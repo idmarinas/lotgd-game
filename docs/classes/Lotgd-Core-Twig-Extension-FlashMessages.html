@@ -94,20 +94,17 @@
     FlashMessages
 
         <span class="phpdocumentor-element__extends">
-        extends <a href="classes/Lotgd-Core-Twig-Extension-AbstractExtension.html"><abbr title="\Lotgd\Core\Twig\Extension\AbstractExtension">AbstractExtension</abbr></a>
+        extends <abbr title="\Twig\Extension\AbstractExtension">AbstractExtension</abbr>
     </span>
     
     
     
-            <span class="phpdocumentor-element__extends">
-            Uses
-                            <a href="classes/Lotgd-Core-Pattern-Sanitize.html"><abbr title="\Lotgd\Core\Pattern\Sanitize">Sanitize</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Template.html"><abbr title="\Lotgd\Core\Pattern\Template">Template</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/FlashMessages.php"><a href="files/src-core-twig-extension-flashmessages.html"><abbr title="src/core/Twig/Extension/FlashMessages.php">FlashMessages.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 </aside>
 
         
@@ -126,60 +123,32 @@
 
 <dl class="phpdocumentor-table-of-contents">
                 <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Pattern-Container.html#property_lotgdKernel">$lotgdKernel</a>
+    <a href="classes/Lotgd-Core-Twig-Extension-FlashMessages.html#property_sanitize">$sanitize</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Pattern-Container.html#property_lotgdKernelContainer">$lotgdKernelContainer</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Pattern-Sanitize.html#property_lotgdSanitize">$lotgdSanitize</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Pattern-Template.html#property_lotgdTemplateParams">$lotgdTemplateParams</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Pattern-Template.html#property_lotgdTemplateSystem">$lotgdTemplateSystem</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Pattern-Container.html#property_serviceManager">$serviceManager</a>
+    <a href="classes/Lotgd-Core-Twig-Extension-FlashMessages.html#property_session">$session</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Twig-Extension-FlashMessages.html#method___construct">__construct()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Twig-Extension-FlashMessages.html#method_display">display()</a>
     <span>
                         &nbsp;: string    </span>
 </dt>
 <dd>Show all messages.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Pattern-Container.html#method_getContainer">getContainer()</a>
-    <span>
-                        &nbsp;: object    </span>
-</dt>
-<dd>Get container.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Twig-Extension-FlashMessages.html#method_getFunctions">getFunctions()</a>
@@ -189,53 +158,11 @@
 <dd>{@inheritdoc}</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Pattern-Container.html#method_getKernel">getKernel()</a>
-    <span>
-                        &nbsp;: <a href="classes/Lotgd-Core-Kernel.html"><abbr title="\Lotgd\Core\Kernel">Kernel</abbr></a>    </span>
-</dt>
-<dd>Get LoTGD Kernel.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Twig-Extension-FlashMessages.html#method_getName">getName()</a>
     <span>
                         &nbsp;: mixed    </span>
 </dt>
 <dd>{@inheritdoc}</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Pattern-Sanitize.html#method_getSanitize">getSanitize()</a>
-    <span>
-                        &nbsp;: object|null    </span>
-</dt>
-<dd>Get sanitize instance.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Pattern-Container.html#method_getService">getService()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd>Get container.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Pattern-Template.html#method_getTemplate">getTemplate()</a>
-    <span>
-                        &nbsp;: object|null    </span>
-</dt>
-<dd>Get theme instance.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Pattern-Template.html#method_getTemplateParams">getTemplateParams()</a>
-    <span>
-                        &nbsp;: object|null    </span>
-</dt>
-<dd>Get template params instance.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Pattern-Container.html#method_setContainer">setContainer()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd>Set container (Service Manager).</dd>
 
         </dl>
 
@@ -256,23 +183,23 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_lotgdKernel">
-        $lotgdKernel
-        <a href="classes/Lotgd-Core-Pattern-Container.html#property_lotgdKernel" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_sanitize">
+        $sanitize
+        <a href="classes/Lotgd-Core-Twig-Extension-FlashMessages.html#property_sanitize" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/FlashMessages.php"><a href="files/src-core-twig-extension-flashmessages.html"><abbr title="src/core/Twig/Extension/FlashMessages.php">FlashMessages.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$lotgdKernel</span>
+    <span class="phpdocumentor-signature__name">$sanitize</span>
     </code>
 
     
@@ -286,143 +213,23 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_lotgdKernelContainer">
-        $lotgdKernelContainer
-        <a href="classes/Lotgd-Core-Pattern-Container.html#property_lotgdKernelContainer" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_session">
+        $session
+        <a href="classes/Lotgd-Core-Twig-Extension-FlashMessages.html#property_session" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/FlashMessages.php"><a href="files/src-core-twig-extension-flashmessages.html"><abbr title="src/core/Twig/Extension/FlashMessages.php">FlashMessages.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$lotgdKernelContainer</span>
-    </code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_lotgdSanitize">
-        $lotgdSanitize
-        <a href="classes/Lotgd-Core-Pattern-Sanitize.html#property_lotgdSanitize" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Sanitize.php"><a href="files/src-core-pattern-sanitize.html"><abbr title="src/core/Pattern/Sanitize.php">Sanitize.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">19</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$lotgdSanitize</span>
-    </code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_lotgdTemplateParams">
-        $lotgdTemplateParams
-        <a href="classes/Lotgd-Core-Pattern-Template.html#property_lotgdTemplateParams" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Template.php"><a href="files/src-core-pattern-template.html"><abbr title="src/core/Pattern/Template.php">Template.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">21</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$lotgdTemplateParams</span>
-    </code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_lotgdTemplateSystem">
-        $lotgdTemplateSystem
-        <a href="classes/Lotgd-Core-Pattern-Template.html#property_lotgdTemplateSystem" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Template.php"><a href="files/src-core-pattern-template.html"><abbr title="src/core/Pattern/Template.php">Template.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">22</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$lotgdTemplateSystem</span>
-    </code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_serviceManager">
-        $serviceManager
-        <a href="classes/Lotgd-Core-Pattern-Container.html#property_serviceManager" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">17</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$serviceManager</span>
+    <span class="phpdocumentor-signature__name">$session</span>
     </code>
 
     
@@ -442,29 +249,44 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_display">
-        display()
-        <a href="classes/Lotgd-Core-Twig-Extension-FlashMessages.html#method_display" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Lotgd-Core-Twig-Extension-FlashMessages.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/FlashMessages.php"><a href="files/src-core-twig-extension-flashmessages.html"><abbr title="src/core/Twig/Extension/FlashMessages.php">FlashMessages.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Show all messages.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">display</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-        <section class="phpdocumentor-description"></section>
+                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpFoundation\Session\SessionInterface">SessionInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$session</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Tool-Sanitize.html"><abbr title="\Lotgd\Core\Tool\Sanitize">Sanitize</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$sanitize</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$session</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpFoundation\Session\SessionInterface">SessionInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$sanitize</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Tool-Sanitize.html"><abbr title="\Lotgd\Core\Tool\Sanitize">Sanitize</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -474,57 +296,41 @@
         class="phpdocumentor-element
             -method
             -public
-            -deprecated                                            "
+                                                        "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getContainer">
-        getContainer()
-        <a href="classes/Lotgd-Core-Pattern-Container.html#method_getContainer" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_display">
+        display()
+        <a href="classes/Lotgd-Core-Twig-Extension-FlashMessages.html#method_display" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/FlashMessages.php"><a href="files/src-core-twig-extension-flashmessages.html"><abbr title="src/core/Twig/Extension/FlashMessages.php">FlashMessages.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Get container.</p>
+        <p class="phpdocumentor-summary">Show all messages.</p>
 
-    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
+    <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getContainer</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object</span></code>
+                <span class="phpdocumentor-signature__name">display</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Twig\Environment">Environment</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$env</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$name</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+                <span class="phpdocumentor-signature__argument__name">$env</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Twig\Environment">Environment</abbr></span>
+                            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">deprecated</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                            <span class="phpdocumentor-tag-link">4.10.0</span>
-                                                                                
-                                                 <section class="phpdocumentor-description"></section>
-
-                                    </dd>
-                        </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">object</span>
+    <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -543,7 +349,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/FlashMessages.php"><a href="files/src-core-twig-extension-flashmessages.html"><abbr title="src/core/Twig/Extension/FlashMessages.php">FlashMessages.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 </aside>
 
         <p class="phpdocumentor-summary">{@inheritdoc}</p>
@@ -570,40 +376,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getKernel">
-        getKernel()
-        <a href="classes/Lotgd-Core-Pattern-Container.html#method_getKernel" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">76</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get LoTGD Kernel.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getKernel</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Kernel.html"><abbr title="\Lotgd\Core\Kernel">Kernel</abbr></a></span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Kernel.html"><abbr title="\Lotgd\Core\Kernel">Kernel</abbr></a></span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getName">
         getName()
         <a href="classes/Lotgd-Core-Twig-Extension-FlashMessages.html#method_getName" class="headerlink"><i class="fas fa-link"></i></a>
@@ -611,7 +383,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/FlashMessages.php"><a href="files/src-core-twig-extension-flashmessages.html"><abbr title="src/core/Twig/Extension/FlashMessages.php">FlashMessages.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">77</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 </aside>
 
         <p class="phpdocumentor-summary">{@inheritdoc}</p>
@@ -624,212 +396,6 @@
 
     
     
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getSanitize">
-        getSanitize()
-        <a href="classes/Lotgd-Core-Pattern-Sanitize.html#method_getSanitize" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Sanitize.php"><a href="files/src-core-pattern-sanitize.html"><abbr title="src/core/Pattern/Sanitize.php">Sanitize.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">26</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get sanitize instance.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getSanitize</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object|null</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">object|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getService">
-        getService()
-        <a href="classes/Lotgd-Core-Pattern-Container.html#method_getService" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">63</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get container.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getService</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$name</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getTemplate">
-        getTemplate()
-        <a href="classes/Lotgd-Core-Pattern-Template.html#method_getTemplate" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Template.php"><a href="files/src-core-pattern-template.html"><abbr title="src/core/Pattern/Template.php">Template.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">44</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get theme instance.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getTemplate</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object|null</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">object|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getTemplateParams">
-        getTemplateParams()
-        <a href="classes/Lotgd-Core-Pattern-Template.html#method_getTemplateParams" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Template.php"><a href="files/src-core-pattern-template.html"><abbr title="src/core/Pattern/Template.php">Template.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">29</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get template params instance.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getTemplateParams</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object|null</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">object|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-            -deprecated                                            "
->
-    <h4 class="phpdocumentor-element__name" id="method_setContainer">
-        setContainer()
-        <a href="classes/Lotgd-Core-Pattern-Container.html#method_setContainer" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">26</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Set container (Service Manager).</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">setContainer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Interop\Container\ContainerInterface">ContainerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$container</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Interop\Container\ContainerInterface">ContainerInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">deprecated</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                            <span class="phpdocumentor-tag-link">4.10.0</span>
-                                                                                
-                                                 <section class="phpdocumentor-description"></section>
-
-                                    </dd>
-                        </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">mixed</span>

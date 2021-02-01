@@ -92,23 +92,24 @@
         <h2 class="phpdocumentor-content__title">
     Install
 
+        <span class="phpdocumentor-element__extends">
+        extends <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html"><abbr title="\Lotgd\Core\Installer\InstallerAbstract">InstallerAbstract</abbr></a>
+    </span>
     
     
     
             <span class="phpdocumentor-element__extends">
             Uses
-                            <a href="classes/Lotgd-Core-Pattern-Container.html"><abbr title="\Lotgd\Core\Pattern\Container">Container</abbr></a>,                             <a href="classes/Lotgd-Core-Installer-Pattern-CanInstall.html"><abbr title="\Lotgd\Core\Installer\Pattern\CanInstall">CanInstall</abbr></a>,                             <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html"><abbr title="\Lotgd\Core\Installer\Pattern\Modules">Modules</abbr></a>,                             <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html"><abbr title="\Lotgd\Core\Installer\Pattern\Progress">Progress</abbr></a>,                             <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html"><abbr title="\Lotgd\Core\Installer\Pattern\Upgrade">Upgrade</abbr></a>,                             <a href="classes/Lotgd-Core-Installer-Pattern-Version.html"><abbr title="\Lotgd\Core\Installer\Pattern\Version">Version</abbr></a>                    </span>
+                            <a href="classes/Lotgd-Core-Installer-Pattern-CheckInstallation.html"><abbr title="\Lotgd\Core\Installer\Pattern\CheckInstallation">CheckInstallation</abbr></a>,                             <a href="classes/Lotgd-Core-Installer-Pattern-Version.html"><abbr title="\Lotgd\Core\Installer\Pattern\Version">Version</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 </aside>
 
-            <p class="phpdocumentor-summary">Script to install and update game.</p>
-
-    <section class="phpdocumentor-description"></section>
+        
 
 
 
@@ -124,179 +125,144 @@
 
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a href="classes/Lotgd-Core-Installer-Install.html#constant_DATA_DIR_INSTALL">DATA_DIR_INSTALL</a>
-    <span>
-        &nbsp;= __DIR__ . &#039;/data/install&#039;                    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a href="classes/Lotgd-Core-Installer-Install.html#constant_TRANSLATOR_DOMAIN">TRANSLATOR_DOMAIN</a>
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#constant_TRANSLATOR_DOMAIN">TRANSLATOR_DOMAIN</a>
     <span>
         &nbsp;= &#039;app_installer&#039;                    </span>
 </dt>
 <dd></dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Installer-Pattern-CanInstall.html#property_cantInstallMessage">$cantInstallMessage</a>
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_dataDir">$dataDir</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#property_dataInserted">$dataInserted</a>
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_doctrine">$doctrine</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#property_dataUpgradesInserted">$dataUpgradesInserted</a>
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_input">$input</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Pattern-Container.html#property_lotgdKernel">$lotgdKernel</a>
+    <a href="classes/Lotgd-Core-Installer-Install.html#property_installedVersionData">$installedVersionData</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Pattern-Container.html#property_lotgdKernelContainer">$lotgdKernelContainer</a>
+    <a href="classes/Lotgd-Core-Installer-Install.html#property_installedVersionDataFile">$installedVersionDataFile</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#property_modules">$modules</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#property_recommendedModules">$recommendedModules</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Pattern-Container.html#property_serviceManager">$serviceManager</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#property_skipModules">$skipModules</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#property_upgrade">$upgrade</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#property_upgradeVersion">$upgradeVersion</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Installer-Pattern-CanInstall.html#property_versionInstalled">$versionInstalled</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#property_versions">$versions</a>
+    <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#property_lotgd_versions">$lotgd_versions</a>
     <span>
                 &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
 <dd>Versions of game.</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_output">$output</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_stepsProcessed">$stepsProcessed</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_stepsProcessedFile">$stepsProcessedFile</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_style">$style</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_totaSteps">$totaSteps</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_translator">$translator</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-CanInstall.html#method_canInstall">canInstall()</a>
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method___construct">__construct()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Installer-Pattern-CheckInstallation.html#method_checkInstallation">checkInstallation()</a>
     <span>
                         &nbsp;: bool    </span>
 </dt>
 <dd>Check if can install this version of game.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataInserted">dataInserted()</a>
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_configureConsole">configureConsole()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd>Configure command with input and output.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Installer-Install.html#method_finish">finish()</a>
     <span>
                         &nbsp;: bool    </span>
 </dt>
-<dd>Get if data are inserted in database.</dd>
+<dd>Last step of install/upgrade.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataInsertedOff">dataInsertedOff()</a>
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_getDirData">getDirData()</a>
     <span>
-                        &nbsp;: self    </span>
+                        &nbsp;: string    </span>
 </dt>
-<dd>Data NOT are inserted in database.</dd>
+<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataInsertedOn">dataInsertedOn()</a>
-    <span>
-                        &nbsp;: self    </span>
-</dt>
-<dd>Data are inserted in database.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataUpgradesInserted">dataUpgradesInserted()</a>
-    <span>
-                        &nbsp;: bool    </span>
-</dt>
-<dd>Get if data of upgrades are inserted in database.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataUpgradesInsertedOff">dataUpgradesInsertedOff()</a>
-    <span>
-                        &nbsp;: self    </span>
-</dt>
-<dd>Data of upgrades NOT are inserted in database.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataUpgradesInsertedOn">dataUpgradesInsertedOn()</a>
-    <span>
-                        &nbsp;: self    </span>
-</dt>
-<dd>Data of upgrades are inserted in database.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_getAllVersions">getAllVersions()</a>
+    <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_getFullListOfVersion">getFullListOfVersion()</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
 <dd>Get array of versions.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Pattern-Container.html#method_getContainer">getContainer()</a>
+    <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_getInstallerVersions">getInstallerVersions()</a>
     <span>
-                        &nbsp;: object    </span>
+                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
-<dd>Get container.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-CanInstall.html#method_getFailInstallMessage">getFailInstallMessage()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;|string    </span>
-</dt>
-<dd>Get the installation failure message.</dd>
+<dd>Get array of versions.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_getIntVersion">getIntVersion()</a>
@@ -306,20 +272,6 @@
 <dd>Get int value for a string version.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Pattern-Container.html#method_getKernel">getKernel()</a>
-    <span>
-                        &nbsp;: <a href="classes/Lotgd-Core-Kernel.html"><abbr title="\Lotgd\Core\Kernel">Kernel</abbr></a>    </span>
-</dt>
-<dd>Get LoTGD Kernel.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#method_getModules">getModules()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Get list of modules to process.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_getNameVersion">getNameVersion()</a>
     <span>
                         &nbsp;: string    </span>
@@ -327,186 +279,74 @@
 <dd>Get name for a numeric version.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_getNextVersion">getNextVersion()</a>
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_getProjectDir">getProjectDir()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_getSteps">getSteps()</a>
     <span>
                         &nbsp;: int    </span>
 </dt>
-<dd>Get the next version of the given version.</dd>
+<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_getPreviusVersion">getPreviusVersion()</a>
+    <a href="classes/Lotgd-Core-Installer-Install.html#method_getVersionInstalled">getVersionInstalled()</a>
     <span>
                         &nbsp;: int    </span>
 </dt>
-<dd>Get the previous version of the given version.</dd>
+<dd>Determine the installed version.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#method_getRecommendedModules">getRecommendedModules()</a>
+    <a href="classes/Lotgd-Core-Installer-Install.html#method_getVersionsToInstall">getVersionsToInstall()</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
-<dd>Get all recommended modules.</dd>
+<dd>Get an array with versions that need install.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Pattern-Container.html#method_getService">getService()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd>Get container.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_getUpgradedVersion">getUpgradedVersion()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Get all upgraded versions in actual install.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_isUpgrade">isUpgrade()</a>
+    <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_isValidVersion">isValidVersion()</a>
     <span>
                         &nbsp;: bool    </span>
 </dt>
-<dd>Get if the installation is a upgrade.</dd>
+<dd>Check if ID is a valid version.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_isUpgradedVersion">isUpgradedVersion()</a>
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_setProjectDir">setProjectDir()</a>
+    <span>
+                        &nbsp;: self    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_setStepComplete">setStepComplete()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_setStepIncomplete">setStepIncomplete()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Installer-Install.html#method_start">start()</a>
     <span>
                         &nbsp;: bool    </span>
 </dt>
-<dd>Get if version is upgraded.</dd>
+<dd>First step of install/upgrade.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_isUpgradeOff">isUpgradeOff()</a>
-    <span>
-                        &nbsp;: $this    </span>
-</dt>
-<dd>Set that the installation not is an upgrade.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_isUpgradeOn">isUpgradeOn()</a>
-    <span>
-                        &nbsp;: $this    </span>
-</dt>
-<dd>Set that the installation is an upgrade.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Install.html#method_makeInsertData">makeInsertData()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Insert data of a clean/upgrade install.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Install.html#method_makeInstallOfModules">makeInstallOfModules()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Install the selected modules.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Install.html#method_makeSynchronizationTables">makeSynchronizationTables()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Synchronize the tables in the database.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Install.html#method_makeUpgradeInstall">makeUpgradeInstall()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Make a upgrade install, avoid in clean install.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Pattern-Container.html#method_setContainer">setContainer()</a>
+    <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_stepStatus">stepStatus()</a>
     <span>
                         &nbsp;: mixed    </span>
 </dt>
-<dd>Set container (Service Manager).</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#method_setModules">setModules()</a>
-    <span>
-                        &nbsp;: self    </span>
-</dt>
-<dd>Set list of modules to process.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_setUpgradedVersion">setUpgradedVersion()</a>
-    <span>
-                        &nbsp;: self    </span>
-</dt>
-<dd>Set all upgraded version in actual install.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#method_skipModules">skipModules()</a>
-    <span>
-                        &nbsp;: bool    </span>
-</dt>
-<dd>Get if installation of modules is ignored.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#method_skipModulesOff">skipModulesOff()</a>
-    <span>
-                        &nbsp;: $this    </span>
-</dt>
-<dd>No install modules.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#method_skipModulesOn">skipModulesOn()</a>
-    <span>
-                        &nbsp;: $this    </span>
-</dt>
-<dd>No install modules.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_upgradedVersionOn">upgradedVersionOn()</a>
-    <span>
-                        &nbsp;: self    </span>
-</dt>
-<dd>Set that version is upgraded.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Installer-Pattern-CanInstall.html#method_versionInstalled">versionInstalled()</a>
-    <span>
-                        &nbsp;: $this    </span>
-</dt>
-<dd>Set currently installed version.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/Lotgd-Core-Installer-Install.html#method_makeInsertDataOfClean">makeInsertDataOfClean()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Insert data of clean install.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/Lotgd-Core-Installer-Install.html#method_makeInsertDataOfUpdates">makeInsertDataOfUpdates()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Insert data of updates.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/Lotgd-Core-Installer-Install.html#method_moduleProcess">moduleProcess()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd>Process with the module.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/Lotgd-Core-Installer-Pattern-CanInstall.html#method_getInstalledVersion">getInstalledVersion()</a>
-    <span>
-                        &nbsp;: int    </span>
-</dt>
-<dd>Get int value of installed version.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/Lotgd-Core-Installer-Install.html#method_insertDataByFiles">insertDataByFiles()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd>Proccess files.</dd>
+<dd></dd>
 
         </dl>
 
@@ -519,40 +359,15 @@
             <a href="classes/Lotgd-Core-Installer-Install.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_DATA_DIR_INSTALL">
-        DATA_DIR_INSTALL
-        <a href="classes/Lotgd-Core-Installer-Install.html#constant_DATA_DIR_INSTALL" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">34</span>
-</aside>
-
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">DATA_DIR_INSTALL</span>
-    = <span class="phpdocumentor-signature__default-value">__DIR__ . &#039;/data/install&#039;</span>
-</code>
-
-
-    
-    
-
-</article>
-                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_TRANSLATOR_DOMAIN">
         TRANSLATOR_DOMAIN
-        <a href="classes/Lotgd-Core-Installer-Install.html#constant_TRANSLATOR_DOMAIN" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#constant_TRANSLATOR_DOMAIN" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 </aside>
 
     
@@ -583,23 +398,53 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_cantInstallMessage">
-        $cantInstallMessage
-        <a href="classes/Lotgd-Core-Installer-Pattern-CanInstall.html#property_cantInstallMessage" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_dataDir">
+        $dataDir
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_dataDir" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/CanInstall.php"><a href="files/src-core-installer-pattern-caninstall.html"><abbr title="src/core/Installer/Pattern/CanInstall.php">CanInstall.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$cantInstallMessage</span>
+    <span class="phpdocumentor-signature__name">$dataDir</span>
+     = <span class="phpdocumentor-signature__default-value">&#039;&#039;</span></code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_doctrine">
+        $doctrine
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_doctrine" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">32</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$doctrine</span>
     </code>
 
     
@@ -613,83 +458,23 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_dataInserted">
-        $dataInserted
-        <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#property_dataInserted" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_input">
+        $input
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_input" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Progress.php"><a href="files/src-core-installer-pattern-progress.html"><abbr title="src/core/Installer/Pattern/Progress.php">Progress.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$dataInserted</span>
-     = <span class="phpdocumentor-signature__default-value">false</span></code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_dataUpgradesInserted">
-        $dataUpgradesInserted
-        <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#property_dataUpgradesInserted" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Progress.php"><a href="files/src-core-installer-pattern-progress.html"><abbr title="src/core/Installer/Pattern/Progress.php">Progress.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">14</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$dataUpgradesInserted</span>
-     = <span class="phpdocumentor-signature__default-value">false</span></code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_lotgdKernel">
-        $lotgdKernel
-        <a href="classes/Lotgd-Core-Pattern-Container.html#property_lotgdKernel" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">18</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$lotgdKernel</span>
+    <span class="phpdocumentor-signature__name">$input</span>
     </code>
 
     
@@ -703,23 +488,23 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_lotgdKernelContainer">
-        $lotgdKernelContainer
-        <a href="classes/Lotgd-Core-Pattern-Container.html#property_lotgdKernelContainer" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_installedVersionData">
+        $installedVersionData
+        <a href="classes/Lotgd-Core-Installer-Install.html#property_installedVersionData" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$lotgdKernelContainer</span>
+    <span class="phpdocumentor-signature__name">$installedVersionData</span>
     </code>
 
     
@@ -733,83 +518,23 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_modules">
-        $modules
-        <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#property_modules" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_installedVersionDataFile">
+        $installedVersionDataFile
+        <a href="classes/Lotgd-Core-Installer-Install.html#property_installedVersionDataFile" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Modules.php"><a href="files/src-core-installer-pattern-modules.html"><abbr title="src/core/Installer/Pattern/Modules.php">Modules.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$modules</span>
-     = <span class="phpdocumentor-signature__default-value">[]</span></code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_recommendedModules">
-        $recommendedModules
-        <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#property_recommendedModules" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Modules.php"><a href="files/src-core-installer-pattern-modules.html"><abbr title="src/core/Installer/Pattern/Modules.php">Modules.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">15</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$recommendedModules</span>
-     = <span class="phpdocumentor-signature__default-value">[&#039;abigail&#039;, &#039;breakin&#039;, &#039;calendar&#039;, &#039;cedrikspotions&#039;, &#039;collapse&#039;, &#039;crazyaudrey&#039;, &#039;crying&#039;, &#039;dag&#039;, &#039;darkhorse&#039;, &#039;distress&#039;, &#039;dragonattack&#039;, &#039;drinks&#039;, &#039;drunkard&#039;, &#039;expbar&#039;, &#039;fairy&#039;, &#039;findgem&#039;, &#039;findgold&#039;, &#039;foilwench&#039;, &#039;forestturn&#039;, &#039;game_dice&#039;, &#039;game_stones&#039;, &#039;gardenparty&#039;, &#039;ghosttown&#039;, &#039;glowingstream&#039;, &#039;goldmine&#039;, &#039;grassyfield&#039;, &#039;haberdasher&#039;, &#039;healthbar&#039;, &#039;innchat&#039;, &#039;kitchen&#039;, &#039;klutz&#039;, &#039;lottery&#039;, &#039;lovers&#039;, &#039;newbieisland&#039;, &#039;oldman&#039;, &#039;outhouse&#039;, &#039;peerpressure&#039;, &#039;petra&#039;, &#039;racedwarf&#039;, &#039;raceelf&#039;, &#039;racehuman&#039;, &#039;racetroll&#039;, &#039;riddles&#039;, &#039;salesman&#039;, &#039;sethsong&#039;, &#039;smith&#039;, &#039;soulgem&#039;, &#039;spa&#039;, &#039;specialtydarkarts&#039;, &#039;specialtymysticpower&#039;, &#039;specialtythiefskills&#039;, &#039;statue&#039;, &#039;stocks&#039;, &#039;stonehenge&#039;, &#039;strategyhut&#039;, &#039;thieves&#039;, &#039;tutor&#039;, &#039;tynan&#039;, &#039;waterfall&#039;]</span></code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_serviceManager">
-        $serviceManager
-        <a href="classes/Lotgd-Core-Pattern-Container.html#property_serviceManager" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">17</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$serviceManager</span>
+    <span class="phpdocumentor-signature__name">$installedVersionDataFile</span>
     </code>
 
     
@@ -823,136 +548,16 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_skipModules">
-        $skipModules
-        <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#property_skipModules" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Modules.php"><a href="files/src-core-installer-pattern-modules.html"><abbr title="src/core/Installer/Pattern/Modules.php">Modules.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">13</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$skipModules</span>
-     = <span class="phpdocumentor-signature__default-value">false</span></code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_upgrade">
-        $upgrade
-        <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#property_upgrade" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Upgrade.php"><a href="files/src-core-installer-pattern-upgrade.html"><abbr title="src/core/Installer/Pattern/Upgrade.php">Upgrade.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">13</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$upgrade</span>
-     = <span class="phpdocumentor-signature__default-value">false</span></code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_upgradeVersion">
-        $upgradeVersion
-        <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#property_upgradeVersion" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Upgrade.php"><a href="files/src-core-installer-pattern-upgrade.html"><abbr title="src/core/Installer/Pattern/Upgrade.php">Upgrade.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">14</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$upgradeVersion</span>
-     = <span class="phpdocumentor-signature__default-value">[]</span></code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_versionInstalled">
-        $versionInstalled
-        <a href="classes/Lotgd-Core-Installer-Pattern-CanInstall.html#property_versionInstalled" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/CanInstall.php"><a href="files/src-core-installer-pattern-caninstall.html"><abbr title="src/core/Installer/Pattern/CanInstall.php">CanInstall.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">13</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$versionInstalled</span>
-     = <span class="phpdocumentor-signature__default-value">0</span></code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_versions">
-        $versions
-        <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#property_versions" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_lotgd_versions">
+        $lotgd_versions
+        <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#property_lotgd_versions" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Version.php"><a href="files/src-core-installer-pattern-version.html"><abbr title="src/core/Installer/Pattern/Version.php">Version.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 </aside>
 
         <p class="phpdocumentor-summary">Versions of game.</p>
@@ -960,9 +565,9 @@
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$versions</span>
+    <span class="phpdocumentor-signature__name">$lotgd_versions</span>
      = <span class="phpdocumentor-signature__default-value">[
-    &#039;-1&#039; =&gt; -1,
+    &#039;Clean Install&#039; =&gt; -1,
     //needed just as a placeholder for new installs.
     &#039;0.9&#039; =&gt; 900,
     &#039;0.9.1&#039; =&gt; 901,
@@ -1010,6 +615,7 @@
     &#039;2.7.0 IDMarinas Edition&#039; =&gt; 20700,
     &#039;3.0.0 IDMarinas Edition&#039; =&gt; 30000,
     &#039;4.0.0 IDMarinas Edition&#039; =&gt; 40000,
+    //-- New Installer
     &#039;4.1.0 IDMarinas Edition&#039; =&gt; 40100,
     &#039;4.2.0 IDMarinas Edition&#039; =&gt; 40200,
     &#039;4.3.0 IDMarinas Edition&#039; =&gt; 40300,
@@ -1021,10 +627,192 @@
     &#039;4.9.0 IDMarinas Edition&#039; =&gt; 40900,
     &#039;4.10.0 IDMarinas Edition&#039; =&gt; 41000,
     &#039;4.11.0 IDMarinas Edition&#039; =&gt; 41100,
+    &#039;4.12.0 IDMarinas Edition&#039; =&gt; 41200,
+    &#039;5.0.0 IDMarinas Edition&#039; =&gt; 50000,
 ]</span></code>
 
         <section class="phpdocumentor-description"></section>
 
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_output">
+        $output
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_output" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">30</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$output</span>
+    </code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_stepsProcessed">
+        $stepsProcessed
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_stepsProcessed" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$stepsProcessed</span>
+    </code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_stepsProcessedFile">
+        $stepsProcessedFile
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_stepsProcessedFile" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">35</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$stepsProcessedFile</span>
+    </code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_style">
+        $style
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_style" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">29</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$style</span>
+    </code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_totaSteps">
+        $totaSteps
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_totaSteps" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">28</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$totaSteps</span>
+    </code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_translator">
+        $translator
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#property_translator" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">33</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$translator</span>
+    </code>
+
+    
     
 
 </article>
@@ -1041,21 +829,172 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_canInstall">
-        canInstall()
-        <a href="classes/Lotgd-Core-Installer-Pattern-CanInstall.html#method_canInstall" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/CanInstall.php"><a href="files/src-core-installer-pattern-caninstall.html"><abbr title="src/core/Installer/Pattern/CanInstall.php">CanInstall.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\EntityManagerInterface">EntityManagerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$doctrine</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Contracts\Translation\TranslatorInterface">TranslatorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$doctrine</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\EntityManagerInterface">EntityManagerInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$translator</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Contracts\Translation\TranslatorInterface">TranslatorInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_checkInstallation">
+        checkInstallation()
+        <a href="classes/Lotgd-Core-Installer-Pattern-CheckInstallation.html#method_checkInstallation" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/CheckInstallation.php"><a href="files/src-core-installer-pattern-checkinstallation.html"><abbr title="src/core/Installer/Pattern/CheckInstallation.php">CheckInstallation.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">23</span>
 </aside>
 
         <p class="phpdocumentor-summary">Check if can install this version of game.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">canInstall</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                <span class="phpdocumentor-signature__name">checkInstallation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fromVersion</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$toVersion</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$fromVersion</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$toVersion</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_configureConsole">
+        configureConsole()
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_configureConsole" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">160</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Configure command with input and output.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">configureConsole</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Console\Input\InputInterface">InputInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$input</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Console\Output\OutputInterface">OutputInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$output</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$input</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Console\Input\InputInterface">InputInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$output</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Console\Output\OutputInterface">OutputInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_finish">
+        finish()
+        <a href="classes/Lotgd-Core-Installer-Install.html#method_finish" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">101</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Last step of install/upgrade.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">finish</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -1075,29 +1014,27 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_dataInserted">
-        dataInserted()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataInserted" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getDirData">
+        getDirData()
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_getDirData" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Progress.php"><a href="files/src-core-installer-pattern-progress.html"><abbr title="src/core/Installer/Pattern/Progress.php">Progress.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">140</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Get if data are inserted in database.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">dataInserted</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                <span class="phpdocumentor-signature__name">getDirData</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
+    <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -1109,191 +1046,21 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_dataInsertedOff">
-        dataInsertedOff()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataInsertedOff" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Progress.php"><a href="files/src-core-installer-pattern-progress.html"><abbr title="src/core/Installer/Pattern/Progress.php">Progress.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">29</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Data NOT are inserted in database.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">dataInsertedOff</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">self</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_dataInsertedOn">
-        dataInsertedOn()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataInsertedOn" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Progress.php"><a href="files/src-core-installer-pattern-progress.html"><abbr title="src/core/Installer/Pattern/Progress.php">Progress.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">19</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Data are inserted in database.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">dataInsertedOn</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">self</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_dataUpgradesInserted">
-        dataUpgradesInserted()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataUpgradesInserted" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Progress.php"><a href="files/src-core-installer-pattern-progress.html"><abbr title="src/core/Installer/Pattern/Progress.php">Progress.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">67</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get if data of upgrades are inserted in database.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">dataUpgradesInserted</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_dataUpgradesInsertedOff">
-        dataUpgradesInsertedOff()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataUpgradesInsertedOff" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Progress.php"><a href="files/src-core-installer-pattern-progress.html"><abbr title="src/core/Installer/Pattern/Progress.php">Progress.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">57</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Data of upgrades NOT are inserted in database.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">dataUpgradesInsertedOff</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">self</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_dataUpgradesInsertedOn">
-        dataUpgradesInsertedOn()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataUpgradesInsertedOn" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Progress.php"><a href="files/src-core-installer-pattern-progress.html"><abbr title="src/core/Installer/Pattern/Progress.php">Progress.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">47</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Data of upgrades are inserted in database.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">dataUpgradesInsertedOn</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">self</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getAllVersions">
-        getAllVersions()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_getAllVersions" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getFullListOfVersion">
+        getFullListOfVersion()
+        <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_getFullListOfVersion" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Version.php"><a href="files/src-core-installer-pattern-version.html"><abbr title="src/core/Installer/Pattern/Version.php">Version.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">140</span>
+    <span class="phpdocumentor-element-found-in__line">129</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get array of versions.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getAllVersions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                <span class="phpdocumentor-signature__name">getFullListOfVersion</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -1311,83 +1078,23 @@
         class="phpdocumentor-element
             -method
             -public
-            -deprecated                                            "
->
-    <h4 class="phpdocumentor-element__name" id="method_getContainer">
-        getContainer()
-        <a href="classes/Lotgd-Core-Pattern-Container.html#method_getContainer" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">42</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get container.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getContainer</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$name</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">deprecated</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                            <span class="phpdocumentor-tag-link">4.10.0</span>
-                                                                                
-                                                 <section class="phpdocumentor-description"></section>
-
-                                    </dd>
-                        </dl>
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">object</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getFailInstallMessage">
-        getFailInstallMessage()
-        <a href="classes/Lotgd-Core-Installer-Pattern-CanInstall.html#method_getFailInstallMessage" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getInstallerVersions">
+        getInstallerVersions()
+        <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_getInstallerVersions" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/CanInstall.php"><a href="files/src-core-installer-pattern-caninstall.html"><abbr title="src/core/Installer/Pattern/CanInstall.php">CanInstall.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Version.php"><a href="files/src-core-installer-pattern-version.html"><abbr title="src/core/Installer/Pattern/Version.php">Version.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">117</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Get the installation failure message.</p>
+        <p class="phpdocumentor-summary">Get array of versions.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getFailInstallMessage</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|string</span></code>
+                <span class="phpdocumentor-signature__name">getInstallerVersions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -1395,7 +1102,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|string</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -1414,7 +1121,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Version.php"><a href="files/src-core-installer-pattern-version.html"><abbr title="src/core/Installer/Pattern/Version.php">Version.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">82</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get int value for a string version.</p>
@@ -1451,74 +1158,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getKernel">
-        getKernel()
-        <a href="classes/Lotgd-Core-Pattern-Container.html#method_getKernel" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">76</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get LoTGD Kernel.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getKernel</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Kernel.html"><abbr title="\Lotgd\Core\Kernel">Kernel</abbr></a></span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Kernel.html"><abbr title="\Lotgd\Core\Kernel">Kernel</abbr></a></span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getModules">
-        getModules()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#method_getModules" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Modules.php"><a href="files/src-core-installer-pattern-modules.html"><abbr title="src/core/Installer/Pattern/Modules.php">Modules.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">122</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get list of modules to process.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getModules</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getNameVersion">
         getNameVersion()
         <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_getNameVersion" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1526,7 +1165,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Version.php"><a href="files/src-core-installer-pattern-version.html"><abbr title="src/core/Installer/Pattern/Version.php">Version.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">132</span>
+    <span class="phpdocumentor-element-found-in__line">97</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get name for a numeric version.</p>
@@ -1563,406 +1202,140 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getNextVersion">
-        getNextVersion()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_getNextVersion" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getProjectDir">
+        getProjectDir()
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_getProjectDir" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Version.php"><a href="files/src-core-installer-pattern-version.html"><abbr title="src/core/Installer/Pattern/Version.php">Version.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">111</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get the next version of the given version.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getNextVersion</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$version</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$version</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getPreviusVersion">
-        getPreviusVersion()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_getPreviusVersion" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Version.php"><a href="files/src-core-installer-pattern-version.html"><abbr title="src/core/Installer/Pattern/Version.php">Version.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">90</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get the previous version of the given version.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getPreviusVersion</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$version</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$version</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getRecommendedModules">
-        getRecommendedModules()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#method_getRecommendedModules" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Modules.php"><a href="files/src-core-installer-pattern-modules.html"><abbr title="src/core/Installer/Pattern/Modules.php">Modules.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">130</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get all recommended modules.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getRecommendedModules</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getService">
-        getService()
-        <a href="classes/Lotgd-Core-Pattern-Container.html#method_getService" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">63</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get container.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getService</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$name</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getUpgradedVersion">
-        getUpgradedVersion()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_getUpgradedVersion" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Upgrade.php"><a href="files/src-core-installer-pattern-upgrade.html"><abbr title="src/core/Installer/Pattern/Upgrade.php">Upgrade.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">69</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get all upgraded versions in actual install.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getUpgradedVersion</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_isUpgrade">
-        isUpgrade()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_isUpgrade" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Upgrade.php"><a href="files/src-core-installer-pattern-upgrade.html"><abbr title="src/core/Installer/Pattern/Upgrade.php">Upgrade.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">43</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get if the installation is a upgrade.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">isUpgrade</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_isUpgradedVersion">
-        isUpgradedVersion()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_isUpgradedVersion" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Upgrade.php"><a href="files/src-core-installer-pattern-upgrade.html"><abbr title="src/core/Installer/Pattern/Upgrade.php">Upgrade.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">61</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get if version is upgraded.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">isUpgradedVersion</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$version</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$version</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_isUpgradeOff">
-        isUpgradeOff()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_isUpgradeOff" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Upgrade.php"><a href="files/src-core-installer-pattern-upgrade.html"><abbr title="src/core/Installer/Pattern/Upgrade.php">Upgrade.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">33</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Set that the installation not is an upgrade.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">isUpgradeOff</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">$this</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_isUpgradeOn">
-        isUpgradeOn()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_isUpgradeOn" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Upgrade.php"><a href="files/src-core-installer-pattern-upgrade.html"><abbr title="src/core/Installer/Pattern/Upgrade.php">Upgrade.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">21</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Set that the installation is an upgrade.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">isUpgradeOn</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">$this</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_makeInsertData">
-        makeInsertData()
-        <a href="classes/Lotgd-Core-Installer-Install.html#method_makeInsertData" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">129</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Insert data of a clean/upgrade install.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">makeInsertData</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_makeInstallOfModules">
-        makeInstallOfModules()
-        <a href="classes/Lotgd-Core-Installer-Install.html#method_makeInstallOfModules" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">152</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Install the selected modules.</p>
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getProjectDir</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getSteps">
+        getSteps()
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_getSteps" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">104</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getSteps</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">int</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getVersionInstalled">
+        getVersionInstalled()
+        <a href="classes/Lotgd-Core-Installer-Install.html#method_getVersionInstalled" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">31</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Determine the installed version.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">makeInstallOfModules</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                <span class="phpdocumentor-signature__name">getVersionInstalled</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
         <section class="phpdocumentor-description"></section>
 
     
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">int</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getVersionsToInstall">
+        getVersionsToInstall()
+        <a href="classes/Lotgd-Core-Installer-Install.html#method_getVersionsToInstall" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">86</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Get an array with versions that need install.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getVersionsToInstall</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fromVersion</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$toVersion</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$fromVersion</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$toVersion</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -1978,55 +1351,21 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_makeSynchronizationTables">
-        makeSynchronizationTables()
-        <a href="classes/Lotgd-Core-Installer-Install.html#method_makeSynchronizationTables" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_isValidVersion">
+        isValidVersion()
+        <a href="classes/Lotgd-Core-Installer-Pattern-Version.html#method_isValidVersion" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Version.php"><a href="files/src-core-installer-pattern-version.html"><abbr title="src/core/Installer/Pattern/Version.php">Version.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">102</span>
+    <span class="phpdocumentor-element-found-in__line">107</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Synchronize the tables in the database.</p>
+        <p class="phpdocumentor-summary">Check if ID is a valid version.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">makeSynchronizationTables</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_makeUpgradeInstall">
-        makeUpgradeInstall()
-        <a href="classes/Lotgd-Core-Installer-Install.html#method_makeUpgradeInstall" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">41</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Make a upgrade install, avoid in clean install.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">makeUpgradeInstall</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$version</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                <span class="phpdocumentor-signature__name">isValidVersion</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$version</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -2037,16 +1376,14 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Is the actual version installed</p>
-</section>
-
+                
             </dd>
             </dl>
 
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">bool</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -2056,31 +1393,29 @@
         class="phpdocumentor-element
             -method
             -public
-            -deprecated                                            "
+                                                        "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setContainer">
-        setContainer()
-        <a href="classes/Lotgd-Core-Pattern-Container.html#method_setContainer" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_setProjectDir">
+        setProjectDir()
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_setProjectDir" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">145</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Set container (Service Manager).</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">setContainer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Interop\Container\ContainerInterface">ContainerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">setProjectDir</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dir</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$container</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Interop\Container\ContainerInterface">ContainerInterface</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$dir</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -2088,21 +1423,48 @@
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">deprecated</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                            <span class="phpdocumentor-tag-link">4.10.0</span>
-                                                                                
-                                                 <section class="phpdocumentor-description"></section>
 
-                                    </dd>
-                        </dl>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">self</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setStepComplete">
+        setStepComplete()
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_setStepComplete" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">123</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">setStepComplete</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$step</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$step</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">mixed</span>
@@ -2117,29 +1479,27 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setModules">
-        setModules()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#method_setModules" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_setStepIncomplete">
+        setStepIncomplete()
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_setStepIncomplete" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Modules.php"><a href="files/src-core-installer-pattern-modules.html"><abbr title="src/core/Installer/Pattern/Modules.php">Modules.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">112</span>
+    <span class="phpdocumentor-element-found-in__line">129</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Set list of modules to process.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">setModules</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$modules</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
+                <span class="phpdocumentor-signature__name">setStepIncomplete</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$step</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$modules</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                <span class="phpdocumentor-signature__argument__name">$step</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -2149,7 +1509,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">self</span>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -2161,65 +1521,21 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setUpgradedVersion">
-        setUpgradedVersion()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_setUpgradedVersion" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_start">
+        start()
+        <a href="classes/Lotgd-Core-Installer-Install.html#method_start" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Upgrade.php"><a href="files/src-core-installer-pattern-upgrade.html"><abbr title="src/core/Installer/Pattern/Upgrade.php">Upgrade.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">77</span>
+    <span class="phpdocumentor-element-found-in__line">94</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Set all upgraded version in actual install.</p>
+        <p class="phpdocumentor-summary">First step of install/upgrade.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">setUpgradedVersion</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$data</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">self</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_skipModules">
-        skipModules()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#method_skipModules" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Modules.php"><a href="files/src-core-installer-pattern-modules.html"><abbr title="src/core/Installer/Pattern/Modules.php">Modules.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">104</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get if installation of modules is ignored.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">skipModules</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                <span class="phpdocumentor-signature__name">start</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -2239,355 +1555,27 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_skipModulesOff">
-        skipModulesOff()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#method_skipModulesOff" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_stepStatus">
+        stepStatus()
+        <a href="classes/Lotgd-Core-Installer-InstallerAbstract.html#method_stepStatus" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Modules.php"><a href="files/src-core-installer-pattern-modules.html"><abbr title="src/core/Installer/Pattern/Modules.php">Modules.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/InstallerAbstract.php"><a href="files/src-core-installer-installerabstract.html"><abbr title="src/core/Installer/InstallerAbstract.php">InstallerAbstract.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">135</span>
 </aside>
 
-        <p class="phpdocumentor-summary">No install modules.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">skipModulesOff</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
-
-        <section class="phpdocumentor-description"></section>
+                <span class="phpdocumentor-signature__name">stepStatus</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$step</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">$this</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_skipModulesOn">
-        skipModulesOn()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Modules.html#method_skipModulesOn" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Modules.php"><a href="files/src-core-installer-pattern-modules.html"><abbr title="src/core/Installer/Pattern/Modules.php">Modules.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">82</span>
-</aside>
-
-        <p class="phpdocumentor-summary">No install modules.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">skipModulesOn</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">$this</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_upgradedVersionOn">
-        upgradedVersionOn()
-        <a href="classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_upgradedVersionOn" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/Upgrade.php"><a href="files/src-core-installer-pattern-upgrade.html"><abbr title="src/core/Installer/Pattern/Upgrade.php">Upgrade.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">51</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Set that version is upgraded.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">upgradedVersionOn</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$version</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$version</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">self</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_versionInstalled">
-        versionInstalled()
-        <a href="classes/Lotgd-Core-Installer-Pattern-CanInstall.html#method_versionInstalled" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/CanInstall.php"><a href="files/src-core-installer-pattern-caninstall.html"><abbr title="src/core/Installer/Pattern/CanInstall.php">CanInstall.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">46</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Set currently installed version.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">versionInstalled</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$version</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$version</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">$this</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_makeInsertDataOfClean">
-        makeInsertDataOfClean()
-        <a href="classes/Lotgd-Core-Installer-Install.html#method_makeInsertDataOfClean" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">224</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Insert data of clean install.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-                <span class="phpdocumentor-signature__name">makeInsertDataOfClean</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_makeInsertDataOfUpdates">
-        makeInsertDataOfUpdates()
-        <a href="classes/Lotgd-Core-Installer-Install.html#method_makeInsertDataOfUpdates" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">267</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Insert data of updates.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-                <span class="phpdocumentor-signature__name">makeInsertDataOfUpdates</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_moduleProcess">
-        moduleProcess()
-        <a href="classes/Lotgd-Core-Installer-Install.html#method_moduleProcess" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">194</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Process with the module.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-                <span class="phpdocumentor-signature__name">moduleProcess</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$modulename</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__reference-operator">&amp;</span><span class="phpdocumentor-signature__argument__name">$messages</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$type</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$modulename</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$messages</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getInstalledVersion">
-        getInstalledVersion()
-        <a href="classes/Lotgd-Core-Installer-Pattern-CanInstall.html#method_getInstalledVersion" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Pattern/CanInstall.php"><a href="files/src-core-installer-pattern-caninstall.html"><abbr title="src/core/Installer/Pattern/CanInstall.php">CanInstall.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">66</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Get int value of installed version.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-                <span class="phpdocumentor-signature__name">getInstalledVersion</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_insertDataByFiles">
-        insertDataByFiles()
-        <a href="classes/Lotgd-Core-Installer-Install.html#method_insertDataByFiles" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Install.php"><a href="files/src-core-installer-install.html"><abbr title="src/core/Installer/Install.php">Install.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">308</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Proccess files.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-                <span class="phpdocumentor-signature__name">insertDataByFiles</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$files</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__reference-operator">&amp;</span><span class="phpdocumentor-signature__argument__name">$messages</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$files</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$messages</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                <span class="phpdocumentor-signature__argument__name">$step</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 

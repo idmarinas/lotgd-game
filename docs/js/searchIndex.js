@@ -481,11 +481,6 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#function_lotgd_show_debug_creature"
         },                {
-            "fqsen": "\\reltime\u0028\u0029",
-            "name": "reltime",
-            "summary": "",
-            "url": "namespaces/default.html#function_reltime"
-        },                {
             "fqsen": "\\checkday\u0028\u0029",
             "name": "checkday",
             "summary": "Check\u0020if\u0020is\u0020a\u0020new\u0020day.",
@@ -580,11 +575,6 @@ Search.appendIndex(
             "name": "increment_specialty",
             "summary": "",
             "url": "namespaces/default.html#function_increment_specialty"
-        },                {
-            "fqsen": "\\return_bytes\u0028\u0029",
-            "name": "return_bytes",
-            "summary": "",
-            "url": "namespaces/default.html#function_return_bytes"
         },                {
             "fqsen": "\\lotgd_mail\u0028\u0029",
             "name": "lotgd_mail",
@@ -1106,86 +1096,6 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#function_get_dk_title"
         },                {
-            "fqsen": "\\translator_setup\u0028\u0029",
-            "name": "translator_setup",
-            "summary": "",
-            "url": "namespaces/default.html#function_translator_setup"
-        },                {
-            "fqsen": "\\translate\u0028\u0029",
-            "name": "translate",
-            "summary": "",
-            "url": "namespaces/default.html#function_translate"
-        },                {
-            "fqsen": "\\sprintf_translate\u0028\u0029",
-            "name": "sprintf_translate",
-            "summary": "",
-            "url": "namespaces/default.html#function_sprintf_translate"
-        },                {
-            "fqsen": "\\translate_inline\u0028\u0029",
-            "name": "translate_inline",
-            "summary": "",
-            "url": "namespaces/default.html#function_translate_inline"
-        },                {
-            "fqsen": "\\translate_mail\u0028\u0029",
-            "name": "translate_mail",
-            "summary": "",
-            "url": "namespaces/default.html#function_translate_mail"
-        },                {
-            "fqsen": "\\tl\u0028\u0029",
-            "name": "tl",
-            "summary": "",
-            "url": "namespaces/default.html#function_tl"
-        },                {
-            "fqsen": "\\translate_loadnamespace\u0028\u0029",
-            "name": "translate_loadnamespace",
-            "summary": "",
-            "url": "namespaces/default.html#function_translate_loadnamespace"
-        },                {
-            "fqsen": "\\tlbutton_push\u0028\u0029",
-            "name": "tlbutton_push",
-            "summary": "",
-            "url": "namespaces/default.html#function_tlbutton_push"
-        },                {
-            "fqsen": "\\tlbutton_pop\u0028\u0029",
-            "name": "tlbutton_pop",
-            "summary": "",
-            "url": "namespaces/default.html#function_tlbutton_pop"
-        },                {
-            "fqsen": "\\tlbutton_clear\u0028\u0029",
-            "name": "tlbutton_clear",
-            "summary": "",
-            "url": "namespaces/default.html#function_tlbutton_clear"
-        },                {
-            "fqsen": "\\enable_translation\u0028\u0029",
-            "name": "enable_translation",
-            "summary": "",
-            "url": "namespaces/default.html#function_enable_translation"
-        },                {
-            "fqsen": "\\tlschema\u0028\u0029",
-            "name": "tlschema",
-            "summary": "",
-            "url": "namespaces/default.html#function_tlschema"
-        },                {
-            "fqsen": "\\translator_check_collect_texts\u0028\u0029",
-            "name": "translator_check_collect_texts",
-            "summary": "",
-            "url": "namespaces/default.html#function_translator_check_collect_texts"
-        },                {
-            "fqsen": "\\translator_uri\u0028\u0029",
-            "name": "translator_uri",
-            "summary": "",
-            "url": "namespaces/default.html#function_translator_uri"
-        },                {
-            "fqsen": "\\translator_page\u0028\u0029",
-            "name": "translator_page",
-            "summary": "",
-            "url": "namespaces/default.html#function_translator_page"
-        },                {
-            "fqsen": "\\comscroll_sanitize\u0028\u0029",
-            "name": "comscroll_sanitize",
-            "summary": "",
-            "url": "namespaces/default.html#function_comscroll_sanitize"
-        },                {
             "fqsen": "\\Lotgd\\Ajax\\Core\\Bans",
             "name": "Bans",
             "summary": "Use\u0020this\u0020class\u0020to\u0020add\u0020a\u0020basic\u0020function\u0020to\u0020your\u0020Jaxon\u0020request.",
@@ -1195,41 +1105,6 @@ Search.appendIndex(
             "name": "showAffected",
             "summary": "",
             "url": "classes/Lotgd-Ajax-Core-Bans.html#method_showAffected"
-        },                {
-            "fqsen": "\\Lotgd\\Ajax\\Core\\Cache",
-            "name": "Cache",
-            "summary": "Actions\u0020for\u0020Cache.",
-            "url": "classes/Lotgd-Ajax-Core-Cache.html"
-        },                {
-            "fqsen": "\\Lotgd\\Ajax\\Core\\Cache\u003A\u003Aoptimize\u0028\u0029",
-            "name": "optimize",
-            "summary": "",
-            "url": "classes/Lotgd-Ajax-Core-Cache.html#method_optimize"
-        },                {
-            "fqsen": "\\Lotgd\\Ajax\\Core\\Cache\u003A\u003Aclearexpire\u0028\u0029",
-            "name": "clearexpire",
-            "summary": "",
-            "url": "classes/Lotgd-Ajax-Core-Cache.html#method_clearexpire"
-        },                {
-            "fqsen": "\\Lotgd\\Ajax\\Core\\Cache\u003A\u003Aclearall\u0028\u0029",
-            "name": "clearall",
-            "summary": "",
-            "url": "classes/Lotgd-Ajax-Core-Cache.html#method_clearall"
-        },                {
-            "fqsen": "\\Lotgd\\Ajax\\Core\\Cache\u003A\u003Aclearbyprefix\u0028\u0029",
-            "name": "clearbyprefix",
-            "summary": "",
-            "url": "classes/Lotgd-Ajax-Core-Cache.html#method_clearbyprefix"
-        },                {
-            "fqsen": "\\Lotgd\\Ajax\\Core\\Cache\u003A\u003AprocessAction\u0028\u0029",
-            "name": "processAction",
-            "summary": "",
-            "url": "classes/Lotgd-Ajax-Core-Cache.html#method_processAction"
-        },                {
-            "fqsen": "\\Lotgd\\Ajax\\Core\\Cache\u003A\u003ATEXT_DOMAIN",
-            "name": "TEXT_DOMAIN",
-            "summary": "",
-            "url": "classes/Lotgd-Ajax-Core-Cache.html#constant_TEXT_DOMAIN"
         },                {
             "fqsen": "\\Lotgd\\Ajax\\Core\\Mail",
             "name": "Mail",
@@ -1686,6 +1561,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Command-RegenerateAppSecretCommand.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\RegenerateAppSecretCommand\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Command-RegenerateAppSecretCommand.html#method_configure"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Command\\RegenerateAppSecretCommand\u003A\u003Aexecute\u0028\u0029",
             "name": "execute",
             "summary": "",
@@ -1695,261 +1575,6 @@ Search.appendIndex(
             "name": "defaultName",
             "summary": "",
             "url": "classes/Lotgd-Core-Command-RegenerateAppSecretCommand.html#property_defaultName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Command\\StorageCacheClearCommand",
-            "name": "StorageCacheClearCommand",
-            "summary": "Clear\u0020cache\u0020directory.",
-            "url": "classes/Lotgd-Core-Command-StorageCacheClearCommand.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Command\\StorageCacheClearCommand\u003A\u003Aconfigure\u0028\u0029",
-            "name": "configure",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Command-StorageCacheClearCommand.html#method_configure"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Command\\StorageCacheClearCommand\u003A\u003Aexecute\u0028\u0029",
-            "name": "execute",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Command-StorageCacheClearCommand.html#method_execute"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Command\\StorageCacheClearCommand\u003A\u003A\u0024defaultName",
-            "name": "defaultName",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Command-StorageCacheClearCommand.html#property_defaultName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Command\\StorageCacheStatsCommand",
-            "name": "StorageCacheStatsCommand",
-            "summary": "Show\u0020stats\u0020of\u0020cache\u0020directory.",
-            "url": "classes/Lotgd-Core-Command-StorageCacheStatsCommand.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Command\\StorageCacheStatsCommand\u003A\u003Aconfigure\u0028\u0029",
-            "name": "configure",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Command-StorageCacheStatsCommand.html#method_configure"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Command\\StorageCacheStatsCommand\u003A\u003Aexecute\u0028\u0029",
-            "name": "execute",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Command-StorageCacheStatsCommand.html#method_execute"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Command\\StorageCacheStatsCommand\u003A\u003A\u0024defaultName",
-            "name": "defaultName",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Command-StorageCacheStatsCommand.html#property_defaultName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Console\\Application",
-            "name": "Application",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Console-Application.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Console\\Application\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Console-Application.html#method___construct"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Console\\Application\u003A\u003AgetServiceManager\u0028\u0029",
-            "name": "getServiceManager",
-            "summary": "Get\u0020Service\u0020Manager\u0020associated\u0020with\u0020this\u0020console.",
-            "url": "classes/Lotgd-Core-Console-Application.html#method_getServiceManager"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Console\\Application\u003A\u003AgetKernel\u0028\u0029",
-            "name": "getKernel",
-            "summary": "Get\u0020App\u0020kernel.",
-            "url": "classes/Lotgd-Core-Console-Application.html#method_getKernel"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Console\\Application\u003A\u003AregisterCommands\u0028\u0029",
-            "name": "registerCommands",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Console-Application.html#method_registerCommands"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Console\\Application\u003A\u003A\u0024serviceManager",
-            "name": "serviceManager",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Console-Application.html#property_serviceManager"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Console\\Application\u003A\u003A\u0024appKernel",
-            "name": "appKernel",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Console-Application.html#property_appKernel"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper",
-            "name": "Dbwrapper",
-            "summary": "Class\u0020for\u0020access\u0020to\u0020data\u0020base.",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "Configure\u0020adapter\u0020for\u0020DB.",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#method___construct"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003Aquery\u0028\u0029",
-            "name": "query",
-            "summary": "Execute\u0020a\u0020query.",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#method_query"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003AgetAffectedRows\u0028\u0029",
-            "name": "getAffectedRows",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#method_getAffectedRows"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003Acurrent\u0028\u0029",
-            "name": "current",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#method_current"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003Acount\u0028\u0029",
-            "name": "count",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#method_count"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003AgetQueriesThisHit\u0028\u0029",
-            "name": "getQueriesThisHit",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#method_getQueriesThisHit"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003AgetQueryTime\u0028\u0029",
-            "name": "getQueryTime",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#method_getQueryTime"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003AgetSql\u0028\u0029",
-            "name": "getSql",
-            "summary": "Get\u0020a\u0020sql\u0020query\u0020string.",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#method_getSql"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003AgetGeneratedValue\u0028\u0029",
-            "name": "getGeneratedValue",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#method_getGeneratedValue"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003A\u0024errorInfo",
-            "name": "errorInfo",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#property_errorInfo"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003AgetAdapter\u0028\u0029",
-            "name": "getAdapter",
-            "summary": "Get\u0020adapter\u0020for\u0020DB.",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#method_getAdapter"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003A\u0024adapter",
-            "name": "adapter",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#property_adapter"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003A\u0024generatedValue",
-            "name": "generatedValue",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#property_generatedValue"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003A\u0024affectedRows",
-            "name": "affectedRows",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#property_affectedRows"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003A\u0024sqlString",
-            "name": "sqlString",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#property_sqlString"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003A\u0024queriesthishit",
-            "name": "queriesthishit",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#property_queriesthishit"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Dbwrapper\u003A\u003A\u0024querytime",
-            "name": "querytime",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Dbwrapper.html#property_querytime"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\DbTool",
-            "name": "DbTool",
-            "summary": "contain\u0020all\u0020function\u0020to\u0020manage\u0020prefix\u0020of\u0020tables.",
-            "url": "classes/Lotgd-Core-Db-Pattern-DbTool.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\DbTool\u003A\u003AgetServerName\u0028\u0029",
-            "name": "getServerName",
-            "summary": "Check\u0020name\u0020of\u0020data\u0020base.",
-            "url": "classes/Lotgd-Core-Db-Pattern-DbTool.html#method_getServerName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\DbTool\u003A\u003Aconnect\u0028\u0029",
-            "name": "connect",
-            "summary": "Check\u0020connection\u0020to\u0020DB.",
-            "url": "classes/Lotgd-Core-Db-Pattern-DbTool.html#method_connect"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\DbTool\u003A\u003A\u0024connection",
-            "name": "connection",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Pattern-DbTool.html#property_connection"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\Prefix",
-            "name": "Prefix",
-            "summary": "Contain\u0020all\u0020function\u0020to\u0020manage\u0020prefix\u0020of\u0020tables.",
-            "url": "classes/Lotgd-Core-Db-Pattern-Prefix.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\Prefix\u003A\u003A\u0024prefix",
-            "name": "prefix",
-            "summary": "Prefix\u0020used\u0020foPrefix\u0020used\u0020by\u0020tables.",
-            "url": "classes/Lotgd-Core-Db-Pattern-Prefix.html#property_prefix"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\Prefix\u003A\u003AgetPrefix\u0028\u0029",
-            "name": "getPrefix",
-            "summary": "Get\u0020the\u0020value\u0020of\u0020prefix.",
-            "url": "classes/Lotgd-Core-Db-Pattern-Prefix.html#method_getPrefix"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\Prefix\u003A\u003AsetPrefix\u0028\u0029",
-            "name": "setPrefix",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020prefix.",
-            "url": "classes/Lotgd-Core-Db-Pattern-Prefix.html#method_setPrefix"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\Zend",
-            "name": "Zend",
-            "summary": "Contain\u0020all\u0020methods\u0020for\u0020zend\u002Ddb\u0020component.",
-            "url": "classes/Lotgd-Core-Db-Pattern-Zend.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\Zend\u003A\u003Aselect\u0028\u0029",
-            "name": "select",
-            "summary": "Select\u0020API.",
-            "url": "classes/Lotgd-Core-Db-Pattern-Zend.html#method_select"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\Zend\u003A\u003Ainsert\u0028\u0029",
-            "name": "insert",
-            "summary": "Insert\u0020API.",
-            "url": "classes/Lotgd-Core-Db-Pattern-Zend.html#method_insert"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\Zend\u003A\u003Aupdate\u0028\u0029",
-            "name": "update",
-            "summary": "Update\u0020API.",
-            "url": "classes/Lotgd-Core-Db-Pattern-Zend.html#method_update"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\Zend\u003A\u003Adelete\u0028\u0029",
-            "name": "delete",
-            "summary": "Delete\u0020API.",
-            "url": "classes/Lotgd-Core-Db-Pattern-Zend.html#method_delete"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\Zend\u003A\u003Aexecute\u0028\u0029",
-            "name": "execute",
-            "summary": "Execute\u0020a\u0020object\u0020type\u0020SQL.",
-            "url": "classes/Lotgd-Core-Db-Pattern-Zend.html#method_execute"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\Zend\u003A\u003Apaginator\u0028\u0029",
-            "name": "paginator",
-            "summary": "Generate\u0020a\u0020paginator\u0020query.",
-            "url": "classes/Lotgd-Core-Db-Pattern-Zend.html#method_paginator"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\Zend\u003A\u003Aexpression\u0028\u0029",
-            "name": "expression",
-            "summary": "Create\u0020Laminas\\Db\\Sql\\Predicate\\Expression\u0020for\u0020uses\u0020in\u0020Zend\u0020DB.",
-            "url": "classes/Lotgd-Core-Db-Pattern-Zend.html#method_expression"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\Zend\u003A\u003AquoteValue\u0028\u0029",
-            "name": "quoteValue",
-            "summary": "Quote\u0020value\u0020for\u0020safe\u0020using\u0020in\u0020DB.",
-            "url": "classes/Lotgd-Core-Db-Pattern-Zend.html#method_quoteValue"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern\\Zend\u003A\u003A\u0024sql",
-            "name": "sql",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Db-Pattern-Zend.html#property_sql"
         },                {
             "fqsen": "\\Lotgd\\Core\\Doctrine\\DBAL\\DateTimeType",
             "name": "DateTimeType",
@@ -7481,41 +7106,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Entity-MountsTranslation.html#property_content"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\Nastywords",
-            "name": "Nastywords",
-            "summary": "Nastywords.",
-            "url": "classes/Lotgd-Core-Entity-Nastywords.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\Nastywords\u003A\u003AsetType\u0028\u0029",
-            "name": "setType",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Type.",
-            "url": "classes/Lotgd-Core-Entity-Nastywords.html#method_setType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\Nastywords\u003A\u003AgetType\u0028\u0029",
-            "name": "getType",
-            "summary": "Get\u0020the\u0020value\u0020of\u0020Type.",
-            "url": "classes/Lotgd-Core-Entity-Nastywords.html#method_getType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\Nastywords\u003A\u003AsetWords\u0028\u0029",
-            "name": "setWords",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Words.",
-            "url": "classes/Lotgd-Core-Entity-Nastywords.html#method_setWords"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\Nastywords\u003A\u003AgetWords\u0028\u0029",
-            "name": "getWords",
-            "summary": "Get\u0020the\u0020value\u0020of\u0020Words.",
-            "url": "classes/Lotgd-Core-Entity-Nastywords.html#method_getWords"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\Nastywords\u003A\u003A\u0024type",
-            "name": "type",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-Nastywords.html#property_type"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\Nastywords\u003A\u003A\u0024words",
-            "name": "words",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-Nastywords.html#property_words"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Entity\\News",
             "name": "News",
             "summary": "News.",
@@ -9108,12 +8698,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Superuser\u003A\u003AgetSuperuserCountWithPermit\u0028\u0029",
             "name": "getSuperuserCountWithPermit",
-            "summary": "Get\u0020all\u0020superusers\u0020who\u0020have\u0020the\u0020given\u0020permission.",
+            "summary": "Get\u0020count\u0020of\u0020superusers\u0020who\u0020have\u0020the\u0020given\u0020permission.",
             "url": "classes/Lotgd-Core-EntityRepository-Account-Superuser.html#method_getSuperuserCountWithPermit"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Superuser\u003A\u003AgetLoginSuperuserWithPermit\u0028\u0029",
             "name": "getLoginSuperuserWithPermit",
-            "summary": "Get\u0020all\u0020superusers\u0020who\u0020have\u0020the\u0020given\u0020permission.",
+            "summary": "Superuser\u0020login.",
             "url": "classes/Lotgd-Core-EntityRepository-Account-Superuser.html#method_getLoginSuperuserWithPermit"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\User",
@@ -9891,226 +9481,6 @@ Search.appendIndex(
             "summary": "RuntimeException\u0020for\u0020Legend\u0020of\u0020the\u0020Green\u0020dragon.",
             "url": "classes/Lotgd-Core-Exception-RuntimeException.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Db\\Dbwrapper",
-            "name": "Dbwrapper",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Db-Dbwrapper.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Db\\Dbwrapper\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Db-Dbwrapper.html#method___invoke"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Db\\Dbwrapper\u003A\u003AcreateService\u0028\u0029",
-            "name": "createService",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Db-Dbwrapper.html#method_createService"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Form\\SymfonyForm",
-            "name": "SymfonyForm",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Form-SymfonyForm.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Form\\SymfonyForm\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Form-SymfonyForm.html#method___invoke"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Form\\SymfonyForm\u003A\u003AcreateService\u0028\u0029",
-            "name": "createService",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Form-SymfonyForm.html#method_createService"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Translator\\LoaderPluginManager",
-            "name": "LoaderPluginManager",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Translator-LoaderPluginManager.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Translator\\LoaderPluginManager\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Translator-LoaderPluginManager.html#method___invoke"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Translator\\LoaderPluginManager\u003A\u003AcreateService\u0028\u0029",
-            "name": "createService",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Translator-LoaderPluginManager.html#method_createService"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Translator\\Translator",
-            "name": "Translator",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Translator-Translator.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Translator\\Translator\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Translator-Translator.html#method___invoke"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Translator\\Translator\u003A\u003AcreateService\u0028\u0029",
-            "name": "createService",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Translator-Translator.html#method_createService"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Filter\\ArrayToComaSeparator",
-            "name": "ArrayToComaSeparator",
-            "summary": "Convert\u0020format\u003A\n\u0020\u0020\u0020\u0020\u0020\u005Bvalue,value2\u005D\ninto\u003A\n\u0020\u0020\u0020\u0020\u0020\u0027value,value2\u0027.",
-            "url": "classes/Lotgd-Core-Filter-ArrayToComaSeparator.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Filter\\ArrayToComaSeparator\u003A\u003Afilter\u0028\u0029",
-            "name": "filter",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Filter-ArrayToComaSeparator.html#method_filter"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Filter\\BitField",
-            "name": "BitField",
-            "summary": "Convert\u0020to\u0020int\u0020value\u0020an\u0020array\u0020of\u0020BitField.",
-            "url": "classes/Lotgd-Core-Filter-BitField.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Filter\\BitField\u003A\u003Afilter\u0028\u0029",
-            "name": "filter",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Filter-BitField.html#method_filter"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Filter\\UnTagify",
-            "name": "UnTagify",
-            "summary": "Convert\u0020format\u003A\n\u0020\u0020\u0020\u0020\u0020\u005B\u007B\u0022value\u0022\u003A\u0022tag_1\u0022\u007D,\u007B\u0022value\u0022\u003A\u0022tag_2\u0022\u007D\u005D\u0022\ninto\u003A\n\u0020\u0020\u0020\u0020\u0020tag_1,tag_2",
-            "url": "classes/Lotgd-Core-Filter-UnTagify.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Filter\\UnTagify\u003A\u003Afilter\u0028\u0029",
-            "name": "filter",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Filter-UnTagify.html#method_filter"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Cache",
-            "name": "Cache",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Fixed-Cache.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Cache\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-Cache.html#method___callStatic"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Cache\u003A\u003A\u0024instance",
-            "name": "instance",
-            "summary": "Instance\u0020of\u0020Cache.",
-            "url": "classes/Lotgd-Core-Fixed-Cache.html#property_instance"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper",
-            "name": "Dbwrapper",
-            "summary": "Static\u0020class\u0020to\u0020access\u0020a\u0020basic\u0020functions\u0020of\u0020DB.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Aquery\u0028\u0029",
-            "name": "query",
-            "summary": "Execute\u0020a\u0020query.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_query"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Aaffected_rows\u0028\u0029",
-            "name": "affected_rows",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_affected_rows"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Afetch_assoc\u0028\u0029",
-            "name": "fetch_assoc",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_fetch_assoc"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Anum_rows\u0028\u0029",
-            "name": "num_rows",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_num_rows"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Aselect\u0028\u0029",
-            "name": "select",
-            "summary": "Select\u0020API.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_select"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Ainsert\u0028\u0029",
-            "name": "insert",
-            "summary": "Insert\u0020API.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_insert"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Aupdate\u0028\u0029",
-            "name": "update",
-            "summary": "Update\u0020API.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_update"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Adelete\u0028\u0029",
-            "name": "delete",
-            "summary": "Delete\u0020API.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_delete"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Aexecute\u0028\u0029",
-            "name": "execute",
-            "summary": "Execute\u0020a\u0020object\u0020type\u0020SQL.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_execute"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Apaginator\u0028\u0029",
-            "name": "paginator",
-            "summary": "Generate\u0020a\u0020paginator\u0020query.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_paginator"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Apagination\u0028\u0029",
-            "name": "pagination",
-            "summary": "Navigation\u0020menu\u0020used\u0020with\u0020Paginator.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_pagination"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Aexpression\u0028\u0029",
-            "name": "expression",
-            "summary": "Create\u0020Laminas\\Db\\Sql\\Predicate\\Expression\u0020for\u0020uses\u0020in\u0020Zend\u0020DB.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_expression"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003AsqlString\u0028\u0029",
-            "name": "sqlString",
-            "summary": "Get\u0020a\u0020sql\u0020query\u0020string.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_sqlString"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003AtoArray\u0028\u0029",
-            "name": "toArray",
-            "summary": "Get\u0020an\u0020array\u0020of\u0020result\u0020of\u0020DB\u003A\u003Aquery.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_toArray"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Ainsert_id\u0028\u0029",
-            "name": "insert_id",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_insert_id"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Afree_result\u0028\u0029",
-            "name": "free_result",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_free_result"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Aerror\u0028\u0029",
-            "name": "error",
-            "summary": "Get\u0020error\u0020of\u0020connection.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_error"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Atable_exists\u0028\u0029",
-            "name": "table_exists",
-            "summary": "Check\u0020if\u0020table\u0020exist.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_table_exists"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003AquoteValue\u0028\u0029",
-            "name": "quoteValue",
-            "summary": "Quote\u0020value\u0020for\u0020safe\u0020using\u0020in\u0020DB.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_quoteValue"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Aprefix\u0028\u0029",
-            "name": "prefix",
-            "summary": "Prefix\u0020for\u0020tables.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_prefix"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003Aconnect\u0028\u0029",
-            "name": "connect",
-            "summary": "Check\u0020connection\u0020to\u0020DB.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#method_connect"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Dbwrapper\u003A\u003A\u0024wrapper",
-            "name": "wrapper",
-            "summary": "Instance\u0020of\u0020Dbwrapper.",
-            "url": "classes/Lotgd-Core-Fixed-Dbwrapper.html#property_wrapper"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Doctrine",
             "name": "Doctrine",
             "summary": "",
@@ -10150,21 +9520,6 @@ Search.appendIndex(
             "name": "wrapper",
             "summary": "",
             "url": "classes/Lotgd-Core-Fixed-Doctrine.html#property_wrapper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\EventManager",
-            "name": "EventManager",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Fixed-EventManager.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\EventManager\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-EventManager.html#method___callStatic"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\EventManager\u003A\u003A\u0024instance",
-            "name": "instance",
-            "summary": "Instance\u0020of\u0020EventManager.",
-            "url": "classes/Lotgd-Core-Fixed-EventManager.html#property_instance"
         },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\FlashMessages",
             "name": "FlashMessages",
@@ -10265,31 +9620,6 @@ Search.appendIndex(
             "name": "container",
             "summary": "",
             "url": "classes/Lotgd-Core-Fixed-Kernel.html#property_container"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Locator",
-            "name": "Locator",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Fixed-Locator.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Locator\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-Locator.html#method___callStatic"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Locator\u003A\u003AgetServiceManager\u0028\u0029",
-            "name": "getServiceManager",
-            "summary": "Get\u0020service\u0020manager.",
-            "url": "classes/Lotgd-Core-Fixed-Locator.html#method_getServiceManager"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Locator\u003A\u003AsetServiceManager\u0028\u0029",
-            "name": "setServiceManager",
-            "summary": "Set\u0020service\u0020manager\u0020for\u0020the\u0020game.",
-            "url": "classes/Lotgd-Core-Fixed-Locator.html#method_setServiceManager"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Locator\u003A\u003A\u0024sm",
-            "name": "sm",
-            "summary": "Instance\u0020of\u0020ServiceManager.",
-            "url": "classes/Lotgd-Core-Fixed-Locator.html#property_sm"
         },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Navigation",
             "name": "Navigation",
@@ -10991,151 +10321,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Form-DataTransformer-UnTagifyTransformer.html#method_transform"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\BitField",
-            "name": "BitField",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Form-Element-BitField.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\BitField\u003A\u003AsetOptions\u0028\u0029",
-            "name": "setOptions",
-            "summary": "Set\u0020options\u0020for\u0020an\u0020element.\u0020Accepted\u0020options\u0020are\u003A\n\u002D\u0020disabled_mask\u003A\u0020a\u0020list\u0020of\u0020disabled\u0020mask\u0020for\u0020element.",
-            "url": "classes/Lotgd-Core-Form-Element-BitField.html#method_setOptions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\BitField\u003A\u003AsetDisabledMask\u0028\u0029",
-            "name": "setDisabledMask",
-            "summary": "Set\u0020disabled\u0020mask\u0020for\u0020bitfield.",
-            "url": "classes/Lotgd-Core-Form-Element-BitField.html#method_setDisabledMask"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\BitField\u003A\u003AgetDisabledMask\u0028\u0029",
-            "name": "getDisabledMask",
-            "summary": "Get\u0020disabled\u0020mask\u0020for\u0020bitfield.",
-            "url": "classes/Lotgd-Core-Form-Element-BitField.html#method_getDisabledMask"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\BitField\u003A\u003AgetInputSpecification\u0028\u0029",
-            "name": "getInputSpecification",
-            "summary": "Provide\u0020default\u0020input\u0020rules\u0020for\u0020this\u0020element.",
-            "url": "classes/Lotgd-Core-Form-Element-BitField.html#method_getInputSpecification"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\BitField\u003A\u003A\u0024disabledMask",
-            "name": "disabledMask",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Form-Element-BitField.html#property_disabledMask"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\BitField\u003A\u003A\u0024attributes",
-            "name": "attributes",
-            "summary": "Seed\u0020attributes.",
-            "url": "classes/Lotgd-Core-Form-Element-BitField.html#property_attributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\GameLanguage",
-            "name": "GameLanguage",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Form-Element-GameLanguage.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\GameLanguage\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "Added\u0020languages.",
-            "url": "classes/Lotgd-Core-Form-Element-GameLanguage.html#method___construct"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\GameLanguage\u003A\u003Aprepare\u0028\u0029",
-            "name": "prepare",
-            "summary": "Prepare\u0020element.",
-            "url": "classes/Lotgd-Core-Form-Element-GameLanguage.html#method_prepare"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\GameLanguage\u003A\u003AgetInputSpecification\u0028\u0029",
-            "name": "getInputSpecification",
-            "summary": "Provide\u0020default\u0020input\u0020rules\u0020for\u0020this\u0020element.",
-            "url": "classes/Lotgd-Core-Form-Element-GameLanguage.html#method_getInputSpecification"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\GameLanguage\u003A\u003A\u0024validLanguages",
-            "name": "validLanguages",
-            "summary": "Valid\u0020languages\u0020for\u0020server.",
-            "url": "classes/Lotgd-Core-Form-Element-GameLanguage.html#property_validLanguages"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\LotgdTheme",
-            "name": "LotgdTheme",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Form-Element-LotgdTheme.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\LotgdTheme\u003A\u003Aprepare\u0028\u0029",
-            "name": "prepare",
-            "summary": "Prepare\u0020element.",
-            "url": "classes/Lotgd-Core-Form-Element-LotgdTheme.html#method_prepare"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\PetitionType",
-            "name": "PetitionType",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Form-Element-PetitionType.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\PetitionType\u003A\u003Aprepare\u0028\u0029",
-            "name": "prepare",
-            "summary": "Prepare\u0020element.",
-            "url": "classes/Lotgd-Core-Form-Element-PetitionType.html#method_prepare"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\ServerLanguage",
-            "name": "ServerLanguage",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Form-Element-ServerLanguage.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\ServerLanguage\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Form-Element-ServerLanguage.html#method___construct"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\ServerLanguage\u003A\u003AgetInputSpecification\u0028\u0029",
-            "name": "getInputSpecification",
-            "summary": "Provide\u0020default\u0020input\u0020rules\u0020for\u0020this\u0020element.",
-            "url": "classes/Lotgd-Core-Form-Element-ServerLanguage.html#method_getInputSpecification"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\ServerLanguage\u003A\u003A\u0024validLanguages",
-            "name": "validLanguages",
-            "summary": "Valid\u0020languages\u0020for\u0020server.",
-            "url": "classes/Lotgd-Core-Form-Element-ServerLanguage.html#property_validLanguages"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\Tagify",
-            "name": "Tagify",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Form-Element-Tagify.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\Tagify\u003A\u003AgetInputSpecification\u0028\u0029",
-            "name": "getInputSpecification",
-            "summary": "Provide\u0020default\u0020input\u0020rules\u0020for\u0020this\u0020element.",
-            "url": "classes/Lotgd-Core-Form-Element-Tagify.html#method_getInputSpecification"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element\\ViewOnly",
-            "name": "ViewOnly",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Form-Element-ViewOnly.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\ElementFactory",
-            "name": "ElementFactory",
-            "summary": "Factory\u0020for\u0020instantiating\u0020form\u0020elements.",
-            "url": "classes/Lotgd-Core-Form-ElementFactory.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\ElementFactory\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Form-ElementFactory.html#method___construct"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\ElementFactory\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "Create\u0020an\u0020instance\u0020of\u0020the\u0020requested\u0020class\u0020name.",
-            "url": "classes/Lotgd-Core-Form-ElementFactory.html#method___invoke"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\ElementFactory\u003A\u003AcreateService\u0028\u0029",
-            "name": "createService",
-            "summary": "Create\u0020an\u0020instance\u0020of\u0020the\u0020named\u0020service.",
-            "url": "classes/Lotgd-Core-Form-ElementFactory.html#method_createService"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\ElementFactory\u003A\u003AsetCreationOptions\u0028\u0029",
-            "name": "setCreationOptions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Form-ElementFactory.html#method_setCreationOptions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\ElementFactory\u003A\u003A\u0024creationOptions",
-            "name": "creationOptions",
-            "summary": "Options\u0020to\u0020pass\u0020to\u0020the\u0020constructor\u0020\u0028when\u0020used\u0020in\u0020v2\u0029,\u0020if\u0020any.",
-            "url": "classes/Lotgd-Core-Form-ElementFactory.html#property_creationOptions"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Form\\EventListener\\AddTranslatableFieldSubscriber",
             "name": "AddTranslatableFieldSubscriber",
             "summary": "",
@@ -11215,16 +10400,6 @@ Search.appendIndex(
             "name": "configureOptions",
             "summary": "",
             "url": "classes/Lotgd-Core-Form-HomeType.html#method_configureOptions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\LotgdElementFactoryInterface",
-            "name": "LotgdElementFactoryInterface",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Form-LotgdElementFactoryInterface.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\LotgdElementFactoryInterface\u003A\u003Aprepare\u0028\u0029",
-            "name": "prepare",
-            "summary": "Prepare\u0020element\u0020for\u0020inject.",
-            "url": "classes/Lotgd-Core-Form-LotgdElementFactoryInterface.html#method_prepare"
         },                {
             "fqsen": "\\Lotgd\\Core\\Form\\PetitionType",
             "name": "PetitionType",
@@ -11836,11 +11011,6 @@ Search.appendIndex(
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Http-Request.html#method_getCookie"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Http\\Request\u003A\u003AsetCookie\u0028\u0029",
-            "name": "setCookie",
-            "summary": "Send\u0020a\u0020cookie.",
-            "url": "classes/Lotgd-Core-Http-Request.html#method_setCookie"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Http\\Request\u003A\u003AgetQueryAll\u0028\u0029",
             "name": "getQueryAll",
             "summary": "Return\u0020all\u0020get\u0020parameters.",
@@ -11896,6 +11066,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Http-Response.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Http-Response.html#method___construct"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003ApageTitle\u0028\u0029",
             "name": "pageTitle",
             "summary": "Set\u0020title\u0020for\u0020page.",
@@ -11931,225 +11106,85 @@ Search.appendIndex(
             "summary": "Page\u0020and\u0020send\u0020content\u0020to\u0020browser.",
             "url": "classes/Lotgd-Core-Http-Response.html#method_pageEnd"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003AsetCookie\u0028\u0029",
+            "name": "setCookie",
+            "summary": "Send\u0020a\u0020cookie.",
+            "url": "classes/Lotgd-Core-Http-Response.html#method_setCookie"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003AgetOutputCharacterStats\u0028\u0029",
             "name": "getOutputCharacterStats",
             "summary": "Output\u0020character\u0020stats.",
             "url": "classes/Lotgd-Core-Http-Response.html#method_getOutputCharacterStats"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Http-Response.html#property_translator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003A\u0024doctrine",
+            "name": "doctrine",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Http-Response.html#property_doctrine"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003A\u0024headTitle",
+            "name": "headTitle",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Http-Response.html#property_headTitle"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003A\u0024template",
+            "name": "template",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Http-Response.html#property_template"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003A\u0024request",
+            "name": "request",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Http-Response.html#property_request"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003A\u0024hookManager",
+            "name": "hookManager",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Http-Response.html#property_hookManager"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003A\u0024params",
+            "name": "params",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Http-Response.html#property_params"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Install",
             "name": "Install",
-            "summary": "Script\u0020to\u0020install\u0020and\u0020update\u0020game.",
+            "summary": "",
             "url": "classes/Lotgd-Core-Installer-Install.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003AmakeUpgradeInstall\u0028\u0029",
-            "name": "makeUpgradeInstall",
-            "summary": "Make\u0020a\u0020upgrade\u0020install,\u0020avoid\u0020in\u0020clean\u0020install.",
-            "url": "classes/Lotgd-Core-Installer-Install.html#method_makeUpgradeInstall"
+            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003AgetVersionInstalled\u0028\u0029",
+            "name": "getVersionInstalled",
+            "summary": "Determine\u0020the\u0020installed\u0020version.",
+            "url": "classes/Lotgd-Core-Installer-Install.html#method_getVersionInstalled"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003AmakeSynchronizationTables\u0028\u0029",
-            "name": "makeSynchronizationTables",
-            "summary": "Synchronize\u0020the\u0020tables\u0020in\u0020the\u0020database.",
-            "url": "classes/Lotgd-Core-Installer-Install.html#method_makeSynchronizationTables"
+            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003AgetVersionsToInstall\u0028\u0029",
+            "name": "getVersionsToInstall",
+            "summary": "Get\u0020an\u0020array\u0020with\u0020versions\u0020that\u0020need\u0020install.",
+            "url": "classes/Lotgd-Core-Installer-Install.html#method_getVersionsToInstall"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003AmakeInsertData\u0028\u0029",
-            "name": "makeInsertData",
-            "summary": "Insert\u0020data\u0020of\u0020a\u0020clean\/upgrade\u0020install.",
-            "url": "classes/Lotgd-Core-Installer-Install.html#method_makeInsertData"
+            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003Astart\u0028\u0029",
+            "name": "start",
+            "summary": "First\u0020step\u0020of\u0020install\/upgrade.",
+            "url": "classes/Lotgd-Core-Installer-Install.html#method_start"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003AmakeInstallOfModules\u0028\u0029",
-            "name": "makeInstallOfModules",
-            "summary": "Install\u0020the\u0020selected\u0020modules.",
-            "url": "classes/Lotgd-Core-Installer-Install.html#method_makeInstallOfModules"
+            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003Afinish\u0028\u0029",
+            "name": "finish",
+            "summary": "Last\u0020step\u0020of\u0020install\/upgrade.",
+            "url": "classes/Lotgd-Core-Installer-Install.html#method_finish"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003AmoduleProcess\u0028\u0029",
-            "name": "moduleProcess",
-            "summary": "Process\u0020with\u0020the\u0020module.",
-            "url": "classes/Lotgd-Core-Installer-Install.html#method_moduleProcess"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003AmakeInsertDataOfClean\u0028\u0029",
-            "name": "makeInsertDataOfClean",
-            "summary": "Insert\u0020data\u0020of\u0020clean\u0020install.",
-            "url": "classes/Lotgd-Core-Installer-Install.html#method_makeInsertDataOfClean"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003AmakeInsertDataOfUpdates\u0028\u0029",
-            "name": "makeInsertDataOfUpdates",
-            "summary": "Insert\u0020data\u0020of\u0020updates.",
-            "url": "classes/Lotgd-Core-Installer-Install.html#method_makeInsertDataOfUpdates"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003AinsertDataByFiles\u0028\u0029",
-            "name": "insertDataByFiles",
-            "summary": "Proccess\u0020files.",
-            "url": "classes/Lotgd-Core-Installer-Install.html#method_insertDataByFiles"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003ATRANSLATOR_DOMAIN",
-            "name": "TRANSLATOR_DOMAIN",
+            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003A\u0024installedVersionData",
+            "name": "installedVersionData",
             "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Install.html#constant_TRANSLATOR_DOMAIN"
+            "url": "classes/Lotgd-Core-Installer-Install.html#property_installedVersionData"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003ADATA_DIR_INSTALL",
-            "name": "DATA_DIR_INSTALL",
+            "fqsen": "\\Lotgd\\Core\\Installer\\Install\u003A\u003A\u0024installedVersionDataFile",
+            "name": "installedVersionDataFile",
             "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Install.html#constant_DATA_DIR_INSTALL"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\CanInstall",
-            "name": "CanInstall",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Pattern-CanInstall.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\CanInstall\u003A\u003AcanInstall\u0028\u0029",
-            "name": "canInstall",
-            "summary": "Check\u0020if\u0020can\u0020install\u0020this\u0020version\u0020of\u0020game.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-CanInstall.html#method_canInstall"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\CanInstall\u003A\u003A\u0024versionInstalled",
-            "name": "versionInstalled",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Pattern-CanInstall.html#property_versionInstalled"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\CanInstall\u003A\u003AgetFailInstallMessage\u0028\u0029",
-            "name": "getFailInstallMessage",
-            "summary": "Get\u0020the\u0020installation\u0020failure\u0020message.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-CanInstall.html#method_getFailInstallMessage"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\CanInstall\u003A\u003AgetInstalledVersion\u0028\u0029",
-            "name": "getInstalledVersion",
-            "summary": "Get\u0020int\u0020value\u0020of\u0020installed\u0020version.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-CanInstall.html#method_getInstalledVersion"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\CanInstall\u003A\u003A\u0024cantInstallMessage",
-            "name": "cantInstallMessage",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Pattern-CanInstall.html#property_cantInstallMessage"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Modules",
-            "name": "Modules",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Modules.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Modules\u003A\u003AskipModulesOn\u0028\u0029",
-            "name": "skipModulesOn",
-            "summary": "No\u0020install\u0020modules.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Modules.html#method_skipModulesOn"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Modules\u003A\u003AskipModulesOff\u0028\u0029",
-            "name": "skipModulesOff",
-            "summary": "No\u0020install\u0020modules.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Modules.html#method_skipModulesOff"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Modules\u003A\u003A\u0024skipModules",
-            "name": "skipModules",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Modules.html#property_skipModules"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Modules\u003A\u003AsetModules\u0028\u0029",
-            "name": "setModules",
-            "summary": "Set\u0020list\u0020of\u0020modules\u0020to\u0020process.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Modules.html#method_setModules"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Modules\u003A\u003AgetModules\u0028\u0029",
-            "name": "getModules",
-            "summary": "Get\u0020list\u0020of\u0020modules\u0020to\u0020process.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Modules.html#method_getModules"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Modules\u003A\u003AgetRecommendedModules\u0028\u0029",
-            "name": "getRecommendedModules",
-            "summary": "Get\u0020all\u0020recommended\u0020modules.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Modules.html#method_getRecommendedModules"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Modules\u003A\u003A\u0024modules",
-            "name": "modules",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Modules.html#property_modules"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Modules\u003A\u003A\u0024recommendedModules",
-            "name": "recommendedModules",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Modules.html#property_recommendedModules"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Progress",
-            "name": "Progress",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Progress.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Progress\u003A\u003AdataInsertedOn\u0028\u0029",
-            "name": "dataInsertedOn",
-            "summary": "Data\u0020are\u0020inserted\u0020in\u0020database.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataInsertedOn"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Progress\u003A\u003AdataInsertedOff\u0028\u0029",
-            "name": "dataInsertedOff",
-            "summary": "Data\u0020NOT\u0020are\u0020inserted\u0020in\u0020database.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataInsertedOff"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Progress\u003A\u003A\u0024dataInserted",
-            "name": "dataInserted",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Progress.html#property_dataInserted"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Progress\u003A\u003AdataUpgradesInsertedOn\u0028\u0029",
-            "name": "dataUpgradesInsertedOn",
-            "summary": "Data\u0020of\u0020upgrades\u0020are\u0020inserted\u0020in\u0020database.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataUpgradesInsertedOn"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Progress\u003A\u003AdataUpgradesInsertedOff\u0028\u0029",
-            "name": "dataUpgradesInsertedOff",
-            "summary": "Data\u0020of\u0020upgrades\u0020NOT\u0020are\u0020inserted\u0020in\u0020database.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Progress.html#method_dataUpgradesInsertedOff"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Progress\u003A\u003A\u0024dataUpgradesInserted",
-            "name": "dataUpgradesInserted",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Progress.html#property_dataUpgradesInserted"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Upgrade",
-            "name": "Upgrade",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Upgrade.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Upgrade\u003A\u003AisUpgradeOn\u0028\u0029",
-            "name": "isUpgradeOn",
-            "summary": "Set\u0020that\u0020the\u0020installation\u0020is\u0020an\u0020upgrade.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_isUpgradeOn"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Upgrade\u003A\u003AisUpgradeOff\u0028\u0029",
-            "name": "isUpgradeOff",
-            "summary": "Set\u0020that\u0020the\u0020installation\u0020not\u0020is\u0020an\u0020upgrade.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_isUpgradeOff"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Upgrade\u003A\u003AisUpgrade\u0028\u0029",
-            "name": "isUpgrade",
-            "summary": "Get\u0020if\u0020the\u0020installation\u0020is\u0020a\u0020upgrade.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_isUpgrade"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Upgrade\u003A\u003AupgradedVersionOn\u0028\u0029",
-            "name": "upgradedVersionOn",
-            "summary": "Set\u0020that\u0020version\u0020is\u0020upgraded.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_upgradedVersionOn"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Upgrade\u003A\u003AisUpgradedVersion\u0028\u0029",
-            "name": "isUpgradedVersion",
-            "summary": "Get\u0020if\u0020version\u0020is\u0020upgraded.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_isUpgradedVersion"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Upgrade\u003A\u003AgetUpgradedVersion\u0028\u0029",
-            "name": "getUpgradedVersion",
-            "summary": "Get\u0020all\u0020upgraded\u0020versions\u0020in\u0020actual\u0020install.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_getUpgradedVersion"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Upgrade\u003A\u003AsetUpgradedVersion\u0028\u0029",
-            "name": "setUpgradedVersion",
-            "summary": "Set\u0020all\u0020upgraded\u0020version\u0020in\u0020actual\u0020install.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Upgrade.html#method_setUpgradedVersion"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Upgrade\u003A\u003A\u0024upgrade",
-            "name": "upgrade",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Upgrade.html#property_upgrade"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Upgrade\u003A\u003A\u0024upgradeVersion",
-            "name": "upgradeVersion",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Upgrade.html#property_upgradeVersion"
+            "url": "classes/Lotgd-Core-Installer-Install.html#property_installedVersionDataFile"
         },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Version",
             "name": "Version",
@@ -12161,300 +11196,30 @@ Search.appendIndex(
             "summary": "Get\u0020int\u0020value\u0020for\u0020a\u0020string\u0020version.",
             "url": "classes/Lotgd-Core-Installer-Pattern-Version.html#method_getIntVersion"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Version\u003A\u003AgetPreviusVersion\u0028\u0029",
-            "name": "getPreviusVersion",
-            "summary": "Get\u0020the\u0020previous\u0020version\u0020of\u0020the\u0020given\u0020version.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Version.html#method_getPreviusVersion"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Version\u003A\u003AgetNextVersion\u0028\u0029",
-            "name": "getNextVersion",
-            "summary": "Get\u0020the\u0020next\u0020version\u0020of\u0020the\u0020given\u0020version.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Version.html#method_getNextVersion"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Version\u003A\u003AgetNameVersion\u0028\u0029",
             "name": "getNameVersion",
             "summary": "Get\u0020name\u0020for\u0020a\u0020numeric\u0020version.",
             "url": "classes/Lotgd-Core-Installer-Pattern-Version.html#method_getNameVersion"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Version\u003A\u003AgetAllVersions\u0028\u0029",
-            "name": "getAllVersions",
+            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Version\u003A\u003AisValidVersion\u0028\u0029",
+            "name": "isValidVersion",
+            "summary": "Check\u0020if\u0020ID\u0020is\u0020a\u0020valid\u0020version.",
+            "url": "classes/Lotgd-Core-Installer-Pattern-Version.html#method_isValidVersion"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Version\u003A\u003AgetInstallerVersions\u0028\u0029",
+            "name": "getInstallerVersions",
             "summary": "Get\u0020array\u0020of\u0020versions.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Version.html#method_getAllVersions"
+            "url": "classes/Lotgd-Core-Installer-Pattern-Version.html#method_getInstallerVersions"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Version\u003A\u003A\u0024versions",
-            "name": "versions",
+            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Version\u003A\u003AgetFullListOfVersion\u0028\u0029",
+            "name": "getFullListOfVersion",
+            "summary": "Get\u0020array\u0020of\u0020versions.",
+            "url": "classes/Lotgd-Core-Installer-Pattern-Version.html#method_getFullListOfVersion"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Version\u003A\u003A\u0024lotgd_versions",
+            "name": "lotgd_versions",
             "summary": "Versions\u0020of\u0020game.",
-            "url": "classes/Lotgd-Core-Installer-Pattern-Version.html#property_versions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40000\\Upgrade",
-            "name": "Upgrade",
-            "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40000-Upgrade.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40000\\Upgrade\u003A\u003Astep1\u0028\u0029",
-            "name": "step1",
-            "summary": "Step\u00201\u003A\u0020Rename\u0020tables\u0020old\u0020tables\u0020and\u0020create\u0020new\u0020tables.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40000-Upgrade.html#method_step1"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40000\\Upgrade\u003A\u003Astep2\u0028\u0029",
-            "name": "step2",
-            "summary": "Import\u0020data\u0020of\u0020old\u0020\u0022commentary\u0022\u0020table.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40000-Upgrade.html#method_step2"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40000\\Upgrade\u003A\u003Astep3\u0028\u0029",
-            "name": "step3",
-            "summary": "Import\u0020data\u0020of\u0020old\u0020\u0022accounts\u0022\u0020table.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40000-Upgrade.html#method_step3"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40000\\Upgrade\u003A\u003Astep4\u0028\u0029",
-            "name": "step4",
-            "summary": "Import\u0020data\u0020of\u0020old\u0020\u0022news\u0022\u0020table.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40000-Upgrade.html#method_step4"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40000\\Upgrade\u003A\u003Astep5\u0028\u0029",
-            "name": "step5",
-            "summary": "Insert\u0020new\u0020data\u0020for\u0020this\u0020upgrade.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40000-Upgrade.html#method_step5"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40000\\Upgrade\u003A\u003Astep6\u0028\u0029",
-            "name": "step6",
-            "summary": "Delete\u0020old\u0020table\u0020when\u0020all\u0020rows\u0020are\u0020imported.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40000-Upgrade.html#method_step6"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40000\\Upgrade\u003A\u003AVERSION_NUMBER",
-            "name": "VERSION_NUMBER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40000-Upgrade.html#constant_VERSION_NUMBER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40100\\Upgrade",
-            "name": "Upgrade",
-            "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40100-Upgrade.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40100\\Upgrade\u003A\u003Astep1\u0028\u0029",
-            "name": "step1",
-            "summary": "Step\u00201\u003A\u0020Update\u0020settings.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40100-Upgrade.html#method_step1"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40100\\Upgrade\u003A\u003AVERSION_NUMBER",
-            "name": "VERSION_NUMBER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40100-Upgrade.html#constant_VERSION_NUMBER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40300\\Upgrade",
-            "name": "Upgrade",
-            "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40300-Upgrade.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40300\\Upgrade\u003A\u003Astep1\u0028\u0029",
-            "name": "step1",
-            "summary": "Step\u00201\u003A\u0020Deleted\u0020some\u0020files\u0020that\u0020are\u0020not\u0020needed.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40300-Upgrade.html#method_step1"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40300\\Upgrade\u003A\u003AVERSION_NUMBER",
-            "name": "VERSION_NUMBER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40300-Upgrade.html#constant_VERSION_NUMBER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40300\\Upgrade\u003A\u003ACONFIG_DIR_GLOBAL",
-            "name": "CONFIG_DIR_GLOBAL",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40300-Upgrade.html#constant_CONFIG_DIR_GLOBAL"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40800\\Upgrade",
-            "name": "Upgrade",
-            "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40800-Upgrade.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40800\\Upgrade\u003A\u003Astep1\u0028\u0029",
-            "name": "step1",
-            "summary": "Step\u00201\u003A\u0020Sanitize\u0020same\u0020values.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40800-Upgrade.html#method_step1"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40800\\Upgrade\u003A\u003AVERSION_NUMBER",
-            "name": "VERSION_NUMBER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40800-Upgrade.html#constant_VERSION_NUMBER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40800\\Upgrade\u003A\u003ACONFIG_DIR_GLOBAL",
-            "name": "CONFIG_DIR_GLOBAL",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40800-Upgrade.html#constant_CONFIG_DIR_GLOBAL"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40900\\Upgrade",
-            "name": "Upgrade",
-            "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40900-Upgrade.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40900\\Upgrade\u003A\u003Astep1\u0028\u0029",
-            "name": "step1",
-            "summary": "Step\u00201\u003A\u0020Remove\u0020some\u0020files.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40900-Upgrade.html#method_step1"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40900\\Upgrade\u003A\u003AVERSION_NUMBER",
-            "name": "VERSION_NUMBER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40900-Upgrade.html#constant_VERSION_NUMBER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40900\\Upgrade\u003A\u003ACONFIG_DIR_GLOBAL",
-            "name": "CONFIG_DIR_GLOBAL",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-40900-Upgrade.html#constant_CONFIG_DIR_GLOBAL"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41000\\Upgrade",
-            "name": "Upgrade",
-            "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41000-Upgrade.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41000\\Upgrade\u003A\u003Astep1\u0028\u0029",
-            "name": "step1",
-            "summary": "Step\u00201\u003A\u0020Remove\u0020some\u0020files.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41000-Upgrade.html#method_step1"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41000\\Upgrade\u003A\u003AVERSION_NUMBER",
-            "name": "VERSION_NUMBER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41000-Upgrade.html#constant_VERSION_NUMBER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41000\\Upgrade\u003A\u003ACONFIG_DIR_GLOBAL",
-            "name": "CONFIG_DIR_GLOBAL",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41000-Upgrade.html#constant_CONFIG_DIR_GLOBAL"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100\\Upgrade",
-            "name": "Upgrade",
-            "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41100-Upgrade.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100\\Upgrade\u003A\u003Astep1\u0028\u0029",
-            "name": "step1",
-            "summary": "Step\u00201\u003A\u0020Remove\u0020some\u0020files.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41100-Upgrade.html#method_step1"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100\\Upgrade\u003A\u003Astep2\u0028\u0029",
-            "name": "step2",
-            "summary": "Step\u00202\u003A\u0020Update\u0020text\u0020domain\u0020of\u0020news\u0020table.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41100-Upgrade.html#method_step2"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100\\Upgrade\u003A\u003Astep3\u0028\u0029",
-            "name": "step3",
-            "summary": "Step\u00203\u003A\u0020Update\u0020field\u0020donationconfig.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41100-Upgrade.html#method_step3"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100\\Upgrade\u003A\u003AVERSION_NUMBER",
-            "name": "VERSION_NUMBER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41100-Upgrade.html#constant_VERSION_NUMBER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100\\Upgrade\u003A\u003ACONFIG_DIR_GLOBAL",
-            "name": "CONFIG_DIR_GLOBAL",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41100-Upgrade.html#constant_CONFIG_DIR_GLOBAL"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade",
-            "name": "Upgrade",
-            "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade\u003A\u003Astep1\u0028\u0029",
-            "name": "step1",
-            "summary": "Step\u00201\u003A\u0020Remove\u0020some\u0020files.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html#method_step1"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade\u003A\u003AVERSION_NUMBER",
-            "name": "VERSION_NUMBER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html#constant_VERSION_NUMBER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade\u003A\u003ACONFIG_DIR_GLOBAL",
-            "name": "CONFIG_DIR_GLOBAL",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html#constant_CONFIG_DIR_GLOBAL"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract",
-            "name": "UpgradeAbstract",
-            "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003Astep0\u0028\u0029",
-            "name": "step0",
-            "summary": "First\u0020step\u0020of\u0020upgraded.",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#method_step0"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003AinsertData\u0028\u0029",
-            "name": "insertData",
-            "summary": "Insert\u0020data\u0020of\u0020an\u0020update\u0020install.",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#method_insertData"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003AgetMessages\u0028\u0029",
-            "name": "getMessages",
-            "summary": "Get\u0020all\u0020generated\u0020messages.",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#method_getMessages"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003AsetDoctrine\u0028\u0029",
-            "name": "setDoctrine",
-            "summary": "Set\u0020Doctrine\u0020Entity\u0020Manager.",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#method_setDoctrine"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003AsetConnection\u0028\u0029",
-            "name": "setConnection",
-            "summary": "Set\u0020connection.",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#method_setConnection"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003AsyncEntity\u0028\u0029",
-            "name": "syncEntity",
-            "summary": "Sync\u0020a\u0020single\u0020entity.",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#method_syncEntity"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003AVERSION_NUMBER",
-            "name": "VERSION_NUMBER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#constant_VERSION_NUMBER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003ADATA_DIR_UPDATE",
-            "name": "DATA_DIR_UPDATE",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#constant_DATA_DIR_UPDATE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003ATRANSLATOR_DOMAIN",
-            "name": "TRANSLATOR_DOMAIN",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#constant_TRANSLATOR_DOMAIN"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003ATRANSLATOR_KEY_TABLE_RENAME",
-            "name": "TRANSLATOR_KEY_TABLE_RENAME",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#constant_TRANSLATOR_KEY_TABLE_RENAME"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003ATRANSLATOR_KEY_TABLE_CREATE",
-            "name": "TRANSLATOR_KEY_TABLE_CREATE",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#constant_TRANSLATOR_KEY_TABLE_CREATE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003ATRANSLATOR_KEY_TABLE_IMPORT",
-            "name": "TRANSLATOR_KEY_TABLE_IMPORT",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#constant_TRANSLATOR_KEY_TABLE_IMPORT"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003ATRANSLATOR_KEY_TABLE_DELETE",
-            "name": "TRANSLATOR_KEY_TABLE_DELETE",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#constant_TRANSLATOR_KEY_TABLE_DELETE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003A\u0024doctrine",
-            "name": "doctrine",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#property_doctrine"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003A\u0024connection",
-            "name": "connection",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#property_connection"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract\u003A\u003A\u0024messages",
-            "name": "messages",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-UpgradeAbstract.html#property_messages"
+            "url": "classes/Lotgd-Core-Installer-Pattern-Version.html#property_lotgd_versions"
         },                {
             "fqsen": "\\Lotgd\\Core\\Jaxon\\Library\\Semantic\\Modal",
             "name": "Modal",
@@ -12550,6 +11315,11 @@ Search.appendIndex(
             "name": "FILE_DB_CONNECT",
             "summary": "",
             "url": "classes/Lotgd-Core-Kernel.html#constant_FILE_DB_CONNECT"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Kernel\u003A\u003ATEXT_DOMAIN_DEFAULT",
+            "name": "TEXT_DOMAIN_DEFAULT",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Kernel.html#constant_TEXT_DOMAIN_DEFAULT"
         },                {
             "fqsen": "\\Lotgd\\Core\\Kernel\u003A\u003ACOPYRIGHT",
             "name": "COPYRIGHT",
@@ -13041,6 +11811,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Output-Commentary.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Commentary\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Commentary.html#method___construct"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Output\\Commentary\u003A\u003AgetComments\u0028\u0029",
             "name": "getComments",
             "summary": "Get\u0020comments\u0020in\u0020the\u0020section.",
@@ -13096,15 +11871,60 @@ Search.appendIndex(
             "summary": "Save\u0020data\u0020in\u0020data\u0020base.",
             "url": "classes/Lotgd-Core-Output-Commentary.html#method_injectComment"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Commentary\u003A\u003ATEXT_DOMAIN",
+            "name": "TEXT_DOMAIN",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Commentary.html#constant_TEXT_DOMAIN"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Output\\Commentary\u003A\u003A\u0024repository",
             "name": "repository",
             "summary": "Repository\u0020of\u0020commentary.",
             "url": "classes/Lotgd-Core-Output-Commentary.html#property_repository"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Commentary\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Commentary.html#property_translator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Commentary\u003A\u003A\u0024cache",
+            "name": "cache",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Commentary.html#property_cache"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Commentary\u003A\u003A\u0024censor",
+            "name": "censor",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Commentary.html#property_censor"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Commentary\u003A\u003A\u0024hook",
+            "name": "hook",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Commentary.html#property_hook"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Commentary\u003A\u003A\u0024flashBag",
+            "name": "flashBag",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Commentary.html#property_flashBag"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Commentary\u003A\u003A\u0024doctrine",
+            "name": "doctrine",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Commentary.html#property_doctrine"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Commentary\u003A\u003A\u0024normalizer",
+            "name": "normalizer",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Commentary.html#property_normalizer"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Output\\Format",
             "name": "Format",
             "summary": "Format\u0020a\u0020string.",
             "url": "classes/Lotgd-Core-Output-Format.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Format\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Format.html#method___construct"
         },                {
             "fqsen": "\\Lotgd\\Core\\Output\\Format\u003A\u003Anumeral\u0028\u0029",
             "name": "numeral",
@@ -13135,6 +11955,21 @@ Search.appendIndex(
             "name": "setThousandsSep",
             "summary": "Set\u0020thousands\u0020separation.",
             "url": "classes/Lotgd-Core-Output-Format.html#method_setThousandsSep"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Format\u003A\u003A\u0024codes",
+            "name": "codes",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Format.html#property_codes"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Format\u003A\u003A\u0024colors",
+            "name": "colors",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Format.html#property_colors"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Format\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Format.html#property_translator"
         },                {
             "fqsen": "\\Lotgd\\Core\\Output\\Format\u003A\u003A\u0024dec_point",
             "name": "dec_point",
@@ -13205,11 +12040,6 @@ Search.appendIndex(
             "name": "getCodeSpecialReplacementClose",
             "summary": "Get\u0020replacement\u0020for\u0020code\u0020close\u0020code\u0020colors.",
             "url": "classes/Lotgd-Core-Output-Pattern-Code.html#method_getCodeSpecialReplacementClose"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Output\\Pattern\\Code\u003A\u003A\u0024codes",
-            "name": "codes",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Output-Pattern-Code.html#property_codes"
         },                {
             "fqsen": "\\Lotgd\\Core\\Output\\Pattern\\Code\u003A\u003A\u0024codePatternOpen",
             "name": "codePatternOpen",
@@ -13286,11 +12116,6 @@ Search.appendIndex(
             "summary": "Get\u0020replacement\u0020for\u0020code\u0020open\u0020code\u0020colors.",
             "url": "classes/Lotgd-Core-Output-Pattern-Color.html#method_getColorReplacementOpen"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Output\\Pattern\\Color\u003A\u003A\u0024colors",
-            "name": "colors",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Output-Pattern-Color.html#property_colors"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Output\\Pattern\\Color\u003A\u003A\u0024colorPatternOpen",
             "name": "colorPatternOpen",
             "summary": "",
@@ -13366,11 +12191,6 @@ Search.appendIndex(
             "summary": "Return\u0020instance\u0020of\u0020cache\u0020of\u0020game\u0020\u0022Cache\\Core\\Lotgd\u0022.",
             "url": "classes/Lotgd-Core-Pattern-Cache.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Pattern\\Cache\u003A\u003AgetCache\u0028\u0029",
-            "name": "getCache",
-            "summary": "Get\u0020cache\u0020instance.",
-            "url": "classes/Lotgd-Core-Pattern-Cache.html#method_getCache"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Cache\u003A\u003AgetCacheApp\u0028\u0029",
             "name": "getCacheApp",
             "summary": "Get\u0020app\u0020cache\u0020instance.",
@@ -13380,11 +12200,6 @@ Search.appendIndex(
             "name": "getCacheAppTag",
             "summary": "Get\u0020app\u0020cache\u0020instance.",
             "url": "classes/Lotgd-Core-Pattern-Cache.html#method_getCacheAppTag"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Pattern\\Cache\u003A\u003A\u0024lotgdCache",
-            "name": "lotgdCache",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Pattern-Cache.html#property_lotgdCache"
         },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Cache\u003A\u003A\u0024lotgdCacheApp",
             "name": "lotgdCacheApp",
@@ -13411,16 +12226,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Pattern-Container.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Pattern\\Container\u003A\u003AsetContainer\u0028\u0029",
-            "name": "setContainer",
-            "summary": "Set\u0020container\u0020\u0028Service\u0020Manager\u0029.",
-            "url": "classes/Lotgd-Core-Pattern-Container.html#method_setContainer"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Pattern\\Container\u003A\u003AgetContainer\u0028\u0029",
-            "name": "getContainer",
-            "summary": "Get\u0020container.",
-            "url": "classes/Lotgd-Core-Pattern-Container.html#method_getContainer"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Container\u003A\u003AgetService\u0028\u0029",
             "name": "getService",
             "summary": "Get\u0020container.",
@@ -13430,11 +12235,6 @@ Search.appendIndex(
             "name": "getKernel",
             "summary": "Get\u0020LoTGD\u0020Kernel.",
             "url": "classes/Lotgd-Core-Pattern-Container.html#method_getKernel"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Pattern\\Container\u003A\u003A\u0024serviceManager",
-            "name": "serviceManager",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Pattern-Container.html#property_serviceManager"
         },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Container\u003A\u003A\u0024lotgdKernel",
             "name": "lotgdKernel",
@@ -13703,7 +12503,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Translator\u003A\u003AgetTranslator\u0028\u0029",
             "name": "getTranslator",
-            "summary": "Get\u0020translator\u0020instance.",
+            "summary": "Alias",
             "url": "classes/Lotgd-Core-Pattern-Translator.html#method_getTranslator"
         },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Translator\u003A\u003AsymfonyTranslator\u0028\u0029",
@@ -13736,6 +12536,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Pvp-Listing.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Pvp\\Listing\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Pvp-Listing.html#method___construct"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Pvp\\Listing\u003A\u003AgetPvpList\u0028\u0029",
             "name": "getPvpList",
             "summary": "Get\u0020a\u0020list\u0020of\u0020players\u0020available\u0020for\u0020pvp.",
@@ -13755,6 +12560,11 @@ Search.appendIndex(
             "name": "setQuery",
             "summary": "Set\u0020query\u0020for\u0020list\u0020of\u0020PvP.",
             "url": "classes/Lotgd-Core-Pvp-Listing.html#method_setQuery"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Pvp\\Listing\u003A\u003A\u0024doctrine",
+            "name": "doctrine",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Pvp-Listing.html#property_doctrine"
         },                {
             "fqsen": "\\Lotgd\\Core\\Pvp\\Listing\u003A\u003A\u0024repository",
             "name": "repository",
@@ -13810,31 +12620,6 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/Lotgd-Core-Service-Jaxon.html#method___construct"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\ServiceManager",
-            "name": "ServiceManager",
-            "summary": "Generated\u0020a\u0020Service\u0020Manager\u0020for\u0020Game.",
-            "url": "classes/Lotgd-Core-ServiceManager.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\ServiceManager\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Lotgd-Core-ServiceManager.html#method___construct"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\ServiceManager\u003A\u003ALOTGD_CONFIG",
-            "name": "LOTGD_CONFIG",
-            "summary": "Production\u0020configuration\u0020for\u0020game.",
-            "url": "classes/Lotgd-Core-ServiceManager.html#constant_LOTGD_CONFIG"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\ServiceManager\u003A\u003ALOTGD_DEV_CONFIG",
-            "name": "LOTGD_DEV_CONFIG",
-            "summary": "Development\u0020configuration\u0020for\u0020game.",
-            "url": "classes/Lotgd-Core-ServiceManager.html#constant_LOTGD_DEV_CONFIG"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\ServiceManager\u003A\u003ACACHE_FILE",
-            "name": "CACHE_FILE",
-            "summary": "Name\u0020of\u0020cache\u0020file.",
-            "url": "classes/Lotgd-Core-ServiceManager.html#constant_CACHE_FILE"
         },                {
             "fqsen": "\\Lotgd\\Core\\Symfony\\Translation\\Formatter\\MessageFormatter",
             "name": "MessageFormatter",
@@ -13931,19 +12716,9 @@ Search.appendIndex(
             "summary": "Prepare\u0020template\u0020for\u0020use.",
             "url": "classes/Lotgd-Core-Template-Template.html#method_prepareTheme"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetValidTheme\u0028\u0029",
-            "name": "getValidTheme",
-            "summary": "Search\u0020for\u0020a\u0020valid\u0020theme\u0020if\u0020removed.",
-            "url": "classes/Lotgd-Core-Template-Template.html#method_getValidTheme"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AupdateGlobals\u0028\u0029",
-            "name": "updateGlobals",
-            "summary": "Update\u0020globals\u0020parameters.",
-            "url": "classes/Lotgd-Core-Template-Template.html#method_updateGlobals"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetBaseTemplateClass\u0028\u0029",
             "name": "getBaseTemplateClass",
-            "summary": "sobree\u0020scribir\u0020las\u0020funciones\u0020originales",
+            "summary": "sobree\u0020scribir\u0020las\u0020funciones\u0020originales.",
             "url": "classes/Lotgd-Core-Template-Template.html#method_getBaseTemplateClass"
         },                {
             "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AsetBaseTemplateClass\u0028\u0029",
@@ -14236,6 +13011,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Template-Template.html#method_getBinaryOperators"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetValidTheme\u0028\u0029",
+            "name": "getValidTheme",
+            "summary": "Search\u0020for\u0020a\u0020valid\u0020theme\u0020if\u0020removed.",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getValidTheme"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AupdateGlobals\u0028\u0029",
+            "name": "updateGlobals",
+            "summary": "Update\u0020globals\u0020parameters.",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_updateGlobals"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003ATEMPLATES_LAYOUT_DIR",
             "name": "TEMPLATES_LAYOUT_DIR",
             "summary": "",
@@ -14306,6 +13091,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Tool-Sanitize.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\Sanitize\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-Sanitize.html#method___construct"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Tool\\Sanitize\u003A\u003AunColorize\u0028\u0029",
             "name": "unColorize",
             "summary": "Remove\u0020all\u0020colors\u0020code\u0020from\u0020string.",
@@ -14371,70 +13161,25 @@ Search.appendIndex(
             "summary": "Converts\u0020a\u0020string\u0020into\u0020a\u0020slug.",
             "url": "classes/Lotgd-Core-Tool-Sanitize.html#method_slugify"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Translator\\Loader\\Yaml",
-            "name": "Yaml",
-            "summary": "Load\u0020a\u0020Yaml\u0020file.",
-            "url": "classes/Lotgd-Core-Translator-Loader-Yaml.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Translator\\Loader\\Yaml\u003A\u003Aload\u0028\u0029",
-            "name": "load",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Translator-Loader-Yaml.html#method_load"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Translator\\Loader\\Yaml\u003A\u003Aflatten\u0028\u0029",
-            "name": "flatten",
-            "summary": "Flattens\u0020an\u0020nested\u0020yaml\u0020of\u0020translations.",
-            "url": "classes/Lotgd-Core-Translator-Loader-Yaml.html#method_flatten"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Translator\\Translator",
-            "name": "Translator",
-            "summary": "Class\u0020translator\u0020for\u0020Legend\u0020of\u0020the\u0020Green\u0020Dragon.",
-            "url": "classes/Lotgd-Core-Translator-Translator.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Translator\\Translator\u003A\u003Atrans\u0028\u0029",
-            "name": "trans",
-            "summary": "Translate\u0020a\u0020message\u0020of\u0020LoTGD\u0020WITH\u0020MessageFormatter.",
-            "url": "classes/Lotgd-Core-Translator-Translator.html#method_trans"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Translator\\Translator\u003A\u003Amf\u0028\u0029",
-            "name": "mf",
-            "summary": "Only\u0020format\u0020a\u0020message\u0020with\u0020MessageFormatter.",
-            "url": "classes/Lotgd-Core-Translator-Translator.html#method_mf"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Translator\\Translator\u003A\u003AcleanParameters\u0028\u0029",
-            "name": "cleanParameters",
-            "summary": "Clean\u0020param\u0020of\u0020a\u0020value.",
-            "url": "classes/Lotgd-Core-Translator-Translator.html#method_cleanParameters"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Translator\\Translator\u003A\u003AloadMessages\u0028\u0029",
-            "name": "loadMessages",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Translator-Translator.html#method_loadMessages"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Translator\\Translator\u003A\u003AloadLotgdMessagesFromPatterns\u0028\u0029",
-            "name": "loadLotgdMessagesFromPatterns",
-            "summary": "Load\u0020messages\u0020from\u0020LotGD\u0020pattern.",
-            "url": "classes/Lotgd-Core-Translator-Translator.html#method_loadLotgdMessagesFromPatterns"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Translator\\Translator\u003A\u003AconstructFile\u0028\u0029",
-            "name": "constructFile",
+            "fqsen": "\\Lotgd\\Core\\Tool\\Sanitize\u003A\u003A\u0024color",
+            "name": "color",
             "summary": "",
-            "url": "classes/Lotgd-Core-Translator-Translator.html#method_constructFile"
+            "url": "classes/Lotgd-Core-Tool-Sanitize.html#property_color"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Translator\\Translator\u003A\u003ATEXT_DOMAIN_DEFAULT",
-            "name": "TEXT_DOMAIN_DEFAULT",
+            "fqsen": "\\Lotgd\\Core\\Tool\\Sanitize\u003A\u003A\u0024code",
+            "name": "code",
             "summary": "",
-            "url": "classes/Lotgd-Core-Translator-Translator.html#constant_TEXT_DOMAIN_DEFAULT"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AbstractExtension",
-            "name": "AbstractExtension",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-AbstractExtension.html"
+            "url": "classes/Lotgd-Core-Tool-Sanitize.html#property_code"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle",
             "name": "AdvertisingGoogle",
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html#method___construct"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003AgetFunctions\u0028\u0029",
             "name": "getFunctions",
@@ -14455,16 +13200,6 @@ Search.appendIndex(
             "name": "advertisingGoogleIsActived",
             "summary": "Determine\u0020if\u0020Google\u0020AdSense\u0020is\u0020active.",
             "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html#method_advertisingGoogleIsActived"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003AgetAdsenseService\u0028\u0029",
-            "name": "getAdsenseService",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html#method_getAdsenseService"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003AgetTemplateBlock\u0028\u0029",
-            "name": "getTemplateBlock",
-            "summary": "Template\u0020block\u0020for\u0020partials.",
-            "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html#method_getTemplateBlock"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003A\u0024adsGoogle",
             "name": "adsGoogle",
@@ -14501,6 +13236,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-Commentary.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Commentary\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Commentary.html#method___construct"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Commentary\u003A\u003AgetFunctions\u0028\u0029",
             "name": "getFunctions",
             "summary": "\u007B\u0040inheritdoc\u007D",
@@ -14521,20 +13261,10 @@ Search.appendIndex(
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Twig-Extension-Commentary.html#method_getTokenParsers"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Commentary\u003A\u003AgetCommentary\u0028\u0029",
-            "name": "getCommentary",
-            "summary": "Get\u0020the\u0020Commentary\u0020instance.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Commentary.html#method_getCommentary"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Commentary\u003A\u003AgetName\u0028\u0029",
             "name": "getName",
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Twig-Extension-Commentary.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Commentary\u003A\u003AgetTemplateBlock\u0028\u0029",
-            "name": "getTemplateBlock",
-            "summary": "Template\u0020block\u0020for\u0020commentary.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Commentary.html#method_getTemplateBlock"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Commentary\u003A\u003A\u0024commentary",
             "name": "commentary",
@@ -14545,6 +13275,16 @@ Search.appendIndex(
             "name": "translator",
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-Commentary.html#property_translator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Commentary\u003A\u003A\u0024request",
+            "name": "request",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Commentary.html#property_request"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Commentary\u003A\u003A\u0024color",
+            "name": "color",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Commentary.html#property_color"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Commentary\u003A\u003A\u0024commentaryNodeVisitor",
             "name": "commentaryNodeVisitor",
@@ -14561,6 +13301,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-Donation.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Donation\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Donation.html#method___construct"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Donation\u003A\u003AgetFunctions\u0028\u0029",
             "name": "getFunctions",
             "summary": "\u007B\u0040inheritdoc\u007D",
@@ -14576,10 +13321,20 @@ Search.appendIndex(
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Twig-Extension-Donation.html#method_getName"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Donation\u003A\u003A\u0024request",
+            "name": "request",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Donation.html#property_request"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\FlashMessages",
             "name": "FlashMessages",
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-FlashMessages.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\FlashMessages\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-FlashMessages.html#method___construct"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\FlashMessages\u003A\u003AgetFunctions\u0028\u0029",
             "name": "getFunctions",
@@ -14596,1025 +13351,25 @@ Search.appendIndex(
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Twig-Extension-FlashMessages.html#method_getName"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement",
-            "name": "AbstractElement",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AcreateAttributesString\u0028\u0029",
-            "name": "createAttributesString",
-            "summary": "Create\u0020a\u0020string\u0020of\u0020all\u0020attribute\/value\u0020pairs.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_createAttributesString"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AgetId\u0028\u0029",
-            "name": "getId",
-            "summary": "Get\u0020the\u0020ID\u0020of\u0020an\u0020element.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_getId"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AaddValidAttribute\u0028\u0029",
-            "name": "addValidAttribute",
-            "summary": "Adds\u0020an\u0020HTML\u0020attribute\u0020to\u0020the\u0020list\u0020of\u0020valid\u0020attributes.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_addValidAttribute"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AaddValidAttributePrefix\u0028\u0029",
-            "name": "addValidAttributePrefix",
-            "summary": "Adds\u0020a\u0020prefix\u0020to\u0020the\u0020list\u0020of\u0020valid\u0020attribute\u0020prefixes.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_addValidAttributePrefix"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AaddTranslatableAttribute\u0028\u0029",
-            "name": "addTranslatableAttribute",
-            "summary": "Adds\u0020an\u0020HTML\u0020attribute\u0020to\u0020the\u0020list\u0020of\u0020translatable\u0020attributes.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_addTranslatableAttribute"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AaddDefaultTranslatableAttribute\u0028\u0029",
-            "name": "addDefaultTranslatableAttribute",
-            "summary": "Adds\u0020an\u0020HTML\u0020attribute\u0020to\u0020the\u0020list\u0020of\u0020the\u0020default\u0020translatable\u0020attributes.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_addDefaultTranslatableAttribute"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AaddTranslatableAttributePrefix\u0028\u0029",
-            "name": "addTranslatableAttributePrefix",
-            "summary": "Adds\u0020an\u0020HTML\u0020attribute\u0020to\u0020the\u0020list\u0020of\u0020translatable\u0020attributes.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_addTranslatableAttributePrefix"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AaddDefaultTranslatableAttributePrefix\u0028\u0029",
-            "name": "addDefaultTranslatableAttributePrefix",
-            "summary": "Adds\u0020an\u0020HTML\u0020attribute\u0020to\u0020the\u0020list\u0020of\u0020translatable\u0020attributes.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_addDefaultTranslatableAttributePrefix"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AsetTranslatorTextDomain\u0028\u0029",
-            "name": "setTranslatorTextDomain",
-            "summary": "Set\u0020translation\u0020text\u0020domain.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_setTranslatorTextDomain"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AgetTranslatorTextDomain\u0028\u0029",
-            "name": "getTranslatorTextDomain",
-            "summary": "Return\u0020the\u0020translation\u0020text\u0020domain.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_getTranslatorTextDomain"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AgetEscapeHtmlAttrHelper\u0028\u0029",
-            "name": "getEscapeHtmlAttrHelper",
-            "summary": "Retrieve\u0020the\u0020escapeHtmlAttr\u0020helper.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_getEscapeHtmlAttrHelper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AprepareAttributes\u0028\u0029",
-            "name": "prepareAttributes",
-            "summary": "Prepare\u0020attributes\u0020for\u0020rendering.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_prepareAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AprepareBooleanAttributeValue\u0028\u0029",
-            "name": "prepareBooleanAttributeValue",
-            "summary": "Prepare\u0020a\u0020boolean\u0020attribute\u0020value.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_prepareBooleanAttributeValue"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AtranslateHtmlAttributeValue\u0028\u0029",
-            "name": "translateHtmlAttributeValue",
-            "summary": "Translates\u0020the\u0020value\u0020of\u0020the\u0020HTML\u0020attribute\u0020if\u0020it\u0020should\u0020be\u0020translated\u0020and\u0020this\u0020view\u0020helper\u0020has\u0020a\u0020translator.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_translateHtmlAttributeValue"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AisValidAttributeName\u0028\u0029",
-            "name": "isValidAttributeName",
-            "summary": "Whether\u0020the\u0020passed\u0020attribute\u0020is\u0020valid\u0020or\u0020not.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_isValidAttributeName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003AhasAllowedPrefix\u0028\u0029",
-            "name": "hasAllowedPrefix",
-            "summary": "Whether\u0020the\u0020passed\u0020attribute\u0020has\u0020a\u0020valid\u0020prefix\u0020or\u0020not.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#method_hasAllowedPrefix"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003A\u0024defaultTranslatableHtmlAttributes",
-            "name": "defaultTranslatableHtmlAttributes",
-            "summary": "The\u0020default\u0020translatable\u0020HTML\u0020attributes.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#property_defaultTranslatableHtmlAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003A\u0024defaultTranslatableHtmlAttributePrefixes",
-            "name": "defaultTranslatableHtmlAttributePrefixes",
-            "summary": "The\u0020default\u0020translatable\u0020HTML\u0020attribute\u0020prefixes.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#property_defaultTranslatableHtmlAttributePrefixes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003A\u0024booleanAttributes",
-            "name": "booleanAttributes",
-            "summary": "Standard\u0020boolean\u0020attributes,\u0020with\u0020expected\u0020values\u0020for\u0020enabling\/disabling.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#property_booleanAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003A\u0024translatableAttributes",
-            "name": "translatableAttributes",
-            "summary": "Translatable\u0020attributes.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#property_translatableAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003A\u0024translatableAttributePrefixes",
-            "name": "translatableAttributePrefixes",
-            "summary": "Prefixes\u0020of\u0020translatable\u0020HTML\u0020attributes.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#property_translatableAttributePrefixes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003A\u0024escapeHtmlAttrHelper",
-            "name": "escapeHtmlAttrHelper",
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\FlashMessages\u003A\u003A\u0024session",
+            "name": "session",
             "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#property_escapeHtmlAttrHelper"
+            "url": "classes/Lotgd-Core-Twig-Extension-FlashMessages.html#property_session"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003A\u0024validGlobalAttributes",
-            "name": "validGlobalAttributes",
-            "summary": "Attributes\u0020globally\u0020valid\u0020for\u0020all\u0020tags.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#property_validGlobalAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003A\u0024validTagAttributePrefixes",
-            "name": "validTagAttributePrefixes",
-            "summary": "Attribute\u0020prefixes\u0020valid\u0020for\u0020all\u0020tags.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#property_validTagAttributePrefixes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003A\u0024validTagAttributes",
-            "name": "validTagAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020the\u0020tag\u0020represented\u0020by\u0020this\u0020helper.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#property_validTagAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\AbstractElement\u003A\u003A\u0024translatorTextDomain",
-            "name": "translatorTextDomain",
-            "summary": "Translation\u0020text\u0020domain.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-AbstractElement.html#property_translatorTextDomain"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\Form",
-            "name": "Form",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-Form.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\Form\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-Form.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\Form\u003A\u003AformRender\u0028\u0029",
-            "name": "formRender",
-            "summary": "Render\u0020a\u0020form.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-Form.html#method_formRender"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\Form\u003A\u003AformRenderTab\u0028\u0029",
-            "name": "formRenderTab",
-            "summary": "Render\u0020a\u0020form\u0020with\u0020tabs.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-Form.html#method_formRenderTab"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\Form\u003A\u003AformRenderMenu\u0028\u0029",
-            "name": "formRenderMenu",
-            "summary": "Rendener\u0020form\u0020with\u0020a\u0020menu\u0020with\u0020popup.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-Form.html#method_formRenderMenu"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\Form\u003A\u003AopenTag\u0028\u0029",
-            "name": "openTag",
-            "summary": "Generate\u0020an\u0020opening\u0020tag.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-Form.html#method_openTag"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\Form\u003A\u003AcloseTag\u0028\u0029",
-            "name": "closeTag",
-            "summary": "Generate\u0020a\u0020closing\u0020tag.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-Form.html#method_closeTag"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\Form\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-Form.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\Form\u003A\u003AgetFormParams\u0028\u0029",
-            "name": "getFormParams",
-            "summary": "Prepare\u0020params\u0020for\u0020form.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-Form.html#method_getFormParams"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\Form\u003A\u003AgenerateButtonsForForm\u0028\u0029",
-            "name": "generateButtonsForForm",
-            "summary": "Generate\u0020buttons\u0020for\u0020this\u0020form\u0020if\u0020necesary.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-Form.html#method_generateButtonsForForm"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\Form\u003A\u003A\u0024validTagAttributes",
-            "name": "validTagAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020forms.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-Form.html#property_validTagAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormAction",
-            "name": "FormAction",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormAction.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormAction\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormAction.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormAction\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Render\u0020a\u0020form\u0020actions.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormAction.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormAction\u003A\u003ArenderRow\u0028\u0029",
-            "name": "renderRow",
-            "summary": "Render\u0020a\u0020form\u0020actions\u0020in\u0020row.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormAction.html#method_renderRow"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormAction\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormAction.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormAction\u003A\u003AgetActionParams\u0028\u0029",
-            "name": "getActionParams",
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\FlashMessages\u003A\u003A\u0024sanitize",
+            "name": "sanitize",
             "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormAction.html#method_getActionParams"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormBitField",
-            "name": "FormBitField",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormBitField.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormBitField\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormBitField.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormBitField\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Render\u0020a\u0020form\u0020\u003Cselect\u003E\u0020element\u0020from\u0020the\u0020provided\u0020\u0024element.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormBitField.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormBitField\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormBitField.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormBitField\u003A\u003AbitFieldValues\u0028\u0029",
-            "name": "bitFieldValues",
-            "summary": "Format\u0020bitfield\u0020values\u0020as\u0020array.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormBitField.html#method_bitFieldValues"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormButton",
-            "name": "FormButton",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormButton.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormButton\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormButton.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormButton\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Render\u0020a\u0020form\u0020\u003Cbutton\u003E\u0020element\u0020from\u0020the\u0020provided\u0020\u0024element,\nusing\u0020content\u0020from\u0020\u0024buttonContent\u0020or\u0020the\u0020element\u0027s\u0020\u0022label\u0022\u0020attribute.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormButton.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormButton\u003A\u003AopenTag\u0028\u0029",
-            "name": "openTag",
-            "summary": "Generate\u0020an\u0020opening\u0020button\u0020tag.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormButton.html#method_openTag"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormButton\u003A\u003AcloseTag\u0028\u0029",
-            "name": "closeTag",
-            "summary": "Return\u0020a\u0020closing\u0020button\u0020tag.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormButton.html#method_closeTag"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormButton\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormButton.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormButton\u003A\u003AgetType\u0028\u0029",
-            "name": "getType",
-            "summary": "Determine\u0020button\u0020type\u0020to\u0020use.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormButton.html#method_getType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormButton\u003A\u003A\u0024validTagAttributes",
-            "name": "validTagAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020the\u0020button\u0020tag.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormButton.html#property_validTagAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormButton\u003A\u003A\u0024validTypes",
-            "name": "validTypes",
-            "summary": "Valid\u0020values\u0020for\u0020the\u0020button\u0020type.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormButton.html#property_validTypes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCheckbox",
-            "name": "FormCheckbox",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCheckbox.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCheckbox\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCheckbox.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCheckbox\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Render\u0020a\u0020form\u0020\u003Cinput\u003E\u0020element\u0020from\u0020the\u0020provided\u0020\u0024element.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCheckbox.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCheckbox\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCheckbox.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCheckbox\u003A\u003AgetInputType\u0028\u0029",
-            "name": "getInputType",
-            "summary": "Return\u0020input\u0020type.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCheckbox.html#method_getInputType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection",
-            "name": "FormCollection",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AfieldsetRender\u0028\u0029",
-            "name": "fieldsetRender",
-            "summary": "Render\u0020collection\u0020as\u0020fieldset\u0020\u0028normal\u0020form\u0029.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_fieldsetRender"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AtabRender\u0028\u0029",
-            "name": "tabRender",
-            "summary": "Render\u0020a\u0020collections\u0020as\u0020tabs\u0020menu.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_tabRender"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003ArenderTemplate\u0028\u0029",
-            "name": "renderTemplate",
-            "summary": "Only\u0020render\u0020a\u0020template.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_renderTemplate"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AsetShouldWrap\u0028\u0029",
-            "name": "setShouldWrap",
-            "summary": "If\u0020set\u0020to\u0020true,\u0020collections\u0020are\u0020automatically\u0020wrapped\u0020around\u0020a\u0020fieldset.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_setShouldWrap"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003A\u0024shouldWrap",
-            "name": "shouldWrap",
-            "summary": "If\u0020set\u0020to\u0020true,\u0020collections\u0020are\u0020automatically\u0020wrapped\u0020around\u0020a\u0020fieldset.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#property_shouldWrap"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AsetDefaultElementHelper\u0028\u0029",
-            "name": "setDefaultElementHelper",
-            "summary": "Sets\u0020the\u0020name\u0020of\u0020the\u0020view\u0020helper\u0020that\u0020should\u0020be\u0020used\u0020to\u0020render\u0020sub\u0020elements.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_setDefaultElementHelper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AgetDefaultElementHelper\u0028\u0029",
-            "name": "getDefaultElementHelper",
-            "summary": "Gets\u0020the\u0020name\u0020of\u0020the\u0020view\u0020helper\u0020that\u0020should\u0020be\u0020used\u0020to\u0020render\u0020sub\u0020elements.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_getDefaultElementHelper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AsetElementHelper\u0028\u0029",
-            "name": "setElementHelper",
-            "summary": "Sets\u0020the\u0020element\u0020helper\u0020that\u0020should\u0020be\u0020used\u0020by\u0020this\u0020collection.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_setElementHelper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AsetFieldsetHelper\u0028\u0029",
-            "name": "setFieldsetHelper",
-            "summary": "Sets\u0020the\u0020fieldset\u0020helper\u0020that\u0020should\u0020be\u0020used\u0020by\u0020this\u0020collection.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_setFieldsetHelper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AgetWrapper\u0028\u0029",
-            "name": "getWrapper",
-            "summary": "Get\u0020the\u0020wrapper\u0020for\u0020the\u0020collection.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_getWrapper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AsetWrapper\u0028\u0029",
-            "name": "setWrapper",
-            "summary": "Set\u0020the\u0020wrapper\u0020for\u0020this\u0020collection.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_setWrapper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AsetLabelWrapper\u0028\u0029",
-            "name": "setLabelWrapper",
-            "summary": "Set\u0020the\u0020label\u002Dwrapper\nThe\u0020string\u0020will\u0020be\u0020passed\u0020through\u0020sprintf\u0020with\u0020the\u0020label\u0020as\u0020single\nparameter\nThis\u0020defaults\u0020to\u0020\u0027\u003Clegend\u003E\u0025s\u003C\/legend\u003E\u0027.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_setLabelWrapper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AgetLabelWrapper\u0028\u0029",
-            "name": "getLabelWrapper",
-            "summary": "Get\u0020the\u0020wrapper\u0020for\u0020the\u0020label.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_getLabelWrapper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AgetTemplateWrapper\u0028\u0029",
-            "name": "getTemplateWrapper",
-            "summary": "Ge\u0020the\u0020wrapper\u0020for\u0020the\u0020template.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_getTemplateWrapper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AsetTemplateWrapper\u0028\u0029",
-            "name": "setTemplateWrapper",
-            "summary": "Set\u0020the\u0020string\u0020where\u0020the\u0020template\u0020will\u0020be\u0020inserted\u0020into.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_setTemplateWrapper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003AgetCollectionParams\u0028\u0029",
-            "name": "getCollectionParams",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#method_getCollectionParams"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003A\u0024wrapper",
-            "name": "wrapper",
-            "summary": "This\u0020is\u0020the\u0020default\u0020wrapper\u0020that\u0020the\u0020collection\u0020is\u0020wrapped\u0020into.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#property_wrapper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003A\u0024labelWrapper",
-            "name": "labelWrapper",
-            "summary": "This\u0020is\u0020the\u0020default\u0020label\u002Dwrapper.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#property_labelWrapper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003A\u0024templateWrapper",
-            "name": "templateWrapper",
-            "summary": "Where\u0020shall\u0020the\u0020template\u002Ddata\u0020be\u0020inserted\u0020into.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#property_templateWrapper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormCollection\u003A\u003A\u0024defaultElementHelper",
-            "name": "defaultElementHelper",
-            "summary": "The\u0020name\u0020of\u0020the\u0020default\u0020view\u0020helper\u0020that\u0020is\u0020used\u0020to\u0020render\u0020sub\u0020elements.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormCollection.html#property_defaultElementHelper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElement",
-            "name": "FormElement",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElement.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElement\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElement.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElement\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Render\u0020an\u0020element.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElement.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElement\u003A\u003AsetDefaultHelper\u0028\u0029",
-            "name": "setDefaultHelper",
-            "summary": "Set\u0020default\u0020helper\u0020name.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElement.html#method_setDefaultHelper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElement\u003A\u003AaddType\u0028\u0029",
-            "name": "addType",
-            "summary": "Add\u0020form\u0020element\u0020type\u0020to\u0020plugin\u0020map.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElement.html#method_addType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElement\u003A\u003AaddClass\u0028\u0029",
-            "name": "addClass",
-            "summary": "Add\u0020instance\u0020class\u0020to\u0020plugin\u0020map.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElement.html#method_addClass"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElement\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElement.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElement\u003A\u003AgetInstanceType\u0028\u0029",
-            "name": "getInstanceType",
-            "summary": "Render\u0020element\u0020by\u0020instance\u0020map.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElement.html#method_getInstanceType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElement\u003A\u003AgetType\u0028\u0029",
-            "name": "getType",
-            "summary": "Render\u0020element\u0020by\u0020type\u0020map.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElement.html#method_getType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElement\u003A\u003ADEFAULT_HELPER",
-            "name": "DEFAULT_HELPER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElement.html#constant_DEFAULT_HELPER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElement\u003A\u003A\u0024classMap",
-            "name": "classMap",
-            "summary": "Instance\u0020map\u0020to\u0020view\u0020helper.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElement.html#property_classMap"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElement\u003A\u003A\u0024typeMap",
-            "name": "typeMap",
-            "summary": "Type\u0020map\u0020to\u0020view\u0020helper.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElement.html#property_typeMap"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElement\u003A\u003A\u0024defaultHelper",
-            "name": "defaultHelper",
-            "summary": "Default\u0020helper\u0020name.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElement.html#property_defaultHelper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElementError",
-            "name": "FormElementError",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElementError.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElementError\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElementError.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElementError\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Render\u0020validation\u0020errors\u0020for\u0020the\u0020provided\u0020\u0024element.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElementError.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElementError\u003A\u003AsetAttributes\u0028\u0029",
-            "name": "setAttributes",
-            "summary": "Set\u0020the\u0020attributes\u0020that\u0020will\u0020go\u0020on\u0020the\u0020message\u0020open\u0020format.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElementError.html#method_setAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElementError\u003A\u003AgetAttributes\u0028\u0029",
-            "name": "getAttributes",
-            "summary": "Get\u0020the\u0020attributes\u0020that\u0020will\u0020go\u0020on\u0020the\u0020message\u0020open\u0020format.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElementError.html#method_getAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElementError\u003A\u003AsetTranslateMessages\u0028\u0029",
-            "name": "setTranslateMessages",
-            "summary": "Set\u0020the\u0020flag\u0020detailing\u0020whether\u0020or\u0020not\u0020to\u0020translate\u0020error\u0020messages.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElementError.html#method_setTranslateMessages"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElementError\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElementError.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElementError\u003A\u003A\u0024attributes",
-            "name": "attributes",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElementError.html#property_attributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormElementError\u003A\u003A\u0024translateErrorMessages",
-            "name": "translateErrorMessages",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormElementError.html#property_translateErrorMessages"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormEmail",
-            "name": "FormEmail",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormEmail.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormEmail\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormEmail.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormEmail\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormEmail.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormEmail\u003A\u003AgetType\u0028\u0029",
-            "name": "getType",
-            "summary": "Determine\u0020input\u0020type\u0020to\u0020use.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormEmail.html#method_getType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormEmail\u003A\u003A\u0024validTagAttributes",
-            "name": "validTagAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020the\u0020input\u0020tag\u0020type\u003D\u0022email\u0022.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormEmail.html#property_validTagAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormHidden",
-            "name": "FormHidden",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormHidden.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormHidden\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormHidden.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormHidden\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormHidden.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormHidden\u003A\u003AgetType\u0028\u0029",
-            "name": "getType",
-            "summary": "Determine\u0020input\u0020type\u0020to\u0020use.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormHidden.html#method_getType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormHidden\u003A\u003A\u0024validTagAttributes",
-            "name": "validTagAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020the\u0020input\u0020tag\u0020type\u003D\u0022hidden\u0022.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormHidden.html#property_validTagAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormInput",
-            "name": "FormInput",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormInput.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormInput\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormInput.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormInput\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Render\u0020a\u0020form\u0020\u003Cinput\u003E\u0020element\u0020from\u0020the\u0020provided\u0020\u0024element.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormInput.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormInput\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormInput.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormInput\u003A\u003AgetType\u0028\u0029",
-            "name": "getType",
-            "summary": "Determine\u0020input\u0020type\u0020to\u0020use.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormInput.html#method_getType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormInput\u003A\u003A\u0024validTagAttributes",
-            "name": "validTagAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020the\u0020input\u0020tag.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormInput.html#property_validTagAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormInput\u003A\u003A\u0024validTypes",
-            "name": "validTypes",
-            "summary": "Valid\u0020values\u0020for\u0020the\u0020input\u0020type.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormInput.html#property_validTypes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormLabel",
-            "name": "FormLabel",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormLabel.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormLabel\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormLabel.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormLabel\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Generate\u0020a\u0020form\u0020label.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormLabel.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormLabel\u003A\u003AopenTag\u0028\u0029",
-            "name": "openTag",
-            "summary": "Generate\u0020an\u0020opening\u0020label\u0020tag.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormLabel.html#method_openTag"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormLabel\u003A\u003AcloseTag\u0028\u0029",
-            "name": "closeTag",
-            "summary": "Return\u0020a\u0020closing\u0020label.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormLabel.html#method_closeTag"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormLabel\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormLabel.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormLabel\u003A\u003AAPPEND",
-            "name": "APPEND",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormLabel.html#constant_APPEND"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormLabel\u003A\u003APREPEND",
-            "name": "PREPEND",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormLabel.html#constant_PREPEND"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormLabel\u003A\u003A\u0024validTagAttributes",
-            "name": "validTagAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020the\u0020label\u0020tag.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormLabel.html#property_validTagAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormNote",
-            "name": "FormNote",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormNote.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormNote\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormNote.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormNote\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Render\u0020note\u0020for\u0020element.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormNote.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormNote\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormNote.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormNumber",
-            "name": "FormNumber",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormNumber.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormNumber\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormNumber.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormNumber\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormNumber.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormNumber\u003A\u003AgetType\u0028\u0029",
-            "name": "getType",
-            "summary": "Determine\u0020input\u0020type\u0020to\u0020use.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormNumber.html#method_getType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormNumber\u003A\u003A\u0024validTagAttributes",
-            "name": "validTagAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020the\u0020input\u0020tag\u0020type\u003D\u0022number\u0022.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormNumber.html#property_validTagAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRange",
-            "name": "FormRange",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRange.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRange\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRange.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRange\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Render\u0020a\u0020form\u0020\u003Cinput\u003E\u0020element\u0020from\u0020the\u0020provided\u0020\u0024element.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRange.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRange\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRange.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRange\u003A\u003AgetType\u0028\u0029",
-            "name": "getType",
-            "summary": "Determine\u0020input\u0020type\u0020to\u0020use.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRange.html#method_getType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRange\u003A\u003A\u0024validTagAttributes",
-            "name": "validTagAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020the\u0020input\u0020tag\u0020type\u003D\u0022range\u0022.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRange.html#property_validTagAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow",
-            "name": "FormRow",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Utility\u0020form\u0020helper\u0020that\u0020renders\u0020a\u0020label\u0020\u0028if\u0020it\u0020exists\u0029,\u0020an\u0020element\u0020and\u0020errors.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003AsetInputErrorClass\u0028\u0029",
-            "name": "setInputErrorClass",
-            "summary": "Set\u0020the\u0020class\u0020that\u0020is\u0020added\u0020to\u0020element\u0020that\u0020have\u0020errors.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#method_setInputErrorClass"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003AgetInputErrorClass\u0028\u0029",
-            "name": "getInputErrorClass",
-            "summary": "Get\u0020the\u0020class\u0020that\u0020is\u0020added\u0020to\u0020element\u0020that\u0020have\u0020errors.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#method_getInputErrorClass"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003AsetLabelAttributes\u0028\u0029",
-            "name": "setLabelAttributes",
-            "summary": "Set\u0020the\u0020attributes\u0020for\u0020the\u0020row\u0020label.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#method_setLabelAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003AgetLabelAttributes\u0028\u0029",
-            "name": "getLabelAttributes",
-            "summary": "Get\u0020the\u0020attributes\u0020for\u0020the\u0020row\u0020label.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#method_getLabelAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003AsetLabelPosition\u0028\u0029",
-            "name": "setLabelPosition",
-            "summary": "Set\u0020the\u0020label\u0020position.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#method_setLabelPosition"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003AgetLabelPosition\u0028\u0029",
-            "name": "getLabelPosition",
-            "summary": "Get\u0020the\u0020label\u0020position.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#method_getLabelPosition"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003AsetRenderErrors\u0028\u0029",
-            "name": "setRenderErrors",
-            "summary": "Set\u0020if\u0020the\u0020errors\u0020are\u0020rendered\u0020by\u0020this\u0020helper.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#method_setRenderErrors"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003AgetRenderErrors\u0028\u0029",
-            "name": "getRenderErrors",
-            "summary": "Retrieve\u0020if\u0020the\u0020errors\u0020are\u0020rendered\u0020by\u0020this\u0020helper.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#method_getRenderErrors"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003ALABEL_APPEND",
-            "name": "LABEL_APPEND",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#constant_LABEL_APPEND"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003ALABEL_PREPEND",
-            "name": "LABEL_PREPEND",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#constant_LABEL_PREPEND"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003A\u0024inputErrorClass",
-            "name": "inputErrorClass",
-            "summary": "The\u0020class\u0020that\u0020is\u0020added\u0020to\u0020element\u0020that\u0020have\u0020errors.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#property_inputErrorClass"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003A\u0024labelAttributes",
-            "name": "labelAttributes",
-            "summary": "The\u0020attributes\u0020for\u0020the\u0020row\u0020label.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#property_labelAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003A\u0024labelPosition",
-            "name": "labelPosition",
-            "summary": "Where\u0020will\u0020be\u0020label\u0020rendered\u003F",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#property_labelPosition"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormRow\u003A\u003A\u0024renderErrors",
-            "name": "renderErrors",
-            "summary": "Are\u0020the\u0020errors\u0020are\u0020rendered\u0020by\u0020this\u0020helper\u003F",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormRow.html#property_renderErrors"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect",
-            "name": "FormSelect",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Render\u0020a\u0020form\u0020\u003Cselect\u003E\u0020element\u0020from\u0020the\u0020provided\u0020\u0024element.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect\u003A\u003ArenderOptions\u0028\u0029",
-            "name": "renderOptions",
-            "summary": "Render\u0020an\u0020array\u0020of\u0020options.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html#method_renderOptions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect\u003A\u003ArenderOptgroup\u0028\u0029",
-            "name": "renderOptgroup",
-            "summary": "Render\u0020an\u0020optgroup.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html#method_renderOptgroup"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect\u003A\u003AvalidateMultiValue\u0028\u0029",
-            "name": "validateMultiValue",
-            "summary": "Ensure\u0020that\u0020the\u0020value\u0020is\u0020set\u0020appropriately.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html#method_validateMultiValue"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect\u003A\u003ArenderHiddenElement\u0028\u0029",
-            "name": "renderHiddenElement",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html#method_renderHiddenElement"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect\u003A\u003AgetFormHiddenHelper\u0028\u0029",
-            "name": "getFormHiddenHelper",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html#method_getFormHiddenHelper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect\u003A\u003A\u0024validTagAttributes",
-            "name": "validTagAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020the\u0020current\u0020tag.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html#property_validTagAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect\u003A\u003A\u0024validSelectAttributes",
-            "name": "validSelectAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020select.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html#property_validSelectAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect\u003A\u003A\u0024validOptionAttributes",
-            "name": "validOptionAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020options.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html#property_validOptionAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect\u003A\u003A\u0024validOptgroupAttributes",
-            "name": "validOptgroupAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020option\u0020groups.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html#property_validOptgroupAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect\u003A\u003A\u0024translatableAttributes",
-            "name": "translatableAttributes",
-            "summary": "Translatable\u0020attributes.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html#property_translatableAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormSelect\u003A\u003A\u0024formHiddenHelper",
-            "name": "formHiddenHelper",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormSelect.html#property_formHiddenHelper"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormTagify",
-            "name": "FormTagify",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormTagify.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormTagify\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormTagify.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormTagify\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Render\u0020the\u0020tag\u0020element.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormTagify.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormTagify\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormTagify.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormTagify\u003A\u003AgetType\u0028\u0029",
-            "name": "getType",
-            "summary": "Determine\u0020input\u0020type\u0020to\u0020use.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormTagify.html#method_getType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormText",
-            "name": "FormText",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormText.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormText\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormText.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormText\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormText.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormText\u003A\u003AgetType\u0028\u0029",
-            "name": "getType",
-            "summary": "Determine\u0020input\u0020type\u0020to\u0020use.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormText.html#method_getType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormText\u003A\u003A\u0024validTagAttributes",
-            "name": "validTagAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020the\u0020input\u0020tag\u0020type\u003D\u0022text\u0022.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormText.html#property_validTagAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormTextarea",
-            "name": "FormTextarea",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormTextarea.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormTextarea\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormTextarea.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormTextarea\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Render\u0020a\u0020form\u0020\u003Ctextarea\u003E\u0020element\u0020from\u0020the\u0020provided\u0020\u0024element.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormTextarea.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormTextarea\u003A\u003AgetType\u0028\u0029",
-            "name": "getType",
-            "summary": "Determine\u0020input\u0020type\u0020to\u0020use.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormTextarea.html#method_getType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormTextarea\u003A\u003A\u0024validTagAttributes",
-            "name": "validTagAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020the\u0020input\u0020tag.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormTextarea.html#property_validTagAttributes"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormViewOnly",
-            "name": "FormViewOnly",
-            "summary": "Base\u0020functionality\u0020for\u0020all\u0020form\u0020view\u0020helpers.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormViewOnly.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormViewOnly\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormViewOnly.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormViewOnly\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "Render\u0020a\u0020form\u0020\u003Cinput\u003E\u0020element\u0020from\u0020the\u0020provided\u0020\u0024element.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormViewOnly.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormViewOnly\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormViewOnly.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormViewOnly\u003A\u003AgetType\u0028\u0029",
-            "name": "getType",
-            "summary": "Determine\u0020input\u0020type\u0020to\u0020use.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormViewOnly.html#method_getType"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form\\FormViewOnly\u003A\u003A\u0024validTagAttributes",
-            "name": "validTagAttributes",
-            "summary": "Attributes\u0020valid\u0020for\u0020the\u0020input\u0020tag.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Form-FormViewOnly.html#property_validTagAttributes"
+            "url": "classes/Lotgd-Core-Twig-Extension-FlashMessages.html#property_sanitize"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore",
             "name": "GameCore",
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html#method___construct"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore\u003A\u003AgetFilters\u0028\u0029",
             "name": "getFilters",
@@ -15636,45 +13391,95 @@ Search.appendIndex(
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html#method_getName"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore\u003A\u003A\u0024request",
+            "name": "request",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html#property_request"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore\u003A\u003A\u0024format",
+            "name": "format",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html#property_format"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore\u003A\u003A\u0024sanitize",
+            "name": "sanitize",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html#property_sanitize"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html#property_translator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore\u003A\u003A\u0024censor",
+            "name": "censor",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html#property_censor"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html#property_settings"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore\u003A\u003A\u0024hookManager",
+            "name": "hookManager",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html#property_hookManager"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore\u003A\u003A\u0024doctrine",
+            "name": "doctrine",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html#property_doctrine"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore\u003A\u003A\u0024session",
+            "name": "session",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html#property_session"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers",
             "name": "Helpers",
             "summary": "Class\u0020for\u0020use\u0020Laminas\u0020Helpers\u003A\u0020like\u0020show\/capture\u0020head\/inline\u0020scripts\/styles\u0020and\u0020files.",
             "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#method___construct"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003AgetFunctions\u0028\u0029",
             "name": "getFunctions",
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#method_getFunctions"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003AheadLink\u0028\u0029",
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A\u0024headLink",
             "name": "headLink",
-            "summary": "View\u0020Helper\u0020Method.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#method_headLink"
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#property_headLink"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003AheadMeta\u0028\u0029",
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A\u0024headMeta",
             "name": "headMeta",
-            "summary": "Retrieve\u0020object\u0020instance\u003B\u0020optionally\u0020add\u0020meta\u0020tag.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#method_headMeta"
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#property_headMeta"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003AheadScript\u0028\u0029",
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A\u0024headScript",
             "name": "headScript",
-            "summary": "Return\u0020headScript\u0020object.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#method_headScript"
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#property_headScript"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003AheadStyle\u0028\u0029",
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A\u0024headStyle",
             "name": "headStyle",
-            "summary": "Return\u0020headStyle\u0020object.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#method_headStyle"
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#property_headStyle"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003AheadTitle\u0028\u0029",
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A\u0024headTitle",
             "name": "headTitle",
-            "summary": "Retrieve\u0020placeholder\u0020for\u0020title\u0020element\u0020and\u0020optionally\u0020set\u0020state.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#method_headTitle"
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#property_headTitle"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003AinlineScript\u0028\u0029",
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A\u0024inlineScript",
             "name": "inlineScript",
-            "summary": "Return\u0020InlineScript\u0020object.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#method_inlineScript"
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#property_inlineScript"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A\u0024basePath",
             "name": "basePath",
@@ -15686,45 +13491,20 @@ Search.appendIndex(
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#method_getName"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003AgetInstance\u0028\u0029",
-            "name": "getInstance",
-            "summary": "Get\u0020intance\u0020of\u0020Laminas\u0020View\u0020Head\u002A.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#method_getInstance"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A\u0024HeadLink",
-            "name": "HeadLink",
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A\u0024request",
+            "name": "request",
             "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#property_HeadLink"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A\u0024HeadMeta",
-            "name": "HeadMeta",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#property_HeadMeta"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A\u0024HeadScript",
-            "name": "HeadScript",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#property_HeadScript"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A\u0024HeadStyle",
-            "name": "HeadStyle",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#property_HeadStyle"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A\u0024HeadTitle",
-            "name": "HeadTitle",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#property_HeadTitle"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers\u003A\u003A\u0024InlineScript",
-            "name": "InlineScript",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#property_InlineScript"
+            "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#property_request"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Motd",
             "name": "Motd",
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-Motd.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Motd\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Motd.html#method___construct"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Motd\u003A\u003AgetFunctions\u0028\u0029",
             "name": "getFunctions",
@@ -15741,6 +13521,11 @@ Search.appendIndex(
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Twig-Extension-Motd.html#method_getName"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Motd\u003A\u003A\u0024doctrine",
+            "name": "doctrine",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Motd.html#property_doctrine"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Motd\u003A\u003A\u0024repository",
             "name": "repository",
             "summary": "",
@@ -15751,6 +13536,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Navigation\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Navigation\u003A\u003AgetFilters\u0028\u0029",
+            "name": "getFilters",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#method_getFilters"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Navigation\u003A\u003AgetFunctions\u0028\u0029",
             "name": "getFunctions",
             "summary": "\u007B\u0040inheritdoc\u007D",
@@ -15760,6 +13555,31 @@ Search.appendIndex(
             "name": "getName",
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#method_getName"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Navigation\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#property_translator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Navigation\u003A\u003A\u0024navigation",
+            "name": "navigation",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#property_navigation"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Navigation\u003A\u003A\u0024accessKeys",
+            "name": "accessKeys",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#property_accessKeys"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Navigation\u003A\u003A\u0024format",
+            "name": "format",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#property_format"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Navigation\u003A\u003A\u0024request",
+            "name": "request",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#property_request"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\AttributesString",
             "name": "AttributesString",
@@ -15866,11 +13686,6 @@ Search.appendIndex(
             "summary": "Preven\u0020to\u0020format\u0020a\u0020LotGD\u0020code.",
             "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFilter.html#method_preventCodes"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFilter\u003A\u003AlotgdUrl\u0028\u0029",
-            "name": "lotgdUrl",
-            "summary": "Add\u0020a\u0020link,\u0020but\u0020not\u0020nav.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFilter.html#method_lotgdUrl"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFilter\u003A\u003Anumeral\u0028\u0029",
             "name": "numeral",
             "summary": "Format\u0020a\u0020number.",
@@ -15915,11 +13730,6 @@ Search.appendIndex(
             "name": "baseUrl",
             "summary": "Add\u0020server\u0020name\u0020to\u0020url\u0020query.",
             "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFunction.html#method_baseUrl"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFunction\u003A\u003ApageTitle\u0028\u0029",
-            "name": "pageTitle",
-            "summary": "Translate\u0020a\u0020title\u0020of\u0020page.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFunction.html#method_pageTitle"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFunction\u003A\u003AgameVersion\u0028\u0029",
             "name": "gameVersion",
@@ -15980,21 +13790,6 @@ Search.appendIndex(
             "name": "varDump",
             "summary": "Dump\u0020var\u0020and\u0020return\u0020a\u0020string.",
             "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFunction.html#method_varDump"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFunction\u003A\u003AincludeModuleTemplate\u0028\u0029",
-            "name": "includeModuleTemplate",
-            "summary": "Renders\u0020a\u0020module\u0020template.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFunction.html#method_includeModuleTemplate"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFunction\u003A\u003AincludeThemeTemplate\u0028\u0029",
-            "name": "includeThemeTemplate",
-            "summary": "Renders\u0020a\u0020theme\u0020template.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFunction.html#method_includeThemeTemplate"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFunction\u003A\u003AincludeLayoutTemplate\u0028\u0029",
-            "name": "includeLayoutTemplate",
-            "summary": "Render\u0020new\u0020layout\u0020system.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFunction.html#method_includeLayoutTemplate"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\Jaxon",
             "name": "Jaxon",
@@ -16066,6 +13861,11 @@ Search.appendIndex(
             "summary": "Show\u0020pagination\u0020for\u0020a\u0020instance\u0020of\u0020Paginator.",
             "url": "classes/Lotgd-Core-Twig-Extension-Pattern-Navigation.html#method_showPagination"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\Navigation\u003A\u003AlotgdUrl\u0028\u0029",
+            "name": "lotgdUrl",
+            "summary": "Add\u0020a\u0020link,\u0020but\u0020not\u0020nav.",
+            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-Navigation.html#method_lotgdUrl"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\Navigation\u003A\u003ArenderPagination\u0028\u0029",
             "name": "renderPagination",
             "summary": "Render\u0020template\u0020for\u0020pagination.",
@@ -16116,55 +13916,15 @@ Search.appendIndex(
             "summary": "Get\u0020source\u0020link.",
             "url": "classes/Lotgd-Core-Twig-Extension-Pattern-Source.html#method_gameSource"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\Translator",
-            "name": "Translator",
-            "summary": "Trait\u0020to\u0020translator.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-Translator.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\Translator\u003A\u003Atranslate\u0028\u0029",
-            "name": "translate",
-            "summary": "Translate\u0020a\u0020string\u0020using\u0020Laminas\u0020Translator.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-Translator.html#method_translate"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\Translator\u003A\u003AsymfonyTrans\u0028\u0029",
-            "name": "symfonyTrans",
-            "summary": "Translate\u0020a\u0020string\u0020using\u0020Symfony\u0020Translator.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-Translator.html#method_symfonyTrans"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\Translator\u003A\u003AtranslateMf\u0028\u0029",
-            "name": "translateMf",
-            "summary": "Format\u0020a\u0020message\u0020with\u0020MessageFormatter.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-Translator.html#method_translateMf"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\Translator\u003A\u003AtranslateSt\u0028\u0029",
-            "name": "translateSt",
-            "summary": "Format\u0020a\u0020message\u0020without\u0020MessageFormatter.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-Translator.html#method_translateSt"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\Translator\u003A\u003AtranslatorDefaultLocale\u0028\u0029",
-            "name": "translatorDefaultLocale",
-            "summary": "Get\u0020locale\u0020for\u0020translator.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-Translator.html#method_translatorDefaultLocale"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Translator",
             "name": "Translator",
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-Translator.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Translator\u003A\u003AgetNodeVisitors\u0028\u0029",
-            "name": "getNodeVisitors",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Translator.html#method_getNodeVisitors"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Translator\u003A\u003AgetTranslationNodeVisitor\u0028\u0029",
-            "name": "getTranslationNodeVisitor",
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Translator\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
             "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Translator.html#method_getTranslationNodeVisitor"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Translator\u003A\u003AgetTokenParsers\u0028\u0029",
-            "name": "getTokenParsers",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Translator.html#method_getTokenParsers"
+            "url": "classes/Lotgd-Core-Twig-Extension-Translator.html#method___construct"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Translator\u003A\u003AgetFilters\u0028\u0029",
             "name": "getFilters",
@@ -16176,20 +13936,30 @@ Search.appendIndex(
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Twig-Extension-Translator.html#method_getFunctions"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Translator\u003A\u003AmessageFormatter\u0028\u0029",
+            "name": "messageFormatter",
+            "summary": "Only\u0020format\u0020a\u0020message\u0020with\u0020MessageFormatter.",
+            "url": "classes/Lotgd-Core-Twig-Extension-Translator.html#method_messageFormatter"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Translator\u003A\u003AtranslatorDefaultLocale\u0028\u0029",
+            "name": "translatorDefaultLocale",
+            "summary": "Get\u0020locale\u0020for\u0020translator.",
+            "url": "classes/Lotgd-Core-Twig-Extension-Translator.html#method_translatorDefaultLocale"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Translator\u003A\u003AgetName\u0028\u0029",
             "name": "getName",
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Twig-Extension-Translator.html#method_getName"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Translator\u003A\u003AcleanParameters\u0028\u0029",
+            "name": "cleanParameters",
+            "summary": "Clean\u0020param\u0020of\u0020a\u0020value.",
+            "url": "classes/Lotgd-Core-Twig-Extension-Translator.html#method_cleanParameters"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Translator\u003A\u003A\u0024translator",
             "name": "translator",
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-Translator.html#property_translator"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Translator\u003A\u003A\u0024translatorNodeVisitor",
-            "name": "translatorNodeVisitor",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Translator.html#property_translatorNodeVisitor"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Loader\\LotgdFilesystemLoader",
             "name": "LotgdFilesystemLoader",
@@ -16260,11 +14030,6 @@ Search.appendIndex(
             "name": "compile",
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Node-Node.html#method_compile"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Node\\TranslatorDefaultDomainNode",
-            "name": "TranslatorDefaultDomainNode",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Node-TranslatorDefaultDomainNode.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\CommentaryDefaultAddCommentNodeVisitor",
             "name": "CommentaryDefaultAddCommentNodeVisitor",
@@ -16471,81 +14236,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-NodeVisitor-Scope.html#property_left"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorDefaultDomainNodeVisitor",
-            "name": "TranslatorDefaultDomainNodeVisitor",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorDefaultDomainNodeVisitor.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorDefaultDomainNodeVisitor\u003A\u003AdoEnterNode\u0028\u0029",
-            "name": "doEnterNode",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorDefaultDomainNodeVisitor.html#method_doEnterNode"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorDefaultDomainNodeVisitor\u003A\u003AdoLeaveNode\u0028\u0029",
-            "name": "doLeaveNode",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorDefaultDomainNodeVisitor.html#method_doLeaveNode"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorNodeVisitor",
-            "name": "TranslatorNodeVisitor",
-            "summary": "TranslateNodeVisitor\u0020extracts\u0020translation\u0020messages.",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorNodeVisitor.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorNodeVisitor\u003A\u003Aenable\u0028\u0029",
-            "name": "enable",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorNodeVisitor.html#method_enable"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorNodeVisitor\u003A\u003Adisable\u0028\u0029",
-            "name": "disable",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorNodeVisitor.html#method_disable"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorNodeVisitor\u003A\u003AgetMessages\u0028\u0029",
-            "name": "getMessages",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorNodeVisitor.html#method_getMessages"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorNodeVisitor\u003A\u003AgetPriority\u0028\u0029",
-            "name": "getPriority",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorNodeVisitor.html#method_getPriority"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorNodeVisitor\u003A\u003AdoEnterNode\u0028\u0029",
-            "name": "doEnterNode",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorNodeVisitor.html#method_doEnterNode"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorNodeVisitor\u003A\u003AdoLeaveNode\u0028\u0029",
-            "name": "doLeaveNode",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorNodeVisitor.html#method_doLeaveNode"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorNodeVisitor\u003A\u003AgetReadDomainFromArguments\u0028\u0029",
-            "name": "getReadDomainFromArguments",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorNodeVisitor.html#method_getReadDomainFromArguments"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorNodeVisitor\u003A\u003AgetReadDomainFromNode\u0028\u0029",
-            "name": "getReadDomainFromNode",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorNodeVisitor.html#method_getReadDomainFromNode"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorNodeVisitor\u003A\u003AUNDEFINED_DOMAIN",
-            "name": "UNDEFINED_DOMAIN",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorNodeVisitor.html#constant_UNDEFINED_DOMAIN"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorNodeVisitor\u003A\u003A\u0024enabled",
-            "name": "enabled",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorNodeVisitor.html#property_enabled"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\NodeVisitor\\TranslatorNodeVisitor\u003A\u003A\u0024messages",
-            "name": "messages",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-NodeVisitor-TranslatorNodeVisitor.html#property_messages"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\TokenParser\\CommentaryDefaultAddCommentTokenParser",
             "name": "CommentaryDefaultAddCommentTokenParser",
             "summary": "Token\u0020Parser\u0020for\u0020the\u0020\u0027commentary_can_add_comments\u0020\u0027\u0020tag.",
@@ -16621,161 +14311,6 @@ Search.appendIndex(
             "summary": "Gets\u0020the\u0020tag\u0020name\u0020associated\u0020with\u0020this\u0020token\u0020parser.",
             "url": "classes/Lotgd-Core-Twig-TokenParser-CommentaryDefaultPaginationUrlTokenParser.html#method_getTag"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\TokenParser\\TranslatorDefaultDomainTokenParser",
-            "name": "TranslatorDefaultDomainTokenParser",
-            "summary": "Token\u0020Parser\u0020for\u0020the\u0020\u0027translate_default_domain\u0027\u0020tag.",
-            "url": "classes/Lotgd-Core-Twig-TokenParser-TranslatorDefaultDomainTokenParser.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\TokenParser\\TranslatorDefaultDomainTokenParser\u003A\u003Aparse\u0028\u0029",
-            "name": "parse",
-            "summary": "Parses\u0020a\u0020token\u0020and\u0020returns\u0020a\u0020node.",
-            "url": "classes/Lotgd-Core-Twig-TokenParser-TranslatorDefaultDomainTokenParser.html#method_parse"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\TokenParser\\TranslatorDefaultDomainTokenParser\u003A\u003AgetTag\u0028\u0029",
-            "name": "getTag",
-            "summary": "Gets\u0020the\u0020tag\u0020name\u0020associated\u0020with\u0020this\u0020token\u0020parser.",
-            "url": "classes/Lotgd-Core-Twig-TokenParser-TranslatorDefaultDomainTokenParser.html#method_getTag"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\NoObjectExists",
-            "name": "NoObjectExists",
-            "summary": "Class\u0020that\u0020validates\u0020if\u0020objects\u0020does\u0020not\u0020exist\u0020in\u0020a\u0020given\u0020repository\u0020with\u0020a\u0020given\u0020list\u0020of\u0020matched\u0020fields.",
-            "url": "classes/Lotgd-Core-Validator-Db-NoObjectExists.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\NoObjectExists\u003A\u003AisValid\u0028\u0029",
-            "name": "isValid",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Validator-Db-NoObjectExists.html#method_isValid"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\NoObjectExists\u003A\u003AERROR_OBJECT_FOUND",
-            "name": "ERROR_OBJECT_FOUND",
-            "summary": "Error\u0020constants.",
-            "url": "classes/Lotgd-Core-Validator-Db-NoObjectExists.html#constant_ERROR_OBJECT_FOUND"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\NoObjectExists\u003A\u003A\u0024messageTemplates",
-            "name": "messageTemplates",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Validator-Db-NoObjectExists.html#property_messageTemplates"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\ObjectExists",
-            "name": "ObjectExists",
-            "summary": "Class\u0020that\u0020validates\u0020if\u0020objects\u0020exist\u0020in\u0020a\u0020given\u0020repository\u0020with\u0020a\u0020given\u0020list\u0020of\u0020matched\u0020fields.",
-            "url": "classes/Lotgd-Core-Validator-Db-ObjectExists.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\ObjectExists\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "Constructor.",
-            "url": "classes/Lotgd-Core-Validator-Db-ObjectExists.html#method___construct"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\ObjectExists\u003A\u003AisValid\u0028\u0029",
-            "name": "isValid",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Validator-Db-ObjectExists.html#method_isValid"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\ObjectExists\u003A\u003AcleanSearchValue\u0028\u0029",
-            "name": "cleanSearchValue",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Validator-Db-ObjectExists.html#method_cleanSearchValue"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\ObjectExists\u003A\u003AvalidateFields\u0028\u0029",
-            "name": "validateFields",
-            "summary": "Filters\u0020and\u0020validates\u0020the\u0020fields\u0020passed\u0020to\u0020the\u0020constructor.",
-            "url": "classes/Lotgd-Core-Validator-Db-ObjectExists.html#method_validateFields"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\ObjectExists\u003A\u003AERROR_NO_OBJECT_FOUND",
-            "name": "ERROR_NO_OBJECT_FOUND",
-            "summary": "Error\u0020constants.",
-            "url": "classes/Lotgd-Core-Validator-Db-ObjectExists.html#constant_ERROR_NO_OBJECT_FOUND"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\ObjectExists\u003A\u003A\u0024messageTemplates",
-            "name": "messageTemplates",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Validator-Db-ObjectExists.html#property_messageTemplates"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\ObjectExists\u003A\u003A\u0024objectRepository",
-            "name": "objectRepository",
-            "summary": "ObjectRepository\u0020from\u0020which\u0020to\u0020search\u0020for\u0020entities.",
-            "url": "classes/Lotgd-Core-Validator-Db-ObjectExists.html#property_objectRepository"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\ObjectExists\u003A\u003A\u0024fields",
-            "name": "fields",
-            "summary": "Fields\u0020to\u0020be\u0020checked.",
-            "url": "classes/Lotgd-Core-Validator-Db-ObjectExists.html#property_fields"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\UniqueObject",
-            "name": "UniqueObject",
-            "summary": "Class\u0020that\u0020validates\u0020if\u0020objects\u0020exist\u0020in\u0020a\u0020given\u0020repository\u0020with\u0020a\u0020given\u0020list\u0020of\u0020matched\u0020fields\u0020only\u0020once.",
-            "url": "classes/Lotgd-Core-Validator-Db-UniqueObject.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\UniqueObject\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "Constructor.",
-            "url": "classes/Lotgd-Core-Validator-Db-UniqueObject.html#method___construct"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\UniqueObject\u003A\u003AisValid\u0028\u0029",
-            "name": "isValid",
-            "summary": "Returns\u0020false\u0020if\u0020there\u0020is\u0020another\u0020object\u0020with\u0020the\u0020same\u0020field\u0020values\u0020but\u0020other\u0020identifiers.",
-            "url": "classes/Lotgd-Core-Validator-Db-UniqueObject.html#method_isValid"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\UniqueObject\u003A\u003AgetFoundIdentifiers\u0028\u0029",
-            "name": "getFoundIdentifiers",
-            "summary": "Gets\u0020the\u0020identifiers\u0020from\u0020the\u0020matched\u0020object.",
-            "url": "classes/Lotgd-Core-Validator-Db-UniqueObject.html#method_getFoundIdentifiers"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\UniqueObject\u003A\u003AgetExpectedIdentifiers\u0028\u0029",
-            "name": "getExpectedIdentifiers",
-            "summary": "Gets\u0020the\u0020identifiers\u0020from\u0020the\u0020context.",
-            "url": "classes/Lotgd-Core-Validator-Db-UniqueObject.html#method_getExpectedIdentifiers"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\UniqueObject\u003A\u003AgetIdentifiers\u0028\u0029",
-            "name": "getIdentifiers",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Validator-Db-UniqueObject.html#method_getIdentifiers"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\UniqueObject\u003A\u003AERROR_OBJECT_NOT_UNIQUE",
-            "name": "ERROR_OBJECT_NOT_UNIQUE",
-            "summary": "Error\u0020constants.",
-            "url": "classes/Lotgd-Core-Validator-Db-UniqueObject.html#constant_ERROR_OBJECT_NOT_UNIQUE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\UniqueObject\u003A\u003A\u0024messageTemplates",
-            "name": "messageTemplates",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Validator-Db-UniqueObject.html#property_messageTemplates"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\UniqueObject\u003A\u003A\u0024objectManager",
-            "name": "objectManager",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Validator-Db-UniqueObject.html#property_objectManager"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db\\UniqueObject\u003A\u003A\u0024useContext",
-            "name": "useContext",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Validator-Db-UniqueObject.html#property_useContext"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\DelimiterIsCountable",
-            "name": "DelimiterIsCountable",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Validator-DelimiterIsCountable.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\DelimiterIsCountable\u003A\u003AgetDelimiter\u0028\u0029",
-            "name": "getDelimiter",
-            "summary": "Get\u0020delimiter\u0020option.",
-            "url": "classes/Lotgd-Core-Validator-DelimiterIsCountable.html#method_getDelimiter"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\DelimiterIsCountable\u003A\u003AsetDelimiter\u0028\u0029",
-            "name": "setDelimiter",
-            "summary": "Set\u0020delimiter\u0020option.",
-            "url": "classes/Lotgd-Core-Validator-DelimiterIsCountable.html#method_setDelimiter"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\DelimiterIsCountable\u003A\u003AisValid\u0028\u0029",
-            "name": "isValid",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Validator-DelimiterIsCountable.html#method_isValid"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\DelimiterIsCountable\u003A\u003A\u0024options",
-            "name": "options",
-            "summary": "Options\u0020for\u0020the\u0020between\u0020validator.",
-            "url": "classes/Lotgd-Core-Validator-DelimiterIsCountable.html#property_options"
-        },                {
             "fqsen": "\\e_rand\u0028\u0029",
             "name": "e_rand",
             "summary": "Alias\u0020of\u0020mt_rand\u0020with\u0020some\u0020improvements.",
@@ -16845,6 +14380,491 @@ Search.appendIndex(
             "name": "bell_rand",
             "summary": "",
             "url": "namespaces/default.html#function_bell_rand"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand",
+            "name": "LotgdInstallCommand",
+            "summary": "Command\u0020for\u0020Install\/Upgrade\u0020LoTGD.",
+            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#method_configure"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003AdoExecute\u0028\u0029",
+            "name": "doExecute",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#method_doExecute"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003AprocessInstallation\u0028\u0029",
+            "name": "processInstallation",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#method_processInstallation"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003AmigrateDataBase\u0028\u0029",
+            "name": "migrateDataBase",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#method_migrateDataBase"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003AprocessCacheClear\u0028\u0029",
+            "name": "processCacheClear",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#method_processCacheClear"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003AgetProgressBar\u0028\u0029",
+            "name": "getProgressBar",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#method_getProgressBar"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003Abanner\u0028\u0029",
+            "name": "banner",
+            "summary": "Beautiful\u0020banner\u0020\u005E_\u005E.",
+            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#method_banner"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003A\u0024defaultName",
+            "name": "defaultName",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#property_defaultName"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003A\u0024installer",
+            "name": "installer",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#property_installer"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#property_translator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand",
+            "name": "UserCreateCommand",
+            "summary": "Command\u0020to\u0020create\u0020a\u0020new\u0020user.",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#method_configure"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003AgetLoginName\u0028\u0029",
+            "name": "getLoginName",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#method_getLoginName"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003AgetEmail\u0028\u0029",
+            "name": "getEmail",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#method_getEmail"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003AgetPassword\u0028\u0029",
+            "name": "getPassword",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#method_getPassword"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003AgetIsAdmin\u0028\u0029",
+            "name": "getIsAdmin",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#method_getIsAdmin"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003AgetCharacterTitle\u0028\u0029",
+            "name": "getCharacterTitle",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#method_getCharacterTitle"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003AgetAccountRepository\u0028\u0029",
+            "name": "getAccountRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#method_getAccountRepository"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003ATEXT_DOMAIN",
+            "name": "TEXT_DOMAIN",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#constant_TEXT_DOMAIN"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003ASU_MEGAUSER",
+            "name": "SU_MEGAUSER",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#constant_SU_MEGAUSER"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003A\u0024defaultName",
+            "name": "defaultName",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#property_defaultName"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003A\u0024doctrine",
+            "name": "doctrine",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#property_doctrine"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#property_translator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003A\u0024validator",
+            "name": "validator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#property_validator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#property_settings"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand\u003A\u003A\u0024accountRepository",
+            "name": "accountRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#property_accountRepository"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Form\\ClanNewType",
+            "name": "ClanNewType",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Form-ClanNewType.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Form\\ClanNewType\u003A\u003AbuildForm\u0028\u0029",
+            "name": "buildForm",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Form-ClanNewType.html#method_buildForm"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Form\\ClanNewType\u003A\u003AconfigureOptions\u0028\u0029",
+            "name": "configureOptions",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Form-ClanNewType.html#method_configureOptions"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\AbstractCommand",
+            "name": "AbstractCommand",
+            "summary": "Command\u0020for\u0020upgrade\u0020to\u0020clean\u0020install.",
+            "url": "classes/Lotgd-Core-Installer-Command-AbstractCommand.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\AbstractCommand\u003A\u003AsetProgressBar\u0028\u0029",
+            "name": "setProgressBar",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Command-AbstractCommand.html#method_setProgressBar"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\AbstractCommand\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Installer-Command-AbstractCommand.html#method_configure"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\AbstractCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Installer-Command-AbstractCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\AbstractCommand\u003A\u003A\u0024installer",
+            "name": "installer",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Command-AbstractCommand.html#property_installer"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\AbstractCommand\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Command-AbstractCommand.html#property_translator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\AbstractCommand\u003A\u003A\u0024bar",
+            "name": "bar",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Command-AbstractCommand.html#property_bar"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\CleanInstallCommand",
+            "name": "CleanInstallCommand",
+            "summary": "Command\u0020for\u0020upgrade\u0020a\u0020clean\u0020install.",
+            "url": "classes/Lotgd-Core-Installer-Command-CleanInstallCommand.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\CleanInstallCommand\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Command-CleanInstallCommand.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\CleanInstallCommand\u003A\u003A\u0024defaultName",
+            "name": "defaultName",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Command-CleanInstallCommand.html#property_defaultName"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\Install50000Command",
+            "name": "Install50000Command",
+            "summary": "Command\u0020for\u0020upgrade\u0020to\u00205.0.0\u0020version.",
+            "url": "classes/Lotgd-Core-Installer-Command-Install50000Command.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\Install50000Command\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Command-Install50000Command.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\Install50000Command\u003A\u003A\u0024defaultName",
+            "name": "defaultName",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Command-Install50000Command.html#property_defaultName"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract",
+            "name": "InstallerAbstract",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003Astart\u0028\u0029",
+            "name": "start",
+            "summary": "First\u0020step\u0020of\u0020install\/upgrade.",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#method_start"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003Afinish\u0028\u0029",
+            "name": "finish",
+            "summary": "Last\u0020step\u0020of\u0020install\/upgrade.",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#method_finish"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003AgetSteps\u0028\u0029",
+            "name": "getSteps",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#method_getSteps"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003AsetStepComplete\u0028\u0029",
+            "name": "setStepComplete",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#method_setStepComplete"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003AsetStepIncomplete\u0028\u0029",
+            "name": "setStepIncomplete",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#method_setStepIncomplete"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003AstepStatus\u0028\u0029",
+            "name": "stepStatus",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#method_stepStatus"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003AgetDirData\u0028\u0029",
+            "name": "getDirData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#method_getDirData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003AsetProjectDir\u0028\u0029",
+            "name": "setProjectDir",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#method_setProjectDir"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003AgetProjectDir\u0028\u0029",
+            "name": "getProjectDir",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#method_getProjectDir"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003AconfigureConsole\u0028\u0029",
+            "name": "configureConsole",
+            "summary": "Configure\u0020command\u0020with\u0020input\u0020and\u0020output.",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#method_configureConsole"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003ATRANSLATOR_DOMAIN",
+            "name": "TRANSLATOR_DOMAIN",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#constant_TRANSLATOR_DOMAIN"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003A\u0024totaSteps",
+            "name": "totaSteps",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#property_totaSteps"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003A\u0024style",
+            "name": "style",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#property_style"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003A\u0024output",
+            "name": "output",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#property_output"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003A\u0024input",
+            "name": "input",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#property_input"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003A\u0024doctrine",
+            "name": "doctrine",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#property_doctrine"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#property_translator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003A\u0024stepsProcessed",
+            "name": "stepsProcessed",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#property_stepsProcessed"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003A\u0024stepsProcessedFile",
+            "name": "stepsProcessedFile",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#property_stepsProcessedFile"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003A\u0024dataDir",
+            "name": "dataDir",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#property_dataDir"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\CheckInstallation",
+            "name": "CheckInstallation",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Pattern-CheckInstallation.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\CheckInstallation\u003A\u003AcheckInstallation\u0028\u0029",
+            "name": "checkInstallation",
+            "summary": "Check\u0020if\u0020can\u0020install\u0020this\u0020version\u0020of\u0020game.",
+            "url": "classes/Lotgd-Core-Installer-Pattern-CheckInstallation.html#method_checkInstallation"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\FormaterTrait",
+            "name": "FormaterTrait",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Pattern-FormaterTrait.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\FormaterTrait\u003A\u003AformatVersion\u0028\u0029",
+            "name": "formatVersion",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Pattern-FormaterTrait.html#method_formatVersion"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\CleanVersion",
+            "name": "CleanVersion",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-CleanVersion.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\CleanVersion\u003A\u003Astep0\u0028\u0029",
+            "name": "step0",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-CleanVersion.html#method_step0"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\CleanVersion\u003A\u003Astep1\u0028\u0029",
+            "name": "step1",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-CleanVersion.html#method_step1"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\CleanVersion\u003A\u003Astep2\u0028\u0029",
+            "name": "step2",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-CleanVersion.html#method_step2"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\CleanVersion\u003A\u003Astep3\u0028\u0029",
+            "name": "step3",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-CleanVersion.html#method_step3"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\CleanVersion\u003A\u003Astep4\u0028\u0029",
+            "name": "step4",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-CleanVersion.html#method_step4"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\CleanVersion\u003A\u003Astep5\u0028\u0029",
+            "name": "step5",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-CleanVersion.html#method_step5"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\CleanVersion\u003A\u003Astep6\u0028\u0029",
+            "name": "step6",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-CleanVersion.html#method_step6"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\CleanVersion\u003A\u003Astep7\u0028\u0029",
+            "name": "step7",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-CleanVersion.html#method_step7"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\CleanVersion\u003A\u003Astep8\u0028\u0029",
+            "name": "step8",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-CleanVersion.html#method_step8"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\CleanVersion\u003A\u003Astep9\u0028\u0029",
+            "name": "step9",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-CleanVersion.html#method_step9"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\CleanVersion\u003A\u003A\u0024upgradeVersion",
+            "name": "upgradeVersion",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-CleanVersion.html#property_upgradeVersion"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50000",
+            "name": "Version50000",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version50000.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50000\u003A\u003Astep0\u0028\u0029",
+            "name": "step0",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version50000.html#method_step0"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50000\u003A\u003Astep1\u0028\u0029",
+            "name": "step1",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version50000.html#method_step1"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50000\u003A\u003Astep2\u0028\u0029",
+            "name": "step2",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version50000.html#method_step2"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50000\u003A\u003Astep3\u0028\u0029",
+            "name": "step3",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version50000.html#method_step3"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50000\u003A\u003Astep4\u0028\u0029",
+            "name": "step4",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version50000.html#method_step4"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50000\u003A\u003A\u0024upgradeVersion",
+            "name": "upgradeVersion",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version50000.html#property_upgradeVersion"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Jaxon",
+            "name": "Jaxon",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Jaxon.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Jaxon\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Jaxon.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Jaxon\u003A\u003AgetFunctions\u0028\u0029",
+            "name": "getFunctions",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Twig-Extension-Jaxon.html#method_getFunctions"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Jaxon\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Twig-Extension-Jaxon.html#method_getName"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Jaxon\u003A\u003A\u0024jaxon",
+            "name": "jaxon",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Jaxon.html#property_jaxon"
         },                {
             "fqsen": "\\",
             "name": "\\",
@@ -16960,21 +14980,6 @@ Search.appendIndex(
             "name": "Command",
             "summary": "",
             "url": "namespaces/lotgd-core-command.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Console",
-            "name": "Console",
-            "summary": "",
-            "url": "namespaces/lotgd-core-console.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db",
-            "name": "Db",
-            "summary": "",
-            "url": "namespaces/lotgd-core-db.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Db\\Pattern",
-            "name": "Pattern",
-            "summary": "",
-            "url": "namespaces/lotgd-core-db-pattern.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Doctrine\\DBAL",
             "name": "DBAL",
@@ -17116,31 +15121,6 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/lotgd-core-exception.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Db",
-            "name": "Db",
-            "summary": "",
-            "url": "namespaces/lotgd-core-factory-db.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory",
-            "name": "Factory",
-            "summary": "",
-            "url": "namespaces/lotgd-core-factory.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Form",
-            "name": "Form",
-            "summary": "",
-            "url": "namespaces/lotgd-core-factory-form.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Translator",
-            "name": "Translator",
-            "summary": "",
-            "url": "namespaces/lotgd-core-factory-translator.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Filter",
-            "name": "Filter",
-            "summary": "",
-            "url": "namespaces/lotgd-core-filter.html"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Fixed",
             "name": "Fixed",
             "summary": "",
@@ -17166,11 +15146,6 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/lotgd-core-form-datatransformer.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Form\\Element",
-            "name": "Element",
-            "summary": "",
-            "url": "namespaces/lotgd-core-form-element.html"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Form\\EventListener",
             "name": "EventListener",
             "summary": "",
@@ -17191,6 +15166,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/lotgd-core-http.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command",
+            "name": "Command",
+            "summary": "",
+            "url": "namespaces/lotgd-core-installer-command.html"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Installer",
             "name": "Installer",
             "summary": "",
@@ -17201,50 +15181,10 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/lotgd-core-installer-pattern.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40000",
-            "name": "Version_40000",
-            "summary": "",
-            "url": "namespaces/lotgd-core-installer-upgrade-version-40000.html"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade",
             "name": "Upgrade",
             "summary": "",
             "url": "namespaces/lotgd-core-installer-upgrade.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40100",
-            "name": "Version_40100",
-            "summary": "",
-            "url": "namespaces/lotgd-core-installer-upgrade-version-40100.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40300",
-            "name": "Version_40300",
-            "summary": "",
-            "url": "namespaces/lotgd-core-installer-upgrade-version-40300.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40800",
-            "name": "Version_40800",
-            "summary": "",
-            "url": "namespaces/lotgd-core-installer-upgrade-version-40800.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_40900",
-            "name": "Version_40900",
-            "summary": "",
-            "url": "namespaces/lotgd-core-installer-upgrade-version-40900.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41000",
-            "name": "Version_41000",
-            "summary": "",
-            "url": "namespaces/lotgd-core-installer-upgrade-version-41000.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100",
-            "name": "Version_41100",
-            "summary": "",
-            "url": "namespaces/lotgd-core-installer-upgrade-version-41100.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200",
-            "name": "Version_41200",
-            "summary": "",
-            "url": "namespaces/lotgd-core-installer-upgrade-version-41200.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Jaxon\\Library\\Semantic",
             "name": "Semantic",
@@ -17341,16 +15281,6 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/lotgd-core-tool.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Translator\\Loader",
-            "name": "Loader",
-            "summary": "",
-            "url": "namespaces/lotgd-core-translator-loader.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Translator",
-            "name": "Translator",
-            "summary": "",
-            "url": "namespaces/lotgd-core-translator.html"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension",
             "name": "Extension",
             "summary": "",
@@ -17360,11 +15290,6 @@ Search.appendIndex(
             "name": "Twig",
             "summary": "",
             "url": "namespaces/lotgd-core-twig.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Form",
-            "name": "Form",
-            "summary": "",
-            "url": "namespaces/lotgd-core-twig-extension-form.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern",
             "name": "Pattern",
@@ -17390,15 +15315,5 @@ Search.appendIndex(
             "name": "TokenParser",
             "summary": "",
             "url": "namespaces/lotgd-core-twig-tokenparser.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator\\Db",
-            "name": "Db",
-            "summary": "",
-            "url": "namespaces/lotgd-core-validator-db.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Validator",
-            "name": "Validator",
-            "summary": "",
-            "url": "namespaces/lotgd-core-validator.html"
         }            ]
 );
