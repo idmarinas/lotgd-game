@@ -17,8 +17,8 @@
 -   A partir de esta versión se empezará a usar un sistema de módulos tipo Bundle
 
 # Módulos
--   Eliminar uso de DB::
--   Lotgd\Core\Pattern mirar donde se usa e intentar quitarlo.
+
+-   ...
 
 # Para la versión 5.1.0
 -   Migrar al nuevo sitema de plantillas
