@@ -42,6 +42,7 @@ final class LotgdInstallCommand extends Command
 
     protected $installer;
     protected $translator;
+    protected $style;
 
     public function __construct(Install $install, TranslatorInterface $translator)
     {
@@ -106,10 +107,10 @@ final class LotgdInstallCommand extends Command
     private function doExecute(InputInterface $input, OutputInterface $output)
     {
         /** @var Lotgd\Core\Kernel */
-        $app    = $this->getApplication();
-        $kernel = $app->getKernel();
-        $style  = new SymfonyStyle($input, $output);
-        $style->newLine();
+        $app         = $this->getApplication();
+        $kernel      = $app->getKernel();
+        $this->style = new SymfonyStyle($input, $output);
+        $this->style->newLine();
 
         //-- Configure installer
         $this->installer->configureConsole($input, $output);
@@ -155,19 +156,19 @@ final class LotgdInstallCommand extends Command
         $countVersionsToInstall = \count($versionsToInstall);
 
         //-- Information count of versions need upgrade.
-        $style->note($this->translator->trans('installer.installation.info.total', ['n' => $countVersionsToInstall], InstallerAbstract::TRANSLATOR_DOMAIN));
+        $this->style->note($this->translator->trans('installer.installation.info.total', ['n' => $countVersionsToInstall], InstallerAbstract::TRANSLATOR_DOMAIN));
 
         //-- Create a progress bar
         $installerBar = $this->getProgressBar($output);
         $installerBar->setMessage($this->translator->trans('installer.progressbar.install.label', [], InstallerAbstract::TRANSLATOR_DOMAIN));
 
         //-- Start bar
-        $installerBar->start($countVersionsToInstall + 2); //-- For migrations DB and clear cache
+        $installerBar->start($countVersionsToInstall + 1); //-- For clear cache
 
         //-- Process instalation scripts
-        if ($this->processInstallation($input, $output, $installerBar, $style, $versionsToInstall))
+        if ($this->processInstallation($input, $output, $installerBar, $fromVersion, $versionsToInstall))
         {
-            $style->error($this->translator->trans('installer.installation.abort.install', [], InstallerAbstract::TRANSLATOR_DOMAIN));
+            $this->style->error($this->translator->trans('installer.installation.abort.install', [], InstallerAbstract::TRANSLATOR_DOMAIN));
 
             return Command::FAILURE;
         }
@@ -182,12 +183,12 @@ final class LotgdInstallCommand extends Command
 
         $installerBar->finish(); //-- Ensures that the progress bar is at 100%
 
-        $style->newLine();
-        $style->newLine();
-        $style->newLine();
+        $this->style->newLine();
+        $this->style->newLine();
+        $this->style->newLine();
 
-        $style->title($this->translator->trans('installer.installation.user.create', [], InstallerAbstract::TRANSLATOR_DOMAIN));
-        $style->info($this->translator->trans('installer.installation.user.info', [], InstallerAbstract::TRANSLATOR_DOMAIN));
+        $this->style->title($this->translator->trans('installer.installation.user.create', [], InstallerAbstract::TRANSLATOR_DOMAIN));
+        $this->style->info($this->translator->trans('installer.installation.user.info', [], InstallerAbstract::TRANSLATOR_DOMAIN));
 
         //-- Create user admin
         $command = $this->getApplication()->find('lotgd:user:create');
@@ -196,18 +197,11 @@ final class LotgdInstallCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function processInstallation(InputInterface $input, OutputInterface $output, ProgressBar $installerBar, SymfonyStyle $style, array $versionsToInstall)
+    private function processInstallation(InputInterface $input, OutputInterface $output, ProgressBar $installerBar, int $fromVersion, array $versionsToInstall)
     {
         $message = $this->translator->trans('installer.progressbar.install.progress.database', [], InstallerAbstract::TRANSLATOR_DOMAIN);
         $installerBar->setMessage($message, 'steps');
         $installerBar->display();
-
-        if ($this->migrateDataBase($installerBar))
-        {
-            $style->warning($this->translator->trans('installer.installation.abort.database', [], InstallerAbstract::TRANSLATOR_DOMAIN));
-
-            return Command::FAILURE;
-        }
 
         foreach ($versionsToInstall as $v_name => $v_id)
         {
@@ -232,7 +226,7 @@ final class LotgdInstallCommand extends Command
             //-- If command fail, abort installation
             if ($returnCode)
             {
-                $style->warning($this->translator->trans('installer.installation.abort.command', [
+                $this->style->warning($this->translator->trans('installer.installation.abort.command', [
                     'version' => $this->installer->getNameVersion($v_id),
                 ], InstallerAbstract::TRANSLATOR_DOMAIN));
 
@@ -243,22 +237,6 @@ final class LotgdInstallCommand extends Command
         }
 
         return Command::SUCCESS;
-    }
-
-    private function migrateDataBase(ProgressBar $installerBar)
-    {
-        $input = new ArrayInput([
-            '--quiet'          => true, //-- Do not output any message
-            '--no-interaction' => true,
-        ]);
-        $input->setInteractive(false); //-- Do not ask any interactive question
-
-        $command = $this->getApplication()->find('doctrine:migrations:migrate');
-        $return  = (int) $command->run($input, new NullOutput());
-
-        $installerBar->advance(1);
-
-        return $return;
     }
 
     private function processCacheClear(ProgressBar $installerBar)
