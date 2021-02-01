@@ -7,11 +7,10 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto (5.0.0)
--   Instalador (documentacion)
-    -   Agregar los pasos para instalr
-    -   Modificar/añadir los archivos .env.prod, .env.local etc, segun sea
-    -   Informar del comando composer dump-env prod/dev/test
--   Se usará un sistema similar al Symfony como transición
+
+-   Actualizando módulos
+
+# Versión 5.0.0
 -   El antiguo sistema de módulos está obsolete desde esta versión
     -   Los módulos antiguos seguiran funcionando pero estan obsoletos.
     -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
