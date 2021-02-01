@@ -24,7 +24,7 @@ installer:
         abort:
             install: 'Installation of LoTGD Core is aborted.'
             command: 'Installation for version "{version}" has been fail'
-            database: 'Migration of Data Basa has been fail or canceled.'
+            database: 'Migration of Data Base has been fail or canceled.'
         user:
             create: Create the administrator user
             info: When asked if the account is an administrator, select 1 to create an account as administrator.
@@ -34,7 +34,7 @@ installer:
             end: LoTGD Core installed correctly
             progress:
                 version: 'Installing "{name}"'
-                database: 'Migrating Data Base to lastest version'
+                database: 'Migrating Data Base'
                 cache.clear: 'Clearing the cache for LoTGD Core'
                 steps: ' Step {step,number} completed of {total,number}'
                 completed: All steps completed
