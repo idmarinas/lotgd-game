@@ -17,7 +17,9 @@ use Lotgd\Core\Installer\InstallerAbstract;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -59,6 +61,15 @@ abstract class AbstractCommand extends Command
 
         $this->installer->start(); //-- Start install
 
+        //-- Make a database migration
+        if ($this->migrateDataBase($this->hasMigration()))
+        {
+            $msg = $this->translator->trans('installer.installation.abort.database', [], InstallerAbstract::TRANSLATOR_DOMAIN);
+            $output->writeln("<error>{$msg}</>");
+
+            return Command::FAILURE;
+        }
+
         $step   = 0;
         $steps  = $this->installer->getSteps();
         $result = true;
@@ -90,5 +101,32 @@ abstract class AbstractCommand extends Command
         $this->installer->finish(); //-- Finish install
 
         return Command::SUCCESS;
+    }
+
+    protected function migrateDataBase(int $hasMigration)
+    {
+        if ( ! $hasMigration)
+        {
+            return Command::SUCCESS;
+        }
+
+        $message = $this->translator->trans('installer.progressbar.install.progress.database', [], InstallerAbstract::TRANSLATOR_DOMAIN);
+        $this->bar->setMessage($message, 'steps');
+        $this->bar->display();
+
+        $input = new ArrayInput([
+            'version' => 'DoctrineMigrations\Version'.$hasMigration,
+            '--no-interaction' => true
+        ]);
+        $input->setInteractive(false); //-- Do not ask any interactive question
+
+        $command = $this->getApplication()->find('doctrine:migrations:migrate');
+
+        return (int) $command->run($input, new NullOutput());
+    }
+
+    protected function hasMigration(): int
+    {
+        return (int) $this->hasMigration;
     }
 }
