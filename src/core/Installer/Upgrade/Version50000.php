@@ -19,6 +19,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class Version50000 extends InstallerAbstract
 {
     protected $upgradeVersion = 50000;
+    protected $hasMigration = false;
 
     //-- Delete old files
     public function step0()
