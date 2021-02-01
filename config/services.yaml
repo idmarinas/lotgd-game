@@ -23,6 +23,7 @@ services:
             - "../src/core/DependencyInjection/"
             - "../src/core/Exception/"
             - "../src/core/Fixed/"
+            - "../src/core/Pattern/"
             - "../src/core/Tests/"
             - "../src/core/Twig/Node/"
             - "../src/core/Twig/NodeVisitor/"
