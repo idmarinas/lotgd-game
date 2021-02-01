@@ -33,7 +33,8 @@ abstract class InstallerAbstract
     protected $translator;
     protected $stepsProcessed;
     protected $stepsProcessedFile;
-    protected $dataDir = ''; //-- Directory of data "data/"
+    protected $dataDir      = ''; //-- Directory of data "data/"
+    protected $hasMigration = false;
 
     public function __construct(EntityManagerInterface $doctrine, TranslatorInterface $translator)
     {
@@ -162,5 +163,10 @@ abstract class InstallerAbstract
         $this->input  = $input;
         $this->output = $output;
         $this->style  = new SymfonyStyle($input, $output);
+    }
+
+    public function hasMigration(): int
+    {
+        return (int) $this->hasMigration;
     }
 }
