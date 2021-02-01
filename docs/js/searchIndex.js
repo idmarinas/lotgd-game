@@ -14411,11 +14411,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#method_processInstallation"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003AmigrateDataBase\u0028\u0029",
-            "name": "migrateDataBase",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#method_migrateDataBase"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003AprocessCacheClear\u0028\u0029",
             "name": "processCacheClear",
             "summary": "",
@@ -14445,6 +14440,11 @@ Search.appendIndex(
             "name": "translator",
             "summary": "",
             "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#property_translator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\LotgdInstallCommand\u003A\u003A\u0024style",
+            "name": "style",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-LotgdInstallCommand.html#property_style"
         },                {
             "fqsen": "\\Lotgd\\Core\\Command\\UserCreateCommand",
             "name": "UserCreateCommand",
@@ -14571,6 +14571,11 @@ Search.appendIndex(
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Installer-Command-AbstractCommand.html#method_execute"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\AbstractCommand\u003A\u003AmigrateDataBase\u0028\u0029",
+            "name": "migrateDataBase",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Command-AbstractCommand.html#method_migrateDataBase"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Command\\AbstractCommand\u003A\u003A\u0024installer",
             "name": "installer",
             "summary": "",
@@ -14675,6 +14680,11 @@ Search.appendIndex(
             "name": "configureConsole",
             "summary": "Configure\u0020command\u0020with\u0020input\u0020and\u0020output.",
             "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#method_configureConsole"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003A\u0024hasMigration",
+            "name": "hasMigration",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-InstallerAbstract.html#property_hasMigration"
         },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\InstallerAbstract\u003A\u003ATRANSLATOR_DOMAIN",
             "name": "TRANSLATOR_DOMAIN",
@@ -14806,6 +14816,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Installer-Upgrade-CleanVersion.html#property_upgradeVersion"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\CleanVersion\u003A\u003A\u0024hasMigration",
+            "name": "hasMigration",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-CleanVersion.html#property_hasMigration"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50000",
             "name": "Version50000",
             "summary": "",
@@ -14840,6 +14855,11 @@ Search.appendIndex(
             "name": "upgradeVersion",
             "summary": "",
             "url": "classes/Lotgd-Core-Installer-Upgrade-Version50000.html#property_upgradeVersion"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50000\u003A\u003A\u0024hasMigration",
+            "name": "hasMigration",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version50000.html#property_hasMigration"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Jaxon",
             "name": "Jaxon",
