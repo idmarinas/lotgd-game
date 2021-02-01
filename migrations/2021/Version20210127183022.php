@@ -14,7 +14,7 @@ final class Version20210127183022 extends AbstractMigration
 {
     public function getDescription() : string
     {
-        return '';
+        return 'Clean install';
     }
 
     public function up(Schema $schema) : void
