@@ -17,6 +17,7 @@ $trash  = (int) getsetting('expiretrashacct', 1);
 $new    = (int) getsetting('expirenewacct', 10);
 $old    = (int) getsetting('expireoldacct', 45);
 $params = [
+    'textDomain'        => $textDomain,
     'allowCreation'     => (bool) getsetting('allowcreation', 1),
     'serverFull'        => ServerFunctions::isTheServerFull(),
     'requireEmail'      => (int) getsetting('requireemail', 0),
