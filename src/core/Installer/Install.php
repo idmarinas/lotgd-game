@@ -73,7 +73,7 @@ class Install extends InstallerAbstract
             }
         }
 
-        $versions = $this->getInstallerVersions();
+        $versions = $this->getFullListOfVersion();
 
         $this->installedVersionData = $versions[\array_search($versionInstalled, $versions)] ?? -2;
 
