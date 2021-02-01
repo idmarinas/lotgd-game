@@ -27,7 +27,13 @@ class Version50000 extends InstallerAbstract
 
         try
         {
-            $fs->remove($this->getProjectDir().'/config/autoload/');
+            $fs->remove([
+                $this->getProjectDir().'/config/lotgd.config.php',
+                $this->getProjectDir().'/config/development.config.php',
+                $this->getProjectDir().'/config/development.config.php.dist',
+                $this->getProjectDir().'/config/development/',
+                $this->getProjectDir().'/config/autoload/'
+            ]);
         }
         catch (\Throwable $th)
         {
