@@ -62,7 +62,7 @@ abstract class AbstractCommand extends Command
         $this->installer->start(); //-- Start install
 
         //-- Make a database migration
-        if ($this->migrateDataBase($this->hasMigration()))
+        if ($this->migrateDataBase($this->installer->hasMigration()))
         {
             $msg = $this->translator->trans('installer.installation.abort.database', [], InstallerAbstract::TRANSLATOR_DOMAIN);
             $output->writeln("<error>{$msg}</>");
@@ -123,10 +123,5 @@ abstract class AbstractCommand extends Command
         $command = $this->getApplication()->find('doctrine:migrations:migrate');
 
         return (int) $command->run($input, new NullOutput());
-    }
-
-    protected function hasMigration(): int
-    {
-        return (int) $this->hasMigration;
     }
 }
