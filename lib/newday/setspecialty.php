@@ -11,8 +11,6 @@ if ('' != $setspecialty)
 }
 else
 {
-    //-- Init page
-    \LotgdResponse::pageStart('title.specialty.choose', [], $textDomain);
     \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.choose.specialty', [], $textDomain));
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_SPECIALTY_CHOOSE);
     modulehook('choose-specialty');
@@ -21,6 +19,8 @@ else
 //-- Have navs
 if (\LotgdNavigation::checkNavs())
 {
+    //-- Init page
+    \LotgdResponse::pageStart('title.specialty.choose', [], $textDomain);
     //-- Finalize page
     \LotgdResponse::pageEnd();
 }
