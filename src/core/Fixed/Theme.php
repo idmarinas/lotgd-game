@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Fixed;
 
-use Lotgd\Core\Template\Template as CoreTheme;
+use Twig\Environment as CoreTheme;
 
 /**
  * @deprecated 5.0.0
