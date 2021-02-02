@@ -401,7 +401,8 @@ elseif ('create' == $op)
             $params['login']    = $shortname;
             $params['password'] = $pass1;
 
-            \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('create_account_login', '{theme}/pages/_blocks/_create.html.twig', $params));
+            $tpl = \LotgdTheme::load('{theme}/pages/_blocks/_create.html.twig');
+            \LotgdResponse::pageAddContent($tpl->renderBlock('create_account_login', $params));
 
             //-- Finalize page
             \LotgdResponse::pageEnd();

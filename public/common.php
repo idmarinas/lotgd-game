@@ -45,7 +45,8 @@ if (
 
     \LotgdNavigation::addNav('common.nav.installer', 'home.php');
 
-    \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('common_install', '@core/_blocks/_common.html.twig', []));
+    $tpl = \LotgdTheme::load('@core/_blocks/_common.html.twig');
+    \LotgdResponse::pageAddContent($tpl->renderBlock('common_install', []));
 
     \LotgdResponse::pageEnd(false);
 }
@@ -58,7 +59,8 @@ elseif (\file_exists('public/installer.php') && 'cli' != \substr(PHP_SAPI, 0, 3)
 
     \LotgdNavigation::addNav('common.nav.home', 'index.php');
 
-    \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('common_security', '@core/_blocks/_common.html.twig', []));
+    $tpl = \LotgdTheme::load('@core/_blocks/_common.html.twig');
+    \LotgdResponse::pageAddContent($tpl->renderBlock('common_security', []));
 
     \LotgdResponse::pageEnd(false);
 }
