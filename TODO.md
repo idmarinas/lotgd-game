@@ -41,7 +41,10 @@
 -   El sistema antiguo de módulos segurá funcionando en esta version (6.y.z)
     -   Se borrará este sistema en la versión 7.0.0
 
-# Para la versión 7.0.*0*  (LoTGD Core as Symfony APP)
+# Para la versión 7.0.*  (LoTGD Core as Symfony APP)
+
+-   Esta versión LoTGD Core será una app Symfony Framework.
+    -   Migrar a la estructura propia de Symfony Framework
 -   Sustituir Entity\Account por Entity\User
 -   Mirar el uso de un bundle tipo settings:
     -   https://github.com/dmishh/SettingsBundle lastest on 28 Jun 2016
@@ -51,8 +54,7 @@
         -   Menos importante
             -   Puede solaparse con las caracteristicas de los bundles
             -   Los prefs-* (ejemplo prefs-city, prefs-mount) datos, del modulo con respecto a alguna caracteristica, como puede ser una ciudad, montura
--   Esta versión LoTGD Core será una app Symfony Framework.
-    -   Migrar a la estructura propia de Symfony Framework
+-   Sonata Admin para la administración del juego.
 -   Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
     -   La instalación por consola ya se creeo en la versión 5.0.0
         -   Se mirará incluir una versión de instalación por web
