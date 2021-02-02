@@ -58,6 +58,7 @@ elseif ('setup' == $op)
         'nextnewday'    => \date('h:i:s a', \strtotime("+{$details['realsecstotomorrow']} seconds")).' ('.\date('H\\h i\\m s\\s', $secstonextday).')',
     ];
 
+    $settings = \LotgdKernel::get(Lotgd\Core\Lib\Settings::class);
     $localsettings = $settings->getArray();
 
     $vals = \array_merge($localsettings, $useful_vals);

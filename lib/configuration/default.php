@@ -13,6 +13,7 @@ $useful_vals  = [
     'nextnewday'    => \date('h:i:s a', \strtotime("+{$details['realsecstotomorrow']} seconds")).' ('.\date('H\\h i\\m s\\s', $secstonewday).')',
 ];
 
+$settings = \LotgdKernel::get(Lotgd\Core\Lib\Settings::class);
 $vals = \array_merge($settings->getArray(), $useful_vals);
 
 $data = [
