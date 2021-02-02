@@ -10,6 +10,7 @@ namespace Lotgd\Core\Lib;
 
 use Lotgd\Core\Doctrine\ORM\EntityManager;
 use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class Settings
 {
@@ -92,7 +93,6 @@ class Settings
      */
     public function loadSettings(): void
     {
-        $item = $this->cache->getItem($this->getCacheKey());
 
         //-- Not do nothing if not have connection to DB
         if (false === $this->isConnected())
@@ -102,9 +102,10 @@ class Settings
             return;
         }
 
-        //-- Cache is invalid
-        if ( ! $item->isHit())
+        $this->settings = $this->cache->get($this->getCacheKey(), function (ItemInterface $item)
         {
+            $item->expiresAt(new \DateTime('tomorrow'));
+
             try
             {
                 $sets   = [];
@@ -115,29 +116,19 @@ class Settings
                     $sets[$row->getSetting()] = $row->getValue();
                 }
 
-                $item->expiresAt(new \DateTime('tomorrow'));
-
                 //-- If not found mark as expired
                 if ( ! \count($sets))
                 {
                     $item->expiresAt(new \DateTime('now'));
                 }
-
-                $item->set($sets);
             }
             catch (\Exception $ex)
             {
-                \bdump('Cant get Settings.');
-
                 $item->expiresAfter(1);  // 1 seconds
-
-                $item->set([]);
             }
 
-            $this->cache->save($item);
-        }
-
-        $this->settings = $item->get();
+            return $sets;
+        });
     }
 
     /**
