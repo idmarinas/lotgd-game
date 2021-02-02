@@ -545,8 +545,8 @@ function battlegainexperiencegraveyard()
         $lotgdBattleContent['battleend'][] = [
             'combat.end.experience.graveyard.total.favor',
             [
-                'favor'             => $totalExp,
-                'overlordOwnerName' => $deathoverlord,
+                'favor'              => $totalExp,
+                'graveyardOwnerName' => $deathoverlord,
             ],
         ];
         $session['user']['deathpower'] += $totalExp;
