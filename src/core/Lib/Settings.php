@@ -8,7 +8,7 @@
 
 namespace Lotgd\Core\Lib;
 
-use Lotgd\Core\Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
@@ -20,6 +20,12 @@ class Settings
     protected $cache;
     protected $settings    = [];
     protected $settingsKey = 'game-settings-';
+
+    public function __construct(CacheInterface $cache, EntityManagerInterface $doctrine)
+    {
+        $this->cache = $cache;
+        $this->doctrine = $doctrine;
+    }
 
     /**
      * Get a value of a setting.
@@ -57,12 +63,6 @@ class Settings
      */
     public function saveSetting(string $settingname, $value): bool
     {
-        //-- Not do nothing if not have connection to DB
-        if (false === $this->isConnected())
-        {
-            return false;
-        }
-
         try
         {
             $entity = $this->repository()->find($settingname);
@@ -93,15 +93,6 @@ class Settings
      */
     public function loadSettings(): void
     {
-
-        //-- Not do nothing if not have connection to DB
-        if (false === $this->isConnected())
-        {
-            $this->settings = [];
-
-            return;
-        }
-
         $this->settings = $this->cache->get($this->getCacheKey(), function (ItemInterface $item)
         {
             $item->expiresAt(new \DateTime('tomorrow'));
@@ -119,7 +110,7 @@ class Settings
             }
             catch (\Exception $ex)
             {
-                $item->expiresAfter(1);  // 1 seconds
+                \Tracy\Debugger::log($ex);
             }
 
             //-- If not found mark as expired
@@ -177,20 +168,6 @@ class Settings
     }
 
     /**
-     * Set doctrine to use.
-     *
-     * @param Doctrine\ORM\EntityManager
-     *
-     * @return $this
-     */
-    public function setDoctrine(EntityManager $doctrine)
-    {
-        $this->doctrine = $doctrine;
-
-        return $this;
-    }
-
-    /**
      * Get repository.
      *
      * @return object|null
@@ -203,26 +180,6 @@ class Settings
         }
 
         return $this->repository;
-    }
-
-    /**
-     * Check if have a connection to DB.
-     */
-    public function isConnected(): bool
-    {
-        return $this->doctrine->isConnected();
-    }
-
-    /**
-     * Set cache system.
-     *
-     * @return $this
-     */
-    public function setCache(CacheInterface $cache)
-    {
-        $this->cache = $cache;
-
-        return $this;
     }
 
     /**
