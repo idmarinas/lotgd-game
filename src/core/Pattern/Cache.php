@@ -14,7 +14,7 @@ namespace Lotgd\Core\Pattern;
 
 use Symfony\Contracts\Cache\CacheInterface;
 
-trigger_error(Cache::class . ' is deprecated, if possible use Dependency Injection.', E_USER_DEPRECATED);
+@trigger_error(Cache::class . ' is deprecated, if possible use Dependency Injection.', E_USER_DEPRECATED);
 
 /**
  * Return instance of cache of game "Cache\Core\Lotgd".

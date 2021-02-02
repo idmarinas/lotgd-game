@@ -16,7 +16,7 @@ namespace Lotgd\Core\Pattern;
 use Lotgd\Core\EventManager\EventManager as CoreEventManager;
 use Lotgd\Core\EventManager\Hook;
 
-trigger_error(HookManager::class . ' is deprecated, if possible use Dependency Injection.', E_USER_DEPRECATED);
+@trigger_error(HookManager::class . ' is deprecated, if possible use Dependency Injection.', E_USER_DEPRECATED);
 
 /**
  * @deprecated 5.0.0 use Dependency Injection when you can, and LotgdKernel::get(ServiceName) when not can use Dependency Injection.
