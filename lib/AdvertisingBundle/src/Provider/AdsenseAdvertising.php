@@ -46,7 +46,7 @@ final class AdsenseAdvertising extends AdvertisingAbstract
     public function __construct(InlineScript $inlineScript, string $environment)
     {
         $this->inlineScript = $inlineScript;
-        $this->environment = $environment;
+        $this->environment  = $environment;
     }
 
     public function getSlot(string $slot)
@@ -57,7 +57,7 @@ final class AdsenseAdvertising extends AdvertisingAbstract
             return '';
         }
 
-        $config = $this->getConfig();
+        $config     = $this->getConfig();
         $slotConfig = $config['banners'][$slot] ?? [];
 
         if (empty($slotConfig) || ! $slotConfig['slot'])
