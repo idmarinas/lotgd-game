@@ -38,7 +38,10 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :wrench: FIXES
 
--   Nothing
+-   **lib/deathmessage.php** and **lib/taunt.php** fixed error with translation function (now pass empty array as param)
+-   **lib/battle/functions.php** fixed error with name of index of Overlord
+-   **public/graveyard.php** fixed error in format of arrays
+-   **templates/lotgd/pages/_macros/_battle.html.twig** fixed error with text domain
 
 ### :x: REMOVES/Break Changes
 
