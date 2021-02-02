@@ -202,7 +202,7 @@ class Format
     /**
      * Only format a message with MessageFormatter.
      */
-    public function messageFormater(string $message, ?array $parameters = [], ?string $locale = null): string
+    public function messageFormatter(string $message, ?array $parameters = [], ?string $locale = null): string
     {
         //-- Not do nothing if message is empty
         //-- MessageFormatter fail if message is empty
@@ -224,7 +224,7 @@ class Format
     /** alias */
     public function mf(string $message, ?array $parameters = [], ?string $locale = null): string
     {
-        return $this->messageFormater($message, $parameters, $locale);
+        return $this->messageFormatter($message, $parameters, $locale);
     }
 
     /**
