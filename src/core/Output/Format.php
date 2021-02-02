@@ -198,4 +198,48 @@ class Format
     {
         $this->thousands_sep = $val;
     }
+
+    /**
+     * Only format a message with MessageFormatter.
+     */
+    public function messageFormater(string $message, ?array $parameters = [], ?string $locale = null): string
+    {
+        //-- Not do nothing if message is empty
+        //-- MessageFormatter fail if message is empty
+        if ('' == $message)
+        {
+            return '';
+        }
+
+        $locale     = ($locale ?: $this->translator->getLocale());
+        $parameters = ($parameters ?: []);
+        //-- Delete all values that not are allowed (can cause a error when use \MessageFormatter::format($params))
+        $parameters = \array_filter($parameters, [$this, 'cleanParameters']);
+
+        $formatter = new \MessageFormatter($locale, $message);
+
+        return $formatter->format($parameters);
+    }
+
+    /** alias */
+    public function mf(string $message, ?array $parameters = [], ?string $locale = null): string
+    {
+        return $this->messageFormater($message, $parameters, $locale);
+    }
+
+    /**
+     * Clean param of a value.
+     *
+     * @param mixed $param
+     */
+    private function cleanParameters($param): bool
+    {
+        return (bool) (
+            \is_string($param) //-- Allow string values
+            || \is_numeric($param) //-- Allow numeric values
+            || \is_bool($param) //-- Allow bool values
+            || \is_null($param) //-- Allow null value (Formatter can handle this value)
+            || $param instanceof \DateTime //-- Allow DateTime object
+        );
+    }
 }
