@@ -37,7 +37,7 @@ class Settings
         }
         elseif ('datacachepath' == $settingname)
         {
-            return '"storage/cache" and "var/cache"';
+            return '"var/cache"';
         }
 
         $this->loadSettings();
@@ -106,25 +106,26 @@ class Settings
         {
             $item->expiresAt(new \DateTime('tomorrow'));
 
+            $sets   = [];
+
             try
             {
-                $sets   = [];
                 $result = $this->repository()->findAll();
 
                 foreach ($result as $row)
                 {
                     $sets[$row->getSetting()] = $row->getValue();
                 }
-
-                //-- If not found mark as expired
-                if ( ! \count($sets))
-                {
-                    $item->expiresAt(new \DateTime('now'));
-                }
             }
             catch (\Exception $ex)
             {
                 $item->expiresAfter(1);  // 1 seconds
+            }
+
+            //-- If not found mark as expired
+            if ( ! \count($sets))
+            {
+                $item->expiresAt(new \DateTime('now'));
             }
 
             return $sets;
