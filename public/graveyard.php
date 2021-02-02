@@ -140,12 +140,12 @@ if ('enter' == $op)
     \LotgdNavigation::addHeader('category.souls');
     \LotgdNavigation::addNav('nav.question', 'graveyard.php?op=question', [
         'params' => [
-            'graveyardOwnerName', $params['graveyardOwnerName']
+            'graveyardOwnerName' => $params['graveyardOwnerName']
         ]
     ]);
     \LotgdNavigation::addNav('nav.restore', 'graveyard.php?op=restore', [
         'params' => [
-            'favor', $favortoheal
+            'favor' => $favortoheal
         ]
     ]);
 }
@@ -174,7 +174,7 @@ elseif ('restore' == $op)
     \LotgdNavigation::addHeader('category.souls');
     \LotgdNavigation::addNav('nav.question', 'graveyard.php?op=question', [
         'params' => [
-            'graveyardOwnerName', $params['graveyardOwnerName']
+            'graveyardOwnerName' => $params['graveyardOwnerName']
         ]
     ]);
 }
@@ -195,12 +195,12 @@ elseif ('question' == $op)
     \LotgdNavigation::addHeader('category.souls');
     \LotgdNavigation::addNav('nav.question', 'graveyard.php?op=question', [
         'params' => [
-            'graveyardOwnerName', $params['graveyardOwnerName']
+            'graveyardOwnerName' => $params['graveyardOwnerName']
         ]
     ]);
     \LotgdNavigation::addNav('nav.restore', 'graveyard.php?op=restore', [
         'params' => [
-            'favor', $favortoheal
+            'favor' => $favortoheal
         ]
     ]);
 
@@ -221,12 +221,12 @@ elseif ('haunt2' == $op)
 
     \LotgdNavigation::addNav('nav.question', 'graveyard.php?op=question', [
         'params' => [
-            'graveyardOwnerName', $params['graveyardOwnerName']
+            'graveyardOwnerName' => $params['graveyardOwnerName']
         ]
     ]);
     \LotgdNavigation::addNav('nav.restore', 'graveyard.php?op=restore', [
         'params' => [
-            'favor', $favortoheal
+            'favor' => $favortoheal
         ]
     ]);
 
@@ -248,12 +248,12 @@ elseif ('haunt3' == $op)
 
     \LotgdNavigation::addNav('nav.question', 'graveyard.php?op=question', [
         'params' => [
-            'graveyardOwnerName', $params['graveyardOwnerName']
+            'graveyardOwnerName' => $params['graveyardOwnerName']
         ]
     ]);
     \LotgdNavigation::addNav('nav.restore', 'graveyard.php?op=restore', [
         'params' => [
-            'favor', $favortoheal
+            'favor' => $favortoheal
         ]
     ]);
 
