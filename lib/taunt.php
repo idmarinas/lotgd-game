@@ -14,7 +14,7 @@ function select_taunt($extraParams = []): array
 {
     global $session, $badguy;
 
-    $count = \LotgdTranslator::translate('count', 'partial_taunt');
+    $count = \LotgdTranslator::translate('count', [], 'partial_taunt');
 
     //-- Default message, if fail in count
     //-- Always shows the default message if the key is not found in the specified language when translating.
