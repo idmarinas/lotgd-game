@@ -21,7 +21,6 @@ use Laminas\Hydrator\ClassMethodsHydrator;
 class EntityManager extends DoctrineEntityManager
 {
     private $repositoryHydrator;
-    private $isConnected;
 
     /**
      * {@inheritdoc}
@@ -43,19 +42,7 @@ class EntityManager extends DoctrineEntityManager
      */
     public function isConnected(): bool
     {
-        if (
-            \defined('DB_NODB')
-            || (null === $this->isConnected && ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
-            || false === $this->isConnected
-        ) {
-            $this->isConnected = false;
-
-            return false;
-        }
-
-        $this->isConnected = $this->getConnection()->ping();
-
-        return $this->isConnected;
+        return $this->getConnection()->isConnected();
     }
 
     /**
