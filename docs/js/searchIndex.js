@@ -1621,10 +1621,10 @@ Search.appendIndex(
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Doctrine-ORM-EntityManager.html#method_create"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Doctrine\\ORM\\EntityManager\u003A\u003A\u0024isConnected",
+            "fqsen": "\\Lotgd\\Core\\Doctrine\\ORM\\EntityManager\u003A\u003AisConnected\u0028\u0029",
             "name": "isConnected",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Doctrine-ORM-EntityManager.html#property_isConnected"
+            "summary": "Check\u0020if\u0020has\u0020a\u0020connection\u0020with\u0020DataBase.",
+            "url": "classes/Lotgd-Core-Doctrine-ORM-EntityManager.html#method_isConnected"
         },                {
             "fqsen": "\\Lotgd\\Core\\Doctrine\\ORM\\EntityManager\u003A\u003AhydrateEntity\u0028\u0029",
             "name": "hydrateEntity",
