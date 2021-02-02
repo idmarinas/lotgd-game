@@ -36,6 +36,7 @@ class CompanionType extends AbstractType
             // How many companions are allowed per player
             ->add('companionsallowed', NumberType::class, [
                 'required'    => false,
+                'empty_data'  => 0,
                 'label'       => 'companion.companionsallowed.label',
                 'help'        => 'companion.companionsallowed.note',
                 'constraints' => [

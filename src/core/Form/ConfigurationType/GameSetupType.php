@@ -73,6 +73,7 @@ class GameSetupType extends AbstractType
         // Max # of players online
         $builder->add('maxonline', NumberType::class, [
             'required'    => false,
+            'empty_data'  => 0,
             'label'       => 'game.setup.max.online',
             'constraints' => [
                 new Assert\DivisibleBy(1),

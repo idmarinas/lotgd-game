@@ -34,6 +34,7 @@ class DonationType extends AbstractType
             // Points to award for $1 (or 1 of whatever currency you allow players to donate)
             ->add('dpointspercurrencyunit', NumberType::class, [
                 'required'    => false,
+                'empty_data'  => 100,
                 'label'       => 'donation.dpointspercurrencyunit',
                 'constraints' => [
                     new Assert\DivisibleBy(1),

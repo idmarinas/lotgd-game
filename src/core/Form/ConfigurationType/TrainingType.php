@@ -49,6 +49,7 @@ class TrainingType extends AbstractType
             ->add('maxlevel', NumberType::class, [
                 'label'       => 'training.maxlevel.label',
                 'help'        => 'training.maxlevel.note',
+                'empty_data'  => 15,
                 'constraints' => [
                     new DivisibleBy(1),
                 ],

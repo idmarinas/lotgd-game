@@ -64,6 +64,7 @@ class ForestType extends AbstractType
             // Minimum DKs before players can Seek Suicidally?
             ->add('suicidedk', NumberType::class, [
                 'required'    => false,
+                'empty_data'  => 10,
                 'label'       => 'forest.suicidedk.label',
                 'help'        => 'forest.suicidedk.note',
                 'constraints' => [

@@ -70,6 +70,7 @@ class DaysetupType extends AbstractType
             // Real time to offset new day
             ->add('gameoffsetseconds', NumberType::class, [
                 'required'    => false,
+                'empty_data'  => 0,
                 'label'       => 'daysetup.gameoffsetseconds',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
