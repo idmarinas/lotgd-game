@@ -11956,6 +11956,21 @@ Search.appendIndex(
             "summary": "Set\u0020thousands\u0020separation.",
             "url": "classes/Lotgd-Core-Output-Format.html#method_setThousandsSep"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Format\u003A\u003AmessageFormater\u0028\u0029",
+            "name": "messageFormater",
+            "summary": "Only\u0020format\u0020a\u0020message\u0020with\u0020MessageFormatter.",
+            "url": "classes/Lotgd-Core-Output-Format.html#method_messageFormater"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Format\u003A\u003Amf\u0028\u0029",
+            "name": "mf",
+            "summary": "alias",
+            "url": "classes/Lotgd-Core-Output-Format.html#method_mf"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Format\u003A\u003AcleanParameters\u0028\u0029",
+            "name": "cleanParameters",
+            "summary": "Clean\u0020param\u0020of\u0020a\u0020value.",
+            "url": "classes/Lotgd-Core-Output-Format.html#method_cleanParameters"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Output\\Format\u003A\u003A\u0024codes",
             "name": "codes",
             "summary": "",
