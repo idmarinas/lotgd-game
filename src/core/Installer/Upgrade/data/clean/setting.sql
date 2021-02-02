@@ -92,7 +92,7 @@ INSERT INTO `settings` (`setting`, `value`) VALUES
 	('requireemail', '0'),
 	('resurrectionturns', '-6'),
 	('selfdelete', '0'),
-	('serverlanguages', 'en,fr,dk,de,es,it'),
+	('serverlanguages', 'en,fr,de,es,it'),
 	('specialtybonus', '1'),
 	('suicide', '0'),
 	('superuseryommessage', 'Asking an admin for gems, gold, weapons, armor, or anything else which you have not earned will not be honored.  If you are experiencing problems with the game, please use the \'Petition for Help\' link instead of contacting an admin directly.'),
