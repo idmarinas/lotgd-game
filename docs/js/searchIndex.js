@@ -11336,6 +11336,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Lib-Settings.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Lib\\Settings\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Lib-Settings.html#method___construct"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Lib\\Settings\u003A\u003AgetSetting\u0028\u0029",
             "name": "getSetting",
             "summary": "Get\u0020a\u0020value\u0020of\u0020a\u0020setting.",
@@ -11371,25 +11376,10 @@ Search.appendIndex(
             "summary": "Set\u0020a\u0020table\u0020name\u0020for\u0020settings.",
             "url": "classes/Lotgd-Core-Lib-Settings.html#method_setTableName"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Lib\\Settings\u003A\u003AsetDoctrine\u0028\u0029",
-            "name": "setDoctrine",
-            "summary": "Set\u0020doctrine\u0020to\u0020use.",
-            "url": "classes/Lotgd-Core-Lib-Settings.html#method_setDoctrine"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Lib\\Settings\u003A\u003A\u0024repository",
             "name": "repository",
             "summary": "",
             "url": "classes/Lotgd-Core-Lib-Settings.html#property_repository"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Lib\\Settings\u003A\u003AisConnected\u0028\u0029",
-            "name": "isConnected",
-            "summary": "Check\u0020if\u0020have\u0020a\u0020connection\u0020to\u0020DB.",
-            "url": "classes/Lotgd-Core-Lib-Settings.html#method_isConnected"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Lib\\Settings\u003A\u003AsetCache\u0028\u0029",
-            "name": "setCache",
-            "summary": "Set\u0020cache\u0020system.",
-            "url": "classes/Lotgd-Core-Lib-Settings.html#method_setCache"
         },                {
             "fqsen": "\\Lotgd\\Core\\Lib\\Settings\u003A\u003AgetCacheKey\u0028\u0029",
             "name": "getCacheKey",
@@ -11956,10 +11946,10 @@ Search.appendIndex(
             "summary": "Set\u0020thousands\u0020separation.",
             "url": "classes/Lotgd-Core-Output-Format.html#method_setThousandsSep"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Output\\Format\u003A\u003AmessageFormater\u0028\u0029",
-            "name": "messageFormater",
+            "fqsen": "\\Lotgd\\Core\\Output\\Format\u003A\u003AmessageFormatter\u0028\u0029",
+            "name": "messageFormatter",
             "summary": "Only\u0020format\u0020a\u0020message\u0020with\u0020MessageFormatter.",
-            "url": "classes/Lotgd-Core-Output-Format.html#method_messageFormater"
+            "url": "classes/Lotgd-Core-Output-Format.html#method_messageFormatter"
         },                {
             "fqsen": "\\Lotgd\\Core\\Output\\Format\u003A\u003Amf\u0028\u0029",
             "name": "mf",
