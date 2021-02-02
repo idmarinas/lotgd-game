@@ -150,10 +150,6 @@ services:
     # LoTGD Settings
     Lotgd\Core\Lib\Settings:
         public: true
-        calls:
-            - setDoctrine: ['@doctrine.orm.entity_manager']
-            - setCache: ['@core.settings.cache']
-            - loadSettings: []
 
     # LoTGD PvP
     Lotgd\Core\Pvp\Listing:
