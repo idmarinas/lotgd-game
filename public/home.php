@@ -140,7 +140,7 @@ if (\is_array($results) && \count($results))
 //-- By default not have banner are
 $params['loginBanner'] = getsetting('loginbanner');
 //-- Version of the game the server is running
-$params['serverVersion'] = \Lotgd\Core\Application::VERSION;
+$params['serverVersion'] = \Lotgd\Core\Kernel::VERSION;
 
 $params = modulehook('page-home-tpl-params', $params);
 \LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/home.html.twig', $params));
