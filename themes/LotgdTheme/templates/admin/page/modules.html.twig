@@ -1,0 +1,17 @@
+{% trans_default_domain textDomain %}
+
+{% for message in messages %}
+    {{ message[0]|trans(message[1])|colorize }}
+{% endfor %}
+
+{% if cat == 'installed' %}
+    {% include "admin/page/modules/installed.html.twig" %}
+{% elseif cat == 'activated' %}
+    {% include "admin/page/modules/activated.html.twig" %}
+{% elseif cat == 'deactivated' %}
+    {% include "admin/page/modules/deactivated.html.twig" %}
+{% elseif cat %}
+    {% include "admin/page/modules/category.html.twig" %}
+{% else %}
+    {% include "admin/page/modules/uninstall.html.twig" %}
+{% endif %}
