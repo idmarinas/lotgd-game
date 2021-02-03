@@ -134,7 +134,7 @@
         {{ 'section.default.no.mail'|trans|colorize }}
     {% endif %}
 
-    {{ 'section.default.note'|trans({ 'inboxCount': inboxCount , 'inboxLimit': inboxLimit, 'oldMail': oldMail })|colorize }}
+    {{ 'section.default.note'|trans({inboxCount, inboxLimit, oldMail })|colorize }}
 
     {% do inline_script().captureStart() %}
         $('.ui.toggle.lotgd.checkbox').checkbox()
