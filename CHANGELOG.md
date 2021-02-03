@@ -35,6 +35,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
         └── translations
            └── messages.en.yml
         ```
+    -   Olso include [Sonata Blocks](https://github.com/sonata-project/SonataBlockBundle)
+        -   Note: `sonata_block_render_event()` not working.
 
 ### :fire: DEPRECATED
 
