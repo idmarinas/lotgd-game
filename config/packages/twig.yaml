@@ -6,8 +6,6 @@ twig:
     paths:
         '%kernel.project_dir%/templates_modules': 'module'
         '%kernel.project_dir%/templates_core': 'core'
-        '%kernel.project_dir%/themes': 'layout'
-        '%kernel.project_dir%/templates/lotgd': ~
     # Globals variables
     globals:
         userPre: ~ # Not remove, if for avoid errors
