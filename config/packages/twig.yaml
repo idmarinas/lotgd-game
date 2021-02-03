@@ -5,7 +5,6 @@ twig:
     auto_reload: '%kernel.debug%'
     paths:
         '%kernel.project_dir%/templates_modules': 'module'
-        '%kernel.project_dir%/templates_core': 'core'
     # Globals variables
     globals:
         userPre: ~ # Not remove, if for avoid errors
