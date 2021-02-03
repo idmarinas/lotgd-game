@@ -28,7 +28,7 @@ trait Navigation
      */
     public function display(Environment $env)
     {
-        return $env->load('{theme}/_blocks/_partials.html.twig')->renderBlock('navigation_menu', [
+        return $env->load('_blocks/_partials.html.twig')->renderBlock('navigation_menu', [
             'navigation' => $this->navigation->getNavigation(),
             'headers'    => $this->navigation->getHeaders(),
             'navs'       => $this->navigation->getNavs(),
@@ -137,14 +137,14 @@ trait Navigation
         //-- Is a pagination for Jaxon-PHP
         if (0 === \strpos($link, 'JaxonLotgd.Ajax.Core.') || 0 === \strpos($link, 'JaxonLotgd.Ajax.Local.'))
         {
-            $template = $template ?: ['pagination_jaxon', '{theme}/_blocks/_partials.html.twig'];
+            $template = $template ?: ['pagination_jaxon', '_blocks/_partials.html.twig'];
 
             $pages['jaxon'] = $link;
 
             return $this->renderPagination($env, $template, $pages);
         }
 
-        $template = $template ?: ['pagination', '{theme}/_blocks/_partials.html.twig'];
+        $template = $template ?: ['pagination', '_blocks/_partials.html.twig'];
 
         //-- Use request uri if not set link
         $link = $link ?: $this->request->getServer('REQUEST_URI');
@@ -197,6 +197,6 @@ trait Navigation
             return $env->load($template[1])->renderBlock($template[0], $pages);
         }
 
-        return $env->render("{theme}/{$template}", $pages);
+        return $env->render($template, $pages);
     }
 }

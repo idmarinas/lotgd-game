@@ -199,7 +199,7 @@ elseif ('prologue' == $op)
 
     //-- This is only for params not use for other purpose
     $params = modulehook('page-dragon-tpl-params', $params);
-    \LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/dragon.html.twig', $params));
+    \LotgdResponse::pageAddContent(\LotgdTheme::render('pages/dragon.html.twig', $params));
 
     \LotgdNavigation::addNav('common.nav.newday', 'news.php');
 

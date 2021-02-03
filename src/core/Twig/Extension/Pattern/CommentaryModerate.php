@@ -43,6 +43,6 @@ trait CommentaryModerate
             'formUrl'    => $this->commentaryFormUrl(),
         ];
 
-        return $env->load('{theme}/_blocks/_commentary.html.twig')->renderBlock('commentary_moderate', $params);
+        return $env->load('_blocks/_commentary.html.twig')->renderBlock('commentary_moderate', $params);
     }
 }

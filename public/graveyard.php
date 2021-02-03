@@ -327,7 +327,7 @@ modulehook('deathoverlord', []);
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-graveyard-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/graveyard.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/graveyard.html.twig', $params));
 
 if ('default' == $params['tpl'])
 {

@@ -139,7 +139,7 @@ elseif ('buy' == $op)
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-mercenarycamp-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/mercenarycamp.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/mercenarycamp.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

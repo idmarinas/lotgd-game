@@ -58,7 +58,7 @@ class AdvertisingGoogle extends AbstractExtension implements GlobalsInterface
 
         if ($ad)
         {
-            return $env->load('{theme}/_blocks/_partials.html.twig')->renderBlock('ad_wrapper', ['ad_content' => $ad]);
+            return $env->load('_blocks/_partials.html.twig')->renderBlock('ad_wrapper', ['ad_content' => $ad]);
         }
 
         return '';

@@ -36,7 +36,7 @@ $params = [
 ];
 
 $params = modulehook('page-account-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/account.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/account.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

@@ -78,7 +78,7 @@ if ('forgotval' == $op)
     $params['account'] = $account;
 
     $params = modulehook('page-create-forgotval-tpl-params', $params);
-    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_forgot_val', '{theme}/pages/_blocks/_create.html.twig', $params));
+    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_forgot_val', 'pages/_blocks/_create.html.twig', $params));
 
     //-- Finalize page
     \LotgdResponse::pageEnd();
@@ -154,7 +154,7 @@ elseif ('val' == $op)
     savesetting('newestplayername', $account->getCharacter()->getName());
 
     $params = modulehook('page-create-val-tpl-params', $params);
-    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_email_val', '{theme}/pages/_blocks/_create.html.twig', $params));
+    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_email_val', 'pages/_blocks/_create.html.twig', $params));
 
     //-- Finalize page
     \LotgdResponse::pageEnd();
@@ -206,7 +206,7 @@ elseif ('forgot' == $op)
     }
 
     $params = modulehook('page-create-forgot-tpl-params', $params);
-    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_forgot', '{theme}/pages/_blocks/_create.html.twig', $params));
+    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_forgot', 'pages/_blocks/_create.html.twig', $params));
 
     //-- Finalize page
     \LotgdResponse::pageEnd();
@@ -401,7 +401,7 @@ elseif ('create' == $op)
             $params['login']    = $shortname;
             $params['password'] = $pass1;
 
-            $tpl = \LotgdTheme::load('{theme}/pages/_blocks/_create.html.twig');
+            $tpl = \LotgdTheme::load('pages/_blocks/_create.html.twig');
             \LotgdResponse::pageAddContent($tpl->renderBlock('create_account_login', $params));
 
             //-- Finalize page
@@ -438,7 +438,7 @@ $params['templates'] = $result['templates'];
 \Doctrine::flush(); //-- Persist objects
 
 $params = modulehook('page-create-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/create.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/create.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

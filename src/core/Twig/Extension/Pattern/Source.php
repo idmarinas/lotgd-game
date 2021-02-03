@@ -25,6 +25,6 @@ trait Source
      */
     public function gameSource(Environment $env): string
     {
-        return $env->load('{theme}/_blocks/_buttons.html.twig')->renderBlock('game_source', []);
+        return $env->load('_blocks/_buttons.html.twig')->renderBlock('game_source', []);
     }
 }

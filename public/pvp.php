@@ -202,7 +202,7 @@ $params['battle'] = $battle;
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-pvp-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/pvp.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/pvp.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

@@ -25,7 +25,7 @@ trait Motd
      */
     public function messageOfTheDay(Environment $env): string
     {
-        return $env->load('{theme}/_blocks/_buttons.html.twig')->renderBlock('message_of_the_day', []);
+        return $env->load('_blocks/_buttons.html.twig')->renderBlock('message_of_the_day', []);
     }
 
     /**
@@ -51,6 +51,6 @@ trait Motd
             $params['motd'] = $this->getMotdRepository()->appendPollResults($motd, $session['user']['acctid'] ?? null);
         }
 
-        return $env->load('{theme}/_blocks/_motd.html.twig')->renderBlock($blockName, $params);
+        return $env->load('_blocks/_motd.html.twig')->renderBlock($blockName, $params);
     }
 }

@@ -410,7 +410,7 @@ $params['battle'] = $battle;
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-train-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/train.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/train.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

@@ -324,7 +324,7 @@ $params['footerTitle'] = [
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-hof-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/hof.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/hof.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

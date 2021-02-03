@@ -59,7 +59,7 @@ trait Commentary
             'SU_EDIT_COMMENTS'  => $session['user']['superuser'] & SU_EDIT_COMMENTS,
         ];
 
-        return $env->load('{theme}/_blocks/_commentary.html.twig')->renderBlock('commentary_block', $params);
+        return $env->load('_blocks/_commentary.html.twig')->renderBlock('commentary_block', $params);
     }
 
     /**
@@ -80,7 +80,7 @@ trait Commentary
             'SU_EDIT_COMMENTS'        => $session['user']['superuser'] & SU_EDIT_COMMENTS,
         ];
 
-        return $env->load('{theme}/_blocks/_commentary.html.twig')->renderBlock('commentary_comment', $params);
+        return $env->load('_blocks/_commentary.html.twig')->renderBlock('commentary_comment', $params);
     }
 
     /**
@@ -187,7 +187,7 @@ trait Commentary
             'maxChars'   => getsetting('maxchars', 200) + 100,
         ];
 
-        return $env->load('{theme}/_blocks/_commentary.html.twig')->renderBlock('commentary_add', $params);
+        return $env->load('_blocks/_commentary.html.twig')->renderBlock('commentary_add', $params);
     }
 
     /**

@@ -79,7 +79,7 @@ else
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-gypsy-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/gypsy.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/gypsy.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

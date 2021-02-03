@@ -25,7 +25,7 @@ trait Petition
      */
     public function userPetition(Environment $env): string
     {
-        return $env->load('{theme}/_blocks/_buttons.html.twig')->renderBlock('user_petition', []);
+        return $env->load('_blocks/_buttons.html.twig')->renderBlock('user_petition', []);
     }
 
     /**
@@ -45,7 +45,7 @@ trait Petition
             $petitions = $petition->getStatusListCount();
         }
 
-        return $env->load('{theme}/_blocks/_buttons.html.twig')->renderBlock('admin_petition', [
+        return $env->load('_blocks/_buttons.html.twig')->renderBlock('admin_petition', [
             'canEditPetitions' => $canEditPetitions,
             'canEditUsers'     => $canEditUsers,
             'petitions'        => $petitions,

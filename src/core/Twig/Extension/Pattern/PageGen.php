@@ -30,7 +30,7 @@ trait PageGen
     {
         global $session;
 
-        return $env->load('{theme}/_blocks/_partials.html.twig')->renderBlock('game_page_gen', [
+        return $env->load('_blocks/_partials.html.twig')->renderBlock('game_page_gen', [
             'genTime'          => Debugger::timer('page-generating'),
             'avg'              => ($session['user']['gentime'] / $session['user']['gentimecount']),
             'userGenTime'      => $session['user']['gentime'],

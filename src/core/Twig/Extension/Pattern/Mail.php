@@ -40,6 +40,6 @@ trait Mail
             ];
         }
 
-        return $env->load('{theme}/_blocks/_buttons.html.twig')->renderBlock('ye_olde_mail', $result);
+        return $env->load('_blocks/_buttons.html.twig')->renderBlock('ye_olde_mail', $result);
     }
 }

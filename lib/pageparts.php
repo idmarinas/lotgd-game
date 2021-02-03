@@ -386,7 +386,7 @@ function charstats($return = true)
                 $onlinecount = $repository->count(['loggedin' => '1', 'locked' => '0']);
             }
 
-            $tpl = \LotgdTheme::load('{theme}/_blocks/_partials.html.twig');
+            $tpl = \LotgdTheme::load('_blocks/_partials.html.twig');
             $ret = $tpl->renderBlock('online_list', [
                 'list'        => $result,
                 'onlineCount' => $onlinecount,
