@@ -12,5 +12,5 @@ twig:
         sessionPre: ~ # Not remove, if for avoid errors
         session: ~ # Not remove, if for avoid errors
     form_themes: [
-        'lotgd/form/semantic-ui-form-theme.html.twig'
+        'form/semantic-ui-form-theme.html.twig'
     ]
