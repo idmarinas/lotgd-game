@@ -8,7 +8,10 @@
 
 # Actualmente haciendo esto (5.0.0)
 
--   Actualizando módulos
+-   Migrar al nuevo sitema de plantillas
+    -   https://github.com/Sylius/SyliusThemeBundle para crear temas en LoTGD
+-   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
+    -   Usar macros y blocks donde se pueda.
 
 # Versión 5.0.0
 -   El antiguo sistema de módulos está obsolete desde esta versión
@@ -19,12 +22,6 @@
 # Módulos
 
 -   ...
-
-# Para la versión 5.1.0
--   Migrar al nuevo sitema de plantillas
-    -   https://github.com/Sylius/SyliusThemeBundle para crear temas en LoTGD
--   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
-    -   Usar macros y blocks donde se pueda.
 
 # Advertising bundle
 -   Permitir desactivarlo en tiempo de ejecución (un módulo que lo desactiva por ejemplo)
