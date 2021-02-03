@@ -55,7 +55,6 @@
         "laminas/laminas-validator": "^2.14",
         "laminas/laminas-view": "^2.11",
         "marioblazek/twig-byte-units-extension": "^1.0",
-        "nucleos/user-bundle": "^1.6",
         "snipe/banbuilder": "^2.3",
         "sonata-project/block-bundle": "^4.5",
         "stof/doctrine-extensions-bundle": "^1.5",

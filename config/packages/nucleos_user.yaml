@@ -1,7 +1,0 @@
-# nucleos_user:
-#     db_driver: orm
-#     firewall_name: main
-#     from_email: '%env(MAIL_SENDER)%'
-#     user_class: 'Lotgd\Core\Entity\User\User'
-#     group:
-#         group_class: 'Lotgd\Core\Entity\User\Group'
