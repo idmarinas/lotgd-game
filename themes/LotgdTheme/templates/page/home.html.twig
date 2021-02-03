@@ -1,4 +1,4 @@
-{% use '{theme}/pages/_blocks/_home.html.twig' %}
+{% use 'page/_blocks/_home.html.twig' %}
 
 {% trans_default_domain 'page_home' %}
 
@@ -12,7 +12,7 @@
 
     {# Show LotGD clock #}
     {% if gameclock %}
-        {{ 'clock'|trans({'villagename': villagename, 'gameclock': gameclock})|colorize }}
+        {{ 'clock'|trans({villagename, gameclock})|colorize }}
     {% endif %}
 
     {# Show how long it takes for the next new day #}
@@ -22,7 +22,7 @@
 
     {# Show the last registered player #}
     {% if newestplayer %}
-        {{ 'newestplayer'|trans({'newestplayer': newestplayer})|colorize }}
+        {{ 'newestplayer'|trans({newestplayer})|colorize }}
     {% endif %}
 
     {# Templates old hook "index" #}
@@ -36,11 +36,7 @@
     {% endfor %}
 
     {# Show the login form or a full server message #}
-    {% if not serverFull %}
-        {{ block('home_login') }}
-    {% else %}
-        {{ block('home_server_full') }}
-    {% endif %}
+    {{ block(serverFull ? 'home_server_full' : 'home_login') }}
 
     {# Results messages of hook "homemiddle" #}
     {% for message in hookHomeMiddle %}
@@ -58,9 +54,5 @@
     {% for tpl, params in includeTemplatesPost %}
         {% include tpl with params %}
     {% endfor %}
-
-    {% if selectSkin is defined %}
-        {{ block('home_select_skin') }}
-    {% endif %}
 </div>
 
