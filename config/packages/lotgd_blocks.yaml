@@ -6,6 +6,8 @@ services:
             - '@twig'
         calls:
             - setRequest: ['@Lotgd\Core\Http\Request']
+            - setDoctrine: ['@Doctrine\ORM\EntityManagerInterface']
+            - setSettings: ['@Lotgd\Core\Lib\Settings']
         tags:
             - { name: sonata.block }
 
