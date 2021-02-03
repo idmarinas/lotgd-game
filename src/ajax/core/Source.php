@@ -68,7 +68,7 @@ class Source extends AjaxAbstract
     {
         if ( ! $this->templatePetition)
         {
-            $this->templatePetition = \LotgdTheme::load('@core/_blocks/_source.html.twig');
+            $this->templatePetition = \LotgdTheme::load('admin/_blocks/_source.html.twig');
         }
 
         return $this->templatePetition;

@@ -91,7 +91,7 @@ foreach($result as $row)
     $params['paginator'][$row[0]->getSite()]['rows'][] = $row[0];
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/referers.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/referers.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

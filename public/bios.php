@@ -55,7 +55,7 @@ if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 
 \LotgdNavigation::addNav('bios.nav.refresh', 'bios.php');
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/bios.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/bios.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

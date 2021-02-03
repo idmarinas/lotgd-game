@@ -58,7 +58,7 @@ foreach($months as $val)
 
 $params['paylog'] = $repository->getList($month);
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/paylog.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/paylog.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

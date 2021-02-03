@@ -132,7 +132,7 @@ elseif ('edit' == $op || 'add' == $op)
 
         \LotgdNavigation::addNavAllow("creatures.php?op=save&subop=module&creatureid={$creatureId}&module={$module}");
 
-        \LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/creatures/module.html.twig', $params));
+        \LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/creatures/module.html.twig', $params));
 
         \LotgdResponse::pageEnd();
     }
@@ -185,7 +185,7 @@ elseif ('edit' == $op || 'add' == $op)
     }
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/creatures.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/creatures.html.twig', $params));
 
 function process_post_save_data($data, $creatureId, $module)
 {

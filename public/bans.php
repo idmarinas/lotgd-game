@@ -71,7 +71,7 @@ switch ($op)
     break;
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/bans.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/bans.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

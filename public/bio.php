@@ -88,7 +88,7 @@ else
 }
 //-- This is only for params not use for other purpose
 $params = modulehook('page-bio-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/bio.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('page/bio.html.twig', $params));
 
 \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_OTHER_BIO_END, null, $target);
 modulehook('bioend', $target);

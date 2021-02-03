@@ -189,7 +189,7 @@ elseif ('view' == $op)
     }, $files);
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/characterbackup.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/characterbackup.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

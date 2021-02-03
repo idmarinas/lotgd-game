@@ -170,7 +170,7 @@ switch ($op)
     break;
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/titleedit.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/titleedit.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

@@ -110,7 +110,7 @@ for ($i = 0; $i <= $max; ++$i)
 
 $params['weapons'] = $repository->findByLevel($weaponlevel, ['damage' => 'ASC']);
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/weaponeditor.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/weaponeditor.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

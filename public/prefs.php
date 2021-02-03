@@ -513,7 +513,7 @@ else
 }
 
 $params = modulehook('page-prefs-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/prefs.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('page/prefs.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

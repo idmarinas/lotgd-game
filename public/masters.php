@@ -100,7 +100,7 @@ if ('' == $op)
     $params['masters'] = $repository->findAll();
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/masters.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/masters.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

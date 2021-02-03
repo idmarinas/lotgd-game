@@ -161,7 +161,7 @@ elseif ('edit' == $op || 'add' == $op)
 
         \LotgdNavigation::addNavAllow("companions.php?op=edit&subop=module&id={$id}&module={$module}");
 
-        \LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/companions/module.html.twig', $params));
+        \LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/companions/module.html.twig', $params));
 
         \LotgdResponse::pageEnd();
     }
@@ -208,7 +208,7 @@ elseif ('edit' == $op || 'add' == $op)
     }
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/companions.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/companions.html.twig', $params));
 
 function process_post_save_data($data, $id, $module)
 {

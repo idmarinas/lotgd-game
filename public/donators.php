@@ -169,7 +169,7 @@ elseif ('' == $op || $op)
     $params['paginator'] = $acctRepository->getPaginator($query, $page);
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/donators.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/donators.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

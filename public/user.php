@@ -420,7 +420,7 @@ switch ($op)
     break;
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/user.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/user.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

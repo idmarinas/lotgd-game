@@ -194,5 +194,5 @@ function module_display_events($eventtype, $forcescript = false)
         'script'     => $script,
     ];
 
-    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('partial_event_trigger', '@core/_blocks/_partials.html.twig', $params));
+    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('partial_event_trigger', 'admin/_blocks/_partials.html.twig', $params));
 }

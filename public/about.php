@@ -101,7 +101,7 @@ else
 }
 
 $params = modulehook('page-about-tpl-params', $params);
-\LotgdResponse::pageAddContent(LotgdTheme::render('@core/pages/about.html.twig', $params));
+\LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/about.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

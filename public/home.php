@@ -143,7 +143,7 @@ $params['loginBanner'] = getsetting('loginbanner');
 $params['serverVersion'] = \Lotgd\Core\Kernel::VERSION;
 
 $params = modulehook('page-home-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/home.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('page/home.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

@@ -147,7 +147,7 @@ elseif ('edit' == $op || 'add' == $op)
 
         \LotgdNavigation::addNav('', "mounts.php?op=edit&subop=module&id=${mountId}&module=${module}");
 
-        \LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/mounts/module.html.twig', $params));
+        \LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/mounts/module.html.twig', $params));
 
         \LotgdResponse::pageEnd();
     }
@@ -195,7 +195,7 @@ elseif ('edit' == $op || 'add' == $op)
     }
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/mounts.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/mounts.html.twig', $params));
 
 function process_post_save_data($data, $mountId, $module)
 {

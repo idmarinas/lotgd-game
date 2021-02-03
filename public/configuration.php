@@ -57,7 +57,7 @@ switch ($type_setting)
     break;
 }
 
-\LotgdResponse::pageAddContent(LotgdTheme::render('@core/pages/configuration.html.twig', $params));
+\LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/configuration.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

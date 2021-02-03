@@ -52,7 +52,7 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
             \LotgdNavigation::addNav('badnav.shades', 'shades.php');
         }
 
-        \LotgdResponse::pageAddContent(\LotgdTheme::render('pages/badnav.html.twig', []));
+        \LotgdResponse::pageAddContent(\LotgdTheme::render('page/badnav.html.twig', []));
 
         //-- Finalize page
         \LotgdResponse::pageEnd();

@@ -251,7 +251,7 @@ if (0 == $confirm)
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-stables-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/stables.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('page/stables.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

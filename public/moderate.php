@@ -110,7 +110,7 @@ elseif (
     }
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/moderate.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/moderate.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

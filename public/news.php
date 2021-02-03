@@ -96,7 +96,7 @@ if ($session['user']['loggedin'])
 $params['SU_EDIT_COMMENTS'] = $session['user']['superuser'] & SU_EDIT_COMMENTS;
 
 $params = modulehook('page-news-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/news.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('page/news.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

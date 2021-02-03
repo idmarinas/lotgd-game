@@ -84,7 +84,7 @@ else
     }
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/rawsql.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/rawsql.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

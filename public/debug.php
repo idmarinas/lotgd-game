@@ -50,7 +50,7 @@ if ('hooksort' == $debug)
 
 $params['paginator'] = $repository->getPaginator($query, $page, 50);
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/debug.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/debug.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

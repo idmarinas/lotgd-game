@@ -84,7 +84,7 @@ elseif ('graph' == $op)
     ;
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/stats.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/stats.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

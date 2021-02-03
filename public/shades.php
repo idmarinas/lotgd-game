@@ -55,7 +55,7 @@ $params = [
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-shades-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/shades.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('page/shades.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

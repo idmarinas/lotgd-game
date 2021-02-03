@@ -156,7 +156,7 @@ else
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-healer-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/healer.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('page/healer.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

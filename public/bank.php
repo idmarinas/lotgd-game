@@ -236,7 +236,7 @@ if (getsetting('allowgoldtransfer', 1) && ($session['user']['level'] >= getsetti
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-bank-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/bank.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('page/bank.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

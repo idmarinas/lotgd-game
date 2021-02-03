@@ -150,7 +150,7 @@ elseif ('view' == $op)
     }
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/viewpetition.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/viewpetition.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

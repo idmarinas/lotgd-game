@@ -438,7 +438,7 @@ $params['templates'] = $result['templates'];
 \Doctrine::flush(); //-- Persist objects
 
 $params = modulehook('page-create-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/create.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('page/create.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

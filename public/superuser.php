@@ -101,7 +101,7 @@ $args = [];
 \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_SUPERUSER, null, $args);
 modulehook('superuser', $args);
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/superuser.html.twig', [
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/superuser.html.twig', [
     'textDomain' => $textDomain
 ]));
 

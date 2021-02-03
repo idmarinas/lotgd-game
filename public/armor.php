@@ -74,7 +74,7 @@ elseif ('buy' == $op)
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-armor-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/armor.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('page/armor.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

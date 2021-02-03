@@ -37,7 +37,7 @@ if ($session['user']['dragonkills'] > 0 || $session['user']['superuser'] & SU_ED
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-rock-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('pages/rock.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('page/rock.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

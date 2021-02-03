@@ -252,7 +252,7 @@ elseif ('activated' == $op || 'activated' == $cat)
     $params['modules'] = $repository->findBy(['active' => 1], ['category' => 'ASC', 'installdate' => 'DESC']);
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/modules.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/modules.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

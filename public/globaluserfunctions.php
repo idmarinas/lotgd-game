@@ -34,7 +34,7 @@ switch ($op)
     break;
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/globaluserfunctions.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/globaluserfunctions.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

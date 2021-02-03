@@ -77,7 +77,7 @@ foreach ($categories as $value)
     ]);
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/gamelog.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/gamelog.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

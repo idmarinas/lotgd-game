@@ -102,7 +102,7 @@ for ($i = 0; $i <= $max; $i++)
 
 $params['armors'] = $repository->findByLevel($armorlevel, ['defense' => 'ASC']);
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/armoreditor.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/armoreditor.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
