@@ -223,7 +223,7 @@ class Response extends HttpResponse
         $session['user']['gentime'] += $gentime;
         ++$session['user']['gentimecount'];
 
-        $browserOutput = $this->template->renderLayout($this->params->toArray());
+        $browserOutput = $this->template->render('layout.html.twig', $this->params->toArray());
 
         $session['user']['gensize'] += \strlen($browserOutput);
         $session['output'] = $browserOutput;
