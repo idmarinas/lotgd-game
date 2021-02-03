@@ -1,0 +1,21 @@
+# Template Blocks system
+services:
+    lotgd.core.template.block.donation.buttons:
+        class: Lotgd\Core\Block\DonationButtonsBlock
+        arguments:
+            - '@twig'
+        calls:
+            - setRequest: ['@Lotgd\Core\Http\Request']
+        tags:
+            - { name: sonata.block }
+
+    # page.block.home.middle:
+    #     class: Lotgd\Core\Block\HomeBlock
+    #     arguments:
+    #         - '@twig'
+    #     tags:
+    #         - { name: sonata.block }
+    # page.block.event.home.middle:
+    #     class: Lotgd\Core\Block\Event\HomeMiddle
+    #     tags:
+    #         - { name: kernel.event_listener, event: sonata.block.event.blog.comment, method: onBlock }
