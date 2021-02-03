@@ -272,15 +272,6 @@ $RECYCLE.BIN/
 !/config/autoload/local/.gitkeep
 !/config/autoload/local/README.md
 
-# Ignore all content of themes folder except lotgd folder and .gitkeep file (This ignore custom content)
-/themes/**
-!/themes/**/
-!/themes/jade.html
-!/themes/layout.html.html
-!/themes/layout/**
-!/themes/**/.gitkeep
-!/themes/**/README.md
-
 # Ignore local content of LoTGD (except .gitkeep)
 /src/ajax/local/**
 /src/ajax/local/**/
