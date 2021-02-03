@@ -117,7 +117,7 @@ class Mail extends AjaxAbstract
     {
         if ( ! $this->templateMail)
         {
-            $this->templateMail = \LotgdTheme::load('{theme}/_blocks/_mail.html.twig');
+            $this->templateMail = \LotgdTheme::load('_blocks/_mail.html.twig');
         }
 
         return $this->templateMail;
