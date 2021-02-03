@@ -138,6 +138,12 @@
     "jaxon-php/jaxon-dialogs": {
         "version": "v3.1.2"
     },
+    "jms/metadata": {
+        "version": "2.4.0"
+    },
+    "jms/serializer": {
+        "version": "3.11.0"
+    },
     "laminas/laminas-code": {
         "version": "3.5.1"
     },
@@ -249,6 +255,9 @@
     "phpdocumentor/type-resolver": {
         "version": "1.4.0"
     },
+    "phpstan/phpdoc-parser": {
+        "version": "0.4.10"
+    },
     "pimple/pimple": {
         "version": "v3.3.1"
     },
@@ -270,6 +279,30 @@
     "snipe/banbuilder": {
         "version": "2.3.0"
     },
+    "sonata-project/block-bundle": {
+        "version": "4.5.0"
+    },
+    "sonata-project/cache": {
+        "version": "2.1.0"
+    },
+    "sonata-project/doctrine-extensions": {
+        "version": "1.11.0"
+    },
+    "sonata-project/form-extensions": {
+        "version": "1.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.4",
+            "ref": "bfc222606aea5418345af70104d974a25dc7c441"
+        },
+        "files": [
+            "./config/packages/sonata_form.yaml"
+        ]
+    },
+    "sonata-project/twig-extensions": {
+        "version": "1.5.0"
+    },
     "stof/doctrine-extensions-bundle": {
         "version": "1.2",
         "recipe": {
@@ -281,6 +314,9 @@
         "files": [
             "./config/packages/stof_doctrine_extensions.yaml"
         ]
+    },
+    "sylius/theme-bundle": {
+        "version": "v2.1.1"
     },
     "symfony/asset": {
         "version": "v5.2.1"
