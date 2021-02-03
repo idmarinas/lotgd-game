@@ -1,0 +1,9 @@
+sylius_theme:
+    context: Lotgd\Core\Theme\LotgdTheme
+    sources:
+        filesystem:
+            enabled: true
+            filename: theme.json
+            scan_depth: 1
+            directories:
+                - "%kernel.project_dir%/themes"

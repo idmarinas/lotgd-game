@@ -1,0 +1,8 @@
+sonata_block:
+    default_contexts: null
+    # blocks:
+    #     Some block with different templates
+    #     acme.demo.block.demo:
+    #        templates:
+    #           - { name: 'Simple', template: '@AcmeDemo/Block/demo_simple.html.twig' }
+    #           - { name: 'Big',    template: '@AcmeDemo/Block/demo_big.html.twig' }

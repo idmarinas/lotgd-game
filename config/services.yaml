@@ -191,15 +191,24 @@ services:
     Lotgd\Core\Symfony\Translation\Formatter\MessageFormatter:
         arguments:
             - '@identity_translator'
+    Symfony\Component\HttpFoundation\Response: # Temporal
+        alias: Lotgd\Core\Http\Response
+    Symfony\Component\HttpFoundation\Request: # Temporal
+        alias: Lotgd\Core\Http\Request
 
     # Twig extensions
     Marek\Twig\ByteUnitsExtension:
         tags:
             - { name: twig.extension }
 
-    # Template system
-    Lotgd\Core\Template\Template:
-        decorates: twig
-    Lotgd\Core\Twig\Loader\LotgdFilesystemLoader:
-        arguments:
-            - '@twig.loader.filesystem'
+    # Template Blocks system
+    # page.block.home.middle:
+    #     class: Lotgd\Core\Block\HomeBlock
+    #     arguments:
+    #         - '@twig'
+    #     tags:
+    #         - { name: sonata.block }
+    # page.block.event.home.middle:
+    #     class: Lotgd\Core\Block\Event\HomeMiddle
+    #     tags:
+    #         - { name: kernel.event_listener, event: sonata.block.event.blog.comment, method: onBlock }
