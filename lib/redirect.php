@@ -3,6 +3,7 @@
 // translator ready
 // addnews ready
 // mail ready
+
 function redirect($location, $reason = false)
 {
     global $session;
@@ -23,9 +24,10 @@ function redirect($location, $reason = false)
         ], 'app_default');
 
         \LotgdResponse::pageTitle('redirect.badnav.title', [], 'app_default');
-        \LotgdTheme::getTemplateParams()->set('content', \LotgdFormat::colorize($content, true));
+        $params = \LotgdKernel::get(Lotgd\Core\Template\Params::class);
+        $params->set('content', \LotgdFormat::colorize($content, true));
 
-        $session['output'] = \LotgdTheme::renderLayout(\LotgdTheme::getTemplateParams()->toArray());
+        $session['output'] = \LotgdTheme::render('layout.html.twig', $params->toArray());
     }
 
     restore_buff_fields();
