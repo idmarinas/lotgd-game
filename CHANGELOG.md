@@ -11,11 +11,30 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   **Moved** `templates/lotgd/` to `themes/LotgdTheme/templates/` folder
+-   **Moved** `templates_core/` to `themes/LotgdTheme/templates/admin/` folder
 
 ### :star: FEATURES
 
--   Nothing
+-   **New Theme System**
+    -   This version included new Theme System powered by [SyliusThemeBundle](https://github.com/Sylius/SyliusThemeBundle)
+    -   This new system allow to customize appearance of LoTGD more easy. This
+    -   And them can change the theme of LoTGD easy.
+        -   At the moment it does not allow the user to change the theme.
+    -   Theme structure in `themes/` folder. 
+        ```
+        AcmeTheme
+        ├── theme.json
+        ├── public
+        │   └── asset.jpg
+        ├── templates
+        │   ├── bundles
+        │   │   └── AcmeBundle
+        │   │       └── bundleTemplate.html.twig
+        |   └── template.html.twig
+        └── translations
+           └── messages.en.yml
+        ```
 
 ### :fire: DEPRECATED
 
@@ -27,7 +46,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :x: REMOVES/Break Changes
 
--   Nothing
+-   Removed `src/core/Template/Template.php` 
+-   Removed `src/core/Twig/Loader/LotgdFilesystemLoader.php`
 
 ### :notebook: NOTES
 
