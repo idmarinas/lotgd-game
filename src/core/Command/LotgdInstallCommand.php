@@ -166,7 +166,7 @@ final class LotgdInstallCommand extends Command
         $installerBar->start($countVersionsToInstall + 1); //-- For clear cache
 
         //-- Process instalation scripts
-        if ($this->processInstallation($input, $output, $installerBar, $fromVersion, $versionsToInstall))
+        if ($this->processInstallation($input, $output, $installerBar, $versionsToInstall))
         {
             $this->style->error($this->translator->trans('installer.installation.abort.install', [], InstallerAbstract::TRANSLATOR_DOMAIN));
 
@@ -197,7 +197,7 @@ final class LotgdInstallCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function processInstallation(InputInterface $input, OutputInterface $output, ProgressBar $installerBar, int $fromVersion, array $versionsToInstall)
+    private function processInstallation(InputInterface $input, OutputInterface $output, ProgressBar $installerBar, array $versionsToInstall)
     {
         $message = $this->translator->trans('installer.progressbar.install.progress.database', [], InstallerAbstract::TRANSLATOR_DOMAIN);
         $installerBar->setMessage($message, 'steps');
