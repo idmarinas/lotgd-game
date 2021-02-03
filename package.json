@@ -43,7 +43,7 @@
         "@babel/core": "^7.12.10",
         "@babel/plugin-transform-runtime": "^7.12.10",
         "@babel/preset-env": "^7.12.11",
-        "@symfony/stimulus-bridge": "^1.1.0",
+        "@symfony/stimulus-bridge": "^2.0.0",
         "@symfony/webpack-encore": "^1.0.3",
         "ansi-colors": "^4.1.1",
         "autoprefixer": "^10.2.4",
