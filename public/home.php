@@ -10,43 +10,44 @@ require_once 'common.php';
 
 $params = [];
 
-if (getsetting('homeskinselect', 1))
-{
-    $template = LotgdRequest::getCookie('template') ?: '';
+//-- New Theme system not is compatible with this.
+// if (getsetting('homeskinselect', 1))
+// {
+//     $template = LotgdRequest::getCookie('template') ?: '';
 
-    if ('' == $template)
-    {
-        $template = getsetting('defaultskin', 'jade.htm');
-    }
+//     if ('' == $template)
+//     {
+//         $template = getsetting('defaultskin', 'jade.htm');
+//     }
 
-    $lotgdFormFactory = \LotgdKernel::get('form.factory');
+//     $lotgdFormFactory = \LotgdKernel::get('form.factory');
 
-    $form = $lotgdFormFactory->create(Lotgd\Core\Form\HomeType::class, ['defaultskin' => $template], [
-        'action' => 'home.php',
-        'attr'   => [
-            'autocomplete' => 'off',
-            'class' => 'center aligned',
-            'hide_info_button' => true
-        ],
-    ]);
+//     $form = $lotgdFormFactory->create(Lotgd\Core\Form\HomeType::class, ['defaultskin' => $template], [
+//         'action' => 'home.php',
+//         'attr'   => [
+//             'autocomplete' => 'off',
+//             'class' => 'center aligned',
+//             'hide_info_button' => true
+//         ],
+//     ]);
 
-    $form->handleRequest(\LotgdRequest::_i());
+//     $form->handleRequest(\LotgdRequest::_i());
 
-    if ($form->isSubmitted() && $form->isValid())
-    {
-        $post = $form->getData();
+//     if ($form->isSubmitted() && $form->isValid())
+//     {
+//         $post = $form->getData();
 
-        $skin = $post['defaultskin'];
+//         $skin = $post['defaultskin'];
 
-        if ($skin > '')
-        {
-            \LotgdResponse::setCookie('template', $skin, '+45 days');
-            \LotgdTheme::setDefaultSkin($skin);
-        }
-    }
+//         if ($skin > '')
+//         {
+//             \LotgdResponse::setCookie('template', $skin, '+45 days');
+//             \LotgdTheme::setDefaultSkin($skin);
+//         }
+//     }
 
-    $params['selectSkin'] = $form->createview();
-}
+//     $params['selectSkin'] = $form->createview();
+// }
 
 if ($session['loggedin'] ?? false)
 {
