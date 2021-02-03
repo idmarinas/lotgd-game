@@ -113,7 +113,7 @@ function getcharstats($buffs)
         }
     }
 
-    $template = \LotgdTheme::load('@theme'.\LotgdTheme::getThemeNamespace().'/_blocks/_character_stats.html.twig');
+    $template = \LotgdTheme::load('_blocks/_character_stats.html.twig');
 
     $statbuff = $template->renderBlock('character_stat_buff', [
         'value' => $buffs,

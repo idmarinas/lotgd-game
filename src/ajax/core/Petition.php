@@ -136,7 +136,7 @@ class Petition extends AjaxAbstract
     {
         if ( ! $this->templatePetition)
         {
-            $this->templatePetition = \LotgdTheme::load('@theme'.\LotgdTheme::getThemeNamespace().'/_blocks/_petition.html.twig');
+            $this->templatePetition = \LotgdTheme::load('_blocks/_petition.html.twig');
         }
 
         return $this->templatePetition;

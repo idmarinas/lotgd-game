@@ -172,7 +172,7 @@ class Motd extends AjaxAbstract
     {
         if ( ! $this->templateMotd)
         {
-            $this->templateMotd = \LotgdTheme::load('@theme'.\LotgdTheme::getThemeNamespace().'/_blocks/_motd.html.twig');
+            $this->templateMotd = \LotgdTheme::load('/_blocks/_motd.html.twig');
         }
 
         return $this->templateMotd;
