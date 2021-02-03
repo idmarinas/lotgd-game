@@ -20,7 +20,7 @@ use Jaxon\Dialogs\Libraries\Library;
 
 class Modal extends Library implements JaxonModal
 {
-    public const PATH_TEMPLATE_JAXON = 'templates_core/jaxon';
+    public const PATH_TEMPLATE_JAXON = 'data/jaxon';
 
     /**
      * The constructor.
