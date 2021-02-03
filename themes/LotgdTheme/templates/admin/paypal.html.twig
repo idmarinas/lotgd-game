@@ -16,7 +16,7 @@
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener noreferrer" style="display: inline-block;" title="Author of LoTGD Mightye (Eric Stevens)">
                 <input type="hidden" name="cmd" value="_xclick">
                 <input type="hidden" name="business" value="logd@mightye.org">
-                <input type="hidden" name="item_name" value="Legend of the Green Dragon Author Donation from {{ user.name|default('Anonymous')|uncolorize }}">
+                <input type="hidden" name="item_name" value="Legend of the Green Dragon Author Donation from {{ user.name|default('Anonymous')|uncolorize|e('html_attr') }}">
                 <input type="hidden" name="item_number" value="{{ item_number }}">
                 <input type="hidden" name="no_shipping" value="1">
                 <input type="hidden" name="notify_url" value="http://lotgd.net/payment.php">
@@ -32,22 +32,22 @@
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener noreferrer" style="display: inline-block;" title="DragonPrime authors">
             <input type="hidden" name="cmd" value="_xclick">
             <input type="hidden" name="business" value="derbugmeister@shaw.ca">
-            <input type="hidden" name="item_name" value="Legend of the Green Dragon DP Donation from {{ user.name|default('Anonymous')|uncolorize }}">
+            <input type="hidden" name="item_name" value="Legend of the Green Dragon DP Donation from {{ user.name|default('Anonymous')|uncolorize|e('html_attr') }}">
             <input type="hidden" name="item_number" value="{{ item_number }}">
             <input type="hidden" name="no_shipping" value="1">
             <input type="hidden" name="notify_url" value="http://dragonprimelogd.net/payment.php">
-            <input type="hidden" name="cn" value="{{ user.name|default('Anonymous')|uncolorize }}">
+            <input type="hidden" name="cn" value="{{ user.name|default('Anonymous')|uncolorize|e('html_attr') }}">
             <input type="hidden" name="cs" value="1">
             <input type="hidden" name="currency_code" value="USD">
             <input type="hidden" name="tax" value="0">
             <input type="image" src="images/paypal3.gif" border="0" name="submit" alt="Donate!">
         </form>
 
-        {# Button for IDMarinas, author of this fork you are using #}
+        {# Button for IDMarinas fork, author of this fork you are using #}
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener noreferrer" style="display: inline-block;" title="IDMarinas author of this Fork you see">
             <input type="hidden" name="cmd" value="_xclick">
             <input type="hidden" name="business" value="idmarinas@outlook.com">
-            <input type="hidden" name="item_name" value="Legend of the Green Dragon IDMarinas Fork Donation from {{ user.name|default('Anonymous')|uncolorize }}">
+            <input type="hidden" name="item_name" value="Legend of the Green Dragon IDMarinas Fork Donation from {{ user.name|default('Anonymous')|uncolorize|e('html_attr') }}">
             <input type="hidden" name="item_number" value="{{ item_number }}">
             <input type="hidden" name="no_shipping" value="1">
             <input type="hidden" name="notify_url" value="https://lotgd.infommo.es/payment.php">
