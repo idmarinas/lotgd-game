@@ -29,6 +29,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Command for Install/Upgrade LoTGD.
@@ -43,13 +44,15 @@ final class LotgdInstallCommand extends Command
     protected $installer;
     protected $translator;
     protected $style;
+    protected $doctrine;
 
-    public function __construct(Install $install, TranslatorInterface $translator)
+    public function __construct(Install $install, TranslatorInterface $translator, EntityManagerInterface $doctrine)
     {
         parent::__construct();
 
         $this->installer  = $install;
         $this->translator = $translator;
+        $this->doctrine = $doctrine;
     }
 
     /**
@@ -187,12 +190,8 @@ final class LotgdInstallCommand extends Command
         $this->style->newLine();
         $this->style->newLine();
 
-        $this->style->title($this->translator->trans('installer.installation.user.create', [], InstallerAbstract::TRANSLATOR_DOMAIN));
-        $this->style->info($this->translator->trans('installer.installation.user.info', [], InstallerAbstract::TRANSLATOR_DOMAIN));
-
-        //-- Create user admin
-        $command = $this->getApplication()->find('lotgd:user:create');
-        $command->run($input, $output);
+        //-- Create user admin (If not have admin)
+        $this->createUserAdmin($input, $output);
 
         return Command::SUCCESS;
     }
@@ -254,6 +253,25 @@ final class LotgdInstallCommand extends Command
         $command->run($input, new NullOutput());
 
         $installerBar->advance(1);
+    }
+
+    private function createUserAdmin(InputInterface $input, OutputInterface $output)
+    {
+        /** @var Lotgd\Core\EntityRepository\AccountsRepository */
+        $repository = $this->doctrine->getRepository('LotgdCore:Accounts');
+        $superusers = (bool) $repository->getSuperuserCountWithPermit(SU_MEGAUSER);
+
+        //-- Not run if server have 1 admin
+        if ($superusers)
+        { //-- If exist one super user not allow create more
+            return false;
+        }
+
+        $this->style->title($this->translator->trans('installer.installation.user.create', [], InstallerAbstract::TRANSLATOR_DOMAIN));
+        $this->style->info($this->translator->trans('installer.installation.user.info', [], InstallerAbstract::TRANSLATOR_DOMAIN));
+
+        $command = $this->getApplication()->find('lotgd:user:create');
+        $command->run($input, $output);
     }
 
     private function getProgressBar($output)
