@@ -51,7 +51,7 @@
 {% endblock bank_deposit %}
 
 {# Deposit end #}
-{% block depositend %}
+{% block bank_depositend %}
     {% trans_default_domain textDomain %}
 
     {% if deposited %}
@@ -63,7 +63,7 @@
     {% else %}
         {{ 'deposit.finish.fail'|trans({ 'gold': user.gold, 'amount': amount, 'ownerName': ownerName })|colorize }}
     {% endif %}
-{% endblock depositend %}
+{% endblock bank_depositend %}
 
 {% block bank_enter %}
     {% trans_default_domain textDomain %}
