@@ -49,7 +49,7 @@
 {% endblock bank_deposit %}
 
 {# Deposit end #}
-{% block depositend %}
+{% block bank_depositend %}
     {% if deposited %}
         {% if user.goldinbank >= 0 %}
             {{ 'deposit.finish.balance.positive'|trans({ 'amount': amount, 'name': user.name, 'bank': user.goldinbank, 'gold': user.gold, 'ownerName': ownerName })|colorize }}
@@ -59,7 +59,7 @@
     {% else %}
         {{ 'deposit.finish.fail'|trans({ 'gold': user.gold, 'amount': amount, 'ownerName': ownerName })|colorize }}
     {% endif %}
-{% endblock depositend %}
+{% endblock bank_depositend %}
 
 {% block bank_enter %}
     {{ 'default.paragraph'|trans({'name': user.name, 'ownerName': ownerName})|colorize }}
