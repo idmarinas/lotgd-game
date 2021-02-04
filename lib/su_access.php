@@ -31,7 +31,8 @@ function check_su_access($level)
 
         \LotgdResponse::pageStart('title.ops', [], $textDomain);
 
-        \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('access_ops', 'admin/_blocks/_access.html.twig', ['textDomain' => $textDomain]));
+        $tpl = LotgdTheme::load('admin/_blocks/_access.html.twig');
+        \LotgdResponse::pageAddContent($tpl->renderBlock('access_ops', ['textDomain' => $textDomain]));
 
         \LotgdNavigation::addNav('common.superuser.mundane', 'village.php');
 
@@ -101,7 +102,8 @@ function check_su_access($level)
         systemmail($row['acctid'], $subj, $body);
     }
 
-    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('access_infidel', 'admin/_blocks/_access.html.twig', [
+    $tpl = \LotgdTheme::load('admin/_blocks/_access.html.twig');
+    \LotgdResponse::pageAddContent($tpl->renderBlock('access_infidel', [
         'textDomain'    => $textDomain,
         'deathOverlord' => getsetting('deathoverlord', '`$Ramius'),
     ]));
