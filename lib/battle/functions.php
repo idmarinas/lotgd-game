@@ -505,7 +505,7 @@ function battlegainexperienceforest()
  */
 function battlegainexperiencegraveyard()
 {
-    global $lotgdBattleContent, $options, $session, $enemies, $expbonus, $exp, $deathoverlord;
+    global $lotgdBattleContent, $options, $session, $enemies, $expbonus, $exp;
 
     if (\floor($exp + $expbonus) < 0)
     {
@@ -546,7 +546,7 @@ function battlegainexperiencegraveyard()
             'combat.end.experience.graveyard.total.favor',
             [
                 'favor'             => $totalExp,
-                'overlordOwnerName' => $deathoverlord,
+                'overlordOwnerName' => (string) getsetting('deathoverlord', '`$Ramius`0'),
             ],
         ];
         $session['user']['deathpower'] += $totalExp;
