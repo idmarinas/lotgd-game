@@ -25,6 +25,7 @@ services:
             - "../src/core/Fixed/"
             - "../src/core/Pattern/"
             - "../src/core/Tests/"
+            - "../src/core/Twig/Loader/LotgdFilesystemLoader.php"
             - "../src/core/Twig/Node/"
             - "../src/core/Twig/NodeVisitor/"
             - "../src/core/Twig/TokenParser/"
