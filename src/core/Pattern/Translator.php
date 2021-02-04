@@ -53,12 +53,21 @@ trait Translator
      */
     public function messageFormatter(string $message, ?array $parameters = [], ?string $locale = null): string
     {
+        global $session;
+
         //-- Not do nothing if message is empty
         //-- MessageFormatter fail if message is empty
         if ('' == $message)
         {
             return '';
         }
+
+        //-- Added same default values
+        $parameters = \array_merge([
+            'playerName' => $session['user']['name'] ?? '',
+            'playerSex'  => $session['user']['sex'] ?? '',
+            'location'   => $session['user']['location'] ?? '',
+        ], $parameters);
 
         $locale     = ($locale ?: $this->symfonyTranslator()->getLocale());
         $parameters = ($parameters ?: []);
