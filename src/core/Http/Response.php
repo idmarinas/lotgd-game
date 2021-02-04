@@ -142,7 +142,7 @@ class Response extends HttpResponse
      * @param $text The input text or variable to debug, string
      * @param $force Default is false, if true it will always be outputted to ANY user. If false, only SU_DEBUG will see it.
      */
-    public function pageDebug(?string $text, $force = false)
+    public function pageDebug($text, $force = false)
     {
         global $session;
 
