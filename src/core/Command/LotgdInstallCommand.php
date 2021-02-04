@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Installer\Install;
 use Lotgd\Core\Installer\InstallerAbstract;
 use Lotgd\Core\Installer\Pattern\FormaterTrait;
@@ -29,7 +30,6 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Command for Install/Upgrade LoTGD.
@@ -52,7 +52,7 @@ final class LotgdInstallCommand extends Command
 
         $this->installer  = $install;
         $this->translator = $translator;
-        $this->doctrine = $doctrine;
+        $this->doctrine   = $doctrine;
     }
 
     /**
