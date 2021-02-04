@@ -225,7 +225,6 @@ else
     }
 }
 
-\LotgdNavigation::addNav('nav.transfer', 'bank.php?op=transfer');
 if (getsetting('allowgoldtransfer', 1) && ($session['user']['level'] >= getsetting('mintransferlev', 3) || $session['user']['dragonkills'] > 0))
 {
     \LotgdNavigation::addNav('nav.transfer', 'bank.php?op=transfer');
