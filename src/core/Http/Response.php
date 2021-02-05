@@ -61,7 +61,7 @@ class Response extends HttpResponse
     {
         $title = $this->translator->trans($message, $parameters, $textDomain, $locale);
 
-        $this->headTitle->__invoke($title, 'set');
+        $this->headTitle->__invoke($title, 'SET');
     }
 
     /**
