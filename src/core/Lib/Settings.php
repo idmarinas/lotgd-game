@@ -21,9 +21,9 @@ class Settings
     protected $settings    = [];
     protected $settingsKey = 'game-settings-';
 
-    public function __construct(CacheInterface $cache, EntityManagerInterface $doctrine)
+    public function __construct(CacheInterface $coreSettingsCache, EntityManagerInterface $doctrine)
     {
-        $this->cache = $cache;
+        $this->cache    = $coreSettingsCache;
         $this->doctrine = $doctrine;
     }
 
@@ -97,7 +97,7 @@ class Settings
         {
             $item->expiresAt(new \DateTime('tomorrow'));
 
-            $sets   = [];
+            $sets = [];
 
             try
             {
