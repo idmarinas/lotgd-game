@@ -36,7 +36,7 @@ class Response extends HttpResponse
         $title     = $this->symfonyTranslator()->trans($message, $parameters, $textDomain, $locale);
         $headTitle = $this->getService(HeadTitle::class);
 
-        $headTitle($title, 'set');
+        $headTitle($title, 'SET');
     }
 
     /**
