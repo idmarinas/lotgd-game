@@ -10213,20 +10213,20 @@
         },
         {
             "name": "idmarinas/tracy-twig-bar",
-            "version": "0.1.0",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/idmarinas/tracy-twig-bar.git",
-                "reference": "8494bf91f99fbf52b43053f588dbb2354125bd30"
+                "reference": "6a395073058c34a54724ab872a607eed7a1a6ff1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/idmarinas/tracy-twig-bar/zipball/8494bf91f99fbf52b43053f588dbb2354125bd30",
-                "reference": "8494bf91f99fbf52b43053f588dbb2354125bd30",
+                "url": "https://api.github.com/repos/idmarinas/tracy-twig-bar/zipball/6a395073058c34a54724ab872a607eed7a1a6ff1",
+                "reference": "6a395073058c34a54724ab872a607eed7a1a6ff1",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2",
+                "php": "^7.2",
                 "tracy/tracy": "^2.7",
                 "twig/twig": "^2.0 || ^3.0"
             },
@@ -10248,7 +10248,7 @@
                     "role": "Developer, Maintainer"
                 }
             ],
-            "description": "A Tracy panel for Twig templates",
+            "description": "A Tracy panel for Twig Template Engine",
             "keywords": [
                 "bar",
                 "debugger",
@@ -10258,7 +10258,7 @@
             ],
             "support": {
                 "issues": "https://github.com/idmarinas/tracy-twig-bar/issues",
-                "source": "https://github.com/idmarinas/tracy-twig-bar/tree/0.1.0"
+                "source": "https://github.com/idmarinas/tracy-twig-bar/tree/0.1.2"
             },
             "funding": [
                 {
@@ -10266,7 +10266,7 @@
                     "type": "liberapay"
                 }
             ],
-            "time": "2020-09-10T15:31:02+00:00"
+            "time": "2021-02-05T12:44:58+00:00"
         },
         {
             "name": "macfja/tracy-doctrine-sql",
