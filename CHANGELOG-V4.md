@@ -13,6 +13,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 Visit **_latest_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG.md)  
 Visit **_V2_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V2.md)  
 Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V3.md)  
+Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V5.md)  
 
 
 # Version: 4.12.0

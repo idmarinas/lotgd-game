@@ -6,12 +6,17 @@
     -   mail.php
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
-# Actualmente haciendo esto (5.0.0)
+# Actualmente haciendo esto
+-   Seguir la transición hacia un sistema Symfony Framework
+-   **BC** Rehacer el sistema de combate, usando el principio del resto del juego y haciendo uso de una factoria.
+    -   Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
+-   **BC** Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente como el sistema de combate nuevo.
+    -   Se simplifica la forma en la que se calcula las estadísticas del personaje, haciendo que tanto los personajes jugador como los creados por el servidor, tengan una forma de creación muy similar.
+-   **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
+    -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
+-   El sistema antiguo de módulos segurá funcionando en esta version (6.y.z)
+    -   Se borrará este sistema en la versión 7.0.0
 
--   Migrar al nuevo sitema de plantillas
-    -   https://github.com/Sylius/SyliusThemeBundle para crear temas en LoTGD
--   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
-    -   Usar macros y blocks donde se pueda.
 
 # Versión 5.0.0
 -   El antiguo sistema de módulos está obsolete desde esta versión
@@ -22,21 +27,6 @@
 # Módulos
 
 -   ...
-
-# Advertising bundle
--   Permitir desactivarlo en tiempo de ejecución (un módulo que lo desactiva por ejemplo)
-    -   Posiblemente esto ya se pueda hacer
-
-# Para la versión 6.0.*
--   Seguir la transición hacia un sistema Symfony Framework
--   **BC** Rehacer el sistema de combate, usando el principio del resto del juego y haciendo uso de una factoria.
-    -   Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
--   **BC** Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente como el sistema de combate nuevo.
-    -   Se simplifica la forma en la que se calcula las estadísticas del personaje, haciendo que tanto los personajes jugador como los creados por el servidor, tengan una forma de creación muy similar.
--   **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
-    -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
--   El sistema antiguo de módulos segurá funcionando en esta version (6.y.z)
-    -   Se borrará este sistema en la versión 7.0.0
 
 # Para la versión 7.0.*  (LoTGD Core as Symfony APP)
 
