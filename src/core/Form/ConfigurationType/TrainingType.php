@@ -43,13 +43,12 @@ class TrainingType extends AbstractType
             // Display news if somebody fought his master?
             ->add('displaymasternews', CheckboxType::class, [
                 'required' => false,
-                'label'    => 'training.displaymasternews',
+                'label'    => 'training.displaymasternews.label',
+                'help'     => 'training.displaymasternews.note',
             ])
             // Which is the maximum attainable level (at which also the Dragon shows up)?
             ->add('maxlevel', NumberType::class, [
-                'label'       => 'training.maxlevel.label',
-                'help'        => 'training.maxlevel.note',
-                'empty_data'  => 15,
+                'label'       => 'training.maxlevel',
                 'constraints' => [
                     new DivisibleBy(1),
                 ],

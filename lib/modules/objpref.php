@@ -20,7 +20,7 @@ function module_delete_objprefs($objtype, $objid)
 
     \Doctrine::flush();
 
-    \LotgdKernel::get('cache.app')->invalidateTags(["module-objpref-{$objtype}-{$objid}"]);
+    \LotgdKernel::get('core.lotgd.cache')->invalidateTags(["module-objpref-{$objtype}-{$objid}"]);
 }
 
 /**
@@ -104,7 +104,7 @@ function set_module_objpref($objtype, $objid, $name, $value, $module = false)
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    \LotgdKernel::get('cache.app')->delete("module-objpref-{$objtype}-{$objid}-{$module}");
+    \LotgdKernel::get('core.lotgd.cache')->delete("module-objpref-{$objtype}-{$objid}-{$module}");
 }
 
 /**
@@ -142,7 +142,7 @@ function increment_module_objpref($objtype, $objid, $name, $value = 1, $module =
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    \LotgdKernel::get('cache.app')->delete("module-objpref-{$objtype}-{$objid}-{$module}", true);
+    \LotgdKernel::get('core.lotgd.cache')->delete("module-objpref-{$objtype}-{$objid}-{$module}");
 }
 
 /**
