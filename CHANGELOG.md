@@ -26,6 +26,9 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   **lib/modules/objectpref.php** Fixed error: now use same cache service. So not give problems with get/set object prefs
 -   **src/core/Form/ConfigurationType/TrainingType.php** Fixed error with translation keys.
+-   **src/core/Http/Response.php**  Fixed errors:
+    -   `pageTitle()` Now replace title correctly.
+    -   `pageDebug()` Param $text can be mixed
 
 ### :x: REMOVES/Break Changes
 
