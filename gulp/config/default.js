@@ -22,12 +22,10 @@ const config = {
             //-- All files including subdirectories
             '**{,/**}',
             //-- Ignore files/folders of development
-            '!{assets,docs,gulp,gulpfile.js,release,entity,_core_files}{,/**}',
+            '!{assets,docs,gulp,gulpfile.js,release,entity}{,/**}',
             //-- Include .files
             '{/**/.gitkeep,/.env,/.htaccess}',
-            //-- Ignore content of
-            '!data/installer{,/**}',
-            'data/installer/README.md', //-- But include README.md
+            '!_core_files{,/**}', //-- Moved here for ignore .gitkeep files in this folder
             //-- Ignore all dist folders/files
             '!{*.,}dist{,/**}',
             //-- Ignore dependency directories
