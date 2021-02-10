@@ -25,6 +25,8 @@ class Settings
     {
         $this->cache    = $coreSettingsCache;
         $this->doctrine = $doctrine;
+
+        $this->loadSettings();
     }
 
     /**
