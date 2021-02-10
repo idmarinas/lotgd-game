@@ -29,9 +29,9 @@ const config = {
             '!docs{,/**}', //-- Ignore the "docs/" folder, you don't need to publish it on your server.
             '!release{,/**}', //-- These are the compiled files of the different versions ready to use in production.
             '!entity{,/**}', //-- Autogenerate entities from BD
-            '!_core_files{,/**}', //-- This files are merge if need, in Custom local Skeleton
             //-- Include .files
             '{/**/.gitkeep,/.env,/.htaccess}',
+            '!_core_files{,/**}', //-- This files are merge if need, in Custom local Skeleton
             '!{*.,}dist{,/**}', //-- Ignore all dist folders
             //-- Ignore dependency directories
             '!{bower_components,node_modules,vendor,var}{,/**}'
