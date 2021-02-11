@@ -9,6 +9,8 @@
  * @param bool   $only          Only this module?
  *
  * @return array The args modified by the event handlers
+ *
+ * @deprecated
  */
 $currenthook = '';
 function modulehook($hookname, $args = false, $allowinactive = false, $only = false)
@@ -205,6 +207,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 
 /**
  * Delete hooks of module.
+ * @deprecated
  */
 function module_wipehooks(string $module)
 {
@@ -291,6 +294,7 @@ function module_drophook($hookname, $functioncall = false)
  * @param string $hookname     The hook to receive a notification for
  * @param string $functioncall The function that should be called, if not specified, use {modulename}_dohook() as the function
  * @param string $whenactive   an expression that should be evaluated before triggering the event, if not specified, none
+ * @deprecated
  */
 function module_addhook($hookname, $functioncall = false, $whenactive = false)
 {
@@ -311,6 +315,7 @@ function module_addhook($hookname, $functioncall = false, $whenactive = false)
  * @param int    $priority     The priority for this hooking -- lower numbers execute first.  < 50 means earlier-than-normal execution, > 50 means later than normal execution.  Priority only affects execution order compared to other events registered on the same hook, all events on a given hook will execute before the game resumes execution.
  * @param string $functioncall The function that should be called, if not specified, use {modulename}_dohook() as the function
  * @param string $whenactive   an expression that should be evaluated before triggering the event, if not specified, none
+ * @deprecated
  */
 function module_addhook_priority($hookname, $priority = 50, $functioncall = false, $whenactive = false)
 {
