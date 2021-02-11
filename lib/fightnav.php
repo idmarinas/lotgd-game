@@ -97,7 +97,7 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
             }
 
             \LotgdNavigation::addNavNotl(
-                ($badguy['istarget'] ?? false) ? '`#*`0' : ''.$badguy['creaturename'],
+                (($badguy['istarget'] ?? false) ? '`#*`0' : '').$badguy['creaturename'],
                 "{$script}op=fight&newtarget={$index}"
             );
         }
