@@ -1,6 +1,6 @@
 # History of changes for IDMarinas Edition
 
-This is a list of changes made in versions __5.*.*__
+This is a list of changes made in versions __5.\*.\*__
 
 
 # Changes of LoTGD IDMarinas Edition
@@ -23,7 +23,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   **New Theme System**
     -   This version included new Theme System powered by [SyliusThemeBundle](https://github.com/Sylius/SyliusThemeBundle)
-    -   This new system allow to customize appearance of LoTGD more easy. This
+    -   This new system allow to customize appearance of LoTGD more easy.
     -   And them can change the theme of LoTGD easy.
         -   At the moment it does not allow the user to change the theme.
     -   Theme structure in `themes/` folder. 
