@@ -12,7 +12,33 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   **Battle Script**
+    -   **First** iteration of changes in Battle system.
+        -   Moved some part of Battle System to a Service `Lotgd\Core\Combat\Battle`
+            -   Get Battle service with `LotgdKernel::get(Lotgd\Core\Combat\Battle::class)`
+    -   No need more require `battle.php` file.
+        -   Only need:
+            ```php
+                $battleInstance
+                    //-- Configure battle
+                    ->setBattleZone('forest') //-- Default is forest.
+                    ->enableCreateNews() //-- Default is enable
+                    ->enableLostGold() //-- Default is enable
+                    ->enableLostExp() //-- Default is enable
+                    ->enableDie() //-- Default is enable
+                    ->enableFlawless() //-- Default is enable
+                    ->enableVictoryDefeat() //-- Default is enable. Disable if you want simulate battle
+
+                    //-- Start battle
+                    ->battleStart($companions, $session['user'], $session['buffslist'] ?? [])
+
+                    //-- Process the battle
+                    ->battleProcess()
+
+                    //-- End battle
+                    ->battleEnd()
+                ;
+            ```
 
 ### :star: FEATURES
 
@@ -29,6 +55,7 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **src/core/Http/Response.php**  Fixed errors:
     -   `pageTitle()` Now replace title correctly.
     -   `pageDebug()` Param $text can be mixed
+-   **lib/figthnav.php** Fixed, now show name of creature when is target.
 
 ### :x: REMOVES/Break Changes
 
