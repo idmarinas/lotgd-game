@@ -28,7 +28,7 @@
 
 -   ...
 
-# Para la versión 7.0.*  (LoTGD Core as Symfony APP)
+# Para la versión 7.0.0  (LoTGD Core as Symfony APP)
 
 -   Esta versión LoTGD Core será una app Symfony Framework.
     -   Migrar a la estructura propia de Symfony Framework
@@ -50,6 +50,9 @@
 -   Se usará un sistema de módulos tipo Bundle, igual que Symfony Framework. 
     -   Se reemplaza por completo el viejo sistema de módulos
 -   **BC** Eliminar compatibilidad con el uso del viejo sistema de módulos
+
+# Para la versión 7.y.0  
+-   Sustituir Fomantic Ui por https://tailwindcss.com npm install tailwindcss
 
 # Para la versión 8.0.0 (LoTGD CORE as Bundle)
 -   ¿? Determinar si es viable usarlo tipo bundle, o crearlo para que se genere el contenido tipo bundle.
