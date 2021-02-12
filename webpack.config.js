@@ -64,7 +64,7 @@ CustomEncore
     // Other custom entries (pages js/css)
     .addEntry('example', './assets/DIR_NAME/path/to/file.js')
 
-const CustomConfig = LotgdEncore.getWebpackConfig()
+const CustomConfig = CustomEncore.getWebpackConfig()
 CustomConfig.name = 'custom'
 */
 module.exports = [LotgdConfig]
