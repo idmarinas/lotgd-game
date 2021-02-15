@@ -19,20 +19,6 @@
 
 # Versión 6.1.0
 
--   Serie 6.y.z se centra en el sistema de combate y personajes
-    -   También en conseguir tenerlo listo para migrar a una Symfony App para la versión 7.0.0
--   Seguir la transición hacia un sistema Symfony Framework
--   **BC** Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
-    -   Eliminar partes antiguas si aun quedan.
--   **BC** Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente como el sistema de combate nuevo.
-    -   Se simplifica la forma en la que se calcula las estadísticas del personaje, haciendo que tanto los personajes jugador como los creados por el servidor, tengan una forma de creación muy similar.
--   **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
-    -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
--   El sistema antiguo de módulos seguirá funcionando en la version 6.y.z
-    -   Se borrará este sistema en la versión 7.0.0
-
-# Versión 6.2.0
-
 -   Seguir la transición hacia un sistema Symfony Framework
 -   https://github.com/KnpLabs/KnpPaginatorBundle para la paginación
 -   El sistema antiguo de módulos seguirá funcionando en la version 6.y.z
@@ -67,6 +53,12 @@
     -   https://sonata-project.org/bundles/block/master/doc/reference/events.html
 -   Se usará un sistema de módulos tipo Bundle, igual que Symfony Framework. 
     -   Se reemplaza por completo el viejo sistema de módulos
+-   **BC** Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
+    -   Eliminar partes antiguas si aun quedan.
+-   **BC** Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente como el sistema de combate nuevo.
+    -   Se simplifica la forma en la que se calcula las estadísticas del personaje, haciendo que tanto los personajes jugador como los creados por el servidor, tengan una forma de creación muy similar.
+-   **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
+    -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
 -   **BC** Eliminar compatibilidad con el uso del viejo sistema de módulos
 
 # Para la versión 7.1.0
