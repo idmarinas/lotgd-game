@@ -9,27 +9,13 @@
     -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
 -   A partir de esta versión se empezará a usar un sistema de módulos tipo Bundle
 
-# Actualmente haciendo esto (6.0.0)
-
--   Seguir la transición hacia un sistema Symfony Framework
--   **BC** Rehacer el sistema de combate, usando el principio del resto del juego y haciendo uso de un service.
-    -   Se modifica el script de battalla creando un service que lo gestione. No es necesario importar battle.php
--   El sistema antiguo de módulos seguirá funcionando en la version 6.y.z
-    -   Se borrará este sistema en la versión 7.0.0
-
-# Versión 6.1.0
-
--   Seguir la transición hacia un sistema Symfony Framework
--   https://github.com/KnpLabs/KnpPaginatorBundle para la paginación
--   El sistema antiguo de módulos seguirá funcionando en la version 6.y.z
-    -   Se borrará este sistema en la versión 7.0.0
-
 # Módulos
 
 -   ...
 
-# Para la versión 7.0.0  (LoTGD Core as Symfony APP)
+# Para la versión 6.0.0  (LoTGD Core as Symfony APP)
 
+-   Se adelanta la transicción
 -   Esta versión LoTGD Core será una app Symfony Framework.
     -   Migrar a la estructura propia de Symfony Framework
 -   Sustituir Entity\Account por Entity\User
@@ -61,7 +47,13 @@
     -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
 -   **BC** Eliminar compatibilidad con el uso del viejo sistema de módulos
 
-# Para la versión 7.1.0
+# Para la versión 6.1.0
+
+-   https://github.com/KnpLabs/KnpPaginatorBundle para la paginación
+-   Sustituir Fomantic Ui por https://tailwindcss.com 
+    -   npm install tailwindcss
+
+# Para la versión 6.y.x
 
 -   Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
     -   La instalación por consola ya se creeo en la versión 5.0.0
@@ -69,9 +61,8 @@
             -   Problematico la creación del usuario admin
     -   Para los admin que no dispongan de esta opción se agrega la opción de instalación via web.
 
-# Para la versión 7.y.z  
--   Sustituir Fomantic Ui por https://tailwindcss.com 
-    -   npm install tailwindcss
+# Para la versión 6.y.z  
+
 -   Agregar sistema al core, para poder añadir términos y condiciones y politica de privacidad, sin necesidad de módulo.
     -    Cookie consent
         -   https://github.com/nucleos/NucleosGDPRBundle

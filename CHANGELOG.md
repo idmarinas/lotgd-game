@@ -12,37 +12,11 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :cyclone: CHANGES
 
--   **Battle Script**
-    -   **First** iteration of changes in Battle system.
-        -   Moved some part of Battle System to a Service `Lotgd\Core\Combat\Battle`
-            -   Get Battle service with `LotgdKernel::get(Lotgd\Core\Combat\Battle::class)`
-    -   No need more require `battle.php` file.
-        -   Only need:
-            ```php
-                $battleInstance
-                    //-- Configure battle
-                    ->setBattleZone('forest') //-- Default is forest.
-                    ->enableCreateNews() //-- Default is enable
-                    ->enableLostGold() //-- Default is enable
-                    ->enableLostExp() //-- Default is enable
-                    ->enableDie() //-- Default is enable
-                    ->enableFlawless() //-- Default is enable
-                    ->enableVictoryDefeat() //-- Default is enable. Disable if you want simulate battle
-
-                    //-- Start battle
-                    ->battleStart($companions, $session['user'], $session['buffslist'] ?? [])
-
-                    //-- Process the battle
-                    ->battleProcess()
-
-                    //-- End battle
-                    ->battleEnd()
-                ;
-            ```
+-   :warning: LoTGD is now a Symfony App.
 
 ### :star: FEATURES
 
--   Nothing
+-   **New** Since 6.0.0 version LoTGD Core is a Symfony App.
 
 ### :fire: DEPRECATED
 
@@ -59,7 +33,7 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :x: REMOVES/Break Changes
 
--   Nothing
+-   **BC** So many to write here, ^_^, in version 6.0.0 LoTGD Core is a Symfony App.
 
 ### :notebook: NOTES
 
