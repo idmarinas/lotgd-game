@@ -5,7 +5,9 @@
 // mail ready
 function fightnav($allowspecial = true, $allowflee = true, $script = false)
 {
-    global $session, $newenemies, $companions;
+    global $session;
+
+    $enemies = $session['user']['badguy']['enemies'];
 
     //-- Change text domain for navigation
     \LotgdNavigation::setTextDomain('navigation_fightnav');
@@ -51,7 +53,7 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
         \LotgdNavigation::addNav('nav.auto.010', "{$script}op=fight&auto=ten");
         $auto = getsetting('autofightfull', 0);
 
-        if ((1 == $auto || (2 == $auto && ! $allowflee)) && 1 == \count($newenemies))
+        if ((1 == $auto || (2 == $auto && ! $allowflee)) && 1 == \count($enemies))
         {
             \LotgdNavigation::addNav('nav.auto.end', "{$script}op=fight&auto=full");
         }
@@ -85,11 +87,11 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
         modulehook('fightnav', $args);
     }
 
-    if (\count($newenemies) > 1)
+    if (\count($enemies) > 1)
     {
         \LotgdNavigation::addHeader('category.target');
 
-        foreach ($newenemies as $index => $badguy)
+        foreach ($enemies as $index => $badguy)
         {
             if ($badguy['creaturehealth'] <= 0 || (isset($badguy['dead']) && $badguy['dead']))
             {
