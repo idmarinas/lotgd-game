@@ -196,6 +196,8 @@ services:
         alias: Lotgd\Core\Http\Response
     Symfony\Component\HttpFoundation\Request: # Temporal
         alias: Lotgd\Core\Http\Request
+    Lotgd\Core\Combat\Battle:
+        public: true
 
     # Twig extensions
     Marek\Twig\ByteUnitsExtension:
