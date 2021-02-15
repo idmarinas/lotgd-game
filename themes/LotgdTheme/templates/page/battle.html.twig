@@ -1,6 +1,6 @@
 {% from 'page/_macros/_battle.html.twig' import combat_health_bar as health_bar %}
 
-{% trans_default_domain 'page_battle' %}
+{% trans_default_domain text_domain %}
 
 {{ 'title'|trans|colorize }}
 
@@ -29,33 +29,37 @@
 </div>
 
 {# Information when battle start #}
-{% for msg in battlestart %}
-    {{ msg|trans|colorize }}
+{% for msg in battle_start %}
+    {{ msg[0]|trans(msg[1]|default({}), msg[2]|default(text_domain))|colorize }}
+{% endfor %}
+
+{% for msg in messages %}
+    {{ msg[0]|trans(msg[1]|default({}), msg[2]|default(text_domain))|colorize }}
 {% endfor %}
 
 {# Show HP of combatants #}
 <div class="ui top attached divided segment">
     <div class="ui divided stackable two column grid">
         <div class="column">
-            {{ health_bar(battlebars.start.player) }}
-            {% for companion in battlebars.start.companions %}
-                {{ health_bar(companion) }}
+            {{ health_bar(bars_start.user, text_domain) }}
+            {% for companion in bars_start.companions %}
+                {{ health_bar(companion, text_domain) }}
             {% endfor %}
         </div>
         <div class="column">
-            {% for enemy in battlebars.start.enemies %}
-                {{ health_bar(enemy) }}
+            {% for enemy in bars_start.enemies %}
+                {{ health_bar(enemy, text_domain) }}
             {% endfor %}
         </div>
     </div>
 </div>
 
 {# Rounds results #}
-{% if battlerounds|length %}
-    <h5 class="ui attached header">{{ 'battle.result'|trans({'n': battlerounds|length})|colorize }}</h5>
+{% if battle_rounds|length %}
+    <h5 class="ui attached header">{{ 'battle.result'|trans({'n': battle_rounds|length})|colorize }}</h5>
     <div class="ui attached divided segment">
         <div class="ui divided list">
-            {% for rounds in battlerounds %}
+            {% for rounds in battle_rounds %}
                 <div class="item">
                     <div class="ui divided stackable two column grid">
                         <div class="column">
@@ -85,29 +89,29 @@
 {% endif %}
 
 {# Show HP of combatants #}
-<div class="ui {{ battleend ? '' : 'bottom' }} attached divided segment">
+<div class="ui {{ battle_has_winner ? '' : 'bottom' }} attached divided segment">
     <div class="ui divided stackable two column grid">
         <div class="column">
-            {{ health_bar(battlebars.end.player) }}
-            {% for companion in battlebars.end.companions %}
-                {{ health_bar(companion) }}
+            {{ health_bar(bars_end.user, text_domain) }}
+            {% for companion in bars_end.companions %}
+                {{ health_bar(companion, text_domain) }}
             {% endfor %}
         </div>
         <div class="column">
-            {% for enemy in battlebars.end.enemies %}
-                {{ health_bar(enemy) }}
+            {% for enemy in bars_end.enemies %}
+                {{ health_bar(enemy, text_domain) }}
             {% endfor %}
         </div>
     </div>
 </div>
 
-{# Information of end of battle #}
-{% if battleend %}
+{# Information when battle has winner #}
+{% if battle_has_winner %}
     <h5 class="ui attached header">{{ 'battle.end'|trans|colorize }}</h5>
     <div class="ui bottom attached divided segment">
-        {% for msg in battleend %}
+        {% for msg in battle_end %}
             {% if msg is array %}
-                {{ msg[0]|trans((msg[1]|default({})), (msg[2] ?: 'page_battle'))|colorize }}
+                {{ msg[0]|trans((msg[1]|default({})), (msg[2]|default(text_domain)))|colorize }}
             {% else %}
                 {{ msg|trans|colorize }}
             {% endif %}
