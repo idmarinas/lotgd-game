@@ -16,11 +16,11 @@ namespace Lotgd\Core\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Structure of table "characters" in data base.
+ * Structure of table "avatar" in data base.
  *
- * This table store character info of users, only data related to character.
+ * This table store avatar info of users, only data related to character.
  *
- * @ORM\Table(name="characters",
+ * @ORM\Table(
  *     indexes={
  *         @ORM\Index(name="name", columns={"name"}),
  *         @ORM\Index(name="level", columns={"level"}),
@@ -29,9 +29,9 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="clanid", columns={"clanid"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\CharactersRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\AvatarRepository")
  */
-class Characters
+class Avatar
 {
     /**
      * @var int
