@@ -1,3 +1,4 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=alert_status)](https://sonarcloud.io/dashboard?id=lotgd-game)
 ![PHP Composer](https://github.com/idmarinas/lotgd-game/workflows/PHP%20Composer/badge.svg?branch=master)
 
 ![GitHub release](https://img.shields.io/github/release/idmarinas/lotgd-game.svg)
@@ -21,7 +22,6 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/idmarinas/lotgd-game.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/idmarinas/lotgd-game/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/idmarinas/lotgd-game.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/idmarinas/lotgd-game/context:javascript)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=alert_status)](https://sonarcloud.io/dashboard?id=lotgd-game)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=lotgd-game)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=bugs)](https://sonarcloud.io/dashboard?id=lotgd-game)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=security_rating)](https://sonarcloud.io/dashboard?id=lotgd-game)
@@ -52,7 +52,8 @@ The version **IDMarinas Edition** is based on the version **1.1.2 Dragonprime** 
 Version of the IDMarinas Edition: **_6.0.0_**
 
 The intention to make a new branch of the Core, is to be able to update certain aspects, which were outdated, such as the script that is used to access the database, while correcting certain errors, and adding new options of customization.  
-Since version 6.0.0 LoTGD Core is a Symfony App.
+
+_**Since version 6.0.0 LoTGD Core is a Symfony App.**_
 
 IDMarinas Edition is used in:
 
