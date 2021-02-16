@@ -41,19 +41,37 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
     -   `Lotgd\Core\Application`
     -   `Lotgd\Core\EventManagerAware`
     -   `Lotgd\Core\Hook`
-    -   All fixed class:
-        - `Lotgd\Core\Fixed\Doctrine`
-        - `Lotgd\Core\Fixed\FlashMessages`
-        - `Lotgd\Core\Fixed\Format`
-        - `Lotgd\Core\Fixed\HookManager`
-        - `Lotgd\Core\Fixed\Kernel`
-        - `Lotgd\Core\Fixed\Navigation`
-        - `Lotgd\Core\Fixed\Request`
-        - `Lotgd\Core\Fixed\Response`
-        - `Lotgd\Core\Fixed\Sanitize`
-        - `Lotgd\Core\Fixed\Session`
-        - `Lotgd\Core\Fixed\Theme`
-        - `Lotgd\Core\Fixed\Translator`
+    -   All fixed class use dependency injection:
+        -   `Lotgd\Core\Fixed\Doctrine`
+        -   `Lotgd\Core\Fixed\FlashMessages`
+        -   `Lotgd\Core\Fixed\Format`
+        -   `Lotgd\Core\Fixed\HookManager`
+        -   `Lotgd\Core\Fixed\Kernel`
+        -   `Lotgd\Core\Fixed\Navigation`
+        -   `Lotgd\Core\Fixed\Request`
+        -   `Lotgd\Core\Fixed\Response`
+        -   `Lotgd\Core\Fixed\Sanitize`
+        -   `Lotgd\Core\Fixed\Session`
+        -   `Lotgd\Core\Fixed\Theme`
+        -   `Lotgd\Core\Fixed\Translator`
+    -   All pattern class, use dependency injection:
+        -   `Lotgd\Core\Pattern\Cache`
+        -   `Lotgd\Core\Pattern\Censor`
+        -   `Lotgd\Core\Pattern\Container`
+        -   `Lotgd\Core\Pattern\Doctrine`
+        -   `Lotgd\Core\Pattern\EntityHydrator`
+        -   `Lotgd\Core\Pattern\Format`
+        -   `Lotgd\Core\Pattern\HookManager`
+        -   `Lotgd\Core\Pattern\Http`
+        -   `Lotgd\Core\Pattern\Jaxon`
+        -   `Lotgd\Core\Pattern\LotgdCore`
+        -   `Lotgd\Core\Pattern\Navigation`
+        -   `Lotgd\Core\Pattern\Output`
+        -   `Lotgd\Core\Pattern\Sanitize`
+        -   `Lotgd\Core\Pattern\Settings`
+        -   `Lotgd\Core\Pattern\Template`
+        -   `Lotgd\Core\Pattern\ThemeList`
+        -   `Lotgd\Core\Pattern\Translator`
 -   **BC** _Entities_
     -   `src/Entity/Characters.php` Rename to `src/Entity/Avatar.php`. Characters is a reserved word.
 -   **Twig functions/filters**
