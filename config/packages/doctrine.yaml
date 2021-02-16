@@ -26,20 +26,14 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         quote_strategy: doctrine.orm.quote_strategy.ansi
         auto_mapping: true
-        default_repository_class: Lotgd\Core\Doctrine\ORM\EntityRepository
+        # default_repository_class: Lotgd\Core\Doctrine\ORM\EntityRepository
         mappings:
             Core:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/core/Entity'
+                dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'Lotgd\Core\Entity'
                 alias: LotgdCore
-            Local:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/local/Entity'
-                prefix: 'Lotgd\Local\Entity'
-                alias: LotgdLocal
         dql:
             string_functions:
                 inet_aton: DoctrineExtensions\Query\Mysql\InetAton
