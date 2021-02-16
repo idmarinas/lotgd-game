@@ -3,203 +3,146 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+imports:
+    - { resource: jaxon.yaml }
+    - { resource: "@JaxonAjaxBundle/Resources/config/services.yaml" }
+
 parameters:
-    lotgd_core.doctrine_prefix: "%env(DATABASE_PREFIX)%"
+    # lotgd_core.doctrine_prefix: "%env(DATABASE_PREFIX)%"
     lotgd_core.number.format.decimal.point: '.'
     lotgd_core.number.format.thousands.sep: ','
-    doctrine.orm.entity_manager.class: Lotgd\Core\Doctrine\ORM\EntityManager
+    # doctrine.orm.entity_manager.class: Lotgd\Core\Doctrine\ORM\EntityManager
 
 services:
     # default configuration for services in *this* file
     _defaults:
-        autowire: true # Automatically injects dependencies in your services.
+        autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     Lotgd\Core\:
-        resource: "../src/core/"
+        resource: '../src/'
         exclude:
-            - "../src/core/DependencyInjection/"
-            - "../src/core/Exception/"
-            - "../src/core/Fixed/"
-            - "../src/core/Pattern/"
-            - "../src/core/Tests/"
-            - "../src/core/Twig/Loader/LotgdFilesystemLoader.php"
-            - "../src/core/Twig/Node/"
-            - "../src/core/Twig/NodeVisitor/"
-            - "../src/core/Twig/TokenParser/"
-            - "../src/core/Application.php"
-            - "../src/core/EventManagerAware.php"
-            - "../src/core/Hook.php"
-            - "../src/core/Kernel.php"
-    Lotgd\Local\:
-        resource: "../src/local/"
-        exclude:
-            - "../src/local/DependencyInjection/"
-            - "../src/local/Exception/"
-            - "../src/local/Fixed/"
-            - "../src/local/Tests/"
-            - "../src/local/Twig/Node/"
-            - "../src/local/Twig/NodeVisitor/"
-            - "../src/local/Twig/TokenParser/"
-
-    Lotgd\Core\Installer\Command\:
-        resource: "../src/core/Installer/Command"
-        tags: ['console.command']
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+            - '../src/functions.php'
+            - '../src/functions_old.php'
+            # Ignore old files
+            - '../src/ajax/'
+            - '../src/core/'
+            - '../src/local/'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    # App\Controller\:
-    #     resource: '../src/Controller/'
-    #     tags: ['controller.service_arguments']
+    Lotgd\Core\Controller\:
+        resource: '../src/Controller/'
+        tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    # Doctrine Extension listeners to handle table prefix
-    lotgd.core.doctrine.listener.table_prefix:
-        class: Lotgd\Core\Doctrine\Extension\TablePrefix
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-        arguments:
-            - "%lotgd_core.doctrine_prefix%"
-
-    # Jaxon-PHP Service
-    Lotgd\Core\Service\Jaxon:
-        arguments:
-            - {
-                  core:
-                      {
-                          request: { uri: "jaxon.php" },
-                          process: { exit: false },
-                      },
-                  dialogs:
-                      {
-                          default: { message: toastr, modal: semantic },
-                          classes:
-                              {
-                                  semantic: Lotgd\Core\Jaxon\Library\Semantic\Modal,
-                              },
-                          toastr:
-                              {
-                                  options:
-                                      {
-                                          progressBar: true,
-                                          newestOnTop: false,
-                                          closeButton: true,
-                                          preventDuplicates: true,
-                                          timeOut: 30000,
-                                          extendedTimeOut: 15000,
-                                      },
-                              },
-                      },
-              }
-    lotgd.core.jaxon:
-        alias: Lotgd\Core\Service\Jaxon
-        public: true
+    # # Doctrine Extension listeners to handle table prefix
+    # lotgd.core.doctrine.listener.table_prefix:
+    #     class: Lotgd\Core\Doctrine\Extension\TablePrefix
+    #     tags:
+    #         - { name: doctrine.event_subscriber, connection: default }
+    #     arguments:
+    #         - "%lotgd_core.doctrine_prefix%"
 
     # View Laminas Service
-    Laminas\View\Helper\HeadLink:
-        public: true
+    Laminas\View\Helper\HeadLink: ~
     Laminas\View\Helper\HeadMeta:
-        public: true
         calls:
             - setView: ['@Laminas\View\Renderer\PhpRenderer']
-    Laminas\View\Helper\HeadScript:
-        public: true
-    Laminas\View\Helper\HeadStyle:
-        public: true
-    Laminas\View\Helper\HeadTitle:
-        public: true
-    Laminas\View\Helper\InlineScript:
-        public: true
+    Laminas\View\Helper\HeadScript: ~
+    Laminas\View\Helper\HeadStyle: ~
+    Laminas\View\Helper\HeadTitle: ~
+    Laminas\View\Helper\InlineScript: ~
     Laminas\View\Renderer\PhpRenderer: ~ # Laminas\View\Helper\HeadMeta
 
-    # Output
-    Lotgd\Core\Output\Code:
-        public: true
-    Lotgd\Core\Output\Color:
-        public: true
-    Lotgd\Core\Output\Format:
-        public: true
+    # Tools
+    Lotgd\Core\Tool\Format:
         arguments:
             - '@translator'
-            - '@Lotgd\Core\Output\Code'
-            - '@Lotgd\Core\Output\Color'
+            - '@Lotgd\Core\Tool\Code'
+            - '@Lotgd\Core\Tool\Color'
         calls:
             - setDecPoint: ['%lotgd_core.number.format.decimal.point%']
             - setThousandsSep: ['%lotgd_core.number.format.thousands.sep%']
-    Lotgd\Core\Service\Censor:
-        lazy: true
-        arguments:
-            - '%kernel.default_locale%'
-    Lotgd\Core\Output\Censor:
-        alias: Lotgd\Core\Service\Censor
-        public: true
-    Lotgd\Core\Output\Commentary:
-        lazy: true
-        public: true
+    # Lotgd\Core\Service\Censor:
+    #     lazy: true
+    #     arguments:
+    #         - '%kernel.default_locale%'
+    # Lotgd\Core\Output\Censor:
+    #     alias: Lotgd\Core\Service\Censor
+    #     public: true
+    # Lotgd\Core\Output\Commentary:
+    #     lazy: true
+    #     public: true
 
-    # LoTGD Installer
-    Lotgd\Core\Installer\Install:
-        lazy: true
-    lotgd.core.install:
-        alias: Lotgd\Core\Installer\Install
-        public: true
+    # # LoTGD Installer
+    # Lotgd\Core\Installer\Install:
+    #     lazy: true
+    # lotgd.core.install:
+    #     alias: Lotgd\Core\Installer\Install
+    #     public: true
 
-    # LoTGD Settings
-    Lotgd\Core\Lib\Settings:
-        public: true
+    # # LoTGD Settings
+    # Lotgd\Core\Lib\Settings:
+    #     public: true
 
-    # LoTGD PvP
-    Lotgd\Core\Pvp\Listing:
-        public: true
+    # # LoTGD PvP
+    # Lotgd\Core\Pvp\Listing:
+    #     public: true
 
-    # LoTGD Tools
-    Lotgd\Core\Tool\Sanitize:
-        public: true
+    # # LoTGD Tools
+    # Lotgd\Core\Tool\Sanitize:
+    #     public: true
 
-    # LoTGD navigation
-    Lotgd\Core\Navigation\AccessKeys:
-        public: true
+    # # LoTGD navigation
+    # Lotgd\Core\Navigation\AccessKeys:
+    #     public: true
 
-    # Lotgd
-    Lotgd\Core\Character\Stats:
-        public: true
-    Lotgd\Core\Navigation\Navigation:
-        public: true
-        calls:
-            - setClassHeader: ['navhead']
-            - setClassNav: ['nav']
-    Lotgd\Core\EventManager\Hook:
-        public: true
-        class:   Lotgd\Core\EventManager\Hook
-        factory: '@Lotgd\Core\Service\HookManagerFactory'
-    Lotgd\Core\EventManagerAware:
-        alias: Lotgd\Core\EventManager\Hook
-    Lotgd\Core\Http\Request:
-        public: true
-        class:   Lotgd\Core\Http\Request
-        factory: '@Lotgd\Core\Service\HttpRequestFactory'
-    Lotgd\Core\Http\Response:
-        public: true
-    Lotgd\Core\Template\Params:
-        public: true
-    lotgd.core.mailer: # Temporal
-        alias: mailer
-        public: true
-    Lotgd\Core\Symfony\Translation\Formatter\MessageFormatter:
-        arguments:
-            - '@identity_translator'
-    Symfony\Component\HttpFoundation\Response: # Temporal
-        alias: Lotgd\Core\Http\Response
-    Symfony\Component\HttpFoundation\Request: # Temporal
-        alias: Lotgd\Core\Http\Request
-    Lotgd\Core\Combat\Battle:
-        public: true
+    # # Lotgd
+    # Lotgd\Core\Character\Stats:
+    #     public: true
+    # Lotgd\Core\Navigation\Navigation:
+    #     public: true
+    #     calls:
+    #         - setClassHeader: ['navhead']
+    #         - setClassNav: ['nav']
+    # Lotgd\Core\EventManager\Hook:
+    #     public: true
+    #     class:   Lotgd\Core\EventManager\Hook
+    #     factory: '@Lotgd\Core\Service\HookManagerFactory'
+    # Lotgd\Core\EventManagerAware:
+    #     alias: Lotgd\Core\EventManager\Hook
+    # Lotgd\Core\Http\Request:
+    #     public: true
+    #     class:   Lotgd\Core\Http\Request
+    #     factory: '@Lotgd\Core\Service\HttpRequestFactory'
+    # Lotgd\Core\Http\Response:
+    #     public: true
+    # Lotgd\Core\Template\Params:
+    #     public: true
+    # lotgd.core.mailer: # Temporal
+    #     alias: mailer
+    #     public: true
+    # Lotgd\Core\Symfony\Translation\Formatter\MessageFormatter:
+    #     arguments:
+    #         - '@identity_translator'
+    # Symfony\Component\HttpFoundation\Response: # Temporal
+    #     alias: Lotgd\Core\Http\Response
+    # Symfony\Component\HttpFoundation\Request: # Temporal
+    #     alias: Lotgd\Core\Http\Request
+    # Lotgd\Core\Combat\Battle:
+    #     public: true
 
     # Twig extensions
-    Marek\Twig\ByteUnitsExtension:
+    twig.extension.byte_units:
+        class: Marek\Twig\ByteUnitsExtension
         tags:
             - { name: twig.extension }
