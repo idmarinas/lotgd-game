@@ -10,6 +10,8 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 ### :cyclone: CHANGES
 
 -   :warning: LoTGD is now a Symfony App.
+-   Moved content of `src/core` to `src`
+    -   LoTGD follow structure of Symfony App
 
 ### :star: FEATURES
 
@@ -21,16 +23,40 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 
 ### :wrench: FIXES
 
--   **lib/modules/objectpref.php** Fixed error: now use same cache service. So not give problems with get/set object prefs
 -   **src/core/Form/ConfigurationType/TrainingType.php** Fixed error with translation keys.
--   **src/core/Http/Response.php**  Fixed errors:
-    -   `pageTitle()` Now replace title correctly.
-    -   `pageDebug()` Param $text can be mixed
--   **lib/figthnav.php** Fixed, now show name of creature when is target.
 
 ### :x: REMOVES/Break Changes
 
 -   **BC** So many to write here, ^_^, in version 6.0.0 LoTGD Core is a Symfony App.
+-   **BC** Delete folder `modules/` old module system not work with this version use Bundle system.
+-   **BC** Delete `AdvertisingBundle` from Core. Now is a independent bundle.
+    -   If you need/want your your server can use https://github.com/idmarinas/advertising-bundle:
+        ```bash
+        composer require idmarinas/advertising-bundle
+        ```
+-   **BC** Removed class:
+    -   `Lotgd\Core\Application`
+    -   `Lotgd\Core\EventManagerAware`
+    -   `Lotgd\Core\Hook`
+    -   All fixed class:
+        - `Lotgd\Core\Fixed\Doctrine`
+        - `Lotgd\Core\Fixed\FlashMessages`
+        - `Lotgd\Core\Fixed\Format`
+        - `Lotgd\Core\Fixed\HookManager`
+        - `Lotgd\Core\Fixed\Kernel`
+        - `Lotgd\Core\Fixed\Navigation`
+        - `Lotgd\Core\Fixed\Request`
+        - `Lotgd\Core\Fixed\Response`
+        - `Lotgd\Core\Fixed\Sanitize`
+        - `Lotgd\Core\Fixed\Session`
+        - `Lotgd\Core\Fixed\Theme`
+        - `Lotgd\Core\Fixed\Translator`
+-   **BC** _Entities_
+    -   `src/Entity/Characters.php` Rename to `src/Entity/Avatar.php`. Characters is a reserved word.
+-   **Twig functions/filters**
+    -   Remove function `base_path()`
+    -   Remove filter `lotgd_url` not need in Symfony App
+    -   Remove functions `var_dump()` and `bdump()`, use `dump()` instead
 
 ### :notebook: NOTES
 
