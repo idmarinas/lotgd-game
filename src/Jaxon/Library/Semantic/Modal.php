@@ -20,7 +20,7 @@ use Jaxon\Dialogs\Libraries\Library;
 
 class Modal extends Library implements JaxonModal
 {
-    public const PATH_TEMPLATE_JAXON = 'data/jaxon';
+    public const PATH_TEMPLATE_JAXON = '/data/jaxon';
 
     /**
      * The constructor.
@@ -39,7 +39,7 @@ class Modal extends Library implements JaxonModal
      */
     public function getScript()
     {
-        return $this->render('/semantic/modal.js');
+        return $this->render('semantic/modal.js');
     }
 
     /**
@@ -81,7 +81,7 @@ class Modal extends Library implements JaxonModal
      */
     public function render($sTemplate, array $aVars = [])
     {
-        jaxon()->template()->addNamespace('jaxon::lotgd', self::PATH_TEMPLATE_JAXON);
+        jaxon()->template()->addNamespace('jaxon::lotgd', dirname(__DIR__, 4).self::PATH_TEMPLATE_JAXON);
 
         // Is the library the default for alert messages?
         $isDefaultForAlert = ($this->getName() == $this->xDialog->getOption('dialogs.default.alert'));
