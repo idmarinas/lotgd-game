@@ -10,7 +10,7 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core\Output;
+namespace Lotgd\Core\Tool;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -184,22 +184,6 @@ class Format
     }
 
     /**
-     * Set decimal point.
-     */
-    public function setDecPoint(string $val)
-    {
-        $this->dec_point = $val;
-    }
-
-    /**
-     * Set thousands separation.
-     */
-    public function setThousandsSep(string $val)
-    {
-        $this->thousands_sep = $val;
-    }
-
-    /**
      * Only format a message with MessageFormatter.
      */
     public function messageFormatter(string $message, ?array $parameters = [], ?string $locale = null): string
@@ -221,10 +205,20 @@ class Format
         return $formatter->format($parameters);
     }
 
-    /** alias */
-    public function mf(string $message, ?array $parameters = [], ?string $locale = null): string
+    /**
+     * Set decimal point.
+     */
+    public function setDecPoint(string $val)
     {
-        return $this->messageFormatter($message, $parameters, $locale);
+        $this->dec_point = $val;
+    }
+
+    /**
+     * Set thousands separation.
+     */
+    public function setThousandsSep(string $val)
+    {
+        $this->thousands_sep = $val;
     }
 
     /**

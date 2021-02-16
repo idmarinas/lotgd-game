@@ -6,7 +6,7 @@
  * @author IDMarinas
  */
 
-namespace Lotgd\Core\Output;
+namespace Lotgd\Core\Tool;
 
 class Color
 {

@@ -6,7 +6,7 @@
  * @author IDMarinas
  */
 
-namespace Lotgd\Core\Output\Pattern;
+namespace Lotgd\Core\Tool\Pattern;
 
 trait Code
 {
