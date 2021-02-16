@@ -21,13 +21,22 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/idmarinas/lotgd-game.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/idmarinas/lotgd-game/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/idmarinas/lotgd-game.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/idmarinas/lotgd-game/context:javascript)
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/4553239eac9e717f1cce/maintainability)](https://codeclimate.com/github/idmarinas/lotgd-game/maintainability)
-![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/idmarinas/lotgd-game?cacheSeconds=86400)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=alert_status)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=bugs)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=security_rating)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=sqale_index)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=code_smells)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=coverage)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=lotgd-game)
 
 [![Build in PHP](https://img.shields.io/badge/PHP-^7.3-8892BF.svg?logo=php)](http://php.net/)
 [![built with gulp](https://img.shields.io/badge/gulp-builds_this_project-eb4a4b.svg?logo=gulp)](http://gulpjs.com/)
 [![built with webpack](https://img.shields.io/badge/webpack-builds_javascript-175d96.svg?logo=webpack)](https://webpack.js.org)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=idmarinas/lotgd-game)](https://dependabot.com)
+
 
 <!-- [![PayPal - The safer, easier way to pay online!](https://img.shields.io/badge/donate-help_my_project-ffaa29.svg?logo=paypal&cacheSeconds=86400)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CAYNPHQ8VN92C&source=url) -->
 [![PayPal.Me - The safer, easier way to pay online!](https://img.shields.io/badge/donate-help_my_project-ffaa29.svg?logo=paypal&cacheSeconds=86400)](https://www.paypal.me/idmarinas)
@@ -42,7 +51,8 @@ The version **IDMarinas Edition** is based on the version **1.1.2 Dragonprime** 
 
 Version of the IDMarinas Edition: **_6.0.0_**
 
-The intention to make a new branch of the Core, is to be able to update certain aspects, which were outdated, such as the script that is used to access the database, while correcting certain errors, and adding new options of customization.
+The intention to make a new branch of the Core, is to be able to update certain aspects, which were outdated, such as the script that is used to access the database, while correcting certain errors, and adding new options of customization.  
+Since version 6.0.0 LoTGD Core is a Symfony App.
 
 IDMarinas Edition is used in:
 
