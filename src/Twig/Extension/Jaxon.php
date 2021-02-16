@@ -13,14 +13,12 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Lotgd\Core\Service\Jaxon as CoreJaxon;
+use Jaxon\AjaxBundle\Jaxon as CoreJaxon;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class Jaxon extends AbstractExtension
 {
-    use Pattern\Jaxon;
-
     protected $jaxon;
 
     public function __construct(CoreJaxon $jaxon)
@@ -34,9 +32,9 @@ class Jaxon extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('jaxon_css', [$this, 'jaxonCss']),
-            new TwigFunction('jaxon_js', [$this, 'jaxonJs']),
-            new TwigFunction('jaxon_script', [$this, 'jaxonScript']),
+            new TwigFunction('jaxon_css', [$this->jaxon, 'getCss'], ['is_safe' => ['html']]),
+            new TwigFunction('jaxon_js', [$this->jaxon, 'getJs'], ['is_safe' => ['html']]),
+            new TwigFunction('jaxon_script', [$this->jaxon, 'getScript'], ['is_safe' => ['html']]),
         ];
     }
 
