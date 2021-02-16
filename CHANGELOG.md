@@ -3,10 +3,7 @@
 Visit the [Wiki](https://github.com/idmarinas/lotgd-game/wiki) for more details.  
 Visit the [Documentation](https://idmarinas.github.io/lotgd-game/) for more details.  
 Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md).   
-Visit **_V2_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V2.md)  
-Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V3.md)  
-Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V4.md)  
-Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V5.md)  
+For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.0/CHANGELOG.md)
 
 # Version: 6.0.0
 
