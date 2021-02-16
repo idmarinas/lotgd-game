@@ -20,7 +20,6 @@ use Laminas\View\Helper\HeadStyle;
 use Laminas\View\Helper\HeadTitle;
 use Laminas\View\Helper\InlineScript;
 use Laminas\View\Helper\Placeholder\Container\AbstractContainer as Placeholder;
-use Lotgd\Core\Http\Request;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -30,7 +29,6 @@ use Twig\TwigFunction;
  */
 class Helpers extends AbstractExtension
 {
-    protected $request;
     protected $headLink;
     protected $headMeta;
     protected $headScript;
@@ -40,7 +38,6 @@ class Helpers extends AbstractExtension
     protected $basePath;
 
     public function __construct(
-        Request $request,
         HeadLink $headLink,
         HeadMeta $headMeta,
         HeadScript $headScript,
@@ -48,7 +45,6 @@ class Helpers extends AbstractExtension
         HeadTitle $headTitle,
         InlineScript $inlineScript
     ) {
-        $this->request      = $request;
         $this->headLink     = $headLink;
         $this->headMeta     = $headMeta;
         $this->headScript   = $headScript;
@@ -66,7 +62,6 @@ class Helpers extends AbstractExtension
             new TwigFunction('head_style', [$this, 'headStyle']),
             new TwigFunction('head_title', [$this, 'headTitle']),
             new TwigFunction('inline_script', [$this, 'inlineScript']),
-            new TwigFunction('base_path', [$this, 'basePath']),
         ];
     }
 
@@ -156,28 +151,6 @@ class Helpers extends AbstractExtension
     public function inlineScript($mode = InlineScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = [], $type = 'text/javascript')
     {
         return $this->inlineScript->__invoke($mode, $spec, $placement, $attrs, $type);
-    }
-
-    /**
-     * Returns site's base path, or file with base path prepended.
-     *
-     * $file is appended to the base path for simplicity.
-     *
-     * @return string
-     */
-    public function basePath(?string $file = null)
-    {
-        if ( ! $this->basePath)
-        {
-            $this->basePath = $this->request->getBasePath();
-        }
-
-        if (null !== $file)
-        {
-            $file = '/'.\ltrim($file, '/');
-        }
-
-        return $this->basePath.$file;
     }
 
     /**
