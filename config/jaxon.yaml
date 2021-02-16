@@ -1,0 +1,27 @@
+parameters:
+    jaxon:
+        app:
+            directories:
+                '%kernel.project_dir%/jaxon/App':
+                    namespace: \Jaxon\App
+                    # separator: '' # '.' or '_'
+                    # protected: []
+
+        lib:
+            core:
+                language: "en"
+                encoding: "UTF-8"
+                request:
+                    uri: "/jaxon"
+                prefix:
+                    class: ""
+                debug:
+                    on: false
+                    verbose: false
+                error:
+                    handle: false
+                js:
+                    lib:
+                    app:
+                    export: false
+                    minify: false

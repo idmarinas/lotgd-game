@@ -1,0 +1,2 @@
+jaxon:
+    resource: "@JaxonAjaxBundle/Resources/config/routes.yaml"
