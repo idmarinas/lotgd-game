@@ -9,7 +9,7 @@ parameters:
 
         lib:
             core:
-                language: "en"
+                language: '%kernel.default_locale%'
                 encoding: "UTF-8"
                 request:
                     uri: "/jaxon"
@@ -25,3 +25,18 @@ parameters:
                     app:
                     export: false
                     minify: false
+
+            dialogs:
+                default:
+                    message: toastr
+                    modal: semantic
+                classes:
+                    semantic: Lotgd\Core\Jaxon\Library\Semantic\Modal
+                toastr:
+                    options:
+                        progressBar: true
+                        newestOnTop: false
+                        closeButton: true
+                        preventDuplicates: true
+                        timeOut: 30000
+                        extendedTimeOut: 15000
