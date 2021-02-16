@@ -53,25 +53,17 @@ class Kernel extends BaseKernel
      */
     public const LICENSE = "\n<!-- Creative Commons License -->\n<a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/2.0/' target='_blank' rel='noopener noreferrer'><img clear='right' align='left' alt='Creative Commons License' border='0' src='images/somerights20.gif' /></a>\nThis work is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/2.0/' target='_blank' rel='noopener noreferrer'>Creative Commons License</a>.<br />\n<!-- /Creative Commons License -->\n<!--\n  <rdf:RDF xmlns='http://web.resource.org/cc/' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>\n	<Work rdf:about=''>\n	  <dc:type rdf:resource='http://purl.org/dc/dcmitype/Interactive' />\n	  <license rdf:resource='http://creativecommons.org/licenses/by-nc-sa/2.0/' />\n	</Work>\n	<License rdf:about='http://creativecommons.org/licenses/by-nc-sa/2.0/'>\n	  <permits rdf:resource='http://web.resource.org/cc/Reproduction' />\n	  <permits rdf:resource='http://web.resource.org/cc/Distribution' />\n	  <requires rdf:resource='http://web.resource.org/cc/Notice' />\n	  <requires rdf:resource='http://web.resource.org/cc/Attribution' />\n	  <prohibits rdf:resource='http://web.resource.org/cc/CommercialUse' />\n	  <permits rdf:resource='http://web.resource.org/cc/DerivativeWorks' />\n	  <requires rdf:resource='http://web.resource.org/cc/ShareAlike' />\n	</License>\n  </rdf:RDF>\n-->\n";
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getProjectDir(): string
-    {
-        return \dirname(__DIR__, 2);
-    }
-
     protected function configureContainer(ContainerConfigurator $container): void
     {
-        $container->import($this->getProjectDir().'/config/{packages}/*.yaml');
-        $container->import($this->getProjectDir().'/config/{packages}/'.$this->environment.'/*.yaml');
+        $container->import('../config/{packages}/*.yaml');
+        $container->import('../config/{packages}/'.$this->environment.'/*.yaml');
 
-        if (\is_file($this->getProjectDir().'/config/services.yaml'))
+        if (\is_file(\dirname(__DIR__).'/config/services.yaml'))
         {
-            $container->import($this->getProjectDir().'/config/services.yaml');
-            $container->import($this->getProjectDir().'/config/{services}_'.$this->environment.'.yaml');
+            $container->import('../config/services.yaml');
+            $container->import('../config/{services}_'.$this->environment.'.yaml');
         }
-        elseif (\is_file($path = $this->getProjectDir().'/config/services.php'))
+        elseif (\is_file($path = \dirname(__DIR__).'/config/services.php'))
         {
             (require $path)($container->withPath($path), $this);
         }
@@ -79,14 +71,14 @@ class Kernel extends BaseKernel
 
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
-        $routes->import($this->getProjectDir().'/config/{routes}/'.$this->environment.'/*.yaml');
-        $routes->import($this->getProjectDir().'/config/{routes}/*.yaml');
+        $routes->import('../config/{routes}/'.$this->environment.'/*.yaml');
+        $routes->import('../config/{routes}/*.yaml');
 
-        if (\is_file($this->getProjectDir().'/config/routes.yaml'))
+        if (\is_file(\dirname(__DIR__).'/config/routes.yaml'))
         {
-            $routes->import($this->getProjectDir().'/config/routes.yaml');
+            $routes->import('../config/routes.yaml');
         }
-        elseif (\is_file($path = $this->getProjectDir().'/config/routes.php'))
+        elseif (\is_file($path = \dirname(__DIR__).'/config/routes.php'))
         {
             (require $path)($routes->withPath($path), $this);
         }
