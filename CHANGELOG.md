@@ -16,6 +16,7 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 ### :star: FEATURES
 
 -   **New** Since 6.0.0 version LoTGD Core is a Symfony App.
+    -   All features of Symfony App
 
 ### :fire: DEPRECATED
 
@@ -28,6 +29,8 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 ### :x: REMOVES/Break Changes
 
 -   **BC** So many to write here, ^_^, in version 6.0.0 LoTGD Core is a Symfony App.
+-   **BC** Remove `src/local` and `src/ajax`
+    -   All Jaxon class are now in `jaxon/App`
 -   **BC** Delete folder `modules/` old module system not work with this version use Bundle system.
 -   **BC** Delete `AdvertisingBundle` from Core. Now is a independent bundle.
     -   If you need/want your your server can use https://github.com/idmarinas/advertising-bundle:
