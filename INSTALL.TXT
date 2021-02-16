@@ -1,7 +1,0 @@
-Important!
-
-
-Edit the settings.php in order get the cronjob working!
-
-Modules like namecolor/namechange will not work anymore! You have to set the 'playername' which now holds the name of the player!
-
