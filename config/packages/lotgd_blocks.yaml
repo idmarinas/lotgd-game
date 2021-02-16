@@ -1,15 +1,15 @@
 # Template Blocks system
-services:
-    lotgd.core.template.block.donation.buttons:
-        class: Lotgd\Core\Block\DonationButtonsBlock
-        arguments:
-            - '@twig'
-        calls:
-            - setRequest: ['@Lotgd\Core\Http\Request']
-            - setDoctrine: ['@Doctrine\ORM\EntityManagerInterface']
-            - setSettings: ['@Lotgd\Core\Lib\Settings']
-        tags:
-            - { name: sonata.block }
+# services:
+#     lotgd.core.template.block.donation.buttons:
+#         class: Lotgd\Core\Block\DonationButtonsBlock
+#         arguments:
+#             - '@twig'
+#         calls:
+#             - setRequest: ['@Lotgd\Core\Http\Request']
+#             - setDoctrine: ['@Doctrine\ORM\EntityManagerInterface']
+#             - setSettings: ['@Lotgd\Core\Lib\Settings']
+#         tags:
+#             - { name: sonata.block }
 
     # page.block.home.middle:
     #     class: Lotgd\Core\Block\HomeBlock
