@@ -80,6 +80,9 @@ services:
         lazy: true
         arguments:
             - '%kernel.default_locale%'
+    lotgd.core.censor:
+        alias: Lotgd\Core\Tool\Censor
+        public: true
     # Lotgd\Core\Tool\Commentary:
     #     lazy: true
 
