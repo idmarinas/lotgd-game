@@ -13,7 +13,6 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
-use Tracy\Debugger;
 use Twig\Environment;
 
 /**
@@ -28,13 +27,8 @@ trait PageGen
      */
     public function gamePageGen(Environment $env)
     {
-        global $session;
-
         return $env->load('_blocks/_partials.html.twig')->renderBlock('game_page_gen', [
-            'genTime'          => Debugger::timer('page-generating'),
-            'avg'              => ($session['user']['gentime'] / $session['user']['gentimecount']),
-            'userGenTime'      => $session['user']['gentime'],
-            'userGenTimeCount' => $session['user']['gentimecount'],
+            'gen_time' => microtime(true) - $this->request->server->get('REQUEST_TIME_FLOAT')
         ]);
     }
 }
