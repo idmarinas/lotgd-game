@@ -8,6 +8,7 @@ imports:
     - { resource: "@JaxonAjaxBundle/Resources/config/services.yaml" }
 
 parameters:
+    lotgd.core.seo.title.default: Legend of the Green Dragon # Default title, show if not configured at runtime
     # lotgd_core.doctrine_prefix: "%env(DATABASE_PREFIX)%"
     lotgd_core.number.format.decimal.point: '.'
     lotgd_core.number.format.thousands.sep: ','
@@ -113,12 +114,6 @@ services:
     # Lotgd\Core\Symfony\Translation\Formatter\MessageFormatter:
     #     arguments:
     #         - '@identity_translator'
-    # Symfony\Component\HttpFoundation\Response: # Temporal
-    #     alias: Lotgd\Core\Http\Response
-    # Symfony\Component\HttpFoundation\Request: # Temporal
-    #     alias: Lotgd\Core\Http\Request
-    # Lotgd\Core\Combat\Battle:
-    #     public: true
 
     # Twig extensions
     twig.extension.byte_units:
@@ -127,3 +122,8 @@ services:
             - { name: twig.extension }
     Lotgd\Core\Twig\Extension\JaxonExtension:
         lazy: true
+
+    # Events Listeners
+    Lotgd\Core\EventListener\PageTitleListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
