@@ -214,7 +214,7 @@ $RECYCLE.BIN/
 # Other files/folders
 cli-config.php
 phan.csv
-/public/build/
+/public/_themes/
 
 # Ignore all files/folders that end in .dist
 *.dist
