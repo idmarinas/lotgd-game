@@ -30,7 +30,7 @@ class FormatExtension extends AbstractExtension
     public function getFilters()
     {
         return [
-            new TwigFilter('colorize', [$this->format, 'colorize']),
+            new TwigFilter('colorize', [$this->format, 'colorize'], ['is_safe' => ['html']]),
             new TwigFilter('uncolorize', [$this->format, 'uncolorize']),
             new TwigFilter('message_formatter', [$this->format, 'messageFormatter']),
             new TwigFilter('numeral', [$this->format, 'numeral']),
