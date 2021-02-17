@@ -89,6 +89,9 @@
         "symfony/var-dumper": "^5.2",
         "symfony/web-profiler-bundle": "^5.2"
     },
+    "suggest": {
+        "idmarinas/advertising-bundle": "AdvertisingBundle if you want add Adsense Network to your server. Can create custom networks."
+    },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": {
