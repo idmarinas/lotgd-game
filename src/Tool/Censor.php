@@ -36,17 +36,22 @@ class Censor extends CensorWords
     {
         parent::__construct();
 
-        $this->addDictionary(self::LOTGD_DICTIONARY_PATH.'/en.php'); //-- Custom dictionary
-
-        if ('en' != $locale)
+        try
         {
+            //-- Try add local dictionary
             $this->addDictionary($locale);
-            $customLanguage = self::LOTGD_DICTIONARY_PATH."/{$locale}.php";
+        }
+        catch (\Throwable $th)
+        {
+            //-- If fail add en-base dictionary
+            $this->addDictionary('en-base');
+        }
 
-            if (\is_file($customLanguage))
-            {
-                $this->addDictionary($customLanguage);
-            }
+        $dictionary = dirname(__DIR__, 2)."/data/dictionary/{$locale}.php";
+
+        if (\is_file($dictionary))
+        {
+            $this->addDictionary($dictionary);
         }
     }
 
