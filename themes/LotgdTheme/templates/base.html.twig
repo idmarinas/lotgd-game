@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="{{ translator_locale() }}">
+<html lang="{{ app.request.locale }}">
     <head>
         <meta charset="utf-8">
 
@@ -15,9 +15,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="robots" content="index, follow">
 
+        {# Dynamically added meta tags #}
         {% block lotgd_head_meta %}{% endblock %}
-
-        <!-- Dynamically added meta tags -->
         {{ head_meta() }}
 
         <!-- Title tag for page -->
@@ -56,7 +55,7 @@
         <!-- START Cookies Consent -->
         <script>
             // eslint-disable-next-line no-unused-vars, no-var
-            var cookieName = '{{ session_cookie_name() }}'
+            var cookieName = '{{ app.request.session.name }}'
         </script>
         {{ encore_entry_script_tags('cookie_guard', 'lotgd', 'lotgd') }}
 		<!-- END Cookies Consent -->
