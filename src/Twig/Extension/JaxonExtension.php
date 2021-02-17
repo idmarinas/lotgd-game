@@ -17,7 +17,7 @@ use Jaxon\AjaxBundle\Jaxon as CoreJaxon;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class Jaxon extends AbstractExtension
+class JaxonExtension extends AbstractExtension
 {
     protected $jaxon;
 
