@@ -1,0 +1,25 @@
+{#
+    @file
+    Template partial for Flash messages
+
+    Show all flash messages in session.
+
+    Usage in template: {% include '_partials/_flash_messages.html.twig' with { 'flashes': app.flashes } %}
+
+    Available variables:
+    - flashes: Associated list of type of messages with a list of messages.
+#}
+
+{% for label, messages in flashes %}
+    {% for message in messages %}
+        <div class="ui lotgd {{ label }} message">
+            <i class="close icon"></i>
+
+            <div class="content">
+                <p>{{ message }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endfor %}
+
+{{ flashes|length ? '<br>' : '' }}
