@@ -26,10 +26,13 @@ services:
         exclude:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
-            - '../src/Kernel.php'
             - '../src/Tests/'
+            - '../src/Twig/Node/'
+            - '../src/Twig/NodeVisitor/'
+            - '../src/Twig/NodeParser/'
             - '../src/functions.php'
             - '../src/functions_old.php'
+            - '../src/Kernel.php'
             # Ignore old files
             - '../src/ajax/'
             - '../src/core/'
@@ -72,23 +75,16 @@ services:
         calls:
             - setDecPoint: ['%lotgd_core.number.format.decimal.point%']
             - setThousandsSep: ['%lotgd_core.number.format.thousands.sep%']
-    # Lotgd\Core\Service\Censor:
+    Lotgd\Core\Tool\Censor:
+        lazy: true
+        arguments:
+            - '%kernel.default_locale%'
+    # Lotgd\Core\Tool\Commentary:
     #     lazy: true
-    #     arguments:
-    #         - '%kernel.default_locale%'
-    # Lotgd\Core\Output\Censor:
-    #     alias: Lotgd\Core\Service\Censor
-    #     public: true
-    # Lotgd\Core\Output\Commentary:
-    #     lazy: true
-    #     public: true
 
-    # # LoTGD Installer
-    # Lotgd\Core\Installer\Install:
-    #     lazy: true
-    # lotgd.core.install:
-    #     alias: Lotgd\Core\Installer\Install
-    #     public: true
+    # LoTGD Installer
+    Lotgd\Core\Installer\Install:
+        lazy: true
 
     # # LoTGD Settings
     # Lotgd\Core\Lib\Settings:
@@ -114,23 +110,6 @@ services:
     #     calls:
     #         - setClassHeader: ['navhead']
     #         - setClassNav: ['nav']
-    # Lotgd\Core\EventManager\Hook:
-    #     public: true
-    #     class:   Lotgd\Core\EventManager\Hook
-    #     factory: '@Lotgd\Core\Service\HookManagerFactory'
-    # Lotgd\Core\EventManagerAware:
-    #     alias: Lotgd\Core\EventManager\Hook
-    # Lotgd\Core\Http\Request:
-    #     public: true
-    #     class:   Lotgd\Core\Http\Request
-    #     factory: '@Lotgd\Core\Service\HttpRequestFactory'
-    # Lotgd\Core\Http\Response:
-    #     public: true
-    # Lotgd\Core\Template\Params:
-    #     public: true
-    # lotgd.core.mailer: # Temporal
-    #     alias: mailer
-    #     public: true
     # Lotgd\Core\Symfony\Translation\Formatter\MessageFormatter:
     #     arguments:
     #         - '@identity_translator'
@@ -146,3 +125,5 @@ services:
         class: Marek\Twig\ByteUnitsExtension
         tags:
             - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\JaxonExtension:
+        lazy: true
