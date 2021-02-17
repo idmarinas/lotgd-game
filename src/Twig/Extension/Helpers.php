@@ -158,6 +158,6 @@ class Helpers extends AbstractExtension
      */
     public function getName()
     {
-        return 'head';
+        return 'lotgd-core-helpers';
     }
 }
