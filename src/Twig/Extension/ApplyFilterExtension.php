@@ -17,7 +17,7 @@ use Twig\Environment as Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class ApplyFilter extends AbstractExtension
+class ApplyFilterExtension extends AbstractExtension
 {
     public function getName()
     {
