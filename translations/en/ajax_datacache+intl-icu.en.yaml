@@ -1,3 +1,0 @@
-clear.all: 'An error occurred when deleting the entire cache'
-not.found: 'The function to be performed cannot be found'
-factory: 'The factory "{name}" is not configured'

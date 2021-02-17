@@ -41,7 +41,7 @@ parts:
             '05': '`${n,number} Top Level `0'
             '06': '`%{n,number} Bug `0'
             '07': '`#{n,number} Awaiting Points `0'
-    pageGen: 'Page gen: {genTime,number}s (Ave: {avg,number}s - {userGenTime,number}/{userGenTimeCount,number})'
+    pageGen: 'Page gen: {gen_time,number}s'
     pagination:
         description: 'Pagination results {firstItemNumber,number} to {lastItemNumber,number} out of {totalItemCount,number}'
         menu:
