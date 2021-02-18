@@ -26,4 +26,5 @@ return [
     Cron\CronBundle\CronCronBundle::class                                    => ['all' => true],
     Jaxon\AjaxBundle\JaxonAjaxBundle::class                                  => ['all' => true],
     SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle::class => ['all' => true],
+    SymfonyCasts\Bundle\VerifyEmail\SymfonyCastsVerifyEmailBundle::class     => ['all' => true],
 ];
