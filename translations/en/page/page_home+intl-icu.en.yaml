@@ -18,7 +18,7 @@ login:
     username: 'Username'
     password: 'Password'
     login: 'Log in'
-    forgot: 'Did you forget your password? Go <a href="create.php?op=forgot">here</a> to retrieve a new one!'
+    forgot: 'Did you forget your password? Go <a href="{link}">here</a> to retrieve a new one!'
 
 # Texts that show when server is full
 serverfull:
