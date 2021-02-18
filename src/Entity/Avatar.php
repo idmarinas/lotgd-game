@@ -43,12 +43,9 @@ class Avatar
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\OneToOne(targetEntity="Accounts")
-     * @ORM\JoinColumn(referencedColumnName="acctid", nullable=true, onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="avatars")
      */
-    private $acct;
+    private $user;
 
     /**
      * @var string
@@ -589,28 +586,16 @@ class Avatar
         return $this->id;
     }
 
-    /**
-     * Set the value of Acct.
-     *
-     * @param int $acct
-     *
-     * @return self
-     */
-    public function setAcct($acct)
+    public function getUser(): ?User
     {
-        $this->acct = $acct;
-
-        return $this;
+        return $this->user;
     }
 
-    /**
-     * Get the value of Acct.
-     *
-     * @return int
-     */
-    public function getAcct()
+    public function setUser(?User $user): self
     {
-        return $this->acct;
+        $this->user = $user;
+
+        return $this;
     }
 
     /**
