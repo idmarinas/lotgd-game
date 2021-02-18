@@ -21,7 +21,6 @@
 \defined('SU_DEBUG_OUTPUT')         || \define('SU_DEBUG_OUTPUT', 8192);
 \defined('SU_MODERATE_CLANS')       || \define('SU_MODERATE_CLANS', 16384);
 \defined('SU_EDIT_RIDDLES')         || \define('SU_EDIT_RIDDLES', 32768);
-\defined('SU_MANAGE_MODULES')       || \define('SU_MANAGE_MODULES', 65536);
 \defined('SU_AUDIT_MODERATION')     || \define('SU_AUDIT_MODERATION', 131072);
 \defined('SU_IS_TRANSLATOR')        || \define('SU_IS_TRANSLATOR', 262144);
 \defined('SU_RAW_SQL')              || \define('SU_RAW_SQL', 524288);
@@ -70,14 +69,3 @@
 //reserved for the future -- I don't have any plans this way currently, but it seemed appropriate to have it here.
 \defined('CHAR_DELETE_PERMADEATH') || \define('CHAR_DELETE_PERMADEATH', 3);
 \defined('CHAR_DELETE_SUICIDE')    || \define('CHAR_DELETE_SUICIDE', 4);
-
-// Constants used in lib/modules - for providing more information about the
-// status of the module
-\defined('MODULE_NO_INFO')          || \define('MODULE_NO_INFO', 0);
-\defined('MODULE_INSTALLED')        || \define('MODULE_INSTALLED', 1);
-\defined('MODULE_VERSION_OK')       || \define('MODULE_VERSION_OK', 2);
-\defined('MODULE_NOT_INSTALLED')    || \define('MODULE_NOT_INSTALLED', 4);
-\defined('MODULE_FILE_NOT_PRESENT') || \define('MODULE_FILE_NOT_PRESENT', 8);
-\defined('MODULE_VERSION_TOO_LOW')  || \define('MODULE_VERSION_TOO_LOW', 16);
-\defined('MODULE_ACTIVE')           || \define('MODULE_ACTIVE', 32);
-\defined('MODULE_INJECTED')         || \define('MODULE_INJECTED', 64);
