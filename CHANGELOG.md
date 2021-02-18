@@ -12,6 +12,15 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 -   :warning: LoTGD is now a Symfony App.
 -   Moved content of `src/core` to `src`
     -   LoTGD follow structure of Symfony App
+-   New login system:
+    -   Old password are auto-migrated (but can fail)
+        -   Can reset password.
+-   **Entities**
+    -   `Lotgd\Core\Entity\Accounts` is now `Lotgd\Core\Entity\User`
+    -   Data of `accounts` are migrated to `user`
+        -   Data that not are migrated.
+
+
 
 ### :star: FEATURES
 
