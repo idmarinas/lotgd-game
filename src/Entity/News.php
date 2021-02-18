@@ -59,7 +59,7 @@ class News
     private $accountId = 0;
 
     /**
-     * @var string
+     * @var array
      *
      * @ORM\Column(type="array")
      */
