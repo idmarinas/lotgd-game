@@ -1,6 +1,5 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
-    strict_variables: false
     globals:
         lotgd_core_version: !php/const \Lotgd\Core\Kernel::VERSION
     form_themes: [
