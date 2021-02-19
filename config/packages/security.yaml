@@ -1,13 +1,12 @@
 security:
+    enable_authenticator_manager: true
     encoders:
-        legacy:
-            algorithm: md5
-            encode_as_base64: false
-            iterations: 2
+        lotgd_old_encoder:
+            id: Lotgd\Core\Security\LotgdPasswordEncoder
         Lotgd\Core\Entity\User:
             algorithm: auto
             migrate_from:
-                - legacy
+                - lotgd_old_encoder
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -21,7 +20,9 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            # configure the maximum login attempts (per minute)
+            # login_throttling:
+            #     max_attempts: 2
             lazy: true
             provider: app_user_provider
             guard:
@@ -51,4 +52,4 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/profile, roles: ROLE_USER }
