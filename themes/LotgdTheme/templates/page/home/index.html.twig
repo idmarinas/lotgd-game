@@ -1,0 +1,45 @@
+{% extends 'layout.html.twig' %}
+
+{% use 'page/home/_blocks.html.twig' %}
+
+{% block lotgd_body_content %}
+    {% trans_default_domain 'page_home' %}
+
+    <div class="center aligned">
+
+        {{ 'welcome'|trans|colorize }}
+
+        {{ sonata_block_render_event('lotgd.core.page.home.pre') }}
+
+        {# Show LotGD clock #}
+        {# {% if gameclock %}
+            {{ 'clock'|trans({villagename, gameclock})|colorize }}
+        {% endif %} #}
+
+        {# Show how long it takes for the next new day #}
+        {# {% if newdaytimer %}
+            {{ 'newdaytimer'|trans({'n': newdaytimer})|colorize }}
+        {% endif %} #}
+
+        {# Show the last registered player #}
+        {# {% if newestplayer %}
+            {{ 'newestplayer'|trans({newestplayer})|colorize }}
+        {% endif %} #}
+        {{ sonata_block_render_event('lotgd.core.page.home.text') }}
+
+        {{ sonata_block_render_event('lotgd.core.page.home.login.pre') }}
+        {# Show the login form or a full server message #}
+        {{ block(serverFull|default(false) ? 'home_server_full' : 'home_login') }}
+        {{ sonata_block_render_event('lotgd.core.page.home.login.post') }}
+
+        {# Login banner text if exist #}
+        {# {% if loginBanner %}
+            {{ '`n`c`b`&%s`0´b´c`n'|format(loginBanner)|colorize }}
+        {% endif %} #}
+
+        {# Version of the game the server is running #}
+        {{ 'server.version'|trans({ 'version': lotgd_core_version })|colorize }}
+
+        {{ sonata_block_render_event('lotgd.core.page.home.post') }}
+    </div>
+{% endblock lotgd_body_content %}
