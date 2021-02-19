@@ -5,11 +5,6 @@
     {%- set attr = attr|merge({class: attr.class ~ ' form' }) -%}
     {%- set attr = attr|merge({class: attr.class ~ (errors|length ? ' error' : '') }) -%}
 
-    {# Allow url of action #}
-    {% if action %}
-        {% set action = action|lotgd_url %}
-    {% endif %}
-
     {{- parent() -}}
 
     {# Hidde if hide_info_button int attr is true #}
@@ -379,12 +374,12 @@
 
 {%- block row_attributes -%}
     {% apply spaceless %}
-        {% set attr = attr|merge({'class': 'field ' ~ attr.class}) %}
+        {% set attr = attr|merge({'class': 'field ' ~ attr.class|default('')}) %}
         {% if required is defined and required %}
-            {% set attr = attr|merge({class: 'required ' ~ attr.class}) %}
+            {% set attr = attr|merge({class: 'required ' ~ attr.class|default('')}) %}
         {% endif %}
         {% if valid is defined and not valid %}
-            {% set attr = attr|merge({class: attr.class ~ ' error'}) %}
+            {% set attr = attr|merge({class: attr.class|default('') ~ ' error'}) %}
         {% endif %}
         {{ block('attributes') }}
     {% endapply %}
