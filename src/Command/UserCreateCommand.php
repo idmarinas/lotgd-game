@@ -14,14 +14,14 @@
 namespace Lotgd\Core\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Lotgd\Core\EntityRepository\AccountsRepository;
-use Lotgd\Core\Lib\Settings;
+use Lotgd\Core\Repository\UserRepository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -35,28 +35,26 @@ final class UserCreateCommand extends Command
 {
     public const TEXT_DOMAIN = 'console_command';
 
-    protected const SU_MEGAUSER = SU_MEGAUSER | SU_EDIT_MOUNTS | SU_EDIT_CREATURES | SU_EDIT_PETITIONS | SU_EDIT_COMMENTS | SU_EDIT_DONATIONS | SU_EDIT_USERS | SU_EDIT_CONFIG | SU_INFINITE_DAYS | SU_EDIT_EQUIPMENT | SU_EDIT_PAYLOG | SU_DEVELOPER | SU_POST_MOTD | SU_MODERATE_CLANS | SU_EDIT_RIDDLES | SU_MANAGE_MODULES | SU_AUDIT_MODERATION | SU_RAW_SQL | SU_VIEW_SOURCE | SU_NEVER_EXPIRE;
-
     protected static $defaultName = 'lotgd:user:create';
 
     protected $doctrine;
     protected $translator;
     protected $validator;
-    protected $settings;
+    protected $encoder;
     protected $accountRepository;
 
     public function __construct(
         EntityManagerInterface $doctrine,
         TranslatorInterface $translator,
         ValidatorInterface $validator,
-        Settings $settings
+        UserPasswordEncoderInterface $encoder
     ) {
         parent::__construct();
 
         $this->doctrine   = $doctrine;
         $this->translator = $translator;
         $this->validator  = $validator;
-        $this->settings   = $settings;
+        $this->encoder    = $encoder;
     }
 
     /**
@@ -81,54 +79,30 @@ final class UserCreateCommand extends Command
     {
         $style = new SymfonyStyle($input, $output);
 
-        $login    = $this->getLoginName($input, $output);
-        $email    = $this->getEmail($input, $output);
-        $password = \md5(\md5(\stripslashes($this->getPassword($input, $output))));
-        $isAdmin  = $this->getIsAdmin($input, $output);
-
         try
         {
             //-- Configure account
-            $account = new \Lotgd\Core\Entity\Accounts();
-            $account->setLogin($login)
-                ->setPassword($password)
-                ->setEmailaddress($email)
-                ->setRegdate(new \DateTime())
+            $user = new \Lotgd\Core\Entity\User();
+            $user->setUsername($this->getUsername($input, $output))
+                ->setEmail($this->getEmail($input, $output))
+                ->setIsVerified(true)
             ;
 
-            //-- Need for get a ID of new account
-            $this->doctrine->persist($account);
-            $this->doctrine->flush(); //Persist objects
-
-            //-- Configure character
-            $title     = $this->getCharacterTitle();
-            $character = new \Lotgd\Core\Entity\Characters();
-            $character->setPlayername($login)
-                ->setName("{$title} {$login}")
-                ->setTitle($title)
-                ->setAcct($account)
-                ->setGold((int) $this->settings->getSetting('newplayerstartgold', 50))
-                ->setLocation((string) $this->settings->getSetting('villagename', LOCATION_FIELDS))
-            ;
-
-            if ($isAdmin)
+            if ($this->getIsAdmin($input, $output))
             {
-                $account->setSuperuser(self::SU_MEGAUSER);
-
-                $character
-                    ->setName("`%Admin`0 `&{$login}`0")
-                    ->setCtitle('`%Admin`0')
-                ;
+                $user->setRoles(['ROLE_SUPER_ADMIN']);
             }
 
-            //-- Need for get ID of new character
-            $this->doctrine->persist($character);
-            $this->doctrine->flush(); //-- Persist objects
+            $user->setPassword(
+                $this->encoder->encodePassword(
+                    $user,
+                    $this->getPassword($input, $output)
+                )
+            );
 
-            //-- Set ID of character and update Account
-            $account->setCharacter($character);
-            $this->doctrine->persist($account);
-            $this->doctrine->flush(); //-- Persist objects
+            //-- Need for get a ID of new account
+            $this->doctrine->persist($user);
+            $this->doctrine->flush(); //Persist objects
         }
         catch (\Throwable $th)
         {
@@ -144,22 +118,22 @@ final class UserCreateCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function getLoginName(InputInterface $input, OutputInterface $output): string
+    private function getUsername(InputInterface $input, OutputInterface $output): string
     {
         $helper = $this->getHelper('question');
 
-        $question = new Question($this->translator->trans('user.create.question.login', [], self::TEXT_DOMAIN));
+        $question = new Question($this->translator->trans('user.create.question.username', [], self::TEXT_DOMAIN));
         $question->setValidator(function ($value)
         {
             $errors = $this->validator->validate((string) $value, [
                 new Assert\Length(null, 3, 25),
-                new Assert\Callback(function ($login, ExecutionContextInterface $context)
+                new Assert\Callback(function ($username, ExecutionContextInterface $context)
                 {
-                    $exists = null !== $this->getAccountRepository()->findOneByLogin($login);
+                    $exists = null !== $this->getAccountRepository()->findOneByUsername($username);
 
                     if ($exists)
                     {
-                        $context->addViolation($this->translator->trans('user.create.question.login.exists', [], self::TEXT_DOMAIN));
+                        $context->addViolation($this->translator->trans('user.create.question.username.exists', [], self::TEXT_DOMAIN));
                     }
                 }),
             ]);
@@ -192,7 +166,7 @@ final class UserCreateCommand extends Command
                 ]),
                 new Assert\Callback(function ($email, ExecutionContextInterface $context)
                 {
-                    $exists = null !== $this->getAccountRepository()->findOneByEmailaddress($email);
+                    $exists = null !== $this->getAccountRepository()->findOneByEmail($email);
 
                     if ($exists && $email)
                     {
@@ -224,7 +198,10 @@ final class UserCreateCommand extends Command
             $errors = $this->validator->validate((string) $value, [
                 new Assert\NotBlank(),
                 new Assert\NotNull(),
-                new Assert\Length(null, 3),
+                new Assert\Length([
+                    'min' => 6,
+                    'max' => 4096, // max length allowed by Symfony for security reasons
+                ]),
                 new Assert\NotCompromisedPassword(),
             ]);
 
@@ -257,10 +234,7 @@ final class UserCreateCommand extends Command
 
     private function getIsAdmin(InputInterface $input, OutputInterface $output): bool
     {
-        /** @var Lotgd\Core\EntityRepository\AccountsRepository */
-        $superusers = (bool) $this->getAccountRepository()->getSuperuserCountWithPermit(SU_MEGAUSER);
-
-        if ($superusers)
+        if ($this->existSuperAdmin())
         { //-- If exist one super user not allow create more
             return false;
         }
@@ -276,36 +250,24 @@ final class UserCreateCommand extends Command
         return (bool) \array_search($helper->ask($input, $output, $question), $choices);
     }
 
-    private function getCharacterTitle()
+    private function existSuperAdmin()
     {
-        $query  = $this->doctrine->createQueryBuilder();
-        $result = $query
-            ->select('u')
-            ->from('LotgdCore:Titles', 'u')
-            ->where('u.dk <= :dk')
-            ->orderBy('rand()')
+        // Entity manager
+        $qb = $this->getAccountRepository()->createQueryBuilder('u');
 
-            ->setParameter('dk', 0)
-
-            ->setMaxResults(1)
-
+        return (bool) $qb->select('COUNT(1)')
+            ->where('u.roles LIKE :roles')
+            ->setParameter('roles', '%"ROLE_SUPER_ADMIN"%')
             ->getQuery()
-            ->getSingleResult()
+            ->getSingleScalarResult()
         ;
-
-        if ($result)
-        {
-            return $result->getMale();
-        }
-
-        return '';
     }
 
-    private function getAccountRepository(): AccountsRepository
+    private function getAccountRepository(): UserRepository
     {
-        if ( ! $this->accountRepository instanceof AccountsRepository)
+        if ( ! $this->accountRepository instanceof UserRepository)
         {
-            $this->accountRepository = $this->doctrine->getRepository('LotgdCore:Accounts');
+            $this->accountRepository = $this->doctrine->getRepository('LotgdCore:User');
         }
 
         return $this->accountRepository;
