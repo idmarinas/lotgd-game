@@ -27,27 +27,27 @@
     "homepage": "http://lotgd.infommo.es",
     "license": "SEE LICENSE IN <LICENSE.txt>",
     "dependencies": {
-        "@yaireo/tagify": "^3.22.1",
+        "@yaireo/tagify": "^3.22.3",
         "fomantic-ui": "2.8.7",
         "jquery": "^3.5.1",
         "numeral": "^2.0.6",
-        "sweetalert2": "^10.14.0",
+        "sweetalert2": "^10.15.5",
         "toastr": "^2.1.4"
     },
     "devDependencies": {
-        "@symfony/stimulus-bridge": "^2.0.0",
-        "@symfony/webpack-encore": "^1.0.0",
-        "core-js": "^3.8.3",
+        "@symfony/stimulus-bridge": "^2.0.2",
+        "@symfony/webpack-encore": "^1.1.1",
+        "core-js": "^3.9.0",
         "file-loader": "^6.2.0",
         "less-loader": "^7.0.0",
-        "postcss": "^8.2.4",
+        "postcss": "^8.2.6",
         "postcss-loader": "^4.2.0",
         "regenerator-runtime": "^0.13.7",
-        "sass": "^1.32.6",
+        "sass": "^1.32.8",
         "sass-loader": "^10.0.0",
         "stimulus": "^2.0.0",
         "url-loader": "^4.1.1",
-        "webpack-notifier": "^1.6.0"
+        "webpack-notifier": "^1.13.0"
     },
     "private": true,
     "repository": {
