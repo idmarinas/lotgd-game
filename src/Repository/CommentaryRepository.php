@@ -11,36 +11,25 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core\EntityRepository;
+namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
-use Lotgd\Core\Entity\Commentary as EntityCommentary;
-use Tracy\Debugger;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Entity\Commentary;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-class CommentaryRepository extends DoctrineRepository
+class CommentaryRepository extends ServiceEntityRepository
 {
-    use Commentary\Backup;
+    protected $translator;
+    protected $security;
 
-    /**
-     * Save comment to data base.
-     *
-     * @param Commentary $commentary
-     */
-    public function saveComment(EntityCommentary $commentary): bool
+    public function __construct(ManagerRegistry $registry, TranslatorInterface $translator, Security $security)
     {
-        try
-        {
-            $this->_em->persist($commentary);
-            $this->_em->flush();
+        parent::__construct($registry, Commentary::class);
 
-            return true;
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return false;
-        }
+        $this->translator = $translator;
+        $this->security   = $security;
     }
 
     /**
@@ -48,8 +37,6 @@ class CommentaryRepository extends DoctrineRepository
      */
     public function moderateComments(array $post): bool
     {
-        global $session;
-
         try
         {
             $keys = \array_keys($post);
@@ -68,16 +55,18 @@ class CommentaryRepository extends DoctrineRepository
                     continue;
                 }
 
+                /** @var Lotgd\Core\Entity\User */
+                $user = $this->security->getUser();
                 $comment->setHidden($hiddenNew);
-                $comment->setHiddenBy($session['user']['acctid']);
-                $comment->setHiddenByName($session['user']['name']);
+                $comment->setHiddenBy($user->getId());
+                $comment->setHiddenByName($user->getUsername());
 
                 //-- Hide message
-                $message = \LotgdTranslator::t('comment.moderation.hide', ['name' => $session['user']['name']], 'app_commentary');
+                $message = $this->translator->trans('comment.moderation.hide', ['name' => $user->getUsername()], 'app_commentary');
                 //--  Unhide message
                 if ($hiddenOld && ! $hiddenNew)
                 {
-                    $message = \LotgdTranslator::t('comment.moderation.unhide', ['name' => $session['user']['name']], 'app_commentary');
+                    $message = $this->translator->trans('comment.moderation.unhide', ['name' => $user->getUsername()], 'app_commentary');
                 }
 
                 $comment->setHiddenComment($message);
@@ -89,8 +78,6 @@ class CommentaryRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            Debugger::log($th);
-
             return false;
         }
     }
@@ -126,8 +113,6 @@ class CommentaryRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            Debugger::log($th);
-
             return [];
         }
     }
@@ -153,8 +138,6 @@ class CommentaryRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            Debugger::log($th);
-
             return 0;
         }
     }
