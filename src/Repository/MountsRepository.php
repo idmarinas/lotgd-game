@@ -15,12 +15,12 @@ namespace Lotgd\Core\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Core\Entity\Avatar;
+use Lotgd\Core\Entity\Mounts;
 
-class AvatarRepository extends ServiceEntityRepository
+class MountsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Avatar::class);
+        parent::__construct($registry, Mounts::class);
     }
 }

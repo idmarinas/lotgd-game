@@ -11,13 +11,19 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core\EntityRepository;
+namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
-use Tracy\Debugger;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Entity\Logdnet;
 
-class LogdnetRepository extends DoctrineRepository
+class LogdnetRepository extends ServiceEntityRepository
 {
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Logdnet::class);
+    }
+
     /**
      * Delete servers older than two weeks.
      */
@@ -39,8 +45,6 @@ class LogdnetRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            Debugger::log($th);
-
             return 0;
         }
     }
@@ -71,8 +75,6 @@ class LogdnetRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            Debugger::log($th);
-
             return 0;
         }
     }
@@ -95,8 +97,6 @@ class LogdnetRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            Debugger::log($th);
-
             return [];
         }
     }
