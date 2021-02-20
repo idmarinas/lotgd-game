@@ -44,7 +44,7 @@
         "postcss-loader": "^4.2.0",
         "regenerator-runtime": "^0.13.7",
         "sass": "^1.32.8",
-        "sass-loader": "^10.0.0",
+        "sass-loader": "^11.0.1",
         "stimulus": "^2.0.0",
         "url-loader": "^4.1.1",
         "webpack-notifier": "^1.13.0"
