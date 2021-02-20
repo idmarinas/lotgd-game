@@ -13,11 +13,16 @@
 
 namespace Lotgd\Core\EntityRepository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Entity\News;
 
-class NewsRepository extends DoctrineRepository
+class NewsRepository extends ServiceEntityRepository
 {
-    use News\Backup;
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, News::class);
+    }
 
     /**
      * Delete a news by ID.
@@ -37,8 +42,6 @@ class NewsRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            \Tracy\Debugger::log($th);
-
             return false;
         }
     }
@@ -64,8 +67,6 @@ class NewsRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            \Tracy\Debugger::log($th);
-
             return 0;
         }
     }
