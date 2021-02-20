@@ -13,11 +13,17 @@
 
 namespace Lotgd\Core\EntityRepository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
-use Tracy\Debugger;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Entity\Referers;
 
-class ReferersRepository extends DoctrineRepository
+class ReferersRepository extends ServiceEntityRepository
 {
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Referers::class);
+    }
+
     /**
      * Delte old referers in data base.
      */
@@ -39,8 +45,6 @@ class ReferersRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            Debugger::log($th);
-
             return 0;
         }
     }

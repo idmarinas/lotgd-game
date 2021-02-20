@@ -11,13 +11,19 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core\EntityRepository;
+namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
-use Tracy\Debugger;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Entity\Petitions;
 
-class PetitionsRepository extends DoctrineRepository
+class PetitionsRepository extends ServiceEntityRepository
 {
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Petitions::class);
+    }
+
     /**
      * Get a list count of petitions.
      */
@@ -43,8 +49,6 @@ class PetitionsRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            Debugger::log($th);
-
             return $petitions;
         }
     }
@@ -74,8 +78,6 @@ class PetitionsRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            Debugger::log($th);
-
             return 0;
         }
     }
@@ -102,8 +104,6 @@ class PetitionsRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            Debugger::log($th);
-
             return false;
         }
     }
