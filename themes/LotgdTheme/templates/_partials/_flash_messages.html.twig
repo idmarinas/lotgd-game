@@ -16,7 +16,13 @@
             <i class="close icon"></i>
 
             <div class="content">
-                <p>{{ message }}</p>
+                <p>
+                    {% if message is instanceof('\Symfony\\Contracts\\Translation\\TranslatableInterface') %}
+                        {{ message|trans }}
+                    {% else %}
+                        {{ message }}
+                    {% endif %}
+                </p>
             </div>
         </div>
     {% endfor %}
