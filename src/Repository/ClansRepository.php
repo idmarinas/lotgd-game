@@ -11,21 +11,27 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core\EntityRepository;
+namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Entity as EntityCore;
-use Tracy\Debugger;
+use Lotgd\Core\Entity\Clans;
 
-class ClansRepository extends DoctrineRepository
+class ClansRepository extends ServiceEntityRepository
 {
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Clans::class);
+    }
+
     /**
      * Get list of clans for apply to enter.
      */
     public function getClanListWithMembersCount(int $order): array
     {
         $query      = $this->createQueryBuilder('u');
-        $countQuery = $this->_em->createQueryBuilder()->from(EntityCore\Characters::class, 'c');
+        $countQuery = $this->_em->createQueryBuilder()->from(EntityCore\Avatar::class, 'c');
 
         try
         {
@@ -56,31 +62,7 @@ class ClansRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            Debugger::log($th);
-
             return [];
-        }
-    }
-
-    /**
-     * Create a new clan.
-     */
-    public function createClan(array $data): ?int
-    {
-        try
-        {
-            $entity = $this->hydrateEntity($data);
-
-            $this->_em->persist($entity);
-            $this->_em->flush();
-
-            return $entity->getClanid();
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return null;
         }
     }
 }
