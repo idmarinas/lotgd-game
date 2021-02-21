@@ -33,7 +33,6 @@ class Helpers extends AbstractExtension
     protected $headMeta;
     protected $headScript;
     protected $headStyle;
-    protected $headTitle;
     protected $inlineScript;
     protected $basePath;
 
@@ -42,14 +41,12 @@ class Helpers extends AbstractExtension
         HeadMeta $headMeta,
         HeadScript $headScript,
         HeadStyle $headStyle,
-        HeadTitle $headTitle,
         InlineScript $inlineScript
     ) {
         $this->headLink     = $headLink;
         $this->headMeta     = $headMeta;
         $this->headScript   = $headScript;
         $this->headStyle    = $headStyle;
-        $this->headTitle    = $headTitle;
         $this->inlineScript = $inlineScript;
     }
 
@@ -60,7 +57,6 @@ class Helpers extends AbstractExtension
             new TwigFunction('head_meta', [$this, 'headMeta']),
             new TwigFunction('head_script', [$this, 'headScript']),
             new TwigFunction('head_style', [$this, 'headStyle']),
-            new TwigFunction('head_title', [$this, 'headTitle']),
             new TwigFunction('inline_script', [$this, 'inlineScript']),
         ];
     }
@@ -122,19 +118,6 @@ class Helpers extends AbstractExtension
     public function headStyle($content = null, $placement = 'APPEND', $attributes = [])
     {
         return $this->headStyle->__invoke($content, $placement, $attributes);
-    }
-
-    /**
-     * Retrieve placeholder for title element and optionally set state.
-     *
-     * @param string $title
-     * @param string $setType
-     *
-     * @return HeadTitle
-     */
-    public function headTitle($title = null, $setType = null)
-    {
-        return $this->headTitle->__invoke($title, $setType);
     }
 
     /**
