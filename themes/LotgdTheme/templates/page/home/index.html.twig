@@ -2,7 +2,7 @@
 
 {% use 'page/home/_blocks.html.twig' %}
 
-{% block lotgd_body_content %}
+{% block lotgd_core_body_content %}
     {% trans_default_domain text_domain %}
 
     <div class="center aligned">
@@ -42,4 +42,4 @@
 
         {{ sonata_block_render_event('lotgd.core.page.home.post') }}
     </div>
-{% endblock lotgd_body_content %}
+{% endblock lotgd_core_body_content %}

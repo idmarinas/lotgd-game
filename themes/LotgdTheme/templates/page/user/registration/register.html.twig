@@ -1,8 +1,8 @@
 {% extends 'layout.html.twig' %}
 
-{% block lotgd_head_title %}Register!{% endblock %}
+{% block lotgd_core_head_title %}Register!{% endblock %}
 
-{% block lotgd_body_content %}
+{% block lotgd_core_body_content %}
     {% trans_default_domain text_domain %}
 
     {% for flashError in app.flashes('verify_email_error') %}
