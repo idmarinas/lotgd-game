@@ -1,0 +1,10 @@
+{% trans_default_domain text_domain %}
+
+<h1>{{ 'email.template.title'|trans }}</h1>
+
+<p>{{ 'email.template.message'|trans({
+    'signedUrl': signedUrl|raw,
+    'duration': expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle')}
+)|raw }}</p>
+
+<p>{{ 'email.template.gretings'|trans }}</p>
