@@ -34,7 +34,7 @@ class PageListener
     {
         //-- Define Twig global variable for text_domain
         $controller = \preg_replace('/::.+/', '::TEXT_DOMAIN', $this->request->get('_controller'));
-        $textDomain = \defined($controller) ? $this->environment->addGlobal('text_domain', \constant($controller)) : null;
+        $textDomain = \defined($controller) ? \constant($controller) : null;
         $this->environment->addGlobal('text_domain', $textDomain);
     }
 }
