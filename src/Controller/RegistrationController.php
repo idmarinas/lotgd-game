@@ -14,9 +14,9 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Component\Translation\TranslatableMessage;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use Twig\Environment;
-use Symfony\Component\Translation\TranslatableMessage;
 
 class RegistrationController extends AbstractController
 {
