@@ -20,6 +20,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class HomeController extends AbstractController
 {
+    public const TEXT_DOMAIN = 'page_home';
+
     /**
      * @Route("/", name="lotgd_core_home")
      */
