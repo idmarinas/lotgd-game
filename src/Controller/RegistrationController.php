@@ -16,17 +16,16 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Translation\TranslatableMessage;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
-use Twig\Environment;
 
 class RegistrationController extends AbstractController
 {
-    protected const TEXT_DOMAIN = 'page_registration';
+    public const TEXT_DOMAIN = 'page_registration';
+
     private $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier, Environment $environment)
+    public function __construct(EmailVerifier $emailVerifier)
     {
         $this->emailVerifier = $emailVerifier;
-        $environment->addGlobal('text_domain', self::TEXT_DOMAIN);
     }
 
     /**
