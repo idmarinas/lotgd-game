@@ -127,6 +127,6 @@ services:
         lazy: true
 
     # Events Listeners
-    Lotgd\Core\EventListener\PageTitleListener:
+    Lotgd\Core\EventListener\PageListener:
         tags:
             - { name: kernel.event_listener, event: kernel.request }
