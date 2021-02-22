@@ -19,6 +19,7 @@ login:
     password: 'Password'
     login: 'Log in'
     forgot: 'Did you forget your password? Go <a href="{link}">here</a> to retrieve a new one!'
+    remember_me: Remember me
 
 # Texts that show when server is full
 serverfull:
