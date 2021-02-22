@@ -161,6 +161,9 @@ redirect:
             <a href="{locationUrl}">Click here to continue</a>
             `n`n`$If you cannot leave this page, notify the staff via <a href='{petitionUrl}'>petition</a> and tell them where this happened and what you did. Thanks.`0
 
+# Mailer service info
+mailer.send.mail.error: 'An error occurred while sending the mail'
+
 flash.message:
     module:
         uninstalled: 'Module {module} is not installed, but was attempted to be injected.'
