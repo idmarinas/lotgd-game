@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% block lotgd_core_head_title %}
+    {{ 'check.email.title'|trans({}, text_domain)|uncolorize }}
+{% endblock %}
+
+{% block lotgd_core_body_content %}
+    {% trans_default_domain text_domain %}
+
+    <p>{{ 'check.email.paragraph.expire'|trans({
+        'time': resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle')
+    })|colorize }}</p>
+    <p>{{ 'check.email.paragraph.reset'|trans({'link': path('lotgd_core_forgot_password_request') })|colorize }}</p>
+{% endblock %}

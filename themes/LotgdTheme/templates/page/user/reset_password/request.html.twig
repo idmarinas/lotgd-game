@@ -1,0 +1,9 @@
+{% extends 'layout.html.twig' %}
+
+{% block lotgd_core_head_title %}
+    {{ 'request.title'|trans({}, text_domain) }}
+{% endblock %}
+
+{% block lotgd_core_body_content %}
+    {{ form(requestForm) }}
+{% endblock %}

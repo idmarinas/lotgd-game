@@ -1,0 +1,4 @@
+{{ 'template.email'|trans({
+    'link': url('lotgd_core_reset_password', {'token': resetToken.token}),
+    'time': resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle')
+}, 'page_reset_password')|colorize|raw }}
