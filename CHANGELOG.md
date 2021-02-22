@@ -9,18 +9,19 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 
 ### :cyclone: CHANGES
 
+-   **BC** LoTGD Core is a Symfony App since version 6.0.0.
+    -   Changed the entire core structure to follow Symfony Framework conventions.
 -   :warning: LoTGD is now a Symfony App.
 -   Moved content of `src/core` to `src`
     -   LoTGD follow structure of Symfony App
--   New login system:
+-   **New** login system:
     -   Old password are auto-migrated (but can fail)
         -   Can reset password.
--   **Entities**
+-   **BC** **Entities**
     -   `Lotgd\Core\Entity\Accounts` is now `Lotgd\Core\Entity\User`
-    -   Data of `accounts` are migrated to `user`
-        -   Data that not are migrated.
-
-
+        -   Data of `accounts` are migrated to `user`
+            -   Not all data are migrated, see diffs for more info.
+    -   `Lotgd\Core\Entity\Characters` is now `Lotgd\Core\Entity\Avatar` Characters is a reserved word.
 
 ### :star: FEATURES
 
@@ -35,17 +36,14 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 
 -   **src/core/Form/ConfigurationType/TrainingType.php** Fixed error with translation keys.
 
-### :x: REMOVES/Break Changes
+### :x: REMOVES
 
--   **BC** So many to write here, ^_^, in version 6.0.0 LoTGD Core is a Symfony App.
 -   **BC** Remove `src/local` and `src/ajax`
     -   All Jaxon class are now in `jaxon/App`
 -   **BC** Delete folder `modules/` old module system not work with this version use Bundle system.
--   **BC** Delete `AdvertisingBundle` from Core. Now is a independent bundle.
-    -   If you need/want your your server can use https://github.com/idmarinas/advertising-bundle:
-        ```bash
-        composer require idmarinas/advertising-bundle
-        ```
+    -   Deleted related files/tables in database to modules too.
+-   **BC** Delete `AdvertisingBundle` from Core. Now is a independent bundle (can use in other Symfony projects).
+    -   If you need/want use in your server can use https://github.com/idmarinas/advertising-bundle:
 -   **BC** Removed class:
     -   `Lotgd\Core\Application`
     -   `Lotgd\Core\EventManagerAware`
@@ -81,12 +79,11 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
         -   `Lotgd\Core\Pattern\Template`
         -   `Lotgd\Core\Pattern\ThemeList`
         -   `Lotgd\Core\Pattern\Translator`
--   **BC** _Entities_
-    -   `src/Entity/Characters.php` Rename to `src/Entity/Avatar.php`. Characters is a reserved word.
 -   **Twig functions/filters**
     -   Remove function `base_path()`
     -   Remove filter `lotgd_url` not need in Symfony App
     -   Remove functions `var_dump()` and `bdump()`, use `dump()` instead
+    -   Remove function `head_title()` this function not have much more usseful. Use block `lotgd_core_head_title` in template.
 
 ### :notebook: NOTES
 
