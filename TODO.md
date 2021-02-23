@@ -2,29 +2,36 @@
     -   mail.php
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
-# Versión 5.0.0
-
--   El antiguo sistema de módulos está obsolete desde esta versión
-    -   Los módulos antiguos seguiran funcionando pero estan obsoletos.
-    -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
--   A partir de esta versión se empezará a usar un sistema de módulos tipo Bundle
-
 # Módulos
 
 -   ...
+
+# Actualmente haciendo........
+
+-   La versión 6.0.0
+-   Plantilla de registro, agregar algunos events para agregar más información.
+-   Las diferentes partes del juego serán bundles internos:
+    -   La aldea
+    -   El bosque
+    -   El cementerio
+    -   Tienda
+    -   La taberna/posada
+    -   La batalla
+    -   Diferentes zonas (interiores de un edificio por ejemplo)
+    -   ...
+    -   Esto permite poder personalizar cada parte, principalmente por el menu de navegación y la opción de poder crear diferentes versiones:
+        -   Diferentes tiendas con la misma base.
+        -   Diferentes ciudades con la misma base
 
 # Para la versión 6.0.0  (LoTGD Core as Symfony APP)
 
 -   Se adelanta la transicción
 -   Esta versión LoTGD Core será una app Symfony Framework.
     -   Migrar a la estructura propia de Symfony Framework
--   Sustituir Entity\Account por Entity\User
 -   Panel de administración
     -   https://github.com/sonata-project/SonataAdminBundle 
 -   Modificar el sistema de logeo, para usar una clase (principalmente por el tema de la contraseña)
     -   Se usa el sistema de Symfony Framework
-    -   Cambiar la forma en la que se códifican las contraseñas y se hace el login.
-    -   Esto obligaría a los usuarios a generar una nueva contraseña.
 -   Mirar el uso de un bundle tipo settings:
     -   https://github.com/dmishh/SettingsBundle lastest on 28 Jun 2016
     -   O mejor crear uno propio que sustituya:
@@ -46,20 +53,26 @@
 -   **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
     -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
 -   **BC** Eliminar compatibilidad con el uso del viejo sistema de módulos
+-   https://github.com/KnpLabs/KnpPaginatorBundle para la paginación
+-   Crear bundle para limitar los intentos de conexión.
 
 # Para la versión 6.1.0
 
--   https://github.com/KnpLabs/KnpPaginatorBundle para la paginación
--   Sustituir Fomantic Ui por https://tailwindcss.com 
+-   Sustituir Fomantic UI por https://tailwindcss.com 
+    -   Tailwind ofrece más flexibilidad para crear la UI.
     -   npm install tailwindcss
 
 # Para la versión 6.y.x
 
+-   Crear el bundle del inventario. Para sustituir el antiguo sistema de armadura y arma.
+-   Crear el bundle de energia, que permita poner energia o un sistema por turnos.
+-   Integrar los componentes Laminas View en un bundle para crear algo similar a Sonata SEO
 -   Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
     -   La instalación por consola ya se creeo en la versión 5.0.0
         -   Se mirará incluir una versión de instalación por web
             -   Problematico la creación del usuario admin
     -   Para los admin que no dispongan de esta opción se agrega la opción de instalación via web.
+-   Posible candidato a sustituir el petition system por https://github.com/hackzilla-project/TicketBundle
 
 # Para la versión 6.y.z  
 
@@ -93,6 +106,8 @@
     -   Usar otra forma
 
 ## Cosas a mirar
+-   https://github.com/nelmio/NelmioSecurityBundle
+-   https://github.com/nan-guo/Sonata-Menu-Bundle
 -   https://github.com/sonata-project/SonataPageBundle 
     -   Puede ser interesante para añadir páginas personalizadas, pero parece que no es compatible con la versión 5 de symfony
 -   https://symfony.com/doc/current/workflow.html
@@ -138,5 +153,6 @@ php bin/console debug:container
 composer dump-env prod
 
 ./vendor/bin/phan -m csv -o phan.csv
+./vendor/bin/phan --init --init-level=3
 
 composer install --no-dev --no-suggest --optimize-autoloader
