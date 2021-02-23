@@ -81,6 +81,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "rector/rector": "^0.9.31",
         "symfony/apache-pack": "^1.0",
         "symfony/browser-kit": "^5.2",
         "symfony/css-selector": "^5.2",
