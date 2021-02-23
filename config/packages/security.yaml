@@ -52,11 +52,10 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # Admin panel can only be access by admin users.
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/$, roles: PUBLIC_ACCESS } # Home route
-        - { path: ^/reset-password, roles: PUBLIC_ACCESS }
-        - { path: ^/register, roles: PUBLIC_ACCESS }
-        - { path: ^/verify/email, roles: PUBLIC_ACCESS }
-        - { path: ^/jaxon, roles: PUBLIC_ACCESS }
-        # By default all routes are for authenticated users.
-        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/game/admin, roles: ROLE_ADMIN }
+        # All routes of game start with /game/
+        # You need prefixed all routes that is part of game this /game/
+        # So all routers that start with this is for authenticated users
+        - { path: ^/game/, roles: IS_AUTHENTICATED_FULLY }
+        # By default all routes are public access.
+        - { path: ^/, roles: PUBLIC_ACCESS }
