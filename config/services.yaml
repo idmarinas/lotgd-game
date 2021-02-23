@@ -126,7 +126,12 @@ services:
     Lotgd\Core\Twig\Extension\JaxonExtension:
         lazy: true
 
-    # Events Listeners
-    Lotgd\Core\EventListener\PageListener:
+    # Menus
+    lotgd_core.menu_builder:
+        class: Lotgd\Core\Menu\MenuBuilder
+        arguments:
+            - '@knp_menu.factory'
+            - '@event_dispatcher'
         tags:
-            - { name: kernel.event_listener, event: kernel.request }
+            - { name: knp_menu.menu_builder, method: createMenuCore, alias: lotgd_core.menu_core } # The alias is what is used to retrieve the menu
+
