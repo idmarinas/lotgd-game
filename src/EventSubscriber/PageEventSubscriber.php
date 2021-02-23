@@ -10,14 +10,15 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Core\EventListener;
+namespace Lotgd\Core\EventSubscriber;
 
-use Laminas\View\Helper\HeadTitle;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\KernelEvents;
 use Twig\Environment;
 
-class PageListener
+class PageEventSubscriber implements EventSubscriberInterface
 {
     protected $params;
     protected $request;
@@ -32,9 +33,24 @@ class PageListener
 
     public function onKernelRequest()
     {
+        $controller = \preg_replace('/::.+/', '', $this->request->get('_controller'));
+
         //-- Define Twig global variable for text_domain
-        $controller = \preg_replace('/::.+/', '::TEXT_DOMAIN', $this->request->get('_controller'));
-        $textDomain = \defined($controller) ? \constant($controller) : null;
+        $textDomain = \defined($controller.'::TEXT_DOMAIN') ? \constant($controller.'::TEXT_DOMAIN') : null;
         $this->environment->addGlobal('text_domain', $textDomain);
+
+        //-- Define Twig global variable for render menu
+        $menu = \defined($controller.'::LOTGD_CORE_MENU') ? \constant($controller.'::LOTGD_CORE_MENU') : 'lotgd_core.menu_core';
+        $this->environment->addGlobal('lotgd_core_menu', $menu);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::REQUEST => 'onKernelRequest'
+        ];
     }
 }
