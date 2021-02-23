@@ -2,6 +2,7 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     globals:
         lotgd_core_title: '%lotgd.core.seo.title.default%'
+        lotgd_core_menu: 'lotgd_core.menu_core'
         lotgd_core_version: !php/const \Lotgd\Core\Kernel::VERSION
     form_themes: [
         'form/semantic-ui-form-theme.html.twig'
