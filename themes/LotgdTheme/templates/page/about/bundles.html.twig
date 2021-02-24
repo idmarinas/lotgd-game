@@ -1,0 +1,65 @@
+{% extends 'layout.html.twig' %}
+
+{% block lotgd_core_head_title %}{{ 'title.bundle'|trans({}, text_domain) }}{% endblock %}
+
+{% block lotgd_core_body_content %}
+    {% trans_default_domain text_domain %}
+
+    <div class="ui inverted two statistics">
+        <div class="statistic">
+            <div class="value">
+                <i class="cubes icon"></i> {{ bundles_total_enabled|numeral }}
+            </div>
+            <div class="label">
+                {{ 'bundle.enabled.total'|trans }}
+            </div>
+        </div>
+
+        <div class="statistic">
+            <div class="value">
+                <i class="dragon icon"></i> {{ bundles_lotgd_enabled|length }}
+            </div>
+            <div class="label">
+                {{ 'bundle.enabled.lotgd'|trans }}
+            </div>
+        </div>
+    </div>
+
+<h2>{{ 'bundle.title'|trans }}</h2>
+
+<div class="ui selection divided list">
+    {% set downloadText = 'bundle.download_link'|trans %}
+
+    {% for name in bundles_lotgd_enabled|keys|sort %}
+        {% set bundle = bundles_lotgd_enabled[name] %}
+        {% set tag = 'div' %}
+        {% set htmlAttrs = '' %}
+
+        {% if bundle.lotgdDownload %}
+            {% set tag = 'a' %}
+            {% set htmlAttrs = 'href="' ~ bundle.lotgdDownload ~ '" target="_blank" rel="noopener noreferrer"' %}
+        {% endif %}
+
+        <{{ tag }} {{ htmlAttrs|raw }} class="item">
+            {% if bundle.lotgdDownload %}
+                <div class="right floated content">
+                    {{ downloadText }}
+                </div>
+            {% endif %}
+            <i class="big {{ bundle.lotgdIcon|default('cube') }} icon"></i>
+            <div class="middle aligned content">
+                {{ bundle.lotgdName }} ({{ bundle.lotgdVersion }})
+                <small>{{ bundle.lotgdDescription }}</small>
+            </div>
+        </{{ tag }}>
+    {% else %}
+        <div class="item">
+            <i class="big times icon"></i>
+            <div class="content">
+                <div class="header">{{ 'bundle.none.title'|trans }}</div>
+                <div class="description">{{ 'bundle.none.desc'|trans }}</div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock lotgd_core_body_content %}
