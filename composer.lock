@@ -393,16 +393,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "1.11.1",
+            "version": "1.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "ce77a7ba1770462cd705a91a151b6c3746f9c6ad"
+                "reference": "b17c5014ef81d212ac539f07a1001832df1b6d3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/ce77a7ba1770462cd705a91a151b6c3746f9c6ad",
-                "reference": "ce77a7ba1770462cd705a91a151b6c3746f9c6ad",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/b17c5014ef81d212ac539f07a1001832df1b6d3b",
+                "reference": "b17c5014ef81d212ac539f07a1001832df1b6d3b",
                 "shasum": ""
             },
             "require": {
@@ -417,11 +417,6 @@
                 "phpunit/phpunit": "^7.5 || ^9.1.5"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.11.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
@@ -462,9 +457,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/annotations/issues",
-                "source": "https://github.com/doctrine/annotations/tree/1.11.1"
+                "source": "https://github.com/doctrine/annotations/tree/1.12.1"
             },
-            "time": "2020-10-26T10:28:16+00:00"
+            "time": "2021-02-21T21:00:45+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -2194,16 +2189,16 @@
         },
         {
             "name": "jaxon-php/jaxon-symfony",
-            "version": "v3.2.1",
+            "version": "v3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaxon-php/jaxon-symfony.git",
-                "reference": "975ce12d1c36da5bd9dbe6831422d39826c2d835"
+                "reference": "e96c5a9a2449be4f1a34f348a8adf590d3808442"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaxon-php/jaxon-symfony/zipball/975ce12d1c36da5bd9dbe6831422d39826c2d835",
-                "reference": "975ce12d1c36da5bd9dbe6831422d39826c2d835",
+                "url": "https://api.github.com/repos/jaxon-php/jaxon-symfony/zipball/e96c5a9a2449be4f1a34f348a8adf590d3808442",
+                "reference": "e96c5a9a2449be4f1a34f348a8adf590d3808442",
                 "shasum": ""
             },
             "require": {
@@ -2243,7 +2238,7 @@
                 "issues": "https://github.com/jaxon-php/jaxon-symfony/issues",
                 "source": "https://github.com/jaxon-php/jaxon-symfony"
             },
-            "time": "2021-02-19T19:40:03+00:00"
+            "time": "2021-02-20T17:49:21+00:00"
         },
         {
             "name": "jms/metadata",
