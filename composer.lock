@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "268ff5c85e78aa1d0c736311af6edbfd",
+    "content-hash": "de0adff435b91b551e9a4d99c78066cd",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -2062,6 +2062,50 @@
                 "wiki": "https://github.com/Atlantic18/DoctrineExtensions/tree/main/doc"
             },
             "time": "2021-01-23T23:40:14+00:00"
+        },
+        {
+            "name": "idmarinas/lotgd-contracts",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/idmarinas/lotgd-contracts.git",
+                "reference": "71e4b4d7c141243b95a79ce50b4f55a81d77e524"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/idmarinas/lotgd-contracts/zipball/71e4b4d7c141243b95a79ce50b4f55a81d77e524",
+                "reference": "71e4b4d7c141243b95a79ce50b4f55a81d77e524",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lotgd\\Bundle\\Contract\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Iván Diaz Marinas (IDMarinas)",
+                    "email": "35842929+idmarinas@users.noreply.github.com",
+                    "homepage": "https://github.com/idmarinas/lotgd-contracts",
+                    "role": "Developer"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/idmarinas/lotgd-contracts/issues",
+                "source": "https://github.com/idmarinas/lotgd-contracts/tree/0.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/idmarinas",
+                    "type": "paypal"
+                }
+            ],
+            "time": "2021-02-24T19:17:43+00:00"
         },
         {
             "name": "jaxon-php/jaxon-core",

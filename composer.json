@@ -28,6 +28,7 @@
         "doctrine/orm": "^2.8",
         "ezyang/htmlpurifier": "^4.13",
         "gedmo/doctrine-extensions": "^3.0",
+        "idmarinas/lotgd-contracts": "^0.1.0",
         "jaxon-php/jaxon-core": "^3.2",
         "jaxon-php/jaxon-dialogs": "^3.1",
         "jaxon-php/jaxon-symfony": "^3.2",
