@@ -25,7 +25,15 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
         $client = self::createClient();
         $client->request('GET', $url);
 
-        $this->assertTrue($client->getResponse()->isSuccessful());
+        $response = $client->getResponse();
+
+        $message = '';
+        if( ! $response->isSuccessful())
+        {
+            $message = sprintf('Error code %s', $response->getStatusCode());
+        }
+
+        $this->assertTrue($response->isSuccessful(), $message);
     }
 
     public function provideUrls()
