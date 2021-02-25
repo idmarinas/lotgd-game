@@ -126,6 +126,9 @@
     "gedmo/doctrine-extensions": {
         "version": "v3.0.3"
     },
+    "idmarinas/lotgd-contracts": {
+        "version": "0.1.0"
+    },
     "jaxon-php/jaxon-core": {
         "version": "v3.2.4"
     },
