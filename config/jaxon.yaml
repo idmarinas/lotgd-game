@@ -29,9 +29,9 @@ parameters:
             dialogs:
                 default:
                     message: toastr
-                    modal: semantic
-                classes:
-                    semantic: Lotgd\Core\Jaxon\Library\Semantic\Modal
+                    # modal: semantic
+                # classes:
+                #     semantic: Lotgd\Core\Jaxon\Library\Semantic\Modal
                 toastr:
                     options:
                         progressBar: true
