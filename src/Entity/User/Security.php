@@ -15,7 +15,6 @@ namespace Lotgd\Core\Entity\User;
 
 trait Security
 {
-
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")

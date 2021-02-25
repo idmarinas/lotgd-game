@@ -28,7 +28,6 @@ trait Avatar
      */
     private $avatars;
 
-
     public function getAvatar(): ?AvatarEntity
     {
         return $this->avatar;

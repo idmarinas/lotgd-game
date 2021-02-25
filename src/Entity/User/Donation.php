@@ -15,7 +15,6 @@ namespace Lotgd\Core\Entity\User;
 
 trait Donation
 {
-
     /**
      * @ORM\Column(type="integer", options={"unsigned": true})
      */
@@ -25,7 +24,6 @@ trait Donation
      * @ORM\Column(type="integer", options={"unsigned": true})
      */
     private $donationSpent = 0;
-
 
     public function getDonation(): ?int
     {
