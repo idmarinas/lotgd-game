@@ -1,0 +1,20 @@
+# Default menu for public pages.
+core:
+    header:
+        login: Login page
+        new: New to LoGD?
+        func: Game Functions
+        about: About
+        other: Other Info
+    menu:
+        login: Login Screen
+        create: Create a character
+        forgot: Forgotten Password
+        warriors: List Warriors
+        news: Daily News
+        about: About LoGD
+        setup: Game Setup
+        net: LoGD Net
+        bundle: Bundles Info
+        license: License
+        source: View PHP Source
