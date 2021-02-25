@@ -48,6 +48,11 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    # Register Install commands
+    Lotgd\Core\Installer\Command\:
+        resource: "../src/Installer/Command"
+        tags: ['console.command']
+
     # # Doctrine Extension listeners to handle table prefix
     # lotgd.core.doctrine.listener.table_prefix:
     #     class: Lotgd\Core\Doctrine\Extension\TablePrefix
