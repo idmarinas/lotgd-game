@@ -39,6 +39,11 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src</directory>
+            <exclude>
+                <directory>src/ajax</directory>
+                <directory>src/core</directory>
+                <directory>src/local</directory>
+            </exclude>
         </whitelist>
     </filter>
 
