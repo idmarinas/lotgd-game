@@ -46,12 +46,12 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
     public function provideValidUrls()
     {
         return [
-            // ['/'],
-            // ['/about'],
-            // ['/about/license'],
-            // ['/about/bundles'],
-            // ['/register'],
-            // ['/reset-password'],
+            ['/'],
+            ['/about'],
+            ['/about/license'],
+            ['/about/bundles'],
+            ['/register'],
+            ['/reset-password'],
         ];
     }
 
