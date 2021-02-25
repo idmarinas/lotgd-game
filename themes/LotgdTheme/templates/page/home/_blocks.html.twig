@@ -32,7 +32,7 @@
                             <div class="field">
                                 <div class="ui toggle checkbox">
                                     <input id="_remember_me" type="checkbox" name="_remember_me">
-                                    <label for="_remember_me">Remember me</label>
+                                    <label for="_remember_me">{{ 'login.remember_me'|trans|uncolorize }}</label>
                                 </div>
                             </div>
                             <div class="center aligned field">
@@ -47,7 +47,7 @@
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
     </form>
 
-    <p>{{ 'login.forgot'|trans({'login': path('lotgd_core_forgot_password_request')})|colorize }}</p>
+    <p>{{ 'login.forgot'|trans({'link': path('lotgd_core_forgot_password_request')})|colorize }}</p>
 {% endblock home_login %}
 
 {% block home_select_skin %}
