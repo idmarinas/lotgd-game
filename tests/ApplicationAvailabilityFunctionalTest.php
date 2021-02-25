@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class ApplicationAvailabilityFunctionalTest extends WebTestCase
 {
     /**
-     * @dataProvider provideUrls
+     * @dataProvider provideValidUrls
      */
     public function testPageIsSuccessful($url)
     {
@@ -30,13 +30,36 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
         $message = '';
         if( ! $response->isSuccessful())
         {
-            $message = sprintf('Error code %s', $response->getStatusCode());
+            $message = sprintf('Error code %s, %s', $response->getStatusCode(), (string) $response->headers);
         }
 
         $this->assertTrue($response->isSuccessful(), $message);
     }
 
-    public function provideUrls()
+    /**
+     * @dataProvider provideNotFoundUrls
+     */
+    public function testPageIsNotFound($url)
+    {
+        $client = self::createClient();
+        $client->request('GET', $url);
+
+        $response = $client->getResponse();
+
+        $message = '';
+        if( ! $response->isSuccessful())
+        {
+            $message = sprintf('Error code %s, Exception: "%s", File "%s"',
+                $response->getStatusCode(),
+                $response->headers->get('X-Debug-Exception'),
+                $response->headers->get('X-Debug-Exception-File'),
+            );
+        }
+
+        $this->assertTrue($response->isNotFound(), $message);
+    }
+
+    public function provideValidUrls()
     {
         return [
             ['/'],
@@ -45,8 +68,14 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
             ['/about/bundles'],
             ['/register'],
             ['/reset-password'],
-            // ['/contact'],
             // ...
+        ];
+    }
+
+    public function provideNotFoundUrls()
+    {
+        return [
+            ['/home']
         ];
     }
 }
