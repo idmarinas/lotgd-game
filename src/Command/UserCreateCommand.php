@@ -41,7 +41,7 @@ final class UserCreateCommand extends Command
     protected $translator;
     protected $validator;
     protected $encoder;
-    protected $accountRepository;
+    protected $userRepository;
 
     public function __construct(
         EntityManagerInterface $doctrine,
@@ -81,7 +81,7 @@ final class UserCreateCommand extends Command
 
         try
         {
-            //-- Configure account
+            //-- Configure user
             $user = new \Lotgd\Core\Entity\User();
             $user->setUsername($this->getUsername($input, $output))
                 ->setEmail($this->getEmail($input, $output))
@@ -100,7 +100,7 @@ final class UserCreateCommand extends Command
                 )
             );
 
-            //-- Need for get a ID of new account
+            //-- Save new user
             $this->doctrine->persist($user);
             $this->doctrine->flush(); //Persist objects
         }
@@ -129,7 +129,7 @@ final class UserCreateCommand extends Command
                 new Assert\Length(null, 3, 25),
                 new Assert\Callback(function ($username, ExecutionContextInterface $context)
                 {
-                    $exists = null !== $this->getAccountRepository()->findOneByUsername($username);
+                    $exists = null !== $this->getuserRepository()->findOneByUsername($username);
 
                     if ($exists)
                     {
@@ -166,7 +166,7 @@ final class UserCreateCommand extends Command
                 ]),
                 new Assert\Callback(function ($email, ExecutionContextInterface $context)
                 {
-                    $exists = null !== $this->getAccountRepository()->findOneByEmail($email);
+                    $exists = null !== $this->getuserRepository()->findOneByEmail($email);
 
                     if ($exists && $email)
                     {
@@ -240,7 +240,7 @@ final class UserCreateCommand extends Command
         }
 
         $helper   = $this->getHelper('question');
-        $choices  = ['No (Normal account)', 'Yes (Only one admin can be create with this command)'];
+        $choices  = ['No (Normal user)', 'Yes (Only one admin can be create with this command)'];
         $question = new ChoiceQuestion(
             $this->translator->trans('user.create.question.is.admin', [], self::TEXT_DOMAIN),
             $choices,
@@ -253,7 +253,7 @@ final class UserCreateCommand extends Command
     private function existSuperAdmin()
     {
         // Entity manager
-        $qb = $this->getAccountRepository()->createQueryBuilder('u');
+        $qb = $this->getUserRepository()->createQueryBuilder('u');
 
         return (bool) $qb->select('COUNT(1)')
             ->where('u.roles LIKE :roles')
@@ -263,13 +263,13 @@ final class UserCreateCommand extends Command
         ;
     }
 
-    private function getAccountRepository(): UserRepository
+    private function getUserRepository(): UserRepository
     {
-        if ( ! $this->accountRepository instanceof UserRepository)
+        if ( ! $this->userRepository instanceof UserRepository)
         {
-            $this->accountRepository = $this->doctrine->getRepository('LotgdCore:User');
+            $this->userRepository = $this->doctrine->getRepository('LotgdCore:User');
         }
 
-        return $this->accountRepository;
+        return $this->userRepository;
     }
 }
