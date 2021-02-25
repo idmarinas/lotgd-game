@@ -5,7 +5,7 @@
 <div class="ui red message">{{ 'section.cronjob.note.red'|trans|uncolorize }}</div>
 
 {{ form(form) }}
-<a class="ui right floated button" href="{{ 'configuration.php?setting=cronjob&op=newcronjob'|lotgd_url }}">{{ 'section.cronjob.form.button.new'|trans|uncolorize }}</a>
+<a class="ui right floated button" href="{{ 'configuration.php?setting=cronjob&op=newcronjob' }}">{{ 'section.cronjob.form.button.new'|trans|uncolorize }}</a>
 <br>
 <br>
 
@@ -34,15 +34,15 @@
                 <td>{{ cronjob.name }}</td>
                 <td>php {{ cronjob.command }}</td>
                 <td>
-                    <a href="{{ ('https://crontab.guru/#' ~ cronjob.schedule|replace({' ': '_'}) )|lotgd_url }}" target="_blank" rel="noopener noreferrer">
+                    <a href="{{ ('https://crontab.guru/#' ~ cronjob.schedule|replace({' ': '_'}) ) }}" target="_blank" rel="noopener noreferrer">
                         <i class="info icon"></i> {{ cronjob.schedule }}
                     </a>
                 </td>
                 <td>{{ cronjob.debug ? yes : no  }}</td>
                 <td>{{ cronjob.enabled ? yes : no  }}</td>
                 <td>
-                    <a href="{{ ('configuration.php?setting=cronjob&op=newcronjob&cronid=' ~ cronjob.id)|lotgd_url }}">{{ edit }}</a> |
-                    <a href="{{ ('configuration.php?setting=cronjob&op=delcronjob&cronid=' ~ cronjob.id)|lotgd_url }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">{{ delete }}</a>
+                    <a href="{{ ('configuration.php?setting=cronjob&op=newcronjob&cronid=' ~ cronjob.id) }}">{{ edit }}</a> |
+                    <a href="{{ ('configuration.php?setting=cronjob&op=delcronjob&cronid=' ~ cronjob.id) }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">{{ delete }}</a>
                 </td>
             </tr>
         {% endfor %}

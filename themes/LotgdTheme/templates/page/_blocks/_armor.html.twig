@@ -21,7 +21,7 @@
                         {% if row.value <= (user.gold + tradeinvalue) %}
                             {% if not unavailable %}
                                 {% set color = '`&' %}
-                                <a href='{{ ('armor.php?op=buy&id=' ~ row.armorid)|lotgd_url }}'>{{ (color ~ row.armorname ~ '`0')|colorize }}</a>
+                                <a href='{{ ('armor.php?op=buy&id=' ~ row.armorid) }}'>{{ (color ~ row.armorname ~ '`0')|colorize }}</a>
                             {% else %}
                                 {% set color = '`7' %}
                                 {{ (color ~ row.armorname ~ '`0')|colorize }}

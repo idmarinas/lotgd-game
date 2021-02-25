@@ -5,7 +5,7 @@
     {{ 'setupban.message'|trans|colorize }}
 </div>
 
-<form action="{{ 'bans.php?op=saveban'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+<form action="{{ 'bans.php?op=saveban' }}" method="POST" autocomplete="off" class="ui form">
     <div class="field">
         <label for="ip">{{ 'setupban.form.input.ip.label'|trans|colorize }}</label>
         <input type="radio" value="ip" id="ipradio" name="type">

@@ -11,7 +11,7 @@
         {{ 'form.header'|trans|colorize }}
     </div>
     <div class="content">
-        <form action="{{ 'donators.php?op=add'|lotgd_url }}" class="ui form" method="POST" id="formManualDonation">
+        <form action="{{ 'donators.php?op=add' }}" class="ui form" method="POST" id="formManualDonation">
             <div class="field">
                 <label for="character">{{ 'form.label.character'|trans|colorize }}</label>
                 <input type="text" name="name" id="character" value="{{ name }}">

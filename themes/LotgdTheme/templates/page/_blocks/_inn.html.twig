@@ -19,7 +19,7 @@
         {{ pvp_list_sleepers({ 'sleepers': sleepers }) }}
     {% elseif 'colors' == action %}
         {{ 'section.bartender.colors.paragraph'|trans({ 'colors': colors, 'barkeep': barkeep, 'rawInput': testText|prevent_codes, 'formatInput': testText })|colorize }}
-        <form action="{{ formUrl|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+        <form action="{{ formUrl }}" method="POST" autocomplete="off" class="ui form">
             <div class="field">
                 <input type="text" id="testText" name="testText">
             </div>

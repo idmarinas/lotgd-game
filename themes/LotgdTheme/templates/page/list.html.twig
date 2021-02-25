@@ -1,7 +1,7 @@
 {% trans_default_domain 'page_list' %}
 
 {% if user.loggedin %}
-    <form action="{{ 'list.php?op=search'|lotgd_url }}" method="POST">
+    <form action="{{ 'list.php?op=search' }}" method="POST">
         <div class="field inline">
             <label for="">{{ 'form.search.label'|trans }}</label>
             <div class="ui action input">
@@ -49,7 +49,7 @@
                         <a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.write('{{ warrior.acctid }}')">
                             <img src="images/newscroll.GIF" width="16" height="16" alt="{{ writemail }}" border="0">
                         </a>
-                        <a href="{{ ('bio.php?char=' ~ warrior.acctid)|lotgd_url }}">{{ warrior.name|colorize }}</a>
+                        <a href="{{ ('bio.php?char=' ~ warrior.acctid) }}">{{ warrior.name|colorize }}</a>
                     {% else %}
                         {{ warrior.name|colorize }}
                     {% endif %}

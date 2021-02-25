@@ -4,7 +4,7 @@
     <div class="ui centered grid">
         <div class="nine wide column">
             <div class="ui segment">
-                <form action="{{ 'bans.php?op=searchban'|lotgd_url }}" autocomplete="off" method="POST" class="ui form">
+                <form action="{{ 'bans.php?op=searchban' }}" autocomplete="off" method="POST" class="ui form">
                     <div class="inline field">
                         <label for="target">{{ 'searchban.form.search.label'|trans|colorize }}</label>
                         <div class="ui action input">
@@ -43,7 +43,7 @@
         {% for row in paginator %}
             <tr>
                 <td>
-                    <a href="{{ ('bans.php?op=delban&ipfilter='~ row.ipfilter|e('url') ~ '&uniqueid=' ~ row.uniqueid|e('url'))|lotgd_url }}">{{ liftban }}</a>
+                    <a href="{{ ('bans.php?op=delban&ipfilter='~ row.ipfilter|e('url') ~ '&uniqueid=' ~ row.uniqueid|e('url')) }}">{{ liftban }}</a>
                 </td>
                 <td>{{ '`&%s`0'|format(row.banner)|colorize }}</td>
                 <td>

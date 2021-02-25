@@ -20,10 +20,10 @@
             <tr>
                 <td class="collapsing">
                     <div class="ui mini icon buttons">
-                        <a class="ui button" href="{{ ('titleedit.php?op=edit&id=' ~ row.titleid)|lotgd_url }}" data-tooltip="{{ edit }}" aria-label="{{ edit }}">
+                        <a class="ui button" href="{{ ('titleedit.php?op=edit&id=' ~ row.titleid) }}" data-tooltip="{{ edit }}" aria-label="{{ edit }}">
                             <i aria-hidden="true" class='write icon'></i>
                         </a>
-                        <a class="ui red button" href="{{ ('titleedit.php?op=delete&id=' ~ row.titleid)|lotgd_url }}" onclick="Lotgd.confirm(this, event)" data-tooltip="{{ del }}" aria-label="{{ del }}" data-options="{{ options }}">
+                        <a class="ui red button" href="{{ ('titleedit.php?op=delete&id=' ~ row.titleid) }}" onclick="Lotgd.confirm(this, event)" data-tooltip="{{ del }}" aria-label="{{ del }}" data-options="{{ options }}">
                             <i aria-hidden="true" class='trash icon'></i>
                         </a>
                     </div>

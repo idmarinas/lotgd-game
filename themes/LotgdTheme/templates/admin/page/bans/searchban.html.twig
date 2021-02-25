@@ -18,7 +18,7 @@
         {% for row in paginator %}
             <tr>
                 <td>
-                    <a href="{{ ('bans.php?op=delban&ipfilter='~ row.ipfilter|e('url') ~ '&uniqueid=' ~ row.uniqueid|e('url'))|lotgd_url }}">{{ liftban }}</a>
+                    <a href="{{ ('bans.php?op=delban&ipfilter='~ row.ipfilter|e('url') ~ '&uniqueid=' ~ row.uniqueid|e('url')) }}">{{ liftban }}</a>
                 </td>
                 <td>{{ '`&%s`0'|format(row.banner)|colorize }}</td>
                 <td>

@@ -2,49 +2,19 @@
 {% block online_list %}
     {% trans_default_domain 'app_default' %}
 
-    {{ 'online.list.title'|trans({ 'n': onlineCount }, textDomain)|colorize }}
+    {{ 'online.list.title'|trans({ 'n': onlineCount })|colorize }}
 
     {% for row in list %}
         {{ '`^%s`0`n'|format(row.name)|colorize }}
     {% else %}
-        {{ 'online.list.none'|trans({}, textDomain)|colorize }}
+        {{ 'online.list.none'|trans({})|colorize }}
     {% endfor %}
 {% endblock online_list %}
 
 {# Stats of page generation #}
 {% block game_page_gen %}
-    {% trans_default_domain 'app_default' %}
-
-    {{ 'parts.pageGen'|trans({
-        'genTime': genTime,
-        'avg': avg,
-        'userGenTime': userGenTime,
-        'userGenTimeCount': userGenTimeCount
-    }, 'app_default')|colorize }}
+    {{ 'parts.pageGen'|trans({ gen_time }, 'app_default')|colorize }}
 {% endblock game_page_gen %}
-
-{# Menu of navigation with all links #}
-{% block navigation_menu %}
-    {% trans_default_domain 'app_default' %}
-
-    <div role="navigation">
-        {% for section, nav in navigation if nav|length > 0 or headers[section]['hiddeEmpty'] == false %}
-            {% set sectionText = navigation_create_header(section, headers[section]) %}
-            {% if sectionText %}
-                {{ sectionText }}
-                <br clear="all">
-            {% endif %}
-
-            {% for key, label in nav %}
-                {% set navText = navigation_create_link(label, navs[section][key]) %}
-                {% if navText %}
-                    {{ navText }}
-                    <br clear="all">
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
-    </div>
-{% endblock navigation_menu %}
 
 {% block pagination_jaxon %}
     {% trans_default_domain 'app_default' %}
@@ -168,14 +138,14 @@
                 <div class="ui pagination menu" role="navigation" aria-label="{{ 'parts.pagination.description'|trans({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|uncolorize }}">
                     <!-- Link to first page -->
                     {% if previous %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ first)|lotgd_url }}"><i class="fast backward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ first) }}"><i class="fast backward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="fast backward icon"></i></div>
                     {% endif %}
 
                     <!-- Link to previous page -->
                     {% if previous %}
-                        <a class="icon item" href="{{ (href ~ 'page=' ~ previous)|lotgd_url }}"><i class="step backward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" href="{{ (href ~ 'page=' ~ previous) }}"><i class="step backward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="step backward icon"></i></div>
                     {% endif %}
@@ -183,7 +153,7 @@
                     <!-- Links to number pages -->
                     {% for page in pagesInRange %}
                         {% if page != current %}
-                            <a class="item" aria-label="{{ 'parts.pagination.menu.page'|trans({'page': page})|uncolorize }}" href="{{ (href ~ 'page=' ~ page)|lotgd_url }}">{{ page }}</a>
+                            <a class="item" aria-label="{{ 'parts.pagination.menu.page'|trans({'page': page})|uncolorize }}" href="{{ (href ~ 'page=' ~ page) }}">{{ page }}</a>
                         {% else %}
                             <div class="active item" aria-hidden="true">
                                 {{ 'parts.pagination.menu.current'|trans({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|colorize }}
@@ -193,14 +163,14 @@
 
                     <!-- Link to next page -->
                     {% if next %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ next)|lotgd_url }}"><i class="step forward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ next) }}"><i class="step forward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="step forward icon"></i></div>
                     {% endif %}
 
                     <!-- Link to last page -->
                     {% if next %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ last)|lotgd_url }}"><i class="fast forward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ last) }}"><i class="fast forward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="fast forward icon"></i></div>
                     {% endif %}
@@ -210,14 +180,14 @@
                 <div class="ui pagination menu" role="navigation" aria-label="{{ 'parts.pagination.label'|trans|uncolorize }}">
                     <!-- Link to first page -->
                     {% if previous %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ first)|lotgd_url }}"><i class="fast backward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ first) }}"><i class="fast backward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="fast backward icon"></i></div>
                     {% endif %}
 
                     <!-- Link to previous page -->
                     {% if previous %}
-                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.previous'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ previous)|lotgd_url }}"><i class="step backward icon" aria-hidden="true"></i></a>
+                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.previous'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ previous) }}"><i class="step backward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="step backward icon"></i></div>
                     {% endif %}
@@ -227,14 +197,14 @@
 
                     <!-- Link to next page -->
                     {% if next %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ next)|lotgd_url }}"><i class="step forward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ next) }}"><i class="step forward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="step forward icon"></i></div>
                     {% endif %}
 
                     <!-- Link to last page -->
                     {% if next %}
-                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ last)|lotgd_url }}"><i class="fast forward icon" aria-hidden="true"></i></a>
+                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ last) }}"><i class="fast forward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="fast forward icon"></i></div>
                     {% endif %}

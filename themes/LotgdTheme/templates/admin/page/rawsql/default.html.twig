@@ -4,7 +4,7 @@
     {{ 'section.default.result.count'|trans({'n': rowCount})|colorize }}
 {% endif %}
 
-<form action="{{ 'rawsql.php'|lotgd_url }}" method="POST" class="ui form">
+<form action="{{ 'rawsql.php' }}" method="POST" class="ui form">
     <div class="field">
         <label for="sql">{{ 'section.default.form.textarea.sql.label'|trans|uncolorize }}</label>
         <textarea name="sql" id="sql">{{ sql }}</textarea>

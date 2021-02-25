@@ -1,6 +1,6 @@
 {% trans_default_domain textDomain %}
 
-<form action="{{ 'creatures.php?op=search'|lotgd_url }}" method="POST" class="ui form">
+<form action="{{ 'creatures.php?op=search' }}" method="POST" class="ui form">
     <div class="field">
         <div class="ui action input">
             <input name="q" id="q" placeholder="{{ 'section.default.form.input.search'|trans|uncolorize }}">
@@ -33,10 +33,10 @@
             <tr>
                 <td class="collapsing">
                     <div class="ui mini icon buttons">
-                        <a data-tooltip="{{ edit|uncolorize }}" aria-label="{{ edit|uncolorize }}" href="{{ ('creatures.php?op=edit&creatureid=' ~ creature.creatureid)|lotgd_url }}" class="ui icon button">
+                        <a data-tooltip="{{ edit|uncolorize }}" aria-label="{{ edit|uncolorize }}" href="{{ ('creatures.php?op=edit&creatureid=' ~ creature.creatureid) }}" class="ui icon button">
                             <i class='write icon'></i>
                         </a>
-                        <a data-tooltip="{{ del|uncolorize }}" aria-label="{{ del|uncolorize }}" href="{{ ('creatures.php?op=del&creatureid=' ~ creature.creatureid)|lotgd_url }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)" class="ui red icon button">
+                        <a data-tooltip="{{ del|uncolorize }}" aria-label="{{ del|uncolorize }}" href="{{ ('creatures.php?op=del&creatureid=' ~ creature.creatureid) }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)" class="ui red icon button">
                             <i class='trash icon'></i>
                         </a>
                     </div>

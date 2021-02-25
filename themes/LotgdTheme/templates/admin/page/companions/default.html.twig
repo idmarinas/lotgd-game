@@ -19,15 +19,15 @@
         <tr>
             <td class="collapsing">
                 <div class="ui mini icon buttons">
-                    <a href="{{ ('companions.php?op=edit&id=' ~ companion.companionid)|lotgd_url }}" class="ui button">{{ 'section.default.table.options.edit'|trans|colorize }}</a>
+                    <a href="{{ ('companions.php?op=edit&id=' ~ companion.companionid) }}" class="ui button">{{ 'section.default.table.options.edit'|trans|colorize }}</a>
                     {% if companion.companionactive %}
                         {{ delText }} |
-                        <a href="{{ ('companions.php?op=deactivate&id=' ~ companion.companionid)|lotgd_url }}" class="ui button">{{ 'section.default.table.options.deac'|trans|colorize }}</a> |
+                        <a href="{{ ('companions.php?op=deactivate&id=' ~ companion.companionid) }}" class="ui button">{{ 'section.default.table.options.deac'|trans|colorize }}</a> |
                     {% else %}
-                        <a href="{{ ('companions.php?op=del&id=' ~ companion.companionid)|lotgd_url }}" class="ui red button">{{ 'section.default.table.options.del'|trans|colorize }}</a> |
-                        <a href="{{ ('companions.php?op=activate&id=' ~ companion.companionid)|lotgd_url }}" class="ui button">{{ 'section.default.table.options.act'|trans|colorize }}</a> |
+                        <a href="{{ ('companions.php?op=del&id=' ~ companion.companionid) }}" class="ui red button">{{ 'section.default.table.options.del'|trans|colorize }}</a> |
+                        <a href="{{ ('companions.php?op=activate&id=' ~ companion.companionid) }}" class="ui button">{{ 'section.default.table.options.act'|trans|colorize }}</a> |
                     {% endif %}
-                    <a href="{{ ('companions.php?op=take&id=' ~ companion.companionid)|lotgd_url }}" class="ui button">{{ 'section.default.table.options.take'|trans|colorize }}</a>
+                    <a href="{{ ('companions.php?op=take&id=' ~ companion.companionid) }}" class="ui button">{{ 'section.default.table.options.take'|trans|colorize }}</a>
                 </div>
             </td>
             <td>{{ '`&%s`0'|format(companion.name)|colorize }}</td>
