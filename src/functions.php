@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/functions_old.php';
 
-/**
+/*
  * This file is part of Legend of the Green Dragon.
  *
  * @see https://github.com/idmarinas/lotgd-game
@@ -24,7 +24,7 @@ if ( ! \function_exists('e_rand'))
     {
         if ( ! \is_numeric($min))
         {
-            return \mt_rand();
+            return \random_int(0, \mt_getrandmax());
         }
         $min = \round($min);
 
@@ -34,7 +34,7 @@ if ( ! \function_exists('e_rand'))
         }
         $max = \round($max);
 
-        return \mt_rand(\min($min, $max), \max($min, $max));
+        return \random_int(\min($min, $max), \max($min, $max));
     }
 }
 
@@ -52,17 +52,17 @@ if ( ! \function_exists('r_rand'))
     {
         if ( ! \is_numeric($min))
         {
-            return \mt_rand();
+            return \random_int(0, \mt_getrandmax());
         }
         $min *= 1000;
 
         if ( ! \is_numeric($max))
         {
-            return \mt_rand($min) / 1000;
+            return \random_int($min, \mt_getrandmax()) / 1000;
         }
         $max *= 1000;
 
-        return \mt_rand(\min($min, $max), \max($min, $max)) / 1000;
+        return \random_int(\min($min, $max), \max($min, $max)) / 1000;
     }
 }
 

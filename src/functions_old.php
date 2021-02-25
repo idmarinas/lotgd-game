@@ -10,11 +10,11 @@
  *
  * @since 4.10.0
  */
-
-if ( ! function_exists(''))
+if ( ! \function_exists(''))
 {
     function bell_rand($min = false, $max = false)
     {
+        $val = null;
         global $bell_curve;
 
         if (false === $min && false === $max)
@@ -617,7 +617,7 @@ if ( ! function_exists(''))
                 99997 => 1.712548831,
             ];
         }
-        $r = \mt_rand(0, 100000);
+        $r = \random_int(0, 100000);
         \reset($bell_curve);
 
         foreach ($bell_curve as $key => $val)
