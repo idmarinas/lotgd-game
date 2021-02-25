@@ -90,13 +90,13 @@
                     <td class="collapsing">
                         {% if user.clanrank >= constant('CLAN_OFFICER') and member.clanrank <= user.clanrank %}
                             {% if member.clanrank <= user.clanrank and member.acctid != user.acctid and member.clanrank < constant('CLAN_FOUNDER') and user.clanrank >= constant('CLAN_ADMINISTRATIVE') %}
-                                {% set deleteButton = '<a class="ui red icon button top aligned" data-tooltip="' ~ remove ~ '" href="' ~ ('clan.php?op=membership&remove=' ~ member.acctid)|lotgd_url ~ '" onclick="Lotgd.confirm(this, event)" data-options="' ~ options|e('html_attr') ~ '"><i class="remove user icon"></i></a>' %}
+                                {% set deleteButton = '<a class="ui red icon button top aligned" data-tooltip="' ~ remove ~ '" href="' ~ ('clan.php?op=membership&remove=' ~ member.acctid) ~ '" onclick="Lotgd.confirm(this, event)" data-options="' ~ options|e('html_attr') ~ '"><i class="remove user icon"></i></a>' %}
                             {% else %}
                                 {% set deleteButton = '<a class="ui disabled red icon button tooltip top aligned" data-tooltip="' ~ remove ~ '"><i class="remove user icon"></i></a>' %}
                             {% endif %}
 
                             {% if constant('CLAN_FOUNDER') == member.clanrank and member.acctid == user.acctid %}
-                                <form action="{{ 'clan.php?op=membership'|lotgd_url }}" method="POST">
+                                <form action="{{ 'clan.php?op=membership' }}" method="POST">
                                     <input type="hidden" name="setrank" value="30">
                                     <input type="hidden" name="whoacctid" value="{{ member.acctid }}">
                                     <button type="submit" class="ui orange button" data-options="{{ optionsFounder|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">{{ stepdown }}</button>
@@ -104,7 +104,7 @@
                                     {{ deleteButton }}
                                 </form>
                             {% elseif constant('CLAN_FOUNDER') != member.clanrank %}
-                                <form action="{{ 'clan.php?op=membership'|lotgd_url }}" method="POST">
+                                <form action="{{ 'clan.php?op=membership' }}" method="POST">
                                     <input type="hidden" name="whoacctid" value="{{ member.acctid }}">
                                     <select class='ui combo lotgd dropdown' name='setrank'>
                                         {% for key, rank in validRanks if key <= user.clanrank and constant('CLAN_FOUNDER') != key %}
@@ -147,7 +147,7 @@
         </blockquote>
     {% endif %}
 
-    <form action="{{ 'clan.php?op=motd'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+    <form action="{{ 'clan.php?op=motd' }}" method="POST" autocomplete="off" class="ui form">
         <div class="field">
             <label for="clanmotd">{{ 'section.motd.form.clanmotd.label'|trans|colorize }}</label>
             <textarea name="clanmotd" id="clanmotd">{{ clanInfo.clanmotd|e('html') }}</textarea>
@@ -182,7 +182,7 @@
     {% endif %}
 
     {% for clan in clanList %}
-        &#149; <a href="{{ ('clan.php?op=apply&clanid=' ~ clan.clanid )|lotgd_url }}">{{ clan.clanname|uncolorize }}</a>
+        &#149; <a href="{{ ('clan.php?op=apply&clanid=' ~ clan.clanid ) }}">{{ clan.clanname|uncolorize }}</a>
         &#60;{{ clan.clanshort|uncolorize }}&#62;
         ({{ 'section.applicant.apply.clan.members'|trans({ 'n': clan.members })|colorize }}) <br>
     {% else %}
@@ -198,7 +198,7 @@
             <i class="close icon"></i>
             <div class="header">{{ 'section.detail.form.title'|trans|colorize }}</div>
             <div class="content">
-                <form id="formEditClan" action="{{ ('clan.php?op=detail&clanid=' ~ clanDetail.clanid)|lotgd_url }}" method="POST" class="ui form">
+                <form id="formEditClan" action="{{ ('clan.php?op=detail&clanid=' ~ clanDetail.clanid) }}" method="POST" class="ui form">
                     <div class="field">
                         <label for="clanname">{{ 'section.detail.form.label.name'|trans|colorize }}</label>
                         <input id="clanname" name="clanname" value="{{ clanDetail.clanname|e }}" />
@@ -249,7 +249,7 @@
                 {% set totalDragonkills = totalDragonkills + member.dragonkills %}
                 <tr>
                     <td>{{ ranksNames[member.clanrank]|trans|colorize }}</td>
-                    <td>{{ '`&<a href="%s">%s</a>`0'|format(('bio.php?char=' ~ member.acctid ~ '&ret=' ~ returnLink|e('url'))|lotgd_url, member.name)|colorize }}</td>
+                    <td>{{ '`&<a href="%s">%s</a>`0'|format(('bio.php?char=' ~ member.acctid ~ '&ret=' ~ returnLink|e('url')), member.name)|colorize }}</td>
                     <td>{{ '`^%s`0'|format(member.level)|colorize }}</td>
                     <td>{{ '`$%s`0'|format(member.dragonkills)|colorize }}</td>
                     <td>{{ '`${date,date} {date,time}`0'|tmf({ 'date': member.clanjoindate })|colorize }}</td>
@@ -269,7 +269,7 @@
     {% endif %}
 
     {% for clan in clanList %}
-        &#149; <a href="{{ ('clan.php?op=detail&clanid=' ~ clan.clanid )|lotgd_url }}">{{ clan.clanname|uncolorize }}</a>
+        &#149; <a href="{{ ('clan.php?op=detail&clanid=' ~ clan.clanid ) }}">{{ clan.clanname|uncolorize }}</a>
         &#60;{{ clan.clanshort|uncolorize }}&#62;
         ({{ 'section.list.clan.members'|trans({ 'n': clan.members })|colorize }}) <br>
     {% else %}

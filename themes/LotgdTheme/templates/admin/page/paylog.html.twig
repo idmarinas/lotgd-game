@@ -27,13 +27,13 @@
                 <td>{{ log.processed ? yes : no }}</td>
                 <td>
                     {% if log.name %}
-                        <a href="{{ ('user.php?op=edit&user_id=' ~ log.acctid)|lotgd_url }}">
+                        <a href="{{ ('user.php?op=edit&user_id=' ~ log.acctid) }}">
                             {{ '`&%s`0 (%s/%s)'|format(log.name, log.donationspent|numeral, log.donation|numeral)|colorize }}
                         </a>
                     {% else %}
                         {% set amt = (log.info.mc_gross * 100)|round %}
                         {% set name = log.info.memo ?: '' %}
-                        -=(<a href="{{ ('donators.php?op=add1&name=' ~ memo|e('url') ~ '&amt=' ~ amt ~ '&txnid=' ~ log.txnid)|lotgd_url }}">
+                        -=(<a href="{{ ('donators.php?op=add1&name=' ~ memo|e('url') ~ '&amt=' ~ amt ~ '&txnid=' ~ log.txnid) }}">
                             {{ memo }}
                         </a>)=-
                     {% endif %}

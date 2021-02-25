@@ -14,7 +14,7 @@
             <i class="top right corner add green icon"></i>
         </i>
         <div class="content">
-            <a class="header" href="{{ ('donators.php?op=save&id=' ~ donation.acctid ~ '&amt=' ~ amt ~ '&reason=' ~ reason|e('url') ~ '&txnid=' ~ txnid)|lotgd_url }}">
+            <a class="header" href="{{ ('donators.php?op=save&id=' ~ donation.acctid ~ '&amt=' ~ amt ~ '&reason=' ~ reason|e('url') ~ '&txnid=' ~ txnid) }}">
                 {{ donation.name|colorize }}
             </a>
             <div class="description">{{ 'section.add.donation.detail'|trans({ 'have': donation.donation, 'spent': donation.donationspent  })|colorize }}</div>

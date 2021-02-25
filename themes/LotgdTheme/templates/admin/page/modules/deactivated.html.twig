@@ -2,7 +2,7 @@
 
 <h4>{{ 'subtitle.desactivated'|trans(_context)|colorize }}</h4>
 
-<form action="{{ ('modules.php?op=mass&cat=deactivated')|lotgd_url }}" method="POST" class="ui form">
+<form action="{{ ('modules.php?op=mass&cat=deactivated') }}" method="POST" class="ui form">
     <table class="ui small very compact striped table">
         <thead>
             <tr>
@@ -24,18 +24,18 @@
                         {% set activate = module.active ? 'deactivate' : 'activate' %}
                         {% set active = module.active ? 'active' : 'inactive' %}
                         <div class="ui mini icon buttons">
-                            <a class="ui {{ module.active ? 'green' : 'orange' }} button" data-tooltip="{{ ('table.tbody.' ~ activate)|trans|uncolorize }}" href="{{ ('modules.php?op=' ~ activate ~ '&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}">
+                            <a class="ui {{ module.active ? 'green' : 'orange' }} button" data-tooltip="{{ ('table.tbody.' ~ activate)|trans|uncolorize }}" href="{{ ('modules.php?op=' ~ activate ~ '&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url')) }}">
                                 <i class="power icon"></i>
                             </a>
-                            <a class="ui red button" id="{{ module.modulename }}" data-tooltip="{{ 'table.tbody.uninstall'|trans|uncolorize }}" href="{{ ('modules.php?op=uninstall&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">
+                            <a class="ui red button" id="{{ module.modulename }}" data-tooltip="{{ 'table.tbody.uninstall'|trans|uncolorize }}" href="{{ ('modules.php?op=uninstall&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url')) }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">
                                 <i class="remove icon"></i>
                             </a>
-                            <a class="ui button" data-tooltip="{{ 'table.tbody.reinstall'|trans|uncolorize }}" href="{{ ('modules.php?op=reinstall&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}">
+                            <a class="ui button" data-tooltip="{{ 'table.tbody.reinstall'|trans|uncolorize }}" href="{{ ('modules.php?op=reinstall&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url')) }}">
                                 <i class="undo icon"></i>
                             </a>
                             {% if SU_EDIT_CONFIG %}
                                 {% if '|settings|' in module.infokeys %}
-                                    <a class="ui blue button" data-tooltip="{{ 'table.tbody.strsettings'|trans|uncolorize }}" href="{{ ('configuration.php?setting=module&module=' ~ module.modulename)|lotgd_url }}">
+                                    <a class="ui blue button" data-tooltip="{{ 'table.tbody.strsettings'|trans|uncolorize }}" href="{{ ('configuration.php?setting=module&module=' ~ module.modulename) }}">
                                         <i class="settings icon"></i>
                                     </a>
                                 {% else %}

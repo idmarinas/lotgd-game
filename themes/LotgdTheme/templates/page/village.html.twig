@@ -39,7 +39,7 @@
         {{ newtext|trans({'name': newestname })|colorize }}
 
         {% if SU_EDIT_USERS and newestplayer %}
-            [<a href="{{ ('user.php?op=edit&userid=' ~ newestplayer)|lotgd_url }}">{{ 'opt.edit'|trans({}, 'app_default') }}</a>]
+            [<a href="{{ ('user.php?op=edit&userid=' ~ newestplayer) }}">{{ 'opt.edit'|trans({}, 'app_default') }}</a>]
         {% endif %}
     {% endif %}
     <br>

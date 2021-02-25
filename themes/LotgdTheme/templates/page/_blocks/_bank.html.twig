@@ -9,7 +9,7 @@
 
     {{ 'borrow.paragraph'|trans({ 'name': user.name, 'n': maxborrow })|colorize }}
 
-    <form action="{{ 'bank.php?op=withdrawfinish'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+    <form action="{{ 'bank.php?op=withdrawfinish' }}" method="POST" autocomplete="off" class="ui form">
         <input type="hidden" name="borrow" value="x">
         <div class="field">
             <div class="ui action input">
@@ -32,7 +32,7 @@
 
     {{ 'deposit.searching'|trans({ 'gold': user.gold, 'ownerName': ownerName })|colorize }}
 
-    <form action="{{ 'bank.php?op=depositfinish'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+    <form action="{{ 'bank.php?op=depositfinish' }}" method="POST" autocomplete="off" class="ui form">
         <div class="field">
             <label for="amount">
                 {% if user.goldinbank >= 0 %}
@@ -88,7 +88,7 @@
             {{ 'transfer.transferred'|trans({'transferred': user.amountouttoday})|colorize }}
         {% endif %}
         <br>
-        <form action="{{ 'bank.php?op=transfer2'|lotgd_url }}" method="POST" class="ui form" autocomplete="off">
+        <form action="{{ 'bank.php?op=transfer2' }}" method="POST" class="ui form" autocomplete="off">
             <div class="field">
                 <label for="amount">{{ 'transfer.form.input.amount'|trans|colorize }}</label>
                 <input type="number" name="amount" id="amount">
@@ -114,7 +114,7 @@
     {% set count = characters|length %}
 
     {% if count == 1 %}
-        <form action="{{ 'bank.php?op=transfer3'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+        <form action="{{ 'bank.php?op=transfer3' }}" method="POST" autocomplete="off" class="ui form">
             <input type="hidden" name="to" value="{{ characters[0].id }}">
             <input type="hidden" name="amount" value="{{ amount }}">
             <div class="field">
@@ -128,7 +128,7 @@
         {% if count == 100 %}
             {{ 'transfer2.results.toMuch'|trans({'ownerName': ownerName})|colorize }}
         {% endif %}
-        <form action="{{ 'bank.php?op=transfer3'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+        <form action="{{ 'bank.php?op=transfer3' }}" method="POST" autocomplete="off" class="ui form">
             <input type="hidden" name="amount" value="{{ amount }}">
             <div class="field">
                 <label for="to">{{ 'transfer2.form.results'|trans({ 'amount': amount })|colorize }}</label>
@@ -183,7 +183,7 @@
 
     {{ 'withdraw.paragraph'|trans({ 'name': user.name })|colorize }}
 
-    <form action="{{ 'bank.php?op=withdrawfinish'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+    <form action="{{ 'bank.php?op=withdrawfinish' }}" method="POST" autocomplete="off" class="ui form">
         <div class="field">
             <div class="ui action input">
                 <input id="input" name="amount">

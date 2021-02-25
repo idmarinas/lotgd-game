@@ -36,7 +36,7 @@
                         {% if weapon.value <= (user.gold + tradeinvalue) %}
                             {% if not unavailable %}
                                 {% set color = '`&' %}
-                                <a href='{{ ('weapons.php?op=buy&id=' ~ weapon.weaponid)|lotgd_url }}'>{{ (color ~ weapon.weaponname ~ '`0')|colorize }}</a>
+                                <a href='{{ ('weapons.php?op=buy&id=' ~ weapon.weaponid) }}'>{{ (color ~ weapon.weaponname ~ '`0')|colorize }}</a>
                             {% else %}
                                 {% set color = '`7' %}
                                 {{ (color ~ weapon.weaponname ~ '`0')|colorize }}

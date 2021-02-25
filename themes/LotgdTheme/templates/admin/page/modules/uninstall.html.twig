@@ -2,7 +2,7 @@
 
 <h4>{{ 'subtitle.uninstall'|trans|colorize }}</h4>
 
-<form action="{{ ('modules.php?op=mass')|lotgd_url }}" method="POST" class="ui form">
+<form action="{{ ('modules.php?op=mass') }}" method="POST" class="ui form">
     <table class="ui small very compact striped table">
         <thead>
             <tr>
@@ -22,7 +22,7 @@
                             <div class="ui lotgd checkbox"><input type="checkbox" name="module[]" value="{{ module.modulename }}"></div>
                         </td>
                         <td class="collapsing">
-                            <a class="ui mini icon {{ module.canInstall ? '' : 'red disabled' }} button" href="{{ ('modules.php?op=install&module=' ~ module.shortname ~ '&cat=' ~ module.category|e('url'))|lotgd_url }}" data-tooltip="{{ 'table.tbody.install'|trans|uncolorize }}">
+                            <a class="ui mini icon {{ module.canInstall ? '' : 'red disabled' }} button" href="{{ ('modules.php?op=install&module=' ~ module.shortname ~ '&cat=' ~ module.category|e('url')) }}" data-tooltip="{{ 'table.tbody.install'|trans|uncolorize }}">
                                 <i aria-hidden="true" class="configure icon"></i>
                             </a>
                         </td>
