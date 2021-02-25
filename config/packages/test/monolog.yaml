@@ -5,7 +5,13 @@ monolog:
             action_level: error
             handler: nested
             excluded_http_codes: [404, 405]
-            channels: ["!event"]
+            channels: ["!event", "!security"]
+        security:
+            # log all messages (since debug is the lowest level)
+            level: debug
+            type: stream
+            path: '%kernel.logs_dir%/%kernel.environment%_security.log'
+            channels: [security]
         nested:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
