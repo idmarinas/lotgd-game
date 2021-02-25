@@ -30,7 +30,7 @@ if ( ! \function_exists('e_rand'))
 
         if ( ! \is_numeric($max))
         {
-            return $min;
+            return \random_int($min, \mt_getrandmax());
         }
         $max = \round($max);
 
@@ -63,38 +63,6 @@ if ( ! \function_exists('r_rand'))
         $max *= 1000;
 
         return \random_int(\min($min, $max), \max($min, $max)) / 1000;
-    }
-}
-
-if ( ! \function_exists('arraytourl'))
-{
-    /**
-     * Turns an array into an URL argument string.
-     *
-     * Takes an array and encodes it in key=val&key=val form.
-     * Does not add starting ?
-     *
-     * @param array $array The array to turn into an URL
-     *
-     * @return string The URL
-     */
-    function arraytourl($array)
-    {
-        //takes an array and encodes it in key=val&key=val form.
-        $url = '';
-        $i   = 0;
-
-        foreach ($array as $key => $val)
-        {
-            if ($i > 0)
-            {
-                $url .= '&';
-            }
-            ++$i;
-            $url .= \rawurlencode($key).'='.\rawurlencode($val);
-        }
-
-        return $url;
     }
 }
 
