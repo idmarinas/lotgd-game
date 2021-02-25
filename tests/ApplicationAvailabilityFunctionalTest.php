@@ -39,7 +39,7 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
     public function provideUrls()
     {
         return [
-            // ['/'],
+            ['/'],
             ['/about'],
             ['/about/license'],
             ['/about/bundles'],
