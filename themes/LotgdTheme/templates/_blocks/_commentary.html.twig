@@ -17,7 +17,7 @@
                 {% endif %}
             {% endfor %}
         {% else %}
-            <form action="{{ formUrl|lotgd_url }}" method="POST" autocomplete="off">
+            <form action="{{ formUrl }}" method="POST" autocomplete="off">
                 <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|trans({}, 'app_commentary')|uncolorize }}</button>
                 {% for comment in comments|reverse %}
                     {{ display_one_comment(comment, textDomain, commentary) }}
@@ -82,7 +82,7 @@
             </div>
             {# Actions for see bio and send mail to the author of comment #}
             {% if comment.command != 'game' %}
-                {% set bioLink = ('bio.php?char=' ~ comment.author ~ '&ret=' ~ returnLink|e('url'))|lotgd_url %}
+                {% set bioLink = ('bio.php?char=' ~ comment.author ~ '&ret=' ~ returnLink|e('url')) %}
                 {% set bioLabel = 'form.button.bio'|trans({'name': comment.authorName|uncolorize|trim}, 'app_commentary') %}
                 {% set mailLabel = 'form.button.mail'|trans({'name': comment.authorName|uncolorize|trim}, 'app_commentary') %}
 
@@ -102,7 +102,7 @@
 {% block commentary_add %}
     {% trans_default_domain textDomain %}
 
-    <form id="commentary-form" action="{{ formUrl|lotgd_url }}" method="POST" autocomplete="off">
+    <form id="commentary-form" action="{{ formUrl }}" method="POST" autocomplete="off">
         <input type="hidden" name="section" value="{{ commentary.section }}">
 
         <div class="ui fluid action input">
@@ -141,14 +141,14 @@
                 <div class="ui pagination menu" role="navigation" aria-label="{{ 'parts.pagination.description'|trans({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|uncolorize }}">
                     <!-- Link to first page -->
                     {% if previous %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ first)|lotgd_url }}"><i class="fast backward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ first) }}"><i class="fast backward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="fast backward icon"></i></div>
                     {% endif %}
 
                     <!-- Link to previous page -->
                     {% if previous %}
-                        <a class="icon item" href="{{ (href ~ 'commentPage=' ~ previous)|lotgd_url }}"><i class="step backward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" href="{{ (href ~ 'commentPage=' ~ previous) }}"><i class="step backward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="step backward icon"></i></div>
                     {% endif %}
@@ -156,7 +156,7 @@
                     <!-- Links to number pages -->
                     {% for page in pagesInRange %}
                         {% if page != current %}
-                            <a class="item" aria-label="{{ 'parts.pagination.menu.page'|trans({'page': page})|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ page)|lotgd_url }}">{{ page }}</a>
+                            <a class="item" aria-label="{{ 'parts.pagination.menu.page'|trans({'page': page})|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ page) }}">{{ page }}</a>
                         {% else %}
                             <div class="active item" aria-hidden="true">
                                 {{ 'parts.pagination.menu.current'|trans({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|colorize }}
@@ -166,14 +166,14 @@
 
                     <!-- Link to next page -->
                     {% if next %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ next)|lotgd_url }}"><i class="step forward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ next) }}"><i class="step forward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="step forward icon"></i></div>
                     {% endif %}
 
                     <!-- Link to last page -->
                     {% if next %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ last)|lotgd_url }}"><i class="fast forward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ last) }}"><i class="fast forward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="fast forward icon"></i></div>
                     {% endif %}
@@ -183,14 +183,14 @@
                 <div class="ui pagination menu" role="navigation" aria-label="{{ 'parts.pagination.label'|trans|uncolorize }}">
                     <!-- Link to first page -->
                     {% if previous %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ first)|lotgd_url }}"><i class="fast backward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ first) }}"><i class="fast backward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="fast backward icon"></i></div>
                     {% endif %}
 
                     <!-- Link to previous page -->
                     {% if previous %}
-                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.previous'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ previous)|lotgd_url }}"><i class="step backward icon" aria-hidden="true"></i></a>
+                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.previous'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ previous) }}"><i class="step backward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="step backward icon"></i></div>
                     {% endif %}
@@ -200,14 +200,14 @@
 
                     <!-- Link to next page -->
                     {% if next %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ next)|lotgd_url }}"><i class="step forward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ next) }}"><i class="step forward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="step forward icon"></i></div>
                     {% endif %}
 
                     <!-- Link to last page -->
                     {% if next %}
-                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ last)|lotgd_url }}"><i class="fast forward icon" aria-hidden="true"></i></a>
+                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ last) }}"><i class="fast forward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="fast forward icon"></i></div>
                     {% endif %}
@@ -223,7 +223,7 @@
 
     {# Show comments (new comment included) #}
     <div class="ui minimal small comments">
-        <form action="{{ formUrl|lotgd_url }}" method="POST" autocomplete="off">
+        <form action="{{ formUrl }}" method="POST" autocomplete="off">
             <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|trans({}, 'app_commentary')|uncolorize }}</button>
             {% for section, comment in comments|reverse %}
                 <h5 class="ui dividing header">{{ sections[section]|default(section)  }}</h5>

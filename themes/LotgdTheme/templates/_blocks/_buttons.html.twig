@@ -55,13 +55,13 @@
     {# Show only to administrator that have user edit permits #}
     {% if canEditUsers %}
         <span> | </span>
-        <a class="ui tertiary button " href="{{ 'user.php'|lotgd_url }}">{{ 'parts.petition.editUser'|trans|colorize }}</a>
+        <a class="ui tertiary button " href="{{ 'user.php' }}">{{ 'parts.petition.editUser'|trans|colorize }}</a>
     {% endif %}
 
     {# Show only to administrators that have petitions edit permits #}
     {% if canEditPetitions %}
         <br>
-        <a class="ui tertiary button " href='{{ 'viewpetition.php'|lotgd_url }}'>{{ 'parts.petition.admin'|trans|colorize }}:</a>
+        <a class="ui tertiary button " href='{{ 'viewpetition.php' }}'>{{ 'parts.petition.admin'|trans|colorize }}:</a>
         {{ 'parts.petition.status.05'|trans({'n': petitions.5 })|colorize }} <span>|</span>
         {{ 'parts.petition.status.04'|trans({'n': petitions.4 })|colorize }} <span>|</span>
         {{ 'parts.petition.status.00'|trans({'n': petitions.0 })|colorize }} <span>|</span>

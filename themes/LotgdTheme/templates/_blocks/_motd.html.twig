@@ -140,7 +140,7 @@
             </div>
             <div class="ui hidden divider"></div>
             <div class="content">
-                <form class="ui small items" action="{{ 'motd.php?op=vote'|lotgd_url }}" method="POST">
+                <form class="ui small items" action="{{ 'motd.php?op=vote' }}" method="POST">
                     <input type="hidden" name="motditem" value="{{ motd.motditem }}">
                     {% set vote = 'item.poll.vote'|trans|uncolorize %}
                     {% if user.loggedin %}
