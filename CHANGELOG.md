@@ -83,7 +83,18 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
     -   Remove function `base_path()`
     -   Remove filter `lotgd_url` not need in Symfony App
     -   Remove functions `var_dump()` and `bdump()`, use `dump()` instead
-    -   Remove function `head_title()` this function not have much more usseful. Use block `lotgd_core_head_title` in template.
+    -   Remove function `head_title()` this function not have much more usseful. Use block `{% block lotgd_core_head_title %}New Title{% endblock %}` in template.
+    -   Remove function `game_version()` this function is not necessary, use Twig Global var `{{ lotgd_core_version }}`
+-   **BC** Global functions:
+    -   `is_mail`, no in use in this version, can use Symfony Validator
+    -   `_curl`, not in use in this version, can use Symfony Http-Client
+    -   `_sock`, not in use in this version, can use Symfony Http-Client
+    -   `list_files`, not in use in this version, can use Symfony Finder
+    -   `myDefine`, not in use.
+    -   `pullurl`, not in use.
+    -   `safeescape`, not in use.
+    -   `createstring`, not in use.
+    -   `urltoarray`, not in use.
 
 ### :notebook: NOTES
 

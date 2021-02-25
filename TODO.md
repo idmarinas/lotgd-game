@@ -156,3 +156,5 @@ composer dump-env prod
 ./vendor/bin/phan --init --init-level=3
 
 composer install --no-dev --no-suggest --optimize-autoloader
+
+vendor/bin/rector process --dry-run
