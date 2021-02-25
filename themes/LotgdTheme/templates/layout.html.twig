@@ -2,16 +2,16 @@
 
 {% use '_layout.html.twig' %}
 
-{% block lotgd_head_css %}
+{% block lotgd_core_head_css %}
     {{ parent() }}
     {{ encore_entry_link_tags('lotgd_theme', 'lotgd', 'lotgd') }}
 {% endblock %}
 
-{% block lotgd_footer_js %}
+{% block lotgd_core_footer_js %}
     {{ encore_entry_script_tags('lotgd_theme', 'lotgd', 'lotgd') }}
 {% endblock %}
 
-{% block lotgd_body %}
+{% block lotgd_core_body %}
     <table class="lotgd table">
         <tr>
             <td>{{ block('layout_header') }}</td>
@@ -22,9 +22,6 @@
                     <tr>
                         <td class="top aligned navigation">
                             {{ block('layout_navigation') }}
-                            {# Start advertising module #}
-                            {{ google_ad('ad_column_navigation_bottom') }}
-                            {# End advertising module #}
                         </td>
                         <td class="top aligned">
                             <table class="lotgd table">
@@ -39,18 +36,14 @@
                                         <table class="lotgd table">
                                             <tr>
                                                 <td class="top aligned left aligned">
-                                                    {# Start advertising module #}
-                                                    {{ google_ad('ad_body') }}
-                                                    {# End advertising module #}
+                                                    {# Display all flash messages #}
+                                                    {% include '_partials/_flash_messages.html.twig' with { 'flashes': app.flashes } %}
 
-                                                    {# Show all alert messages #}
-                                                    {{ show_flash_messages() }}
-
-                                                    {% if event %}
+                                                    {# {% if event %}
                                                         <h1 class="center aligned">{{ event[0]|trans(event[1], event[2])|colorize }}</h1>
-                                                    {% endif %}
+                                                    {% endif %} #}
                                                     {# This is all content of game #}
-                                                    {% block lotgd_body_content %}{{ content }}{% endblock %}
+                                                    {% block lotgd_core_body_content %}{% endblock %}
                                                 </td>
                                             </tr>
                                         </table>
@@ -75,4 +68,4 @@
             <td>{{ block('layout_footer') }}</td>
         </tr>
     </table>
-{% endblock lotgd_body %}
+{% endblock lotgd_core_body %}

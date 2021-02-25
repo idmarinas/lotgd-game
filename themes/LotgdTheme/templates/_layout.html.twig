@@ -10,7 +10,7 @@
                     </tr>
                     <tr>
                         <td class="border tlt"></td>
-                        <td class="lotgd-text-nowrap"><span class='pagetitle'>&#149; {{ head_title().renderTitle()|uncolorize }}</span></td>
+                        <td class="lotgd-text-nowrap"><span class='pagetitle'>&#149; {{ block('lotgd_core_head_title') }}</span></td>
                         <td class="border trt"></td>
                     </tr>
                     <tr>
@@ -23,21 +23,13 @@
             <td class="top aligned right aligned"><img src="{{ asset('build/lotgd/images/logo.jpg', 'lotgd') }}" width="465" height="71" alt="The Legend of the Green Dragon Logo"></td>
         </tr>
         <tr>
-            <td class="top aligned" colspan='2'>
-                <table class="lotgd table">
-                    <tr>
-                        {# Start advertising module #}
-                        <td class="collapsing">{{ google_ad('ad_header') }}</td>
-                        {# End advertising module #}
-
-                        <td class="right aligned bottom aligned">
-                            {{ message_of_the_day() }} |
-                            {{ ye_olde_mail() }} |
-                            {{ user_petition() }}
-                            {{ admin_petition() }}
-                        </td>
-                    </tr>
-                </table>
+            <td class="right aligned bottom aligned">
+            {#
+                {{ message_of_the_day() }} |
+                {{ ye_olde_mail() }} |
+                {{ user_petition() }}
+                {{ admin_petition() }}
+            #}
             </td>
         </tr>
     </table>
@@ -56,7 +48,14 @@
                 <table class="lotgd table">
                     <tr>
                         <td class="top aligned">{{ game_copyright() }} <br> Design: Jade Template &copy; Josh Canning 2004 of <a href='http://hfs.cjb.net/' target="_blank" rel="noopener noreferrer">HFS</a></td>
-                        <td class="top aligned right aligned collapsing">{{ game_source() }}<br />{{ game_version() }}<br />{{ game_page_gen() }}</td>
+                        <td class="top aligned right aligned collapsing">
+                            <a href="{{ path('lotgd_core_about_license') }}">{{ 'core.menu.license'|trans({}, 'lotgd_core_navigation') }}</a> -
+                            <a href="{{ path('lotgd_core_home') }}">{{ 'core.menu.source'|trans({}, 'lotgd_core_navigation') }}</a>
+                            <br>
+                            {{ lotgd_core_version }}
+                            <br>
+                            {{ game_page_gen() }}
+                        </td>
                     </tr>
                 </table>
             </td>
@@ -80,7 +79,7 @@
         <tr>
             <td class="border tlt"></td>
             <td class="lotgd top aligned nav">
-                <div class="left aligned">{{ navigation_menu() }}</div>
+                <div class="left aligned">{{ knp_menu_render(lotgd_core_menu, {'currentAsLink': false}) }}</div>
             </td>
             <td class="border trt"></td>
         </tr>
@@ -102,10 +101,10 @@
         <tr>
             <td class="border tlt"></td>
             <td class="top aligned nav left aligned lotgd-text-nowrap">
-                {{ stats }}
+                {# {{ stats }} #}
                 <p>&nbsp;</p>
-                {{ paypal }}
-                {{ sonata_block_render({ 'type': 'lotgd.core.template.block.donation.buttons'}) }}
+                {# {{ paypal }} #}
+                {# {{ sonata_block_render({ 'type': 'lotgd.core.template.block.donation.buttons'}) }} #}
             </td>
             <td class="border trt"></td>
         </tr>
