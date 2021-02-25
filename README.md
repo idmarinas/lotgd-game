@@ -1,5 +1,6 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=alert_status)](https://sonarcloud.io/dashboard?id=lotgd-game)
 ![PHP Composer](https://github.com/idmarinas/lotgd-game/workflows/PHP%20Composer/badge.svg?branch=master)
+[![SonarCloud](https://github.com/idmarinas/lotgd-game/actions/workflows/sonar-cloud.yml/badge.svg)](https://github.com/idmarinas/lotgd-game/actions/workflows/sonar-cloud.yml)
 
 ![GitHub release](https://img.shields.io/github/release/idmarinas/lotgd-game.svg)
 ![GitHub Release Date](https://img.shields.io/github/release-date/idmarinas/lotgd-game.svg)
