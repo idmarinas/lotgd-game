@@ -34,6 +34,7 @@ services:
             - '../src/functions.php'
             - '../src/functions_old.php'
             - '../src/Kernel.php'
+            - '../src/Jaxon/'
             # Ignore old files
             - '../src/ajax/'
             - '../src/core/'
