@@ -1,0 +1,3 @@
+password.not.match: The password fields must match.
+entity:
+    user.username.not.unique: There is already an account with this username
