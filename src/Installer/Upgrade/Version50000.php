@@ -19,7 +19,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class Version50000 extends InstallerAbstract
 {
     protected $upgradeVersion = 50000;
-    protected $hasMigration = false;
+    protected $migration      = 0;
 
     //-- Delete old files
     public function step0()
@@ -33,7 +33,7 @@ class Version50000 extends InstallerAbstract
                 $this->getProjectDir().'/config/development.config.php',
                 $this->getProjectDir().'/config/development.config.php.dist',
                 $this->getProjectDir().'/config/development/',
-                $this->getProjectDir().'/config/autoload/'
+                $this->getProjectDir().'/config/autoload/',
             ]);
         }
         catch (\Throwable $th)

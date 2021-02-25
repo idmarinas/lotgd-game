@@ -257,12 +257,8 @@ final class LotgdInstallCommand extends Command
 
     private function createUserAdmin(InputInterface $input, OutputInterface $output)
     {
-        /** @var Lotgd\Core\EntityRepository\AccountsRepository */
-        $repository = $this->doctrine->getRepository('LotgdCore:Accounts');
-        $superusers = (bool) $repository->getSuperuserCountWithPermit(SU_MEGAUSER);
-
         //-- Not run if server have 1 admin
-        if ($superusers)
+        if ($this->existSuperAdmin())
         { //-- If exist one super user not allow create more
             return false;
         }
@@ -272,6 +268,20 @@ final class LotgdInstallCommand extends Command
 
         $command = $this->getApplication()->find('lotgd:user:create');
         $command->run($input, $output);
+    }
+
+    private function existSuperAdmin()
+    {
+        /** @var Lotgd\Core\EntityRepository\UserRepository */
+        $repository = $this->doctrine->getRepository('LotgdCore:User');
+        $qb = $repository->createQueryBuilder('u');
+
+        return (bool) $qb->select('COUNT(1)')
+            ->where('u.roles LIKE :roles')
+            ->setParameter('roles', '%"ROLE_SUPER_ADMIN"%')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
     }
 
     private function getProgressBar($output)

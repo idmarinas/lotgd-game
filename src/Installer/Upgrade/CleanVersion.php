@@ -18,14 +18,14 @@ use Lotgd\Core\Installer\InstallerAbstract;
 class CleanVersion extends InstallerAbstract
 {
     protected $upgradeVersion = 'clean';
-    protected $hasMigration = 20210127183022;
+    protected $migration      = 20210127183022;
 
     //-- Insert data of armors.
     public function step0(): bool
     {
         try
         {
-            $sql = file_get_contents(__DIR__.'/data/clean/armor.sql');
+            $sql = \file_get_contents(__DIR__.'/data/clean/armor.sql');
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
@@ -42,7 +42,7 @@ class CleanVersion extends InstallerAbstract
     {
         try
         {
-            $sql = file_get_contents(__DIR__.'/data/clean/companion.sql');
+            $sql = \file_get_contents(__DIR__.'/data/clean/companion.sql');
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
@@ -59,7 +59,7 @@ class CleanVersion extends InstallerAbstract
     {
         try
         {
-            $sql = file_get_contents(__DIR__.'/data/clean/creature.sql');
+            $sql = \file_get_contents(__DIR__.'/data/clean/creature.sql');
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
@@ -76,7 +76,7 @@ class CleanVersion extends InstallerAbstract
     {
         try
         {
-            $sql = file_get_contents(__DIR__.'/data/clean/cronjob.sql');
+            $sql = \file_get_contents(__DIR__.'/data/clean/cronjob.sql');
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
@@ -93,7 +93,7 @@ class CleanVersion extends InstallerAbstract
     {
         try
         {
-            $sql = file_get_contents(__DIR__.'/data/clean/master.sql');
+            $sql = \file_get_contents(__DIR__.'/data/clean/master.sql');
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
@@ -110,7 +110,7 @@ class CleanVersion extends InstallerAbstract
     {
         try
         {
-            $sql = file_get_contents(__DIR__.'/data/clean/mount.sql');
+            $sql = \file_get_contents(__DIR__.'/data/clean/mount.sql');
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
@@ -127,7 +127,7 @@ class CleanVersion extends InstallerAbstract
     {
         try
         {
-            $sql = file_get_contents(__DIR__.'/data/clean/news.sql');
+            $sql = \file_get_contents(__DIR__.'/data/clean/news.sql');
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
@@ -144,7 +144,7 @@ class CleanVersion extends InstallerAbstract
     {
         try
         {
-            $sql = file_get_contents(__DIR__.'/data/clean/setting.sql');
+            $sql = \file_get_contents(__DIR__.'/data/clean/setting.sql');
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
@@ -161,7 +161,7 @@ class CleanVersion extends InstallerAbstract
     {
         try
         {
-            $sql = file_get_contents(__DIR__.'/data/clean/title.sql');
+            $sql = \file_get_contents(__DIR__.'/data/clean/title.sql');
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
@@ -178,7 +178,7 @@ class CleanVersion extends InstallerAbstract
     {
         try
         {
-            $sql = file_get_contents(__DIR__.'/data/clean/weapon.sql');
+            $sql = \file_get_contents(__DIR__.'/data/clean/weapon.sql');
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }

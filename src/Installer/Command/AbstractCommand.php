@@ -62,7 +62,7 @@ abstract class AbstractCommand extends Command
         $this->installer->start(); //-- Start install
 
         //-- Make a database migration
-        if ($this->migrateDataBase($this->installer->hasMigration()))
+        if ($this->migrateDataBase($this->installer->getMigration()))
         {
             $msg = $this->translator->trans('installer.installation.abort.database', [], InstallerAbstract::TRANSLATOR_DOMAIN);
             $output->writeln("<error>{$msg}</>");
@@ -103,9 +103,9 @@ abstract class AbstractCommand extends Command
         return Command::SUCCESS;
     }
 
-    protected function migrateDataBase(int $hasMigration)
+    protected function migrateDataBase(int $migration)
     {
-        if ( ! $hasMigration)
+        if ( ! $migration)
         {
             return Command::SUCCESS;
         }
@@ -115,7 +115,7 @@ abstract class AbstractCommand extends Command
         $this->bar->display();
 
         $input = new ArrayInput([
-            'version' => 'DoctrineMigrations\Version'.$hasMigration,
+            'version' => 'DoctrineMigrations\Version'.$migration,
             '--no-interaction' => true
         ]);
         $input->setInteractive(false); //-- Do not ask any interactive question

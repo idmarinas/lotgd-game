@@ -19,7 +19,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class Version50100 extends InstallerAbstract
 {
     protected $upgradeVersion = 50100;
-    protected $hasMigration = false;
+    protected $migration      = 0;
 
     //-- Delete old files
     public function step0()
@@ -32,7 +32,7 @@ class Version50100 extends InstallerAbstract
                 $this->getProjectDir().'/config/packages/nucleos_user.yaml',
                 $this->getProjectDir().'/src/core/Template/Template.php', //-- To avoid Kernel autoload as service
                 $this->getProjectDir().'/src/core/Twig/Loader/LotgdFilesystemLoader.php', //-- To avoid Kernel autoload as service
-                $this->getProjectDir().'/templates_core/' //-- Are moved to /themes/LotgdTheme/templates/admin
+                $this->getProjectDir().'/templates_core/', //-- Are moved to /themes/LotgdTheme/templates/admin
             ]);
         }
         catch (\Throwable $th)
