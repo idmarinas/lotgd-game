@@ -32,7 +32,7 @@ class Debuglog
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="id", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -41,9 +41,9 @@ class Debuglog
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="date", type="datetime")
      */
-    private $date = '0000-00-00 00:00:00';
+    private $date;
 
     /**
      * @var int
@@ -62,23 +62,28 @@ class Debuglog
     /**
      * @var string
      *
-     * @ORM\Column(name="message", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="message", type="text", length=65535)
      */
     private $message;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="field", type="string", length=20, nullable=false)
+     * @ORM\Column(name="field", type="string", length=20)
      */
     private $field;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="value", type="float", precision=9, scale=2, nullable=false, options={"default": "0.00"})
+     * @ORM\Column(name="value", type="float", precision=9, scale=2, options={"default": "0.00"})
      */
     private $value = '0.00';
+
+    public function __construct()
+    {
+        $this->date = new \DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * Set the value of Id.

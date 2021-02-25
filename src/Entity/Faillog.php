@@ -32,7 +32,7 @@ class Faillog
     /**
      * @var int
      *
-     * @ORM\Column(name="eventid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="eventid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -41,21 +41,21 @@ class Faillog
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="date", type="datetime", options={"default": "0000-00-00 00:00:00"})
      */
     private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="post", type="array", nullable=false)
+     * @ORM\Column(name="post", type="array")
      */
     private $post;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ip", type="string", length=40, nullable=false)
+     * @ORM\Column(name="ip", type="string", length=40)
      */
     private $ip;
 
@@ -69,7 +69,7 @@ class Faillog
     /**
      * @var string
      *
-     * @ORM\Column(name="id", type="string", length=32, nullable=false)
+     * @ORM\Column(name="id", type="string", length=32)
      */
     private $id;
 

@@ -26,7 +26,7 @@ class Logdnetbans
     /**
      * @var int
      *
-     * @ORM\Column(name="banid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="banid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -35,14 +35,14 @@ class Logdnetbans
     /**
      * @var string
      *
-     * @ORM\Column(name="bantype", type="string", length=20, nullable=false)
+     * @ORM\Column(name="bantype", type="string", length=20)
      */
     private $bantype;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="banvalue", type="string", length=255, nullable=false)
+     * @ORM\Column(name="banvalue", type="string", length=255)
      */
     private $banvalue;
 

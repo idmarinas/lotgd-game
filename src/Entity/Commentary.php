@@ -32,7 +32,7 @@ class Commentary implements EntityInterface
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -41,84 +41,84 @@ class Commentary implements EntityInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=50)
      */
     private $section;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=20, nullable=false)
+     * @ORM\Column(type="string", length=20)
      */
     private $command = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=1000, nullable=false)
+     * @ORM\Column(type="string", length=1000)
      */
     private $comment;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=1000, nullable=false)
+     * @ORM\Column(type="string", length=1000)
      */
     private $commentRaw;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(type="datetime", options={"default": "0000-00-00 00:00:00"})
      */
     private $postdate;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="array", nullable=false)
+     * @ORM\Column(type="array")
      */
     private $extra;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(type="integer", options={"default": 0, "unsigned": true})
      */
     private $author = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=100)
      */
     private $authorName = '';
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(type="integer", options={"default": 0, "unsigned": true})
      */
     private $clanId = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="smallint", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(type="smallint", options={"default": 0, "unsigned": true})
      */
     private $clanRank = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $clanName = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=50)
      */
     private $clanNameShort = '';
 

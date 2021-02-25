@@ -24,9 +24,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Debug
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="bigint")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */

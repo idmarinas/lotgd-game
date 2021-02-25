@@ -30,7 +30,7 @@ class Pollresults
     /**
      * @var int
      *
-     * @ORM\Column(name="resultid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="resultid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -39,21 +39,21 @@ class Pollresults
     /**
      * @var int
      *
-     * @ORM\Column(name="choice", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="choice", type="integer", options={"unsigned": true})
      */
     private $choice = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="account", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="account", type="integer", options={"unsigned": true})
      */
     private $account = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="motditem", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="motditem", type="integer", options={"unsigned": true})
      */
     private $motditem = 0;
 

@@ -31,7 +31,7 @@ class News
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -40,21 +40,21 @@ class News
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="date", nullable=false, options={"default": "0000-00-00"})
+     * @ORM\Column(type="date", options={"default": "0000-00-00"})
      */
     private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="text", length=65535, nullable=false)
+     * @ORM\Column(type="text", length=65535)
      */
     private $text;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(type="integer", options={"unsigned": true})
      */
     private $accountId = 0;
 
@@ -68,14 +68,14 @@ class News
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean", nullable=false, options={"default": 1})
+     * @ORM\Column(type="boolean", options={"default": 1})
      */
     private $newFormat = true;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=false, options={"default": "partial_news"})
+     * @ORM\Column(type="string", length=255, options={"default": "partial_news"})
      */
     private $textDomain = '';
 

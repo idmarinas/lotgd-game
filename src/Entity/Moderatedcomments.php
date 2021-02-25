@@ -26,32 +26,34 @@ class Moderatedcomments
     /**
      * @var int
      *
-     * @ORM\Column(name="modid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="modid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $modid;
-
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="comment", type="text", length=65535)
      */
     private $comment;
-
     /**
      * @var int
      *
-     * @ORM\Column(name="moderator", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
+     * @ORM\Column(name="moderator", type="integer", options={"unsigned": true, "default": "0"})
      */
     private $moderator = 0;
-
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="moddate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="moddate", type="datetime")
      */
-    private $moddate = '0000-00-00 00:00:00';
+    private $moddate;
+
+    public function __construct()
+    {
+        $this->moddate = new \DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * Set the value of Modid.

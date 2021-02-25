@@ -31,7 +31,7 @@ class Mounts implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="mountid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="mountid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -41,7 +41,7 @@ class Mounts implements Translatable
      * @var string
      *
      * @Gedmo\Translatable
-     * @ORM\Column(name="mountname", type="string", length=50, nullable=false)
+     * @ORM\Column(name="mountname", type="string", length=50)
      *
      * @Assert\Length(
      *     min=1,
@@ -69,7 +69,7 @@ class Mounts implements Translatable
      * @var string
      *
      * @Gedmo\Translatable
-     * @ORM\Column(name="mountcategory", type="string", length=50, nullable=false)
+     * @ORM\Column(name="mountcategory", type="string", length=50)
      *
      * @Assert\Length(
      *     min=1,
@@ -82,14 +82,14 @@ class Mounts implements Translatable
     /**
      * @var array
      *
-     * @ORM\Column(name="mountbuff", type="array", nullable=false)
+     * @ORM\Column(name="mountbuff", type="array")
      */
     private $mountbuff = [];
 
     /**
      * @var int
      *
-     * @ORM\Column(name="mountcostgems", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
+     * @ORM\Column(name="mountcostgems", type="integer", options={"unsigned": true, "default": "0"})
      *
      * @Assert\Range(
      *     min=0,
@@ -102,7 +102,7 @@ class Mounts implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="mountcostgold", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
+     * @ORM\Column(name="mountcostgold", type="integer", options={"unsigned": true, "default": "0"})
      *
      * @Assert\Range(
      *     min=0,
@@ -115,14 +115,14 @@ class Mounts implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="mountactive", type="boolean", nullable=false, options={"default": "1"})
+     * @ORM\Column(name="mountactive", type="boolean", options={"default": "1"})
      */
     private $mountactive = true;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="mountforestfights", type="integer", nullable=false, options={"default": "0"})
+     * @ORM\Column(name="mountforestfights", type="integer", options={"default": "0"})
      *
      * @Assert\Range(
      *     min=0,
@@ -136,7 +136,7 @@ class Mounts implements Translatable
      * @var string
      *
      * @Gedmo\Translatable
-     * @ORM\Column(name="newday", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="newday", type="text", length=65535)
      *
      * @Assert\Length(
      *     min=1,
@@ -150,7 +150,7 @@ class Mounts implements Translatable
      * @var string
      *
      * @Gedmo\Translatable
-     * @ORM\Column(name="recharge", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="recharge", type="text", length=65535)
      *
      * @Assert\Length(
      *     min=1,
@@ -164,7 +164,7 @@ class Mounts implements Translatable
      * @var string
      *
      * @Gedmo\Translatable
-     * @ORM\Column(name="partrecharge", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="partrecharge", type="text", length=65535)
      *
      * @Assert\Length(
      *     min=1,
@@ -177,7 +177,7 @@ class Mounts implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="mountfeedcost", type="integer", nullable=false, options={"unsigned": true, "default": "20"})
+     * @ORM\Column(name="mountfeedcost", type="integer", options={"unsigned": true, "default": "20"})
      *
      * @Assert\Range(
      *     min=0,
@@ -190,14 +190,14 @@ class Mounts implements Translatable
     /**
      * @var string
      *
-     * @ORM\Column(name="mountlocation", type="string", length=25, nullable=false, options={"default": "all"})
+     * @ORM\Column(name="mountlocation", type="string", length=25, options={"default": "all"})
      */
     private $mountlocation = 'all';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="mountdkcost", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
+     * @ORM\Column(name="mountdkcost", type="integer", options={"unsigned": true, "default": "0"})
      *
      * @Assert\Range(
      *     min=0,
@@ -209,6 +209,8 @@ class Mounts implements Translatable
 
     /**
      * @ORM\OneToMany(targetEntity="MountsTranslation", mappedBy="object", cascade={"all"})
+     *
+     * @var \Lotgd\Core\Entity\MountsTranslation[]|\Doctrine\Common\Collections\Collection<int, \Lotgd\Core\Entity\MountsTranslation>
      */
     private $translations;
 

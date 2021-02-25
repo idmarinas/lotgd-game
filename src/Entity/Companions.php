@@ -31,7 +31,7 @@ class Companions implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="companionid", type="integer", nullable=false)
+     * @ORM\Column(name="companionid", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -41,7 +41,7 @@ class Companions implements Translatable
      * @var string
      *
      * @Gedmo\Translatable
-     * @ORM\Column(name="name", type="string", length=50, nullable=false)
+     * @ORM\Column(name="name", type="string", length=50)
      */
     private $name = '';
 
@@ -49,7 +49,7 @@ class Companions implements Translatable
      * @var string
      *
      * @Gedmo\Translatable
-     * @ORM\Column(name="category", type="string", length=50, nullable=false)
+     * @ORM\Column(name="category", type="string", length=50)
      */
     private $category = '';
 
@@ -57,14 +57,14 @@ class Companions implements Translatable
      * @var string
      *
      * @Gedmo\Translatable
-     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="description", type="text", length=65535)
      */
     private $description = '';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="attack", type="smallint", nullable=false, options={"default": 1, "unsigned": true})
+     * @ORM\Column(name="attack", type="smallint", options={"default": 1, "unsigned": true})
      *
      * @Assert\Range(
      *     min=1,
@@ -77,7 +77,7 @@ class Companions implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="attackperlevel", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(name="attackperlevel", type="smallint", options={"default": 0, "unsigned": true})
      *
      * @Assert\Range(
      *     min=0,
@@ -90,7 +90,7 @@ class Companions implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="defense", type="smallint", nullable=false, options={"default": 1, "unsigned": true})
+     * @ORM\Column(name="defense", type="smallint", options={"default": 1, "unsigned": true})
      *
      * @Assert\Range(
      *     min=1,
@@ -103,7 +103,7 @@ class Companions implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="defenseperlevel", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(name="defenseperlevel", type="smallint", options={"default": 0, "unsigned": true})
      *
      * @Assert\Range(
      *     min=0,
@@ -116,7 +116,7 @@ class Companions implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="maxhitpoints", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
+     * @ORM\Column(name="maxhitpoints", type="smallint", options={"default": 10, "unsigned": true})
      *
      * @Assert\Range(
      *     min=0,
@@ -129,7 +129,7 @@ class Companions implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="maxhitpointsperlevel", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
+     * @ORM\Column(name="maxhitpointsperlevel", type="smallint", options={"default": 10, "unsigned": true})
      *
      * @Assert\Range(
      *     min=0,

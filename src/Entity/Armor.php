@@ -31,7 +31,7 @@ class Armor implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="armorid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="armorid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -48,7 +48,7 @@ class Armor implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="value", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="value", type="integer", options={"unsigned": true})
      *
      * @Assert\Range(
      *     min=0,
@@ -61,7 +61,7 @@ class Armor implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="defense", type="smallint", nullable=false, options={"unsigned": true, "default": "1"})
+     * @ORM\Column(name="defense", type="smallint", options={"unsigned": true, "default": "1"})
      *
      * @Assert\Range(
      *     min=1,
@@ -74,7 +74,7 @@ class Armor implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="level", type="smallint", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="level", type="smallint", options={"unsigned": true})
      *
      * @Assert\Range(
      *     min=0,
@@ -86,6 +86,8 @@ class Armor implements Translatable
 
     /**
      * @ORM\OneToMany(targetEntity="ArmorTranslation", mappedBy="object", cascade={"all"})
+     *
+     * @var \Lotgd\Core\Entity\ArmorTranslation[]|\Doctrine\Common\Collections\Collection<int, \Lotgd\Core\Entity\ArmorTranslation>
      */
     private $translations;
 
@@ -140,8 +142,6 @@ class Armor implements Translatable
     /**
      * Set the value of Armorname.
      *
-     * @param string $armorname
-     *
      * @return self
      */
     public function setArmorname(string $armorname)
@@ -161,8 +161,6 @@ class Armor implements Translatable
 
     /**
      * Set the value of Value.
-     *
-     * @param int $value
      *
      * @return self
      */
@@ -184,8 +182,6 @@ class Armor implements Translatable
     /**
      * Set the value of Defense.
      *
-     * @param int $defense
-     *
      * @return self
      */
     public function setDefense(int $defense)
@@ -205,8 +201,6 @@ class Armor implements Translatable
 
     /**
      * Set the value of Level.
-     *
-     * @param int $level
      *
      * @return self
      */

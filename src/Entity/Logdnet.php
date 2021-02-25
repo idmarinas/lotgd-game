@@ -26,7 +26,7 @@ class Logdnet
     /**
      * @var int
      *
-     * @ORM\Column(name="serverid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="serverid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -35,76 +35,77 @@ class Logdnet
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255, nullable=false)
+     * @ORM\Column(name="address", type="string", length=255)
      */
     private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255, nullable=false)
+     * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="priority", type="float", precision=10, scale=0, nullable=false, options={"default": "100"})
+     * @ORM\Column(name="priority", type="float", precision=10, options={"default": "100"})
      */
     private $priority = '100';
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastupdate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="lastupdate", type="datetime", options={"default": "0000-00-00 00:00:00"})
      */
     private $lastupdate;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="version", type="string", length=255, nullable=false, options={"default": "Unknown"})
+     * @ORM\Column(name="version", type="string", length=255, options={"default": "Unknown"})
      */
     private $version = 'Unknown';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="admin", type="string", length=255, nullable=false, options={"default": "unknown"})
+     * @ORM\Column(name="admin", type="string", length=255, options={"default": "unknown"})
      */
     private $admin = 'unknown';
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastping", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="lastping", type="datetime")
      */
-    private $lastping = '0000-00-00 00:00:00';
+    private $lastping;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="recentips", type="string", length=255, nullable=false)
+     * @ORM\Column(name="recentips", type="string", length=255)
      */
     private $recentips;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="count", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="count", type="integer", options={"unsigned": true})
      */
-    private $count = '0';
+    private $count = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lang", type="string", length=20, nullable=false)
+     * @ORM\Column(name="lang", type="string", length=20)
      */
     private $lang;
 
     public function __construct()
     {
         $this->lastupdate = new \DateTime('now');
+        $this->lastping   = new \DateTime('0000-00-00 00:00:00');
     }
 
     /**

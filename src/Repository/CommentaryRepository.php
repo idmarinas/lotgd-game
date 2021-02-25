@@ -94,7 +94,7 @@ class CommentaryRepository extends ServiceEntityRepository
             $result = $query->select('u.section')
                 ->where('u.section NOT LIKE :section')
                 ->groupBy('u.section')
-                ->orderBy('u.section', 'ASC')
+                ->orderBy('u.section', \Doctrine\Common\Collections\Criteria::ASC)
 
                 ->setParameter('section', 'clan-%')
 

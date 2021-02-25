@@ -30,7 +30,7 @@ class Gamelog
     /**
      * @var int
      *
-     * @ORM\Column(name="logid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="logid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -39,37 +39,42 @@ class Gamelog
     /**
      * @var string
      *
-     * @ORM\Column(name="message", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="message", type="text", length=65535)
      */
     private $message;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="category", type="string", length=50, nullable=false)
+     * @ORM\Column(name="category", type="string", length=50)
      */
     private $category;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="filed", type="boolean", nullable=false)
+     * @ORM\Column(name="filed", type="boolean")
      */
-    private $filed = '0';
+    private $filed = false;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="date", type="datetime")
      */
-    private $date = '0000-00-00 00:00:00';
+    private $date;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="who", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="who", type="integer", options={"unsigned": true})
      */
-    private $who = '0';
+    private $who = 0;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * Set the value of Logid.

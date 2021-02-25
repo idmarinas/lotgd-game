@@ -27,7 +27,7 @@ class Petitions
     /**
      * @var int
      *
-     * @ORM\Column(name="petitionid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="petitionid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -36,49 +36,49 @@ class Petitions
     /**
      * @var int
      *
-     * @ORM\Column(name="author", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="author", type="integer", options={"unsigned": true})
      */
     private $author = 0;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="date", type="datetime", options={"default": "0000-00-00 00:00:00"})
      */
     private $date;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="smallint", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="status", type="smallint", options={"unsigned": true})
      */
     private $status = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="array", nullable=false)
+     * @ORM\Column(name="body", type="array")
      */
     private $body = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pageinfo", type="array", nullable=false)
+     * @ORM\Column(name="pageinfo", type="array")
      */
     private $pageinfo = [];
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="closedate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="closedate", type="datetime", options={"default": "0000-00-00 00:00:00"})
      */
     private $closedate;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="closeuserid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="closeuserid", type="integer", options={"unsigned": true})
      *
      * @Assert\DivisibleBy(1)
      */
@@ -87,14 +87,14 @@ class Petitions
     /**
      * @var string
      *
-     * @ORM\Column(name="ip", type="string", length=40, nullable=false)
+     * @ORM\Column(name="ip", type="string", length=40)
      */
     private $ip = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="id", type="string", length=32, nullable=false)
+     * @ORM\Column(name="id", type="string", length=32)
      */
     private $id = '';
 

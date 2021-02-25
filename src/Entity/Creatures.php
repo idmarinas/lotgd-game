@@ -35,7 +35,7 @@ class Creatures implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="creatureid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="creatureid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -71,7 +71,7 @@ class Creatures implements Translatable
     /**
      * @var string
      *
-     * @ORM\Column(name="creatureimage", type="string", length=250, nullable=false)
+     * @ORM\Column(name="creatureimage", type="string", length=250)
      *
      * @Assert\Length(
      *     min=0,
@@ -85,7 +85,7 @@ class Creatures implements Translatable
      * @var string
      *
      * @Gedmo\Translatable
-     * @ORM\Column(name="creaturedescription", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="creaturedescription", type="text", length=65535)
      *
      * @Assert\Length(
      *     min=0,
@@ -106,7 +106,7 @@ class Creatures implements Translatable
     /**
      * @var string
      *
-     * @ORM\Column(name="creaturegoldbonus", type="decimal", precision=4, scale=2, nullable=false)
+     * @ORM\Column(name="creaturegoldbonus", type="decimal", precision=4, scale=2)
      *
      * @Assert\Range(
      *     min=0,
@@ -119,7 +119,7 @@ class Creatures implements Translatable
     /**
      * @var string
      *
-     * @ORM\Column(name="creatureattackbonus", type="decimal", precision=4, scale=2, nullable=false)
+     * @ORM\Column(name="creatureattackbonus", type="decimal", precision=4, scale=2)
      *
      * @Assert\Range(
      *     min=0,
@@ -132,7 +132,7 @@ class Creatures implements Translatable
     /**
      * @var string
      *
-     * @ORM\Column(name="creaturedefensebonus", type="decimal", precision=4, scale=2, nullable=false)
+     * @ORM\Column(name="creaturedefensebonus", type="decimal", precision=4, scale=2)
      *
      * @Assert\Range(
      *     min=0,
@@ -145,7 +145,7 @@ class Creatures implements Translatable
     /**
      * @var string
      *
-     * @ORM\Column(name="creaturehealthbonus", type="decimal", precision=4, scale=2, nullable=false)
+     * @ORM\Column(name="creaturehealthbonus", type="decimal", precision=4, scale=2)
      *
      * @Assert\Range(
      *     min=0,

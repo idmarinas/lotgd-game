@@ -35,14 +35,14 @@ class Whostyping
     /**
      * @var int
      *
-     * @ORM\Column(name="time", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="time", type="integer", options={"unsigned": true})
      */
     private $time;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="section", type="string", length=255, nullable=false)
+     * @ORM\Column(name="section", type="string", length=255)
      */
     private $section;
 

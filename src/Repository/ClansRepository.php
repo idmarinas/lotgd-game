@@ -17,6 +17,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Entity as EntityCore;
 use Lotgd\Core\Entity\Clans;
+use Doctrine\Common\Collections\Criteria;
 
 class ClansRepository extends ServiceEntityRepository
 {
@@ -44,15 +45,15 @@ class ClansRepository extends ServiceEntityRepository
                 ->setParameter('rank', CLAN_APPLICANT)
             ;
 
-            $query->orderBy('members', 'DESC');
+            $query->orderBy('members', Criteria::DESC);
 
             if (1 == $order)
             {
-                $query->orderBy('u.clanname', 'ASC');
+                $query->orderBy('u.clanname', Criteria::ASC);
             }
             elseif (2 == $order)
             {
-                $query->orderBy('u.clanshort', 'ASC');
+                $query->orderBy('u.clanshort', Criteria::ASC);
             }
 
             return $query

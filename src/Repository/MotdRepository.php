@@ -51,7 +51,7 @@ class MotdRepository extends ServiceEntityRepository
         {
             $date = $query
                 ->select('u.motddate')
-                ->orderBy('u.motddate', 'DESC')
+                ->orderBy('u.motddate', \Doctrine\Common\Collections\Criteria::DESC)
                 ->setMaxResults(1)
                 ->getQuery()
                 ->getSingleScalarResult()

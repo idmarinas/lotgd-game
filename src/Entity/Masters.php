@@ -31,7 +31,7 @@ class Masters implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="creatureid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="creatureid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -85,6 +85,8 @@ class Masters implements Translatable
 
     /**
      * @ORM\OneToMany(targetEntity="MastersTranslation", mappedBy="object", cascade={"all"})
+     *
+     * @var \Lotgd\Core\Entity\MastersTranslation[]|\Doctrine\Common\Collections\Collection<int, \Lotgd\Core\Entity\MastersTranslation>
      */
     private $translations;
 

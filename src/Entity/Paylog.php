@@ -30,7 +30,7 @@ class Paylog
     /**
      * @var int
      *
-     * @ORM\Column(name="payid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="payid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -39,42 +39,42 @@ class Paylog
     /**
      * @var string
      *
-     * @ORM\Column(name="info", type="array", nullable=false)
+     * @ORM\Column(name="info", type="array")
      */
     private $info;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="response", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="response", type="text", length=65535)
      */
     private $response;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="txnid", type="string", length=32, nullable=false)
+     * @ORM\Column(name="txnid", type="string", length=32)
      */
     private $txnid;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="amount", type="float", precision=9, scale=2, nullable=false)
+     * @ORM\Column(name="amount", type="float", precision=9, scale=2)
      */
     private $amount = '0.00';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=50, nullable=false)
+     * @ORM\Column(name="name", type="string", length=50)
      */
     private $name;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="acctid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="acctid", type="integer", options={"unsigned": true})
      */
     private $acctid = 0;
 
@@ -102,9 +102,14 @@ class Paylog
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="processdate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="processdate", type="datetime", nullable=false)
      */
-    private $processdate = '0000-00-00 00:00:00';
+    private $processdate;
+
+    public function __construct()
+    {
+        $this->processdate = new \DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * Set the value of Payid.

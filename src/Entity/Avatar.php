@@ -36,7 +36,7 @@ class Avatar
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -50,91 +50,91 @@ class Avatar
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=100, nullable=false)
+     * @ORM\Column(name="name", type="string", length=100)
      */
     private $name = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="playername", type="string", unique=true, length=40, nullable=false)
+     * @ORM\Column(name="playername", type="string", unique=true, length=40)
      */
     private $playername = '';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="sex", type="smallint", nullable=false, options={"default": 0})
+     * @ORM\Column(name="sex", type="smallint", options={"default": 0})
      */
     private $sex = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="strength", type="integer", nullable=false, options={"default": 10, "unsigned": true})
+     * @ORM\Column(name="strength", type="integer", options={"default": 10, "unsigned": true})
      */
     private $strength = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dexterity", type="integer", nullable=false, options={"default": 10, "unsigned": true})
+     * @ORM\Column(name="dexterity", type="integer", options={"default": 10, "unsigned": true})
      */
     private $dexterity = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="intelligence", type="integer", nullable=false, options={"default": 10, "unsigned": true})
+     * @ORM\Column(name="intelligence", type="integer", options={"default": 10, "unsigned": true})
      */
     private $intelligence = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="constitution", type="integer", nullable=false, options={"default": 10, "unsigned": true})
+     * @ORM\Column(name="constitution", type="integer", options={"default": 10, "unsigned": true})
      */
     private $constitution = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="wisdom", type="integer", nullable=false, options={"default": 10, "unsigned": true})
+     * @ORM\Column(name="wisdom", type="integer", options={"default": 10, "unsigned": true})
      */
     private $wisdom = 10;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="specialty", type="string", length=20, nullable=false)
+     * @ORM\Column(name="specialty", type="string", length=20)
      */
     private $specialty = '';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="experience", type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(name="experience", type="integer", options={"default": 0, "unsigned": true})
      */
     private $experience = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="gold", type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(name="gold", type="integer", options={"default": 0, "unsigned": true})
      */
     private $gold = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="weapon", type="string", length=50, nullable=false, options={"default": "Fists"})
+     * @ORM\Column(name="weapon", type="string", length=50, options={"default": "Fists"})
      */
     private $weapon = 'Fists';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="armor", type="string", length=50, nullable=false, options={"default": "T-Shirt"})
+     * @ORM\Column(name="armor", type="string", length=50, options={"default": "T-Shirt"})
      */
     private $armor = 'T-Shirt';
 
@@ -1878,8 +1878,6 @@ class Avatar
 
     /**
      * Set the value of Bio.
-     *
-     * @param string $bio
      *
      * @return self
      */

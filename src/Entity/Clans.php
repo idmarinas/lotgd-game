@@ -35,7 +35,7 @@ class Clans
     /**
      * @var int
      *
-     * @ORM\Column(name="clanid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="clanid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -44,7 +44,7 @@ class Clans
     /**
      * @var string
      *
-     * @ORM\Column(name="clanname", type="string", length=255, nullable=false)
+     * @ORM\Column(name="clanname", type="string", length=255)
      *
      * @Assert\Length(
      *     min=2,
@@ -60,7 +60,7 @@ class Clans
     /**
      * @var string
      *
-     * @ORM\Column(name="clanshort", type="string", length=50, nullable=false)
+     * @ORM\Column(name="clanshort", type="string", length=50)
      *
      * @Assert\Length(
      *     min=2,
@@ -76,35 +76,35 @@ class Clans
     /**
      * @var string
      *
-     * @ORM\Column(name="clanmotd", type="text", nullable=false, length=65535)
+     * @ORM\Column(name="clanmotd", type="text", length=65535)
      */
     private $clanmotd = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="clandesc", type="text", nullable=false, length=65535)
+     * @ORM\Column(name="clandesc", type="text", length=65535)
      */
     private $clandesc = '';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="motdauthor", type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(name="motdauthor", type="integer", options={"default": 0, "unsigned": true})
      */
     private $motdauthor = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="descauthor", type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(name="descauthor", type="integer", options={"default": 0, "unsigned": true})
      */
     private $descauthor = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="customsay", type="string", length=15, nullable=false)
+     * @ORM\Column(name="customsay", type="string", length=15)
      */
     private $customsay = '';
 

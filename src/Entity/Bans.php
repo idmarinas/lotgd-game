@@ -26,14 +26,14 @@ class Bans
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="banexpire", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="banexpire", type="datetime", options={"default": "0000-00-00 00:00:00"})
      */
     private $banexpire;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="uniqueid", type="string", length=32, nullable=false)
+     * @ORM\Column(name="uniqueid", type="string", length=32)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
@@ -42,7 +42,7 @@ class Bans
     /**
      * @var string
      *
-     * @ORM\Column(name="ipfilter", type="string", length=40, nullable=false)
+     * @ORM\Column(name="ipfilter", type="string", length=40)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
@@ -51,21 +51,21 @@ class Bans
     /**
      * @var string
      *
-     * @ORM\Column(name="banreason", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="banreason", type="text", length=65535)
      */
     private $banreason;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="banner", type="string", length=50, nullable=false)
+     * @ORM\Column(name="banner", type="string", length=50)
      */
     private $banner;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lasthit", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="lasthit", type="datetime", options={"default": "0000-00-00 00:00:00"})
      */
     private $lasthit;
 

@@ -35,7 +35,7 @@ class Titles implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="titleid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="titleid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -44,14 +44,14 @@ class Titles implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="dk", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="dk", type="integer", options={"unsigned": true})
      */
     private $dk = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ref", type="string", length=100, nullable=false)
+     * @ORM\Column(name="ref", type="string", length=100)
      */
     private $ref;
 
@@ -59,7 +59,7 @@ class Titles implements Translatable
      * @var string
      *
      * @Gedmo\Translatable
-     * @ORM\Column(name="male", type="string", length=25, nullable=false)
+     * @ORM\Column(name="male", type="string", length=25)
      *
      * @Assert\Length(
      *     min=1,
@@ -73,7 +73,7 @@ class Titles implements Translatable
      * @var string
      *
      * @Gedmo\Translatable
-     * @ORM\Column(name="female", type="string", length=25, nullable=false)
+     * @ORM\Column(name="female", type="string", length=25)
      *
      * @Assert\Length(
      *     min=1,
@@ -85,6 +85,8 @@ class Titles implements Translatable
 
     /**
      * @ORM\OneToMany(targetEntity="TitlesTranslation", mappedBy="object", cascade={"all"})
+     *
+     * @var \Lotgd\Core\Entity\TitlesTranslation[]|\Doctrine\Common\Collections\Collection<int, \Lotgd\Core\Entity\TitlesTranslation>
      */
     private $translations;
 

@@ -33,7 +33,7 @@ class Mail
     /**
      * @var int
      *
-     * @ORM\Column(name="messageid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="messageid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -42,37 +42,37 @@ class Mail
     /**
      * @var int
      *
-     * @ORM\Column(name="msgfrom", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="msgfrom", type="integer", options={"unsigned": true})
      */
     private $msgfrom = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="msgto", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="msgto", type="integer", options={"unsigned": true})
      */
     private $msgto = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="subject", type="string", length=500, nullable=false)
+     * @ORM\Column(name="subject", type="string", length=500)
      */
     private $subject;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="body", type="text", length=65535)
      */
     private $body;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="sent", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="sent", type="datetime")
      */
-    private $sent = '0000-00-00 00:00:00';
+    private $sent;
 
     /**
      * @var bool
@@ -87,6 +87,11 @@ class Mail
      * @ORM\Column(name="originator", type="integer", nullable=false, options={"unsigned": true})
      */
     private $originator = '0';
+
+    public function __construct()
+    {
+        $this->sent = new \DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * Set the value of Messageid.

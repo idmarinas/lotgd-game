@@ -26,7 +26,7 @@ class Settings
     /**
      * @var string
      *
-     * @ORM\Column(name="setting", type="string", length=25, nullable=false)
+     * @ORM\Column(name="setting", type="string", length=25)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
@@ -35,7 +35,7 @@ class Settings
     /**
      * @var string
      *
-     * @ORM\Column(name="value", type="string", length=255, nullable=false)
+     * @ORM\Column(name="value", type="string", length=255)
      */
     private $value;
 

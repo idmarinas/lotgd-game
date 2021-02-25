@@ -31,7 +31,7 @@ class Weapons implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="weaponid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="weaponid", type="integer", options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -48,7 +48,7 @@ class Weapons implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="value", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="value", type="integer", options={"unsigned": true})
      *
      * @Assert\Range(
      *     min=0,
@@ -61,7 +61,7 @@ class Weapons implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="damage", type="smallint", nullable=false, options={"unsigned": true, "default": "1"})
+     * @ORM\Column(name="damage", type="smallint", options={"unsigned": true, "default": "1"})
      *
      * @Assert\Range(
      *     min=1,
@@ -74,7 +74,7 @@ class Weapons implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="level", type="smallint", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="level", type="smallint", options={"unsigned": true})
      *
      * @Assert\Range(
      *     min=0,
@@ -86,6 +86,8 @@ class Weapons implements Translatable
 
     /**
      * @ORM\OneToMany(targetEntity="WeaponsTranslation", mappedBy="object", cascade={"all"})
+     *
+     * @var \Lotgd\Core\Entity\WeaponsTranslation[]|\Doctrine\Common\Collections\Collection<int, \Lotgd\Core\Entity\WeaponsTranslation>
      */
     private $translations;
 
@@ -138,8 +140,6 @@ class Weapons implements Translatable
     /**
      * Set the value of Weaponname.
      *
-     * @param string $weaponname
-     *
      * @return self
      */
     public function setWeaponname(string $weaponname)
@@ -159,8 +159,6 @@ class Weapons implements Translatable
 
     /**
      * Set the value of Value.
-     *
-     * @param int $value
      *
      * @return self
      */
@@ -182,8 +180,6 @@ class Weapons implements Translatable
     /**
      * Set the value of Damage.
      *
-     * @param int $damage
-     *
      * @return self
      */
     public function setDamage(int $damage)
@@ -203,8 +199,6 @@ class Weapons implements Translatable
 
     /**
      * Set the value of Level.
-     *
-     * @param int $level
      *
      * @return self
      */
