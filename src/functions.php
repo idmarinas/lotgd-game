@@ -66,23 +66,6 @@ if ( ! \function_exists('r_rand'))
     }
 }
 
-if ( ! \function_exists('is_email'))
-{
-    /**
-     * Check if given email is valid.
-     *
-     * @param string $email
-     *
-     * @return bool
-     */
-    function is_email($email)
-    {
-        $validator = new Laminas\Validator\EmailAddress();
-
-        return $validator->isValid($email);
-    }
-}
-
 if ( ! \function_exists('arraytourl'))
 {
     /**
