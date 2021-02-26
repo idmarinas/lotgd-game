@@ -11,7 +11,7 @@
  * @since 4.6.0
  */
 
-namespace Lotgd\Core;
+namespace Lotgd\Bundle;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
