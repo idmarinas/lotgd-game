@@ -1,5 +1,4 @@
 sylius_theme:
-    context: Lotgd\Core\Theme\LotgdTheme
     sources:
         filesystem:
             enabled: true
