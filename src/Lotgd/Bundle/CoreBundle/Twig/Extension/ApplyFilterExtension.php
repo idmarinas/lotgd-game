@@ -11,7 +11,7 @@
  * @since 4.8.0
  */
 
-namespace Lotgd\Core\Twig\Extension;
+namespace Lotgd\Bundle\CoreBundle\Twig\Extension;
 
 use Twig\Environment as Environment;
 use Twig\Extension\AbstractExtension;
