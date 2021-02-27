@@ -11,10 +11,10 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Core\Security;
+namespace Lotgd\Bundle\CoreBundle\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Lotgd\Core\Entity\User;
+use Lotgd\Bundle\CoreBundle\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -35,7 +35,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'lotgd_core_home';
+    public const LOGIN_ROUTE = 'lotgd_core_login';
 
     private $entityManager;
     private $urlGenerator;
@@ -116,7 +116,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('lotgd_core_profile'));
+        return new RedirectResponse($this->urlGenerator->generate('lotgd_user_profile'));
     }
 
     protected function getLoginUrl()

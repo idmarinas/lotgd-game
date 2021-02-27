@@ -11,7 +11,7 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Core\Security;
+namespace Lotgd\Bundle\CoreBundle\Security;
 
 use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;

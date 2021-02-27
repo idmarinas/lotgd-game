@@ -11,10 +11,10 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Core\Security;
+namespace Lotgd\Bundle\CoreBundle\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Lotgd\Core\Entity\User;
+use Lotgd\Bundle\CoreBundle\Entity\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
