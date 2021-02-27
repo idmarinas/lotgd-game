@@ -1,0 +1,13 @@
+title: Create account
+
+email:
+    verified: 'Your email address has been verified.'
+    send.error: 'An error occurred while sending the mail'
+    template:
+        title: 'Hi! Please confirm your email!'
+        message: |
+            Please confirm your email address by clicking the following link:
+
+            <a href="{signedUrl}">Confirm my Email</a>.
+            This link will expire in {duration}.
+        gretings: 'Cheers!'
