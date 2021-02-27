@@ -28,7 +28,7 @@ class Kernel extends BaseKernel
     public const MINOR_VERSION       = 0;
     public const RELEASE_VERSION     = 0;
     public const EXTRA_VERSION       = '';
-    public const TEXT_DOMAIN_DEFAULT = 'app_default';
+    public const TEXT_DOMAIN_DEFAULT = 'lotgd_core_default';
 
     /**
      * This series of scripts (collectively known as Legend of the Green Dragon or LotGD) is copyright as per below.
