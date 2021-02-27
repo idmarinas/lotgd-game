@@ -40,7 +40,7 @@ class PageEventSubscriber implements EventSubscriberInterface
         $this->environment->addGlobal('text_domain', $textDomain);
 
         //-- Define Twig global variable for render menu
-        $menu = \defined($controller.'::LOTGD_MENU') ? \constant($controller.'::LOTGD_MENU') : 'lotgd_core.menu_core';
+        $menu = \defined($controller.'::LOTGD_MENU') ? \constant($controller.'::LOTGD_MENU') : 'lotgd_core.menu';
         $this->environment->addGlobal('lotgd_menu', $menu);
     }
 
