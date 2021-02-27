@@ -2,4 +2,4 @@
 # Can change for your custom home page and login page
 lotgd_core_home: # Not change this name, this name is use for Lotgd Bundle
     path: /
-    controller: Lotgd\Bundle\CoreBundle\Controller\HomeController::index
+    controller: Lotgd\Bundle\CoreBundle\Controller\HomeController::login
