@@ -11,7 +11,7 @@
 * @since 6.0.0
 */
 
-namespace Lotgd\Core\Tests;
+namespace Lotgd\Bundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -43,23 +43,38 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
         $this->assertTrue($response->isNotFound(), $this->messageError($response));
     }
 
+    /**
+     * @dataProvider privideRedirectionUrls
+     */
+    public function testRedirectionRoute($url, $redirected)
+    {
+        $client = self::createClient();
+        $client->request('GET', $url);
+
+        $response = $client->getResponse();
+
+        $this->assertTrue($response->isRedirect($redirected), $this->messageError($response));
+    }
+
     public function provideValidUrls()
     {
-        return [
-            ['/'],
-            ['/about'],
-            ['/about/license'],
-            ['/about/bundles'],
-            ['/register'],
-            ['/reset-password'],
-        ];
+        yield ['/'];
+        yield ['/about'];
+        yield ['/about/bundles'];
+        yield ['/about/game/setup'];
+        yield ['/about/license'];
+        yield ['/register'];
+        yield ['/reset-password'];
     }
 
     public function provideNotFoundUrls()
     {
-        return [
-            ['/home']
-        ];
+        yield ['/home'];
+    }
+
+    public function privideRedirectionUrls()
+    {
+        yield ['/reset-password/check-email', '/reset-password'];
     }
 
     private function messageError($response): string
