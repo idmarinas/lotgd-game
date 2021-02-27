@@ -1,0 +1,78 @@
+{% block home_login %}
+    {% trans_default_domain text_domain %}
+
+    <form method="post" action="/">
+        <br>
+        <h4 class="h3 mb-3 font-weight-normal">{{ 'login.message'|trans|colorize }}</h4>
+
+        <table class="ui centered center aligned very basic collapsing table">
+            <tr>
+                <td><img alt="" src="{{ asset('_themes/lotgd/core-theme/images/logindragon.gif') }}"></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="ui form">
+                        <div class="fields">
+                            <div class="field">
+                                <label for="inputUsername">{{ 'login.username'|trans|uncolorize }}</label>
+                                <input type="text" value="{{ last_username }}" name="username" id="inputUsername" required autofocus>
+                            </div>
+                            <div class="field">
+                                <label for="inputPassword">{{ 'login.password'|trans|uncolorize }}</label>
+                                <input type="password" name="password" id="inputPassword" required>
+                            </div>
+                        </div>
+                            {% if error %}
+                                <div class="field error">
+                                    <div class="ui error message">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                </div>
+                            {% endif %}
+                        <div class="field"><div class="ui divider"></div></div>
+                        <div class="equal width inline fields">
+                            <div class="field">
+                                <div class="ui toggle checkbox">
+                                    <input id="_remember_me" type="checkbox" name="_remember_me">
+                                    <label for="_remember_me">{{ 'login.remember_me'|trans|uncolorize }}</label>
+                                </div>
+                            </div>
+                            <div class="center aligned field">
+                                <button class="ui button" type="submit">{{ 'login.login'|trans }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+    </form>
+
+    <p>{{ 'login.forgot'|trans({'link': path('lotgd_core_forgot_password_request')})|colorize }}</p>
+{% endblock home_login %}
+
+{% block home_select_skin %}
+    {% trans_default_domain text_domain %}
+
+    <br>
+    <table class="ui very basic collapsing centered table">
+        <tr>
+            <td>
+                {{ form(selectSkin) }}
+            </td>
+        </tr>
+    </table>
+{% endblock home_select_skin %}
+
+{% block home_server_full %}
+    {% trans_default_domain text_domain %}
+
+    <div class="ui header">{{ 'serverfull.message'|trans|colorize }}</div>
+    <table class="ui centered center aligned very basic collapsing table">
+        <tr>
+            <td><img src="{{ asset('_themes/lotgd/core-theme/images/Medallion-Red.gif') }}" alt="" class="noborder"></td>
+        </tr>
+        <tr>
+            <td class="center aligned">{{ 'serverfull.wait'|trans|colorize }}</td>
+        </tr>
+    </table>
+{% endblock home_server_full %}

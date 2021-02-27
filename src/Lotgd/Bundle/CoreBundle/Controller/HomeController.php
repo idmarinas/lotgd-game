@@ -11,7 +11,7 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Core\Controller;
+namespace Lotgd\Bundle\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,16 +20,16 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class HomeController extends AbstractController
 {
-    public const TEXT_DOMAIN = 'page_home';
+    public const TEXT_DOMAIN = 'lotgd_core_page_home';
 
     /**
-     * @Route("/", name="lotgd_core_home")
+     * @Route("/login", name="lotgd_core_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->isGranted('ROLE_USER'))
         {
-            return $this->redirectToRoute('lotgd_core_profile');
+            return $this->redirectToRoute('lotgd_user_profile');
         }
 
         // get the login error if there is one
@@ -37,7 +37,7 @@ class HomeController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('page/home/index.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('@LotgdCore/home/index.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**
