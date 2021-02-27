@@ -1,20 +1,4 @@
 security:
-    enable_authenticator_manager: true
-    encoders:
-        lotgd_old_encoder:
-            id: Lotgd\Core\Security\LotgdPasswordEncoder
-        Lotgd\Core\Entity\User:
-            algorithm: auto
-            migrate_from:
-                - lotgd_old_encoder
-
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-    providers:
-        # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
-            entity:
-                class: Lotgd\Core\Entity\User
-                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -24,10 +8,10 @@ security:
             # login_throttling:
             #     max_attempts: 2
             lazy: true
-            provider: app_user_provider
+            provider: lotgd_core_user_provider
             guard:
                 authenticators:
-                    - Lotgd\Core\Security\LoginFormAuthenticator
+                    - Lotgd\Bundle\CoreBundle\Security\LoginFormAuthenticator
             logout:
                 path: lotgd_core_logout
                 # where to redirect after logout
