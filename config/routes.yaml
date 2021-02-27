@@ -1,22 +1,5 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-
-# About pages
-# # # # # # #
-lotgd_core_about:
-    path: /about
-    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
-    defaults:
-        # the path of the template to render
-        template: 'page/about/index.html.twig'
-        # special options defined by Symfony to set the page cache
-        maxAge: 86400
-        sharedAge: 86400
-lotgd_core_about_license:
-    path: /about/license
-    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
-    defaults:
-        template: 'page/about/license.html.twig'
-        maxAge: 86400
-        sharedAge: 86400
+# By default home page is a login page
+# Can change for your custom home page and login page
+lotgd_core_home: # Not change this name, this name is use for Lotgd Bundle
+    path: /
+    controller: Lotgd\Bundle\CoreBundle\Controller\HomeController::index
