@@ -1,11 +1,22 @@
 <?php
 
-namespace Lotgd\Core\Controller;
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 6.0.0
+ */
 
-use Lotgd\Core\Entity\User;
-use Lotgd\Core\Form\RegistrationFormType;
-use Lotgd\Core\Security\EmailVerifier;
-use Lotgd\Core\Security\LoginFormAuthenticator;
+namespace Lotgd\Bundle\CoreBundle\Controller;
+
+use Lotgd\Bundle\CoreBundle\Entity\User;
+use Lotgd\Bundle\CoreBundle\Form\RegistrationFormType;
+use Lotgd\Bundle\CoreBundle\Security\EmailVerifier;
+use Lotgd\Bundle\CoreBundle\Security\LoginFormAuthenticator;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +30,7 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
-    public const TEXT_DOMAIN = 'page_registration';
+    public const TEXT_DOMAIN = 'lotgd_core_page_registration';
 
     private $emailVerifier;
 
@@ -36,7 +47,7 @@ class RegistrationController extends AbstractController
         //-- Redirect to profile if user is authenticated
         if ($this->isGranted('ROLE_USER'))
         {
-            return $this->redirectToRoute('lotgd_core_profile');
+            return $this->redirectToRoute('lotgd_user_profile');
         }
 
         $user = new User();
@@ -63,7 +74,7 @@ class RegistrationController extends AbstractController
                     ->from(new Address('mailer@lotgd.core', 'LoTGD Mail Bot'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
-                    ->htmlTemplate('page/user/registration/confirmation_email.html.twig')
+                    ->htmlTemplate('@LotgdCore/registration/confirmation_email.html.twig')
                     ->context(['text_domain' => self::TEXT_DOMAIN])
             );
             // do anything else you need here, like send an email
@@ -76,7 +87,7 @@ class RegistrationController extends AbstractController
             );
         }
 
-        return $this->render('page/user/registration/register.html.twig', [
+        return $this->render('@LotgdCore/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
@@ -102,6 +113,6 @@ class RegistrationController extends AbstractController
 
         $this->addFlash('success', new TranslatableMessage('email.verified', [], self::TEXT_DOMAIN));
 
-        return $this->redirectToRoute('lotgd_core_profile');
+        return $this->redirectToRoute('lotgd_user_profile');
     }
 }

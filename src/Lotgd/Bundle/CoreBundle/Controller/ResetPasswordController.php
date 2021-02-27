@@ -11,11 +11,11 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Core\Controller;
+namespace Lotgd\Bundle\CoreBundle\Controller;
 
-use Lotgd\Core\Entity\User;
-use Lotgd\Core\Form\ChangePasswordFormType;
-use Lotgd\Core\Form\ResetPasswordRequestFormType;
+use Lotgd\Bundle\CoreBundle\Entity\User;
+use Lotgd\Bundle\CoreBundle\Form\ChangePasswordFormType;
+use Lotgd\Bundle\CoreBundle\Form\ResetPasswordRequestFormType;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -37,7 +37,7 @@ class ResetPasswordController extends AbstractController
 {
     use ResetPasswordControllerTrait;
 
-    public const TEXT_DOMAIN = 'page_reset_password';
+    public const TEXT_DOMAIN = 'lotgd_core_page_reset_password';
 
     private $resetPasswordHelper;
 
@@ -64,7 +64,7 @@ class ResetPasswordController extends AbstractController
             );
         }
 
-        return $this->render('page/user/reset_password/request.html.twig', [
+        return $this->render('@LotgdCore/reset_password/request.html.twig', [
             'requestForm' => $form->createView(),
         ]);
     }
@@ -82,7 +82,7 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('lotgd_core_forgot_password_request');
         }
 
-        return $this->render('page/user/reset_password/check_email.html.twig', [
+        return $this->render('@LotgdCore/reset_password/check_email.html.twig', [
             'resetToken' => $resetToken,
         ]);
     }
@@ -144,10 +144,10 @@ class ResetPasswordController extends AbstractController
             // The session is cleaned up after the password has been changed.
             $this->cleanSessionAfterReset();
 
-            return $this->redirectToRoute('lotgd_core_home');
+            return $this->redirectToRoute('lotgd_core_login');
         }
 
-        return $this->render('page/user/reset_password/reset.html.twig', [
+        return $this->render('@LotgdCore/reset_password/reset.html.twig', [
             'resetForm' => $form->createView(),
         ]);
     }
@@ -186,7 +186,7 @@ class ResetPasswordController extends AbstractController
             ->from(new Address('no-reply@lotgd.com', 'LoTGD Mail'))
             ->to($user->getEmail())
             ->subject('Your password reset request')
-            ->htmlTemplate('page/user/reset_password/email.html.twig')
+            ->htmlTemplate('@LotgdCore/reset_password/email.html.twig')
             ->context([
                 'resetToken' => $resetToken,
             ])

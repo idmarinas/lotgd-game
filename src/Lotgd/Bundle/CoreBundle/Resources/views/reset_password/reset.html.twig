@@ -1,0 +1,7 @@
+{% extends '@LotgdUi/layout/classic.html.twig' %}
+
+{% block lotgd_head_title %}{{ 'reset.title'|trans({}, text_domain) }}{% endblock %}
+
+{% block lotgd_body_content %}
+    {{ form(resetForm) }}
+{% endblock %}

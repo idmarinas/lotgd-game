@@ -1,8 +1,8 @@
-{% extends 'layout.html.twig' %}
+{% extends '@LotgdUi/layout/classic.html.twig' %}
 
-{% block lotgd_core_head_title %}{{ 'title.bundle'|trans({}, text_domain) }}{% endblock %}
+{% block lotgd_head_title %}{{ 'title.bundle'|trans({}, text_domain) }}{% endblock %}
 
-{% block lotgd_core_body_content %}
+{% block lotgd_body_content %}
     {% trans_default_domain text_domain %}
 
     <div class="ui inverted two statistics">
@@ -37,7 +37,7 @@
 
             {% if bundle.lotgdDownload %}
                 {% set tag = 'a' %}
-                {% set htmlAttrs = 'href="' ~ bundle.lotgdDownload ~ '" target="_blank" rel="noopener noreferrer"' %}
+                {% set htmlAttrs = 'href="' ~ bundle.lotgdDownload|e('url') ~ '" target="_blank" rel="noopener noreferrer"' %}
             {% endif %}
 
             <{{ tag }} {{ htmlAttrs|raw }} class="item">
@@ -62,4 +62,4 @@
             </div>
         {% endfor %}
     </div>
-{% endblock lotgd_core_body_content %}
+{% endblock lotgd_body_content %}

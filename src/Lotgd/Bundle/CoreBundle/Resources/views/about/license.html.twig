@@ -1,8 +1,8 @@
-{% extends 'layout.html.twig' %}
+{% extends '@LotgdUi/layout/classic.html.twig' %}
 
-{% block lotgd_core_head_title %}{{ 'title.license'|trans({}, text_domain) }}{% endblock %}
+{% block lotgd_head_title %}{{ 'title.license'|trans({}, 'lotgd_core_page_about') }}{% endblock %}
 
-{% block lotgd_core_body_content %}
+{% block lotgd_body_content %}
     {{ '`0MightyE tells you, "`2We\'re going to take a few moments to try and explain this new license and the reasons behind it in plain English.
     The legalese for the license can be found online at <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode" target="_blank" rel="noopener noreferrer">http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode</a> and should be read and understood in detail before you use this code.`0"'|colorize }}
     <br>
@@ -34,4 +34,4 @@
     It must be done by the original author since only the original author has the right to change the copyright or license upon their work.
     {{ '[Additionally, reworking the modifications will be a good idea anyway as the mechanism for making modifications is substantially cleaner/clearer starting with the 0.9.8-prerelease code.]`0"`0'|colorize }}
 
-{% endblock lotgd_core_body_content %}
+{% endblock lotgd_body_content %}

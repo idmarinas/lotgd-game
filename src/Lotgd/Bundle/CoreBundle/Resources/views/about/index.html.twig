@@ -1,8 +1,8 @@
-{% extends 'layout.html.twig' %}
+{% extends '@LotgdUi/layout/classic.html.twig' %}
 
-{% block lotgd_core_head_title %}{{ 'title.about'|trans({}, text_domain) }}{% endblock %}
+{% block lotgd_head_title %}{{ 'title.about'|trans({}, 'lotgd_core_page_about') }}{% endblock %}
 
-{% block lotgd_core_body_content %}
+{% block lotgd_body_content %}
     <div class="ui basic segments">
         <div class="ui vertical segment">
             {# NOTICE
@@ -14,7 +14,7 @@
             <br>
             <br>
             <div class="center aligned">
-                LoGD version <strong>{{ lotgd_core_version }}</strong>
+                LoGD version <strong>{{ lotgd_version }}</strong>
             </div>
             {{ 'MightyE tells you, "`2Legend of the Green Dragon is a remake of and homage to the classic BBS Door game, Legend of the Red Dragon (aka LoRD) by <a href="http://www.rtsoft.com" target="_blank" rel="noopener noreferrer">Seth Able Robinson</a>.`0"'|colorize }}
             <br>

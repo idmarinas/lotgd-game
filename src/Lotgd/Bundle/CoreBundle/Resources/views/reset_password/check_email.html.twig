@@ -1,10 +1,10 @@
-{% extends 'layout.html.twig' %}
+{% extends '@LotgdUi/layout/classic.html.twig' %}
 
-{% block lotgd_core_head_title %}
+{% block lotgd_head_title %}
     {{ 'check.email.title'|trans({}, text_domain)|uncolorize }}
 {% endblock %}
 
-{% block lotgd_core_body_content %}
+{% block lotgd_body_content %}
     {% trans_default_domain text_domain %}
 
     <p>{{ 'check.email.paragraph.expire'|trans({
