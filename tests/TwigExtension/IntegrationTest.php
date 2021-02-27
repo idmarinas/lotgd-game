@@ -11,9 +11,9 @@
  * @since 0.1.0
  */
 
-namespace Lotgd\Core\Tests\TwigExtension;
+namespace Lotgd\Bundle\Tests\TwigExtension;
 
-use Lotgd\Core\Twig\Extension\GameCoreExtension;
+use Lotgd\Bundle\CoreBundle\Twig\Extension\GameCoreExtension;
 use Twig\Test\IntegrationTestCase;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -30,7 +30,7 @@ class IntegrationTest extends IntegrationTestCase
         return [
             new GameCoreExtension(
                 $container->get('request_stack'),
-                $container->get('lotgd.core.censor'))
+                $container->get('lotgd_core.censor'))
         ];
     }
 
