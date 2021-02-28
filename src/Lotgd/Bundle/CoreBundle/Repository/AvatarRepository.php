@@ -8,19 +8,19 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.2.0
+ * @since 4.0.0
  */
 
-namespace Lotgd\Core\Repository;
+namespace Lotgd\Bundle\CoreBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Core\Entity\Masters;
+use Lotgd\Bundle\CoreBundle\Entity\Avatar;
 
-class MastersRepository extends ServiceEntityRepository
+class AvatarRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Masters::class);
+        parent::__construct($registry, Avatar::class);
     }
 }

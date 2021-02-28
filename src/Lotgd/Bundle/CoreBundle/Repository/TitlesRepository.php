@@ -5,22 +5,22 @@
  *
  * @see https://github.com/idmarinas/lotgd-game
  *
- * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.md
  * @author IDMarinas
  *
- * @since 4.2.0
+ * @since 4.0.0
  */
 
-namespace Lotgd\Core\Repository;
+namespace Lotgd\Bundle\CoreBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Core\Entity\Creatures;
+use Lotgd\Bundle\CoreBundle\Entity\Titles;
 
-class CreaturesRepository extends ServiceEntityRepository
+class TitlesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Creatures::class);
+        parent::__construct($registry, Titles::class);
     }
 }

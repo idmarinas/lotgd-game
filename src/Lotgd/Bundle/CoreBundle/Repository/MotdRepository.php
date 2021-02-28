@@ -11,11 +11,11 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core\Repository;
+namespace Lotgd\Bundle\CoreBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Core\Entity\Motd;
+use Lotgd\Bundle\CoreBundle\Entity\Motd;
 
 class MotdRepository extends ServiceEntityRepository
 {

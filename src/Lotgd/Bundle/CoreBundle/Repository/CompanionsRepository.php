@@ -11,16 +11,16 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core\Repository;
+namespace Lotgd\Bundle\CoreBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Core\Entity\Mail;
+use Lotgd\Bundle\CoreBundle\Entity\Companions;
 
-class MailRepository extends ServiceEntityRepository
+class CompanionsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Mail::class);
+        parent::__construct($registry, Companions::class);
     }
 }

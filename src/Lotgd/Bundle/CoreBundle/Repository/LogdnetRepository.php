@@ -11,11 +11,11 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core\Repository;
+namespace Lotgd\Bundle\CoreBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Core\Entity\Logdnet;
+use Lotgd\Bundle\CoreBundle\Entity\Logdnet;
 
 class LogdnetRepository extends ServiceEntityRepository
 {

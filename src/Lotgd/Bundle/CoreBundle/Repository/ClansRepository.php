@@ -11,12 +11,12 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core\Repository;
+namespace Lotgd\Bundle\CoreBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Core\Entity as EntityCore;
-use Lotgd\Core\Entity\Clans;
+use Lotgd\Bundle\CoreBundle\Entity as EntityCore;
+use Lotgd\Bundle\CoreBundle\Entity\Clans;
 use Doctrine\Common\Collections\Criteria;
 
 class ClansRepository extends ServiceEntityRepository

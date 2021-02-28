@@ -11,11 +11,11 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core\Repository;
+namespace Lotgd\Bundle\CoreBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Core\Entity\Commentary;
+use Lotgd\Bundle\CoreBundle\Entity\Commentary;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -55,7 +55,7 @@ class CommentaryRepository extends ServiceEntityRepository
                     continue;
                 }
 
-                /** @var Lotgd\Core\Entity\User */
+                /** @var Lotgd\Bundle\CoreBundle\Entity\User */
                 $user = $this->security->getUser();
                 $comment->setHidden($hiddenNew);
                 $comment->setHiddenBy($user->getId());

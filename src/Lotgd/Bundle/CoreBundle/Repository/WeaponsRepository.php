@@ -11,16 +11,16 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core\Repository;
+namespace Lotgd\Bundle\CoreBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Core\Entity\Debug;
+use Lotgd\Bundle\CoreBundle\Entity\Weapons;
 
-class DebugRepository extends ServiceEntityRepository
+class WeaponsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Debug::class);
+        parent::__construct($registry, Weapons::class);
     }
 }

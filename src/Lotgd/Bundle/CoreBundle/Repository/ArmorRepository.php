@@ -11,16 +11,16 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core\Repository;
+namespace Lotgd\Bundle\CoreBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Core\Entity\Mounts;
+use Lotgd\Bundle\CoreBundle\Entity\Armor;
 
-class MountsRepository extends ServiceEntityRepository
+class ArmorRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Mounts::class);
+        parent::__construct($registry, Armor::class);
     }
 }
