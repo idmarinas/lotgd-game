@@ -23,10 +23,12 @@ return [
     Knp\Bundle\MenuBundle\KnpMenuBundle::class                               => ['all' => true],
     Sonata\Exporter\Bridge\Symfony\SonataExporterSymfonyBundle::class        => ['all' => true],
     Sonata\AdminBundle\SonataAdminBundle::class                              => ['all' => true],
+    Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle::class        => ['all' => true],
     Cron\CronBundle\CronCronBundle::class                                    => ['all' => true],
     SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle::class => ['all' => true],
     SymfonyCasts\Bundle\VerifyEmail\SymfonyCastsVerifyEmailBundle::class     => ['all' => true],
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class                     => ['all' => true],
+    Lotgd\Bundle\AdminBundle\LotgdAdminBundle::class                         => ['all' => true],
     Lotgd\Bundle\CoreBundle\LotgdCoreBundle::class                           => ['all' => true],
     Lotgd\Bundle\UiBundle\LotgdUiBundle::class                               => ['all' => true],
 ];
