@@ -1,0 +1,18 @@
+{% block user_block %}
+    {% if app.user %}
+        {% set _bg_class = "bg-light-blue" %}
+        {% set _logout_uri = url('lotgd_core_logout') %}
+
+        <li class="user-header {{ _bg_class }}">
+            <img src="{{ asset('/bundles/lotgdui/images/Medallion-Yellow.gif') }}" class="img-circle" alt="Avatar" />
+            <p>{{ app.user.username }}</p>
+        </li>
+
+        <li class="user-footer">
+            <div class="pull-left">
+                <a class="btn btn-default btn-flat" target="_blank"><i aria-hidden="true" class="fa fa-user"></i> Perfil </a>
+            </div>
+            <div class="pull-right"><a href="{{ _logout_uri }}" class="btn btn-default btn-flat"><i aria-hidden="true" class="text-danger fa fa-sign-out fa-fw"></i> Desconectar</a></div>
+        </li>
+    {% endif %}
+{% endblock %}

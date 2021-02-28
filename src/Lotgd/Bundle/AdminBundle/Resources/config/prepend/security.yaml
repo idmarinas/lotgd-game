@@ -1,0 +1,4 @@
+security:
+    providers:
+        lotgd_admin_user_provider:
+            id: Lotgd\Bundle\AdminBundle\Security\UserProvider

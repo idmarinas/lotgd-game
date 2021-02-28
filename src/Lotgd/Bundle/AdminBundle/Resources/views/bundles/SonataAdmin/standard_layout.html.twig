@@ -1,0 +1,33 @@
+{% extends '@SonataAdmin/standard_layout.html.twig' %}
+
+{% block sonata_top_nav_menu %}
+    {% if app.user  %}
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="{{ path('lotgd_core_home') }}" title="Game">
+                        <img src="{{ asset('/bundles/lotgdui/images/Medallion-Red.gif') }}" alt="Logo" width="19">
+                    </a>
+                </li>
+                {% block sonata_top_nav_menu_add_block %}
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-plus-square fa-fw" aria-hidden="true"></i> <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </a>
+                        {% include get_global_template('add_block') %}
+                    </li>
+                {% endblock %}
+                {% block sonata_top_nav_menu_user_block %}
+                    <li class="dropdown user-menu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw" aria-hidden="true"></i> <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            {% include get_global_template('user_block') %}
+                        </ul>
+                    </li>
+                {% endblock %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}
