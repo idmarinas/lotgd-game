@@ -1,0 +1,28 @@
+{
+    "name": "idmarinas/ui-bundle",
+    "description": "LoTGD UI component.",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Iván Diaz Marinas (IDMarinas)",
+            "email": "35842929+idmarinas@users.noreply.github.com",
+            "homepage": "https://github.com/idmarinas/lotgd-game",
+            "role": "Developer, Maintainer"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "sonata-project/block-bundle": "^4.5",
+        "sylius/theme-bundle": "^2.1",
+        "symfony/intl": "5.2.*",
+        "symfony/dependency-injection": "5.2.*",
+        "symfony/translation": "5.2.*",
+        "symfony/twig-bundle": "^5.2",
+        "twig/twig": "^2.12|^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lotgd\\Bundle\\UiBundle\\": ""
+        }
+    }
+}
