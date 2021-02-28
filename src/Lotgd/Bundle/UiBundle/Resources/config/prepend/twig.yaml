@@ -1,0 +1,4 @@
+twig:
+    form_themes: [
+        '@LotgdUi/form/semantic-ui-form-theme.html.twig'
+    ]
