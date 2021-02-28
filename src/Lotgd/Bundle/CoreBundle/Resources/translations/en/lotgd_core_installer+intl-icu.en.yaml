@@ -1,0 +1,40 @@
+installer:
+    command.running: 'The command "{name}" is already running in another process.'
+    license:
+        read: |
+            Before continuing, you must read and understand the following license agreement.
+            By continuing with this installation, you indicate your agreement with the terms of the license found on the next link.
+        question: 'Agree this license? (default is no): '
+        reject: 'Installation cancelled, license rejected.'
+        confirmation: 'By using this software, you indicate your agreement to the license terms found on the previous link.'
+    check.installation:
+        verify:
+            version: 'We detect "{version}" installed in server. Is correct? (defaults is No): '
+            clean: 'We detect that is a new install or not version is detected. Is correct? (defaults is No): '
+        version:
+            choice: 'Please select version installed in your server: (defaults is new install): '
+            invalid: 'We have detected that the version from "{from}" or the version to "{to}" are not valid (one or both).'
+            same: 'You cannot install, you try to install the same version that is already installed'
+            less:
+                info: Cannot upgrade from a previous version to 4.12.0 IDMarinas Edition.
+                upgrade: Please upgrade to version 4.12.0 IDMarinas Edition and then try a higher version.
+            superior: 'This is crazy, you want to install a lower version on a server with a higher version?'
+    installation:
+        info.total: LoTGD Installer need install {n,plural, =1{"1" version} other{"#" versions}} of LoTGD Core. Please wait to finish.
+        abort:
+            install: 'Installation of LoTGD Core is aborted.'
+            command: 'Installation for version "{version}" has been fail'
+            database: 'Migration of Data Base has been fail or canceled.'
+        user:
+            create: Create the administrator user
+            info: When asked if the account is an administrator, select 1 to create an account as administrator.
+    progressbar:
+        install:
+            label: Installing LoTGD Core installation
+            end: LoTGD Core installed correctly
+            progress:
+                version: 'Installing "{name}"'
+                database: 'Migrating Data Base'
+                cache.clear: 'Clearing the cache for LoTGD Core'
+                steps: ' Step {step,number} completed of {total,number}'
+                completed: All steps completed
