@@ -11,9 +11,9 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Core\Controller;
+namespace Lotgd\Bundle\CoreBundle\Controller;
 
-use Lotgd\Bundle\Contract\LotgdBundleInterface;
+use Lotgd\Core\Contract\LotgdBundleInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,7 +38,7 @@ class AboutController extends AbstractController
      */
     public function gameSetup(): Response
     {
-        return $this->render('page/about/game_setup.html.twig');
+        return $this->render('@LotgdCore/about/game_setup.html.twig');
     }
 
     /**
@@ -48,7 +48,7 @@ class AboutController extends AbstractController
     {
         $bundles = $this->containerI->get('kernel')->getBundles();
 
-        return $this->render('page/about/bundles.html.twig', [
+        return $this->render('@LotgdCore/about/bundles.html.twig', [
             'bundles_total_enabled' => \is_countable($bundles) ? \count($bundles) : 0,
             'bundles_lotgd_enabled' => \array_filter($bundles, function ($var)
             {
