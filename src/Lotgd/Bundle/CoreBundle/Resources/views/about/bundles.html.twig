@@ -46,7 +46,7 @@
                         {{ downloadText }}
                     </div>
                 {% endif %}
-                <i class="big {{ bundle.lotgdIcon|default('cube') }} icon"></i>
+                <i class="big green {{ bundle.lotgdIcon|default('cube') }} icon"></i>
                 <div class="middle aligned content">
                     {{ bundle.lotgdName }} ({{ bundle.lotgdVersion }})
                     <small>{{ bundle.lotgdDescription }}</small>
@@ -54,7 +54,7 @@
             </{{ tag }}>
         {% else %}
             <div class="item">
-                <i class="big times icon"></i>
+                <i class="big red times icon"></i>
                 <div class="content">
                     <div class="header">{{ 'bundle.none.title'|trans }}</div>
                     <div class="description">{{ 'bundle.none.desc'|trans }}</div>
