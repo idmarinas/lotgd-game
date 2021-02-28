@@ -11,9 +11,9 @@
  * @since 4.3.0
  */
 
-namespace Lotgd\Core\Form\Type;
+namespace Lotgd\Bundle\CoreBundle\Form\Type;
 
-use Lotgd\Core\Form\DataTransformer\DateTimeTypeTransformer;
+use Lotgd\Bundle\CoreBundle\Form\DataTransformer\DateTimeTypeTransformer;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType as SymfonyDateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 

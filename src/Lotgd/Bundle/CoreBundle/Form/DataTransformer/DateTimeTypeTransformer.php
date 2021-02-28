@@ -11,7 +11,7 @@
  * @since 4.3.0
  */
 
-namespace Lotgd\Core\Form\DataTransformer;
+namespace Lotgd\Bundle\CoreBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
