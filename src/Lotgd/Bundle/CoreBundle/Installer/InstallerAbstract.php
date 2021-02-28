@@ -23,7 +23,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class InstallerAbstract
 {
-    public const TRANSLATOR_DOMAIN = 'app_installer';
+    public const TRANSLATOR_DOMAIN = 'lotgd_core_installer';
 
     protected $totaSteps;
     protected $style;
