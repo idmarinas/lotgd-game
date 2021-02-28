@@ -1,0 +1,37 @@
+{
+    "name": "idmarinas/admin-bundle",
+    "description": "LoTGD Administration panel component.",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Iván Diaz Marinas (IDMarinas)",
+            "email": "35842929+idmarinas@users.noreply.github.com",
+            "homepage": "https://github.com/idmarinas/lotgd-game",
+            "role": "Developer, Maintainer"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "sonata-project/admin-bundle": "dev-master",
+        "sonata-project/block-bundle": "^4.5",
+        "sonata-project/doctrine-orm-admin-bundle": "dev-master",
+        "symfony/console": "5.2.*",
+        "symfony/form": "5.2.*",
+        "symfony/framework-bundle": "5.2.*",
+        "symfony/intl": "5.2.*",
+        "symfony/lock": "5.2.*",
+        "symfony/mailer": "5.2.*",
+        "symfony/dependency-injection": "5.2.*",
+        "symfony/process": "5.2.*",
+        "symfony/translation": "5.2.*",
+        "symfony/twig-bundle": "^5.2",
+        "symfony/validator": "5.2.*",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/twig": "^2.12|^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lotgd\\Bundle\\AdminBundle\\": ""
+        }
+    }
+}
