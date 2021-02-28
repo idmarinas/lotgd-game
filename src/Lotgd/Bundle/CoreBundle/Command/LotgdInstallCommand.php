@@ -11,13 +11,13 @@
  * @since 5.0.0
  */
 
-namespace Lotgd\Core\Command;
+namespace Lotgd\Bundle\CoreBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Lotgd\Core\Installer\Install;
-use Lotgd\Core\Installer\InstallerAbstract;
-use Lotgd\Core\Installer\Pattern\FormaterTrait;
-use Lotgd\Core\Kernel;
+use Lotgd\Bundle\CoreBundle\Installer\Install;
+use Lotgd\Bundle\CoreBundle\Installer\InstallerAbstract;
+use Lotgd\Bundle\CoreBundle\Installer\Pattern\FormaterTrait;
+use Lotgd\Bundle\Kernel;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Helper\Helper;
@@ -38,6 +38,8 @@ final class LotgdInstallCommand extends Command
 {
     use LockableTrait;
     use FormaterTrait;
+
+    public const TRANSLATOR_DOMAIN = InstallerAbstract::TRANSLATOR_DOMAIN;
 
     protected static $defaultName = 'lotgd:install';
 
@@ -73,7 +75,7 @@ final class LotgdInstallCommand extends Command
         //-- Check if command is running/locked
         if ( ! $this->lock())
         {
-            $output->writeln($this->translator->trans('installer.command.running', ['name' => $this->getName()], InstallerAbstract::TRANSLATOR_DOMAIN));
+            $output->writeln($this->translator->trans('installer.command.running', ['name' => $this->getName()], self::TRANSLATOR_DOMAIN));
 
             return Command::SUCCESS;
         }
@@ -82,23 +84,23 @@ final class LotgdInstallCommand extends Command
         $output->writeln('<fg=green>'.$this->banner().'</>');
         $output->writeln('');
 
-        $text = $this->translator->trans('installer.license.read', [], InstallerAbstract::TRANSLATOR_DOMAIN);
+        $text = $this->translator->trans('installer.license.read', [], self::TRANSLATOR_DOMAIN);
         $output->writeln("<info>{$text}</>");
         $output->writeln('<href=http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode>http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode</>');
 
         $helper   = $this->getHelper('question');
-        $question = new ConfirmationQuestion($this->translator->trans('installer.license.question', [], InstallerAbstract::TRANSLATOR_DOMAIN), false);
+        $question = new ConfirmationQuestion($this->translator->trans('installer.license.question', [], self::TRANSLATOR_DOMAIN), false);
 
         $output->writeln('');
         if ( ! $helper->ask($input, $output, $question))
         {
-            $text = $this->translator->trans('installer.license.reject', [], InstallerAbstract::TRANSLATOR_DOMAIN);
+            $text = $this->translator->trans('installer.license.reject', [], self::TRANSLATOR_DOMAIN);
             $output->writeln("<error>{$text}</>");
 
             return Command::SUCCESS;
         }
 
-        $text = $this->translator->trans('installer.license.confirmation', [], InstallerAbstract::TRANSLATOR_DOMAIN);
+        $text = $this->translator->trans('installer.license.confirmation', [], self::TRANSLATOR_DOMAIN);
         $output->writeln('');
         $output->writeln("<comment>{$text}</>");
 
@@ -109,7 +111,7 @@ final class LotgdInstallCommand extends Command
 
     private function doExecute(InputInterface $input, OutputInterface $output)
     {
-        /** @var Lotgd\Core\Kernel */
+        /** @var Lotgd\Bundle\CoreBundle\Kernel */
         $app         = $this->getApplication();
         $kernel      = $app->getKernel();
         $this->style = new SymfonyStyle($input, $output);
@@ -129,7 +131,7 @@ final class LotgdInstallCommand extends Command
         $nameVersion = $this->installer->getNameVersion($fromVersion);
         $type        = 'Clean Install' == $nameVersion ? 'clean' : 'version';
         $question    = new ConfirmationQuestion(
-            $this->translator->trans("installer.check.installation.verify.{$type}", ['version' => $nameVersion], InstallerAbstract::TRANSLATOR_DOMAIN),
+            $this->translator->trans("installer.check.installation.verify.{$type}", ['version' => $nameVersion], self::TRANSLATOR_DOMAIN),
             false
         );
 
@@ -139,7 +141,7 @@ final class LotgdInstallCommand extends Command
             $versions = $this->installer->getInstallerVersions();
 
             $question = new ChoiceQuestion(
-                $this->translator->trans('installer.check.installation.version.choice', [], InstallerAbstract::TRANSLATOR_DOMAIN),
+                $this->translator->trans('installer.check.installation.version.choice', [], self::TRANSLATOR_DOMAIN),
                 \array_keys($versions),
                 0
             );
@@ -159,11 +161,11 @@ final class LotgdInstallCommand extends Command
         $countVersionsToInstall = \count($versionsToInstall);
 
         //-- Information count of versions need upgrade.
-        $this->style->note($this->translator->trans('installer.installation.info.total', ['n' => $countVersionsToInstall], InstallerAbstract::TRANSLATOR_DOMAIN));
+        $this->style->note($this->translator->trans('installer.installation.info.total', ['n' => $countVersionsToInstall], self::TRANSLATOR_DOMAIN));
 
         //-- Create a progress bar
         $installerBar = $this->getProgressBar($output);
-        $installerBar->setMessage($this->translator->trans('installer.progressbar.install.label', [], InstallerAbstract::TRANSLATOR_DOMAIN));
+        $installerBar->setMessage($this->translator->trans('installer.progressbar.install.label', [], self::TRANSLATOR_DOMAIN));
 
         //-- Start bar
         $installerBar->start($countVersionsToInstall + 1); //-- For clear cache
@@ -171,7 +173,7 @@ final class LotgdInstallCommand extends Command
         //-- Process instalation scripts
         if ($this->processInstallation($input, $output, $installerBar, $versionsToInstall))
         {
-            $this->style->error($this->translator->trans('installer.installation.abort.install', [], InstallerAbstract::TRANSLATOR_DOMAIN));
+            $this->style->error($this->translator->trans('installer.installation.abort.install', [], self::TRANSLATOR_DOMAIN));
 
             return Command::FAILURE;
         }
@@ -181,8 +183,8 @@ final class LotgdInstallCommand extends Command
         //-- Cache clear
         $this->processCacheClear($installerBar);
 
-        $installerBar->setMessage($this->translator->trans('installer.progressbar.install.end', [], InstallerAbstract::TRANSLATOR_DOMAIN));
-        $installerBar->setMessage($this->translator->trans('installer.progressbar.install.progress.completed', [], InstallerAbstract::TRANSLATOR_DOMAIN), 'steps');
+        $installerBar->setMessage($this->translator->trans('installer.progressbar.install.end', [], self::TRANSLATOR_DOMAIN));
+        $installerBar->setMessage($this->translator->trans('installer.progressbar.install.progress.completed', [], self::TRANSLATOR_DOMAIN), 'steps');
 
         $installerBar->finish(); //-- Ensures that the progress bar is at 100%
 
@@ -198,13 +200,13 @@ final class LotgdInstallCommand extends Command
 
     private function processInstallation(InputInterface $input, OutputInterface $output, ProgressBar $installerBar, array $versionsToInstall)
     {
-        $message = $this->translator->trans('installer.progressbar.install.progress.database', [], InstallerAbstract::TRANSLATOR_DOMAIN);
+        $message = $this->translator->trans('installer.progressbar.install.progress.database', [], self::TRANSLATOR_DOMAIN);
         $installerBar->setMessage($message, 'steps');
         $installerBar->display();
 
         foreach ($versionsToInstall as $v_name => $v_id)
         {
-            $message = $this->translator->trans('installer.progressbar.install.progress.version', ['name' => $v_name], InstallerAbstract::TRANSLATOR_DOMAIN);
+            $message = $this->translator->trans('installer.progressbar.install.progress.version', ['name' => $v_name], self::TRANSLATOR_DOMAIN);
             $installerBar->setMessage($message);
             $installerBar->setMessage('', 'steps');
             $installerBar->display();
@@ -217,7 +219,7 @@ final class LotgdInstallCommand extends Command
                 continue;
             }
 
-            /** @var Lotgd\Core\Installer\Command\AbstractCommand */
+            /** @var Lotgd\Bundle\CoreBundle\Installer\Command\AbstractCommand */
             $command = $this->getApplication()->find("lotgd:install:v:{$v_id}");
             $command->setProgressBar($installerBar);
             $returnCode = (int) $command->run($input, $output);
@@ -227,7 +229,7 @@ final class LotgdInstallCommand extends Command
             {
                 $this->style->warning($this->translator->trans('installer.installation.abort.command', [
                     'version' => $this->installer->getNameVersion($v_id),
-                ], InstallerAbstract::TRANSLATOR_DOMAIN));
+                ], self::TRANSLATOR_DOMAIN));
 
                 return Command::FAILURE;
             }
@@ -243,8 +245,8 @@ final class LotgdInstallCommand extends Command
         $input = new ArrayInput([]);
         $input->setInteractive(false); //-- Do not ask any interactive question
 
-        $installerBar->setMessage($this->translator->trans('installer.progressbar.install.label', [], InstallerAbstract::TRANSLATOR_DOMAIN));
-        $message = $this->translator->trans('installer.progressbar.install.progress.cache.clear', [], InstallerAbstract::TRANSLATOR_DOMAIN);
+        $installerBar->setMessage($this->translator->trans('installer.progressbar.install.label', [], self::TRANSLATOR_DOMAIN));
+        $message = $this->translator->trans('installer.progressbar.install.progress.cache.clear', [], self::TRANSLATOR_DOMAIN);
         $installerBar->setMessage($message, 'steps');
         $installerBar->display();
 
@@ -263,8 +265,8 @@ final class LotgdInstallCommand extends Command
             return false;
         }
 
-        $this->style->title($this->translator->trans('installer.installation.user.create', [], InstallerAbstract::TRANSLATOR_DOMAIN));
-        $this->style->info($this->translator->trans('installer.installation.user.info', [], InstallerAbstract::TRANSLATOR_DOMAIN));
+        $this->style->title($this->translator->trans('installer.installation.user.create', [], self::TRANSLATOR_DOMAIN));
+        $this->style->info($this->translator->trans('installer.installation.user.info', [], self::TRANSLATOR_DOMAIN));
 
         $command = $this->getApplication()->find('lotgd:user:create');
         $command->run($input, $output);
@@ -272,9 +274,9 @@ final class LotgdInstallCommand extends Command
 
     private function existSuperAdmin()
     {
-        /** @var Lotgd\Core\EntityRepository\UserRepository */
+        /** @var Lotgd\Bundle\CoreBundle\EntityRepository\UserRepository */
         $repository = $this->doctrine->getRepository('LotgdCore:User');
-        $qb = $repository->createQueryBuilder('u');
+        $qb         = $repository->createQueryBuilder('u');
 
         return (bool) $qb->select('COUNT(1)')
             ->where('u.roles LIKE :roles')
