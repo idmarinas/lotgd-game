@@ -1,0 +1,15 @@
+# Parts of page
+app:
+    page_gen: 'Page gen: {gen_time,number}s'
+    pagination:
+        description: 'Pagination results {firstItemNumber,number} to {lastItemNumber,number} out of {totalItemCount,number}'
+        menu:
+            first: 'First page'
+            previous: 'Previous page'
+            current: '{firstItemNumber,number} - {lastItemNumber,number} of {totalItemCount,number}'
+            page: 'Page {page,number}'
+            next: 'Next page'
+            last: 'Last page'
+
+# Mailer service info
+mailer.send.mail.error: 'An error occurred while sending the mail'
