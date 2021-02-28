@@ -126,6 +126,9 @@
     "gedmo/doctrine-extensions": {
         "version": "v3.0.3"
     },
+    "idmarinas/admin-bundle": {
+        "version": "dev-master"
+    },
     "idmarinas/core-bundle": {
         "version": "dev-master"
     },
@@ -316,6 +319,9 @@
     },
     "sonata-project/doctrine-extensions": {
         "version": "1.11.0"
+    },
+    "sonata-project/doctrine-orm-admin-bundle": {
+        "version": "4.x-dev"
     },
     "sonata-project/exporter": {
         "version": "2.5.1"
