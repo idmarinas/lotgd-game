@@ -16,8 +16,6 @@ use Snipe\BanBuilder\CensorWords;
 
 class Censor extends CensorWords
 {
-    public const LOTGD_DICTIONARY_PATH = 'data/dictionary';
-
     /**
      * Last original text, before filter.
      *
@@ -32,13 +30,13 @@ class Censor extends CensorWords
      */
     protected $lotgdMatchWords = [];
 
-    public function __construct($locale)
+    public function __construct(string $locale, string $projectDir)
     {
         parent::__construct();
 
         try
         {
-            //-- Try add local dictionary
+            //-- Try add locale dictionary
             $this->addDictionary($locale);
         }
         catch (\Throwable $th)
@@ -47,7 +45,8 @@ class Censor extends CensorWords
             $this->addDictionary('en-base');
         }
 
-        $dictionary = dirname(__DIR__, 2)."/data/dictionary/{$locale}.php";
+        //-- Add custom local dictionary
+        $dictionary = "{$projectDir}/data/dictionary/{$locale}.php";
 
         if (\is_file($dictionary))
         {
