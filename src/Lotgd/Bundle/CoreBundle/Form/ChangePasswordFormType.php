@@ -11,7 +11,7 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Core\Form;
+namespace Lotgd\Bundle\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
