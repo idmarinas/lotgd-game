@@ -9,11 +9,11 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 
 ### :cyclone: CHANGES
 
--   **BC** LoTGD Core is a Symfony App since version 6.0.0.
+-   **BC** LoTGD Core is a Symfony App (Bundle) since version 6.0.0.
     -   Changed the entire core structure to follow Symfony Framework conventions.
--   :warning: LoTGD is now a Symfony App.
--   Moved content of `src/core` to `src`
-    -   LoTGD follow structure of Symfony App
+-   :warning: LoTGD is now a Symfony App (Bundle).
+-   Moved content of `src/core` to `src/Bundle`
+    -   LoTGD follow structure of Symfony App divided in Bundles.
 -   **New** login system:
     -   Old password are auto-migrated (but can fail)
         -   Can reset password.
@@ -25,7 +25,7 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 
 ### :star: FEATURES
 
--   **New** Since 6.0.0 version LoTGD Core is a Symfony App.
+-   **New** Since 6.0.0 version LoTGD Core is a Symfony Bundle.
     -   All features of Symfony App
 
 ### :fire: DEPRECATED
@@ -38,12 +38,12 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 
 ### :x: REMOVES
 
--   **BC** Remove `src/local` and `src/ajax`
+-   **BC** Remove `src/core`, `src/local` and `src/ajax`
     -   All Jaxon class are now in `jaxon/App`
 -   **BC** Delete folder `modules/` old module system not work with this version use Bundle system.
     -   Deleted related files/tables in database to modules too.
 -   **BC** Delete `AdvertisingBundle` from Core. Now is a independent bundle (can use in other Symfony projects).
-    -   If you need/want use in your server can use https://github.com/idmarinas/advertising-bundle:
+    -   If you need/want use in your server can use https://github.com/idmarinas/advertising-bundle
 -   **BC** Removed class:
     -   `Lotgd\Core\Application`
     -   `Lotgd\Core\EventManagerAware`
