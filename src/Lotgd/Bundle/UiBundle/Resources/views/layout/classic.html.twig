@@ -1,17 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends '@LotgdUi/base.html.twig' %}
 
-{% use '_layout.html.twig' %}
+{% use '@LotgdUi/layout/_classic.html.twig' %}
 
-{% block lotgd_core_head_css %}
+{% block lotgd_head_css %}
     {{ parent() }}
     {{ encore_entry_link_tags('lotgd_theme', 'lotgd', 'lotgd') }}
 {% endblock %}
 
-{% block lotgd_core_footer_js %}
+{% block lotgd_footer_js %}
     {{ encore_entry_script_tags('lotgd_theme', 'lotgd', 'lotgd') }}
 {% endblock %}
 
-{% block lotgd_core_body %}
+{% block lotgd_body %}
     <table class="lotgd table">
         <tr>
             <td>{{ block('layout_header') }}</td>
@@ -37,13 +37,13 @@
                                             <tr>
                                                 <td class="top aligned left aligned">
                                                     {# Display all flash messages #}
-                                                    {% include '_partials/_flash_messages.html.twig' with { 'flashes': app.flashes } %}
+                                                    {% include '@LotgdUi/_partials/_flash_messages.html.twig' with { 'flashes': app.flashes } %}
 
                                                     {# {% if event %}
                                                         <h1 class="center aligned">{{ event[0]|trans(event[1], event[2])|colorize }}</h1>
                                                     {% endif %} #}
                                                     {# This is all content of game #}
-                                                    {% block lotgd_core_body_content %}{% endblock %}
+                                                    {% block lotgd_body_content %}{% endblock %}
                                                 </td>
                                             </tr>
                                         </table>
@@ -68,4 +68,4 @@
             <td>{{ block('layout_footer') }}</td>
         </tr>
     </table>
-{% endblock lotgd_core_body %}
+{% endblock lotgd_body %}

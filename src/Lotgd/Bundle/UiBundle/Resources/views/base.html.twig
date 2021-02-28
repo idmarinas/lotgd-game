@@ -16,33 +16,33 @@
         <meta name="robots" content="index, follow">
 
         {# Dynamically added meta tags #}
-        {% block lotgd_core_head_meta %}{% endblock %}
+        {% block lotgd_head_meta %}{% endblock %}
         {{ head_meta() }}
 
         <!-- Title tag for page -->
         <title>
-            {% block lotgd_core_head_title %}
-                {{ lotgd_core_title }}
-            {% endblock lotgd_core_head_title %}
+            {% block lotgd_head_title %}
+                {{ lotgd_title }}
+            {% endblock lotgd_head_title %}
         </title>
 
         {{ encore_entry_link_tags('lotgd', 'lotgd', 'lotgd') }}
         {{ encore_entry_link_tags('semantic_ui', 'lotgd', 'lotgd') }}
-        {% block lotgd_core_head_css %}
+        {% block lotgd_head_css %}
             {# Favicon can custom per theme #}
             <link rel="shortcut icon" href="/favicon.png" type="image/png" />
-        {% endblock lotgd_core_head_css %}
+        {% endblock lotgd_head_css %}
         <!-- Jaxon CSS styles -->
-        {{ jaxon_css() }}
+        {# {{ jaxon_css() }} #}
 
         {{ encore_entry_script_tags('lotgd', 'lotgd', 'lotgd') }}
-        {% block lotgd_core_head_theme_js %}{% endblock %}
+        {% block lotgd_head_theme_js %}{% endblock %}
 
         <!-- JavaScript of Fomantic UI -->
         {{ encore_entry_script_tags('semantic_ui', 'lotgd', 'lotgd') }}
 
         <!-- Jaxon JS script -->
-        {{ jaxon_js() }}
+        {# {{ jaxon_js() }} #}
 
         <!-- Dynamically added script/style code and files -->
         {{ head_link() }}
@@ -50,7 +50,7 @@
         {{ head_script() }}
 
         <!-- Jaxon inline Script -->
-        {{ jaxon_script() }}
+        {# {{ jaxon_script() }} #}
 
         <!-- START Cookies Consent -->
         <script>
@@ -61,11 +61,11 @@
 		<!-- END Cookies Consent -->
     </head>
     <body>
-        {% block lotgd_core_body %}{% endblock %}
+        {% block lotgd_body %}{% endblock %}
 
-        {% block lotgd_core_footer_css %}{% endblock %}
+        {% block lotgd_footer_css %}{% endblock %}
 
-        {% block lotgd_core_footer_js %}{% endblock %}
+        {% block lotgd_footer_js %}{% endblock %}
 
         {# Render Sonata Blocks JS and CSS #}
         {{ sonata_block_include_stylesheets('all') }}

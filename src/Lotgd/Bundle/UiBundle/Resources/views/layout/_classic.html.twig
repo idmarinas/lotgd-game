@@ -10,7 +10,7 @@
                     </tr>
                     <tr>
                         <td class="border tlt"></td>
-                        <td class="lotgd-text-nowrap"><span class='pagetitle'>&#149; {{ block('lotgd_core_head_title') }}</span></td>
+                        <td class="lotgd-text-nowrap"><span class='pagetitle'>&#149; {{ block('lotgd_head_title') }}</span></td>
                         <td class="border trt"></td>
                     </tr>
                     <tr>
@@ -52,7 +52,7 @@
                             <a href="{{ path('lotgd_core_about_license') }}">{{ 'core.menu.license'|trans({}, 'lotgd_core_navigation') }}</a> -
                             <a href="{{ path('lotgd_core_home') }}">{{ 'core.menu.source'|trans({}, 'lotgd_core_navigation') }}</a>
                             <br>
-                            {{ lotgd_core_version }}
+                            {{ lotgd_version }}
                             <br>
                             {{ game_page_gen() }}
                         </td>
@@ -79,7 +79,7 @@
         <tr>
             <td class="border tlt"></td>
             <td class="lotgd top aligned nav">
-                <div class="left aligned">{{ knp_menu_render(lotgd_core_menu, {'currentAsLink': false}) }}</div>
+                <div class="left aligned">{{ knp_menu_render(lotgd_menu, {'currentAsLink': false}) }}</div>
             </td>
             <td class="border trt"></td>
         </tr>
