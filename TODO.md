@@ -10,6 +10,9 @@
 
 -   La versión 6.0.0
 -   Plantilla de registro, agregar algunos events para agregar más información.
+-   No hace falta Gulp (puede ser), copiar los archivos se puede hacer desde composer igual que hice con el skeleton al crear proyecto.
+-   Crear el instalador como un Bundle
+-   Crear la administración como un Bundle
 -   Las diferentes partes del juego serán bundles internos:
     -   La aldea
     -   El bosque
@@ -145,6 +148,8 @@
 #### Comandos
 
 php bin/console doctrine:schema:update --force --dump-sql
+
+php bin/console doctrine:migrations:diff
 
 php phpDocumentor.phar
 
