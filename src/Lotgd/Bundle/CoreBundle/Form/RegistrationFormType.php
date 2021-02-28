@@ -11,9 +11,9 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Core\Form;
+namespace Lotgd\Bundle\CoreBundle\Form;
 
-use Lotgd\Core\Entity\User;
+use Lotgd\Bundle\CoreBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -78,7 +78,7 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => User::class,
-            'translation_domain' => 'form_registration',
+            'translation_domain' => 'lotgd_core_form_registration',
         ]);
     }
 }

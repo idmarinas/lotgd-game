@@ -11,7 +11,7 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Core\Form;
+namespace Lotgd\Bundle\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -46,7 +46,7 @@ class ResetPasswordRequestFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'translation_domain' => 'form_reset_password',
+            'translation_domain' => 'lotgd_core_form_reset_password',
         ]);
     }
 }
