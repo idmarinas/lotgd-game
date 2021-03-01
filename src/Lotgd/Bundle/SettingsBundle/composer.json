@@ -1,7 +1,8 @@
 {
-    "name": "idmarinas/ui-bundle",
-    "description": "LoTGD UI component.",
+    "name": "idmarinas/settings-bundle",
     "type": "symfony-bundle",
+    "description": "Settings system for Symfony applications, editable via web user interface.",
+    "keywords": ["config", "configuration", "settings", "shop", "webshop", "ecommerce"],
     "authors": [
         {
             "name": "Iván Diaz Marinas (IDMarinas)",
@@ -11,13 +12,9 @@
         }
     ],
     "require": {
-        "php": "^7.3",
-        "sonata-project/block-bundle": "^4.5",
-        "sylius/theme-bundle": "^2.1"
+        "php": "^7.3"
     },
     "autoload": {
-        "psr-4": {
-            "Lotgd\\Bundle\\UiBundle\\": ""
-        }
+        "psr-4": { "Lotgd\\Bundle\\SettingsBundle\\": "" }
     }
 }

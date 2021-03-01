@@ -6,13 +6,16 @@
 
 -   ...
 
-# Actualmente haciendo........
+# Actualmente haciendo... versión 6.0.0
 
--   La versión 6.0.0
+-   Esta versión LoTGD Core será una app Symfony Framework.
+    -   Se hace como un Bundle y se crea un lotgd-skeleton para crear una versión personalizada.
+
+-   Crear la migración desde la clean install
 -   Plantilla de registro, agregar algunos events para agregar más información.
--   No hace falta Gulp (puede ser), copiar los archivos se puede hacer desde composer igual que hice con el skeleton al crear proyecto.
--   Crear el instalador como un Bundle
--   Crear la administración como un Bundle
+-   * No hace falta Gulp (puede ser), copiar los archivos se puede hacer desde composer igual que hice con el skeleton al crear proyecto.
+-   Panel de administración
+    -   https://github.com/sonata-project/SonataAdminBundle 
 -   Las diferentes partes del juego serán bundles internos:
     -   La aldea
     -   El bosque
@@ -25,16 +28,14 @@
     -   Esto permite poder personalizar cada parte, principalmente por el menu de navegación y la opción de poder crear diferentes versiones:
         -   Diferentes tiendas con la misma base.
         -   Diferentes ciudades con la misma base
+-   https://github.com/KnpLabs/KnpPaginatorBundle para la paginación
+-   SonataBlockBundle puede ser interesante para agregar bloques en lugares concretos
+    -   Se usará para agregar contenido personalizado a las páginas. por ejemplo:
+        - pre_content y post_content (antes del contenido de la propia página y después)
+    -   https://sonata-project.org/bundles/block/master/doc/reference/events.html
 
 # Para la versión 6.0.0  (LoTGD Core as Symfony APP)
 
--   Se adelanta la transicción
--   Esta versión LoTGD Core será una app Symfony Framework.
-    -   Migrar a la estructura propia de Symfony Framework
--   Panel de administración
-    -   https://github.com/sonata-project/SonataAdminBundle 
--   Modificar el sistema de logeo, para usar una clase (principalmente por el tema de la contraseña)
-    -   Se usa el sistema de Symfony Framework
 -   Mirar el uso de un bundle tipo settings:
     -   https://github.com/dmishh/SettingsBundle lastest on 28 Jun 2016
     -   O mejor crear uno propio que sustituya:
@@ -43,12 +44,6 @@
         -   Menos importante
             -   Puede solaparse con las caracteristicas de los bundles
             -   Los prefs-* (ejemplo prefs-city, prefs-mount) datos, del modulo con respecto a alguna caracteristica, como puede ser una ciudad, montura
--   SonataBlockBundle puede ser interesante para agregar bloques en lugares concretos
-    -   Se usará para agregar contenido personalizado a las páginas. por ejemplo:
-        - pre_content y post_content (antes del contenido de la propia página y después)
-    -   https://sonata-project.org/bundles/block/master/doc/reference/events.html
--   Se usará un sistema de módulos tipo Bundle, igual que Symfony Framework. 
-    -   Se reemplaza por completo el viejo sistema de módulos
 -   **BC** Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
     -   Eliminar partes antiguas si aun quedan.
 -   **BC** Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente como el sistema de combate nuevo.
@@ -56,8 +51,6 @@
 -   **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
     -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
 -   **BC** Eliminar compatibilidad con el uso del viejo sistema de módulos
--   https://github.com/KnpLabs/KnpPaginatorBundle para la paginación
--   Crear bundle para limitar los intentos de conexión.
 
 # Para la versión 6.1.0
 
@@ -67,6 +60,7 @@
 
 # Para la versión 6.y.x
 
+-   Crear bundle para limitar los intentos de conexión.
 -   Crear el bundle del inventario. Para sustituir el antiguo sistema de armadura y arma.
 -   Crear el bundle de energia, que permita poner energia o un sistema por turnos.
 -   Integrar los componentes Laminas View en un bundle para crear algo similar a Sonata SEO
@@ -150,6 +144,8 @@
 php bin/console doctrine:schema:update --force --dump-sql
 
 php bin/console doctrine:migrations:diff
+
+php bin/console assets:install public
 
 php phpDocumentor.phar
 
