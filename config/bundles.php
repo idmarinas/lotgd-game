@@ -31,4 +31,5 @@ return [
     Lotgd\Bundle\AdminBundle\LotgdAdminBundle::class                         => ['all' => true],
     Lotgd\Bundle\CoreBundle\LotgdCoreBundle::class                           => ['all' => true],
     Lotgd\Bundle\UiBundle\LotgdUiBundle::class                               => ['all' => true],
+    Lotgd\Bundle\UserBundle\LotgdUserBundle::class                           => ['all' => true],
 ];
