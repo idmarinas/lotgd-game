@@ -11,7 +11,7 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Entity\User;
+namespace Lotgd\Bundle\UserBundle\Entity\User;
 
 trait Security
 {

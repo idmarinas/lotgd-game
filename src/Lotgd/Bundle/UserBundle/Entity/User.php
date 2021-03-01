@@ -11,12 +11,13 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Entity;
+namespace Lotgd\Bundle\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Lotgd\Bundle\CoreBundle\Repository\UserRepository;
+use Lotgd\Bundle\CoreBundle\Entity\Common\IdTrait;
+use Lotgd\Bundle\UserBundle\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -31,7 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
-    use Common\IdTrait;
+    use IdTrait;
     use User\Avatar;
     use User\Ban;
     use User\Donation;

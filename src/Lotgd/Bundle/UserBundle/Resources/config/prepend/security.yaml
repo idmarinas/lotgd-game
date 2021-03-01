@@ -2,8 +2,8 @@ security:
     enable_authenticator_manager: true
     encoders:
         lotgd_old_encoder:
-            id: Lotgd\Bundle\CoreBundle\Security\LotgdPasswordEncoder
-        Lotgd\Bundle\CoreBundle\Entity\User:
+            id: Lotgd\Bundle\UserBundle\Security\LotgdPasswordEncoder
+        Lotgd\Bundle\UserBundle\Entity\User:
             algorithm: auto
             migrate_from:
                 - lotgd_old_encoder
@@ -13,5 +13,5 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         lotgd_core_user_provider:
             entity:
-                class: Lotgd\Bundle\CoreBundle\Entity\User
+                class: Lotgd\Bundle\UserBundle\Entity\User
                 property: username

@@ -11,7 +11,7 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Repository;
+namespace Lotgd\Bundle\UserBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;

@@ -1,0 +1,8 @@
+doctrine:
+    orm:
+        mappings:
+            LotgdUserBundle:
+                is_bundle: true
+                type: annotation
+                prefix: 'Lotgd\Bundle\UserBundle\Entity'
+                alias: LotgdUserCore

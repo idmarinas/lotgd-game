@@ -11,7 +11,7 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Security;
+namespace Lotgd\Bundle\UserBundle\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Bundle\CoreBundle\Entity\User;
@@ -35,7 +35,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'lotgd_core_login';
+    //-- Can login from home page and login page
+    public const LOGIN_ROUTES = ['lotgd_core_home', 'lotgd_core_login'];
 
     private $entityManager;
     private $urlGenerator;
@@ -56,7 +57,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function supports(Request $request)
     {
-        return self::LOGIN_ROUTE === $request->attributes->get('_route')
+        return \in_array($request->attributes->get('_route'), self::LOGIN_ROUTES)
             && $request->isMethod('POST');
     }
 
@@ -121,6 +122,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+        return $this->urlGenerator->generate(self::LOGIN_ROUTES[1]);
     }
 }

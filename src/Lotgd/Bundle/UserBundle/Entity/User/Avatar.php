@@ -11,7 +11,7 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Entity\User;
+namespace Lotgd\Bundle\UserBundle\Entity\User;
 
 use Doctrine\Common\Collections\Collection;
 use Lotgd\Bundle\CoreBundle\Entity\Avatar as AvatarEntity;
@@ -19,12 +19,12 @@ use Lotgd\Bundle\CoreBundle\Entity\Avatar as AvatarEntity;
 trait Avatar
 {
     /**
-     * @ORM\OneToOne(targetEntity=Avatar::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=AvatarEntity::class, cascade={"persist", "remove"})
      */
     private $avatar;
 
     /**
-     * @ORM\OneToMany(targetEntity=Avatar::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=AvatarEntity::class, mappedBy="user")
      */
     private $avatars;
 

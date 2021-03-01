@@ -11,11 +11,11 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Controller;
+namespace Lotgd\Bundle\UserBundle\Controller;
 
-use Lotgd\Bundle\CoreBundle\Entity\User;
-use Lotgd\Bundle\CoreBundle\Form\ChangePasswordFormType;
-use Lotgd\Bundle\CoreBundle\Form\ResetPasswordRequestFormType;
+use Lotgd\Bundle\UserBundle\Entity\User;
+use Lotgd\Bundle\UserBundle\Form\ChangePasswordFormType;
+use Lotgd\Bundle\UserBundle\Form\ResetPasswordRequestFormType;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -49,7 +49,7 @@ class ResetPasswordController extends AbstractController
     /**
      * Display & process form to request a password reset.
      *
-     * @Route("", name="lotgd_core_forgot_password_request")
+     * @Route("", name="lotgd_user_forgot_password_request")
      */
     public function request(Request $request, MailerInterface $mailer): Response
     {
@@ -72,14 +72,14 @@ class ResetPasswordController extends AbstractController
     /**
      * Confirmation page after a user has requested a password reset.
      *
-     * @Route("/check-email", name="lotgd_core_check_email")
+     * @Route("/check-email", name="lotgd_user_check_email")
      */
     public function checkEmail(): Response
     {
         // We prevent users from directly accessing this page
         if (null === ($resetToken = $this->getTokenObjectFromSession()))
         {
-            return $this->redirectToRoute('lotgd_core_forgot_password_request');
+            return $this->redirectToRoute('lotgd_user_forgot_password_request');
         }
 
         return $this->render('@LotgdCore/reset_password/check_email.html.twig', [
@@ -120,7 +120,7 @@ class ResetPasswordController extends AbstractController
                 $e->getReason()
             ));
 
-            return $this->redirectToRoute('lotgd_core_forgot_password_request');
+            return $this->redirectToRoute('lotgd_user_forgot_password_request');
         }
 
         // The token is valid; allow the user to change their password.
@@ -161,7 +161,7 @@ class ResetPasswordController extends AbstractController
         // Do not reveal whether a user account was found or not.
         if ( ! $user)
         {
-            return $this->redirectToRoute('lotgd_core_check_email');
+            return $this->redirectToRoute('lotgd_user_check_email');
         }
 
         try
@@ -171,7 +171,7 @@ class ResetPasswordController extends AbstractController
         catch (ResetPasswordExceptionInterface $e)
         {
             // If you want to tell the user why a reset email was not sent, uncomment
-            // the lines below and change the redirect to 'lotgd_core_forgot_password_request'.
+            // the lines below and change the redirect to 'lotgd_user_forgot_password_request'.
             // Caution: This may reveal if a user is registered or not.
             //
             // $this->addFlash('error', sprintf(
@@ -179,7 +179,7 @@ class ResetPasswordController extends AbstractController
             //     $e->getReason()
             // ));
 
-            return $this->redirectToRoute('lotgd_core_check_email');
+            return $this->redirectToRoute('lotgd_user_check_email');
         }
 
         $email = (new TemplatedEmail())
@@ -204,6 +204,6 @@ class ResetPasswordController extends AbstractController
         // Store the token object in session for retrieval in check-email route.
         $this->setTokenObjectInSession($resetToken);
 
-        return $this->redirectToRoute('lotgd_core_check_email');
+        return $this->redirectToRoute('lotgd_user_check_email');
     }
 }

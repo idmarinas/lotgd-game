@@ -11,12 +11,12 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Controller;
+namespace Lotgd\Bundle\UserBundle\Controller;
 
-use Lotgd\Bundle\CoreBundle\Entity\User;
-use Lotgd\Bundle\CoreBundle\Form\RegistrationFormType;
-use Lotgd\Bundle\CoreBundle\Security\EmailVerifier;
-use Lotgd\Bundle\CoreBundle\Security\LoginFormAuthenticator;
+use Lotgd\Bundle\UserBundle\Entity\User;
+use Lotgd\Bundle\UserBundle\Form\RegistrationFormType;
+use Lotgd\Bundle\UserBundle\Security\EmailVerifier;
+use Lotgd\Bundle\UserBundle\Security\LoginFormAuthenticator;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,7 +40,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="lotgd_core_register")
+     * @Route("/register", name="lotgd_user_register")
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
@@ -69,7 +69,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('lotgd_core_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation('lotgd_user_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address('mailer@lotgd.core', 'LoTGD Mail Bot'))
                     ->to($user->getEmail())
@@ -93,7 +93,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/verify/email", name="lotgd_core_verify_email")
+     * @Route("/verify/email", name="lotgd_user_verify_email")
      */
     public function verifyUserEmail(Request $request): Response
     {
@@ -108,7 +108,7 @@ class RegistrationController extends AbstractController
         {
             $this->addFlash('verify_email_error', $exception->getReason());
 
-            return $this->redirectToRoute('lotgd_core_register');
+            return $this->redirectToRoute('lotgd_user_register');
         }
 
         $this->addFlash('success', new TranslatableMessage('email.verified', [], self::TEXT_DOMAIN));

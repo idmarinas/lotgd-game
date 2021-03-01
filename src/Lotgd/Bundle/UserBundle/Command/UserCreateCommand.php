@@ -14,7 +14,7 @@
 namespace Lotgd\Bundle\CoreBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Lotgd\Bundle\CoreBundle\Repository\UserRepository;
+use Lotgd\Bundle\UserBundle\Repository\UserRepository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -82,7 +82,7 @@ final class UserCreateCommand extends Command
         try
         {
             //-- Configure user
-            $user = new \Lotgd\Bundle\CoreBundle\Entity\User();
+            $user = new \Lotgd\Bundle\UserBundle\Entity\User();
             $user->setUsername($this->getUsername($input, $output))
                 ->setEmail($this->getEmail($input, $output))
                 ->setIsVerified(true)
@@ -267,7 +267,7 @@ final class UserCreateCommand extends Command
     {
         if ( ! $this->userRepository instanceof UserRepository)
         {
-            $this->userRepository = $this->doctrine->getRepository('LotgdCore:User');
+            $this->userRepository = $this->doctrine->getRepository('LotgdUser:User');
         }
 
         return $this->userRepository;

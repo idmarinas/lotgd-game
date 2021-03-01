@@ -11,9 +11,9 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Form;
+namespace Lotgd\Bundle\UserBundle\Form;
 
-use Lotgd\Bundle\CoreBundle\Entity\User;
+use Lotgd\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
