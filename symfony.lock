@@ -138,6 +138,9 @@
     "idmarinas/ui-bundle": {
         "version": "dev-master"
     },
+    "idmarinas/user-bundle": {
+        "version": "dev-master"
+    },
     "jaxon-php/jaxon-core": {
         "version": "v3.2.4"
     },

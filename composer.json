@@ -23,6 +23,7 @@
         "ezyang/htmlpurifier": "^4.13",
         "idmarinas/admin-bundle": "*@dev",
         "idmarinas/core-bundle": "*@dev",
+        "idmarinas/user-bundle": "*@dev",
         "idmarinas/lotgd-contracts": "^0.1.0",
         "idmarinas/ui-bundle": "*@dev",
         "jaxon-php/jaxon-core": "^3.2",
