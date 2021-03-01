@@ -85,6 +85,13 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
     -   Remove functions `var_dump()` and `bdump()`, use `dump()` instead
     -   Remove function `head_title()` this function not have much more usseful. Use block `{% block lotgd_core_head_title %}New Title{% endblock %}` in template.
     -   Remove function `game_version()` this function is not necessary, use Twig Global var `{{ lotgd_core_version }}`
+    -   Removed `Helpers` extension:
+        -   Function `head_link` removed. 
+        -   Function `head_meta` removed. 
+        -   Function `head_script` removed. 
+        -   Function `head_style` removed. 
+        -   Function `inline_script` removed. 
+        -   Note: These functions have been replaced by `sonata_block_render_event` and `sonata_block_render`
 -   **BC** Global functions:
     -   `is_mail`, no in use in this version, can use Symfony Validator
     -   `_curl`, not in use in this version, can use Symfony Http-Client
