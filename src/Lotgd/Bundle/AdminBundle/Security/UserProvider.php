@@ -14,7 +14,7 @@
 namespace Lotgd\Bundle\AdminBundle\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Lotgd\Bundle\CoreBundle\Entity\User;
+use Lotgd\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
