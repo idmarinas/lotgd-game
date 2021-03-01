@@ -14,24 +14,19 @@
 namespace Lotgd\Bundle\AdminBundle\Security;
 
 use Lotgd\Bundle\UserBundle\Security\UserChecker as SecurityUserChecker;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
+use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 
 class UserChecker extends SecurityUserChecker
 {
-    protected $security;
-
-    public function __construct(Security $security)
+    public function checkPostAuth(UserInterface $user)
     {
-        $this->security = $security;
-    }
+        parent::checkPostAuth($user);
 
-    public function checkPreAuth(UserInterface $user)
-    {
-        parent::checkPreAuth($user);
+        $token = new PreAuthenticatedToken($user, [], 'admin', $user->getRoles());
 
-        if ( ! $this->security->isGranted('ROLE_ADMIN'))
+        if ( ! $this->accessDecisionManager->decide($token, ['ROLE_ADMIN'], null))
         {
             $th = new CustomUserMessageAccountStatusException('user.role.insufficient');
             $th->setUser($user);
