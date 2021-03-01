@@ -14,6 +14,7 @@
 namespace Lotgd\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Lotgd\Bundle\UserBundle\Entity\User;
 
 /**
  * Structure of table "avatar" in data base.
