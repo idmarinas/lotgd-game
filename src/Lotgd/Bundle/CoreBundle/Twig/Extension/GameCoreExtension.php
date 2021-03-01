@@ -11,9 +11,9 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core\Twig\Extension;
+namespace Lotgd\Bundle\CoreBundle\Twig\Extension;
 
-use Lotgd\Core\Tool\Censor;
+use Lotgd\Bundle\CoreBundle\Tool\Censor;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -99,13 +99,5 @@ class GameCoreExtension extends AbstractExtension
                 return $instance instanceof $class;
             }),
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'lotgd-core';
     }
 }
