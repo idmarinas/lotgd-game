@@ -1,9 +1,9 @@
 <?php
 
-namespace Lotgd\Bundle\CoreBundle\Entity;
+namespace Lotgd\Bundle\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Lotgd\Bundle\CoreBundle\Repository\ResetPasswordRequestRepository;
+use Lotgd\Bundle\UserBundle\Repository\ResetPasswordRequestRepository;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestInterface;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestTrait;
 

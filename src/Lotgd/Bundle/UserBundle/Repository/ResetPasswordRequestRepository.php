@@ -11,11 +11,11 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Repository;
+namespace Lotgd\Bundle\UserBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Bundle\CoreBundle\Entity\ResetPasswordRequest;
+use Lotgd\Bundle\UserBundle\Entity\ResetPasswordRequest;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestInterface;
 use SymfonyCasts\Bundle\ResetPassword\Persistence\Repository\ResetPasswordRequestRepositoryTrait;
 use SymfonyCasts\Bundle\ResetPassword\Persistence\ResetPasswordRequestRepositoryInterface;
