@@ -17,7 +17,6 @@
 
         {# Dynamically added meta tags #}
         {% block lotgd_head_meta %}{% endblock %}
-        {{ head_meta() }}
 
         <!-- Title tag for page -->
         <title>
@@ -44,11 +43,6 @@
         <!-- Jaxon JS script -->
         {# {{ jaxon_js() }} #}
 
-        <!-- Dynamically added script/style code and files -->
-        {{ head_link() }}
-        {{ head_style() }}
-        {{ head_script() }}
-
         <!-- Jaxon inline Script -->
         {# {{ jaxon_script() }} #}
 
@@ -70,8 +64,5 @@
         {# Render Sonata Blocks JS and CSS #}
         {{ sonata_block_include_stylesheets('all') }}
         {{ sonata_block_include_javascripts('all') }}
-
-        <!-- Dynamically added script code -->
-        {{ inline_script() }}
     </body>
 </html>
