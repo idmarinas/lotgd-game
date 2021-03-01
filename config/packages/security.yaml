@@ -19,7 +19,7 @@ security:
             # anonymous: true
             guard:
                 authenticators:
-                    - Lotgd\Bundle\CoreBundle\Security\LoginFormAuthenticator
+                    - Lotgd\Bundle\UserBundle\Security\LoginFormAuthenticator
             entry_point: form_login
         main:
             # configure the maximum login attempts (per minute)
@@ -29,7 +29,7 @@ security:
             provider: lotgd_core_user_provider
             guard:
                 authenticators:
-                    - Lotgd\Bundle\CoreBundle\Security\LoginFormAuthenticator
+                    - Lotgd\Bundle\UserBundle\Security\LoginFormAuthenticator
             logout:
                 path: lotgd_core_logout
                 # where to redirect after logout
