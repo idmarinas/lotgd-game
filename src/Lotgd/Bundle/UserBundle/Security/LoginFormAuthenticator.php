@@ -14,7 +14,7 @@
 namespace Lotgd\Bundle\UserBundle\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Lotgd\Bundle\CoreBundle\Entity\User;
+use Lotgd\Bundle\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
