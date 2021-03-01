@@ -11,7 +11,7 @@
  * @since 5.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Command;
+namespace Lotgd\Bundle\UserBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Bundle\UserBundle\Repository\UserRepository;
