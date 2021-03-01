@@ -1,6 +1,6 @@
 {
-    "name": "idmarinas/admin-bundle",
-    "description": "LoTGD Administration panel component.",
+    "name": "idmarinas/user-bundle",
+    "description": "LoTGD User component.",
     "type": "symfony-bundle",
     "authors": [
         {
@@ -11,14 +11,11 @@
         }
     ],
     "require": {
-        "php": "^7.3",
-        "sonata-project/admin-bundle": "dev-master",
-        "sonata-project/block-bundle": "^4.5",
-        "sonata-project/doctrine-orm-admin-bundle": "dev-master"
+        "php": "^7.3"
     },
     "autoload": {
         "psr-4": {
-            "Lotgd\\Bundle\\AdminBundle\\": ""
+            "Lotgd\\Bundle\\UserBundle\\": ""
         }
     }
 }
