@@ -1,0 +1,20 @@
+
+# About pages
+# # # # # # #
+lotgd_core_about:
+    path: /about
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        # the path of the template to render
+        template: '@LotgdCore/about/index.html.twig'
+        # special options defined by Symfony to set the page cache
+        maxAge: 86400
+        sharedAge: 86400
+
+lotgd_core_about_license:
+    path: /about/license
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: '@LotgdCore/about/license.html.twig'
+        maxAge: 86400
+        sharedAge: 86400
