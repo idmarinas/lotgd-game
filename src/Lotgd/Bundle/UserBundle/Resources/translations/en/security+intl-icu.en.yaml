@@ -1,0 +1,3 @@
+user.account:
+    no.exist: Your user account no longer exists.
+    banned: Your user account is banned
