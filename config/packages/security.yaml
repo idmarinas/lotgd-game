@@ -8,6 +8,7 @@ security:
         admin:
             pattern: ^/game/_admin
             provider: lotgd_admin_user_provider
+            user_checker: Lotgd\Bundle\AdminBundle\Security\UserChecker
             form_login:
                 login_path: lotgd_admin_login
                 use_forward: false
@@ -19,7 +20,7 @@ security:
             # anonymous: true
             guard:
                 authenticators:
-                    - Lotgd\Bundle\UserBundle\Security\LoginFormAuthenticator
+                    - Lotgd\Bundle\AdminBundle\Security\LoginFormAuthenticator
             entry_point: form_login
         main:
             # configure the maximum login attempts (per minute)
@@ -27,6 +28,7 @@ security:
             #     max_attempts: 2
             lazy: true
             provider: lotgd_core_user_provider
+            user_checker: Lotgd\Bundle\UserBundle\Security\UserChecker
             guard:
                 authenticators:
                     - Lotgd\Bundle\UserBundle\Security\LoginFormAuthenticator
