@@ -44,11 +44,11 @@ class MenuBuilder
         $menu['core.header.login']->addChild('core.menu.login', ['route' => 'lotgd_core_home']);
 
         $menu->addChild('core.header.new');
-        $menu['core.header.new']->addChild('core.menu.create', ['route' => 'lotgd_core_register']);
+        $menu['core.header.new']->addChild('core.menu.create', ['route' => 'lotgd_user_register']);
 
         $menu->addChild('core.header.func');
         $menu['core.header.func']
-            ->addChild('core.menu.forgot', ['route' => 'lotgd_core_forgot_password_request'])
+            ->addChild('core.menu.forgot', ['route' => 'lotgd_user_forgot_password_request'])
             ->addChild('core.menu.warriors', ['route' => 'lotgd_core_home'])
             ->addChild('core.menu.news', ['route' => 'lotgd_core_home'])
         ;
