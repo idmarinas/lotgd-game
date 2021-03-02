@@ -1,0 +1,23 @@
+# Routes of LotgdAdminBundle
+lotgd_admin_route:
+    resource: "@LotgdAdminBundle/Controller/"
+    type: annotation
+lotgd_admin_route_import:
+    resource: "@LotgdAdminBundle/Resources/config/routes/"
+    type: directory
+
+# Routes of LotgdCoreBundle (unauthenticated users)
+lotgd_core_route:
+    resource: "@LotgdCoreBundle/Controller/"
+    type: annotation
+lotgd_core_route_import:
+    resource: "@LotgdCoreBundle/Resources/config/routes/"
+    type: directory
+
+# Routes of LotgdUserBundle (unauthenticated users)
+lotgd_user_route:
+    resource: "@LotgdUserBundle/Controller/"
+    type: annotation
+lotgd_user_route_import:
+    resource: "@LotgdUserBundle/Resources/config/routes/"
+    type: directory
