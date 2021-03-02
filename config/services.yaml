@@ -3,141 +3,32 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-imports:
-    - { resource: jaxon.yaml }
-    - { resource: "@JaxonAjaxBundle/Resources/config/services.yaml" }
+# imports:
+#     - { resource: jaxon.yaml }
+#     - { resource: "@JaxonAjaxBundle/Resources/config/services.yaml" }
 
-parameters:
-    lotgd.core.seo.title.default: Legend of the Green Dragon # Default title, show if not configured at runtime
-    # lotgd_core.doctrine_prefix: "%env(DATABASE_PREFIX)%"
-    lotgd_core.number.format.decimal.point: '.'
-    lotgd_core.number.format.thousands.sep: ','
-    # doctrine.orm.entity_manager.class: Lotgd\Core\Doctrine\ORM\EntityManager
+# parameters:
 
-services:
-    # default configuration for services in *this* file
-    _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+# services:
+#     # Tools
+#     # Lotgd\Core\Tool\Commentary:
+#     #     lazy: true
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    Lotgd\Core\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Tests/'
-            - '../src/Twig/Node/'
-            - '../src/Twig/NodeVisitor/'
-            - '../src/Twig/NodeParser/'
-            - '../src/functions.php'
-            - '../src/functions_old.php'
-            - '../src/Kernel.php'
-            - '../src/Jaxon/'
-            # Ignore old files
-            - '../src/ajax/'
-            - '../src/core/'
-            - '../src/local/'
+#     # # LoTGD Settings
+#     # Lotgd\Core\Lib\Settings:
+#     #     public: true
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
-    Lotgd\Core\Controller\:
-        resource: '../src/Controller/'
-        tags: ['controller.service_arguments']
+#     # # LoTGD PvP
+#     # Lotgd\Core\Pvp\Listing:
+#     #     public: true
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+#     # # LoTGD Tools
+#     # Lotgd\Core\Tool\Sanitize:
+#     #     public: true
 
-    # Register Install commands
-    Lotgd\Core\Installer\Command\:
-        resource: "../src/Installer/Command"
-        tags: ['console.command']
-
-    # # Doctrine Extension listeners to handle table prefix
-    # lotgd.core.doctrine.listener.table_prefix:
-    #     class: Lotgd\Core\Doctrine\Extension\TablePrefix
-    #     tags:
-    #         - { name: doctrine.event_subscriber, connection: default }
-    #     arguments:
-    #         - "%lotgd_core.doctrine_prefix%"
-
-    # View Laminas Service
-    Laminas\View\Helper\HeadLink: ~
-    Laminas\View\Helper\HeadMeta:
-        calls:
-            - setView: ['@Laminas\View\Renderer\PhpRenderer']
-    Laminas\View\Helper\HeadScript: ~
-    Laminas\View\Helper\HeadStyle: ~
-    Laminas\View\Helper\HeadTitle: ~
-    Laminas\View\Helper\InlineScript: ~
-    Laminas\View\Renderer\PhpRenderer: ~ # Laminas\View\Helper\HeadMeta
-
-    # Tools
-    Lotgd\Core\Tool\Format:
-        arguments:
-            - '@translator'
-            - '@Lotgd\Core\Tool\Code'
-            - '@Lotgd\Core\Tool\Color'
-        calls:
-            - setDecPoint: ['%lotgd_core.number.format.decimal.point%']
-            - setThousandsSep: ['%lotgd_core.number.format.thousands.sep%']
-    Lotgd\Core\Tool\Censor:
-        lazy: true
-        arguments:
-            - '%kernel.default_locale%'
-    lotgd.core.censor:
-        alias: Lotgd\Core\Tool\Censor
-        public: true
-    # Lotgd\Core\Tool\Commentary:
-    #     lazy: true
-
-    # LoTGD Installer
-    Lotgd\Core\Installer\Install:
-        lazy: true
-
-    # # LoTGD Settings
-    # Lotgd\Core\Lib\Settings:
-    #     public: true
-
-    # # LoTGD PvP
-    # Lotgd\Core\Pvp\Listing:
-    #     public: true
-
-    # # LoTGD Tools
-    # Lotgd\Core\Tool\Sanitize:
-    #     public: true
-
-    # # LoTGD navigation
-    # Lotgd\Core\Navigation\AccessKeys:
-    #     public: true
-
-    # # Lotgd
-    # Lotgd\Core\Character\Stats:
-    #     public: true
-    # Lotgd\Core\Navigation\Navigation:
-    #     public: true
-    #     calls:
-    #         - setClassHeader: ['navhead']
-    #         - setClassNav: ['nav']
-    # Lotgd\Core\Symfony\Translation\Formatter\MessageFormatter:
-    #     arguments:
-    #         - '@identity_translator'
-
-    # Twig extensions
-    twig.extension.byte_units:
-        class: Marek\Twig\ByteUnitsExtension
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\JaxonExtension:
-        lazy: true
-
-    # Menus
-    lotgd_core.menu_builder:
-        class: Lotgd\Core\Menu\MenuBuilder
-        arguments:
-            - '@knp_menu.factory'
-            - '@event_dispatcher'
-        tags:
-            - { name: knp_menu.menu_builder, method: createMenuCore, alias: lotgd_core.menu_core } # The alias is what is used to retrieve the menu
-
+#     # # Lotgd
+#     # Lotgd\Core\Character\Stats:
+#     #     public: true
+#     # Twig extensions
+#     Lotgd\Core\Twig\Extension\JaxonExtension:
+#         lazy: true
