@@ -23,7 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="txnid", columns={"txnid"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\EntityRepository\PaylogRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\PaylogRepository")
  */
 class Paylog
 {

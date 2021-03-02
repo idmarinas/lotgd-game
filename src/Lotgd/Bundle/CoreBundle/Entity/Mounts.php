@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Mounts.
  *
  * @ORM\Table(name="mounts")
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\EntityRepository\MountsRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\MountsRepository")
  * @Gedmo\TranslationEntity(class="Lotgd\Bundle\CoreBundle\Entity\MountsTranslation")
  */
 class Mounts implements Translatable

@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Companions.
  *
  * @ORM\Table(name="companions")
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\EntityRepository\CompanionsRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\CompanionsRepository")
  * @Gedmo\TranslationEntity(class="Lotgd\Bundle\CoreBundle\Entity\CompanionsTranslation")
  */
 class Companions implements Translatable

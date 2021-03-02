@@ -23,7 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="date", columns={"category", "date"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\EntityRepository\GamelogRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\GamelogRepository")
  */
 class Gamelog
 {

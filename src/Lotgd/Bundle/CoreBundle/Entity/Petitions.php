@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Petitions.
  *
  * @ORM\Table(name="petitions")
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\EntityRepository\PetitionsRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\PetitionsRepository")
  */
 class Petitions
 {

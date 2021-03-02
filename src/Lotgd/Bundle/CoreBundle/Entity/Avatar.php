@@ -30,7 +30,7 @@ use Lotgd\Bundle\UserBundle\Entity\User;
  *         @ORM\Index(name="clanid", columns={"clanid"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\EntityRepository\AvatarRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\AvatarRepository")
  */
 class Avatar
 {

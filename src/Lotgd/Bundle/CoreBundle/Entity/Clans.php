@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         @ORM\Index(name="clanshort", columns={"clanshort"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\EntityRepository\ClansRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\ClansRepository")
  *
  * @UniqueEntity("clanname")
  */

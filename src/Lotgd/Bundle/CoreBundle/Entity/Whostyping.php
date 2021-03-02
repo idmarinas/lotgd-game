@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Whostyping.
  *
  * @ORM\Table(name="whostyping")
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\EntityRepository\WhostypingRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\WhostypingRepository")
  */
 class Whostyping
 {

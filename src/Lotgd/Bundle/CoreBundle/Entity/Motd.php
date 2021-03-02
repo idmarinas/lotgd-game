@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Motd.
  *
  * @ORM\Table(name="motd")
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\EntityRepository\MotdRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\MotdRepository")
  */
 class Motd
 {

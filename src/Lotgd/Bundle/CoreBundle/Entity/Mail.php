@@ -26,7 +26,7 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="seen", columns={"seen"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\EntityRepository\MailRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\MailRepository")
  */
 class Mail
 {

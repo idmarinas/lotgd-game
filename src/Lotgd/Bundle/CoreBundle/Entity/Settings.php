@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Settings.
  *
  * @ORM\Table(name="settings")
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\EntityRepository\SettingsRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\SettingsRepository")
  */
 class Settings
 {

@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Bans.
  *
  * @ORM\Table(name="bans")
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\EntityRepository\BansRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\BansRepository")
  */
 class Bans
 {

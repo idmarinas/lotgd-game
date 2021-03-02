@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Weapons.
  *
  * @ORM\Table(name="weapons")
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\EntityRepository\WeaponsRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\WeaponsRepository")
  * @Gedmo\TranslationEntity(class="Lotgd\Bundle\CoreBundle\Entity\WeaponsTranslation")
  */
 class Weapons implements Translatable
