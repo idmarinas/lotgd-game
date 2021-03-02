@@ -1,4 +1,7 @@
 {
+    "acelaya/doctrine-enum-type": {
+        "version": "v2.3.0"
+    },
     "beberlei/doctrineextensions": {
         "version": "v1.3.0"
     },
@@ -212,6 +215,9 @@
     },
     "monolog/monolog": {
         "version": "2.2.0"
+    },
+    "myclabs/php-enum": {
+        "version": "1.8.0"
     },
     "nette/finder": {
         "version": "v2.5.2"
