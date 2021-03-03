@@ -15,7 +15,6 @@ namespace Lotgd\Bundle\CoreBundle\Controller;
 
 use Lotgd\Core\Contract\LotgdBundleInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -26,12 +25,7 @@ class AboutController extends AbstractController
 {
     public const TEXT_DOMAIN = 'lotgd_core_page_about';
 
-    private $containerI;
-
-    public function __construct(ContainerInterface $container)
-    {
-        $this->containerI = $container;
-    }
+    private $bundles;
 
     /**
      * @Route("/game/setup", name="lotgd_core_about_game_setup")
@@ -46,14 +40,17 @@ class AboutController extends AbstractController
      */
     public function bundles(): Response
     {
-        $bundles = $this->containerI->get('kernel')->getBundles();
-
         return $this->render('@LotgdCore/about/bundles.html.twig', [
-            'bundles_total_enabled' => \is_countable($bundles) ? \count($bundles) : 0,
-            'bundles_lotgd_enabled' => \array_filter($bundles, function ($var)
+            'bundles_total_enabled' => \is_countable($this->bundles) ? \count($this->bundles) : 0,
+            'bundles_lotgd_enabled' => \array_filter($this->bundles, function ($var)
             {
                 return $var instanceof LotgdBundleInterface;
             }),
         ]);
+    }
+
+    public function setBundles(array $bundles): void
+    {
+        $this->bundles = $bundles;
     }
 }

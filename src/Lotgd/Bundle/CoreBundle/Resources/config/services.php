@@ -20,6 +20,7 @@ use Laminas\View\Helper\HeadStyle;
 use Laminas\View\Helper\HeadTitle;
 use Laminas\View\Helper\InlineScript;
 use Laminas\View\Renderer\PhpRenderer;
+use Lotgd\Bundle\CoreBundle\Controller\AboutController;
 use Lotgd\Bundle\CoreBundle\Installer\Install;
 use Lotgd\Bundle\CoreBundle\Menu\MenuBuilder;
 use Lotgd\Bundle\CoreBundle\Tool\Censor;
@@ -49,6 +50,9 @@ return static function (ContainerConfigurator $container)
             ])
         ->load('Lotgd\Bundle\CoreBundle\Controller\\', '../../Controller/')
             ->tag('controller.service_arguments')
+
+        ->set(AboutController::class)
+            ->call('setBundles', [expr("service('kernel').getBundles()")])
 
         //-- Register install commands
         ->load('Lotgd\Bundle\CoreBundle\Installer\Command\\', '../../Installer/Command/')
