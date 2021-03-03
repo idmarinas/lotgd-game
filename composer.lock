@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4d47ac00c3c5c35a0a9a100f26a2ee7",
+    "content-hash": "8a3a654d6a26e250c4112377af4caccc",
     "packages": [
         {
             "name": "acelaya/doctrine-enum-type",
@@ -2119,7 +2119,7 @@
             "dist": {
                 "type": "path",
                 "url": "src/Lotgd/Bundle/CoreBundle",
-                "reference": "78aaeab3bc16ce3c3b513ba9227dbae630cafdc1"
+                "reference": "a09c463428878061bf3d719962d326dd507fe38b"
             },
             "require": {
                 "beberlei/doctrineextensions": "^1.2",
@@ -2143,7 +2143,6 @@
                 "snipe/banbuilder": "^2.3",
                 "stof/doctrine-extensions-bundle": "^1.5",
                 "symfony/lock": "5.2.*",
-                "symfony/security-bundle": "5.2.*",
                 "symfonycasts/reset-password-bundle": "^1.4",
                 "symfonycasts/verify-email-bundle": "^1.2"
             },
@@ -5068,12 +5067,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "95d5160c5c12bbaf3a6f5c9bed47a4097325647c"
+                "reference": "3342402dcdab31b96b98ef77893b004789e408c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/95d5160c5c12bbaf3a6f5c9bed47a4097325647c",
-                "reference": "95d5160c5c12bbaf3a6f5c9bed47a4097325647c",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/3342402dcdab31b96b98ef77893b004789e408c2",
+                "reference": "3342402dcdab31b96b98ef77893b004789e408c2",
                 "shasum": ""
             },
             "require": {
@@ -5181,7 +5180,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-03T11:34:57+00:00"
+            "time": "2021-03-03T13:33:54+00:00"
         },
         {
             "name": "sonata-project/exporter",
