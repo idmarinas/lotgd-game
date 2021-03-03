@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ce2b66e52f412fcbca6734599f21b70",
+    "content-hash": "82f24038292cb4f04a5150492ef15784",
     "packages": [
         {
             "name": "acelaya/doctrine-enum-type",
@@ -2119,7 +2119,7 @@
             "dist": {
                 "type": "path",
                 "url": "src/Lotgd/Bundle/CoreBundle",
-                "reference": "ccc762b86a0bbbdc59fafa545042d03e4a845a76"
+                "reference": "13bdcf93eee37a6a67d52048a27687544b032ea1"
             },
             "require": {
                 "beberlei/doctrineextensions": "^1.2",
@@ -2137,6 +2137,7 @@
                 "laminas/laminas-math": "^3.3",
                 "marioblazek/twig-byte-units-extension": "^1.0",
                 "php": "^7.3",
+                "snipe/banbuilder": "^2.3",
                 "symfony/console": "5.2.*",
                 "symfony/dependency-injection": "5.2.*",
                 "symfony/form": "5.2.*",

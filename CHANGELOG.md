@@ -38,8 +38,7 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 
 ### :x: REMOVES
 
--   **BC** Remove `src/core`, `src/local` and `src/ajax`
-    -   All Jaxon class are now in `jaxon/App`
+-   **BC** Remove `src/core/`, `src/local/` and `src/ajax/`
 -   **BC** Delete folder `modules/` old module system not work with this version use Bundle system.
     -   Deleted related files/tables in database to modules too.
 -   **BC** Delete `AdvertisingBundle` from Core. Now is a independent bundle (can use in other Symfony projects).
