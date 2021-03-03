@@ -64,7 +64,7 @@ class ResetPasswordController extends AbstractController
             );
         }
 
-        return $this->render('@LotgdCore/reset_password/request.html.twig', [
+        return $this->render('@LotgdUser/reset_password/request.html.twig', [
             'requestForm' => $form->createView(),
         ]);
     }
@@ -82,7 +82,7 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('lotgd_user_forgot_password_request');
         }
 
-        return $this->render('@LotgdCore/reset_password/check_email.html.twig', [
+        return $this->render('@LotgdUser/reset_password/check_email.html.twig', [
             'resetToken' => $resetToken,
         ]);
     }
@@ -147,7 +147,7 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('lotgd_core_login');
         }
 
-        return $this->render('@LotgdCore/reset_password/reset.html.twig', [
+        return $this->render('@LotgdUser/reset_password/reset.html.twig', [
             'resetForm' => $form->createView(),
         ]);
     }
@@ -186,7 +186,7 @@ class ResetPasswordController extends AbstractController
             ->from(new Address('no-reply@lotgd.com', 'LoTGD Mail'))
             ->to($user->getEmail())
             ->subject('Your password reset request')
-            ->htmlTemplate('@LotgdCore/reset_password/email.html.twig')
+            ->htmlTemplate('@LotgdUser/reset_password/email.html.twig')
             ->context([
                 'resetToken' => $resetToken,
             ])

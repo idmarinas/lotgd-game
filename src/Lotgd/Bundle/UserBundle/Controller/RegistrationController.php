@@ -74,7 +74,7 @@ class RegistrationController extends AbstractController
                     ->from(new Address('mailer@lotgd.core', 'LoTGD Mail Bot'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
-                    ->htmlTemplate('@LotgdCore/registration/confirmation_email.html.twig')
+                    ->htmlTemplate('@LotgdUser/registration/confirmation_email.html.twig')
                     ->context(['text_domain' => self::TEXT_DOMAIN])
             );
             // do anything else you need here, like send an email
@@ -87,7 +87,7 @@ class RegistrationController extends AbstractController
             );
         }
 
-        return $this->render('@LotgdCore/registration/register.html.twig', [
+        return $this->render('@LotgdUser/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
