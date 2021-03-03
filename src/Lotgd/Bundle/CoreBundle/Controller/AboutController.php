@@ -13,7 +13,7 @@
 
 namespace Lotgd\Bundle\CoreBundle\Controller;
 
-use Lotgd\Core\Contract\LotgdBundleInterface;
+use Lotgd\Bundle\Contract\LotgdBundleInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
