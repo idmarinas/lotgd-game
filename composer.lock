@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "82f24038292cb4f04a5150492ef15784",
+    "content-hash": "d4d47ac00c3c5c35a0a9a100f26a2ee7",
     "packages": [
         {
             "name": "acelaya/doctrine-enum-type",
@@ -2119,17 +2119,20 @@
             "dist": {
                 "type": "path",
                 "url": "src/Lotgd/Bundle/CoreBundle",
-                "reference": "13bdcf93eee37a6a67d52048a27687544b032ea1"
+                "reference": "78aaeab3bc16ce3c3b513ba9227dbae630cafdc1"
             },
             "require": {
                 "beberlei/doctrineextensions": "^1.2",
                 "bukashk0zzz/filter-bundle": "^4.0",
+                "cron/cron-bundle": "^2.4",
                 "doctrine/annotations": "^1.0",
                 "doctrine/doctrine-bundle": "^2.2",
                 "doctrine/doctrine-migrations-bundle": "^3.0",
                 "doctrine/orm": "^2.8",
+                "ezyang/htmlpurifier": "^4.13",
                 "gedmo/doctrine-extensions": "^3.0",
                 "knplabs/knp-menu-bundle": "^3.1",
+                "knplabs/knp-paginator-bundle": "^5.4",
                 "laminas/laminas-escaper": "^2.7",
                 "laminas/laminas-filter": "^2.10",
                 "laminas/laminas-hydrator": "^4.1",
@@ -2138,21 +2141,11 @@
                 "marioblazek/twig-byte-units-extension": "^1.0",
                 "php": "^7.3",
                 "snipe/banbuilder": "^2.3",
-                "symfony/console": "5.2.*",
-                "symfony/dependency-injection": "5.2.*",
-                "symfony/form": "5.2.*",
-                "symfony/intl": "5.2.*",
+                "stof/doctrine-extensions-bundle": "^1.5",
                 "symfony/lock": "5.2.*",
-                "symfony/mailer": "5.2.*",
-                "symfony/process": "5.2.*",
                 "symfony/security-bundle": "5.2.*",
-                "symfony/translation": "5.2.*",
-                "symfony/twig-bundle": "^5.2",
-                "symfony/validator": "5.2.*",
                 "symfonycasts/reset-password-bundle": "^1.4",
-                "symfonycasts/verify-email-bundle": "^1.2",
-                "twig/extra-bundle": "^2.12|^3.0",
-                "twig/twig": "^2.12|^3.0"
+                "symfonycasts/verify-email-bundle": "^1.2"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -5075,12 +5068,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "bb2769756d17c1a53e690df179e1b6aedaa8cf34"
+                "reference": "95d5160c5c12bbaf3a6f5c9bed47a4097325647c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/bb2769756d17c1a53e690df179e1b6aedaa8cf34",
-                "reference": "bb2769756d17c1a53e690df179e1b6aedaa8cf34",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/95d5160c5c12bbaf3a6f5c9bed47a4097325647c",
+                "reference": "95d5160c5c12bbaf3a6f5c9bed47a4097325647c",
                 "shasum": ""
             },
             "require": {
@@ -5188,7 +5181,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-02T22:20:40+00:00"
+            "time": "2021-03-03T11:34:57+00:00"
         },
         {
             "name": "sonata-project/exporter",
