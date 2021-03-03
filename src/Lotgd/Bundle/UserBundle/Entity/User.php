@@ -15,14 +15,14 @@ namespace Lotgd\Bundle\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Lotgd\Bundle\CoreBundle\Entity\Common\IdTrait;
 use Lotgd\Bundle\UserBundle\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 
 /**
  * Structure of table "user" in data base.
@@ -41,6 +41,7 @@ class User implements UserInterface
     use User\Ban;
     use User\Donation;
     use User\Security;
+    use User\Settings;
     use TimestampableEntity;
     use SoftDeleteableEntity;
 
@@ -89,6 +90,7 @@ class User implements UserInterface
         $this->avatars   = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+        $this->settings  = new ArrayCollection();
     }
 
     /**
