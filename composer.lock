@@ -5075,12 +5075,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "5a4347e92317f966f4015f2e1574d2b57b55edb9"
+                "reference": "bb2769756d17c1a53e690df179e1b6aedaa8cf34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/5a4347e92317f966f4015f2e1574d2b57b55edb9",
-                "reference": "5a4347e92317f966f4015f2e1574d2b57b55edb9",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/bb2769756d17c1a53e690df179e1b6aedaa8cf34",
+                "reference": "bb2769756d17c1a53e690df179e1b6aedaa8cf34",
                 "shasum": ""
             },
             "require": {
@@ -5188,7 +5188,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-01T20:21:45+00:00"
+            "time": "2021-03-02T22:20:40+00:00"
         },
         {
             "name": "sonata-project/exporter",
