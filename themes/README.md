@@ -8,14 +8,14 @@ This folder only contain the custom themes for your version.
 AcmeTheme
 ├── theme.json
 ├── public
-│   └── asset.jpg
+│   └── asset.jpg
 ├── templates
-│   ├── bundles
-│   │   └── AcmeBundle
-│   │       └── bundleTemplate.html.twig
+│   ├── bundles
+│   │   └── AcmeBundle
+│   │      └── bundleTemplate.html.twig
 |   └── template.html.twig
 └── translations
-    └── messages.en.yml
+    └── messages.en.yml
 ```
 
 ## Theme config reference (theme.json)
