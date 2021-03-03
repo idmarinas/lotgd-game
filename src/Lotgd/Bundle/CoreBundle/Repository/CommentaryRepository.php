@@ -55,7 +55,7 @@ class CommentaryRepository extends ServiceEntityRepository
                     continue;
                 }
 
-                /** @var Lotgd\Bundle\CoreBundle\Entity\User */
+                /** @var Lotgd\Bundle\UserBundle\Entity\User */
                 $user = $this->security->getUser();
                 $comment->setHidden($hiddenNew);
                 $comment->setHiddenBy($user->getId());
