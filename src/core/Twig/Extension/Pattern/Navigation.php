@@ -100,7 +100,7 @@ trait Navigation
         }
         else
         {
-            $label = $this->messageFormatter($label, $options['params'] ?? [], $options['locale'] ?? null);
+            $label = $this->format->messageFormatter($label, $options['params'] ?? [], $options['locale'] ?? null);
         }
 
         $attributes = $options['attributes'] ?? [];
