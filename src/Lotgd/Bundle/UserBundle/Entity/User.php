@@ -16,7 +16,6 @@ namespace Lotgd\Bundle\UserBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Lotgd\Bundle\CoreBundle\Entity\Common\IdTrait;
 use Lotgd\Bundle\UserBundle\Repository\UserRepository;
@@ -39,11 +38,11 @@ class User implements UserInterface
     use IdTrait;
     use User\Avatar;
     use User\Ban;
+    use User\Deletable;
     use User\Donation;
     use User\Security;
     use User\Settings;
     use TimestampableEntity;
-    use SoftDeleteableEntity;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
