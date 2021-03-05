@@ -1,0 +1,44 @@
+# For menu en Admin panel
+menu:
+    admin.user:
+        group: Accounts
+        label_user: User
+
+# Breadcrum menu bar
+breadcrumb.link_user_list: List of users
+
+# Action in list page
+list.label__action: Acction
+
+# Fields names of entity
+entity.user:
+    id: User ID
+    username: Username
+    email: Email Address
+    created_at: Creation date
+    updated_at: Last updated
+    roles: Roles
+    is_verified: Verified email
+    is_banned: Banned user
+    is_deleted: User deleted
+    banned_until: Banned until
+    avatar: Avatar active
+    avatars: Avatars of user
+    donation: Donation points
+    donation_spent: Donation points spent
+    referer_is_rewarded: Referer is rewarded
+    referer: Referer
+    last_motd: Last motd seen
+    deleted_at: Deleted date
+
+# Groups for fields in form and show
+form:
+    group_roles: Roles
+    group_basic: Basic info
+    group_info: User info
+    group_avatar: Avatar info
+    group_donation: Donation points
+    group_referer: Referer info
+    group_other: Other info
+
+show.group_menu_admin_user_label_user: 'User info'
