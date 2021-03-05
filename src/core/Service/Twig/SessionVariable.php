@@ -28,7 +28,7 @@ class SessionVariable
     /**
      * Returns the current session.
      */
-    private function getSession()
+    public function getSession()
     {
         global $session;
 

@@ -28,7 +28,7 @@ class UserVariable
     /**
      * Returns the current user.
      */
-    private function getUser(): array
+    public function getUser(): array
     {
         global $session;
 
