@@ -23,7 +23,7 @@ function redirect($location, $reason = false)
             'petitionUrl' => 'petition.php',
         ], 'app_default');
 
-        \LotgdResponse::pageTitle('redirect.badnav.title', [], 'app_default');
+        \LotgdResponse::pageStart('redirect.badnav.title', [], 'app_default');
         $params = \LotgdKernel::get(Lotgd\Core\Template\Params::class);
         $params->set('content', \LotgdFormat::colorize($content, true));
 
