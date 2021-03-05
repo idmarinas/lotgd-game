@@ -37,7 +37,7 @@ class DoctrineFiltersSubscriber implements EventSubscriberInterface
 
     public function disableDoctrineFilterOnAdmin(ControllerEvent $event)
     {
-        $controller = $event->getController()[0];
+        $controller = is_array($event->getController()) ? $event->getController()[0] : $event->getController();
         if ($controller instanceof CRUDController)
         {
             //-- Disable filter "softdeleteable" for all admin controllers
