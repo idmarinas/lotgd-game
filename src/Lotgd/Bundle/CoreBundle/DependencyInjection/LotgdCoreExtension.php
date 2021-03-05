@@ -40,6 +40,7 @@ class LotgdCoreExtension extends Extension implements PrependExtensionInterface
         $loader->load('prepend/bukashk0zzz_filter.yaml');
         $loader->load('prepend/doctrine_migrations.yaml');
         $loader->load('prepend/doctrine.yaml');
+        $loader->load('prepend/framework.yaml');
         $loader->load('prepend/stof_doctrine_extensions.yaml');
     }
 }
