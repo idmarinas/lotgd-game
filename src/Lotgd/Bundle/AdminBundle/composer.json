@@ -14,7 +14,9 @@
         "php": "^7.3",
         "sonata-project/admin-bundle": "dev-master",
         "sonata-project/block-bundle": "^4.5",
-        "sonata-project/doctrine-orm-admin-bundle": "dev-master"
+        "sonata-project/doctrine-orm-admin-bundle": "dev-master",
+        "sonata-project/intl-bundle": "^2.10",
+        "sonata-project/translation-bundle": "dev-master"
     },
     "autoload": {
         "psr-4": {
