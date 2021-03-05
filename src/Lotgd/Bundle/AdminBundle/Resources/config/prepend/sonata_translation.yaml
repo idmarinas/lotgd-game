@@ -8,7 +8,8 @@ sonata_block:
         sonata_translation.block.locale_switcher: null
 
 sonata_translation:
-    locales: [en, fr, it, nl, es]
+    locales:
+        - en
     default_locale: '%kernel.default_locale%'
     default_filter_mode: gedmo
     locale_switcher: true
