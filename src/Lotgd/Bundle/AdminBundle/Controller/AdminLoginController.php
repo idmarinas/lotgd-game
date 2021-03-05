@@ -46,7 +46,6 @@ final class AdminLoginController extends AbstractController
         return $this->render('@LotgdAdmin/login/index.html.twig', [
             'last_username' => $this->authenticationUtils->getLastUsername(),
             'form'          => $form->createView(),
-            'form2'          => $form->createView(),
             'error'         => $this->authenticationUtils->getLastAuthenticationError(),
         ]);
     }
