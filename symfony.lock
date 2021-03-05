@@ -335,6 +335,21 @@
             "./config/packages/sonata_form.yaml"
         ]
     },
+    "sonata-project/intl-bundle": {
+        "version": "2.10.1"
+    },
+    "sonata-project/translation-bundle": {
+        "version": "2.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.3",
+            "ref": "65f0e544ca19d262268e1f1ce2b4cbbe459a4a97"
+        },
+        "files": [
+            "./config/packages/sonata_translation.yaml"
+        ]
+    },
     "sonata-project/twig-extensions": {
         "version": "1.5.1"
     },
@@ -677,6 +692,9 @@
     },
     "symfony/string": {
         "version": "v5.2.3"
+    },
+    "symfony/templating": {
+        "version": "v5.2.4"
     },
     "symfony/test-pack": {
         "version": "v1.0.7"

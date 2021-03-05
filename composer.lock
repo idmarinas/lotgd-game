@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "75e364cd343af03b64119c0104c411c1",
+    "content-hash": "8cd27eb1176f5c4e8142923b00437419",
     "packages": [
         {
             "name": "acelaya/doctrine-enum-type",
@@ -5386,6 +5386,214 @@
             "time": "2021-02-15T19:31:54+00:00"
         },
         {
+            "name": "sonata-project/intl-bundle",
+            "version": "2.10.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sonata-project/SonataIntlBundle.git",
+                "reference": "d058c42e852099813431775713dc68223fed88a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sonata-project/SonataIntlBundle/zipball/d058c42e852099813431775713dc68223fed88a0",
+                "reference": "d058c42e852099813431775713dc68223fed88a0",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 || ^8.0",
+                "symfony/config": "^4.4 || ^5.1",
+                "symfony/dependency-injection": "^4.4 || ^5.1",
+                "symfony/http-foundation": "^4.4 || ^5.1",
+                "symfony/http-kernel": "^4.4 || ^5.1",
+                "symfony/intl": "^4.4 || ^5.1",
+                "symfony/templating": "^4.4 || ^5.1",
+                "twig/twig": "^2.9 || ^3.0"
+            },
+            "conflict": {
+                "sonata-project/user-bundle": "<3.6"
+            },
+            "require-dev": {
+                "matthiasnoback/symfony-config-test": "^4.2",
+                "matthiasnoback/symfony-dependency-injection-test": "^4.0",
+                "symfony/phpunit-bridge": "^5.1.8",
+                "symfony/security-core": "^4.4 || ^5.1"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sonata\\IntlBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Rabaix",
+                    "email": "thomas.rabaix@sonata-project.org"
+                },
+                {
+                    "name": "Sonata Community",
+                    "homepage": "https://github.com/sonata-project/SonataIntlBundle/contributors"
+                }
+            ],
+            "description": "Symfony SonataIntlBundle",
+            "homepage": "https://sonata-project.org/bundles/intl",
+            "keywords": [
+                "date",
+                "intl",
+                "number",
+                "sonata",
+                "time"
+            ],
+            "support": {
+                "issues": "https://github.com/sonata-project/SonataIntlBundle/issues",
+                "source": "https://github.com/sonata-project/SonataIntlBundle/tree/2.10.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/OskarStark",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/VincentLanglet",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/core23",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/wbloszyk",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-02-15T15:42:12+00:00"
+        },
+        {
+            "name": "sonata-project/translation-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sonata-project/SonataTranslationBundle.git",
+                "reference": "3cf09ab881e33af874e9d26bf0664cf06dd34dc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sonata-project/SonataTranslationBundle/zipball/3cf09ab881e33af874e9d26bf0664cf06dd34dc4",
+                "reference": "3cf09ab881e33af874e9d26bf0664cf06dd34dc4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 || ^8.0",
+                "sonata-project/admin-bundle": "4.x-dev",
+                "sonata-project/block-bundle": "^3.17 || ^4.0",
+                "symfony/config": "^4.4 || ^5.1",
+                "symfony/dependency-injection": "^4.4 || ^5.1",
+                "symfony/form": "^4.4 || ^5.1",
+                "symfony/http-foundation": "^4.4 || ^5.1",
+                "symfony/http-kernel": "^4.4 || ^5.1",
+                "symfony/options-resolver": "^4.4 || ^5.1",
+                "twig/twig": "^2.12 || ^3.0"
+            },
+            "conflict": {
+                "doctrine/annotations": "<1.8",
+                "doctrine/persistence": "<1.3.4",
+                "doctrine/phpcr-odm": ">=3.0",
+                "gedmo/doctrine-extensions": "<2.4.36",
+                "knplabs/doctrine-behaviors": "<1.0 || >=3.0"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.5",
+                "doctrine/phpcr-odm": "^1.5",
+                "gedmo/doctrine-extensions": "^2.3.36 || ^3.0",
+                "jackalope/jackalope-doctrine-dbal": "^1.5",
+                "knplabs/doctrine-behaviors": "^1.4 || ^2.0",
+                "matthiasnoback/symfony-config-test": "^4.2",
+                "matthiasnoback/symfony-dependency-injection-test": "^4.0",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12.48",
+                "phpstan/phpstan-doctrine": "^0.12.26",
+                "phpstan/phpstan-phpunit": "^0.12.16",
+                "phpstan/phpstan-symfony": "^0.12.11",
+                "psalm/plugin-phpunit": "^0.15.0",
+                "psalm/plugin-symfony": "^2.0",
+                "sonata-project/doctrine-orm-admin-bundle": "4.x-dev",
+                "symfony/framework-bundle": "^4.4 || ^5.1",
+                "symfony/phpunit-bridge": "^5.1.8",
+                "symfony/templating": "^4.4 || ^5.1",
+                "vimeo/psalm": "^4.3.2",
+                "weirdan/doctrine-psalm-plugin": "^1.0"
+            },
+            "suggest": {
+                "doctrine/phpcr-odm": "if you translate odm documents",
+                "gedmo/doctrine-extensions": "if you translate orm entities with the gedmo extensions",
+                "knplabs/doctrine-behaviors": "if you translate orm entities with the knplabs behaviours",
+                "sonata-project/doctrine-orm-admin-bundle": "if you translate orm entities and search on translated fields"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sonata\\TranslationBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Bastien",
+                    "email": "nbastien.pro@gmail.com",
+                    "homepage": "https://github.com/nicolas-bastien"
+                },
+                {
+                    "name": "Sonata Community",
+                    "homepage": "https://github.com/sonata-project/SonataTranslationBundle/contributors"
+                }
+            ],
+            "description": "SonataTranslationBundle",
+            "homepage": "http://sonata-project.org/bundles/translation",
+            "keywords": [
+                "i18n",
+                "translation"
+            ],
+            "support": {
+                "issues": "https://github.com/sonata-project/SonataTranslationBundle/issues",
+                "source": "https://github.com/sonata-project/SonataTranslationBundle/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/OskarStark",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/VincentLanglet",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/core23",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/wbloszyk",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-03-05T02:02:32+00:00"
+        },
+        {
             "name": "sonata-project/twig-extensions",
             "version": "1.5.1",
             "source": {
@@ -10066,6 +10274,74 @@
             "time": "2021-02-16T10:20:28+00:00"
         },
         {
+            "name": "symfony/templating",
+            "version": "v5.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/templating.git",
+                "reference": "954c01bae6689423a83b6c9025f83bb93d38d9b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/templating/zipball/954c01bae6689423a83b6c9025f83bb93d38d9b2",
+                "reference": "954c01bae6689423a83b6c9025f83bb93d38d9b2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/polyfill-ctype": "~1.8"
+            },
+            "require-dev": {
+                "psr/log": "~1.0"
+            },
+            "suggest": {
+                "psr/log-implementation": "For using debug logging in loaders"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Templating\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides all the tools needed to build any kind of template system",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/templating/tree/v5.2.4"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-01-27T10:01:46+00:00"
+        },
+        {
             "name": "symfony/translation",
             "version": "v5.2.4",
             "source": {
@@ -13780,7 +14056,8 @@
         "idmarinas/core-bundle": 20,
         "idmarinas/settings-bundle": 20,
         "idmarinas/ui-bundle": 20,
-        "idmarinas/user-bundle": 20
+        "idmarinas/user-bundle": 20,
+        "sonata-project/translation-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
