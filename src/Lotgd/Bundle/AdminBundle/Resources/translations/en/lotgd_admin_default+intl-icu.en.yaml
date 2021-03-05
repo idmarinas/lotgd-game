@@ -2,3 +2,4 @@ login.authentication: Authentication
 form:
     email: Email
     password: Password
+    button: Login
