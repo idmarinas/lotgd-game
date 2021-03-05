@@ -1,0 +1,22 @@
+sonata_admin:
+    title: 'LoTGD Admin'
+    title_logo: /bundles/lotgdui/images/Medallion-Green.gif
+    dashboard:
+        blocks:
+            - { type: sonata.admin.block.admin_list, position: left }
+    security:
+        handler: sonata.admin.security.handler.role
+
+        role_admin: ROLE_ADMIN
+        role_super_admin: ROLE_SUPER_ADMIN
+    options:
+        lock_protection: true
+    templates:
+        user_block: '@LotgdAdmin/bundles/SonataAdmin/Core/user_block.html.twig'
+        layout: '@LotgdAdmin/bundles/SonataAdmin/standard_layout.html.twig'
+        edit: '@LotgdAdmin/bundles/SonataAdmin/CRUD/edit.html.twig'
+
+sonata_block:
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
