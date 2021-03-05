@@ -33,4 +33,6 @@ return [
     Lotgd\Bundle\SettingsBundle\LotgdSettingsBundle::class                   => ['all' => true],
     Lotgd\Bundle\UiBundle\LotgdUiBundle::class                               => ['all' => true],
     Lotgd\Bundle\UserBundle\LotgdUserBundle::class                           => ['all' => true],
+    Sonata\TranslationBundle\SonataTranslationBundle::class                  => ['all' => true],
+    Sonata\IntlBundle\SonataIntlBundle::class                                => ['all' => true],
 ];
