@@ -11,7 +11,8 @@
 -   Esta versión LoTGD Core será una app Symfony Framework.
     -   Se hace como un Bundle y se crea un lotgd-skeleton para crear una versión personalizada.
 
--   Crear la migración desde la clean install
+-   **_Crear la migración desde la clean install_**
+
 -   Plantilla de registro, agregar algunos events para agregar más información.
 -   * No hace falta Gulp (puede ser), copiar los archivos se puede hacer desde composer igual que hice con el skeleton al crear proyecto.
 -   Panel de administración
