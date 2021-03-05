@@ -36,5 +36,6 @@ class LotgdAdminExtension extends Extension implements PrependExtensionInterface
         $loader->load('prepend/sonata_admin.yaml');
         $loader->load('prepend/sonata_block.yaml');
         $loader->load('prepend/sonata_form.yaml');
+        $loader->load('prepend/sonata_translation.yaml');
     }
 }
