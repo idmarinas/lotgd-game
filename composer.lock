@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8cd27eb1176f5c4e8142923b00437419",
+    "content-hash": "b6e06955c57a4cb5f7f8e97374275b70",
     "packages": [
         {
             "name": "acelaya/doctrine-enum-type",
@@ -2086,13 +2086,15 @@
             "dist": {
                 "type": "path",
                 "url": "src/Lotgd/Bundle/AdminBundle",
-                "reference": "8cc11f491d090302b6aa7bbd47a740fd2c4cb54a"
+                "reference": "01e9a66a6f10ac8dfacabd080832e681fcdc6d8b"
             },
             "require": {
                 "php": "^7.3",
                 "sonata-project/admin-bundle": "dev-master",
                 "sonata-project/block-bundle": "^4.5",
-                "sonata-project/doctrine-orm-admin-bundle": "dev-master"
+                "sonata-project/doctrine-orm-admin-bundle": "dev-master",
+                "sonata-project/intl-bundle": "^2.10",
+                "sonata-project/translation-bundle": "dev-master"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -11943,16 +11945,16 @@
         },
         {
             "name": "nette/robot-loader",
-            "version": "v3.3.1",
+            "version": "v3.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/robot-loader.git",
-                "reference": "15c1ecd0e6e69e8d908dfc4cca7b14f3b850a96b"
+                "reference": "9ad3afdd0d2422db7a58aee76e8b3b7a82f31af5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/robot-loader/zipball/15c1ecd0e6e69e8d908dfc4cca7b14f3b850a96b",
-                "reference": "15c1ecd0e6e69e8d908dfc4cca7b14f3b850a96b",
+                "url": "https://api.github.com/repos/nette/robot-loader/zipball/9ad3afdd0d2422db7a58aee76e8b3b7a82f31af5",
+                "reference": "9ad3afdd0d2422db7a58aee76e8b3b7a82f31af5",
                 "shasum": ""
             },
             "require": {
@@ -12004,9 +12006,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/robot-loader/issues",
-                "source": "https://github.com/nette/robot-loader/tree/v3.3.1"
+                "source": "https://github.com/nette/robot-loader/tree/v3.3.2"
             },
-            "time": "2020-09-15T15:14:17+00:00"
+            "time": "2021-03-06T15:56:17+00:00"
         },
         {
             "name": "nette/utils",
@@ -12211,16 +12213,16 @@
         },
         {
             "name": "phpstan/phpstan-phpunit",
-            "version": "0.12.17",
+            "version": "0.12.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "432575b41cf2d4f44e460234acaf56119ed97d36"
+                "reference": "ab44aec7cfb5cb267b8bc30a8caea86dd50d1f72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/432575b41cf2d4f44e460234acaf56119ed97d36",
-                "reference": "432575b41cf2d4f44e460234acaf56119ed97d36",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/ab44aec7cfb5cb267b8bc30a8caea86dd50d1f72",
+                "reference": "ab44aec7cfb5cb267b8bc30a8caea86dd50d1f72",
                 "shasum": ""
             },
             "require": {
@@ -12260,9 +12262,9 @@
             "description": "PHPUnit extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
-                "source": "https://github.com/phpstan/phpstan-phpunit/tree/0.12.17"
+                "source": "https://github.com/phpstan/phpstan-phpunit/tree/0.12.18"
             },
-            "time": "2020-12-13T12:12:51+00:00"
+            "time": "2021-03-06T11:51:27+00:00"
         },
         {
             "name": "psr/simple-cache",
@@ -14056,8 +14058,7 @@
         "idmarinas/core-bundle": 20,
         "idmarinas/settings-bundle": 20,
         "idmarinas/ui-bundle": 20,
-        "idmarinas/user-bundle": 20,
-        "sonata-project/translation-bundle": 20
+        "idmarinas/user-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
