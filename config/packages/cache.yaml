@@ -1,7 +1,7 @@
 framework:
     cache:
         # Unique name of your app: used to compute stable namespaces for cache keys.
-        prefix_seed: lotgd/core
+        #prefix_seed: your_vendor_name/app_name
 
         # The "app" cache stores to the filesystem by default.
         # The data in this cache should persist between deploys.
@@ -15,14 +15,5 @@ framework:
         #app: cache.adapter.apcu
 
         # Namespaced pools use the above "app" backend by default
-        pools:
-            core.lotgd.cache:
-                adapter: cache.app
-                public: true
-                tags: true
-            core.settings.cache:
-                adapter: cache.app # Use same configuration of app cache
-                public: true # For access with LotgdKernel::get('core.settings.cache')
-            core.cronjobs.cache:
-                adapter: cache.app
-                public: true
+        #pools:
+            #my.dedicated.cache: null
