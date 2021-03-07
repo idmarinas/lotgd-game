@@ -14,9 +14,8 @@
 namespace Lotgd\Bundle\AdminBundle\EventSubscriber;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 class DoctrineFiltersSubscriber implements EventSubscriberInterface
@@ -31,14 +30,13 @@ class DoctrineFiltersSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::CONTROLLER => 'disableDoctrineFilterOnAdmin',
+            KernelEvents::REQUEST => 'disableDoctrineFilterOnAdmin',
         ];
     }
 
-    public function disableDoctrineFilterOnAdmin(ControllerEvent $event)
+    public function disableDoctrineFilterOnAdmin(RequestEvent $event)
     {
-        $controller = is_array($event->getController()) ? $event->getController()[0] : $event->getController();
-        if ($controller instanceof CRUDController)
+        if ('security.firewall.map.context.admin' == $event->getRequest()->attributes->get('_firewall_context'))
         {
             //-- Disable filter "softdeleteable" for all admin controllers
             $this->em->getFilters()->disable('softdeleteable');
