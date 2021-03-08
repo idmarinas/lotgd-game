@@ -3,3 +3,10 @@ form:
     email: Email
     password: Password
     button: Login
+
+# Dashboard translations
+dashboard:
+    block:
+        rss:
+            title: Last topics of LoTGD Core
+            no_feeds: No feeds available.
