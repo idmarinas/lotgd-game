@@ -1,0 +1,10 @@
+framework:
+    cache:
+        # Unique name of your app: used to compute stable namespaces for cache keys.
+        prefix_seed: lotgd_core/package
+
+        # Namespaced pools use the above "app" backend by default
+        pools:
+            lotgd.core.package.cache:
+                adapter: cache.app
+                tags: true

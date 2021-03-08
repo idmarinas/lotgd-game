@@ -38,6 +38,7 @@ class LotgdCoreExtension extends Extension implements PrependExtensionInterface
         $loader = new YamlFileLoader($container, new FileLocator(\dirname(__DIR__).'/Resources/config'));
 
         $loader->load('prepend/bukashk0zzz_filter.yaml');
+        $loader->load('prepend/cache.yaml');
         $loader->load('prepend/doctrine_migrations.yaml');
         $loader->load('prepend/doctrine.yaml');
         $loader->load('prepend/framework.yaml');
