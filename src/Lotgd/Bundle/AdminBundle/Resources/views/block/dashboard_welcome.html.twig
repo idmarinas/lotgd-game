@@ -1,0 +1,21 @@
+{#
+    This file is part of "LoTGD Core Package".
+
+    @see https://github.com/idmarinas/lotgd-game
+
+    @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.md
+    @author IDMarinas
+
+    @since 6.0.0
+#}
+
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="box">
+        <h2 class="box-header">{{ 'dashboard.block.welcome.title'|trans({'package': 'LoTGD Core Admin'}, 'lotgd_admin_default') }}</h2>
+        <div class="box-body">
+            {{ 'dashboard.block.welcome.paragraph'|trans({'sonata': '<a href="https://sonata-project.org/bundles/admin/master/doc/index.html" target="_blank" rel="noopener noreferrer">Sonata Admin</a>', 'package': 'LoTGD Core Admin'}, 'lotgd_admin_default')|raw|nl2br }}
+        </div>
+    </div>
+{% endblock %}
