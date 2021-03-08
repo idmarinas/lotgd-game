@@ -3,7 +3,42 @@ sonata_admin:
     title_logo: /bundles/lotgdui/images/Medallion-Green.gif
     dashboard:
         blocks:
-            - { type: sonata.admin.block.admin_list, position: left }
+            # Welcome message
+            -
+                type: sonata.block.service.text
+                position: left
+                settings:
+                    template: '@LotgdAdmin/block/dashboard_welcome.html.twig'
+            # RSS Feeds of LoTGD Core
+            - { type: lotgd_admin.block.service.dashboard.rss, position: left }
+            # List of admins panels
+            - { type: sonata.admin.block.admin_list, position: right }
+            # Total accounts
+            -
+                class: col-lg-2 col-xs-6
+                position: top
+                type: sonata.admin.block.stats
+                settings:
+                    code: lotgd_user.admin
+                    icon: fa-user # font awesome icon
+                    text: lotgd_user.dashboard.top.total_accounts # static text or translation message
+                    color: bg-blue
+            # Total unverified accounts
+            -
+                class: col-lg-2 col-xs-6
+                position: top
+                type: sonata.admin.block.stats
+                settings:
+                    code: lotgd_user.admin
+                    icon: fa-user # font awesome icon
+                    text: lotgd_user.dashboard.top.total_unverified_accounts
+                    color: bg-yellow
+                    filters:
+                        isVerified: { value: 2 }
+        # Order menu groups
+        groups:
+            menu.admin.user.group: ~
+            menu.admin.settings.group: ~
     security:
         handler: sonata.admin.security.handler.role
 
