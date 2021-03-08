@@ -7,6 +7,11 @@ menu:
 # Breadcrum menu bar
 breadcrumb.link_user_list: List of users
 
+# Dashboard
+lotgd_user.dashboard.top:
+    total_accounts: Total accounts
+    total_unverified_accounts: Unverified accounts
+
 # Action in list page
 list.label__action: Acction
 
