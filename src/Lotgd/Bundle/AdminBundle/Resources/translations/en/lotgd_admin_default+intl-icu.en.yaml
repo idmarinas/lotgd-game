@@ -10,3 +10,9 @@ dashboard:
         rss:
             title: Last topics of LoTGD Core
             no_feeds: No feeds available.
+        welcome:
+            title: 'Welcome to the {package}'
+            paragraph: |
+                This is the administration panel of your project "{package}". From this panel you can manage all parts of your game server.
+                It is possible to add more panels and blocks to this admin panel. {package} uses the "Sonata Admin" package to create itself.
+                Visit the {sonata} page to learn how to create your own admin pages.
