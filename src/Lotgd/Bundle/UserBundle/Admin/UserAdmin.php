@@ -27,6 +27,7 @@ final class UserAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('id', null, ['label' => 'entity.user.id'])
+            ->add('isVerified', null, ['label' => 'entity.user.is_verified'])
             ->add('bannedUntil', null, ['label' => 'entity.user.banned_until'])
             ->add('username', null, ['label' => 'entity.user.username'])
             ->add('email', null, ['label' => 'entity.user.email'])
