@@ -1,0 +1,43 @@
+{#
+    This file is part of "LoTGD Core Package".
+
+    @see https://github.com/idmarinas/lotgd-game
+
+    @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.md
+    @author IDMarinas
+
+    @since 6.0.0
+
+    @file
+    Template block for show RSS in Dashboard admin.
+
+    Available variables:
+    - translation_domain: Domain for translate text.
+    - feeds: a list of feeds items
+        - title: Title of post
+        - link: Link to post.
+        - description: Content of post.
+        - guid: ID of post.
+        - pubDate: Date of publication.
+#}
+
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="box box-warning">
+        <div class="box-header with-border">
+            <h3 class="box-title sonata-feed-title"><i class="fa fa-rss" aria-hidden="true"></i> {{ 'dashboard.block.rss.title'|trans({}, translation_domain) }}</h3>
+        </div>
+
+        <div class="sonata-feeds-container list-group">
+            {% for feed in feeds %}
+                <a class="list-group-item" href="{{ feed.link }}" rel="nofollow" title="{{ feed.title }}">
+                    <strong>{{ feed.title }}</strong>
+                    <div>{{ feed.description|striptags|u.truncate(200, '...') }}</div>
+                </a>
+            {% else %}
+                <div class="list-group-item">{{ 'dashboard.block.rss.no_feeds'|trans({}, translation_domain) }}</div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
