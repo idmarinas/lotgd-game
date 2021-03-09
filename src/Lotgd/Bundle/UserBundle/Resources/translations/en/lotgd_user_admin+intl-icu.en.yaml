@@ -13,7 +13,7 @@ lotgd_user.dashboard.top:
     total_unverified_accounts: Unverified accounts
 
 # Action in list page
-list.label__action: Acction
+list.label__action: Actions
 
 # Fields names of entity
 entity.user:
