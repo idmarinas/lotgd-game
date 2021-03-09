@@ -92,6 +92,11 @@ class User implements UserInterface
         $this->settings  = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->username;
+    }
+
     /**
      * A visual identifier that represents this user.
      *
