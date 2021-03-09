@@ -11,9 +11,9 @@
  * @since 4.8.0
  */
 
-namespace Lotgd\Core\Form\Type;
+namespace Lotgd\Bundle\CoreBundle\Form\Type;
 
-use Lotgd\Core\Form\DataTransformer\BooleanTransformer;
+use Lotgd\Bundle\CoreBundle\Form\DataTransformer\BooleanTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType as TypeCheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
