@@ -11,3 +11,7 @@ framework:
         cookie_secure: true
         cookie_samesite: lax
         use_cookies: true
+    http_client:
+        default_options:
+            headers:
+                'User-Agent': 'LoTGD Core Package/RSS Reader'
