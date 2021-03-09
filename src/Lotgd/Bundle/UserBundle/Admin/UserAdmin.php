@@ -67,7 +67,6 @@ final class UserAdmin extends AbstractAdmin
                     ->add('createdAt', SonataType\DateTimePickerType::class, ['disabled' => true, 'label' => 'entity.user.created_at', 'dp_side_by_side' => true])
                 ->end()
                 ->with('roles', ['class' => 'col-md-4', 'label' => null, 'box_class' => null])
-                    ->add('isBanned', SonataType\BooleanType::class, ["mapped" => false])
                     ->add('isVerified', null, ['label' => 'entity.user.is_verified'])
                     ->add('roles', CollectionType::class, [
                         'label' => 'entity.user.roles',
