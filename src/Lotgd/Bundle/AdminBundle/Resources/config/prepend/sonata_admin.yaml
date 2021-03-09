@@ -37,8 +37,10 @@ sonata_admin:
                         isVerified: { value: 2 }
         # Order menu groups
         groups:
-            menu.admin.user.group: ~
-            menu.admin.settings.group: ~
+            menu.admin.user.group:
+                icon: '<i class="fa fa-user"></i>'
+            menu.admin.settings.group:
+                icon: '<i class="fa fa-cogs"></i>'
     security:
         handler: sonata.admin.security.handler.role
 
