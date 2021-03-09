@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Lotgd\Bundle\CoreBundle\Entity\Common\IdTrait;
+use Lotgd\Bundle\CoreBundle\Entity\Common;
 use Lotgd\Bundle\UserBundle\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -35,10 +35,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
-    use IdTrait;
+    use Common\IdTrait;
+    use Common\Deletable;
     use User\Avatar;
     use User\Ban;
-    use User\Deletable;
     use User\Donation;
     use User\Security;
     use User\Settings;
