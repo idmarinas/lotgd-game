@@ -42,7 +42,6 @@ return static function (ContainerConfigurator $container)
             ->tag('sonata.admin', [
                 'manager_type' => 'orm',
                 'group' => 'menu.admin.user.group',
-                'icon' => '<i class="fa fa-user"></i>',
                 'label' => 'menu.admin.user.label_user',
                 'label_catalogue' => 'lotgd_user_admin',
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
