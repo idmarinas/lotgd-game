@@ -1,0 +1,52 @@
+# # Redirect old files to new routes.
+# # # # # # # # # # # # # # # # # # #
+
+# home.php
+lotgd_core_legacy_redirect_home:
+    path: /home.php
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+    defaults:
+        route: lotgd_core_home
+        # optionally you can define some arguments passed to the route
+        # page: 'index'
+        # version: 'current'
+        # redirections are temporary by default (code 302) but you can make them permanent (code 301)
+        permanent: true
+        # add this to keep the original query string parameters when redirecting
+        keepQueryParams: false
+        # add this to keep the HTTP method when redirecting. The redirect status changes
+        # * for temporary redirects, it uses the 307 status code instead of 302
+        # * for permanent redirects, it uses the 308 status code instead of 301
+        keepRequestMethod: true
+
+# about.php?op=license
+lotgd_core_legacy_redirect_about_license:
+    path: /about.php
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+    condition: "request.query.get('op') == 'license'"
+    defaults:
+        route: lotgd_core_about_license
+        permanent: true
+        keepQueryParams: false
+        keepRequestMethod: true
+
+# about.php?op=listmodules
+lotgd_core_legacy_redirect_about_module:
+    path: /about.php
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+    condition: "request.query.get('op') == 'listmodules'"
+    defaults:
+        route: lotgd_core_about_bundles
+        permanent: true
+        keepQueryParams: false
+        keepRequestMethod: true
+
+# about.php
+lotgd_core_legacy_redirect_about:
+    path: /about.php
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+    defaults:
+        route: lotgd_core_about
+        permanent: true
+        keepQueryParams: false
+        keepRequestMethod: true
