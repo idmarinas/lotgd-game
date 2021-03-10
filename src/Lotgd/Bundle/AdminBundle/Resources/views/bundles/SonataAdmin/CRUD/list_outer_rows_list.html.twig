@@ -1,0 +1,5 @@
+{% for object in admin.datagrid.results %}
+    <tr {{ object.isDeleted ? 'class="danger"' : ''}}>
+        {% include get_admin_template('inner_list_row', admin.code) %}
+    </tr>
+{% endfor %}

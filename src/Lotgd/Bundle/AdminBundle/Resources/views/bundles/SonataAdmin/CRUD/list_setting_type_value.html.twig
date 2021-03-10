@@ -1,0 +1,9 @@
+{% extends get_admin_template('base_list_field', admin.code) %}
+
+{% block field %}
+    {% if object.type == 'bool' %}
+        {%- include '@SonataAdmin/CRUD/display_boolean.html.twig' -%}
+    {% else %}
+        {{ value }}
+    {% endif %}
+{% endblock %}

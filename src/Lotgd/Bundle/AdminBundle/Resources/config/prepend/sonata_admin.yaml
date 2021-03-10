@@ -52,8 +52,18 @@ sonata_admin:
         user_block: '@LotgdAdmin/bundles/SonataAdmin/Core/user_block.html.twig'
         layout: '@LotgdAdmin/bundles/SonataAdmin/standard_layout.html.twig'
         edit: '@LotgdAdmin/bundles/SonataAdmin/CRUD/edit.html.twig'
+        outer_list_rows_mosaic: '@LotgdAdmin/bundles/SonataAdmin/CRUD/list_outer_rows_mosaic.html.twig'
+        outer_list_rows_list: '@LotgdAdmin/bundles/SonataAdmin/CRUD/list_outer_rows_list.html.twig'
 
 sonata_block:
     blocks:
         sonata.admin.block.admin_list:
             contexts: [admin]
+
+sonata_doctrine_orm_admin:
+    templates:
+        types:
+            show:
+                avatar: '@LotgdAdmin/bundles/SonataAdmin/CRUD/show_setting_type_value.html.twig'
+            list:
+                setting_type_value: '@LotgdAdmin/bundles/SonataAdmin/CRUD/list_setting_type_value.html.twig'
