@@ -51,6 +51,7 @@ final class DashboardRssServiceBlock extends AbstractBlockService
         $feeds = $this->cache->get('lotgd_admin.dashboard.rss.feed', function (CacheItemInterface $item)
         {
             $item->expiresAfter(600); //-- Cache for 1 hour
+            $content = '';
 
             try
             {
