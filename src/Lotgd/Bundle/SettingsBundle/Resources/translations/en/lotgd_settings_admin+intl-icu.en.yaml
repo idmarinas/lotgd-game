@@ -1,0 +1,37 @@
+menu:
+    admin.settings:
+        group: Settings
+        label_settings: Settings
+        label_settings_domain: Domains
+
+# Breadcrum menu bar
+breadcrumb:
+    link_setting_list: List of settings
+    link_setting_create: Create setting
+    link_setting_domain_list: List of domains
+
+# Fields names of entity Setting
+entity.setting:
+    id: ID
+    name: Name
+    domain: Domain
+    description: Description
+    type: Type
+    value: Value
+    owner: User
+
+# Action in list page
+list.label__action: Actions
+
+# Show page
+show.group_menu_admin_settings_label_settings: Details of setting
+show.group_menu_admin_settings_label_settings_domain: Details of domain
+
+# Fields names of entity SettingDomain
+entity.setting_domain:
+    id: ID
+    name: Name
+    priority: Priority
+    enabled: Enabled
+    read_only: Read only
+    settings: Settings
