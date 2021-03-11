@@ -34,11 +34,8 @@
     -   Se usará para agregar contenido personalizado a las páginas. por ejemplo:
         - pre_content y post_content (antes del contenido de la propia página y después)
     -   https://sonata-project.org/bundles/block/master/doc/reference/events.html
-
-# Para la versión 6.0.0  (LoTGD Core as Symfony APP)
-
 -   Mirar el uso de un bundle tipo settings:
-    -   https://github.com/dmishh/SettingsBundle lastest on 28 Jun 2016
+    -   (Se crea uno propio sencillo) https://github.com/dmishh/SettingsBundle lastest on 28 Jun 2016
     -   O mejor crear uno propio que sustituya:
         -   Los settings de los modulos
         -   Los prefs-user de los modulos (guardar datos del modulo con respecto al modulo)
@@ -71,25 +68,12 @@
             -   Problematico la creación del usuario admin
     -   Para los admin que no dispongan de esta opción se agrega la opción de instalación via web.
 -   Posible candidato a sustituir el petition system por https://github.com/hackzilla-project/TicketBundle
-
-# Para la versión 6.y.z  
-
+-   Para limitar los intentos de conexión https://github.com/anyx/LoginGateBundle
 -   Agregar sistema al core, para poder añadir términos y condiciones y politica de privacidad, sin necesidad de módulo.
     -    Cookie consent
         -   https://github.com/nucleos/NucleosGDPRBundle
         -   https://github.com/kiprotect/klaro
         -   https://github.com/osano/cookieconsent/
-
-# Para la versión X.0.0 (LoTGD CORE as Bundle, puede que sea la versión 8.0.0)
-
--   ¿? Determinar si es viable usarlo tipo bundle, o crearlo para que se genere el contenido tipo bundle.
--   Esta versión LoTGD Core se transforma en un Symfony Bundle.
--   Se usa un sistema de módulos tipo Bundle
-    -   Pensado para módulos que se tengan intención de compartir (en en proyectos propios o con terceros)
-    -   La configuración personal se hace como una web en  Symfony Framework
-
-## Para la versión X+1.0.0
-
 -   Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
     -   Poner las opciones de la encuesta en una tabla separada. Permitiendo que las opciones también se puedan traducir.
 
