@@ -40,7 +40,7 @@
         "core-js": "^3.9.1",
         "file-loader": "^6.2.0",
         "less-loader": "^8.0.0",
-        "postcss": "^8.2.7",
+        "postcss": "^8.2.8",
         "postcss-loader": "^5.1.0",
         "regenerator-runtime": "^0.13.7",
         "sass": "^1.32.8",
