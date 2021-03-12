@@ -58,7 +58,7 @@ class EmailVerifier
         }
         catch (\Throwable $th)
         {
-            $this->flash->add('error', new TranslatableMessage('email.send.error', [], 'page_registration'));
+            $this->flash->add('error', new TranslatableMessage('email.send.error', [], 'lotgd_core_page_registration'));
         }
     }
 
