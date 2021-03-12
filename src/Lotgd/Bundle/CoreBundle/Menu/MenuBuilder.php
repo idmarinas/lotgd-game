@@ -49,7 +49,7 @@ class MenuBuilder
         $menu->addChild('core.header.func');
         $menu['core.header.func']
             ->addChild('core.menu.forgot', ['route' => 'lotgd_user_forgot_password_request'])
-            ->addChild('core.menu.warriors', ['route' => 'lotgd_core_home'])
+            ->addChild('core.menu.warriors', ['route' => 'lotgd_core_page_list'])
             ->addChild('core.menu.news', ['route' => 'lotgd_core_home'])
         ;
 
