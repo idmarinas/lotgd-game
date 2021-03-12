@@ -30,7 +30,7 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
-    public const TEXT_DOMAIN = 'lotgd_core_page_registration';
+    public const TRANSLATOR_DOMAIN = 'lotgd_core_page_registration';
 
     private $emailVerifier;
 
@@ -75,7 +75,7 @@ class RegistrationController extends AbstractController
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('@LotgdUser/registration/confirmation_email.html.twig')
-                    ->context(['text_domain' => self::TEXT_DOMAIN])
+                    ->context(['translator_domain' => self::TRANSLATOR_DOMAIN])
             );
             // do anything else you need here, like send an email
 
@@ -111,7 +111,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('lotgd_user_register');
         }
 
-        $this->addFlash('success', new TranslatableMessage('email.verified', [], self::TEXT_DOMAIN));
+        $this->addFlash('success', new TranslatableMessage('email.verified', [], self::TRANSLATOR_DOMAIN));
 
         return $this->redirectToRoute('lotgd_user_profile');
     }

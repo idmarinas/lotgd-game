@@ -1,9 +1,9 @@
 {% extends '@LotgdUi/layout/classic.html.twig' %}
 
-{% block lotgd_head_title %}{{ 'title.bundle'|trans({}, text_domain) }}{% endblock %}
+{% block lotgd_head_title %}{{ 'title.bundle'|trans({}, translator_domain) }}{% endblock %}
 
 {% block lotgd_body_content %}
-    {% trans_default_domain text_domain %}
+    {% trans_default_domain translator_domain %}
 
     <div class="ui inverted two statistics">
         <div class="statistic">

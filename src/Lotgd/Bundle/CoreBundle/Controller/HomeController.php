@@ -20,7 +20,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class HomeController extends AbstractController
 {
-    public const TEXT_DOMAIN = 'lotgd_core_page_home';
+    public const TRANSLATOR_DOMAIN = 'lotgd_core_page_home';
 
     /**
      * @Route("/login", name="lotgd_core_login")

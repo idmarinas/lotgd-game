@@ -1,5 +1,5 @@
 {% block home_login %}
-    {% trans_default_domain text_domain %}
+    {% trans_default_domain translator_domain %}
 
     <form method="post" action="/">
         <br>
@@ -51,7 +51,7 @@
 {% endblock home_login %}
 
 {% block home_select_skin %}
-    {% trans_default_domain text_domain %}
+    {% trans_default_domain translator_domain %}
 
     <br>
     <table class="ui very basic collapsing centered table">
@@ -64,7 +64,7 @@
 {% endblock home_select_skin %}
 
 {% block home_server_full %}
-    {% trans_default_domain text_domain %}
+    {% trans_default_domain translator_domain %}
 
     <div class="ui header">{{ 'serverfull.message'|trans|colorize }}</div>
     <table class="ui centered center aligned very basic collapsing table">

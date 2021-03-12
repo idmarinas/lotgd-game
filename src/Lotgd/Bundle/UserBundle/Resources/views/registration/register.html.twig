@@ -3,7 +3,7 @@
 {% block lotgd_head_title %}Register!{% endblock %}
 
 {% block lotgd_body_content %}
-    {% trans_default_domain text_domain %}
+    {% trans_default_domain translator_domain %}
 
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="ui error message" role="alert">{{ flashError }}</div>

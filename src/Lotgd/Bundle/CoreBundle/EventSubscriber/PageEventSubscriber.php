@@ -35,9 +35,9 @@ class PageEventSubscriber implements EventSubscriberInterface
     {
         $controller = \preg_replace('/::.+/', '', $this->request->get('_controller'));
 
-        //-- Define Twig global variable for text_domain
-        $textDomain = \defined($controller.'::TEXT_DOMAIN') ? \constant($controller.'::TEXT_DOMAIN') : null;
-        $this->environment->addGlobal('text_domain', $textDomain);
+        //-- Define Twig global variable for translator_domain
+        $textDomain = \defined($controller.'::TRANSLATOR_DOMAIN') ? \constant($controller.'::TRANSLATOR_DOMAIN') : null;
+        $this->environment->addGlobal('translator_domain', $textDomain);
 
         //-- Define Twig global variable for render menu
         $menu = \defined($controller.'::LOTGD_MENU') ? \constant($controller.'::LOTGD_MENU') : 'lotgd_core.menu';

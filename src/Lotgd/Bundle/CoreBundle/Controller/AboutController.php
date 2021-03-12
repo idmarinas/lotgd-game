@@ -23,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AboutController extends AbstractController
 {
-    public const TEXT_DOMAIN = 'lotgd_core_page_about';
+    public const TRANSLATOR_DOMAIN = 'lotgd_core_page_about';
 
     private $bundles;
 

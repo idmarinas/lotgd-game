@@ -33,7 +33,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class UserCreateCommand extends Command
 {
-    public const TEXT_DOMAIN = 'lotgd_core_console_command';
+    public const TRANSLATOR_DOMAIN = 'lotgd_core_console_command';
 
     protected static $defaultName = 'lotgd:user:create';
 
@@ -108,12 +108,12 @@ final class UserCreateCommand extends Command
         {
             $style->info($th->getMessage());
 
-            $style->error($this->translator->trans('user.create.fail', [], self::TEXT_DOMAIN));
+            $style->error($this->translator->trans('user.create.fail', [], self::TRANSLATOR_DOMAIN));
 
             return Command::FAILURE;
         }
 
-        $style->success($this->translator->trans('user.create.success', [], self::TEXT_DOMAIN));
+        $style->success($this->translator->trans('user.create.success', [], self::TRANSLATOR_DOMAIN));
 
         return Command::SUCCESS;
     }
@@ -122,7 +122,7 @@ final class UserCreateCommand extends Command
     {
         $helper = $this->getHelper('question');
 
-        $question = new Question($this->translator->trans('user.create.question.username', [], self::TEXT_DOMAIN));
+        $question = new Question($this->translator->trans('user.create.question.username', [], self::TRANSLATOR_DOMAIN));
         $question->setValidator(function ($value)
         {
             $errors = $this->validator->validate((string) $value, [
@@ -133,7 +133,7 @@ final class UserCreateCommand extends Command
 
                     if ($exists)
                     {
-                        $context->addViolation($this->translator->trans('user.create.question.username.exists', [], self::TEXT_DOMAIN));
+                        $context->addViolation($this->translator->trans('user.create.question.username.exists', [], self::TRANSLATOR_DOMAIN));
                     }
                 }),
             ]);
@@ -153,7 +153,7 @@ final class UserCreateCommand extends Command
     {
         $helper = $this->getHelper('question');
 
-        $question = new Question($this->translator->trans('user.create.question.email', [], self::TEXT_DOMAIN));
+        $question = new Question($this->translator->trans('user.create.question.email', [], self::TRANSLATOR_DOMAIN));
         $question->setValidator(function ($value)
         {
             $errors = $this->validator->validate((string) $value, [
@@ -170,7 +170,7 @@ final class UserCreateCommand extends Command
 
                     if ($exists && $email)
                     {
-                        $context->addViolation($this->translator->trans('user.create.question.email.exists', [], self::TEXT_DOMAIN));
+                        $context->addViolation($this->translator->trans('user.create.question.email.exists', [], self::TRANSLATOR_DOMAIN));
                     }
                 }),
             ]);
@@ -190,7 +190,7 @@ final class UserCreateCommand extends Command
     {
         $helper = $this->getHelper('question');
 
-        $question = new Question($this->translator->trans('user.create.question.password.one', [], self::TEXT_DOMAIN));
+        $question = new Question($this->translator->trans('user.create.question.password.one', [], self::TRANSLATOR_DOMAIN));
         $question->setHidden(true);
         $question->setHiddenFallback(false);
         $question->setValidator(function ($value)
@@ -213,7 +213,7 @@ final class UserCreateCommand extends Command
             return $value;
         });
 
-        $questionR = new Question($this->translator->trans('user.create.question.password.two', [], self::TEXT_DOMAIN));
+        $questionR = new Question($this->translator->trans('user.create.question.password.two', [], self::TRANSLATOR_DOMAIN));
         $questionR->setHidden(true);
         $questionR->setHiddenFallback(false);
 
@@ -224,7 +224,7 @@ final class UserCreateCommand extends Command
 
             if ($password != $confirmPasword)
             {
-                $text = $this->translator->trans('user.create.question.password.not.match', [], self::TEXT_DOMAIN);
+                $text = $this->translator->trans('user.create.question.password.not.match', [], self::TRANSLATOR_DOMAIN);
                 $output->writeln("<error>{$text}</>");
             }
         } while ($password != $confirmPasword);
@@ -242,7 +242,7 @@ final class UserCreateCommand extends Command
         $helper   = $this->getHelper('question');
         $choices  = ['No (Normal user)', 'Yes (Only one admin can be create with this command)'];
         $question = new ChoiceQuestion(
-            $this->translator->trans('user.create.question.is.admin', [], self::TEXT_DOMAIN),
+            $this->translator->trans('user.create.question.is.admin', [], self::TRANSLATOR_DOMAIN),
             $choices,
             0
         );

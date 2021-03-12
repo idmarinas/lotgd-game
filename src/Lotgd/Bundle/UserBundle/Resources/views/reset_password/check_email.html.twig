@@ -1,11 +1,11 @@
 {% extends '@LotgdUi/layout/classic.html.twig' %}
 
 {% block lotgd_head_title %}
-    {{ 'check.email.title'|trans({}, text_domain)|uncolorize }}
+    {{ 'check.email.title'|trans({}, translator_domain)|uncolorize }}
 {% endblock %}
 
 {% block lotgd_body_content %}
-    {% trans_default_domain text_domain %}
+    {% trans_default_domain translator_domain %}
 
     <p>{{ 'check.email.paragraph.expire'|trans({
         'time': resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle')
