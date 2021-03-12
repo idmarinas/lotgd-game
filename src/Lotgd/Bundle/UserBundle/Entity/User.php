@@ -28,6 +28,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * This table store users, only data related to user.
  *
+ * @ORM\Table(
+ *     indexes={
+ *         @ORM\Index(name="deleted_at_index", columns={"deleted_at"})
+ *     }
+ * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"username"}, message="entity.user.username.not.unique")
  *
