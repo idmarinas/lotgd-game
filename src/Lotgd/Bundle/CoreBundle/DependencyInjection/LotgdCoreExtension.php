@@ -42,6 +42,7 @@ class LotgdCoreExtension extends Extension implements PrependExtensionInterface
         $loader->load('prepend/doctrine_migrations.yaml');
         $loader->load('prepend/doctrine.yaml');
         $loader->load('prepend/framework.yaml');
+        $loader->load('prepend/pagination.yaml');
         $loader->load('prepend/stof_doctrine_extensions.yaml');
     }
 }
