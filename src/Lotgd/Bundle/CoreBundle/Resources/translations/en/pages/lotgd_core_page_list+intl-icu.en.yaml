@@ -1,0 +1,23 @@
+title: 'List Warriors'
+
+# Table of list of Warriors
+table:
+    caption:
+        found: 'Warriors of the realm (Page {page}: {range_min}-{range_max} of {total_item_count})'
+        not_found: 'Warriors of the realm'
+    header:
+        alive: 'Alive'
+        level: 'Level'
+        name: 'Name'
+        dragonkills: DragonKills
+        location: 'Location'
+        race: 'Race'
+        last: 'Last on'
+    body:
+        not_found: '`$No warriors found in realm`0'
+        warrior:
+            is_online: '`#(Online)`0'
+            sex: '{sex,select, 0{`!Male`0} 1{`%Female`0} other{`&Unknown`0}}'
+    opcs:
+        writemail: 'Write Mail'
+        unconscious: '`6Unconscious`0'

@@ -1,0 +1,48 @@
+{% extends '@LotgdUi/layout/classic.html.twig' %}
+
+{% block lotgd_head_title %}
+    {{ 'title'|trans({}, translator_domain) }}
+{% endblock %}
+
+{% block lotgd_body_content %}
+    {% trans_default_domain translator_domain %}
+
+    {% set rangeMax = min(pagination.itemNumberPerPage * pagination.currentPageNumber, pagination.totalItemCount) %}
+    {% set rangeMin = ((pagination.currentPageNumber - 1) * pagination.itemNumberPerPage) + 1 %}
+
+    <table class="ui table">
+        <caption>{{ (pagination.totalItemCount ? 'table.caption.found' : 'table.caption.not_found')|trans({
+            'page': pagination.currentPageNumber,
+            'range_min': rangeMin,
+            'range_max': rangeMax,
+            'total_item_count': pagination.totalItemCount
+        }) }}</caption>
+        <thead>
+            <tr>
+                <th scope="col">{{ 'table.header.name'|trans }}</th>
+                <th scope="col">{{ 'table.header.alive'|trans }}</th>
+                <th scope="col">{{ 'table.header.level'|trans }}</th>
+                <th scope="col">{{ 'table.header.dragonkills'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for avatar in pagination %}
+                <tr>
+                    <td><i class="icon {{ avatar.sex ? 'venus' : 'mars' }}"></i> {{ avatar.name|colorize }}</td>
+                    <td>{{ (avatar.hitpoints > 0)|yes_no|colorize }}</td>
+                    <td>{{ avatar.level }}</td>
+                    <td>{{ avatar.dragonkills|numeral }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="center aligned">{{ 'table.body.not_found'|trans|colorize }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if pagination.totalItemCount %}
+        <div class="ui grid">
+            <div class="center aligned column">{{ knp_pagination_render(pagination) }}</div>
+        </div>
+    {% endif %}
+{% endblock %}
