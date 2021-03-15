@@ -15,6 +15,7 @@ namespace Lotgd\Bundle\CoreBundle\Twig\Extension;
 
 use Lotgd\Bundle\CoreBundle\Tool\Censor;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -22,17 +23,21 @@ use Twig\TwigTest;
 
 class GameCoreExtension extends AbstractExtension
 {
+    use Pattern\CoreFilter;
     use Pattern\PageGen;
 
     protected $request;
+    protected $translator;
     protected $censor;
 
     public function __construct(
         RequestStack $request,
+        TranslatorInterface $translator,
         Censor $censor
     ) {
-        $this->request = $request->getCurrentRequest();
-        $this->censor  = $censor;
+        $this->request    = $request->getCurrentRequest();
+        $this->translator = $translator;
+        $this->censor     = $censor;
     }
 
     /**
@@ -42,6 +47,7 @@ class GameCoreExtension extends AbstractExtension
     {
         return [
             new TwigFilter('censor', [$this->censor, 'filter']),
+            new TwigFilter('yes_no', [$this, 'affirmationNegation']),
         ];
     }
 
@@ -53,7 +59,7 @@ class GameCoreExtension extends AbstractExtension
         return [
             new TwigFunction('game_copyright', function (): string
             {
-                return \Lotgd\Core\Kernel::LICENSE.\Lotgd\Core\Kernel::COPYRIGHT;
+                return \Lotgd\Bundle\Kernel::LICENSE.\Lotgd\Bundle\Kernel::COPYRIGHT;
             }, ['is_safe' => ['html']]),
             new TwigFunction('game_page_gen', [$this, 'gamePageGen'], ['needs_environment' => true]),
 
