@@ -10,6 +10,9 @@ app:
             page: 'Page {page,number}'
             next: 'Next page'
             last: 'Last page'
+    adverb:
+        yes: '`@Yes`0'
+        no: '`$No`0'
 
 # Mailer service info
 mailer.send.mail.error: 'An error occurred while sending the mail'
