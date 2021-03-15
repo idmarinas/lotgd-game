@@ -13,6 +13,7 @@
 
 -   **_Crear la migración desde la clean install_**
 
+-   ??? Revisar el theme para ver si se puede quitar el uso de webpack encore (php)
 -   Plantilla de registro, agregar algunos events para agregar más información.
 -   * No hace falta Gulp (puede ser), copiar los archivos se puede hacer desde composer igual que hice con el skeleton al crear proyecto.
 -   Panel de administración
