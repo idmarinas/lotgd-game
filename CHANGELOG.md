@@ -109,7 +109,8 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 -   **Upgrade/Install for version 5.0.0 and up**
     -   First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
     -   If have problems:
-        -   Read info in `storage/log/tracy/*` files, and see the problem.
+        -   Read info in `var/log/*` files, and see the problem.
+        -   Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS distribution) in your webserver.
         -   If you can't solve the problem go to: [Repository issues](https://github.com/idmarinas/lotgd-game/issues)
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
