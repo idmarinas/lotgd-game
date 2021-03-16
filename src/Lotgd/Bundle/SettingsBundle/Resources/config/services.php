@@ -13,10 +13,12 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Lotgd\Bundle\CoreBundle\EventSubscriber\SettingsSubscriber;
 use Lotgd\Bundle\SettingsBundle\Admin\SettingAdmin;
 use Lotgd\Bundle\SettingsBundle\Admin\SettingDomainAdmin;
 use Lotgd\Bundle\SettingsBundle\Entity\Setting;
 use Lotgd\Bundle\SettingsBundle\Entity\SettingDomain;
+use Lotgd\Bundle\SettingsBundle\EntityListener\SettingListener;
 
 return static function (ContainerConfigurator $container)
 {
@@ -32,6 +34,7 @@ return static function (ContainerConfigurator $container)
                 '../../Resources/',
                 '../../Tests/',
                 '../../LotgdSettingsBundle.php',
+                '../../LotgdSettingsCache.php',
             ])
 
         //-- Admin panels
@@ -57,5 +60,18 @@ return static function (ContainerConfigurator $container)
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore'
             ])
             ->public()
+
+        // Entities Listeners
+        ->set(SettingListener::class)
+            ->tag('doctrine.orm.entity_listener', [ 'event' => 'preUpdate', 'entity' => Setting::class, 'lazy' => true ])
+            ->tag('doctrine.orm.entity_listener', [ 'event' => 'postUpdate', 'entity' => Setting::class, 'lazy' => true ])
+            ->tag('doctrine.orm.entity_listener', [ 'event' => 'prePersist', 'entity' => Setting::class, 'lazy' => true ])
+            ->tag('doctrine.orm.entity_listener', [ 'event' => 'postPersist', 'entity' => Setting::class, 'lazy' => true ])
+            ->tag('doctrine.orm.entity_listener', [ 'event' => 'preRemove', 'entity' => Setting::class, 'lazy' => true ])
+            ->tag('doctrine.orm.entity_listener', [ 'event' => 'postRemove', 'entity' => Setting::class, 'lazy' => true ])
+
+        ->set(SettingsSubscriber::class)
+            ->args([service('lotgd.core.package.cache')])
+            ->tag('kernel.event_subscriber')
     ;
 };
