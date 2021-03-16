@@ -19,7 +19,7 @@ use Lotgd\Bundle\SettingsBundle\Entity\Setting;
 trait Settings
 {
     /**
-     * @ORM\OneToMany(targetEntity=Setting::class, mappedBy="owner")
+     * @ORM\OneToMany(targetEntity=Setting::class, mappedBy="user")
      */
     private $settings;
 
@@ -36,7 +36,7 @@ trait Settings
         if ( ! $this->settings->contains($setting))
         {
             $this->settings[] = $setting;
-            $setting->setOwner($this);
+            $setting->setUser($this);
         }
 
         return $this;
@@ -44,10 +44,10 @@ trait Settings
 
     public function removeSetting(Setting $setting): self
     {
-        if ($this->settings->removeElement($setting) && $setting->getOwner() === $this)
+        if ($this->settings->removeElement($setting) && $setting->getUser() === $this)
         {
             // set the owning side to null (unless already changed)
-            $setting->setOwner(null);
+            $setting->setUser(null);
         }
 
         return $this;

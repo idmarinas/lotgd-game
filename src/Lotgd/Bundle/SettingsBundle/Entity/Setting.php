@@ -23,6 +23,12 @@ use Lotgd\Bundle\UserBundle\Entity\User;
 /**
  * Settings of LoTGD and for Bundles.
  *
+ * @ORM\Table(
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="lotgd_settings_bundle_setting", columns={"domain_id", "name", "user_id"})
+ *     }
+ * )
+ *
  * @ORM\Entity(repositoryClass=SettingRepository::class)
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
@@ -33,7 +39,7 @@ class Setting
     use Deletable;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 
@@ -63,7 +69,7 @@ class Setting
      *
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="settings")
      */
-    private $owner;
+    private $user;
 
     public function getName(): ?string
     {
@@ -130,15 +136,36 @@ class Setting
         return $this;
     }
 
-    public function getOwner(): ?User
+    public function getUser(): ?User
     {
-        return $this->owner;
+        return $this->user;
     }
 
-    public function setOwner(?User $owner): self
+    public function setUser(?User $user): self
     {
-        $this->owner = $owner;
+        $this->user = $user;
 
         return $this;
+    }
+
+    public function formatedValue()
+    {
+        switch ($this->getType())
+        {
+            case 'bool':
+                $formated = (bool) $this->getValue();
+            break;
+            case 'int':
+                $formated = (int) $this->getValue();
+            break;
+            case 'float':
+                $formated = (float) $this->getValue();
+            break;
+            default: //-- Default is string
+                $formated = (string) $this->getValue();
+            break;
+        }
+
+        return $formated;
     }
 }
