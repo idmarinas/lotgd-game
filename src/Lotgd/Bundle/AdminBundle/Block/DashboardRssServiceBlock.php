@@ -28,12 +28,12 @@ final class DashboardRssServiceBlock extends AbstractBlockService
     private $client;
     private $cache;
 
-    public function __construct(Environment $twig, HttpClientInterface $client, CacheInterface $lotgdCorePackagecache)
+    public function __construct(Environment $twig, HttpClientInterface $client, CacheInterface $lotgdCorePackageCache)
     {
         parent::__construct($twig);
 
         $this->client = $client;
-        $this->cache  = $lotgdCorePackagecache;
+        $this->cache  = $lotgdCorePackageCache;
     }
 
     public function configureSettings(OptionsResolver $resolver): void
@@ -73,7 +73,10 @@ final class DashboardRssServiceBlock extends AbstractBlockService
 
                     for ($i = 0; $i < 5; ++$i)
                     {
-                        $feeds[$i] = $xml->channel->item[$i];
+                        //-- Convert to array
+                        $feeds[$i] = json_decode(json_encode($xml->channel->item[$i]), true);
+                        //-- Convert to string
+                        $feeds[$i]['description'] = (string) $xml->channel->item[$i]->description;
                     }
                 }
                 catch (\Exception $e)
