@@ -13,6 +13,9 @@
 
 namespace Lotgd\Bundle\SettingsBundle\Admin;
 
+use Lotgd\Bundle\CoreBundle\Form\Type\CheckboxType;
+use Lotgd\Bundle\CoreBundle\Form\Type\NumberFloatType;
+use Lotgd\Bundle\CoreBundle\Form\Type\NumberType;
 use Lotgd\Bundle\SettingsBundle\Doctrine\FieldEnum\SettingType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -21,9 +24,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type as SonataType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Lotgd\Bundle\CoreBundle\Form\Type\CheckboxType;
-use Lotgd\Bundle\CoreBundle\Form\Type\NumberFloatType;
-use Lotgd\Bundle\CoreBundle\Form\Type\NumberType;
 
 final class SettingAdmin extends AbstractAdmin
 {
@@ -42,14 +42,14 @@ final class SettingAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['label' => 'entity.setting.id'])
             ->add('domain', null, ['label' => 'entity.setting.domain'])
-            ->add('name',null, ['label' => 'entity.setting.name'])
+            ->add('name', null, ['label' => 'entity.setting.name'])
             ->add('description', null, ['label' => 'entity.setting.description'])
             ->add('type', null, ['label' => 'entity.setting.type'])
             ->add('value', 'setting_type_value', ['editable' => true, 'label' => 'entity.setting.value'])
             ->add('_action', null, [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'show'   => [],
+                    'edit'   => [],
                     'delete' => [],
                 ],
             ])
@@ -65,8 +65,8 @@ final class SettingAdmin extends AbstractAdmin
                 ->add('name', null, ['label' => 'entity.setting.name'])
                 ->add('description', null, ['label' => 'entity.setting.description'])
                 ->add('type', ChoiceType::class, [
-                    'label' => 'entity.setting.type',
-                    'choices' => SettingType::toArray()
+                    'label'   => 'entity.setting.type',
+                    'choices' => SettingType::toArray(),
                 ])
         ;
 
@@ -82,6 +82,7 @@ final class SettingAdmin extends AbstractAdmin
                 break;
                 case 'int':
                     $formMapper->add('value', NumberType::class, ['label' => 'entity.setting.value']);
+                // no break
                 case 'float':
                     $formMapper->add('value', NumberFloatType::class, ['label' => 'entity.setting.value']);
                 break;
