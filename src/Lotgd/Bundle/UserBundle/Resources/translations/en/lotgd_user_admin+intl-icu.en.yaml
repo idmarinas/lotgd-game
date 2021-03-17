@@ -5,7 +5,9 @@ menu:
         label_user: User
 
 # Breadcrum menu bar
-breadcrumb.link_user_list: List of users
+breadcrumb:
+    link_user_list: List of users
+    link_user_create: Create user
 
 # Dashboard
 lotgd_user.dashboard.top:
