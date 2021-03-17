@@ -30,7 +30,7 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
-    public const TRANSLATOR_DOMAIN = 'lotgd_core_page_registration';
+    public const TRANSLATOR_DOMAIN = 'lotgd_user_page_registration';
 
     private $emailVerifier;
 

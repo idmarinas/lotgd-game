@@ -37,7 +37,7 @@ class ResetPasswordController extends AbstractController
 {
     use ResetPasswordControllerTrait;
 
-    public const TRANSLATOR_DOMAIN = 'lotgd_core_page_reset_password';
+    public const TRANSLATOR_DOMAIN = 'lotgd_user_page_reset_password';
 
     private $resetPasswordHelper;
 
