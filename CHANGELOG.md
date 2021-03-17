@@ -9,14 +9,16 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 
 ### :cyclone: CHANGES
 
--   **BC** LoTGD Core is a Symfony App (Bundle) since version 6.0.0.
+-   **BC** LoTGD Core is a Symfony App Bundle since version 6.0.0.
     -   Changed the entire core structure to follow Symfony Framework conventions.
--   :warning: LoTGD is now a Symfony App (Bundle).
+-   :warning: LoTGD is now a Symfony App Bundle.
 -   Moved content of `src/core` to `src/Bundle`
     -   LoTGD follow structure of Symfony App divided in Bundles.
 -   **New** login system:
     -   Old password are auto-migrated (but can fail)
         -   Can reset password.
+-   **New** registration system:
+    -   Character not is created when create account.
 -   **BC** **Entities**
     -   `Lotgd\Core\Entity\Accounts` is now `Lotgd\Core\Entity\User`
         -   Data of `accounts` are migrated to `user`
@@ -25,8 +27,8 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 
 ### :star: FEATURES
 
--   **New** Since 6.0.0 version LoTGD Core is a Symfony Bundle.
-    -   All features of Symfony App
+-   **New** Since 6.0.0 version LoTGD Core is a Symfony App Bundle.
+    -   LoTGD Core have all features of Symfony App
 
 ### :fire: DEPRECATED
 
@@ -38,8 +40,10 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 
 ### :x: REMOVES
 
--   **BC** Remove `src/core/`, `src/local/` and `src/ajax/`
--   **BC** Delete folder `modules/` old module system not work with this version use Bundle system.
+-   **BC** Remove `src/local/`
+    -   You need migrate all your local content to Bundle system.
+-   **BC** **Deleted OLD MODULE SYSTEM** use Bundle system. 
+    -   Delete folder `modules/` 
     -   Deleted related files/tables in database to modules too.
 -   **BC** Delete `AdvertisingBundle` from Core. Now is a independent bundle (can use in other Symfony projects).
     -   If you need/want use in your server can use https://github.com/idmarinas/advertising-bundle
@@ -109,6 +113,7 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 -   **Upgrade/Install for version 5.0.0 and up**
     -   First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
     -   If have problems:
+        -   Read info in `storage/log/tracy/*` files, and see the problem.
         -   Read info in `var/log/*` files, and see the problem.
         -   Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS distribution) in your webserver.
         -   If you can't solve the problem go to: [Repository issues](https://github.com/idmarinas/lotgd-game/issues)
