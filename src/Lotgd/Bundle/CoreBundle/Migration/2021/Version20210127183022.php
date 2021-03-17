@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.md
+ * @author IDMarinas
+ *
+ * @since 5.0.0
+ */
+
 declare(strict_types=1);
 
 namespace Lotgd\Bundle\CoreBundle\Migration;
@@ -7,9 +18,6 @@ namespace Lotgd\Bundle\CoreBundle\Migration;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20210127183022 extends AbstractMigration
 {
     public function getDescription() : string
@@ -19,7 +27,6 @@ final class Version20210127183022 extends AbstractMigration
 
     public function up(Schema $schema) : void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE accounts (acctid INT UNSIGNED AUTO_INCREMENT NOT NULL, character_id INT UNSIGNED DEFAULT NULL, laston DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL, password VARCHAR(32) NOT NULL, loggedin TINYINT(1) DEFAULT \'0\' NOT NULL, superuser INT UNSIGNED DEFAULT 0 NOT NULL, login VARCHAR(50) NOT NULL, lastmotd DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL, locked TINYINT(1) DEFAULT \'0\' NOT NULL, lastip VARCHAR(40) NOT NULL, uniqueid VARCHAR(32) NOT NULL, boughtroomtoday TINYINT(1) DEFAULT \'0\' NOT NULL, emailaddress VARCHAR(128) NOT NULL, replaceemail VARCHAR(128) NOT NULL, emailvalidation VARCHAR(32) DEFAULT NULL, forgottenpassword VARCHAR(32) DEFAULT NULL, sentnotice TINYINT(1) DEFAULT \'0\' NOT NULL, prefs LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', transferredtoday SMALLINT UNSIGNED DEFAULT 0 NOT NULL, recentcomments DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL, donation INT UNSIGNED DEFAULT 0 NOT NULL, donationspent INT UNSIGNED DEFAULT 0 NOT NULL, donationconfig LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', referer INT UNSIGNED DEFAULT 0 NOT NULL, refererawarded INT UNSIGNED DEFAULT 0 NOT NULL, banoverride TINYINT(1) DEFAULT \'0\', translatorlanguages VARCHAR(128) DEFAULT \'en\' NOT NULL, amountouttoday INT UNSIGNED DEFAULT 0 NOT NULL, beta TINYINT(1) DEFAULT \'0\' NOT NULL, regdate DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL, UNIQUE INDEX UNIQ_CAC89EACAA08CB10 (login), UNIQUE INDEX UNIQ_CAC89EAC1136BE75 (character_id), INDEX login (login), INDEX laston (laston), INDEX emailaddress (emailaddress), INDEX locked (locked, loggedin, laston), INDEX referer (referer), INDEX uniqueid (uniqueid), INDEX emailvalidation (emailvalidation), PRIMARY KEY(acctid)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE accounts_everypage (acctid INT UNSIGNED NOT NULL, gentime DOUBLE PRECISION UNSIGNED NOT NULL, gentimecount INT UNSIGNED NOT NULL, gensize INT UNSIGNED NOT NULL, PRIMARY KEY(acctid)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE accounts_output (acctid INT UNSIGNED NOT NULL, output MEDIUMBLOB NOT NULL, PRIMARY KEY(acctid)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
@@ -78,7 +85,6 @@ final class Version20210127183022 extends AbstractMigration
 
     public function down(Schema $schema) : void
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE characters DROP FOREIGN KEY FK_3A29410E9D02C3AF');
         $this->addSql('ALTER TABLE armor_translation DROP FOREIGN KEY FK_4ABA0F8B232D562B');
         $this->addSql('ALTER TABLE accounts DROP FOREIGN KEY FK_CAC89EAC1136BE75');
