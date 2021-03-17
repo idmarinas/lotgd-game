@@ -31,7 +31,7 @@
 
         <div class="sonata-feeds-container list-group">
             {% for feed in feeds %}
-                <a class="list-group-item" href="{{ feed.link }}" rel="nofollow" title="{{ feed.title }}">
+                <a class="list-group-item" href="{{ feed.link }}" target="_blank" rel="noopener noreferrer">{{ feed.title="{{ feed.title }}">
                     <strong>{{ feed.title }}</strong>
                     <div>{{ feed.description|striptags|u.truncate(200, '...') }}</div>
                 </a>
