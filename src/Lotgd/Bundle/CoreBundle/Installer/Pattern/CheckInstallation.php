@@ -28,7 +28,7 @@ trait CheckInstallation
         if ( ! $this->isValidVersion($fromVersion) || ! $this->isValidVersion($toVersion))
         {
             $this->style->error($this->translator->trans('installer.check.installation.version.invalid', [
-                'from' => $this->formatVersion($fromVersion),
+                'from' => $fromVersion < 0 ? 'Clean Install' : $this->formatVersion($fromVersion),
                 'to'   => $this->formatVersion($toVersion),
             ], parent::TRANSLATOR_DOMAIN));
 
