@@ -275,7 +275,7 @@ final class LotgdInstallCommand extends Command
     private function existSuperAdmin()
     {
         /** @var Lotgd\Bundle\CoreBundle\EntityRepository\UserRepository */
-        $repository = $this->doctrine->getRepository('LotgdCore:User');
+        $repository = $this->doctrine->getRepository('LotgdUser:User');
         $qb         = $repository->createQueryBuilder('u');
 
         return (bool) $qb->select('COUNT(1)')
