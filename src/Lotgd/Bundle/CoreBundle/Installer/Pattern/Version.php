@@ -82,7 +82,7 @@ trait Version
         '4.12.0 IDMarinas Edition'        => 41200,
         '5.0.0 IDMarinas Edition'         => 50000, //-- New Installer
         '5.1.0 IDMarinas Edition'         => 50100,
-        '6.0.0 IDMarinas Edition'         => 60000, //-- Symfony Application
+        '6.0.0 IDMarinas Edition'         => 60000, //-- Symfony Application Bundle
     ];
 
     /**
