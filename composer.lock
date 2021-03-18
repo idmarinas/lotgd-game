@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f78deece1ba00fc85ae102372993c056",
+    "content-hash": "60a052ce542d4cd2bec3aa23b8d5329b",
     "packages": [
         {
             "name": "acelaya/doctrine-enum-type",
@@ -2111,6 +2111,36 @@
                 }
             ],
             "description": "LoTGD Administration panel component.",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "idmarinas/avatar-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "src/Lotgd/Bundle/AvatarBundle",
+                "reference": "dcd96a6d7a97b06794bad44db7fe7e05be0280ad"
+            },
+            "require": {
+                "php": "^7.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Lotgd\\Bundle\\AvatarBundle\\": ""
+                }
+            },
+            "authors": [
+                {
+                    "name": "Iván Diaz Marinas (IDMarinas)",
+                    "email": "35842929+idmarinas@users.noreply.github.com",
+                    "homepage": "https://github.com/idmarinas/lotgd-game",
+                    "role": "Developer, Maintainer"
+                }
+            ],
+            "description": "LoTGD Avatar component.",
             "transport-options": {
                 "relative": true
             }
@@ -13643,6 +13673,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "idmarinas/admin-bundle": 20,
+        "idmarinas/avatar-bundle": 20,
         "idmarinas/core-bundle": 20,
         "idmarinas/settings-bundle": 20,
         "idmarinas/ui-bundle": 20,
