@@ -14,6 +14,7 @@
 namespace Lotgd\Bundle\UserBundle\Form;
 
 use Lotgd\Bundle\UserBundle\Entity\User;
+use Lotgd\Bundle\UserBundle\Repository\UserRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -23,14 +24,36 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
+use Symfony\Component\Validator\Constraints\Callback;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class RegistrationFormType extends AbstractType
 {
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('username', null, ['label' => 'username'])
-            ->add('email', EmailType::class, ['label' => 'email'])
+            ->add('email', EmailType::class, [
+                'label' => 'email',
+                'constraints' => [
+                    new Callback(function ($email, ExecutionContextInterface $context)
+                    {
+                        $exists = null !== $this->userRepository->findOneByEmail($email);
+
+                        if ($exists && $email)
+                        {
+                            $context->addViolation('entity.user.email.not.unique');
+                        }
+                    }),
+                ]
+            ])
             ->add('plainPassword', RepeatedType::class, [
                 'mapped'          => false,
                 'type'            => PasswordType::class,
