@@ -10,9 +10,6 @@
 
 -   Esta versión LoTGD Core será una app Symfony Framework.
     -   Se hace como un Bundle y se crea un lotgd-skeleton para crear una versión personalizada.
-
--   **_Crear la migración desde la clean install_**
-
 -   ??? Revisar el theme para ver si se puede quitar el uso de webpack encore (php)
 -   Plantilla de registro, agregar algunos events para agregar más información.
 -   * No hace falta Gulp (puede ser), copiar los archivos se puede hacer desde composer igual que hice con el skeleton al crear proyecto.
@@ -30,26 +27,17 @@
     -   Esto permite poder personalizar cada parte, principalmente por el menu de navegación y la opción de poder crear diferentes versiones:
         -   Diferentes tiendas con la misma base.
         -   Diferentes ciudades con la misma base
--   https://github.com/KnpLabs/KnpPaginatorBundle para la paginación
 -   SonataBlockBundle puede ser interesante para agregar bloques en lugares concretos
     -   Se usará para agregar contenido personalizado a las páginas. por ejemplo:
         - pre_content y post_content (antes del contenido de la propia página y después)
     -   https://sonata-project.org/bundles/block/master/doc/reference/events.html
--   Mirar el uso de un bundle tipo settings:
-    -   (Se crea uno propio sencillo) https://github.com/dmishh/SettingsBundle lastest on 28 Jun 2016
-    -   O mejor crear uno propio que sustituya:
-        -   Los settings de los modulos
-        -   Los prefs-user de los modulos (guardar datos del modulo con respecto al modulo)
-        -   Menos importante
-            -   Puede solaparse con las caracteristicas de los bundles
-            -   Los prefs-* (ejemplo prefs-city, prefs-mount) datos, del modulo con respecto a alguna caracteristica, como puede ser una ciudad, montura
 -   **BC** Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
     -   Eliminar partes antiguas si aun quedan.
 -   **BC** Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente como el sistema de combate nuevo.
     -   Se simplifica la forma en la que se calcula las estadísticas del personaje, haciendo que tanto los personajes jugador como los creados por el servidor, tengan una forma de creación muy similar.
 -   **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
     -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
--   **BC** Eliminar compatibilidad con el uso del viejo sistema de módulos
+-   **BC** Eliminar compatibilidad con el uso del viejo sistema de módulos.
 
 # Para la versión 6.1.0
 
@@ -124,3 +112,12 @@
             }
         }
         ```
+-   Creado, un bundle sencillo
+    -   Mirar el uso de un bundle tipo settings:
+        -   (Se crea uno propio sencillo) https://github.com/dmishh/SettingsBundle lastest on 28 Jun 2016
+        -   O mejor crear uno propio que sustituya:
+            -   Los settings de los modulos
+            -   Los prefs-user de los modulos (guardar datos del modulo con respecto al modulo)
+            -   Menos importante
+                -   Puede solaparse con las caracteristicas de los bundles
+                -   Los prefs-* (ejemplo prefs-city, prefs-mount) datos, del modulo con respecto a alguna caracteristica, como puede ser una ciudad, montura
