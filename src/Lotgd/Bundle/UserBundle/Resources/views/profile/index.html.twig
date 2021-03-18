@@ -17,6 +17,9 @@
         <dt>{{ 'list.donation_points'|trans }}</dt>
         <dd>{{ (app.user.donation - app.user.donationSpent)|numeral }}</dd>
 
+        <dt>{{ 'list.referer'|trans }}</dt>
+        <dd>{{ app.user.referer|default('list.referer.none'|trans) }}</dd>
+
         <dt>{{ 'list.register_date'|trans }}</dt>
         <dd>{{ app.user.createdAt|date }}</dd>
     </dl>
