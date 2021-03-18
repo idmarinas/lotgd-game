@@ -53,6 +53,14 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      *
      * @Assert\NotBlank
+     * @Assert\Length(
+     *     min=3,
+     *     max=25
+     * )
+     * @Assert\Regex(
+     *     pattern="/^[a-z]+$/",
+     *     message="entity.user.username.only_letters"
+     * )
      */
     private $username;
 
