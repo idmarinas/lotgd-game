@@ -29,6 +29,7 @@ return [
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class                     => ['all' => true],
     Knp\Bundle\MenuBundle\KnpMenuBundle::class                               => ['all' => true],
     Lotgd\Bundle\AdminBundle\LotgdAdminBundle::class                         => ['all' => true],
+    Lotgd\Bundle\AvatarBundle\LotgdAvatarBundle::class                       => ['all' => true],
     Lotgd\Bundle\CoreBundle\LotgdCoreBundle::class                           => ['all' => true],
     Lotgd\Bundle\SettingsBundle\LotgdSettingsBundle::class                   => ['all' => true],
     Lotgd\Bundle\UiBundle\LotgdUiBundle::class                               => ['all' => true],
