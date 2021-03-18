@@ -129,6 +129,9 @@
     "idmarinas/admin-bundle": {
         "version": "dev-master"
     },
+    "idmarinas/avatar-bundle": {
+        "version": "dev-master"
+    },
     "idmarinas/core-bundle": {
         "version": "dev-master"
     },
