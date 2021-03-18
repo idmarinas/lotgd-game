@@ -1,0 +1,41 @@
+{% extends "@LotgdUi/layout/classic.html.twig" %}
+
+{% block lotgd_head_title %}{{ 'title'|trans({'name': app.user.username}, translator_domain) }}{% endblock %}
+
+{% block lotgd_body_content %}
+    {% trans_default_domain translator_domain %}
+
+    <h1>{{ 'hello'|trans({'name': app.user.username}) }}</h1>
+
+    <dl>
+        <dt>{{ 'list.username'|trans }}</dt>
+        <dd>{{ app.user.username }}</dd>
+
+        <dt>{{ 'list.email'|trans }}</dt>
+        <dd>{{ app.user.email }}</dd>
+
+        <dt>{{ 'list.donation_points'|trans }}</dt>
+        <dd>{{ (app.user.donation - app.user.donationSpent)|numeral }}</dd>
+
+        <dt>{{ 'list.register_date'|trans }}</dt>
+        <dd>{{ app.user.createdAt|date }}</dd>
+    </dl>
+
+    <h3>{{ 'characters_list'|trans }}</h3>
+    <div class="ui cards">
+        {% for avatar in app.user.avatars %}
+
+        {% else %}
+            <div class="ui card">
+                <div class="content">
+                    <div class="header">{{ 'character.undefined'|trans }}</div>
+                    <div class="meta">{{ 'character.create'|trans }}</div>
+                    <div class="description">{{ 'character.description'|trans }}</div>
+                </div>
+                <div class="extra content">
+                    <div class="ui fluid button">{{ 'character.create_button'|trans }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+title: 'Profile of {name}'
+
+hello: 'Hello "{name}"'
+
+list:
+    username: Username
+    email: Email
+    register_date: Registration
+    donation_points: Donation points
+
+characters_list: List of characters
+character:
+    undefined: 'Unknown'
+    create: Create new character
+    description: Initiate the creation of a new character associated with this account.
+    create_button: Create
