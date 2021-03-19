@@ -125,6 +125,29 @@
         "psr/container": "^1.1.0",
         "symfony/symfony": "*"
     },
+    "authors": [
+        {
+            "name": "Iván Diaz Marinas",
+            "email": "contacto@infommo.es",
+            "homepage": "https://github.com/idmarinas/lotgd-game",
+            "role": "Contributor, Maintainer"
+        },
+        {
+            "name": "Oliver Brendel",
+            "homepage": "http://nb-core.org",
+            "role": "Contributor"
+        },
+        {
+            "name": "DragonPrime",
+            "homepage": "http://www.dragonprime.net",
+            "role": "Developer, Maintainer"
+        },
+        {
+            "name": "Eric Stevens & JT Traub (MightyE)",
+            "homepage": "http://lotgd.net/",
+            "role": "Author"
+        }
+    ],
     "extra": {
         "symfony": {
             "allow-contrib": false,

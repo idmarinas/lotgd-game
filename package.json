@@ -22,6 +22,11 @@
             "name": "DragonPrime",
             "homepage": "http://www.dragonprime.net",
             "role": "Developer, Maintainer"
+        },
+        {
+            "name": "Eric Stevens & JT Traub (MightyE)",
+            "homepage": "http://lotgd.net/",
+            "role": "Author"
         }
     ],
     "homepage": "http://lotgd.infommo.es",
