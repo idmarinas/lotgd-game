@@ -93,9 +93,22 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         return $user;
     }
 
+    /**
+     * @param User  $user
+     * @param array $credentials
+     */
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        if ($this->passwordEncoder->isPasswordValid($user, $credentials['password']))
+        {
+            $user->setLastConnection(new \DateTime('now'));
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
