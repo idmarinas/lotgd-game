@@ -83,7 +83,7 @@ class User implements UserInterface
     private $lastMotd;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=User::class)
      */
     private $referer;
 
