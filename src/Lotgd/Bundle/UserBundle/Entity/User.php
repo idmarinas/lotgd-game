@@ -97,12 +97,17 @@ class User implements UserInterface
      */
     private $isVerified = false;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastConnection;
+
     public function __construct()
     {
-        $this->avatars   = new ArrayCollection();
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
-        $this->settings  = new ArrayCollection();
+        $this->avatars        = new ArrayCollection();
+        $this->createdAt      = new \DateTime();
+        $this->updatedAt      = new \DateTime();
+        $this->settings       = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -202,6 +207,26 @@ class User implements UserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of lastConnection.
+     */
+    public function getLastConnection(): ?\DateTimeInterface
+    {
+        return $this->lastConnection;
+    }
+
+    /**
+     * Set the value of lastConnection.
+     *
+     * @return self
+     */
+    public function setLastConnection(?\DateTimeInterface $lastConnection)
+    {
+        $this->lastConnection = $lastConnection;
 
         return $this;
     }
