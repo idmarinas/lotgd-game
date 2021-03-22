@@ -13,7 +13,8 @@
     "require": {
         "php": "^7.3",
         "sonata-project/block-bundle": "^4.5",
-        "sylius/theme-bundle": "^2.1"
+        "sylius/theme-bundle": "^2.1",
+        "symfony/webpack-encore-bundle": "^1.11"
     },
     "autoload": {
         "psr-4": {
