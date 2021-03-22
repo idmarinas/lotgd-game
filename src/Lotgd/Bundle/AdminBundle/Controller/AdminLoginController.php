@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
- * @Route("/game")
+ * @Route("/grotto")
  */
 final class AdminLoginController extends AbstractController
 {
