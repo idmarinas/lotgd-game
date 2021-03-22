@@ -77,6 +77,7 @@
     -   Usar otra forma
 
 ## Cosas a mirar
+-   https://github.com/pirasterize/sonata-form-builder
 -   https://github.com/nelmio/NelmioSecurityBundle
 -   https://github.com/nan-guo/Sonata-Menu-Bundle
 -   https://github.com/sonata-project/SonataPageBundle 
