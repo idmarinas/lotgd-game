@@ -36,7 +36,7 @@ return static function (ContainerConfigurator $container)
 
         //-- Blocks
         ->set('lotgd_admin.block.service.dashboard.rss', DashboardRssServiceBlock::class)
-            ->args([service('twig'), service('http_client')])
+            ->args([new ReferenceConfigurator('twig'), new ReferenceConfigurator('http_client')])
             ->tag('sonata.block')
     ;
 };
