@@ -26,6 +26,8 @@ return [
     Cron\CronBundle\CronCronBundle::class                                    => ['all' => true],
     SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle::class => ['all' => true],
     SymfonyCasts\Bundle\VerifyEmail\SymfonyCastsVerifyEmailBundle::class     => ['all' => true],
+    Sonata\TranslationBundle\SonataTranslationBundle::class                  => ['all' => true],
+    Sonata\IntlBundle\SonataIntlBundle::class                                => ['all' => true],
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class                     => ['all' => true],
     Knp\Bundle\MenuBundle\KnpMenuBundle::class                               => ['all' => true],
     Lotgd\Bundle\AdminBundle\LotgdAdminBundle::class                         => ['all' => true],
@@ -34,6 +36,4 @@ return [
     Lotgd\Bundle\SettingsBundle\LotgdSettingsBundle::class                   => ['all' => true],
     Lotgd\Bundle\UiBundle\LotgdUiBundle::class                               => ['all' => true],
     Lotgd\Bundle\UserBundle\LotgdUserBundle::class                           => ['all' => true],
-    Sonata\TranslationBundle\SonataTranslationBundle::class                  => ['all' => true],
-    Sonata\IntlBundle\SonataIntlBundle::class                                => ['all' => true],
 ];
