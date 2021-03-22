@@ -3,32 +3,29 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-# imports:
-#     - { resource: jaxon.yaml }
-#     - { resource: "@JaxonAjaxBundle/Resources/config/services.yaml" }
-
 # parameters:
 
 # services:
-#     # Tools
-#     # Lotgd\Core\Tool\Commentary:
-#     #     lazy: true
+#     # default configuration for services in *this* file
+#     _defaults:
+#         autowire: true      # Automatically injects dependencies in your services.
+#         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-#     # # LoTGD Settings
-#     # Lotgd\Core\Lib\Settings:
-#     #     public: true
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    # Lotgd\Bundle\:
+    #     resource: '../src/'
+    #     exclude:
+    #         - '../src/DependencyInjection/'
+    #         - '../src/Entity/'
+    #         - '../src/Kernel.php'
+    #         - '../src/Tests/'
 
-#     # # LoTGD PvP
-#     # Lotgd\Core\Pvp\Listing:
-#     #     public: true
+    # # controllers are imported separately to make sure services can be injected
+    # # as action arguments even if you don't extend any base controller class
+    # App\Controller\:
+    #     resource: '../src/Controller/'
+    #     tags: ['controller.service_arguments']
 
-#     # # LoTGD Tools
-#     # Lotgd\Core\Tool\Sanitize:
-#     #     public: true
-
-#     # # Lotgd
-#     # Lotgd\Core\Character\Stats:
-#     #     public: true
-#     # Twig extensions
-#     Lotgd\Core\Twig\Extension\JaxonExtension:
-#         lazy: true
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
