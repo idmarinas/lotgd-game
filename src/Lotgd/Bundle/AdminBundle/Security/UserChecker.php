@@ -13,9 +13,9 @@
 
 namespace Lotgd\Bundle\AdminBundle\Security;
 
+use Lotgd\Bundle\AdminBundle\Exception\AccountRoleException;
 use Lotgd\Bundle\UserBundle\Security\UserChecker as SecurityUserChecker;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 
 class UserChecker extends SecurityUserChecker
@@ -28,7 +28,7 @@ class UserChecker extends SecurityUserChecker
 
         if ( ! $this->accessDecisionManager->decide($token, ['ROLE_ADMIN'], null))
         {
-            $th = new CustomUserMessageAccountStatusException('user.role.insufficient');
+            $th = new AccountRoleException();
             $th->setUser($user);
 
             throw $th;
