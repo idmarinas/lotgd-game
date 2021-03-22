@@ -66,7 +66,7 @@ return static function (ContainerConfigurator $container)
         //-- View Laminas service
         ->set(HeadLink::class)
         ->set(HeadMeta::class)
-            ->call('setView', [service(PhpRenderer::class)])
+            ->call('setView', [new ReferenceConfigurator(PhpRenderer::class)])
         ->set(HeadScript::class)
         ->set(HeadStyle::class)
         ->set(HeadTitle::class)
@@ -76,20 +76,20 @@ return static function (ContainerConfigurator $container)
         //-- Tools
         ->set('lotgd_core.format', Format::class)
             ->args([
-                service('translator'),
-                service(Code::class),
-                service(Color::class)
+                new ReferenceConfigurator('translator'),
+                new ReferenceConfigurator(Code::class),
+                new ReferenceConfigurator(Color::class)
             ])
-            ->call('setDecPoint', [param('lotgd_core.number.format.decimal.point')])
-            ->call('setThousandsSep', [param('lotgd_core.number.format.thousands.sep')])
+            ->call('setDecPoint', ['%lotgd_core.number.format.decimal.point%'])
+            ->call('setThousandsSep', ['%lotgd_core.number.format.thousands.sep%'])
             ->public()
         ->alias(Format::class, 'lotgd_core.format')
 
         ->set('lotgd_core.censor', Censor::class)
             ->lazy()
             ->args([
-                param('kernel.default_locale'),
-                param('kernel.project_dir')
+                '%kernel.default_locale%',
+                '%kernel.project_dir%'
             ])
             ->public()
         ->alias(Censor::class, 'lotgd_core.censor')
@@ -108,8 +108,8 @@ return static function (ContainerConfigurator $container)
         //-- Menu
         ->set('lotgd_core.menu_builder', MenuBuilder::class)
             ->args([
-                service('knp_menu.factory'),
-                service('event_dispatcher')
+                new ReferenceConfigurator('knp_menu.factory'),
+                new ReferenceConfigurator('event_dispatcher')
             ])
             ->tag('knp_menu.menu_builder', [
                 'method' => 'createMenuCore',

@@ -31,7 +31,7 @@
         "marioblazek/twig-byte-units-extension": "^1.0",
         "snipe/banbuilder": "^2.3",
         "stof/doctrine-extensions-bundle": "^1.5",
-        "symfony/lock": "5.2.*",
+        "symfony/lock": "4.4.*",
         "symfonycasts/reset-password-bundle": "^1.4",
         "symfonycasts/verify-email-bundle": "^1.2"
     },
