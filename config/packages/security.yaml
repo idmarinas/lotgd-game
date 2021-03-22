@@ -6,7 +6,7 @@ security:
 
         # Custom firewall for the admin area of the URL
         admin:
-            pattern: ^/game/_admin
+            pattern: ^/grotto/_admin
             provider: lotgd_admin_user_provider
             user_checker: Lotgd\Bundle\AdminBundle\Security\UserChecker
             form_login:
@@ -17,16 +17,13 @@ security:
             logout:
                 path: lotgd_admin_logout
                 target: lotgd_admin_login
-            # anonymous: true
+            anonymous: lazy
             guard:
                 authenticators:
                     - Lotgd\Bundle\AdminBundle\Security\LoginFormAuthenticator
-            entry_point: form_login
+            # entry_point: form_login
         main:
-            # configure the maximum login attempts (per minute)
-            # login_throttling:
-            #     max_attempts: 2
-            lazy: true
+            anonymous: lazy
             provider: lotgd_core_user_provider
             user_checker: Lotgd\Bundle\UserBundle\Security\UserChecker
             guard:
@@ -55,13 +52,13 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/game/_admin/login$, role: PUBLIC_ACCESS }
-        - { path: ^/game/_admin/logout$, role: PUBLIC_ACCESS }
+        - { path: ^/grotto/_admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/grotto/_admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         # Admin panel can only be access by admin users.
-        - { path: ^/game/_admin/, roles: ROLE_ADMIN }
+        - { path: ^/grotto/_admin/, roles: ROLE_ADMIN }
         # All routes of game start with /game/
         # You need prefixed all routes that is part of game this /game/
         # So all routers that start with this is for authenticated users
         - { path: ^/game/, roles: IS_AUTHENTICATED_FULLY }
         # By default all routes are public access.
-        - { path: ^/, roles: PUBLIC_ACCESS }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
