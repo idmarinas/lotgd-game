@@ -14,22 +14,25 @@
 namespace Lotgd\Bundle\UserBundle\Security;
 
 use Lotgd\Bundle\UserBundle\Entity\User;
+use Lotgd\Bundle\UserBundle\Exception\AccountBannedException;
+use Lotgd\Bundle\UserBundle\Exception\AccountDeletedException;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Translation\TranslatableMessage;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserChecker implements UserCheckerInterface
 {
     protected $accessDecisionManager;
     protected $flash;
+    protected $translator;
 
-    public function __construct(AccessDecisionManagerInterface $accessDecisionManager, FlashBagInterface $flash)
+    public function __construct(AccessDecisionManagerInterface $accessDecisionManager, FlashBagInterface $flash, TranslatorInterface $translator)
     {
         $this->accessDecisionManager = $accessDecisionManager;
         $this->flash                 = $flash;
+        $this->translator            = $translator;
     }
 
     public function checkPreAuth(UserInterface $user)
@@ -41,12 +44,18 @@ class UserChecker implements UserCheckerInterface
 
         if ($user->isDeleted())
         {
-            throw new CustomUserMessageAccountStatusException('user.account.no.exist');
+            $exp = new AccountDeletedException();
+            $exp->setUser($user);
+
+            throw $exp;
         }
 
         if ($user->isBanned())
         {
-            throw new CustomUserMessageAccountStatusException('user.account.banned');
+            $exp = new AccountBannedException();
+            $exp->setUser($user);
+
+            throw $exp;
         }
     }
 
@@ -59,7 +68,7 @@ class UserChecker implements UserCheckerInterface
 
         if ( ! $user->isVerified())
         {
-            $this->flash->add('warning', new TranslatableMessage('user.email.not.verified', [], 'lotgd_user_bundle'));
+            $this->flash->add('warning', $this->translator->trans('user.email.not.verified', [], 'lotgd_user_bundle'));
         }
 
         // user account is expired, the user may be notified
