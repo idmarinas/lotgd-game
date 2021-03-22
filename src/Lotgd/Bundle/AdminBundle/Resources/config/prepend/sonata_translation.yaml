@@ -15,4 +15,4 @@ sonata_translation:
     locale_switcher: true
     gedmo:
         enabled: true
-        translatable_listener_service: stof_doctrine_extensions.listener.translatable
+        # translatable_listener_service: stof_doctrine_extensions.listener.translatable

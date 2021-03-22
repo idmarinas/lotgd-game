@@ -71,7 +71,7 @@ return static function (ContainerConfigurator $container)
             ->tag('doctrine.orm.entity_listener', [ 'event' => 'postRemove', 'entity' => Setting::class, 'lazy' => true ])
 
         ->set(SettingsSubscriber::class)
-            ->args([service('lotgd.core.package.cache')])
+            ->args([new ReferenceConfigurator('lotgd.core.package.cache')])
             ->tag('kernel.event_subscriber')
     ;
 };
