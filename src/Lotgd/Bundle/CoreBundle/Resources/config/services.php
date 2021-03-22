@@ -13,13 +13,6 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use Laminas\View\Helper\HeadLink;
-use Laminas\View\Helper\HeadMeta;
-use Laminas\View\Helper\HeadScript;
-use Laminas\View\Helper\HeadStyle;
-use Laminas\View\Helper\HeadTitle;
-use Laminas\View\Helper\InlineScript;
-use Laminas\View\Renderer\PhpRenderer;
 use Lotgd\Bundle\CoreBundle\Controller\AboutController;
 use Lotgd\Bundle\CoreBundle\Installer\Install;
 use Lotgd\Bundle\CoreBundle\Menu\MenuBuilder;
@@ -62,16 +55,6 @@ return static function (ContainerConfigurator $container)
         ->set(Install::class)
             ->lazy()
             ->private()
-
-        //-- View Laminas service
-        ->set(HeadLink::class)
-        ->set(HeadMeta::class)
-            ->call('setView', [new ReferenceConfigurator(PhpRenderer::class)])
-        ->set(HeadScript::class)
-        ->set(HeadStyle::class)
-        ->set(HeadTitle::class)
-        ->set(InlineScript::class)
-        ->set(PhpRenderer::class)
 
         //-- Tools
         ->set('lotgd_core.format', Format::class)
