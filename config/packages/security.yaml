@@ -3,10 +3,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        # Custom firewall for the admin area of the URL
+        # Custom firewall for the admin area
         admin:
-            pattern: ^/grotto/_admin
+            pattern: ^/_grotto
             provider: lotgd_admin_user_provider
             user_checker: Lotgd\Bundle\AdminBundle\Security\UserChecker
             form_login:
@@ -22,6 +21,7 @@ security:
                 authenticators:
                     - Lotgd\Bundle\AdminBundle\Security\LoginFormAuthenticator
             # entry_point: form_login
+        # Main (default) firewall (Activated when none of the above is active.)
         main:
             anonymous: lazy
             provider: lotgd_core_user_provider
@@ -52,13 +52,21 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/grotto/_admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/grotto/_admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        # Admin panel can only be access by admin users.
-        - { path: ^/grotto/_admin/, roles: ROLE_ADMIN }
-        # All routes of game start with /game/
-        # You need prefixed all routes that is part of game this /game/
-        # So all routers that start with this is for authenticated users
-        - { path: ^/game/, roles: IS_AUTHENTICATED_FULLY }
-        # By default all routes are public access.
+        # All routes prefixed with /_grotto/ is the admin panel.
+        # and need ROLE_ADMIN to access
+        - { path: ^/_grotto/, roles: ROLE_ADMIN }
+
+        # All routes prefixed with /game/ are public access.
+        # this routes is for information of public info game
+        - { path: ^/game/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # All routes prefixed with /play/ are ahtenticated access.
+        # Only users authenticated can access this routes.
+        # This is the game itself (village, forest, profile...)
+        - { path: ^/play/, roles: IS_AUTHENTICATED_FULLY }
+
+        # All others routers can be public or authenticated access as your want
+        # By default is public access
+        # If you want them to be authenticated access.
+        # Change IS_AUTHENTICATED_ANONYMOUSLY for IS_AUTHENTICATED_FULLY in the next line
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
