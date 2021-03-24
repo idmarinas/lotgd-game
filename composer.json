@@ -20,7 +20,6 @@
         "ext-session": "*",
         "composer/package-versions-deprecated": "1.11.99.1",
         "idmarinas/admin-bundle": "*@dev",
-        "idmarinas/avatar-bundle": "*@dev",
         "idmarinas/core-bundle": "*@dev",
         "idmarinas/lotgd-contracts": "^0.1.0",
         "idmarinas/settings-bundle": "*@dev",
@@ -35,10 +34,8 @@
         "symfony/flex": "^1.3.1",
         "symfony/form": "4.4.*",
         "symfony/framework-bundle": "4.4.*",
-        "symfony/http-client": "4.4.*",
         "symfony/intl": "4.4.*",
         "symfony/mailer": "4.4.*",
-        "symfony/mime": "4.4.*",
         "symfony/monolog-bundle": "^3.1",
         "symfony/process": "4.4.*",
         "symfony/property-access": "4.4.*",
@@ -130,7 +127,7 @@
             "name": "Iván Diaz Marinas",
             "email": "contacto@infommo.es",
             "homepage": "https://github.com/idmarinas/lotgd-game",
-            "role": "Contributor, Maintainer"
+            "role": "Contributor, Developer, Maintainer"
         },
         {
             "name": "Oliver Brendel",
@@ -140,12 +137,12 @@
         {
             "name": "DragonPrime",
             "homepage": "http://www.dragonprime.net",
-            "role": "Developer, Maintainer"
+            "role": "Developer"
         },
         {
             "name": "Eric Stevens & JT Traub (MightyE)",
             "homepage": "http://lotgd.net/",
-            "role": "Author"
+            "role": "Author, Developer"
         }
     ],
     "extra": {
@@ -163,7 +160,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "src/Lotgd/Bundle/*"
+            "url": "src/Bundle/*"
         }
     ]
 }

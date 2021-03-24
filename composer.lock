@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "67559cc60d91b2fc11b935afd64a0ab8",
+    "content-hash": "43cfe8a6ffa08ebbef76b7a4a4ed4f74",
     "packages": [
         {
             "name": "acelaya/doctrine-enum-type",
@@ -1792,60 +1792,6 @@
             "time": "2020-12-29T14:50:06+00:00"
         },
         {
-            "name": "ezyang/htmlpurifier",
-            "version": "v4.13.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ezyang/htmlpurifier.git",
-                "reference": "08e27c97e4c6ed02f37c5b2b20488046c8d90d75"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/08e27c97e4c6ed02f37c5b2b20488046c8d90d75",
-                "reference": "08e27c97e4c6ed02f37c5b2b20488046c8d90d75",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2"
-            },
-            "require-dev": {
-                "simpletest/simpletest": "dev-master#72de02a7b80c6bb8864ef9bf66d41d2f58f826bd"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "HTMLPurifier": "library/"
-                },
-                "files": [
-                    "library/HTMLPurifier.composer.php"
-                ],
-                "exclude-from-classmap": [
-                    "/library/HTMLPurifier/Language/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-2.1-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Edward Z. Yang",
-                    "email": "admin@htmlpurifier.org",
-                    "homepage": "http://ezyang.com"
-                }
-            ],
-            "description": "Standards compliant HTML filter written in PHP",
-            "homepage": "http://htmlpurifier.org/",
-            "keywords": [
-                "html"
-            ],
-            "support": {
-                "issues": "https://github.com/ezyang/htmlpurifier/issues",
-                "source": "https://github.com/ezyang/htmlpurifier/tree/master"
-            },
-            "time": "2020-06-29T00:56:53+00:00"
-        },
-        {
             "name": "friendsofphp/proxy-manager-lts",
             "version": "v1.0.3",
             "source": {
@@ -2085,16 +2031,16 @@
             "version": "dev-master",
             "dist": {
                 "type": "path",
-                "url": "src/Lotgd/Bundle/AdminBundle",
-                "reference": "01e9a66a6f10ac8dfacabd080832e681fcdc6d8b"
+                "url": "src/Bundle/AdminBundle",
+                "reference": "871339976a2a1aa63ec371ca10d9e1a5cc3b442b"
             },
             "require": {
                 "php": "^7.3",
-                "sonata-project/admin-bundle": "dev-master",
-                "sonata-project/block-bundle": "^4.5",
-                "sonata-project/doctrine-orm-admin-bundle": "dev-master",
+                "sonata-project/admin-bundle": "^3.93",
+                "sonata-project/block-bundle": "^3.23",
+                "sonata-project/doctrine-orm-admin-bundle": "^3.31",
                 "sonata-project/intl-bundle": "^2.10",
-                "sonata-project/translation-bundle": "dev-master"
+                "sonata-project/translation-bundle": "^2.7"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -2116,42 +2062,12 @@
             }
         },
         {
-            "name": "idmarinas/avatar-bundle",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "src/Lotgd/Bundle/AvatarBundle",
-                "reference": "dcd96a6d7a97b06794bad44db7fe7e05be0280ad"
-            },
-            "require": {
-                "php": "^7.3"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Lotgd\\Bundle\\AvatarBundle\\": ""
-                }
-            },
-            "authors": [
-                {
-                    "name": "Iván Diaz Marinas (IDMarinas)",
-                    "email": "35842929+idmarinas@users.noreply.github.com",
-                    "homepage": "https://github.com/idmarinas/lotgd-game",
-                    "role": "Developer, Maintainer"
-                }
-            ],
-            "description": "LoTGD Avatar component.",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
             "name": "idmarinas/core-bundle",
             "version": "dev-master",
             "dist": {
                 "type": "path",
-                "url": "src/Lotgd/Bundle/CoreBundle",
-                "reference": "f7b3af7efaeec78edbb73b6cb7e644112f62ef6f"
+                "url": "src/Bundle/CoreBundle",
+                "reference": "7c17eed69047660a30577e3ef286b114fa61c6c9"
             },
             "require": {
                 "beberlei/doctrineextensions": "^1.2",
@@ -2161,22 +2077,15 @@
                 "doctrine/doctrine-bundle": "^2.2",
                 "doctrine/doctrine-migrations-bundle": "^3.0",
                 "doctrine/orm": "^2.8",
-                "ezyang/htmlpurifier": "^4.13",
                 "gedmo/doctrine-extensions": "^3.0",
                 "knplabs/knp-menu-bundle": "^3.1",
                 "knplabs/knp-paginator-bundle": "^5.4",
-                "laminas/laminas-escaper": "^2.7",
-                "laminas/laminas-filter": "^2.10",
-                "laminas/laminas-hydrator": "^4.1",
-                "laminas/laminas-i18n": "^2.11",
-                "laminas/laminas-math": "^3.3",
                 "marioblazek/twig-byte-units-extension": "^1.0",
                 "php": "^7.3",
                 "snipe/banbuilder": "^2.3",
                 "stof/doctrine-extensions-bundle": "^1.5",
-                "symfony/lock": "4.4.*",
-                "symfonycasts/reset-password-bundle": "^1.4",
-                "symfonycasts/verify-email-bundle": "^1.2"
+                "symfony/http-client": "4.4.*",
+                "symfony/lock": "4.4.*"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -2249,7 +2158,7 @@
             "version": "dev-master",
             "dist": {
                 "type": "path",
-                "url": "src/Lotgd/Bundle/SettingsBundle",
+                "url": "src/Bundle/SettingsBundle",
                 "reference": "836387f5f172c77848a270d194a716aab4ace625"
             },
             "require": {
@@ -2288,12 +2197,11 @@
             "version": "dev-master",
             "dist": {
                 "type": "path",
-                "url": "src/Lotgd/Bundle/UiBundle",
-                "reference": "134e9e0c3dfd7ed3c4a70c24b5c31fcaedf1e471"
+                "url": "src/Bundle/UiBundle",
+                "reference": "fb40703b0ef68f341f9dc1f82fcc936cb22eeb5b"
             },
             "require": {
                 "php": "^7.3",
-                "sonata-project/block-bundle": "^4.5",
                 "sylius/theme-bundle": "^2.1",
                 "symfony/webpack-encore-bundle": "^1.11"
             },
@@ -2321,11 +2229,13 @@
             "version": "dev-master",
             "dist": {
                 "type": "path",
-                "url": "src/Lotgd/Bundle/UserBundle",
-                "reference": "0f4b7db1a4af1f9d4d8a70fe0a092844d8a25c6c"
+                "url": "src/Bundle/UserBundle",
+                "reference": "97797957fc9eefe1e3dcb7fc9789dc2b3c572863"
             },
             "require": {
-                "php": "^7.3"
+                "php": "^7.3",
+                "symfonycasts/reset-password-bundle": "^1.4",
+                "symfonycasts/verify-email-bundle": "^1.2"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -2412,16 +2322,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "3.12.1",
+            "version": "3.12.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "0887ce89d889b15205d24111908efec55a2bdf27"
+                "reference": "ea54838a0acd960839b7401bfd83fcd6ebe34aed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/0887ce89d889b15205d24111908efec55a2bdf27",
-                "reference": "0887ce89d889b15205d24111908efec55a2bdf27",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/ea54838a0acd960839b7401bfd83fcd6ebe34aed",
+                "reference": "ea54838a0acd960839b7401bfd83fcd6ebe34aed",
                 "shasum": ""
             },
             "require": {
@@ -2493,7 +2403,7 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/serializer/issues",
-                "source": "https://github.com/schmittjoh/serializer/tree/3.12.1"
+                "source": "https://github.com/schmittjoh/serializer/tree/3.12.2"
             },
             "funding": [
                 {
@@ -2501,7 +2411,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-21T19:32:17+00:00"
+            "time": "2021-03-23T12:37:04+00:00"
         },
         {
             "name": "knplabs/knp-components",
@@ -2862,69 +2772,6 @@
             "time": "2019-12-31T16:28:24+00:00"
         },
         {
-            "name": "laminas/laminas-escaper",
-            "version": "2.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-escaper.git",
-                "reference": "5e04bc5ae5990b17159d79d331055e2c645e5cc5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/5e04bc5ae5990b17159d79d331055e2c645e5cc5",
-                "reference": "5e04bc5ae5990b17159d79d331055e2c645e5cc5",
-                "shasum": ""
-            },
-            "require": {
-                "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.3 || ~8.0.0"
-            },
-            "replace": {
-                "zendframework/zend-escaper": "^2.6.1"
-            },
-            "require-dev": {
-                "laminas/laminas-coding-standard": "~1.0.0",
-                "phpunit/phpunit": "^9.3",
-                "psalm/plugin-phpunit": "^0.12.2",
-                "vimeo/psalm": "^3.16"
-            },
-            "suggest": {
-                "ext-iconv": "*",
-                "ext-mbstring": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\Escaper\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Securely and safely escape HTML, HTML attributes, JavaScript, CSS, and URLs",
-            "homepage": "https://laminas.dev",
-            "keywords": [
-                "escaper",
-                "laminas"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.laminas.dev/laminas-escaper/",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/laminas/laminas-escaper/issues",
-                "rss": "https://github.com/laminas/laminas-escaper/releases.atom",
-                "source": "https://github.com/laminas/laminas-escaper"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2020-11-17T21:26:43+00:00"
-        },
-        {
             "name": "laminas/laminas-eventmanager",
             "version": "3.3.1",
             "source": {
@@ -3071,234 +2918,6 @@
                 }
             ],
             "time": "2021-03-16T14:37:02+00:00"
-        },
-        {
-            "name": "laminas/laminas-hydrator",
-            "version": "4.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-hydrator.git",
-                "reference": "fc201f29280a8308579e7fb4c1fbc2fb3dfdbd8f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-hydrator/zipball/fc201f29280a8308579e7fb4c1fbc2fb3dfdbd8f",
-                "reference": "fc201f29280a8308579e7fb4c1fbc2fb3dfdbd8f",
-                "shasum": ""
-            },
-            "require": {
-                "laminas/laminas-stdlib": "^3.3",
-                "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.3 || ~8.0.0"
-            },
-            "replace": {
-                "zendframework/zend-hydrator": "^3.0.2"
-            },
-            "require-dev": {
-                "laminas/laminas-coding-standard": "~1.0.0",
-                "laminas/laminas-eventmanager": "^3.2.1",
-                "laminas/laminas-modulemanager": "^2.8",
-                "laminas/laminas-serializer": "^2.9",
-                "laminas/laminas-servicemanager": "^3.3.2",
-                "phpunit/phpunit": "~9.3.0",
-                "psalm/plugin-phpunit": "^0.15.0",
-                "vimeo/psalm": "^4.2"
-            },
-            "suggest": {
-                "laminas/laminas-eventmanager": "^3.2, to support aggregate hydrator usage",
-                "laminas/laminas-serializer": "^2.9, to use the SerializableStrategy",
-                "laminas/laminas-servicemanager": "^3.3, to support hydrator plugin manager usage"
-            },
-            "type": "library",
-            "extra": {
-                "laminas": {
-                    "component": "Laminas\\Hydrator",
-                    "config-provider": "Laminas\\Hydrator\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\Hydrator\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Serialize objects to arrays, and vice versa",
-            "homepage": "https://laminas.dev",
-            "keywords": [
-                "hydrator",
-                "laminas"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.laminas.dev/laminas-hydrator/",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/laminas/laminas-hydrator/issues",
-                "rss": "https://github.com/laminas/laminas-hydrator/releases.atom",
-                "source": "https://github.com/laminas/laminas-hydrator"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2020-12-16T21:35:39+00:00"
-        },
-        {
-            "name": "laminas/laminas-i18n",
-            "version": "2.11.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-i18n.git",
-                "reference": "85678f444b6dcb48e8a04591779e11c24e5bb901"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-i18n/zipball/85678f444b6dcb48e8a04591779e11c24e5bb901",
-                "reference": "85678f444b6dcb48e8a04591779e11c24e5bb901",
-                "shasum": ""
-            },
-            "require": {
-                "ext-intl": "*",
-                "laminas/laminas-stdlib": "^2.7 || ^3.0",
-                "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.3 || ~8.0.0"
-            },
-            "conflict": {
-                "phpspec/prophecy": "<1.9.0"
-            },
-            "replace": {
-                "zendframework/zend-i18n": "^2.10.1"
-            },
-            "require-dev": {
-                "laminas/laminas-cache": "^2.6.1",
-                "laminas/laminas-coding-standard": "~1.0.0",
-                "laminas/laminas-config": "^2.6",
-                "laminas/laminas-eventmanager": "^2.6.2 || ^3.0",
-                "laminas/laminas-filter": "^2.6.1",
-                "laminas/laminas-servicemanager": "^3.2.1",
-                "laminas/laminas-validator": "^2.6",
-                "laminas/laminas-view": "^2.6.3",
-                "phpunit/phpunit": "^9.3"
-            },
-            "suggest": {
-                "laminas/laminas-cache": "Laminas\\Cache component",
-                "laminas/laminas-config": "Laminas\\Config component",
-                "laminas/laminas-eventmanager": "You should install this package to use the events in the translator",
-                "laminas/laminas-filter": "You should install this package to use the provided filters",
-                "laminas/laminas-i18n-resources": "Translation resources",
-                "laminas/laminas-servicemanager": "Laminas\\ServiceManager component",
-                "laminas/laminas-validator": "You should install this package to use the provided validators",
-                "laminas/laminas-view": "You should install this package to use the provided view helpers"
-            },
-            "type": "library",
-            "extra": {
-                "laminas": {
-                    "component": "Laminas\\I18n",
-                    "config-provider": "Laminas\\I18n\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\I18n\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Provide translations for your application, and filter and validate internationalized values",
-            "homepage": "https://laminas.dev",
-            "keywords": [
-                "i18n",
-                "laminas"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.laminas.dev/laminas-i18n/",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/laminas/laminas-i18n/issues",
-                "rss": "https://github.com/laminas/laminas-i18n/releases.atom",
-                "source": "https://github.com/laminas/laminas-i18n"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2020-10-24T13:14:32+00:00"
-        },
-        {
-            "name": "laminas/laminas-math",
-            "version": "3.3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-math.git",
-                "reference": "188456530923a449470963837c25560f1fdd8a60"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-math/zipball/188456530923a449470963837c25560f1fdd8a60",
-                "reference": "188456530923a449470963837c25560f1fdd8a60",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.3 || ~8.0.0"
-            },
-            "replace": {
-                "zendframework/zend-math": "^3.2.0"
-            },
-            "require-dev": {
-                "laminas/laminas-coding-standard": "~1.0.0",
-                "phpunit/phpunit": "^9.3"
-            },
-            "suggest": {
-                "ext-bcmath": "If using the bcmath functionality",
-                "ext-gmp": "If using the gmp functionality"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2.x-dev",
-                    "dev-develop": "3.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\Math\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Create cryptographically secure pseudo-random numbers, and manage big integers",
-            "homepage": "https://laminas.dev",
-            "keywords": [
-                "laminas",
-                "math"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.laminas.dev/laminas-math/",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/laminas/laminas-math/issues",
-                "rss": "https://github.com/laminas/laminas-math/releases.atom",
-                "source": "https://github.com/laminas/laminas-math"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2021-02-16T15:46:01+00:00"
         },
         {
             "name": "laminas/laminas-stdlib",
@@ -4167,16 +3786,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "dev-master",
+            "version": "3.93.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "9e415f63bbfcafe8aac0b052077bf532ecadb85a"
+                "reference": "f683abb6768cf82722d64f9b12d5c5aa242c7793"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/9e415f63bbfcafe8aac0b052077bf532ecadb85a",
-                "reference": "9e415f63bbfcafe8aac0b052077bf532ecadb85a",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/f683abb6768cf82722d64f9b12d5c5aa242c7793",
+                "reference": "f683abb6768cf82722d64f9b12d5c5aa242c7793",
                 "shasum": ""
             },
             "require": {
@@ -4188,45 +3807,48 @@
                 "knplabs/knp-menu": "^3.1",
                 "knplabs/knp-menu-bundle": "^3.0",
                 "php": "^7.3 || ^8.0",
-                "psr/container": "^1.0",
                 "psr/log": "^1.1",
-                "sonata-project/block-bundle": "^4.0",
-                "sonata-project/doctrine-extensions": "^1.8",
-                "sonata-project/exporter": "^2.1",
-                "sonata-project/form-extensions": "^1.7.1",
-                "sonata-project/twig-extensions": "^1.4.1",
+                "sonata-project/block-bundle": "^3.20 || ^4.0",
+                "sonata-project/exporter": "^1.11 || ^2.0",
+                "sonata-project/form-extensions": "^0.1.1 || ^1.4",
+                "sonata-project/twig-extensions": "^0.1.1 || ^1.3",
                 "symfony/asset": "^4.4 || ^5.1",
                 "symfony/config": "^4.4 || ^5.1",
-                "symfony/console": "^4.4 || ^5.1",
+                "symfony/console": "^4.4",
                 "symfony/dependency-injection": "^4.4.8 || ^5.1",
-                "symfony/doctrine-bridge": "^4.4 || ^5.1",
-                "symfony/event-dispatcher": "^4.4 || ^5.1",
+                "symfony/doctrine-bridge": "^4.4",
+                "symfony/event-dispatcher": "^4.4",
                 "symfony/event-dispatcher-contracts": "^1.1 || ^2.0",
                 "symfony/expression-language": "^4.4 || ^5.1",
-                "symfony/form": "^4.4.12 || ^5.1",
-                "symfony/framework-bundle": "^4.4 || ^5.1",
+                "symfony/form": "^4.4.12",
+                "symfony/framework-bundle": "^4.4",
                 "symfony/http-foundation": "^4.4 || ^5.1",
-                "symfony/http-kernel": "^4.4 || ^5.1",
+                "symfony/http-kernel": "^4.4",
                 "symfony/options-resolver": "^4.4 || ^5.1",
                 "symfony/property-access": "^4.4 || ^5.1",
                 "symfony/routing": "^4.4 || ^5.1",
                 "symfony/security-acl": "^3.1",
-                "symfony/security-bundle": "^4.4 || ^5.1",
-                "symfony/security-core": "^4.4 || ^5.1",
+                "symfony/security-bundle": "^4.4",
+                "symfony/security-core": "^4.4",
                 "symfony/security-csrf": "^4.4 || ^5.1",
                 "symfony/string": "^5.1",
-                "symfony/translation": "^4.4 || ^5.1",
+                "symfony/translation": "^4.4",
                 "symfony/translation-contracts": "^1.1.10 || ^2.3",
-                "symfony/twig-bridge": "^4.4 || ^5.1",
-                "symfony/twig-bundle": "^4.4 || ^5.1",
+                "symfony/twig-bridge": "^4.4",
+                "symfony/twig-bundle": "^4.4",
                 "symfony/validator": "^4.4 || ^5.1",
                 "twig/string-extra": "^3.0",
                 "twig/twig": "^2.12.1 || ^3.0"
             },
             "conflict": {
-                "doctrine/doctrine-bundle": ">=3"
+                "doctrine/doctrine-bundle": ">=3",
+                "sonata-project/core-bundle": "<3.20",
+                "sonata-project/doctrine-extensions": "<1.8",
+                "sonata-project/media-bundle": "<3.7",
+                "sonata-project/user-bundle": "<3.3"
             },
             "require-dev": {
+                "jms/translation-bundle": "^1.4",
                 "matthiasnoback/symfony-config-test": "^4.2",
                 "matthiasnoback/symfony-dependency-injection-test": "^4.1",
                 "phpstan/extension-installer": "^1.0",
@@ -4244,12 +3866,13 @@
                 "vimeo/psalm": "^4.3.2"
             },
             "suggest": {
+                "jms/translation-bundle": "Extract message keys from Admins",
                 "twig/extra-bundle": "Auto configures the Twig Intl extension"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.x-dev"
+                    "dev-master": "3.x-dev"
                 }
             },
             "autoload": {
@@ -4284,7 +3907,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/master"
+                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/3.93.0"
             },
             "funding": [
                 {
@@ -4304,20 +3927,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-21T19:20:09+00:00"
+            "time": "2021-03-15T22:07:03+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
-            "version": "4.5.2",
+            "version": "3.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "17878a4507e41021e9566a6ff8423160d5cb7d4e"
+                "reference": "969dcf7e3b26eeca733fbd9de50dcc91df292e1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/17878a4507e41021e9566a6ff8423160d5cb7d4e",
-                "reference": "17878a4507e41021e9566a6ff8423160d5cb7d4e",
+                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/969dcf7e3b26eeca733fbd9de50dcc91df292e1e",
+                "reference": "969dcf7e3b26eeca733fbd9de50dcc91df292e1e",
                 "shasum": ""
             },
             "require": {
@@ -4325,26 +3948,26 @@
                 "doctrine/common": "^2.7.1 || ^3.0",
                 "php": "^7.3 || ^8.0",
                 "psr/cache": "^1.0",
-                "sonata-project/cache": "^2.0",
+                "sonata-project/cache": "^1.0 || ^2.0",
                 "sonata-project/doctrine-extensions": "^1.10.1",
-                "sonata-project/form-extensions": "^1.4",
-                "sonata-project/twig-extensions": "^1.0",
-                "symfony/asset": "^4.4 || ^5.0",
-                "symfony/config": "^4.4 || ^5.0",
-                "symfony/console": "^4.4 || ^5.0",
-                "symfony/dependency-injection": "^4.4 || ^5.0",
-                "symfony/event-dispatcher": "^4.4 || ^5.0",
-                "symfony/event-dispatcher-contracts": "^1.1 || ^2.0",
-                "symfony/form": "^4.4 || ^5.0",
-                "symfony/framework-bundle": "^4.4 || ^5.0",
-                "symfony/http-foundation": "^4.4 || ^5.0",
-                "symfony/http-kernel": "^4.4 || ^5.0",
-                "symfony/options-resolver": "^4.4 || ^5.1",
-                "symfony/twig-bundle": "^4.4 || ^5.0",
+                "sonata-project/form-extensions": "^0.1.1 || ^1.4",
+                "symfony/asset": "^4.4 || ^5.2",
+                "symfony/config": "^4.4 || ^5.2",
+                "symfony/console": "^4.4",
+                "symfony/dependency-injection": "^4.4 || ^5.2",
+                "symfony/event-dispatcher": "^4.4",
+                "symfony/form": "^4.4",
+                "symfony/framework-bundle": "^4.4",
+                "symfony/http-foundation": "^4.4 || ^5.2",
+                "symfony/http-kernel": "^4.4",
+                "symfony/options-resolver": "^4.4 || ^5.2",
+                "symfony/templating": "^4.4 || ^5.2",
+                "symfony/twig-bundle": "^4.4",
                 "twig/twig": "^2.12.1 || ^3.0"
             },
             "conflict": {
-                "knplabs/knp-menu-bundle": "<3.0"
+                "knplabs/knp-menu-bundle": "<3.0",
+                "sonata-project/core-bundle": "<3.20"
             },
             "require-dev": {
                 "knplabs/knp-menu": "^3.1",
@@ -4354,25 +3977,28 @@
                 "phpstan/phpstan": "^0.12.29",
                 "phpstan/phpstan-symfony": "^0.12.10",
                 "psalm/plugin-symfony": "^2.0",
-                "symfony/browser-kit": "^4.4 || ^5.0",
-                "symfony/debug": "^4.4 || ^5.0",
-                "symfony/phpunit-bridge": "^5.1.8",
-                "symfony/stopwatch": "^4.4 || ^5.1",
+                "sonata-project/admin-bundle": "^3.28",
+                "symfony/debug": "^4.4",
+                "symfony/phpunit-bridge": "^5.2",
+                "symfony/stopwatch": "^4.4 || ^5.2",
                 "vimeo/psalm": "^4.1"
             },
             "suggest": {
-                "knplabs/knp-menu-bundle": "Required to use the menu block"
+                "knplabs/knp-menu-bundle": "In order to use MenuBlockService."
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.x-dev"
+                    "dev-master": "3.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
                     "Sonata\\BlockBundle\\": "src/"
-                }
+                },
+                "files": [
+                    "src/Resources/stubs/symfony2.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -4397,7 +4023,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataBlockBundle/issues",
-                "source": "https://github.com/sonata-project/SonataBlockBundle/tree/4.5.2"
+                "source": "https://github.com/sonata-project/SonataBlockBundle/tree/3.23.0"
             },
             "funding": [
                 {
@@ -4417,7 +4043,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-08T01:05:49+00:00"
+            "time": "2021-03-09T14:00:17+00:00"
         },
         {
             "name": "sonata-project/cache",
@@ -4620,16 +4246,16 @@
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
-            "version": "dev-master",
+            "version": "3.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "fc215585b99a31d5253113b233d947b73d7c1ebb"
+                "reference": "1bc9c2da4abfd2d83c5af434895c282f2396711c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/fc215585b99a31d5253113b233d947b73d7c1ebb",
-                "reference": "fc215585b99a31d5253113b233d947b73d7c1ebb",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/1bc9c2da4abfd2d83c5af434895c282f2396711c",
+                "reference": "1bc9c2da4abfd2d83c5af434895c282f2396711c",
                 "shasum": ""
             },
             "require": {
@@ -4637,17 +4263,17 @@
                 "doctrine/orm": "^2.5",
                 "doctrine/persistence": "^1.3.4 || ^2.0",
                 "php": "^7.3 || ^8.0",
-                "sonata-project/admin-bundle": "4.x-dev",
+                "sonata-project/admin-bundle": "^3.89.1",
                 "sonata-project/exporter": "^1.11.0 || ^2.0",
                 "sonata-project/form-extensions": "^0.1 || ^1.4",
                 "symfony/config": "^4.4 || ^5.2",
-                "symfony/console": "^4.4 || ^5.2",
+                "symfony/console": "^4.4",
                 "symfony/dependency-injection": "^4.4 || ^5.2",
-                "symfony/doctrine-bridge": "^4.4 || ^5.2",
-                "symfony/form": "^4.4 || ^5.2",
-                "symfony/framework-bundle": "^4.4 || ^5.2",
+                "symfony/doctrine-bridge": "^4.4",
+                "symfony/form": "^4.4",
+                "symfony/framework-bundle": "^4.4",
                 "symfony/http-foundation": "^4.4 || ^5.2",
-                "symfony/http-kernel": "^4.4 || ^5.2",
+                "symfony/http-kernel": "^4.4",
                 "symfony/options-resolver": "^4.4 || ^5.2",
                 "symfony/property-access": "^4.4 || ^5.2",
                 "symfony/security-acl": "^3.0",
@@ -4668,7 +4294,7 @@
                 "phpstan/phpstan-symfony": "^0.12.10",
                 "psalm/plugin-symfony": "^2.0",
                 "simplethings/entity-audit-bundle": "^0.9 || ^1.0",
-                "sonata-project/block-bundle": "^4.2",
+                "sonata-project/block-bundle": "^3.17 || ^4.0",
                 "symfony/panther": "^0.9.0",
                 "symfony/phpunit-bridge": "^5.2",
                 "symfony/templating": "^4.4 || ^5.2",
@@ -4681,7 +4307,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.x-dev"
+                    "dev-master": "3.x-dev"
                 }
             },
             "autoload": {
@@ -4717,7 +4343,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/tree/master"
+                "source": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/tree/3.31.0"
             },
             "funding": [
                 {
@@ -4737,20 +4363,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-21T20:49:22+00:00"
+            "time": "2021-03-10T22:24:29+00:00"
         },
         {
             "name": "sonata-project/exporter",
-            "version": "2.5.2",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/exporter.git",
-                "reference": "1eb43c310cc30b72073cd099992fdd061dbd69b5"
+                "reference": "33e9f0c991dcec6225312a0e4055d03dc2216eb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/1eb43c310cc30b72073cd099992fdd061dbd69b5",
-                "reference": "1eb43c310cc30b72073cd099992fdd061dbd69b5",
+                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/33e9f0c991dcec6225312a0e4055d03dc2216eb4",
+                "reference": "33e9f0c991dcec6225312a0e4055d03dc2216eb4",
                 "shasum": ""
             },
             "require": {
@@ -4815,7 +4441,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/exporter/issues",
-                "source": "https://github.com/sonata-project/exporter/tree/2.5.2"
+                "source": "https://github.com/sonata-project/exporter/tree/2.6.0"
             },
             "funding": [
                 {
@@ -4835,7 +4461,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-21T20:17:45+00:00"
+            "time": "2021-03-24T13:36:11+00:00"
         },
         {
             "name": "sonata-project/form-extensions",
@@ -5033,28 +4659,28 @@
         },
         {
             "name": "sonata-project/translation-bundle",
-            "version": "dev-master",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataTranslationBundle.git",
-                "reference": "cb6ec7d4f08f09f91eb02e5117f2ec8e1a874332"
+                "reference": "fd877227d1bee382634e438e57f42d54b6e9cd98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataTranslationBundle/zipball/cb6ec7d4f08f09f91eb02e5117f2ec8e1a874332",
-                "reference": "cb6ec7d4f08f09f91eb02e5117f2ec8e1a874332",
+                "url": "https://api.github.com/repos/sonata-project/SonataTranslationBundle/zipball/fd877227d1bee382634e438e57f42d54b6e9cd98",
+                "reference": "fd877227d1bee382634e438e57f42d54b6e9cd98",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3 || ^8.0",
-                "sonata-project/admin-bundle": "4.x-dev",
+                "php": "^7.3",
+                "sonata-project/admin-bundle": "^3.58",
                 "sonata-project/block-bundle": "^3.17 || ^4.0",
-                "symfony/config": "^4.4 || ^5.1",
-                "symfony/dependency-injection": "^4.4 || ^5.1",
-                "symfony/form": "^4.4 || ^5.1",
-                "symfony/http-foundation": "^4.4 || ^5.1",
-                "symfony/http-kernel": "^4.4 || ^5.1",
-                "symfony/options-resolver": "^4.4 || ^5.1",
+                "symfony/config": "^4.4",
+                "symfony/dependency-injection": "^4.4",
+                "symfony/form": "^4.4",
+                "symfony/http-foundation": "^4.4",
+                "symfony/http-kernel": "^4.4",
+                "symfony/options-resolver": "^4.4",
                 "twig/twig": "^2.12 || ^3.0"
             },
             "conflict": {
@@ -5062,40 +4688,41 @@
                 "doctrine/persistence": "<1.3.4",
                 "doctrine/phpcr-odm": ">=3.0",
                 "gedmo/doctrine-extensions": "<2.4.36",
-                "knplabs/doctrine-behaviors": "<1.0 || >=3.0"
+                "knplabs/doctrine-behaviors": "<1.0 || >=3.0",
+                "stof/doctrine-extensions-bundle": "<1.1 || >=2.0"
             },
             "require-dev": {
                 "doctrine/orm": "^2.5",
                 "doctrine/phpcr-odm": "^1.5",
-                "gedmo/doctrine-extensions": "^2.3.36 || ^3.0",
                 "jackalope/jackalope-doctrine-dbal": "^1.5",
                 "knplabs/doctrine-behaviors": "^1.4 || ^2.0",
                 "matthiasnoback/symfony-config-test": "^4.2",
                 "matthiasnoback/symfony-dependency-injection-test": "^4.0",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^0.12.48",
-                "phpstan/phpstan-doctrine": "^0.12.26",
                 "phpstan/phpstan-phpunit": "^0.12.16",
                 "phpstan/phpstan-symfony": "^0.12.11",
-                "psalm/plugin-phpunit": "^0.15.0",
-                "psalm/plugin-symfony": "^2.0",
-                "sonata-project/doctrine-orm-admin-bundle": "4.x-dev",
-                "symfony/framework-bundle": "^4.4 || ^5.1",
+                "phpunit/phpunit": "^9.4.0",
+                "psalm/plugin-phpunit": "^0.12",
+                "psalm/plugin-symfony": "^1.5",
+                "sonata-project/doctrine-orm-admin-bundle": "^3.2",
+                "stof/doctrine-extensions-bundle": "^1.1",
+                "symfony/framework-bundle": "^4.4",
                 "symfony/phpunit-bridge": "^5.1.8",
                 "symfony/templating": "^4.4 || ^5.1",
-                "vimeo/psalm": "^4.3.2",
-                "weirdan/doctrine-psalm-plugin": "^1.0"
+                "vimeo/psalm": "^3.16",
+                "weirdan/doctrine-psalm-plugin": "^0.11.3"
             },
             "suggest": {
                 "doctrine/phpcr-odm": "if you translate odm documents",
-                "gedmo/doctrine-extensions": "if you translate orm entities with the gedmo extensions",
                 "knplabs/doctrine-behaviors": "if you translate orm entities with the knplabs behaviours",
-                "sonata-project/doctrine-orm-admin-bundle": "if you translate orm entities and search on translated fields"
+                "sonata-project/doctrine-orm-admin-bundle": "if you translate orm entities and search on translated fields",
+                "stof/doctrine-extensions-bundle": "if you translate orm entities with the gedmo extensions"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -5126,7 +4753,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataTranslationBundle/issues",
-                "source": "https://github.com/sonata-project/SonataTranslationBundle/tree/master"
+                "source": "https://github.com/sonata-project/SonataTranslationBundle/tree/2.7.0"
             },
             "funding": [
                 {
@@ -5146,7 +4773,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-19T17:31:00+00:00"
+            "time": "2020-11-25T07:47:16+00:00"
         },
         {
             "name": "sonata-project/twig-extensions",
@@ -11395,16 +11022,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.30.0",
+            "version": "v1.30.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "a9ff8a8600b6354d79fd16c72c24757dcb086c3c"
+                "reference": "a395a85aa4ded6c1fa3da118d60329b64b6c2acd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/a9ff8a8600b6354d79fd16c72c24757dcb086c3c",
-                "reference": "a9ff8a8600b6354d79fd16c72c24757dcb086c3c",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/a395a85aa4ded6c1fa3da118d60329b64b6c2acd",
+                "reference": "a395a85aa4ded6c1fa3da118d60329b64b6c2acd",
                 "shasum": ""
             },
             "require": {
@@ -11463,7 +11090,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
-                "source": "https://github.com/symfony/maker-bundle/tree/v1.30.0"
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.30.2"
             },
             "funding": [
                 {
@@ -11479,7 +11106,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-03-19T18:32:22+00:00"
+            "time": "2021-03-23T13:53:38+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
@@ -11647,7 +11274,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "idmarinas/admin-bundle": 20,
-        "idmarinas/avatar-bundle": 20,
         "idmarinas/core-bundle": 20,
         "idmarinas/settings-bundle": 20,
         "idmarinas/ui-bundle": 20,
