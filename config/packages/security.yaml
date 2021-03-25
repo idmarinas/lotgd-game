@@ -1,3 +1,8 @@
+parameters:
+    lotgd_bundle.router.regex.prefix.admin_panel: '^%lotgd_bundle.router.prefix.admin_panel%/'
+    lotgd_bundle.router.regex.prefix.public: '^%lotgd_bundle.router.prefix.public%/'
+    lotgd_bundle.router.regex.prefix.authenticated: '^%lotgd_bundle.router.prefix.authenticated%/'
+
 security:
     firewalls:
         dev:
@@ -54,16 +59,16 @@ security:
     access_control:
         # All routes prefixed with /_grotto/ is the admin panel.
         # and need ROLE_ADMIN to access
-        - { path: ^/_grotto/, roles: ROLE_ADMIN }
+        - { path: '%lotgd_bundle.router.regex.prefix.admin_panel%', roles: ROLE_ADMIN }
 
         # All routes prefixed with /game/ are public access.
         # this routes is for information of public info game
-        - { path: ^/game/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: '%lotgd_bundle.router.regex.prefix.public%', roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # All routes prefixed with /play/ are ahtenticated access.
         # Only users authenticated can access this routes.
         # This is the game itself (village, forest, profile...)
-        - { path: ^/play/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: '%lotgd_bundle.router.regex.prefix.authenticated%', roles: IS_AUTHENTICATED_FULLY }
 
         # All others routers can be public or authenticated access as your want
         # By default is public access
