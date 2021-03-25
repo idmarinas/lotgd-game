@@ -1,0 +1,39 @@
+{
+    "name": "idmarinas/core-bundle",
+    "description": "LoTGD Core component.",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Iván Diaz Marinas (IDMarinas)",
+            "email": "35842929+idmarinas@users.noreply.github.com",
+            "homepage": "https://github.com/idmarinas/lotgd-game",
+            "role": "Developer, Maintainer"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "beberlei/doctrineextensions": "^1.2",
+        "bukashk0zzz/filter-bundle": "^4.0",
+        "cron/cron-bundle": "^2.4",
+        "doctrine/annotations": "^1.0",
+        "doctrine/doctrine-bundle": "^2.2",
+        "doctrine/doctrine-migrations-bundle": "^3.0",
+        "doctrine/orm": "^2.8",
+        "gedmo/doctrine-extensions": "^3.0",
+        "knplabs/knp-menu-bundle": "^3.1",
+        "knplabs/knp-paginator-bundle": "^5.4",
+        "marioblazek/twig-byte-units-extension": "^1.0",
+        "snipe/banbuilder": "^2.3",
+        "stof/doctrine-extensions-bundle": "^1.5",
+        "symfony/http-client": "4.4.*",
+        "symfony/lock": "4.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lotgd\\Bundle\\CoreBundle\\": ""
+        },
+        "exclude-from-classmap": [
+            "Migration/"
+        ]
+    }
+}

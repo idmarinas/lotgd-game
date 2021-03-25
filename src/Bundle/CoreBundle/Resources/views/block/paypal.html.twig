@@ -1,0 +1,94 @@
+{#
+    //NOTICE |
+    //NOTICE | Although under the license, you're not required to keep this
+    //NOTICE | paypal link, I do request, as the author of this software
+    //NOTICE | which I have made freely available to you, that you leave it in.
+    //NOTICE |
+#}
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    {% set userName = app.user.name|default('Anonymous')|uncolorize|e('html_attr') %}
+
+    <div style="width: 100%; text-align: center; display: inline-block;">
+        {# Button for Author of LoTGD Mightye (Eric Stevens) #}
+        {% if author.register_logdnet %}
+            <img src="{{ 'images/logdnet.php?op=register&c=%s&l=%s&a=%s&d=%s'|format(author.c, app.request.locale, author.v, author.a, author.d) }}" alt="Donate to Eric Stevens">
+        {% else %}
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener noreferrer" style="display: inline-block;" title="Author of LoTGD Mightye (Eric Stevens)">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="business" value="logd@mightye.org">
+                <input type="hidden" name="item_name" value="Legend of the Green Dragon Author, Donation from {{ userName }}">
+                <input type="hidden" name="item_number" value="{{ item_number }}">
+                <input type="hidden" name="no_shipping" value="1">
+                <input type="hidden" name="notify_url" value="http://lotgd.net/payment.php">
+                <input type="hidden" name="cn" value="Your Character Name">
+                <input type="hidden" name="cs" value="1">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="tax" value="0">
+                <input type="image" src="/bundles/lotgdui/images/paypal1.gif" border="0" name="submit" alt="Donate to Eric Stevens">
+            </form>
+        {% endif %}
+
+        {# Button for DragonPrime fork #}
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener noreferrer" style="display: inline-block;" title="DragonPrime authors">
+            <input type="hidden" name="cmd" value="_xclick">
+            <input type="hidden" name="business" value="derbugmeister@shaw.ca">
+            <input type="hidden" name="item_name" value="Legend of the Green Dragon DP, Donation from {{ userName }}">
+            <input type="hidden" name="item_number" value="{{ item_number }}">
+            <input type="hidden" name="no_shipping" value="1">
+            <input type="hidden" name="notify_url" value="http://dragonprimelogd.net/payment.php">
+            <input type="hidden" name="cn" value="{{ userName }}">
+            <input type="hidden" name="cs" value="1">
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="hidden" name="tax" value="0">
+            <input type="image" src="/bundles/lotgdui/images/paypal3.gif" border="0" name="submit" alt="Donate!">
+        </form>
+
+        {# Button for IDMarinas fork, author of this fork you are using #}
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener noreferrer" style="display: inline-block;" title="IDMarinas author of this Fork you see">
+            <input type="hidden" name="cmd" value="_xclick">
+            <input type="hidden" name="business" value="idmarinas@outlook.com">
+            <input type="hidden" name="item_name" value="Legend of the Green Dragon IDMarinas Fork, Donation from {{ userName }}">
+            <input type="hidden" name="item_number" value="{{ item_number }}">
+            <input type="hidden" name="no_shipping" value="1">
+            <input type="hidden" name="notify_url" value="https://lotgd.infommo.es/payment.php">
+            <input type="hidden" name="cn" value="{{ userName }}">
+            <input type="hidden" name="cs" value="1">
+            <input type="hidden" name="currency_code" value="EUR">
+            <input type="hidden" name="tax" value="0">
+            <input type="image" src="/bundles/lotgdui/images/paypal4.gif" border="0" name="submit" alt="Donate!">
+        </form>
+
+        {# Button for Site Admin (your server) #}
+        {% set paysite = '' %}
+        {% if paysite %}
+            {% set paypal_text = 'Legend of the Green Dragon Site Donation from' %}
+
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="business" value="{{ paysite }}">
+                <input type="hidden" name="item_name" value="{{ paypal_text ~ ' ' ~ userName }}">
+                <input type="hidden" name="item_number" value="{{ item_number }}">
+                <input type="hidden" name="no_shipping" value="1">
+                {% if notify_url %}
+                    <input type="hidden" name="notify_url" value="{{ notify_url }}">
+                {% endif %}
+                <input type="hidden" name="cn" value="{{ userName }}">
+                <input type="hidden" name="cs" value="1">
+                <input type="hidden" name="currency_code" value="{{ 'USD' }}">
+                <input type="hidden" name="lc" value="{{ 'US' }}">
+                <input type="hidden" name="bn" value="PP-DonationsBF">
+                <input type="hidden" name="tax" value="0">
+                <input type="image" src="/bundles/lotgdui/images/paypal2.gif" border="0" name="submit" alt="Donate to the Site">
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}
+{#
+    //NOTICE |
+    //NOTICE | Although I will not deny you the ability to remove the above
+    //NOTICE | paypal link, I do request, as the author of this software
+    //NOTICE | which I made available for free to you that you leave it in.
+    //NOTICE |
+#}
