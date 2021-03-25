@@ -1,23 +1,23 @@
 # Routes of LotgdAdminBundle
-lotgd_admin_route:
-    resource: "@LotgdAdminBundle/Controller/"
-    type: annotation
 lotgd_admin_route_import:
-    resource: "@LotgdAdminBundle/Resources/config/routes/"
-    type: directory
+    resource: "@LotgdAdminBundle/Resources/config/router.php"
+    type: php
 
-# Routes of LotgdCoreBundle (unauthenticated users)
-lotgd_core_route:
-    resource: "@LotgdCoreBundle/Controller/"
-    type: annotation
+# Routes of LotgdCoreBundle
 lotgd_core_route_import:
-    resource: "@LotgdCoreBundle/Resources/config/routes/"
-    type: directory
+    resource: "@LotgdCoreBundle/Resources/config/routes/router.php"
+    prefix: '%lotgd_bundle.router.prefix.public%'
+    type: php
+# If your need load legacy routes
+# Legacy routes only work for public pages (like about.php...), not work with authenticated pages (village.php...)
+lotgd_core_route_legacy:
+    resource: "@LotgdCoreBundle/Resources/config/routes/legacy_routes.php"
+    type: php
 
-# Routes of LotgdUserBundle (unauthenticated users)
-lotgd_user_route:
-    resource: "@LotgdUserBundle/Controller/"
-    type: annotation
+# Routes of LotgdUserBundle
+lotgd_user_route_legacy:
+    resource: "@LotgdUserBundle/Resources/config/routes/legacy_routes.php"
+    type: php
 lotgd_user_route_import:
-    resource: "@LotgdUserBundle/Resources/config/routes/"
-    type: directory
+    resource: "@LotgdUserBundle/Resources/config/routes/router.php"
+    type: php
