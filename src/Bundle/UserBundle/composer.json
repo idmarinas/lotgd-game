@@ -11,7 +11,9 @@
         }
     ],
     "require": {
-        "php": "^7.3"
+        "php": "^7.3",
+        "symfonycasts/reset-password-bundle": "^1.4",
+        "symfonycasts/verify-email-bundle": "^1.2"
     },
     "autoload": {
         "psr-4": {

@@ -101,7 +101,7 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => User::class,
-            'translation_domain' => 'lotgd_core_form_registration',
+            'translation_domain' => 'lotgd_user_form_registration',
         ]);
     }
 }

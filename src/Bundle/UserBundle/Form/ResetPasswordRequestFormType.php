@@ -46,7 +46,7 @@ class ResetPasswordRequestFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'translation_domain' => 'lotgd_core_form_reset_password',
+            'translation_domain' => 'lotgd_user_form_reset_password',
         ]);
     }
 }

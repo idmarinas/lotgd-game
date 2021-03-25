@@ -106,16 +106,16 @@ final class UserCreateCommand extends Command
         }
         catch (\Throwable $th)
         {
-            $style->info($th->getMessage());
+            $style->writeln('<info>'.$th->getMessage().'</>');
 
             $style->error($this->translator->trans('user.create.fail', [], self::TRANSLATOR_DOMAIN));
 
-            return Command::FAILURE;
+            return 1;
         }
 
         $style->success($this->translator->trans('user.create.success', [], self::TRANSLATOR_DOMAIN));
 
-        return Command::SUCCESS;
+        return 0;
     }
 
     private function getUsername(InputInterface $input, OutputInterface $output): string
@@ -126,7 +126,10 @@ final class UserCreateCommand extends Command
         $question->setValidator(function ($value)
         {
             $errors = $this->validator->validate((string) $value, [
-                new Assert\Length(null, 3, 25),
+                new Assert\Length([
+                    'min' => 3,
+                    'max' => 25,
+                ]),
                 new Assert\Callback(function ($username, ExecutionContextInterface $context)
                 {
                     $exists = null !== $this->getuserRepository()->findOneByUsername($username);
@@ -157,13 +160,7 @@ final class UserCreateCommand extends Command
         $question->setValidator(function ($value)
         {
             $errors = $this->validator->validate((string) $value, [
-                new Assert\AtLeastOneOf([
-                    'constraints' => [
-                        new Assert\Blank(),
-                        new Assert\IsNull(),
-                        new Assert\Email(),
-                    ],
-                ]),
+                new Assert\Email(),
                 new Assert\Callback(function ($email, ExecutionContextInterface $context)
                 {
                     $exists = null !== $this->getuserRepository()->findOneByEmail($email);

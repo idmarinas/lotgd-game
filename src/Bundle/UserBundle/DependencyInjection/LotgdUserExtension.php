@@ -30,10 +30,10 @@ class LotgdUserExtension extends Extension implements PrependExtensionInterface
 
     public function prepend(ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(\dirname(__DIR__).'/Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(\dirname(__DIR__).'/Resources/config/prepend'));
 
-        $loader->load('prepend/doctrine.yaml');
-        $loader->load('prepend/reset_password.yaml');
-        $loader->load('prepend/security.yaml');
+        $loader->load('doctrine.php');
+        $loader->load('reset_password.php');
+        $loader->load('security.php');
     }
 }
