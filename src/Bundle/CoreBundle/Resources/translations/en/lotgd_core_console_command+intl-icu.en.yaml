@@ -2,7 +2,7 @@ user.create:
     question:
         username: 'Username: '
         username.exists: This username is already in use
-        email: 'Email address for user (can omit): '
+        email: 'Email address for user: '
         email.exists: This email is already in use
         password:
             one: 'Enter password for user: '

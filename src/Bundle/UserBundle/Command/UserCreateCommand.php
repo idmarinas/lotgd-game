@@ -160,6 +160,8 @@ final class UserCreateCommand extends Command
         $question->setValidator(function ($value)
         {
             $errors = $this->validator->validate((string) $value, [
+                new Assert\NotBlank(),
+                new Assert\NotNull(),
                 new Assert\Email(),
                 new Assert\Callback(function ($email, ExecutionContextInterface $context)
                 {
