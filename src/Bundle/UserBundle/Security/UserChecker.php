@@ -16,7 +16,7 @@ namespace Lotgd\Bundle\UserBundle\Security;
 use Lotgd\Bundle\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
+use Lotgd\Bundle\CoreBundle\Security\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Translation\TranslatableMessage;
