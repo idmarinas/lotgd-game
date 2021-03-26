@@ -19,9 +19,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-/**
- * @Route("/grotto")
- */
 final class AdminLoginController extends AbstractController
 {
     /**
@@ -35,15 +32,10 @@ final class AdminLoginController extends AbstractController
     }
 
     /**
-     * @Route("/_admin/login", name="lotgd_admin_login")
+     * @Route("/login", name="lotgd_admin_login")
      */
     public function loginAction(): Response
     {
-        if ($this->isGranted('ROLE_ADMIN'))
-        {
-            return $this->redirectToRoute('sonata_admin_dashboard');
-        }
-
         $form = $this->createForm(AdminLoginForm::class, [
             'email' => $this->authenticationUtils->getLastUsername(),
         ]);
@@ -56,7 +48,7 @@ final class AdminLoginController extends AbstractController
     }
 
     /**
-     * @Route("/_admin/logout", name="lotgd_admin_logout")
+     * @Route("/logout", name="lotgd_admin_logout")
      */
     public function logoutAction(): void
     {

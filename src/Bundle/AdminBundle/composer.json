@@ -12,11 +12,11 @@
     ],
     "require": {
         "php": "^7.3",
-        "sonata-project/admin-bundle": "dev-master",
-        "sonata-project/block-bundle": "^4.5",
-        "sonata-project/doctrine-orm-admin-bundle": "dev-master",
+        "sonata-project/admin-bundle": "^3.93",
+        "sonata-project/block-bundle": "^3.23",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.31",
         "sonata-project/intl-bundle": "^2.10",
-        "sonata-project/translation-bundle": "dev-master"
+        "sonata-project/translation-bundle": "^2.7"
     },
     "autoload": {
         "psr-4": {
