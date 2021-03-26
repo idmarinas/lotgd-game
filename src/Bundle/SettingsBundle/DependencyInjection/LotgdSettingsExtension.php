@@ -18,7 +18,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 final class LotgdSettingsExtension extends Extension implements PrependExtensionInterface
 {
@@ -31,11 +30,11 @@ final class LotgdSettingsExtension extends Extension implements PrependExtension
 
         $loader->load('services.php');
     }
-    
+
     public function prepend(ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(\dirname(__DIR__).'/Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(dirname(__DIR__).'/Resources/config/prepend'));
 
-        $loader->load('prepend/doctrine.yaml');
+        $loader->load('doctrine.php');
     }
 }

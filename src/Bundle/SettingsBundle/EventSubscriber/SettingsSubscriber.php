@@ -10,7 +10,7 @@
  * @since 6.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\EventSubscriber;
+namespace Lotgd\Bundle\SettingsBundle\EventSubscriber;
 
 use Lotgd\Bundle\SettingsBundle\Event\SettingsEvent;
 use Psr\Cache\CacheItemPoolInterface;

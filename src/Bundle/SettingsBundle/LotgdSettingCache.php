@@ -19,5 +19,5 @@ namespace Lotgd\Bundle\SettingsBundle;
 class LotgdSettingCache
 {
     /** List of settings */
-    public const COLLECTION = 'lotgd_core.package.settings_bundle.collection';
+    public const COLLECTION = 'lotgd_bundle.package.settings_bundle.collection';
 }

@@ -13,7 +13,7 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use Lotgd\Bundle\CoreBundle\EventSubscriber\SettingsSubscriber;
+use Lotgd\Bundle\SettingsBundle\EventSubscriber\SettingsSubscriber;
 use Lotgd\Bundle\SettingsBundle\Admin\SettingAdmin;
 use Lotgd\Bundle\SettingsBundle\Admin\SettingDomainAdmin;
 use Lotgd\Bundle\SettingsBundle\Entity\Setting;
@@ -71,7 +71,7 @@ return static function (ContainerConfigurator $container)
             ->tag('doctrine.orm.entity_listener', [ 'event' => 'postRemove', 'entity' => Setting::class, 'lazy' => true ])
 
         ->set(SettingsSubscriber::class)
-            ->args([new ReferenceConfigurator('lotgd.core.package.cache')])
+            ->args([new ReferenceConfigurator('lotgd.bundle.package.cache')])
             ->tag('kernel.event_subscriber')
     ;
 };
