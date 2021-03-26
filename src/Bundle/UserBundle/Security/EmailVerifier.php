@@ -19,7 +19,7 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Translation\TranslatableMessage;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
@@ -28,13 +28,15 @@ class EmailVerifier
     private $verifyEmailHelper;
     private $mailer;
     private $entityManager;
+    private $translator;
 
-    public function __construct(VerifyEmailHelperInterface $helper, MailerInterface $mailer, EntityManagerInterface $manager, FlashBagInterface $flash)
+    public function __construct(VerifyEmailHelperInterface $helper, MailerInterface $mailer, EntityManagerInterface $manager, FlashBagInterface $flash, TranslatorInterface $translator)
     {
         $this->verifyEmailHelper = $helper;
         $this->mailer            = $mailer;
         $this->entityManager     = $manager;
         $this->flash             = $flash;
+        $this->translator        = $translator;
     }
 
     public function sendEmailConfirmation(string $verifyEmailRouteName, User $user, TemplatedEmail $email): void
@@ -58,7 +60,7 @@ class EmailVerifier
         }
         catch (\Throwable $th)
         {
-            $this->flash->add('error', new TranslatableMessage('email.send.error', [], 'lotgd_core_page_registration'));
+            $this->flash->add('error', $this->translator->trans('email.send.error', [], 'lotgd_core_page_registration'));
         }
     }
 

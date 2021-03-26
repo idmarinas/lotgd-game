@@ -25,7 +25,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Translation\TranslatableMessage;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
@@ -40,10 +40,12 @@ class ResetPasswordController extends AbstractController
     public const TRANSLATOR_DOMAIN = 'lotgd_user_page_reset_password';
 
     private $resetPasswordHelper;
+    private $translator;
 
-    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper)
+    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, TranslatorInterface $translator)
     {
         $this->resetPasswordHelper = $resetPasswordHelper;
+        $this->translator          = $translator;
     }
 
     /**
@@ -198,7 +200,7 @@ class ResetPasswordController extends AbstractController
         }
         catch (\Throwable $th)
         {
-            $this->addFlash('error', new TranslatableMessage('mailer.send.mail.error', [], 'app_default'));
+            $this->addFlash('error', $this->translator->trans('mailer.send.mail.error', [], 'app_default'));
         }
 
         // Store the token object in session for retrieval in check-email route.

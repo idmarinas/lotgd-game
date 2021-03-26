@@ -13,23 +13,25 @@
 
 namespace Lotgd\Bundle\UserBundle\Security;
 
+use Lotgd\Bundle\CoreBundle\Security\Exception\CustomUserMessageAccountStatusException;
 use Lotgd\Bundle\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
-use Lotgd\Bundle\CoreBundle\Security\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Translation\TranslatableMessage;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserChecker implements UserCheckerInterface
 {
     protected $accessDecisionManager;
     protected $flash;
+    protected $translator;
 
-    public function __construct(AccessDecisionManagerInterface $accessDecisionManager, FlashBagInterface $flash)
+    public function __construct(AccessDecisionManagerInterface $accessDecisionManager, FlashBagInterface $flash, TranslatorInterface $translator)
     {
         $this->accessDecisionManager = $accessDecisionManager;
         $this->flash                 = $flash;
+        $this->translator            = $translator;
     }
 
     public function checkPreAuth(UserInterface $user)
@@ -59,7 +61,7 @@ class UserChecker implements UserCheckerInterface
 
         if ( ! $user->isVerified())
         {
-            $this->flash->add('warning', new TranslatableMessage('user.email.not.verified', [], 'lotgd_user_bundle'));
+            $this->flash->add('warning', $this->translator->trans('user.email.not.verified', [], 'lotgd_user_bundle'));
         }
 
         // user account is expired, the user may be notified

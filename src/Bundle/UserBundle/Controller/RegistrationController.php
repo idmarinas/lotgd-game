@@ -25,7 +25,7 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
-use Symfony\Component\Translation\TranslatableMessage;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
@@ -33,10 +33,12 @@ class RegistrationController extends AbstractController
     public const TRANSLATOR_DOMAIN = 'lotgd_user_page_registration';
 
     private $emailVerifier;
+    private $translator;
 
-    public function __construct(EmailVerifier $emailVerifier)
+    public function __construct(EmailVerifier $emailVerifier, TranslatorInterface $translator)
     {
         $this->emailVerifier = $emailVerifier;
+        $this->translator    = $translator;
     }
 
     /**
@@ -111,7 +113,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('lotgd_user_register');
         }
 
-        $this->addFlash('success', new TranslatableMessage('email.verified', [], self::TRANSLATOR_DOMAIN));
+        $this->addFlash('success', $this->translator->trans('email.verified', [], self::TRANSLATOR_DOMAIN));
 
         return $this->redirectToRoute('lotgd_user_profile');
     }
