@@ -15,11 +15,9 @@ namespace Lotgd\Bundle\UiBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 class LotgdUiExtension extends Extension implements PrependExtensionInterface
 {
@@ -31,15 +29,15 @@ class LotgdUiExtension extends Extension implements PrependExtensionInterface
 
     public function prepend(ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(\dirname(__DIR__).'/Resources/config/prepend'));
 
         $container->loadFromExtension('knp_menu', [
             // use 'twig' => false to disable the Twig extension and the TwigRenderer
             'twig' => [
-                'template' => '@LotgdUi/menu/classic_menu.html.twig'
+                'template' => '@LotgdUi/menu/classic_menu.html.twig',
             ],
         ]);
 
-        $loader->load('prepend/twig.yaml');
+        $loader->load('twig.php');
     }
 }
