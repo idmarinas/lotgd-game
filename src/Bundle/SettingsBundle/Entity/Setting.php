@@ -76,7 +76,7 @@ class Setting
         return $this->name;
     }
 
-    public function __toString(): ?string
+    public function __toString(): string
     {
         return $this->domain . ') ' . $this->name;
     }
