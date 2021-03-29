@@ -17,6 +17,7 @@ return static function (ContainerConfigurator $container)
 {
     //-- Register parameters
     $container->parameters()
+        ->set('lotgd_bundle.logdnet.central_server', 'http://lotgd.net')
         ->set('lotgd_bundle.seo.title.default', 'Legend of the Green Dragon')
         ->set('lotgd_bundle.number.format.decimal.point', '.')
         ->set('lotgd_bundle.number.format.thousands.sep', ',')
