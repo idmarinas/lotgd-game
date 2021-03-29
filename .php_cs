@@ -1,7 +1,7 @@
 <?php
 /*
  * This document has been generated with
- * https://mlocati.github.io/php-cs-fixer-configurator/#version:2.17.3|configurator
+ * https://mlocati.github.io/php-cs-fixer-configurator/#version:2.18.4|configurator
  * you can change this configuration by importing this file.
  */
 return PhpCsFixer\Config::create()
@@ -11,9 +11,9 @@ return PhpCsFixer\Config::create()
         '@PHP56Migration'     => true,
         '@PHP70Migration'     => true,
         '@PHP71Migration'     => true,
+        '@PHP73Migration'     => true,
         '@PSR2'               => true,
         '@Symfony'            => true,
-        '@PHP73Migration'     => true,
         // Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.
         'align_multiline_comment' => true,
         // Each element of an array must be indented exactly once.
@@ -23,7 +23,9 @@ return PhpCsFixer\Config::create()
         // Binary operators should be surrounded by space as configured.
         'binary_operator_spaces' => ['default' => 'align_single_space_minimal'],
         // An empty line feed must precede any configured statement.
-        'blank_line_before_statement' => true,
+        'blank_line_before_statement' => [
+            'statements' => ['declare', 'die', 'do', 'exit', 'for', 'foreach', 'goto', 'if', 'return', 'switch', 'throw', 'try', 'while', 'yield'],
+        ],
         // The body of each structure MUST be enclosed by braces. Braces should be properly placed. Body of braces should be properly indented.
         'braces' => ['position_after_anonymous_constructs' => 'next', 'position_after_control_structures' => 'next', 'position_after_functions_and_oop_constructs' => 'next'],
         // Using `isset($var) &&` multiple times should be done in one call.
@@ -32,8 +34,6 @@ return PhpCsFixer\Config::create()
         'combine_consecutive_unsets' => true,
         // Replace multiple nested calls of `dirname` by only one call with second `$level` parameter. Requires PHP >= 7.0.
         'combine_nested_dirname' => true,
-        // Remove extra spaces in a nullable typehint.
-        'compact_nullable_typehint' => true,
         // Equal sign in declare statement should be surrounded by spaces or not following configuration.
         'declare_equal_normalize' => ['space' => 'single'],
         // Replaces `dirname(__FILE__)` expression with equivalent `__DIR__` constant.
@@ -48,8 +48,6 @@ return PhpCsFixer\Config::create()
         'function_to_constant' => true,
         // Convert `heredoc` to `nowdoc` where possible.
         'heredoc_to_nowdoc' => true,
-        // Ensure there is no code on the same line as the PHP open tag.
-        'linebreak_after_opening_tag' => true,
         // Method chaining MUST be properly indented. Method chaining with different levels of indentation is not supported.
         'method_chaining_indentation' => true,
         // Replaces `intval`, `floatval`, `doubleval`, `strval` and `boolval` function calls with according type casting operator.
@@ -62,28 +60,26 @@ return PhpCsFixer\Config::create()
         'native_function_invocation' => true,
         // Master functions shall be used instead of aliases.
         'no_alias_functions' => true,
-        // Replace control structure alternative syntax to use braces.
-        'no_alternative_syntax' => true,
+        // Removes extra blank lines and/or blank lines following configuration.
+        'no_extra_blank_lines' => ['tokens' => ['break', 'case', 'continue', 'curly_brace_block', 'default', 'return', 'switch', 'throw', 'use', 'useTrait']],
         // Properties MUST not be explicitly initialized with `null` except when they have a type declaration (PHP 7.4).
         'no_null_property_initialization' => true,
+        // Convert PHP4-style constructors to `__construct`.
+        'no_php4_constructor' => true,
         // Replaces short-echo `<?=` with long format `<?php echo` syntax.
         'no_short_echo_tag' => true,
         // Variables must be set `null` instead of using `(unset)` casting.
         'no_unset_cast' => true,
         // There should not be an empty `return` statement at the end of a function.
         'no_useless_return' => true,
+        // There must be no `sprintf` calls with only the first argument.
+        'no_useless_sprintf' => true,
         // Logical NOT operators (`!`) should have leading and trailing whitespaces.
         'not_operator_with_space' => true,
         // Adds or removes `?` before type declarations for parameters with a default `null` value.
         'nullable_type_declaration_for_default_null_value' => true,
-        // Orders the elements of classes/interfaces/traits.
-        'ordered_class_elements' => true,
-        // Ordering `use` statements.
-        'ordered_imports' => true,
         // All PHPUnit test classes should be marked as internal.
         'php_unit_internal_class' => true,
-        // Enforce camel (or snake) case for PHPUnit test methods, following configuration.
-        'php_unit_method_casing' => true,
         // Order `@covers` annotation of PHPUnit tests.
         'php_unit_ordered_covers' => true,
         // Adds a default `@coversNothing` annotation to PHPUnit test classes that have no `@covers*` annotation.
@@ -98,6 +94,8 @@ return PhpCsFixer\Config::create()
         'phpdoc_var_annotation_correct_order' => true,
         // Local, dynamic and directly referenced variables should not be assigned and directly returned by a function or method.
         'return_assignment' => true,
+        // Inside a `final` class or anonymous class `self` should be preferred to `static`.
+        'self_static_accessor' => true,
         // Converts explicit variables in double-quoted strings and heredoc syntax from simple to complex format (`${` to `{$`).
         'simple_to_complex_string_variable' => true,
         // Simplify `if` control structures that return the boolean result of their condition.
