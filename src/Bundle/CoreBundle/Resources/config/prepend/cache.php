@@ -18,7 +18,7 @@ return static function (ContainerConfigurator $container): void {
         'cache' => [
             'prefix_seed' => 'lotgd_core/package',
             'pools' => [
-                'lotgd.core.package.cache' => [
+                'lotgd.bundle.package.cache' => [
                     'adapter' => 'cache.app',
                     'tags' => true
                 ]
