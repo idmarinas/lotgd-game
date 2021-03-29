@@ -1,9 +1,0 @@
-doctrine:
-    orm:
-        mappings:
-            core:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Bundle/Entity'
-                prefix: 'Lotgd\Bundle\Entity'
-                alias: Dev
