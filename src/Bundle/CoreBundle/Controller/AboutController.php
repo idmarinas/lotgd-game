@@ -18,6 +18,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/about")
+ */
 class AboutController extends AbstractController
 {
     public const TRANSLATOR_DOMAIN = 'lotgd_core_page_about';
