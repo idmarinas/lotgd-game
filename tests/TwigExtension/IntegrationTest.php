@@ -30,6 +30,7 @@ class IntegrationTest extends IntegrationTestCase
         return [
             new GameCoreExtension(
                 $container->get('request_stack'),
+                $container->get('translator'),
                 $container->get('lotgd_bundle.censor'))
         ];
     }
