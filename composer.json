@@ -120,7 +120,7 @@
             "composer dump-env prod",
             "php bin/console cache:clear"
         ],
-        "test": "php bin/phpunit"
+        "test": "php bin/phpunit --process-isolation"
     },
     "conflict": {
         "symfony/symfony": "*"
