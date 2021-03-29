@@ -59,12 +59,12 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
     public function provideValidUrls()
     {
         yield ['/'];
-        yield ['/about'];
-        yield ['/about/bundles'];
-        yield ['/about/game/setup'];
-        yield ['/about/license'];
-        yield ['/register'];
-        yield ['/reset-password'];
+        yield ['/game/about'];
+        yield ['/game/about/bundles'];
+        yield ['/game/about/game/setup'];
+        yield ['/game/about/license'];
+        yield ['/game/register'];
+        yield ['/game/reset-password'];
     }
 
     public function provideNotFoundUrls()
@@ -74,7 +74,7 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
 
     public function privideRedirectionUrls()
     {
-        yield ['/reset-password/check-email', '/reset-password'];
+        yield ['/game/reset-password/check-email', '/game/reset-password'];
     }
 
     private function messageError($response): string
