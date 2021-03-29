@@ -72,7 +72,10 @@
             "*": "dist"
         },
         "process-timeout": 5000,
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "7.3.0"
+        }
     },
     "autoload": {
         "psr-4": {
