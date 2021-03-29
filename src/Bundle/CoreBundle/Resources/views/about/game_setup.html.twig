@@ -1,0 +1,12 @@
+{% extends '@LotgdUi/layout/classic.html.twig' %}
+
+{% block lotgd_head_title %}{{ 'title.setup'|trans({}, 'lotgd_core_page_about') }}{% endblock %}
+
+{% block lotgd_body_content %}
+    <h3>{{ 'setup.title'|trans|colorize }}</h3>
+
+    {# This apply tabs theme only for this form #}
+    {# {% form_theme form 'form/semantic-ui-tabs-form-theme.html.twig' %} #}
+
+    {# {{ form(form) }} #}
+{% endblock lotgd_body_content %}
