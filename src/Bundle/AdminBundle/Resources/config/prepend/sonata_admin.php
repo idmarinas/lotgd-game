@@ -55,7 +55,7 @@ return static function (ContainerConfigurator $container): void
                         'text'    => 'lotgd_user.dashboard.top.total_unverified_accounts',
                         'color'   => 'bg-yellow',
                         'filters' => [
-                            'isVerified' => ['value' => 1],
+                            'isVerified' => ['value' => 2],
                         ],
                     ],
                 ],
