@@ -10,7 +10,7 @@ return [
     'arr' => [],
     'traversable' => new \ArrayIterator([]),
     'obj' => new \stdClass(),
-    'val' => 'test',
+    'val' => 'test'
 ]
 --EXPECT--
 ok
