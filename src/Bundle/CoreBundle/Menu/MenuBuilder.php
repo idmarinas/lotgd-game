@@ -56,7 +56,7 @@ class MenuBuilder
         $menu->addChild('core.header.about');
         $menu['core.header.about']
             ->addChild('core.menu.about', ['route' => 'lotgd_core_about'])
-            ->addChild('core.menu.net', ['route' => 'lotgd_core_home'])
+            ->addChild('core.menu.net', ['route' => 'lotgd_core_page_logdnet_list'])
         ;
 
         $menu->addChild('core.header.other');
