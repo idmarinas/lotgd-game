@@ -60,7 +60,7 @@ class LogdnetRepository extends ServiceEntityRepository
         try
         {
             $date = new \DateTime('now');
-            $date->sub(new \DateInterval('PT5M'));
+            $date->sub(new \DateInterval('PT10M'));
 
             return $query->update($this->_entityName, 'u')
 
