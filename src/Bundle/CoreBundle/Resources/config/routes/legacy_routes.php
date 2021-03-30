@@ -67,5 +67,43 @@ return function (RoutingConfigurator $routes)
                 'keepQueryParams' => false,
                 'keepRequestMethod' => true
             ])
+        // images/logdnet.php
+        ->add('lotgd_core_page_logdnet_redirect_image', '/images/logdnet.php')
+            ->controller(RedirectController::class)
+            ->defaults([
+                'route' => 'lotgd_core_page_logdnet_image',
+                'permanent' => true,
+                'keepQueryParams' => true,
+                'keepRequestMethod' => true
+            ])
+        // logdnet.php?op=net
+        ->add('lotgd_core_page_logdnet_redirect_net', '/logdnet.php')
+            ->condition("request.query.get('op') == 'net'")
+            ->controller(RedirectController::class)
+            ->defaults([
+                'route' => 'lotgd_core_page_logdnet_net',
+                'permanent' => true,
+                'keepQueryParams' => false,
+                'keepRequestMethod' => true
+            ])
+        // logdnet.php?op=list
+        ->add('lotgd_core_page_logdnet_redirect_list', '/logdnet.php')
+            ->condition("request.query.get('op') == 'list'")
+            ->controller(RedirectController::class)
+            ->defaults([
+                'route' => 'lotgd_core_page_logdnet_list',
+                'permanent' => true,
+                'keepQueryParams' => false,
+                'keepRequestMethod' => true
+            ])
+        // logdnet.php
+        ->add('lotgd_core_page_logdnet_redirect_register', '/logdnet.php')
+            ->controller(RedirectController::class)
+            ->defaults([
+                'route' => 'lotgd_core_page_logdnet_register',
+                'permanent' => true,
+                'keepQueryParams' => true,
+                'keepRequestMethod' => true
+            ])
     ;
 };
