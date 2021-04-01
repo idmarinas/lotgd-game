@@ -1,0 +1,36 @@
+{#
+    Block to show modal of Source information
+#}
+
+{% trans_default_domain 'lotgd_core_block_source' %}
+
+<a href id="lotgd-bundle-source-modal-button">
+    {{ 'core.menu.source'|trans({}, 'lotgd_core_navigation') }}
+</a>
+<div class="ui modal" id="lotgd-bundle-source-modal-dialog">
+    <i class="close icon"></i>
+    <div class="content">
+        {{ 'paragraph'|trans({
+            'dragonprime': '<a href="http://www.dragonprime.net" target="_blank" rel="noopener noreferrer">DragonPrime</a>',
+            'idmarinas': '<a href="https://github.com/idmarinas/lotgd-game" target="_blank" rel="noopener noreferrer">IDMarinas Edition</a>'
+        })|colorize }}
+
+        <ul>
+            <li>{{ 'ul.li.releasing'|trans|colorize }}</li>
+            <li>{{ 'ul.li.removing'|trans|colorize }}</li>
+            <li>{{ 'ul.li.portions'|trans|colorize }}</li>
+            <li>{{ 'ul.li.claiming'|trans|colorize }}</li>
+        </ul>
+    </div>
+    <div class="actions">
+        <div class="ui cancel button">{{ 'app.modal.actions.close'|trans({}, 'lotgd_core_default') }}</div>
+    </div>
+</div>
+<script>
+    $('#lotgd-bundle-source-modal-button').on('click', function (e)
+    {
+        e.preventDefault()
+        console.log(e)
+        $('#lotgd-bundle-source-modal-dialog').modal('show')
+    })
+</script>

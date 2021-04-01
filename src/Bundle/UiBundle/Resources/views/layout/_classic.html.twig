@@ -50,7 +50,10 @@
                         <td class="top aligned">{{ game_copyright() }} <br> Design: Jade Template &copy; Josh Canning 2004 of <a href='http://hfs.cjb.net/' target="_blank" rel="noopener noreferrer">HFS</a></td>
                         <td class="top aligned right aligned collapsing">
                             <a href="{{ path('lotgd_core_about_license') }}">{{ 'core.menu.license'|trans({}, 'lotgd_core_navigation') }}</a> -
-                            <a href="{{ path('lotgd_core_home') }}">{{ 'core.menu.source'|trans({}, 'lotgd_core_navigation') }}</a>
+                            {# Render source button modal #}
+                            {{ sonata_block_render({'type': 'sonata.block.service.template'}, {
+                                'template': '@LotgdCore/block/source.html.twig'
+                            }) }}
                             <br>
                             {{ lotgd_version }}
                             <br>
