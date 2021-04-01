@@ -27,7 +27,7 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
 
         $response = $client->getResponse();
 
-        $this->assertTrue($response->isSuccessful(), $this->messageError($response));
+        $this->assertTrue($response->isSuccessful(), $this->messageError($response, $response->isSuccessful()));
     }
 
     /**
@@ -40,11 +40,11 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
 
         $response = $client->getResponse();
 
-        $this->assertTrue($response->isNotFound(), $this->messageError($response));
+        $this->assertTrue($response->isNotFound(), $this->messageError($response, $response->isNotFound()));
     }
 
     /**
-     * @dataProvider privideRedirectionUrls
+     * @dataProvider provideRedirectionUrls
      */
     public function testRedirectionRoute($url, $redirected)
     {
@@ -53,18 +53,22 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
 
         $response = $client->getResponse();
 
-        $this->assertTrue($response->isRedirect($redirected), $this->messageError($response));
+        $this->assertTrue($response->isRedirection($redirected), $this->messageError($response, $response->isRedirection($redirected)));
     }
 
     public function provideValidUrls()
     {
         yield ['/'];
+        yield ['/game/login'];
         yield ['/game/about'];
         yield ['/game/about/bundles'];
         yield ['/game/about/game/setup'];
         yield ['/game/about/license'];
         yield ['/game/register'];
         yield ['/game/reset-password'];
+        yield ['/game/logdnet/net'];
+        yield ['/game/logdnet/list'];
+        yield ['/_grotto/login'];
     }
 
     public function provideNotFoundUrls()
@@ -72,18 +76,23 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
         yield ['/home'];
     }
 
-    public function privideRedirectionUrls()
+    public function provideRedirectionUrls()
     {
         yield ['/game/reset-password/check-email', '/game/reset-password'];
+        yield ['/about.php', '/game/about'];
+        yield ['/about.php?op=license', '/game/about/license'];
+        yield ['/create.php', '/game/register'];
+        yield ['/create.php?op=forgot', '/game/reset-password'];
+        yield ['/play/profile', '/'];
     }
 
-    private function messageError($response): string
+    private function messageError($response, $isSuccessful): string
     {
         $message = '';
 
-        if( ! $response->isSuccessful())
+        if( ! $isSuccessful)
         {
-            $message = sprintf("Error code %s\n Exception: '%s'\n File '%s",
+            $message = sprintf(" Error code %s\n Exception: '%s'\n File '%s'",
                 $response->getStatusCode(),
                 urldecode($response->headers->get('X-Debug-Exception', '')),
                 urldecode($response->headers->get('X-Debug-Exception-File', '')),
