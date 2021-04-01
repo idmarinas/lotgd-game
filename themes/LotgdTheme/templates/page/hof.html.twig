@@ -1,7 +1,0 @@
-{% use 'page/_blocks/_hof.html.twig' %}
-
-{% trans_default_domain textDomain %}
-
-{{ subTitle[0]|trans(subTitle[1])|colorize }}
-
-{{ block('hof_' ~ tpl|default('default')) }}
