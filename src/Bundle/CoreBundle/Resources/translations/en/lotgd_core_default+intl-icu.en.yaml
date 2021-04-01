@@ -14,6 +14,13 @@ app:
         yes: '`@Yes`0'
         no: '`$No`0'
 
+    modal:
+        actions:
+            cancel: Cancel
+            close: Close
+            accept: Accept
+            ok: 'Ok'
+
 # Mailer service info
 mailer.send.mail.error: 'An error occurred while sending the mail'
 
