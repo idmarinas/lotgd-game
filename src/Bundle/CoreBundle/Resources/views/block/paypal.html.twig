@@ -10,7 +10,7 @@
 {% block block %}
     {% set userName = app.user.name|default('Anonymous')|uncolorize|e('html_attr') %}
 
-    <div style="width: 100%; text-align: center; display: inline-block;">
+    <div class="center aligned">
         {# Button for Author of LoTGD Mightye (Eric Stevens) #}
         {% if author.register_logdnet %}
             <img src="{{ 'images/logdnet.php?op=register&c=%s&a=%s&d=%s'|format(author.c, author.v, author.a, author.d) }}" alt="Donate to Eric Stevens">
