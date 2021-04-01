@@ -23,10 +23,6 @@
     </testsuites>
 
     <logging>
-        <log type="coverage-html"
-            target="./build/coverage"
-            lowUpperBound="35"
-            highLowerBound="70"/>
         <log type="coverage-clover"
             target="./build/reports/phpunit.coverage.xml"/>
         <log type="junit"
