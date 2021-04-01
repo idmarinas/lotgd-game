@@ -21,7 +21,6 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
 
 final class DonationButtonsBlock extends AbstractBlockService
@@ -65,7 +64,7 @@ final class DonationButtonsBlock extends AbstractBlockService
             $author['a'] = \rawurlencode("{$schema}://{$host}/");
         }
 
-        $name = $user ? $user->getUserName() : 'annonymous';
+        $name = $user ? $user->getUserName() : 'Annonymous';
 
         return $this->renderResponse('@LotgdCore/block/paypal.html.twig', [
             'settings'    => $blockContext->getSettings(),
