@@ -53,6 +53,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "symfony/apache-pack": "^1.0",
         "symfony/browser-kit": "^4.4",
         "symfony/css-selector": "^4.4",
