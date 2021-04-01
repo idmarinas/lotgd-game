@@ -192,7 +192,7 @@ class LogdnetController extends AbstractController
 
         if ($v >= 2)
         {
-            $currency = $this->getParameter('lotgd_bundle.paypal.currency');
+            $currency = $this->getParameter('lotgd_bundle.paypal.site.currency');
             $info     = [];
             $info[''] = '<!--data from '.$request->server->get('HTTP_HOST', '').'-->
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">

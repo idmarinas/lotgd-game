@@ -16,3 +16,6 @@ app:
 
 # Mailer service info
 mailer.send.mail.error: 'An error occurred while sending the mail'
+
+# Text to show in Donation from Paypal (item_name input)
+paypal.donation.text: 'Legend of the Green Dragon Site Donation from {name}'

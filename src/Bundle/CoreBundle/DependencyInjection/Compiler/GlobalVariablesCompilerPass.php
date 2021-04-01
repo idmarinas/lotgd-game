@@ -27,6 +27,9 @@ final class GlobalVariablesCompilerPass implements CompilerPassInterface
             ->addMethodCall('addGlobal', ['lotgd_menu', 'lotgd_bundle.menu'])
             ->addMethodCall('addGlobal', ['lotgd_version', Kernel::VERSION])
             ->addMethodCall('addGlobal', ['lotgd_game_server_email', new Parameter('lotgd_bundle.game.server.admin.email')])
+            ->addMethodCall('addGlobal', ['lotgd_paypal_site_email', new Parameter('lotgd_bundle.paypal.site.email')])
+            ->addMethodCall('addGlobal', ['lotgd_paypal_site_currency', new Parameter('lotgd_bundle.paypal.site.currency')])
+            ->addMethodCall('addGlobal', ['lotgd_paypal_site_country', new Parameter('lotgd_bundle.paypal.site.country')])
         ;
     }
 }

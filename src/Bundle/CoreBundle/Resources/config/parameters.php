@@ -25,6 +25,8 @@ return static function (ContainerConfigurator $container)
         ->set('lotgd_bundle.router.prefix.authenticated', '/play')
         ->set('lotgd_bundle.router.prefix.admin_panel', '/_grotto')
         ->set('lotgd_bundle.game.server.admin.email', '%env(GAME_ADMIN_EMAIL)%')
-        ->set('lotgd_bundle.paypal.currency', 'USD')
+        ->set('lotgd_bundle.paypal.site.currency', 'USD')
+        ->set('lotgd_bundle.paypal.site.country', 'US')
+        ->set('lotgd_bundle.paypal.site.email', '')
     ;
 };
