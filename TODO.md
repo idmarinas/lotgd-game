@@ -44,10 +44,13 @@
 -   Sustituir Fomantic UI por https://tailwindcss.com 
     -   Tailwind ofrece más flexibilidad para crear la UI.
     -   npm install tailwindcss
+-   WebpackEncore
+    -   Organizar mejor los archivos js/css
+        -   El tema se crea en una configuración nueva para personalizar
+        -   El js se crea en una entry comun para todo (app por ejemplo) ya que puede dar problemas
 
 # Para la versión 6.y.x
 
--   Crear bundle para limitar los intentos de conexión.
 -   Crear el bundle del inventario. Para sustituir el antiguo sistema de armadura y arma.
 -   Crear el bundle de energia, que permita poner energia o un sistema por turnos.
 -   Integrar los componentes Laminas View en un bundle para crear algo similar a Sonata SEO
