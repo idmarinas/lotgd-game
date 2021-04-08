@@ -40,8 +40,8 @@ define([
     //-- Extra
     'sweetalert2.css',
     'tagify.scss',
-    './css/tagify.css'
-    // 'toastr.css'
+    './css/tagify.css',
+    'toastr.css'
 ], function (Lotgd)
 {
     'use strict'
