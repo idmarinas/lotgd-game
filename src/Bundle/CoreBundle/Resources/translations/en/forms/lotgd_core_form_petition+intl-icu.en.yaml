@@ -1,0 +1,14 @@
+character: "Your Character's Name"
+email: 'Your email address'
+description: 'Description of the problem'
+petition:
+    type: 'Type of your Problem / Enquiry'
+    option:
+        general: General
+        report.bug: Report bug
+        suggestion: Suggestion
+        comment: Comment
+        other: Other
+
+button.submit: Send petition
+button.report: Send report
