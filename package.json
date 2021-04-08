@@ -36,6 +36,7 @@
         "fomantic-ui": "2.8.7",
         "jquery": "^3.6.0",
         "numeral": "^2.0.6",
+        "stimulus-popover": "^4.0.0",
         "sweetalert2": "^10.15.7",
         "toastr": "^2.1.4"
     },
