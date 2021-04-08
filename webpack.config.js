@@ -28,13 +28,14 @@ LotgdEncore
     * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
     */
     //-- This is the global entry used in all pages
+    .addEntry('stimulus', './assets/stimulus.js')
     .addEntry('lotgd', './assets/lotgd/lib/index.js')
     .addEntry('cookie_guard', './assets/lotgd/js/cookie/index.js')
     .addEntry('semantic_ui', './node_modules/fomantic-ui/dist/semantic.js')
     //-- This is the default theme
     .addEntry('lotgd_theme', './assets/lotgd/lotgd.less') //-- If not want generate this theme, comment/eliminate this line
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
-    // .enableStimulusBridge('./assets/controllers.json')
+    .enableStimulusBridge('./assets/controllers.json')
 
     // enables Sass/SCSS support
     .enableSassLoader()
