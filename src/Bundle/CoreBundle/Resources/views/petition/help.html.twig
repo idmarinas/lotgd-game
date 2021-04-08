@@ -1,0 +1,34 @@
+<div class="ui modal" id="lotgd_user_petition_modal_dialog">
+    <div class="content ui form">
+        {% trans_default_domain translator_domain %}
+
+        {{ 'section.default.paragraph'|trans|colorize|nl2br }}
+
+        {% if message %}
+            <div class="ui positive message">
+                {{ message|trans }}
+            </div>
+        {% endif %}
+
+        <div class="ui error message">
+            <div class="header">{{ 'flash.message.section.default.error.server.title'|trans|uncolorize|nl2br }}</div>
+            <p>{{ 'flash.message.section.default.error.server.message'|trans|uncolorize|nl2br }}</p>
+        </div>
+
+        <br>
+
+        {{ form(form) }}
+        <br>
+        {{ 'section.default.note'|trans|colorize|nl2br }}
+    </div>
+    <div class="actions">
+        <div class="ui negative right labeled icon button">
+            {{ 'app.modal.actions.cancel'|trans({}, 'lotgd_core_default') }}
+            <i class="times icon"></i>
+        </div>
+        <div class="ui positive approve right labeled icon button">
+            {{ 'app.modal.actions.submit'|trans({}, 'lotgd_core_default') }}
+            <i class="send icon"></i>
+        </div>
+    </div>
+</div>
