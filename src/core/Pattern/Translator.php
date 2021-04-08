@@ -12,7 +12,7 @@
 
 namespace Lotgd\Core\Pattern;
 
-use Symfony\Component\Translation\Translator as TranslationTranslator;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 @trigger_error(Translator::class . ' is deprecated, if possible use Dependency Injection.', E_USER_DEPRECATED);
 
@@ -21,7 +21,6 @@ use Symfony\Component\Translation\Translator as TranslationTranslator;
  */
 trait Translator
 {
-    protected $lotgdTranslator;
     protected $lotgdSymfonyTranslator;
 
     /**
@@ -35,9 +34,9 @@ trait Translator
     /**
      * Symfony Translator instance.
      */
-    public function symfonyTranslator(): TranslationTranslator
+    public function symfonyTranslator(): TranslatorInterface
     {
-        if ( ! $this->lotgdSymfonyTranslator instanceof TranslationTranslator)
+        if ( ! $this->lotgdSymfonyTranslator instanceof TranslatorInterface)
         {
             $this->lotgdSymfonyTranslator = $this->getService('translator');
         }
