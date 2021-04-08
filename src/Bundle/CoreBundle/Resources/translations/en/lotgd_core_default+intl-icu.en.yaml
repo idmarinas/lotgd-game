@@ -19,6 +19,7 @@ app:
             cancel: Cancel
             close: Close
             accept: Accept
+            submit: Submit
             ok: 'Ok'
 
 # Mailer service info
