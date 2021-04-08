@@ -1,0 +1,17 @@
+{% trans_default_domain 'lotgd_core_navigation' %}
+
+<span
+    data-controller="lotgd-petition-help"
+    data-lotgd-petition-help-url-value="{{ path('lotgd_core_petition_help') }}"
+    data-lotgd-petition-help-loading-class="loading"
+    data-lotgd-petition-help-disabled-class="disabled"
+>
+    <a
+        id="petition-button"
+        class="ui tertiary basic button motd"
+        data-action="click->lotgd-petition-help#show"
+        data-lotgd-petition-help-target="button"
+    >
+        {{ 'core.menu.petition_user'|trans|colorize }}
+    </a>
+</span>
