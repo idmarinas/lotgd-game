@@ -28,7 +28,8 @@ module.exports = function (Encore)
         //-- Useful alias for some files
         .addAliases({
             'sweetalert2.css$': 'sweetalert2/src/sweetalert2.scss',
-            'tagify.scss$': '@yaireo/tagify/src/tagify.scss'
+            'tagify.scss$': '@yaireo/tagify/src/tagify.scss',
+            'toastr.css$': 'toastr/toastr.scss'
         })
 
         // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
