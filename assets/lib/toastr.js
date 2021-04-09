@@ -2,7 +2,7 @@
 import Swal from 'sweetalert2'
 import 'sweetalert2.css'
 
-const Toast = Swal.mixin({
+const toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
@@ -15,4 +15,4 @@ const Toast = Swal.mixin({
     }
 })
 
-export default Toast
+export default toast
