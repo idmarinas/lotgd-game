@@ -4,9 +4,15 @@
 
         {{ 'section.default.paragraph'|trans|colorize|nl2br }}
 
-        {% if message %}
+        {% if network_message %}
+            <div class="ui yellow message">
+                {{ network_message|trans({'count': network_count})|uncolorize }}
+            </div>
+        {% endif %}
+
+        {% if message_send %}
             <div class="ui positive message">
-                {{ message|trans }}
+                {{ message_send|trans|uncolorize }}
             </div>
         {% endif %}
 
