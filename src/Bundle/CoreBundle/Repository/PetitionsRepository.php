@@ -56,7 +56,7 @@ class PetitionsRepository extends ServiceEntityRepository
     /**
      * Get count of petitions for network.
      */
-    public function getCountPetitionsForNetwork(string $ip, string $lgi): int
+    public function getCountPetitionsForNetwork(string $ip): int
     {
         $query = $this->createQueryBuilder('u');
 
@@ -66,11 +66,10 @@ class PetitionsRepository extends ServiceEntityRepository
             $date->sub(new \DateInterval('P1D'));
 
             return $query->select('count(u.petitionid)')
-                ->where('inet_aton(u.ip) LIKE inet_aton(:ip) OR u.id = :lgi')
+                ->where('inet_aton(u.ip) LIKE inet_aton(:ip) AND u.status != 2')
                 ->andWhere('u.date > :date')
                 ->setParameter('date', $date)
                 ->setParameter('ip', $ip)
-                ->setParameter('lgi', $lgi)
 
                 ->getQuery()
                 ->getSingleScalarResult()
