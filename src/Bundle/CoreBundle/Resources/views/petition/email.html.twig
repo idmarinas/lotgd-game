@@ -1,0 +1,15 @@
+{% trans_default_domain translator_domain %}
+
+<h1>{{ 'mailer.email.title'|trans({url}) }}</h1>
+
+<p>
+    {{ 'mailer.email.server'|trans }}: {{ url }}<br>
+    {{ 'mailer.email.author'|trans }}: {{ entity.character }}<br>
+    {{ 'mailer.email.date'|trans }}: {{ 'now'|date('F jS - G:i') }}<br>
+    {{ 'mailer.email.body'|trans }}: {{ entity.body.description }}<br>
+    {{ 'mailer.email.ip'|trans }}: {{ entity.ip }}<br>
+</p>
+
+<p>
+    {{ 'mailer.email.type'|trans }}: {{ entity.body.petition_type|trans({}, 'lotgd_core_form_petition') }}
+</p>
