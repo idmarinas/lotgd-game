@@ -20,12 +20,6 @@ section:
             If you have questions about how the game works, please check out the <a href="#" onclick='JaxonLotgd.Ajax.Core.Petition.faq()'>FAQ</a>.
             Petitions about game mechanics will more than likely not be answered unless they have something to do with a bug.
             Remember, if you are not signed in, and do not provide an email address, we have no way to contact you.
-        petition.mail:
-            server: Server
-            author: Author
-            date: Date
-            body: Body
-            subject: 'New LoGD Petition at {url}'
     report:
         paragraph: 'Complete all the fields'
         note: >
@@ -340,12 +334,22 @@ jaxon:
     load.fail:
         help: An error occurred while loading the help request
 
+mailer.email:
+    title: New petition in LoTGD Game
+    subject: 'New LoTGD Petition at {url}'
+    server: Server
+    author: Author
+    date: Date
+    body: Body
+    type: Petition type
+    ip: From IP
+
 flash.message:
     section:
         default:
             error:
                 network: >
-                    <strong>Error:</strong> There have already been {count,plural, =1{1 petition} other{# petitions}} filed from your network in the last day; to prevent abuse of the petition system, you must wait until there have been 5 or fewer within the last 24 hours.
+                    There have already been {count,plural, =1{1 petition} other{# petitions}} filed from your network in the last day; to prevent abuse of the petition system, you must wait until there have been 5 or fewer within the last 24 hours.
                     If you have multiple issues to bring up with the staff of this server, you might think about consolidating those issues to reduce the overall number of petitions you file.
                 cancel: >
                     There was a problem with your petition!<br>
