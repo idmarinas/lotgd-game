@@ -1,0 +1,4 @@
+sonata_translation:
+    locales:
+        # - en
+        - es # For test purposes
