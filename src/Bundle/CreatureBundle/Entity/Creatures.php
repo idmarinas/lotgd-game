@@ -13,12 +13,11 @@
 
 namespace Lotgd\Bundle\CreatureBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Sonata\TranslationBundle\Model\Gedmo\TranslatableInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 use Sonata\TranslationBundle\Traits\Gedmo\PersonalTranslatableTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Creatures.
@@ -270,8 +269,6 @@ class Creatures implements TranslatableInterface
 
     /**
      * Set the value of Creaturename.
-     *
-     * @param string $creaturename
      *
      * @return self
      */
