@@ -44,4 +44,4 @@ form:
     tab_bonus: Creature Bonuses
     tab_other: Other info
 
-show.group_menu_admin_user_label_user: 'User info'
+show.group_menu_admin_creature_label_creature: 'Creature info'
