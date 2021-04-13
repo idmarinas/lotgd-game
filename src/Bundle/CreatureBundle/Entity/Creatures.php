@@ -232,7 +232,7 @@ class Creatures implements TranslatableInterface
 
     public function __toString()
     {
-        return (string) $this->getCreatureid();
+        return (string) $this->getCreaturename();
     }
 
     /**
