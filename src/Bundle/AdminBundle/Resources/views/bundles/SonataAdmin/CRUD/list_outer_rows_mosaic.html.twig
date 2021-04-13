@@ -42,7 +42,7 @@ This template can be customized to match your needs. You should only extends the
                             </div>
                         </div>
 
-                        <div class="mosaic-inner-text {{ object.isDeleted ? 'text-danger' : ''}}">
+                        <div class="mosaic-inner-text {{ object.isDeleted|default(false) ? 'text-danger' : ''}}">
                             {% if (admin.hasRoute('batch') and batchactions|length > 0) or (admin.hasRoute('export') and admin.hasAccess('export') and export_formats|length) %}
                                 <input type="checkbox" name="idx[]" value="{{ admin.id(object) }}">
                             {% else %}
