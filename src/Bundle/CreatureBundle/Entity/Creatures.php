@@ -11,13 +11,14 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Entity;
+namespace Lotgd\Bundle\CreatureBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Translatable\Translatable;
+use Sonata\TranslationBundle\Model\Gedmo\TranslatableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Sonata\TranslationBundle\Traits\Gedmo\PersonalTranslatableTrait;
 
 /**
  * Creatures.
@@ -27,11 +28,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         @ORM\Index(name="creaturecategory", columns={"creaturecategory"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\CreaturesRepository")
- * @Gedmo\TranslationEntity(class="Lotgd\Bundle\CoreBundle\Entity\CreaturesTranslation")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CreatureBundle\Repository\CreaturesRepository")
+ * @Gedmo\TranslationEntity(class="Lotgd\Bundle\CreatureBundle\Entity\CreaturesTranslation")
  */
-class Creatures implements Translatable
+class Creatures implements TranslatableInterface
 {
+    use PersonalTranslatableTrait;
+
     /**
      * @var int
      *
@@ -52,7 +55,7 @@ class Creatures implements Translatable
      *     max=50
      * )
      */
-    private $creaturename;
+    private $creaturename = '';
 
     /**
      * @var string
@@ -227,28 +230,9 @@ class Creatures implements Translatable
      */
     private $translations;
 
-    public function __construct()
-    {
-        $this->translations = new ArrayCollection();
-    }
-
     public function __toString()
     {
         return (string) $this->getCreatureid();
-    }
-
-    public function getTranslations()
-    {
-        return $this->translations;
-    }
-
-    public function addTranslation(CreaturesTranslation $t): void
-    {
-        if ( ! $this->translations->contains($t))
-        {
-            $t->setObject($this);
-            $this->translations->add($t);
-        }
     }
 
     /**
@@ -291,7 +275,7 @@ class Creatures implements Translatable
      *
      * @return self
      */
-    public function setCreaturename($creaturename)
+    public function setCreaturename(string $creaturename)
     {
         $this->creaturename = $creaturename;
 
@@ -301,7 +285,7 @@ class Creatures implements Translatable
     /**
      * Get the value of Creaturename.
      */
-    public function getCreaturename(): string
+    public function getCreaturename(): ?string
     {
         return $this->creaturename;
     }
@@ -367,7 +351,7 @@ class Creatures implements Translatable
     /**
      * Get the value of Creaturedescription.
      */
-    public function getCreaturedescription(): string
+    public function getCreaturedescription(): ?string
     {
         return $this->creaturedescription;
     }
@@ -389,7 +373,7 @@ class Creatures implements Translatable
     /**
      * Get the value of Creatureweapon.
      */
-    public function getCreatureweapon(): string
+    public function getCreatureweapon(): ?string
     {
         return $this->creatureweapon;
     }
@@ -499,7 +483,7 @@ class Creatures implements Translatable
     /**
      * Get the value of Creaturelose.
      */
-    public function getCreaturelose(): string
+    public function getCreaturelose(): ?string
     {
         return $this->creaturelose;
     }

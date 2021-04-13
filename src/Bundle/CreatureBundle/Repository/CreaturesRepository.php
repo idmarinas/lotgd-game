@@ -11,11 +11,11 @@
  * @since 4.2.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Repository;
+namespace Lotgd\Bundle\CreatureBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Bundle\CoreBundle\Entity\Creatures;
+use Lotgd\Bundle\CreatureBundle\Entity\Creatures;
 
 class CreaturesRepository extends ServiceEntityRepository
 {
