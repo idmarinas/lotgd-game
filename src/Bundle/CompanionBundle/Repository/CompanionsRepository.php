@@ -11,11 +11,11 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Repository;
+namespace Lotgd\Bundle\CompanionBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Bundle\CoreBundle\Entity\Companions;
+use Lotgd\Bundle\CompanionBundle\Entity\Companions;
 
 class CompanionsRepository extends ServiceEntityRepository
 {

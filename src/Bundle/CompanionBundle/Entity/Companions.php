@@ -11,23 +11,26 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Entity;
+namespace Lotgd\Bundle\CompanionBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Translatable\Translatable;
+use Sonata\TranslationBundle\Model\Gedmo\TranslatableInterface;
+use Sonata\TranslationBundle\Traits\Gedmo\PersonalTranslatableTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Companions.
  *
  * @ORM\Table(name="companions")
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\CompanionsRepository")
- * @Gedmo\TranslationEntity(class="Lotgd\Bundle\CoreBundle\Entity\CompanionsTranslation")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\CompanionBundle\Repository\CompanionsRepository")
+ * @Gedmo\TranslationEntity(class="Lotgd\Bundle\CompanionBundle\Entity\CompanionsTranslation")
  */
-class Companions implements Translatable
+class Companions implements TranslatableInterface
 {
+    use PersonalTranslatableTrait;
+
     /**
      * @var int
      *
@@ -263,20 +266,6 @@ class Companions implements Translatable
     public function __toString()
     {
         return (string) $this->getCompanionid();
-    }
-
-    public function getTranslations()
-    {
-        return $this->translations;
-    }
-
-    public function addTranslation(CompanionsTranslation $t): void
-    {
-        if ( ! $this->translations->contains($t))
-        {
-            $t->setObject($this);
-            $this->translations->add($t);
-        }
     }
 
     /**
