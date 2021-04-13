@@ -59,6 +59,18 @@ return static function (ContainerConfigurator $container): void
                         ],
                     ],
                 ],
+                // Total Companions
+                [
+                    'class'    => 'col-lg-2 col-xs-6',
+                    'position' => 'top',
+                    'type'     => 'sonata.admin.block.stats',
+                    'settings' => [
+                        'code'    => 'lotgd_companion.admin',
+                        'icon'    => 'ion-ios-people', // font awesome icon
+                        'text'    => 'lotgd_companion.dashboard.top.total_companions',
+                        'color'   => 'bg-olive',
+                    ],
+                ],
                 // Total creatures
                 [
                     'class'    => 'col-lg-2 col-xs-6',
@@ -75,6 +87,9 @@ return static function (ContainerConfigurator $container): void
             'groups' => [
                 'menu.admin.user.group' => [
                     'icon' => '<i class="fa fa-user"></i>',
+                ],
+                'menu.admin.companion.group' => [
+                    'icon' => '<i class="fa ion-ios-people"></i>',
                 ],
                 'menu.admin.creature.group' => [
                     'icon' => '<i class="fa fa-paw"></i>',
