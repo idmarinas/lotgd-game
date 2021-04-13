@@ -59,10 +59,25 @@ return static function (ContainerConfigurator $container): void
                         ],
                     ],
                 ],
+                // Total creatures
+                [
+                    'class'    => 'col-lg-2 col-xs-6',
+                    'position' => 'top',
+                    'type'     => 'sonata.admin.block.stats',
+                    'settings' => [
+                        'code'    => 'lotgd_creature.admin',
+                        'icon'    => 'fa-paw', // font awesome icon
+                        'text'    => 'lotgd_creature.dashboard.top.total_creatures',
+                        'color'   => 'bg-green',
+                    ],
+                ],
             ],
             'groups' => [
                 'menu.admin.user.group' => [
                     'icon' => '<i class="fa fa-user"></i>',
+                ],
+                'menu.admin.creature.group' => [
+                    'icon' => '<i class="fa fa-paw"></i>',
                 ],
                 'menu.admin.settings.group' => [
                     'icon' => '<i class="fa fa-cogs"></i>',
