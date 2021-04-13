@@ -23,13 +23,22 @@
             <td class="top aligned right aligned"><img src="{{ asset('build/lotgd/images/logo.jpg', 'lotgd') }}" width="465" height="71" alt="The Legend of the Green Dragon Logo"></td>
         </tr>
         <tr>
-            <td class="right aligned bottom aligned">
-            {#
-                {{ message_of_the_day() }} |
-                {{ ye_olde_mail() }} |
-                {{ user_petition() }}
-                {{ admin_petition() }}
-            #}
+            <td colspan="2">
+                <table class="lotgd table">
+                    <tr>
+                        <td class="right aligned bottom aligned">
+                        {#
+                            {{ message_of_the_day() }} |
+                            {{ ye_olde_mail() }} |
+                            {{ user_petition() }}
+                            {{ admin_petition() }}
+                        #}
+                        {{ sonata_block_render({'type': 'sonata.block.service.template'}, {
+                            'template': '@LotgdCore/block/petition_user.html.twig'
+                        }) }}
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
     </table>
