@@ -141,6 +141,9 @@
     "idmarinas/core-bundle": {
         "version": "dev-master"
     },
+    "idmarinas/creature-bundle": {
+        "version": "dev-master"
+    },
     "idmarinas/lotgd-contracts": {
         "version": "0.1.0"
     },

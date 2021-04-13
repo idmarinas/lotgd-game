@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e7a22366859072b4603dbc2255a914e",
+    "content-hash": "7aafbac8c8a2a3c9b27cf0e7f2825616",
     "packages": [
         {
             "name": "acelaya/doctrine-enum-type",
@@ -2136,6 +2136,36 @@
                 }
             ],
             "description": "LoTGD Core component.",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "idmarinas/creature-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "src/Bundle/CreatureBundle",
+                "reference": "8f694752b7d7935fc8c46b28286d7926a21fe4c4"
+            },
+            "require": {
+                "php": "^7.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Lotgd\\Bundle\\CreatureBundle\\": ""
+                }
+            },
+            "authors": [
+                {
+                    "name": "Iván Diaz Marinas (IDMarinas)",
+                    "email": "35842929+idmarinas@users.noreply.github.com",
+                    "homepage": "https://github.com/idmarinas/lotgd-game",
+                    "role": "Developer, Maintainer"
+                }
+            ],
+            "description": "LoTGD Creature component.",
             "transport-options": {
                 "relative": true
             }
@@ -10297,16 +10327,16 @@
         },
         {
             "name": "symfonycasts/reset-password-bundle",
-            "version": "v1.6.0",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SymfonyCasts/reset-password-bundle.git",
-                "reference": "fef9bc5343713d2064b2e9b0caba36a62084ab96"
+                "reference": "368a4f64fc4f8174234fc91f9b22d5016257211b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SymfonyCasts/reset-password-bundle/zipball/fef9bc5343713d2064b2e9b0caba36a62084ab96",
-                "reference": "fef9bc5343713d2064b2e9b0caba36a62084ab96",
+                "url": "https://api.github.com/repos/SymfonyCasts/reset-password-bundle/zipball/368a4f64fc4f8174234fc91f9b22d5016257211b",
+                "reference": "368a4f64fc4f8174234fc91f9b22d5016257211b",
                 "shasum": ""
             },
             "require": {
@@ -10342,22 +10372,22 @@
             "description": "Symfony bundle that adds password reset functionality.",
             "support": {
                 "issues": "https://github.com/SymfonyCasts/reset-password-bundle/issues",
-                "source": "https://github.com/SymfonyCasts/reset-password-bundle/tree/v1.6.0"
+                "source": "https://github.com/SymfonyCasts/reset-password-bundle/tree/v1.7.0"
             },
-            "time": "2021-03-29T18:43:48+00:00"
+            "time": "2021-04-12T17:29:47+00:00"
         },
         {
             "name": "symfonycasts/verify-email-bundle",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SymfonyCasts/verify-email-bundle.git",
-                "reference": "cd6bf4533ec8794cb001627754cdecec0ec4a4de"
+                "reference": "3935f7375b2fa795f349bb4281ba8bcb754f4c91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/cd6bf4533ec8794cb001627754cdecec0ec4a4de",
-                "reference": "cd6bf4533ec8794cb001627754cdecec0ec4a4de",
+                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/3935f7375b2fa795f349bb4281ba8bcb754f4c91",
+                "reference": "3935f7375b2fa795f349bb4281ba8bcb754f4c91",
                 "shasum": ""
             },
             "require": {
@@ -10392,9 +10422,9 @@
             "description": "Simple, stylish Email Verification for Symfony",
             "support": {
                 "issues": "https://github.com/SymfonyCasts/verify-email-bundle/issues",
-                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.3.0"
+                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.4.0"
             },
-            "time": "2021-03-29T17:57:50+00:00"
+            "time": "2021-04-12T17:34:34+00:00"
         },
         {
             "name": "twig/extra-bundle",
@@ -11464,6 +11494,7 @@
     "stability-flags": {
         "idmarinas/admin-bundle": 20,
         "idmarinas/core-bundle": 20,
+        "idmarinas/creature-bundle": 20,
         "idmarinas/settings-bundle": 20,
         "idmarinas/ui-bundle": 20,
         "idmarinas/user-bundle": 20
