@@ -332,6 +332,32 @@
     </div>
 {%- endblock form_row -%}
 
+{%- block companion_abilities_row -%}
+    <div {{ block('row_attributes') }}>
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+
+    <script>
+        /* global $ */
+        $("input[name$='[abilities][defend]']").on('ifChecked', function(){
+            $("input[name$='[abilities][fight]']").iCheck('uncheck').iCheck('disable')
+        })
+        $("input[name$='[abilities][defend]']").on('ifUnchecked', function(){
+            $("input[name$='[abilities][fight]']").iCheck('uncheck').iCheck('enable')
+        })
+
+        $("input[name$='[abilities][fight]']").on('ifChecked', function(){
+            $("input[name$='[abilities][defend]']").iCheck('uncheck').iCheck('disable')
+        })
+        $("input[name$='[abilities][fight]']").on('ifUnchecked', function(){
+            $("input[name$='[abilities][defend]']").iCheck('uncheck').iCheck('enable')
+        })
+    </script>
+{%- endblock companion_abilities_row -%}
+
 {%- block button_row -%}
     <div {{ block('row_attributes') }}>
         {{- form_widget(form) -}}
