@@ -1,0 +1,33 @@
+# For menu in Admin panel
+menu:
+    admin.master:
+        group: Masters
+        label_master: Master
+
+# Breadcrumb menu bar
+breadcrumb:
+    link_masters_list: List of Masters
+    link_masters_create: Create Master
+
+# Dashboard
+lotgd_master.dashboard.top.total_masters: Total Masters
+
+# Action in list page
+list.label__action: Actions
+
+# Fields names of entity
+entity.master:
+    creatureid: Master ID
+    creaturelevel: Master's level
+    creaturename: Master's name
+    creatureweapon: Master's weapon
+    creaturelose: Master's speech when player wins
+    creaturewin: Master's speech when player loses
+
+# Groups for fields in form and show
+form:
+    tab_properties: Master Properties
+    tab_bonus: Master Bonuses
+    tab_other: Other info
+
+show.group_menu_admin_master_label_creature: Master info
