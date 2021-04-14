@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "666447559a2a9a4c4331c677684731d9",
+    "content-hash": "f883516345747e072807bca7a40e368d",
     "packages": [
         {
             "name": "acelaya/doctrine-enum-type",
@@ -2243,6 +2243,36 @@
                 }
             ],
             "time": "2021-02-24T19:17:43+00:00"
+        },
+        {
+            "name": "idmarinas/master-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "src/Bundle/MasterBundle",
+                "reference": "8c27f567af65c649adfd84e384041b22f112a0dc"
+            },
+            "require": {
+                "php": "^7.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Lotgd\\Bundle\\MasterBundle\\": ""
+                }
+            },
+            "authors": [
+                {
+                    "name": "Iván Diaz Marinas (IDMarinas)",
+                    "email": "35842929+idmarinas@users.noreply.github.com",
+                    "homepage": "https://github.com/idmarinas/lotgd-game",
+                    "role": "Developer, Maintainer"
+                }
+            ],
+            "description": "LoTGD Master component.",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "idmarinas/settings-bundle",
@@ -11526,6 +11556,7 @@
         "idmarinas/companion-bundle": 20,
         "idmarinas/core-bundle": 20,
         "idmarinas/creature-bundle": 20,
+        "idmarinas/master-bundle": 20,
         "idmarinas/settings-bundle": 20,
         "idmarinas/ui-bundle": 20,
         "idmarinas/user-bundle": 20

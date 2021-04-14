@@ -23,6 +23,7 @@
         "idmarinas/companion-bundle": "*@dev",
         "idmarinas/core-bundle": "*@dev",
         "idmarinas/creature-bundle": "*@dev",
+        "idmarinas/master-bundle": "*@dev",
         "idmarinas/lotgd-contracts": "^0.1.0",
         "idmarinas/settings-bundle": "*@dev",
         "idmarinas/ui-bundle": "*@dev",
