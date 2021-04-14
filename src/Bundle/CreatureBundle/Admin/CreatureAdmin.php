@@ -78,7 +78,6 @@ final class CreatureAdmin extends AbstractAdmin
         $form
             ->tab('form.tab_properties')
                 ->with('form.group_properties', ['label' => null, 'box_class' => null])
-                    ->add('creatureid', null, ['label' => 'entity.creature.creatureid'])
                     ->add('creaturename', null, ['label' => 'entity.creature.creaturename'])
                     ->add('creaturecategory', null, ['label' => 'entity.creature.creaturecategory'])
                     ->add('creatureimage', null, [
