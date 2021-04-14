@@ -13,7 +13,6 @@
 
 namespace Lotgd\Bundle\CompanionBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Sonata\TranslationBundle\Model\Gedmo\TranslatableInterface;
@@ -258,14 +257,9 @@ class Companions implements TranslatableInterface
      */
     private $translations;
 
-    public function __construct()
-    {
-        $this->translations = new ArrayCollection();
-    }
-
     public function __toString()
     {
-        return (string) $this->getCompanionid();
+        return (string) $this->getName();
     }
 
     /**
@@ -309,7 +303,7 @@ class Companions implements TranslatableInterface
     /**
      * Get the value of Name.
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -331,7 +325,7 @@ class Companions implements TranslatableInterface
     /**
      * Get the value of Category.
      */
-    public function getCategory(): string
+    public function getCategory(): ?string
     {
         return $this->category;
     }
@@ -353,7 +347,7 @@ class Companions implements TranslatableInterface
     /**
      * Get the value of Description.
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -688,7 +682,7 @@ class Companions implements TranslatableInterface
     /**
      * Get the value of Jointext.
      */
-    public function getJointext(): string
+    public function getJointext(): ?string
     {
         return $this->jointext;
     }
@@ -710,7 +704,7 @@ class Companions implements TranslatableInterface
     /**
      * Get the value of Dyingtext.
      */
-    public function getDyingtext(): string
+    public function getDyingtext(): ?string
     {
         return $this->dyingtext;
     }

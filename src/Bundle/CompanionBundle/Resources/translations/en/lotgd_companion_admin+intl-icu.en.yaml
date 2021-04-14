@@ -1,0 +1,58 @@
+# For menu en Admin panel
+menu:
+    admin.companion:
+        group: Companions
+        label_companion: Companion
+
+# Breadcrum menu bar
+breadcrumb:
+    link_companions_list: List of companions
+    link_companions_create: Create companion
+
+# Dashboard
+lotgd_companion.dashboard.top.total_companions: Total companion
+
+# Action in list page
+list.label__action: Actions
+
+# Fields names of entity
+entity.companion:
+    companionid: Companion ID
+    companionactive: Is companion active?
+    name: 'Companion Name'
+    category: 'Companion Category'
+    description: 'Companion Description'
+    jointext: 'Companion join text'
+    dyingtext: 'Companion Dyingtext'
+    companionlocation: 'Companion Availability'
+    maxhitpoints: 'Maxhitpoints'
+    maxhitpointsperlevel: 'Hitpoints bonus per level'
+    attack: 'Attack'
+    attackperlevel: 'Attack bonus per level'
+    defense: Defense
+    defenseperlevel: 'Defense bonus per level'
+    abilities.figther: 'Fighter?'
+    abilities.defend: 'Defender?'
+    abilities.heal: 'Healer level'
+    abilities.heal.help: 'This value determines the maximum amount of HP healed per round'
+    abilities.magic: 'Magician?'
+    abilities.magic.help: 'This value determines the maximum amount of damage caused per round'
+    cannotdie: 'Companion cannot die'
+    cannotbehealed: 'Companion cannot be healed'
+    companioncostdks: 'Companion Cost (DKs)'
+    companioncostgems: 'Companion Cost (Gems)'
+    companioncostgold: 'Companion Cost (Gold)'
+    allowinshades: 'Allow in shades'
+    allowinpvp: 'Allow in PvP'
+    allowintrain: 'Allow in train'
+    abilities: Abilities of companion
+
+# Groups for fields in form and show
+form:
+    tab_properties: Companion Properties
+    tab_attributes: Companion Attributes
+    tab_abilities: Companion Abilities
+    tab_cost: Companion Cost
+    tab_other: Other info
+
+show.group_menu_admin_companion_label_companion: 'Companion info'
