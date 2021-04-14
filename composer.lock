@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7aafbac8c8a2a3c9b27cf0e7f2825616",
+    "content-hash": "666447559a2a9a4c4331c677684731d9",
     "packages": [
         {
             "name": "acelaya/doctrine-enum-type",
@@ -2088,6 +2088,36 @@
                 }
             ],
             "description": "LoTGD Administration panel component.",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "idmarinas/companion-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "src/Bundle/CompanionBundle",
+                "reference": "9b964326d12ac18671f32591ff2f3e04f1007b0c"
+            },
+            "require": {
+                "php": "^7.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Lotgd\\Bundle\\CompanionBundle\\": ""
+                }
+            },
+            "authors": [
+                {
+                    "name": "Iván Diaz Marinas (IDMarinas)",
+                    "email": "35842929+idmarinas@users.noreply.github.com",
+                    "homepage": "https://github.com/idmarinas/lotgd-game",
+                    "role": "Developer, Maintainer"
+                }
+            ],
+            "description": "LoTGD Companion component.",
             "transport-options": {
                 "relative": true
             }
@@ -11493,6 +11523,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "idmarinas/admin-bundle": 20,
+        "idmarinas/companion-bundle": 20,
         "idmarinas/core-bundle": 20,
         "idmarinas/creature-bundle": 20,
         "idmarinas/settings-bundle": 20,

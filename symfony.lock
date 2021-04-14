@@ -138,6 +138,9 @@
     "idmarinas/admin-bundle": {
         "version": "dev-master"
     },
+    "idmarinas/companion-bundle": {
+        "version": "dev-master"
+    },
     "idmarinas/core-bundle": {
         "version": "dev-master"
     },

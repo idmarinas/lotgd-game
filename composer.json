@@ -20,6 +20,7 @@
         "ext-session": "*",
         "composer/package-versions-deprecated": "1.11.99.1",
         "idmarinas/admin-bundle": "*@dev",
+        "idmarinas/companion-bundle": "*@dev",
         "idmarinas/core-bundle": "*@dev",
         "idmarinas/creature-bundle": "*@dev",
         "idmarinas/lotgd-contracts": "^0.1.0",
