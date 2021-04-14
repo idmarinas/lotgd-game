@@ -11,11 +11,11 @@
  * @since 4.2.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Repository;
+namespace Lotgd\Bundle\MasterBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Bundle\CoreBundle\Entity\Masters;
+use Lotgd\Bundle\MasterBundle\Entity\Masters;
 
 class MastersRepository extends ServiceEntityRepository
 {

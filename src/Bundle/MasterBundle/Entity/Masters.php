@@ -11,23 +11,25 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Entity;
+namespace Lotgd\Bundle\MasterBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Translatable\Translatable;
+use Sonata\TranslationBundle\Model\Gedmo\TranslatableInterface;
+use Sonata\TranslationBundle\Traits\Gedmo\PersonalTranslatableTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Masters.
  *
  * @ORM\Table(name="masters")
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\MastersRepository")
- * @Gedmo\TranslationEntity(class="Lotgd\Bundle\CoreBundle\Entity\MastersTranslation")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\MasterBundle\Repository\MastersRepository")
+ * @Gedmo\TranslationEntity(class="Lotgd\Bundle\MasterBundle\Entity\MastersTranslation")
  */
-class Masters implements Translatable
+class Masters implements TranslatableInterface
 {
+    use PersonalTranslatableTrait;
+
     /**
      * @var int
      *
@@ -86,27 +88,13 @@ class Masters implements Translatable
     /**
      * @ORM\OneToMany(targetEntity="MastersTranslation", mappedBy="object", cascade={"all"})
      *
-     * @var \Lotgd\Bundle\CoreBundle\Entity\MastersTranslation[]|\Doctrine\Common\Collections\Collection<int, \Lotgd\Bundle\CoreBundle\Entity\MastersTranslation>
+     * @var \Lotgd\Bundle\MasterBundle\Entity\MastersTranslation[]|\Doctrine\Common\Collections\Collection<int, \Lotgd\Bundle\MasterBundle\Entity\MastersTranslation>
      */
     private $translations;
 
-    public function __construct()
+    public function __toString()
     {
-        $this->translations = new ArrayCollection();
-    }
-
-    public function getTranslations()
-    {
-        return $this->translations;
-    }
-
-    public function addTranslation(MastersTranslation $t): void
-    {
-        if ( ! $this->translations->contains($t))
-        {
-            $t->setObject($this);
-            $this->translations->add($t);
-        }
+        return $this->getCreaturename();
     }
 
     /**
@@ -148,7 +136,7 @@ class Masters implements Translatable
     /**
      * Get the value of Creaturename.
      */
-    public function getCreaturename(): string
+    public function getCreaturename(): ?string
     {
         return $this->creaturename;
     }
@@ -192,7 +180,7 @@ class Masters implements Translatable
     /**
      * Get the value of Creatureweapon.
      */
-    public function getCreatureweapon(): string
+    public function getCreatureweapon(): ?string
     {
         return $this->creatureweapon;
     }
@@ -214,7 +202,7 @@ class Masters implements Translatable
     /**
      * Get the value of Creaturelose.
      */
-    public function getCreaturelose(): string
+    public function getCreaturelose(): ?string
     {
         return $this->creaturelose;
     }
@@ -236,7 +224,7 @@ class Masters implements Translatable
     /**
      * Get the value of Creaturewin.
      */
-    public function getCreaturewin(): string
+    public function getCreaturewin(): ?string
     {
         return $this->creaturewin;
     }
