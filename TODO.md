@@ -10,7 +10,7 @@
 
 -   Esta versión LoTGD Core será una app Symfony Framework.
     -   Se hace como un Bundle y se crea un lotgd-skeleton para crear una versión personalizada.
--   ??? Revisar el theme para ver si se puede quitar el uso de webpack encore (php)
+-   
 -   Plantilla de registro, agregar algunos events para agregar más información.
 -   * No hace falta Gulp (puede ser), copiar los archivos se puede hacer desde composer igual que hice con el skeleton al crear proyecto.
 -   Panel de administración
@@ -48,6 +48,8 @@
     -   Organizar mejor los archivos js/css
         -   El tema se crea en una configuración nueva para personalizar
         -   El js se crea en una entry comun para todo (app por ejemplo) ya que puede dar problemas
+            -   webpack.encore.entry.js
+            -   webpack.encore.theme.js
 
 # Para la versión 6.y.x
 
@@ -55,7 +57,7 @@
 -   Crear el bundle de energia, que permita poner energia o un sistema por turnos.
 -   Integrar los componentes Laminas View en un bundle para crear algo similar a Sonata SEO
 -   Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
-    -   La instalación por consola ya se creeo en la versión 5.0.0
+    -   La instalación por consola ya se creo en la versión 5.0.0
         -   Se mirará incluir una versión de instalación por web
             -   Problematico la creación del usuario admin
     -   Para los admin que no dispongan de esta opción se agrega la opción de instalación via web.
