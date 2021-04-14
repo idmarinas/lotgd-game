@@ -41,11 +41,10 @@ return static function (ContainerConfigurator $container)
             ->call('setTranslationDomain', ['lotgd_creature_admin'])
             ->tag('sonata.admin', [
                 'manager_type' => 'orm',
-                'group' => 'menu.admin.creature.group',
+                'group' => 'menu.admin.npc.group',
                 'label' => 'menu.admin.creature.label_creature',
                 'label_catalogue' => 'lotgd_creature_admin',
-                'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
-                'on_top' => true
+                'label_translator_strategy' => 'sonata.admin.label.strategy.underscore'
             ])
             ->public()
     ;
