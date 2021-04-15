@@ -1,9 +1,0 @@
-title:
-    special: '`^Something Special!`0'
-    trigger: '`n`nSpecial event triggers:`n'
-
-table:
-    thead:
-        name: Name
-        rchance: Raw Chance
-        nchance: Normalized Chance

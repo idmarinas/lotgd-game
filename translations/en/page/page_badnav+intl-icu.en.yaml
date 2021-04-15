@@ -1,5 +1,0 @@
-title: 'Your Navs Are Corrupted'
-
-navsCorrupt:
-    village: 'Your navs are corrupted, please return to {location}.'
-    shades: 'Your navs are corrupted, please return to the Shades.'

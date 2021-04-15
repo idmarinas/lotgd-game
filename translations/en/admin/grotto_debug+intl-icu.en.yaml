@@ -1,9 +1,0 @@
-title: 'Debug Analysis'
-
-table:
-    thead:
-        category: 'Setting'
-        subCategory: 'Module Name'
-        sum: 'Total Seconds'
-        med: 'Average per Hit'
-        hits: 'Hits'
