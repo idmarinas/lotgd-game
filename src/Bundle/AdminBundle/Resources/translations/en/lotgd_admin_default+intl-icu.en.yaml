@@ -18,4 +18,6 @@ dashboard:
                 Visit the {sonata} page to learn how to create your own admin pages.
 
 # Menu groups
-menu.admin.npc.group: Npc
+menu.admin:
+    npc.group: Npc
+    editor.group: Editor
