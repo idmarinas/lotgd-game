@@ -16,7 +16,8 @@ namespace Lotgd\Bundle\CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Translatable\Translatable;
+use Sonata\TranslationBundle\Model\Gedmo\TranslatableInterface;
+use Sonata\TranslationBundle\Traits\Gedmo\PersonalTranslatableTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -30,8 +31,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\TitlesRepository")
  * @Gedmo\TranslationEntity(class="Lotgd\Bundle\CoreBundle\Entity\TitlesTranslation")
  */
-class Titles implements Translatable
+class Titles implements TranslatableInterface
 {
+    use PersonalTranslatableTrait;
+
     /**
      * @var int
      *
@@ -90,28 +93,9 @@ class Titles implements Translatable
      */
     private $translations;
 
-    public function __construct()
-    {
-        $this->translations = new ArrayCollection();
-    }
-
     public function __toString()
     {
-        return (string) $this->getTitleid();
-    }
-
-    public function getTranslations()
-    {
-        return $this->translations;
-    }
-
-    public function addTranslation(TitlesTranslation $t): void
-    {
-        if ( ! $this->translations->contains($t))
-        {
-            $t->setObject($this);
-            $this->translations->add($t);
-        }
+        return (string) $this->getMale();
     }
 
     /**
