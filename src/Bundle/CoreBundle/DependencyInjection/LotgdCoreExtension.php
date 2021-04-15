@@ -25,6 +25,7 @@ class LotgdCoreExtension extends Extension implements PrependExtensionInterface
     {
         $loader = new PhpFileLoader($container, new FileLocator(\dirname(__DIR__).'/Resources/config'));
         $loader->load('services.php');
+        $loader->load('admin_services.php');
     }
 
     public function prepend(ContainerBuilder $container): void
