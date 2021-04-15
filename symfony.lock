@@ -153,6 +153,9 @@
     "idmarinas/master-bundle": {
         "version": "dev-master"
     },
+    "idmarinas/mount-bundle": {
+        "version": "dev-master"
+    },
     "idmarinas/settings-bundle": {
         "version": "dev-master"
     },

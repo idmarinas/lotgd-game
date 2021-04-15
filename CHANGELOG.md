@@ -29,6 +29,7 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
 
 -   **New** Since 6.0.0 version LoTGD Core is a Symfony App Bundle.
     -   LoTGD Core have all features of Symfony App
+-   **New** Administration panel (Powered by Sonata Admin)
 
 ### :fire: DEPRECATED
 

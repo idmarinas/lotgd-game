@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f883516345747e072807bca7a40e368d",
+    "content-hash": "492667fea561b611774149a81c6432b9",
     "packages": [
         {
             "name": "acelaya/doctrine-enum-type",
@@ -2270,6 +2270,36 @@
                 }
             ],
             "description": "LoTGD Master component.",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "idmarinas/mount-bundle",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "src/Bundle/MountBundle",
+                "reference": "58bc0ce491d4ef916f3643e85623e15b118ba6b0"
+            },
+            "require": {
+                "php": "^7.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Lotgd\\Bundle\\MountBundle\\": ""
+                }
+            },
+            "authors": [
+                {
+                    "name": "Iván Diaz Marinas (IDMarinas)",
+                    "email": "35842929+idmarinas@users.noreply.github.com",
+                    "homepage": "https://github.com/idmarinas/lotgd-game",
+                    "role": "Developer, Maintainer"
+                }
+            ],
+            "description": "LoTGD Mount component.",
             "transport-options": {
                 "relative": true
             }
@@ -11557,6 +11587,7 @@
         "idmarinas/core-bundle": 20,
         "idmarinas/creature-bundle": 20,
         "idmarinas/master-bundle": 20,
+        "idmarinas/mount-bundle": 20,
         "idmarinas/settings-bundle": 20,
         "idmarinas/ui-bundle": 20,
         "idmarinas/user-bundle": 20
