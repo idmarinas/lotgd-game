@@ -42,4 +42,4 @@ form:
     tab_message: Mount Messages
     tab_other: Other info
 
-show.group_menu_admin_creature_label_creature: 'Creature info'
+show.group_menu_admin_mount_label_mount: 'Mount info'
