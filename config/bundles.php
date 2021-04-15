@@ -36,6 +36,7 @@ return [
     Lotgd\Bundle\CoreBundle\LotgdCoreBundle::class                           => ['all' => true],
     Lotgd\Bundle\CreatureBundle\LotgdCreatureBundle::class                   => ['all' => true],
     Lotgd\Bundle\MasterBundle\LotgdMasterBundle::class                       => ['all' => true],
+    Lotgd\Bundle\MountBundle\LotgdMountBundle::class                         => ['all' => true],
     Lotgd\Bundle\SettingsBundle\LotgdSettingsBundle::class                   => ['all' => true],
     Lotgd\Bundle\UiBundle\LotgdUiBundle::class                               => ['all' => true],
     Lotgd\Bundle\UserBundle\LotgdUserBundle::class                           => ['all' => true],
