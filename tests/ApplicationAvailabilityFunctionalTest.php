@@ -68,12 +68,13 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
         yield ['/game/reset-password'];
         yield ['/game/logdnet/net'];
         yield ['/game/logdnet/list'];
+        yield ['/game/petition/help'];
         yield ['/_grotto/login'];
     }
 
     public function provideNotFoundUrls()
     {
-        yield ['/home'];
+        yield ['/invalid-route'];
     }
 
     public function provideRedirectionUrls()
@@ -84,6 +85,7 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
         yield ['/create.php', '/game/register'];
         yield ['/create.php?op=forgot', '/game/reset-password'];
         yield ['/play/profile', '/'];
+        yield ['/_grotto/dashboard', '/_grotto/login'];
     }
 
     private function messageError($response, $isSuccessful): string
