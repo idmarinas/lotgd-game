@@ -108,6 +108,11 @@ class Logdnet
         $this->lastping   = new \DateTime('0000-00-00 00:00:00');
     }
 
+    public function __toString(): string
+    {
+        return $this->getAddress();
+    }
+
     /**
      * Set the value of Serverid.
      *
