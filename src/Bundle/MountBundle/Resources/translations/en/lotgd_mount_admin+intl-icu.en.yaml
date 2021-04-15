@@ -1,0 +1,45 @@
+# For menu en Admin panel
+menu:
+    admin.mount:
+        group: Mounts
+        label_mount: Mount
+
+# Breadcrum menu bar
+breadcrumb:
+    link_mounts_list: List of mounts
+    link_mounts_create: Create mount
+
+# Dashboard
+lotgd_mount.dashboard.top.total_mounts: Total mounts
+
+# Action in list page
+list.label__action: Actions
+
+# Fields names of entity
+entity.mount:
+    mountid: Mount ID
+    mountactive: Is mount active?
+    mountname: Mount Name
+    mountdesc: Mount Description
+    mountcategory: Mount Category
+    mountlocation: Mount Availability
+    mountdkcost: Mount Cost (DKs)
+    mountcostgems: Mount Cost (Gems)
+    mountcostgold: Mount Cost (Gold)
+    mountfeedcost: Mount Feed Cost (Gold per level)
+    mountforestfights: Delta Forest Fights
+    newday: New Day
+    recharge: Full Recharge
+    partrecharge: Partial Recharge
+    mountbuff: Mount Buff
+
+# Groups for fields in form and show
+form:
+    tab_properties: Mount Properties
+    tab_bonus: Mount Bonuses
+    tab_buff: Mount Buffs
+    tab_cost: Mount Cost
+    tab_message: Mount Messages
+    tab_other: Other info
+
+show.group_menu_admin_creature_label_creature: 'Creature info'
