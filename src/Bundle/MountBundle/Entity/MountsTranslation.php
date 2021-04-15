@@ -11,10 +11,10 @@
  * @since 4.2.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Entity;
+namespace Lotgd\Bundle\MountBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
+use Sonata\TranslationBundle\Model\Gedmo\AbstractPersonalTranslation;
 
 /**
  * Mounts translations.

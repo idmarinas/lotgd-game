@@ -11,23 +11,25 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Entity;
+namespace Lotgd\Bundle\MountBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Translatable\Translatable;
+use Sonata\TranslationBundle\Model\Gedmo\TranslatableInterface;
+use Sonata\TranslationBundle\Traits\Gedmo\PersonalTranslatableTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Mounts.
  *
  * @ORM\Table(name="mounts")
- * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\MountsRepository")
- * @Gedmo\TranslationEntity(class="Lotgd\Bundle\CoreBundle\Entity\MountsTranslation")
+ * @ORM\Entity(repositoryClass="Lotgd\Bundle\MountBundle\Repository\MountsRepository")
+ * @Gedmo\TranslationEntity(class="Lotgd\Bundle\MountBundle\Entity\MountsTranslation")
  */
-class Mounts implements Translatable
+class Mounts implements TranslatableInterface
 {
+    use PersonalTranslatableTrait;
+
     /**
      * @var int
      *
@@ -210,32 +212,13 @@ class Mounts implements Translatable
     /**
      * @ORM\OneToMany(targetEntity="MountsTranslation", mappedBy="object", cascade={"all"})
      *
-     * @var \Lotgd\Bundle\CoreBundle\Entity\MountsTranslation[]|\Doctrine\Common\Collections\Collection<int, \Lotgd\Bundle\CoreBundle\Entity\MountsTranslation>
+     * @var \Lotgd\Bundle\MountBundle\Entity\MountsTranslation[]|\Doctrine\Common\Collections\Collection<int, \Lotgd\Bundle\MountBundle\Entity\MountsTranslation>
      */
     private $translations;
 
-    public function __construct()
-    {
-        $this->translations = new ArrayCollection();
-    }
-
     public function __toString()
     {
-        return (string) $this->getMountid();
-    }
-
-    public function getTranslations()
-    {
-        return $this->translations;
-    }
-
-    public function addTranslation(MountsTranslation $t): void
-    {
-        if ( ! $this->translations->contains($t))
-        {
-            $t->setObject($this);
-            $this->translations->add($t);
-        }
+        return (string) $this->getMountname();
     }
 
     /**
@@ -277,7 +260,7 @@ class Mounts implements Translatable
     /**
      * Get the value of Mountname.
      */
-    public function getMountname(): string
+    public function getMountname(): ?string
     {
         return $this->mountname;
     }
@@ -299,7 +282,7 @@ class Mounts implements Translatable
     /**
      * Get the value of Mountdesc.
      */
-    public function getMountdesc(): string
+    public function getMountdesc(): ?string
     {
         return $this->mountdesc;
     }
@@ -321,7 +304,7 @@ class Mounts implements Translatable
     /**
      * Get the value of Mountcategory.
      */
-    public function getMountcategory(): string
+    public function getMountcategory(): ?string
     {
         return $this->mountcategory;
     }
@@ -456,7 +439,7 @@ class Mounts implements Translatable
     /**
      * Get the value of Newday.
      */
-    public function getNewday(): string
+    public function getNewday(): ?string
     {
         return $this->newday;
     }
@@ -478,7 +461,7 @@ class Mounts implements Translatable
     /**
      * Get the value of Recharge.
      */
-    public function getRecharge(): string
+    public function getRecharge(): ?string
     {
         return $this->recharge;
     }
@@ -500,7 +483,7 @@ class Mounts implements Translatable
     /**
      * Get the value of Partrecharge.
      */
-    public function getPartrecharge(): string
+    public function getPartrecharge(): ?string
     {
         return $this->partrecharge;
     }

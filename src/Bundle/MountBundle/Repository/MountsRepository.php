@@ -11,11 +11,11 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Repository;
+namespace Lotgd\Bundle\MountBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Bundle\CoreBundle\Entity\Mounts;
+use Lotgd\Bundle\MountBundle\Entity\Mounts;
 
 class MountsRepository extends ServiceEntityRepository
 {
