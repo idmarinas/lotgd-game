@@ -88,12 +88,16 @@ return static function (ContainerConfigurator $container): void
                 'menu.admin.user.group' => [
                     'icon' => '<i class="fa fa-user"></i>',
                 ],
-                'menu.admin.npc.group' => [
-                    'icon' => '<i class="fa fa-male"></i>',
+                'menu.admin.action.group' => [
+                    'icon' => '<i class="fa fa-cog"></i>',
                     'label_catalogue' => 'lotgd_admin_default',
                 ],
                 'menu.admin.editor.group' => [
                     'icon' => '<i class="fa fa-pencil"></i>',
+                    'label_catalogue' => 'lotgd_admin_default',
+                ],
+                'menu.admin.npc.group' => [
+                    'icon' => '<i class="fa fa-male"></i>',
                     'label_catalogue' => 'lotgd_admin_default',
                 ],
                 'menu.admin.logdnet.group' => [
