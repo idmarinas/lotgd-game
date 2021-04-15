@@ -92,6 +92,13 @@ return static function (ContainerConfigurator $container): void
                     'icon' => '<i class="fa fa-male"></i>',
                     'label_catalogue' => 'lotgd_admin_default',
                 ],
+                'menu.admin.editor.group' => [
+                    'icon' => '<i class="fa fa-pencil"></i>',
+                    'label_catalogue' => 'lotgd_admin_default',
+                ],
+                'menu.admin.logdnet.group' => [
+                    'icon' => '<i class="fa fa-wifi"></i>',
+                ],
                 'menu.admin.settings.group' => [
                     'icon' => '<i class="fa fa-cogs"></i>',
                 ],
