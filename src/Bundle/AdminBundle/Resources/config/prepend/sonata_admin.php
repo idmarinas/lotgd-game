@@ -83,6 +83,12 @@ return static function (ContainerConfigurator $container): void
                         'color'   => 'bg-green',
                     ],
                 ],
+                // Total donations
+                [
+                    'class'    => 'col-lg-2 col-xs-6',
+                    'position' => 'top',
+                    'type'     => 'lotgd_admin.block.service.dashboard.paylog',
+                ],
             ],
             'groups' => [
                 'menu.admin.user.group' => [
