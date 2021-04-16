@@ -37,25 +37,25 @@ class Paylog
     private $payid;
 
     /**
-     * @var string
+     * @var array
      *
      * @ORM\Column(name="info", type="array")
      */
-    private $info;
+    private $info = [];
 
     /**
      * @var string
      *
      * @ORM\Column(name="response", type="text", length=65535)
      */
-    private $response;
+    private $response = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="txnid", type="string", length=32)
      */
-    private $txnid;
+    private $txnid = '';
 
     /**
      * @var float
@@ -69,7 +69,7 @@ class Paylog
      *
      * @ORM\Column(name="name", type="string", length=50)
      */
-    private $name;
+    private $name = '';
 
     /**
      * @var int
@@ -108,7 +108,7 @@ class Paylog
 
     public function __construct()
     {
-        $this->processdate = new \DateTime('0000-00-00 00:00:00');
+        $this->processdate = new \DateTime();
     }
 
     /**
@@ -128,7 +128,7 @@ class Paylog
     /**
      * Get the value of Payid.
      */
-    public function getPayid(): int
+    public function getPayid(): ?int
     {
         return $this->payid;
     }
@@ -140,7 +140,7 @@ class Paylog
      *
      * @return self
      */
-    public function setInfo($info)
+    public function setInfo(array $info)
     {
         $this->info = $info;
 
@@ -150,7 +150,7 @@ class Paylog
     /**
      * Get the value of Info.
      */
-    public function getInfo(): string
+    public function getInfo(): array
     {
         return $this->info;
     }
