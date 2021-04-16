@@ -13,6 +13,7 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Lotgd\Bundle\AdminBundle\Block\DashboardPaylogServiceBlock;
 use Lotgd\Bundle\AdminBundle\Block\DashboardRssServiceBlock;
 
 return static function (ContainerConfigurator $container)
@@ -36,7 +37,8 @@ return static function (ContainerConfigurator $container)
 
         //-- Blocks
         ->set('lotgd_admin.block.service.dashboard.rss', DashboardRssServiceBlock::class)
-            ->args([new ReferenceConfigurator('twig'), new ReferenceConfigurator('http_client')])
+            ->tag('sonata.block')
+        ->set('lotgd_admin.block.service.dashboard.paylog', DashboardPaylogServiceBlock::class)
             ->tag('sonata.block')
     ;
 };
