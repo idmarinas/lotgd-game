@@ -16,7 +16,8 @@
         "sonata-project/block-bundle": "^3.23",
         "sonata-project/doctrine-orm-admin-bundle": "^3.31",
         "sonata-project/intl-bundle": "^2.10",
-        "sonata-project/translation-bundle": "^2.7"
+        "sonata-project/translation-bundle": "^2.7",
+        "twig/intl-extra": "^3.3"
     },
     "autoload": {
         "psr-4": {
