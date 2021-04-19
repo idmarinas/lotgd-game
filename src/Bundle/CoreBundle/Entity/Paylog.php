@@ -111,6 +111,11 @@ class Paylog
         $this->processdate = new \DateTime();
     }
 
+    public function __toString(): string
+    {
+        return $this->getTxnid();
+    }
+
     /**
      * Set the value of Payid.
      *
