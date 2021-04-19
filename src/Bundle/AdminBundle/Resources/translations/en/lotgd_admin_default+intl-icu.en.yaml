@@ -16,8 +16,10 @@ dashboard:
                 This is the administration panel of your project "{package}". From this panel you can manage all parts of your game server.
                 It is possible to add more panels and blocks to this admin panel. {package} uses the "Sonata Admin" package to create itself.
                 Visit the {sonata} page to learn how to create your own admin pages.
-
+        paylog:
+            current_month: '{symbol} donated in {month}'
 # Menu groups
 menu.admin:
-    npc.group: Npc
-    editor.group: Editor
+    npc.group: Npcs
+    editor.group: Editors
+    action.group: Actions
