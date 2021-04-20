@@ -45,7 +45,7 @@
         "@symfony/webpack-encore": "^1.1.2",
         "core-js": "^3.10.0",
         "file-loader": "^6.2.0",
-        "less": "^3.0.0",
+        "less": "^4.1.1",
         "less-loader": "^8.0.0",
         "postcss": "^8.2.9",
         "postcss-loader": "^5.2.0",
