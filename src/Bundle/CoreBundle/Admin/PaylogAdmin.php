@@ -16,9 +16,8 @@ namespace Lotgd\Bundle\CoreBundle\Admin;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 final class PaylogAdmin extends AbstractAdmin
 {
@@ -66,7 +65,8 @@ final class PaylogAdmin extends AbstractAdmin
                 'actions' => [
                     'show' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
