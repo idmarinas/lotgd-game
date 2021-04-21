@@ -62,7 +62,7 @@ class User implements UserInterface
      *     message="entity.user.username.only_letters"
      * )
      */
-    private $username;
+    private $username = '';
 
     /**
      * @ORM\Column(type="json")
