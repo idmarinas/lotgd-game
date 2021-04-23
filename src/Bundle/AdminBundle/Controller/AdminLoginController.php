@@ -36,6 +36,11 @@ final class AdminLoginController extends AbstractController
      */
     public function loginAction(): Response
     {
+        if ($this->isGranted('ROLE_ADMIN'))
+        {
+            return $this->redirectToRoute('sonata_admin_dashboard');
+        }
+
         $form = $this->createForm(AdminLoginForm::class, [
             'email' => $this->authenticationUtils->getLastUsername(),
         ]);
