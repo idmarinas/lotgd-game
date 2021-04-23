@@ -8,9 +8,11 @@
 
 # Actualmente haciendo... versión 6.0.0
 
+-   Agregar la validación a las entidades (sólo algunas tienen validaciones de los campos)
+-   Agregar el envio de un correo privado cuando se agrega una donación manual. (DonatorAdmin panel)
+
 -   Esta versión LoTGD Core será una app Symfony Framework.
     -   Se hace como un Bundle y se crea un lotgd-skeleton para crear una versión personalizada.
--   Agregar la validación a las entidades (sólo algunas tienen validaciones de los campos)
 -   Plantilla de registro, agregar algunos events para agregar más información.
 -   * No hace falta Gulp (puede ser), copiar los archivos se puede hacer desde composer igual que hice con el skeleton al crear proyecto.
 -   Panel de administración
@@ -37,7 +39,7 @@
     -   Se simplifica la forma en la que se calcula las estadísticas del personaje, haciendo que tanto los personajes jugador como los creados por el servidor, tengan una forma de creación muy similar.
 -   **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
     -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
--   **BC** Eliminar compatibilidad con el uso del viejo sistema de módulos.
+-   **BC** Eliminado compatibilidad con el uso del viejo sistema de módulos.
 
 # Para la versión 6.1.0
 
