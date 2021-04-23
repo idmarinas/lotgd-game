@@ -1,0 +1,10 @@
+doctrine:
+    orm:
+        mappings:
+            Lotgd\Bundle:
+                is_bundle: false
+                type: annotation
+                dir: 'src/Bundle'
+                prefix: Lotgd\Bundle\Entity
+
+
