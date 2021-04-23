@@ -14,6 +14,7 @@
 namespace Lotgd\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Lotgd\Bundle\UserBundle\Entity\User;
 
 /**
  * Paylog.
@@ -72,7 +73,14 @@ class Paylog
     private $name = '';
 
     /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     */
+    private $user;
+
+    /**
      * @var int
+     *
+     * @deprecated deleted in version 6.1.0. Now use User ID and is associated with User table.
      *
      * @ORM\Column(name="acctid", type="integer", options={"unsigned": true})
      */
@@ -246,6 +254,18 @@ class Paylog
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
     /**
