@@ -33,7 +33,7 @@ class DonationManualType extends AbstractType
     {
         $builder
             ->add('txnid', TextType::class, [
-                'label'       => 'entity.donator.txnid',
+                'label'       => 'form.donator.txnid',
                 'required' => false,
                 'constraints' => [
                     new Assert\Length(['max' => 65000]),
@@ -44,18 +44,18 @@ class DonationManualType extends AbstractType
             ])
             ->add('user', EntityType::class, [
                 'class'        => User::class,
-                'label'        => 'entity.donator.id',
+                'label'        => 'form.donator.id',
                 'choice_label' => 'username',
             ])
             ->add('amount', NumberType::class, [
-                'label'       => 'entity.donator.amount',
+                'label'       => 'form.donator.amount',
                 'constraints' => [
                     new Assert\NotNull(),
                     new Assert\GreaterThan(0)
                 ],
             ])
             ->add('reason', TextareaType::class, [
-                'label'       => 'entity.donator.reason',
+                'label'       => 'form.donator.reason',
                 'constraints' => [
                     new Assert\Length(['max' => 65000]),
                     new Assert\NotNull(),
