@@ -123,4 +123,13 @@ final class UserAdmin extends AbstractAdmin
             ->add('roles', 'array', ['label' => 'entity.user.roles'])
         ;
     }
+
+    protected function configureExportFields(): array
+    {
+        //- Avoid sensitive data to be exported.
+        return array_filter(parent::configureExportFields(), static function (string $v): bool
+        {
+            return !\in_array($v, ['password', 'salt'], true);
+        });
+    }
 }
