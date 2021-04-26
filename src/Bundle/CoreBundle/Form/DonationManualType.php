@@ -51,7 +51,8 @@ class DonationManualType extends AbstractType
                 'label'       => 'form.donator.amount',
                 'constraints' => [
                     new Assert\NotNull(),
-                    new Assert\GreaterThan(0)
+                    new Assert\NotEqualTo(0),
+                    new Assert\DivisibleBy(1),
                 ],
             ])
             ->add('reason', TextareaType::class, [
