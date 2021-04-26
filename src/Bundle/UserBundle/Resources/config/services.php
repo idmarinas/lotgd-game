@@ -45,7 +45,8 @@ return static function (ContainerConfigurator $container)
                 'label' => 'menu.admin.user.label_user',
                 'label_catalogue' => 'lotgd_user_admin',
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
-                'on_top' => true
+                'on_top' => true,
+                'default' => true
             ])
             ->public()
     ;
