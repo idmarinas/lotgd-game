@@ -13,13 +13,14 @@
 
 namespace Lotgd\Bundle\CoreBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Laminas\Filter;
+use Lotgd\Bundle\CoreBundle\Entity\Paylog;
 use Lotgd\Bundle\CoreBundle\Form\Type\NumberType;
 use Lotgd\Bundle\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -32,15 +33,20 @@ class DonationManualType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('txnid', TextType::class, [
-                'label'       => 'form.donator.txnid',
-                'required' => false,
-                'constraints' => [
-                    new Assert\Length(['max' => 65000]),
-                ],
-                'filters' => [
-                    new Filter\StripTags(),
-                ],
+            ->add('txnid', EntityType::class, [
+                'class'         => Paylog::class,
+                'label'         => 'form.donator.txnid',
+                'required'      => false,
+                'query_builder' => function (EntityRepository $er)
+                {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.processed = 0') //-- Select all that not are processed
+                    ;
+                },
+                'choice_label' => function ($paylog)
+                {
+                    return $paylog->getTxnid().') '.$paylog->getName();
+                },
             ])
             ->add('user', EntityType::class, [
                 'class'        => User::class,
