@@ -47,8 +47,8 @@ class DonationManualType extends AbstractType
                 'label'        => 'form.donator.id',
                 'choice_label' => 'username',
             ])
-            ->add('amount', NumberType::class, [
-                'label'       => 'form.donator.amount',
+            ->add('points', NumberType::class, [
+                'label'       => 'form.donator.points',
                 'constraints' => [
                     new Assert\NotNull(),
                     new Assert\NotEqualTo(0),
