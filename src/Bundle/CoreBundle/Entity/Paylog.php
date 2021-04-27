@@ -14,6 +14,7 @@
 namespace Lotgd\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Lotgd\Bundle\UserBundle\Entity\User;
 
 /**
@@ -28,6 +29,8 @@ use Lotgd\Bundle\UserBundle\Entity\User;
  */
 class Paylog
 {
+    use TimestampableEntity;
+
     /**
      * @var int
      *
