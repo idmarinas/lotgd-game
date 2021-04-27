@@ -58,7 +58,7 @@ class DonationManualEvent extends Event
     /**
      * Get reason of manual donation.
      */
-    public function getReason(): string
+    public function getReason(): ?string
     {
         return $this->data['reason'];
     }
@@ -66,7 +66,7 @@ class DonationManualEvent extends Event
     /**
      * Set (change) reason of manual donation.
      */
-    public function setReason(string $reason): self
+    public function setReason(?string $reason): self
     {
         $this->data['reason'] = $reason;
 
