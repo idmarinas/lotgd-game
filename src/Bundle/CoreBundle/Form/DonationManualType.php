@@ -63,9 +63,9 @@ class DonationManualType extends AbstractType
             ])
             ->add('reason', TextareaType::class, [
                 'label'       => 'form.donator.reason',
+                'required'    => false,
                 'constraints' => [
-                    new Assert\Length(['max' => 65000]),
-                    new Assert\NotNull(),
+                    new Assert\Length(['min' => 0, 'max' => 65000]),
                 ],
                 'filters' => [
                     new Filter\StripTags(),
