@@ -55,14 +55,14 @@ class Petitions
     private $status = 0;
 
     /**
-     * @var string
+     * @var array
      *
      * @ORM\Column(name="body", type="array")
      */
-    private $body = '';
+    private $body = [];
 
     /**
-     * @var string
+     * @var array
      *
      * @ORM\Column(name="pageinfo", type="array")
      */
@@ -193,7 +193,7 @@ class Petitions
     /**
      * Set the value of Body.
      *
-     * @param string $body
+     * @param array $body
      *
      * @return self
      */
@@ -207,7 +207,7 @@ class Petitions
     /**
      * Get the value of Body.
      */
-    public function getBody(): string
+    public function getBody(): array
     {
         return $this->body;
     }
@@ -215,7 +215,7 @@ class Petitions
     /**
      * Set the value of Pageinfo.
      *
-     * @param string $pageinfo
+     * @param array $pageinfo
      *
      * @return self
      */
@@ -229,7 +229,7 @@ class Petitions
     /**
      * Get the value of Pageinfo.
      */
-    public function getPageinfo(): string
+    public function getPageinfo(): array
     {
         return $this->pageinfo;
     }
