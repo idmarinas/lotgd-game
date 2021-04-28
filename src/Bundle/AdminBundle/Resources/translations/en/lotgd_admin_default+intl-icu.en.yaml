@@ -23,3 +23,4 @@ menu.admin:
     npc.group: Npcs
     editor.group: Editors
     action.group: Actions
+    mechanics.group: Mechanics
