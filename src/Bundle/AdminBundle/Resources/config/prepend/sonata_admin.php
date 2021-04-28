@@ -106,6 +106,10 @@ return static function (ContainerConfigurator $container): void
                     'icon' => '<i class="fa fa-male"></i>',
                     'label_catalogue' => 'lotgd_admin_default',
                 ],
+                'menu.admin.mechanics.group' => [
+                    'icon' => '<i class="fa fa-wrench"></i>',
+                    'label_catalogue' => 'lotgd_admin_default',
+                ],
                 'menu.admin.logdnet.group' => [
                     'icon' => '<i class="fa fa-wifi"></i>',
                 ],
