@@ -79,6 +79,11 @@ class Referers
      */
     private $ip;
 
+    public function __toString(): string
+    {
+        return $this->getUri();
+    }
+
     /**
      * Set the value of Refererid.
      *
