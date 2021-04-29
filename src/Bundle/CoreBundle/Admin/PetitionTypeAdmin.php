@@ -38,11 +38,12 @@ final class PetitionTypeAdmin extends AbstractAdmin
             ->add('slug', null, ['label' => 'entity.petition_type.slug'])
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'show'   => [],
+                    'edit'   => [],
                     'delete' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -50,11 +51,11 @@ final class PetitionTypeAdmin extends AbstractAdmin
         $form
             ->add('name', null, ['label' => 'entity.petition_type.name'])
             ->add('slug', null, [
-                'attr' => ['readonly' => true],
+                'attr'  => ['readonly' => true],
                 'label' => 'entity.petition_type.slug',
-                'help' => 'entity.petition_type.slug_help'
+                'help'  => 'entity.petition_type.slug_help',
             ])
-            ;
+        ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
