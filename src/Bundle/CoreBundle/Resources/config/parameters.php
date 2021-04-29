@@ -30,6 +30,5 @@ return static function (ContainerConfigurator $container)
         ->set('lotgd_bundle.paypal.site.country', 'US')
         ->set('lotgd_bundle.paypal.site.email', '')
         ->set('lotgd_bundle.donation.points_per_currency_unit', 100)
-        ->set('lotgd_bundle.petitions.types', 'petition.option.general,petition.option.report.bug,petition.option.suggestion,petition.option.comment,petition.option.other')
     ;
 };
