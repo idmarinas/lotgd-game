@@ -14,14 +14,15 @@
 namespace Lotgd\Bundle\CoreBundle\Form;
 
 use Laminas\Filter;
-use Lotgd\Bundle\CoreBundle\Form\Type\PetitionTypesType;
+use Lotgd\Bundle\CoreBundle\Entity\Petition;
+use Lotgd\Bundle\CoreBundle\Entity\PetitionType as EntityPetitionType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class PetitionType extends AbstractType
 {
@@ -31,34 +32,38 @@ class PetitionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('character', TextType::class, [
-                'label'       => 'character',
+            ->add('avatarName', TextType::class, [
+                'label'    => 'avatar_name',
                 'required' => false,
-                'constraints' => [
-                    new Assert\Length(['min' => 0, 'max' => 100]),
+                'filters'  => [
+                    new Filter\StripTags(),
+                    new Filter\StripNewlines(),
                 ],
+            ])
+            ->add('userOfAvatar', TextType::class, [
+                'label'   => 'user_of_avatar',
                 'filters' => [
                     new Filter\StripTags(),
                     new Filter\StripNewlines(),
                 ],
             ])
             ->add('email', EmailType::class, [
-                'label'       => 'email',
-                'constraints' => [
-                    new Assert\NotNull(),
-                    new Assert\Email(),
-                ],
+                'label' => 'email',
             ])
-            ->add('problem_type', PetitionTypesType::class, [
-                'label'     => 'petition.type',
-                'petitions' => $options['petitions'],
+            ->add('problemType', EntityType::class, [
+                'label'        => 'petition.type',
+                'class'        => EntityPetitionType::class,
+                'choice_label' => 'name',
+            ])
+            ->add('subject', TextType::class, [
+                'label'   => 'subject',
+                'filters' => [
+                    new Filter\StripTags(),
+                    new Filter\StripNewlines(),
+                ],
             ])
             ->add('description', TextareaType::class, [
-                'label'       => 'description',
-                'constraints' => [
-                    new Assert\Length(['max' => 65000]),
-                    new Assert\NotNull(),
-                ],
+                'label'   => 'description',
                 'filters' => [
                     new Filter\StripTags(),
                 ],
@@ -72,7 +77,7 @@ class PetitionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'         => null,
+            'data_class'         => Petition::class,
             'petitions'          => [],
             'translation_domain' => 'lotgd_core_form_petition',
         ]);
