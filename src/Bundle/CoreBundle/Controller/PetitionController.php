@@ -13,9 +13,9 @@
 
 namespace Lotgd\Bundle\CoreBundle\Controller;
 
-use Lotgd\Bundle\CoreBundle\Entity\Petitions;
+use Lotgd\Bundle\CoreBundle\Entity\Petition;
 use Lotgd\Bundle\CoreBundle\Form\PetitionType;
-use Lotgd\Bundle\CoreBundle\Repository\PetitionsRepository;
+use Lotgd\Bundle\CoreBundle\Repository\PetitionRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,7 +48,7 @@ class PetitionController extends AbstractController
     /**
      * @Route("/help", name="lotgd_core_petition_help")
      */
-    public function help(Request $request, PetitionsRepository $repository): Response
+    public function help(Request $request, PetitionRepository $repository): Response
     {
         $networkRestriction = false;
         $messageSend        = '';
@@ -62,8 +62,21 @@ class PetitionController extends AbstractController
             $messageNetwork     = 'flash.message.section.default.error.network';
         }
 
-        $form = $this->createForm(PetitionType::class, null, [
-            'petitions' => \explode(',', $this->getParameter('lotgd_bundle.petitions.types')),
+        $entity = (new Petition())
+            ->setIpAddress($request->getClientIp())
+        ;
+
+        //-- If user is logged in set user and avatar
+        if ($this->getUser())
+        {
+            $entity->setUser($this->getUser())
+                ->setAvatar($this->getUser()->getAvatar())
+                ->setAvatarName($this->getUser()->getAvatar()->getName())
+                ->setUserOfAvatar($this->getUser()->getUsername())
+            ;
+        }
+
+        $form = $this->createForm(PetitionType::class, $entity, [
             'action'    => $this->generateUrl('lotgd_core_petition_help'),
         ]);
         $formClone = clone $form;
@@ -72,18 +85,11 @@ class PetitionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() && ! $networkRestriction)
         {
-            $data = $form->getData();
+            $entity     = $form->getData();
+            $doctrine = $this->getDoctrine()->getManager();
 
-            $entity = (new Petitions())
-                ->setAuthor($this->getUser() ? $this->getUser()->getId() : 0)
-                ->setDate(new \DateTime('now'))
-                ->setBody($data)
-                ->setPageinfo($request->getSession()->all())
-                ->setIp($request->getClientIp())
-            ;
-
-            $this->getDoctrine()->getManager()->persist($entity);
-            $this->getDoctrine()->getManager()->flush();
+            $doctrine->persist($entity);
+            $doctrine->flush();
 
             $messageSend = 'flash.message.section.default.success.send';
             $form        = $formClone;
@@ -103,7 +109,7 @@ class PetitionController extends AbstractController
     /**
      * If the admin wants it, email the petitions to them.
      */
-    private function emailPetitionToAdmin(Petitions $entity): void
+    private function emailPetitionToAdmin(Petition $entity): void
     {
         $adminEmail = $this->getParameter('lotgd_bundle.game.server.admin.email');
         $validEmail = $this->validator->validate($adminEmail, [
