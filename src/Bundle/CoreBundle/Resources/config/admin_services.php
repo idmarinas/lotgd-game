@@ -107,6 +107,7 @@ return static function (ContainerConfigurator $container)
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
             ])
             ->public()
+        //-- Admin for Referers (url)
         ->set('lotgd_referer.admin', Admin\ReferersAdmin::class)
             ->args([null, Entity\Referers::class, null])
             ->call('setTranslationDomain', ['lotgd_core_admin'])
@@ -114,6 +115,30 @@ return static function (ContainerConfigurator $container)
                 'manager_type' => 'orm',
                 'group' => 'menu.admin.mechanics.group',
                 'label' => 'menu.admin.referer.label_referer',
+                'label_catalogue' => 'lotgd_core_admin',
+                'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
+            ])
+            ->public()
+        // //-- Admin for petitions
+        // ->set('lotgd_petition.admin', Admin\PetitionAdmin::class)
+        //     ->args([null, Entity\Petition::class, null])
+        //     ->call('setTranslationDomain', ['lotgd_core_admin'])
+        //     ->tag('sonata.admin', [
+        //         'manager_type' => 'orm',
+        //         'group' => 'menu.admin.action.group',
+        //         'label' => 'menu.admin.petition.label_petition',
+        //         'label_catalogue' => 'lotgd_core_admin',
+        //         'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
+        //     ])
+        //     ->public()
+        //-- Admin for petitions types (create/update/delete types of petitions)
+        ->set('lotgd_petition_type.admin', Admin\PetitionTypeAdmin::class)
+            ->args([null, Entity\PetitionType::class, null])
+            ->call('setTranslationDomain', ['lotgd_core_admin'])
+            ->tag('sonata.admin', [
+                'manager_type' => 'orm',
+                'group' => 'menu.admin.settings.group',
+                'label' => 'menu.admin.petition_type.label_petition_type',
                 'label_catalogue' => 'lotgd_core_admin',
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
             ])
