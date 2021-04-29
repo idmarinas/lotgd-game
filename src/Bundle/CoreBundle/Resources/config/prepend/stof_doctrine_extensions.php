@@ -16,7 +16,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 return static function (ContainerConfigurator $container): void
 {
     $container->extension('stof_doctrine_extensions', [
-        'default_locale' => '%kernel.default_locale%',
+        'translation_fallback' => true,
         'orm'            => [
             'default' => [
                 'translatable'        => true,
