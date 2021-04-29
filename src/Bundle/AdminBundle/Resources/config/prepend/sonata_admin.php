@@ -115,6 +115,7 @@ return static function (ContainerConfigurator $container): void
                 ],
                 'menu.admin.settings.group' => [
                     'icon' => '<i class="fa fa-cogs"></i>',
+                    'label_catalogue' => 'lotgd_admin_default',
                 ],
             ],
         ],
