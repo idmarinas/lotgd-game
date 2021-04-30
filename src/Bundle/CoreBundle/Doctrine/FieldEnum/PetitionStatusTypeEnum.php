@@ -28,4 +28,16 @@ class PetitionStatusTypeEnum extends Enum
     public const BUG             = 'bug';
     public const AWAITING_POINTS = 'awaiting_points';
     public const CLOSED          = 'closed';
+
+    public static function toChoices(): array
+    {
+        $choices = [];
+
+        foreach(self::toArray() as $key => $value)
+        {
+            $choices[strtolower($key)] = 'form.petition.status.option.'.$value;
+        }
+
+        return $choices;
+    }
 }
