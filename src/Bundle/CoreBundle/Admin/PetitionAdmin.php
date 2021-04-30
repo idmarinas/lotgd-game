@@ -105,13 +105,13 @@ final class PetitionAdmin extends AbstractAdmin
             ->add('avatarName', null, ['label' => 'entity.petition.avatar_name'])
             ->add('userOfAvatar', null, ['label' => 'entity.petition.user_of_avatar'])
             ->add('email', null, ['label' => 'entity.petition.email'])
-            ->add('subject', null, ['label' => 'entity.petition.subject'])
-            ->add('description', null, ['label' => 'entity.petition.description'])
             ->add('ipAddress', null, ['label' => 'entity.petition.ip_address'])
             ->add('closeDate', null, ['label' => 'entity.petition.close_date'])
             ->add('closeUser', null, ['label' => 'entity.petition.close_user'])
             ->add('createdAt', null, ['label' => 'entity.petition.created_at'])
             ->add('updatedAt', null, ['label' => 'entity.petition.updated_at'])
+            ->add('subject', null, ['label' => 'entity.petition.subject'])
+            ->add('description', null, ['label' => 'entity.petition.description'])
         ;
     }
 }
