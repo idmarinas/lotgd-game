@@ -113,6 +113,10 @@ return static function (ContainerConfigurator $container): void
                 'menu.admin.logdnet.group' => [
                     'icon' => '<i class="fa fa-wifi"></i>',
                 ],
+                'menu.admin.configuration.group' => [
+                    'icon' => '<i class="fa fa-cog"></i>',
+                    'label_catalogue' => 'lotgd_admin_default',
+                ],
                 'menu.admin.settings.group' => [
                     'icon' => '<i class="fa fa-cogs"></i>',
                     'label_catalogue' => 'lotgd_admin_default',

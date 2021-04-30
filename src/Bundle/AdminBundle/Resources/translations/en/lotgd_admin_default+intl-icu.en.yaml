@@ -24,4 +24,5 @@ menu.admin:
     editor.group: Editors
     action.group: Actions
     mechanics.group: Mechanics
+    configuration.group: Configuration
     settings.group: Settings
