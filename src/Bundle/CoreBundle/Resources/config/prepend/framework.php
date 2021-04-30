@@ -31,6 +31,11 @@ return static function (ContainerConfigurator $container): void
                     'User-Agent' => 'LoTGD Core Package/RSS Reader'
                 ]
             ]
+                ],
+        'validation' => [
+            'auto_mapping' => [
+                'Lotgd\\CoreBundle\\Entity\\' => []
+            ]
         ]
     ]);
 };
