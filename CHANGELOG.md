@@ -108,7 +108,9 @@ For historic Changelog [visit](https://github.com/idmarinas/lotgd-game/blob/5.1.
     -   `urltoarray`, not in use.
 
 ### :notebook: NOTES
-
+-   **Before migrate to 6.0.0 version**
+    -   **Important** The petition system has been renewed. Therefore, the old system is not compatible with the new one.  
+        Before migrating to this new version from an old one, fix all previous requests or create a copy.
 -   **Notes**:
     -   :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
 -   **Upgrade/Install for version 5.0.0 and up**

@@ -10,6 +10,7 @@
 
 -   Agregar la validación a las entidades (sólo algunas tienen validaciones de los campos)
 -   Agregar el envio de un correo privado cuando se agrega una donación manual. (DonatorAdmin panel)
+-   Crear un cronjob (command console) para eliminar peticiones cerradas y antiguas.
 
 -   Esta versión LoTGD Core será una app Symfony Framework.
     -   Se hace como un Bundle y se crea un lotgd-skeleton para crear una versión personalizada.
