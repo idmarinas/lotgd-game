@@ -53,9 +53,9 @@ class PetitionType implements TranslatableInterface
      */
     private $translations;
 
-    public function __toString(): ?string
+    public function __toString(): string
     {
-        return $this->getName() ?: $this->getSlug();
+        return (string) ($this->getName() ?: $this->getSlug());
     }
 
     public function getName(): ?string
