@@ -1,0 +1,78 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "09:00"
+    timezone: Europe/Madrid
+  open-pull-requests-limit: 10
+  versioning-strategy: widen
+  ignore:
+  - dependency-name: sweetalert2
+    versions:
+    - 10.15.0
+    - 10.15.1
+    - 10.15.2
+    - 10.15.4
+    - 10.15.6
+    - 10.15.7
+    - 10.16.0
+    - 10.16.4
+    - 10.16.5
+    - 10.16.6
+  - dependency-name: core-js
+    versions:
+    - 3.10.0
+    - 3.10.2
+    - 3.11.0
+    - 3.9.0
+  - dependency-name: postcss
+    versions:
+    - 8.2.12
+    - 8.2.7
+    - 8.2.8
+    - 8.2.9
+  - dependency-name: "@yaireo/tagify"
+    versions:
+    - 3.22.3
+    - 3.23.0
+    - 3.23.1
+    - 3.25.0
+    - 4.0.0
+    - 4.0.2
+    - 4.0.3
+    - 4.0.4
+    - 4.0.5
+  - dependency-name: sass
+    versions:
+    - 1.32.11
+  - dependency-name: "@symfony/stimulus-bridge"
+    versions:
+    - 2.1.0
+  - dependency-name: less-loader
+    versions:
+    - 8.0.0
+    - 8.1.0
+  - dependency-name: postcss-loader
+    versions:
+    - 5.0.0
+    - 5.2.0
+  - dependency-name: jquery
+    versions:
+    - 3.6.0
+  - dependency-name: sass-loader
+    versions:
+    - 11.0.0
+    - 11.0.1
+  - dependency-name: "@symfony/webpack-encore"
+    versions:
+    - 1.0.2
+    - 1.1.0
+    - 1.1.1
+  - dependency-name: webpack-notifier
+    versions:
+    - 1.13.0
+  - dependency-name: autoprefixer
+    versions:
+    - 10.2.4
