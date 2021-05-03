@@ -46,7 +46,6 @@ final class PetitionAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $list): void
     {
-        dump(PetitionStatusTypeEnum::values());
         $list
             ->add('id', null, ['label' => 'entity.petition.id'])
             ->add('userOfAvatar', null, ['label' => 'entity.petition.user_of_avatar'])
