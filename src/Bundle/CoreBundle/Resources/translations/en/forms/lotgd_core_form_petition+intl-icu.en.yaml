@@ -1,5 +1,7 @@
-character: "Your Character's Name"
+avatar_name: "Your Character's Name"
+user_of_avatar: Your username of account
 email: 'Your email address'
+subject: Subject of your petition
 description: 'Description of the problem'
 petition:
     type: 'Type of your Problem / Enquiry'
