@@ -102,6 +102,11 @@ class User implements UserInterface
      */
     private $lastConnection;
 
+    /**
+     * @ORM\Column(type="string", length=45)
+     */
+    private $ipAddress;
+
     public function __construct()
     {
         $this->avatars        = new ArrayCollection();
@@ -227,6 +232,18 @@ class User implements UserInterface
     public function setLastConnection(?\DateTimeInterface $lastConnection)
     {
         $this->lastConnection = $lastConnection;
+
+        return $this;
+    }
+
+    public function getIpAddress(): ?string
+    {
+        return $this->ipAddress;
+    }
+
+    public function setIpAddress(string $ipAddress): self
+    {
+        $this->ipAddress = $ipAddress;
 
         return $this;
     }
