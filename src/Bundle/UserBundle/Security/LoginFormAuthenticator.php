@@ -67,6 +67,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             'username'   => $request->request->get('username'),
             'password'   => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
+            'ip_address'   => $request->getClientIp()
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
@@ -103,7 +104,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     {
         if ($this->passwordEncoder->isPasswordValid($user, $credentials['password']))
         {
-            $user->setLastConnection(new \DateTime('now'));
+            $user
+                ->setLastConnection(new \DateTime('now'))
+                ->setIpAddress($credentials['ip_address'])
+            ;
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
