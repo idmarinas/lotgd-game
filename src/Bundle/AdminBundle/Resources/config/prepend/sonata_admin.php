@@ -121,6 +121,11 @@ return static function (ContainerConfigurator $container): void
                     'icon' => '<i class="fa fa-cogs"></i>',
                     'label_catalogue' => 'lotgd_admin_default',
                 ],
+                //-- This menu group you can add your admin panels
+                'menu.admin.lotgd_bundle.group' => [
+                    'icon' => '<i class="fa fa-cubes"></i>',
+                    'label_catalogue' => 'lotgd_admin_default',
+                ],
             ],
         ],
         'security' => [

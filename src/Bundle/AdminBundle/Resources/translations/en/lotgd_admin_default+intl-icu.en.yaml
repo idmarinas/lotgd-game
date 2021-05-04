@@ -26,3 +26,4 @@ menu.admin:
     mechanics.group: Mechanics
     configuration.group: Configuration
     settings.group: Settings
+    lotgd_bundle.group: LoTGD Bundles
