@@ -6,11 +6,16 @@
 
 -   ...
 
+
+# Documentación
+-   Menu group para los panales de administración "menu.admin.lotgd_bundle.group"
+
 # Actualmente haciendo... versión 6.0.0
 
 -   Agregar la validación a las entidades (sólo algunas tienen validaciones de los campos)
 -   Agregar el envio de un correo privado cuando se agrega una donación manual. (DonatorAdmin panel)
 -   Crear un cronjob (command console) para eliminar peticiones cerradas y antiguas.
+-   Crear el modo de mantenimiento 
 
 -   Esta versión LoTGD Core será una app Symfony Framework.
     -   Se hace como un Bundle y se crea un lotgd-skeleton para crear una versión personalizada.
