@@ -143,5 +143,17 @@ return static function (ContainerConfigurator $container)
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
             ])
             ->public()
+        //-- Admin for alters users
+        ->set('lotgd_alt_user.admin', Admin\AltUserAdmin::class)
+            ->args([null, UserEntity\User::class, null])
+            ->call('setTranslationDomain', ['lotgd_core_admin'])
+            ->tag('sonata.admin', [
+                'manager_type' => 'orm',
+                'group' => 'menu.admin.action.group',
+                'label' => 'menu.admin.alt_user.label_alt_user',
+                'label_catalogue' => 'lotgd_core_admin',
+                'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
+            ])
+            ->public()
     ;
 };

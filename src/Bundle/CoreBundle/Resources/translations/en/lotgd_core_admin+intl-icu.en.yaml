@@ -1,0 +1,166 @@
+# For menu en Admin panel
+menu.admin:
+    logdnet:
+        group: LogdNet
+        label_logdnet: LogdNet
+    title:
+        group: Titles
+        label_title: Title
+    armor:
+        group: Armors
+        label_armor: Armor
+    weapon:
+        group: Weapons
+        label_weapon: Weapon
+    paylog:
+        group: Paylog
+        label_paylog: Paylog
+    donator:
+        group: Donators
+        label_donator: Donator
+    referer:
+        group: Referers
+        label_referer: Referer
+    petition:
+        group: Petitions
+        label_petition: Petition
+    petition_type:
+        group: Petitions types
+        label_petition_type: Petition types
+    alt_user:
+        group: Alternate users
+        label_alt_user: Alternate user
+
+# Breadcrum menu bar
+breadcrumb:
+    link_logdnet_list: List of servers in LogdNet
+    link_titles_list: List of titles
+    link_armor_list: List of armors
+    link_weapons_list: List of weapons
+    link_paylog_list: List of PayLog
+    link_donator_list: List of Donators
+    link_donator_add_manual: Manual donation
+    link_referers_list: List of Referers
+    link_petition_list: List of Petitions
+    link_petition_type_list: List of Petition Types
+    link_alt_user_list: List of Alternate users
+
+# Dashboard
+lotgd_mount.dashboard.top:
+    total_logdnet: Servers of LogdNet
+    total_title: Total Titles
+    total_armor: Total Armors
+
+# Action in list page
+list.label__action: Actions
+list.label__add_manual: Add manual donation
+
+# Fields names of entity
+entity:
+    logdnet:
+        serverid: ID
+        address: URL
+        description: Description
+        priority: Priority
+        lastupdate: Last update
+        version: Game version
+        admin: Administrator
+        lastping: Last ping
+        recentips: Recent IP
+        count: Users count
+        lang: Language code
+    title:
+        titleid: Title ID
+        dk: Dragon Kills
+        male: Male Title
+        female: Female Title
+    armor:
+        armorid: Armor ID
+        armorname: Armor Name
+        defense: Defense
+        level: DK level
+        value: Cost
+    weapon:
+        weaponid: Weapon ID
+        weaponname: Weapon Name
+        damage: Damage
+        level: DK Level
+        value: Cost
+    paylog:
+        payid: "ID"
+        processdate: Process Date
+        amount: Amount
+        info: Info
+        type: Type
+        gross: Gross
+        txfee: PayPal Fee
+        txnid: PayPal ID
+        net: Net
+        name: Name
+        response: Response of PayPal
+        processed: Processed
+        filed: Filed
+        user: Who
+    donator:
+        id: User ID
+        username: Username
+        email: Email
+        donation: Points
+        donation_spent: Points spent
+    referers:
+        refererid: ID
+        uri: URI
+        count: Count
+        total_count: Total Count
+        last: Last
+        site: Site
+        dest: Destination
+        ip: Last IP
+    petition:
+        id: ID
+        user: User object
+        avatar: Avatar object
+        avatar_name: Avatar name
+        user_of_avatar: Username
+        email: Email
+        subject: Subject
+        description: Description
+        ip_address: Ip Address
+        status: Status
+        close_date: Close Date
+        close_user: Close user
+        created_at: Created At
+        updated_at: Updated At
+    petition_type:
+        id: ID
+        name: Petition name
+        slug: Slug
+        slug_help: Slug code is auto-generate
+    alt_user:
+        username: Username
+        email: Email
+        count_ip: Alts by IP
+        created_at: Created At
+        updated_at: Updated At
+        ip_address: IP Address
+
+# Fields for a form
+form:
+    donator:
+        id: User ID
+        txnid: PayPal ID
+        points: Points to give
+        reason: Reason
+        reason_value: Received donator points -- Manually assigned, not based on a known dollar donation
+        reason_value_txnid: Received donator points for donating -- Credited manually
+    petition.status.option:
+        unhandled: Unhandled
+        in_progress: In Progress
+        informational: Informational
+        escalated: Escalated
+        top_level: Top level
+        bug: Bug
+        awaiting_points: Awaiting Points
+        closed: Closed
+
+flash.donator.added_success: '{points,number} donation points added to {name}, reason: "{reason}"'
