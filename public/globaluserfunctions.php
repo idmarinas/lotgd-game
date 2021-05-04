@@ -13,7 +13,7 @@ $textDomain = 'grotto_globaluserfunctions';
 \LotgdNavigation::superuserGrottoNav();
 
 \LotgdNavigation::addHeader('globaluserfunctions.category.actions');
-\LotgdNavigation::addAdd('globaluserfunctions.nav.reset', 'globaluserfunctions.php?op=dkpointreset');
+\LotgdNavigation::addNav('globaluserfunctions.nav.reset', 'globaluserfunctions.php?op=dkpointreset');
 
 $op = (string) \LotgdRequest::getQuery('op');
 $params = [];
