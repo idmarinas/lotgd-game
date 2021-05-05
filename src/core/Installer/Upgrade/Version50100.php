@@ -42,4 +42,28 @@ class Version50100 extends InstallerAbstract
 
         return true;
     }
+
+    //-- Update array fields
+    public function step1(): bool
+    {
+        try
+        {
+            $this->doctrine->getConnection()->executeQuery(sprintf(
+                "UPDATE `accounts` SET `donationconfig` = 'a:0:{}' WHERE `donationconfig` = '%s' OR `donationconfig` = '%s'",
+                's:0:"";',
+                'N;'
+            ));
+            $this->doctrine->getConnection()->executeQuery(sprintf(
+                "UPDATE `accounts` SET `prefs` = 'a:0:{}' WHERE `prefs` = '%s' OR `prefs` = '%s'",
+                's:0:"";',
+                'N;'
+            ));
+        }
+        catch (\Throwable $th)
+        {
+            return false;
+        }
+
+        return true;
+    }
 }
