@@ -68,7 +68,7 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
         yield ['/game/reset-password'];
         yield ['/game/logdnet/net'];
         yield ['/game/logdnet/list'];
-        yield ['/game/petition/help'];
+        // yield ['/game/petition/help'];
         yield ['/_grotto/login'];
     }
 
