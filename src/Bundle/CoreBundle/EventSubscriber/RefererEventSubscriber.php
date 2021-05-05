@@ -36,25 +36,25 @@ class RefererEventSubscriber implements EventSubscriberInterface
 
     public function onKernelRequest()
     {
-        $url  = \parse_url($this->request->server->get('SERVER_NAME'), PHP_URL_HOST);
+        $url  = $this->request->server->get('SERVER_NAME');
         $uri  = $this->request->server->get('HTTP_REFERER');
         $site = $uri ? \parse_url($uri, PHP_URL_HOST) : '';
 
         //-- Ignore if not have $uri or $site or referer is the server
-        if ($url == $site || ! $uri || ! $site)
+        if ($url == $site || \parse_url($url, PHP_URL_HOST) == $site || ! $uri || ! $site)
         {
             return;
         }
 
         $url = \sprintf('%s://%s/%s',
-            $this->request->server->get('REQUEST_SCHEME'),
+            $this->request->server->get('REQUEST_SCHEME', $this->request->server->get('SYMFONY_APPLICATION_DEFAULT_ROUTE_SCHEME')),
             $this->request->server->get('SERVER_NAME'),
             $this->request->server->get('REQUEST_URI')
         );
 
         $refererRepository = $this->doctrine->getRepository(Referers::class);
-        $entity          = $refererRepository->findOneBy(['uri' => $uri]);
-        $entity          = $entity ?: new Referers();
+        $entity            = $refererRepository->findOneBy(['uri' => $uri]);
+        $entity            = $entity ?: new Referers();
 
         $entity->setUri($uri)
             ->incrementCount()
