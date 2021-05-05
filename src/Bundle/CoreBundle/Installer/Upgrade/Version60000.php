@@ -13,13 +13,25 @@
 
 namespace Lotgd\Bundle\CoreBundle\Installer\Upgrade;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Lotgd\Bundle\CoreBundle\Installer\InstallerAbstract;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Version60000 extends InstallerAbstract
 {
     protected $upgradeVersion = 60000;
     protected $migration      = 20210317133257;
+
+    private $paginator;
+
+    public function __construct(EntityManagerInterface $doctrine, TranslatorInterface $translator, PaginatorInterface $paginator)
+    {
+        parent::__construct($doctrine, $translator);
+
+        $this->paginator = $paginator;
+    }
 
     //-- Delete old files
     public function step0()
@@ -125,5 +137,57 @@ class Version60000 extends InstallerAbstract
         }
 
         return true;
+    }
+
+    /**
+     * Step 2: Update commentary table.
+     */
+    public function step2(): bool
+    {
+        try
+        {
+            $page       = 1;
+            /** @var \Doctrine\ORM\EntityRepository */
+            $repository = $this->doctrine->getRepository('LotgdCore:Commentary');
+            $query      = $repository->createQueryBuilder('u');
+            $pagination = $this->paginator->paginate($query, $page, 100);
+            $pageCount  = (int) \ceil($pagination->getTotalItemCount() / $pagination->getItemNumberPerPage());
+
+            do
+            {
+                foreach ($pagination as $entity)
+                {
+                    if (
+                        $entity->getCommentRaw()
+                        || empty($entity->getExtra())
+                        || ! isset($entity->getExtra()['rawcomment'])
+                        || ! $entity->getExtra()['rawcomment']
+                    ) {
+                        continue;
+                    }
+
+                    $extra = $entity->getExtra();
+
+                    $entity->setCommentRaw($extra['rawcomment']);
+
+                    unset($extra['rawcomment']);
+
+                    $entity->setExtra($extra);
+
+                    $this->doctrine->persist($entity);
+                }
+
+                $this->doctrine->flush();
+
+                ++$page;
+                $pagination = $this->paginator->paginate($query, $page, 100);
+            } while ($pagination->count() && $page <= $pageCount);
+
+            return true;
+        }
+        catch (\Throwable $th)
+        {
+            return false;
+        }
     }
 }
