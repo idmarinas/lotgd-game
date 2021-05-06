@@ -99,6 +99,7 @@ final class UserCreateCommand extends Command
                     $this->getPassword($input, $output)
                 )
             );
+            $user->setIpAddress('::1'); //-- Set a IP address to localhost (is a console command)
 
             //-- Save new user
             $this->doctrine->persist($user);
