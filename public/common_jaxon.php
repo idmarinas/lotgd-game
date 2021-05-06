@@ -65,27 +65,22 @@ $l  = \Lotgd\Core\Kernel::LICENSE;
 do_forced_nav(ALLOW_ANONYMOUS, OVERRIDE_FORCED_NAV);
 
 //-- Check if have a full maintenance mode activate force to log out all players
-if (getsetting('fullmaintenance', 0))
+if (getsetting('fullmaintenance', 0) && (($session['user']['loggedin'] ?? false) && 0 >= ($session['user']['superuser'] & SU_DEVELOPER)))
 {
-    if (($session['user']['loggedin'] ?? false) && 0 >= ($session['user']['superuser'] & SU_DEVELOPER))
+    $session['user']['restorepage'] = 'news.php';
+
+    if ($session['user']['location'] == $iname)
     {
-        $session['user']['restorepage'] = 'news.php';
-
-        if ($session['user']['location'] == $iname)
-        {
-            $session['user']['restorepage'] = 'inn.php?op=strolldown';
-        }
-
-        \LotgdKernel::get('cache.app')->delete('char-list-home-page');
-
-        saveuser();
-
-        \LotgdSession::invalidate();
-
-        $session = [];
+        $session['user']['restorepage'] = 'inn.php?op=strolldown';
     }
 
-    exit;
+    \LotgdKernel::get('cache.app')->delete('char-list-home-page');
+
+    saveuser();
+
+    \LotgdSession::invalidate();
+
+    $session = [];
 }
 
 $script = \substr(LotgdRequest::getServer('SCRIPT_NAME'), 0, \strrpos(LotgdRequest::getServer('SCRIPT_NAME'), '.'));
