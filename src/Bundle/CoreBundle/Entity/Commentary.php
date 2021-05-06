@@ -14,6 +14,7 @@
 namespace Lotgd\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Lotgd\Bundle\UserBundle\Entity\User;
 
 /**
  * Commentary.
@@ -81,9 +82,7 @@ class Commentary implements EntityInterface
     private $extra;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(type="integer", options={"default": 0, "unsigned": true})
+     * @ORM\ManyToOne(targetEntity=User::class)
      */
     private $author = 0;
 
@@ -95,11 +94,10 @@ class Commentary implements EntityInterface
     private $authorName = '';
 
     /**
-     * @var int
-     *
-     * @ORM\Column(type="integer", options={"default": 0, "unsigned": true})
+     * @ORM\ManyToOne(targetEntity=Clans::class)
+     * @ORM\JoinColumn(referencedColumnName="clanid")
      */
-    private $clanId = 0;
+    private $clan;
 
     /**
      * @var int
@@ -201,12 +199,8 @@ class Commentary implements EntityInterface
 
     /**
      * Set the value of Author.
-     *
-     * @param int $author
-     *
-     * @return self
      */
-    public function setAuthor($author)
+    public function setAuthor(?User $author): self
     {
         $this->author = $author;
 
@@ -216,7 +210,7 @@ class Commentary implements EntityInterface
     /**
      * Get the value of Author.
      */
-    public function getAuthor(): int
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
@@ -419,22 +413,18 @@ class Commentary implements EntityInterface
 
     /**
      * Get the value of clanId.
-     *
-     * @return int
      */
-    public function getClanId()
+    public function getClan(): ?Clans
     {
-        return $this->clanId;
+        return $this->clan;
     }
 
     /**
      * Set the value of clanId.
-     *
-     * @return self
      */
-    public function setClanId(int $clanId)
+    public function setClan(?Clans $clan): self
     {
-        $this->clanId = $clanId;
+        $this->clan = $clan;
 
         return $this;
     }
