@@ -127,7 +127,7 @@ class Armor implements TranslatableInterface
      *
      * @return self
      */
-    public function setArmorname(string $armorname)
+    public function setArmorname(?string $armorname)
     {
         $this->armorname = $armorname;
 
@@ -137,7 +137,7 @@ class Armor implements TranslatableInterface
     /**
      * Get the value of Armorname.
      */
-    public function getArmorname(): string
+    public function getArmorname(): ?string
     {
         return $this->armorname;
     }
