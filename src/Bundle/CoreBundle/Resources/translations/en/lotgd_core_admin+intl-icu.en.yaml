@@ -33,15 +33,18 @@ menu.admin:
 
 # Breadcrum menu bar
 breadcrumb:
-    link_logdnet_list: List of servers in LogdNet
-    link_titles_list: List of titles
+    link_logdnet_list: List of Servers in LogdNet
+    link_titles_list: List of Titles
+    link_armor_create: Create Armor
     link_armor_list: List of armors
-    link_weapons_list: List of weapons
+    link_weapons_create: Create Weapon
+    link_weapons_list: List of Weapons
     link_paylog_list: List of PayLog
     link_donator_list: List of Donators
     link_donator_add_manual: Manual donation
     link_referers_list: List of Referers
     link_petition_list: List of Petitions
+    link_petition_type_create: Create Petition Type
     link_petition_type_list: List of Petition Types
     link_alt_user_list: List of Alternate users
 
