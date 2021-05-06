@@ -30,14 +30,7 @@ use Lotgd\Bundle\UserBundle\Entity\User;
  */
 class Commentary implements EntityInterface
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer", options={"unsigned": true})
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    use Common\IdTrait;
 
     /**
      * @var string
@@ -84,7 +77,7 @@ class Commentary implements EntityInterface
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
      */
-    private $author = 0;
+    private $author;
 
     /**
      * @var string
@@ -125,7 +118,7 @@ class Commentary implements EntityInterface
      *
      * @ORM\Column(type="boolean", nullable=false, options={"default": 0})
      */
-    private $hidden = 0;
+    private $hidden = false;
 
     /**
      * @var string
@@ -135,11 +128,9 @@ class Commentary implements EntityInterface
     private $hiddenComment = '';
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\ManyToOne(targetEntity=User::class)
      */
-    private $hiddenBy = '';
+    private $hiddenBy;
 
     /**
      * @var string
@@ -154,35 +145,13 @@ class Commentary implements EntityInterface
     }
 
     /**
-     * Set the value of id.
-     *
-     * @param int $id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of id.
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
      * Set the value of Section.
      *
      * @param string $section
      *
      * @return self
      */
-    public function setSection($section)
+    public function setSection(?string $section)
     {
         $this->section = $section;
 
@@ -192,7 +161,7 @@ class Commentary implements EntityInterface
     /**
      * Get the value of Section.
      */
-    public function getSection(): string
+    public function getSection(): ?string
     {
         return $this->section;
     }
@@ -222,7 +191,7 @@ class Commentary implements EntityInterface
      *
      * @return self
      */
-    public function setComment($comment)
+    public function setComment(?string $comment)
     {
         $this->comment = $comment;
 
@@ -232,7 +201,7 @@ class Commentary implements EntityInterface
     /**
      * Get the value of Comment.
      */
-    public function getComment(): string
+    public function getComment(): ?string
     {
         return $this->comment;
     }
@@ -242,7 +211,7 @@ class Commentary implements EntityInterface
      *
      * @return string
      */
-    public function getCommentRaw()
+    public function getCommentRaw(): ?string
     {
         return $this->commentRaw;
     }
@@ -252,7 +221,7 @@ class Commentary implements EntityInterface
      *
      * @return self
      */
-    public function setCommentRaw(string $commentRaw)
+    public function setCommentRaw(?string $commentRaw)
     {
         $this->commentRaw = $commentRaw;
 
@@ -369,10 +338,8 @@ class Commentary implements EntityInterface
 
     /**
      * Get the value of hiddenBy.
-     *
-     * @return string
      */
-    public function getHiddenBy()
+    public function getHiddenBy(): ?User
     {
         return $this->hiddenBy;
     }
@@ -382,7 +349,7 @@ class Commentary implements EntityInterface
      *
      * @return self
      */
-    public function setHiddenBy(string $hiddenBy)
+    public function setHiddenBy(?User $hiddenBy)
     {
         $this->hiddenBy = $hiddenBy;
 
