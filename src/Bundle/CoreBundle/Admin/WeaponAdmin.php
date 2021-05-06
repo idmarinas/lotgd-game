@@ -21,6 +21,17 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 final class WeaponAdmin extends AbstractAdmin
 {
+    private const VALUES = [1 => 48, 225, 585, 990, 1575, 2250, 2790, 3420, 4230, 5040, 5850, 6840, 8010, 9000, 10350];
+
+    public function preUpdate($object)
+    {
+        $object->setValue(self::VALUES[$object->getDamage()] ?? 48);
+    }
+
+    public function prePersist($object)
+    {
+        $object->setValue(self::VALUES[$object->getDamage()] ?? 48);
+    }
 
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
@@ -38,8 +49,8 @@ final class WeaponAdmin extends AbstractAdmin
         $list
             ->add('weaponid', null, ['label' => 'entity.weapon.weaponid'])
             ->add('weaponname', null, ['label' => 'entity.weapon.weaponname'])
-            ->add('value', null, ['label' => 'entity.weapon.value'])
-            ->add('damage', null, ['label' => 'entity.weapon.damage'])
+            ->add('value', null, ['attr' => ['readonly' => true], 'label' => 'entity.weapon.value'])
+            ->add('damage', null,  ['attr' => ['max' => 15, 'min' => 1],'label' => 'entity.weapon.damage'])
             ->add('level', null, ['label' => 'entity.weapon.level'])
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'actions' => [
