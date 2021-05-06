@@ -126,7 +126,7 @@ class Weapons implements TranslatableInterface
      *
      * @return self
      */
-    public function setWeaponname(string $weaponname)
+    public function setWeaponname(?string $weaponname)
     {
         $this->weaponname = $weaponname;
 
@@ -136,7 +136,7 @@ class Weapons implements TranslatableInterface
     /**
      * Get the value of Weaponname.
      */
-    public function getWeaponname(): string
+    public function getWeaponname(): ?string
     {
         return $this->weaponname;
     }
