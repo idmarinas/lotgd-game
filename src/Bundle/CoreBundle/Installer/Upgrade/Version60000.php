@@ -22,7 +22,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class Version60000 extends InstallerAbstract
 {
     protected $upgradeVersion = 60000;
-    protected $migration      = 20210317133257;
+    protected $migration      = 20210506112034;
 
     private $paginator;
 
