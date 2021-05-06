@@ -38,6 +38,11 @@ class UserVariable
         return $user;
     }
 
+    public function __toArray(): array
+    {
+        return $this->getUser();
+    }
+
     private function access(): PropertyAccessor
     {
         if (! $this->access instanceof PropertyAccessor)

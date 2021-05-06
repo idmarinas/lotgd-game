@@ -38,6 +38,11 @@ class SessionVariable
         return $sesion;
     }
 
+    public function __toArray(): array
+    {
+        return $this->getSession();
+    }
+
     private function access(): PropertyAccessor
     {
         if (! $this->access instanceof PropertyAccessor)
