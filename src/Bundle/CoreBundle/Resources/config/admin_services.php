@@ -83,18 +83,6 @@ return static function (ContainerConfigurator $container)
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
             ])
             ->public()
-        //-- Admin for commentary
-        // ->set('lotgd_commentary.admin', Admin\CommentaryAdmin::class)
-        //     ->args([null, Entity\Commentary::class, null])
-        //     ->call('setTranslationDomain', ['lotgd_core_admin'])
-        //     ->tag('sonata.admin', [
-        //         'manager_type' => 'orm',
-        //         'group' => 'menu.admin.action.group',
-        //         'label' => 'menu.admin.commentary.label_commentary',
-        //         'label_catalogue' => 'lotgd_core_admin',
-        //         'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
-        //     ])
-        //     ->public()
         //-- Admin for donator
         ->set('lotgd_donator.admin', Admin\DonatorAdmin::class)
             ->args([null, UserEntity\User::class, Controller\DonatorAdminController::class])
