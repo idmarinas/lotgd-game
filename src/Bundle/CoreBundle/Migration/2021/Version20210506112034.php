@@ -64,6 +64,8 @@ final class Version20210506112034 extends AbstractMigration
         $this->addSql('ALTER TABLE setting ADD CONSTRAINT FK_9F74B898A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D64987C61384 FOREIGN KEY (referer_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D64986383B10 FOREIGN KEY (avatar_id) REFERENCES avatar (id)');
+        $this->addSql('ALTER TABLE commentary ADD avatar_id INT UNSIGNED DEFAULT NULL');
+        $this->addSql('ALTER TABLE commentary ADD CONSTRAINT FK_1CAC12CA86383B10 FOREIGN KEY (avatar_id) REFERENCES avatar (id)');
 
     }
 
@@ -97,6 +99,7 @@ final class Version20210506112034 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_78FBAC5EA76ED395 ON paylog (user_id)');
         $this->addSql('DROP INDEX uri ON referers');
         $this->addSql('CREATE INDEX uri ON referers (uri)');
+        $this->addSql('CREATE INDEX IDX_1CAC12CA86383B10 ON commentary (avatar_id)');
     }
 
     private function lotgdImportData()
@@ -120,6 +123,7 @@ final class Version20210506112034 extends AbstractMigration
 
         //-- Update table commentary
         $this->addSql('UPDATE commentary AS c SET c.clan_id = NULL WHERE c.clan_id = 0');
+        $this->addSql('UPDATE commentary AS c SET c.avatar_id = (SELECT a.id FROM avatar AS a WHERE a.user_id = c.author_id)');
     }
 
     public function down(Schema $schema): void
@@ -177,5 +181,8 @@ final class Version20210506112034 extends AbstractMigration
         $this->addSql('ALTER TABLE paylog DROP user_id, DROP created_at, DROP updated_at, CHANGE processdate processdate DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL');
         $this->addSql('DROP INDEX uri ON referers');
         $this->addSql('CREATE INDEX uri ON referers (uri(255))');
+        $this->addSql('ALTER TABLE commentary DROP FOREIGN KEY FK_1CAC12CA86383B10');
+        $this->addSql('DROP INDEX IDX_1CAC12CA86383B10 ON commentary');
+        $this->addSql('ALTER TABLE commentary DROP avatar_id');
     }
 }
