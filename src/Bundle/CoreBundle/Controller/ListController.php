@@ -31,7 +31,7 @@ class ListController extends AbstractController
      */
     public function index(PaginatorInterface $paginator, Request $request): Response
     {
-        /** @var º\Doctrine\ORM\EntityManagerInterface */
+        /** @var \Doctrine\ORM\EntityManagerInterface */
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery("SELECT u FROM LotgdCore:Avatar AS u ORDER BY u.dragonkills DESC, u.level DESC");
 
