@@ -46,8 +46,10 @@ final class DonationButtonsBlock extends AbstractBlockService
 
         $alreadyRegisteredLogdnet = true;
 
-        if ( ! $this->session->get('logdnet_registered', false) || ! $user || $now > $user->getLastConnection())
-        {
+        if (
+            'prod' == $this->request->server->get('APP_ENV')
+            && (! $this->session->get('logdnet_registered', false) || ! $user || $now > $user->getLastConnection())
+        ) {
             $cacheTime                = 0;
             $alreadyRegisteredLogdnet = false;
             $this->session->set('logdnet_registered', true);
