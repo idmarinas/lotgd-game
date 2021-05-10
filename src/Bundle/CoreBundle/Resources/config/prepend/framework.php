@@ -16,8 +16,9 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 return static function (ContainerConfigurator $container): void
 {
     $container->extension('framework', [
-        'csrf_protection' => true,
-        'session'         => [
+        'csrf_protection'      => true,
+        'http_method_override' => true,
+        'session'              => [
             'enabled'         => true,
             'name'            => 'LegendOfTheGreenDragon',
             'handler_id'      => null,
@@ -28,14 +29,14 @@ return static function (ContainerConfigurator $container): void
         'http_client' => [
             'default_options' => [
                 'headers' => [
-                    'User-Agent' => 'LoTGD Core Package/RSS Reader'
-                ]
-            ]
+                    'User-Agent' => 'LoTGD Core Package/RSS Reader',
                 ],
+            ],
+        ],
         'validation' => [
             'auto_mapping' => [
-                'Lotgd\\CoreBundle\\Entity\\' => []
-            ]
-        ]
+                'Lotgd\\CoreBundle\\Entity\\' => [],
+            ],
+        ],
     ]);
 };
