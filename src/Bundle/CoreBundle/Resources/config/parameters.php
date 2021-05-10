@@ -29,6 +29,7 @@ return static function (ContainerConfigurator $container)
         ->set('lotgd_bundle.paypal.site.currency', 'USD')
         ->set('lotgd_bundle.paypal.site.country', 'US')
         ->set('lotgd_bundle.paypal.site.email', '')
+        ->set('lotgd_bundle.paypal.site.description', '')
         ->set('lotgd_bundle.donation.points_per_currency_unit', 100)
     ;
 };
