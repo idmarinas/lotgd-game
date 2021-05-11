@@ -71,9 +71,13 @@ class PetitionController extends AbstractController
         {
             $entity->setUser($this->getUser())
                 ->setAvatar($this->getUser()->getAvatar())
-                ->setAvatarName($this->getUser()->getAvatar()->getName())
                 ->setUserOfAvatar($this->getUser()->getUsername())
             ;
+
+            if ($this->getUser()->getAvatar())
+            {
+                $entity->setAvatarName($this->getUser()->getAvatar()->getName());
+            }
         }
 
         $form = $this->createForm(PetitionType::class, $entity, [
