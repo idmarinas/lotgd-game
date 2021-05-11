@@ -65,6 +65,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->setIpAddress($request->getClientIp());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
