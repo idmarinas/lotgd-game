@@ -22,7 +22,7 @@ return static function (ContainerConfigurator $container): void
             'blocks' => [
                 // Welcome message
                 [
-                    'type'     => 'sonata.block.service.text',
+                    'type'     => 'sonata.block.service.template',
                     'position' => 'left',
                     'settings' => [
                         'template' => '@LotgdAdmin/block/dashboard_welcome.html.twig',
