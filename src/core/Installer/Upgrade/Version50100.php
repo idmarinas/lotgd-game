@@ -66,4 +66,21 @@ class Version50100 extends InstallerAbstract
 
         return true;
     }
+
+    //-- Update cronjobs
+    public function step2(): bool
+    {
+        try
+        {
+            $sql = file_get_contents(__DIR__.'/data/50100/cronjobs.sql');
+
+            $this->doctrine->getConnection()->executeQuery($sql);
+        }
+        catch (\Throwable $th)
+        {
+            return false;
+        }
+
+        return true;
+    }
 }
