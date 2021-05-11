@@ -28,7 +28,7 @@ class CreatureAiType extends ChoiceType
 
         foreach ($files as $file)
         {
-            $defaultChoice[$file] = \rtrim($file, '.php');
+            $defaultChoice[$file] = \str_replace('.php', '', $file);
         }
 
         $resolver->setDefaults([
