@@ -8,7 +8,7 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.8.0
+ * @since 6.0.0
  */
 
 namespace Lotgd\Bundle\CoreBundle\Form\DataTransformer;
