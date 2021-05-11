@@ -34,7 +34,7 @@ if ($seen)
 \LotgdNavigation::addHeader('moderate.category.commentary');
 \LotgdNavigation::addHeader('moderate.category.sections');
 
-$commentary = new \Lotgd\Core\Output\Commentary();
+$commentary = \LotgdKernel::get(\Lotgd\Core\Output\Commentary::class);
 $params['sectionName'] = $commentary->commentaryLocs();
 $cache = \LotgdKernel::get('cache.app');
 $item = $cache->getItem('commentary-published-sections');
