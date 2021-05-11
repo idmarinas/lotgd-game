@@ -65,10 +65,10 @@ return static function (ContainerConfigurator $container): void
                     'position' => 'top',
                     'type'     => 'sonata.admin.block.stats',
                     'settings' => [
-                        'code'    => 'lotgd_companion.admin',
-                        'icon'    => 'ion-ios-people', // font awesome icon
-                        'text'    => 'lotgd_companion.dashboard.top.total_companions',
-                        'color'   => 'bg-olive',
+                        'code'  => 'lotgd_companion.admin',
+                        'icon'  => 'ion-ios-people', // font awesome icon
+                        'text'  => 'lotgd_companion.dashboard.top.total_companions',
+                        'color' => 'bg-olive',
                     ],
                 ],
                 // Total creatures
@@ -77,10 +77,10 @@ return static function (ContainerConfigurator $container): void
                     'position' => 'top',
                     'type'     => 'sonata.admin.block.stats',
                     'settings' => [
-                        'code'    => 'lotgd_creature.admin',
-                        'icon'    => 'fa-paw', // font awesome icon
-                        'text'    => 'lotgd_creature.dashboard.top.total_creatures',
-                        'color'   => 'bg-green',
+                        'code'  => 'lotgd_creature.admin',
+                        'icon'  => 'fa-paw', // font awesome icon
+                        'text'  => 'lotgd_creature.dashboard.top.total_creatures',
+                        'color' => 'bg-green',
                     ],
                 ],
                 // Total donations
@@ -95,35 +95,35 @@ return static function (ContainerConfigurator $container): void
                     'icon' => '<i class="fa fa-user"></i>',
                 ],
                 'menu.admin.action.group' => [
-                    'icon' => '<i class="fa fa-cog"></i>',
+                    'icon'            => '<i class="fa fa-cog"></i>',
                     'label_catalogue' => 'lotgd_admin_default',
                 ],
                 'menu.admin.editor.group' => [
-                    'icon' => '<i class="fa fa-pencil"></i>',
+                    'icon'            => '<i class="fa fa-pencil"></i>',
                     'label_catalogue' => 'lotgd_admin_default',
                 ],
                 'menu.admin.npc.group' => [
-                    'icon' => '<i class="fa fa-male"></i>',
+                    'icon'            => '<i class="fa fa-male"></i>',
                     'label_catalogue' => 'lotgd_admin_default',
                 ],
                 'menu.admin.mechanics.group' => [
-                    'icon' => '<i class="fa fa-wrench"></i>',
+                    'icon'            => '<i class="fa fa-wrench"></i>',
                     'label_catalogue' => 'lotgd_admin_default',
                 ],
                 'menu.admin.logdnet.group' => [
                     'icon' => '<i class="fa fa-wifi"></i>',
                 ],
                 'menu.admin.configuration.group' => [
-                    'icon' => '<i class="fa fa-cog"></i>',
+                    'icon'            => '<i class="fa fa-cog"></i>',
                     'label_catalogue' => 'lotgd_admin_default',
                 ],
                 'menu.admin.settings.group' => [
-                    'icon' => '<i class="fa fa-cogs"></i>',
+                    'icon'            => '<i class="fa fa-cogs"></i>',
                     'label_catalogue' => 'lotgd_admin_default',
                 ],
                 //-- This menu group you can add your admin panels
                 'menu.admin.lotgd_bundle.group' => [
-                    'icon' => '<i class="fa fa-cubes"></i>',
+                    'icon'            => '<i class="fa fa-cubes"></i>',
                     'label_catalogue' => 'lotgd_admin_default',
                 ],
             ],
