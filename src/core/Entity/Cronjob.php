@@ -259,14 +259,8 @@ class Cronjob
      * @var bool
      *
      * @ORM\Column(name="enabled", type="boolean", nullable=true)
-     *
-     * @Assert\Length(
-     *     min=1,
-     *     max=255,
-     *     allowEmptyString=true
-     * )
      */
-    private $enabled = '1';
+    private $enabled = true;
 
     /**
      * @var string
