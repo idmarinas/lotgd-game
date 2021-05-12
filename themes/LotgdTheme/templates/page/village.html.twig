@@ -29,7 +29,7 @@
     {% set result = modulehook('village-desc') %}
     {% for message in result %}
         {% if message is array %}
-            {{ message[0]|trans(message[1], message[2])|colorize }}
+            {{ message[0]|trans(message[1]|default({}), message[2])|colorize }}
         {% else %}
             {{ message|colorize }}
         {% endif %}
