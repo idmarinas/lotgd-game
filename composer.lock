@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7664135e75a27acfd2c68e37646758e3",
+    "content-hash": "6e9e78f9d2b2e52c277107a98d3a5b69",
     "packages": [
         {
             "name": "acelaya/doctrine-enum-type",
@@ -5569,86 +5569,6 @@
                 "source": "https://github.com/Sylius/SyliusThemeBundle/tree/v2.1.1"
             },
             "time": "2021-01-13T08:21:37+00:00"
-        },
-        {
-            "name": "symfony/acl-bundle",
-            "version": "v2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/acl-bundle.git",
-                "reference": "0aa31bd863fbed6a7714c475056d8da4367d3f57"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/acl-bundle/zipball/0aa31bd863fbed6a7714c475056d8da4367d3f57",
-                "reference": "0aa31bd863fbed6a7714c475056d8da4367d3f57",
-                "shasum": ""
-            },
-            "require": {
-                "ext-xml": "*",
-                "php": ">=7.2.9",
-                "symfony/dependency-injection": "^4.4|^5.0",
-                "symfony/http-kernel": "^4.4|^5.0",
-                "symfony/security-acl": "^3.0",
-                "symfony/security-bundle": "^4.4|^5.0"
-            },
-            "require-dev": {
-                "doctrine/dbal": "~2.2",
-                "doctrine/doctrine-bundle": "^1.6.12|^2.0",
-                "symfony/console": "^4.4|^5.0",
-                "symfony/framework-bundle": "^4.4|^5.0",
-                "symfony/phpunit-bridge": "^5.0",
-                "symfony/yaml": "^4.4|^5.0"
-            },
-            "suggest": {
-                "doctrine/doctrine-bundle": "To use the default dbal configuration"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Bundle\\AclBundle\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony AclBundle",
-            "homepage": "https://symfony.com",
-            "support": {
-                "issues": "https://github.com/symfony/acl-bundle/issues",
-                "source": "https://github.com/symfony/acl-bundle/tree/v2.1.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2021-02-13T18:02:15+00:00"
         },
         {
             "name": "symfony/asset",

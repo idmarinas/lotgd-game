@@ -358,9 +358,6 @@
     "sylius/theme-bundle": {
         "version": "v2.1.1"
     },
-    "symfony/acl-bundle": {
-        "version": "v2.1.0"
-    },
     "symfony/apache-pack": {
         "version": "1.0",
         "recipe": {
