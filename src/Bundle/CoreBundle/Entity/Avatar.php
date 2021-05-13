@@ -8,13 +8,12 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.0.0
+ * @since 6.0.0
  */
 
 namespace Lotgd\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Lotgd\Bundle\UserBundle\Entity\User;
 
 /**
  * Structure of table "avatar" in data base.
@@ -26,27 +25,21 @@ use Lotgd\Bundle\UserBundle\Entity\User;
  *         @ORM\Index(name="name", columns={"name"}),
  *         @ORM\Index(name="level", columns={"level"}),
  *         @ORM\Index(name="alive", columns={"alive"}),
- *         @ORM\Index(name="lasthit", columns={"lasthit"}),
- *         @ORM\Index(name="clanid", columns={"clanid"})
+ *         @ORM\Index(name="lasthit", columns={"lasthit"})
  *     }
  * )
  * @ORM\Entity(repositoryClass="Lotgd\Bundle\CoreBundle\Repository\AvatarRepository")
  */
 class Avatar
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer", options={"unsigned": true})
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    use Common\IdTrait;
+    use Common\Clan;
+    use Common\User;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="avatars")
+     * @ORM\ManyToOne(targetEntity="Lotgd\Bundle\UserBundle\Entity\User", inversedBy="avatars")
      */
-    private $user;
+    protected $user;
 
     /**
      * @var string
@@ -527,13 +520,6 @@ class Avatar
     /**
      * @var int
      *
-     * @ORM\Column(name="clanid", type="integer", nullable=true, options={"default": 0, "unsigned": true})
-     */
-    private $clanid;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="clanrank", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $clanrank = 0;
@@ -563,40 +549,6 @@ class Avatar
         $this->recentcomments = new \DateTime('0000-00-00 00:00:00');
         $this->biotime        = new \DateTime('0000-00-00 00:00:00');
         $this->clanjoindate   = new \DateTime('0000-00-00 00:00:00');
-    }
-
-    /**
-     * Set the value of Id.
-     *
-     * @param int $id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Id.
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
     }
 
     /**
@@ -2091,28 +2043,6 @@ class Avatar
     public function getFedmount(): bool
     {
         return $this->fedmount;
-    }
-
-    /**
-     * Set the value of Clanid.
-     *
-     * @param int $clanid
-     *
-     * @return self
-     */
-    public function setClanid(?int $clanid)
-    {
-        $this->clanid = $clanid;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Clanid.
-     */
-    public function getClanid(): ?int
-    {
-        return $this->clanid;
     }
 
     /**
