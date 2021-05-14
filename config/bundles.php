@@ -43,4 +43,5 @@ return [
     Lotgd\Bundle\SettingsBundle\LotgdSettingsBundle::class                   => ['all' => true],
     Lotgd\Bundle\UiBundle\LotgdUiBundle::class                               => ['all' => true],
     Lotgd\Bundle\UserBundle\LotgdUserBundle::class                           => ['all' => true],
+    Lotgd\Bundle\CommentaryBundle\LotgdCommentaryBundle::class               => ['all' => true],
 ];
