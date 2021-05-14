@@ -21,3 +21,8 @@ lotgd_user_route_legacy:
 lotgd_user_route_import:
     resource: "@LotgdUserBundle/Resources/config/routes/router.php"
     type: php
+
+# Routes for LotgdCommentaryBundle
+lotgd_commentary_route_import:
+    resource: "@LotgdCommentaryBundle/Resources/config/router.php"
+    type: php
