@@ -1,0 +1,40 @@
+{% set depth = depth|default(0) %}
+{% set view = view|default('tree') %}
+
+{% if depth == 0 %}
+
+    {% if is_granted('EDIT', thread) %}
+        <div class="fos_comment_thread_commentable right floated">
+            <button
+                data-url="{{ url('fos_comment_edit_thread_commentable', {'id': thread.id, 'value': not thread.commentable}) }}"
+                class="fos_comment_thread_commentable_action ui {{ thread.commentable ? 'red' : 'primary' }} button"
+            >
+                {{ (thread.commentable ? 'fos_comment_thread_close' : 'fos_comment_thread_open') | trans({}, 'FOSCommentBundle') }}
+            </button>
+        </div>
+    {% endif %}
+
+    <h3 class="ui dividing header">
+        <i class="icon comments"></i>
+        <div class="content">
+            {{ settings.title }}
+            <div class="sub header">{% trans with {'%count%': thread.numComments} from 'FOSCommentBundle' %}fos_comment_thread_comment_count{% endtrans %}</div>
+        </div>
+    </h3>
+
+    {% if is_granted('CREATE', thread) %}
+        {{ render(url('fos_comment_new_thread_comments', {"id": thread.id})) }}
+    {% endif %}
+{% endif %}
+
+{% for commentinfo in comments %}
+    {# Not show deleted comments #}
+    {% if is_granted('ROLE_ADMIN') or commentinfo.comment is not fos_comment_in_state(constant('FOS\\CommentBundle\\Model\\CommentInterface::STATE_DELETED')) %}
+        {% include '@FOSComment/Thread/comment.html.twig' with {
+            'children': commentinfo.children,
+            'comment': commentinfo.comment,
+            'depth': depth,
+            'view': view
+        } %}
+    {% endif %}
+{% endfor %}

@@ -1,0 +1,60 @@
+{% set first = first|default(false) %}
+
+{% set url_parameters = {'id': id } %}
+{% if parent is not null %}
+    {% set url_parameters = url_parameters|merge({'parentId': parent.id}) %}
+{% endif %}
+
+{% block fos_comment_comment_form_holder %}
+    <div class="fos_comment_comment_form_holder">
+        {% block fos_comment_form_title %}
+            {% if first %}
+                <h3>{% trans from 'FOSCommentBundle' %}fos_comment_comment_new_headline_first{% endtrans %}</h3>
+            {% elseif parent is not null %}
+                <h3>{% trans with {"%name%": parent.authorName|default(parent.authorNameAlternative) } from 'FOSCommentBundle' %}fos_comment_comment_reply_reply_to{% endtrans %}</h3>
+            {# {% else %} #}
+                {# <h3>{% trans from 'FOSCommentBundle' %}fos_comment_comment_new_headline{% endtrans %}</h3> #}
+            {% endif %}
+        {% endblock %}
+
+        {% block fos_comment_comment_new_form %}
+            <form
+                class="fos_comment_comment_new_form ui reply {{ form.vars.valid ? '' : 'error' }} form"
+                action="{{ url('fos_comment_post_thread_comments', url_parameters) }}"
+                data-parent="{{ parent.id|default() }}"
+                method="POST"
+            >
+                {% if not form.vars.valid %}
+                    <div class="fos_comment_form_errors field">
+                        {{ form_errors(form) }}
+                        {{ form_errors(form.body) }}
+                    </div>
+                {% endif %}
+                <div class="field" data-controller="character-counter">
+                    {% block fos_comment_form_fields %}
+
+                        {% set widget_attr = {'attr': {
+                            'data-controller': 'textarea-autogrow',
+                            'data-character-counter-target': 'input',
+                            'rows': 1
+                        }} %}
+                        {{ form_widget(form.body, widget_attr) }}
+
+                        {{ form_rest(form) }}
+                    {% endblock %}
+                    <p>{{ 'characters_count'|trans({'count': '<strong data-character-counter-target="counter"></strong>'}, 'lotgd_commentary_default' )|raw }}</p>
+                </div>
+
+                <div class="fos_comment_submit field">
+                    {% block fos_comment_form_submit %}
+                        {% if parent is not null %}
+                            <input type="button" value="{% trans from 'FOSCommentBundle' %}fos_comment_comment_reply_cancel{% endtrans %}" class="fos_comment_comment_reply_cancel ui red button" />
+                        {% endif %}
+                        <input type="submit" value="{% trans from 'FOSCommentBundle' %}fos_comment_comment_new_submit{% endtrans %}" class="ui primary button" />
+                    {% endblock %}
+                </div>
+                <div class="ui divider"></div>
+            </form>
+        {% endblock fos_comment_comment_new_form %}
+    </div>
+{% endblock fos_comment_comment_form_holder %}

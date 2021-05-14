@@ -1,0 +1,35 @@
+{#
+    This file is part of "LoTGD Core Package".
+
+    @see https://github.com/idmarinas/lotgd-game
+
+    @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.md
+    @author IDMarinas
+
+    @since 6.0.0
+
+    @file
+    Template block for show comments for a section.
+
+    Available variables:
+    - settings<array>:
+        - translation_domain<string>: Domain for translate text.
+        - title<null|string>: Title for Commentary block.
+
+    - comments<Lotgd\Bundle\CommentaryBundle\Entity\Comment[]>: List with all comments for section.
+    - thread<Lotgd\Bundle\CommentaryBundle\Entity\Thread>: Thread of commentary.
+#}
+
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div id="fos_comment_thread" data-thread="{{ thread.id }}" class="ui threaded comments">
+        {% include '@FOSComment/Thread/comments.html.twig' with {
+            'comments': comments,
+            'thread': thread,
+            'settings': settings
+        } %}
+    </div>
+
+    <script src="{{ asset('bundles/foscomment/js/comments.js') }}"></script>
+{% endblock %}

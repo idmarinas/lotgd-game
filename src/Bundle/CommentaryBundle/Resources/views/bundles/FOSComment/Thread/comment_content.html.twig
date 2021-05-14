@@ -1,0 +1,111 @@
+{%- macro fos_comment_avatar_icon(command) -%}
+    {% apply spaceless %}
+        {% if 'game' == command %}
+            gamepad
+        {% elseif 'system' == command %}
+            desktop
+        {% else %}
+            user
+        {% endif %}
+    {% endapply %}
+{%- endmacro -%}
+
+{% block fos_comment_comment %}
+    <div
+        id="fos_comment_{{ comment.id }}"
+        class="comment fos_comment_comment_show fos_comment_comment_depth_{{ depth }}"
+        {% if parent is defined and parent is not null %}data-parent="{{ parent.id }}"{% endif %}
+    >
+        {% block fos_comment_comment_avatar %}
+            <div class="avatar">
+                <i class="large icons">
+                    <i class="{{ _self.fos_comment_avatar_icon(comment.command) }} icon"></i>
+                    {{ comment.createdAt > app.user.avatar.recentcomments|default(null) ? '<i class="top right green corner add icon"></i>' : '' }}
+                </i>
+            </div>
+        {% endblock fos_comment_comment_avatar %}
+
+        {%- block fos_comment_comment_content -%}
+            <div class="content">
+                <div id="fos_comment_comment_body_{{ comment.id }}" class="fos_comment_comment_body text">
+                    {% if comment.isGameComment %}
+                        {# It's a message from the game #}
+                        <span class="colDkMagenta"><em><strong>{{ comment.body|uncolorize|nl2br|trim|capitalize }}</strong></em></span>
+                    {% elseif comment.isSystemComment %}
+                        {# It's a message from the system #}
+                        <span class="colMdGrey"><code><strong>{{ comment.body|uncolorize|nl2br|trim|capitalize }}</strong></code></span>
+                    {% else %}
+                        {% block fos_comment_comment_metas_authorline %}
+                            <span class="fos_comment_comment_authorname">{{ comment.authorName|default(comment.authorNameAlternative)|colorize }}</span>&emsp13;
+                            <em class="colDkCyan">{{ settings.talk_line|default('talk_line')|trans({}, settings.translation_domain|default('lotgd_commentary_default'))|colorize|lower }}</em>,
+                        {%- endblock fos_comment_comment_metas_authorline -%}
+
+                        {% block fos_comment_comment_content_body %}
+                            <span class="colDkCyan">"<span class="colLtCyan">{{ comment.body|nl2br|colorize }}</span>"</span>
+                        {% endblock fos_comment_comment_content_body %}
+                    {% endif %}
+                </div>
+
+                {% block fos_comment_comment_metas %}
+                    <div class="actions">
+                        {% block fos_comment_comment_metas_edit %}
+                            {% if is_granted('EDIT', comment) %}
+                                <a data-container="#fos_comment_comment_body_{{ comment.id }}" data-url="{{ url("fos_comment_edit_thread_comment", {"id": comment.thread.id, "commentId": comment.id}) }}" class="fos_comment_comment_edit_show_form">
+                                    <i class="icon edit"></i>
+                                    {% trans from 'FOSCommentBundle' %}fos_comment_comment_edit{% endtrans %}
+                                </a>
+                            {% endif %}
+                        {% endblock fos_comment_comment_metas_edit %}
+
+                        {% block fos_comment_comment_metas_delete %}
+                            {% if is_granted('DELETE', comment) %}
+                                {% if comment is fos_comment_in_state(constant('FOS\\CommentBundle\\Model\\CommentInterface::STATE_DELETED')) %}
+                                    {# undelete #}
+                                    <a data-url="{{ url("fos_comment_remove_thread_comment", {"id": comment.thread.id, "commentId": comment.id, "value": constant('FOS\\CommentBundle\\Model\\CommentInterface::STATE_VISIBLE') }) }}" class="fos_comment_comment_remove">
+                                        <i class="trash restore icon"></i>
+                                        {% trans from 'FOSCommentBundle' %}fos_comment_comment_undelete{% endtrans %}
+                                    </a>
+                                {% else %}
+                                    {# delete #}
+                                    <a data-url="{{ url("fos_comment_remove_thread_comment", {"id": comment.thread.id, "commentId": comment.id, "value":  constant('FOS\\CommentBundle\\Model\\CommentInterface::STATE_DELETED')}) }}" class="fos_comment_comment_remove">
+                                        <i class="icon trash"></i>
+                                        {% trans from 'FOSCommentBundle' %}fos_comment_comment_delete{% endtrans %}
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        {% endblock fos_comment_comment_metas_delete %}
+
+                        {% block fos_comment_comment_reply %}
+                            {% if is_granted('REPLY', comment) %}
+                                <a data-url="{{ url('fos_comment_new_thread_comments', {"id": comment.thread.id}) }}" data-name="{{ comment.authorName }}" data-parent-id="{{ comment.id }}" class="fos_comment_comment_reply_show_form">
+                                    <i class="reply icon"></i>
+                                    {% trans from 'FOSCommentBundle' %}fos_comment_comment_show_reply{% endtrans %}
+                                </a>
+                            {% endif %}
+                        {% endblock fos_comment_comment_reply %}
+                    </div>
+                {% endblock fos_comment_comment_metas %}
+            </div>
+        {%- endblock fos_comment_comment_content -%}
+
+        {% block fos_comment_comment_children %}
+            {% apply spaceless %}
+                <div class="comments fos_comment_comment_replies">
+                    {# Not show reply comments if parent is deleted only for ADMIN #}
+                    {% if is_granted('ROLE_ADMIN') or comment is not fos_comment_in_state(constant('FOS\\CommentBundle\\Model\\CommentInterface::STATE_DELETED')) %}
+                        {% if view is not same as('flat') %}
+                            {% if children is defined and children|length %}
+                                <div class="fos_comment_comment_replies">
+                                    {% include '@FOSComment/Thread/comments.html.twig' with { "comments": children, "depth": depth + 1, "parent": comment, "view": view } %}
+                                </div>
+                            {% endif %}
+                        {% elseif view is same as('flat') and children is defined %}
+                            {% include '@FOSComment/Thread/comments.html.twig' with { "comments": children, "depth": depth + 1, "parent": comment, "view": view } %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endapply %}
+        {% endblock fos_comment_comment_children %}
+    </div>
+{% endblock fos_comment_comment %}
+

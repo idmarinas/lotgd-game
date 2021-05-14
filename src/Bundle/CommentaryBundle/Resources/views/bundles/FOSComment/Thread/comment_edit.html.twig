@@ -1,0 +1,39 @@
+<div class="fos_comment_comment_form_holder">
+    {% if is_granted('EDIT', comment) %}
+        <form
+            class="fos_comment_comment_edit_form ui reply {{ form.vars.valid ? '' : 'error' }} form"
+            action="{{ url('fos_comment_put_thread_comments', {'id': comment.thread.id, 'commentId': comment.id}) }}"
+            method="POST"
+        >
+            {% if not form.vars.valid %}
+                <div class="fos_comment_form_errors field">
+                    {{ form_errors(form) }}
+                    {{ form_errors(form.body) }}
+                </div>
+            {% endif %}
+            <div class="field" data-controller="character-counter">
+                {% block fos_comment_form_fields %}
+                    {% set widget_attr = {'attr': {
+                        'data-controller': 'textarea-autogrow',
+                        'data-character-counter-target': 'input',
+                        'rows': 1
+                    }} %}
+                    {{ form_widget(form.body, widget_attr) }}
+
+                    {{ form_rest(form) }}
+                {% endblock %}
+
+                <p>{{ 'characters_count'|trans({'count': '<strong data-character-counter-target="counter"></strong>'}, 'lotgd_commentary_default' )|raw }}</p>
+            </div>
+
+            <div class="fos_comment_submit field">
+                <button type="button" class="fos_comment_comment_edit_cancel ui red button">
+                    {% trans from 'FOSCommentBundle' %}fos_comment_comment_edit_cancel{% endtrans %}
+                </button>
+                {% block fos_comment_form_submit %}
+                    <input type="submit" class="ui primary button" value="{% trans from 'FOSCommentBundle' %}fos_comment_comment_edit_submit{% endtrans %}" />
+                {% endblock %}
+            </div>
+        </form>
+    {% endif %}
+</div>
