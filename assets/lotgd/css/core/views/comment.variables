@@ -5,3 +5,6 @@
 @maxWidth: none;
 
 @commentPadding: 0;
+
+@actionLinkColor: @invertedUnselectedTextColor;
+@actionLinkHoverColor: @invertedHoveredTextColor;
