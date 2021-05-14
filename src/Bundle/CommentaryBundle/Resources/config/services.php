@@ -34,8 +34,8 @@ return static function (ContainerConfigurator $container)
                 '../../Tests/',
                 '../../LotgdCommentaryBundle.php',
             ])
-        ->load('Lotgd\Bundle\CommentaryBundle\Controller\\', '../../Controller/')
-            ->tag('controller.service_arguments')
+        // ->load('Lotgd\Bundle\CommentaryBundle\Controller\\', '../../Controller/')
+        //     ->tag('controller.service_arguments')
 
 
         //-- Admin for commentary
