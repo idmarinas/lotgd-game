@@ -21,6 +21,7 @@
         "composer/package-versions-deprecated": "1.11.99.1",
         "friendsofsymfony/comment-bundle": "^3.0",
         "idmarinas/admin-bundle": "*@dev",
+        "idmarinas/avatar-bundle": "*@dev",
         "idmarinas/commentary-bundle": "*@dev",
         "idmarinas/companion-bundle": "*@dev",
         "idmarinas/core-bundle": "*@dev",

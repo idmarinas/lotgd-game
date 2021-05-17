@@ -153,6 +153,9 @@
     "idmarinas/admin-bundle": {
         "version": "dev-master"
     },
+    "idmarinas/avatar-bundle": {
+        "version": "dev-master"
+    },
     "idmarinas/commentary-bundle": {
         "version": "dev-master"
     },
