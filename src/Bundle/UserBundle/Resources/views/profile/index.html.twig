@@ -15,7 +15,10 @@
         <dd>{{ app.user.email }}</dd>
 
         <dt>{{ 'list.donation_points'|trans }}</dt>
-        <dd>{{ (app.user.donation - app.user.donationSpent)|numeral }}</dd>
+        <dd>{{ (app.user.donation - app.user.donationSpent)|format_number }}</dd>
+
+        <dt>{{ 'list.donation_spent'|trans }}</dt>
+        <dd>{{ app.user.donationSpent|format_number }}</dd>
 
         <dt>{{ 'list.referer'|trans }}</dt>
         <dd>{{ app.user.referer|default('list.referer.none'|trans) }}</dd>
