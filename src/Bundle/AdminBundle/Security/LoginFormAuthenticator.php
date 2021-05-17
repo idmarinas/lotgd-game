@@ -30,6 +30,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Component\String\ByteString;
 
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
@@ -105,6 +106,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             $user
                 ->setLastConnection(new \DateTime('now'))
                 ->setIpAddress($credentials['ip_address'])
+                ->setSessionId(ByteString::fromRandom(45))
             ;
             $this->entityManager->persist($user);
             $this->entityManager->flush();
