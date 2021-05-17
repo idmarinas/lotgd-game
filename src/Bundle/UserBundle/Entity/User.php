@@ -22,6 +22,7 @@ use Lotgd\Bundle\UserBundle\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 
 /**
  * Structure of table "user" in data base.
@@ -38,13 +39,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  */
-class User implements UserInterface
+class User implements UserInterface, EquatableInterface
 {
     use Common\IdTrait;
     use Common\Deletable;
     use User\Avatar;
     use User\Ban;
     use User\Donation;
+    use User\Equatable;
     use User\Security;
     use User\Settings;
     use TimestampableEntity;
