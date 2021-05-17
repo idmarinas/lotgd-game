@@ -53,6 +53,8 @@ class LogdnetController extends AbstractController
 
         if ('register' == $op)
         {
+            $info = [];
+
             if (empty($logdnet) || ! isset($logdnet['']) || '' == $logdnet[''])
             {
                 $serverCentral = \preg_replace('/\/$/', '', $this->getParameter('lotgd_bundle.logdnet.central_server'));
@@ -95,8 +97,8 @@ class LogdnetController extends AbstractController
                 $content = $logdnet['note']."\n";
                 $content .= "<!-- At {$logdnet['when']} -->\n";
                 $content .= \sprintf($info[''],
-                    $user['username'],
-                    \htmlentities($user['username']).':'.$request->server->get('HTTP_HOST', '').$refer, ENT_COMPAT, 'UTF-8');
+                    $user->getUsername(),
+                    \htmlentities($user->getUsername()).':'.$request->server->get('HTTP_HOST', '').$refer, ENT_COMPAT, 'UTF-8');
 
                 return new Response($content, 200, [
                     'Content-Type' => 'image/gif',
