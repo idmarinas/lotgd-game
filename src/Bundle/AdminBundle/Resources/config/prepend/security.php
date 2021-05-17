@@ -17,7 +17,10 @@ return static function (ContainerConfigurator $container): void {
     $container->extension('security', [
         'providers' => [
             'lotgd_admin_user_provider' => [
-                'id' => 'Lotgd\Bundle\AdminBundle\Security\UserProvider',
+                'entity' => [
+                    'class' => 'Lotgd\Bundle\UserBundle\Entity\User',
+                    'property' => 'email'
+                ]
             ]
         ]
     ]);
