@@ -23,6 +23,11 @@ lotgd_user_route_import:
     type: php
 
 # Routes for LotgdCommentaryBundle
+lotgd_avatar_route_import:
+    resource: "@LotgdAvatarBundle/Resources/config/router.php"
+    type: php
+
+# Routes for LotgdCommentaryBundle
 lotgd_commentary_route_import:
     resource: "@LotgdCommentaryBundle/Resources/config/router.php"
     type: php
