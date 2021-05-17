@@ -13,7 +13,7 @@
     <div class="center aligned">
         {# Button for Author of LoTGD Mightye (Eric Stevens) #}
         {% if author.register_logdnet %}
-            <img src="{{ 'images/logdnet.php?op=register&c=%s&a=%s&d=%s'|format(author.c, author.v, author.a, author.d) }}" alt="Donate to Eric Stevens">
+            <img src="{{ '/images/logdnet.php?op=register&c=%s&a=%s&d=%s'|format(author.c, author.v, author.a, lotgd_paypal_site_description) }}" alt="Donate to Eric Stevens">
         {% else %}
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener noreferrer" style="display: inline-block;" title="Author of LoTGD Mightye (Eric Stevens)">
                 <input type="hidden" name="cmd" value="_xclick">
