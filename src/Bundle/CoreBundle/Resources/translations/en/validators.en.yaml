@@ -1,3 +1,11 @@
 password.not.match: The password fields must match.
 entity:
     user.username.not.unique: There is already an account with this username
+
+lotgd_avatar:
+    form:
+        create_avatar:
+            field:
+                name:
+                    censor: Bad language was found in your name, please consider revising it.
+                    duplicate: Someone is already known by that name in this realm, please try again.
