@@ -4,6 +4,8 @@ hello: 'Hello "{name}"'
 
 list:
     username: Username
+    character: Character
+    character.name: '{name} (Level: {level,number}, Dragon kills: {dragonkills,number})'
     email: Email
     register_date: Registration
     donation_points: Donation points

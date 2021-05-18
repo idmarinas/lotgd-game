@@ -5,11 +5,18 @@
 {% block lotgd_body_content %}
     {% trans_default_domain translator_domain %}
 
-    <h1>{{ 'hello'|trans({'name': app.user.username}) }}</h1>
+    <h1>{{ 'hello'|trans({'name': app.user.avatar.playerName }) }}</h1>
 
     <dl>
         <dt>{{ 'list.username'|trans }}</dt>
         <dd>{{ app.user.username }}</dd>
+
+        <dt>{{ 'list.character'|trans }}</dt>
+        <dd>{{ 'list.character.name'|trans({
+            'level': app.user.avatar.level,
+            'dragonkills': app.user.avatar.dragonkills,
+            'name': app.user.avatar.name
+        }) }}</dd>
 
         <dt>{{ 'list.email'|trans }}</dt>
         <dd>{{ app.user.email }}</dd>
