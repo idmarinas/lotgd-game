@@ -132,14 +132,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        /** @var \Lotgd\Bundle\UserBundle\Entity\User */
-        $user = $token->getUser();
-
-        if (! $user->getAvatar() || empty($user->getAvatars()))
-        {
-            return new RedirectResponse($this->urlGenerator->generate('lotgd_avatar_create'));
-        }
-
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey))
         {
             return new RedirectResponse($targetPath);
