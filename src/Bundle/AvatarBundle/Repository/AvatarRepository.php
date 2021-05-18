@@ -8,14 +8,14 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.0.0
+ * @since 6.0.0
  */
 
-namespace Lotgd\Bundle\CoreBundle\Repository;
+namespace Lotgd\Bundle\AvatarBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Lotgd\Bundle\CoreBundle\Entity\Avatar;
+use Lotgd\Bundle\AvatarBundle\Entity\Avatar;
 
 class AvatarRepository extends ServiceEntityRepository
 {
