@@ -26,7 +26,7 @@ trait User
      */
     protected $user;
 
-    public function getAvatar(): ?EntityUser
+    public function getUser(): ?EntityUser
     {
         return $this->user;
     }
