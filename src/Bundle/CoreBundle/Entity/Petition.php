@@ -25,17 +25,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Petition
 {
     use Common\IdTrait;
+    use Common\Avatar;
+    use Common\User;
     use TimestampableEntity;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class)
-     */
-    private $user;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Avatar::class)
-     */
-    private $avatar;
 
     /**
      * @ORM\Column(type="string", length=120, nullable=true)
@@ -118,35 +110,10 @@ class Petition
         return $this->getUserOfAvatar().') '.$this->getAvatarName() ?: '-';
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getAvatar(): ?Avatar
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatar(?Avatar $avatar): self
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
     }
-
 
     public function setEmail(?string $email): self
     {
