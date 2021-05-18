@@ -1,0 +1,11 @@
+{% extends "@LotgdUi/layout/classic.html.twig" %}
+
+{% block lotgd_head_title %}{{ 'title'|trans({}, translator_domain) }}{% endblock %}
+
+{% block lotgd_body_content %}
+    {% trans_default_domain translator_domain %}
+
+    {{ 'welcome'|trans }}
+
+    {{ form(form) }}
+{% endblock %}

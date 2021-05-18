@@ -1,0 +1,16 @@
+title: Create a character
+
+welcome: Welcome to Legend of the Green Dragon, first need create a character to enter in the Realm.
+
+form:
+    field:
+        name: How will you be known to this world?
+        sex:
+            label: And are you a..?
+            option:
+                male: a Male
+                female: a Female
+    button.submit: Create a character
+    success.create_avatar: Character created successfully
+
+flash.max_avatars_per_user: You have reached the maximum number of characters allowed per account.
