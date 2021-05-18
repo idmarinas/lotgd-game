@@ -14,7 +14,7 @@
 namespace Lotgd\Bundle\CoreBundle\Entity\Common;
 
 use Doctrine\ORM\Mapping as ORM;
-use Lotgd\Bundle\CoreBundle\Entity as CoreEntity;
+use Lotgd\Bundle\AvatarBundle\Entity\Avatar as AvatarEntity;
 
 /**
  * Trait for add avatar field to entity.
@@ -22,16 +22,16 @@ use Lotgd\Bundle\CoreBundle\Entity as CoreEntity;
 trait Avatar
 {
     /**
-     * @ORM\ManyToOne(targetEntity=CoreEntity\Avatar::class)
+     * @ORM\ManyToOne(targetEntity=AvatarEntity::class)
      */
     protected $avatar;
 
-    public function getAvatar(): ?CoreEntity\Avatar
+    public function getAvatar(): ?AvatarEntity
     {
         return $this->avatar;
     }
 
-    public function setAvatar(?CoreEntity\Avatar $avatar): self
+    public function setAvatar(?AvatarEntity $avatar): self
     {
         $this->avatar = $avatar;
 
