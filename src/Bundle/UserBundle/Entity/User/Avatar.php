@@ -14,7 +14,7 @@
 namespace Lotgd\Bundle\UserBundle\Entity\User;
 
 use Doctrine\Common\Collections\Collection;
-use Lotgd\Bundle\CoreBundle\Entity\Avatar as AvatarEntity;
+use Lotgd\Bundle\AvatarBundle\Entity\Avatar as AvatarEntity;
 
 trait Avatar
 {
