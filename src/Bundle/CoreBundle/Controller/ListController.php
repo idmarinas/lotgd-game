@@ -33,7 +33,7 @@ class ListController extends AbstractController
     {
         /** @var \Doctrine\ORM\EntityManagerInterface */
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery("SELECT u FROM LotgdCore:Avatar AS u ORDER BY u.dragonkills DESC, u.level DESC");
+        $query = $em->createQuery("SELECT u FROM LotgdAvatar:Avatar AS u ORDER BY u.dragonkills DESC, u.level DESC");
 
         $pagination = $paginator->paginate($query, $request->query->getInt('page', 1), 25);
 
