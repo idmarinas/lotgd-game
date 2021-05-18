@@ -16,6 +16,9 @@
 -   Agregar el envio de un correo privado cuando se agrega una donación manual. (DonatorAdmin panel)
 -   Crear un cronjob (command console) para eliminar peticiones cerradas y antiguas.
 -   Crear el modo de mantenimiento 
+-   Comentarios
+    -   Crear administración para los comentarios
+    -   Importar comentarios antiguos al nuevo sistema
 
 -   Esta versión LoTGD Core será una app Symfony Framework.
     -   Se hace como un Bundle y se crea un lotgd-skeleton para crear una versión personalizada.
