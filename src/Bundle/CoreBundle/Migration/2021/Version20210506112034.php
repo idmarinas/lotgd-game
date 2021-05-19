@@ -124,6 +124,7 @@ final class Version20210506112034 extends AbstractMigration
         $this->addSql("INSERT INTO commentary_thread (permalink, id, is_commentable, last_comment_at, num_comments) SELECT '', section, 1, max(postdate), COUNT(section) FROM commentary GROUP BY section");
         //-- Import comments
         $this->addSql("INSERT INTO commentary_comment (censored_words, uncesored_body, ancestors, depth, state, thread_id, command, body, raw_body, created_at, author_id, clan_id, clan_rank, clan_name, clan_name_short, params, author_name) SELECT '[]', '', '', 0, IF(hidden = 1, 1, 0), section, command, `comment`, comment_raw, postdate, author, IF(clan_id = 0, NULL, clan_id), clan_rank, clan_name, clan_name_short, extra, author_name FROM commentary ORDER BY id ASC");
+        $this->addSql("UPDATE commentary_comment SET params = 'a:0:{}' WHERE params = 'N;'");
     }
 
     public function down(Schema $schema): void
