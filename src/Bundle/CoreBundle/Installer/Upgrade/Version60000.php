@@ -140,15 +140,15 @@ class Version60000 extends InstallerAbstract
     }
 
     /**
-     * Step 2: Update commentary table.
+     * Step 2: Import commentary to new commentary system.
      */
     public function step2(): bool
     {
         try
         {
-            $page       = 1;
+            $page = 1;
             /** @var \Doctrine\ORM\EntityRepository */
-            $repository = $this->doctrine->getRepository('LotgdCore:Commentary');
+            $repository = $this->doctrine->getRepository('LotgdCommentary:Comment');
             $query      = $repository->createQueryBuilder('u');
             $pagination = $this->paginator->paginate($query, $page, 100);
             $pageCount  = (int) \ceil($pagination->getTotalItemCount() / $pagination->getItemNumberPerPage());
@@ -158,21 +158,21 @@ class Version60000 extends InstallerAbstract
                 foreach ($pagination as $entity)
                 {
                     if (
-                        $entity->getCommentRaw()
-                        || empty($entity->getExtra())
-                        || ! isset($entity->getExtra()['rawcomment'])
-                        || ! $entity->getExtra()['rawcomment']
+                        $entity->getRawBody()
+                        || empty($entity->getParams())
+                        || ! isset($entity->getParams()['rawcomment'])
+                        || ! $entity->getParams()['rawcomment']
                     ) {
                         continue;
                     }
 
-                    $extra = $entity->getExtra();
+                    $extra = $entity->getParams();
 
-                    $entity->setCommentRaw($extra['rawcomment']);
+                    $entity->setRawBody($extra['rawcomment']);
 
                     unset($extra['rawcomment']);
 
-                    $entity->setExtra($extra);
+                    $entity->setParams($extra);
 
                     $this->doctrine->persist($entity);
                 }
