@@ -30,6 +30,7 @@ class LotgdCommentaryExtension extends Extension implements PrependExtensionInte
     public function prepend(ContainerBuilder $container): void
     {
         $loader = new PhpFileLoader($container, new FileLocator(\dirname(__DIR__).'/Resources/config/prepend'));
+        $loader->load('doctrine.php');
         $loader->load('fos_comment.php');
 
         $container->loadFromExtension('twig', [
