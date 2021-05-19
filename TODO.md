@@ -19,11 +19,13 @@
 -   Comentarios
     -   Crear administración para los comentarios
     -   Importar comentarios antiguos al nuevo sistema
+-   Agregar a la entidad User un campo ban, para poder agregar un ban temporal o permanente al usuario
+    -   Agregar una tabla de ban para agregar las razones y el ban
+    -   Sistema de ban, que agrega un ban a un usuario y va sumando según se agregan penalizaciones
 
 -   Esta versión LoTGD Core será una app Symfony Framework.
     -   Se hace como un Bundle y se crea un lotgd-skeleton para crear una versión personalizada.
 -   Plantilla de registro, agregar algunos events para agregar más información.
--   * No hace falta Gulp (puede ser), copiar los archivos se puede hacer desde composer igual que hice con el skeleton al crear proyecto.
 -   Panel de administración
     -   https://github.com/sonata-project/SonataAdminBundle 
 -   Las diferentes partes del juego serán bundles internos:
@@ -48,14 +50,13 @@
     -   Se simplifica la forma en la que se calcula las estadísticas del personaje, haciendo que tanto los personajes jugador como los creados por el servidor, tengan una forma de creación muy similar.
 -   **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
     -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
--   **BC** Eliminado compatibilidad con el uso del viejo sistema de módulos.
 
 # Para la versión 6.1.0
 
 -   Sustituir Fomantic UI por https://tailwindcss.com 
     -   Tailwind ofrece más flexibilidad para crear la UI.
     -   npm install tailwindcss
--   WebpackEncore
+-   WebpackEncore (Se tiene que revisar como seria con Tailwind)
     -   Organizar mejor los archivos js/css
         -   El tema se crea en una configuración nueva para personalizar
         -   El js se crea en una entry comun para todo (app por ejemplo) ya que puede dar problemas
@@ -66,7 +67,6 @@
 
 -   Crear el bundle del inventario. Para sustituir el antiguo sistema de armadura y arma.
 -   Crear el bundle de energia, que permita poner energia o un sistema por turnos.
--   Integrar los componentes Laminas View en un bundle para crear algo similar a Sonata SEO
 -   Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
     -   La instalación por consola ya se creo en la versión 5.0.0
         -   Se mirará incluir una versión de instalación por web
@@ -138,3 +138,7 @@
             -   Menos importante
                 -   Puede solaparse con las caracteristicas de los bundles
                 -   Los prefs-* (ejemplo prefs-city, prefs-mount) datos, del modulo con respecto a alguna caracteristica, como puede ser una ciudad, montura
+
+# Ideas dudodas
+
+-   Integrar los componentes Laminas View en un bundle para crear algo similar a Sonata SEO
