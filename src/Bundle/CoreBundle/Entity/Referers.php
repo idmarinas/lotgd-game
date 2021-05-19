@@ -42,7 +42,7 @@ class Referers
      *
      * @ORM\Column(type="string", length=1000)
      */
-    private $uri;
+    private $uri = '';
 
     /**
      * @var int

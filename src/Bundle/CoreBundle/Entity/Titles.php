@@ -69,7 +69,7 @@ class Titles implements TranslatableInterface
      *     allowEmptyString=false
      * )
      */
-    private $male;
+    private $male = '';
 
     /**
      * @var string
@@ -83,7 +83,7 @@ class Titles implements TranslatableInterface
      *     allowEmptyString=false
      * )
      */
-    private $female;
+    private $female = '';
 
     /**
      * @ORM\OneToMany(targetEntity="TitlesTranslation", mappedBy="object", cascade={"all"})

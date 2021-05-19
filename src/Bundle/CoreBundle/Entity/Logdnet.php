@@ -37,14 +37,14 @@ class Logdnet
      *
      * @ORM\Column(name="address", type="string", length=255)
      */
-    private $address;
+    private $address = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255)
      */
-    private $description;
+    private $description = '';
 
     /**
      * @var float
