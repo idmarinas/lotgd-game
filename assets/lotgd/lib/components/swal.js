@@ -23,11 +23,20 @@ define([
         }
         else options = {}
 
-        const funcs = ['preConfirm', 'onBeforeOpen', 'onOpen,', 'onRender', 'onClose', 'onAfterClose', 'onDestroy']
+        //-- Old functions
+        const funcsOld = ['onBeforeOpen', 'onOpen,', 'onRender', 'onClose', 'onAfterClose', 'onDestroy']
+        //-- New functions
+        const funcsNew = ['willOpen', 'didOpen', 'didRender', 'willClose', 'didClose', 'didDestroy']
+        const funcs = ['preConfirm', ...funcsOld, ...funcsNew]
 
         for (const funcId in funcs)
         {
-            const func = funcs[funcId]
+            let func = funcs[funcId]
+            // Replace old for new function
+            if (funcsOld.includes(func))
+            {
+                func = funcsNew[funcsOld.indexOf(func)]
+            }
 
             if (options[func])
             {
