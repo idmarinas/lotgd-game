@@ -131,7 +131,6 @@
         "test": "php bin/phpunit --process-isolation"
     },
     "conflict": {
-        "symfony/framework-bundle": ">4.4.22",
         "symfony/symfony": "*"
     },
     "authors": [

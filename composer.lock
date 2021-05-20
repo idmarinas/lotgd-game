@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5578b580a727c911787bf4a57b5a1d04",
+    "content-hash": "d9dddf0275cea3db2a2550a7fecb49d4",
     "packages": [
         {
             "name": "acelaya/doctrine-enum-type",
@@ -167,16 +167,16 @@
         },
         {
             "name": "bukashk0zzz/filter-bundle",
-            "version": "v4.0.0",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Bukashk0zzz/FilterBundle.git",
-                "reference": "7ce7050410e1d81256353fefabaf5ee2a60f1293"
+                "reference": "2c8c5c60103b7b49f319a4307111da5ee0c42ba7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Bukashk0zzz/FilterBundle/zipball/7ce7050410e1d81256353fefabaf5ee2a60f1293",
-                "reference": "7ce7050410e1d81256353fefabaf5ee2a60f1293",
+                "url": "https://api.github.com/repos/Bukashk0zzz/FilterBundle/zipball/2c8c5c60103b7b49f319a4307111da5ee0c42ba7",
+                "reference": "2c8c5c60103b7b49f319a4307111da5ee0c42ba7",
                 "shasum": ""
             },
             "require": {
@@ -226,9 +226,9 @@
             "support": {
                 "email": "bukashk0zzz@gmail.com",
                 "issues": "https://github.com/bukashk0zzz/FilterBundle/issues",
-                "source": "https://github.com/Bukashk0zzz/FilterBundle/tree/master"
+                "source": "https://github.com/Bukashk0zzz/FilterBundle/tree/v4.0.1"
             },
-            "time": "2020-01-15T08:13:52+00:00"
+            "time": "2021-05-20T11:44:15+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
@@ -6993,23 +6993,23 @@
         },
         {
             "name": "symfony/framework-bundle",
-            "version": "v4.4.22",
+            "version": "v4.4.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/framework-bundle.git",
-                "reference": "98e855fd35dd2c4614f61d349b1fd7dd3622b9b9"
+                "reference": "0e9b5cec25fb3de04fb51d8ec05eb35df1385096"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/98e855fd35dd2c4614f61d349b1fd7dd3622b9b9",
-                "reference": "98e855fd35dd2c4614f61d349b1fd7dd3622b9b9",
+                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/0e9b5cec25fb3de04fb51d8ec05eb35df1385096",
+                "reference": "0e9b5cec25fb3de04fb51d8ec05eb35df1385096",
                 "shasum": ""
             },
             "require": {
                 "ext-xml": "*",
                 "php": ">=7.1.3",
                 "symfony/cache": "^4.4|^5.0",
-                "symfony/config": "^4.3.4|^5.0",
+                "symfony/config": "^4.4.11|~5.0.11|^5.1.3",
                 "symfony/dependency-injection": "^4.4.1|^5.0.1",
                 "symfony/error-handler": "^4.4.1|^5.0.1",
                 "symfony/filesystem": "^3.4|^4.0|^5.0",
@@ -7048,7 +7048,7 @@
             },
             "require-dev": {
                 "doctrine/annotations": "^1.10.4",
-                "doctrine/cache": "~1.0",
+                "doctrine/cache": "^1.0|^2.0",
                 "doctrine/persistence": "^1.3|^2.0",
                 "paragonie/sodium_compat": "^1.8",
                 "phpdocumentor/reflection-docblock": "^3.0|^4.0|^5.0",
@@ -7118,7 +7118,7 @@
             "description": "Provides a tight integration between Symfony components and the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/framework-bundle/tree/v4.4.22"
+                "source": "https://github.com/symfony/framework-bundle/tree/v4.4.24"
             },
             "funding": [
                 {
@@ -7134,7 +7134,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-04-14T13:03:08+00:00"
+            "time": "2021-05-16T21:41:25+00:00"
         },
         {
             "name": "symfony/http-client",
