@@ -36,7 +36,7 @@ final class CreateController extends AbstractController
     public function create(Request $request, TranslatorInterface $translator, Lotgd $lotgdFunctions)
     {
         //-- Check count of avatars and not allow create more if have max
-        if (count($this->getUser()->getAvatars()) >= $this->getParameter('lotgd_avatar.avatar.max_per_user'))
+        if (\count($this->getUser()->getAvatars()) >= $this->getParameter('lotgd_avatar.avatar.max_per_user'))
         {
             $this->addFlash('warning', $translator->trans('flash.max_avatars_per_user', [], self::TRANSLATOR_DOMAIN));
 
