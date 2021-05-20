@@ -13,4 +13,9 @@ form:
     button.submit: Create a character
     success.create_avatar: Character created successfully
 
-flash.max_avatars_per_user: You have reached the maximum number of characters allowed per account.
+flash:
+    max_avatars_per_user: You have reached the maximum number of characters allowed per account.
+    controller:
+        change:
+            success: The active character has been changed to "{name}"
+            error: Could not change the character, it may be because it is not your character or another error
