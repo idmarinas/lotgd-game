@@ -31,7 +31,8 @@ class ProfileController extends AbstractController
     public function index(): Response
     {
         return $this->render('@LotgdUser/profile/index.html.twig', [
-            'controller_name' => 'ProfileController',
+            'controller_name'       => 'ProfileController',
+            'can_create_new_avatar' => (\count($this->getUser()->getAvatars()) < $this->getParameter('lotgd_avatar.avatar.max_per_user')),
         ]);
     }
 }
