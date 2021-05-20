@@ -18,6 +18,7 @@ use Lotgd\Bundle\CoreBundle\Tool\Lotgd;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -31,9 +32,11 @@ final class CreateController extends AbstractController
     public const TRANSLATOR_DOMAIN = 'lotgd_avatar_page_create';
 
     /**
+     * Create a new avatar for user.
+     *
      * @Route("/create", name="lotgd_avatar_create")
      */
-    public function create(Request $request, TranslatorInterface $translator, Lotgd $lotgdFunctions)
+    public function create(Request $request, TranslatorInterface $translator, Lotgd $lotgdFunctions): Response
     {
         //-- Check count of avatars and not allow create more if have max
         if (\count($this->getUser()->getAvatars()) >= $this->getParameter('lotgd_avatar.avatar.max_per_user'))
