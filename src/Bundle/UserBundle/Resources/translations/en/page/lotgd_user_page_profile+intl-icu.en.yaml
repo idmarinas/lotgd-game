@@ -4,8 +4,6 @@ hello: 'Hello "{name}"'
 
 list:
     username: Username
-    character: Character
-    character.name: '{name} (Level: {level,number}, Dragon kills: {dragonkills,number})'
     email: Email
     register_date: Registration
     donation_points: Donation points
@@ -15,7 +13,14 @@ list:
 
 characters_list: List of characters
 character:
-    undefined: 'Unknown'
-    create: Create new character
-    description: Initiate the creation of a new character associated with this account.
-    create_button: Create
+    info:
+        meta: 'Level: {level,number}, Dragon kills: {dragonkills,number}'
+        unknown_bio: 'This character not have bio'
+        in_use: Character in use
+        change: Change character
+        profile: View profile
+    new:
+        undefined: 'Unknown'
+        create: Create new character
+        description: Initiate the creation of a new character associated with this account.
+        create_button: Create
