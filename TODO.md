@@ -8,7 +8,7 @@
 
 
 # Documentación
--   Menu group para los panales de administración "menu.admin.lotgd_bundle.group"
+-   Menu group para los paneles de administración "menu.admin.lotgd_bundle.group"
 
 # Actualmente haciendo... versión 6.0.0
 
@@ -51,18 +51,6 @@
 -   **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
     -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
 
-# Para la versión 6.1.0
-
--   Sustituir Fomantic UI por https://tailwindcss.com 
-    -   Tailwind ofrece más flexibilidad para crear la UI.
-    -   npm install tailwindcss
--   WebpackEncore (Se tiene que revisar como seria con Tailwind)
-    -   Organizar mejor los archivos js/css
-        -   El tema se crea en una configuración nueva para personalizar
-        -   El js se crea en una entry comun para todo (app por ejemplo) ya que puede dar problemas
-            -   webpack.encore.entry.js
-            -   webpack.encore.theme.js
-
 # Para la versión 6.y.x
 
 -   Crear el bundle del inventario. Para sustituir el antiguo sistema de armadura y arma.
@@ -81,6 +69,18 @@
         -   https://github.com/osano/cookieconsent/
 -   Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
     -   Poner las opciones de la encuesta en una tabla separada. Permitiendo que las opciones también se puedan traducir.
+
+# Para la versión 7.0.0
+
+-   Sustituir Fomantic UI por https://tailwindcss.com 
+    -   Tailwind ofrece más flexibilidad para crear la UI.
+    -   npm install tailwindcss
+-   WebpackEncore (Se tiene que revisar como seria con Tailwind)
+    -   Organizar mejor los archivos js/css
+        -   El tema se crea en una configuración nueva para personalizar
+        -   El js se crea en una entry comun para todo (app por ejemplo) ya que puede dar problemas
+            -   webpack.encore.entry.js
+            -   webpack.encore.theme.js
 
 ## Cosas pendientes
 
