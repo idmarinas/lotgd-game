@@ -14,8 +14,8 @@
 
 @attachedBackground: @transparentWhite;
 
-
-
+@subHeaderColor: rgba(255, 255, 255, 0.6);
+@invertedSubHeaderColor: @mutedTextColor;
 
 /* Page title LOTGD */
 @lotgd_pTitleFontVariant: small-caps;

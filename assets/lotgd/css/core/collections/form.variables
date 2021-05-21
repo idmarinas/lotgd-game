@@ -7,3 +7,4 @@
 --------------------*/
 
 @rowDistance: 0.5em;
+@loaderDimmerColor: fade(@pageBackground, 80%);
