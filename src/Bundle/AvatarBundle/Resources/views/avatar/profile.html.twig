@@ -1,0 +1,61 @@
+{% extends "@LotgdUi/layout/classic.html.twig" %}
+
+{% block lotgd_head_title %}{{ 'title'|trans({ 'name': avatar.playerName }, translator_domain) }}{% endblock %}
+
+{% block lotgd_body_content %}
+    {% trans_default_domain translator_domain %}
+
+    <table class="ui very compact collapsing centered table">
+        <caption>{{ 'table.caption'|trans }}</caption>
+        <thead>
+            <tr>
+                <th scope="colgroup" colspan="2">{{ 'table.thead.avatar_info'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">{{ 'table.avatar_info.name'|trans }}</th>
+                <td>{{ avatar.playerName }}</td>
+            </tr>
+            <tr>
+                <th scope="row">{{ 'table.avatar_info.level'|trans }}</th>
+                <td>{{ avatar.level }}</td>
+            </tr>
+            <tr>
+                <th scope="row">{{ 'table.avatar_info.dragonkills'|trans }}</th>
+                <td>{{ avatar.dragonkills }}</td>
+            </tr>
+            <tr>
+                <th scope="row">{{ 'table.avatar_info.hitpoints'|trans }}</th>
+                <td>{{ avatar.hitpoints ~ '/' ~ avatar.hitpoints }}</td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+                <th scope="colgroup" colspan="2">{{ 'table.thead.basic_attributes'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">{{ 'table.basic_attributes.strength'|trans }}</th>
+                <td>{{ avatar.strength }}</td>
+            </tr>
+            <tr>
+                <th scope="row">{{ 'table.basic_attributes.dexterity'|trans }}</th>
+                <td>{{ avatar.dexterity }}</td>
+            </tr>
+            <tr>
+                <th scope="row">{{ 'table.basic_attributes.intelligence'|trans }}</th>
+                <td>{{ avatar.intelligence }}</td>
+            </tr>
+            <tr>
+                <th scope="row">{{ 'table.basic_attributes.constitution'|trans }}</th>
+                <td>{{ avatar.constitution }}</td>
+            </tr>
+            <tr>
+                <th scope="row">{{ 'table.basic_attributes.wisdom'|trans }}</th>
+                <td>{{ avatar.wisdom }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

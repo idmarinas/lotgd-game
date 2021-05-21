@@ -1,0 +1,17 @@
+# For menu en Admin panel
+menu.admin:
+    commentary:
+        group: Commentaries
+        label_commentary: Commentary
+
+# Breadcrum menu bar
+breadcrumb:
+    link_commentary_list: List of Commentaries
+
+# Action in list page
+list.label__action: Actions
+
+# Fields names of entity
+entity:
+    commentary:
+        id: ID

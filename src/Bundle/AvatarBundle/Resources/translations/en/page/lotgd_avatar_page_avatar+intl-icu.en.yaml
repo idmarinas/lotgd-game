@@ -1,0 +1,18 @@
+title: 'Profile for {name}'
+
+table:
+    caption: Character Characteristics
+    thead:
+        avatar_info: Character info
+        basic_attributes: Basic attributes
+    avatar_info:
+        name: Name
+        level: Level
+        dragonkills: Dragonkills
+        hitpoints: Hitpoints
+    basic_attributes:
+        strength: Strength
+        dexterity: Dexterity
+        intelligence: Intelligence
+        constitution: Constitution
+        wisdom: Wisdom
