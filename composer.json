@@ -107,8 +107,7 @@
             "Lotgd\\Ajax\\Core\\": "src/ajax/core/",
             "Lotgd\\Ajax\\Local\\": "src/ajax/local/",
             "Lotgd\\Ajax\\Pattern\\Core\\": "src/ajax/pattern/core/",
-            "Lotgd\\Ajax\\Pattern\\Local\\": "src/ajax/pattern/local/",
-            "LotgdCore\\AdvertisingBundle\\": "lib/AdvertisingBundle/src/"
+            "Lotgd\\Ajax\\Pattern\\Local\\": "src/ajax/pattern/local/"
         },
 		"files": ["src/functions.php"]
     },

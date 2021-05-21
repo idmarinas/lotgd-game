@@ -12,7 +12,6 @@ return [
     Bukashk0zzz\FilterBundle\Bukashk0zzzFilterBundle::class           => ['all' => true],
     Symfony\Bundle\SecurityBundle\SecurityBundle::class               => ['all' => true],
     Symfony\Bundle\MakerBundle\MakerBundle::class                     => ['dev' => true],
-    LotgdCore\AdvertisingBundle\LotgdCoreAdvertisingBundle::class     => ['all' => true],
     Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class  => ['all' => true],
     Sylius\Bundle\ThemeBundle\SyliusThemeBundle::class                => ['all' => true],
     Sonata\Doctrine\Bridge\Symfony\SonataDoctrineSymfonyBundle::class => ['all' => true],
