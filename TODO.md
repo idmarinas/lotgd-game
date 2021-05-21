@@ -29,6 +29,7 @@
     -   Posiblemente esto ya se pueda hacer
 
 ## Para la versión X.Y.Z
+-   Copiar el sistema de petition (y adaptarlo) en el app bundle.
 -   **BC** Cambiar el sistema de login/user por el de Symfony
 -   Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
     -   Poner las opciones de la encuesta en una tabla separada. Permitiendo que las opciones también se puedan traducir.
