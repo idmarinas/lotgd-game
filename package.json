@@ -70,7 +70,7 @@
         "gulp-print": "^5.0.2",
         "gulp-uglify": "^3.0.2",
         "gulp-zip": "^5.1.0",
-        "less": "^3.13.1",
+        "less": "^4.1.1",
         "less-loader": "^8.1.1",
         "minimist": "^1.2.5",
         "normalize-path": "^3.0.0",
