@@ -2,9 +2,9 @@ name: PHP Composer
 
 on:
   push:
-    branches: [ master ]
+    branches: [ 5-dev ]
   pull_request:
-    branches: [ master ]
+    branches: [ 5-dev ]
 
 jobs:
   build:
