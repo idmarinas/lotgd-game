@@ -1,7 +1,3 @@
--   Errores
-    -   s
--   Añadir
-    -   s
 -   Cambiar
     -   mail.php
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
@@ -14,7 +10,6 @@
 
 # Actualmente haciendo esto (5.2.0)
 
--   Migrar Advertising bundle a la nueva versión (independiente del core)
 -   Downgrade de la versión de los componentes de Symfony desde la version 5.2 a la 4.4
     -   Por si se llega a la versión App Bundle de LoTGD antes de que se termine el soporte para 4.4
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
@@ -29,7 +24,7 @@
     -   Posiblemente esto ya se pueda hacer
 
 ## Para la versión X.Y.Z
--   Migrar los cronjobs a cron/cron mediante comandos de symfony console.
+-   Migrar los cronjobs a cron/cron bundle mediante comandos de symfony console.
 -   Copiar el sistema de petition (y adaptarlo) en el app bundle.
 -   **BC** Cambiar el sistema de login/user por el de Symfony
 -   Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
