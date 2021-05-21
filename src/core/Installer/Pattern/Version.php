@@ -82,6 +82,12 @@ trait Version
         '4.12.0 IDMarinas Edition'        => 41200,
         '5.0.0 IDMarinas Edition'         => 50000, //-- New Installer
         '5.1.0 IDMarinas Edition'         => 50100,
+        '5.1.1 IDMarinas Edition'         => 50101,
+        '5.1.2 IDMarinas Edition'         => 50102,
+        '5.1.3 IDMarinas Edition'         => 50103,
+        '5.1.4 IDMarinas Edition'         => 50104,
+        '5.1.4 IDMarinas Edition'         => 50105,
+        '5.1.6 IDMarinas Edition'         => 50106,
     ];
 
     /**
