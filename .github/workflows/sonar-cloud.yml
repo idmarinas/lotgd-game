@@ -25,24 +25,24 @@ jobs:
       - name: Validate composer.json and composer.lock
         run: composer validate
 
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v2
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
+    #   - name: Cache Composer packages
+    #     id: composer-cache
+    #     uses: actions/cache@v2
+    #     with:
+    #       path: vendor
+    #       key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+    #       restore-keys: |
+    #         ${{ runner.os }}-php-
 
-      - name: Install PHP dependencies
-        run: composer install --prefer-dist --no-progress --no-scripts
+    #   - name: Install PHP dependencies
+    #     run: composer install --prefer-dist --no-progress --no-scripts
 
-      - name: Run test suite
-        run: composer run-script test
+    #   - name: Run test suite
+    #     run: composer run-script test
 
-      - name: Fix paths for Sonar
-        working-directory: ./build/reports/
-        run: sed -i 's/\/home\/runner\/work\/lotgd-game\/lotgd-game\//\/github\/workspace\//g' phpunit.coverage.xml
+    #   - name: Fix paths for Sonar
+    #     working-directory: ./build/reports/
+    #     run: sed -i 's/\/home\/runner\/work\/lotgd-game\/lotgd-game\//\/github\/workspace\//g' phpunit.coverage.xml
 
       - name: SonarCloud Scan
         if: matrix.php-version == '7.4'
