@@ -6,14 +6,17 @@
     -   mail.php
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
-# Actualmente haciendo esto (5.0.0)
-
+# A tener encuenta desde la versión 5.0.0
 -   El antiguo sistema de módulos está obsoleto desde la versión **5.0.0**
     -   Los módulos antiguos seguiran funcionando pero estan obsoletos.
     -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
     -   A partir de la versión **5.0.0** se empezará a usar un sistema de módulos tipo Bundle
--   Migrar al nuevo sitema de plantillas
-    -   https://github.com/Sylius/SyliusThemeBundle para crear temas en LoTGD
+
+# Actualmente haciendo esto (5.2.0)
+
+-   Migrar Advertising bundle a la nueva versión (independiente del core)
+-   Downgrade de la versión de los componentes de Symfony desde la version 5.2 a la 4.4
+    -   Por si se llega a la versión App Bundle de LoTGD antes de que se termine el soporte para 4.4
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 
