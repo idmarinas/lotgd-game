@@ -34,9 +34,8 @@ use Lotgd\Core\Fixed\Sanitize as LotgdSanitize;
 use Lotgd\Core\Fixed\Session as LotgdSession;
 use Lotgd\Core\Fixed\Theme as LotgdTheme;
 use Lotgd\Core\Fixed\Translator as LotgdTranslator;
-use Symfony\Component\Dotenv\Dotenv;
 
-(new Dotenv())->bootEnv(\dirname(__DIR__).'/.env');
+require \dirname(__DIR__).'/config/bootstrap.php';
 
 $isDevelopment = 'prod' != $_SERVER['APP_ENV'];
 //-- Init Debugger
