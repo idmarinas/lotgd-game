@@ -14,9 +14,11 @@
 namespace Lotgd\Core;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\Config\Resource\FileResource;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\Component\Routing\RouteCollectionBuilder;
 
 class Kernel extends BaseKernel
 {
@@ -54,6 +56,8 @@ class Kernel extends BaseKernel
      */
     public const LICENSE = "\n<!-- Creative Commons License -->\n<a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/2.0/' target='_blank' rel='noopener noreferrer'><img clear='right' align='left' alt='Creative Commons License' border='0' src='images/somerights20.gif' /></a>\nThis work is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/2.0/' target='_blank' rel='noopener noreferrer'>Creative Commons License</a>.<br />\n<!-- /Creative Commons License -->\n<!--\n  <rdf:RDF xmlns='http://web.resource.org/cc/' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>\n	<Work rdf:about=''>\n	  <dc:type rdf:resource='http://purl.org/dc/dcmitype/Interactive' />\n	  <license rdf:resource='http://creativecommons.org/licenses/by-nc-sa/2.0/' />\n	</Work>\n	<License rdf:about='http://creativecommons.org/licenses/by-nc-sa/2.0/'>\n	  <permits rdf:resource='http://web.resource.org/cc/Reproduction' />\n	  <permits rdf:resource='http://web.resource.org/cc/Distribution' />\n	  <requires rdf:resource='http://web.resource.org/cc/Notice' />\n	  <requires rdf:resource='http://web.resource.org/cc/Attribution' />\n	  <prohibits rdf:resource='http://web.resource.org/cc/CommercialUse' />\n	  <permits rdf:resource='http://web.resource.org/cc/DerivativeWorks' />\n	  <requires rdf:resource='http://web.resource.org/cc/ShareAlike' />\n	</License>\n  </rdf:RDF>\n-->\n";
 
+    private const CONFIG_EXTS = '.{php,xml,yaml,yml}';
+
     /**
      * {@inheritdoc}
      */
@@ -62,34 +66,37 @@ class Kernel extends BaseKernel
         return \dirname(__DIR__, 2);
     }
 
-    protected function configureContainer(ContainerConfigurator $container): void
+    public function registerBundles(): iterable
     {
-        $container->import($this->getProjectDir().'/config/{packages}/*.yaml');
-        $container->import($this->getProjectDir().'/config/{packages}/'.$this->environment.'/*.yaml');
-
-        if (\is_file($this->getProjectDir().'/config/services.yaml'))
+        $contents = require $this->getProjectDir().'/config/bundles.php';
+        foreach ($contents as $class => $envs)
         {
-            $container->import($this->getProjectDir().'/config/services.yaml');
-            $container->import($this->getProjectDir().'/config/{services}_'.$this->environment.'.yaml');
-        }
-        elseif (\is_file($path = $this->getProjectDir().'/config/services.php'))
-        {
-            (require $path)($container->withPath($path), $this);
+            if ($envs[$this->environment] ?? $envs['all'] ?? false)
+            {
+                yield new $class();
+            }
         }
     }
 
-    protected function configureRoutes(RoutingConfigurator $routes): void
+    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
-        $routes->import($this->getProjectDir().'/config/{routes}/'.$this->environment.'/*.yaml');
-        $routes->import($this->getProjectDir().'/config/{routes}/*.yaml');
+        $container->addResource(new FileResource($this->getProjectDir().'/config/bundles.php'));
+        $container->setParameter('container.dumper.inline_class_loader', \PHP_VERSION_ID < 70400 || $this->debug);
+        $container->setParameter('container.dumper.inline_factories', true);
+        $confDir = $this->getProjectDir().'/config';
 
-        if (\is_file($this->getProjectDir().'/config/routes.yaml'))
-        {
-            $routes->import($this->getProjectDir().'/config/routes.yaml');
-        }
-        elseif (\is_file($path = $this->getProjectDir().'/config/routes.php'))
-        {
-            (require $path)($routes->withPath($path), $this);
-        }
+        $loader->load($confDir.'/{packages}/*'.self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir.'/{packages}/'.$this->environment.'/*'.self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir.'/{services}'.self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
+    }
+
+    protected function configureRoutes(RouteCollectionBuilder $routes): void
+    {
+        $confDir = $this->getProjectDir().'/config';
+
+        $routes->import($confDir.'/{routes}/'.$this->environment.'/*'.self::CONFIG_EXTS, '/', 'glob');
+        $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
+        $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
     }
 }

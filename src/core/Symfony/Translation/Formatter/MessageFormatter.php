@@ -22,7 +22,7 @@ class MessageFormatter extends CoreMessageFormatter implements MessageFormatterI
     /**
      * {@inheritdoc}
      */
-    public function format(string $message, string $locale, array $parameters = [])
+    public function format($message, $locale, array $parameters = [])
     {
         global $session;
 
