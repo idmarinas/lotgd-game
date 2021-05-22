@@ -10,8 +10,8 @@
 
 # Actualmente haciendo esto (5.2.0)
 
--   Downgrade de la versión de los componentes de Symfony desde la version 5.2 a la 4.4
-    -   Por si se llega a la versión App Bundle de LoTGD antes de que se termine el soporte para 4.4
+-   Desmarcar algunas clases fixed como deprecadas (todavia es pronto para algunas)
+    -   LotgdKernel ya no esta deprecada
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 

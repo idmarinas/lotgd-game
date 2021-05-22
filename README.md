@@ -1,4 +1,4 @@
-![PHP Composer](https://github.com/idmarinas/lotgd-game/workflows/PHP%20Composer/badge.svg?branch=master)
+![PHP Composer](https://github.com/idmarinas/lotgd-game/workflows/PHP%20Composer/badge.svg?branch=migration)
 
 ![GitHub release](https://img.shields.io/github/release/idmarinas/lotgd-game.svg)
 ![GitHub Release Date](https://img.shields.io/github/release-date/idmarinas/lotgd-game.svg)
@@ -8,7 +8,7 @@
 ![Upgrade](https://img.shields.io/badge/upgrade-success-green.svg?maxAge=2592000)
 ![Working](https://img.shields.io/badge/working-succes-green.svg?maxAge=2592000)
 
-![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/idmarinas/lotgd-game/master.svg?color=red)
+![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/idmarinas/lotgd-game/migration.svg?color=red)
 ![GitHub issues](https://img.shields.io/github/issues/idmarinas/lotgd-game.svg)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/idmarinas/lotgd-game.svg)
 ![Github commits (since latest release)](https://img.shields.io/github/commits-since/idmarinas/lotgd-game/latest.svg)

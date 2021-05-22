@@ -11,7 +11,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   **Downgrade** Symfony components from 5.2 versions to 4.4 versions.
 
 ### :star: FEATURES
 
