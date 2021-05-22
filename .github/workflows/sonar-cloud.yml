@@ -2,7 +2,7 @@ name: SonarCloud
 on:
   push:
     branches:
-      - 5-dev
+      - migration-app-bundle
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
