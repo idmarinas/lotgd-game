@@ -15,9 +15,6 @@ namespace Lotgd\Core\Fixed;
 
 use Lotgd\Core\Kernel as CoreKernel;
 
-/**
- * @deprecated 5.0.0
- */
 class Kernel
 {
     /**

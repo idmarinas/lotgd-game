@@ -16,9 +16,6 @@ namespace Lotgd\Core\Fixed;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 
-/**
- * @deprecated 5.0.0
- */
 class Doctrine
 {
     protected static $wrapper;
