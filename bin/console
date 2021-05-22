@@ -4,7 +4,6 @@
 use Lotgd\Core\Kernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\ErrorHandler\Debug;
 
 if ( ! \in_array(PHP_SAPI, ['cli', 'phpdbg', 'embed'], true))
@@ -20,9 +19,9 @@ require \dirname(__DIR__).'/vendor/autoload.php';
 //-- Include constants
 require_once \dirname(__DIR__).'/src/constants.php';
 
-if ( ! \class_exists(Application::class) || ! \class_exists(Dotenv::class))
+if ( ! \class_exists(Application::class))
 {
-    throw new LogicException('You need to add "symfony/framework-bundle" and "symfony/dotenv" as Composer dependencies.');
+    throw new LogicException('You need to add "symfony/framework-bundle" as a Composer dependency.');
 }
 
 $input = new ArgvInput();
@@ -37,7 +36,7 @@ if ($input->hasParameterOption('--no-debug', true))
     \putenv('APP_DEBUG='.$_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = '0');
 }
 
-(new Dotenv())->bootEnv(\dirname(__DIR__).'/.env');
+require \dirname(__DIR__).'/config/bootstrap.php';
 
 if ($_SERVER['APP_DEBUG'])
 {
