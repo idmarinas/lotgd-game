@@ -15,9 +15,6 @@ namespace Lotgd\Core\Fixed;
 
 use Symfony\Component\HttpFoundation\Session\Session as CoreSession;
 
-/**
- * @deprecated 5.0.0
- */
 class Session
 {
     /**

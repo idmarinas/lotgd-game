@@ -18,8 +18,6 @@ use Lotgd\Core\Tool\Sanitize as CoreSanitize;
 /**
  * This class is for sanitize a string
  * For example: sanitize a number or a date.
- *
- * @deprecated 5.0.0
  */
 class Sanitize
 {

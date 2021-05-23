@@ -15,9 +15,6 @@ namespace Lotgd\Core\Fixed;
 
 use Twig\Environment as CoreTheme;
 
-/**
- * @deprecated 5.0.0
- */
 class Theme
 {
     protected static $wrapper;
