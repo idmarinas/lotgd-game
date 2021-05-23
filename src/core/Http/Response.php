@@ -16,13 +16,13 @@ namespace Lotgd\Core\Http;
 use Doctrine\ORM\EntityManagerInterface;
 use Laminas\View\Helper\HeadTitle;
 use Lotgd\Core\EventManager\EventManager;
-Use Lotgd\Core\Hook;
+use Lotgd\Core\Hook;
 use Lotgd\Core\Kernel;
-use Symfony\Component\HttpFoundation\Response as HttpResponse;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use Twig\Environment;
 use Lotgd\Core\Template\Params;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use Twig\Environment;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class Response extends HttpResponse
 {
@@ -33,23 +33,25 @@ class Response extends HttpResponse
     protected $request;
     protected $hookManager;
     protected $params;
+    private $kernel;
 
     public function __construct(
-        TranslatorInterface $translator,
         EntityManagerInterface $doctrine,
         HeadTitle $headTitle,
         Environment $template,
         Request $request,
         EventManager $hookManager,
-        Params $params
+        Params $params,
+        KernelInterface $kernel
     ) {
-        $this->translator  = $translator;
+        $this->translator  = $kernel->getContainer()->get('translator');
         $this->doctrine    = $doctrine;
         $this->headTitle   = $headTitle;
         $this->template    = $template;
         $this->request     = $request;
         $this->hookManager = $hookManager;
-        $this->params = $params;
+        $this->params      = $params;
+        $this->kernel      = $kernel;
 
         parent::__construct();
     }
@@ -70,6 +72,8 @@ class Response extends HttpResponse
     public function pageStart(?string $title = null, ?array $parameters = [], string $textDomain = Kernel::TEXT_DOMAIN_DEFAULT, ?string $locale = null): void
     {
         global $session;
+
+        $this->kernel->handle($this->request);
 
         if ($title)
         { //-- If not have title not overwrite page title
@@ -243,8 +247,7 @@ class Response extends HttpResponse
 
         //-- Send content to browser
         $this->send();
-
-        exit();
+        $this->kernel->terminate($this->request, $this);
     }
 
     /**
