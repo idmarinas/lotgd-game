@@ -323,8 +323,8 @@ function charstats($return = true)
         }
 
         addcharstat(\LotgdTranslator::t('statistic.stat.spirits', [], 'app_default'), '`b'.$spirits[(int) $u['spirits']].'´b');
-        addcharstat(\LotgdTranslator::t('statistic.stat.gold', [], 'app_default'), LotgdFormat::numeral($u['gold'].check_temp_stat('gold', 1)));
-        addcharstat(\LotgdTranslator::t('statistic.stat.gems', [], 'app_default'), LotgdFormat::numeral($u['gems'].check_temp_stat('gems', 1)));
+        addcharstat(\LotgdTranslator::t('statistic.stat.gold', [], 'app_default'), \LotgdFormat::numeral($u['gold'].check_temp_stat('gold', 1)));
+        addcharstat(\LotgdTranslator::t('statistic.stat.gems', [], 'app_default'), \LotgdFormat::numeral($u['gems'].check_temp_stat('gems', 1)));
 
         addcharstat(\LotgdTranslator::t('statistic.category.character.equip', [], 'app_default'));
 
@@ -340,7 +340,7 @@ function charstats($return = true)
             addcharstat(\LotgdTranslator::t('statistic.stat.creature', [], 'app_default'), $playermount['mountname'].'`0');
         }
 
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_STATS);
+        \LotgdEventDispatcher::dispatch(new \Lotgd\Core\Event\Character(), \Lotgd\Core\Event\Character::STATS);
         modulehook('charstats');
 
         if ($return)
@@ -366,9 +366,10 @@ function charstats($return = true)
     {
         $onlinecount = 0;
         // If a module wants to do it's own display of the online chars, let it.
-        $list = [];
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_ONLINE_LIST, null, $list);
-        $list = modulehook('onlinecharlist', $list);
+        $list = new \Lotgd\Core\Event\Character();
+        \LotgdEventDispatcher::dispatch($list, \Lotgd\Core\Event\Character::ONLINE_LIST);
+        $list->setData(modulehook('onlinecharlist', $list->getData()));
+        $list = $list->getData();
 
         if (isset($list['handled']) && $list['handled'])
         {
