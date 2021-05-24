@@ -8,6 +8,9 @@
 // license must be used on the distribution of any works derived from this
 // work.
 // Please see the file LICENSE for a full textual description of the license.txt.
+
+use Lotgd\Core\Event\EveryRequest;
+
 require_once 'common_common.php';
 
 // Include some commonly needed and useful routines
@@ -298,12 +301,12 @@ if (getsetting('debug', 0) && SU_EDIT_CONFIG == ($session['user']['superuser'] &
 // This however is the only context where blockmodule can be called safely!
 // You should do as LITTLE as possible here and consider if you can hook on
 // a page header instead.
-\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_EVERYHIT);
+\LotgdEventDispatcher::dispatch(new EveryRequest(), EveryRequest::HIT);
 modulehook('everyhit');
 
 if ($session['user']['loggedin'])
 {
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_EVERYHIT_LOGGEDIN);
+    \LotgdEventDispatcher::dispatch(new EveryRequest(), EveryRequest::HIT_AUTHENTICATED);
     modulehook('everyhit-loggedin');
 }
 
