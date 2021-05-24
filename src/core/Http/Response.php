@@ -15,14 +15,14 @@ namespace Lotgd\Core\Http;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Laminas\View\Helper\HeadTitle;
-use Lotgd\Core\EventManager\EventManager;
-use Lotgd\Core\Hook;
+use Lotgd\Core\Event\EveryRequest;
 use Lotgd\Core\Kernel;
 use Lotgd\Core\Template\Params;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
-use Twig\Environment;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Twig\Environment;
 
 class Response extends HttpResponse
 {
@@ -31,8 +31,9 @@ class Response extends HttpResponse
     protected $headTitle;
     protected $template;
     protected $request;
-    protected $hookManager;
     protected $params;
+    /** @var EventDispatcher */
+    private $eventDispatcher;
     private $kernel;
 
     public function __construct(
@@ -40,18 +41,17 @@ class Response extends HttpResponse
         HeadTitle $headTitle,
         Environment $template,
         Request $request,
-        EventManager $hookManager,
         Params $params,
         KernelInterface $kernel
     ) {
-        $this->translator  = $kernel->getContainer()->get('translator');
-        $this->doctrine    = $doctrine;
-        $this->headTitle   = $headTitle;
-        $this->template    = $template;
-        $this->request     = $request;
-        $this->hookManager = $hookManager;
-        $this->params      = $params;
-        $this->kernel      = $kernel;
+        $this->translator      = $kernel->getContainer()->get('translator');
+        $this->eventDispatcher = $kernel->getContainer()->get('event_dispatcher');
+        $this->doctrine        = $doctrine;
+        $this->headTitle       = $headTitle;
+        $this->template        = $template;
+        $this->request         = $request;
+        $this->params          = $params;
+        $this->kernel          = $kernel;
 
         parent::__construct();
     }
@@ -84,13 +84,13 @@ class Response extends HttpResponse
         $script = \substr($script, 0, \strpos($script, '.'));
         $module = (string) $this->request->getQuery('module');
 
-        $args = ['script' => $script, 'module' => $module];
-        $this->hookManager->trigger(Hook::HOOK_EVERY_HEADER, null, $args);
-        $args = modulehook('everyheader', $args);
+        $args = new EveryRequest(['script' => $script, 'module' => $module]);
+        $this->eventDispatcher->dispatch($args, EveryRequest::HEADER);
+        $args->setData(modulehook('everyheader', $args->getData()));
 
         if ($session['user']['loggedin'] ?? false)
         {
-            $this->hookManager->trigger(Hook::HOOK_EVERY_HEADER_AUTHENTICATED, null, $args);
+            $this->eventDispatcher->dispatch($args, EveryRequest::HEADER_AUTHENTICATED);
             modulehook('everyheader-loggedin', $args);
         }
 
@@ -169,14 +169,14 @@ class Response extends HttpResponse
         $script = \substr($script, 0, \strpos($script, '.'));
         $module = (string) $this->request->getQuery('module');
 
-        $replacementbits = ['script' => $script, '__scriptfile__' => $script, 'module' => $module];
-        $this->hookManager->trigger(Hook::HOOK_EVERY_FOOTER, null, $replacementbits);
-        $replacementbits = modulehook('everyfooter', $replacementbits);
+        $args = new EveryRequest(['script' => $script, '__scriptfile__' => $script, 'module' => $module]);
+        $this->eventDispatcher->dispatch($args, EveryRequest::FOOTER);
+        $args->setData(modulehook('everyfooter', $args->getData()));
 
         if ($session['user']['loggedin'] ?? false)
         {
-            $this->hookManager->trigger(Hook::HOOK_EVERY_FOOTER_AUTHENTICATED, null, $replacementbits);
-            $replacementbits = modulehook('everyfooter-loggedin', $replacementbits);
+            $this->eventDispatcher->dispatch($args, EveryRequest::FOOTER_AUTHENTICATED);
+            $replacementbits = modulehook('everyfooter-loggedin', $args->getData());
         }
 
         unset($replacementbits['__scriptfile__'], $replacementbits['script']);
