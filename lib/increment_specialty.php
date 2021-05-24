@@ -4,6 +4,8 @@
 // addnews ready
 // mail ready
 
+use Lotgd\Core\Event\Character;
+
 function increment_specialty($colorcode, $spec = false)
 {
     global $session;
@@ -16,9 +18,9 @@ function increment_specialty($colorcode, $spec = false)
 
     if ('' != $session['user']['specialty'])
     {
-        $args = ['color' => $colorcode];
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_SPECIALTY_INCREMENT, null, $args);
-        modulehook('incrementspecialty', $args);
+        $args = new Character(['color' => $colorcode]);
+        \LotgdEventDispatcher::dispatch($args, Character::SPECIALTY_INCREMENT);
+        modulehook('incrementspecialty', $args->getData());
     }
     else
     {

@@ -4,6 +4,8 @@
 // addnews ready
 // mail ready
 
+use Lotgd\Core\Event\Character;
+
 require_once 'lib/pvpwarning.php';
 require_once 'lib/substitute.php';
 require_once 'lib/systemmail.php';
@@ -60,9 +62,9 @@ function setup_pvp_target(int $characterId)
             $entity['playerstarthp']  = $session['user']['hitpoints'];
             $entity['fightstartdate'] = new \DateTime('now');
 
-            $args = ['entity' => $entity];
-            \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_PVP_ADJUST, null, $args);
-            $entity = modulehook('pvpadjust', $args['entity']);
+            $args = new Character(['entity' => $entity]);
+            \LotgdEventDispatcher::dispatch($args, Character::PVP_ADJUST);
+            $entity = modulehook('pvpadjust', $args->getData()['entity']);
 
             pvpwarning(true);
 
@@ -159,9 +161,9 @@ function pvpvictory($badguy, $killedloc)
     debuglog("started the fight and defeated {$badguy['creaturename']} in {$killedloc} (earned {$winamount} of {$badguy['creaturegold']} gold and {$wonexp} of {$lostexp} exp)", false, $session['user']['acctid']);
     debuglog("was victim and has been defeated by {$session['user']['name']} in {$killedloc} (lost {$badguy['creaturegold']} gold and {$lostexp} exp, actor tooks {$winamount} gold and {$wonexp} exp)", false, $badguy['acctid']);
 
-    $args = ['pvpmessageadd' => '', 'handled' => false, 'badguy' => $badguy];
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_PVP_WIN, null, $args);
-    $args = modulehook('pvpwin', $args);
+    $args = new Character(['pvpmessageadd' => '', 'handled' => false, 'badguy' => $badguy]);
+    \LotgdEventDispatcher::dispatch($args, Character::PVP_WIN);
+    $args = modulehook('pvpwin', $args->getData());
 
     $subject = ['mail.victory.subject', ['location' => $killedloc], $textDomain];
 
@@ -250,9 +252,9 @@ function pvpdefeat($badguy, $killedloc)
 
     $lostexp = \round($session['user']['experience'] * getsetting('pvpattlose', 15) / 100, 0);
 
-    $args = ['pvpmessageadd' => '', 'handled' => false, 'badguy' => $badguy];
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_PVP_LOSS, null, $args);
-    $args = modulehook('pvploss', $args);
+    $args = new Character(['pvpmessageadd' => '', 'handled' => false, 'badguy' => $badguy]);
+    \LotgdEventDispatcher::dispatch($args, Character::PVP_LOSS);
+    $args = modulehook('pvploss', $args->getData());
 
     if ($character->getLevel() < $badguy['creaturelevel'])
     {

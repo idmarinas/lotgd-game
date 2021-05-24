@@ -1,15 +1,17 @@
 <?php
 
+use Lotgd\Core\Event\Character;
+
 function killplayer($explossproportion = 0.1, $goldlossproportion = 1)
 {
     global $session;
 
-    $args = [
+    $args = new Character([
         'explossproportion'  => $explossproportion,
         'goldlossproportion' => $goldlossproportion,
-    ];
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_KILLED_PLAYER, null, $args);
-    $args = modulehook('killedplayer', $args);
+    ]);
+    \LotgdEventDispatcher::dispatch($args, Character::KILLED_PLAYER);
+    $args = modulehook('killedplayer', $args->getData());
 
     if (isset($args['donotkill']))
     {

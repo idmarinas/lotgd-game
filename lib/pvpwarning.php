@@ -3,6 +3,9 @@
 // addnews ready
 // translator ready
 // mail ready
+
+use Lotgd\Core\Event\Character;
+
 function pvpwarning($dokill = false)
 {
     global $session, $textDomain;
@@ -23,7 +26,7 @@ function pvpwarning($dokill = false)
         }
     }
 
-    $args = ['dokill' => $dokill];
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_PVP_DO_KILL, null, $args);
-    modulehook('pvpwarning', $args);
+    $args = new Character(['dokill' => $dokill]);
+    \LotgdEventDispatcher::dispatch($args, Character::PVP_DO_KILL);
+    modulehook('pvpwarning', $args->getData());
 }

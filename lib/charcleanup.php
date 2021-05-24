@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Event\Character;
+
 /**
  * Delete an account and create a backup.
  *
@@ -16,7 +18,7 @@ function char_cleanup($accountId, $type): bool
 
     // this function handles the grunt work of character cleanup.
     // Run any modules hooks who want to deal with character deletion
-    $return = [
+    $return = new Character([
         'entities' => [
             //-- Delete data from DataBase of all entities here
             // 'Entity:Name' => Backup: true|false,
@@ -28,9 +30,9 @@ function char_cleanup($accountId, $type): bool
         ],
         'acctid'  => $accountId,
         'deltype' => $type,
-    ];
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_CLEANUP, null, $return);
-    $return = modulehook('character-cleanup', $return);
+    ]);
+    \LotgdEventDispatcher::dispatch($return, Character::CLEANUP);
+    $return = modulehook('character-cleanup', $return->getData());
 
     $accountRepository = \Doctrine::getRepository('LotgdCore:Accounts');
     $accountEntity     = $accountRepository->find($accountId);

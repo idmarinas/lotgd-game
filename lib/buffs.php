@@ -4,6 +4,8 @@
 // translator ready
 // mail ready
 
+use Lotgd\Core\Event\Character;
+
 $buffreplacements = [];
 $debuggedbuffs    = [];
 function calculate_buff_fields()
@@ -198,9 +200,9 @@ function apply_buff($name, $buff)
         restore_buff_fields();
     }
 
-    $buff = ['name' => $name, 'buff' => $buff];
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_MODIFY_BUFF, null, $buff);
-    $buff = modulehook('modify-buff', $buff);
+    $buff = new Character(['name' => $name, 'buff' => $buff]);
+    \LotgdEventDispatcher::dispatch($buff, Character::MODIFY_BUFF);
+    $buff = modulehook('modify-buff', $buff->getData());
 
     $session['bufflist'][$name] = $buff['buff'];
     calculate_buff_fields();
@@ -211,9 +213,9 @@ function apply_companion($name, $companion, $ignorelimit = false)
     global $session, $companions;
 
     $companionsallowed = getsetting('companionsallowed', 1);
-    $args              = ['maxallowed' => $companionsallowed];
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_COMPANIONS_ALLOWED, null, $args);
-    $args = modulehook('companionsallowed', $args);
+    $args              = new Character(['maxallowed' => $companionsallowed]);
+    \LotgdEventDispatcher::dispatch($args, Character::COMPANIONS_ALLOWED);
+    $args = modulehook('companionsallowed', $args->getData());
 
     $companionsallowed = $args['maxallowed'];
     $current           = 0;
