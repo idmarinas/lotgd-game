@@ -25,7 +25,7 @@ require_once 'src/constants.php';
 use Lotgd\Core\Fixed\Doctrine;
 use Lotgd\Core\Fixed\FlashMessages as LotgdFlashMessages;
 use Lotgd\Core\Fixed\Format as LotgdFormat;
-use Lotgd\Core\Fixed\HookManager as LotgdHook;
+use Lotgd\Core\Fixed\EventDispatcher as LotgdEventDispatcher;
 use Lotgd\Core\Fixed\Kernel as LotgdKernel;
 use Lotgd\Core\Fixed\Navigation as LotgdNavigation;
 use Lotgd\Core\Fixed\Request as LotgdRequest;
@@ -176,8 +176,8 @@ LotgdTheme::wrapper(LotgdKernel::get('twig'));
 LotgdSanitize::instance(LotgdKernel::get(\Lotgd\Core\Tool\Sanitize::class));
 //-- Configure Translator
 LotgdTranslator::setContainer(LotgdKernel::get('translator'));
-//-- Configure Hook Manager instance
-LotgdHook::instance(LotgdKernel::get(\Lotgd\Core\EventManager\Hook::class));
+//-- Configure Event dispatcher instance
+LotgdEventDispatcher::instance(LotgdKernel::get('event_dispatcher'));
 
 $session = &$_SESSION['session'];
 
