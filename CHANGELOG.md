@@ -29,6 +29,9 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   **BC** Delete `AdvertisingBundle` from Core. Now is a independent bundle (can use in other Symfony projects).
     -   If you need/want use in your server can use https://github.com/idmarinas/advertising-bundle
+-   **BC** Removed Laminas Event Manager (Lotgd\Core\EventManager\EventManager), now use Symfony Event Dispatcher.
+    -   All events triggers are migrated to `evenDispacher->dispatch()`
+    -   You can see all available events in `src/core/Event/` folder
 
 ### :notebook: NOTES
 
