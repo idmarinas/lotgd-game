@@ -176,9 +176,10 @@ class Response extends HttpResponse
         if ($session['user']['loggedin'] ?? false)
         {
             $this->eventDispatcher->dispatch($args, EveryRequest::FOOTER_AUTHENTICATED);
-            $replacementbits = modulehook('everyfooter-loggedin', $args->getData());
+            $args->setData(modulehook('everyfooter-loggedin', $args->getData()));
         }
 
+        $replacementbits = $args->getData();
         unset($replacementbits['__scriptfile__'], $replacementbits['script']);
         //output any template part replacements that above hooks need (eg, advertising)º
         foreach ($replacementbits as $key => $val)
