@@ -1,20 +1,27 @@
 <?php
 
-define('OVERRIDE_FORCED_NAV', true);
+\define('OVERRIDE_FORCED_NAV', true);
 
 //-- Allow anonymous conections to Jaxon functions
 //-- This avoid some errors and allow to use with not registers users.
-define('ALLOW_ANONYMOUS', true);
+\define('ALLOW_ANONYMOUS', true);
 
 require_once 'common_jaxon.php';
 
-$jaxon = \LotgdKernel::get('lotgd.core.jaxon');
-
-if($jaxon->canProcessRequest())
+try
 {
-    $jaxon->processRequest();
+    $jaxon = \LotgdKernel::get('lotgd.core.jaxon');
 
-    saveuser(false); //-- Not updated laston (to avoid perma loggedin)
+    if ($jaxon->canProcessRequest())
+    {
+        $jaxon->processRequest();
 
-    exit;
+        saveuser(false); //-- Not updated laston (to avoid perma loggedin)
+
+        exit;
+    }
+}
+catch (\Throwable $th)
+{
+    \Tracy\Debugger::log($th);
 }
