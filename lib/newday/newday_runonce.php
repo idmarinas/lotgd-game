@@ -5,7 +5,10 @@
 //Let's do a new day operation that will only fire off for
 //one user on the whole server.
 //run the hook.
-\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_NEWDAY_RUNONCE, null, $args);
+
+use Lotgd\Core\Event\Core;
+
+\LotgdEventDispatcher::dispatch(new Core(), Core::NEWDAY_RUNONCE);
 modulehook('newday-runonce', []);
 
 //only if not done by cron

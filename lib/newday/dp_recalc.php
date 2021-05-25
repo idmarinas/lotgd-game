@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Event\Core;
+
 $pdks = [];
 \reset($labels);
 
@@ -22,7 +24,7 @@ foreach ($labels as $type => $label)
 $pdktotal = 0;
 $pdkneg   = false;
 
-\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_DK_POINT_RECALC, null, $args);
+\LotgdEventDispatcher::dispatch(new Core(), Core::DK_POINT_RECALC);
 modulehook('pdkpointrecalc');
 
 foreach ($labels as $type => $label)

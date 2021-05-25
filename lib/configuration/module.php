@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Event\Core;
+
 $module    = (string) \LotgdRequest::getQuery('module');
 $save      = (string) \LotgdRequest::getQuery('save');
 $isLaminas = (string) \LotgdRequest::getQuery('laminas');
@@ -129,9 +131,9 @@ function process_post_save_data($post, $old, &$flashMessages, $module, $textDoma
             }
             gamelog("`@Changed module(`5{$module}`0) setting `^{$key}`0 from `#{$oldval}`0 to `&{$val}`0`0", 'settings');
 
-            $args = ['module' => $module, 'setting' => $key, 'old' => $oldval, 'new' => $val];
-            \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_SETTING_CHANGE, null, $args);
-            modulehook('changesetting', $args, true);
+            $args = new Core(['module' => $module, 'setting' => $key, 'old' => $oldval, 'new' => $val]);
+            \LotgdEventDispatcher::dispatch($args, Core::SETTING_CHANGE);
+            modulehook('changesetting', $args->getData(), true);
         }
     }
 }

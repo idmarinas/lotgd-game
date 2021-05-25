@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Form\Type;
 
+use Lotgd\Core\Event\Core;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,9 +23,9 @@ class SpecialtyType extends ChoiceType
     {
         parent::configureOptions($resolver);
 
-        $specialties = ['' => 'Undecided'];
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_SPECIALTY_NAMES, null, $specialties);
-        $specialties = modulehook('specialtynames', $specialties);
+        $specialties = new Core(['' => 'Undecided']);
+        \LotgdEventDispatcher::dispatch($specialties, Core::SPECIALTY_NAMES);
+        $specialties = modulehook('specialtynames', $specialties->getData());
         $specialties = \array_flip($specialties);
 
         $resolver->setDefaults([

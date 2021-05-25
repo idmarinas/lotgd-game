@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Event\Core;
+
 $charRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
 
 $flashMessages = '';
@@ -79,9 +81,9 @@ foreach ($postSettings as $key => $val)
         gamelog("`@Changed core setting `^{$key}`@ from `#{$old[$key]}`@ to `&{$val}`0", 'settings');
 
         // Notify every module
-        $args = ['module' => 'core', 'setting' => $key, 'old' => $old[$key], 'new' => $val];
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_SETTING_CHANGE, null, $args);
-        modulehook('changesetting', $args, true);
+        $args = new Core(['module' => 'core', 'setting' => $key, 'old' => $old[$key], 'new' => $val]);
+        \LotgdEventDispatcher::dispatch($args, Core::SETTING_CHANGE);
+        modulehook('changesetting', $args->getData(), true);
     }
 }
 

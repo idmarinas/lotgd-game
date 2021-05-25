@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Event\Core;
+
 if ('bribe' == $action)
 {
     $amt  = (int) \LotgdRequest::getQuery('amt');
@@ -152,8 +154,9 @@ elseif ('specialty' == $action)
 
     if ('' == $specialty)
     {
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_SPECIALTY_NAMES);
-        $specialities = modulehook('specialtynames');
+        $specialities = new Core();
+        \LotgdEventDispatcher::dispatch($specialities, Core::SPECIALTY_NAMES);
+        $specialities = modulehook('specialtynames', $specialities->getData());
 
         \LotgdNavigation::addHeader('category.specialty');
 

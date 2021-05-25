@@ -3,6 +3,9 @@
 // mail ready
 // addnews ready
 // translator ready
+
+use Lotgd\Core\Event\Core;
+
 \define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
@@ -174,7 +177,7 @@ if ('' != $name)
     // If the player isn't allowed on for some reason, anything on
     // this hook should automatically call page_footer and exit
     // itself.
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_LOGIN_CHECK);
+    \LotgdEventDispatcher::dispatch(new Core(), Core::LOGIN_CHECK);
     modulehook('check-login');
 
     if ('' != $session['user']['emailvalidation'] && 'x' != \substr($session['user']['emailvalidation'], 0, 1))
@@ -195,7 +198,7 @@ if ('' != $name)
     // Let's throw a login module hook in here so that modules
     // like the stafflist which need to invalidate the cache
     // when someone logs in or off can do so.
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_LOGIN_PLAYER);
+    \LotgdEventDispatcher::dispatch(new Core(), Core::LOGIN_PLAYER);
     modulehook('player-login');
 
     //-- Check for valid restorepage
@@ -250,7 +253,7 @@ elseif ('logout' == $op)
         // Let's throw a logout module hook in here so that modules
         // like the stafflist which need to invalidate the cache
         // when someone logs in or off can do so.
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_LOGOUT_PLAYER);
+        \LotgdEventDispatcher::dispatch(new Core(), Core::LOGOUT_PLAYER);
         modulehook('player-logout');
         saveuser();
 

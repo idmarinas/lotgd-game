@@ -1,6 +1,9 @@
 <?php
 
 //-- Init page
+
+use Lotgd\Core\Event\Core;
+
 \LotgdResponse::pageStart('title.default', [], $textDomain);
 
 $params['tpl']                 = 'default';
@@ -21,9 +24,9 @@ if ( ! $session['user']['alive'])
 $session['user']['seenmaster'] = 0;
 
 $turnstoday = "Base: {$turnsperday}";
-$args       = ['resurrection' => $resurrection, 'turnstoday' => $turnstoday];
-\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_NEWDAY_PRE, null, $args);
-$args       = modulehook('pre-newday', $args);
+$args       = new Core(['resurrection' => $resurrection, 'turnstoday' => $turnstoday]);
+\LotgdEventDispatcher::dispatch($args, Core::NEWDAY_PRE);
+$args       = modulehook('pre-newday', $args->getData());
 $turnstoday = $args['turnstoday'];
 
 $interestrate = e_rand($mininterest * 100, $maxinterest * 100) / (float) 100;
@@ -267,14 +270,14 @@ if ( ! getsetting('newdaycron', 0))
     }
 }
 
-$args = [
+$args = new Core([
     'resurrection'         => $resurrection,
     'turnstoday'           => $turnstoday,
     'includeTemplatesPre'  => $params['includeTemplatesPre'],
     'includeTemplatesPost' => $params['includeTemplatesPost'],
-];
-\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_NEWDAY, null, $args);
-$args = modulehook('newday', $args);
+]);
+\LotgdEventDispatcher::dispatch($args, Core::NEWDAY);
+$args = modulehook('newday', $args->getData());
 
 $turnstoday                     = $args['turnstoday'];
 $params['includeTemplatesPre']  = $args['includeTemplatesPre'];

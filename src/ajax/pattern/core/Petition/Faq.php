@@ -13,6 +13,7 @@
 namespace Lotgd\Ajax\Pattern\Core\Petition;
 
 use Jaxon\Response\Response;
+use Lotgd\Core\Event\Core;
 use Tracy\Debugger;
 
 trait Faq
@@ -117,7 +118,7 @@ trait Faq
      */
     private function faqToc(): array
     {
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_PETITION_FAQ_TOC);
+        \LotgdEventDispatcher::dispatch(new Core(), Core::PETITION_FAQ_TOC);
 
         return modulehook('faq-toc', [
             [

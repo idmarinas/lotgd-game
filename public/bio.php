@@ -5,6 +5,7 @@
 // mail ready
 
 use Lotgd\Core\Event\Clan;
+use Lotgd\Core\Event\Core;
 
 require_once 'common.php';
 
@@ -51,9 +52,9 @@ $ranks = new Clan(['ranks' => $ranks, 'textDomain' => 'page_clan', 'clanid' => $
 \LotgdEventDispatcher::dispatch($ranks, Clan::RANK_LIST);
 $ranks = modulehook('clanranks', $ranks->getData());
 
-$args = ['' => \LotgdTranslator::t('character.specialtyname', [], 'app_default')];
-\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_SPECIALTY_NAMES, null, $args);
-$specialties = modulehook('specialtynames', $args);
+$args = new Core(['' => \LotgdTranslator::t('character.specialtyname', [], 'app_default')]);
+\LotgdEventDispatcher::dispatch($args, Core::SPECIALTY_NAMES);
+$specialties = modulehook('specialtynames', $args->getData());
 
 $params = [
     'textDomain' => $textDomain,

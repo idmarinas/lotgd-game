@@ -17,6 +17,7 @@ use Jaxon\Response\Response;
 use Lotgd\Ajax\Pattern\Core as PatternCore;
 use Lotgd\Core\AjaxAbstract;
 use Lotgd\Core\EntityRepository\PetitionsRepository;
+use Lotgd\Core\Event\Core;
 use Lotgd\Core\Form\PetitionType;
 use Tracy\Debugger;
 
@@ -225,8 +226,9 @@ class Petition extends AjaxAbstract
         $post['cancelpetition'] = $post['cancelpetition'] ?? false;
         $post['cancelreason']   = $post['cancelreason']   ?? '' ?: \LotgdTranslator::t('section.default.post.cancel', [], self::TEXT_DOMAIN);
 
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_PETITION_ADD, null, $post);
-        $post = modulehook('addpetition', $post);
+        $post = new Core($post);
+        \LotgdEventDispatcher::dispatch($post, Core::PETITION_ADD);
+        $post = modulehook('addpetition', $post->getData());
 
         if ($post['cancelpetition'])
         {
