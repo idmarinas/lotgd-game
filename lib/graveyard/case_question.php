@@ -1,9 +1,11 @@
 <?php
 
+use Lotgd\Core\Event\Graveyard;
+
 $hauntcost        = (int) getsetting('hauntcost', 25);
 $resurrectioncost = (int) getsetting('resurrectioncost', 100);
 
-$default_actions = [
+$default_actions = new Graveyard([
     [
         'textDomain'           => $textDomain, //-- For translator text
         'textDomainNavigation' => $textDomainNavigation, //-- For translation navigation
@@ -16,11 +18,11 @@ $default_actions = [
             'graveyardOwnerName' => $params['graveyardOwnerName'],
         ],
     ],
-];
+]);
 
 //build navigation
-\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_GRAVEYARD_DEATH_OVERLORD_ACTIONS, null, $default_actions);
-$actions = modulehook('deathoverlord_actions', $default_actions);
+\LotgdEventDispatcher::dispatch($default_actions, Graveyard::DEATH_OVERLORD_ACTIONS);
+$actions = modulehook('deathoverlord_actions', $default_actions->getData());
 
 $favorCostList = [];
 
@@ -80,5 +82,5 @@ foreach ($actions as $key => $value)
 
 \LotgdNavigation::addHeader('category.other');
 
-\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_GRAVEYARD_DEATH_OVERLORD_FAVORS);
+\LotgdEventDispatcher::dispatch(new Graveyard(), Graveyard::DEATH_OVERLORD_FAVORS);
 modulehook('ramiusfavors');

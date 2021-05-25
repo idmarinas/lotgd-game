@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Event\Graveyard;
+
 if ($session['user']['gravefights'] <= 0)
 {
     \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.no.torments', [], $textDomain));
@@ -48,8 +50,9 @@ else
         $attackstack['options']['type'] = 'graveyard';
 
         //no multifights currently, so this hook passes the badguy to modify
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_GRAVEYARD_FIGHT_START, null, $attackstack);
-        $attackstack = modulehook('graveyardfight-start', $attackstack);
+        $attackstack = new Graveyard($attackstack);
+        \LotgdEventDispatcher::dispatch($attackstack, Graveyard::FIGHT_START);
+        $attackstack = modulehook('graveyardfight-start', $attackstack->getData());
 
         $session['user']['badguy'] = $attackstack;
     }
