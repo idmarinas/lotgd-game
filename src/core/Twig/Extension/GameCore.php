@@ -85,7 +85,7 @@ class GameCore extends AbstractExtension
             new TwigFilter('unserialize', 'unserialize'),
             new TwigFilter('stripslashes', 'stripslashes'),
             new TwigFilter('sprintfnews', [$this, 'sprintfnews']),
-            new TwigFilter('censor', [$this, 'censor']),
+            new TwigFilter('censor', [$this->censor, 'filter']),
             new TwigFilter('highlight_file', [$this, 'highlightFile']),
             new TwigFilter('highlight_string', [$this, 'highlightString']),
             new TwigFilter('yes_no', [$this, 'affirmationNegation']),

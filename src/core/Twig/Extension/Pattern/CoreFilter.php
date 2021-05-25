@@ -112,14 +112,6 @@ trait CoreFilter
     }
 
     /**
-     * Filter string with censor.
-     */
-    public function censor(?string $string): string
-    {
-        return $this->censor->filter($string);
-    }
-
-    /**
      * Syntax highlighting of a file.
      *
      * @param string $file
