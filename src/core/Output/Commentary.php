@@ -17,7 +17,8 @@ use Laminas\Filter;
 use Lotgd\Core\Entity as LotgdEntity;
 use Lotgd\Core\Entity\Commentary as EntityCommentary;
 use Lotgd\Core\EntityRepository\CommentaryRepository;
-use Lotgd\Core\EventManager\EventManager;
+use Lotgd\Core\Event\Commentary as EventCommentary;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
@@ -46,7 +47,7 @@ class Commentary
         TranslatorInterface $translator,
         CacheInterface $appCache,
         Censor $censor,
-        EventManager $hook,
+        EventDispatcher $hook,
         FlashBagInterface $flashBag,
         EntityManagerInterface $doctrine,
         DenormalizerInterface $normalizer
@@ -141,9 +142,9 @@ class Commentary
         $post['commentOri']   = $this->censor->getOrigString();
         $post['commentMatch'] = $this->censor->getMatchWords();
 
-        $args = ['data' => $post];
-        $this->hook->trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_COMMENT_POST, null, $args);
-        $args = modulehook('postcomment', $args);
+        $args = new EventCommentary(['data' => $post]);
+        $this->hook->dispatch($args, EventCommentary::COMMENT_POST);
+        $args = modulehook('postcomment', $args->getData());
 
         //-- A module tells us to ignore this comment, so we will
         if ($args['ignore'] ?? false)
@@ -216,9 +217,9 @@ class Commentary
         // }
 
         //-- Process additional commands
-        $args = ['command' => $command, 'section' => $data['section'], 'data' => &$data];
-        $this->hook->trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_COMMANDS, null, $args);
-        $returnedHook = modulehook('commentary-command', $args);
+        $args = new EventCommentary(['command' => $command, 'section' => $data['section'], 'data' => &$data]);
+        $this->hook->dispatch($args, EventCommentary::COMMANDS);
+        $returnedHook = modulehook('commentary-command', $args->getData());
 
         $processed = true;
 
@@ -305,8 +306,8 @@ class Commentary
         $comment = $filterChain->filter($comment);
 
         //-- Process comment
-        $args = ['comment' => $comment];
-        $this->hook->trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_COMMENT, null, $args);
+        $args = new EventCommentary(['comment' => $comment]);
+        $this->hook->dispatch($args, EventCommentary::COMMENT);
         $comment = modulehook('commentary-comment', $args);
 
         return $comment['comment'];
@@ -334,8 +335,9 @@ class Commentary
             $comsecs['waiting'] = $this->translator->trans('section.waiting', [], self::TEXT_DOMAIN);
             $comsecs['beta'] = $this->translator->trans('section.beta', [], self::TEXT_DOMAIN);
 
+            $comsecs = new EventCommentary($comsecs);
             // All of the ones after this will be translated in the modules.
-            $this->hook->trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_MODERATE_SECTIONS, null, $comsecs);
+            $this->hook->dispatch($comsecs, EventCommentary::MODERATE_SECTIONS);
 
             return modulehook('moderate-comment-sections', $comsecs);
         });
