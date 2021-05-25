@@ -18,7 +18,7 @@ use Lotgd\Core\Entity as LotgdEntity;
 use Lotgd\Core\Entity\Commentary as EntityCommentary;
 use Lotgd\Core\EntityRepository\CommentaryRepository;
 use Lotgd\Core\Event\Commentary as EventCommentary;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
@@ -47,7 +47,7 @@ class Commentary
         TranslatorInterface $translator,
         CacheInterface $appCache,
         Censor $censor,
-        EventDispatcher $hook,
+        EventDispatcherInterface $hook,
         FlashBagInterface $flashBag,
         EntityManagerInterface $doctrine,
         DenormalizerInterface $normalizer
