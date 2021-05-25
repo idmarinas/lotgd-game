@@ -29,20 +29,6 @@ trait CoreFilter
     }
 
     /**
-     * Uncolorize a string.
-     * Remove all LoTGD codes.
-     */
-    public function uncolorize(?string $string): string
-    {
-        if ( ! $string)
-        {
-            return '';
-        }
-
-        return $this->sanitize->fullSanitize($string);
-    }
-
-    /**
      * Preven to format a LotGD code.
      */
     public function preventCodes(?string $string): string
