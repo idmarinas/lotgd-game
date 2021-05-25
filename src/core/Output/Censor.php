@@ -30,6 +30,30 @@ class Censor extends CensorWords
      */
     protected $lotgdMatchWords = [];
 
+    public function __construct(string $locale, string $projectDir)
+    {
+        parent::__construct();
+
+        try
+        {
+            //-- Try add locale dictionary
+            $this->addDictionary($locale);
+        }
+        catch (\Throwable $th)
+        {
+            //-- If fail add en-base dictionary
+            $this->addDictionary('en-base');
+        }
+
+        //-- Add custom local dictionary
+        $dictionary = "{$projectDir}/data/dictionary/{$locale}.php";
+
+        if (\is_file($dictionary))
+        {
+            $this->addDictionary($dictionary);
+        }
+    }
+
     /**
      * Apply profanity filter.
      *

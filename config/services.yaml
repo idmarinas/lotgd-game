@@ -132,12 +132,13 @@ services:
         calls:
             - setDecPoint: ['%lotgd_core.number.format.decimal.point%']
             - setThousandsSep: ['%lotgd_core.number.format.thousands.sep%']
-    Lotgd\Core\Service\Censor:
+    Lotgd\Core\Output\Censor:
         lazy: true
         arguments:
             - '%kernel.default_locale%'
-    Lotgd\Core\Output\Censor:
-        alias: Lotgd\Core\Service\Censor
+            - '%kernel.project_dir%'
+    lotgd_core.censor:
+        alias: Lotgd\Core\Output\Censor
         public: true
     Lotgd\Core\Output\Commentary:
         lazy: true
