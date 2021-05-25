@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Twig\Environment as Environment;
 
 trait CoreFunction
@@ -64,9 +65,10 @@ trait CoreFunction
      */
     public function triggerEvent($name, $data = [])
     {
-        $this->hookManager->trigger($name, null, $data);
+        $data = new GenericEvent(null, $data);
+        $this->hookmanager->dispatch($name, $data);
 
-        return modulehook($name, $data);
+        return modulehook($name, $data->getArguments());
     }
 
     /**

@@ -14,18 +14,18 @@
 namespace Lotgd\Core\Twig\Extension;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Lotgd\Core\EventManager\EventManager as CoreEventManager;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Output\Censor;
 use Lotgd\Core\Output\Format;
 use Lotgd\Core\Tool\Sanitize;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use Twig\TwigTest;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class GameCore extends AbstractExtension
 {
@@ -55,7 +55,7 @@ class GameCore extends AbstractExtension
         TranslatorInterface $translator,
         Censor $censor,
         Settings $settings,
-        CoreEventManager $hookManager,
+        EventDispatcherInterface $hookManager,
         EntityManagerInterface $doctrine,
         SessionInterface $session
     ) {
@@ -67,7 +67,7 @@ class GameCore extends AbstractExtension
         $this->settings    = $settings;
         $this->hookManager = $hookManager;
         $this->doctrine    = $doctrine;
-        $this->session    = $session;
+        $this->session     = $session;
     }
 
     /**
