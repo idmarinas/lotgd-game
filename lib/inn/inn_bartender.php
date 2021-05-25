@@ -1,6 +1,7 @@
 <?php
 
 use Lotgd\Core\Event\Core;
+use Lotgd\Core\Event\Other;
 
 if ('bribe' == $action)
 {
@@ -91,7 +92,7 @@ if ('bribe' == $action)
         if ($params['bribeSuccess'])
         {
             \LotgdNavigation::addHeader('category.want');
-            \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_INN_BARTENDER_BRIBE);
+            \LotgdEventDispatcher::dispatch(new Other(), Other::INN_BARTENDER_BRIBE);
             modulehook('bartenderbribe');
 
             if (getsetting('pvp', 1))
@@ -182,9 +183,9 @@ else
 
     \LotgdNavigation::addHeader('Drinks');
 
-    $result = ['includeTemplatesPre' => $params['includeTemplatesPre'], 'includeTemplatesPost' => $params['includeTemplatesPost']];
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_INN_ALE, null, $result);
-    $result = modulehook('ale', $result);
+    $result = new Other(['includeTemplatesPre' => $params['includeTemplatesPre'], 'includeTemplatesPost' => $params['includeTemplatesPost']]);
+    \LotgdEventDispatcher::dispatch($result, Other::INN_ALE);
+    $result = modulehook('ale', $result->getData());
 
     $params['includeTemplatesPre']  = $result['includeTemplatesPre'];
     $params['includeTemplatesPost'] = $result['includeTemplatesPost'];
