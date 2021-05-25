@@ -3,6 +3,9 @@
 // addnews ready
 // translator ready
 // mail ready
+
+use Lotgd\Core\Event\Creature;
+
 require_once 'lib/creaturefunctions.php';
 
 /**
@@ -36,8 +39,9 @@ function buffbadguy($badguy, $hook = 'buffbadguy')
     }
 
     //-- Activate hook when find a creature
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CREATURE_ENCOUNTER, null, $badguy);
-    $badguy = modulehook('creatureencounter', $badguy);
+    $badguy = new Creature($badguy);
+    \LotgdEventDispatcher::dispatch($badguy, Creature::ENCOUNTER);
+    $badguy = $badguy->setData(modulehook('creatureencounter', $badguy->getData()));
 
     $hookNew = $hook;
 
@@ -50,8 +54,8 @@ function buffbadguy($badguy, $hook = 'buffbadguy')
         $hookNew = 'master';
     }
     //-- Activate hook custom or default (buffbadguy)
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CREATURE_BUFF.$hookNew, null, $badguy);
-    $badguy = modulehook($hook, $badguy);
+    \LotgdEventDispatcher::dispatch($badguy, Creature::BUFF_FOR.$hookNew);
+    $badguy = modulehook($hook, $badguy->getData());
 
     //-- Update max creature health
     $badguy['creaturemaxhealth'] = $badguy['creaturehealth'];

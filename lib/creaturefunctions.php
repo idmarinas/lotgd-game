@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Event\Creature;
+
 /**
  * Generate a base creature stats
  * Can use for generated your own creatures in your modules.
@@ -207,16 +209,16 @@ function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmon
     }
 
     //-- You can add more creatures. This is good, when not find nothing in data base
-    $creatures = [
+    $creatures = new Creature([
         'creatures'      => $creatures,
         'multi'          => $multi,
         'targetlevel'    => $targetlevel,
         'mintargetlevel' => $mintargetlevel,
         'packofmonsters' => $packofmonsters,
         'forest'         => $forest,
-    ];
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CREATURE_SEARCH, null, $creatures);
-    $creatures = modulehook('creature-search', $creatures);
+    ]);
+    \LotgdEventDispatcher::dispatch($creatures, Creature::SEARCH);
+    $creatures = modulehook('creature-search', $creatures->getData());
 
     return $creatures['creatures'];
 }
