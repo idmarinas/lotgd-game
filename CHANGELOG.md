@@ -19,7 +19,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   All pattern class in **src/core/Pattern/** folder are deprecated. If possible use Dependency Injection.
+    -   All these patterns will be removed in future version.
 
 ### :wrench: FIXES
 
@@ -32,6 +33,12 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **BC** Removed Laminas Event Manager (Lotgd\Core\EventManager\EventManager), now use Symfony Event Dispatcher.
     -   All events triggers are migrated to `evenDispacher->dispatch()`
     -   You can see all available events in `src/core/Event/` folder
+    -   Also removed all related files to Hook manager like (`Lotgd\Core\Fixed\HookManager` as `LotgdHook`)
+        -   Use `LotgdEventDispatcher` instead of `LotgdHook`
+    -   Use Event Dispatcher service for all events. Can create new custom events.
+        -   Use `LotgdKernel::get('event_dispatcher')` for get service of Event Dispatcher.
+-   **BC** Deleted pattern `Lotgd\Core\Pattern\HookManager`
+-   **BC** Deleted events class `Lotgd\Core\Hook` See `src/core/Event/` folder to see all new events.
 
 ### :notebook: NOTES
 
