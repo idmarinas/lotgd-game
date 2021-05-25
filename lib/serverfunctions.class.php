@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Event\Other;
+
 class ServerFunctions
 {
     public static function isTheServerFull()
@@ -68,8 +70,8 @@ class ServerFunctions
         \Doctrine::flush();
 
         //adding a hook, nasty, but you don't call this too often
-        $args = [$result];
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_SERVER_DRAGON_POINT_RESET, null, $args);
-        modulehook('dragonpointreset', $args);
+        $args = new Other([$result]);
+        \LotgdEventDispatcher::dispatch($args, Other::SERVER_DRAGON_POINT_RESET);
+        modulehook('dragonpointreset', $args->getData());
     }
 }
