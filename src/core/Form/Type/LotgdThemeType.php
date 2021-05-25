@@ -22,32 +22,6 @@ class LotgdThemeType extends ChoiceType
     {
         parent::configureOptions($resolver);
 
-        $vname = getsetting('villagename', LOCATION_FIELDS);
-        $locs  = [
-            $vname => [
-                'location.village.of',
-                ['name' => $vname],
-                'app_default',
-            ],
-        ];
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_OTHER_LOCATIONS, null, $locs);
-        $locs        = modulehook('camplocs', $locs);
-        $locs['all'] = [
-            'location.everywhere',
-            [],
-            'app_default',
-        ];
-        \ksort($locs);
-
-        $defaultChoice = [];
-
-        foreach ($locs as $loc => $params)
-        {
-            $value = \LotgdTranslator::t($params[0], $params[1], $params[2]);
-
-            $defaultChoice[$value] = $loc;
-        }
-
         $resolver->setDefaults([
             'attr' => [
                 'class' => 'search selection lotgd',
