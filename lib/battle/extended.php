@@ -5,6 +5,8 @@
 // translation ready
 //
 
+use Lotgd\Core\Event\Fight;
+
 /**
  * Prepare all data for show battle bars.
  *
@@ -179,9 +181,9 @@ function prepare_fight($options = [])
         $options = [];
     }
 
-    $fightoptions = $options + $basicoptions;
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_OPTIONS, null, $fightoptions);
-    $fightoptions = modulehook('fightoptions', $fightoptions);
+    $fightoptions = new Fight($options + $basicoptions);
+    \LotgdEventDispatcher::dispatch($fightoptions, Fight::OPTIONS);
+    $fightoptions = modulehook('fightoptions', $fightoptions->getData());
 
     // We'll also reset the companions here...
     prepare_companions();

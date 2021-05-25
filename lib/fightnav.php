@@ -3,6 +3,9 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Event\Fight;
+
 function fightnav($allowspecial = true, $allowflee = true, $script = false)
 {
     global $session, $newenemies, $companions;
@@ -27,9 +30,9 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
     $fight = $session['user']['alive'] ? 'nav.fight.live' : 'nav.fight.death';
     $run   = $session['user']['alive'] ? 'nav.run.live' : 'nav.run.death';
 
-    $args = ['script' => $script];
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_NAV_PRE, null, $args);
-    modulehook('fightnav-prenav', $args);
+    $args = new Fight(['script' => $script]);
+    \LotgdEventDispatcher::dispatch($args, Fight::NAV_PRE);
+    modulehook('fightnav-prenav', $args->getData());
 
     \LotgdNavigation::addHeader('category.standard');
     \LotgdNavigation::addNav($fight, "{$script}op=fight");
@@ -64,16 +67,16 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
     //added hook for the Stamina system
     if ( ! $session['user']['alive'])
     {
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_NAV_GRAVEYARD, null, $args);
-        modulehook('fightnav-graveyard', $args);
+        \LotgdEventDispatcher::dispatch($args, Fight::NAV_GRAVEYARD);
+        modulehook('fightnav-graveyard', $args->getData());
     }
 
     if ($allowspecial)
     {
         \LotgdNavigation::addHeader('category.special', ['hiddeEmpty' => false]);
 
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_NAV_SPECIALTY, null, $args);
-        modulehook('fightnav-specialties', $args);
+        \LotgdEventDispatcher::dispatch($args, Fight::NAV_SPECIALTY);
+        modulehook('fightnav-specialties', $args->getData());
 
         if ($session['user']['superuser'] & SU_DEVELOPER)
         {
@@ -81,8 +84,8 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
             \LotgdNavigation::addNav('nav.god', "{$script}op=fight&skill=godmode");
         }
 
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_NAV, null, $args);
-        modulehook('fightnav', $args);
+        \LotgdEventDispatcher::dispatch($args, Fight::NAV);
+        modulehook('fightnav', $args->getData());
     }
 
     if (\count($newenemies) > 1)

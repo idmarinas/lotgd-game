@@ -3,6 +3,9 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Event\Fight;
+
 require_once 'lib/buffs.php';
 
 function rolldamage()
@@ -345,6 +348,6 @@ function apply_skill($skill, $l)
         ]);
     }
 
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_APPLY_SPECIALTY);
+    \LotgdEventDispatcher::dispatch(new Fight(), Fight::APPLY_SPECIALTY);
     modulehook('apply-specialties');
 }
