@@ -219,7 +219,7 @@ elseif ('create' == $op)
     $emailverification = '';
     $shortname         = \trim((string) \LotgdRequest::getPost('name'));
     $shortname         = \LotgdSanitize::nameSanitize(getsetting('spaceinname', 0), $shortname);
-    $censor            = \LotgdKernel::get(\Lotgd\Core\Output\Censor::class);
+    $censor            = \LotgdKernel::get('lotgd_core.censor');
     $blockaccount      = false;
 
     if ($censor->filter($shortname) != $shortname)

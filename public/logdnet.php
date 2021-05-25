@@ -87,7 +87,7 @@ $op = \LotgdRequest::getQuery('op');
 
 if ('' == $op)
 {
-    $censor = \LotgdKernel::get(\Lotgd\Core\Output\Censor::class);
+    $censor = \LotgdKernel::get('lotgd_core.censor');
 
     $addy = (string) \LotgdRequest::getQuery('addy');
     $desc = (string) \LotgdRequest::getQuery('desc');
