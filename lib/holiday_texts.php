@@ -3,6 +3,9 @@
 // addnews ready
 // translator ready
 // mail ready
+
+use Lotgd\Core\Event\Other;
+
 require_once 'lib/modules.php';
 
 function holidayize($text, $type = 'unknown')
@@ -19,9 +22,9 @@ function holidayize($text, $type = 'unknown')
         return $text;
     }
 
-    $args = ['text' => $text, 'type' => $type];
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_SPECIAL_HOLIDAY, null, $args);
-    $args = modulehook('holiday', $args);
+    $args = new Other(['text' => $text, 'type' => $type]);
+    \LotgdEventDispatcher::dispatch($args, Other::SPECIAL_HOLIDAY);
+    $args = modulehook('holiday', $args->getData());
 
     return $args['text'];
 }
