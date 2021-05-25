@@ -1,14 +1,16 @@
 <?php
 
+use Lotgd\Core\Event\Clan;
+
 require_once 'lib/gamelog.php';
 
-$args = [
+$args = new Clan([
     'clanid'   => $session['user']['clanid'],
     'clanrank' => $session['user']['clanrank'],
     'acctid'   => $session['user']['acctid'],
-];
-\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_WITHDRAW, null, $args);
-modulehook('clan-withdraw', $args);
+]);
+\LotgdEventDispatcher::dispatch($args, Clan::WITHDRAW);
+modulehook('clan-withdraw', $args->getData());
 
 $charRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
 
@@ -40,9 +42,9 @@ if ($session['user']['clanrank'] >= CLAN_LEADER)
             $clanEntity     = $clanRepository->find($session['user']['clanid']);
 
             //-- There are no other members, we need to delete the clan.
-            $args = ['clanid' => $session['user']['clanid'], 'clanEntity' => $clanEntity];
-            \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_DELETE, null, $args);
-            modulehook('clan-delete', $args);
+            $args = new Clan(['clanid' => $session['user']['clanid'], 'clanEntity' => $clanEntity]);
+            \LotgdEventDispatcher::dispatch($args, Clan::DELETE);
+            modulehook('clan-delete', $args->getData());
 
             \Doctrine::remove($clanEntity);
             \Doctrine::flush();

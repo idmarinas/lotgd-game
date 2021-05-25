@@ -3,6 +3,9 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Event\Clan;
+
 require_once 'common.php';
 require_once 'lib/systemmail.php';
 
@@ -49,9 +52,9 @@ $ranks = [
     CLAN_FOUNDER => 'ranks.031'
 ];
 
-$ranks = ['ranks' => $ranks, 'textDomain' => 'page_clan', 'clanid' => null];
-\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_RANK_LIST, null, $ranks);
-$ranks = modulehook('clanranks', $ranks);
+$ranks = new Clan(['ranks' => $ranks, 'textDomain' => 'page_clan', 'clanid' => null]);
+\LotgdEventDispatcher::dispatch($ranks, Clan::RANK_LIST);
+$ranks = modulehook('clanranks', $ranks->getData());
 $params['ranksNames'] = $ranks['ranks'];
 
 if ('detail' == $op)

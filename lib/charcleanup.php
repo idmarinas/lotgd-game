@@ -1,6 +1,7 @@
 <?php
 
 use Lotgd\Core\Event\Character;
+use Lotgd\Core\Event\Clan;
 
 /**
  * Delete an account and create a backup.
@@ -111,9 +112,9 @@ function char_cleanup($accountId, $type): bool
                 $clanEntity     = $clanRepository->find($accountEntity->getCharacter()->getClanid());
 
                 //-- There are no other members, we need to delete the clan.
-                $return = ['clanid' => $accountEntity->getCharacter()->getClanid(), 'clanEntity' => $clanEntity];
-                \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_DELETE, null, $return);
-                modulehook('clan-delete', $return);
+                $return = new Clan(['clanid' => $accountEntity->getCharacter()->getClanid(), 'clanEntity' => $clanEntity]);
+                \LotgdEventDispatcher::dispatch($return, Clan::DELETE);
+                modulehook('clan-delete', $return->getData());
 
                 \Doctrine::remove($clanEntity);
 

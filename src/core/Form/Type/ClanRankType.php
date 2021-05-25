@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Form\Type;
 
+use Lotgd\Core\Event\Clan;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,9 +32,9 @@ class ClanRankType extends ChoiceType
             CLAN_LEADER         => 'ranks.030',
             CLAN_FOUNDER        => 'ranks.031',
         ];
-        $ranksResult = ['ranks' => $ranks, 'textDomain' => 'page_clan', 'clanid' => null];
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_RANK_LIST, null, $ranksResult);
-        $ranksResult = modulehook('clanranks', $ranksResult);
+        $ranksResult = new Clan(['ranks' => $ranks, 'textDomain' => 'page_clan', 'clanid' => null]);
+        \LotgdEventDispatcher::dispatch($ranksResult, Clan::RANK_LIST);
+        $ranksResult = modulehook('clanranks', $ranksResult->getData());
         $ranks       = $ranksResult['ranks'];
 
         $choices = [];

@@ -1,8 +1,10 @@
 <?php
 
+use Lotgd\Core\Event\Clan;
+
 \LotgdNavigation::addHeader('category.options');
 
-\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_ENTER);
+\LotgdEventDispatcher::dispatch(new Clan(), Clan::ENTER);
 modulehook('clan-enter');
 
 if ('withdraw' == $op)

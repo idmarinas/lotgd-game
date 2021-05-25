@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Event\Clan;
+
 $params['clanShortNameLength'] = getsetting('clanshortnamelength', 5);
 
 $lotgdFormFactory = \LotgdKernel::get('form.factory');
@@ -23,10 +25,9 @@ if ($session['user']['gold'] < $costGold || $session['user']['gems'] < $costGems
 }
 elseif ($form->isSubmitted() && $form->isValid())
 {
-    $args = ['clanname' => $entity->getClanname(), 'clanshort' => $entity->getClanshort()];
-
-    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_CREATE, null, $args);
-    $args = modulehook('process-createclan', $args);
+    $args = new Clan(['clanname' => $entity->getClanname(), 'clanshort' => $entity->getClanshort()]);
+    \LotgdEventDispatcher::dispatch($args, Clan::CREATE);
+    $args = modulehook('process-createclan', $args->getData());
 
     if ($args['blocked'] ?? false)
     {
