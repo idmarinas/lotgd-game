@@ -5,6 +5,9 @@
 // translator ready
 
 // hilarious copy of mounts.php
+
+use Lotgd\Core\Event\Other;
+
 require_once 'common.php';
 require_once 'lib/showform.php';
 
@@ -74,8 +77,9 @@ elseif ('take' == $op)
         $row['maxhitpoints'] = $row['maxhitpoints'] + $row['maxhitpointsperlevel'] * $session['user']['level'];
         $row['hitpoints'] = $row['maxhitpoints'];
 
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_COMPANION_ALTER, null, $row);
-        $row = modulehook('alter-companion', $row);
+        $row = new Other($row);
+        \LotgdEventDispatcher::dispatch($row, Other::COMPANION_ALTER);
+        $row = modulehook('alter-companion', $row->getData());
 
         require_once 'lib/buffs.php';
 
