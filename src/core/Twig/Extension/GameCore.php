@@ -17,7 +17,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Output\Censor;
-use Lotgd\Core\Output\Format;
 use Lotgd\Core\Tool\Sanitize;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
@@ -39,7 +38,6 @@ class GameCore extends AbstractExtension
     use Pattern\Source;
 
     protected $request;
-    protected $format;
     protected $sanitize;
     protected $translator;
     protected $censor;
@@ -50,7 +48,6 @@ class GameCore extends AbstractExtension
 
     public function __construct(
         Request $request,
-        Format $format,
         Sanitize $sanitize,
         TranslatorInterface $translator,
         Censor $censor,
@@ -60,7 +57,6 @@ class GameCore extends AbstractExtension
         SessionInterface $session
     ) {
         $this->request     = $request;
-        $this->format      = $format;
         $this->sanitize    = $sanitize;
         $this->translator  = $translator;
         $this->censor      = $censor;
@@ -76,12 +72,8 @@ class GameCore extends AbstractExtension
     public function getFilters()
     {
         return [
-            new TwigFilter('colorize', [$this, 'colorize']),
-            new TwigFilter('uncolorize', [$this, 'uncolorize']),
             new TwigFilter('prevent_codes', [$this, 'preventCodes']),
             new TwigFilter('nltoappon', [$this, 'nltoappon']),
-            new TwigFilter('numeral', [$this, 'numeral']),
-            new TwigFilter('relative_date', [$this, 'relativedate']),
             new TwigFilter('unserialize', 'unserialize'),
             new TwigFilter('stripslashes', 'stripslashes'),
             new TwigFilter('sprintfnews', [$this, 'sprintfnews']),
