@@ -3,6 +3,7 @@
 //-- Init page
 
 use Lotgd\Core\Event\Core;
+use Lotgd\Core\Event\Other;
 
 \LotgdResponse::pageStart('title.default', [], $textDomain);
 
@@ -284,9 +285,9 @@ $params['includeTemplatesPre']  = $args['includeTemplatesPre'];
 $params['includeTemplatesPost'] = $args['includeTemplatesPost'];
 
 //## Process stamina for spirit
-$args = ['spirits' => $spirits];
-\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_OTHER_STAMINA_NEWDAY, null, $args);
-modulehook('stamina-newday', $args);
+$args = new Other(['spirits' => $spirits]);
+\LotgdEventDispatcher::dispatch($args, Other::STAMINA_NEWDAY);
+modulehook('stamina-newday', $args->getData());
 
 debuglog("New Day Turns: {$turnstoday}");
 

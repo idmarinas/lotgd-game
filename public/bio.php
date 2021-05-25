@@ -6,6 +6,7 @@
 
 use Lotgd\Core\Event\Clan;
 use Lotgd\Core\Event\Core;
+use Lotgd\Core\Event\Other;
 
 require_once 'common.php';
 
@@ -94,8 +95,9 @@ else
 $params = modulehook('page-bio-tpl-params', $params);
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/bio.html.twig', $params));
 
-\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_OTHER_BIO_END, null, $target);
-modulehook('bioend', $target);
+$args = new Other($target);
+\LotgdEventDispatcher::dispatch($args, Other::BIO_END);
+modulehook('bioend', $args->getData());
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

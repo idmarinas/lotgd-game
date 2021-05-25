@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Form\Type;
 
+use Lotgd\Core\Event\Other;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,15 +24,15 @@ class LocationType extends ChoiceType
         parent::configureOptions($resolver);
 
         $vname = getsetting('villagename', LOCATION_FIELDS);
-        $locs  = [
+        $locs  = new Other([
             $vname => [
                 'location.village.of',
                 ['name' => $vname],
                 'app_default',
             ],
-        ];
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_OTHER_LOCATIONS, null, $locs);
-        $locs        = modulehook('camplocs', $locs);
+        ]);
+        \LotgdEventDispatcher::dispatch($locs, Other::LOCATIONS);
+        $locs        = modulehook('camplocs', $locs->getData());
         $locs['all'] = [
             'location.everywhere',
             [],
