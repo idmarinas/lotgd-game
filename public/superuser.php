@@ -3,6 +3,9 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Event\Superuser;
+
 require_once 'common.php';
 
 check_su_access(0xFFFFFFFF & ~SU_DOESNT_GIVE_GROTTO);
@@ -97,9 +100,9 @@ if ($session['user']['superuser'] & SU_EDIT_CONFIG)
 
 \LotgdNavigation::addHeader('superuser.category.module');
 
-$args = [];
-\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_SUPERUSER, null, $args);
-modulehook('superuser', $args);
+$args = new Superuser([]);
+\LotgdEventDispatcher::dispatch($args, Superuser::SUPERUSER);
+modulehook('superuser', $args->getData());
 
 \LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/superuser.html.twig', [
     'textDomain' => $textDomain

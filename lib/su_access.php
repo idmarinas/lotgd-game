@@ -3,6 +3,9 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Event\Superuser;
+
 $thispage_superuser_level = 0;
 function check_su_access($level)
 {
@@ -18,9 +21,9 @@ function check_su_access($level)
     {
         //-- They have appropriate levels, let's see if there's a module that restricts access beyond this point.
 
-        $return = ['enabled' => true, 'level' => $level];
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_SUPERUSER_CHECK_SU_ACCESS, null, $return);
-        $return = modulehook('check_su_access', $return);
+        $return = new Superuser(['enabled' => true, 'level' => $level]);
+        \LotgdEventDispatcher::dispatch($return, Superuser::CHECK_SU_ACCESS);
+        $return = modulehook('check_su_access', $return->getData());
 
         if ($return['enabled'])
         {
@@ -125,9 +128,9 @@ function checkSuPermission($permission, ?string $return = null)
 
     if ($session['user']['superuser'] & $permission)
     {
-        $result = ['enabled' => true, 'permission' => $permission];
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_SUPERUSER_CHECK_SU_PERMISSION, null, $return);
-        $result = modulehook('check-su-permission', $result);
+        $result = new Superuser(['enabled' => true, 'permission' => $permission]);
+        \LotgdEventDispatcher::dispatch($result, Superuser::CHECK_SU_PERMISSION);
+        $result = modulehook('check-su-permission', $result->getData());
 
         if ($result['enabled'])
         {
