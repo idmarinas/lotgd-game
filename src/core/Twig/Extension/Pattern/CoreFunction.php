@@ -27,22 +27,6 @@ trait CoreFunction
     }
 
     /**
-     * Get version of game.
-     */
-    public function gameVersion(): string
-    {
-        return \Lotgd\Core\Kernel::VERSION;
-    }
-
-    /**
-     * Get copyright of game.
-     */
-    public function gameCopyright(): string
-    {
-        return \Lotgd\Core\Kernel::LICENSE.\Lotgd\Core\Kernel::COPYRIGHT;
-    }
-
-    /**
      * Get value of setting.
      *
      * @param string $name

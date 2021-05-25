@@ -110,8 +110,14 @@ class GameCore extends AbstractExtension
             new TwigFunction('secondstonextgameday', [$this, 'secondstonextgameday']),
 
             new TwigFunction('page_title', [$this, 'pageTitle']),
-            new TwigFunction('game_version', [$this, 'gameVersion']),
-            new TwigFunction('game_copyright', [$this, 'gameCopyright']),
+            new TwigFunction('game_version', function (): string
+            {
+                return \Lotgd\Core\Kernel::VERSION;
+            }),
+            new TwigFunction('game_copyright', function (): string
+            {
+                return \Lotgd\Core\Kernel::LICENSE.\Lotgd\Core\Kernel::COPYRIGHT;
+            }),
             new TwigFunction('game_source', [$this, 'gameSource'], ['needs_environment' => true]),
             new TwigFunction('game_page_gen', [$this, 'gamePageGen'], ['needs_environment' => true]),
 
