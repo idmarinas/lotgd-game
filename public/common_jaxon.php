@@ -186,11 +186,11 @@ if ($session['user']['superuser'] & SU_MEGAUSER)
 // This however is the only context where blockmodule can be called safely!
 // You should do as LITTLE as possible here and consider if you can hook on
 // a page header instead.
-\LotgdEventDispatcher::dispatch(new EveryRequest(), EveryRequest::HIT)
+\LotgdEventDispatcher::dispatch(new EveryRequest(), EveryRequest::HIT);
 modulehook('everyhit');
 
 if ($session['user']['loggedin'])
 {
-    \LotgdEventDispatcher::dispatch(new EveryRequest(), EveryRequest::HIT_AUTHENTICATED)
+    \LotgdEventDispatcher::dispatch(new EveryRequest(), EveryRequest::HIT_AUTHENTICATED);
     modulehook('everyhit-loggedin');
 }
