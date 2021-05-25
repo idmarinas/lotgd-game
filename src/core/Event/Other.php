@@ -26,6 +26,21 @@ class Other extends Event
     // End of bio page. Old: bioend
     public const BIO_END = 'lotgd.other.bio.end';
 
+    // Special holiday
+    public const SPECIAL_HOLIDAY = 'lotgd.other.holiday';
+
+    // Dragonpoints reset
+    public const SERVER_DRAGON_POINT_RESET = 'lotgd.other.server.dragon.point.reset';
+
+    // Alter companion. Old: alter-companion
+    public const COMPANION_ALTER = 'lotgd.companion.alter';
+
+    // Bribe bartender
+    public const INN_BARTENDER_BRIBE = 'lotgd.inn.bartender.bribe';
+
+    // Ale
+    public const INN_ALE = 'lotgd.inn.ale';
+
     private $data;
 
     public function __construct(array $data = [])
