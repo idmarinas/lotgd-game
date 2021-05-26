@@ -57,6 +57,7 @@ class Version50200 extends InstallerAbstract
                 $this->getProjectDir().'/src/core/Fixed/HookManager.php',
                 $this->getProjectDir().'/src/core/Fixed/Locator.php',
                 $this->getProjectDir().'/src/core/Fixed/SymfonyForm.php',
+                $this->getProjectDir().'/src/core/Twig/Extension/AdvertisingGoogle.php',
             ]);
         }
         catch (\Throwable $th)

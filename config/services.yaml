@@ -33,6 +33,7 @@ services:
             - "../src/core/EventManagerAware.php"
             - "../src/core/EventManager/EventManager.php"
             - "../src/core/Fixed/HookManager.php"
+            - "../src/core/Twig/Extension/AdvertisingGoogle.php"
             - "../src/core/Hook.php"
             - "../src/core/Kernel.php"
     Lotgd\Local\:
