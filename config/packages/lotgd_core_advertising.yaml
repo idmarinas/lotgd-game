@@ -1,4 +1,4 @@
-# For avoid errors commented this lines
+# This is a optional bundle
 # lotgd_core_advertising:
 #     enable: true
 #     providers:
