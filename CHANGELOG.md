@@ -39,6 +39,33 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
         -   Use `LotgdKernel::get('event_dispatcher')` for get service of Event Dispatcher.
 -   **BC** Deleted pattern `Lotgd\Core\Pattern\HookManager`
 -   **BC** Deleted events class `Lotgd\Core\Hook` See `src/core/Event/` folder to see all new events.
+-   **Installer delete this files/folders**:
+    -   `/src/core/Component/`
+    -   `/src/core/Console/`
+    -   `/src/core/Factory/`
+    -   `/src/core/Filter/`
+    -   `/src/core/Db/`
+    -   `/src/core/Nav/`
+    -   `/src/core/Patern/`
+    -   `/src/core/Translator/`
+    -   `/src/core/Validator/`
+    -   `/src/core/Template/Base.php`
+    -   `/src/core/Template/Theme.php`
+    -   `/src/core/EventManagerAware.php`
+    -   `/src/core/Event.php`
+    -   `/src/core/Http.php`
+    -   `/src/core/Modules.php`
+    -   `/src/core/ServiceManager.php`
+    -   `/src/core/Session.php`
+    -   `/src/core/Fixed/Cache.php`
+    -   `/src/core/Fixed/Dbwrapper.php`
+    -   `/src/core/Fixed/EventManager.php`
+    -   `/src/core/Fixed/Format.php`
+    -   `/src/core/Fixed/Http.php`
+    -   `/src/core/Fixed/HookManager.php`
+    -   `/src/core/Fixed/Locator.php`
+    -   `/src/core/Fixed/SymfonyForm.php`
+    -   Note: all this files/folders are automatically deleted when upgrade to version 5.2.0, this files not are in used by Core.
 
 ### :notebook: NOTES
 
