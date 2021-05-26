@@ -67,7 +67,7 @@ abstract class AbstractCommand extends Command
             $msg = $this->translator->trans('installer.installation.abort.database', [], InstallerAbstract::TRANSLATOR_DOMAIN);
             $output->writeln("<error>{$msg}</>");
 
-            return Command::FAILURE;
+            return 1;
         }
 
         $step   = 0;
@@ -100,14 +100,14 @@ abstract class AbstractCommand extends Command
 
         $this->installer->finish(); //-- Finish install
 
-        return Command::SUCCESS;
+        return 0;
     }
 
     protected function migrateDataBase(int $hasMigration)
     {
         if ( ! $hasMigration)
         {
-            return Command::SUCCESS;
+            return 0;
         }
 
         $message = $this->translator->trans('installer.progressbar.install.progress.database', [], InstallerAbstract::TRANSLATOR_DOMAIN);

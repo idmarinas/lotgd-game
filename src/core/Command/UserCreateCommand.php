@@ -136,12 +136,12 @@ final class UserCreateCommand extends Command
 
             $style->error($this->translator->trans('user.create.fail', [], self::TEXT_DOMAIN));
 
-            return Command::FAILURE;
+            return 1;
         }
 
         $style->success($this->translator->trans('user.create.success', [], self::TEXT_DOMAIN));
 
-        return Command::SUCCESS;
+        return 0;
     }
 
     private function getLoginName(InputInterface $input, OutputInterface $output): string

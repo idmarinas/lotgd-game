@@ -66,11 +66,11 @@ class RegenerateAppSecretCommand extends Command
                 $io->warning('Not find APP_SECRET in file ".env"');
             }
 
-            return Command::SUCCESS;
+            return 0;
         }
 
         $io->warning('Not find file ".env" or not is readable or writable.');
 
-        return Command::SUCCESS;
+        return 0;
     }
 }
