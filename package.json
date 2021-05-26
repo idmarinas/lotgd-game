@@ -4,9 +4,6 @@
     "version": "5.2.0",
     "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization for PHP >= 7.3",
     "time": "2017-04-21",
-    "engines": {
-        "node": ">= 0.10.0"
-    },
     "support": {
         "email": "contacto@infommo.es",
         "issues": "https://github.com/idmarinas/lotgd-game/issues"
@@ -37,11 +34,11 @@
     "homepage": "http://lotgd.infommo.es",
     "license": "SEE LICENSE IN <LICENSE.txt>",
     "dependencies": {
-        "@yaireo/tagify": "^4.1.2",
+        "@yaireo/tagify": "^4.1.3",
         "fomantic-ui": "2.8.7",
         "jquery": "^3.6.0",
         "numeral": "^2.0.6",
-        "sweetalert2": "^11.0.9",
+        "sweetalert2": "^11.0.11",
         "toastr": "^2.1.4"
     },
     "devDependencies": {
@@ -49,7 +46,7 @@
         "@symfony/webpack-encore": "^1.3.0",
         "ansi-colors": "^4.1.1",
         "autoprefixer": "^10.2.5",
-        "core-js": "^3.12.1",
+        "core-js": "^3.13.0",
         "del": "^6.0.0",
         "fancy-log": "^1.3.3",
         "file-loader": "^6.2.0",
@@ -66,12 +63,13 @@
         "postcss": "^8.3.0",
         "postcss-loader": "^4.2.0",
         "regenerator-runtime": "^0.13.7",
-        "sass": "^1.33.0",
+        "sass": "^1.34.0",
         "sass-loader": "^11.1.1",
         "stimulus": "^2.0.0",
         "url-loader": "^4.1.1",
         "webpack-notifier": "^1.13.0"
     },
+    "private": true,
     "repository": {
         "type": "git",
         "url": "https://github.com/idmarinas/lotgd-game.git"
