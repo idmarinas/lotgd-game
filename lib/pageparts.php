@@ -360,16 +360,14 @@ function charstats($return = true)
 
     $cache = \LotgdKernel::get('cache.app');
 
-    $item = $cache->getItem('char-list-home-page');
+    return $cache->get('char-list-home-page', function ($item) {
+        $item->expiresAfter(600);
 
-    if ( ! $item->isHit())
-    {
         $onlinecount = 0;
         // If a module wants to do it's own display of the online chars, let it.
         $list = new \Lotgd\Core\Event\Character();
         \LotgdEventDispatcher::dispatch($list, \Lotgd\Core\Event\Character::ONLINE_LIST);
-        $list->setData(modulehook('onlinecharlist', $list->getData()));
-        $list = $list->getData();
+        $list = modulehook('onlinecharlist', $list->getData());
 
         if (isset($list['handled']) && $list['handled'])
         {
@@ -398,11 +396,6 @@ function charstats($return = true)
         savesetting('OnlineCount', $onlinecount);
         savesetting('OnlineCountLast', \strtotime('now'));
 
-        $item->expiresAfter(600);
-        $item->set($ret);
-
-        $cache->save($item);
-    }
-
-    return $item->get();
+        return $ret;
+    });
 }
