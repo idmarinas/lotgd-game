@@ -52,15 +52,7 @@
     <section class="phpdocumentor-sidebar__category">
         <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                 <h3 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
-                                        <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/lotgdcore.html"><abbr title="\LotgdCore">LotgdCore</abbr></a></h4>
-                <ul class="phpdocumentor-list">
-                                            <li><a href="namespaces/lotgdcore-advertisingbundle.html"><abbr title="\LotgdCore\AdvertisingBundle">AdvertisingBundle</abbr></a></li>
-                                    </ul>
-                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/symfony.html"><abbr title="\Symfony">Symfony</abbr></a></h4>
-                <ul class="phpdocumentor-list">
-                                            <li><a href="namespaces/symfony-component.html"><abbr title="\Symfony\Component">Component</abbr></a></li>
-                                    </ul>
-                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/lotgd.html"><abbr title="\Lotgd">Lotgd</abbr></a></h4>
+                                        <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/lotgd.html"><abbr title="\Lotgd">Lotgd</abbr></a></h4>
                 <ul class="phpdocumentor-list">
                                             <li><a href="namespaces/lotgd-ajax.html"><abbr title="\Lotgd\Ajax">Ajax</abbr></a></li>
                                             <li><a href="namespaces/lotgd-core.html"><abbr title="\Lotgd\Core">Core</abbr></a></li>
@@ -136,13 +128,6 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Http-Response.html#property_hookManager">$hookManager</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Lotgd-Core-Http-Response.html#property_params">$params</a>
     <span>
                 &nbsp;: mixed            </span>
@@ -165,6 +150,20 @@
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Lotgd-Core-Http-Response.html#property_translator">$translator</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Lotgd-Core-Http-Response.html#property_eventDispatcher">$eventDispatcher</a>
+    <span>
+                &nbsp;: <abbr title="\Symfony\Component\EventDispatcher\EventDispatcher">EventDispatcher</abbr>            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Lotgd-Core-Http-Response.html#property_kernel">$kernel</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
@@ -319,36 +318,6 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_hookManager">
-        $hookManager
-        <a href="classes/Lotgd-Core-Http-Response.html#property_hookManager" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Http/Response.php"><a href="files/src-core-http-response.html"><abbr title="src/core/Http/Response.php">Response.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">34</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$hookManager</span>
-    </code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_params">
         $params
         <a href="classes/Lotgd-Core-Http-Response.html#property_params" class="headerlink"><i class="fas fa-link"></i></a>
@@ -358,7 +327,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Http/Response.php"><a href="files/src-core-http-response.html"><abbr title="src/core/Http/Response.php">Response.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 </aside>
 
     
@@ -462,6 +431,67 @@
     
 
 </article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_eventDispatcher">
+        $eventDispatcher
+        <a href="classes/Lotgd-Core-Http-Response.html#property_eventDispatcher" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Http/Response.php"><a href="files/src-core-http-response.html"><abbr title="src/core/Http/Response.php">Response.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">36</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Symfony\Component\EventDispatcher\EventDispatcher">EventDispatcher</abbr></span>
+    <span class="phpdocumentor-signature__name">$eventDispatcher</span>
+    </code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_kernel">
+        $kernel
+        <a href="classes/Lotgd-Core-Http-Response.html#property_kernel" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Http/Response.php"><a href="files/src-core-http-response.html"><abbr title="src/core/Http/Response.php">Response.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$kernel</span>
+    </code>
+
+    
+    
+
+</article>
             </section>
 
             <section class="phpdocumentor-methods">
@@ -482,24 +512,17 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Http/Response.php"><a href="files/src-core-http-response.html"><abbr title="src/core/Http/Response.php">Response.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Contracts\Translation\TranslatorInterface">TranslatorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\EntityManagerInterface">EntityManagerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$doctrine</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\View\Helper\HeadTitle">HeadTitle</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$headTitle</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Twig\Environment">Environment</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$template</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Http-Request.html"><abbr title="\Lotgd\Core\Http\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-EventManager-EventManager.html"><abbr title="\Lotgd\Core\EventManager\EventManager">EventManager</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$hookManager</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Template-Params.html"><abbr title="\Lotgd\Core\Template\Params">Params</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$params</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\EntityManagerInterface">EntityManagerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$doctrine</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Laminas\View\Helper\HeadTitle">HeadTitle</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$headTitle</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Twig\Environment">Environment</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$template</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Http-Request.html"><abbr title="\Lotgd\Core\Http\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Template-Params.html"><abbr title="\Lotgd\Core\Template\Params">Params</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$params</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpKernel\KernelInterface">KernelInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$kernel</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$translator</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Contracts\Translation\TranslatorInterface">TranslatorInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$doctrine</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\ORM\EntityManagerInterface">EntityManagerInterface</abbr></span>
@@ -529,15 +552,15 @@
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$hookManager</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-EventManager-EventManager.html"><abbr title="\Lotgd\Core\EventManager\EventManager">EventManager</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$params</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Template-Params.html"><abbr title="\Lotgd\Core\Template\Params">Params</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$params</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Template-Params.html"><abbr title="\Lotgd\Core\Template\Params">Params</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$kernel</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpKernel\KernelInterface">KernelInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -566,7 +589,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Http/Response.php"><a href="files/src-core-http-response.html"><abbr title="src/core/Http/Response.php">Response.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">107</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 </aside>
 
         <p class="phpdocumentor-summary">Add content to response.</p>
@@ -611,7 +634,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Http/Response.php"><a href="files/src-core-http-response.html"><abbr title="src/core/Http/Response.php">Response.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">145</span>
+    <span class="phpdocumentor-element-found-in__line">147</span>
 </aside>
 
         <p class="phpdocumentor-summary">Lets you display debug output (specially formatted, optionally only visible to SU_DEBUG users).</p>
@@ -666,7 +689,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Http/Response.php"><a href="files/src-core-http-response.html"><abbr title="src/core/Http/Response.php">Response.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">160</span>
+    <span class="phpdocumentor-element-found-in__line">162</span>
 </aside>
 
         <p class="phpdocumentor-summary">Page and send content to browser.</p>
@@ -711,7 +734,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Http/Response.php"><a href="files/src-core-http-response.html"><abbr title="src/core/Http/Response.php">Response.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">134</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 </aside>
 
         <p class="phpdocumentor-summary">Alias of getContent.</p>
@@ -745,7 +768,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Http/Response.php"><a href="files/src-core-http-response.html"><abbr title="src/core/Http/Response.php">Response.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">121</span>
+    <span class="phpdocumentor-element-found-in__line">123</span>
 </aside>
 
         <p class="phpdocumentor-summary">Alias of setContent().</p>
@@ -790,7 +813,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Http/Response.php"><a href="files/src-core-http-response.html"><abbr title="src/core/Http/Response.php">Response.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 </aside>
 
         <p class="phpdocumentor-summary">Start page.</p>
@@ -855,7 +878,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Http/Response.php"><a href="files/src-core-http-response.html"><abbr title="src/core/Http/Response.php">Response.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+    <span class="phpdocumentor-element-found-in__line">62</span>
 </aside>
 
         <p class="phpdocumentor-summary">Set title for page.</p>
@@ -920,7 +943,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Http/Response.php"><a href="files/src-core-http-response.html"><abbr title="src/core/Http/Response.php">Response.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">261</span>
+    <span class="phpdocumentor-element-found-in__line">262</span>
 </aside>
 
         <p class="phpdocumentor-summary">Send a cookie.</p>
@@ -1013,7 +1036,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Http/Response.php"><a href="files/src-core-http-response.html"><abbr title="src/core/Http/Response.php">Response.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">272</span>
+    <span class="phpdocumentor-element-found-in__line">273</span>
 </aside>
 
         <p class="phpdocumentor-summary">Output character stats.</p>

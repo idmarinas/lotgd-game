@@ -52,15 +52,7 @@
     <section class="phpdocumentor-sidebar__category">
         <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                 <h3 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
-                                        <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/lotgdcore.html"><abbr title="\LotgdCore">LotgdCore</abbr></a></h4>
-                <ul class="phpdocumentor-list">
-                                            <li><a href="namespaces/lotgdcore-advertisingbundle.html"><abbr title="\LotgdCore\AdvertisingBundle">AdvertisingBundle</abbr></a></li>
-                                    </ul>
-                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/symfony.html"><abbr title="\Symfony">Symfony</abbr></a></h4>
-                <ul class="phpdocumentor-list">
-                                            <li><a href="namespaces/symfony-component.html"><abbr title="\Symfony\Component">Component</abbr></a></li>
-                                    </ul>
-                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/lotgd.html"><abbr title="\Lotgd">Lotgd</abbr></a></h4>
+                                        <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/lotgd.html"><abbr title="\Lotgd">Lotgd</abbr></a></h4>
                 <ul class="phpdocumentor-list">
                                             <li><a href="namespaces/lotgd-ajax.html"><abbr title="\Lotgd\Ajax">Ajax</abbr></a></li>
                                             <li><a href="namespaces/lotgd-core.html"><abbr title="\Lotgd\Core">Core</abbr></a></li>
@@ -200,7 +192,7 @@ license must be used on the distribution of any works derived from this work. Th
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="classes/Lotgd-Core-Kernel.html#constant_MINOR_VERSION">MINOR_VERSION</a>
     <span>
-        &nbsp;= 1                    </span>
+        &nbsp;= 2                    </span>
 </dt>
 <dd></dd>
 
@@ -221,14 +213,14 @@ license must be used on the distribution of any works derived from this work. Th
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="classes/Lotgd-Core-Kernel.html#constant_VERSION">VERSION</a>
     <span>
-        &nbsp;= &#039;5.1.0 IDMarinas Edition&#039;                    </span>
+        &nbsp;= &#039;5.2.0 IDMarinas Edition&#039;                    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="classes/Lotgd-Core-Kernel.html#constant_VERSION_ID">VERSION_ID</a>
     <span>
-        &nbsp;= 50100                    </span>
+        &nbsp;= 50200                    </span>
 </dt>
 <dd></dd>
 
@@ -239,12 +231,26 @@ license must be used on the distribution of any works derived from this work. Th
 </dt>
 <dd></dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
+    <a href="classes/Lotgd-Core-Kernel.html#constant_CONFIG_EXTS">CONFIG_EXTS</a>
+    <span>
+        &nbsp;= &#039;.{php,xml,yaml,yml}&#039;                    </span>
+</dt>
+<dd></dd>
+
                     <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Kernel.html#method_getProjectDir">getProjectDir()</a>
     <span>
                         &nbsp;: string    </span>
 </dt>
 <dd>{@inheritdoc}</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Kernel.html#method_registerBundles">registerBundles()</a>
+    <span>
+                        &nbsp;: iteratable&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Lotgd-Core-Kernel.html#method_configureContainer">configureContainer()</a>
@@ -279,7 +285,7 @@ license must be used on the distribution of any works derived from this work. Th
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 </aside>
 
         <p class="phpdocumentor-summary">This series of scripts (collectively known as Legend of the Green Dragon or LotGD) is copyright as per below.</p>
@@ -311,7 +317,7 @@ Copyright 2002-2004, Game: Eric Stevens &amp; JT Traub, modified by Your Name.</
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 </aside>
 
     
@@ -336,7 +342,7 @@ Copyright 2002-2004, Game: Eric Stevens &amp; JT Traub, modified by Your Name.</
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 </aside>
 
     
@@ -361,7 +367,7 @@ Copyright 2002-2004, Game: Eric Stevens &amp; JT Traub, modified by Your Name.</
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 </aside>
 
         <p class="phpdocumentor-summary">This series of scripts (collectively known as Legend of the Green Dragon or LotGD) is licensed according to the Creating Commons Attribution
@@ -413,7 +419,7 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 </aside>
 
     
@@ -438,7 +444,7 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 </aside>
 
     
@@ -446,7 +452,7 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
     <span class="phpdocumentor-signature__visibility">public</span>
     <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">MINOR_VERSION</span>
-    = <span class="phpdocumentor-signature__default-value">1</span>
+    = <span class="phpdocumentor-signature__default-value">2</span>
 </code>
 
 
@@ -463,7 +469,7 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 </aside>
 
     
@@ -488,7 +494,7 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 </aside>
 
     
@@ -513,7 +519,7 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 </aside>
 
     
@@ -521,7 +527,7 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
     <span class="phpdocumentor-signature__visibility">public</span>
     <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">VERSION</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;5.1.0 IDMarinas Edition&#039;</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;5.2.0 IDMarinas Edition&#039;</span>
 </code>
 
 
@@ -538,7 +544,7 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 </aside>
 
     
@@ -546,7 +552,7 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
     <span class="phpdocumentor-signature__visibility">public</span>
     <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">VERSION_ID</span>
-    = <span class="phpdocumentor-signature__default-value">50100</span>
+    = <span class="phpdocumentor-signature__default-value">50200</span>
 </code>
 
 
@@ -563,7 +569,7 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 </aside>
 
     
@@ -572,6 +578,31 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
     <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">VERSION_NUMBER</span>
     = <span class="phpdocumentor-signature__default-value">self::VERSION_ID</span>
+</code>
+
+
+    
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -private ">
+    <h4 class="phpdocumentor-element__name" id="constant_CONFIG_EXTS">
+        CONFIG_EXTS
+        <a href="classes/Lotgd-Core-Kernel.html#constant_CONFIG_EXTS" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">59</span>
+</aside>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+    <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">CONFIG_EXTS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;.{php,xml,yaml,yml}&#039;</span>
 </code>
 
 
@@ -601,7 +632,7 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 </aside>
 
         <p class="phpdocumentor-summary">{@inheritdoc}</p>
@@ -625,6 +656,38 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
                     <article
         class="phpdocumentor-element
             -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_registerBundles">
+        registerBundles()
+        <a href="classes/Lotgd-Core-Kernel.html#method_registerBundles" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">69</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">registerBundles</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, mixed&gt;</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, mixed&gt;</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
             -protected
                                                         "
 >
@@ -635,20 +698,27 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">65</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-                <span class="phpdocumentor-signature__name">configureContainer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator">ContainerConfigurator</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                <span class="phpdocumentor-signature__name">configureContainer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\DependencyInjection\ContainerBuilder">ContainerBuilder</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Config\Loader\LoaderInterface">LoaderInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$loader</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$container</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator">ContainerConfigurator</abbr></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\DependencyInjection\ContainerBuilder">ContainerBuilder</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$loader</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Config\Loader\LoaderInterface">LoaderInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -677,20 +747,20 @@ This work is licensed under a &lt;a rel=&#039;license&#039; href=&#039;http://cr
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Kernel.php"><a href="files/src-core-kernel.html"><abbr title="src/core/Kernel.php">Kernel.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">94</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-                <span class="phpdocumentor-signature__name">configureRoutes</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator">RoutingConfigurator</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routes</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                <span class="phpdocumentor-signature__name">configureRoutes</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Routing\RouteCollectionBuilder">RouteCollectionBuilder</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routes</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$routes</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator">RoutingConfigurator</abbr></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Routing\RouteCollectionBuilder">RouteCollectionBuilder</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 

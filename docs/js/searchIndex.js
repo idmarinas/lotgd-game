@@ -6,211 +6,6 @@ Search.appendIndex(
             "summary": "Adds\u0020a\u0020news\u0020item\u0020for\u0020the\u0020current\u0020user.",
             "url": "namespaces/default.html#function_addnews"
         },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Configuration",
-            "name": "Configuration",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Configuration.html"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Configuration\u003A\u003AgetConfigTreeBuilder\u0028\u0029",
-            "name": "getConfigTreeBuilder",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Configuration.html#method_getConfigTreeBuilder"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\LotgdCoreAdvertisingExtension",
-            "name": "LotgdCoreAdvertisingExtension",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-LotgdCoreAdvertisingExtension.html"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\LotgdCoreAdvertisingExtension\u003A\u003AloadInternal\u0028\u0029",
-            "name": "loadInternal",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-LotgdCoreAdvertisingExtension.html#method_loadInternal"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\LotgdCoreAdvertisingExtension\u003A\u003AgetConfigurator\u0028\u0029",
-            "name": "getConfigurator",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-LotgdCoreAdvertisingExtension.html#method_getConfigurator"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\LotgdCoreAdvertisingExtension\u003A\u003AconfigureProviderAndService\u0028\u0029",
-            "name": "configureProviderAndService",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-LotgdCoreAdvertisingExtension.html#method_configureProviderAndService"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\LotgdCoreAdvertisingExtension\u003A\u003AbuildConfigurationForProviderType\u0028\u0029",
-            "name": "buildConfigurationForProviderType",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-LotgdCoreAdvertisingExtension.html#method_buildConfigurationForProviderType"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\LotgdCoreAdvertisingExtension\u003A\u003ASUPPORTED_PROVIDER_TYPES",
-            "name": "SUPPORTED_PROVIDER_TYPES",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-LotgdCoreAdvertisingExtension.html#constant_SUPPORTED_PROVIDER_TYPES"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\LotgdCoreAdvertisingExtension\u003A\u003A\u0024configurators",
-            "name": "configurators",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-LotgdCoreAdvertisingExtension.html#property_configurators"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Provider\\AdsenseProviderConfiguration",
-            "name": "AdsenseProviderConfiguration",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Provider-AdsenseProviderConfiguration.html"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Provider\\AdsenseProviderConfiguration\u003A\u003AbuildConfiguration\u0028\u0029",
-            "name": "buildConfiguration",
-            "summary": "Build\u0020configuration\u0020for\u0020provider.",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Provider-AdsenseProviderConfiguration.html#method_buildConfiguration"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Provider\\GenericProviderConfiguration",
-            "name": "GenericProviderConfiguration",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Provider-GenericProviderConfiguration.html"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Provider\\GenericProviderConfiguration\u003A\u003AbuildConfiguration\u0028\u0029",
-            "name": "buildConfiguration",
-            "summary": "Build\u0020configuration\u0020for\u0020provider.",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Provider-GenericProviderConfiguration.html#method_buildConfiguration"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Provider\\ProviderConfigurationInterface",
-            "name": "ProviderConfigurationInterface",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Provider-ProviderConfigurationInterface.html"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Provider\\ProviderConfigurationInterface\u003A\u003AbuildConfiguration\u0028\u0029",
-            "name": "buildConfiguration",
-            "summary": "Build\u0020configuration\u0020for\u0020provider.",
-            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Provider-ProviderConfigurationInterface.html#method_buildConfiguration"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\LotgdCoreAdvertisingBundle",
-            "name": "LotgdCoreAdvertisingBundle",
-            "summary": "Advertising\u0020bundle\u0020for\u0020LoTGD\u0020Core.",
-            "url": "classes/LotgdCore-AdvertisingBundle-LotgdCoreAdvertisingBundle.html"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising",
-            "name": "AdsenseAdvertising",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#method___construct"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003AgetSlot\u0028\u0029",
-            "name": "getSlot",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#method_getSlot"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003AisEnabled\u0028\u0029",
-            "name": "isEnabled",
-            "summary": "Is\u0020enable\u0020if\u0020enable\u0020is\u0020true\u0020and\u0020client\u0020are\u0020configured.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#method_isEnabled"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003AaddGoogleAdsenseScript\u0028\u0029",
-            "name": "addGoogleAdsenseScript",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#method_addGoogleAdsenseScript"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003A\u0024hasAds",
-            "name": "hasAds",
-            "summary": "Indicate\u0020if\u0020has\u0020an\u0020ads.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#property_hasAds"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003A\u0024scriptRendered",
-            "name": "scriptRendered",
-            "summary": "Indicate\u0020if\u0020script\u0020is\u0020rendered.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#property_scriptRendered"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003A\u0024inlineScript",
-            "name": "inlineScript",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#property_inlineScript"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003A\u0024environment",
-            "name": "environment",
-            "summary": "Environment\u0020of\u0020app.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#property_environment"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract",
-            "name": "AdvertisingAbstract",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003AisEnabled\u0028\u0029",
-            "name": "isEnabled",
-            "summary": "Check\u0020if\u0020provider\u0020is\u0020active.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#method_isEnabled"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003AisAdvertisingEnabled\u0028\u0029",
-            "name": "isAdvertisingEnabled",
-            "summary": "Check\u0020if\u0020advertising\u0020module\u0020is\u0020enable.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#method_isAdvertisingEnabled"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003AenableAdvertising\u0028\u0029",
-            "name": "enableAdvertising",
-            "summary": "Enable\u0020advertising\u0020module.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#method_enableAdvertising"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003AdisableAdvertising\u0028\u0029",
-            "name": "disableAdvertising",
-            "summary": "Disable\u0020advertising\u0020module.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#method_disableAdvertising"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003Aconfigure\u0028\u0029",
-            "name": "configure",
-            "summary": "Add\u0020configuration\u0020for\u0020provider.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#method_configure"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003AgetConfig\u0028\u0029",
-            "name": "getConfig",
-            "summary": "Get\u0020configuration\u0020of\u0020provider.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#method_getConfig"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003A\u0024configuration",
-            "name": "configuration",
-            "summary": "Configuration\u0020for\u0020Provider.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#property_configuration"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003A\u0024advertisingEnable",
-            "name": "advertisingEnable",
-            "summary": "Indicate\u0020if\u0020advertising\u0020bundle\u0020is\u0020enable\u0020or\u0020disabled.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#property_advertisingEnable"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface",
-            "name": "AdvertisingInterface",
-            "summary": "",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingInterface.html"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface\u003A\u003AisEnabled\u0028\u0029",
-            "name": "isEnabled",
-            "summary": "Check\u0020if\u0020provider\u0020is\u0020active.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingInterface.html#method_isEnabled"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface\u003A\u003AisAdvertisingEnabled\u0028\u0029",
-            "name": "isAdvertisingEnabled",
-            "summary": "Check\u0020if\u0020advertising\u0020module\u0020is\u0020enable.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingInterface.html#method_isAdvertisingEnabled"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface\u003A\u003AenableAdvertising\u0028\u0029",
-            "name": "enableAdvertising",
-            "summary": "Enable\u0020advertising\u0020module.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingInterface.html#method_enableAdvertising"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface\u003A\u003AdisableAdvertising\u0028\u0029",
-            "name": "disableAdvertising",
-            "summary": "Disable\u0020advertising\u0020module.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingInterface.html#method_disableAdvertising"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface\u003A\u003Aconfigure\u0028\u0029",
-            "name": "configure",
-            "summary": "Add\u0020configuration\u0020for\u0020provider.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingInterface.html#method_configure"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface\u003A\u003AgetConfig\u0028\u0029",
-            "name": "getConfig",
-            "summary": "Get\u0020configuration\u0020of\u0020provider.",
-            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingInterface.html#method_getConfig"
-        },                {
             "fqsen": "\\activate_buffs\u0028\u0029",
             "name": "activate_buffs",
             "summary": "",
@@ -1460,11 +1255,6 @@ Search.appendIndex(
             "name": "Application",
             "summary": "Contain\u0020information\u0020about\u0020application\/game.",
             "url": "classes/Lotgd-Core-Application.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Battle\\Battle",
-            "name": "Battle",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Battle-Battle.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Block\\DonationButtonsBlock",
             "name": "DonationButtonsBlock",
@@ -9641,30 +9431,590 @@ Search.appendIndex(
             "summary": "Delete\u0020old\u0020rows.",
             "url": "classes/Lotgd-Core-EntityRepository-WhostypingRepository.html#method_deleteOld"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EventManager\\EventManager",
-            "name": "EventManager",
+            "fqsen": "\\Lotgd\\Core\\Event\\Character",
+            "name": "Character",
             "summary": "",
-            "url": "classes/Lotgd-Core-EventManager-EventManager.html"
+            "url": "classes/Lotgd-Core-Event-Character.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EventManagerAware",
-            "name": "EventManagerAware",
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
             "summary": "",
-            "url": "classes/Lotgd-Core-EventManagerAware.html"
+            "url": "classes/Lotgd-Core-Event-Character.html#method___construct"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EventManagerAware\u003A\u003AsetEventManager\u0028\u0029",
-            "name": "setEventManager",
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003AgetData\u0028\u0029",
+            "name": "getData",
             "summary": "",
-            "url": "classes/Lotgd-Core-EventManagerAware.html#method_setEventManager"
+            "url": "classes/Lotgd-Core-Event-Character.html#method_getData"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EventManagerAware\u003A\u003AgetEventManager\u0028\u0029",
-            "name": "getEventManager",
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003AsetData\u0028\u0029",
+            "name": "setData",
             "summary": "",
-            "url": "classes/Lotgd-Core-EventManagerAware.html#method_getEventManager"
+            "url": "classes/Lotgd-Core-Event-Character.html#method_setData"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EventManagerAware\u003A\u003A\u0024events",
-            "name": "events",
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003ASTATS",
+            "name": "STATS",
             "summary": "",
-            "url": "classes/Lotgd-Core-EventManagerAware.html#property_events"
+            "url": "classes/Lotgd-Core-Event-Character.html#constant_STATS"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003AONLINE_LIST",
+            "name": "ONLINE_LIST",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Character.html#constant_ONLINE_LIST"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003AMODIFY_BUFF",
+            "name": "MODIFY_BUFF",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Character.html#constant_MODIFY_BUFF"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003ACOMPANIONS_ALLOWED",
+            "name": "COMPANIONS_ALLOWED",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Character.html#constant_COMPANIONS_ALLOWED"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003ACLEANUP",
+            "name": "CLEANUP",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Character.html#constant_CLEANUP"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003AKILLED_PLAYER",
+            "name": "KILLED_PLAYER",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Character.html#constant_KILLED_PLAYER"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003ASPECIALTY_INCREMENT",
+            "name": "SPECIALTY_INCREMENT",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Character.html#constant_SPECIALTY_INCREMENT"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003APVP_ADJUST",
+            "name": "PVP_ADJUST",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Character.html#constant_PVP_ADJUST"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003APVP_WIN",
+            "name": "PVP_WIN",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Character.html#constant_PVP_WIN"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003APVP_LOSS",
+            "name": "PVP_LOSS",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Character.html#constant_PVP_LOSS"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003APVP_DO_KILL",
+            "name": "PVP_DO_KILL",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Character.html#constant_PVP_DO_KILL"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003ABACKUP_RESTORE",
+            "name": "BACKUP_RESTORE",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Character.html#constant_BACKUP_RESTORE"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Character\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Character.html#property_data"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Clan",
+            "name": "Clan",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Clan.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Clan\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Clan.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Clan\u003A\u003AgetData\u0028\u0029",
+            "name": "getData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Clan.html#method_getData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Clan\u003A\u003AsetData\u0028\u0029",
+            "name": "setData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Clan.html#method_setData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Clan\u003A\u003ADELETE",
+            "name": "DELETE",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Clan.html#constant_DELETE"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Clan\u003A\u003ACREATE",
+            "name": "CREATE",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Clan.html#constant_CREATE"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Clan\u003A\u003AENTER",
+            "name": "ENTER",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Clan.html#constant_ENTER"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Clan\u003A\u003ARANK_SET",
+            "name": "RANK_SET",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Clan.html#constant_RANK_SET"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Clan\u003A\u003ARANK_LIST",
+            "name": "RANK_LIST",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Clan.html#constant_RANK_LIST"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Clan\u003A\u003AWITHDRAW",
+            "name": "WITHDRAW",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Clan.html#constant_WITHDRAW"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Clan\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Clan.html#property_data"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Commentary",
+            "name": "Commentary",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Commentary.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Commentary\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Commentary.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Commentary\u003A\u003AgetData\u0028\u0029",
+            "name": "getData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Commentary.html#method_getData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Commentary\u003A\u003AsetData\u0028\u0029",
+            "name": "setData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Commentary.html#method_setData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Commentary\u003A\u003ACOMMENT_POST",
+            "name": "COMMENT_POST",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Commentary.html#constant_COMMENT_POST"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Commentary\u003A\u003ACOMMANDS",
+            "name": "COMMANDS",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Commentary.html#constant_COMMANDS"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Commentary\u003A\u003ACOMMENT",
+            "name": "COMMENT",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Commentary.html#constant_COMMENT"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Commentary\u003A\u003AMODERATE_SECTIONS",
+            "name": "MODERATE_SECTIONS",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Commentary.html#constant_MODERATE_SECTIONS"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Commentary\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Commentary.html#property_data"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core",
+            "name": "Core",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003AgetData\u0028\u0029",
+            "name": "getData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#method_getData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003AsetData\u0028\u0029",
+            "name": "setData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#method_setData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003ALOGIN_CHECK",
+            "name": "LOGIN_CHECK",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_LOGIN_CHECK"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003ALOGIN_PLAYER",
+            "name": "LOGIN_PLAYER",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_LOGIN_PLAYER"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003ALOGOUT_PLAYER",
+            "name": "LOGOUT_PLAYER",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_LOGOUT_PLAYER"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003APETITION_ADD",
+            "name": "PETITION_ADD",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_PETITION_ADD"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003APETITION_FAQ_TOC",
+            "name": "PETITION_FAQ_TOC",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_PETITION_FAQ_TOC"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003ASETTING_CHANGE",
+            "name": "SETTING_CHANGE",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_SETTING_CHANGE"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003ASPECIALTY_NAMES",
+            "name": "SPECIALTY_NAMES",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_SPECIALTY_NAMES"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003ADK_POINT_RECALC",
+            "name": "DK_POINT_RECALC",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_DK_POINT_RECALC"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003ANEWDAY_RUNONCE",
+            "name": "NEWDAY_RUNONCE",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_NEWDAY_RUNONCE"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003ANEWDAY_PRE",
+            "name": "NEWDAY_PRE",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_NEWDAY_PRE"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003ANEWDAY",
+            "name": "NEWDAY",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_NEWDAY"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003ARACE_SET",
+            "name": "RACE_SET",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_RACE_SET"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003ARACE_CHOOSE",
+            "name": "RACE_CHOOSE",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_RACE_CHOOSE"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003ASPECIALTY_SET",
+            "name": "SPECIALTY_SET",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_SPECIALTY_SET"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003ASPECIALTY_CHOOSE",
+            "name": "SPECIALTY_CHOOSE",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#constant_SPECIALTY_CHOOSE"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Core\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Core.html#property_data"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Creature",
+            "name": "Creature",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Creature.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Creature\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Creature.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Creature\u003A\u003AgetData\u0028\u0029",
+            "name": "getData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Creature.html#method_getData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Creature\u003A\u003AsetData\u0028\u0029",
+            "name": "setData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Creature.html#method_setData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Creature\u003A\u003ASEARCH",
+            "name": "SEARCH",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Creature.html#constant_SEARCH"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Creature\u003A\u003AENCOUNTER",
+            "name": "ENCOUNTER",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Creature.html#constant_ENCOUNTER"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Creature\u003A\u003ABUFF_FOR",
+            "name": "BUFF_FOR",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Creature.html#constant_BUFF_FOR"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Creature\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Creature.html#property_data"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\EveryRequest",
+            "name": "EveryRequest",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-EveryRequest.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\EveryRequest\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-EveryRequest.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\EveryRequest\u003A\u003AgetData\u0028\u0029",
+            "name": "getData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-EveryRequest.html#method_getData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\EveryRequest\u003A\u003AsetData\u0028\u0029",
+            "name": "setData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-EveryRequest.html#method_setData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\EveryRequest\u003A\u003AHEADER",
+            "name": "HEADER",
+            "summary": "Event\u0020that\u0020occurs\u0020in\u0020every\u0020request\u0020in\u0020header.",
+            "url": "classes/Lotgd-Core-Event-EveryRequest.html#constant_HEADER"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\EveryRequest\u003A\u003AHEADER_AUTHENTICATED",
+            "name": "HEADER_AUTHENTICATED",
+            "summary": "Event\u0020that\u0020occurs\u0020in\u0020every\u0020request\u0020in\u0020header\u0020for\u0020authenticated\u0020user.",
+            "url": "classes/Lotgd-Core-Event-EveryRequest.html#constant_HEADER_AUTHENTICATED"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\EveryRequest\u003A\u003AFOOTER",
+            "name": "FOOTER",
+            "summary": "Event\u0020that\u0020occurs\u0020in\u0020every\u0020request\u0020in\u0020footer.",
+            "url": "classes/Lotgd-Core-Event-EveryRequest.html#constant_FOOTER"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\EveryRequest\u003A\u003AFOOTER_AUTHENTICATED",
+            "name": "FOOTER_AUTHENTICATED",
+            "summary": "Event\u0020that\u0020occurs\u0020in\u0020every\u0020request\u0020in\u0020footer\u0020for\u0020authenticated\u0020user.",
+            "url": "classes/Lotgd-Core-Event-EveryRequest.html#constant_FOOTER_AUTHENTICATED"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\EveryRequest\u003A\u003AHIT",
+            "name": "HIT",
+            "summary": "Event\u0020that\u0020occurs\u0020in\u0020every\u0020request\u0020in\u0020hit.",
+            "url": "classes/Lotgd-Core-Event-EveryRequest.html#constant_HIT"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\EveryRequest\u003A\u003AHIT_AUTHENTICATED",
+            "name": "HIT_AUTHENTICATED",
+            "summary": "Event\u0020that\u0020occurs\u0020in\u0020every\u0020request\u0020in\u0020hit\u0020for\u0020authenticated\u0020user.",
+            "url": "classes/Lotgd-Core-Event-EveryRequest.html#constant_HIT_AUTHENTICATED"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\EveryRequest\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-EveryRequest.html#property_data"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Fight",
+            "name": "Fight",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Fight.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Fight\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Fight.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Fight\u003A\u003AgetData\u0028\u0029",
+            "name": "getData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Fight.html#method_getData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Fight\u003A\u003AsetData\u0028\u0029",
+            "name": "setData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Fight.html#method_setData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Fight\u003A\u003ANAV_PRE",
+            "name": "NAV_PRE",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Fight.html#constant_NAV_PRE"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Fight\u003A\u003ANAV_GRAVEYARD",
+            "name": "NAV_GRAVEYARD",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Fight.html#constant_NAV_GRAVEYARD"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Fight\u003A\u003ANAV_SPECIALTY",
+            "name": "NAV_SPECIALTY",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Fight.html#constant_NAV_SPECIALTY"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Fight\u003A\u003ANAV",
+            "name": "NAV",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Fight.html#constant_NAV"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Fight\u003A\u003AOPTIONS",
+            "name": "OPTIONS",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Fight.html#constant_OPTIONS"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Fight\u003A\u003AALTER_GEM_CHANCE",
+            "name": "ALTER_GEM_CHANCE",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Fight.html#constant_ALTER_GEM_CHANCE"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Fight\u003A\u003AAPPLY_SPECIALTY",
+            "name": "APPLY_SPECIALTY",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Fight.html#constant_APPLY_SPECIALTY"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Fight\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Fight.html#property_data"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Graveyard",
+            "name": "Graveyard",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Graveyard.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Graveyard\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Graveyard.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Graveyard\u003A\u003AgetData\u0028\u0029",
+            "name": "getData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Graveyard.html#method_getData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Graveyard\u003A\u003AsetData\u0028\u0029",
+            "name": "setData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Graveyard.html#method_setData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Graveyard\u003A\u003AFIGHT_START",
+            "name": "FIGHT_START",
+            "summary": "Hooks\u0020of\u0020graveyard.",
+            "url": "classes/Lotgd-Core-Event-Graveyard.html#constant_FIGHT_START"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Graveyard\u003A\u003ADEATH_OVERLORD_ACTIONS",
+            "name": "DEATH_OVERLORD_ACTIONS",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Graveyard.html#constant_DEATH_OVERLORD_ACTIONS"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Graveyard\u003A\u003ADEATH_OVERLORD_FAVORS",
+            "name": "DEATH_OVERLORD_FAVORS",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Graveyard.html#constant_DEATH_OVERLORD_FAVORS"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Graveyard\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Graveyard.html#property_data"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Other",
+            "name": "Other",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Other.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Other\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Other.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Other\u003A\u003AgetData\u0028\u0029",
+            "name": "getData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Other.html#method_getData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Other\u003A\u003AsetData\u0028\u0029",
+            "name": "setData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Other.html#method_setData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Other\u003A\u003ASTAMINA_NEWDAY",
+            "name": "STAMINA_NEWDAY",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Other.html#constant_STAMINA_NEWDAY"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Other\u003A\u003ALOCATIONS",
+            "name": "LOCATIONS",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Other.html#constant_LOCATIONS"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Other\u003A\u003ABIO_END",
+            "name": "BIO_END",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Other.html#constant_BIO_END"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Other\u003A\u003ASPECIAL_HOLIDAY",
+            "name": "SPECIAL_HOLIDAY",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Other.html#constant_SPECIAL_HOLIDAY"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Other\u003A\u003ASERVER_DRAGON_POINT_RESET",
+            "name": "SERVER_DRAGON_POINT_RESET",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Other.html#constant_SERVER_DRAGON_POINT_RESET"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Other\u003A\u003ACOMPANION_ALTER",
+            "name": "COMPANION_ALTER",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Other.html#constant_COMPANION_ALTER"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Other\u003A\u003AINN_BARTENDER_BRIBE",
+            "name": "INN_BARTENDER_BRIBE",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Other.html#constant_INN_BARTENDER_BRIBE"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Other\u003A\u003AINN_ALE",
+            "name": "INN_ALE",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Other.html#constant_INN_ALE"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Other\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Other.html#property_data"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Superuser",
+            "name": "Superuser",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Superuser.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Superuser\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Superuser.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Superuser\u003A\u003AgetData\u0028\u0029",
+            "name": "getData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Superuser.html#method_getData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Superuser\u003A\u003AsetData\u0028\u0029",
+            "name": "setData",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Superuser.html#method_setData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Superuser\u003A\u003ASUPERUSER",
+            "name": "SUPERUSER",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Superuser.html#constant_SUPERUSER"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Superuser\u003A\u003ACHECK_SU_ACCESS",
+            "name": "CHECK_SU_ACCESS",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Superuser.html#constant_CHECK_SU_ACCESS"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Superuser\u003A\u003ACHECK_SU_PERMISSION",
+            "name": "CHECK_SU_PERMISSION",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Superuser.html#constant_CHECK_SU_PERMISSION"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Event\\Superuser\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Event-Superuser.html#property_data"
         },                {
             "fqsen": "\\Lotgd\\Core\\Exception\\ConfigNotFound",
             "name": "ConfigNotFound",
@@ -9726,6 +10076,21 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Fixed-Doctrine.html#property_wrapper"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Fixed\\EventDispatcher",
+            "name": "EventDispatcher",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Fixed-EventDispatcher.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Fixed\\EventDispatcher\u003A\u003A__callStatic\u0028\u0029",
+            "name": "__callStatic",
+            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
+            "url": "classes/Lotgd-Core-Fixed-EventDispatcher.html#method___callStatic"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Fixed\\EventDispatcher\u003A\u003A\u0024instance",
+            "name": "instance",
+            "summary": "Instance.",
+            "url": "classes/Lotgd-Core-Fixed-EventDispatcher.html#property_instance"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\FlashMessages",
             "name": "FlashMessages",
             "summary": "",
@@ -9780,21 +10145,6 @@ Search.appendIndex(
             "name": "instance",
             "summary": "Instance\u0020of\u0020Format.",
             "url": "classes/Lotgd-Core-Fixed-Format.html#property_instance"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\HookManager",
-            "name": "HookManager",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Fixed-HookManager.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\HookManager\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-HookManager.html#method___callStatic"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\HookManager\u003A\u003A\u0024instance",
-            "name": "instance",
-            "summary": "Instance\u0020of\u0020EventManager.",
-            "url": "classes/Lotgd-Core-Fixed-HookManager.html#property_instance"
         },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Kernel",
             "name": "Kernel",
@@ -10866,356 +11216,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Form-Type-ViewOnlyType.html#method_getName"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Hook",
-            "name": "Hook",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_EVERY_HEADER",
-            "name": "HOOK_EVERY_HEADER",
-            "summary": "Page\u0020Hooks.",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_EVERY_HEADER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_EVERY_FOOTER",
-            "name": "HOOK_EVERY_FOOTER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_EVERY_FOOTER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_EVERY_HEADER_AUTHENTICATED",
-            "name": "HOOK_EVERY_HEADER_AUTHENTICATED",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_EVERY_HEADER_AUTHENTICATED"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_EVERY_FOOTER_AUTHENTICATED",
-            "name": "HOOK_EVERY_FOOTER_AUTHENTICATED",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_EVERY_FOOTER_AUTHENTICATED"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_HEADER_SCRIPT",
-            "name": "HOOK_HEADER_SCRIPT",
-            "summary": "Hooks\u0020header\/footer\u0020page.",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_HEADER_SCRIPT"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_FOOTER_SCRIPT",
-            "name": "HOOK_FOOTER_SCRIPT",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_FOOTER_SCRIPT"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CHARACTER_STATS",
-            "name": "HOOK_CHARACTER_STATS",
-            "summary": "Hooks\u0020of\u0020character.",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CHARACTER_STATS"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CHARACTER_ONLINE_LIST",
-            "name": "HOOK_CHARACTER_ONLINE_LIST",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CHARACTER_ONLINE_LIST"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CHARACTER_MODIFY_BUFF",
-            "name": "HOOK_CHARACTER_MODIFY_BUFF",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CHARACTER_MODIFY_BUFF"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CHARACTER_COMPANIONS_ALLOWED",
-            "name": "HOOK_CHARACTER_COMPANIONS_ALLOWED",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CHARACTER_COMPANIONS_ALLOWED"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CHARACTER_CLEANUP",
-            "name": "HOOK_CHARACTER_CLEANUP",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CHARACTER_CLEANUP"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CHARACTER_KILLED_PLAYER",
-            "name": "HOOK_CHARACTER_KILLED_PLAYER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CHARACTER_KILLED_PLAYER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CHARACTER_SPECIALTY_INCREMENT",
-            "name": "HOOK_CHARACTER_SPECIALTY_INCREMENT",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CHARACTER_SPECIALTY_INCREMENT"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CHARACTER_PVP_ADJUST",
-            "name": "HOOK_CHARACTER_PVP_ADJUST",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CHARACTER_PVP_ADJUST"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CHARACTER_PVP_WIN",
-            "name": "HOOK_CHARACTER_PVP_WIN",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CHARACTER_PVP_WIN"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CHARACTER_PVP_LOSS",
-            "name": "HOOK_CHARACTER_PVP_LOSS",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CHARACTER_PVP_LOSS"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CHARACTER_PVP_DO_KILL",
-            "name": "HOOK_CHARACTER_PVP_DO_KILL",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CHARACTER_PVP_DO_KILL"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CHARACTER_BACKUP_RESTORE",
-            "name": "HOOK_CHARACTER_BACKUP_RESTORE",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CHARACTER_BACKUP_RESTORE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_COMPANION_ALTER",
-            "name": "HOOK_COMPANION_ALTER",
-            "summary": "Hooks\u0020of\u0020companions.",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_COMPANION_ALTER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CLAN_DELETE",
-            "name": "HOOK_CLAN_DELETE",
-            "summary": "Hooks\u0020of\u0020clan.",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CLAN_DELETE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CLAN_CREATE",
-            "name": "HOOK_CLAN_CREATE",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CLAN_CREATE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CLAN_ENTER",
-            "name": "HOOK_CLAN_ENTER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CLAN_ENTER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CLAN_RANK_SET",
-            "name": "HOOK_CLAN_RANK_SET",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CLAN_RANK_SET"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CLAN_RANK_LIST",
-            "name": "HOOK_CLAN_RANK_LIST",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CLAN_RANK_LIST"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CLAN_WITHDRAW",
-            "name": "HOOK_CLAN_WITHDRAW",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CLAN_WITHDRAW"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CREATURE_SEARCH",
-            "name": "HOOK_CREATURE_SEARCH",
-            "summary": "Hooks\u0020of\u0020forest\/creatures.",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CREATURE_SEARCH"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CREATURE_ENCOUNTER",
-            "name": "HOOK_CREATURE_ENCOUNTER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CREATURE_ENCOUNTER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CREATURE_BUFF",
-            "name": "HOOK_CREATURE_BUFF",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CREATURE_BUFF"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_GRAVEYARD_FIGHT_START",
-            "name": "HOOK_GRAVEYARD_FIGHT_START",
-            "summary": "Hooks\u0020of\u0020graveyard.",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_GRAVEYARD_FIGHT_START"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_GRAVEYARD_DEATH_OVERLORD_ACTIONS",
-            "name": "HOOK_GRAVEYARD_DEATH_OVERLORD_ACTIONS",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_GRAVEYARD_DEATH_OVERLORD_ACTIONS"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_GRAVEYARD_DEATH_OVERLORD_FAVORS",
-            "name": "HOOK_GRAVEYARD_DEATH_OVERLORD_FAVORS",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_GRAVEYARD_DEATH_OVERLORD_FAVORS"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_INN_BARTENDER_BRIBE",
-            "name": "HOOK_INN_BARTENDER_BRIBE",
-            "summary": "Hooks\u0020of\u0020Inn.",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_INN_BARTENDER_BRIBE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_INN_ALE",
-            "name": "HOOK_INN_ALE",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_INN_ALE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_FIGHT_NAV_PRE",
-            "name": "HOOK_FIGHT_NAV_PRE",
-            "summary": "Hooks\u0020Fight.",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_FIGHT_NAV_PRE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_FIGHT_NAV_GRAVEYARD",
-            "name": "HOOK_FIGHT_NAV_GRAVEYARD",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_FIGHT_NAV_GRAVEYARD"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_FIGHT_NAV_SPECIALTY",
-            "name": "HOOK_FIGHT_NAV_SPECIALTY",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_FIGHT_NAV_SPECIALTY"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_FIGHT_NAV",
-            "name": "HOOK_FIGHT_NAV",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_FIGHT_NAV"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_FIGHT_OPTIONS",
-            "name": "HOOK_FIGHT_OPTIONS",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_FIGHT_OPTIONS"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_FIGHT_ALTER_GEM_CHANCE",
-            "name": "HOOK_FIGHT_ALTER_GEM_CHANCE",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_FIGHT_ALTER_GEM_CHANCE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_FIGHT_APPLY_SPECIALTY",
-            "name": "HOOK_FIGHT_APPLY_SPECIALTY",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_FIGHT_APPLY_SPECIALTY"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_EVERYHIT",
-            "name": "HOOK_CORE_EVERYHIT",
-            "summary": "Core\u0020hooks.",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_EVERYHIT"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_EVERYHIT_LOGGEDIN",
-            "name": "HOOK_CORE_EVERYHIT_LOGGEDIN",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_EVERYHIT_LOGGEDIN"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_LOGIN_CHECK",
-            "name": "HOOK_CORE_LOGIN_CHECK",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_LOGIN_CHECK"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_LOGIN_PLAYER",
-            "name": "HOOK_CORE_LOGIN_PLAYER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_LOGIN_PLAYER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_LOGOUT_PLAYER",
-            "name": "HOOK_CORE_LOGOUT_PLAYER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_LOGOUT_PLAYER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_PETITION_ADD",
-            "name": "HOOK_CORE_PETITION_ADD",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_PETITION_ADD"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_PETITION_FAQ_TOC",
-            "name": "HOOK_CORE_PETITION_FAQ_TOC",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_PETITION_FAQ_TOC"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_SETTING_CHANGE",
-            "name": "HOOK_CORE_SETTING_CHANGE",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_SETTING_CHANGE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_SPECIALTY_NAMES",
-            "name": "HOOK_CORE_SPECIALTY_NAMES",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_SPECIALTY_NAMES"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_DK_POINT_RECALC",
-            "name": "HOOK_CORE_DK_POINT_RECALC",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_DK_POINT_RECALC"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_NEWDAY_RUNONCE",
-            "name": "HOOK_CORE_NEWDAY_RUNONCE",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_NEWDAY_RUNONCE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_NEWDAY_PRE",
-            "name": "HOOK_CORE_NEWDAY_PRE",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_NEWDAY_PRE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_NEWDAY",
-            "name": "HOOK_CORE_NEWDAY",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_NEWDAY"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_RACE_SET",
-            "name": "HOOK_CORE_RACE_SET",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_RACE_SET"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_RACE_CHOOSE",
-            "name": "HOOK_CORE_RACE_CHOOSE",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_RACE_CHOOSE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_SPECIALTY_SET",
-            "name": "HOOK_CORE_SPECIALTY_SET",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_SPECIALTY_SET"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_CORE_SPECIALTY_CHOOSE",
-            "name": "HOOK_CORE_SPECIALTY_CHOOSE",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_CORE_SPECIALTY_CHOOSE"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_COMENTARY_COMMENT_POST",
-            "name": "HOOK_COMENTARY_COMMENT_POST",
-            "summary": "Hook\u0020comentary.",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_COMENTARY_COMMENT_POST"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_COMENTARY_COMMANDS",
-            "name": "HOOK_COMENTARY_COMMANDS",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_COMENTARY_COMMANDS"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_COMENTARY_COMMENT",
-            "name": "HOOK_COMENTARY_COMMENT",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_COMENTARY_COMMENT"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_COMENTARY_MODERATE_SECTIONS",
-            "name": "HOOK_COMENTARY_MODERATE_SECTIONS",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_COMENTARY_MODERATE_SECTIONS"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_SPECIAL_HOLIDAY",
-            "name": "HOOK_SPECIAL_HOLIDAY",
-            "summary": "Other\u0020hooks.",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_SPECIAL_HOLIDAY"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_SERVER_DRAGON_POINT_RESET",
-            "name": "HOOK_SERVER_DRAGON_POINT_RESET",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_SERVER_DRAGON_POINT_RESET"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_SUPERUSER",
-            "name": "HOOK_SUPERUSER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_SUPERUSER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_SUPERUSER_CHECK_SU_ACCESS",
-            "name": "HOOK_SUPERUSER_CHECK_SU_ACCESS",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_SUPERUSER_CHECK_SU_ACCESS"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_SUPERUSER_CHECK_SU_PERMISSION",
-            "name": "HOOK_SUPERUSER_CHECK_SU_PERMISSION",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_SUPERUSER_CHECK_SU_PERMISSION"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_OTHER_STAMINA_NEWDAY",
-            "name": "HOOK_OTHER_STAMINA_NEWDAY",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_OTHER_STAMINA_NEWDAY"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_OTHER_LOCATIONS",
-            "name": "HOOK_OTHER_LOCATIONS",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_OTHER_LOCATIONS"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Hook\u003A\u003AHOOK_OTHER_BIO_END",
-            "name": "HOOK_OTHER_BIO_END",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Hook.html#constant_HOOK_OTHER_BIO_END"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Http\\Request",
             "name": "Request",
             "summary": "",
@@ -11361,15 +11361,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Http-Response.html#property_request"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003A\u0024hookManager",
-            "name": "hookManager",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Http-Response.html#property_hookManager"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003A\u0024params",
             "name": "params",
             "summary": "",
             "url": "classes/Lotgd-Core-Http-Response.html#property_params"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003A\u0024eventDispatcher",
+            "name": "eventDispatcher",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Http-Response.html#property_eventDispatcher"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003A\u0024kernel",
+            "name": "kernel",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Http-Response.html#property_kernel"
         },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Command\\AbstractCommand",
             "name": "AbstractCommand",
@@ -11455,6 +11460,21 @@ Search.appendIndex(
             "name": "defaultName",
             "summary": "",
             "url": "classes/Lotgd-Core-Installer-Command-Install50100Command.html#property_defaultName"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\Install50200Command",
+            "name": "Install50200Command",
+            "summary": "Command\u0020for\u0020upgrade\u0020to\u00205.2.0\u0020version.",
+            "url": "classes/Lotgd-Core-Installer-Command-Install50200Command.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\Install50200Command\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Command-Install50200Command.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\Install50200Command\u003A\u003A\u0024defaultName",
+            "name": "defaultName",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Command-Install50200Command.html#property_defaultName"
         },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Install",
             "name": "Install",
@@ -11776,6 +11796,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Installer-Upgrade-Version50100.html#method_step0"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50100\u003A\u003Astep1\u0028\u0029",
+            "name": "step1",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version50100.html#method_step1"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50100\u003A\u003Astep2\u0028\u0029",
+            "name": "step2",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version50100.html#method_step2"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50100\u003A\u003A\u0024upgradeVersion",
             "name": "upgradeVersion",
             "summary": "",
@@ -11785,6 +11815,26 @@ Search.appendIndex(
             "name": "hasMigration",
             "summary": "",
             "url": "classes/Lotgd-Core-Installer-Upgrade-Version50100.html#property_hasMigration"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50200",
+            "name": "Version50200",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version50200.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50200\u003A\u003Astep0\u0028\u0029",
+            "name": "step0",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version50200.html#method_step0"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50200\u003A\u003A\u0024upgradeVersion",
+            "name": "upgradeVersion",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version50200.html#property_upgradeVersion"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version50200\u003A\u003A\u0024hasMigration",
+            "name": "hasMigration",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version50200.html#property_hasMigration"
         },                {
             "fqsen": "\\Lotgd\\Core\\Jaxon\\Library\\Semantic\\Modal",
             "name": "Modal",
@@ -11830,6 +11880,11 @@ Search.appendIndex(
             "name": "getProjectDir",
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Kernel.html#method_getProjectDir"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Kernel\u003A\u003AregisterBundles\u0028\u0029",
+            "name": "registerBundles",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Kernel.html#method_registerBundles"
         },                {
             "fqsen": "\\Lotgd\\Core\\Kernel\u003A\u003AconfigureContainer\u0028\u0029",
             "name": "configureContainer",
@@ -11895,6 +11950,11 @@ Search.appendIndex(
             "name": "LICENSE",
             "summary": "This\u0020series\u0020of\u0020scripts\u0020\u0028collectively\u0020known\u0020as\u0020Legend\u0020of\u0020the\u0020Green\u0020Dragon\u0020or\u0020LotGD\u0029\u0020is\u0020licensed\u0020according\u0020to\u0020the\u0020Creating\u0020Commons\u0020Attribution\nNon\u002Dcommercial\u0020Share\u002Dalike\u0020license.\u0020\u0020The\u0020terms\u0020of\u0020this\u0020license\u0020must\u0020be\u0020followed\u0020for\u0020you\u0020to\u0020legally\u0020use\u0020or\u0020distribute\u0020this\u0020software.\u0020This\nlicense\u0020must\u0020be\u0020used\u0020on\u0020the\u0020distribution\u0020of\u0020any\u0020works\u0020derived\u0020from\u0020this\u0020work.\u0020This\u0020license\u0020text\u0020may\u0020not\u0020be\u0020removed\u0020nor\u0020altered\u0020in\u0020any\u0020way.",
             "url": "classes/Lotgd-Core-Kernel.html#constant_LICENSE"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Kernel\u003A\u003ACONFIG_EXTS",
+            "name": "CONFIG_EXTS",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Kernel.html#constant_CONFIG_EXTS"
         },                {
             "fqsen": "\\Lotgd\\Core\\Lib\\Settings",
             "name": "Settings",
@@ -12245,6 +12305,11 @@ Search.appendIndex(
             "name": "Censor",
             "summary": "",
             "url": "classes/Lotgd-Core-Output-Censor.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Censor\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Censor.html#method___construct"
         },                {
             "fqsen": "\\Lotgd\\Core\\Output\\Censor\u003A\u003Afilter\u0028\u0029",
             "name": "filter",
@@ -12886,21 +12951,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Pattern-Format.html#property_lotgdFormat"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Pattern\\HookManager",
-            "name": "HookManager",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Pattern-HookManager.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Pattern\\HookManager\u003A\u003AgetHookManager\u0028\u0029",
-            "name": "getHookManager",
-            "summary": "Get\u0020EventManager\u0020instance.",
-            "url": "classes/Lotgd-Core-Pattern-HookManager.html#method_getHookManager"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Pattern\\HookManager\u003A\u003A\u0024lotgdHookManager",
-            "name": "lotgdHookManager",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Pattern-HookManager.html#property_lotgdHookManager"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Http",
             "name": "Http",
             "summary": "",
@@ -13091,11 +13141,6 @@ Search.appendIndex(
             "summary": "Clean\u0020param\u0020of\u0020a\u0020value.",
             "url": "classes/Lotgd-Core-Pattern-Translator.html#method_cleanParameters"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Pattern\\Translator\u003A\u003A\u0024lotgdTranslator",
-            "name": "lotgdTranslator",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Pattern-Translator.html#property_lotgdTranslator"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Translator\u003A\u003A\u0024lotgdSymfonyTranslator",
             "name": "lotgdSymfonyTranslator",
             "summary": "",
@@ -13146,31 +13191,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Pvp-Listing.html#property_query"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Service\\Censor",
-            "name": "Censor",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Service-Censor.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Service\\Censor\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Service-Censor.html#method___construct"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Service\\Censor\u003A\u003ALOTGD_DICTIONARY_PATH",
-            "name": "LOTGD_DICTIONARY_PATH",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Service-Censor.html#constant_LOTGD_DICTIONARY_PATH"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Service\\HookManagerFactory",
-            "name": "HookManagerFactory",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Service-HookManagerFactory.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Service\\HookManagerFactory\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Service-HookManagerFactory.html#method___invoke"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Service\\HttpRequestFactory",
             "name": "HttpRequestFactory",
             "summary": "",
@@ -13206,6 +13226,11 @@ Search.appendIndex(
             "summary": "Returns\u0020the\u0020current\u0020session.",
             "url": "classes/Lotgd-Core-Service-Twig-SessionVariable.html#method_getSession"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Service\\Twig\\SessionVariable\u003A\u003A__toArray\u0028\u0029",
+            "name": "__toArray",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Service-Twig-SessionVariable.html#method___toArray"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Service\\Twig\\SessionVariable\u003A\u003A\u0024access",
             "name": "access",
             "summary": "",
@@ -13225,6 +13250,11 @@ Search.appendIndex(
             "name": "getUser",
             "summary": "Returns\u0020the\u0020current\u0020user.",
             "url": "classes/Lotgd-Core-Service-Twig-UserVariable.html#method_getUser"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Service\\Twig\\UserVariable\u003A\u003A__toArray\u0028\u0029",
+            "name": "__toArray",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Service-Twig-UserVariable.html#method___toArray"
         },                {
             "fqsen": "\\Lotgd\\Core\\Service\\Twig\\UserVariable\u003A\u003A\u0024access",
             "name": "access",
@@ -13371,46 +13401,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Tool-Sanitize.html#property_code"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle",
-            "name": "AdvertisingGoogle",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html#method___construct"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003AgetGlobals\u0028\u0029",
-            "name": "getGlobals",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html#method_getGlobals"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003AshowGoogleAd\u0028\u0029",
-            "name": "showGoogleAd",
-            "summary": "Show\u0020ad\u0020of\u0020Google.",
-            "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html#method_showGoogleAd"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003AadvertisingGoogleIsActived\u0028\u0029",
-            "name": "advertisingGoogleIsActived",
-            "summary": "Determine\u0020if\u0020Google\u0020AdSense\u0020is\u0020active.",
-            "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html#method_advertisingGoogleIsActived"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003A\u0024adsGoogle",
-            "name": "adsGoogle",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html#property_adsGoogle"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003A\u0024templatePartialsBlock",
-            "name": "templatePartialsBlock",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html#property_templatePartialsBlock"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\ApplyFilter",
             "name": "ApplyFilter",
             "summary": "",
@@ -13531,6 +13521,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-FlashMessages.html#property_sanitize"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\FormatExtension",
+            "name": "FormatExtension",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-FormatExtension.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\FormatExtension\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-FormatExtension.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\FormatExtension\u003A\u003AgetFilters\u0028\u0029",
+            "name": "getFilters",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Twig-Extension-FormatExtension.html#method_getFilters"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\FormatExtension\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Twig-Extension-FormatExtension.html#method_getName"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore",
             "name": "GameCore",
             "summary": "",
@@ -13565,11 +13575,6 @@ Search.appendIndex(
             "name": "request",
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html#property_request"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore\u003A\u003A\u0024format",
-            "name": "format",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html#property_format"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameCore\u003A\u003A\u0024sanitize",
             "name": "sanitize",
@@ -13871,11 +13876,6 @@ Search.appendIndex(
             "summary": "Colorize\u0020a\u0020string.",
             "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFilter.html#method_colorize"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFilter\u003A\u003Auncolorize\u0028\u0029",
-            "name": "uncolorize",
-            "summary": "Uncolorize\u0020a\u0020string.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFilter.html#method_uncolorize"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFilter\u003A\u003ApreventCodes\u0028\u0029",
             "name": "preventCodes",
             "summary": "Preven\u0020to\u0020format\u0020a\u0020LotGD\u0020code.",
@@ -13895,11 +13895,6 @@ Search.appendIndex(
             "name": "sprintfnews",
             "summary": "Similar\u0020to\u0020filter\u0020\u0022format\u0022\u0020but\u0020second\u0020argument\u0020is\u0020an\u0020array.",
             "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFilter.html#method_sprintfnews"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFilter\u003A\u003Acensor\u0028\u0029",
-            "name": "censor",
-            "summary": "Filter\u0020string\u0020with\u0020censor.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFilter.html#method_censor"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFilter\u003A\u003AhighlightFile\u0028\u0029",
             "name": "highlightFile",
@@ -13925,16 +13920,6 @@ Search.appendIndex(
             "name": "baseUrl",
             "summary": "Add\u0020server\u0020name\u0020to\u0020url\u0020query.",
             "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFunction.html#method_baseUrl"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFunction\u003A\u003AgameVersion\u0028\u0029",
-            "name": "gameVersion",
-            "summary": "Get\u0020version\u0020of\u0020game.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFunction.html#method_gameVersion"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFunction\u003A\u003AgameCopyright\u0028\u0029",
-            "name": "gameCopyright",
-            "summary": "Get\u0020copyright\u0020of\u0020game.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFunction.html#method_gameCopyright"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFunction\u003A\u003Agetsetting\u0028\u0029",
             "name": "getsetting",
@@ -14551,56 +14536,6 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html"
         },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection",
-            "name": "DependencyInjection",
-            "summary": "",
-            "url": "namespaces/lotgdcore-advertisingbundle-dependencyinjection.html"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Provider",
-            "name": "Provider",
-            "summary": "",
-            "url": "namespaces/lotgdcore-advertisingbundle-dependencyinjection-provider.html"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle",
-            "name": "AdvertisingBundle",
-            "summary": "",
-            "url": "namespaces/lotgdcore-advertisingbundle.html"
-        },                {
-            "fqsen": "\\LotgdCore",
-            "name": "LotgdCore",
-            "summary": "",
-            "url": "namespaces/lotgdcore.html"
-        },                {
-            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider",
-            "name": "Provider",
-            "summary": "",
-            "url": "namespaces/lotgdcore-advertisingbundle-provider.html"
-        },                {
-            "fqsen": "\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator",
-            "name": "Configurator",
-            "summary": "",
-            "url": "namespaces/symfony-component-dependencyinjection-loader-configurator.html"
-        },                {
-            "fqsen": "\\Symfony\\Component\\DependencyInjection\\Loader",
-            "name": "Loader",
-            "summary": "",
-            "url": "namespaces/symfony-component-dependencyinjection-loader.html"
-        },                {
-            "fqsen": "\\Symfony\\Component\\DependencyInjection",
-            "name": "DependencyInjection",
-            "summary": "",
-            "url": "namespaces/symfony-component-dependencyinjection.html"
-        },                {
-            "fqsen": "\\Symfony\\Component",
-            "name": "Component",
-            "summary": "",
-            "url": "namespaces/symfony-component.html"
-        },                {
-            "fqsen": "\\Symfony",
-            "name": "Symfony",
-            "summary": "",
-            "url": "namespaces/symfony.html"
-        },                {
             "fqsen": "\\Lotgd\\Ajax\\Core",
             "name": "Core",
             "summary": "",
@@ -14645,11 +14580,6 @@ Search.appendIndex(
             "name": "Core",
             "summary": "",
             "url": "namespaces/lotgd-core.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Battle",
-            "name": "Battle",
-            "summary": "",
-            "url": "namespaces/lotgd-core-battle.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Block",
             "name": "Block",
@@ -14796,10 +14726,10 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/lotgd-core-entityrepository-news.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EventManager",
-            "name": "EventManager",
+            "fqsen": "\\Lotgd\\Core\\Event",
+            "name": "Event",
             "summary": "",
-            "url": "namespaces/lotgd-core-eventmanager.html"
+            "url": "namespaces/lotgd-core-event.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Exception",
             "name": "Exception",
