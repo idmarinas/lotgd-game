@@ -44,6 +44,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **BC** Deleted pattern `Lotgd\Core\Pattern\HookManager`
 -   **BC** Deleted events class `Lotgd\Core\Hook` See `src/core/Event/` folder to see all new events.
 -   **Installer delete this files/folders**:
+    -   `/src/core/Battle/`
     -   `/src/core/Component/`
     -   `/src/core/Console/`
     -   `/src/core/Factory/`
