@@ -29,6 +29,8 @@ class Version50200 extends InstallerAbstract
         try
         {
             $fs->remove([
+                $this->getProjectDir().'/bin/lotgd',
+                $this->getProjectDir().'/data/form/core/',
                 $this->getProjectDir().'/src/core/Battle/',
                 $this->getProjectDir().'/src/core/Component/',
                 $this->getProjectDir().'/src/core/Console/',
