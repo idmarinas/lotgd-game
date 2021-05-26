@@ -45,9 +45,9 @@ const config = {
             'data/installer/README.md', //-- But include README.md
             //-- Ignore folders not need for skeleton
             '!{error_docs,lib,migrations}{,/**}',
-            '!assets/{,/**}',
-            '!bin/{,/**}',
-            '!config/{,/**}',
+            '!assets{,/**}',
+            '!bin{,/**}',
+            '!config{,/**}',
             //-- Ignore files of core
             '!cronjob/*.php',
             '!public{,/**}',
