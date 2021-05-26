@@ -8,22 +8,22 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
  *
- * @since 5.2.0
+ * @since 5.2.1
  */
 
 namespace Lotgd\Core\Installer\Command;
 
-use Lotgd\Core\Installer\Upgrade\Version50200;
+use Lotgd\Core\Installer\Upgrade\Version50201;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Command for upgrade to 5.2.0 version.
+ * Command for upgrade to 5.2.1 version.
  */
-final class Install50200Command extends AbstractCommand
+final class Install50201Command extends AbstractCommand
 {
-    protected static $defaultName = 'lotgd:install:v:50200';
+    protected static $defaultName = 'lotgd:install:v:50201';
 
-    public function __construct(Version50200 $install, TranslatorInterface $translator)
+    public function __construct(Version50201 $install, TranslatorInterface $translator)
     {
         parent::__construct();
 
