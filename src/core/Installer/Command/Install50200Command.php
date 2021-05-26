@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Installer\Command;
 
-use Lotgd\Core\Installer\Upgrade\Version50100;
+use Lotgd\Core\Installer\Upgrade\Version50200;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -23,7 +23,7 @@ final class Install50200Command extends AbstractCommand
 {
     protected static $defaultName = 'lotgd:install:v:50200';
 
-    public function __construct(Version50100 $install, TranslatorInterface $translator)
+    public function __construct(Version50200 $install, TranslatorInterface $translator)
     {
         parent::__construct();
 
