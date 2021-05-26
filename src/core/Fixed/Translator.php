@@ -15,14 +15,6 @@ namespace Lotgd\Core\Fixed;
 
 use Symfony\Contracts\Translation\TranslatorInterface as CoreTranslator;
 
-\trigger_error(\sprintf(
-    'Class %s is deprecated, please use Symfony Translator instead. "$translator = LotgdKernel::get("translator")"',
-    Translator::class
-), E_USER_DEPRECATED);
-
-/**
- * @deprecated 4.8.0
- */
 class Translator
 {
     /**
