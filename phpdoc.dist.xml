@@ -10,7 +10,7 @@
         <output>docs</output>
         <cache>output-cache.dist</cache>
     </paths>
-    <version number="4.10.0">
+    <version number="5.2.0">
         <api>
             <source dsn=".">
                 <path>src</path>
