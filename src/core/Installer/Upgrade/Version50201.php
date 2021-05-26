@@ -8,7 +8,7 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
  *
- * @since 5.2.0
+ * @since 5.2.1
  */
 
 namespace Lotgd\Core\Installer\Upgrade;
@@ -16,9 +16,9 @@ namespace Lotgd\Core\Installer\Upgrade;
 use Lotgd\Core\Installer\InstallerAbstract;
 use Symfony\Component\Filesystem\Filesystem;
 
-class Version50200 extends InstallerAbstract
+class Version50201 extends InstallerAbstract
 {
-    protected $upgradeVersion = 50200;
+    protected $upgradeVersion = 50201;
     protected $hasMigration = false;
 
     //-- Delete old files
