@@ -8,20 +8,17 @@
     -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
     -   A partir de la versión **5.0.0** se empezará a usar un sistema de módulos tipo Bundle
 
+
 # Actualmente haciendo esto (5.2.0)
 
--   Desmarcar algunas clases fixed como deprecadas (todavia es pronto para algunas)
-    -   LotgdKernel ya no esta deprecada
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
+
 
 # Módulos
 
 -   ...
 
-# Advertising bundle
--   Permitir desactivarlo en tiempo de ejecución (un módulo que lo desactiva por ejemplo)
-    -   Posiblemente esto ya se pueda hacer
 
 ## Para la versión X.Y.Z
 -   Migrar los cronjobs a cron/cron bundle mediante comandos de symfony console.
@@ -46,6 +43,7 @@
                 -   webpack.encore.entry.js
                 -   webpack.encore.theme.js
 
+
 ## Cosas pendientes
 
 -   Añadir un check para comprobar si se han usado las funciones obligatorias (copyright(), game_version() .... )
@@ -55,6 +53,7 @@
     -   IDEA: usar la clase BBCode, ejemplo como se usa en foros y similar
 -   ¿? Permitir que en los eventos, el chance pueda ser superior a 100, para priorizar que un evento pueda pasar con más frecuencia.
     -   Usar otra forma
+
 
 ## Cosas a mirar
 -   https://github.com/pirasterize/sonata-form-builder

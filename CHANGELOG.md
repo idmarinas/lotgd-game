@@ -12,6 +12,10 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 ### :cyclone: CHANGES
 
 -   **Downgrade** Symfony components from 5.2 versions to 4.4 versions.
+-   **Fixed Classes** 
+    -   All fixed classes in `src/core/Fixed/` folder.
+    -   Instead use this clases `LotgdResponse`, `LotgdRequest`...
+    -   Try to use service injection when you can. All this clases is for transiction.
 
 ### :star: FEATURES
 
@@ -65,7 +69,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   `/src/core/Fixed/HookManager.php`
     -   `/src/core/Fixed/Locator.php`
     -   `/src/core/Fixed/SymfonyForm.php`
-    -   Note: all this files/folders are automatically deleted when upgrade to version 5.2.0, this files not are in used by Core.
+    -   Note: all this files/folders are automatically deleted when upgrade to version 5.2.0, this files not are in used by the LoTGD Core.
 
 ### :notebook: NOTES
 
