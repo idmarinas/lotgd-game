@@ -73,8 +73,6 @@ class Response extends HttpResponse
     {
         global $session;
 
-        $this->kernel->handle($this->request);
-
         if ($title)
         { //-- If not have title not overwrite page title
             $this->pageTitle($title, $parameters, $textDomain, $locale);
@@ -248,7 +246,6 @@ class Response extends HttpResponse
 
         //-- Send content to browser
         $this->send();
-        $this->kernel->terminate($this->request, $this);
     }
 
     /**
