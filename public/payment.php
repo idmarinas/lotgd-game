@@ -3,6 +3,10 @@
 // mail ready
 // addnews ready
 // translator ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 ob_start();
 
 set_error_handler('payment_error');
@@ -96,7 +100,9 @@ else
             }
             else
             {
-                modulehook('donation-error', $post);
+                $args = new GenericEvent(null, $post);
+                \LotgdEventDispatcher::dispatch($args, Events::PAYMENT_DONATION_ERROR);
+                modulehook('donation-error', $args->getArguments());
                 payment_error(E_ERROR, "Payment Status isn't 'Completed' it's '$payment_status'", __FILE__, __LINE__);
             }
         }
@@ -141,12 +147,14 @@ function writelog($response)
                 $donation -= $payment_fee;
             }
 
-            $hookresult = modulehook('donation_adjustments', [
+            $args = new GenericEvent(null, [
                 'points' => $donation * (int) getsetting('dpointspercurrencyunit', 100),
                 'amount' => $donation,
                 'acctid' => $acctId,
                 'messages' => []
             ]);
+            \LotgdEventDispatcher::dispatch($args, Events::PAYMENT_DONATION_ADJUSTMENT);
+            $hookresult = modulehook('donation_adjustments', $args->getArguments());
             $hookresult['points'] = round($hookresult['points']);
 
             $account->setDonation($account->getDonation() + $hookresult['points']);
@@ -165,7 +173,9 @@ function writelog($response)
             }
 
             $processed = 1;
-            modulehook('donation', ['id' => $acctId, 'amt' => $donation * getsetting('dpointspercurrencyunit', 100), 'manual' => false]);
+            $args = new GenericEvent(null, ['id' => $acctId, 'amt' => $donation * getsetting('dpointspercurrencyunit', 100), 'manual' => false]);
+            \LotgdEventDispatcher::dispatch(Events::PAYMENT_DONATION_SUCCESS, $args);
+            modulehook('donation', $args->getArguments());
         }
     }
 
