@@ -7,10 +7,10 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [migration-app-bundle]
+    branches: [migration]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [migration-app-bundle]
+    branches: [migration]
   schedule:
     - cron: '0 22 * * 2'
 
