@@ -62,6 +62,6 @@ final class AboutCommand extends Command
 
         $style->table([], $rows);
 
-        return Command::SUCCESS;
+        return 0;
     }
 }

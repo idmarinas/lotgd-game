@@ -75,7 +75,7 @@ final class LotgdInstallCommand extends Command
         {
             $output->writeln($this->translator->trans('installer.command.running', ['name' => $this->getName()], InstallerAbstract::TRANSLATOR_DOMAIN));
 
-            return Command::SUCCESS;
+            return 0;
         }
 
         $output->writeln('');
@@ -95,7 +95,7 @@ final class LotgdInstallCommand extends Command
             $text = $this->translator->trans('installer.license.reject', [], InstallerAbstract::TRANSLATOR_DOMAIN);
             $output->writeln("<error>{$text}</>");
 
-            return Command::SUCCESS;
+            return 0;
         }
 
         $text = $this->translator->trans('installer.license.confirmation', [], InstallerAbstract::TRANSLATOR_DOMAIN);
@@ -151,7 +151,7 @@ final class LotgdInstallCommand extends Command
         if ( ! $this->installer->checkInstallation($fromVersion, $toVersion))
         {
             //-- Abort if cant continue with installation
-            return Command::SUCCESS;
+            return 0;
         }
 
         //-- Checks versions need install
@@ -173,7 +173,7 @@ final class LotgdInstallCommand extends Command
         {
             $this->style->error($this->translator->trans('installer.installation.abort.install', [], InstallerAbstract::TRANSLATOR_DOMAIN));
 
-            return Command::FAILURE;
+            return 1;
         }
 
         $this->installer->finish(); //-- Finish installer
@@ -193,7 +193,7 @@ final class LotgdInstallCommand extends Command
         //-- Create user admin (If not have admin)
         $this->createUserAdmin($input, $output);
 
-        return Command::SUCCESS;
+        return 0;
     }
 
     private function processInstallation(InputInterface $input, OutputInterface $output, ProgressBar $installerBar, array $versionsToInstall)
@@ -229,13 +229,13 @@ final class LotgdInstallCommand extends Command
                     'version' => $this->installer->getNameVersion($v_id),
                 ], InstallerAbstract::TRANSLATOR_DOMAIN));
 
-                return Command::FAILURE;
+                return 1;
             }
 
             $installerBar->advance(1);
         }
 
-        return Command::SUCCESS;
+        return 0;
     }
 
     private function processCacheClear(ProgressBar $installerBar)
@@ -286,7 +286,7 @@ final class LotgdInstallCommand extends Command
 
         //-- Progress bar.
         $installerBar = new ProgressBar($output);
-        $installerBar->setFormat(" <fg=white;bg=#003800> %message:-37s% </>\n %current%/%max% %bar% %percent:3s%%\n %steps:39s% \n %remaining:-10s% %memory:39s%");
+        $installerBar->setFormat(" <fg=white;bg=green> %message:-37s% </>\n %current%/%max% %bar% %percent:3s%%\n %steps:39s% \n %remaining:-10s% %memory:39s%");
         $installerBar->setBarCharacter("\033[32m+\033[0m");
         $installerBar->setEmptyBarCharacter("\033[31m-\033[0m");
         $installerBar->setProgressCharacter("\033[32m-\033[0m");
