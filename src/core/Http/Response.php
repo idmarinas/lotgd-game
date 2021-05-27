@@ -89,7 +89,7 @@ class Response extends HttpResponse
         if ($session['user']['loggedin'] ?? false)
         {
             $this->eventDispatcher->dispatch($args, EveryRequest::HEADER_AUTHENTICATED);
-            modulehook('everyheader-loggedin', $args);
+            modulehook('everyheader-loggedin', $args->getData());
         }
 
         calculate_buff_fields();
