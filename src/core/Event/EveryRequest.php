@@ -30,7 +30,7 @@ class EveryRequest extends Event
     /**
      * Event that occurs in every request in footer.
      */
-    public const FOOTER = 'lotgd.core.every.footer.authenticated';
+    public const FOOTER = 'lotgd.core.every.footer';
 
     /**
      * Event that occurs in every request in footer for authenticated user.
