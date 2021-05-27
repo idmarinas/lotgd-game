@@ -15,7 +15,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :star: FEATURES
 
--   Nothing
+-   **Add** new events to Event Dispatcher.
+    -   See class `Lotgd\Core\Events` and `src/core/Event/` folder for see all events.
 
 ### :fire: DEPRECATED
 
