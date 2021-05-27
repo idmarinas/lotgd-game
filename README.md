@@ -1,4 +1,6 @@
-![PHP Composer](https://github.com/idmarinas/lotgd-game/workflows/PHP%20Composer/badge.svg?branch=migration-app-bundle)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=alert_status)](https://sonarcloud.io/dashboard?id=lotgd-game)
+![PHP Composer](https://github.com/idmarinas/lotgd-game/workflows/PHP%20Composer/badge.svg?branch=migration)
+[![SonarCloud](https://github.com/idmarinas/lotgd-game/actions/workflows/sonar-cloud.yml/badge.svg)](https://github.com/idmarinas/lotgd-game/actions/workflows/sonar-cloud.yml)
 
 ![GitHub release](https://img.shields.io/github/release/idmarinas/lotgd-game.svg)
 ![GitHub Release Date](https://img.shields.io/github/release-date/idmarinas/lotgd-game.svg)
@@ -8,7 +10,7 @@
 ![Upgrade](https://img.shields.io/badge/upgrade-success-green.svg?maxAge=2592000)
 ![Working](https://img.shields.io/badge/working-succes-green.svg?maxAge=2592000)
 
-![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/idmarinas/lotgd-game/migration-app-bundle.svg?color=red)
+![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/idmarinas/lotgd-game/migration.svg?color=red)
 ![GitHub issues](https://img.shields.io/github/issues/idmarinas/lotgd-game.svg)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/idmarinas/lotgd-game.svg)
 ![Github commits (since latest release)](https://img.shields.io/github/commits-since/idmarinas/lotgd-game/latest.svg)
@@ -21,8 +23,15 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/idmarinas/lotgd-game.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/idmarinas/lotgd-game/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/idmarinas/lotgd-game.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/idmarinas/lotgd-game/context:javascript)
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/4553239eac9e717f1cce/maintainability)](https://codeclimate.com/github/idmarinas/lotgd-game/maintainability)
-![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/idmarinas/lotgd-game?cacheSeconds=86400)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=bugs)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=security_rating)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=sqale_index)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=code_smells)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=coverage)](https://sonarcloud.io/dashboard?id=lotgd-game)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=lotgd-game)
 
 [![Build in PHP](https://img.shields.io/badge/PHP-^7.3-8892BF.svg?logo=php)](http://php.net/)
 [![built with gulp](https://img.shields.io/badge/gulp-builds_this_project-eb4a4b.svg?logo=gulp)](http://gulpjs.com/)
