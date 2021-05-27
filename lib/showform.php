@@ -26,7 +26,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
     static $title_id    = 0;
 
     \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 4.1.0; and delete in version future version, use new form system. \LotgdLocator::get($formName)',
+        'Usage of %s is obsolete since 4.1.0; and delete in version future version, use new Symfony Form system.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
