@@ -9,8 +9,10 @@
     -   A partir de la versión **5.0.0** se empezará a usar un sistema de módulos tipo Bundle
 
 
-# Actualmente haciendo esto (5.2.0)
+# Actualmente haciendo esto (5.3.0)
 
+-   Agregar los eventos del event dispatcher en los modulehook que no tengan sustituto.
+    -   Con este cambio, será mas fácil migrar algunos módulos a un sistema Bundle.
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 
