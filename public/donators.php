@@ -3,6 +3,10 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/systemmail.php';
 
@@ -56,12 +60,14 @@ if ('save' == $op)
     $points = $amt;
     if ($txnid)
     {
-        $result = modulehook('donation_adjustments', [
+        $args = new GenericEvent(null, [
             'points' => $amt,
             'amount' => $amt / getsetting('dpointspercurrencyunit', 100),
             'acctid' => $id,
             'messages' => []
         ]);
+        \LotgdEventDispatcher::dispatch($args, Events::PAYMENT_DONATION_ADJUSTMENT);
+        $result = modulehook('donation_adjustments', $args->getArguments());
         $points = $result['points'];
 
         if (! is_array($result['messages']))
@@ -82,11 +88,13 @@ if ('save' == $op)
     \Doctrine::persist($account);
     \Doctrine::flush();
 
-    modulehook('donation', [
+    $args = new GenericEvent(null, [
         'id' => $id,
         'amt' => $points,
         'manual' => (bool) ($txnid)
     ]);
+    \LotgdEventDispatcher::dispatch($args, Events::PAYMENT_DONATION_SUCCESS);
+    modulehook('donation', $args->getArguments());
 
     if ($txnid)
     {
