@@ -41,7 +41,7 @@ function buffbadguy($badguy, $hook = 'buffbadguy')
     //-- Activate hook when find a creature
     $badguy = new Creature($badguy);
     \LotgdEventDispatcher::dispatch($badguy, Creature::ENCOUNTER);
-    $badguy = $badguy->setData(modulehook('creatureencounter', $badguy->getData()));
+    $badguy->setData(modulehook('creatureencounter', $badguy->getData()));
 
     $hookNew = $hook;
 
