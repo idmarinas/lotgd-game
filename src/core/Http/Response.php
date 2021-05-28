@@ -25,13 +25,13 @@ use Twig\Environment;
 
 class Response extends HttpResponse
 {
-    protected $translator;
+    private $translator;
     /** @var Lotgd\Core\Doctrine\ORM\EntityManager */
-    protected $doctrine;
-    protected $headTitle;
-    protected $template;
-    protected $request;
-    protected $params;
+    private $doctrine;
+    private $headTitle;
+    private $template;
+    private $request;
+    private $params;
     /** @var Symfony\Component\EventDispatcher\EventDispatcher */
     private $eventDispatcher;
     private $kernel;
