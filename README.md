@@ -36,7 +36,6 @@
 [![Build in PHP](https://img.shields.io/badge/PHP-^7.3-8892BF.svg?logo=php)](http://php.net/)
 [![built with gulp](https://img.shields.io/badge/gulp-builds_this_project-eb4a4b.svg?logo=gulp)](http://gulpjs.com/)
 [![built with webpack](https://img.shields.io/badge/webpack-builds_javascript-175d96.svg?logo=webpack)](https://webpack.js.org)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=idmarinas/lotgd-game)](https://dependabot.com)
 
 <!-- [![PayPal - The safer, easier way to pay online!](https://img.shields.io/badge/donate-help_my_project-ffaa29.svg?logo=paypal&cacheSeconds=86400)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CAYNPHQ8VN92C&source=url) -->
 [![PayPal.Me - The safer, easier way to pay online!](https://img.shields.io/badge/donate-help_my_project-ffaa29.svg?logo=paypal&cacheSeconds=86400)](https://www.paypal.me/idmarinas)
