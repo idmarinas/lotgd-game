@@ -3,12 +3,18 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/names.php';
 
 // Don't hook on to this text for your standard modules please, use "lodge" instead.
 // This hook is specifically to allow modules that do other lodges to create ambience.
-$result = modulehook('lodge-text-domain', ['textDomain' => 'page_lodge', 'textDomainNavigation' => 'navigation_lodge']);
+$args = new GenericEvent(null, ['textDomain' => 'page_lodge', 'textDomainNavigation' => 'navigation_lodge']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_LODGE_PRE);
+$result = modulehook('lodge-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -57,6 +63,7 @@ if ('' == $op)
     if ($entry)
     {
         \LotgdNavigation::addHeader('category.use.points');
+        \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_LODGE);
         modulehook('lodge');
     }
 }
@@ -85,7 +92,9 @@ elseif ('points' == $op)
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-lodge-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_LODGE_POST);
+$params = modulehook('page-lodge-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/lodge.html.twig', $params));
 
 //-- Finalize page

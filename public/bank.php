@@ -3,10 +3,16 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/systemmail.php';
 
-$result = modulehook('bank-text-domain', ['textDomain' => 'page_bank', 'textDomainNavigation' => 'navigation_bank']);
+$args = new GenericEvent(null, ['textDomain' => 'page_bank', 'textDomainNavigation' => 'navigation_bank']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_BANK_PRE);
+$result = modulehook('bank-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 
@@ -234,7 +240,9 @@ if (getsetting('allowgoldtransfer', 1) && ($session['user']['level'] >= getsetti
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-bank-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_BANK_POST);
+$params = modulehook('page-bank-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/bank.html.twig', $params));
 
 //-- Finalize page

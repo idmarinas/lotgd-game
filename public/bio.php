@@ -7,6 +7,8 @@
 use Lotgd\Core\Event\Clan;
 use Lotgd\Core\Event\Core;
 use Lotgd\Core\Event\Other;
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
 
@@ -92,7 +94,9 @@ else
     \LotgdNavigation::addNav('bio.nav.village', 'village.php');
 }
 //-- This is only for params not use for other purpose
-$params = modulehook('page-bio-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_BIO_POST);
+$params = modulehook('page-bio-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/bio.html.twig', $params));
 
 $args = new Other($target);

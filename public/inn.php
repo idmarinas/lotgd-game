@@ -3,6 +3,10 @@
 // addnews ready
 // translator ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/pvpwarning.php';
 require_once 'lib/buffs.php';
@@ -11,7 +15,9 @@ require_once 'lib/partner.php';
 
 // Don't hook on to this text for your standard modules please, use "inn" instead.
 // This hook is specifically to allow modules that do other inns to create ambience.
-$result = modulehook('inn-text-domain', ['textDomain' => 'page_inn', 'textDomainNavigation' => 'navigation_inn']);
+$args = new GenericEvent(null, ['textDomain' => 'page_inn', 'textDomainNavigation' => 'navigation_inn']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_INN_PRE);
+$result = modulehook('inn-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -137,6 +143,7 @@ switch ($op)
 
         $bodyguards = ['Butch', 'Bruce', 'Alfonozo', 'Guido', 'Bruno', 'Bubba', 'Al', 'Chuck', 'Brutus', 'Nunzio', 'Terrance', 'Mitch', 'Rocco', 'Spike', 'Gregor', 'Sven', 'Draco'];
 
+        \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_INN_ROOMS);
         modulehook('innrooms');
 
         \LotgdNavigation::addHeader('category.buy.room');
@@ -180,7 +187,9 @@ switch ($op)
 
         \LotgdNavigation::addHeader('category.do');
 
-        $args = modulehook('blockcommentarea', ['section' => 'inn']);
+        $args = new GenericEvent(null, ['section' => 'inn']);
+        \LotgdEventDispatcher::dispatch($args, Events::PAGE_INN_BLOCK_COMMENT_AREA);
+        $args = modulehook('blockcommentarea', $args->getArguments());
 
         if (! ($args['block'] ?? false) || ! $args['block'])
         {
@@ -201,7 +210,7 @@ switch ($op)
             $session['user']['charm'] = max(0, $session['user']['charm']);
         }
 
-        $chats = [
+        $chats = new GenericEvent(null, [
             [
                 'chats.dragon', [], $textDomain
             ],
@@ -220,9 +229,10 @@ switch ($op)
             [
                 $params['partner'], [], $textDomain
             ],
-        ];
+        ]);
 
-        $chats = modulehook('innchatter', $chats);
+        \LotgdEventDispatcher::dispatch($chats , Events::PAGE_INN_CHATTER);
+        $chats = modulehook('innchatter', $chats->getArguments());
 
         $params['talk'] = $chats[array_rand($chats)];
         $params['gameclock'] = getgametime();
@@ -233,7 +243,9 @@ switch ($op)
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-inn-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_INN_POST);
+$params = modulehook('page-inn-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/inn.html.twig', $params));
 
 if ('default' == $params['tpl'])

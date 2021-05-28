@@ -3,13 +3,19 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 
 checkday();
 
 // Don't hook on to this text for your standard modules please, use "inn" instead.
 // This hook is specifically to allow modules that do other inns to create ambience.
-$result = modulehook('mercenarycamp-text-domain', ['textDomain' => 'page_mercenarycamp', 'textDomainNavigation' => 'navigation_mercenarycamp']);
+$args = new GenericEvent(null, ['textDomain' => 'page_mercenarycamp', 'textDomainNavigation' => 'navigation_mercenarycamp']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_MERCENARY_CAMP_PRE);
+$result = modulehook('mercenarycamp-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -138,7 +144,9 @@ elseif ('buy' == $op)
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-mercenarycamp-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_MERCENARY_CAMP_POST);
+$params = modulehook('page-mercenarycamp-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/mercenarycamp.html.twig', $params));
 
 //-- Finalize page

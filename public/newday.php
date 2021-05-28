@@ -3,10 +3,16 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/buffs.php';
 
-modulehook('newday-intercept', []);
+$args = new GenericEvent();
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_NEWDAY_INTERCEPT);
+modulehook('newday-intercept', $args->getArguments());
 
 $resurrection = (string) \LotgdRequest::getQuery('resurrection');
 $resline = ('true' == $resurrection) ? '&resurrection=true' : '';
@@ -24,7 +30,9 @@ $dailypvpfights = getsetting('pvpday', 3);
 
 // Don't hook on to this text for your standard modules please, use "newday" instead.
 // This hook is specifically to allow modules that do other newdays to create ambience.
-$result = modulehook('newday-text-domain', ['textDomain' => 'page_newday', 'textDomainNavigation' => 'navigation_newday']);
+$args = new GenericEvent(null, ['textDomain' => 'page_newday', 'textDomainNavigation' => 'navigation_newday']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_NEWDAY_PRE);
+$result = modulehook('newday-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -96,7 +104,9 @@ if (is_module_active('staminasystem'))
 {
     $canbuy['ff'] = 0;
 }
-$retargs = modulehook('dkpointlabels', ['desc' => $labels, 'buy' => $canbuy]);
+$args = new GenericEvent(null, ['desc' => $labels, 'buy' => $canbuy]);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_NEWDAY_DK_POINT_LABELS);
+$retargs = modulehook('dkpointlabels', $args->getArguments());
 $labels = $retargs['desc'];
 $canbuy = $retargs['buy'];
 
@@ -133,7 +143,9 @@ $params['turnsPerDay'] = $turnsperday;
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-newday-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_NEWS_POST);
+$params = modulehook('page-newday-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/newday.html.twig', $params));
 
 //-- Finalize page

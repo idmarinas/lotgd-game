@@ -3,6 +3,10 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 \define('ALLOW_ANONYMOUS', true);
 require_once 'common.php';
 require_once 'lib/showform.php';
@@ -92,7 +96,9 @@ else
 {
     LotgdNavigation::blockLink('about.php');
 
-    $results = modulehook('about', []);
+    $args = new GenericEvent();
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_ABOUT);
+    $results = modulehook('about', $args->getArguments());
 
     if (\is_array($results) && \count($results))
     {
@@ -100,8 +106,10 @@ else
     }
 }
 
-$params = modulehook('page-about-tpl-params', $params);
-\LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/about.html.twig', $params));
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_ABOUT_POST);
+$params = modulehook('page-about-tpl-params', $args->getArguments());
+\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/about.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

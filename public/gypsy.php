@@ -3,11 +3,17 @@
 // addnews ready
 // translator ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 
 // Don't hook on to this text for your standard modules please, use "gypsy" instead.
 // This hook is specifically to allow modules that do other gypsys to create ambience.
-$result = modulehook('gypsy-text-domain', ['textDomain' => 'page_gypsy', 'textDomainNavigation' => 'navigation_gypsy']);
+$args = new GenericEvent(null, ['textDomain' => 'page_gypsy', 'textDomainNavigation' => 'navigation_gypsy']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_GYPSY_PRE);
+$result = modulehook('gypsy-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -71,6 +77,7 @@ else
     \LotgdNavigation::addHeader('category.other');
     \LotgdNavigation::addNav('nav.forget', 'village.php');
 
+    \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_GYPSY);
     modulehook('gypsy');
 }
 
@@ -78,7 +85,9 @@ else
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-gypsy-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_GYPSY_POST);
+$params = modulehook('page-gypsy-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/gypsy.html.twig', $params));
 
 //-- Finalize page

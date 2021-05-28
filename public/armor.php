@@ -3,13 +3,19 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 
 checkday();
 
 // Don't hook on to this text for your standard modules please, use "armor" instead.
 // This hook is specifically to allow modules that do other armors to create ambience.
-$result = modulehook('armor-text-domain', ['textDomain' => 'page_armor', 'textDomainNavigation' => 'navigation_armor']);
+$args = new GenericEvent(null, ['textDomain' => 'page_armor', 'textDomainNavigation' => 'navigation_armor']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_ARMOR_PRE);
+$result = modulehook('armor-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -73,7 +79,9 @@ elseif ('buy' == $op)
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-armor-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_ARMOR_POST);
+$params = modulehook('page-armor-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/armor.html.twig', $params));
 
 //-- Finalize page

@@ -4,50 +4,14 @@
 // addnews ready
 // mail ready
 
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 \define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
 
 $params = [];
-
-//-- New Theme system not is compatible with this.
-// if (getsetting('homeskinselect', 1))
-// {
-//     $template = LotgdRequest::getCookie('template') ?: '';
-
-//     if ('' == $template)
-//     {
-//         $template = getsetting('defaultskin', 'jade.htm');
-//     }
-
-//     $lotgdFormFactory = \LotgdKernel::get('form.factory');
-
-//     $form = $lotgdFormFactory->create(Lotgd\Core\Form\HomeType::class, ['defaultskin' => $template], [
-//         'action' => 'home.php',
-//         'attr'   => [
-//             'autocomplete' => 'off',
-//             'class' => 'center aligned',
-//             'hide_info_button' => true
-//         ],
-//     ]);
-
-//     $form->handleRequest(\LotgdRequest::_i());
-
-//     if ($form->isSubmitted() && $form->isValid())
-//     {
-//         $post = $form->getData();
-
-//         $skin = $post['defaultskin'];
-
-//         if ($skin > '')
-//         {
-//             \LotgdResponse::setCookie('template', $skin, '+45 days');
-//             \LotgdTheme::setDefaultSkin($skin);
-//         }
-//     }
-
-//     $params['selectSkin'] = $form->createview();
-// }
 
 if ($session['loggedin'] ?? false)
 {
@@ -110,7 +74,9 @@ if (\abs(getsetting('OnlineCountLast', 0) - \strtotime('now')) > 60)
 
 $params['OnlineCount'] = getsetting('OnlineCount', 0);
 
-$results = modulehook('hometext', []);
+$args = new GenericEvent();
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_HOME_TEXT);
+$results = modulehook('hometext', $args->getArguments());
 
 if (\is_array($results) && \count($results))
 {
@@ -131,7 +97,9 @@ if ($params['OnlineCount'] < getsetting('maxonline', 0) || 0 == getsetting('maxo
     $params['serverFull'] = false;
 }
 
-$results = modulehook('homemiddle', []);
+$args = new GenericEvent();
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_HOME_MIDDLE);
+$results = modulehook('homemiddle', $args->getArguments());
 
 if (\is_array($results) && \count($results))
 {
@@ -143,7 +111,9 @@ $params['loginBanner'] = getsetting('loginbanner');
 //-- Version of the game the server is running
 $params['serverVersion'] = \Lotgd\Core\Kernel::VERSION;
 
-$params = modulehook('page-home-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_HOME_POST);
+$params = modulehook('page-home-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/home.html.twig', $params));
 
 //-- Finalize page

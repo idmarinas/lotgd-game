@@ -3,13 +3,19 @@
 // addnews ready.
 // translator ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/buffs.php';
 require_once 'lib/events.php';
 
 // Don't hook on to this text for your standard modules please, use "graveyard" instead.
 // This hook is specifically to allow modules that do other graveyards to create ambience.
-$result = modulehook('graveyard-text-domain', ['textDomain' => 'page_graveyard', 'textDomainNavigation' => 'navigation_graveyard']);
+$args = new GenericEvent(null, ['textDomain' => 'page_graveyard', 'textDomainNavigation' => 'navigation_graveyard']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_GRAVEYARD_PRE);
+$result = modulehook('graveyard-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -44,7 +50,9 @@ $battle = false;
 
 strip_all_buffs();
 $max = $session['user']['level'] * 10 + $session['user']['dragonkills'] * 2 + 50;
-$favortoheal = modulehook('favortoheal', ['favor' => round(10 * ($max - $session['user']['soulpoints']) / $max)]);
+$args = new GenericEvent(null, ['favor' => round(10 * ($max - $session['user']['soulpoints']) / $max)]);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_GRAVEYARD_HEAL);
+$favortoheal = modulehook('favortoheal', $args->getArguments());
 $favortoheal = (int) $favortoheal['favor'];
 
 $params['favorToHeal'] = $favortoheal;
@@ -323,10 +331,13 @@ elseif (! $battle)
     \LotgdNavigation::addNav('nav.mausoleum', 'graveyard.php?op=enter');
 }
 
-modulehook('deathoverlord', []);
+\LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_GRAVEYARD);
+modulehook('deathoverlord');
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-graveyard-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_GRAVEYARD_POST);
+$params = modulehook('page-graveyard-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/graveyard.html.twig', $params));
 
 if ('default' == $params['tpl'])

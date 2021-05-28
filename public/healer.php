@@ -3,11 +3,17 @@
 // addnews ready
 // translator ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 
 // Don't hook on to this text for your standard modules please, use "healer" instead.
 // This hook is specifically to allow modules that do other healers to create ambience.
-$result = modulehook('healer-text-domain', ['textDomain' => 'page_healer', 'textDomainNavigation' => 'navigation_healer']);
+$args = new GenericEvent(null, ['textDomain' => 'page_healer', 'textDomainNavigation' => 'navigation_healer']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_HEALER_PRE);
+$result = modulehook('healer-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -17,7 +23,9 @@ unset($result);
 
 //-- Calculate cost for healing
 $cost = log($session['user']['level']) * (($session['user']['maxhitpoints'] - $session['user']['hitpoints']) + 10);
-$result = modulehook('healmultiply', ['alterpct' => 1.0, 'cost' => $cost]);
+$args = new GenericEvent(null, ['alterpct' => 1.0, 'cost' => $cost]);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_HEALER_MULTIPLY);
+$result = modulehook('healmultiply', $args->getArguments());
 $cost = round($result['alterpct'] * $result['cost'], 0);
 
 $params = [
@@ -109,6 +117,7 @@ if ($session['user']['hitpoints'] < $session['user']['maxhitpoints'])
             ]
         ]);
     }
+    \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_HEALER_POTION);
     modulehook('potion');
 }
 \LotgdNavigation::addHeader('category.heal.companion');
@@ -155,7 +164,9 @@ else
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-healer-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_HEALER_POST);
+$params = modulehook('page-healer-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/healer.html.twig', $params));
 
 //-- Finalize page

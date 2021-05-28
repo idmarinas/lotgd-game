@@ -3,6 +3,10 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
@@ -15,7 +19,9 @@ if ($session['user']['loggedin'] ?? false)
 //-- Init page
 \LotgdResponse::pageStart('title', [], 'page_news');
 
-$hookIntercept = modulehook('news-intercept', ['showLastMotd' => true]);
+$args = new GenericEvent(null, ['showLastMotd' => true]);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_NEWS_INTERCEPT);
+$hookIntercept = modulehook('news-intercept', $args->getArguments());
 
 $newsPerPage = 50;
 $page = (int) \LotgdRequest::getQuery('page');
@@ -95,7 +101,9 @@ if ($session['user']['loggedin'])
 
 $params['SU_EDIT_COMMENTS'] = $session['user']['superuser'] & SU_EDIT_COMMENTS;
 
-$params = modulehook('page-news-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_NEWS_POST);
+$params = modulehook('page-news-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/news.html.twig', $params));
 
 //-- Finalize page

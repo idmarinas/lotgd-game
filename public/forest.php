@@ -3,6 +3,10 @@
 // addnews ready
 // translator ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/fightnav.php';
 require_once 'lib/taunt.php';
@@ -11,7 +15,9 @@ require_once 'lib/battle/skills.php';
 
 // Don't hook on to this text for your standard modules please, use "forest" instead.
 // This hook is specifically to allow modules that do other forests to create ambience.
-$result               = modulehook('forest-text-domain', ['textDomain' => 'page_forest', 'textDomainNavigation' => 'navigation_forest']);
+$args = new GenericEvent(null, ['textDomain' => 'page_forest', 'textDomainNavigation' => 'navigation_forest']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_PRE);
+$result               = modulehook('forest-text-domain', $args->getArguments());
 $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -59,13 +65,16 @@ elseif ('search' == $op)
     }
     else
     {
-        modulehook('forestsearch', []);
-        $args = [
+        $args = new GenericEvent();
+        \LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_SEARCH);
+        modulehook('forestsearch', $args->getArguments());
+
+        $args = new GenericEvent(null, [
             'soberval' => 0.9,
             'sobermsg' => \LotgdTranslator::t('sober.message', [], $textDomain),
             'schema'   => 'forest',
-        ];
-        modulehook('soberup', $args);
+        ]);
+        modulehook('soberup', $args->getArguments());
 
         if (0 != module_events('forest', getsetting('forestchance', 15)))
         {
@@ -305,13 +314,14 @@ elseif ('search' == $op)
                 }
             }
             calculate_buff_fields();
-            $attackstack = [
+            $args = new GenericEvent(null, [
                 'enemies' => $stack,
                 'options' => [
                     'type' => 'forest',
                 ],
-            ];
-            $attackstack = modulehook('forestfight-start', $attackstack);
+            ]);
+            \LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_FIGHT_START);
+            $attackstack = modulehook('forestfight-start', $args->getArguments());
 
             $session['user']['badguy'] = $attackstack;
             // If someone for any reason wanted to add a nav where the user cannot choose the number of rounds anymore
@@ -398,6 +408,7 @@ if ('' == $op)
 
     \LotgdNavigation::addHeader('other');
 
+    \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_FOREST_HEADER);
     modulehook('forest-header');
 
     if ($session['user']['level'] >= getsetting('maxlevel', 15) && 0 == $session['user']['seendragon'])
@@ -408,7 +419,9 @@ if ('' == $op)
         // a superuser link, but it shouldn't happen otherwise.. We just
         // want to make sure however.
         $isforest = 0;
-        $vloc     = modulehook('validforestloc', []);
+        $args = new GenericEvent();
+        \LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_VALID_FOREST_LOC);
+        $vloc     = modulehook('validforestloc', $args->getArguments());
 
         foreach ($vloc as $i => $l)
         {
@@ -425,6 +438,7 @@ if ('' == $op)
         }
     }
 
+    \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_FOREST);
     modulehook('forest', []);
 }
 
@@ -434,7 +448,9 @@ if ('' == $op)
 $params['battle'] = $battle;
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-forest-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_POST);
+$params = modulehook('page-forest-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/forest.html.twig', $params));
 
 //-- Display events

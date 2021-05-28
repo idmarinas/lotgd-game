@@ -3,6 +3,10 @@
 // mail ready
 // addnews ready
 // translator ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 
 check_su_access(SU_EDIT_PAYLOG);
@@ -39,7 +43,9 @@ $params = [
 \LotgdNavigation::superuserGrottoNav();
 \LotgdNavigation::addNav('paylog.nav.refresh', 'paylog.php');
 
-modulehook('paylog', []);
+$args = new GenericEvent();
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_PAYLOG);
+modulehook('paylog', $args->getArguments());
 
 $repository->updateProcessDate();
 $months = $repository->getMonths();

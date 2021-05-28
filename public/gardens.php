@@ -3,12 +3,18 @@
 // addnews ready
 // translator ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/events.php';
 
 // Don't hook on to this text for your standard modules please, use "gardens" instead.
 // This hook is specifically to allow modules that do other gardenss to create ambience.
-$result = modulehook('gardens-text-domain', ['textDomain' => 'page_gardens', 'textDomainNavigation' => 'navigation_gardens']);
+$args = new GenericEvent(null, ['textDomain' => 'page_gardens', 'textDomainNavigation' => 'navigation_gardens']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_GARDEN_PRE);
+$result = modulehook('gardens-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -56,10 +62,13 @@ if (! $skipgardendesc)
 }
 
 \LotgdNavigation::villageNav();
+\LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_GARDEN);
 modulehook('gardens', []);
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-gardens-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_GARDEN_POST);
+$params = modulehook('page-gardens-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/gardens.html.twig', $params));
 
 module_display_events('gardens', 'gardens.php');

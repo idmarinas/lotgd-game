@@ -3,6 +3,10 @@
 // addnews ready
 // translator ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
@@ -120,7 +124,9 @@ else
 $params['result'] = $result;
 \LotgdNavigation::pagination($result, 'list.php');
 
-$params = modulehook('page-list-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_LIST_POST);
+$params = modulehook('page-list-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(LotgdTheme::render('page/list.html.twig', $params));
 
 //-- Finalize page

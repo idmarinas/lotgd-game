@@ -1,5 +1,8 @@
 <?php
 
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/fightnav.php';
 require_once 'lib/titles.php';
@@ -9,7 +12,9 @@ require_once 'lib/creaturefunctions.php';
 
 // Don't hook on to this text for your standard modules please, use "dragon" instead.
 // This hook is specifically to allow modules that do other dragons to create ambience.
-$result = modulehook('dragon-text-domain', ['textDomain' => 'page_dragon', 'textDomainNavigation' => 'navigation_app']);
+$args = new GenericEvent(null, ['textDomain' => 'page_dragon', 'textDomainNavigation' => 'navigation_app']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_DRAGON_PRE);
+$result = modulehook('dragon-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -49,7 +54,9 @@ if ('' == $op)
     $badguy = lotgd_transform_creature($badguy);
     calculate_buff_fields();
 
-    $badguy = modulehook('buffdragon', $badguy);
+    $args = new GenericEvent(null, $badguy);
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_DRAGON_BUFF);
+    $badguy = modulehook('buffdragon', $args->getArguments());
 
     $session['user']['badguy'] = $badguy;
     $battle = true;
@@ -67,13 +74,14 @@ elseif ('prologue' == $op)
     $dkpoints = 0;
 
     restore_buff_fields();
-    $hpgain = [
+    $args = new GenericEvent(null, [
         'total' => $session['user']['maxhitpoints'],
         'dkpoints' => $dkpoints,
         'extra' => $session['user']['maxhitpoints'] - $dkpoints - ($session['user']['level'] * 10),
         'base' => $dkpoints + ($session['user']['level'] * 10),
-    ];
-    $hpgain = modulehook('hprecalc', $hpgain);
+    ]);
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_DRAGON_HP_RECALC);
+    $hpgain = modulehook('hprecalc', $args->getArguments());
 
     calculate_buff_fields();
 
@@ -111,7 +119,9 @@ elseif ('prologue' == $op)
         'dragonage' => 1,
     ];
 
-    $nochange = modulehook('dk-preserve', $nochange);
+    $args = new GenericEvent(null, $nochange);
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_DRAGON_DK_PRESERVE);
+    $nochange = modulehook('dk-preserve', $args->getArguments());
     $session['user']['dragonkills']++;
 
     $badguys = $session['user']['badguy']; //needed for the dragons name later
@@ -195,10 +205,14 @@ elseif ('prologue' == $op)
     debuglog("slew the dragon and starts with {$session['user']['gold']} gold and {$session['user']['gems']} gems");
 
     // Moved this hear to make some things easier.
-    modulehook('dragonkill', []);
+    $args = new GenericEvent();
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_DRAGON_KILL);
+    modulehook('dragonkill', $args->getArguments());
 
     //-- This is only for params not use for other purpose
-    $params = modulehook('page-dragon-tpl-params', $params);
+    $args = new GenericEvent(null, $params);
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_DRAGON_POST);
+    $params = modulehook('page-dragon-tpl-params', $args->getArguments());
     \LotgdResponse::pageAddContent(\LotgdTheme::render('page/dragon.html.twig', $params));
 
     \LotgdNavigation::addNav('common.nav.newday', 'news.php');
@@ -263,7 +277,9 @@ if ($battle)
     {
         \LotgdNavigation::addNav('battle.nav.news', 'news.php', ['textDomain' => 'navigation_app']);
 
-        $result = modulehook('dragondeath', []);
+        $args = new GenericEvent();
+        \LotgdEventDispatcher::dispatch($args, Events::PAGE_DRAGON_DEATH);
+        $result = modulehook('dragondeath', $args->getArguments());
         $lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result);
 
         battleshowresults($lotgdBattleContent);

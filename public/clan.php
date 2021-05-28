@@ -5,13 +5,17 @@
 // mail ready
 
 use Lotgd\Core\Event\Clan;
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
 require_once 'lib/systemmail.php';
 
 // Don't hook on to this text for your standard modules please, use "clan" instead.
 // This hook is specifically to allow modules that do other clans to create ambience.
-$result = modulehook('clan-text-domain', ['textDomain' => 'page_clan', 'textDomainNavigation' => 'navigation_clan']);
+$args = new GenericEvent(null, ['textDomain' => 'page_clan', 'textDomainNavigation' => 'navigation_clan']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_CLAN_PRE);
+$result = modulehook('clan-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -141,7 +145,9 @@ elseif ('withdraw' == $op)
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-clan-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_CLAN_POST);
+$params = modulehook('page-clan-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(LotgdTheme::render('page/clan.html.twig', $params));
 
 //-- Finalize page

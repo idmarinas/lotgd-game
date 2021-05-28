@@ -7,13 +7,18 @@
 // New Hall of Fame features by anpera
 // http://www.anpera.net/forum/viewforum.php?f=27
 
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 
 checkday();
 
 // Don't hook on to this text for your standard modules please, use "hof" instead.
 // This hook is specifically to allow modules that do other hofs to create ambience.
-$result = modulehook('hof-text-domain', ['textDomain' => 'page_hof', 'textDomainNavigation' => 'navigation_hof']);
+$args = new GenericEvent(null, ['textDomain' => 'page_hof', 'textDomainNavigation' => 'navigation_hof']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_HOF_PRE);
+$result = modulehook('hof-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -53,6 +58,7 @@ $order = ('worst' == $subop) ? 'ASC' : 'DESC';
 
 \LotgdNavigation::addHeader('category.other');
 
+\LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_HOF_ADD);
 modulehook('hof-add', []);
 
 $repository = \Doctrine::getRepository('LotgdCore:Accounts');
@@ -323,6 +329,8 @@ $params['footerTitle'] = [
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_HOF_POST);
 $params = modulehook('page-hof-tpl-params', $params);
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/hof.html.twig', $params));
 
