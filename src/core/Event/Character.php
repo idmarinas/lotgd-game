@@ -53,6 +53,9 @@ class Character extends Event
     // Character restore backup. Old: character-restore
     public const BACKUP_RESTORE = 'lotgd.character.backup.restore';
 
+    // Character races names. Old: racenames
+    public const RACE_NAMES = 'lotgd.character.race.names';
+
     private $data;
 
     public function __construct(array $data = [])
