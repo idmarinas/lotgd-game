@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Form\Type;
 
+use Lotgd\Core\Event\Character;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,7 +23,9 @@ class RaceType extends ChoiceType
     {
         parent::configureOptions($resolver);
 
-        $races = modulehook('racenames');
+        $args = new Character();
+        \LotgdEventDispatcher::dispatch($args, Character::RACE_NAMES);
+        $races = modulehook('racenames', $args->getData());
         $races = \array_flip($races);
         $races = [
             \LotgdTranslator::t('character.racename', [], RACE_UNKNOWN) => RACE_UNKNOWN,
