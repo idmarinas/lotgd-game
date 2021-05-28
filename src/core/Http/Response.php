@@ -18,7 +18,6 @@ use Laminas\View\Helper\HeadTitle;
 use Lotgd\Core\Event\EveryRequest;
 use Lotgd\Core\Kernel;
 use Lotgd\Core\Template\Params;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -27,12 +26,13 @@ use Twig\Environment;
 class Response extends HttpResponse
 {
     protected $translator;
+    /** @var Lotgd\Core\Doctrine\ORM\EntityManager */
     protected $doctrine;
     protected $headTitle;
     protected $template;
     protected $request;
     protected $params;
-    /** @var EventDispatcher */
+    /** @var Symfony\Component\EventDispatcher\EventDispatcher */
     private $eventDispatcher;
     private $kernel;
 
