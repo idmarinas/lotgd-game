@@ -29,4 +29,9 @@ class Events
     public const PAYMENT_DONATION_SUCCESS = 'lotgd.payment.donation.success';
     public const PAYMENT_DONATION_ERROR = 'lotgd.payment.donation.error';
     public const PAYMENT_DONATION_ADJUSTMENT = 'lotgd.payment.donation.adjustment';
+
+    /**
+     * Special events
+     */
+    public const EVENTS_COLLECT = 'lotgd.events.collect';
 }
