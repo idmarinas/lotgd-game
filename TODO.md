@@ -3,6 +3,7 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # A tener encuenta desde la versión 5.0.0
+
 -   El antiguo sistema de módulos está obsoleto desde la versión **5.0.0**
     -   Los módulos antiguos seguiran funcionando pero estan obsoletos.
     -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
@@ -13,6 +14,8 @@
 
 -   Agregar los eventos del event dispatcher en los modulehook que no tengan sustituto.
     -   Con este cambio, será mas fácil migrar algunos módulos a un sistema Bundle.
+-   Crear service para la funcion `gamelog` y también para otras de registro de eventos.
+    -   `lib/gamelog.php`
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 
