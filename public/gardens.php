@@ -62,8 +62,9 @@ if (! $skipgardendesc)
 }
 
 \LotgdNavigation::villageNav();
-\LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_GARDEN);
-modulehook('gardens', []);
+$args = new GenericEvent();
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_GARDEN);
+modulehook('gardens', $args->getArguments());
 
 //-- This is only for params not use for other purpose
 $args = new GenericEvent(null, $params);

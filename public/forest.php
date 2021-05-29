@@ -438,8 +438,9 @@ if ('' == $op)
         }
     }
 
-    \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_FOREST);
-    modulehook('forest', []);
+    $args = new GenericEvent();
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST);
+    modulehook('forest', $args->getArguments());
 }
 
 //-- Restore text domain for navigation

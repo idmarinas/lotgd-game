@@ -250,7 +250,9 @@ $params = modulehook('page-inn-tpl-params', $args->getArguments());
 
 if ('default' == $params['tpl'])
 {
-    modulehook('inn', []);
+    $args = new GenericEvent();
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_INN);
+    modulehook('inn', $args->getArguments());
 
     module_display_events('inn', 'inn.php');
 }

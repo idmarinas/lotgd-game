@@ -58,8 +58,9 @@ $order = ('worst' == $subop) ? 'ASC' : 'DESC';
 
 \LotgdNavigation::addHeader('category.other');
 
-\LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_HOF_ADD);
-modulehook('hof-add', []);
+$args = new GenericEvent();
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_HOF_ADD);
+modulehook('hof-add', $args->getArguments());
 
 $repository = \Doctrine::getRepository('LotgdCore:Accounts');
 $query = $repository->createQueryBuilder('u');
