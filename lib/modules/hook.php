@@ -11,6 +11,9 @@
  * @return array The args modified by the event handlers
  */
 $currenthook = '';
+/**
+ * @deprecated 4.4.0 Remove in future version.
+ */
 function modulehook($hookname, $args = false, $allowinactive = false, $only = false)
 {
     global $navsection, $mostrecentmodule;
@@ -19,7 +22,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
     global $currenthook;
 
     \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 4.4.0; and delete in version 7.0.0',
+        'Usage of %s is obsolete since 4.4.0; and delete in future version.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
@@ -205,11 +208,13 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 
 /**
  * Delete hooks of module.
+ *
+ * @deprecated 4.4.0 Remove in future version.
  */
 function module_wipehooks(string $module)
 {
     \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 4.4.0; and delete in version 7.0.0',
+        'Usage of %s is obsolete since 4.4.0; and delete in future version.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
@@ -258,12 +263,19 @@ function module_addeventhook($type, $chance)
     \Doctrine::flush();
 }
 
+/**
+ * @deprecated 4.4.0 Remove in future version
+ *
+ * @param [type] $hookname
+ * @param bool $functioncall
+ * @return void
+ */
 function module_drophook($hookname, $functioncall = false)
 {
     global $mostrecentmodule;
 
     \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 4.4.0; and delete in version 7.0.0',
+        'Usage of %s is obsolete since 4.4.0; and delete in future version.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
@@ -291,11 +303,13 @@ function module_drophook($hookname, $functioncall = false)
  * @param string $hookname     The hook to receive a notification for
  * @param string $functioncall The function that should be called, if not specified, use {modulename}_dohook() as the function
  * @param string $whenactive   an expression that should be evaluated before triggering the event, if not specified, none
+ *
+ * @deprecated 4.4.0 Remove in future version
  */
 function module_addhook($hookname, $functioncall = false, $whenactive = false)
 {
     \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 4.4.0; and delete in version 7.0.0',
+        'Usage of %s is obsolete since 4.4.0; and delete in future version.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
@@ -311,13 +325,15 @@ function module_addhook($hookname, $functioncall = false, $whenactive = false)
  * @param int    $priority     The priority for this hooking -- lower numbers execute first.  < 50 means earlier-than-normal execution, > 50 means later than normal execution.  Priority only affects execution order compared to other events registered on the same hook, all events on a given hook will execute before the game resumes execution.
  * @param string $functioncall The function that should be called, if not specified, use {modulename}_dohook() as the function
  * @param string $whenactive   an expression that should be evaluated before triggering the event, if not specified, none
+ *
+ * @deprecated 4.4.0 Remove in future version
  */
 function module_addhook_priority($hookname, $priority = 50, $functioncall = false, $whenactive = false)
 {
     global $mostrecentmodule;
 
     \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 4.4.0; and delete in version 7.0.0',
+        'Usage of %s is obsolete since 4.4.0; and delete in future version.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
