@@ -118,9 +118,7 @@ trait Faq
      */
     private function faqToc(): array
     {
-        \LotgdEventDispatcher::dispatch(new Core(), Core::PETITION_FAQ_TOC);
-
-        return modulehook('faq-toc', [
+        $args = new Core([
             [
                 'onclick' => 'JaxonLotgd.Ajax.Core.Petition.primer()',
                 'link'    => [
@@ -154,5 +152,8 @@ trait Faq
                 ],
             ],
         ]);
+        \LotgdEventDispatcher::dispatch($args, Core::PETITION_FAQ_TOC);
+
+        return modulehook('faq-toc', $args->getData());
     }
 }
