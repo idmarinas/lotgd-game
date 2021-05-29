@@ -14,6 +14,8 @@
 namespace Lotgd\Core\Navigation;
 
 use Laminas\Stdlib\ArrayUtils;
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Class for construct a navigation menu in LotGD.
@@ -316,7 +318,9 @@ class Navigation
         $extra = (false === \strpos($extra, '?') ? '?' : '');
         $extra = ('?' == $extra ? '' : $extra);
 
-        $args = modulehook('villagenav');
+        $args = new GenericEvent();
+        \LotgdEventDispatcher::dispatch($args, Events::PAGE_NAVIGATION_VILLAGE);
+        $args = modulehook('villagenav', $args->getArguments());
 
         if ($args['handled'] ?? false)
         {

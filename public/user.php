@@ -2,6 +2,10 @@
 
 //addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/showform.php';
 require_once 'lib/datetime.php';
@@ -201,7 +205,9 @@ elseif ('save' == $op)
 elseif ('savemodule' == $op)
 {
     $post = \LotgdRequest::getPostAll();
-    $post = modulehook('validateprefs', $post, true, $module);
+    $args = new GenericEvent(null, $post);
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_USER_VALIDATE_PREFS);
+    $post = modulehook('validateprefs', $args->getArguments(), true, $module);
 
     if (isset($post['validation_error']) && $post['validation_error'])
     {
