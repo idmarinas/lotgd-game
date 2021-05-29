@@ -3,6 +3,10 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
@@ -59,7 +63,9 @@ $params['referrers'] = $query->select('u.refererawarded')
     ->getResult()
 ;
 
-$params = modulehook('page-referral-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_REFERRAL_POST);
+$params = modulehook('page-referral-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/referral.html.twig', $params));
 
 //-- Finalize page

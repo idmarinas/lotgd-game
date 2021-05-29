@@ -4,6 +4,9 @@
 // mail ready
 // translator ready
 
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 if (isset($_POST['template']))
 {
     $skin = $_POST['template'];
@@ -187,7 +190,9 @@ else
                 $module = $x[0];
                 $key = $x[1];
 
-                modulehook('notifyuserprefchange', ['name' => $key, 'new' => $val]);
+                $args = new GenericEvent(null, ['name' => $key, 'new' => $val]);
+                \LotgdEventDispatcher::dispatch($args, Events::PAGE_PREFS_CHANGE);
+                modulehook('notifyuserprefchange', $args->getArguments());
 
                 set_module_pref($key, $val, $module);
 
@@ -426,7 +431,9 @@ else
             // checkuserpref  (requested by cortalUX)
             if ($ischeck)
             {
-                $args = modulehook('checkuserpref', ['name' => $key, 'pref' => $x[0], 'default' => $x[1]], false, $module);
+                $args = new GenericEvent(null, ['name' => $key, 'pref' => $x[0], 'default' => $x[1]]);
+                \LotgdEventDispatcher::dispatch($args, Events::PAGE_PREFS_CHECK);
+                $args = modulehook('checkuserpref', $args->getArguments(), false, $module);
 
                 if (isset($args['allow']) && ! $args['allow'])
                 {
@@ -512,7 +519,9 @@ else
     $params['form'] = lotgd_showform($form, $prefs, false, false, false);
 }
 
-$params = modulehook('page-prefs-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_PREFS_POST);
+$params = modulehook('page-prefs-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/prefs.html.twig', $params));
 
 //-- Finalize page

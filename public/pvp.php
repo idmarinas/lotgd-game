@@ -3,6 +3,10 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/fightnav.php';
 require_once 'lib/pvpwarning.php';
@@ -201,7 +205,9 @@ if ($battle)
 $params['battle'] = $battle;
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-pvp-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_PVP_POST);
+$params = modulehook('page-pvp-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/pvp.html.twig', $params));
 
 //-- Finalize page
