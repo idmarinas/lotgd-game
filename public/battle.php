@@ -3,6 +3,10 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/substitute.php';
 require_once 'lib/battle/functions.php';
@@ -142,7 +146,9 @@ $defeat = false;
 
 if ($enemycounter > 0)
 {
-    modulehook('battle-turn-start', $enemies);
+    $args = new GenericEvent(null, $enemies);
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_BATTLE_TURN_START);
+    modulehook('battle-turn-start', $args->getArguments());
     $lotgdBattleContent['enemies'] = $enemies;
 
     $data = prepare_data_battlebars($enemies);
@@ -243,6 +249,7 @@ if ('newtarget' != $op)
     do
     {
         //we need to restore and calculate here to reflect changes that happen throughout the course of multiple rounds.
+        \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_BATTLE_ROUND_START_BUFF_PRE);
         modulehook('startofround-prebuffs'); //-- For Stamina System
         restore_buff_fields();
         calculate_buff_fields();
@@ -555,7 +562,9 @@ if ('newtarget' != $op)
 
             if ($surprised || 'run' == $op || 'fight' == $op || 'newtarget' == $op)
             {
-                $badguy = modulehook('endofround', $badguy);
+                $args = new GenericEvent(null, $badguy);
+                \LotgdEventDispatcher::dispatch($args, Events::PAGE_BATTLE_ROUND_END);
+                $badguy = modulehook('endofround', $args->getArguments());
             } //-- For Stamina System
         }
         expire_buffs();
@@ -743,7 +752,9 @@ else
 
 $newenemies = autosettarget($newenemies);
 
-$badguy = modulehook('endofpage', $badguy);
+$args = new GenericEvent(null, $badguy);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_BATTLE_PAGE_END);
+$badguy = modulehook('endofpage', $args->getArguments());
 
 if ($session['user']['hitpoints'] <= 0)
 {
@@ -793,30 +804,33 @@ if ($victory || $defeat)
         }
     }
 
-    if (is_array($newenemies))
-    {
-        foreach ($newenemies as $index => $badguy)
-        {
-            //-- Not use this hooks, better use battle-victory-end and battle-defeat-end
-            //-- This other hooks have an array with all enemies and can add a extra information
+    //-- Use battle-victory-end and battle-defeat-end
+    // if (is_array($newenemies))
+    // {
+    //     foreach ($newenemies as $index => $badguy)
+    //     {
+    //         //-- Not use this hooks, better use battle-victory-end and battle-defeat-end
+    //         //-- This other hooks have an array with all enemies and can add a extra information
 
-            //-- This hooks triger for each badguy and maybe saturate server
-            //-- Legacy support
-            if ($victory)
-            {
-                $badguy = modulehook('battle-victory', $badguy);
-            }
+    //         //-- This hooks triger for each badguy and maybe saturate server
+    //         //-- Legacy support
+    //         if ($victory)
+    //         {
+    //             $badguy = modulehook('battle-victory', $badguy);
+    //         }
 
-            if ($defeat)
-            {
-                $badguy = modulehook('battle-defeat', $badguy);
-            }
-        }
-    }
+    //         if ($defeat)
+    //         {
+    //             $badguy = modulehook('battle-defeat', $badguy);
+    //         }
+    //     }
+    // }
 
     if ($victory)
     {
-        $result = modulehook('battle-victory-end', ['enemies' => $newenemies, 'options' => $options, 'messages' => []]);
+        $args = new GenericEvent(null, ['enemies' => $newenemies, 'options' => $options, 'messages' => []]);
+        \LotgdEventDispatcher::dispatch($args, Events::PAGE_BATTLE_END_VICTORY);
+        $result = modulehook('battle-victory-end', $args->getArguments());
         $newenemies = $result['enemies'];
 
         $lotgdBattleContent['battleend'] = $lotgdBattleContent['battleend'] + $result['messages'];
@@ -828,7 +842,9 @@ if ($victory || $defeat)
     }
     elseif ($defeat)
     {
-        $result = modulehook('battle-defeat-end', ['enemies' => $newenemies, 'options' => $options, 'messages' => []]);
+        $args = new GenericEvent(null, ['enemies' => $newenemies, 'options' => $options, 'messages' => []]);
+        \LotgdEventDispatcher::dispatch($args, Events::PAGE_BATTLE_END_DEFEAT);
+        $result = modulehook('battle-defeat-end', $args->getArguments());
         $newenemies = $result['enemies'];
 
         $lotgdBattleContent['battleend'] = $lotgdBattleContent['battleend'] + $result['messages'];
@@ -842,7 +858,9 @@ if ($victory || $defeat)
 
 if ($enemycounter > 0)
 {
-    modulehook('battle-turn-end', $newenemies);
+    $args = new GenericEvent(null, $newenemies);
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_BATTLE_TURN_END);
+    modulehook('battle-turn-end', $args->getArguments());
     $lotgdBattleContent['enemies'] = $newenemies;
 
     $data = prepare_data_battlebars($newenemies);

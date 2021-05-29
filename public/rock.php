@@ -1,12 +1,17 @@
 <?php
 
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 
 checkday();
 
 // Don't hook on to this text for your standard modules please, use "rock" instead.
 // This hook is specifically to allow modules that do other rocks to create ambience.
-$result = modulehook('rock-text-domain', ['textDomain' => 'page_rock', 'textDomainNavigation' => 'navigation_rock']);
+$args = new GenericEvent(null, ['textDomain' => 'page_rock', 'textDomainNavigation' => 'navigation_rock']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_ROCK_PRE);
+$result = modulehook('rock-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -36,7 +41,9 @@ if ($session['user']['dragonkills'] > 0 || $session['user']['superuser'] & SU_ED
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-rock-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_ROCK_POST);
+$params = modulehook('page-rock-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/rock.html.twig', $params));
 
 //-- Finalize page

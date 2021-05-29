@@ -3,13 +3,19 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 
 checkday();
 
 // Don't hook on to this text for your standard modules please, use "weapon" instead.
 // This hook is specifically to allow modules that do other weapons to create ambience.
-$result = modulehook('weapon-text-domain', ['textDomain' => 'page_weapon', 'textDomainNavigation' => 'navigation_weapon']);
+$args = new GenericEvent(null, ['textDomain' => 'page_weapon', 'textDomainNavigation' => 'navigation_weapon']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_WEAPONS_PRE);
+$result = modulehook('weapon-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -73,7 +79,9 @@ elseif ('buy' == $op)
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-weapon-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_WEAPONS_POST);
+$params = modulehook('page-weapon-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/weapon.html.twig', $params));
 
 //-- Finalize page

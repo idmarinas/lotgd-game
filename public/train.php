@@ -3,6 +3,10 @@
 //addnews ready
 // mail ready
 // translator ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/systemmail.php';
 require_once 'lib/increment_specialty.php';
@@ -14,7 +18,9 @@ require_once 'lib/forestoutcomes.php';
 
 // Don't hook on to this text for your standard modules please, use "train" instead.
 // This hook is specifically to allow modules that do other trains to create ambience.
-$result = modulehook('train-text-domain', ['textDomain' => 'page_train', 'textDomainNavigation' => 'navigation_train']);
+$args = new GenericEvent(null, ['textDomain' => 'page_train', 'textDomainNavigation' => 'navigation_train']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_TRAIN_PRE);
+$result = modulehook('train-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -182,6 +188,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
             $session['user']['hitpoints'] = $session['user']['maxhitpoints'];
         }
 
+        \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_TRAIN_AUTOCHALLENGE);
         modulehook('master-autochallenge');
 
         if (getsetting('displaymasternews', 1))
@@ -322,7 +329,9 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
                 }
             }
 
-            $result = modulehook('training-victory', ['badguy' => $badguy, 'messages' => []]);
+            $args = new GenericEvent(null, ['badguy' => $badguy, 'messages' => []]);
+            \LotgdEventDispatcher::dispatch($args, Events::PAGE_TRAIN_TRANING_VICTORY);
+            $result = modulehook('training-victory', $args->getArguments());
 
             $lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result['messages']);
 
@@ -361,7 +370,8 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
 
             $lotgdBattleContent['battleend'][] = ['battle.end.defeat.end', ['masterName' => $badguy['creaturename']], $textDomain];
 
-            $result = modulehook('training-defeat', ['badguy' => $badguy, 'messages' => []]);
+            $args = new GenericEvent(null, ['badguy' => $badguy, 'messages' => []]);
+            $result = modulehook('training-defeat', $args->getArguments());
 
             $lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result['messages']);
 
@@ -409,7 +419,9 @@ $params['battle'] = $battle;
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-train-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_TRAIN_POST);
+$params = modulehook('page-train-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/train.html.twig', $params));
 
 //-- Finalize page

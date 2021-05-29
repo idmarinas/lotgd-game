@@ -1,5 +1,8 @@
 <?php
 
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 
 checkday();
@@ -12,7 +15,9 @@ if ($session['user']['alive'])
 
 // Don't hook on to this text for your standard modules please, use "shades" instead.
 // This hook is specifically to allow modules that do other shades to create ambience.
-$result = modulehook('shades-text-domain', ['textDomain' => 'page_shades', 'textDomainNavigation' => 'navigation_shades']);
+$args = new GenericEvent(null, ['textDomain' => 'page_shades', 'textDomainNavigation' => 'navigation_shades']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_SHADES_PRE);
+$result = modulehook('shades-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -54,7 +59,9 @@ $params = [
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-shades-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_SHADES_POST);
+$params = modulehook('page-shades-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/shades.html.twig', $params));
 
 //-- Finalize page

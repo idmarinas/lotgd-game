@@ -3,6 +3,10 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/events.php';
 require_once 'lib/experience.php';
@@ -27,11 +31,15 @@ $vname = getsetting('villagename', LOCATION_FIELDS);
 $iname = getsetting('innname', LOCATION_INN);
 $valid_loc = [];
 $valid_loc[$vname] = 'village';
-$valid_loc = modulehook('validlocation', $valid_loc);
+$args = new GenericEvent(null, $valid_loc);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_VILLAGE_LOCATION);
+$valid_loc = modulehook('validlocation', $args->getArguments());
 
 // Don't hook on to this text for your standard modules please, use "village" instead.
 // This hook is specifically to allow modules that do other villages to create ambience.
-$result = modulehook('village-text-domain', ['textDomain' => 'page_village', 'textDomainNavigation' => 'navigation_village']);
+$args = new GenericEvent(null, ['textDomain' => 'page_village', 'textDomainNavigation' => 'navigation_village']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_VILLAGE_PRE);
+$result = modulehook('village-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -183,6 +191,7 @@ if (! file_exists('public/lodge.php'))
 \LotgdNavigation::superuser();
 
 //special hook for all villages... saves queries...
+\LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_VILLAGE);
 modulehook('village');
 
 $params['showVillageDesc'] = ! $skipvillagedesc; //-- Show or not village description
@@ -191,7 +200,9 @@ $params['blockCommentArea'] = false; //-- Show or not comment area
 $params['commentarySection'] = 'village'; //-- Commentary section
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-village-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_VILLAGE_POST);
+$params = modulehook('page-village-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/village.html.twig', $params));
 
 //-- Restore text domain for navigation

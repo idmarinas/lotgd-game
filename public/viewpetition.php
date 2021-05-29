@@ -4,6 +4,9 @@
 // addnews ready
 // mail ready
 
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 
 check_su_access(SU_EDIT_PETITIONS);
@@ -19,7 +22,9 @@ $statuses = [
     2 => 'statuses.02',
 ];
 
-$statuses = modulehook('petition-status', $statuses);
+$args = new GenericEvent(null, $statuses);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_PETITION_STATUS);
+$statuses = modulehook('petition-status', $args->getArguments());
 reset($statuses);
 
 $op = (string) \LotgdRequest::getQuery('op');

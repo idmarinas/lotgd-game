@@ -3,6 +3,10 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 \define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
@@ -77,7 +81,9 @@ if ('forgotval' == $op)
 
     $params['account'] = $account;
 
-    $params = modulehook('page-create-forgotval-tpl-params', $params);
+    $args = new GenericEvent(null, $params);
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_CREATE_FORGOTVAL);
+    $params = modulehook('page-create-forgotval-tpl-params', $args->getArguments());
     $tpl = \LotgdTheme::load('page/_blocks/_create.html.twig');
     \LotgdResponse::pageAddContent($tpl->renderBlock('create_forgot_val', $params));
 
@@ -154,7 +160,9 @@ elseif ('val' == $op)
     savesetting('newestplayer', $account->getAcctid());
     savesetting('newestplayername', $account->getCharacter()->getName());
 
-    $params = modulehook('page-create-val-tpl-params', $params);
+    $args = new GenericEvent(null, $params);
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_CREATE_VAL);
+    $params = modulehook('page-create-val-tpl-params', $args->getArguments());
     $tpl = \LotgdTheme::load('page/_blocks/_create.html.twig');
     \LotgdResponse::pageAddContent($tpl->renderBlock('create_email_val', $params));
 
@@ -207,7 +215,9 @@ elseif ('forgot' == $op)
         return redirect('create.php?op=forgot');
     }
 
-    $params = modulehook('page-create-forgot-tpl-params', $params);
+    $args = new GenericEvent(null, $params);
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_CREATE_FORGOT);
+    $params = modulehook('page-create-forgot-tpl-params', $args->getArguments());
     $tpl = \LotgdTheme::load('page/_blocks/_create.html.twig');
     \LotgdResponse::pageAddContent($tpl->renderBlock('create_forgot', $params));
 
@@ -280,7 +290,9 @@ elseif ('create' == $op)
         $blockaccount = true;
     }
 
-    $args = modulehook('check-create', \LotgdRequest::getPostAll());
+    $args = new GenericEvent(null, \LotgdRequest::getPostAll());
+    \LotgdEventDispatcher::dispatch($args, Events::PAGE_CREATE_CHECK_CREATION);
+    $args = modulehook('check-create', $args->getArguments());
 
     if (isset($args['blockaccount']) && $args['blockaccount'])
     {
@@ -378,7 +390,9 @@ elseif ('create' == $op)
 
             $args           = \LotgdRequest::getPostAll();
             $args['acctid'] = $accountEntity->getAcctid();
-            modulehook('process-create', $args);
+            $args = new GenericEvent(null, $args);
+            \LotgdEventDispatcher::dispatch($args, Events::PAGE_CREATE_PROCESS_CREATION);
+            modulehook('process-create', $args->getArguments());
 
             if ('' != $emailverification)
             {
@@ -435,12 +449,16 @@ if ($refer)
  *      'tpl-tame' => ['key' => 'value']
  * ].
  */
-$result              = modulehook('create-form', ['templates' => []]);
+$args = new GenericEvent(null, ['templates' => []]);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_CREATE_FORM);
+$result              = modulehook('create-form', $args->getArguments());
 $params['templates'] = $result['templates'];
 
 \Doctrine::flush(); //-- Persist objects
 
-$params = modulehook('page-create-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_CREATE_POST);
+$params = modulehook('page-create-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/create.html.twig', $params));
 
 //-- Finalize page

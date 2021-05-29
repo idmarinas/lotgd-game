@@ -3,12 +3,18 @@
 // translator ready
 // addnews ready
 // mail ready
+
+use Lotgd\Core\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 require_once 'common.php';
 require_once 'lib/buffs.php';
 
 // Don't hook on to this text for your standard modules please, use "stable" instead.
 // This hook is specifically to allow modules that do other stables to create ambience.
-$result = modulehook('stables-text-domain', ['textDomain' => 'page_stables', 'textDomainNavigation' => 'navigation_stables']);
+$args = new GenericEvent(null, ['textDomain' => 'page_stables', 'textDomainNavigation' => 'navigation_stables']);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_STABLES_PRE);
+$result = modulehook('stables-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -133,7 +139,10 @@ if ('confirmbuy' == $op)
             $repaygems = round($playermount['mountcostgems'] * 2 / 3, 0);
 
             // Recalculate the special name as well.
-            modulehook('stable-mount', []);
+            $args = new GenericEvent();
+            \LotgdEventDispatcher::dispatch($args, Events::PAGE_STABLES_MOUNT);
+            modulehook('stable-mount', $args->getArguments());
+            \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_STABLES_BOUGHT);
             modulehook('boughtmount');
 
             $grubprice = round($session['user']['level'] * $playermount['mountfeedcost'], 0);
@@ -186,6 +195,7 @@ elseif ('confirmsell' == $op)
     debuglog("gained $repaygold gold and $repaygems gems selling their mount, a $debugmount");
     strip_buff('mount');
     $session['user']['hashorse'] = 0;
+    \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_STABLES_SOLD);
     modulehook('soldmount');
 
     $params['repayGold'] = $repaygold;
@@ -250,7 +260,9 @@ if (0 == $confirm)
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
-$params = modulehook('page-stables-tpl-params', $params);
+$args = new GenericEvent(null, $params);
+\LotgdEventDispatcher::dispatch($args, Events::PAGE_STABLES_POST);
+$params = modulehook('page-stables-tpl-params', $args->getArguments());
 \LotgdResponse::pageAddContent(\LotgdTheme::render('page/stables.html.twig', $params));
 
 //-- Finalize page
