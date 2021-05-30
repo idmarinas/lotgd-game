@@ -126,7 +126,7 @@ if ('confirmbuy' == $op)
             $session['user']['gold'] += $goldcost;
             $gemcost = $repaygems - $mount['mountcostgems'];
             $session['user']['gems'] += $gemcost;
-            debuglog(($goldcost <= 0 ? 'spent ' : 'gained ').abs($goldcost).' gold and '.($gemcost <= 0 ? 'spent ' : 'gained ').abs($gemcost)." gems trading $debugmount1 for a new mount, a $debugmount2");
+            \LotgdLog::debug(($goldcost <= 0 ? 'spent ' : 'gained ').abs($goldcost).' gold and '.($gemcost <= 0 ? 'spent ' : 'gained ').abs($gemcost)." gems trading $debugmount1 for a new mount, a $debugmount2");
 
             $mount['mountbuff']['schema'] = $mount['mountbuff']['schema'] ?? 'mounts' ?: 'mounts';
 
@@ -173,7 +173,7 @@ elseif ('feed' == $op)
             $session['user']['gold'] -= $grubprice;
             $session['user']['fedmount'] = 1;
 
-            debuglog("spent $grubprice feeding their mount");
+            \LotgdLog::debug("spent $grubprice feeding their mount");
 
             apply_buff('mount', $mount['mountbuff']);
         }
@@ -192,7 +192,7 @@ elseif ('confirmsell' == $op)
     $session['user']['gold'] += $repaygold;
     $session['user']['gems'] += $repaygems;
     $debugmount = $playermount['mountname'];
-    debuglog("gained $repaygold gold and $repaygems gems selling their mount, a $debugmount");
+    \LotgdLog::debug("gained $repaygold gold and $repaygems gems selling their mount, a $debugmount");
     strip_buff('mount');
     $session['user']['hashorse'] = 0;
     \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_STABLES_SOLD);

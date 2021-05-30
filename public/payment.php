@@ -160,7 +160,7 @@ function writelog($response)
             $account->setDonation($account->getDonation() + $hookresult['points']);
             \Doctrine::persist($account);
 
-            debuglog('Received donator points for donating -- Credited Automatically', false, $acctId, 'donation', $hookresult['points'], false);
+            \LotgdLog::debug('Received donator points for donating -- Credited Automatically', false, $acctId, 'donation', $hookresult['points'], false);
 
             if (! is_array($hookresult['messages']))
             {
@@ -169,7 +169,7 @@ function writelog($response)
 
             foreach ($hookresult['messages'] as $id => $message)
             {
-                debuglog($message, false, $acctId, 'donation', 0, false);
+                \LotgdLog::debug($message, false, $acctId, 'donation', 0, false);
             }
 
             $processed = 1;

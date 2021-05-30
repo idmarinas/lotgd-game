@@ -61,7 +61,7 @@ elseif ('buy' == $op)
         {
             $params['buyIt'] = true;
 
-            debuglog(sprintf('spent "%s" gold on the "%s" weapon', ($row['value'] - $tradeinvalue), $row['weaponname']));
+            \LotgdLog::debug(sprintf('spent "%s" gold on the "%s" weapon', ($row['value'] - $tradeinvalue), $row['weaponname']));
             $session['user']['gold'] -= $row['value'];
             $session['user']['weapon'] = $row['weaponname'];
             $session['user']['gold'] += $tradeinvalue;

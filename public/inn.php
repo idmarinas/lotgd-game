@@ -117,7 +117,7 @@ switch ($op)
                         }
 
                         $session['user']['boughtroomtoday'] = 1;
-                        debuglog("spent $expense gold on an inn room");
+                        \LotgdLog::debug("spent $expense gold on an inn room");
                     }
 
                     $session['user']['location'] = $iname;

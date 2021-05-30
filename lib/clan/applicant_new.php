@@ -49,7 +49,7 @@ elseif ($form->isSubmitted() && $form->isValid())
 
         \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('section.applicant.new.form.success', $params, $textDomain));
 
-        debuglog("has started a new clan (<{$entity->getClanshort()}> {$entity->getClanname()}) for {$costGold} gold and {$costGems} gems.");
+        \LotgdLog::debug("has started a new clan (<{$entity->getClanshort()}> {$entity->getClanname()}) for {$costGold} gold and {$costGems} gems.");
 
         $params['clan_created'] = true;
     }

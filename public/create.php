@@ -112,7 +112,7 @@ elseif ('val' == $op)
         $replaceemail           = $replace_array[0]; //1==date
         $oldEmail               = $account->getEmailaddress();
 
-        debuglog('Email change request validated by link from '.$oldEmail.' to '.$replaceemail, $account->getAcctid(), $account->getAcctid(), 'Email');
+        \LotgdLog::debug('Email change request validated by link from '.$oldEmail.' to '.$replaceemail, $account->getAcctid(), $account->getAcctid(), 'Email');
 
         //-- Note: remove any forgotten password request!
         $account->setReplaceemail('')

@@ -79,7 +79,7 @@ elseif ('buy' == $op)
         $session['user']['gold'] -= $newcost;
         $session['user']['hitpoints'] += $diff;
 
-        debuglog('spent gold on healing', false, false, 'healing', $newcost);
+        \LotgdLog::debug('spent gold on healing', false, false, 'healing', $newcost);
     }
 }
 elseif ('companion' == $op)

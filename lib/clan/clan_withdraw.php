@@ -76,7 +76,7 @@ foreach ($leaders as $leader)
     systemmail($leader['acctid'], $subj, $msg);
 }
 
-debuglog($session['user']['login'].' has withdrawn from his/her clan nº. '.$session['user']['clanid']);
+\LotgdLog::debug($session['user']['login'].' has withdrawn from his/her clan nº. '.$session['user']['clanid']);
 
 $session['user']['clanid']       = 0;
 $session['user']['clanrank']     = CLAN_APPLICANT;

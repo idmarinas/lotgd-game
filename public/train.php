@@ -122,7 +122,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
         {
             /* OK, let's fix the multimaster thing */
             $session['user']['seenmaster'] = 1;
-            debuglog('Challenged master, setting seenmaster to 1');
+            \LotgdLog::debug('Challenged master, setting seenmaster to 1');
 
             if ($session['user']['experience'] >= $exprequired)
             {
@@ -249,7 +249,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
             if (1 == getsetting('multimaster', 1))
             {
                 $session['user']['seenmaster'] = 0;
-                debuglog('Defeated master, setting seenmaster to 0');
+                \LotgdLog::debug('Defeated master, setting seenmaster to 0');
             }
             $lotgdBattleContent['battleend'][] = ['battle.end.victory.end', [], $textDomain];
             $lotgdBattleContent['battleend'][] = ['battle.end.victory.level', ['level' => $session['user']['level']], $textDomain];

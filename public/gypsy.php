@@ -40,7 +40,7 @@ if ('pay' == $op)
     { // Gunnar Kreitz
         $session['user']['gold'] -= $params['cost'];
 
-        debuglog("spent {$params['cost']} gold to speak to the dead");
+        \LotgdLog::debug("spent {$params['cost']} gold to speak to the dead");
 
         return redirect('gypsy.php?op=talk');
     }

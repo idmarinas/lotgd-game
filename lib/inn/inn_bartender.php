@@ -65,7 +65,7 @@ if ('bribe' == $action)
                 $chance = $amt * 30;
                 $session['user']['gems'] -= $amt;
 
-                debuglog("spent {$amt} gems on bribing {$barkeep}");
+                \LotgdLog::debug("spent {$amt} gems on bribing {$barkeep}");
             }
         }
         else
@@ -83,7 +83,7 @@ if ('bribe' == $action)
                 $chance  = ($fact - 10) * $sfactor + 25;
                 $session['user']['gold'] -= $amt;
 
-                debuglog("spent {$amt} gold bribing {$barkeep}");
+                \LotgdLog::debug("spent {$amt} gold bribing {$barkeep}");
             }
         }
 

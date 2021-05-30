@@ -79,7 +79,7 @@ elseif ('forcechangeemail' == $op)
     $params['tpl'] = 'forcechangeemail';
     $params['email'] = $email;
 
-    debuglog('Email Change Request from '.$session['user']['emailaddress'].' to '.$email.' has been forced after the wait period', $session['user']['acctid'], $session['user']['acctid'], 'Email');
+    \LotgdLog::debug('Email Change Request from '.$session['user']['emailaddress'].' to '.$email.' has been forced after the wait period', $session['user']['acctid'], $session['user']['acctid'], 'Email');
 
     $session['user']['emailaddress'] = $replacearray[0];
     $session['user']['replaceemail'] = '';
@@ -106,7 +106,7 @@ elseif ('cancelemail' == $op)
     $params['tpl'] = 'cancelemail';
     $params['email'] = $email;
 
-    debuglog('Email Change Request from '.$session['user']['emailaddress'].' to '.$email.' has been cancelled', $session['user']['acctid'], $session['user']['acctid'], 'Email');
+    \LotgdLog::debug('Email Change Request from '.$session['user']['emailaddress'].' to '.$email.' has been cancelled', $session['user']['acctid'], $session['user']['acctid'], 'Email');
 
     $session['user']['replaceemail'] = '';
     $session['user']['emailvalidation'] = '';
@@ -270,7 +270,7 @@ else
                         $session['user']['replaceemail'] = $email.'|'.date('Y-m-d H:i:s');
                         $session['user']['emailvalidation'] = $emailverification;
 
-                        debuglog('Email Change requested from '.$session['user']['emailaddress'].' to '.$email, $session['user']['acctid'], $session['user']['acctid'], 'Email');
+                        \LotgdLog::debug('Email Change requested from '.$session['user']['emailaddress'].' to '.$email, $session['user']['acctid'], $session['user']['acctid'], 'Email');
 
                         \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.validate', [ 'target' => getsetting('validationtarget', 0) ], $textDomain));
 
@@ -292,7 +292,7 @@ else
                     {
                         \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.form.email.changed', [], $textDomain));
 
-                        debuglog('Email changed from '.$session['user']['emailaddress'].' to '.$email, $session['user']['acctid'], $session['user']['acctid'], 'Email');
+                        \LotgdLog::debug('Email changed from '.$session['user']['emailaddress'].' to '.$email, $session['user']['acctid'], $session['user']['acctid'], 'Email');
 
                         $session['user']['emailaddress'] = $email;
                     }

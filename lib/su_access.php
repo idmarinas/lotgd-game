@@ -68,7 +68,7 @@ function check_su_access($level)
 
     addnews('`&%s was smitten down for attempting to defile the gods (they tried to hack superuser pages).', $session['user']['name']);
 
-    debuglog("Lost {$session['user']['gold']} and ".($session['user']['experience'] * 0.25).' experience trying to hack superuser pages.');
+    \LotgdLog::debug("Lost {$session['user']['gold']} and ".($session['user']['experience'] * 0.25).' experience trying to hack superuser pages.');
 
     $session['user']['hitpoints']   = 0;
     $session['user']['alive']       = 0;

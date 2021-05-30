@@ -158,8 +158,8 @@ function pvpvictory($badguy, $killedloc)
     $lostexp = \round($badguy['creatureexp'] * getsetting('pvpdeflose', 5) / 100, 0);
 
     //player wins gold and exp from badguy
-    debuglog("started the fight and defeated {$badguy['creaturename']} in {$killedloc} (earned {$winamount} of {$badguy['creaturegold']} gold and {$wonexp} of {$lostexp} exp)", false, $session['user']['acctid']);
-    debuglog("was victim and has been defeated by {$session['user']['name']} in {$killedloc} (lost {$badguy['creaturegold']} gold and {$lostexp} exp, actor tooks {$winamount} gold and {$wonexp} exp)", false, $badguy['acctid']);
+    \LotgdLog::debug("started the fight and defeated {$badguy['creaturename']} in {$killedloc} (earned {$winamount} of {$badguy['creaturegold']} gold and {$wonexp} of {$lostexp} exp)", false, $session['user']['acctid']);
+    \LotgdLog::debug("was victim and has been defeated by {$session['user']['name']} in {$killedloc} (lost {$badguy['creaturegold']} gold and {$lostexp} exp, actor tooks {$winamount} gold and {$wonexp} exp)", false, $badguy['acctid']);
 
     $args = new Character(['pvpmessageadd' => '', 'handled' => false, 'badguy' => $badguy]);
     \LotgdEventDispatcher::dispatch($args, Character::PVP_WIN);
@@ -304,8 +304,8 @@ function pvpdefeat($badguy, $killedloc)
 
     $session['user']['alive'] = false;
 
-    debuglog("started the fight and has been defeated by {$badguy['creaturename']} in {$killedloc} (lost {$session['user']['gold']} gold and {$lostexp} exp, victim tooks {$winamount} gold and {$wonexp} exp)", false, $session['user']['acctid']);
-    debuglog("was the victim and won aginst {$session['user']['name']} in {$killedloc} (earned {$winamount} gold and {$wonexp} exp)", false, $badguy['acctid']);
+    \LotgdLog::debug("started the fight and has been defeated by {$badguy['creaturename']} in {$killedloc} (lost {$session['user']['gold']} gold and {$lostexp} exp, victim tooks {$winamount} gold and {$wonexp} exp)", false, $session['user']['acctid']);
+    \LotgdLog::debug("was the victim and won aginst {$session['user']['name']} in {$killedloc} (earned {$winamount} gold and {$wonexp} exp)", false, $badguy['acctid']);
 
     $session['user']['gold']           = 0;
     $session['user']['hitpoints']      = 0;

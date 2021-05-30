@@ -202,7 +202,7 @@ elseif ('prologue' == $op)
         'creatureName' => $badguy['creaturename']
     ], $textDomain);
 
-    debuglog("slew the dragon and starts with {$session['user']['gold']} gold and {$session['user']['gems']} gems");
+    \LotgdLog::debug("slew the dragon and starts with {$session['user']['gold']} gold and {$session['user']['gems']} gems");
 
     // Moved this hear to make some things easier.
     $args = new GenericEvent();

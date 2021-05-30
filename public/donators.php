@@ -77,7 +77,7 @@ if ('save' == $op)
 
         foreach ($result['messages'] as $messageid => $message)
         {
-            debuglog($message, false, $id, 'donation', 0, false);
+            \LotgdLog::debug($message, false, $id, 'donation', 0, false);
         }
     }
 
@@ -107,13 +107,13 @@ if ('save' == $op)
         \Doctrine::persist($paylog);
         \Doctrine::flush();
 
-        debuglog("Received donator points for donating -- Credited manually [$reason]", false, $id, 'donation', $points, false);
+        \LotgdLog::debug("Received donator points for donating -- Credited manually [$reason]", false, $id, 'donation', $points, false);
 
         return redirect('paylog.php');
     }
     else
     {
-        debuglog("Received donator points -- Manually assigned, not based on a known dollar donation [$reason]", false, $id, 'donation', $amt, false);
+        \LotgdLog::debug("Received donator points -- Manually assigned, not based on a known dollar donation [$reason]", false, $id, 'donation', $amt, false);
     }
 
     $subj = ['mail.donation.subject', ['points' => $points], $textDomain];

@@ -91,7 +91,7 @@ elseif ('heal' == $op)
         $session['user']['companions'] = $companions;
         $session['user']['gold'] -= $costToHeal;
 
-        debuglog("spent {$costToHeal} gold on healing a companion", false, false, 'healcompanion', $costToHeal);
+        \LotgdLog::debug("spent {$costToHeal} gold on healing a companion", false, false, 'healcompanion', $costToHeal);
     }
 
     $params['companionName'] = $companions[$name]['name'];
@@ -129,7 +129,7 @@ elseif ('buy' == $op)
             $session['user']['gold'] -= $row['companioncostgold'];
             $session['user']['gems'] -= $row['companioncostgems'];
 
-            debuglog("has spent {$row['companioncostgold']} gold and {$row['companioncostgems']} gems on hiring a mercenary ({$row['name']}).");
+            \LotgdLog::debug("has spent {$row['companioncostgold']} gold and {$row['companioncostgems']} gems on hiring a mercenary ({$row['name']}).");
         }
     }
 

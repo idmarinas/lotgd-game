@@ -108,7 +108,7 @@ elseif ('transfer3' == $op)
                 \Doctrine::persist($result);
                 \Doctrine::flush();
 
-                debuglog("transferred $amt gold to", $result->getAcct()->getAcctid());
+                \LotgdLog::debug("transferred $amt gold to", $result->getAcct()->getAcctid());
 
                 $subj = ['transfer3.success.mail.subject', [], $textDomain];
                 $body = ['transfer3.success.mail.message', ['name' => $session['user']['name'], 'amount' => $amt], $textDomain];
@@ -134,7 +134,7 @@ elseif ('depositfinish' == $op)
     if ($amount <= $session['user']['gold'])
     {
         $params['deposited'] = true;
-        debuglog('deposited '.$amount.' gold in the bank');
+        \LotgdLog::debug('deposited '.$amount.' gold in the bank');
         $session['user']['goldinbank'] += $amount;
         $session['user']['gold'] -= $amount;
     }
@@ -181,7 +181,7 @@ elseif ('withdrawfinish' == $op)
                 $session['user']['gold'] += $session['user']['goldinbank'];
                 $session['user']['goldinbank'] = 0;
 
-                debuglog("withdrew $amount gold from the bank");
+                \LotgdLog::debug("withdrew $amount gold from the bank");
             }
 
             $params['lefttoborrow'] = $lefttoborrow;
@@ -191,7 +191,7 @@ elseif ('withdrawfinish' == $op)
                 $session['user']['goldinbank'] -= $lefttoborrow;
                 $session['user']['gold'] += $lefttoborrow;
 
-                debuglog("borrows $lefttoborrow gold from the bank");
+                \LotgdLog::debug("borrows $lefttoborrow gold from the bank");
             }
         }
     }
@@ -201,7 +201,7 @@ elseif ('withdrawfinish' == $op)
         $session['user']['goldinbank'] -= $amount;
         $session['user']['gold'] += $amount;
 
-        debuglog("withdrew $amount gold from the bank");
+        \LotgdLog::debug("withdrew $amount gold from the bank");
     }
 }
 

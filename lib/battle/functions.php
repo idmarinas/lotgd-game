@@ -303,7 +303,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
     {
         $lotgdBattleContent['battleend'][] = ['combat.end.get.gem'];
         ++$session['user']['gems'];
-        debuglog('found gem when slaying a monster.', false, false, 'forestwingem', 1);
+        \LotgdLog::debug('found gem when slaying a monster.', false, false, 'forestwingem', 1);
     }
 
     //-- Gold for user only in forest
@@ -316,7 +316,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
             ],
         ];
         $session['user']['gold'] += $gold;
-        debuglog('received gold for slaying a monster.', false, false, 'forestwin', $badguy['creaturegold']);
+        \LotgdLog::debug('received gold for slaying a monster.', false, false, 'forestwin', $badguy['creaturegold']);
     }
 
     //-- Process exp/favor
@@ -611,7 +611,7 @@ function battledefeat($enemies, $where = 'forest', $candie = true, $lostexp = tr
 
     if ($lostgold)
     {
-        debuglog("lost gold when they were slain {$where}", false, false, 'forestlose', -$session['user']['gold']);
+        \LotgdLog::debug("lost gold when they were slain {$where}", false, false, 'forestlose', -$session['user']['gold']);
         $session['user']['gold'] = 0;
 
         $lotgdBattleContent['battleend'][] = 'combat.end.defeated.lost.gold';

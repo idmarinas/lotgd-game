@@ -35,7 +35,7 @@ if ($remove)
     \Doctrine::persist($character);
     \Doctrine::flush();
 
-    debuglog("Player {$session['user']['name']} removed player {$character->getAcct()->getLogin()} from {$claninfo['clanname']}.", $remove);
+    \LotgdLog::debug("Player {$session['user']['name']} removed player {$character->getAcct()->getLogin()} from {$claninfo['clanname']}.", $remove);
 
     //delete unread application emails from this user.
     //breaks if the applicant has had their name changed via
@@ -68,7 +68,7 @@ elseif ($setrank > 0 && $setrank <= $session['user']['clanrank'] && $whoacctid)
         {
             $character->setClanrank(\max(0, \min($session['user']['clanrank'], $setrank)));
 
-            debuglog("Player {$session['user']['name']} changed rank of {$character->getName()} to {$setrank}.", $whoacctid);
+            \LotgdLog::debug("Player {$session['user']['name']} changed rank of {$character->getName()} to {$setrank}.", $whoacctid);
 
             \Doctrine::persist($character);
             \Doctrine::flush();

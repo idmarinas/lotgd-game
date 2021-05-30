@@ -75,7 +75,7 @@ if ('del' == $op)
         {
             addnews('news.account.delete', ['playerName' => $account->getCharacter()->getName()], $textDomain, true);
 
-            debuglog("Deleted account {$account->getCharacter()->getName()}");
+            \LotgdLog::debug("Deleted account {$account->getCharacter()->getName()}");
         }
     }
 }
@@ -179,7 +179,7 @@ elseif ('save' == $op)
         {
             $messages .= \LotgdTranslator::t('flash.message.account.edit.changed', ['key' => $key, 'oldVal' => $oldValues[$key], 'newVal' => $val], $textDomain).'<br>';
 
-            debuglog($session['user']['name']."`0 changed {$key} from {$oldValues[$key]} to {$val}", $userId);
+            \LotgdLog::debug($session['user']['name']."`0 changed {$key} from {$oldValues[$key]} to {$val}", $userId);
         }
     }
 

@@ -179,7 +179,7 @@ $nbgold                        = $session['user']['goldinbank'] - $bgold;
 
 if (0 != $nbgold)
 {
-    debuglog(($nbgold >= 0 ? 'earned ' : 'paid ').\abs($nbgold).' gold in interest');
+    \LotgdLog::debug(($nbgold >= 0 ? 'earned ' : 'paid ').\abs($nbgold).' gold in interest');
 }
 $turnstoday .= ", Spirits: {$resurrectionturns}, DK: {$dkff}";
 $session['user']['turns']     = $turnsperday + $resurrectionturns + $dkff;
@@ -289,6 +289,6 @@ $args = new Other(['spirits' => $spirits]);
 \LotgdEventDispatcher::dispatch($args, Other::STAMINA_NEWDAY);
 modulehook('stamina-newday', $args->getData());
 
-debuglog("New Day Turns: {$turnstoday}");
+\LotgdLog::debug("New Day Turns: {$turnstoday}");
 
 $session['user']['sentnotice'] = 0;
