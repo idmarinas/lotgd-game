@@ -20,8 +20,11 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :fire: DEPRECATED
 
--   Nothing
-
+-   **lib/gamelog.php** Function `gamelog` is deprecated and removed in future versions.
+    -   Use `LotgdLog::game(string $message, string $category)` instead or use a dependency injection.
+-   **lib/debuglog.php** Function `debuglog` is deprecated and removed in future versions.
+    -   Use `LotgdLog::debug(string $message, ?int $target = null, ?int $user = null, ?string $field = null, ?int $value = null, bool $consolidate = true)` instead or use a dependency injection.
+    
 ### :wrench: FIXES
 
 -   Nothing
