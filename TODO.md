@@ -12,8 +12,6 @@
 
 # Actualmente haciendo esto (5.3.0)
 
--   Agregar los eventos del event dispatcher en los modulehook que no tengan sustituto.
-    -   Con este cambio, será mas fácil migrar algunos módulos a un sistema Bundle.
 -   Crear service para la funcion `gamelog` y también para otras de registro de eventos.
     -   `lib/gamelog.php`
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
