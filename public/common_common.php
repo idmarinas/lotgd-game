@@ -34,6 +34,7 @@ use Lotgd\Core\Fixed\Sanitize as LotgdSanitize;
 use Lotgd\Core\Fixed\Session as LotgdSession;
 use Lotgd\Core\Fixed\Theme as LotgdTheme;
 use Lotgd\Core\Fixed\Translator as LotgdTranslator;
+use Lotgd\Core\Fixed\Log as LotgdLog;
 
 require \dirname(__DIR__).'/config/bootstrap.php';
 
@@ -178,6 +179,8 @@ LotgdSanitize::instance(LotgdKernel::get(\Lotgd\Core\Tool\Sanitize::class));
 LotgdTranslator::setContainer(LotgdKernel::get('translator'));
 //-- Configure Event dispatcher instance
 LotgdEventDispatcher::instance(LotgdKernel::get('event_dispatcher'));
+//-- Configure Log instance
+LotgdLog::instance(LotgdKernel::get(\Lotgd\Core\Log::class));
 
 $session = &$_SESSION['session'];
 
