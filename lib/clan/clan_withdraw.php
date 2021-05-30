@@ -55,7 +55,7 @@ if ($session['user']['clanrank'] >= CLAN_LEADER)
 
             \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.withdraw.deleting.clan', [], $textDomain));
 
-            gamelog('Clan '.$session['user']['clanid'].' has been deleted, last member gone', 'Clan');
+            \LotgdLog::game('Clan '.$session['user']['clanid'].' has been deleted, last member gone', 'Clan');
 
             unset($clanEntity);
         }

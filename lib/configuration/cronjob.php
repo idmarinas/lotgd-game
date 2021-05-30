@@ -16,7 +16,7 @@ if ('delcronjob' == $op)
 
     if ($cronEntity)
     {
-        gamelog("`4Delete CronJob `^{$cronId}`4 by admin {$session['user']['playername']}", 'cronjob');
+        \LotgdLog::game("`4Delete CronJob `^{$cronId}`4 by admin {$session['user']['playername']}", 'cronjob');
 
         \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.cronjob.deleted', [], $textDomain));
 
@@ -94,7 +94,7 @@ elseif ('newcronjob' == $op)
 
         $cronId = $entity->getId();
 
-        gamelog('`@'.$cronId ? 'Updated' : 'Create'." CronJob`0 `^{$entity->getName()}`0`$ by admin {$session['user']['playername']}`0", 'cronjob');
+        \LotgdLog::game('`@'.$cronId ? 'Updated' : 'Create'." CronJob`0 `^{$entity->getName()}`0`$ by admin {$session['user']['playername']}`0", 'cronjob');
 
         \LotgdKernel::get('core.cronjobs.cache')->delete('cronjobstable');
 

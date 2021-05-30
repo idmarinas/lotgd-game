@@ -41,7 +41,7 @@ function char_cleanup($accountId, $type): bool
     //-- Not do nothing if not find account or fail in create basic backup
     if ( ! $accountEntity || ! createBackupBasicInfo($accountId, $accountEntity))
     {
-        gamelog("Could not create basic info backup for the account ID:{$accountEntity->getAcctid()}, Login {$accountEntity->getLogin()}, canceled", 'backup');
+        \LotgdLog::game("Could not create basic info backup for the account ID:{$accountEntity->getAcctid()}, Login {$accountEntity->getLogin()}, canceled", 'backup');
 
         return false;
     }
@@ -72,7 +72,7 @@ function char_cleanup($accountId, $type): bool
                     $message = 'A backup has been created for the Entity %s, account ID: %s, Login %s';
                 }
 
-                gamelog(\sprintf($message, $entity, $accountId, $accountLogin), 'backup');
+                \LotgdLog::game(\sprintf($message, $entity, $accountId, $accountLogin), 'backup');
             }
 
             $repository->backupDeleteDataFromAccount($accountId);
@@ -104,7 +104,7 @@ function char_cleanup($accountId, $type): bool
                 //-- who applied for membership.
                 $charRepository->setNewClanLeader($result['id']);
 
-                gamelog("Clan {$accountEntity->getCharacter()->getClanid()} has a new leader {$result['id']} as there were no others left", 'clan');
+                \LotgdLog::game("Clan {$accountEntity->getCharacter()->getClanid()} has a new leader {$result['id']} as there were no others left", 'clan');
             }
             else
             {
@@ -122,7 +122,7 @@ function char_cleanup($accountId, $type): bool
                 //about people being associated with a deleted clan.
                 $charRepository->expelPlayersFromDeletedClan($session['user']['clanid']);
 
-                gamelog('Clan '.$session['user']['clanid'].' has been deleted, last member gone', 'Clan');
+                \LotgdLog::game('Clan '.$session['user']['clanid'].' has been deleted, last member gone', 'Clan');
 
                 unset($clanEntity);
             }

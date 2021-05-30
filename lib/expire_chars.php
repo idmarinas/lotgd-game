@@ -90,7 +90,7 @@ $msg .= "[{$dk1ct}] with 1 dk avg lvl [".\round($dk1lvl / \max(1, $dk1ct), 2)."]
 $msg .= 'Avg DK: ['.\round($dks / \max(1, \count($result)), 2)."]\n";
 $msg .= 'Accounts: '.\implode(', ', $pinfo);
 
-gamelog('Deleted '.\count($result)." accounts:\n{$msg}", 'char expiration');
+\LotgdLog::game('Deleted '.\count($result)." accounts:\n{$msg}", 'char expiration');
 
 //adjust for notification - don't notify total newbie chars
 $old = \max(1, $old - (int) getsetting('notifydaysbeforedeletion', 5)); //a minimum of 1 day is necessary

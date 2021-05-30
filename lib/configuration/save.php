@@ -78,7 +78,7 @@ foreach ($postSettings as $key => $val)
 
         $flashMessages .= \LotgdTranslator::t('flash.message.default.save.change.setting', ['key' => $key, 'oldValue' => $old[$key], 'newValue' => $val], $textDomain);
 
-        gamelog("`@Changed core setting `^{$key}`@ from `#{$old[$key]}`@ to `&{$val}`0", 'settings');
+        \LotgdLog::game("`@Changed core setting `^{$key}`@ from `#{$old[$key]}`@ to `&{$val}`0", 'settings');
 
         // Notify every module
         $args = new Core(['module' => 'core', 'setting' => $key, 'old' => $old[$key], 'new' => $val]);
