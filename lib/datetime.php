@@ -23,8 +23,6 @@ function checkday()
             if (\count($post) > 0)
             {
                 $session['user']['lasthit'] = new \DateTime('0000-00-00 00:00:00');
-
-                return;
             }
             else
             {
