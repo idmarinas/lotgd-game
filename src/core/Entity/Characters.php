@@ -33,14 +33,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Characters
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer", nullable=false, options={"unsigned": true})
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    use Common\IdTrait;
 
     /**
      * @var int
@@ -565,28 +558,6 @@ class Characters
         $this->recentcomments = new \DateTime('0000-00-00 00:00:00');
         $this->biotime        = new \DateTime('0000-00-00 00:00:00');
         $this->clanjoindate   = new \DateTime('0000-00-00 00:00:00');
-    }
-
-    /**
-     * Set the value of Id.
-     *
-     * @param int $id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Id.
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     /**
