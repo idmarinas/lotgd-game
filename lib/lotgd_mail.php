@@ -8,11 +8,18 @@
  * @param mixed $message
  * @param mixed $additional_headers
  * @param mixed $additional_parameters
+ *
+ * @deprecated 5.3.0 Removed in future versions.
  */
 function lotgd_mail($to, $subject, $message, $additional_headers = '', $additional_parameters = '')
 {
     $message = \LotgdSanitize::fullSanitize(\str_replace('`n', '<br>', nltoappon($message)));
     $headers = [];
+
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 5.3.0; and delete in future version. Use Symfony mailer for send emails.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
     //-- Add a "From" header if not added
     if ( ! \strstr($additional_headers, 'From'))
