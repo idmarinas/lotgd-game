@@ -21,77 +21,10 @@
  */
 function debuglog($message, $target = false, $user = false, $field = false, $value = false, $consolidate = true)
 {
-    global $session;
-
     \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 5.3.0; and delete in future version. Use LotgdLog::debug($message, $category); instead.',
+        'Usage of %s is obsolete since 5.3.0; and delete in future version. Use LotgdLog::debug($message, $target, $user, $field, $value, $consolidate); instead.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
-    $repository = \Doctrine::getRepository('LotgdCore:Debuglog');
-
-    if (false === $target)
-    {
-        $target = 0;
-    }
-
-    if (false === $user)
-    {
-        $user = $session['user']['acctid'];
-    }
-
-    $corevalue = $value;
-
-    $id = 0;
-
-    if (false !== $field && false !== $value && $consolidate)
-    {
-        $query  = $repository->createQueryBuilder('u');
-        $result = $query
-            ->where('u.actor = :user AND u.field = :field AND u.date > :date')
-
-            ->setParameter('user', $user)
-            ->setParameter('field', $field)
-            ->setParameter('date', new \DateTime(\date('Y-m-d 00:00:00')))
-
-            ->getQuery()
-            ->getResult()
-        ;
-
-        if (\count($result))
-        {
-            $result  = $result[0];
-            $value   = $result->getValue() + $value;
-            $message = $result->getMessage();
-            $id      = $result->getId();
-        }
-    }
-
-    if (false !== $corevalue)
-    {
-        $message .= " ({$corevalue})";
-    }
-
-    if (false === $field)
-    {
-        $field = '';
-    }
-
-    if (false === $value)
-    {
-        $value = 0;
-    }
-
-    $entity = $repository->find($id);
-    $entity = $repository->hydrateEntity([
-        'date'    => new \DateTime('now'),
-        'actor'   => $user,
-        'target'  => $target,
-        'message' => $message,
-        'field'   => $field,
-        'value'   => $value,
-    ], $entity);
-
-    \Doctrine::persist($entity);
-    \Doctrine::flush();
+    \LotgdLog::debug($message, $target, $user, $field, $value, $consolidate);
 }
