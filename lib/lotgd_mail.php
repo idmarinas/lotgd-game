@@ -47,7 +47,7 @@ function lotgd_mail($to, $subject, $message, $additional_headers = '', $addition
             'url'       => getsetting('serverurl', '//'.$_SERVER['SERVER_NAME']),
         ];
 
-        $message = LotgdTheme::renderThemeTemplate('mail.twig', $data);
+        $message = LotgdTheme::render('mail.twig', $data);
         unset($data);
     }
     else
