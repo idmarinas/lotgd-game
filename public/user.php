@@ -68,7 +68,7 @@ if ('del' == $op)
         {
             \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.account.del.fail', [], $textDomain));
 
-            return redirect('user.php');
+            redirect('user.php');
         }
 
         if (char_cleanup($userId, CHAR_DELETE_MANUAL))
@@ -129,7 +129,7 @@ elseif ('special' == $op)
     \Doctrine::persist($accountEntity);
     \Doctrine::flush();
 
-    return redirect("user.php?op=edit&userid={$userId}");
+    redirect("user.php?op=edit&userid={$userId}");
 }
 elseif ('save' == $op)
 {
@@ -378,7 +378,7 @@ switch ($op)
             {
                 \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.account.edit.no.prefs', ['module' => $module], $textDomain));
 
-                return redirect("user.php?op=edit&userid={$userId}{$returnpetition}");
+                redirect("user.php?op=edit&userid={$userId}{$returnpetition}");
             }
         }
     break;

@@ -128,12 +128,12 @@ switch ($op)
 
                 $session = [];
 
-                return redirect('home.php');
+                redirect('home.php');
             }
 
             \LotgdFlashNavigation::addWarningMessage(\LotgdTranslator::t('flash.message.room.not.gold', [ 'barkeep' => $barkeep ], $textDomain));
 
-            return redirect('inn.php?op=room');
+            redirect('inn.php?op=room');
         }
 
         if ($params['boughtRoomToday'])

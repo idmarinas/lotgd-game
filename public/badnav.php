@@ -76,5 +76,5 @@ else
 {
     $session = [];
 
-    return redirect('index.php');
+    redirect('index.php');
 }

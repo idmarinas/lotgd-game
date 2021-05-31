@@ -142,7 +142,7 @@ function checkSuPermission($permission, ?string $return = null)
 
     if ( ! $return)
     {
-        return redirect($return);
+        redirect($return);
     }
 
     return false;

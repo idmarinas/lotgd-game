@@ -55,7 +55,7 @@ if ('suicide' == $op && $params['selfDelete'])
 
         \LotgdKernel::get('cache.app')->delete('char-list-home-page');
 
-        return redirect('home.php');
+        redirect('home.php');
     }
 }
 elseif ('forcechangeemail' == $op)

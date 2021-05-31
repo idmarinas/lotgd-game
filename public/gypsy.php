@@ -42,7 +42,7 @@ if ('pay' == $op)
 
         \LotgdLog::debug("spent {$params['cost']} gold to speak to the dead");
 
-        return redirect('gypsy.php?op=talk');
+        redirect('gypsy.php?op=talk');
     }
 
     \LotgdNavigation::villageNav();

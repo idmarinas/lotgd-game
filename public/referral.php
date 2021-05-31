@@ -19,7 +19,7 @@ if (! $session['user']['loggedin'])
 
     \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.referral.create', [ 'referral' => $referral ], $textDomain));
 
-    return redirect('create.php?r='.rawurlencode($referral));
+    redirect('create.php?r='.rawurlencode($referral));
 }
 
 //-- Init page

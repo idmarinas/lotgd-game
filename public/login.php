@@ -23,7 +23,7 @@ if ('' != $name)
 {
     if ($session['loggedin'])
     {
-        return redirect('badnav.php');
+        redirect('badnav.php');
     }
 
     //-- If server is full, not need proces any data.
@@ -33,7 +33,7 @@ if ('' != $name)
         $session['user'] = [];
         \LotgdFlashMessaged::addWarningMessage(\LotgdTranslator::t('login.full', [], 'page_login'));
 
-        return redirect('home.php');
+        redirect('home.php');
     }
 
     $password = \stripslashes((string) \LotgdRequest::getPost('password'));
@@ -167,7 +167,7 @@ if ('' != $name)
             }//end foreach
         }//end if (DB::num_rows)
 
-        return redirect('index.php');
+        redirect('index.php');
     }
 
     $session['user'] = $account;
@@ -185,7 +185,7 @@ if ('' != $name)
         $session['user'] = [];
         \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('login.validate', [], 'page_login'));
 
-        return redirect('home.php');
+        redirect('home.php');
     }
 
     $session['loggedin']       = true;
@@ -223,14 +223,14 @@ if ('' != $name)
 
     if ($session['user']['location'] == $iname)
     {
-        return redirect('inn.php?op=strolldown');
+        redirect('inn.php?op=strolldown');
     }
     elseif ($session['user']['restorepage'] > '')
     {
-        return redirect($session['user']['restorepage']);
+        redirect($session['user']['restorepage']);
     }
 
-    return redirect('news.php');
+    redirect('news.php');
 }
 elseif ('logout' == $op)
 {
@@ -263,11 +263,11 @@ elseif ('logout' == $op)
     }
     $session = [];
 
-    return redirect('index.php');
+    redirect('index.php');
 }
 
 //- If you enter an empty username, don't just say oops.. do something useful.
 \LotgdSession::invalidate();
 \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('fail.empty', [], 'page_login'));
 
-return redirect('index.php');
+redirect('index.php');

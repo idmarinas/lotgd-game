@@ -33,7 +33,7 @@ function checkday()
                 $session['user']['allowednavs'] = [];
                 \LotgdNavigation::addNavAllow('newday.php');
 
-                return redirect('newday.php');
+                redirect('newday.php');
             }
         }
     }

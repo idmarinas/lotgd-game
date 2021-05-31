@@ -58,7 +58,7 @@ if ('bribe' == $action)
             {
                 \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.bribe.no.gems', ['amt' => $amt], $textDomain));
 
-                return redirect('inn.php?op=bartender&act=bribe');
+                redirect('inn.php?op=bartender&act=bribe');
             }
             else
             {
@@ -74,7 +74,7 @@ if ('bribe' == $action)
             {
                 \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.bribe.no.gold', ['amt' => $amt], $textDomain));
 
-                return redirect('inn.php?op=bartender&act=bribe');
+                redirect('inn.php?op=bartender&act=bribe');
             }
             else
             {

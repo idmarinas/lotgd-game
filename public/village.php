@@ -21,7 +21,7 @@ if (getsetting('automaster', 1) && 1 != $session['user']['seenmaster'])
 
     if ($session['user']['experience'] > $expreqd && $session['user']['level'] < getsetting('maxlevel', 15))
     {
-        return redirect('train.php?op=autochallenge');
+        redirect('train.php?op=autochallenge');
     }
 }
 
@@ -85,7 +85,7 @@ if (1 == $session['user']['slaydragon'])
 
 if (! $session['user']['alive'])
 {
-    return redirect('shades.php');
+    redirect('shades.php');
 }
 
 $op = \LotgdRequest::getQuery('op');

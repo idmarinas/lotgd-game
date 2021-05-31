@@ -93,7 +93,7 @@ elseif ('edit' == $op || 'add' == $op)
     {
         \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.mount.not.found', [], $textDomain));
 
-        return redirect('mount.php');
+        redirect('mount.php');
     }
 
     \LotgdNavigation::addNav('mounts.nav.properties', "mounts.php?op=edit&id=$mountId");

@@ -109,7 +109,7 @@ if ('save' == $op)
 
         \LotgdLog::debug("Received donator points for donating -- Credited manually [$reason]", false, $id, 'donation', $points, false);
 
-        return redirect('paylog.php');
+        redirect('paylog.php');
     }
     else
     {

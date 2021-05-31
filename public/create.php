@@ -62,7 +62,7 @@ if ('forgotval' == $op)
     {
         \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('validating.pass.paragraph', [], $textDomain));
 
-        return redirect('home.php');
+        redirect('home.php');
     }
 
     //-- Delete code of fogotten password
@@ -100,7 +100,7 @@ elseif ('val' == $op)
     {
         \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('validating.email.paragraph.fail', [], $textDomain));
 
-        return redirect('home.php');
+        redirect('home.php');
     }
 
     $params['showLoginButton'] = (bool) ! ($account->getReplaceemail());
@@ -181,14 +181,14 @@ elseif ('forgot' == $op)
         {
             \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.notFound', [], $textDomain));
 
-            return redirect('create.php?op=forgot');
+            redirect('create.php?op=forgot');
         }
 
         if ( ! \trim($account->getEmailaddress()))
         {
             \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.noEmail', [], $textDomain));
 
-            return redirect('create.php?op=forgot');
+            redirect('create.php?op=forgot');
         }
 
         if ('' == $account->getForgottenpassword())
@@ -212,7 +212,7 @@ elseif ('forgot' == $op)
 
         \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.sent', [], $textDomain));
 
-        return redirect('create.php?op=forgot');
+        redirect('create.php?op=forgot');
     }
 
     $args = new GenericEvent(null, $params);
@@ -409,7 +409,7 @@ elseif ('create' == $op)
 
                 \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('create.account.emailVerification', ['email' => $email], $textDomain));
 
-                return redirect('index.php');
+                redirect('index.php');
             }
 
             savesetting('newestplayer', $accountEntity->getAcctid());

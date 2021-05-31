@@ -10,7 +10,7 @@ checkday();
 //-- You can only stay in the shades if you're dead.
 if ($session['user']['alive'])
 {
-    return redirect('village.php');
+    redirect('village.php');
 }
 
 // Don't hook on to this text for your standard modules please, use "shades" instead.

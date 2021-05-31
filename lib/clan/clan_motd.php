@@ -6,7 +6,7 @@ if ($session['user']['clanrank'] < CLAN_OFFICER)
 {
     \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('secction.motd.messagess.error', [], $textDomain));
 
-    return redirect('clan.php');
+    redirect('clan.php');
 }
 
 $acctRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);

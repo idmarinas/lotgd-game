@@ -43,8 +43,8 @@ else
 
     if ($session['user']['loggedin'])
     {
-        return redirect('village.php');
+        redirect('village.php');
     }
 
-    return redirect('index.php');
+    redirect('index.php');
 }

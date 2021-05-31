@@ -84,4 +84,4 @@ $session['user']['clanjoindate'] = new \DateTime('0000-00-00 00:00:00');
 
 \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.withdraw.withdraw', [], $textDomain));
 
-return redirect('clan.php');
+redirect('clan.php');

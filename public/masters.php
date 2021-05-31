@@ -41,7 +41,7 @@ if ('del' == $op)
 
     \LotgdFlashMessages::{$type}(\LotgdTranslator::t($message, [], $textDomain));
 
-    return redirect('masters.php');
+    redirect('masters.php');
 }
 elseif ('edit' == $op)
 {

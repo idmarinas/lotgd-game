@@ -37,7 +37,7 @@ if (! $skipgraveyardtext)
 {
     if ($session['user']['alive'])
     {
-        return redirect('village.php');
+        redirect('village.php');
     }
 
     checkday();

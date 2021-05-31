@@ -15,7 +15,7 @@ $params = [];
 
 if ($session['loggedin'] ?? false)
 {
-    return redirect('badnav.php');
+    redirect('badnav.php');
 }
 
 //-- Init page

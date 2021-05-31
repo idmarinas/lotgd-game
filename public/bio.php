@@ -39,7 +39,7 @@ if (empty($target))
 {
     \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('deleted', [], $textDomain));
 
-    return redirect($return);
+    redirect($return);
 }
 
 $ranks = [

@@ -44,7 +44,7 @@ if ($clanId > 0)
         systemmail($session['user']['acctid'], $subj, $msg);
     }
 
-    return redirect('clan.php?op=waiting');
+    redirect('clan.php?op=waiting');
 }
 
 $order = (int) \LotgdRequest::getQuery('order');

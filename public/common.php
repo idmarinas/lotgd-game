@@ -76,7 +76,7 @@ if (isset($session['lasthit'], $session['loggedin']) && \strtotime('-'.getsettin
 
     \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('session.timeout', [], 'app_default'));
 
-    return redirect('home.php', \LotgdTranslator::t('session.login.account.notLogged', [], 'app_default'));
+    redirect('home.php', \LotgdTranslator::t('session.login.account.notLogged', [], 'app_default'));
 }
 $session['lasthit'] = \strtotime('now');
 
@@ -118,7 +118,7 @@ if (getsetting('fullmaintenance', 0))
 
         $session = [];
 
-        return redirect('index.php');
+        redirect('index.php');
     }
 }
 //-- Check if have a maintenance mode that players cannot login anymore and show a message to log out immediateley at a safe location.
@@ -155,7 +155,7 @@ $session['loggedin']         = $session['user']['loggedin'];
 
 if ( ! $session['user']['loggedin'] && ! ALLOW_ANONYMOUS)
 {
-    return redirect('login.php?op=logout');
+    redirect('login.php?op=logout');
 }
 
 $nokeeprestore = ['newday.php' => 1, 'badnav.php' => 1, 'motd.php' => 1, 'mail.php' => 1, 'petition.php' => 1];
