@@ -24,12 +24,18 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   Use `LotgdLog::game(string $message, string $category)` instead or use a dependency injection.
 -   **lib/debuglog.php** Function `debuglog` is deprecated and removed in future versions.
     -   Use `LotgdLog::debug(string $message, ?int $target = null, ?int $user = null, ?string $field = null, ?int $value = null, bool $consolidate = true)` instead or use a dependency injection.
+-   **lib/addnews.php** Function `addnews` is deprecated and removed in future versions.
+    -   Use `LotgdTool::addNews(string $text, array $params, string $textDomain, bool $hideFromBio);` instead or use a dependency injection.
+-   **lib/experience.php** Function `exp_for_next_level` is deprecated and removed in future versions.
+    -   Use `LotgdTool::expForNextLevel($curlevel, $curdk);` instead or use a dependency injection.
+-   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
+    -   Use `Symfony mailer` instead.
     
 ### :wrench: FIXES
 
 -   Nothing
 
-### :x: REMOVES/Break Changes
+### :x: REMOVES
 
 -   **Remove** file `error_docs/dberror.html` not in use.
 
@@ -70,7 +76,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   Nothing
 
-### :x: REMOVES/Break Changes
+### :x: REMOVES
 
 -   **BC** Delete `AdvertisingBundle` from Core. Now is a independent bundle (can use in other Symfony projects).
     -   If you need/want use in your server can use https://github.com/idmarinas/advertising-bundle
@@ -167,7 +173,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   Nothing
 
-### :x: REMOVES/Break Changes
+### :x: REMOVES
 
 -   Removed `src/core/Template/Template.php` 
 -   Removed `src/core/Twig/Loader/LotgdFilesystemLoader.php`
@@ -226,7 +232,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **public/graveyard.php** fixed error in format of arrays
 -   **templates/lotgd/pages/_macros/_battle.html.twig** fixed error with text domain
 
-### :x: REMOVES/Break Changes
+### :x: REMOVES
 
 -   **BC** remove LoTGD console `bin/lotgd` use `bin/console`
     -   Removed command `src/core/Command/StorageCacheClearCommand.php` 

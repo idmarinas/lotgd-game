@@ -12,6 +12,7 @@
 
 # Actualmente haciendo esto (5.3.0)
 
+-   Sustutir las funciones obsoletas
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 
