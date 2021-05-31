@@ -47,7 +47,7 @@ function module_check_requirements($reqs, $forceinject = false)
         //-- It's need a specific version of LoTGD
         if ('lotgd' == $key)
         {
-            $version = \explode(' ', \Lotgd\Core\Application::VERSION);
+            $version = \explode(' ', \Lotgd\Core\Kernel::VERSION);
 
             $comparison = Composer\Semver\Semver::satisfies($version[0], $info[0]);
 

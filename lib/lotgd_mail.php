@@ -36,7 +36,7 @@ function lotgd_mail($to, $subject, $message, $additional_headers = '', $addition
         $data = [
             'title'     => $subject,
             'content'   => $message,
-            'copyright' => \Lotgd\Core\Application::COPYRIGHT,
+            'copyright' => \Lotgd\Core\Kernel::COPYRIGHT,
             'url'       => getsetting('serverurl', '//'.$_SERVER['SERVER_NAME']),
         ];
 
