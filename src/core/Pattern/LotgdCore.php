@@ -5,7 +5,7 @@
  *
  * @see https://github.com/idmarinas/lotgd-game
  *
- * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
  *
  * @since 4.0.0
  */
