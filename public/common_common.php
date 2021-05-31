@@ -35,6 +35,7 @@ use Lotgd\Core\Fixed\Session as LotgdSession;
 use Lotgd\Core\Fixed\Theme as LotgdTheme;
 use Lotgd\Core\Fixed\Translator as LotgdTranslator;
 use Lotgd\Core\Fixed\Log as LotgdLog;
+use Lotgd\Core\Fixed\Tool as LotgdTool;
 
 require \dirname(__DIR__).'/config/bootstrap.php';
 
@@ -181,6 +182,8 @@ LotgdTranslator::setContainer(LotgdKernel::get('translator'));
 LotgdEventDispatcher::instance(LotgdKernel::get('event_dispatcher'));
 //-- Configure Log instance
 LotgdLog::instance(LotgdKernel::get(\Lotgd\Core\Log::class));
+//-- Configure Tool instance
+LotgdTool::instance(LotgdKernel::get(\Lotgd\Core\Tool\Tool::class));
 
 $session = &$_SESSION['session'];
 
