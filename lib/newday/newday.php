@@ -114,7 +114,7 @@ $resurrectionturns = $spirits;
 
 if ('true' == $resurrection)
 {
-    addnews('news.resurrected', [
+    \LotgdTool::addNews('news.resurrected', [
         'playerName'    => $session['user']['name'],
         'deathOverlord' => getsetting('deathoverlord', '`$Ramius`0'),
     ], $textDomain);

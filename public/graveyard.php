@@ -307,7 +307,7 @@ elseif ('haunt3' == $op)
                 systemmail($params['character']->getAcct()->getAcctid(), $subject, $message);
             }
 
-            addnews($text, [
+            \LotgdTool::addNews($text, [
                 'playerName' => $session['user']['name'],
                 'hauntedName' => $params['character']->getName()
             ], $textDomain);

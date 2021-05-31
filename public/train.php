@@ -193,7 +193,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
 
         if (getsetting('displaymasternews', 1))
         {
-            addnews('news.autochallenge', [
+            \LotgdTool::addNews('news.autochallenge', [
                 'playerName' => $session['user']['name'],
                 'masterName' => $master['creaturename']
             ], $textDomain);
@@ -319,7 +319,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
 
                 if (getsetting('displaymasternews', 1))
                 {
-                    addnews('news.victory', [
+                    \LotgdTool::addNews('news.victory', [
                         'sex' => $session['user']['sex'],
                         'playerName' => $session['user']['name'],
                         'masterName' => $badguy['creaturename'],
@@ -353,7 +353,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
             {
                 $taunt = select_taunt();
 
-                addnews('deathmessage', [
+                \LotgdTool::addNews('deathmessage', [
                     'deathmessage' => [
                         'deathmessage' => 'news.defeated',
                         'params' => [

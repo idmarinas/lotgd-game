@@ -66,7 +66,7 @@ function check_su_access($level)
 
     \LotgdResponse::pageStart('title.infidel', [], $textDomain);
 
-    addnews('`&%s was smitten down for attempting to defile the gods (they tried to hack superuser pages).', $session['user']['name']);
+    \LotgdTool::addNews('`&%s was smitten down for attempting to defile the gods (they tried to hack superuser pages).', $session['user']['name']);
 
     \LotgdLog::debug("Lost {$session['user']['gold']} and ".($session['user']['experience'] * 0.25).' experience trying to hack superuser pages.');
 

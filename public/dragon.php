@@ -195,7 +195,7 @@ elseif ('prologue' == $op)
         }
     }
 
-    addnews('battle.victory.news.title', [
+    \LotgdTool::addNews('battle.victory.news.title', [
         'playerName' => $regname,
         'title' => $session['user']['title'],
         'times' => $session['user']['dragonkills'],
@@ -268,7 +268,7 @@ if ($battle)
             $textDomain
         ];
 
-        addnews('battle.victory.news.slain', [
+        \LotgdTool::addNews('battle.victory.news.slain', [
             'playerName' => $session['user']['name'],
             'creatureName' => $badguy['creaturename']
         ], $textDomain);

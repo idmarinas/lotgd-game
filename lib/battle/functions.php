@@ -603,7 +603,7 @@ function battledefeat($enemies, $where = 'forest', $candie = true, $lostexp = tr
         $deathmessage = select_deathmessage($where);
         $taunt        = select_taunt();
 
-        addnews('deathmessage', [
+        \LotgdTool::addNews('deathmessage', [
             'deathmessage' => $deathmessage,
             'taunt'        => $taunt,
         ], '');

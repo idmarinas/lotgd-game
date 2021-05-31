@@ -129,7 +129,7 @@ if ($battle)
         {
             $news = ($killedin == $iname) ? 'inn' : 'other';
 
-            addnews("pvp.victory.{$news}", [
+            \LotgdTool::addNews("pvp.victory.{$news}", [
                 'playerName' => $session['user']['name'],
                 'creatureName' => $badguy['creaturename'],
                 'location' => $killedin
@@ -174,7 +174,7 @@ if ($battle)
 
             $news = ($killedin == $iname) ? 'inn' : 'other';
 
-            addnews('deathmessage', [
+            \LotgdTool::addNews('deathmessage', [
                 'deathmessage' => [
                     'deathmessage' => "pvp.defeated.{$news}",
                     'params' => [

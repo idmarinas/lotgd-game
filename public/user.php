@@ -73,7 +73,7 @@ if ('del' == $op)
 
         if (char_cleanup($userId, CHAR_DELETE_MANUAL))
         {
-            addnews('news.account.delete', ['playerName' => $account->getCharacter()->getName()], $textDomain, true);
+            \LotgdTool::addNews('news.account.delete', ['playerName' => $account->getCharacter()->getName()], $textDomain, true);
 
             \LotgdLog::debug("Deleted account {$account->getCharacter()->getName()}");
         }
