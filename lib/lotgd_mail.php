@@ -47,7 +47,23 @@ function lotgd_mail($to, $subject, $message, $additional_headers = '', $addition
             'url'       => getsetting('serverurl', '//'.$_SERVER['SERVER_NAME']),
         ];
 
-        $message = LotgdTheme::render('mail.twig', $data);
+        try
+        {
+            $message = \LotgdTheme::render('mail.twig', $data);
+        }
+        catch(\Throwable $ex)
+        {
+            \Tracy\Debugger::log($ex);
+            $message = \str_replace('<br>', "\r\n", $message);
+            $headers = [];
+
+            //-- Add a "From" header if not added
+            if ( ! \strstr($additional_headers, 'From'))
+            {
+                $headers[] = 'From: '.getsetting('servername', 'The Legend of the Green Dragon').' <'.getsetting('gameadminemail', 'postmaster@localhost.com').'>';
+            }
+        }
+
         unset($data);
     }
     else
