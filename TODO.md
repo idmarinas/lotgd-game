@@ -12,8 +12,6 @@
 
 # Actualmente haciendo esto (5.3.0)
 
--   Crear service para la funcion `gamelog` y también para otras de registro de eventos.
-    -   `lib/gamelog.php`
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 
