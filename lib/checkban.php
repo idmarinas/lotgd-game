@@ -3,77 +3,14 @@
 // translator ready
 // addnews ready
 // mail ready
+
+/** @deprecated  5.3.0 Removed in future versions.*/
 function checkban($login = false)
 {
-    global $session;
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 5.3.0; and delete in future version. Use "LotgdTool::checkBan($login);" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if ($session['banoverride'] ?? false)
-    {
-        return false;
-    }
-    elseif (false === $login)
-    {
-        $ip = \LotgdRequest::getServer('REMOTE_ADDR');
-        $id = \LotgdRequest::getCookie('lgi', '');
-    }
-    else
-    {
-        $repository = \Doctrine::getRepository('LotgdCore:Accounts');
-        $result     = $repository->extractEntity($repository->findOneBy(['login' => $login]));
-
-        if ($result['banoverride'] || ($result['superuser'] & ~SU_DOESNT_GIVE_GROTTO))
-        {
-            $session['banoverride'] = true;
-
-            return false;
-        }
-
-        $ip = $result['lastip'];
-        $id = $result['uniqueid'];
-    }
-
-    $repository = \Doctrine::getRepository('LotgdCore:Bans');
-    $repository->removeExpireBans();
-
-    $query  = $repository->createQueryBuilder('u');
-    $result = $query->where("((substring(:ip ,1 , length(u.ipfilter)) = u.ipfilter AND u.ipfilter != '') OR (u.uniqueid = :id AND u.uniqueid != '')) AND (u.banexpire = '0000-00-00' OR u.banexpire >= :date)")
-
-        ->setParameter('ip', $ip)
-        ->setParameter('id', $id)
-        ->setParameter('date', new \DateTime('now'))
-
-        ->getQuery()
-        ->getResult()
-    ;
-
-    if (\count($result))
-    {
-        $session = [];
-        $session['message'] .= \LotgdTranslator::t('checkban.ban', [], 'page_bans');
-
-        foreach ($result as $row)
-        {
-            $session['message'] .= $row->getBanreason().'`n';
-
-            $message = \LotgdTranslator::t('checkban.expire.time', ['date' => $row->getBanexpire()], 'page_bans');
-
-            if (new \DateTime('0000-00-00') == $row->getBanexpire() || new \DateTime('0000-00-00 00:00:00') == $row->getBanexpire())
-            {
-                $message = \LotgdTranslator::t('checkban.expire.permanent', [], 'page_bans');
-            }
-
-            $session['message'] .= $message;
-
-            $row->setLasthit(new \DateTime('now'));
-            \Doctrine::persist($row);
-            \Doctrine::flush();
-
-            $session['message'] .= '`n';
-            $session['message'] .= \LotgdTranslator::t('checkban.by', ['by' => $row['banner']], 'page_bans');
-        }
-        $session['message'] .= \LotgdTranslator::t('checkban.note', [], 'page_bans');
-        \header('Location: index.php');
-
-        exit();
-    }
+    return \LotgdTool::checkBan($login);
 }
