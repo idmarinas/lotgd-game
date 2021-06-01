@@ -53,9 +53,12 @@ services:
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    # App\Controller\:
-    #     resource: '../src/Controller/'
-    #     tags: ['controller.service_arguments']
+    Lotgd\Core\Controller\:
+        resource: '../src/core/Controller/'
+        tags: ['controller.service_arguments']
+    Lotgd\Local\Controller\:
+        resource: '../src/local/Controller/'
+        tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
