@@ -20,7 +20,7 @@ function checkday()
             $post = $_POST;
             unset($post['i_am_a_hack']);
 
-            if (! \empty($post))
+            if (! empty($post))
             {
                 $session['user']['lasthit'] = new \DateTime('0000-00-00 00:00:00');
             }
