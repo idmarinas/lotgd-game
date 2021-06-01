@@ -130,7 +130,7 @@ class Tool
 
         if ($session['banoverride'] ?? false)
         {
-            return false;
+            return;
         }
         elseif ( ! $login)
         {
@@ -148,7 +148,7 @@ class Tool
             {
                 $session['banoverride'] = true;
 
-                return false;
+                return;
             }
 
             $ip = $result->getLastip();
