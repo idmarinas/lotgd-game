@@ -52,7 +52,7 @@ if ('' != $name)
         $password = \md5(\md5($password));
     }
 
-    checkban(); //check if this computer is banned
+    \LotgdTool::checkBan(); //check if this computer is banned
 
     //-- Using Doctrine repository to process login
     $repositoryAccounts = Doctrine::getRepository(Lotgd\Core\Entity\Accounts::class);
@@ -65,7 +65,7 @@ if ('' != $name)
 
         //now we'll log the failed attempt and begin to issue bans if
         //there are too many, plus notify the admins.
-        checkban();
+        \LotgdTool::checkBan();
 
         $result = $repositoryAccounts->createQueryBuilder('u')
             ->select('u.acctid')
@@ -172,7 +172,7 @@ if ('' != $name)
 
     $session['user'] = $account;
 
-    checkban($session['user']['login']); //check if this account is banned
+    \LotgdTool::checkBan($session['user']['login']); //check if this account is banned
 
     // If the player isn't allowed on for some reason, anything on
     // this hook should automatically call page_footer and exit

@@ -13,7 +13,7 @@ require_once 'common.php';
 require_once 'lib/checkban.php';
 require_once 'lib/serverfunctions.class.php';
 
-checkban();
+\LotgdTool::checkBan();
 
 $textDomain = 'page_create'; //-- Namespace, textDomain for page
 
