@@ -12,5 +12,5 @@ function checkban($login = false)
         __METHOD__
     ), E_USER_DEPRECATED);
 
-    return \LotgdTool::checkBan($login);
+    return \LotgdTool::checkBan($login ?: null);
 }
