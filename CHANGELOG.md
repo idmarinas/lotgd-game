@@ -30,6 +30,12 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   Use `LotgdTool::expForNextLevel($curlevel, $curdk);` instead or use a dependency injection.
 -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
     -   Use `Symfony mailer` instead.
+-   **lib/checkban.php** Function `checkban` is deprecated and removed in future versions.
+    -   Use `LotgdLog::checkBan(?string $login)` instead or use a dependency injection.
+-   **lib/charcleanup.php** Function `char_cleanup` is deprecated and removed in future versions.
+    -   Functions `createBackupOfEntity` and `createBackupBasicInfo` are used by `char_cleanup` and removed from file.
+    -   Use `LotgdKernel::get(\Lotgd\Core\Tool\Backup::class)->characterCleanUp($accountId, $type)` instead or use a dependency injection.
+        -   `LotgdKernel::get('lotgd.core.backup')->characterCleanUp($accountId, $type)`.
     
 ### :wrench: FIXES
 
