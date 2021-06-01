@@ -14,7 +14,7 @@ namespace Lotgd\Core\Tool;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Http\Response;
-use Lotgd\Core\Kernel;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Lotgd\Core\Lib\Settings as LibSettings;
 
 class Tool
@@ -28,7 +28,7 @@ class Tool
         EntityManagerInterface $doctrine,
         LibSettings $settings,
         Response $response,
-        Kernel $kernel
+        KernelInterface $kernel
     ) {
         $this->doctrine = $doctrine;
         $this->settings = $settings;
