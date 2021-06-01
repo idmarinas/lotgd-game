@@ -197,6 +197,9 @@ services:
         alias: Lotgd\Core\Http\Response
     Symfony\Component\HttpFoundation\Request: # Temporal
         alias: Lotgd\Core\Http\Request
+    lotgd.core.backup:
+        alias: Lotgd\Core\Tool\Backup
+        public: true
 
     # Twig extensions
     Marek\Twig\ByteUnitsExtension:
