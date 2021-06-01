@@ -181,7 +181,7 @@ LotgdTranslator::setContainer(LotgdKernel::get('translator'));
 //-- Configure Event dispatcher instance
 LotgdEventDispatcher::instance(LotgdKernel::get('event_dispatcher'));
 //-- Configure Log instance
-LotgdLog::instance(LotgdKernel::get(\Lotgd\Core\Log::class));
+LotgdLog::instance(LotgdKernel::get('lotgd.core.log'));
 //-- Configure Tool instance
 LotgdTool::instance(LotgdKernel::get(\Lotgd\Core\Tool\Tool::class));
 
