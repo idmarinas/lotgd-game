@@ -183,7 +183,7 @@ LotgdEventDispatcher::instance(LotgdKernel::get('event_dispatcher'));
 //-- Configure Log instance
 LotgdLog::instance(LotgdKernel::get('lotgd.core.log'));
 //-- Configure Tool instance
-LotgdTool::instance(LotgdKernel::get(\Lotgd\Core\Tool\Tool::class));
+LotgdTool::instance(LotgdKernel::get('lotgd.core.tools'));
 
 $session = &$_SESSION['session'];
 
