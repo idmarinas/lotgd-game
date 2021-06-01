@@ -19,7 +19,9 @@ use Lotgd\Core\Event\EveryRequest;
 use Lotgd\Core\Kernel;
 use Lotgd\Core\Template\Params;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Twig\Environment;
 
@@ -152,6 +154,33 @@ class Response extends HttpResponse
         {
             $this->pageAddContent(\Tracy\Debugger::dump($text, true));
         }
+    }
+
+    /**
+     * Call a controller and add content to response.
+     *
+     * @param string $class  Fully Qualified Class Name
+     * @param string $method Method to call of controller
+     */
+    public function callController(string $class, string $method = 'index'): void
+    {
+        $resolver   = new ArgumentResolver();
+        $controller = [$this->kernel->getContainer()->get($class), $method];
+
+        //-- Controller arguments
+        $arguments = $resolver->getArguments($this->request, $controller);
+
+        $response = $controller(...$arguments);
+
+        //-- If is a instance of RedirectResponse redirect to new route
+        if ($response instanceof RedirectResponse)
+        {
+            $response->send();
+
+            exit;
+        }
+
+        $this->pageAddContent($response->getContent());
     }
 
     /**
