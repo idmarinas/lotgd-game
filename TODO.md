@@ -12,7 +12,9 @@
 
 # Actualmente haciendo esto (5.3.0)
 
--   Sustutir las funciones obsoletas
+-   Sustituir la funcion lotgd_mail por Symfony mailer
+    -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
+        -   Use `Symfony mailer` instead.
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 
