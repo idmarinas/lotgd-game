@@ -13,6 +13,7 @@
 namespace Lotgd\Core\Tool;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Lotgd\Core\Http\Request;
 use Lotgd\Core\Http\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Lotgd\Core\Lib\Settings as LibSettings;
@@ -134,7 +135,7 @@ class Tool
         }
         elseif ( ! $login)
         {
-            $request = $this->kernel->getContainer()->get('request_stack')->getCurrentRequest();
+            $request = $this->kernel->getContainer()->get(Request::class);
             $ip      = $request->getServer('REMOTE_ADDR');
             $id      = $request->getCookie('lgi', '');
         }
