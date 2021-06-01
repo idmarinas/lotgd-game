@@ -166,6 +166,9 @@ services:
     lotgd.core.sanitize:
         alias: Lotgd\Core\Tool\Sanitize
         public: true
+    lotgd.core.log:
+        alias: Lotgd\Core\Log
+        public: true
 
     # LoTGD navigation
     Lotgd\Core\Navigation\AccessKeys:
