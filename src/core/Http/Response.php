@@ -246,6 +246,8 @@ class Response extends HttpResponse
 
         //-- Send content to browser
         $this->send();
+
+        exit;
     }
 
     /**
