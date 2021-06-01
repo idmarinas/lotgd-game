@@ -71,7 +71,7 @@ if ('del' == $op)
             redirect('user.php');
         }
 
-        if (char_cleanup($userId, CHAR_DELETE_MANUAL))
+        if (\LotgdKernel::get('lotgd.core.backup')->characterCleanUp($userId, CHAR_DELETE_MANUAL))
         {
             \LotgdTool::addNews('news.account.delete', ['playerName' => $account->getCharacter()->getName()], $textDomain, true);
 

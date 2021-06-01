@@ -38,11 +38,11 @@ $op = (string) \LotgdRequest::getQuery('op');
 
 if ('suicide' == $op && $params['selfDelete'])
 {
-    $userId = $session['user']['acctid'];
+    $userId = (int) $session['user']['acctid'];
 
     require_once 'lib/charcleanup.php';
 
-    if (char_cleanup($userId, CHAR_DELETE_SUICIDE))
+    if (\LotgdKernel::get('lotgd.core.backup')->characterCleanUp($userId, CHAR_DELETE_SUICIDE))
     {
         \LotgdTool::addNews('delete.character', [ 'name' => $session['user']['name'] ], 'partial_news', true);
 

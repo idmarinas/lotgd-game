@@ -64,7 +64,7 @@ $result = $query->getQuery()->getResult();
 foreach ($result as $entity)
 {
     //-- Delete account and data related
-    if ( ! char_cleanup($entity->getAcct()->getAcctid(), CHAR_DELETE_AUTO))
+    if ( ! \LotgdKernel::get('lotgd.core.backup')->characterCleanUp($entity->getAcct()->getAcctid(), CHAR_DELETE_AUTO))
     {
         continue;
     }
