@@ -17,6 +17,9 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   **Add** new events to Event Dispatcher.
     -   See class `Lotgd\Core\Events` and `src/core/Event/` folder for all events.
+-   **Controllers** First approach to controllers in LoTGD Core
+    -   `public/home.php` Have the first controller of LoTGD Core
+        -   Can see this example for use in your modules. Is a good step to full migrate modules to bundles.
 
 ### :fire: DEPRECATED
 
