@@ -17,7 +17,7 @@ if (getsetting('automaster', 1) && 1 != $session['user']['seenmaster'])
     //masters hunt down truant students
     $level = $session['user']['level'] + 1;
     $dks = $session['user']['dragonkills'];
-    $expreqd = exp_for_next_level($level, $dks);
+    $expreqd = \LotgdTool::expForNextLevel($level, $dks);
 
     if ($session['user']['experience'] > $expreqd && $session['user']['level'] < getsetting('maxlevel', 15))
     {

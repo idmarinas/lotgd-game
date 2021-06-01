@@ -74,7 +74,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
 
     $level = $session['user']['level'];
     $dks = $session['user']['dragonkills'];
-    $exprequired = exp_for_next_level($level, $dks);
+    $exprequired = \LotgdTool::expForNextLevel($level, $dks);
 
     $op = (string) \LotgdRequest::getQuery('op');
 
