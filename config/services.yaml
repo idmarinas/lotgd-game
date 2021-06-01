@@ -169,6 +169,9 @@ services:
     lotgd.core.log:
         alias: Lotgd\Core\Log
         public: true
+    lotgd.core.tools:
+        alias: Lotgd\Core\Tool\Tool
+        public: true
 
     # LoTGD navigation
     Lotgd\Core\Navigation\AccessKeys:
