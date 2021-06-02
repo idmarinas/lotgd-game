@@ -23,15 +23,6 @@ use Tracy\Debugger;
 
 class LogdnetRepository extends DoctrineRepository
 {
-    private $cache;
-
-    public function __construct(CacheInterface $coreLotgdCache, EntityManagerInterface $em, Mapping\ClassMetadata $class)
-    {
-        $this->cache = $coreLotgdCache;
-
-        parent::__construct($em, $class);
-    }
-
     /**
      * Delete servers older than two weeks.
      */
@@ -100,7 +91,7 @@ class LogdnetRepository extends DoctrineRepository
 
         try
         {
-            return $this->cache->get('logdnet-repository-'.__METHOD__, function (ItemInterface $item) use ($query)
+            return \LotgdCache::get('logdnet-repository-'.__METHOD__, function (ItemInterface $item) use ($query)
             {
                 $item->expiresAfter(1800); //-- Cache 1800 seconds (30 mins)
 
