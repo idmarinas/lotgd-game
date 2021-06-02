@@ -11,7 +11,11 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   This pages use a controller to render content of page
+    -   `public/about.php` use controller `Lotgd\Core\Controller\AboutController`
+    -   `public/home.php` use controller `Lotgd\Core\Controller\HomeController`
+    -   `public/list.php` use controller `Lotgd\Core\Controller\ListController`
+    -   Note: See this files for an examples of how to use the controllers in LoTGD Core.
 
 ### :star: FEATURES
 
@@ -47,6 +51,17 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :x: REMOVES
 
 -   **Remove** file `error_docs/dberror.html` not in use.
+-   **BC** `public/battle.php` 
+    -   Removed the following `modulehooks`
+        -   `battle-victory`
+        -   `battle-defeat`
+    -   Note: this hooks is individual for each creature, better use:
+        - Event Dispatcher: 
+            -   `Lotgd\Core\Events::PAGE_BATTLE_END_VICTORY`
+            -   `Lotgd\Core\Events::PAGE_BATTLE_END_DEFEAT`
+        -   Module hook: (this method is deprecated use Event Dispatcher instead)
+            -   `battle-victory-end`
+            -   `battle-defeat-end`
 
 ### :notebook: NOTES
 
