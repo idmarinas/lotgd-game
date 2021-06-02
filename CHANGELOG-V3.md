@@ -9,10 +9,10 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 
 Visit the [Wiki](https://github.com/idmarinas/lotgd-game/wiki) for more details. 
 Visit the [Documentation](https://idmarinas.github.io/lotgd-game/) for more details.  
-Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md).  
-Visit **_latest_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG.md)  
-Visit **_V2_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V2.md)  
-Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V4.md)  
+Visit the [README](https://github.com/idmarinas/lotgd-game/blob/migration/README.md).  
+Visit **_latest_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG.md)  
+Visit **_V2_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V2.md)  
+Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V4.md)  
 
 
 # Version: 3.0.0
