@@ -20,6 +20,8 @@ use Lotgd\Core\Kernel;
 use Lotgd\Core\Template\Params;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -172,9 +174,12 @@ class Response extends HttpResponse
 
         $response = $controller(...$arguments);
 
-        //-- If is a instance of RedirectResponse redirect to new route
-        if ($response instanceof RedirectResponse)
-        {
+        //-- If is a instance of RedirectResponse|BinaryFileResponse|JsonResponse send response no add content.
+        if (
+            $response instanceof RedirectResponse
+            || $response instanceof BinaryFileResponse
+            || $response instanceof JsonResponse
+        ) {
             $response->send();
 
             exit;
