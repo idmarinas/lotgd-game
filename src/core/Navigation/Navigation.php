@@ -26,6 +26,7 @@ class Navigation
 {
     use Pattern\CustomClass;
     use Pattern\Links;
+    use Pattern\Pagination;
 
     /**
      * Default text domain for navigation menu.

@@ -13,7 +13,6 @@
 
 namespace Lotgd\Core\Fixed;
 
-use Laminas\Paginator\Paginator;
 use Lotgd\Core\Navigation\Navigation as CoreNavigation;
 
 class Navigation
@@ -51,40 +50,6 @@ class Navigation
     public static function instance(CoreNavigation $instance)
     {
         self::$instance = $instance;
-    }
-
-    /**
-     * Navigation menu used with Paginator.
-     *
-     * @param Laminas\Paginator\Paginator $paginator
-     * @param bool|null                   $forcePages Force to show pages if only have 1 page
-     */
-    public static function pagination(Paginator $paginator, string $url, $forcePages = null)
-    {
-        $paginator = $paginator->getPages('all');
-
-        if (1 >= $paginator->pageCount && ! $forcePages)
-        {
-            return;
-        }
-
-        $union = false === \strpos($url, '?') ? '?' : '&';
-        self::$instance->addHeader('common.pagination.title');
-
-        foreach ($paginator->pagesInRange as $page)
-        {
-            $minItem = (($page - 1) * $paginator->itemCountPerPage) + 1;
-            $maxItem = \min($paginator->itemCountPerPage * $page, $paginator->totalItemCount);
-
-            $text = ($page != $paginator->current ? 'common.pagination.page' : 'common.pagination.current');
-            self::$instance->addNav($text, "{$url}{$union}page={$page}", [
-                'params' => [
-                    'page'  => $page,
-                    'item'  => $minItem,
-                    'total' => $maxItem,
-                ],
-            ]);
-        }
     }
 }
 
