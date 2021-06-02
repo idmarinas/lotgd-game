@@ -18,10 +18,10 @@ use Laminas\View\Helper\HeadTitle;
 use Lotgd\Core\Event\EveryRequest;
 use Lotgd\Core\Kernel;
 use Lotgd\Core\Template\Params;
-use Symfony\Component\HttpFoundation\Cookie;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -163,8 +163,9 @@ class Response extends HttpResponse
      *
      * @param string $class  Fully Qualified Class Name
      * @param string $method Method to call of controller
+     * @param bool   $send   Send content and not add to response content
      */
-    public function callController(string $class, string $method = 'index'): void
+    public function callController(string $class, string $method = 'index', bool $send = false): void
     {
         $resolver   = new ArgumentResolver();
         $controller = [$this->kernel->getContainer()->get($class), $method];
@@ -176,7 +177,8 @@ class Response extends HttpResponse
 
         //-- If is a instance of RedirectResponse|BinaryFileResponse|JsonResponse send response no add content.
         if (
-            $response instanceof RedirectResponse
+            $send
+            || $response instanceof RedirectResponse
             || $response instanceof BinaryFileResponse
             || $response instanceof JsonResponse
         ) {
