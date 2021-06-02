@@ -16,6 +16,7 @@ namespace Lotgd\Core\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping;
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Lotgd\Core\Installer\Pattern\Version;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Tracy\Debugger;
@@ -110,7 +111,11 @@ class LogdnetRepository extends DoctrineRepository
                     ->getArrayResult()
                 ;
 
-                return $this->applyLogdnetBans($result);
+                $result = $this->applyLogdnetBans($result);
+
+                \usort($result, [$this, 'lotgdSort']);
+
+                return $result;
             });
         }
         catch (\Throwable $th)
@@ -139,5 +144,66 @@ class LogdnetRepository extends DoctrineRepository
         }
 
         return $logdnet;
+    }
+
+    private function lotgdSort($a, $b)
+    {
+        $official_prefixes = (new class() {
+            use Version;
+        })->getFullListOfVersion();
+
+        unset($official_prefixes['Clean Install']);
+        $official_prefixes = \array_keys($official_prefixes);
+
+        $aver = \strtolower(\str_replace(' ', '', $a['version']));
+        $bver = \strtolower(\str_replace(' ', '', $b['version']));
+
+        // Okay, if $a and $b are the same version, use the priority
+        // This is true whether or not they are the official version or not.
+        // We bubble the official version to the top below.
+        if (0 == \strcmp($aver, $bver))
+        {
+            if ($a['priority'] == $b['priority'])
+            {
+                return 0;
+            }
+
+            return ($a['priority'] < $b['priority']) ? 1 : -1;
+        }
+
+        // Unknown versions are always worse than non-unknown
+        if (0 == \strcmp($aver, 'unknown') && 0 != \strcmp($bver, 'unknown'))
+        {
+            return 1;
+        }
+        elseif (0 == \strcmp($bver, 'unknown') && 0 != \strcmp($aver, 'unknown'))
+        {
+            return -1;
+        }
+
+        // Check if either of them are a prefix.
+        $costa = 10000;
+        $costb = 10000;
+
+        foreach ($official_prefixes as $index => $value)
+        {
+            if (0 == \strncmp($aver, $value, \strlen($value)) && 10000 == $costa)
+            {
+                $costa = $index;
+            }
+
+            if (0 == \strncmp($bver, $value, \strlen($value)) && 10000 == $costb)
+            {
+                $costb = $index;
+            }
+        }
+
+        // If both are the same prefix (or no prefix), just strcmp.
+        if ($costa == $costb)
+        {
+            return \strcmp($aver, $bver);
+        }
+
+        return ($costa < $costb) ? -1 : 1;
     }
 }
