@@ -13,11 +13,24 @@
 
 namespace Lotgd\Core\EntityRepository;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping;
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 use Tracy\Debugger;
 
 class LogdnetRepository extends DoctrineRepository
 {
+    private $cache;
+
+    public function __construct(CacheInterface $coreLotgdCache, EntityManagerInterface $em, Mapping\ClassMetadata $class)
+    {
+        $this->cache = $coreLotgdCache;
+
+        parent::__construct($em, $class);
+    }
+
     /**
      * Delete servers older than two weeks.
      */
@@ -86,12 +99,19 @@ class LogdnetRepository extends DoctrineRepository
 
         try
         {
-            return $query->select('u.address', 'u.description', 'u.version', 'u.admin', 'u.priority')
-                ->where('u.lastping > :date')
-                ->setParameter('date', (new \DateTime('now'))->sub(new \DateInterval('P2W')))
-                ->getQuery()
-                ->getArrayResult()
-            ;
+            return $this->cache->get('logdnet-repository-'.__METHOD__, function (ItemInterface $item) use ($query)
+            {
+                $item->expiresAfter(1800); //-- Cache 1800 seconds (30 mins)
+
+                $result = $query->select('u.address', 'u.description', 'u.version', 'u.admin', 'u.priority')
+                    ->where('u.lastping > :date')
+                    ->setParameter('date', (new \DateTime('now'))->sub(new \DateInterval('P2W')))
+                    ->getQuery()
+                    ->getArrayResult()
+                ;
+
+                return $this->applyLogdnetBans($result);
+            });
         }
         catch (\Throwable $th)
         {
@@ -99,5 +119,25 @@ class LogdnetRepository extends DoctrineRepository
 
             return [];
         }
+    }
+
+    private function applyLogdnetBans($logdnet)
+    {
+        $repository = $this->getDoctrine()->getRepository('LotgdCore:Logdnetbans');
+        $entities   = $repository->findAll();
+
+        foreach ($entities as $ban)
+        {
+            foreach ($logdnet as $key => $net)
+            {
+                $text = $ban->getBanvalue();
+                if (\preg_match("/{$text}/i", $net[$ban->getBantype()]))
+                {
+                    unset($logdnet[$key]);
+                }
+            }
+        }
+
+        return $logdnet;
     }
 }
