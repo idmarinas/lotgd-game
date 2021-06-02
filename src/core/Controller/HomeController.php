@@ -27,14 +27,12 @@ class HomeController extends AbstractController
 {
     private $settings;
     private $dispatcher;
-    private $doctrine;
     private $translator;
 
-    public function __construct(Settings $settings, EventDispatcherInterface $eventDispatcher, EntityManagerInterface $doctrine, TranslatorInterface $translator)
+    public function __construct(Settings $settings, EventDispatcherInterface $eventDispatcher, TranslatorInterface $translator)
     {
         $this->settings   = $settings;
         $this->dispatcher = $eventDispatcher;
-        $this->doctrine   = $doctrine;
         $this->translator = $translator;
     }
 
@@ -61,7 +59,7 @@ class HomeController extends AbstractController
             if (0 != $new && $old != $new)
             {
                 /** @var Lotgd\Core\EntityRepository\CharactersRepository */
-                $character = $this->doctrine->getRepository('LotgdCore:Characters');
+                $character = $this->getDoctrine()->getRepository('LotgdCore:Characters');
                 $name      = $character->getCharacterNameFromAcctId($new);
                 $this->settings->saveSetting('newestPlayerName', $name);
                 $this->settings->saveSetting('newestPlayerOld', $new);
@@ -73,7 +71,7 @@ class HomeController extends AbstractController
         if (\abs($this->settings->getSetting('OnlineCountLast', 0) - \strtotime('now')) > 60)
         {
             /** @var \Lotgd\Core\EntityRepository\AccountsRepository */
-            $account = $this->doctrine->getRepository('LotgdCore:Accounts');
+            $account = $this->getDoctrine()->getRepository('LotgdCore:Accounts');
 
             $this->settings->saveSetting('OnlineCount', $account->getCountAcctsOnline((int) $this->settings->getSetting('LOGINTIMEOUT', 900)));
             $this->settings->saveSetting('OnlineCountLast', \strtotime('now'));
