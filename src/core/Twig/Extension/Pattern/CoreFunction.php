@@ -50,7 +50,7 @@ trait CoreFunction
     public function triggerEvent($name, $data = [])
     {
         $data = new GenericEvent(null, $data);
-        $this->hookmanager->dispatch($name, $data);
+        $this->dispatcher->dispatch($name, $data);
 
         return modulehook($name, $data->getArguments());
     }

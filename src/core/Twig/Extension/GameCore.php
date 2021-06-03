@@ -42,7 +42,7 @@ class GameCore extends AbstractExtension
     protected $translator;
     protected $censor;
     protected $settings;
-    protected $hookManager;
+    protected $dispatcher;
     protected $doctrine;
     protected $session;
 
@@ -52,7 +52,7 @@ class GameCore extends AbstractExtension
         TranslatorInterface $translator,
         Censor $censor,
         Settings $settings,
-        EventDispatcherInterface $hookManager,
+        EventDispatcherInterface $dispatcher,
         EntityManagerInterface $doctrine,
         SessionInterface $session
     ) {
@@ -61,7 +61,7 @@ class GameCore extends AbstractExtension
         $this->translator  = $translator;
         $this->censor      = $censor;
         $this->settings    = $settings;
-        $this->hookManager = $hookManager;
+        $this->dispatcher = $dispatcher;
         $this->doctrine    = $doctrine;
         $this->session     = $session;
     }
