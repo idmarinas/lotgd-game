@@ -18,46 +18,55 @@ use Lotgd\Core\Lib\Settings;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class AboutController extends AbstractController
 {
     private $dispatcher;
     private $settings;
+    private $cache;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, Settings $settings)
+    public function __construct(EventDispatcherInterface $eventDispatcher, Settings $settings, CacheInterface $coreLotgdCache)
     {
         $this->dispatcher = $eventDispatcher;
         $this->settings   = $settings;
+        $this->cache      = $coreLotgdCache;
     }
 
     public function setup()
     {
         $params['block_tpl'] = 'about_setup';
 
-        $details       = gametimedetails();
-        $secstonextday = secondstonextgameday($details);
-        $useful_vals   = [
-            'dayduration'   => \round(($details['dayduration'] / 60 / 60), 0).' hours',
-            'curgametime'   => getgametime(),
-            'curservertime' => \date('Y-m-d h:i:s a'),
-            'lastnewday'    => \date('h:i:s a', \strtotime("-{$details['realsecssofartoday']} seconds")),
-            'nextnewday'    => \date('h:i:s a', \strtotime("+{$details['realsecstotomorrow']} seconds")).' ('.\date('H\\h i\\m s\\s', $secstonextday).')',
-        ];
+        $data = $this->cache->get('', function (ItemInterface $item)
+        {
+            $item->expiresAfter(43200); //-- Expire after 12 hours
 
-        $localsettings = $this->settings->getArray();
+            $details = gametimedetails();
+            $secstonextday = secondstonextgameday($details);
+            $useful_vals = [
+                'dayduration'   => \round(($details['dayduration'] / 60 / 60), 0).' hours',
+                'curgametime'   => getgametime(),
+                'curservertime' => \date('Y-m-d h:i:s a'),
+                'lastnewday'    => \date('h:i:s a', \strtotime("-{$details['realsecssofartoday']} seconds")),
+                'nextnewday'    => \date('h:i:s a', \strtotime("+{$details['realsecstotomorrow']} seconds")).' ('.\date('H\\h i\\m s\\s', $secstonextday).')',
+            ];
 
-        $vals = \array_merge($localsettings, $useful_vals);
+            $localsettings = $this->settings->getArray();
 
-        $data = [
-            'game_setup' => $vals,
-            'newday'     => $vals,
-            'bank'       => $vals,
-            'forest'     => $vals,
-            'mail'       => $vals,
-            'content'    => $vals,
-            'info'       => $vals,
-        ];
+            $vals = \array_merge($localsettings, $useful_vals);
+
+            return [
+                'game_setup' => $vals,
+                'newday'     => $vals,
+                'bank'       => $vals,
+                'forest'     => $vals,
+                'mail'       => $vals,
+                'content'    => $vals,
+                'info'       => $vals,
+            ];
+        });
 
         $form = $this->createForm(\Lotgd\Core\Form\AboutType::class, $data, [
             'action' => 'none',
