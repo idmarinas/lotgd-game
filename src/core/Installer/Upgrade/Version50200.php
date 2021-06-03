@@ -52,7 +52,6 @@ class Version50200 extends InstallerAbstract
                 $this->getProjectDir().'/src/core/Fixed/Cache.php',
                 $this->getProjectDir().'/src/core/Fixed/Dbwrapper.php',
                 $this->getProjectDir().'/src/core/Fixed/EventManager.php',
-                $this->getProjectDir().'/src/core/Fixed/Format.php',
                 $this->getProjectDir().'/src/core/Fixed/Http.php',
                 $this->getProjectDir().'/src/core/Fixed/HookManager.php',
                 $this->getProjectDir().'/src/core/Fixed/Locator.php',
