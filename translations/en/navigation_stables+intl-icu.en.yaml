@@ -3,6 +3,7 @@
 # Headers of navigations
 category:
     other: Other
+    new: 'New {name}'
     confirm:
         trade: 'Confirm trade'
         sale: 'Confirm sale'
@@ -10,6 +11,7 @@ category:
 # Menu navs
 nav:
     examine: 'Examine {name}'
+    buy: 'Buy this creature'
     sell: 'Sell your {name}'
     feed: 'Feed your {name} (`^{grubPrice,number}`0 gold)'
     yes: '`@Yes`0'
