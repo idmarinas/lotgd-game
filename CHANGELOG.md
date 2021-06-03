@@ -16,6 +16,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `public/home.php` use controller `Lotgd\Core\Controller\HomeController`
     -   `public/list.php` use controller `Lotgd\Core\Controller\ListController`
     -   Note: See this files for an examples of how to use the controllers in LoTGD Core.
+-   **Translations**
+    -   `translations/en/navigation_stables+intl-icu.en.yaml` Add new translations
 
 ### :star: FEATURES
 
@@ -46,7 +48,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     
 ### :wrench: FIXES
 
--   Nothing
+-   **public/stables.php** Now translate navs for examine mount
 
 ### :x: REMOVES
 
