@@ -34,8 +34,6 @@ class Translator
      */
     public static function __callStatic($method, $arguments)
     {
-        \trigger_error('Usage of LotgdTranslator is deprecated, please use "$translator = LotgdKernel::get("translator")" instead', E_USER_DEPRECATED);
-
         if (\method_exists(self::$container, $method))
         {
             return self::$container->{$method}(...$arguments);
