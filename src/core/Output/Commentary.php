@@ -308,7 +308,7 @@ class Commentary
         //-- Process comment
         $args = new EventCommentary(['comment' => $comment]);
         $this->hook->dispatch($args, EventCommentary::COMMENT);
-        $comment = modulehook('commentary-comment', $args);
+        $comment = modulehook('commentary-comment', $args->getData());
 
         return $comment['comment'];
     }
