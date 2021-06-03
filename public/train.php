@@ -225,7 +225,6 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
         require_once 'battle.php';
 
         suspend_buffs('allowintrain');
-        // suspend_buffs('allowintrain', '`&Your pride prevents you from using extra abilities during the fight!`0`n');
         suspend_companions('allowintrain');
 
         //-- Superuser Gain level
@@ -397,7 +396,6 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
         if ($victory || $defeat)
         {
             unsuspend_buffs('allowintrain');
-            // unsuspend_buffs('allowintrain', '`&You now feel free to make use of your buffs again!`0`n');
             unsuspend_companions('allowintrain');
         }
     }
