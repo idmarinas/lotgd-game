@@ -67,8 +67,8 @@ elseif ('examine' == $op)
 
     if ($params['mount'])
     {
-        \LotgdNavigation::addHeaderNotl('New %s'.$params['mount']['mountname']);
-        \LotgdNavigation::addNav('Buy this creature', "stables.php?op=buymount&id={$params['mount']['mountid']}");
+        \LotgdNavigation::addHeader('category.new', ['params' => ['name' => $params['mount']['mountname']]]);
+        \LotgdNavigation::addNav('nav.buy', "stables.php?op=buymount&id={$params['mount']['mountid']}");
     }
 }
 elseif ('buymount' == $op)
