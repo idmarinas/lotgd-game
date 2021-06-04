@@ -107,12 +107,12 @@ function pvpvictory($badguy, $killedloc)
     $session['user']['gold'] += $winamount;
 
     $lotgdBattleContent['battleend'][] = [
-        'battle.victory.creature',
+        'combat.end.slain',
         ['creatureName' => $badguy['creaturename']],
         $textDomain,
     ];
     $lotgdBattleContent['battleend'][] = [
-        'battle.victory.gold',
+        'combat.end.get.gold',
         ['gold' => $winamount],
         $textDomain,
     ];
@@ -134,7 +134,7 @@ function pvpvictory($badguy, $killedloc)
     if ($expbonus > 0)
     {
         $lotgdBattleContent['battleend'][] = [
-            'battle.victory.difficult',
+            'combat.end.experience.forest.bonus',
             ['experience' => $expbonus],
             $textDomain,
         ];
@@ -142,7 +142,7 @@ function pvpvictory($badguy, $killedloc)
     elseif ($expbonus < 0)
     {
         $lotgdBattleContent['battleend'][] = [
-            'battle.victory.simplistic',
+            'combat.end.experience.forest.penalize',
             ['experience' => \abs($expbonus)],
             $textDomain,
         ];
@@ -311,22 +311,22 @@ function pvpdefeat($badguy, $killedloc)
     $session['user']['hitpoints']      = 0;
     $session['user']['experience']     = \round($session['user']['experience'] * (100 - getsetting('pvpattlose', 15)) / 100, 0);
     $lotgdBattleContent['battleend'][] = [
-        'battle.defeated.death',
+        'combat.end.defeated.die',
         ['creatureName' => $badguy['creaturename']],
         $textDomain,
     ];
     $lotgdBattleContent['battleend'][] = [
-        'battle.defeated.gold',
+        'combat.end.defeated.lost.gold',
         [],
         $textDomain,
     ];
     $lotgdBattleContent['battleend'][] = [
-        'battle.defeated.experience',
+        'combat.end.defeated.lost.exp',
         ['experience' => getsetting('pvpattlose', 15) / 100],
         $textDomain,
     ];
     $lotgdBattleContent['battleend'][] = [
-        'battle.defeated.tomorrow',
+        'combat.end.defeated.tomorrow.forest',
         [],
         $textDomain,
     ];
