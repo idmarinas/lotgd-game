@@ -34,26 +34,21 @@
         'pdo'       => 'PDO',
         'pdo_mysql' => 'PDO MySQL',
         'session'   => 'Session',
+        'ctype'     => 'Ctype',
+        'iconv'     => 'Iconv',
     ];
 
     $default = [
-        'php_version'    => '7.2.5',
+        'php_version'    => '7.3.0',
         'memory_limit'   => 128 * 1024 * 1024, //-- Need 128 MB
-        'execution_time' => 30, //-- 30 Seconds
+        'execution_time' => 60, //-- 60 Seconds
         'extensions'     => $extensions,
         'mysql_version'  => '5.5.3',
     ];
 
-    $default46 = \array_merge($default, ['php_version' => '7.3.0']);
-    $default48 = \array_merge($default46, ['extensions' => \array_merge($extensions, ['ctype' => 'Ctype', 'iconv' => 'Iconv'])]);
-    $default49 = \array_merge($default48, ['execution_time' => 60]); //-- Increased execution_time for version 4.9.0
-
     $requeriments = [
         //-- LotgdVersion => Requeriments
-        '4.2' => $default,
-        '4.6' => $default46,
-        '4.8' => $default48,
-        '4.9' => $default49,
+        '5.0' => $default,
     ];
 
     $results = [];
