@@ -13,7 +13,6 @@
 
 namespace Lotgd\Core\Controller;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;

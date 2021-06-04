@@ -48,7 +48,7 @@ The version **IDMarinas Edition** is based on the version **1.1.2 Dragonprime** 
 
 ## IDMarinas Edition
 
-Version of the IDMarinas Edition: **_5.3.1_**
+Version of the IDMarinas Edition: **_5.4.0_**
 
 The intention to make a new branch of the Core, is to be able to update certain aspects, which were outdated, such as the script that is used to access the database, while correcting certain errors, and adding new options of customization.
 

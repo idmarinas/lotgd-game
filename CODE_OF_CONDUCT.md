@@ -18,7 +18,7 @@ In the effort to create such a place, we hold to these values:
 1.  **Discrimination limits us.** This includes discrimination on the basis of
     race, gender, sexual orientation, gender identity, age, nationality, technology
     and any other arbitrary exclusion of a group of people.
-2.  **Boundaries honor us.** Your comfort levels are not everyone’s comfort
+2.  **Boundaries honor us.** Your comfort levels are not everyone's comfort
     levels. Remember that, and if brought to your attention, heed it.
 3.  **We are our biggest assets.** None of us were born masters of our trade.
     Each of us has been helped along the way. Return that favor, when and where
