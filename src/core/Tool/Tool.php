@@ -15,8 +15,8 @@ namespace Lotgd\Core\Tool;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Http\Response;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Lotgd\Core\Lib\Settings as LibSettings;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class Tool
 {
@@ -204,5 +204,70 @@ class Tool
 
             exit();
         }
+    }
+
+    /**
+     * Save user data and character.
+     */
+    public function saveuser(bool $update_last_on = true): void
+    {
+        global $session, $companions;
+
+        //-- It's defined as not save user, Not are a user logged in or not are defined id of account
+        if (\defined('NO_SAVE_USER') || ! ($session['loggedin'] ?? false) || ! ($session['user']['acctid'] ?? false))
+        {
+            return;
+        }
+
+        // Any time we go to save a user, make SURE that any tempstat changes
+        // are undone.
+        restore_buff_fields();
+
+        $session['user']['bufflist'] = $session['bufflist'];
+
+        if ($update_last_on)
+        {
+            $session['user']['laston'] = new \DateTime('now');
+        }
+
+        if (isset($companions) && \is_array($companions))
+        {
+            $session['user']['companions'] = $companions;
+        }
+
+        $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
+
+        $accountRep = $this->doctrine->getRepository('LotgdCore:Accounts');
+        $pageRep    = $this->doctrine->getRepository('LotgdCore:AccountsEverypage');
+
+        $everypage = $hydrator->hydrate($session['user'], $pageRep->find((int) $session['user']['acctid']));
+        $account   = $hydrator->hydrate($session['user'], $accountRep->find((int) $session['user']['acctid']));
+        $character = $hydrator->hydrate($session['user'], $account->getCharacter());
+
+        $account->setCharacter($character);
+        $character->setAcct($account);
+
+        $this->doctrine->persist($account);
+        $this->doctrine->persist($character);
+        $this->doctrine->persist($everypage);
+
+        if ($session['output'] ?? false)
+        {
+            $outputRep  = $this->doctrine->getRepository('LotgdCore:AccountsOutput');
+            $acctOutput = $outputRep->find((int) $session['user']['acctid']) ?: new \Lotgd\Core\Entity\AccountsOutput();
+
+            $acctOutput->setAcctid($session['user']['acctid'])
+                ->setOutput(\gzcompress($session['output'], 1))
+            ;
+
+            $this->doctrine->persist($acctOutput);
+        }
+
+        $this->doctrine->flush(); //Persist objects
+
+        $session['user'] = [
+            'acctid'   => $session['user']['acctid'],
+            'loggedin' => $session['user']['loggedin'],
+        ];
     }
 }
