@@ -43,6 +43,7 @@ class PetitionType extends AbstractType
             ->add('email', EmailType::class, [
                 'label'       => 'email',
                 'constraints' => [
+                    new Assert\NotBlank(),
                     new Assert\Email(),
                 ],
             ])
@@ -52,6 +53,7 @@ class PetitionType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label'       => 'description',
                 'constraints' => [
+                    new Assert\NotBlank(),
                     new Assert\Length(['min' => 0, 'max' => 65000]),
                 ],
                 'filters' => [
