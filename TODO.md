@@ -10,11 +10,12 @@
     -   A partir de la versión **5.0.0** se empezará a usar un sistema de módulos tipo Bundle
 
 
-# Actualmente haciendo esto (5.3.0)
+# Actualmente haciendo esto (5.4.0)
 
 -   Sustituir la funcion lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
         -   Use `Symfony mailer` instead.
+-   Se intetará pasar todas las paginas al sistema de controllador igual que home.php y about.php        
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 
