@@ -8,7 +8,7 @@
                 {% if data.isTarget %}<i class="yellow bullseye icon"></i>{% endif %}
                 {{ '(%s) %s (Level `b%s´b)`0'|trans|format(data.who|trans, nametext, data.level)|colorize }}
                 {% if not data.showbar %}
-                    {% if data.hpvalue > 0 %}: {% if data.showhptext %}{{ ( '`6' ~ data.hpvaluetext ~ '`0')|colorize }}{% endif %}{% else %}{{ '`7DEFEATED`0'|trans|colorize }}{% endif %}
+                    {% if data.hpvalue > 0 %}: {% if data.showhptext %}{{ ( '`6' ~ data.hpvaluetext ~ '`0')|colorize }}{% endif %}{% else %}{{ 'battle.defeated'|trans|colorize }}{% endif %}
                 {% endif %}
             </td>
         </tr>
@@ -21,7 +21,7 @@
                     </div>
                 </td>
                 {% if data.showhptext %}
-                    {% set text = data.hpvalue > 0 ? '' : '`7DEFEATED`0'|trans|colorize %}
+                    {% set text = data.hpvalue > 0 ? '' : 'battle.defeated'|trans|colorize %}
                     <td>&nbsp;{{ '(%s/%s) %s`0`n'|format(data.hpvaluetext, data.hptotaltext, text)|colorize }}</td>
                 {% endif %}
             </tr>
