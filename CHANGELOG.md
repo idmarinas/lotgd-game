@@ -19,7 +19,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   **lib/saveuser.php** Function `saveuser` is deprecated and removed in future versions.
+    -   Use `LotgdLog::saveUser($update_last_on)` instead or use a dependency injection.
     
 ### :wrench: FIXES
 
@@ -27,7 +28,10 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :x: REMOVES
 
--   Nothing
+-   **Deleted some old files** this files is related to version 1.1.2 or older.
+    -   `README.txt`
+    -   `AFTERUPGRADE.txt`
+    -   `BUG FIXES.txt`
 
 ### :notebook: NOTES
 
