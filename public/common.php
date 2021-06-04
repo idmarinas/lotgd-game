@@ -112,7 +112,7 @@ if (getsetting('fullmaintenance', 0))
 
         \LotgdKernel::get('cache.app')->delete('char-list-home-page');
 
-        saveuser();
+        \LotgdTool::saveUser();
 
         \LotgdSession::invalidate();
 

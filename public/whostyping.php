@@ -18,7 +18,7 @@ if ($session['typerequests'][$minute] >= 200)
 {
     echo "Please don't run multiple Global Banter windows, it puts a tremendous strain on the server.  I've logged you out.  You'll be able to log back in again in a few minutes - please clear your cookies.";
     $session['user']['loggedin'] = false;
-    saveuser();
+    \LotgdTool::saveUser();
 
     exit();
 }

@@ -36,7 +36,7 @@ function redirect($location, $reason = false)
         'locationFrom' => \LotgdRequest::getServer('REQUEST_URI'),
         'reason'       => $reason,
     ], 'app_default');
-    saveuser();
+    \LotgdTool::saveUser();
 
     $host = \LotgdRequest::getServer('HTTP_HOST');
     $http = (443 == \LotgdRequest::getServer('SERVER_PORT')) ? 'https' : 'http';

@@ -79,7 +79,7 @@ if (getsetting('fullmaintenance', 0) && (($session['user']['loggedin'] ?? false)
 
     \LotgdKernel::get('cache.app')->delete('char-list-home-page');
 
-    saveuser();
+    \LotgdTool::saveUser();
 
     \LotgdSession::invalidate();
 

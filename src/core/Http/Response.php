@@ -269,7 +269,7 @@ class Response extends HttpResponse
 
         if (true === $saveuser)
         {
-            saveuser();
+            \LotgdTool::saveUser();
         }
 
         unset($session['output']);

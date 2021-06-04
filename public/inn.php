@@ -123,7 +123,7 @@ switch ($op)
                     $session['user']['location'] = $iname;
                     $session['user']['loggedin'] = 0;
                     $session['user']['restorepage'] = 'inn.php?op=strolldown';
-                    saveuser();
+                    \LotgdTool::saveUser();
                 }
 
                 $session = [];

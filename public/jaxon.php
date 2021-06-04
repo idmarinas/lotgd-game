@@ -16,7 +16,7 @@ try
     {
         $jaxon->processRequest();
 
-        saveuser(false); //-- Not updated laston (to avoid perma loggedin)
+        \LotgdTool::saveUser(false); //-- Not updated laston (to avoid perma loggedin)
 
         exit;
     }

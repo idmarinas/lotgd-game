@@ -213,7 +213,7 @@ if ('' != $name)
 
         $str = \LotgdTranslator::t('login.redirect', ['link' => $link], 'page_login');
         \header("Location: {$session['user']['restorepage']}");
-        saveuser();
+        \LotgdTool::saveUser();
         echo $str;
 
         exit();
@@ -255,7 +255,7 @@ elseif ('logout' == $op)
         // when someone logs in or off can do so.
         \LotgdEventDispatcher::dispatch(new Core(), Core::LOGOUT_PLAYER);
         modulehook('player-logout');
-        saveuser();
+        \LotgdTool::saveUser();
 
         \LotgdSession::invalidate();
 

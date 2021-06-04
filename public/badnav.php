@@ -68,7 +68,7 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
     }
 
     $session['debug'] = '';
-    saveuser();
+    \LotgdTool::saveUser();
 
     exit;
 }
