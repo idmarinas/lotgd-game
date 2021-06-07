@@ -6,7 +6,6 @@
  * This will speed up the processing of a Jaxon-PHP request a bit.
  */
 
-use Lotgd\Core\Event\Core;
 use Lotgd\Core\Event\EveryRequest;
 
 // **** NOTICE *****
