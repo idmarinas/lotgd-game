@@ -21,7 +21,16 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 -   **lib/saveuser.php** Function `saveuser` is deprecated and removed in future versions.
     -   Use `LotgdLog::saveUser($update_last_on)` instead or use a dependency injection.
-    
+-   **lib/deathmessage.php** Function `select_deathmessage` is deprecated and removed in future versions.
+    -   Use `LotgdLog::selectDeathMessage($zone, $extraParams)` instead or use a dependency injection.
+-   **lib/taunt.php** Function `select_taunt` is deprecated and removed in future versions.
+    -   Use `\LotgdTool::selectTaunt($extraParams)` instead or use a dependency injection.
+-   **lib/substitute.php** 
+    -   Function `substitute` is deprecated and removed in future versions.
+        -   Use `\LotgdTool::substitute($string, $extra, $extrarep)` instead or use a dependency injection.
+    -   Function `substitute_array` is deprecated and removed in future versions.
+        -   Use `\LotgdTool::substituteArray($string, $extra, $extrarep)` instead or use a dependency injection.
+
 ### :wrench: FIXES
 
 -   Nothing
