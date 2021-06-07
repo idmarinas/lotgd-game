@@ -406,7 +406,7 @@ if ('' == $op)
 
     (getsetting('suicide', 0) && getsetting('suicidedk', 10) <= $session['user']['dragonkills']) && \LotgdNavigation::addNav('nav.suicide', 'forest.php?op=search&type=suicide');
 
-    \LotgdNavigation::addHeader('other');
+    \LotgdNavigation::addHeader('category.other');
 
     \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_FOREST_HEADER);
     modulehook('forest-header');
