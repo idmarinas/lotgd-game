@@ -170,7 +170,7 @@ if ($battle)
         {
             require_once 'lib/taunt.php';
 
-            $taunt = select_taunt();
+            $taunt = \LotgdTool::selectTaunt();
 
             $news = ($killedin == $iname) ? 'inn' : 'other';
 

@@ -212,7 +212,7 @@ if ($session['user']['hashorse'])
     $msg                 = $playermount['newday'];
     $params['mountName'] = $playermount['mountname'] ?? '';
 
-    $params['mountMessage'] = substitute_array('`n`&'.$playermount['newday'].'`0`n');
+    $params['mountMessage'] = \LotgdTool::substituteArray('`n`&'.$playermount['newday'].'`0`n');
 
     $mff = (int) $playermount['mountforestfights'];
     $session['user']['turns'] += $mff;

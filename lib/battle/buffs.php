@@ -44,11 +44,11 @@ function activate_buffs($tag)
             if (\is_array($buff['startmsg']))
             {
                 $buff['startmsg']                                            = \str_replace('`%', '`%%', $buff['startmsg']);
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`5{$buff['startmsg']}`0`n");
+                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = \LotgdTool::substitute("`5{$buff['startmsg']}`0`n");
             }
             else
             {
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`5{$buff['startmsg']}`0`n");
+                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = \LotgdTool::substitute("`5{$buff['startmsg']}`0`n");
             }
 
             unset($session['bufflist'][$key]['startmsg']);
@@ -146,11 +146,11 @@ function activate_buffs($tag)
                 if (\is_array($buff['roundmsg']))
                 {
                     $buff['roundmsg']                                            = \str_replace('`%', '`%%', $buff['roundmsg']);
-                    $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`5{$buff['roundmsg']}`0`n");
+                    $lotgdBattleContent['battlerounds'][$countround]['allied'][] = \LotgdTool::substitute("`5{$buff['roundmsg']}`0`n");
                 }
                 else
                 {
-                    $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`5{$buff['roundmsg']}`0`n");
+                    $lotgdBattleContent['battlerounds'][$countround]['allied'][] = \LotgdTool::substitute("`5{$buff['roundmsg']}`0`n");
                 }
             }
         }
@@ -243,11 +243,11 @@ function activate_buffs($tag)
 
             if (\is_array($msg))
             {
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`){$msg}`0`n", ['{damage}'], [$hptoregen]);
+                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = \LotgdTool::substitute("`){$msg}`0`n", ['{damage}'], [$hptoregen]);
             }
             elseif ('' != $msg)
             {
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`){$msg}`0`n", ['{damage}'], [$hptoregen]);
+                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = \LotgdTool::substitute("`){$msg}`0`n", ['{damage}'], [$hptoregen]);
             }
 
             if (isset($buff['aura']) && true == $buff['aura'])
@@ -266,7 +266,8 @@ function activate_buffs($tag)
                         {
                             $hptoregen = \min($auraeffect, $companion['maxhitpoints'] - $companion['hitpoints']);
                             $companions[$name]['hitpoints'] += $hptoregen;
-                            $msg                                                         = substitute("`){$buff['auramsg']}`0`n", ['{damage}', '{companion}'], [$hptoregen, $companion['name']]);
+                            $msg = \LotgdTool::substitute("`){$buff['auramsg']}`0`n", ['{damage}', '{companion}'], [$hptoregen, $companion['name']]);
+
                             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 
                             if ($hptoregen < 0 && $companion['hitpoints'] <= 0)
@@ -339,12 +340,14 @@ function activate_buffs($tag)
 
                 if (\is_array($msg))
                 {
-                    $msg                                                         = substitute("`){$msg}`0`n", ['{damage}'], [\abs($damage)]);
+                    $msg = \LotgdTool::substitute("`){$msg}`0`n", ['{damage}'], [\abs($damage)]);
+
                     $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg; //Here it's already translated
                 }
                 elseif ($msg > '')
                 {
-                    $msg                                                         = substitute("`){$msg}`0`n", ['{damage}'], [\abs($damage)]);
+                    $msg = \LotgdTool::substitute("`){$msg}`0`n", ['{damage}'], [\abs($damage)]);
+
                     $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
                 }
 
@@ -408,12 +411,14 @@ function process_lifetaps($ltaps, $damage)
 
         if (\is_array($msg))
         {
-            $msg                                                         = substitute("`){$msg}`0`n", ['{damage}'], [$healhp]);
+            $msg = \LotgdTool::substitute("`){$msg}`0`n", ['{damage}'], [$healhp]);
+
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
         }
         elseif ($msg > '')
         {
-            $msg                                                         = substitute("`){$msg}`0`n", ['{damage}'], [$healhp]);
+            $msg = \LotgdTool::substitute("`){$msg}`0`n", ['{damage}'], [$healhp]);
+
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
         }
     }
@@ -462,12 +467,14 @@ function process_dmgshield($dshield, $damage)
 
         if (\is_array($msg))
         {
-            $msg                                                         = substitute("`){$msg}`0`n", ['{damage}'], [$realdamage]);
+            $msg = \LotgdTool::substitute("`){$msg}`0`n", ['{damage}'], [$realdamage]);
+
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
         }
         elseif ($msg > '')
         {
-            $msg                                                         = substitute("`){$msg}`0`n", ['{damage}'], [$realdamage]);
+            $msg = \LotgdTool::substitute("`){$msg}`0`n", ['{damage}'], [$realdamage]);
+
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
         }
     }
@@ -500,11 +507,11 @@ function expire_buffs()
                     if (\is_array($buff['wearoff']))
                     {
                         $buff['wearoff'] = \str_replace('`%', '`%%', $buff['wearoff']);
-                        $msg             = substitute('`5'.$msg.'`0`n');
+                        $msg             = \LotgdTool::substitute('`5'.$msg.'`0`n');
                     }
                     else
                     {
-                        $msg = substitute('`5'.$buff['wearoff'].'`0`n');
+                        $msg = \LotgdTool::substitute('`5'.$buff['wearoff'].'`0`n');
                     }
 
                     $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
@@ -540,13 +547,13 @@ function expire_buffs_afterbattle()
                     if (\is_array($buff['wearoff']))
                     {
                         $buff['wearoff'] = \str_replace('`%', '`%%', $buff['wearoff']);
-                        $msg             = substitute("`5{$buff['wearoff']}`0`n");
+                        $msg             = \LotgdTool::substitute("`5{$buff['wearoff']}`0`n");
 
                         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
                     }
                     else
                     {
-                        $msg                                                         = substitute("`5{$buff['wearoff']}`0`n");
+                        $msg                                                         = \LotgdTool::substitute("`5{$buff['wearoff']}`0`n");
                         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
                     }
                 }

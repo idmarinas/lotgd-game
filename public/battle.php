@@ -114,7 +114,7 @@ elseif ('newtarget' == $op)
             {
                 if (is_array($badguy['cannotbetarget']))
                 {
-                    $lotgdBattleContent['msg'][] = substitute($msg);
+                    $lotgdBattleContent['msg'][] = \LotgdTool::substitute($msg);
                 }
                 else
                 {
@@ -678,7 +678,7 @@ if ('newtarget' != $op)
                 {
                     if (is_array($badguy['fleesifalone']))
                     {
-                        $msg = substitute($badguy['fleesifalone']);
+                        $msg = \LotgdTool::substitute($badguy['fleesifalone']);
                     }
                     else
                     {
@@ -711,7 +711,7 @@ if ('newtarget' != $op)
         {
             if (is_array($badguy['essentialleader']))
             {
-                $msg = substitute($badguy['essentialleader']);
+                $msg = \LotgdTool::substitute($badguy['essentialleader']);
                 $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = $msg;
             }
             else

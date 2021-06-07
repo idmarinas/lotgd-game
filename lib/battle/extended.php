@@ -760,7 +760,7 @@ function report_companion_move($companion, $activate = 'fight')
             $msg = $companion['dyingtext'];
         }
 
-        $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute_array("`){$msg}`0`n", ['{companion}'], [$companion['name']]);
+        $lotgdBattleContent['battlerounds'][$countround]['allied'][] = \LotgdTool::substituteArray("`){$msg}`0`n", ['{companion}'], [$companion['name']]);
 
         if (isset($companion['cannotdie']) && true == $companion['cannotdie'])
         {

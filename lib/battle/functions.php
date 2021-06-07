@@ -241,7 +241,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 
         if (isset($badguy['creaturelose']))
         {
-            \array_unshift($lotgdBattleContent['battleend'], substitute($badguy['creaturelose'].'`n'));
+            \array_unshift($lotgdBattleContent['battleend'], \LotgdTool::substitute($badguy['creaturelose'].'`n'));
         }
 
         if (true === $forest)
@@ -583,7 +583,7 @@ function battledefeat($enemies, $where = 'forest', $candie = true, $lostexp = tr
 
         if (isset($badguy['creaturewin']) && $badguy['creaturewin'] > '')
         {
-            $lotgdBattleContent['battleend'][] = substitute("`b`&{$badguy['creaturewin']}`0´b`n");
+            $lotgdBattleContent['battleend'][] = \LotgdTool::substitute("`b`&{$badguy['creaturewin']}`0´b`n");
         }
     }
 
@@ -600,8 +600,8 @@ function battledefeat($enemies, $where = 'forest', $candie = true, $lostexp = tr
     //-- If not want add a news when defeat set $where in null|''|false
     if ($where)
     {
-        $deathmessage = select_deathmessage($where);
-        $taunt        = select_taunt();
+        $deathmessage = \LotgdTool::selectDeathMessage($where);
+        $taunt        = \LotgdTool::selectTaunt();
 
         \LotgdTool::addNews('deathmessage', [
             'deathmessage' => $deathmessage,

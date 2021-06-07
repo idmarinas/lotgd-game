@@ -350,7 +350,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
         {
             if (getsetting('displaymasternews', 1))
             {
-                $taunt = select_taunt();
+                $taunt = \LotgdTool::selectTaunt();
 
                 \LotgdTool::addNews('deathmessage', [
                     'deathmessage' => [
