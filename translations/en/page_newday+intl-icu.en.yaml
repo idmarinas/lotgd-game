@@ -67,6 +67,18 @@ section:
                 points:
                     left: "`&You have `^%s`0, %s left to spend.`0"
                     over: "`&You have spent `$%s`0, %s too many!`0"
+        buy:
+            category:
+                attributes: Attributes
+                general: General Stuff
+            type:
+                str: Strength +1
+                dex: Dexterity +1
+                con: Constitution +1
+                int: Intelligence +1
+                wis: Wisdom +1
+                unknown: Unknown Spends (contact an admin to investigate!)
+
 
 spirits:
     '00': 'Resurrected'

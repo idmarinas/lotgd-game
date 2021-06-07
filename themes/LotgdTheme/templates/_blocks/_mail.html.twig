@@ -343,7 +343,7 @@
         </div>
         <div class="content">
             <span class="ui header">{{ subjectDisplay }}</span>
-            <p>{{ bodyDisplay|e('html')|colorize }}</p>
+            <p>{{ bodyDisplay|colorize|nl2br }}</p>
         </div>
         {% set jaxonRead = 'JaxonLotgd.Ajax.Core.Mail.read(%s);' %}
         <div class="ui bottom attached primary buttons">

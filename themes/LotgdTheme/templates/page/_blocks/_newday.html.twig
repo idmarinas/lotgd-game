@@ -86,14 +86,16 @@
                     {% set head = label|split(',') %}
 
                     {% if head|length > 1 %}
+                        {% set category = 'section.dragonpoints.buy.category.' ~ type %}
                         <thead>
                             <tr>
-                                <th colspan="2" class="collapsing center aligned" scope="colgroup">{{ '`b`4%s`0´b'|format(head[0])|colorize }}</th>
+                                <th colspan="3" class="collapsing center aligned" scope="colgroup">{{ '`4%s`0'|format(category|trans)|colorize }}</th>
                             </tr>
                         </thead>
                     {% elseif canBuy[type] %}
+                        {% set attribute = 'section.dragonpoints.buy.type.' ~ type %}
                         <tr>
-                            <td class="collapsing">{{ label|colorize }}</td>
+                            <td class="collapsing">{{ attribute|colorize }}</td>
                             <td>&nbsp;&nbsp;</td>
                             <td><input type="number" id="{{ type }}" name="{{ type }}" value="" onchange="pointsLeft(this)"></td>
                         </tr>
@@ -141,14 +143,16 @@
                 {% set head = label|split(',') %}
 
                 {% if head|length > 1 %}
+                    {% set category = 'section.dragonpoints.buy.category.' ~ type %}
                     <thead>
                         <tr>
-                            <th colspan="2" class="center aligned" scope="colgroup">{{ '`b`4%s`0´b'|format(head[0])|colorize }}</th>
+                            <th colspan="3" class="center aligned" scope="colgroup">{{ '`b`4%s`0´b'|format(category|trans)|colorize }}</th>
                         </tr>
                     </thead>
                 {% elseif canBuy[type] and canBuy[type] != 'unknown' %}
+                    {% set attribute = 'section.dragonpoints.buy.type.' ~ type %}
                     <tr>
-                        <td>{{ label|colorize }}</td>
+                        <td>{{ attribute|trans|colorize }}</td>
                         <td>&nbsp;&nbsp;</td>
                         <td>{{ '`@%s`0'|format(distribution[type]|numeral)|colorize }}</td>
                     </tr>

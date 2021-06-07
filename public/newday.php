@@ -76,9 +76,9 @@ if ((count($session['user']['dragonpoints']) < $session['user']['dragonkills']) 
 }
 
 $labels = [
-    'General Stuff,title',
+    'general' => 'General Stuff,title',
         'ff' => 'Forest Fights + 1',
-    'Attributes,title',
+    'attributes' => 'Attributes,title',
         'str' => 'Strength +1',
         'dex' => 'Dexterity +1',
         'con' => 'Constitution +1',

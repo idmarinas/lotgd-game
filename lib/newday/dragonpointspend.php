@@ -27,14 +27,26 @@ else
 
         if (\count($head) > 1)
         {
-            \LotgdNavigation::addHeader($head[0]); //got a headline here
+            \LotgdNavigation::addHeader("category.{$type}");
 
             continue;
         }
 
         if ($canbuy[$type] ?? false)
         {
-            \LotgdNavigation::addNavNotl($label, "newday.php?dk={$type}{$resline}");
+            \LotgdNavigation::addNav("nav.{$type}", "newday.php?dk={$type}{$resline}");
         }
     }
 }
+
+// $labels = [
+//     'general' => 'General Stuff,title',
+//         'ff' => 'Forest Fights + 1',
+//     'attributes' => 'Attributes,title',
+//         'str' => 'Strength +1',
+//         'dex' => 'Dexterity +1',
+//         'con' => 'Constitution +1',
+//         'int' => 'Intelligence +1',
+//         'wis' => 'Wisdom +1',
+//     'unknown' => 'Unknown Spends (contact an admin to investigate!)',
+// ];
