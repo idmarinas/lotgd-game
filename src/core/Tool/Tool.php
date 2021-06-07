@@ -20,6 +20,10 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 class Tool
 {
+    use Tool\DeathMessage;
+    use Tool\Substitute;
+    use Tool\Taunt;
+
     private $doctrine;
     private $settings;
     private $response;
