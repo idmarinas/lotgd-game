@@ -4,8 +4,16 @@
 category:
     continue: Continue
     basic: Basic
+    attributes: Attributes
+    general: General Stuff
 
 # Menu navs
 nav:
     continue: Continue
     reset: Reset
+    str: Strength +1
+    dex: Dexterity +1
+    con: Constitution +1
+    int: Intelligence +1
+    wis: Wisdom +1
+    unknown: Unknown Spends (contact an admin to investigate!)
