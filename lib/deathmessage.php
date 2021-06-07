@@ -10,6 +10,8 @@
  * @param string $zone
  * @param array  $extraParams
  * @param array  $extrarep
+ *
+ * @deprecated 5.4.0 Use "LotgdTool::selectDeathMessage($zone, $extraParams);" instead. Removed in future versions.
  */
 function select_deathmessage($zone = 'forest', $extraParams = []): array
 {

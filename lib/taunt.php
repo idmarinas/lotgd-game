@@ -8,6 +8,7 @@
  * Select 1 taunt.
  *
  * @param array $extraParams
+ * @deprecated 5.4.0 Use "LotgdTool::selectTaunt($extraParams);" instead. Removed in future versions.
  */
 function select_taunt($extraParams = []): array
 {
