@@ -12,7 +12,7 @@
 
 namespace Lotgd\Core\Tool\Tool;
 
-class Substitute
+trait Substitute
 {
     function substitute(?string $string, ?array $extraSearch = null, ?array $extraReplace = null)
     {

@@ -12,7 +12,7 @@
 
 namespace Lotgd\Core\Tool\Tool;
 
-class Taunt
+trait Taunt
 {
     /**
      * Select 1 taunt.

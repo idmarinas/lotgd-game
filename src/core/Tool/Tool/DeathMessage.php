@@ -12,7 +12,7 @@
 
 namespace Lotgd\Core\Tool\Tool;
 
-class DeathMessage
+trait DeathMessage
 {
     /**
      * Select 1 death message.
