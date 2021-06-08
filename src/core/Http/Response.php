@@ -269,7 +269,7 @@ class Response extends HttpResponse
 
         if (true === $saveuser)
         {
-            \LotgdTool::saveUser();
+            $this->kernel->getContainer()->get('lotgd.core.tools')->saveUser();
         }
 
         unset($session['output']);
