@@ -22,10 +22,15 @@ unset($result);
 
 $tradeinvalue = round(($session['user']['armorvalue'] * .75), 0);
 
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+
 $params = [
     'textDomain' => $textDomain,
     'tradeinvalue' => $tradeinvalue,
 ];
+
+$request->attributes->set('params', $params);
 
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);
@@ -33,56 +38,22 @@ $params = [
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
 
-$op = \LotgdRequest::getQuery('op');
+$op = $request->query->get('op');
 $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Armor::class);
 
-$params['opt'] = 'list';
-if ('' == $op)
+bdump($op);
+$method = 'index';
+if ('buy' == $op)
 {
-    $armorLevel = $repository->getMaxArmorLevel($session['user']['dragonkills']);
-
-    $result = $repository->findByLevel($armorLevel);
-
-    $params['opt'] = 'list';
-    $params['stuff'] = $result;
+    $method = 'buy';
 }
-elseif ('buy' == $op)
-{
-    $id = (int) \LotgdRequest::getQuery('id');
 
-    $params['opt'] = 'buy';
-    $params['result'] = $repository->findOneArmorById($id);
-
-    if ($params['result'])
-    {
-        $row = $params['result'];
-        $params['buyIt'] = false;
-
-        if ($row['value'] <= ($session['user']['gold'] + $tradeinvalue))
-        {
-            $params['buyIt'] = true;
-
-            \LotgdLog::debug(sprintf('spent "%s" gold on the "%s" armor', ($row['value'] - $tradeinvalue), $row['armorname']));
-            $session['user']['gold'] -= $row['value'];
-            $session['user']['armor'] = $row['armorname'];
-            $session['user']['gold'] += $tradeinvalue;
-            $session['user']['defense'] -= $session['user']['armordef'];
-            $session['user']['armordef'] = $row['defense'];
-            $session['user']['defense'] += $session['user']['armordef'];
-            $session['user']['armorvalue'] = $row['value'];
-        }
-    }
-}
 \LotgdNavigation::villageNav();
 
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
 
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_ARMOR_POST);
-$params = modulehook('page-armor-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/armor.html.twig', $params));
+\LotgdResponse::callController(\Lotgd\Core\Controller\ArmorController::class, $method);
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
