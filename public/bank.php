@@ -8,7 +8,6 @@ use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/systemmail.php';
 
 $args = new GenericEvent(null, ['textDomain' => 'page_bank', 'textDomainNavigation' => 'navigation_bank']);
 \LotgdEventDispatcher::dispatch($args, Events::PAGE_BANK_PRE);
@@ -19,196 +18,55 @@ $textDomainNavigation = $result['textDomainNavigation'];
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);
 
-$op = \LotgdRequest::getQuery('op');
-
 $params = [
     'textDomain' => $textDomain,
     'ownerName' => getsetting('bankername', '`@Elessa`0')
 ];
 
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+$request->attributes->set('params', $params);
+
+$op = (string) $request->query->get('op');
+
+$method = 'index';
 if ('transfer' == $op)
 {
-    $params['opt'] = 'transfer';
-    $params['transferPerLevel'] = getsetting('transferperlevel', 25);
-    $params['maxTransfer'] = $session['user']['level'] * getsetting('maxtransferout', 25);
+    $method = 'transfer';
 }
 elseif ('transfer2' == $op)
 {
-    $to = \LotgdRequest::getPost('to');
-    $amt = abs((int) \LotgdRequest::getPost('amount', 0));
-    $params['opt'] = 'transfer2';
-    $params['amount'] = $amt;
-    $params['to'] = $to;
-
-    $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
-    $characters = $repository->findLikeName("%{$to}%", 100);
-
-    $params['characters'] = $characters;
+    $method = 'transfer2';
 }
 elseif ('transfer3' == $op)
 {
-    $amt = abs((int) \LotgdRequest::getPost('amount'));
-    $to = (int) \LotgdRequest::getPost('to');
-    $maxout = $session['user']['level'] * getsetting('maxtransferout', 25);
-    $params['opt'] = 'transfer3';
-    $params['maxOut'] = $maxout;
-    $params['amount'] = $amt;
-
-    $params['transferred'] = false;
-
-    if ($to == $session['user']['acctid'])
-    {
-        $params['transferred'] = 'sameAct';
-    }
-    elseif (($session['user']['amountouttoday'] + $amt) > $maxout)
-    {
-        $params['transferred'] = 'maxOut';
-    }
-    elseif ($amt < (int) $session['user']['level'])
-    {
-        $params['transferred'] = 'level';
-    }
-    elseif (($session['user']['gold'] + $session['user']['goldinbank']) >= $amt)
-    {
-        $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
-        $result = $repository->find($to);
-
-        $params['transferred'] = 0;
-        if ($result)
-        {
-            $maxtfer = $result->getLevel() * getsetting('transferperlevel', 25);
-
-            if ($result->getTransferredtoday() >= getsetting('transferreceive', 3))
-            {
-                $params['transferred'] = 'tomanytfer';
-                $params['name'] = $result->getName();
-            }
-            elseif ($maxtfer < $amt)
-            {
-                $params['transferred'] = 'maxtfer';
-                $params['maxtfer'] = $maxtfer;
-                $params['name'] = $result->getName();
-            }
-            else
-            {
-                $params['transferred'] = true;
-                $session['user']['gold'] -= $amt;
-
-                if ($session['user']['gold'] < 0)
-                {
-                    //withdraw in case they don't have enough on hand.
-                    $session['user']['goldinbank'] += $session['user']['gold'];
-                    $session['user']['gold'] = 0;
-                }
-                $session['user']['amountouttoday'] += $amt;
-
-                $result->setGoldinbank($result->getGoldinbank() + $amt);
-                $result->setTransferredtoday($result->getTransferredtoday() + 1);
-
-                \Doctrine::persist($result);
-                \Doctrine::flush();
-
-                \LotgdLog::debug("transferred $amt gold to", $result->getAcct()->getAcctid());
-
-                $subj = ['transfer3.success.mail.subject', [], $textDomain];
-                $body = ['transfer3.success.mail.message', ['name' => $session['user']['name'], 'amount' => $amt], $textDomain];
-
-                systemmail($result->getAcct()->getAcctid(), $subj, $body);
-            }
-        }
-    }
+    $method = 'transfer3';
 }
 elseif ('deposit' == $op)
 {
-    $params['opt'] = 'deposit';
+    $method = 'deposit';
 }
 elseif ('depositfinish' == $op)
 {
-    $amount = abs((int) \LotgdRequest::getPost('amount'));
-    $amount = (0 == $amount) ? $session['user']['gold'] : $amount;
-
-    $params['amount'] = $amount;
-    $params['deposited'] = false;
-    $params['opt'] = 'depositend';
-
-    if ($amount <= $session['user']['gold'])
-    {
-        $params['deposited'] = true;
-        \LotgdLog::debug('deposited '.$amount.' gold in the bank');
-        $session['user']['goldinbank'] += $amount;
-        $session['user']['gold'] -= $amount;
-    }
+    $method = 'depositFinish';
 }
 elseif ('borrow' == $op)
 {
-    $maxborrow = $session['user']['level'] * getsetting('borrowperlevel', 20);
-
-    $params['opt'] = 'borrow';
-    $params['maxborrow'] = $maxborrow;
+    $method = 'borrow';
 }
 elseif ('withdraw' == $op)
 {
-    $params['opt'] = 'withdraw';
+    $method = 'withdraw';
 }
 elseif ('withdrawfinish' == $op)
 {
-    $amount = abs((int) \LotgdRequest::getPost('amount'));
-    $amount = (0 == $amount) ? $session['user']['goldinbank'] : $amount;
-
-    $params['opt'] = 'withdrawend';
-    $params['amount'] = $amount;
-    $params['withdrawal'] = false;
-
-    if ($amount > $session['user']['goldinbank'] && '' != \LotgdRequest::getPost('borrow'))
-    {
-        $lefttoborrow = $amount;
-        $maxborrow = $session['user']['level'] * getsetting('borrowperlevel', 20);
-        $params['withdrawal'] = 1;
-        $params['lefttoborrow'] = $lefttoborrow;
-        $params['maxborrow'] = $maxborrow;
-        $params['borrowed'] = false;
-        $params['didwithdraw'] = false;
-
-        if ($lefttoborrow <= ($session['user']['goldinbank'] + $maxborrow))
-        {
-            $params['withdrawal'] = 2;
-
-            if ($session['user']['goldinbank'] > 0)
-            {
-                $params['goldInBank'] = $session['user']['goldinbank'];
-                $params['didwithdraw'] = true;
-                $lefttoborrow -= $session['user']['goldinbank'];
-                $session['user']['gold'] += $session['user']['goldinbank'];
-                $session['user']['goldinbank'] = 0;
-
-                \LotgdLog::debug("withdrew $amount gold from the bank");
-            }
-
-            $params['lefttoborrow'] = $lefttoborrow;
-            if (($lefttoborrow - $session['user']['goldinbank']) <= $maxborrow)
-            {
-                $params['borrowed'] = true;
-                $session['user']['goldinbank'] -= $lefttoborrow;
-                $session['user']['gold'] += $lefttoborrow;
-
-                \LotgdLog::debug("borrows $lefttoborrow gold from the bank");
-            }
-        }
-    }
-    elseif ($amount <= $session['user']['goldinbank'])
-    {
-        $params['withdrawal'] = true;
-        $session['user']['goldinbank'] -= $amount;
-        $session['user']['gold'] += $amount;
-
-        \LotgdLog::debug("withdrew $amount gold from the bank");
-    }
+    $method = 'withdrawFinish';
 }
+
+\LotgdNavigation::villageNav();
 
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
-
-\LotgdNavigation::villageNav();
 \LotgdNavigation::addHeader('category.money');
 
 if ($session['user']['goldinbank'] >= 0)
@@ -236,14 +94,10 @@ if (getsetting('allowgoldtransfer', 1) && ($session['user']['level'] >= getsetti
     \LotgdNavigation::addNav('nav.transfer', 'bank.php?op=transfer');
 }
 
+\LotgdResponse::callController(\Lotgd\Core\Controller\BankController::class, $method);
+
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
-
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_BANK_POST);
-$params = modulehook('page-bank-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/bank.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
