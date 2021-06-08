@@ -41,7 +41,6 @@ $request->attributes->set('params', $params);
 $op = $request->query->get('op');
 $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Armor::class);
 
-bdump($op);
 $method = 'index';
 if ('buy' == $op)
 {
