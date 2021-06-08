@@ -11,7 +11,11 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   This pages use a controller to render content of page
+    -   `public/account.php` use controller `Lotgd\Core\Controller\AccountController`
+    -   `public/armor.php` use controller `Lotgd\Core\Controller\ArmorController`
+    -   `public/bank.php` use controller `Lotgd\Core\Controller\BankController`
+    -   Note: See this files for an examples of how to use the controllers in LoTGD Core.
 
 ### :star: FEATURES
 
