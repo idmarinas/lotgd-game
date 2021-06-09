@@ -39,7 +39,6 @@ class GameCore extends AbstractExtension
     protected $request;
     protected $sanitize;
     protected $translator;
-    protected $censor;
     protected $settings;
     protected $dispatcher;
     protected $doctrine;
@@ -49,7 +48,6 @@ class GameCore extends AbstractExtension
         Request $request,
         Sanitize $sanitize,
         TranslatorInterface $translator,
-        Censor $censor,
         EventDispatcherInterface $dispatcher,
         EntityManagerInterface $doctrine,
         SessionInterface $session
@@ -57,7 +55,6 @@ class GameCore extends AbstractExtension
         $this->request    = $request;
         $this->sanitize   = $sanitize;
         $this->translator = $translator;
-        $this->censor     = $censor;
         $this->dispatcher = $dispatcher;
         $this->doctrine   = $doctrine;
         $this->session    = $session;
@@ -74,7 +71,6 @@ class GameCore extends AbstractExtension
             new TwigFilter('unserialize', 'unserialize'),
             new TwigFilter('stripslashes', 'stripslashes'),
             new TwigFilter('sprintfnews', [$this, 'sprintfnews']),
-            new TwigFilter('censor', [$this->censor, 'filter']),
             new TwigFilter('highlight_file', [$this, 'highlightFile']),
             new TwigFilter('highlight_string', [$this, 'highlightString']),
             new TwigFilter('yes_no', [$this, 'affirmationNegation']),
