@@ -182,7 +182,7 @@ class Response extends HttpResponse
             || $response instanceof BinaryFileResponse
             || $response instanceof JsonResponse
         ) {
-            saveuser();
+            $this->kernel->getContainer()->get('lotgd.core.tools')->saveUser();
 
             $response->send();
 
