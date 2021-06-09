@@ -27,19 +27,6 @@ trait CoreFunction
     }
 
     /**
-     * Get value of setting.
-     *
-     * @param string $name
-     * @param string $default
-     *
-     * @return string
-     */
-    public function getsetting($name, $default): ?string
-    {
-        return $this->settings->getSetting($name, $default);
-    }
-
-    /**
      * Activate a hook.
      *
      * @param string $name

@@ -15,7 +15,6 @@ namespace Lotgd\Core\Twig\Extension;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Http\Request;
-use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Output\Censor;
 use Lotgd\Core\Tool\Sanitize;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -51,19 +50,17 @@ class GameCore extends AbstractExtension
         Sanitize $sanitize,
         TranslatorInterface $translator,
         Censor $censor,
-        Settings $settings,
         EventDispatcherInterface $dispatcher,
         EntityManagerInterface $doctrine,
         SessionInterface $session
     ) {
-        $this->request     = $request;
-        $this->sanitize    = $sanitize;
-        $this->translator  = $translator;
-        $this->censor      = $censor;
-        $this->settings    = $settings;
+        $this->request    = $request;
+        $this->sanitize   = $sanitize;
+        $this->translator = $translator;
+        $this->censor     = $censor;
         $this->dispatcher = $dispatcher;
-        $this->doctrine    = $doctrine;
-        $this->session     = $session;
+        $this->doctrine   = $doctrine;
+        $this->session    = $session;
     }
 
     /**
@@ -93,8 +90,6 @@ class GameCore extends AbstractExtension
         return [
             new TwigFunction('url', [$this, 'baseUrl']),
 
-            new TwigFunction('get_setting', [$this, 'getsetting']),
-            new TwigFunction('getsetting', [$this, 'getsetting']), // Alias
             new TwigFunction('trigger_event', [$this, 'triggerEvent']),
             new TwigFunction('modulehook', [$this, 'triggerEvent']), // Alias
             new TwigFunction('is_valid_protocol', [$this, 'isValidProtocol']),
