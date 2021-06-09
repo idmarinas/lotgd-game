@@ -1,10 +1,12 @@
 {% trans_default_domain textDomain %}
 
-<div class="ui buttons">
-    <a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.write('{{ petition.acctid }}')" class="ui button">
-        {{ 'section.view.write'|trans|uncolorize }}
-    </a>
-</div>
+{% if petition.acctid %}
+    <div class="ui buttons">
+        <a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.write('{{ petition.acctid }}')" class="ui button">
+            {{ 'section.view.write'|trans|uncolorize }}
+        </a>
+    </div>
+{% endif %}
 
 <h2>{{ 'section.view.category'|trans({ 'category': petition.body.problem_type })|colorize }}</h2>
 
