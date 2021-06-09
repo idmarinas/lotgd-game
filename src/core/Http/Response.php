@@ -182,6 +182,8 @@ class Response extends HttpResponse
             || $response instanceof BinaryFileResponse
             || $response instanceof JsonResponse
         ) {
+            saveuser();
+
             $response->send();
 
             exit;
