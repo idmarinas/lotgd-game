@@ -9,7 +9,6 @@ use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/systemmail.php';
 
 // Don't hook on to this text for your standard modules please, use "clan" instead.
 // This hook is specifically to allow modules that do other clans to create ambience.
@@ -19,8 +18,6 @@ $result = modulehook('clan-text-domain', $args->getArguments());
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
-
-$op = (string) \LotgdRequest::getQuery('op');
 
 $costGold = (int) getsetting('goldtostartclan', 10000);
 $costGems = (int) getsetting('gemstostartclan', 15);
@@ -56,28 +53,30 @@ $ranks = [
     CLAN_FOUNDER => 'ranks.031'
 ];
 
-$ranks = new Clan(['ranks' => $ranks, 'textDomain' => 'page_clan', 'clanid' => null]);
+$ranks = new Clan(['ranks' => $ranks, 'textDomain' => $textDomain, 'clanid' => null]);
 \LotgdEventDispatcher::dispatch($ranks, Clan::RANK_LIST);
 $ranks = modulehook('clanranks', $ranks->getData());
 $params['ranksNames'] = $ranks['ranks'];
 
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+$request->attributes->set('params', $params);
+
+$op = (string) $request->query->get('op', '');
+
 if ('detail' == $op)
 {
-    $params['tpl'] = 'clan_applicant_detail';
-
-    require_once 'lib/clan/detail.php';
+    $method = 'detail';
 }
 elseif ('list' == $op)
 {
-    $params['tpl'] = 'clan_applicant_list';
+    $method = 'list';
 
     \LotgdResponse::pageTitle('title.list', [], $textDomain);
-
-    require_once 'lib/clan/list.php';
 }
 elseif ('waiting' == $op)
 {
-    $params['tpl'] = 'clan_applicant_waiting';
+    $method = 'waiting';
 
     \LotgdResponse::pageTitle('title.applicant', [], $textDomain);
 
@@ -88,67 +87,92 @@ elseif ('waiting' == $op)
 }
 elseif (CLAN_APPLICANT == $session['user']['clanrank'] && 'apply' == $op)
 {
-    $params['tpl'] = 'clan_applicant_apply';
+    $method = 'applicantApply';
 
     \LotgdResponse::pageTitle('title.applicant', [], $textDomain);
 
-    require_once 'lib/clan/applicant_apply.php';
 }
 elseif (CLAN_APPLICANT == $session['user']['clanrank'] && 'new' == $op)
 {
-    $params['tpl'] = 'clan_applicant_new';
+    $method = 'applicantNew';
 
     \LotgdResponse::pageTitle('title.applicant', [], $textDomain);
 
-    require_once 'lib/clan/applicant_new.php';
+    \LotgdNavigation::addNav('nav.applicant.apply.lobby', 'clan.php');
 }
 elseif (CLAN_APPLICANT == $session['user']['clanrank'])
 {
-    $params['tpl'] = 'clan_applicant';
+    $method = 'applicant';
 
     \LotgdResponse::pageTitle('title.applicant', [], $textDomain);
 
-    require_once 'lib/clan/applicant.php';
+    \LotgdNavigation::addHeader('category.options');
+
+    if (($claninfo['clanid'] ?? 0) > 0)
+    {
+        //-- Applied for membership to a clan
+        \LotgdNavigation::addNav('nav.applicant.waiting.label', 'clan.php?op=waiting');
+        \LotgdNavigation::addNav('nav.applicant.withdraw', 'clan.php?op=withdraw');
+    }
+    else
+    {
+        //-- Hasn't applied for membership to any clan.
+        \LotgdNavigation::addNav('nav.applicant.apply.membership', 'clan.php?op=apply');
+        \LotgdNavigation::addNav('nav.applicant.apply.new', 'clan.php?op=new');
+    }
+
 }
 elseif ('' == $op)
 {
-    $params['tpl'] = 'clan_default';
+    $method = 'index';
 
     \LotgdResponse::pageTitle('title.default', ['name' => \LotgdSanitize::fullSanitize($claninfo['clanname'])], $textDomain);
 
-    require_once 'lib/clan/clan_default.php';
+    \LotgdNavigation::addHeader('category.options');
+
+    if ($session['user']['clanrank'] > CLAN_MEMBER)
+    {
+        \LotgdNavigation::addNav('nav.default.update', 'clan.php?op=motd');
+    }
+
+    \LotgdNavigation::addNav('nav.default.membership', 'clan.php?op=membership');
+    \LotgdNavigation::addNav('nav.default.online', 'list.php?op=clan');
+    \LotgdNavigation::addNav('nav.default.waiting.area', 'clan.php?op=waiting');
+    \LotgdNavigation::addNav('nav.default.withdraw', 'clan.php?op=withdraw', [
+        'attributes' => [
+            'data-options' => \json_encode(['text' => \LotgdTranslator::t('section.withdraw.confirm', [], $textDomain)]),
+            'onclick'      => 'Lotgd.confirm(this, event)',
+        ],
+    ]);
 }
 elseif ('motd' == $op)
 {
-    $params['tpl'] = 'clan_motd';
+    $method = 'motd';
 
     \LotgdResponse::pageTitle('title.motd', [], $textDomain);
 
-    require_once 'lib/clan/clan_motd.php';
+    \LotgdNavigation::addHeader('category.options');
+    \LotgdNavigation::addNav('nav.motd.return', 'clan.php');
+
 }
 elseif ('membership' == $op)
 {
-    $params['tpl'] = 'clan_membership';
+    $method = 'membership';
 
     \LotgdResponse::pageTitle('title.membership', ['name' => \LotgdSanitize::fullSanitize($claninfo['clanname'])], $textDomain);
 
-    require_once 'lib/clan/clan_membership.php';
+    \LotgdNavigation::addHeader('category.options');
+    \LotgdNavigation::addNav('nav.membership.hall', 'clan.php');
 }
 elseif ('withdraw' == $op)
 {
-    $params['tpl'] = 'clan_withdraw';
-
-    require_once 'lib/clan/clan_withdraw.php';
+    $method = 'withdraw';
 }
+
+LotgdResponse::callController(\Lotgd\Core\Controller\ClanController::class, $method);
 
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
-
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_CLAN_POST);
-$params = modulehook('page-clan-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(LotgdTheme::render('page/clan.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
