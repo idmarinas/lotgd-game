@@ -147,7 +147,7 @@ class Clans
     /**
      * Get the value of Clanname.
      */
-    public function getClanname(): string
+    public function getClanname(): ?string
     {
         return $this->clanname;
     }
@@ -169,7 +169,7 @@ class Clans
     /**
      * Get the value of Clanshort.
      */
-    public function getClanshort(): string
+    public function getClanshort(): ?string
     {
         return $this->clanshort;
     }
