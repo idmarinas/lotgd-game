@@ -45,7 +45,7 @@
                 </td>
                 <td>{{ '`7%s`0'|format(petition.date|relative_date)|colorize }}</td>
                 <td>{{ '`#%s`0'|format(petition.comments|numeral)|colorize }}</td>
-                <td>{{ petition.closerName|colorize }}</td>
+                <td>{{ petition.closerName|default('')|colorize }}</td>
                 <td>{{ '`7%s`0'|format(petition.closedate|relative_date)|colorize }}</td>
             </tr>
         {% else %}
