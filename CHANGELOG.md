@@ -15,7 +15,13 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `public/account.php` use controller `Lotgd\Core\Controller\AccountController`
     -   `public/armor.php` use controller `Lotgd\Core\Controller\ArmorController`
     -   `public/bank.php` use controller `Lotgd\Core\Controller\BankController`
+    -   `public/clan.php` use controller `Lotgd\Core\Controller\ClanController`
     -   Note: See this files for an examples of how to use the controllers in LoTGD Core.
+-   **Twig Extensions**
+    -   `GameCore` Settings and Censor functions are moved to new extensions.
+        -   `CensorExtension`
+        -   `SettingsExtension`
+
 
 ### :star: FEATURES
 
@@ -45,6 +51,16 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `README.txt`
     -   `AFTERUPGRADE.txt`
     -   `BUG FIXES.txt`
+-   **Deleted** all files in folder `lib/clan/`:
+    -   `applicant_apply.php` 
+    -   `applicant_new.php` 
+    -   `applicant.php` 
+    -   `clan_default.php` 
+    -   `clan_membership.php` 
+    -   `clan_motd.php` 
+    -   `clan_withdraw.php` 
+    -   `detail.php` 
+    -   `list.php` 
 
 ### :notebook: NOTES
 
