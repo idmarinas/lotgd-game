@@ -18,6 +18,9 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+
 //-- Init page
 \LotgdResponse::pageStart('title.default', [], $textDomain);
 
@@ -26,7 +29,9 @@ $params = [
     'cost' =>  $session['user']['level'] * 20
 ];
 
-$op = (string) \LotgdRequest::getQuery('op');
+$request->attributes->set('params', $params);
+
+$op = (string) $request->query->get('op');
 
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
@@ -34,16 +39,7 @@ $op = (string) \LotgdRequest::getQuery('op');
 \LotgdNavigation::addHeader('category.navigation');
 if ('pay' == $op)
 {
-    $params['tpl'] = 'pay';
-
-    if ($session['user']['gold'] >= $params['cost'])
-    { // Gunnar Kreitz
-        $session['user']['gold'] -= $params['cost'];
-
-        \LotgdLog::debug("spent {$params['cost']} gold to speak to the dead");
-
-        redirect('gypsy.php?op=talk');
-    }
+    $method = 'pay';
 
     \LotgdNavigation::villageNav();
 }
@@ -51,15 +47,13 @@ elseif ('talk' == $op)
 {
     \LotgdResponse::pageTitle('title.talk', [], $textDomain);
 
-    $params['tpl'] = 'talk';
+    $method = 'talk';
 
     \LotgdNavigation::addNav('nav.snap', 'gypsy.php');
 }
 else
 {
-    checkday();
-
-    $params['tpl'] = 'default';
+    $method = 'index';
 
     \LotgdNavigation::addHeader('category.seance');
     \LotgdNavigation::addNav('nav.pay', 'gypsy.php?op=pay', [
@@ -76,19 +70,12 @@ else
 
     \LotgdNavigation::addHeader('category.other');
     \LotgdNavigation::addNav('nav.forget', 'village.php');
-
-    \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_GYPSY);
-    modulehook('gypsy');
 }
+
+\LotgdResponse::callController(Lotgd\Core\Controller\GypsyController::class, $method);
 
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
-
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_GYPSY_POST);
-$params = modulehook('page-gypsy-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/gypsy.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
