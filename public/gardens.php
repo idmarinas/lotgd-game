@@ -10,6 +10,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 require_once 'common.php';
 require_once 'lib/events.php';
 
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+
 // Don't hook on to this text for your standard modules please, use "gardens" instead.
 // This hook is specifically to allow modules that do other gardenss to create ambience.
 $args = new GenericEvent(null, ['textDomain' => 'page_gardens', 'textDomainNavigation' => 'navigation_gardens']);
@@ -31,10 +34,12 @@ $params = [
     'includeTemplatesPost' => []
 ];
 
-$op = (string) \LotgdRequest::getQuery('op');
-$com = \LotgdRequest::getQuery('commentPage');
-$commenting = \LotgdRequest::getQuery('commenting');
-$comment = \LotgdRequest::getPost('comment');
+$request->attributes->set('params', $params);
+
+$op = (string) $request->query->get('op');
+$com = $request->query->get('commentPage');
+$commenting = $request->query->get('commenting');
+$comment = $request->request->get('comment');
 
 // Don't give people a chance at a special event if they are just browsing
 // the commentary (or talking) or dealing with any of the hooks in the village.
@@ -62,15 +67,8 @@ if (! $skipgardendesc)
 }
 
 \LotgdNavigation::villageNav();
-$args = new GenericEvent();
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_GARDEN);
-modulehook('gardens', $args->getArguments());
 
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_GARDEN_POST);
-$params = modulehook('page-gardens-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/gardens.html.twig', $params));
+\LotgdResponse::callController(\Lotgd\Core\Controller\GardenController::class);
 
 module_display_events('gardens', 'gardens.php');
 
