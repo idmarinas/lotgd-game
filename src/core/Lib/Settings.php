@@ -79,6 +79,8 @@ class Settings
             return false;
         }
 
+        $this->loadSettings();
+
         $this->settings[$settingname] = $value;
 
         $item = $this->cache->getItem($this->getCacheKey());
