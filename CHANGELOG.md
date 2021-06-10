@@ -16,6 +16,9 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `public/armor.php` use controller `Lotgd\Core\Controller\ArmorController`
     -   `public/bank.php` use controller `Lotgd\Core\Controller\BankController`
     -   `public/clan.php` use controller `Lotgd\Core\Controller\ClanController`
+    -   `public/create.php` use controller `Lotgd\Core\Controller\CreateController`
+    -   `public/gardens.php` use controller `Lotgd\Core\Controller\GardenController`
+    -   `public/gypsy.php` use controller `Lotgd\Core\Controller\GypsyController`
     -   Note: See this files for an examples of how to use the controllers in LoTGD Core.
 -   **Twig Extensions**
     -   `GameCore` Settings and Censor functions are moved to new extensions.
