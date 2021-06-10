@@ -17,7 +17,7 @@ use Lotgd\Core\Output\Censor;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class CensorCore extends AbstractExtension
+class CensorExtension extends AbstractExtension
 {
     protected $censor;
 
