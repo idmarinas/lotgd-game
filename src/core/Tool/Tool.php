@@ -244,7 +244,7 @@ class Tool
         $accountRep = $this->doctrine->getRepository('LotgdCore:Accounts');
         $pageRep    = $this->doctrine->getRepository('LotgdCore:AccountsEverypage');
 
-        $everypage = $hydrator->hydrate($session['user'], $pageRep->find((int) $session['user']['acctid']));
+        $everypage = $hydrator->hydrate($session['user'], $pageRep->find((int) $session['user']['acctid']) ?: new \Lotgd\Core\Entity\AccountsEverypage());
         $account   = $hydrator->hydrate($session['user'], $accountRep->find((int) $session['user']['acctid']));
         $character = $hydrator->hydrate($session['user'], $account->getCharacter());
 
