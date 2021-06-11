@@ -15,7 +15,6 @@ namespace Lotgd\Core\Twig\Extension;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Http\Request;
-use Lotgd\Core\Output\Censor;
 use Lotgd\Core\Tool\Sanitize;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
