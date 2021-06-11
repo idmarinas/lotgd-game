@@ -1,0 +1,12 @@
+--TEST--
+"censor" filter
+--TEMPLATE--
+{{ 'No censored'|censor }}
+{{ 'Teets'|censor }}
+{{ 'teets'|censor }}
+--DATA--
+return []
+--EXPECT--
+No censored
+*****
+*****
