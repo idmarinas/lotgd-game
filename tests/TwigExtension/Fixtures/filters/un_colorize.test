@@ -1,0 +1,10 @@
+--TEST--
+"uncolorize" filter
+--TEMPLATE--
+{{ '`%uncolorize`0'|uncolorize }}
+{{ 'uncolorize'|uncolorize }}
+--DATA--
+return []
+--EXPECT--
+uncolorize
+uncolorize
