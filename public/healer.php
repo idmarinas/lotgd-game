@@ -18,6 +18,9 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);
 
@@ -33,74 +36,22 @@ $params = [
     'healCost' => $cost
 ];
 
-$op = (string) \LotgdRequest::getQuery('op');
-$return = (string) \LotgdRequest::getQuery('return');
+$request->attributes->set('params', $params);
+
+$op = (string) $request->query->get('op');
+$return = (string) $request->query->get('return');
 
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
 
-if ('' == $op)
+$method = 'index';
+if ('buy' == $op)
 {
-    checkday();
-
-    $params['tpl'] = 'default';
-    $params['needHeal'] = false;
-
-    if ($session['user']['hitpoints'] < $session['user']['maxhitpoints'])
-    {
-        $params['needHeal'] = true;
-    }
-    elseif ($session['user']['hitpoints'] == $session['user']['maxhitpoints'])
-    {
-        $params['needHeal'] = 0;
-    }
-
-    if (false === $params['needHeal'])
-    {
-        $session['user']['hitpoints'] = $session['user']['maxhitpoints'];
-    }
-}
-elseif ('buy' == $op)
-{
-    $pct = (int) \LotgdRequest::getQuery('pct');
-    $newcost = round($pct * $cost / 100, 0);
-
-    $params['tpl'] = 'buy';
-    $params['newHealCost'] = $newcost;
-    $params['canHeal'] = false;
-
-    if ($session['user']['gold'] >= $newcost)
-    {
-        $diff = round(($session['user']['maxhitpoints'] - $session['user']['hitpoints']) * $pct / 100, 0);
-
-        $params['canHeal'] = true;
-        $params['healHealed'] = $diff;
-
-        $session['user']['gold'] -= $newcost;
-        $session['user']['hitpoints'] += $diff;
-
-        \LotgdLog::debug('spent gold on healing', false, false, 'healing', $newcost);
-    }
+    $method = 'buy';
 }
 elseif ('companion' == $op)
 {
-    $compcost = (int) \LotgdRequest::getQuery('compcost');
-
-    $params['tpl'] = 'companion';
-    $params['canHeal'] = false;
-    $params['newHealCost'] = $compcost;
-
-    if ($session['user']['gold'] >= $compcost)
-    {
-        $params['canHeal'] = true;
-
-        $name = stripslashes(rawurldecode(\LotgdRequest::getQuery('name')));
-
-        $session['user']['gold'] -= $compcost;
-        $companions[$name]['hitpoints'] = $companions[$name]['maxhitpoints'];
-
-        $params['companionName'] = $companions[$name]['name'];
-    }
+    $method = 'companion';
 }
 
 if ($session['user']['hitpoints'] < $session['user']['maxhitpoints'])
@@ -160,14 +111,10 @@ else
     \LotgdNavigation::addNav('nav.return.return', $return);
 }
 
+\LotgdResponse::callController(\Lotgd\Core\Controller\HealerController::class, $method);
+
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
-
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_HEALER_POST);
-$params = modulehook('page-healer-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/healer.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
