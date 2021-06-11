@@ -19,6 +19,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `public/create.php` use controller `Lotgd\Core\Controller\CreateController`
     -   `public/gardens.php` use controller `Lotgd\Core\Controller\GardenController`
     -   `public/gypsy.php` use controller `Lotgd\Core\Controller\GypsyController`
+    -   `public/healer.php` use controller `Lotgd\Core\Controller\HealerController`
+    -   `public/hof.php` use controller `Lotgd\Core\Controller\HofController`
     -   Note: See this files for an examples of how to use the controllers in LoTGD Core.
 -   **Twig Extensions**
     -   `GameCore` Settings and Censor functions are moved to new extensions.
@@ -28,7 +30,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :star: FEATURES
 
--   Nothing
+-   **Test** add a basic test, limited to any functions of Twig Extensions
 
 ### :fire: DEPRECATED
 
