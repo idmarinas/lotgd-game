@@ -23,6 +23,9 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);
 
@@ -30,9 +33,9 @@ $params = [
     'textDomain' => $textDomain
 ];
 
-$op = (string) \LotgdRequest::getQuery('op');
-$subop = (string) \LotgdRequest::getQuery('subop');
-$page = (int) \LotgdRequest::getQuery('page');
+$op = (string) $request->query->get('op');
+$subop = (string) $request->query->get('subop');
+$page = $request->query->getInt('page');
 $subop = $subop ?: 'best';
 $op = $op ?: 'kills';
 $order = ('worst' == $subop) ? 'ASC' : 'DESC';
@@ -62,278 +65,12 @@ $args = new GenericEvent();
 \LotgdEventDispatcher::dispatch($args, Events::PAGE_HOF_ADD);
 modulehook('hof-add', $args->getArguments());
 
-$repository = \Doctrine::getRepository('LotgdCore:Accounts');
-$query = $repository->createQueryBuilder('u');
+$request->attributes->set('params', $params);
 
-$query
-    ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.acct', 'u.acctid'))
-    ->where('u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0')
-    ->setParameter('permit', SU_HIDE_FROM_LEADERBOARD)
-;
-
-if ('money' == $op)
-{
-    $params['tpl'] = 'money';
-
-    $query->select('c.name', 'round((0.95 * (c.gold + c.goldinbank)), 2) AS gold')
-        ->orderBy('gold', $order)
-        ->addOrderBy('c.level', $order)
-        ->addOrderBy('c.experience', $order)
-    ;
-
-    $me = clone $query;
-    $me->select('count(1) AS count')
-        ->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND round((0.95 * (c.gold + c.goldinbank)), 2) >= ?0')
-        ->orderBy('round((0.95 * (c.gold + c.goldinbank)), 2)', $order)
-        ->setParameters([
-            0 => ($session['user']['gold'] + $session['user']['goldinbank']),
-            'permit' => SU_HIDE_FROM_LEADERBOARD
-        ])
-        ->setMaxResults(1)
-    ;
-
-    if ('worst' == $subop)
-    {
-        $em->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND gold <= ?0');
-    }
-
-    $myRank = $me->getQuery()->getSingleScalarResult();
-
-    $params['subTitle'] = [
-        'section.gems.subtitle',
-        [
-            'adverb' => $subop
-        ]
-    ];
-}
-elseif ('gems' == $op)
-{
-    $params['tpl'] = 'gems';
-
-    $query->select('c.name')
-        ->orderBy('c.gems', $order)
-        ->addOrderBy('c.level', $order)
-        ->addOrderBy('c.experience', $order)
-    ;
-
-    $me = clone $query;
-    $me->select('count(1) AS count')
-        ->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.gems >= ?0')
-        ->setParameters([
-            0 => $session['user']['gems'],
-            'permit' => SU_HIDE_FROM_LEADERBOARD
-        ])
-    ;
-
-    if ('worst' == $subop)
-    {
-        $em->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.gems <= ?0');
-    }
-
-    $myRank = $me->getQuery()->getSingleScalarResult();
-
-    $params['subTitle'] = [
-        'section.gems.subtitle',
-        [
-            'adverb' => $subop
-        ]
-    ];
-}
-elseif ('charm' == $op)
-{
-    $params['tpl'] = 'charm';
-
-    $query->select('c.name', 'c.sex', 'c.race')
-        ->orderBy('c.charm', $order)
-        ->addOrderBy('c.level', $order)
-        ->addOrderBy('c.experience', $order)
-    ;
-
-    $me = clone $query;
-    $me->select('count(1) AS count')
-        ->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.charm >= ?0')
-        ->setParameters([
-            0 => $session['user']['charm'],
-            'permit' => SU_HIDE_FROM_LEADERBOARD
-        ])
-    ;
-
-    if ('worst' == $subop)
-    {
-        $em->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.charm <= ?0');
-    }
-
-    $myRank = $me->getQuery()->getSingleScalarResult();
-
-    $params['subTitle'] = [
-        'section.charm.subtitle',
-        [
-            'adverb' => $subop
-        ]
-    ];
-}
-elseif ('tough' == $op)
-{
-    $params['tpl'] = 'tough';
-
-    $query->select('c.name', 'c.sex', 'c.race')
-        ->orderBy('c.maxhitpoints', $order)
-        ->addOrderBy('c.level', $order)
-        ->addOrderBy('c.experience', $order)
-    ;
-
-    $me = clone $query;
-    $me->select('count(1) AS count')
-        ->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.maxhitpoints >= ?0')
-        ->setParameters([
-            0 => $session['user']['maxhitpoints'],
-            'permit' => SU_HIDE_FROM_LEADERBOARD
-        ])
-    ;
-
-    if ('worst' == $subop)
-    {
-        $em->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.maxhitpoints <= ?0');
-    }
-
-    $myRank = $me->getQuery()->getSingleScalarResult();
-
-    $params['subTitle'] = [
-        'section.tough.subtitle',
-        [
-            'adverb' => $subop
-        ]
-    ];
-}
-elseif ('resurrects' == $op)
-{
-    $params['tpl'] = 'resurrects';
-
-    $query->select('c.name', 'c.level')
-        ->orderBy('c.resurrections', $order)
-        ->addOrderBy('c.level', $order)
-        ->addOrderBy('c.experience', $order)
-    ;
-
-    $me = clone $query;
-    $me->select('count(1) AS count')
-        ->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.resurrections >= ?0')
-        ->setParameters([
-            0 => $session['user']['resurrections'],
-            'permit' => SU_HIDE_FROM_LEADERBOARD
-        ])
-    ;
-
-    if ('worst' == $subop)
-    {
-        $em->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.resurrections <= ?0');
-    }
-
-    $myRank = $me->getQuery()->getSingleScalarResult();
-
-    $params['subTitle'] = [
-        'section.gems.subtitle',
-        [
-            'adverb' => $subop
-        ]
-    ];
-}
-elseif ('days' == $op)
-{
-    $params['tpl'] = 'days';
-
-    $order = ('worst' == $subop) ? 'DESC' : 'ASC';
-
-    $query->select('c.name', 'c.bestdragonage')
-        ->andWhere('c.dragonkills > 0')
-        ->andWhere('c.bestdragonage > 0')
-        ->orderBy('c.bestdragonage', $order)
-        ->addOrderBy('c.level', $order)
-        ->addOrderBy('c.experience', $order)
-    ;
-
-    $me = clone $query;
-    $me->select('count(1) AS count')
-        ->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.dragonkills > 0 AND c.bestdragonage <= ?0')
-        ->setParameters([
-            0 => $session['user']['bestdragonage'],
-            'permit' => SU_HIDE_FROM_LEADERBOARD
-        ])
-    ;
-
-    if ('worst' == $subop)
-    {
-        $em->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.dragonkills > 0 AND c.bestdragonage >= ?0');
-    }
-
-    $myRank = $me->getQuery()->getSingleScalarResult();
-
-    $params['subTitle'] = [
-        'section.days.subtitle',
-        [
-            'adverb' => $subop
-        ]
-    ];
-}
-//-- Default is kills
-else
-{
-    $params['tpl'] = 'default';
-
-    $query->select('c.name', 'c.level', 'c.dragonkills', 'c.dragonage', 'c.bestdragonage')
-        ->andWhere('c.dragonkills > 0')
-        ->orderBy('c.dragonkills', $order)
-        ->addOrderBy('c.level', $order)
-        ->addOrderBy('c.experience', $order)
-    ;
-
-    $myRank = 0;
-    if ($session['user']['dragonkills'] > 0)
-    {
-        $me = clone $query;
-
-        $me->select('count(1) AS count')
-            ->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.dragonkills >= :kills')
-            ->setParameters([
-                'kills' => $session['user']['dragonkills'],
-                'permit' => SU_HIDE_FROM_LEADERBOARD
-            ])
-            ->setMaxResults(1)
-        ;
-
-        if ('worst' == $subop)
-        {
-            $em->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.dragonkills <= :kills');
-        }
-
-        $myRank = $me->getQuery()->getSingleScalarResult();
-    }
-
-    $params['subTitle'] = [
-        'section.default.subtitle',
-        [
-            'adverb' => $subop
-        ]
-    ];
-}
-
-$params['paginator'] = $repository->getPaginator($query, $page, 25);
-
-$params['footerTitle'] = [
-    'section.footertitle',
-    [
-        'percent' => round($myRank / $params['paginator']->getTotalItemCount(), 2)
-    ]
-];
+\LotgdResponse::callController(\Lotgd\Core\Controller\HofController::class);
 
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
-
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_HOF_POST);
-$params = modulehook('page-hof-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/hof.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
