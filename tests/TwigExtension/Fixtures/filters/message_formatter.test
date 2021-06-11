@@ -1,12 +1,14 @@
 --TEST--
 "message_formatter" filter
 --TEMPLATE--
+{{ ''|message_formatter({n: 10}) }}
 {{ 'Count {n,plural, =0{cero} =1{one} other{many}}'|message_formatter({n: 0}) }}
 {{ 'Count {n,plural, =0{cero} =1{one} other{many}}'|message_formatter({n: 1}) }}
 {{ 'Count {n,plural, =0{cero} =1{one} other{many}}'|message_formatter({n: 10}) }}
 --DATA--
 return []
 --EXPECT--
+
 Count cero
 Count one
 Count many
