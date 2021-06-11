@@ -1,0 +1,10 @@
+--TEST--
+"colorize" filter
+--TEMPLATE--
+{{ '`$colorize`0'|colorize }}
+{{ 'colorize'|colorize }}
+--DATA--
+return []
+--EXPECT--
+<span class='colLtRed'>colorize</span>
+colorize
