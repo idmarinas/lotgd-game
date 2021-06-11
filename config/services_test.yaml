@@ -1,0 +1,7 @@
+services:
+    lotgd_core.event_dispatcher:
+        alias: Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+        public: true
+    lotgd_core.entity_manager:
+        alias: Doctrine\ORM\EntityManagerInterface
+        public: true
