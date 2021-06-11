@@ -1,0 +1,19 @@
+--TEST--
+"array" test
+--TEMPLATE--
+{{ arr is array ? 'ok' : 'ko' }}
+{{ traversable is array ? 'ok' : 'ko' }}
+{{ obj is array ? 'ok' : 'ko' }}
+{{ val is array ? 'ok' : 'ko' }}
+--DATA--
+return [
+    'arr' => [],
+    'traversable' => new \ArrayIterator([]),
+    'obj' => new \stdClass(),
+    'val' => 'test'
+]
+--EXPECT--
+ok
+ko
+ko
+ko

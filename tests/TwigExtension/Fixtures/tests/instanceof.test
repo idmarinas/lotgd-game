@@ -1,0 +1,19 @@
+--TEST--
+"instanceof" test
+--TEMPLATE--
+{{ arr is instanceof('\ArrayIterator') ? 'ok' : 'ko' }}
+{{ traversable is instanceof('\ArrayIterator') ? 'ok' : 'ko' }}
+{{ obj is instanceof('\stdClass') ? 'ok' : 'ko' }}
+{{ val is instanceof('\ArrayIterator') ? 'ok' : 'ko' }}
+--DATA--
+return [
+    'arr' => [],
+    'traversable' => new \ArrayIterator([]),
+    'obj' => new \stdClass(),
+    'val' => 'test'
+]
+--EXPECT--
+ko
+ok
+ok
+ko
