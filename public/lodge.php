@@ -19,7 +19,10 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-$op = (string) \LotgdRequest::getQuery('op');
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+
+$op = (string) $request->query->get('op');
 
 if ('' == $op)
 {
@@ -58,44 +61,19 @@ if ('' != $op && $entry)
 
 if ('' == $op)
 {
-    $params['tpl'] = 'default';
-
-    if ($entry)
-    {
-        \LotgdNavigation::addHeader('category.use.points');
-        \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_LODGE);
-        modulehook('lodge');
-    }
+    $method = 'index';
 }
 elseif ('points' == $op)
 {
-    $params['tpl'] = 'points';
-
-    $params['currencySymbol'] = getsetting('paypalcurrency', 'USD');
-    $params['currencyUnits'] = getsetting('dpointspercurrencyunit', 100);
-    $params['refererAward'] = getsetting('refereraward', 25);
-    $params['referMinLevel'] = getsetting('referminlevel', 25);
-
-    $params['donatorPointMessages'] = [
-        [
-            'section.points.messages.default', //-- Translator keys
-            [ //-- Params for translator
-                'currencySymbol' => $params['currencySymbol'],
-                'currencyUnits' => $params['currencyUnits']
-            ],
-            $textDomain //-- Translator text domain
-        ]
-    ];
+    $method = 'points';
 }
+
+$request->attributes->set('params', $params);
+
+\LotgdResponse::callController(Lotgd\Core\Controller\LodgeController::class, $method);
 
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
-
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_LODGE_POST);
-$params = modulehook('page-lodge-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/lodge.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
