@@ -21,6 +21,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `public/gypsy.php` use controller `Lotgd\Core\Controller\GypsyController`
     -   `public/healer.php` use controller `Lotgd\Core\Controller\HealerController`
     -   `public/hof.php` use controller `Lotgd\Core\Controller\HofController`
+    -   `public/inn.php` use controller `Lotgd\Core\Controller\InnController`
+    -   `public/lodge.php` use controller `Lotgd\Core\Controller\LodgeController`
     -   Note: See this files for an examples of how to use the controllers in LoTGD Core.
 -   **Twig Extensions**
     -   `GameCore` Settings and Censor functions are moved to new extensions.
@@ -66,6 +68,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `clan_withdraw.php` 
     -   `detail.php` 
     -   `list.php` 
+-   **Deleted** file `lib/inn/inn_bartender.php`
 
 ### :notebook: NOTES
 
