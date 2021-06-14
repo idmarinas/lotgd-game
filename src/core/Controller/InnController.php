@@ -61,6 +61,16 @@ class InnController extends AbstractController
         $this->color = $color;
     }
 
+    public function converse(array $params): Response
+    {
+        $params['tpl'] = 'converse';
+
+        $this->navigation->addHeader('category.other');
+        $this->navigation->addNav('nav.return.inn', 'inn.php');
+
+        return $this->renderInn($params);
+    }
+
     public function bartender(array $params, Request $request): Response
     {
         global $session;

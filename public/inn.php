@@ -70,10 +70,7 @@ if ('fleedragon' == $op)
 switch ($op)
 {
     case 'converse':
-        $params['tpl'] = 'converse';
-
-        \LotgdNavigation::addHeader('category.other');
-        \LotgdNavigation::addNav('nav.return.inn', 'inn.php');
+        $method = 'converse';
     break;
     case 'bartender':
         $method = 'bartender';
