@@ -29,6 +29,9 @@ if (! $skipinndesc)
     checkday();
 }
 
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+
 $params = [
     'textDomain' => $textDomain,
     'innName' => getsetting('innname', LOCATION_INN),
@@ -43,11 +46,11 @@ $params = [
 //-- Init page
 \LotgdResponse::pageStart('title', ['name' => \LotgdSanitize::fullSanitize($params['innName'])], $textDomain);
 
-$op = (string) \LotgdRequest::getQuery('op');
-$subop = (string) \LotgdRequest::getQuery('subop');
-$com = \LotgdRequest::getQuery('commentPage');
-$commenting = \LotgdRequest::getQuery('commenting');
-$comment = \LotgdRequest::getPost('comment');
+$op = (string) $request->query->get('op');
+$subop = (string) $request->query->get('subop');
+$com = $request->query->getInt('commentPage');
+$commenting = $request->query->get('commenting');
+$comment = $request->request->get('comment');
 
 $params['op'] = $op;
 
@@ -73,98 +76,13 @@ switch ($op)
         \LotgdNavigation::addNav('nav.return.inn', 'inn.php');
     break;
     case 'bartender':
-        $action = (string) \LotgdRequest::getQuery('act');
-
-        $params['tpl'] = 'bartender';
-        $params['action'] = $action;
-
-        require 'lib/inn/inn_bartender.php';
+        $method = 'bartender';
     break;
     case 'room':
-        $params['tpl'] = 'room';
-
-        $pay = (int) \LotgdRequest::getQuery('pay');
-
-        \LotgdNavigation::addHeader('category.other');
-        \LotgdNavigation::addNav('nav.return.inn', 'inn.php');
-
-        $expense = round(($session['user']['level'] * (10 + log($session['user']['level']))), 0);
-        $fee = getsetting('innfee', '5%');
-        $fee = (strpos($fee, '%')) ? round($expense * (str_replace('%', '', $fee) / 100), 0) : 0;
-        $bankexpense = $expense + $fee;
-
-        $params['fee'] = $fee;
-        $params['feePercent'] = (strpos($fee, '%')) ? str_replace('%', '', $fee) / 100 : null;
-        $params['expense'] = $expense;
-        $params['bankExpense'] = $bankexpense;
-        $params['boughtRoomToday'] = $session['user']['boughtroomtoday'];
-
-        if ($pay)
-        {
-            if (2 == $pay || $session['user']['gold'] >= $expense || $params['boughtRoomToday'])
-            {
-                if ($session['user']['loggedin'])
-                {
-                    if (! $params['boughtRoomToday'])
-                    {
-                        if (2 == $pay)
-                        {
-                            $session['user']['goldinbank'] -= $expense;
-                        }
-                        else
-                        {
-                            $session['user']['gold'] -= $expense;
-                        }
-
-                        $session['user']['boughtroomtoday'] = 1;
-                        \LotgdLog::debug("spent $expense gold on an inn room");
-                    }
-
-                    $session['user']['location'] = $iname;
-                    $session['user']['loggedin'] = 0;
-                    $session['user']['restorepage'] = 'inn.php?op=strolldown';
-                    \LotgdTool::saveUser();
-                }
-
-                $session = [];
-
-                redirect('home.php');
-            }
-
-            \LotgdFlashNavigation::addWarningMessage(\LotgdTranslator::t('flash.message.room.not.gold', [ 'barkeep' => $barkeep ], $textDomain));
-
-            redirect('inn.php?op=room');
-        }
-
-        if ($params['boughtRoomToday'])
-        {
-            \LotgdNavigation::addNav('nav.go.room', 'inn.php?op=room&pay=1');
-        }
-
-        $bodyguards = ['Butch', 'Bruce', 'Alfonozo', 'Guido', 'Bruno', 'Bubba', 'Al', 'Chuck', 'Brutus', 'Nunzio', 'Terrance', 'Mitch', 'Rocco', 'Spike', 'Gregor', 'Sven', 'Draco'];
-
-        \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_INN_ROOMS);
-        modulehook('innrooms');
-
-        \LotgdNavigation::addHeader('category.buy.room');
-        \LotgdNavigation::addNav('nav.room.buy.hand', 'inn.php?op=room&pay=1', [
-            'params' => [
-                'expense' => $expense
-            ]
-        ]);
-
-        if ($session['user']['goldinbank'] >= $bankexpense)
-        {
-            \LotgdNavigation::addNav('nav.room.buy.bank', 'inn.php?op=room&pay=2', [
-                'params' => [
-                    'expense' => $bankexpense
-                ]
-            ]);
-        }
-
+        $method = 'room';
     break;
     default:
-        $params['tpl'] = 'default';
+        $method = 'index';
 
         \LotgdNavigation::blockLink('inn.php');
 
@@ -184,70 +102,15 @@ switch ($op)
             $op = '';
             \LotgdRequest::setQuery('op', '');
         }
-
-        \LotgdNavigation::addHeader('category.do');
-
-        $args = new GenericEvent(null, ['section' => 'inn']);
-        \LotgdEventDispatcher::dispatch($args, Events::PAGE_INN_BLOCK_COMMENT_AREA);
-        $args = modulehook('blockcommentarea', $args->getArguments());
-
-        if (! ($args['block'] ?? false) || ! $args['block'])
-        {
-            \LotgdNavigation::addNav('nav.converse', 'inn.php?op=converse');
-        }
-        \LotgdNavigation::addNav('nav.barkeep.talk', 'inn.php?op=bartender', [
-            'params' => [
-                'barkeep' => $params['barkeep']
-            ]
-        ]);
-
-        \LotgdNavigation::addHeader('category.other');
-        \LotgdNavigation::addNav('nav.room.get', 'inn.php?op=room');
-
-        if ('fleedragon' == $op)
-        {
-            $session['user']['charm']--;
-            $session['user']['charm'] = max(0, $session['user']['charm']);
-        }
-
-        $chats = new GenericEvent(null, [
-            [
-                'chats.dragon', [], $textDomain
-            ],
-            [
-                getsetting('bard', '`^Seth`0'), [], $textDomain
-            ],
-            [
-                getsetting('barmaid', '`%Violet`0'), [], $textDomain
-            ],
-            [
-                '`#MightyE`0', [], $textDomain
-            ],
-            [
-                'chats.drink', [], $textDomain
-            ],
-            [
-                $params['partner'], [], $textDomain
-            ],
-        ]);
-
-        \LotgdEventDispatcher::dispatch($chats , Events::PAGE_INN_CHATTER);
-        $chats = modulehook('innchatter', $chats->getArguments());
-
-        $params['talk'] = $chats[array_rand($chats)];
-        $params['gameclock'] = getgametime();
     break;
 }
 
+$request->attributes->set('params', $params);
+
+\LotgdResponse::callController(Lotgd\Core\Controller\InnController::class, $method);
+
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
-
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_INN_POST);
-$params = modulehook('page-inn-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/inn.html.twig', $params));
-
 if ('default' == $params['tpl'])
 {
     $args = new GenericEvent();
