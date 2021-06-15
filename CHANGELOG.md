@@ -23,6 +23,13 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `public/hof.php` use controller `Lotgd\Core\Controller\HofController`
     -   `public/inn.php` use controller `Lotgd\Core\Controller\InnController`
     -   `public/lodge.php` use controller `Lotgd\Core\Controller\LodgeController`
+    -   `public/mercenarycamp.php` use controller `Lotgd\Core\Controller\MercenaryCampController`
+    -   `public/news.php` use controller `Lotgd\Core\Controller\NewsController`
+    -   `public/referral.php` use controller `Lotgd\Core\Controller\ReferralController`
+    -   `public/rock.php` use controller `Lotgd\Core\Controller\RockController`
+    -   `public/shades.php` use controller `Lotgd\Core\Controller\ShadesController`
+    -   `public/village.php` use controller `Lotgd\Core\Controller\VillageController`
+    -   `public/weapons.php` use controller `Lotgd\Core\Controller\WeaponController`
     -   Note: See this files for an examples of how to use the controllers in LoTGD Core.
 -   **Twig Extensions**
     -   `GameCore` Settings and Censor functions are moved to new extensions.
