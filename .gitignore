@@ -258,8 +258,6 @@ phan.csv
 
 ###> symfony/phpunit-bridge ###
 .phpunit
-.phpunit.result.cache
-/phpunit.xml
 /build/
 ###< symfony/phpunit-bridge ###
 
@@ -269,3 +267,8 @@ phan.csv
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
