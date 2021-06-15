@@ -1,4 +1,3 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/node,macos,linux,windows,composer,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,macos,linux,windows,composer,visualstudiocode
 
@@ -257,7 +256,6 @@ phan.csv
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
-.phpunit
 /build/
 ###< symfony/phpunit-bridge ###
 

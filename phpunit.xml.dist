@@ -20,6 +20,7 @@
             <text outputFile="php://stdout" showUncoveredFiles="false"/>
         </report>
     </coverage>
+
     <php>
         <env name="BOOTSTRAP_CLEAR_CACHE_ENV" value="test" />
         <ini name="error_reporting" value="-1" />
@@ -38,10 +39,10 @@
     <logging>
         <junit outputFile="./build/reports/phpunit.xml"/>
     </logging>
+
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
     </listeners>
-
     <!-- Run `composer require symfony/panther` before enabling this extension -->
     <!--
     <extensions>
