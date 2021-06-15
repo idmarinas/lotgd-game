@@ -16,6 +16,9 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
 
@@ -37,14 +40,12 @@ if ($session['user']['dragonkills'] > 0 || $session['user']['superuser'] & SU_ED
 //-- Init page
 \LotgdResponse::pageStart($title, [], $textDomain);
 
+$request->attributes->set('params', $params);
+
+\LotgdResponse::callController(Lotgd\Core\Controller\RockController::class);
+
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
-
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_ROCK_POST);
-$params = modulehook('page-rock-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/rock.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
