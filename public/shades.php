@@ -22,6 +22,9 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+
 $params = [
     'textDomain' => $textDomain,
     'includeTemplatesPre' => [], //-- Templates that are in top of content (but below of title)
@@ -55,14 +58,12 @@ $params = [
 //-- Superuser menu
 \LotgdNavigation::superuser();
 
+$request->attributes->set('params', $params);
+
+\Lotgdresponse::callController(Lotgd\Core\Controller\ShadesController::class);
+
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
-
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_SHADES_POST);
-$params = modulehook('page-shades-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/shades.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
