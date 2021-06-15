@@ -16,6 +16,9 @@ if ($session['user']['loggedin'] ?? false)
     checkday();
 }
 
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+
 //-- Init page
 \LotgdResponse::pageStart('title', [], 'page_news');
 
@@ -23,36 +26,18 @@ $args = new GenericEvent(null, ['showLastMotd' => true]);
 \LotgdEventDispatcher::dispatch($args, Events::PAGE_NEWS_INTERCEPT);
 $hookIntercept = modulehook('news-intercept', $args->getArguments());
 
-$newsPerPage = 50;
-$page = (int) \LotgdRequest::getQuery('page');
-$day = (int) \LotgdRequest::getQuery('day');
-$op = (string) \LotgdRequest::getQuery('op');
+$day = $request->query->getInt('day');
 $timestamp = strtotime("-{$day} days");
-$params = ['date' => $timestamp];
+$params = [
+    'timestamp' => $timestamp,
+    'date' => $timestamp,
+];
 
 if ($hookIntercept['showLastMotd'] ?? false)
 {
     $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Motd::class);
     $params['lastMotd'] = $repository->getLastMotd($session['user']['acctid'] ?? null);
 }
-
-$newsRepo = \Doctrine::getRepository(\Lotgd\Core\Entity\News::class);
-
-if ('delete' == $op)
-{
-    checkSuPermission(SU_EDIT_COMMENTS, 'news.php');
-
-    $newsId = (int) \LotgdRequest::getQuery('newsid');
-    $newsRepo->deleteNewsId($newsId);
-}
-
-$query = $newsRepo->createQueryBuilder('u');
-$query->orderBy('u.id', 'DESC')
-    ->where('u.date = :date')
-    ->setParameter('date', date('Y-m-d', $timestamp))
-;
-
-$params['result'] = $newsRepo->getPaginator($query, $page, $newsPerPage);
 
 if (! $session['user']['loggedin'])
 {
@@ -80,6 +65,7 @@ else
     \LotgdNavigation::addNav('news.nav.shades', 'shades.php');
     \LotgdNavigation::addNav('news.nav.graveyard', 'graveyard.php');
 }
+
 \LotgdNavigation::addHeader('news.category.news');
 \LotgdNavigation::addNav('news.nav.previous', 'news.php?day='.($day + 1));
 
@@ -97,14 +83,11 @@ if ($session['user']['loggedin'])
 //-- Superuser menu
 \LotgdNavigation::superuser();
 
-\LotgdNavigation::pagination($params['result'], "news.php?day={$day}");
-
 $params['SU_EDIT_COMMENTS'] = $session['user']['superuser'] & SU_EDIT_COMMENTS;
 
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_NEWS_POST);
-$params = modulehook('page-news-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/news.html.twig', $params));
+$request->attributes->set('params', $params);
+
+\LotgdResponse::callController(Lotgd\Core\Controller\NewsController::class);
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
