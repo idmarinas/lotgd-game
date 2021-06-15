@@ -30,6 +30,7 @@ class Version50400 extends InstallerAbstract
         {
             $fs->remove([
                 $this->getProjectDir().'/lib/clan/', //-- Deleted old files of clan
+                $this->getProjectDir().'/lib/inn/',
             ]);
         }
         catch (\Throwable $th)
