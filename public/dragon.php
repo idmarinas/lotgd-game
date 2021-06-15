@@ -66,7 +66,6 @@ elseif ('prologue' == $op)
     $flawless = (int) \LotgdRequest::getQuery('flawless');
 
     $params['flawless'] = $flawless;
-    $params['creatureName'] = $badguy['creaturename'];
 
     strip_all_buffs();
     $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
@@ -194,6 +193,8 @@ elseif ('prologue' == $op)
             break;
         }
     }
+
+    $params['creatureName'] = $badguy['creaturename'];
 
     \LotgdTool::addNews('battle.victory.news.title', [
         'playerName' => $regname,

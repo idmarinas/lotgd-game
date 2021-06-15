@@ -16,5 +16,5 @@ function addnews($text, array $params = [], $textDomain = 'partial_news', ?bool 
         __METHOD__
     ), E_USER_DEPRECATED);
 
-    \LotgdTool::addNews($text, $params, $textDomain, $hideFromBio);
+    \LotgdTool::addNews($text, $params, $textDomain, $hideFromBio ?: false);
 }
