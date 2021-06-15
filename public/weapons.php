@@ -22,6 +22,9 @@ unset($result);
 
 $tradeinvalue = round(($session['user']['weaponvalue'] * .75), 0);
 
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+
 $params = [
     'textDomain' => $textDomain,
     'tradeinvalue' => $tradeinvalue,
@@ -30,59 +33,26 @@ $params = [
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);
 
-$op = (string) \LotgdRequest::getQuery('op');
-$repository = \Doctrine::getRepository('LotgdCore:Weapons');
+$op = (string) $request->query->get('op');
 
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
 
-if ('' == $op)
+$method = 'index';
+
+if ('buy' == $op)
 {
-    $params['opt'] = 'default';
-    $weaponLevel = $repository->getMaxWeaponLevel($session['user']['dragonkills']);
-
-    $result = $repository->findByLevel($weaponLevel);
-
-    $params['weapons'] = $result;
-}
-elseif ('buy' == $op)
-{
-    $id = (int) \LotgdRequest::getQuery('id');
-
-    $params['opt'] = 'buy';
-    $params['result'] = $repository->findOneWeaponById($id);
-
-    if ($params['result'])
-    {
-        $row = $params['result'];
-        $params['buyIt'] = false;
-
-        if ($row['value'] <= ($session['user']['gold'] + $tradeinvalue))
-        {
-            $params['buyIt'] = true;
-
-            \LotgdLog::debug(sprintf('spent "%s" gold on the "%s" weapon', ($row['value'] - $tradeinvalue), $row['weaponname']));
-            $session['user']['gold'] -= $row['value'];
-            $session['user']['weapon'] = $row['weaponname'];
-            $session['user']['gold'] += $tradeinvalue;
-            $session['user']['attack'] -= $session['user']['weapondmg'];
-            $session['user']['weapondmg'] = $row['damage'];
-            $session['user']['attack'] += $session['user']['weapondmg'];
-            $session['user']['weaponvalue'] = $row['value'];
-        }
-    }
+    $method = 'buy';
 }
 
 \LotgdNavigation::villageNav();
 
+$request->attributes->set('params', $params);
+
+LotgdResponse::callController(Lotgd\Core\Controller\WeaponController::class, $method);
+
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
-
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_WEAPONS_POST);
-$params = modulehook('page-weapon-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/weapon.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
