@@ -88,10 +88,13 @@ if (! $session['user']['alive'])
     redirect('shades.php');
 }
 
-$op = \LotgdRequest::getQuery('op');
-$com = \LotgdRequest::getQuery('commentPage');
-$commenting = \LotgdRequest::getQuery('commenting');
-$comment = \LotgdRequest::getPost('comment');
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+
+$op = $request->query->get('op');
+$com = $request->query->getInt('commentPage');
+$commenting = $request->query->get('commenting');
+$comment = $request->request->get('comment');
 
 // Don't give people a chance at a special event if they are just browsing
 // the commentary (or talking) or dealing with any of the hooks in the village.
@@ -109,7 +112,7 @@ if (! $op && '' == $com && ! $comment && ! $commenting && 0 != module_events('vi
         $session['user']['specialmisc'] = '';
         $skipvillagedesc = true;
         $op = '';
-        \LotgdRequest::setQuery('op', '');
+        $request->setQuery('op', '');
     }
 }
 
@@ -199,11 +202,9 @@ $params['SU_EDIT_USERS'] = $session['user']['superuser'] & SU_EDIT_USERS;
 $params['blockCommentArea'] = false; //-- Show or not comment area
 $params['commentarySection'] = 'village'; //-- Commentary section
 
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_VILLAGE_POST);
-$params = modulehook('page-village-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/village.html.twig', $params));
+$request->attributes->set('params', $params);
+
+\LotgdResponse::callController(Lotgd\Core\Controller\VillageController::class);
 
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
