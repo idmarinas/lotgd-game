@@ -78,8 +78,8 @@ elseif ('buymount' == $op)
     if ($session['user']['hashorse'])
     {
         \LotgdNavigation::addHeader('category.confirm.trade');
-        \LotgdNavigaiton::addNav('nav.yes', "stables.php?op=confirmbuy&id={$mountId}");
-        \LotgdNavigaiton::addNav('nav.no', 'stables.php');
+        \LotgdNavigation::addNav('nav.yes', "stables.php?op=confirmbuy&id={$mountId}");
+        \LotgdNavigation::addNav('nav.no', 'stables.php');
 
         $confirm = 1;
     }
@@ -182,8 +182,8 @@ elseif ('feed' == $op)
 elseif ('sellmount' == $op)
 {
     \LotgdNavigation::addHeader('category.confirm.sell');
-    \LotgdNavigaiton::addNav('nav.yes', 'stables.php?op=confirmsell');
-    \LotgdNavigaiton::addNav('nav.no', 'stables.php');
+    \LotgdNavigation::addNav('nav.yes', 'stables.php?op=confirmsell');
+    \LotgdNavigation::addNav('nav.no', 'stables.php');
 
     $confirm = 1;
 }
