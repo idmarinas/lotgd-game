@@ -91,6 +91,9 @@
                     <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/checkban.php">lib/checkban.php</a></td>
                 </tr>
                             <tr>
+                    <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/deathmessage.php">lib/deathmessage.php</a></td>
+                </tr>
+                            <tr>
                     <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/debuglog.php">lib/debuglog.php</a></td>
                 </tr>
                             <tr>
@@ -106,7 +109,16 @@
                     <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/modules/hook.php">lib/modules/hook.php</a></td>
                 </tr>
                             <tr>
+                    <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/saveuser.php">lib/saveuser.php</a></td>
+                </tr>
+                            <tr>
                     <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/showform.php">lib/showform.php</a></td>
+                </tr>
+                            <tr>
+                    <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/substitute.php">lib/substitute.php</a></td>
+                </tr>
+                            <tr>
+                    <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/taunt.php">lib/taunt.php</a></td>
                 </tr>
                             <tr>
                     <td class="phpdocumentor-cell"><a href="reports/deprecated.html#src/core/Application.php">src/core/Application.php</a></td>
@@ -187,6 +199,20 @@
                             <td class="phpdocumentor-cell">8</td>
                             <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_checkban"><abbr title="\checkban()">checkban()</abbr></a></td>
                             <td class="phpdocumentor-cell">Removed in future versions.</td>
+                        </tr>
+                                                </table>
+                    <a id="lib/deathmessage.php"></a>
+            <h3><abbr title="lib/deathmessage.php">deathmessage.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">16</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_select_deathmessage"><abbr title="\select_deathmessage()">select_deathmessage()</abbr></a></td>
+                            <td class="phpdocumentor-cell">Use &quot;LotgdTool::selectDeathMessage($zone, $extraParams);&quot; instead. Removed in future versions.</td>
                         </tr>
                                                 </table>
                     <a id="lib/debuglog.php"></a>
@@ -279,6 +305,20 @@
                             <td class="phpdocumentor-cell">Remove in future version</td>
                         </tr>
                                                 </table>
+                    <a id="lib/saveuser.php"></a>
+            <h3><abbr title="lib/saveuser.php">saveuser.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">8</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_saveuser"><abbr title="\saveuser()">saveuser()</abbr></a></td>
+                            <td class="phpdocumentor-cell">Migrated to service Lotgd\Core\Tool\Tool, deleted in future version.</td>
+                        </tr>
+                                                </table>
                     <a id="lib/showform.php"></a>
             <h3><abbr title="lib/showform.php">showform.php</abbr></h3>
             <table>
@@ -291,6 +331,39 @@
                             <td class="phpdocumentor-cell">23</td>
                             <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_lotgd_showform"><abbr title="\lotgd_showform()">lotgd_showform()</abbr></a></td>
                             <td class="phpdocumentor-cell"></td>
+                        </tr>
+                                                </table>
+                    <a id="lib/substitute.php"></a>
+            <h3><abbr title="lib/substitute.php">substitute.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">8</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_substitute"><abbr title="\substitute()">substitute()</abbr></a></td>
+                            <td class="phpdocumentor-cell">Use &quot;LotgdTool::substitute($string, $extraSearch, $extraReplace);&quot; instead. Removed in future versions.</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">20</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_substitute_array"><abbr title="\substitute_array()">substitute_array()</abbr></a></td>
+                            <td class="phpdocumentor-cell">Use &quot;LotgdTool::substituteArray($string, $extraSearch, $extraReplace);&quot; instead. Removed in future versions.</td>
+                        </tr>
+                                                </table>
+                    <a id="lib/taunt.php"></a>
+            <h3><abbr title="lib/taunt.php">taunt.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">13</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_select_taunt"><abbr title="\select_taunt()">select_taunt()</abbr></a></td>
+                            <td class="phpdocumentor-cell">Use &quot;LotgdTool::selectTaunt($extraParams);&quot; instead. Removed in future versions.</td>
                         </tr>
                                                 </table>
                     <a id="src/core/Application.php"></a>
