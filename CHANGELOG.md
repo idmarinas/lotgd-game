@@ -28,6 +28,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `public/referral.php` use controller `Lotgd\Core\Controller\ReferralController`
     -   `public/rock.php` use controller `Lotgd\Core\Controller\RockController`
     -   `public/shades.php` use controller `Lotgd\Core\Controller\ShadesController`
+    -   `public/stables.php` use controller `Lotgd\Core\Controller\StableController`
     -   `public/village.php` use controller `Lotgd\Core\Controller\VillageController`
     -   `public/weapons.php` use controller `Lotgd\Core\Controller\WeaponController`
     -   Note: See this files for an examples of how to use the controllers in LoTGD Core.
