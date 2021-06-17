@@ -19,14 +19,12 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+
 $playermount = getmount($session['user']['hashorse']);
 
-$params = [
-    'textDomain' => $textDomain,
-    'barkeep' => getsetting('barkeep', '`tCedrik`0'),
-    'userSex' => $session['user']['sex'],
-    'mountName' => $playermount['mountname'] ?? ''
-];
+$confirm = 0;
 
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
@@ -47,10 +45,21 @@ if (! empty($playermount))
     $repaygems = round($playermount['mountcostgems'] * 2 / 3, 0);
     $grubprice = round($session['user']['level'] * $playermount['mountfeedcost'], 0);
 }
-$confirm = 0;
+
+$params = [
+    'textDomain' => $textDomain,
+    'barkeep' => getsetting('barkeep', '`tCedrik`0'),
+    'userSex' => $session['user']['sex'],
+    'player_mount' => $playermount,
+    'mountName' => $playermount['mountname'] ?? '',
+    'confirm' => 0,
+    'repaygems' => $repaygems,
+    'repaygold' => $repaygold,
+    'grubprice' => $grubprice
+];
 
 $op = (string) \LotgdRequest::getQuery('op');
-$mountId = (int) \LotgdRequest::getQuery('id');
+$mountId = $request->query->getInt('id');
 
 $mountRepository = \Doctrine::getRepository('LotgdCore:Mounts');
 
@@ -58,212 +67,42 @@ if ('' == $op)
 {
     checkday();
 
-    $params['tpl'] = 'default';
+    $method = 'index';
 }
 elseif ('examine' == $op)
 {
-    $params['tpl'] = 'examine';
-    $params['mount'] = $mountRepository->extractEntity($mountRepository->find($mountId));
-
-    if ($params['mount'])
-    {
-        \LotgdNavigation::addHeader('category.new', ['params' => ['name' => $params['mount']['mountname']]]);
-        \LotgdNavigation::addNav('nav.buy', "stables.php?op=buymount&id={$params['mount']['mountid']}");
-    }
+    $method = 'examine';
 }
 elseif ('buymount' == $op)
 {
-    $params['tpl'] = 'buymount';
-
-    if ($session['user']['hashorse'])
-    {
-        \LotgdNavigation::addHeader('category.confirm.trade');
-        \LotgdNavigation::addNav('nav.yes', "stables.php?op=confirmbuy&id={$mountId}");
-        \LotgdNavigation::addNav('nav.no', 'stables.php');
-
-        $confirm = 1;
-    }
-    else
-    {
-        $op = 'confirmbuy';
-        \LotgdRequest::setQuery('op', $op);
-    }
+    $method = 'buy';
 }
 
 if ('confirmbuy' == $op)
 {
-    $params['tpl'] = 'confirmbuy';
-
-    $mount = $mountRepository->extractEntity($mountRepository->find($mountId));
-
-    if ($mount)
-    {
-        $params['mountBuyed'] = true;
-
-        if (($session['user']['gold'] + $repaygold) < $mount['mountcostgold'] || ($session['user']['gems'] + $repaygems) < $mount['mountcostgems'])
-        {
-            $params['mountBuyed'] = false;
-        }
-        else
-        {
-            $params['mountReplace'] = false;
-            $params['mountNameNew'] = $mount['mountname'];
-
-            if ($session['user']['hashorse'])
-            {
-                $params['mountReplace'] = true;
-            }
-
-            $debugmount1 = $playermount['mountname'] ?? '';
-
-            if ($debugmount1)
-            {
-                $debugmount1 = 'a '.$debugmount1;
-            }
-            $session['user']['hashorse'] = $mount['mountid'];
-            $debugmount2 = $mount['mountname'];
-            $goldcost = $repaygold - $mount['mountcostgold'];
-            $session['user']['gold'] += $goldcost;
-            $gemcost = $repaygems - $mount['mountcostgems'];
-            $session['user']['gems'] += $gemcost;
-            \LotgdLog::debug(($goldcost <= 0 ? 'spent ' : 'gained ').abs($goldcost).' gold and '.($gemcost <= 0 ? 'spent ' : 'gained ').abs($gemcost)." gems trading $debugmount1 for a new mount, a $debugmount2");
-
-            $mount['mountbuff']['schema'] = $mount['mountbuff']['schema'] ?? 'mounts' ?: 'mounts';
-
-            apply_buff('mount', $mount['mountbuff']);
-
-            // Recalculate so the selling stuff works right
-            $playermount = getmount($mount['mountid']);
-
-            $repaygold = round($playermount['mountcostgold'] * 2 / 3, 0);
-            $repaygems = round($playermount['mountcostgems'] * 2 / 3, 0);
-
-            // Recalculate the special name as well.
-            $args = new GenericEvent();
-            \LotgdEventDispatcher::dispatch($args, Events::PAGE_STABLES_MOUNT);
-            modulehook('stable-mount', $args->getArguments());
-            \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_STABLES_BOUGHT);
-            modulehook('boughtmount');
-
-            $grubprice = round($session['user']['level'] * $playermount['mountfeedcost'], 0);
-        }
-    }
+    $method = 'buyConfirm';
 }
 elseif ('feed' == $op)
 {
-    $params['allowFeed'] = (int) getsetting('allowfeed', 0);
-    $params['haveGold'] = ($session['user']['gold'] >= $grubprice);
-
-    if ($params['haveGold'])
-    {
-        $mount['mountbuff']['schema'] = $mount['mountbuff']['schema'] ?? 'mounts' ?: 'mounts';
-        $params['mountHungry'] = (isset($session['bufflist']['mount']) && $session['bufflist']['mount']['rounds'] == $mount['mountbuff']['rounds']);
-
-        if ($params['mountHungry'])
-        {
-            $params['halfHungry'] = (isset($session['bufflist']['mount']) && $session['bufflist']['mount']['rounds'] > $mount['mountbuff']['rounds'] * .5);
-
-            if ($params['halfHungry'])
-            {
-                $grubprice = round($grubprice / 2, 0);
-            }
-
-            $params['grubPrice'] = $grubprice;
-
-            $session['user']['gold'] -= $grubprice;
-            $session['user']['fedmount'] = 1;
-
-            \LotgdLog::debug("spent $grubprice feeding their mount");
-
-            apply_buff('mount', $mount['mountbuff']);
-        }
-    }
+    $method = 'feed';
 }
 elseif ('sellmount' == $op)
 {
-    \LotgdNavigation::addHeader('category.confirm.sell');
-    \LotgdNavigation::addNav('nav.yes', 'stables.php?op=confirmsell');
-    \LotgdNavigation::addNav('nav.no', 'stables.php');
-
-    $confirm = 1;
+    $method = 'sell';
 }
 elseif ('confirmsell' == $op)
 {
-    $session['user']['gold'] += $repaygold;
-    $session['user']['gems'] += $repaygems;
-    $debugmount = $playermount['mountname'];
-    \LotgdLog::debug("gained $repaygold gold and $repaygems gems selling their mount, a $debugmount");
-    strip_buff('mount');
-    $session['user']['hashorse'] = 0;
-    \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_STABLES_SOLD);
-    modulehook('soldmount');
-
-    $params['repayGold'] = $repaygold;
-    $params['repayGems'] = $repaygems;
-
-    $params['mountName'] = ($playermount['newname'] ? $playermount['newname'] : $playermount['mountname']);
+    $method = 'sellConfirm';
 }
 
 $params['confirm'] = $confirm;
 
-if (0 == $confirm)
-{
-    if ($session['user']['hashorse'] > 0)
-    {
-        $params['costGold'] = $repaygold;
-        $params['costGems'] = $repaygems;
-        $params['mountName'] = $playermount['mountname'];
+$request->attributes->set('params', $params);
 
-        \LotgdNavigation::addHeaderNotl(\LotgdSanitize::fullSanitize($playermount['mountname']));
-
-        \LotgdNavigation::addNav('nav.sell', 'stables.php?op=sellmount', [
-            'params' => [
-                'name' => $playermount['mountname']
-            ]
-        ]);
-
-        if (getsetting('allowfeed', 0) && 0 == $session['user']['fedmount'])
-        {
-            \LotgdNavigation::addNav('nav.feed', 'stables.php?op=feed', [
-                'params' => [
-                    'name' => $playermount['mountname'],
-                    'grubPrice' => $grubprice
-                ]
-            ]);
-        }
-    }
-
-    $result = $mountRepository->getMountsByLocation($session['user']['location']);
-
-    $category = '';
-
-    foreach ($result as $row)
-    {
-        if ($category != $row->getMountcategory())
-        {
-            \LotgdNavigation::addHeaderNotl($row->getMountcategory());
-            $category = $row->getMountcategory();
-        }
-
-        if ($row->getMountdkcost() <= $session['user']['dragonkills'])
-        {
-            \LotgdNavigation::addNav('nav.examine', "stables.php?op=examine&id={$row->getMountid()}", [
-                'params' => [
-                    'name' => $row->getMountname()
-                ]
-            ]);
-        }
-    }
-}
+\LotgdResponse::callController(Lotgd\Core\Controller\StableController::class, $method);
 
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
-
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_STABLES_POST);
-$params = modulehook('page-stables-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/stables.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
