@@ -14,30 +14,20 @@
 namespace Lotgd\Core\Installer\Upgrade;
 
 use Lotgd\Core\Installer\InstallerAbstract;
-use Symfony\Component\Filesystem\Filesystem;
 
 class Version50400 extends InstallerAbstract
 {
+    use DeleteFilesTrait;
+
     protected $upgradeVersion = 50400;
     protected $hasMigration = false;
 
     //-- Delete old files
     public function step0()
     {
-        $fs = new Filesystem();
-
-        try
-        {
-            $fs->remove([
-                $this->getProjectDir().'/lib/clan/', //-- Deleted old files of clan
-                $this->getProjectDir().'/lib/inn/',
-            ]);
-        }
-        catch (\Throwable $th)
-        {
-            return false;
-        }
-
-        return true;
+        return $this->removeFiles([
+            $this->getProjectDir().'/lib/clan/', //-- Deleted old files of clan
+            $this->getProjectDir().'/lib/inn/',
+        ]);
     }
 }
