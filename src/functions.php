@@ -255,7 +255,7 @@ if ( ! \function_exists('_curl'))
         $total = \count($val);
         $cur   = 0;
 
-        foreach ($val as $k => $a)
+        foreach ($val as $a)
         {
             ++$cur;
             $done[] = $a.($cur != $total ? "\n" : '');
