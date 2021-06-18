@@ -34,7 +34,7 @@ class ModulesRepository extends DoctrineRepository
                 ->where('u.modulename = :module')
 
                 ->setParameter('module', $module)
-                ->setParameter('date', (new \DateTime('0000-00-00 00:00:00'))->format(\DateTime::ISO8601))
+                ->setParameter('date', '0000-00-00 00:00:00')
 
                 ->getQuery()
                 ->execute()
