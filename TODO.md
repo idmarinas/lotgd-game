@@ -20,6 +20,7 @@
         -   El panel de administración del juego se va a sustituir por **Sonata Admin**
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
+-   Mover clases repositorios de `EntityRepository` a `Repository` 
 
 
 # Módulos
