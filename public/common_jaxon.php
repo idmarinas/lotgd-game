@@ -18,12 +18,6 @@ use Lotgd\Core\Event\EveryRequest;
 // Please see the file LICENSE for a full textual description of the license.txt.
 require_once './common_common.php';
 
-// Decline static file requests back to the PHP built-in webserver
-if ('cli-server' === \PHP_SAPI && \is_file(__DIR__.\parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH)))
-{
-    return false;
-}
-
 if (
     isset($session['lasthit'], $session['loggedin'])
 

@@ -17,12 +17,6 @@ require_once 'common_common.php';
 require_once 'lib/redirect.php';
 require_once 'lib/pageparts.php';
 
-// Decline static file requests back to the PHP built-in webserver
-if ('cli-server' === \PHP_SAPI && \is_file(__DIR__.\parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH)))
-{
-    return false;
-}
-
 //-- Check if game is installed
 if (
     'cli' != \substr(PHP_SAPI, 0, 3) //-- Not check if is a cli (CronJob)
