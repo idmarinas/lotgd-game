@@ -38,11 +38,9 @@ function checkday()
 }
 
 /**
- * @param int $now
- *
- * @return bool
+ * Check if is a new day
  */
-function is_new_day($now = 0)
+function is_new_day(): bool
 {
     global $session;
 
