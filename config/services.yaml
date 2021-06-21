@@ -220,3 +220,11 @@ services:
         class: Lotgd\Core\Service\PaypalButtons
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.lotgd_core.paypal, method: onBlock }
+
+    # Combat
+    lotgd_core.combat.buffs:
+        alias: Lotgd\Core\Combat\Buff
+        public: true
+    lotgd_core.combat.temp_stats:
+        alias: Lotgd\Core\Combat\TempStat
+        public: true
