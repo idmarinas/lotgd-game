@@ -6,6 +6,7 @@
 
     {{ 'welcome'|trans|colorize }}
 
+    {{ sonata_block_render_event('lotgd.core.page.home.pre') }}
     {% for tpl, params in includeTemplatesPre %}
         {% include tpl with params %}
     {% endfor %}
@@ -25,11 +26,13 @@
         {{ 'newestplayer'|trans({newestplayer})|colorize }}
     {% endif %}
 
+    {{ sonata_block_render_event('lotgd.core.page.home.index') }}
     {# Templates old hook "index" #}
     {% for tpl, params in includeTemplatesIndex %}
         {% include tpl with params %}
     {% endfor %}
 
+    {{ sonata_block_render_event('lotgd.core.page.home.text') }}
     {# Results messages of hook "hometext" #}
     {% for message in hookHomeText %}
         {{ message|colorize }}
@@ -38,6 +41,7 @@
     {# Show the login form or a full server message #}
     {{ block(serverFull ? 'home_server_full' : 'home_login') }}
 
+    {{ sonata_block_render_event('lotgd.core.page.home.middle') }}
     {# Results messages of hook "homemiddle" #}
     {% for message in hookHomeMiddle %}
         {{ message|colorize }}
@@ -51,6 +55,7 @@
     {# Version of the game the server is running #}
     {{ 'server.version'|trans({ 'version': serverVersion })|colorize }}
 
+    {{ sonata_block_render_event('lotgd.core.page.home.post') }}
     {% for tpl, params in includeTemplatesPost %}
         {% include tpl with params %}
     {% endfor %}
