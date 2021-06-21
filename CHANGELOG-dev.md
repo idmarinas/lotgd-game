@@ -16,7 +16,10 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :star: FEATURES
 
--   Nothing
+-   **Sonata Block Event**
+    -   **themes/LotgdTheme/templates/_layout.html.twig** 
+        -   Add sonata block event {{ sonata_block_render_event('lotgd_core.paypal') }}
+            -   Example of usage in `src/core/Service/PaypalButtons` and see service `lotgd_core.service.paypal.buttons` in `config/service.yaml`
 
 ### :fire: DEPRECATED
 
