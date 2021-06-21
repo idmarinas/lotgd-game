@@ -214,3 +214,9 @@ services:
     Marek\Twig\ByteUnitsExtension:
         tags:
             - { name: twig.extension }
+
+    # Blocks
+    lotgd_core.service.paypal.buttons:
+        class: Lotgd\Core\Service\PaypalButtons
+        tags:
+            - { name: kernel.event_listener, event: sonata.block.event.lotgd_core.paypal, method: onBlock }
