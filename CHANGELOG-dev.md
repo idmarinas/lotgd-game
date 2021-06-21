@@ -27,6 +27,9 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
             -   `lotgd.core.page.home.text` avoid using `hookHomeText` in `$params`
             -   `lotgd.core.page.home.middle` avoid using `hookHomeMiddle` in `$params`
             -   `lotgd.core.page.home.post` avoid using `includeTemplatesPost` in `$params`
+-   **Create service for Buff and TemptStat**
+    -   `lib/buffs.php`
+    -   `lib/tempstat.php`
 
 ### :fire: DEPRECATED
 
