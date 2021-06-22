@@ -47,6 +47,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `check_temp_stat` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat($name, $color)` instead
     -   `suspend_temp_stats` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->suspendTempStats()` instead
     -   `restore_temp_stats` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->restoreTempStats()` instead
+-   **lib/fightnav.php** `fightnav` use `LotgdNavigation::fightNav($allowspecial, $allowflee, $script)` instead
 
 ### :wrench: FIXES
 
