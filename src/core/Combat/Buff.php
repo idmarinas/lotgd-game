@@ -32,7 +32,7 @@ class Buff
         $this->tempStat   = $tempStat;
     }
 
-    public function calculate_buff_fields()
+    public function calculateBuffFields()
     {
         global $session;
 
@@ -52,7 +52,7 @@ class Buff
                 {
                     if ('tempstat-' == \substr($property, 0, 9))
                     {
-                        $this->tempStat->apply_temp_stat(\substr($property, 9), $value);
+                        $this->tempStat->applyTempStat(\substr($property, 9), $value);
                     }
                 }//end foreach
                 $session['bufflist'][$buffname]['tempstats_calculated'] = true;
@@ -156,7 +156,7 @@ class Buff
 
     //end function
 
-    public function restore_buff_fields()
+    public function restoreBuffFields()
     {
         global $session;
 
@@ -197,7 +197,7 @@ class Buff
                 {
                     if ('tempstat-' == \substr($property, 0, 9))
                     {
-                        $this->tempStat->apply_temp_stat(\substr($property, 9), -$value);
+                        $this->tempStat->applyTempStat(\substr($property, 9), -$value);
                     }
                 }//end foreach
                 unset($session['bufflist'][$buffname]['tempstats_calculated']);
@@ -207,7 +207,7 @@ class Buff
 
     //end function
 
-    public function apply_buff($name, $buff)
+    public function applyBuff($name, $buff)
     {
         global $session, $translation_namespace;
 
@@ -225,7 +225,7 @@ class Buff
         {
             //we'll need to unapply buff fields before applying this buff since
             //it's already set.
-            $this->restore_buff_fields();
+            $this->restoreBuffFields();
         }
 
         $buff = new Character(['name' => $name, 'buff' => $buff]);
@@ -233,10 +233,10 @@ class Buff
         $buff = modulehook('modify-buff', $buff->getData());
 
         $session['bufflist'][$name] = $buff['buff'];
-        $this->calculate_buff_fields();
+        $this->calculateBuffFields();
     }
 
-    public function apply_companion($name, $companion, $ignorelimit = false)
+    public function applyCompanion($name, $companion, $ignorelimit = false)
     {
         global $session, $companions;
 
@@ -282,10 +282,10 @@ class Buff
         return false;
     }
 
-    public function strip_buff($name)
+    public function stripBuff($name)
     {
         global $session;
-        $this->restore_buff_fields();
+        $this->restoreBuffFields();
 
         if (isset($session['bufflist'][$name]))
         {
@@ -296,10 +296,10 @@ class Buff
         {
             unset($this->buffreplacements[$name]);
         }
-        $this->calculate_buff_fields();
+        $this->calculateBuffFields();
     }
 
-    public function strip_all_buffs()
+    public function stripAllBuffs()
     {
         global $session;
 
@@ -309,7 +309,7 @@ class Buff
         }
     }
 
-    public function has_buff($name): bool
+    public function hasBuff($name): bool
     {
         global $session;
 

@@ -25,7 +25,7 @@ class TempStat
         $this->response = $response;
     }
 
-    public function apply_temp_stat($name, $value, $type = 'add')
+    public function applyTempStat($name, $value, $type = 'add')
     {
         global $session;
 
@@ -59,7 +59,7 @@ class TempStat
         return false;
     }
 
-    public function check_temp_stat($name, $color = false)
+    public function checkTempStat($name, $color = false)
     {
         global $session;
 
@@ -89,7 +89,7 @@ class TempStat
         }
     }
 
-    public function suspend_temp_stats()
+    public function suspendTempStats()
     {
         global $session;
 
@@ -117,7 +117,7 @@ class TempStat
         return false;
     }
 
-    public function restore_temp_stats()
+    public function restoreTempStats()
     {
         global $session;
 
