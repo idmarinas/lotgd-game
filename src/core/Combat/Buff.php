@@ -276,12 +276,10 @@ class Buff
 
             return true; // success!
         }
-        else
-        {
-            $this->response->pageDebug('Failed to add companion due to restrictions regarding the maximum amount of companions allowed.');
 
-            return false;
-        }
+        $this->response->pageDebug('Failed to add companion due to restrictions regarding the maximum amount of companions allowed.');
+
+        return false;
     }
 
     public function strip_buff($name)
