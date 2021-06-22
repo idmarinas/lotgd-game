@@ -30,10 +30,23 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **Create service for Buff and TemptStat**
     -   `lib/buffs.php`
     -   `lib/tempstat.php`
+-   **Page About** Add new section "Bundle Info" like "Module Info" but for Bundles
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   **lib/buffs.php** All functions (removed in future version)
+    -   `calculate_buff_fields` use `LotgdKernel::get('lotgd_core.combat.buffs')->calculateBuffFields()` instead
+    -   `restore_buff_fields` use `LotgdKernel::get('lotgd_core.combat.buffs')->restoreBuffFields()` instead
+    -   `apply_buff` use `LotgdKernel::get('lotgd_core.combat.buffs')->applyBuff($name, $buff)` instead
+    -   `apply_companion` use `LotgdKernel::get('lotgd_core.combat.buffs')->applyCompanion($name, $companion, $ignorelimit)` instead
+    -   `strip_buff` use `LotgdKernel::get('lotgd_core.combat.buffs')->stripBuff($name)` instead
+    -   `strip_all_buffs` use `LotgdKernel::get('lotgd_core.combat.buffs')->stripAllBuffs()` instead
+    -   `has_buff` use `LotgdKernel::get('lotgd_core.combat.buffs')->hasBuff($name)` instead
+-   **lib/tempstat.php** All functions (removed in future version)
+    -   `apply_temp_stat` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->applyTempStat($name, $value, $type)` instead
+    -   `check_temp_stat` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat($name, $color)` instead
+    -   `suspend_temp_stats` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->suspendTempStats()` instead
+    -   `restore_temp_stats` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->restoreTempStats()` instead
 
 ### :wrench: FIXES
 
