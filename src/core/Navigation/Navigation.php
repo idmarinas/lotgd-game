@@ -15,6 +15,7 @@ namespace Lotgd\Core\Navigation;
 
 use Laminas\Stdlib\ArrayUtils;
 use Lotgd\Core\Events;
+use Lotgd\Core\Http\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -28,13 +29,6 @@ class Navigation
     use Pattern\CustomClass;
     use Pattern\Links;
     use Pattern\Pagination;
-
-    private $dispatcher;
-
-    public function __construct(EventDispatcherInterface $dispatcher)
-    {
-        $this->dispatcher = $dispatcher;
-    }
 
     /**
      * Default text domain for navigation menu.
@@ -82,6 +76,15 @@ class Navigation
      * @var string
      */
     protected $textDomainPrev = '';
+
+    private $dispatcher;
+    private $request;
+
+    public function __construct(EventDispatcherInterface $dispatcher, Request $request)
+    {
+        $this->dispatcher = $dispatcher;
+        $this->request    = $request;
+    }
 
     /**
      * Added nav header in navigation menu.
@@ -304,7 +307,7 @@ class Navigation
 
         if ($superuser & ~SU_DOESNT_GIVE_GROTTO)
         {
-            $script = \LotgdRequest::getServer('SCRIPT_NAME');
+            $script = $this->request->getServer('SCRIPT_NAME');
 
             if ('superuser.php' != $script)
             {
