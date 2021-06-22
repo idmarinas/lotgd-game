@@ -39,7 +39,7 @@ class AboutController extends AbstractController
     {
         $params['block_tpl'] = 'about_setup';
 
-        $data = $this->cache->get('', function (ItemInterface $item)
+        $data = $this->cache->get('lotgd_core.about.game_setup', function (ItemInterface $item)
         {
             $item->expiresAfter(43200); //-- Expire after 12 hours
 
