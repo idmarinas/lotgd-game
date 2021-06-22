@@ -16,17 +16,18 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :star: FEATURES
 
--   **Sonata Block Event**
-    -   **themes/LotgdTheme/templates/_layout.html.twig** 
-        -   Add sonata block event `lotgd_core.paypal`  
-            -   Example of usage in `src/core/Service/PaypalButtons` and see service `lotgd_core.service.paypal.buttons` in `config/service.yaml`
-    -   Add new Sonata Block Events: 
-        -   **themes/LotgdTheme/templates/page/home.html.twig**
-            -   `lotgd.core.page.home.pre` avoid using `includeTemplatesPre` in `$params`
-            -   `lotgd.core.page.home.index` avoid using `includeTemplatesIndex` in `$params`
-            -   `lotgd.core.page.home.text` avoid using `hookHomeText` in `$params`
-            -   `lotgd.core.page.home.middle` avoid using `hookHomeMiddle` in `$params`
-            -   `lotgd.core.page.home.post` avoid using `includeTemplatesPost` in `$params`
+-   **Theme/Template**
+    -   Add **Sonata Block Event** to some templates:
+        -   **themes/LotgdTheme/templates/_layout.html.twig** 
+            -   Add sonata block event `lotgd_core.paypal`  
+                -   Example of usage in `src/core/Service/PaypalButtons` and see service `lotgd_core.service.paypal.buttons` in `config/service.yaml`
+        -   Add new Sonata Block Events: 
+            -   **themes/LotgdTheme/templates/page/home.html.twig**
+                -   `lotgd.core.page.home.pre` avoid using `includeTemplatesPre` in `$params`
+                -   `lotgd.core.page.home.index` avoid using `includeTemplatesIndex` in `$params`
+                -   `lotgd.core.page.home.text` avoid using `hookHomeText` in `$params`
+                -   `lotgd.core.page.home.middle` avoid using `hookHomeMiddle` in `$params`
+                -   `lotgd.core.page.home.post` avoid using `includeTemplatesPost` in `$params`
 -   **Create service for Buff and TemptStat**
     -   `lib/buffs.php`
     -   `lib/tempstat.php`
