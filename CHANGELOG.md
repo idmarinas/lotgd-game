@@ -23,7 +23,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   **src/core/EntityRepository/ModulesRepository.php** Fix error when reinstall a module. (Invalid date format)
+-   **src/core/EntityRepository/ModulesRepository.php** Fixed error when reinstall a module. (Invalid date format)
+-   **src/core/Controller/AboutController.php** Fixed error, defined name for cache key.
 
 ### :x: REMOVES
 
