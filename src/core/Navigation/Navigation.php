@@ -14,9 +14,7 @@
 namespace Lotgd\Core\Navigation;
 
 use Laminas\Stdlib\ArrayUtils;
-use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -28,6 +26,7 @@ class Navigation
 {
     use Pattern\CustomClass;
     use Pattern\Links;
+    use Pattern\Menu;
     use Pattern\Pagination;
 
     /**
@@ -267,89 +266,6 @@ class Navigation
         bdump($this->navs, 'Info of navs');
 
         return $this->navs;
-    }
-
-    /**
-     * Add navs for actions of superuser.
-     */
-    public function superuser(): void
-    {
-        global $session;
-
-        $superuser = $session['user']['superuser'];
-
-        $this->addHeader('common.superuser.category', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
-
-        if ($superuser & SU_EDIT_COMMENTS)
-        {
-            $this->addNav('common.superuser.moderate', 'moderate.php', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
-        }
-
-        if ($superuser & ~SU_DOESNT_GIVE_GROTTO)
-        {
-            $this->addNav('common.superuser.superuser', 'superuser.php', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
-        }
-
-        if ($superuser & SU_INFINITE_DAYS)
-        {
-            $this->addNav('common.superuser.newday', 'newday.php', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
-        }
-    }
-
-    /**
-     * Add navs for action of superuser in Grotto page.
-     */
-    public function superuserGrottoNav(): void
-    {
-        global $session;
-
-        $superuser = $session['user']['superuser'];
-
-        if ($superuser & ~SU_DOESNT_GIVE_GROTTO)
-        {
-            $script = $this->request->getServer('SCRIPT_NAME');
-
-            if ('superuser.php' != $script)
-            {
-                $this->addNav('common.superuser.rsuperuser', 'superuser.php', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
-            }
-        }
-
-        $this->addNav('common.superuser.mundane', 'village.php', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
-    }
-
-    /**
-     * Add nav to village/shades.
-     *
-     * @param string $extra
-     */
-    public function villageNav($extra = ''): void
-    {
-        global $session;
-
-        $extra = (false === \strpos($extra, '?') ? '?' : '');
-        $extra = ('?' == $extra ? '' : $extra);
-
-        $args = new GenericEvent();
-        $this->dispatcher->dispatch($args, Events::PAGE_NAVIGATION_VILLAGE);
-        $args = modulehook('villagenav', $args->getArguments());
-
-        if ($args['handled'] ?? false)
-        {
-            return;
-        }
-        elseif ($session['user']['alive'])
-        {
-            $this->addNav('common.villagenav.village', "village.php{$extra}", [
-                'textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN,
-                'params'     => ['location' => $session['user']['location']],
-            ]);
-
-            return;
-        }
-
-        //-- User is dead
-        $this->addNav('common.villagenav.shades', 'shades.php', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
     }
 
     /**
