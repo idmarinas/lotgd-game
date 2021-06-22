@@ -26,7 +26,7 @@ function apply_companion($name, $companion, $ignorelimit = false)
 
 function strip_buff($name)
 {
-    \LotgdKernel::get('lotgd_core.combat.buffs')->stripBuff();
+    \LotgdKernel::get('lotgd_core.combat.buffs')->stripBuff($name);
 }
 
 function strip_all_buffs()
