@@ -1,14 +1,38 @@
-'title': 'About Legend of the Green Dragon Core Engine'
-'modules':
-    'name': 'Module Name'
-    'version': 'Version'
-    'author': 'Module Author'
-    'core': 'Core Distribution'
-    'notInstalled': '`i-- No modules installed --´i'
-    'download':
-        'title': 'Download'
-        'location': 'Download Location'
-        'contact': '`$Contact Admin for Release`0'
-        'notPublic': '`$Not publically released.`0'
-'setup':
-    'title': '`@Settings for this game`0'
+title: 'About Legend of the Green Dragon Core Engine'
+
+modules:
+    name: 'Module Name'
+    version: 'Version'
+    author: 'Module Author'
+    core: 'Core Distribution'
+    notInstalled: '`i-- No modules installed --´i'
+    download:
+        title: 'Download'
+        location: 'Download Location'
+        contact: '`$Contact Admin for Release`0'
+        notPublic: '`$Not publically released.`0'
+
+bundle:
+    title: List of LoTGD Bundles enabled in this server
+    enabled:
+        total: Total Bundles
+        lotgd: LoTGD Bundles
+    none:
+        title: No LoTGD Bundles
+        desc: This game server not have a LoTGD Bundles enabled
+    download_link: Download Bundle
+
+    name: 'Bundle Name'
+    version: 'Version'
+    author: 'Module Author'
+
+    core: 'Core Distribution'
+    notInstalled: '`i-- No modules installed --´i'
+    download:
+        title: 'Download'
+        location: 'Download Location'
+        contact: '`$Contact Admin for Release`0'
+        notPublic: '`$Not publically released.`0'
+
+setup:
+    title: '`@Settings for this game`0'

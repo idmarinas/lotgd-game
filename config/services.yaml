@@ -56,6 +56,11 @@ services:
     Lotgd\Core\Controller\:
         resource: '../src/core/Controller/'
         tags: ['controller.service_arguments']
+
+    Lotgd\Core\Controller\AboutController:
+        calls:
+            - setBundles: [ "@=service('kernel').getBundles()" ]
+
     Lotgd\Local\Controller\:
         resource: '../src/local/Controller/'
         tags: ['controller.service_arguments']
