@@ -180,6 +180,9 @@ services:
     lotgd.core.tools:
         alias: Lotgd\Core\Tool\Tool
         public: true
+    lotgd_core.tool.date_time:
+        alias: Lotgd\Core\Tool\DateTime
+        public: true
 
     # LoTGD navigation
     Lotgd\Core\Navigation\AccessKeys:
