@@ -294,6 +294,14 @@ class Navigation
     }
 
     /**
+     * Get default text domain.
+     */
+    public function getDefaultTextDomain(): string
+    {
+        return self::DEFAULT_NAVIGATION_TEXT_DOMAIN;
+    }
+
+    /**
      * Private function to add a nav in navigation menu.
      *
      * @return $this

@@ -132,21 +132,21 @@ trait Menu
 
         $superuser = $session['user']['superuser'];
 
-        $this->addHeader('common.superuser.category', ['textDomain' => parent::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
+        $this->addHeader('common.superuser.category', ['textDomain' => $this->getDefaultTextDomain()]);
 
         if ($superuser & SU_EDIT_COMMENTS)
         {
-            $this->addNav('common.superuser.moderate', 'moderate.php', ['textDomain' => parent::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
+            $this->addNav('common.superuser.moderate', 'moderate.php', ['textDomain' => $this->getDefaultTextDomain()]);
         }
 
         if ($superuser & ~SU_DOESNT_GIVE_GROTTO)
         {
-            $this->addNav('common.superuser.superuser', 'superuser.php', ['textDomain' => parent::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
+            $this->addNav('common.superuser.superuser', 'superuser.php', ['textDomain' => $this->getDefaultTextDomain()]);
         }
 
         if ($superuser & SU_INFINITE_DAYS)
         {
-            $this->addNav('common.superuser.newday', 'newday.php', ['textDomain' => parent::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
+            $this->addNav('common.superuser.newday', 'newday.php', ['textDomain' => $this->getDefaultTextDomain()]);
         }
     }
 
@@ -165,11 +165,11 @@ trait Menu
 
             if ('superuser.php' != $script)
             {
-                $this->addNav('common.superuser.rsuperuser', 'superuser.php', ['textDomain' => parent::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
+                $this->addNav('common.superuser.rsuperuser', 'superuser.php', ['textDomain' => $this->getDefaultTextDomain()]);
             }
         }
 
-        $this->addNav('common.superuser.mundane', 'village.php', ['textDomain' => parent::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
+        $this->addNav('common.superuser.mundane', 'village.php', ['textDomain' => $this->getDefaultTextDomain()]);
     }
 
     /**
@@ -195,7 +195,7 @@ trait Menu
         elseif ($session['user']['alive'])
         {
             $this->addNav('common.villagenav.village', "village.php{$extra}", [
-                'textDomain' => parent::DEFAULT_NAVIGATION_TEXT_DOMAIN,
+                'textDomain' => $this->getDefaultTextDomain(),
                 'params'     => ['location' => $session['user']['location']],
             ]);
 
@@ -203,6 +203,6 @@ trait Menu
         }
 
         //-- User is dead
-        $this->addNav('common.villagenav.shades', 'shades.php', ['textDomain' => parent::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
+        $this->addNav('common.villagenav.shades', 'shades.php', ['textDomain' => $this->getDefaultTextDomain()]);
     }
 }
