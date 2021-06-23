@@ -133,7 +133,7 @@ class DateTime
 
     public function secondsToNextGameDay(?array $details = null)
     {
-        if ( ! $details)
+        if ( ! $details || empty($details))
         {
             $details = $this->gameTimeDetails();
         }
