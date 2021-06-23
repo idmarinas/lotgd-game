@@ -305,7 +305,7 @@ class Buff
 
         foreach ($session['bufflist'] as $buffname => $buff)
         {
-            $this->strip_buff($buffname);
+            $this->stripBuff($buffname);
         }
     }
 
