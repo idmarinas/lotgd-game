@@ -102,6 +102,7 @@ trait Version
         '5.3.5 IDMarinas Edition'         => 50305,
         '5.4.0 IDMarinas Edition'         => 50400,
         '5.4.1 IDMarinas Edition'         => 50401,
+        '5.4.2 IDMarinas Edition'         => 50402,
     ];
 
     /**
