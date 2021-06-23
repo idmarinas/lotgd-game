@@ -78,5 +78,5 @@ function secondstonextgameday($details = false)
         __METHOD__
     ), E_USER_DEPRECATED);
 
-    return \LotgdKernel::get('lotgd_core.tool.date_time')->secondsToNextGameDay((array) $details);
+    return \LotgdKernel::get('lotgd_core.tool.date_time')->secondsToNextGameDay($details ?: null);
 }
