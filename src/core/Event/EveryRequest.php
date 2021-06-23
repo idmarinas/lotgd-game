@@ -25,7 +25,7 @@ class EveryRequest extends Event
     /**
      * Event that occurs in every request in header for authenticated user.
      */
-    public const HEADER_AUTHENTICATED = 'lotgd.core.every.header';
+    public const HEADER_AUTHENTICATED = 'lotgd.core.every.header.authenticated';
 
     /**
      * Event that occurs in every request in footer.
@@ -40,7 +40,7 @@ class EveryRequest extends Event
     /**
      * Event that occurs in every request in hit.
      */
-    public const HIT = 'lotgd.core.every.hit.authenticated';
+    public const HIT = 'lotgd.core.every.hit';
 
     /**
      * Event that occurs in every request in hit for authenticated user.
