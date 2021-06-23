@@ -163,6 +163,9 @@ services:
     # LoTGD Settings
     Lotgd\Core\Lib\Settings:
         public: true
+    lotgd_core.settings:
+        alias: Lotgd\Core\Lib\Settings
+        public: true
 
     # LoTGD PvP
     Lotgd\Core\Pvp\Listing:
