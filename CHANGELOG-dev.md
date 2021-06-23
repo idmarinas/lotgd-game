@@ -12,7 +12,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   This pages use a controller to render content of page
+    -   `public/forest.php` use controller `Lotgd\Core\Controller\ForestController`
 
 ### :star: FEATURES
 
@@ -28,9 +29,6 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
                 -   `lotgd.core.page.home.text` avoid using `hookHomeText` in `$params`
                 -   `lotgd.core.page.home.middle` avoid using `hookHomeMiddle` in `$params`
                 -   `lotgd.core.page.home.post` avoid using `includeTemplatesPost` in `$params`
--   **Create service for Buff and TemptStat**
-    -   `lib/buffs.php`
-    -   `lib/tempstat.php`
 -   **Page About** Add new section "Bundle Info" like "Module Info" but for Bundles
 
 ### :fire: DEPRECATED
@@ -49,10 +47,18 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `suspend_temp_stats` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->suspendTempStats()` instead
     -   `restore_temp_stats` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->restoreTempStats()` instead
 -   **lib/fightnav.php** `fightnav` use `LotgdNavigation::fightNav($allowspecial, $allowflee, $script)` instead
+-   **lib/datetime.php** All functions (removed in future version)
+    -   `checkday` use `LotgdKernel::get('lotgd_core.tool.date_time')->checkDay()` instead
+    -   `is_new_day` use `LotgdKernel::get('lotgd_core.tool.date_time')->isNewDay()` instead
+    -   `getgametime` use `LotgdKernel::get('lotgd_core.tool.date_time')->getGameTime()` instead
+    -   `gametime` use `LotgdKernel::get('lotgd_core.tool.date_time')->gameTime()` instead
+    -   `convertgametime` use `LotgdKernel::get('lotgd_core.tool.date_time')->convertGameTime($intime, $debug)` instead
+    -   `gametimedetails` use `LotgdKernel::get('lotgd_core.tool.date_time')->gameTimeDetails()` instead
+    -   `secondstonextgameday` use `LotgdKernel::get('lotgd_core.tool.date_time')->secondsToNextGameDay($details)` instead
 
 ### :wrench: FIXES
 
--   Nothing
+-   **themes/LotgdTheme/templates/page/_blocks/_newday.html.twig** Now pass mount name if mount give turns.
 
 ### :x: REMOVES
 
