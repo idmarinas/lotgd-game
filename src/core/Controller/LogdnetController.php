@@ -63,6 +63,8 @@ class LogdnetController extends AbstractController
      */
     public function image(Request $request): Response
     {
+        global $session;
+
         //-- Default response
         $file     = 'public/images/paypal1.gif';
         $response = new BinaryFileResponse($file);
@@ -110,15 +112,15 @@ class LogdnetController extends AbstractController
 
             $this->session->set('logdnet', $info);
 
-            if (isset($result) && $user = $this->getUser())
+            if (isset($result) && ($session['user']['loggedin'] ?? false))
             {
                 $logdnet = $this->session->get('logdnet', []);
                 $refer   = $request->server->get('HTTP_REFERER', '');
                 $content = $logdnet['note']."\n";
                 $content .= "<!-- At {$logdnet['when']} -->\n";
                 $content .= \sprintf($info[''],
-                    $user->getUsername(),
-                    \htmlentities($user->getUsername()).':'.$request->server->get('HTTP_HOST', '').$refer, ENT_COMPAT, 'UTF-8');
+                    $session['user']['login'],
+                    \htmlentities($session['user']['login']).':'.$request->server->get('HTTP_HOST', '').$refer, ENT_COMPAT, 'UTF-8');
 
                 return new Response($content, 200, [
                     'Content-Type' => 'image/gif',
