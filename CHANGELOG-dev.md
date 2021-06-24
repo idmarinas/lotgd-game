@@ -59,6 +59,11 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :wrench: FIXES
 
 -   **themes/LotgdTheme/templates/page/_blocks/_newday.html.twig** Now pass mount name if mount give turns.
+-   **public/images/logdnet.php** Fixed error with required file
+-   **src/core/Controller/LogdnetController.php** 
+    -   Fix error, use correct path of image.
+    -   Fix: Not overwrite $response var (with response of http get client)
+    -   Fix: use $session var and not getUser() method
 
 ### :x: REMOVES
 
