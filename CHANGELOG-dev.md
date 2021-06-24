@@ -14,6 +14,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 -   This pages use a controller to render content of page
     -   `public/forest.php` use controller `Lotgd\Core\Controller\ForestController`
+-   **src/core/Twig/Extension/GameCore.php** Moved date time function to a new Twig Extension
 
 ### :star: FEATURES
 
