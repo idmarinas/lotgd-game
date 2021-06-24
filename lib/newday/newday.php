@@ -207,8 +207,6 @@ $session['user']['lasthit']         = new \DateTime('now');
 
 if ($session['user']['hashorse'])
 {
-    require_once 'lib/substitute.php';
-
     $msg                 = $playermount['newday'];
     $params['mountName'] = $playermount['mountname'] ?? '';
 

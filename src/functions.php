@@ -235,15 +235,8 @@ if ( ! \function_exists('_curl'))
         \curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         \curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-        $val = 5;
-
-        if (\defined('DB_CONNECTED') && DB_CONNECTED == true)
-        {
-            require_once 'lib/settings.php';
-            $val = getsetting('curltimeout', 5);
-        }
-        \curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $val);
-        \curl_setopt($ch, CURLOPT_TIMEOUT, $val);
+        \curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        \curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 
         // grab URL and pass it to the browser
         $ret = \curl_exec($ch);
@@ -255,7 +248,7 @@ if ( ! \function_exists('_curl'))
         $total = \count($val);
         $cur   = 0;
 
-        foreach ($val as $k => $a)
+        foreach ($val as $a)
         {
             ++$cur;
             $done[] = $a.($cur != $total ? "\n" : '');

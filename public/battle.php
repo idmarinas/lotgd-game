@@ -804,28 +804,6 @@ if ($victory || $defeat)
         }
     }
 
-    //-- Use battle-victory-end and battle-defeat-end
-    // if (is_array($newenemies))
-    // {
-    //     foreach ($newenemies as $index => $badguy)
-    //     {
-    //         //-- Not use this hooks, better use battle-victory-end and battle-defeat-end
-    //         //-- This other hooks have an array with all enemies and can add a extra information
-
-    //         //-- This hooks triger for each badguy and maybe saturate server
-    //         //-- Legacy support
-    //         if ($victory)
-    //         {
-    //             $badguy = modulehook('battle-victory', $badguy);
-    //         }
-
-    //         if ($defeat)
-    //         {
-    //             $badguy = modulehook('battle-defeat', $badguy);
-    //         }
-    //     }
-    // }
-
     if ($victory)
     {
         $args = new GenericEvent(null, ['enemies' => $newenemies, 'options' => $options, 'messages' => []]);

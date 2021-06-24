@@ -4,130 +4,46 @@
 // addnews ready
 // mail ready
 
-$temp_user_stats = ['is_suspended' => false];
-
+/** @deprecated 5.5.0 use "LotgdKernel::get('lotgd_core.combat.temp_stats')->applyTempStat($name, $value, $type)" instead. Removed in future versions. */
 function apply_temp_stat($name, $value, $type = 'add')
 {
-    global $session, $temp_user_stats;
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 5.5.0; and delete in future version. Use "LotgdKernel::get("lotgd_core.combat.temp_stats")->applyTempStat($name, $value, $type)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if ('add' == $type)
-    {
-        if ( ! isset($temp_user_stats['add']))
-        {
-            $temp_user_stats['add'] = [];
-        }
-        $temp = &$temp_user_stats['add'];
-
-        if ( ! isset($temp[$name]))
-        {
-            $temp[$name] = $value;
-        }
-        else
-        {
-            $temp[$name] += $value;
-        }
-
-        if ( ! $temp_user_stats['is_suspended'])
-        {
-            $session['user'][$name] += $value;
-        }
-
-        return true;
-    }
-    else
-    {
-        \LotgdResponse::pageDebug("Temp stat type {$type} is not supported.");
-
-        return false;
-    }
+    return \LotgdKernel::get('lotgd_core.combat.temp_stats')->applyTempStat($name, $value, $type);
 }
 
+/** @deprecated 5.5.0 use "LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat($name, $color)" instead. Removed in future versions. */
 function check_temp_stat($name, $color = false)
 {
-    global $temp_user_stats, $session;
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 5.5.0; and delete in future version. Use "LotgdKernel::get("lotgd_core.combat.temp_stats")->checkTempStat($name, $color)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if (isset($temp_user_stats['add'][$name]))
-    {
-        $v = $temp_user_stats['add'][$name];
-    }
-    else
-    {
-        $v = 0;
-    }
-
-    if (false === $color)
-    {
-        return 0 == $v ? '' : $v;
-    }
-    else
-    {
-        if ($v > 0)
-        {
-            return ' `&('.($session['user'][$name] - \round($v, 1)).'`@+'.\round($v, 1).'`&)';
-        }
-        else
-        {
-            return 0 == $v ? '' : ' `&('.($session['user'][$name] + \round($v, 1)).'`$-'.\round($v, 1).'`&)';
-        }
-    }
+    return \LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat($name, $color);
 }
 
+/** @deprecated 5.5.0 use "LotgdKernel::get('lotgd_core.combat.temp_stats')->suspendTempStats()" instead. Removed in future versions. */
 function suspend_temp_stats()
 {
-    global $session, $temp_user_stats;
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 5.5.0; and delete in future version. Use "LotgdKernel::get("lotgd_core.combat.temp_stats")->suspendTempStats()" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if ( ! $temp_user_stats['is_suspended'])
-    {
-        \reset($temp_user_stats);
-
-        foreach ($temp_user_stats as $type => $collection)
-        {
-            if ('add' == $type)
-            {
-                \reset($collection);
-
-                foreach ($collection as $attribute => $value)
-                {
-                    $session['user'][$attribute] -= $value;
-                }
-            }
-        }
-        $temp_user_stats['is_suspended'] = true;
-
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return \LotgdKernel::get('lotgd_core.combat.temp_stats')->suspendTempStats();
 }
 
+/** @deprecated 5.5.0 use "LotgdKernel::get('lotgd_core.combat.temp_stats')->restoreTempStats()" instead. Removed in future versions. */
 function restore_temp_stats()
 {
-    global $session, $temp_user_stats;
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 5.5.0; and delete in future version. Use "LotgdKernel::get("lotgd_core.combat.temp_stats")->restoreTempStats()" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if ($temp_user_stats['is_suspended'])
-    {
-        \reset($temp_user_stats);
-
-        foreach ($temp_user_stats as $type => $collection)
-        {
-            if ('add' == $type)
-            {
-                \reset($collection);
-
-                foreach ($collection as $attribute => $value)
-                {
-                    $session['user'][$attribute] += $value;
-                }
-            }
-        }
-        $temp_user_stats['is_suspended'] = false;
-
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return \LotgdKernel::get('lotgd_core.combat.temp_stats')->restoreTempStats();
 }

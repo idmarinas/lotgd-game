@@ -14,29 +14,8 @@ use Lotgd\Core\Event\EveryRequest;
 require_once 'common_common.php';
 
 // Include some commonly needed and useful routines
-require_once 'lib/settings.php';
-require_once 'lib/gamelog.php';
-require_once 'lib/holiday_texts.php';
 require_once 'lib/redirect.php';
-require_once 'lib/debuglog.php';
-require_once 'lib/su_access.php';
-require_once 'lib/datetime.php';
-require_once 'lib/modules.php';
-require_once 'lib/tempstat.php';
-require_once 'lib/buffs.php';
-require_once 'lib/saveuser.php';
-require_once 'lib/addnews.php';
-require_once 'lib/forcednavigation.php';
-require_once 'lib/mounts.php';
-require_once 'lib/lotgd_mail.php';
-require_once 'lib/playerfunctions.php';
 require_once 'lib/pageparts.php';
-
-// Decline static file requests back to the PHP built-in webserver
-if ('cli-server' === \PHP_SAPI && \is_file(__DIR__.\parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH)))
-{
-    return false;
-}
 
 //-- Check if game is installed
 if (

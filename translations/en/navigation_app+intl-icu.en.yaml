@@ -46,6 +46,7 @@ about:
         about: 'About LoGD'
         setup: 'Game Setup Info'
         module: 'Module Info'
+        bundle: Bundle Info
         license: 'License Info'
 
 # Navs for account page

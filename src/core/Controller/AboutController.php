@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Bundle\Contract\LotgdBundleInterface;
 use Lotgd\Core\Events;
 use Lotgd\Core\Lib\Settings;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,6 +28,7 @@ class AboutController extends AbstractController
     private $dispatcher;
     private $settings;
     private $cache;
+    private $bundles = [];
 
     public function __construct(EventDispatcherInterface $eventDispatcher, Settings $settings, CacheInterface $coreLotgdCache)
     {
@@ -106,11 +108,28 @@ class AboutController extends AbstractController
         return $this->renderAbout($params);
     }
 
+    public function bundles(): Response
+    {
+        return $this->renderAbout([
+            'block_tpl'             => 'about_bundles',
+            'bundles_total_enabled' => \is_countable($this->bundles) ? \count($this->bundles) : 0,
+            'bundles_lotgd_enabled' => \array_filter($this->bundles, function ($var)
+            {
+                return $var instanceof LotgdBundleInterface;
+            }),
+        ]);
+    }
+
     public function license()
     {
         $params = ['block_tpl' => 'about_license'];
 
         return $this->renderAbout($params);
+    }
+
+    public function setBundles(array $bundles): void
+    {
+        $this->bundles = $bundles;
     }
 
     private function renderAbout(array $params): Response

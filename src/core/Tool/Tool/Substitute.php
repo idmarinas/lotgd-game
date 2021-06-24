@@ -92,15 +92,15 @@ trait Substitute
 
         $replace = [
             $session['user']['weapon'],
-            $badguy['creatureweapon'],
+            $badguy['creatureweapon'] ?? '',
             $session['user']['armor'],
-            $badguy['creaturename'],
+            $badguy['creaturename'] ?? '',
             '`^'.$session['user']['name'].'`0',
-            $badguy['creaturename'],
+            $badguy['creaturename'] ?? '',
             '`^'.$session['user']['name'].'`0',
             $session['user']['weapon'],
             $session['user']['armor'],
-            $badguy['creatureweapon'],
+            $badguy['creatureweapon'] ?? '',
         ];
 
         if (is_array($extraSearch) && is_array($extraReplace))

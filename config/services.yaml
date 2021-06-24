@@ -56,6 +56,11 @@ services:
     Lotgd\Core\Controller\:
         resource: '../src/core/Controller/'
         tags: ['controller.service_arguments']
+
+    Lotgd\Core\Controller\AboutController:
+        calls:
+            - setBundles: [ "@=service('kernel').getBundles()" ]
+
     Lotgd\Local\Controller\:
         resource: '../src/local/Controller/'
         tags: ['controller.service_arguments']
@@ -158,6 +163,9 @@ services:
     # LoTGD Settings
     Lotgd\Core\Lib\Settings:
         public: true
+    lotgd_core.settings:
+        alias: Lotgd\Core\Lib\Settings
+        public: true
 
     # LoTGD PvP
     Lotgd\Core\Pvp\Listing:
@@ -174,6 +182,9 @@ services:
         public: true
     lotgd.core.tools:
         alias: Lotgd\Core\Tool\Tool
+        public: true
+    lotgd_core.tool.date_time:
+        alias: Lotgd\Core\Tool\DateTime
         public: true
 
     # LoTGD navigation
@@ -214,3 +225,17 @@ services:
     Marek\Twig\ByteUnitsExtension:
         tags:
             - { name: twig.extension }
+
+    # Blocks
+    lotgd_core.service.paypal.buttons:
+        class: Lotgd\Core\Service\PaypalButtons
+        tags:
+            - { name: kernel.event_listener, event: sonata.block.event.lotgd_core.paypal, method: onBlock }
+
+    # Combat
+    lotgd_core.combat.buffs:
+        alias: Lotgd\Core\Combat\Buff
+        public: true
+    lotgd_core.combat.temp_stats:
+        alias: Lotgd\Core\Combat\TempStat
+        public: true
