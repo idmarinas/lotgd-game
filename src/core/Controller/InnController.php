@@ -13,22 +13,22 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Event\Core;
+use Lotgd\Core\Event\Other;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
+use Lotgd\Core\Output\Color;
+use Lotgd\Core\Pvp\Listing;
+use Lotgd\Core\Tool\DateTime;
+use Lotgd\Core\Tool\Sanitize;
 use Lotgd\Core\Tool\Tool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-
-use Lotgd\Core\Event\Core;
-use Lotgd\Core\Event\Other;
-use Lotgd\Core\Output\Color;
-use Lotgd\Core\Pvp\Listing;
-use Lotgd\Core\Tool\Sanitize;
 
 class InnController extends AbstractController
 {
@@ -40,6 +40,7 @@ class InnController extends AbstractController
     private $sanitize;
     private $pvpListing;
     private $color;
+    private $dateTime;
 
     public function __construct(
         Navigation $navigation,
@@ -49,16 +50,18 @@ class InnController extends AbstractController
         Tool $tool,
         Sanitize $sanitize,
         Listing $listing,
-        Color $color
+        Color $color,
+        DateTime $dateTime
     ) {
         $this->navigation = $navigation;
         $this->dispatcher = $eventDispatcher;
         $this->translator = $translator;
         $this->log        = $log;
         $this->tool       = $tool;
-        $this->sanitize = $sanitize;
+        $this->sanitize   = $sanitize;
         $this->pvpListing = $listing;
-        $this->color = $color;
+        $this->color      = $color;
+        $this->dateTime   = $dateTime;
     }
 
     public function converse(array $params): Response
@@ -77,7 +80,7 @@ class InnController extends AbstractController
 
         $action = (string) $request->query->get('act');
 
-        $params['tpl'] = 'bartender';
+        $params['tpl']    = 'bartender';
         $params['action'] = $action;
 
         if ('bribe' == $action)
@@ -413,7 +416,7 @@ class InnController extends AbstractController
         $chats = modulehook('innchatter', $chats->getArguments());
 
         $params['talk']      = $chats[\array_rand($chats)];
-        $params['gameclock'] = getgametime();
+        $params['gameclock'] = $this->dateTime->getGameTime();
 
         return $this->renderInn($params);
     }

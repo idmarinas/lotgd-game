@@ -16,6 +16,7 @@ namespace Lotgd\Core\Controller;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Log;
+use Lotgd\Core\Tool\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,20 +26,22 @@ class HealerController extends AbstractController
 {
     private $dispatcher;
     private $log;
+    private $dateTime;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, Log $log)
+    public function __construct(EventDispatcherInterface $eventDispatcher, Log $log, DateTime $dateTime)
     {
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
+        $this->dateTime   = $dateTime;
     }
 
     public function index(array $params): Response
     {
         global $session;
 
-        checkday();
+        $this->dateTime->checkDay();
 
-        $params['tpl'] = 'default';
+        $params['tpl']      = 'default';
         $params['needHeal'] = false;
 
         if ($session['user']['hitpoints'] < $session['user']['maxhitpoints'])
@@ -62,18 +65,18 @@ class HealerController extends AbstractController
     {
         global $session;
 
-        $pct = $request->query->getInt('pct');
-        $newcost = round($pct * $params['healCost'] / 100, 0);
+        $pct     = $request->query->getInt('pct');
+        $newcost = \round($pct * $params['healCost'] / 100, 0);
 
-        $params['tpl'] = 'buy';
+        $params['tpl']         = 'buy';
         $params['newHealCost'] = $newcost;
-        $params['canHeal'] = false;
+        $params['canHeal']     = false;
 
         if ($session['user']['gold'] >= $newcost)
         {
-            $diff = round(($session['user']['maxhitpoints'] - $session['user']['hitpoints']) * $pct / 100, 0);
+            $diff = \round(($session['user']['maxhitpoints'] - $session['user']['hitpoints']) * $pct / 100, 0);
 
-            $params['canHeal'] = true;
+            $params['canHeal']    = true;
             $params['healHealed'] = $diff;
 
             $session['user']['gold'] -= $newcost;
@@ -91,15 +94,15 @@ class HealerController extends AbstractController
 
         $compcost = $request->query->getInt('compcost');
 
-        $params['tpl'] = 'companion';
-        $params['canHeal'] = false;
+        $params['tpl']         = 'companion';
+        $params['canHeal']     = false;
         $params['newHealCost'] = $compcost;
 
         if ($session['user']['gold'] >= $compcost)
         {
             $params['canHeal'] = true;
 
-            $name = stripslashes(rawurldecode($request->query->get('name')));
+            $name = \stripslashes(\rawurldecode($request->query->get('name')));
 
             $session['user']['gold'] -= $compcost;
             $companions[$name]['hitpoints'] = $companions[$name]['maxhitpoints'];

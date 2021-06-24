@@ -11,7 +11,7 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
 {
     if (isset($session['output']) && false !== strpos($session['output'], '<!--CheckNewDay()-->'))
     {
-        checkday();
+        \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
     }
 
     foreach ($session['user']['allowednavs'] as $key => $val)

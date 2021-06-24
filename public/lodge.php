@@ -26,7 +26,7 @@ $op = (string) $request->query->get('op');
 
 if ('' == $op)
 {
-    checkday();
+    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 }
 
 $pointsavailable = max(0, $session['user']['donation'] - $session['user']['donationspent']);

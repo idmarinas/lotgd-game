@@ -80,7 +80,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
 
     if ('' == $op)
     {
-        checkday();
+        \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
         $params['tpl'] = 'default';
 
@@ -126,7 +126,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
 
             if ($session['user']['experience'] >= $exprequired)
             {
-                restore_buff_fields();
+                \LotgdKernel::get('lotgd_core.combat.buffs')->restoreBuffFields();
 
                 $master = buffbadguy($master, 'buffmaster');
 
@@ -157,7 +157,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
     {
         $params['tpl'] = 'question';
 
-        checkday();
+        \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
         \LotgdNavigation::addHeader('category.navigation');
         \LotgdNavigation::villageNav();
@@ -402,7 +402,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
 }
 else
 {
-    checkday();
+    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
     $params['tpl'] = 'maxlevel';
 

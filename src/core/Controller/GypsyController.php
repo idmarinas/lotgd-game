@@ -16,6 +16,7 @@ namespace Lotgd\Core\Controller;
 use Lotgd\Core\Events;
 use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
+use Lotgd\Core\Tool\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,12 +27,14 @@ class GypsyController extends AbstractController
     private $dispatcher;
     private $navigation;
     private $log;
+    private $dateTime;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, Navigation $navigation, Log $log)
+    public function __construct(EventDispatcherInterface $eventDispatcher, Navigation $navigation, Log $log, DateTime $dateTime)
     {
         $this->navigation = $navigation;
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
+        $this->dateTime   = $dateTime;
     }
 
     public function pay(array $params): Response
@@ -61,7 +64,7 @@ class GypsyController extends AbstractController
     {
         $params['tpl'] = 'default';
 
-        checkday();
+        $this->dateTime->checkDay();
 
         $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_GYPSY);
         modulehook('gypsy');

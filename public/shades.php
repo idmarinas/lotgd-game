@@ -5,7 +5,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
 
-checkday();
+\LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
 //-- You can only stay in the shades if you're dead.
 if ($session['user']['alive'])

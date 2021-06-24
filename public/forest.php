@@ -57,7 +57,7 @@ if ('dragon' == $op)
 }
 elseif ('search' == $op)
 {
-    checkday();
+    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
     require_once 'lib/forestoutcomes.php';
 
@@ -216,7 +216,7 @@ elseif ('search' == $op)
 
             $result = lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmonsters, true);
 
-            restore_buff_fields();
+            \LotgdKernel::get('lotgd_core.combat.buffs')->restoreBuffFields();
 
             if (empty($result))
             {
@@ -318,7 +318,7 @@ elseif ('search' == $op)
                     }
                 }
             }
-            calculate_buff_fields();
+            \LotgdKernel::get('lotgd_core.combat.buffs')->calculateBuffFields();
             $args = new GenericEvent(null, [
                 'enemies' => $stack,
                 'options' => [

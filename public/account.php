@@ -10,7 +10,7 @@ $textDomain = 'page_account';
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);
 
-checkday();
+\LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
 \LotgdNavigation::addHeader('account.category.navigation');
 \LotgdNavigation::villageNav();

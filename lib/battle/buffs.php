@@ -516,7 +516,7 @@ function expire_buffs()
 
                     $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
                 }
-                strip_buff($key);
+                \LotgdKernel::get('lotgd_core.combat.buffs')->stripBuff($key);
             }
         }
     }
@@ -557,7 +557,7 @@ function expire_buffs_afterbattle()
                         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
                     }
                 }
-                strip_buff($key);
+                \LotgdKernel::get('lotgd_core.combat.buffs')->stripBuff($key);
             }
         }
     }

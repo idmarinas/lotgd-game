@@ -7,7 +7,7 @@ require_once 'common.php';
 //-- Init page
 \LotgdResponse::pageStart('title', [], 'page_about');
 
-checkday();
+\LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 $op = \LotgdRequest::getQuery('op');
 
 if ($session['user']['loggedin'])

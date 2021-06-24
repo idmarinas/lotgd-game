@@ -13,7 +13,7 @@ require_once 'common.php';
 
 if ($session['user']['loggedin'] ?? false)
 {
-    checkday();
+    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 }
 
 /** @var Lotgd\Core\Http\Request */

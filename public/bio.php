@@ -13,7 +13,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 require_once 'common.php';
 
 $textDomain = 'page_bio';
-checkday();
+\LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
 $ret = \LotgdRequest::getQuery('ret');
 $char = \LotgdRequest::getQuery('char');

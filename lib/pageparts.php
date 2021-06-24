@@ -237,12 +237,12 @@ function charstats($return = true)
         addcharstat(\LotgdTranslator::t('statistic.category.character.info', [], 'app_default'));
         addcharstat(\LotgdTranslator::t('statistic.stat.name', [], 'app_default'), $u['name']);
         addcharstat(\LotgdTranslator::t('statistic.stat.dragonkills', [], 'app_default'), '`b'.$u['dragonkills'].'´b');
-        addcharstat(\LotgdTranslator::t('statistic.stat.level', [], 'app_default'), '`b'.$u['level'].check_temp_stat('level', 1).'´b');
+        addcharstat(\LotgdTranslator::t('statistic.stat.level', [], 'app_default'), '`b'.$u['level'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('level', 1).'´b');
 
         if ($u['alive'])
         {
             //-- HitPoints are calculated in base to attributes
-            addcharstat(\LotgdTranslator::t('statistic.stat.hitpoints', [], 'app_default'), \sprintf('%s/%s `$<span title="%s">(?)</span>`0', $u['hitpoints'].check_temp_stat('hitpoints', 1), $u['maxhitpoints'].check_temp_stat('maxhitpoints', 1), explained_get_player_hitpoints()));
+            addcharstat(\LotgdTranslator::t('statistic.stat.hitpoints', [], 'app_default'), \sprintf('%s/%s `$<span title="%s">(?)</span>`0', $u['hitpoints'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('hitpoints', 1), $u['maxhitpoints'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('maxhitpoints', 1), explained_get_player_hitpoints()));
 
             if (is_module_active('staminasystem'))
             {
@@ -250,33 +250,33 @@ function charstats($return = true)
             }
             else
             {
-                addcharstat(\LotgdTranslator::t('statistic.stat.turns', [], 'app_default'), $u['turns'].check_temp_stat('turns', 1));
+                addcharstat(\LotgdTranslator::t('statistic.stat.turns', [], 'app_default'), $u['turns'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('turns', 1));
             }
 
             if (is_module_active('displaycp'))
             {
                 addcharstat(\LotgdTranslator::t('statistic.stat.drunkeness', [], 'app_default'), '');
             }
-            addcharstat(\LotgdTranslator::t('statistic.stat.experience', [], 'app_default'), LotgdFormat::numeral($u['experience'].check_temp_stat('experience', 1)));
-            addcharstat(\LotgdTranslator::t('statistic.stat.attack', [], 'app_default'), \sprintf("{$atk} `\$<span title='%s'>(?)</span>`0", explained_get_player_attack().check_temp_stat('attack', 1)));
-            addcharstat(\LotgdTranslator::t('statistic.stat.defense', [], 'app_default'), \sprintf("{$def} `\$<span title='%s'>(?)</span>`0", explained_get_player_defense().check_temp_stat('defense', 1)));
-            addcharstat(\LotgdTranslator::t('statistic.stat.speed', [], 'app_default'), $spd.check_temp_stat('speed', 1));
-            addcharstat(\LotgdTranslator::t('statistic.stat.strength', [], 'app_default'), $u['strength'].check_temp_stat('strength', 1));
-            addcharstat(\LotgdTranslator::t('statistic.stat.dexterity', [], 'app_default'), $u['dexterity'].check_temp_stat('dexterity', 1));
-            addcharstat(\LotgdTranslator::t('statistic.stat.intelligence', [], 'app_default'), $u['intelligence'].check_temp_stat('intelligence', 1));
-            addcharstat(\LotgdTranslator::t('statistic.stat.constitution', [], 'app_default'), $u['constitution'].check_temp_stat('constitution', 1));
-            addcharstat(\LotgdTranslator::t('statistic.stat.wisdom', [], 'app_default'), $u['wisdom'].check_temp_stat('wisdom', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.experience', [], 'app_default'), LotgdFormat::numeral($u['experience'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('experience', 1)));
+            addcharstat(\LotgdTranslator::t('statistic.stat.attack', [], 'app_default'), \sprintf("{$atk} `\$<span title='%s'>(?)</span>`0", explained_get_player_attack().\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('attack', 1)));
+            addcharstat(\LotgdTranslator::t('statistic.stat.defense', [], 'app_default'), \sprintf("{$def} `\$<span title='%s'>(?)</span>`0", explained_get_player_defense().\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('defense', 1)));
+            addcharstat(\LotgdTranslator::t('statistic.stat.speed', [], 'app_default'), $spd.\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('speed', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.strength', [], 'app_default'), $u['strength'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('strength', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.dexterity', [], 'app_default'), $u['dexterity'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('dexterity', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.intelligence', [], 'app_default'), $u['intelligence'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('intelligence', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.constitution', [], 'app_default'), $u['constitution'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('constitution', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.wisdom', [], 'app_default'), $u['wisdom'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('wisdom', 1));
         }
         else
         {
             $maxsoul = 50 + 10 * $u['level'] + $u['dragonkills'] * 2;
-            addcharstat(\LotgdTranslator::t('statistic.stat.soulpoints', [], 'app_default'), $u['soulpoints'].check_temp_stat('soulpoints', 1).'`0/'.$maxsoul);
+            addcharstat(\LotgdTranslator::t('statistic.stat.soulpoints', [], 'app_default'), $u['soulpoints'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('soulpoints', 1).'`0/'.$maxsoul);
 
             if (is_module_active('staminasystem'))
             {
                 addcharstat(\LotgdTranslator::t('statistic.stat.stamina', [], 'app_default'), '');
             }
-            addcharstat(\LotgdTranslator::t('statistic.stat.torments', [], 'app_default'), $u['gravefights'].check_temp_stat('gravefights', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.torments', [], 'app_default'), $u['gravefights'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('gravefights', 1));
             addcharstat(\LotgdTranslator::t('statistic.stat.psyche', [], 'app_default'), 10 + \round(($u['level'] - 1) * 1.5));
             addcharstat(\LotgdTranslator::t('statistic.stat.spirit', [], 'app_default'), 10 + \round(($u['level'] - 1) * 1.5));
         }
@@ -319,12 +319,12 @@ function charstats($return = true)
         }
         else
         {
-            addcharstat(\LotgdTranslator::t('statistic.stat.favor', [], 'app_default'), $u['deathpower'].check_temp_stat('deathpower', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.favor', [], 'app_default'), $u['deathpower'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('deathpower', 1));
         }
 
         addcharstat(\LotgdTranslator::t('statistic.stat.spirits', [], 'app_default'), '`b'.$spirits[(int) $u['spirits']].'´b');
-        addcharstat(\LotgdTranslator::t('statistic.stat.gold', [], 'app_default'), \LotgdFormat::numeral($u['gold'].check_temp_stat('gold', 1)));
-        addcharstat(\LotgdTranslator::t('statistic.stat.gems', [], 'app_default'), \LotgdFormat::numeral($u['gems'].check_temp_stat('gems', 1)));
+        addcharstat(\LotgdTranslator::t('statistic.stat.gold', [], 'app_default'), \LotgdFormat::numeral($u['gold'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('gold', 1)));
+        addcharstat(\LotgdTranslator::t('statistic.stat.gems', [], 'app_default'), \LotgdFormat::numeral($u['gems'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('gems', 1)));
 
         addcharstat(\LotgdTranslator::t('statistic.category.character.equip', [], 'app_default'));
 

@@ -96,7 +96,7 @@ class Response extends HttpResponse
             modulehook('everyheader-loggedin', $args->getData());
         }
 
-        calculate_buff_fields();
+        $this->kernel->getContainer()->get('lotgd_core.combat.buffs')->calculateBuffFields();
 
         $userPre   = $session['user'] ?? [];
         $sesionPre = $session         ?? [];
@@ -312,11 +312,11 @@ class Response extends HttpResponse
      */
     private function getOutputCharacterStats()
     {
-        restore_buff_fields();
-        calculate_buff_fields();
+        $this->kernel->getContainer()->get('lotgd_core.combat.buffs')->restoreBuffFields();
+        $this->kernel->getContainer()->get('lotgd_core.combat.buffs')->calculateBuffFields();
 
         $charstats = charstats();
-        restore_buff_fields();
+        $this->kernel->getContainer()->get('lotgd_core.combat.buffs')->restoreBuffFields();
 
         return $charstats;
     }

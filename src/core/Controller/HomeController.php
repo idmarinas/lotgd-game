@@ -21,18 +21,21 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Lotgd\Core\Tool\DateTime;
 
 class HomeController extends AbstractController
 {
     private $settings;
     private $dispatcher;
     private $translator;
+    private $dateTime;
 
-    public function __construct(Settings $settings, EventDispatcherInterface $eventDispatcher, TranslatorInterface $translator)
+    public function __construct(Settings $settings, EventDispatcherInterface $eventDispatcher, TranslatorInterface $translator, DateTime $dateTime)
     {
         $this->settings   = $settings;
         $this->dispatcher = $eventDispatcher;
         $this->translator = $translator;
+        $this->dateTime = $dateTime;
     }
 
     public function index(Request $request): Response
@@ -44,8 +47,8 @@ class HomeController extends AbstractController
             'includeTemplatesPre'   => [], //-- Templates that are in top of content (but below of title)
             'includeTemplatesIndex' => [], //-- Templates that are in index below of new player
             'includeTemplatesPost'  => [], //-- Templates that are in bottom of content
-            'gameclock'             => $this->settings->getSetting('homecurtime', 1) ? getgametime() : null,
-            'newdaytimer'           => $this->settings->getSetting('homenewdaytime', 1) ? secondstonextgameday() : null,
+            'gameclock'             => $this->settings->getSetting('homecurtime', 1) ? $this->dateTime->getGameTime() : null,
+            'newdaytimer'           => $this->settings->getSetting('homenewdaytime', 1) ? $this->dateTime->secondsToNextGameDay() : null,
         ];
 
         //-- Get newest player name if show in home page

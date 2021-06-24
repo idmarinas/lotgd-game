@@ -65,7 +65,7 @@ $mountRepository = \Doctrine::getRepository('LotgdCore:Mounts');
 
 if ('' == $op)
 {
-    checkday();
+    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
     $method = 'index';
 }

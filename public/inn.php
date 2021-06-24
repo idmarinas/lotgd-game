@@ -26,7 +26,7 @@ $skipinndesc = handle_event('inn');
 
 if (! $skipinndesc)
 {
-    checkday();
+    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 }
 
 /** @var Lotgd\Core\Http\Request */

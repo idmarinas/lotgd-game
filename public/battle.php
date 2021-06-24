@@ -251,8 +251,8 @@ if ('newtarget' != $op)
         //we need to restore and calculate here to reflect changes that happen throughout the course of multiple rounds.
         \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_BATTLE_ROUND_START_BUFF_PRE);
         modulehook('startofround-prebuffs'); //-- For Stamina System
-        restore_buff_fields();
-        calculate_buff_fields();
+        \LotgdKernel::get('lotgd_core.combat.buffs')->restoreBuffFields();
+        \LotgdKernel::get('lotgd_core.combat.buffs')->calculateBuffFields();
         prepare_companions();
         $newenemies = [];
         // Run the beginning of round buffs (this also calculates all modifiers)

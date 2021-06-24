@@ -13,8 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
-require_once 'lib/buffs.php';
-
+use Lotgd\Core\Combat\Buff;
 use Lotgd\Core\EntityRepository\MountsRepository;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
@@ -33,13 +32,15 @@ class StableController extends AbstractController
     private $repository;
     private $log;
     private $sanitize;
+    private $buffs;
 
-    public function __construct(Navigation $navigation, EventDispatcherInterface $eventDispatcher, Log $log, Sanitize $sanitize)
+    public function __construct(Navigation $navigation, EventDispatcherInterface $eventDispatcher, Log $log, Sanitize $sanitize, Buff $buffs)
     {
         $this->navigation = $navigation;
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
         $this->sanitize   = $sanitize;
+        $this->buffs      = $buffs;
     }
 
     public function buy(array $params, Request $request): Response
@@ -104,7 +105,7 @@ class StableController extends AbstractController
 
                 $mount['mountbuff']['schema'] = $mount['mountbuff']['schema'] ?? 'mounts' ?: 'mounts';
 
-                apply_buff('mount', $mount['mountbuff']);
+                $this->buffs->applyBuff('mount', $mount['mountbuff']);
 
                 // Recalculate so the selling stuff works right
                 $params['player_mount'] = getmount($mount['mountid']);
@@ -149,7 +150,7 @@ class StableController extends AbstractController
         $session['user']['gems'] += $params['repaygems'];
         $debugmount = $params['player_mount']['mountname'];
         $this->log->debug("gained {$params['repaygold']} gold and {$params['repaygems']} gems selling their mount, a {$debugmount}");
-        strip_buff('mount');
+        $this->buffs->stripBuff('mount');
         $session['user']['hashorse'] = 0;
         $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_STABLES_SOLD);
         modulehook('soldmount');
@@ -190,7 +191,7 @@ class StableController extends AbstractController
 
                 $this->log->debug("spent {$params['grubprice']} feeding their mount");
 
-                apply_buff('mount', $mount['mountbuff']);
+                $this->buffs->applyBuff('mount', $mount['mountbuff']);
             }
         }
 

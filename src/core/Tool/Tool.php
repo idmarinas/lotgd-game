@@ -225,7 +225,7 @@ class Tool
 
         // Any time we go to save a user, make SURE that any tempstat changes
         // are undone.
-        restore_buff_fields();
+        $this->kernel->getContainer()->get('lotgd_core.combat.buffs')->restoreBuffFields();
 
         $session['user']['bufflist'] = $session['bufflist'];
 
