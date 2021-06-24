@@ -31,7 +31,7 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="emailvalidation", columns={"emailvalidation"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\AccountsRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\AccountsRepository")
  */
 class Accounts
 {

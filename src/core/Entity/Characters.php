@@ -29,7 +29,7 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="clanid", columns={"clanid"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\CharactersRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\CharactersRepository")
  */
 class Characters
 {

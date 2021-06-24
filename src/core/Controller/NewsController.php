@@ -36,7 +36,7 @@ class NewsController extends AbstractController
 
     public function index(array $params, Request $request): Response
     {
-        /** @var Lotgd\Core\EntityRepository\NewsRepository */
+        /** @var Lotgd\Core\Repository\NewsRepository */
         $newsRepo = $this->getDoctrine()->getRepository('LotgdCore:News');
         $page     = $request->query->getInt('page');
         $day      = $request->query->getInt('day');

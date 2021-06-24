@@ -14,7 +14,7 @@
 namespace Lotgd\Core\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Lotgd\Core\EntityRepository\AccountsRepository;
+use Lotgd\Core\Repository\AccountsRepository;
 use Lotgd\Core\Lib\Settings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -257,7 +257,7 @@ final class UserCreateCommand extends Command
 
     private function getIsAdmin(InputInterface $input, OutputInterface $output): bool
     {
-        /** @var Lotgd\Core\EntityRepository\AccountsRepository */
+        /** @var Lotgd\Core\Repository\AccountsRepository */
         $superusers = (bool) $this->getAccountRepository()->getSuperuserCountWithPermit(SU_MEGAUSER);
 
         if ($superusers)

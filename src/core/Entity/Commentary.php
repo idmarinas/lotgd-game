@@ -25,7 +25,7 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="hidden", columns={"hidden"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\CommentaryRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\CommentaryRepository")
  */
 class Commentary implements EntityInterface
 {

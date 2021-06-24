@@ -16,7 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Laminas\Filter;
 use Lotgd\Core\Entity as LotgdEntity;
 use Lotgd\Core\Entity\Commentary as EntityCommentary;
-use Lotgd\Core\EntityRepository\CommentaryRepository;
+use Lotgd\Core\Repository\CommentaryRepository;
 use Lotgd\Core\Event\Commentary as EventCommentary;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -118,7 +118,7 @@ class Commentary
             {
                 $item->expiresAt(new \DateTime('tomorrow'));
 
-                /** @var Entity\Core\EntityRepository\ClanRepository */
+                /** @var Entity\Core\Repository\ClanRepository */
                 $clanRep = $this->doctrine->getRepository(\Lotgd\Core\Entity\Clans::class);
                 $clanInfo = $clanRep->findOneBy(['clanid' => $session['user']['clanid']]);
                 $clanInfo = $clanRep->extractEntity($clanInfo);

@@ -18,7 +18,7 @@ use Doctrine\ORM\QueryBuilder;
 class Listing
 {
     protected $doctrine;
-    /** @var \Lotgd\Core\EntityRepository\CharactersRepository */
+    /** @var \Lotgd\Core\Repository\CharactersRepository */
     protected $repository;
     protected $query;
 

@@ -14,7 +14,7 @@
 namespace Lotgd\Core\Twig\Extension;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Lotgd\Core\EntityRepository\MotdRepository;
+use Lotgd\Core\Repository\MotdRepository;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

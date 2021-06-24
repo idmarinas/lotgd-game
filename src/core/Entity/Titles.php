@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         @ORM\Index(name="dk", columns={"dk"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\TitlesRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\TitlesRepository")
  * @Gedmo\TranslationEntity(class="Lotgd\Core\Entity\TitlesTranslation")
  */
 class Titles implements Translatable

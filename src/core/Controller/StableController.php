@@ -14,7 +14,7 @@
 namespace Lotgd\Core\Controller;
 
 use Lotgd\Core\Combat\Buff;
-use Lotgd\Core\EntityRepository\MountsRepository;
+use Lotgd\Core\Repository\MountsRepository;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Log;

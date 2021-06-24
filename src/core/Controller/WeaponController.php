@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
-use Lotgd\Core\EntityRepository\WeaponsRepository;
+use Lotgd\Core\Repository\WeaponsRepository;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Log;

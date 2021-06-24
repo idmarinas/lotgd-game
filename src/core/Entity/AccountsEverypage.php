@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Structure of table "accounts_everypage" in data base.
  *
  * @ORM\Table(name="accounts_everypage")
- * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\AccountsEverypageRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\AccountsEverypageRepository")
  */
 class AccountsEverypage
 {

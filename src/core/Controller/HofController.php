@@ -374,7 +374,7 @@ class HofController extends AbstractController
 
     private function renderHof(array $params): Response
     {
-        /** @var Lotgd\Core\EntityRepository\AccountsRepository */
+        /** @var Lotgd\Core\Repository\AccountsRepository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:Accounts');
 
         $params['paginator'] = $repository->getPaginator($params['query'], $params['page'], 25);
@@ -396,7 +396,7 @@ class HofController extends AbstractController
 
     private function getQuery()
     {
-        /** @var Lotgd\Core\EntityRepository\AccountsRepository */
+        /** @var Lotgd\Core\Repository\AccountsRepository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:Accounts');
         $query      = $repository->createQueryBuilder('u');
 

@@ -143,7 +143,7 @@ class LogdnetController extends AbstractController
      */
     public function net(): JsonResponse
     {
-        /** @var \Lotgd\Core\EntityRepository\LogdnetRepository */
+        /** @var \Lotgd\Core\Repository\LogdnetRepository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:Logdnet');
         $entities   = $repository->getNetServerList();
 

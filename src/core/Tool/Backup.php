@@ -36,7 +36,7 @@ class Backup
     /**
      * Delete an account and create a backup.
      *
-     * In order to create a backup and delete the data, the EntityRepository of each table needs to have the following two methods:
+     * In order to create a backup and delete the data, the Entity Repository of each table needs to have the following two methods:
      *  - public function backupDeleteDataFromAccount(int $accountId): array {}
      *  - public function backupGetDataFromAccount(int $accountId): int {}
      */
@@ -127,7 +127,7 @@ class Backup
 
     private function processClan(int $accountId, $accountEntity): void
     {
-        /** @var \Lotgd\Core\EntityRepository\CharactersRepository */
+        /** @var \Lotgd\Core\Repository\CharactersRepository */
         $charRepository = $this->doctrine->getRepository('LotgdCore:Characters');
 
         if ($accountEntity->getCharacter()->getClanid() && (CLAN_LEADER == $accountEntity->getCharacter()->getClanrank() || CLAN_FOUNDER == $accountEntity->getCharacter()->getClanrank()))

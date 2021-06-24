@@ -16,7 +16,7 @@ namespace Lotgd\Ajax\Core;
 use Jaxon\Response\Response;
 use Lotgd\Ajax\Pattern\Core as PatternCore;
 use Lotgd\Core\AjaxAbstract;
-use Lotgd\Core\EntityRepository\MotdRepository;
+use Lotgd\Core\Repository\MotdRepository;
 use Tracy\Debugger;
 
 /**

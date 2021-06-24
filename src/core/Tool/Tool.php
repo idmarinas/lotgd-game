@@ -160,7 +160,7 @@ class Tool
             $id = $result->getUniqueid();
         }
 
-        /** @var \Lotgd\Core\EntityRepository\BansRepository */
+        /** @var \Lotgd\Core\Repository\BansRepository */
         $repository = $this->doctrine->getRepository('LotgdCore:Bans');
         $repository->removeExpireBans();
 

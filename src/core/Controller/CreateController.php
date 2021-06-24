@@ -57,7 +57,7 @@ class CreateController extends AbstractController
 
     public function forgotVal(array $params, Request $request): Response
     {
-        /** @var Lotgd\Core\EntityRepository\AccountsRepository */
+        /** @var Lotgd\Core\Repository\AccountsRepository */
         $accountRepo   = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Accounts::class);
         $forgottenCode = $request->query->getInt('id');
 
@@ -95,7 +95,7 @@ class CreateController extends AbstractController
 
     public function val(array $params, Request $request): Response
     {
-        /** @var Lotgd\Core\EntityRepository\AccountsRepository */
+        /** @var Lotgd\Core\Repository\AccountsRepository */
         $accountRepo = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Accounts::class);
         $code        = $request->query->getInt('id');
 

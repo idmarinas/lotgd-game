@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Debug.
  *
  * @ORM\Table
- * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\DebugRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\DebugRepository")
  */
 class Debug
 {

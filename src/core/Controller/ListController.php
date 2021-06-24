@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
-use Lotgd\Core\EntityRepository\AccountsRepository;
+use Lotgd\Core\Repository\AccountsRepository;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Navigation\Navigation;
@@ -27,7 +27,7 @@ class ListController extends AbstractController
     public const ITEM_PER_PAGE = 50;
 
     private $dispatcher;
-    /** @var \Lotgd\Core\EntityRepository\AccountsRepository */
+    /** @var \Lotgd\Core\Repository\AccountsRepository */
     private $repository;
     private $navigation;
 
