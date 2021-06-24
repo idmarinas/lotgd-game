@@ -82,7 +82,7 @@ class LogdnetController extends AbstractController
 
                 try
                 {
-                    $response = $this->client->request('GET', $url, [
+                    $res = $this->client->request('GET', $url, [
                         'query' => [
                             'addy'    => \rawurlencode($request->get('a', '')), //server URL
                             'desc'    => \rawurlencode($request->get('d', '')), //server description
@@ -93,7 +93,7 @@ class LogdnetController extends AbstractController
                             'v'       => 2,   // LoGDnet version.
                         ],
                     ]);
-                    $result = \unserialize(\base64_decode($response->getContent()));
+                    $result = \unserialize(\base64_decode($res->getContent()));
 
                     $info         = $result;
                     $info['when'] = \date('Y-m-d H:i:s');
