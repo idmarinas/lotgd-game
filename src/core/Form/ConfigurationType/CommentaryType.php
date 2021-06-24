@@ -87,12 +87,14 @@ class CommentaryType extends AbstractType
                 'empty_data'  => '',
                 'label'       => 'commentary.moderateexcludes',
                 'constraints' => [
-                    new Assert\AtLeastOneOf([
-                        'constraints' => [
-                            new Assert\Length(['min' => 0, 'max' => 255]),
-                            new Assert\Blank(),
-                        ],
-                    ]),
+                    new Assert\Length(['min' => 0, 'max' => 255]),
+                    new Assert\Blank(),
+                    // new Assert\AtLeastOneOf([
+                    //     'constraints' => [
+                    //         new Assert\Length(['min' => 0, 'max' => 255]),
+                    //         new Assert\Blank(),
+                    //     ],
+                    // ]),
                 ],
                 'filters' => [
                     new Filter\StripTags(),
