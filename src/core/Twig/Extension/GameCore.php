@@ -88,8 +88,6 @@ class GameCore extends AbstractExtension
             new TwigFunction('trigger_event', [$this, 'triggerEvent']),
             new TwigFunction('modulehook', [$this, 'triggerEvent']), // Alias
             new TwigFunction('is_valid_protocol', [$this, 'isValidProtocol']),
-            new TwigFunction('gametime', [$this, 'gametime']),
-            new TwigFunction('secondstonextgameday', [$this, 'secondstonextgameday']),
 
             new TwigFunction('page_title', [$this, 'pageTitle']),
             new TwigFunction('game_version', function (): string
