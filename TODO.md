@@ -21,7 +21,6 @@
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 -   Mover clases repositorios de `EntityRepository` a `Repository` 
--   Eliminar funciones usadas por el core que estan obsoletas
 
 
 # Módulos
