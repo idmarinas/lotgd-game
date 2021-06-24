@@ -64,7 +64,7 @@ class LogdnetController extends AbstractController
     public function image(Request $request): Response
     {
         //-- Default response
-        $file     = 'bundles/lotgdui/images/paypal1.gif';
+        $file     = 'public/images/paypal1.gif';
         $response = new BinaryFileResponse($file);
 
         $op      = $request->get('op', '');
