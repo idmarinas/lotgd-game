@@ -48,7 +48,7 @@ $battle = false;
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
 
-\LotgdKernel::get('lotgd_core.combat.buffs')->stripAllBuffs();
+\LotgdKernel::get('lotgd_core.combat.buffer')->stripAllBuffs();
 $max = $session['user']['level'] * 10 + $session['user']['dragonkills'] * 2 + 50;
 $args = new GenericEvent(null, ['favor' => round(10 * ($max - $session['user']['soulpoints']) / $max)]);
 \LotgdEventDispatcher::dispatch($args, Events::PAGE_GRAVEYARD_HEAL);

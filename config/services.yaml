@@ -235,8 +235,8 @@ services:
             - { name: kernel.event_listener, event: sonata.block.event.lotgd_core.paypal, method: onBlock }
 
     # Combat
-    lotgd_core.combat.buffs:
-        alias: Lotgd\Core\Combat\Buff
+    lotgd_core.combat.buffer:
+        alias: Lotgd\Core\Combat\Buffer
         public: true
     lotgd_core.combat.temp_stats:
         alias: Lotgd\Core\Combat\TempStat

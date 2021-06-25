@@ -50,9 +50,9 @@ if ('' == $op)
     ];
 
     //--  Transform Dragon to adapt to player
-    \LotgdKernel::get('lotgd_core.combat.buffs')->restoreBuffFields();
+    \LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields();
     $badguy = lotgd_transform_creature($badguy);
-    \LotgdKernel::get('lotgd_core.combat.buffs')->calculateBuffFields();
+    \LotgdKernel::get('lotgd_core.combat.buffer')->calculateBuffFields();
 
     $args = new GenericEvent(null, $badguy);
     \LotgdEventDispatcher::dispatch($args, Events::PAGE_DRAGON_BUFF);
@@ -67,12 +67,12 @@ elseif ('prologue' == $op)
 
     $params['flawless'] = $flawless;
 
-    \LotgdKernel::get('lotgd_core.combat.buffs')->stripAllBuffs();
+    \LotgdKernel::get('lotgd_core.combat.buffer')->stripAllBuffs();
     $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
     $characterEntity = $hydrator->extract(new \Lotgd\Core\Entity\Characters());
     $dkpoints = 0;
 
-    \LotgdKernel::get('lotgd_core.combat.buffs')->restoreBuffFields();
+    \LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields();
     $args = new GenericEvent(null, [
         'total' => $session['user']['maxhitpoints'],
         'dkpoints' => $dkpoints,
@@ -82,7 +82,7 @@ elseif ('prologue' == $op)
     \LotgdEventDispatcher::dispatch($args, Events::PAGE_DRAGON_HP_RECALC);
     $hpgain = modulehook('hprecalc', $args->getArguments());
 
-    \LotgdKernel::get('lotgd_core.combat.buffs')->calculateBuffFields();
+    \LotgdKernel::get('lotgd_core.combat.buffer')->calculateBuffFields();
 
     //-- Values that do not change when defeating the Dragon
     $nochange = [

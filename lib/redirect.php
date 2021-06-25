@@ -30,7 +30,7 @@ function redirect($location, $reason = false)
         $session['output'] = \LotgdTheme::render('layout.html.twig', $params->toArray());
     }
 
-    \LotgdKernel::get('lotgd_core.combat.buffs')->restoreBuffFields();
+    \LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields();
     $session['debug'] = \LotgdTranslator::t('redirect.redirection', [
         'locationTo'   => $location,
         'locationFrom' => \LotgdRequest::getServer('REQUEST_URI'),

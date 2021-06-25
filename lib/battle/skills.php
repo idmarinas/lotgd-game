@@ -316,7 +316,7 @@ function apply_bodyguard($level)
             break;
         }
 
-        \LotgdKernel::get('lotgd_core.combat.buffs')->applyBuff('bodyguard', [
+        \LotgdKernel::get('lotgd_core.combat.buffer')->applyBuff('bodyguard', [
             'startmsg'         => \LotgdTranslator::t('skill.bodyguard.startmsg', [], 'page_battle'),
             'name'             => \LotgdTranslator::t('skill.bodyguard.name', [], 'page_battle'),
             'wearoff'          => \LotgdTranslator::t('skill.bodyguard.wearoff', [], 'page_battle'),
@@ -336,7 +336,7 @@ function apply_skill($skill, $l)
 
     if ('godmode' == $skill)
     {
-        \LotgdKernel::get('lotgd_core.combat.buffs')->applyBuff('godmode', [
+        \LotgdKernel::get('lotgd_core.combat.buffer')->applyBuff('godmode', [
             'name'         => \LotgdTranslator::t('skill.godmode.name', [], 'page_battle'),
             'rounds'       => 1,
             'wearoff'      => \LotgdTranslator::t('skill.godmode.wearoff', [], 'page_battle'),

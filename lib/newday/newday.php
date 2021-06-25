@@ -61,7 +61,7 @@ $params['interestRate'] = $interestrate;
 //clear all standard buffs
 $tempbuf                     = $session['user']['bufflist'] ?? [];
 $session['user']['bufflist'] = [];
-\LotgdKernel::get('lotgd_core.combat.buffs')->stripAllBuffs();
+\LotgdKernel::get('lotgd_core.combat.buffer')->stripAllBuffs();
 
 $params['buffMessages'] = [];
 
@@ -69,7 +69,7 @@ foreach ($tempbuf as $key => $val)
 {
     if (\array_key_exists('survivenewday', $val) && 1 == $val['survivenewday'])
     {
-        \LotgdKernel::get('lotgd_core.combat.buffs')->applyBuff($key, $val);
+        \LotgdKernel::get('lotgd_core.combat.buffer')->applyBuff($key, $val);
 
         if (\array_key_exists('newdaymessage', $val) && $val['newdaymessage'])
         {
@@ -104,7 +104,7 @@ if ($session['user']['hashorse'])
     {
         $buff['schema'] = 'mounts';
     }
-    \LotgdKernel::get('lotgd_core.combat.buffs')->applyBuff('mount', $buff);
+    \LotgdKernel::get('lotgd_core.combat.buffer')->applyBuff('mount', $buff);
 }
 
 $r1                = e_rand(-1, 1);

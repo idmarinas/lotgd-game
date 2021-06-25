@@ -17,7 +17,7 @@ use Lotgd\Core\Event\Character;
 use Lotgd\Core\Http\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-class Buff
+class Buffer
 {
     private $buffreplacements = [];
     private $debuggedbuffs    = [];

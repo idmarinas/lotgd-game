@@ -216,7 +216,7 @@ elseif ('search' == $op)
 
             $result = lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmonsters, true);
 
-            \LotgdKernel::get('lotgd_core.combat.buffs')->restoreBuffFields();
+            \LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields();
 
             if (empty($result))
             {
@@ -318,7 +318,7 @@ elseif ('search' == $op)
                     }
                 }
             }
-            \LotgdKernel::get('lotgd_core.combat.buffs')->calculateBuffFields();
+            \LotgdKernel::get('lotgd_core.combat.buffer')->calculateBuffFields();
             $args = new GenericEvent(null, [
                 'enemies' => $stack,
                 'options' => [

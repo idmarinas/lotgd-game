@@ -126,7 +126,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
 
             if ($session['user']['experience'] >= $exprequired)
             {
-                \LotgdKernel::get('lotgd_core.combat.buffs')->restoreBuffFields();
+                \LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields();
 
                 $master = buffbadguy($master, 'buffmaster');
 
