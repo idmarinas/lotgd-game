@@ -56,7 +56,7 @@
         "gulp-print": "^5.0.2",
         "gulp-uglify": "^3.0.2",
         "gulp-zip": "^5.1.0",
-        "less-loader": "^9.1.0",
+        "less-loader": "^10.0.0",
         "minimist": "^1.2.5",
         "normalize-path": "^3.0.0",
         "postcss": "^8.3.5",
