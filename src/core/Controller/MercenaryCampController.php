@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
-use Lotgd\Core\Combat\Buff;
+use Lotgd\Core\Combat\Buffer;
 use Lotgd\Core\Repository\CompanionsRepository;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
@@ -32,7 +32,7 @@ class MercenaryCampController extends AbstractController
     private $log;
     private $buffs;
 
-    public function __construct(Navigation $navigation, EventDispatcherInterface $eventDispatcher, Log $log, Buff $buffs)
+    public function __construct(Navigation $navigation, EventDispatcherInterface $eventDispatcher, Log $log, Buffer $buffs)
     {
         $this->navigation = $navigation;
         $this->dispatcher = $eventDispatcher;

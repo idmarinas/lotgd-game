@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
-use Lotgd\Core\Combat\Buff;
+use Lotgd\Core\Combat\Buffer;
 use Lotgd\Core\Repository\MountsRepository;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
@@ -34,7 +34,7 @@ class StableController extends AbstractController
     private $sanitize;
     private $buffs;
 
-    public function __construct(Navigation $navigation, EventDispatcherInterface $eventDispatcher, Log $log, Sanitize $sanitize, Buff $buffs)
+    public function __construct(Navigation $navigation, EventDispatcherInterface $eventDispatcher, Log $log, Sanitize $sanitize, Buffer $buffs)
     {
         $this->navigation = $navigation;
         $this->dispatcher = $eventDispatcher;
