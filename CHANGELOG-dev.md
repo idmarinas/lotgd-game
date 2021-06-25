@@ -17,6 +17,9 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **src/core/Twig/Extension/GameCore.php** Moved date time function to a new Twig Extension
 -   **Entity Repositories** Moved to new location:
     -   From `src/core/EntityRepository/` to `src/core/Repository/` 
+        -   Added transition classes in `src/core/EntityRepository/` to avoid BC, this clases will removed in version 6.0.0.
+-   **THEME**
+    -   Updated Fomantic UI version: 2.8.7 => 2.8.8
 
 ### :star: FEATURES
 
