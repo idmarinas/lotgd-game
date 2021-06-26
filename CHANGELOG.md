@@ -25,6 +25,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 -   **src/core/Event/EveryRequest.php** Fixed error with values of const 
 -   **src/core/Form/ConfigurationType/CommentaryType.php** Fixed error: removed usage of `Symfony\Component\Validator\Constraints\AtLeastOneOf` not exist in version 4.4 of Symfony
+-   **lib/battle/functions.php** Fix error when "die" in graveyard, nbow show message and  nav
 
 ### :x: REMOVES
 
