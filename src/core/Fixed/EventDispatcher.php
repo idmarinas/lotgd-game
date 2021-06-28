@@ -13,8 +13,6 @@
 
 namespace Lotgd\Core\Fixed;
 
-use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher as CoreEventDispatcher;
-
 class EventDispatcher
 {
     /**
@@ -49,7 +47,7 @@ class EventDispatcher
      *
      * @param CoreEventDispatcher $container
      */
-    public static function instance(CoreEventDispatcher $instance)
+    public static function instance($instance)
     {
         self::$instance = $instance;
     }
