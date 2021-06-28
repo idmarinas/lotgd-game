@@ -19,7 +19,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * Command for upgrade to 5.5.0 version.
  */
-final class Install50400Command extends AbstractCommand
+final class Install50500Command extends AbstractCommand
 {
     protected static $defaultName = 'lotgd:install:v:50500';
 
