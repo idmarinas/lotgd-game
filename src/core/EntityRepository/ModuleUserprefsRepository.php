@@ -1,52 +1,14 @@
 <?php
 
-/**
- * This file is part of Legend of the Green Dragon.
- *
- * @see https://github.com/idmarinas/lotgd-game
- *
- * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
- * @author IDMarinas
- *
- * @since 4.0.0
- */
-
 namespace Lotgd\Core\EntityRepository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
-use Tracy\Debugger;
+use Lotgd\Core\Repository\ModuleUserprefsRepository as Core;
 
-class ModuleUserprefsRepository extends DoctrineRepository
+class_exists('Lotgd\Core\Repository\ModuleUserprefsRepository');
+
+@trigger_error('Using the "Lotgd\Core\EntityRepository\ModuleUserprefsRepository" class is deprecated since 5.5.0, use "Lotgd\Core\Repository\ModuleUserprefsRepository" instead.', \E_USER_DEPRECATED);
+
+/** @deprecated since 5.5.0 Use Lotgd\Core\Repository\ModuleUserprefsRepository. Removed in 6.0.0 version. */
+class ModuleUserprefsRepository extends Core
 {
-    use ModuleUserprefs\Backup;
-
-    /**
-     * Find modules prefs for modules.
-     */
-    public function findModulesPrefs(array $modules, int $acctId): array
-    {
-        $query = $this->createQueryBuilder('u');
-
-        try
-        {
-            return $query
-                ->where('u.modulename IN (:modules) AND u.userid = :acct')
-                ->andWhere("u.setting LIKE 'user_%' OR u.setting LIKE 'check_%'")
-
-                ->setParameter('modules', $modules)
-                ->setParameter('acct', $acctId)
-
-                ->orderBy('u.modulename', 'DESC')
-
-                ->getQuery()
-                ->getArrayResult()
-            ;
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return [];
-        }
-    }
 }

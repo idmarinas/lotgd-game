@@ -16,8 +16,8 @@ namespace Lotgd\Ajax\Core;
 use Jaxon\Response\Response;
 use Lotgd\Ajax\Pattern\Core as PatternCore;
 use Lotgd\Core\AjaxAbstract;
-use Lotgd\Core\EntityRepository\AccountsRepository;
-use Lotgd\Core\EntityRepository\MailRepository;
+use Lotgd\Core\Repository\AccountsRepository;
+use Lotgd\Core\Repository\MailRepository;
 
 class Mail extends AjaxAbstract
 {

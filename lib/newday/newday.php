@@ -61,7 +61,7 @@ $params['interestRate'] = $interestrate;
 //clear all standard buffs
 $tempbuf                     = $session['user']['bufflist'] ?? [];
 $session['user']['bufflist'] = [];
-strip_all_buffs();
+\LotgdKernel::get('lotgd_core.combat.buffer')->stripAllBuffs();
 
 $params['buffMessages'] = [];
 
@@ -69,7 +69,7 @@ foreach ($tempbuf as $key => $val)
 {
     if (\array_key_exists('survivenewday', $val) && 1 == $val['survivenewday'])
     {
-        apply_buff($key, $val);
+        \LotgdKernel::get('lotgd_core.combat.buffer')->applyBuff($key, $val);
 
         if (\array_key_exists('newdaymessage', $val) && $val['newdaymessage'])
         {
@@ -104,7 +104,7 @@ if ($session['user']['hashorse'])
     {
         $buff['schema'] = 'mounts';
     }
-    apply_buff('mount', $buff);
+    \LotgdKernel::get('lotgd_core.combat.buffer')->applyBuff('mount', $buff);
 }
 
 $r1                = e_rand(-1, 1);
@@ -207,8 +207,6 @@ $session['user']['lasthit']         = new \DateTime('now');
 
 if ($session['user']['hashorse'])
 {
-    require_once 'lib/substitute.php';
-
     $msg                 = $playermount['newday'];
     $params['mountName'] = $playermount['mountname'] ?? '';
 
@@ -250,16 +248,16 @@ unsuspend_companions('allowinshades');
 if ( ! getsetting('newdaycron', 0))
 {
     //check last time we did this vs now to see if it was a different game day.
-    $lastnewdaysemaphore = convertgametime(\strtotime(getsetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
-    $gametoday           = gametime();
+    $lastnewdaysemaphore = \LotgdKernel::get('lotgd_core.tool.date_time')->convertGameTime(\strtotime(getsetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
+    $gametoday           = \LotgdKernel::get('lotgd_core.tool.date_time')->gameTime();
 
     if (\gmdate('Ymd', $gametoday) != \gmdate('Ymd', $lastnewdaysemaphore))
     {
         // it appears to be a different game day, acquire semaphore and
         // check again.
         clearsettings();
-        $lastnewdaysemaphore = convertgametime(\strtotime(getsetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
-        $gametoday           = gametime();
+        $lastnewdaysemaphore = \LotgdKernel::get('lotgd_core.tool.date_time')->convertGameTime(\strtotime(getsetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
+        $gametoday           = \LotgdKernel::get('lotgd_core.tool.date_time')->gameTime();
 
         if (\gmdate('Ymd', $gametoday) != \gmdate('Ymd', $lastnewdaysemaphore))
         {

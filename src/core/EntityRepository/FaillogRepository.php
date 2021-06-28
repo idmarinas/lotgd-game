@@ -1,46 +1,14 @@
 <?php
 
-/**
- * This file is part of Legend of the Green Dragon.
- *
- * @see https://github.com/idmarinas/lotgd-game
- *
- * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
- * @author IDMarinas
- *
- * @since 4.0.0
- */
-
 namespace Lotgd\Core\EntityRepository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Lotgd\Core\Repository\FaillogRepository as Core;
 
-class FaillogRepository extends DoctrineRepository
+class_exists('Lotgd\Core\Repository\FaillogRepository');
+
+@trigger_error('Using the "Lotgd\Core\EntityRepository\FaillogRepository" class is deprecated since 5.5.0, use "Lotgd\Core\Repository\FaillogRepository" instead.', \E_USER_DEPRECATED);
+
+/** @deprecated since 5.5.0 Use Lotgd\Core\Repository\FaillogRepository. Removed in 6.0.0 version. */
+class FaillogRepository extends Core
 {
-    /**
-     * Delte old fail logs in data base.
-     */
-    public function deleteExpireFaillogs(int $expire): int
-    {
-        $query = $this->_em->createQueryBuilder();
-
-        try
-        {
-            $date = new \DateTime('now');
-            $date->sub(new \DateInterval("P{$expire}D"));
-
-            return $query->delete($this->_entityName, 'u')
-                ->where('u.date < :date')
-                ->setParameter('date', $date)
-                ->getQuery()
-                ->execute()
-            ;
-        }
-        catch (\Throwable $th)
-        {
-            \Tracy\Debugger::log($th);
-
-            return 0;
-        }
-    }
 }

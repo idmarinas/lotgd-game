@@ -7,7 +7,7 @@ require_once 'common.php';
 //-- Init page
 \LotgdResponse::pageStart('title', [], 'page_about');
 
-checkday();
+\LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 $op = \LotgdRequest::getQuery('op');
 
 if ($session['user']['loggedin'])
@@ -24,6 +24,7 @@ else
 \LotgdNavigation::addNav('about.nav.about', 'about.php');
 \LotgdNavigation::addNav('about.nav.setup', 'about.php?op=setup');
 \LotgdNavigation::addNav('about.nav.module', 'about.php?op=listmodules');
+\LotgdNavigation::addNav('about.nav.bundle', 'about.php?op=bundles');
 \LotgdNavigation::addNav('about.nav.license', 'about.php?op=license');
 
 if ('listmodules' == $op)
@@ -31,6 +32,12 @@ if ('listmodules' == $op)
     \LotgdNavigation::blockLink('about.php?op=listmodules');
 
     $method = 'modules';
+}
+if ('bundles' == $op)
+{
+    \LotgdNavigation::blockLink('about.php?op=bundles');
+
+    $method = 'bundles';
 }
 elseif ('setup' == $op)
 {

@@ -1,47 +1,14 @@
 <?php
 
-/**
- * This file is part of Legend of the Green Dragon.
- *
- * @see https://github.com/idmarinas/lotgd-game
- *
- * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.md
- * @author IDMarinas
- *
- * @since 4.0.0
- */
-
 namespace Lotgd\Core\EntityRepository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
-use Tracy\Debugger;
+use Lotgd\Core\Repository\ReferersRepository as Core;
 
-class ReferersRepository extends DoctrineRepository
+class_exists('Lotgd\Core\Repository\ReferersRepository');
+
+@trigger_error('Using the "Lotgd\Core\EntityRepository\ReferersRepository" class is deprecated since 5.5.0, use "Lotgd\Core\Repository\ReferersRepository" instead.', \E_USER_DEPRECATED);
+
+/** @deprecated since 5.5.0 Use Lotgd\Core\Repository\ReferersRepository. Removed in 6.0.0 version. */
+class ReferersRepository extends Core
 {
-    /**
-     * Delte old referers in data base.
-     */
-    public function deleteExpireReferers(int $expire): int
-    {
-        $query = $this->_em->createQueryBuilder();
-
-        try
-        {
-            $date = new \DateTime('now');
-            $date->sub(new \DateInterval("P{$expire}D"));
-
-            return $query->delete($this->_entityName, 'u')
-                ->where('u.last < :date')
-                ->setParameter('date', $date)
-                ->getQuery()
-                ->execute()
-            ;
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return 0;
-        }
-    }
 }

@@ -1,73 +1,14 @@
 <?php
 
-/**
- * This file is part of Legend of the Green Dragon.
- *
- * @see https://github.com/idmarinas/lotgd-game
- *
- * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
- * @author IDMarinas
- *
- * @since 4.0.0
- */
-
 namespace Lotgd\Core\EntityRepository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Lotgd\Core\Repository\BansRepository as Core;
 
-class BansRepository extends DoctrineRepository
+class_exists('Lotgd\Core\Repository\BansRepository');
+
+@trigger_error('Using the "Lotgd\Core\EntityRepository\BansRepository" class is deprecated since 5.5.0, use "Lotgd\Core\Repository\BansRepository" instead.', \E_USER_DEPRECATED);
+
+/** @deprecated since 5.5.0 Use Lotgd\Core\Repository\BansRepository. Removed in 6.0.0 version. */
+class BansRepository extends Core
 {
-    /**
-     * Remove expired bans.
-     */
-    public function removeExpireBans(): int
-    {
-        $query = $this->_em->createQueryBuilder();
-
-        try
-        {
-            return $query->delete($this->_entityName, 'u')
-                ->where("u.banexpire < :date AND u.banexpire > '0000-00-00 00:00:00'")
-                ->setParameter('date', new \DateTime('now'))
-                ->getQuery()
-                ->execute()
-            ;
-        }
-        catch (\Throwable $th)
-        {
-            \Tracy\Debugger::log($th);
-
-            return 0;
-        }
-    }
-
-    /**
-     * Delete ban from data base.
-     *
-     * @param string $ip
-     * @param string $id
-     *
-     * @return bool
-     */
-    public function deleteBan($ip, $id): int
-    {
-        $query = $this->_em->createQueryBuilder();
-
-        try
-        {
-            return $query->delete($this->_entityName, 'u')
-                ->where('u.ipfilter = :ip AND u.uniqueid = :id')
-                ->setParameter('ip', $ip)
-                ->setParameter('id', $id)
-                ->getQuery()
-                ->execute()
-            ;
-        }
-        catch (\Throwable $th)
-        {
-            \Tracy\Debugger::log($th);
-
-            return 0;
-        }
-    }
 }

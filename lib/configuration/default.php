@@ -2,12 +2,12 @@
 
 use Lotgd\Core\Form\ConfigurationType;
 
-$details = gametimedetails();
+$details = \LotgdKernel::get('lotgd_core.tool.date_time')->gameTimeDetails();
 
-$secstonewday = secondstonextgameday($details);
+$secstonewday = \LotgdKernel::get('lotgd_core.tool.date_time')->secondsToNextGameDay($details);
 $useful_vals  = [
     'dayduration'   => \round(($details['dayduration'] / 60 / 60), 0).' hours',
-    'curgametime'   => getgametime(),
+    'curgametime'   => \LotgdKernel::get('lotgd_core.tool.date_time')->getGameTime(),
     'curservertime' => \date('Y-m-d h:i:s a'),
     'lastnewday'    => \date('h:i:s a', \strtotime("-{$details['realsecssofartoday']} seconds")),
     'nextnewday'    => \date('h:i:s a', \strtotime("+{$details['realsecstotomorrow']} seconds")).' ('.\date('H\\h i\\m s\\s', $secstonewday).')',

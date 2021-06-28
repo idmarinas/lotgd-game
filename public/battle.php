@@ -8,17 +8,14 @@ use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/substitute.php';
-require_once 'lib/battle/functions.php';
-require_once 'lib/battle/buffs.php';
-require_once 'lib/battle/skills.php';
-require_once 'lib/battle/extended.php';
-require_once 'lib/buffs.php';
 
 //just in case we're called from within a function.Yuck is this ugly.
 global $badguy, $enemies, $newenemies, $session, $creatureattack, $creatureatkmod, $beta;
 global $creaturedefmod, $adjustment, $defmod, $atkmod, $compdefmod, $compatkmod, $buffset, $atk, $def, $options;
 global $companions, $companion, $newcompanions, $countround, $defended, $needtostopfighting, $roll, $lotgdBattleContent, $content;
+
+$serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
+$serviceBuffer = \LotgdKernel::get('lotgd_core.combat.buffer');
 
 $newcompanions = [];
 $lotgdBattleContent = [
@@ -62,7 +59,7 @@ if (! isset($options) && isset($enemies[0]['type']))
     $options['type'] = $enemies[0]['type'];
 }
 
-$options = prepare_fight($options);
+$options = $serviceBattle->prepareFight($options);
 
 $roundcounter = 0;
 $adjustment = 1;
@@ -84,7 +81,7 @@ elseif ('ten' == $auto)
 }
 
 $enemycounter = count($enemies);
-$enemies = autosettarget($enemies);
+$enemies = $serviceBattle->autoSetTarget($enemies);
 
 $op = \LotgdRequest::getQuery('op');
 $skill = \LotgdRequest::getQuery('skill');
@@ -98,7 +95,7 @@ if ('' != $newtarget)
 
 if ('fight' == $op)
 {
-    apply_skill($skill, $l);
+    $serviceBattle->applySkill($skill, $l);
 }
 elseif ('newtarget' == $op)
 {
@@ -151,7 +148,7 @@ if ($enemycounter > 0)
     modulehook('battle-turn-start', $args->getArguments());
     $lotgdBattleContent['enemies'] = $enemies;
 
-    $data = prepare_data_battlebars($enemies);
+    $data = $serviceBattle->prepareDataBattleBars($enemies);
     $lotgdBattleContent['battlebars']['start'] = [
         'player' => $data['user'],
         'companions' => $data['companions'],
@@ -161,15 +158,15 @@ if ($enemycounter > 0)
     unset($data);
 }
 
-suspend_buffs((('pvp' == $options['type']) ? 'allowinpvp' : false));
-suspend_companions((('pvp' == $options['type']) ? 'allowinpvp' : false));
+$serviceBattle->suspendBuffs((('pvp' == $options['type']) ? 'allowinpvp' : false));
+$serviceBattle->suspendCompanions((('pvp' == $options['type']) ? 'allowinpvp' : false));
 
 // Now that the bufflist is sane, see if we should add in the bodyguard.
 $inn = (int) \LotgdRequest::getQuery('inn');
 
 if ('pvp' == $options['type'] && 1 == $inn)
 {
-    apply_bodyguard($enemies[0]['bodyguardlevel']);
+    $serviceBattle->applyBodyguard($enemies[0]['bodyguardlevel']);
 }
 
 $surprised = false;
@@ -189,13 +186,13 @@ if ('run' != $op && 'fight' != $op && 'newtarget' != $op)
         if (! array_key_exists('didsurprise', $options) || ! $options['didsurprise'])
         {
             // By default, surprise is 50/50
-            $surprised = e_rand(0, 1) ? true : false;
+            $surprised = mt_rand(0, 1) ? true : false;
             // Now, adjust for slum/thrill
             $type = \LotgdRequest::getQuery('type');
 
             if ('slum' == $type || 'thrill' == $type)
             {
-                $num = e_rand(0, 2);
+                $num = mt_rand(0, 2);
                 $surprised = true;
 
                 if ('slum' == $type && 2 != $num)
@@ -251,9 +248,9 @@ if ('newtarget' != $op)
         //we need to restore and calculate here to reflect changes that happen throughout the course of multiple rounds.
         \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_BATTLE_ROUND_START_BUFF_PRE);
         modulehook('startofround-prebuffs'); //-- For Stamina System
-        restore_buff_fields();
-        calculate_buff_fields();
-        prepare_companions();
+        $serviceBuffer->restoreBuffFields();
+        $serviceBuffer->calculateBuffFields();
+        $serviceBattle->prepareCompanions();
         $newenemies = [];
         // Run the beginning of round buffs (this also calculates all modifiers)
         foreach ($enemies as $index => $badguy)
@@ -271,7 +268,7 @@ if ('newtarget' != $op)
                 }
                 else
                 {
-                    $buffset = activate_buffs('roundstart');
+                    $buffset = $serviceBattle->activateBuffs('roundstart');
 
                     if ($badguy['creaturehealth'] <= 0 || $session['user']['hitpoints'] <= 0)
                     {
@@ -314,7 +311,7 @@ if ('newtarget' != $op)
                                 {
                                     if ($companion['hitpoints'] > 0)
                                     {
-                                        $buffer = report_companion_move($companion, 'heal');
+                                        $buffer = $serviceBattle->reportCompanionMove($companion, 'heal');
 
                                         if (false !== $buffer)
                                         {
@@ -343,7 +340,7 @@ if ('newtarget' != $op)
                         if ('fight' == $op || 'run' == $op || $surprised)
                         {
                             // Grab an initial roll.
-                            $roll = rolldamage();
+                            $roll = $serviceBattle->rollDamage();
 
                             if ('fight' == $op && ! $surprised)
                             {
@@ -352,7 +349,7 @@ if ('newtarget' != $op)
 
                                 if ($badguy['creaturehealth'] > 0 && $session['user']['hitpoints'] > 0)
                                 {
-                                    $buffset = activate_buffs('offense');
+                                    $buffset = $serviceBattle->activateBuffs('offense');
 
                                     if ($badguy['creaturehealth'] > 0 && $session['user']['hitpoints'] > 0 && $badguy['istarget'] && is_array($companions))
                                     {
@@ -364,7 +361,7 @@ if ('newtarget' != $op)
                                             {
                                                 if ($companion['hitpoints'] > 0)
                                                 {
-                                                    $buffer = report_companion_move($companion, 'magic');
+                                                    $buffer = $serviceBattle->reportCompanionMove($companion, 'magic');
 
                                                     if (false !== $buffer)
                                                     {
@@ -420,7 +417,7 @@ if ('newtarget' != $op)
                                             }
                                             else
                                             {
-                                                $needtostopfighting = battle_player_attacks();
+                                                $needtostopfighting = $serviceBattle->battlePlayerAttacks();
                                             }
 
                                             $r = mt_rand(0, 100);
@@ -429,7 +426,7 @@ if ('newtarget' != $op)
                                             {
                                                 $additionalattack = true;
                                                 $ggchancetodouble -= ($r + 5);
-                                                $roll = rolldamage();
+                                                $roll = $serviceBattle->rollDamage();
                                             }
                                             else
                                             {
@@ -465,12 +462,12 @@ if ('newtarget' != $op)
                             //-- Gunnar Kreitz
                             if ($badguy['creaturehealth'] > 0 && $session['user']['hitpoints'] > 0 && $roundcounter <= $options['maxattacks'])
                             {
-                                $buffset = activate_buffs('defense');
+                                $buffset = $serviceBattle->activateBuffs('defense');
 
                                 do
                                 {
                                     $defended = false;
-                                    $needtostopfighting = battle_badguy_attacks();
+                                    $needtostopfighting = $serviceBattle->battleBadguyAttacks();
                                     $r = mt_rand(0, 100);
 
                                     if (! isset($bgchancetodouble))
@@ -482,7 +479,7 @@ if ('newtarget' != $op)
                                     {
                                         $additionalattack = true;
                                         $bgchancetodouble -= ($r + 5);
-                                        $roll = rolldamage();
+                                        $roll = $serviceBattle->rollDamage();
                                     }
                                     else
                                     {
@@ -501,7 +498,7 @@ if ('newtarget' != $op)
                                     {
                                         if ($companion['hitpoints'] > 0)
                                         {
-                                            $buffer = report_companion_move($companion, 'fight');
+                                            $buffer = $serviceBattle->reportCompanionMove($companion, 'fight');
 
                                             if (false !== $buffer)
                                             {
@@ -534,7 +531,7 @@ if ('newtarget' != $op)
                         {
                             global $unsetme;
 
-                            execute_ai_script($badguy['creatureaiscript']);
+                            $serviceBattle->executeAiScript($badguy['creatureaiscript']);
                         }
                     }
                 }
@@ -567,7 +564,7 @@ if ('newtarget' != $op)
                 $badguy = modulehook('endofround', $args->getArguments());
             } //-- For Stamina System
         }
-        expire_buffs();
+        $serviceBattle->expireBuffs();
         $creaturedmg = 0;
         $selfdmg = 0;
 
@@ -750,7 +747,7 @@ else
     $newenemies = $enemies;
 }
 
-$newenemies = autosettarget($newenemies);
+$newenemies = $serviceBattle->autoSetTarget($newenemies);
 
 $args = new GenericEvent(null, $badguy);
 \LotgdEventDispatcher::dispatch($args, Events::PAGE_BATTLE_PAGE_END);
@@ -786,13 +783,13 @@ if ($victory || $defeat)
     $options['endbattle'] = 1;
     // expire any buffs which cannot persist across fights and
     // unsuspend any suspended buffs
-    expire_buffs_afterbattle();
+    $serviceBattle->expireBuffsAfterBattle();
     //unsuspend any suspended buffs
-    unsuspend_buffs((('pvp' == $options['type']) ? 'allowinpvp' : false));
+    $serviceBattle->unsuspendBuffs((('pvp' == $options['type']) ? 'allowinpvp' : false));
 
     if ($session['user']['alive'])
     {
-        unsuspend_companions((('pvp' == $options['type']) ? 'allowinpvp' : false));
+        $serviceBattle->unsuspendCompanions((('pvp' == $options['type']) ? 'allowinpvp' : false));
     }
 
     foreach ($companions as $index => $companion)
@@ -803,28 +800,6 @@ if ($victory || $defeat)
             unset($companions[$index]);
         }
     }
-
-    //-- Use battle-victory-end and battle-defeat-end
-    // if (is_array($newenemies))
-    // {
-    //     foreach ($newenemies as $index => $badguy)
-    //     {
-    //         //-- Not use this hooks, better use battle-victory-end and battle-defeat-end
-    //         //-- This other hooks have an array with all enemies and can add a extra information
-
-    //         //-- This hooks triger for each badguy and maybe saturate server
-    //         //-- Legacy support
-    //         if ($victory)
-    //         {
-    //             $badguy = modulehook('battle-victory', $badguy);
-    //         }
-
-    //         if ($defeat)
-    //         {
-    //             $badguy = modulehook('battle-defeat', $badguy);
-    //         }
-    //     }
-    // }
 
     if ($victory)
     {
@@ -837,7 +812,7 @@ if ($victory || $defeat)
 
         if ($battleProcessVictoryDefeat)
         {
-            battlevictory($newenemies, ($options['denyflawless'] ?? $battleDenyFlawless), $battleInForest);
+            $serviceBattle->battleVictory($newenemies, ($options['denyflawless'] ?? $battleDenyFlawless), $battleInForest);
         }
     }
     elseif ($defeat)
@@ -851,7 +826,7 @@ if ($victory || $defeat)
 
         if ($battleProcessVictoryDefeat)
         {
-            battledefeat($newenemies, $battleDefeatWhere, $battleDefeatCanDie, $battleDefeatLostExp, $battleDefeatLostGold);
+            $serviceBattle->battleDefeat($newenemies, $battleDefeatWhere, $battleDefeatCanDie, $battleDefeatLostExp, $battleDefeatLostGold);
         }
     }
 }
@@ -863,7 +838,7 @@ if ($enemycounter > 0)
     modulehook('battle-turn-end', $args->getArguments());
     $lotgdBattleContent['enemies'] = $newenemies;
 
-    $data = prepare_data_battlebars($newenemies);
+    $data = $serviceBattle->prepareDataBattleBars($newenemies);
     $lotgdBattleContent['battlebars']['end'] = [
         'player' => $data['user'],
         'companions' => $data['companions'],
@@ -880,7 +855,7 @@ $session['user']['battle']['options'] = $options;
 
 if ($battleShowResult)
 {
-    battleshowresults($lotgdBattleContent);
+    $serviceBattle->battleShowResults($lotgdBattleContent);
 }
 
 //-- If battle end in defeat, break page after show content

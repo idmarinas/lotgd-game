@@ -63,7 +63,7 @@ if (! $op && '' == $com && ! $comment && ! $refresh && ! $commenting && 0 != mod
 
 if (! $skipgardendesc)
 {
-    checkday();
+    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 }
 
 \LotgdNavigation::villageNav();

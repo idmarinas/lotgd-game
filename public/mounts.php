@@ -69,7 +69,7 @@ elseif ('give' == $op)
 
     $buff['schema'] = $buff['schema'] ?: 'mounts';
 
-    apply_buff('mount', $buff);
+    \LotgdKernel::get('lotgd_core.combat.buffer')->applyBuff('mount', $buff);
 
     $op = '';
     \LotgdRequest::setQuery('op', '');

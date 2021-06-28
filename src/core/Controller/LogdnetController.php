@@ -63,8 +63,10 @@ class LogdnetController extends AbstractController
      */
     public function image(Request $request): Response
     {
+        global $session;
+
         //-- Default response
-        $file     = 'bundles/lotgdui/images/paypal1.gif';
+        $file     = 'public/images/paypal1.gif';
         $response = new BinaryFileResponse($file);
 
         $op      = $request->get('op', '');
@@ -82,7 +84,7 @@ class LogdnetController extends AbstractController
 
                 try
                 {
-                    $response = $this->client->request('GET', $url, [
+                    $res = $this->client->request('GET', $url, [
                         'query' => [
                             'addy'    => \rawurlencode($request->get('a', '')), //server URL
                             'desc'    => \rawurlencode($request->get('d', '')), //server description
@@ -93,7 +95,7 @@ class LogdnetController extends AbstractController
                             'v'       => 2,   // LoGDnet version.
                         ],
                     ]);
-                    $result = \unserialize(\base64_decode($response->getContent()));
+                    $result = \unserialize(\base64_decode($res->getContent()));
 
                     $info         = $result;
                     $info['when'] = \date('Y-m-d H:i:s');
@@ -110,15 +112,15 @@ class LogdnetController extends AbstractController
 
             $this->session->set('logdnet', $info);
 
-            if (isset($result) && $user = $this->getUser())
+            if (isset($result) && ($session['user']['loggedin'] ?? false))
             {
                 $logdnet = $this->session->get('logdnet', []);
                 $refer   = $request->server->get('HTTP_REFERER', '');
                 $content = $logdnet['note']."\n";
                 $content .= "<!-- At {$logdnet['when']} -->\n";
                 $content .= \sprintf($info[''],
-                    $user->getUsername(),
-                    \htmlentities($user->getUsername()).':'.$request->server->get('HTTP_HOST', '').$refer, ENT_COMPAT, 'UTF-8');
+                    $session['user']['login'],
+                    \htmlentities($session['user']['login']).':'.$request->server->get('HTTP_HOST', '').$refer, ENT_COMPAT, 'UTF-8');
 
                 return new Response($content, 200, [
                     'Content-Type' => 'image/gif',
@@ -141,7 +143,7 @@ class LogdnetController extends AbstractController
      */
     public function net(): JsonResponse
     {
-        /** @var \Lotgd\Core\EntityRepository\LogdnetRepository */
+        /** @var \Lotgd\Core\Repository\LogdnetRepository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:Logdnet');
         $entities   = $repository->getNetServerList();
 

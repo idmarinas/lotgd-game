@@ -1,70 +1,14 @@
 <?php
 
-/**
- * This file is part of Legend of the Green Dragon.
- *
- * @see https://github.com/idmarinas/lotgd-game
- *
- * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
- * @author IDMarinas
- *
- * @since 4.0.0
- */
-
 namespace Lotgd\Core\EntityRepository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Lotgd\Core\Repository\AccountsOutputRepository as Core;
 
-class AccountsOutputRepository extends DoctrineRepository
+class_exists('Lotgd\Core\Repository\AccountsOutputRepository');
+
+@trigger_error('Using the "Lotgd\Core\EntityRepository\AccountsOutputRepository" class is deprecated since 5.5.0, use "Lotgd\Core\Repository\AccountsOutputRepository" instead.', \E_USER_DEPRECATED);
+
+/** @deprecated since 5.5.0 Use Lotgd\Core\Repository\AccountsOutputRepository. Removed in 6.0.0 version. */
+class AccountsOutputRepository extends Core
 {
-    use AccountsOutput\Backup;
-
-    /**
-     * Get output code for account.
-     */
-    public function getOutput(int $acctId): string
-    {
-        $query = $this->createQueryBuilder('u');
-
-        try
-        {
-            return $query->select('u.output')
-                ->where('u.acctid = :acct')
-                ->setParameter('acct', $acctId)
-                ->setMaxResults(1)
-                ->getQuery()
-                ->getSingleScalarResult()
-            ;
-        }
-        catch (\Throwable $th)
-        {
-            \Tracy\Debugger::log($th);
-
-            return '';
-        }
-    }
-
-    /**
-     * Delete output of account.
-     */
-    public function deleteOutputOfAccount(int $accountId): int
-    {
-        $query = $this->_em->createQueryBuilder();
-
-        try
-        {
-            return $query->delete($this->_entityName, 'u')
-                ->where('u.acctid = :acct')
-                ->setParameter('acct', $accountId)
-                ->getQuery()
-                ->execute()
-            ;
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return 0;
-        }
-    }
 }

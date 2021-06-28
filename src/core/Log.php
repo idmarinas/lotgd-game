@@ -65,7 +65,7 @@ class Log
     {
         global $session;
 
-        /** @var Lotgd\Core\EntityRepository\DebuglogRepository */
+        /** @var Lotgd\Core\Repository\DebuglogRepository */
         $repository = $this->doctrine->getRepository('LotgdCore:Debuglog');
 
         $corevalue = $value;

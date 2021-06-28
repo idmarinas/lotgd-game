@@ -76,7 +76,7 @@ elseif (! $params['newestname'] && $params['newestplayer'])
 \LotgdResponse::pageStart('title', $params, $textDomain);
 
 $skipvillagedesc = handle_event('village');
-checkday();
+\LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
 if (1 == $session['user']['slaydragon'])
 {

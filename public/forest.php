@@ -22,6 +22,9 @@ $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
+/** @var Lotgd\Core\Http\Request */
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);
 
@@ -39,6 +42,8 @@ $op = (string) \LotgdRequest::getQuery('op');
 
 $battle = false;
 
+$method = 'index';
+
 if ('dragon' == $op)
 {
     require_once 'lib/partner.php';
@@ -52,7 +57,7 @@ if ('dragon' == $op)
 }
 elseif ('search' == $op)
 {
-    checkday();
+    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
     require_once 'lib/forestoutcomes.php';
 
@@ -211,7 +216,7 @@ elseif ('search' == $op)
 
             $result = lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmonsters, true);
 
-            restore_buff_fields();
+            \LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields();
 
             if (empty($result))
             {
@@ -313,7 +318,7 @@ elseif ('search' == $op)
                     }
                 }
             }
-            calculate_buff_fields();
+            \LotgdKernel::get('lotgd_core.combat.buffer')->calculateBuffFields();
             $args = new GenericEvent(null, [
                 'enemies' => $stack,
                 'options' => [
@@ -337,7 +342,7 @@ elseif ('search' == $op)
 }
 elseif ('run' == $op)
 {
-    if (0 == e_rand() % 3)
+    if (0 == mt_rand() % 3)
     {
         $battle        = false;
         $params['tpl'] = 'default';
@@ -378,6 +383,7 @@ if ($battle)
         $params['showForestMessage'] = ! $dontDisplayForestMessage;
 
         $op = '';
+        $battle = false;
         \LotgdRequest::setQuery('op', '');
     }
     else
@@ -388,71 +394,21 @@ if ($battle)
 
 if ('' == $op)
 {
-    $params['tpl']               = 'default';
+    $method = 'index';
     $params['showForestMessage'] = ! $dontDisplayForestMessage;
+}
 
-    \LotgdNavigation::addHeader('category.navigation');
-    \LotgdNavigation::villageNav();
+$params['battle'] = $battle;
 
-    \LotgdNavigation::addHeader('category.heal');
-    \LotgdNavigation::addNav('nav.healer', 'healer.php');
+$request->attributes->set('params', $params);
 
-    \LotgdNavigation::addHeader('category.fight');
-    \LotgdNavigation::addNav('nav.search', 'forest.php?op=search');
-
-    ($session['user']['level'] > 1) && \LotgdNavigation::addNav('nav.slum', 'forest.php?op=search&type=slum');
-
-    \LotgdNavigation::addNav('nav.thrill', 'forest.php?op=search&type=thrill');
-
-    (getsetting('suicide', 0) && getsetting('suicidedk', 10) <= $session['user']['dragonkills']) && \LotgdNavigation::addNav('nav.suicide', 'forest.php?op=search&type=suicide');
-
-    \LotgdNavigation::addHeader('category.other');
-
-    \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_FOREST_HEADER);
-    modulehook('forest-header');
-
-    if ($session['user']['level'] >= getsetting('maxlevel', 15) && 0 == $session['user']['seendragon'])
-    {
-        // Only put the green dragon link if we are a location which
-        // should have a forest.   Don't even ask how we got into a forest()
-        // call if we shouldn't have one.   There is at least one way via
-        // a superuser link, but it shouldn't happen otherwise.. We just
-        // want to make sure however.
-        $isforest = 0;
-        $args = new GenericEvent();
-        \LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_VALID_FOREST_LOC);
-        $vloc     = modulehook('validforestloc', $args->getArguments());
-
-        foreach ($vloc as $i => $l)
-        {
-            if ($session['user']['location'] == $i)
-            {
-                $isforest = 1;
-                break;
-            }
-        }
-
-        if ($isforest || 0 == \count($vloc))
-        {
-            \LotgdNavigation::addNav('nav.dragon', 'forest.php?op=dragon');
-        }
-    }
-
-    $args = new GenericEvent();
-    \LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST);
-    modulehook('forest', $args->getArguments());
+if ( ! $battle)
+{
+    \LotgdResponse::callController(Lotgd\Core\Controller\ForestController::class, $method);
 }
 
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
-
-$params['battle'] = $battle;
-
-//-- This is only for params not use for other purpose
-$args = new GenericEvent(null, $params);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_POST);
-$params = modulehook('page-forest-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/forest.html.twig', $params));
 
 //-- Display events
 ('' == $op) && module_display_events('forest', 'forest.php');

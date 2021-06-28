@@ -59,7 +59,7 @@ class BankController extends AbstractController
         $params['amount'] = $amt;
         $params['to']     = $to;
 
-        /** @var Lotgd\Core\EntityRepository\CharactersRepository */
+        /** @var Lotgd\Core\Repository\CharactersRepository */
         $repository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Characters::class);
         $characters = $repository->findLikeName("%{$to}%", 100);
 

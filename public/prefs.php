@@ -60,7 +60,7 @@ if ('suicide' == $op && $params['selfDelete'])
 }
 elseif ('forcechangeemail' == $op)
 {
-    checkday();
+    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
     if ($session['user']['alive'])
     {
@@ -87,7 +87,7 @@ elseif ('forcechangeemail' == $op)
 }
 elseif ('cancelemail' == $op)
 {
-    checkday();
+    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
     if ($session['user']['alive'])
     {
@@ -113,7 +113,7 @@ elseif ('cancelemail' == $op)
 }
 else
 {
-    checkday();
+    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
     \LotgdNavigation::addNav('common.nav.bio', 'bio.php?char='.$session['user']['acctid'].'&ret='.urlencode(\LotgdRequest::getServer('REQUEST_URI')));
     if ($session['user']['alive'])

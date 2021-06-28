@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Logdnet.
  *
  * @ORM\Table(name="logdnet")
- * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\LogdnetRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\LogdnetRepository")
  */
 class Logdnet
 {

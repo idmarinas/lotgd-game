@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Cronjob.
  *
  * @ORM\Table(name="cronjob")
- * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\CronjobRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\CronjobRepository")
  */
 class Cronjob
 {

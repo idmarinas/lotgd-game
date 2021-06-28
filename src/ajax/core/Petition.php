@@ -16,7 +16,7 @@ namespace Lotgd\Ajax\Core;
 use Jaxon\Response\Response;
 use Lotgd\Ajax\Pattern\Core as PatternCore;
 use Lotgd\Core\AjaxAbstract;
-use Lotgd\Core\EntityRepository\PetitionsRepository;
+use Lotgd\Core\Repository\PetitionsRepository;
 use Lotgd\Core\Event\Core;
 use Lotgd\Core\Form\PetitionType;
 use Tracy\Debugger;

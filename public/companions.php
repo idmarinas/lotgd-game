@@ -85,7 +85,7 @@ elseif ('take' == $op)
 
         $message = 'flash.message.take.fail';
         $paramsMessage = [];
-        if (apply_companion($row['name'], $row))
+        if (\LotgdKernel::get('lotgd_core.combat.buffer')->applyCompanion($row['name'], $row))
         {
             $message = 'flash.message.take.success';
             $paramsMessage = ['name' => $row['name']];

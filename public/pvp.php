@@ -30,7 +30,7 @@ $act = (string) \LotgdRequest::getQuery('act');
 
 if ('' == $op && 'attack' != $act)
 {
-    checkday();
+    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
     pvpwarning();
 

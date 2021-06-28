@@ -1,72 +1,14 @@
 <?php
 
-/**
- * This file is part of Legend of the Green Dragon.
- *
- * @see https://github.com/idmarinas/lotgd-game
- *
- * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
- * @author IDMarinas
- *
- * @since 4.0.0
- */
-
 namespace Lotgd\Core\EntityRepository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Lotgd\Core\Repository\NewsRepository as Core;
 
-class NewsRepository extends DoctrineRepository
+class_exists('Lotgd\Core\Repository\NewsRepository');
+
+@trigger_error('Using the "Lotgd\Core\EntityRepository\NewsRepository" class is deprecated since 5.5.0, use "Lotgd\Core\Repository\NewsRepository" instead.', \E_USER_DEPRECATED);
+
+/** @deprecated since 5.5.0 Use Lotgd\Core\Repository\NewsRepository. Removed in 6.0.0 version. */
+class NewsRepository extends Core
 {
-    use News\Backup;
-
-    /**
-     * Delete a news by ID.
-     */
-    public function deleteNewsId(int $newsId): bool
-    {
-        $query = $this->_em->createQueryBuilder();
-
-        try
-        {
-            return $query->delete($this->_entityName, 'u')
-                ->where('u.newsid = :id')
-                ->setParameters(['id' => $newsId])
-                ->getQuery()
-                ->execute()
-            ;
-        }
-        catch (\Throwable $th)
-        {
-            \Tracy\Debugger::log($th);
-
-            return false;
-        }
-    }
-
-    /**
-     * Delte old news in data base.
-     */
-    public function deleteExpireNews(int $expire): int
-    {
-        $query = $this->_em->createQueryBuilder();
-
-        try
-        {
-            $date = new \DateTime('now');
-            $date->sub(new \DateInterval("P{$expire}D"));
-
-            return $query->delete($this->_entityName, 'u')
-                ->where('u.date < :date')
-                ->setParameter('date', $date)
-                ->getQuery()
-                ->execute()
-            ;
-        }
-        catch (\Throwable $th)
-        {
-            \Tracy\Debugger::log($th);
-
-            return 0;
-        }
-    }
 }

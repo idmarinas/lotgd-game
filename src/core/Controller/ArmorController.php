@@ -36,7 +36,7 @@ class ArmorController extends AbstractController
     {
         global $session;
 
-        /** @var Lotgd\Core\EntityRepository\ArmorRepository */
+        /** @var Lotgd\Core\Repository\ArmorRepository */
         $repository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Armor::class);
 
         $armorLevel = $repository->getMaxArmorLevel($session['user']['dragonkills']);
@@ -53,7 +53,7 @@ class ArmorController extends AbstractController
     {
         global $session;
 
-        /** @var Lotgd\Core\EntityRepository\ArmorRepository */
+        /** @var Lotgd\Core\Repository\ArmorRepository */
         $repository   = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Armor::class);
         $id           = $request->query->getInt('id');
         $tradeinvalue = $params['tradeinvalue'];

@@ -69,7 +69,6 @@
                         </div>
                         <div class="column">
                             {% for enemy in rounds.enemy %}
-                                {{ bdump(enemy) }}
                                 {% if enemy is array %}
                                     {{ enemy[0]|trans((enemy[1] ?: {}), (enemy[2] ?: 'page_battle'))|colorize }}
                                 {% else %}

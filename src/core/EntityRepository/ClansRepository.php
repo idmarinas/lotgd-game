@@ -1,86 +1,14 @@
 <?php
 
-/**
- * This file is part of Legend of the Green Dragon.
- *
- * @see https://github.com/idmarinas/lotgd-game
- *
- * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
- * @author IDMarinas
- *
- * @since 4.0.0
- */
-
 namespace Lotgd\Core\EntityRepository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
-use Lotgd\Core\Entity as EntityCore;
-use Tracy\Debugger;
+use Lotgd\Core\Repository\ClansRepository as Core;
 
-class ClansRepository extends DoctrineRepository
+class_exists('Lotgd\Core\Repository\ClansRepository');
+
+@trigger_error('Using the "Lotgd\Core\EntityRepository\ClansRepository" class is deprecated since 5.5.0, use "Lotgd\Core\Repository\ClansRepository" instead.', \E_USER_DEPRECATED);
+
+/** @deprecated since 5.5.0 Use Lotgd\Core\Repository\ClansRepository. Removed in 6.0.0 version. */
+class ClansRepository extends Core
 {
-    /**
-     * Get list of clans for apply to enter.
-     */
-    public function getClanListWithMembersCount(int $order): array
-    {
-        $query      = $this->createQueryBuilder('u');
-        $countQuery = $this->_em->createQueryBuilder()->from(EntityCore\Characters::class, 'c');
-
-        try
-        {
-            $countQuery->select('COUNT(1)')
-                ->where('c.clanrank >= :rank AND c.clanid = u.clanid')
-            ;
-
-            $query->select('u.clanname', 'u.clanid', 'u.clanshort', 'u.clandesc')
-                ->addSelect('('.$countQuery->getDQL().') AS members')
-                ->setParameter('rank', CLAN_APPLICANT)
-            ;
-
-            $query->orderBy('members', 'DESC');
-
-            if (1 == $order)
-            {
-                $query->orderBy('u.clanname', 'ASC');
-            }
-            elseif (2 == $order)
-            {
-                $query->orderBy('u.clanshort', 'ASC');
-            }
-
-            return $query
-                ->getQuery()
-                ->getResult()
-            ;
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return [];
-        }
-    }
-
-    /**
-     * Create a new clan.
-     */
-    public function createClan(array $data): ?int
-    {
-        try
-        {
-            $entity = $this->hydrateEntity($data);
-
-            $this->_em->persist($entity);
-            $this->_em->flush();
-
-            return $entity->getClanid();
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return null;
-        }
-    }
 }

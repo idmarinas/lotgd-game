@@ -13,8 +13,10 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Bundle\Contract\LotgdBundleInterface;
 use Lotgd\Core\Events;
 use Lotgd\Core\Lib\Settings;
+use Lotgd\Core\Tool\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,12 +29,15 @@ class AboutController extends AbstractController
     private $dispatcher;
     private $settings;
     private $cache;
+    private $dateTime;
+    private $bundles = [];
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, Settings $settings, CacheInterface $coreLotgdCache)
+    public function __construct(EventDispatcherInterface $eventDispatcher, Settings $settings, CacheInterface $coreLotgdCache, DateTime $dateTime)
     {
         $this->dispatcher = $eventDispatcher;
         $this->settings   = $settings;
         $this->cache      = $coreLotgdCache;
+        $this->dateTime   = $dateTime;
     }
 
     public function setup()
@@ -43,11 +48,11 @@ class AboutController extends AbstractController
         {
             $item->expiresAfter(43200); //-- Expire after 12 hours
 
-            $details = gametimedetails();
-            $secstonextday = secondstonextgameday($details);
+            $details = $this->dateTime->gameTimeDetails();
+            $secstonextday = $this->dateTime->secondsToNextGameDay($details);
             $useful_vals = [
                 'dayduration'   => \round(($details['dayduration'] / 60 / 60), 0).' hours',
-                'curgametime'   => getgametime(),
+                'curgametime'   => $this->dateTime->getGameTime(),
                 'curservertime' => \date('Y-m-d h:i:s a'),
                 'lastnewday'    => \date('h:i:s a', \strtotime("-{$details['realsecssofartoday']} seconds")),
                 'nextnewday'    => \date('h:i:s a', \strtotime("+{$details['realsecstotomorrow']} seconds")).' ('.\date('H\\h i\\m s\\s', $secstonextday).')',
@@ -106,11 +111,28 @@ class AboutController extends AbstractController
         return $this->renderAbout($params);
     }
 
+    public function bundles(): Response
+    {
+        return $this->renderAbout([
+            'block_tpl'             => 'about_bundles',
+            'bundles_total_enabled' => \is_countable($this->bundles) ? \count($this->bundles) : 0,
+            'bundles_lotgd_enabled' => \array_filter($this->bundles, function ($var)
+            {
+                return $var instanceof LotgdBundleInterface;
+            }),
+        ]);
+    }
+
     public function license()
     {
         $params = ['block_tpl' => 'about_license'];
 
         return $this->renderAbout($params);
+    }
+
+    public function setBundles(array $bundles): void
+    {
+        $this->bundles = $bundles;
     }
 
     private function renderAbout(array $params): Response

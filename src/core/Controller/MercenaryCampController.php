@@ -13,7 +13,8 @@
 
 namespace Lotgd\Core\Controller;
 
-use Lotgd\Core\EntityRepository\CompanionsRepository;
+use Lotgd\Core\Combat\Buffer;
+use Lotgd\Core\Repository\CompanionsRepository;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Log;
@@ -29,12 +30,14 @@ class MercenaryCampController extends AbstractController
     private $dispatcher;
     private $repository;
     private $log;
+    private $buffs;
 
-    public function __construct(Navigation $navigation, EventDispatcherInterface $eventDispatcher, Log $log)
+    public function __construct(Navigation $navigation, EventDispatcherInterface $eventDispatcher, Log $log, Buffer $buffs)
     {
         $this->navigation = $navigation;
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
+        $this->buffs = $buffs;
     }
 
     public function heal(array $params, Request $request): Response
@@ -91,7 +94,7 @@ class MercenaryCampController extends AbstractController
             $row['maxhitpoints'] = $row['maxhitpoints'] + $row['maxhitpointsperlevel'] * $session['user']['level'];
             $row['hitpoints']    = $row['maxhitpoints'];
 
-            $params['companionHire'] = apply_companion($row['name'], $row);
+            $params['companionHire'] = $this->buffs->applyCompanion($row['name'], $row);
 
             if ($params['companionHire'])
             {

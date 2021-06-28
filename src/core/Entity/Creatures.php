@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         @ORM\Index(name="creaturecategory", columns={"creaturecategory"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\CreaturesRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\CreaturesRepository")
  * @Gedmo\TranslationEntity(class="Lotgd\Core\Entity\CreaturesTranslation")
  */
 class Creatures implements Translatable

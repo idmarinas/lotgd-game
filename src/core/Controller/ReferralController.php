@@ -45,7 +45,7 @@ class ReferralController extends AbstractController
         $params['refererAward']  = getsetting('refereraward', 25);
         $params['referMinLevel'] = getsetting('referminlevel', 4);
 
-        /** @var Lotgd\Core\EntityRepository\AccountsRepository */
+        /** @var Lotgd\Core\Repository\AccountsRepository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:Accounts');
         $query      = $repository->createQueryBuilder('u');
 

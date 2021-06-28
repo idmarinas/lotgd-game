@@ -43,9 +43,7 @@ class EventDispatcher
     }
 
     /**
-     * Set instance of EventManager.
-     *
-     * @param CoreEventDispatcher $container
+     * Set instance of EventDistpatcher.
      */
     public static function instance($instance)
     {

@@ -62,26 +62,6 @@ trait CoreFunction
     }
 
     /**
-     * Time in the game.
-     *
-     * @return string
-     */
-    public function gametime()
-    {
-        return getgametime();
-    }
-
-    /**
-     * Seconds to next game day.
-     *
-     * @return int
-     */
-    public function secondstonextgameday()
-    {
-        return secondstonextgameday();
-    }
-
-    /**
      * Render a PvP table list.
      */
     public function pvpListTable(Environment $env, array $params): string

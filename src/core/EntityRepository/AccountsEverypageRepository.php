@@ -1,43 +1,14 @@
 <?php
 
-/**
- * This file is part of Legend of the Green Dragon.
- *
- * @see https://github.com/idmarinas/lotgd-game
- *
- * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
- * @author IDMarinas
- *
- * @since 4.0.0
- */
-
 namespace Lotgd\Core\EntityRepository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
-use Tracy\Debugger;
+use Lotgd\Core\Repository\AccountsEverypageRepository as Core;
 
-class AccountsEverypageRepository extends DoctrineRepository
+class_exists('Lotgd\Core\Repository\AccountsEverypageRepository');
+
+@trigger_error('Using the "Lotgd\Core\EntityRepository\AccountsEverypageRepository" class is deprecated since 5.5.0, use "Lotgd\Core\Repository\AccountsEverypageRepository" instead.', \E_USER_DEPRECATED);
+
+/** @deprecated since 5.5.0 Use Lotgd\Core\Repository\AccountsEverypageRepository. Removed in 6.0.0 version. */
+class AccountsEverypageRepository extends Core
 {
-    /**
-     * Get stats of page gen.
-     */
-    public function getStatsPageGen(): array
-    {
-        $query = $this->createQueryBuilder('u');
-
-        try
-        {
-            return $query->select('SUM(u.gentime) AS gentime', 'SUM(u.gentimecount) AS gentimecount', 'SUM(u.gensize) AS gensize')
-                ->setMaxResults(1)
-                ->getQuery()
-                ->getSingleResult()
-            ;
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return [];
-        }
-    }
 }

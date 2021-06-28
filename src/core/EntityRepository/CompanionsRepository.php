@@ -1,127 +1,14 @@
 <?php
 
-/**
- * This file is part of Legend of the Green Dragon.
- *
- * @see https://github.com/idmarinas/lotgd-game
- *
- * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
- * @author IDMarinas
- *
- * @since 4.0.0
- */
-
 namespace Lotgd\Core\EntityRepository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
-use Tracy\Debugger;
+use Lotgd\Core\Repository\CompanionsRepository as Core;
 
-class CompanionsRepository extends DoctrineRepository
+class_exists('Lotgd\Core\Repository\CompanionsRepository');
+
+@trigger_error('Using the "Lotgd\Core\EntityRepository\CompanionsRepository" class is deprecated since 5.5.0, use "Lotgd\Core\Repository\CompanionsRepository" instead.', \E_USER_DEPRECATED);
+
+/** @deprecated since 5.5.0 Use Lotgd\Core\Repository\CompanionsRepository. Removed in 6.0.0 version. */
+class CompanionsRepository extends Core
 {
-    /**
-     * Get a list of available mecenaries.
-     */
-    public function getMercenaryList(string $location, int $dragonKills): array
-    {
-        $query = $this->createQueryBuilder('u');
-
-        try
-        {
-            $query
-                ->where('u.companioncostdks <= :dk')
-                ->andWhere("u.companionlocation = :loc OR u.companionlocation = 'all'")
-                ->andWhere('u.companionactive = 1')
-            ;
-
-            $query = $this->createTranslatebleQuery($query);
-            $query
-                ->setParameter('dk', $dragonKills)
-                ->setParameter('loc', $location)
-            ;
-
-            return $query->getArrayResult();
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return [];
-        }
-    }
-
-    /**
-     * Find one by id.
-     * Entity is translated.
-     */
-    public function findOneCompanionById(int $id): ?array
-    {
-        try
-        {
-            $dql = 'SELECT a
-                FROM LotgdCore:Companion a
-                WHERE a.creatureid = :id
-            ';
-
-            $query = $this->createTranslatebleQuery($dql);
-            $query->setParameter('id', $id);
-
-            return $query->getArrayResult()[0];
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return null;
-        }
-    }
-
-    /**
-     * Get an array by ids.
-     * Entities is translated.
-     */
-    public function findCompanionsById(array $ids): ?array
-    {
-        try
-        {
-            $dql = 'SELECT a
-                FROM LotgdCore:Companion a
-                WHERE a.creatureid IN (:id)
-            ';
-
-            $query = $this->createTranslatebleQuery($dql);
-            $query->setParameter('id', $ids);
-
-            return $query->getArrayResult();
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return null;
-        }
-    }
-
-    /**
-     * Get list of companions.
-     */
-    public function getList(): array
-    {
-        $query = $this->createQueryBuilder('u');
-
-        try
-        {
-            $query->orderBy('u.category', 'DESC');
-            $query->addOrderBy('u.name', 'DESC');
-
-            $query = $this->createTranslatebleQuery($query);
-
-            return $query->getResult();
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return [];
-        }
-    }
 }

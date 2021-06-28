@@ -160,7 +160,7 @@ class Tool
             $id = $result->getUniqueid();
         }
 
-        /** @var \Lotgd\Core\EntityRepository\BansRepository */
+        /** @var \Lotgd\Core\Repository\BansRepository */
         $repository = $this->doctrine->getRepository('LotgdCore:Bans');
         $repository->removeExpireBans();
 
@@ -225,7 +225,7 @@ class Tool
 
         // Any time we go to save a user, make SURE that any tempstat changes
         // are undone.
-        restore_buff_fields();
+        $this->kernel->getContainer()->get('lotgd_core.combat.buffer')->restoreBuffFields();
 
         $session['user']['bufflist'] = $session['bufflist'];
 

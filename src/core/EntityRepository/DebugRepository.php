@@ -1,20 +1,14 @@
 <?php
 
-/**
- * This file is part of Legend of the Green Dragon.
- *
- * @see https://github.com/idmarinas/lotgd-game
- *
- * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
- * @author IDMarinas
- *
- * @since 4.0.0
- */
-
 namespace Lotgd\Core\EntityRepository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Lotgd\Core\Repository\DebugRepository as Core;
 
-class DebugRepository extends DoctrineRepository
+class_exists('Lotgd\Core\Repository\DebugRepository');
+
+@trigger_error('Using the "Lotgd\Core\EntityRepository\DebugRepository" class is deprecated since 5.5.0, use "Lotgd\Core\Repository\DebugRepository" instead.', \E_USER_DEPRECATED);
+
+/** @deprecated since 5.5.0 Use Lotgd\Core\Repository\DebugRepository. Removed in 6.0.0 version. */
+class DebugRepository extends Core
 {
 }

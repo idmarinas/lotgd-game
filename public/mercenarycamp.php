@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
 
-checkday();
+\LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
 // Don't hook on to this text for your standard modules please, use "inn" instead.
 // This hook is specifically to allow modules that do other inns to create ambience.

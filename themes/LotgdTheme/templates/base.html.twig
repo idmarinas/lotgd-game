@@ -52,14 +52,6 @@
 
         <!-- Jaxon inline Script -->
         {{ jaxon_script() }}
-
-        <!-- START Cookies Consent -->
-        <script>
-            // eslint-disable-next-line no-unused-vars, no-var
-            var cookieName = '{{ session_cookie_name() }}'
-        </script>
-        {{ encore_entry_script_tags('cookie_guard', 'lotgd', 'lotgd') }}
-		<!-- END Cookies Consent -->
     </head>
     <body>
         {% block lotgd_body %}{% endblock %}

@@ -62,7 +62,7 @@
         {% if mountTurns != 0 %}
             {% set state = mountTurns > 0 ? 'gain' : 'lost' %}
 
-            {{ 'section.default.horse.yes'|trans({ 'state': state, 'turns': mountTurns })|colorize }}
+            {{ 'section.default.horse.yes'|trans({ 'state': state, 'turns': mountTurns, 'mountname': mountName })|colorize }}
         {% endif %}
     {% else %}
         {{ 'section.default.horse.no'|trans({ 'playerWeapon': user.weapon })|colorize }}

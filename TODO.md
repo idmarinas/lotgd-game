@@ -10,15 +10,14 @@
     -   A partir de la versión **5.0.0** se empezará a usar un sistema de módulos tipo Bundle
 
 
-# Actualmente haciendo esto (5.4.0)
+# Actualmente haciendo esto (5.5.0)
 
 -   Sustituir la funcion lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
         -   Use `Symfony mailer` instead.
--   Se intetará pasar todas las paginas al sistema de controllador igual que home.php y about.php        
-    -   Las páginas Grotto (las de configuración y administración) puede que no se pase a un sistema de controllador.
+-   Se intentará pasar todas las paginas al sistema de controllador igual que home.php y about.php
+    -   Las páginas Grotto (las de configuración y administración) no se pasarán a un sistema de controllador.
         -   El panel de administración del juego se va a sustituir por **Sonata Admin**
--   Crear los test básicos, como tenía en el bundle (de la configuración y para los filtros/funciones de Twig)
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 
@@ -50,7 +49,15 @@
             -   El js se crea en una entry comun para todo (app por ejemplo) ya que puede dar problemas
                 -   webpack.encore.entry.js
                 -   webpack.encore.theme.js
-
+-   Crear el bundle del inventario. Para sustituir el antiguo sistema de armadura y arma.
+-   Crear el bundle de energia, que permita poner energia o un sistema por turnos.
+-   Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
+    -   La instalación por consola ya se creo en la versión 5.0.0
+        -   Se mirará incluir una versión de instalación por web
+            -   Problematico la creación del usuario admin
+    -   Para los admin que no dispongan de esta opción se agrega la opción de instalación via web.
+-   Posible candidato a sustituir el petition system por https://github.com/hackzilla-project/TicketBundle
+-   Para limitar los intentos de conexión https://github.com/anyx/LoginGateBundle
 
 ## Cosas pendientes
 

@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  * This table stores modules instaled in game.
  *
  * @ORM\Table(name="modules")
- * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\ModulesRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\ModulesRepository")
  */
 class Modules
 {

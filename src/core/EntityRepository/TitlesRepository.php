@@ -1,95 +1,14 @@
 <?php
 
-/**
- * This file is part of Legend of the Green Dragon.
- *
- * @see https://github.com/idmarinas/lotgd-game
- *
- * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.md
- * @author IDMarinas
- *
- * @since 4.0.0
- */
-
 namespace Lotgd\Core\EntityRepository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
-use Tracy\Debugger;
+use Lotgd\Core\Repository\TitlesRepository as Core;
 
-class TitlesRepository extends DoctrineRepository
+class_exists('Lotgd\Core\Repository\TitlesRepository');
+
+@trigger_error('Using the "Lotgd\Core\EntityRepository\TitlesRepository" class is deprecated since 5.5.0, use "Lotgd\Core\Repository\TitlesRepository" instead.', \E_USER_DEPRECATED);
+
+/** @deprecated since 5.5.0 Use Lotgd\Core\Repository\TitlesRepository. Removed in 6.0.0 version. */
+class TitlesRepository extends Core
 {
-    /**
-     * Find one title by id.
-     * Title is translated.
-     */
-    public function findOneTitleById(int $id): ?array
-    {
-        try
-        {
-            $dql = "SELECT a
-                FROM {$this->_entityName} a
-                WHERE a.titleid = :id
-            ";
-
-            $query = $this->createTranslatebleQuery($dql);
-            $query->setParameter('id', $id);
-
-            return $query->getArrayResult()[0];
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return null;
-        }
-    }
-
-    /**
-     * Get an array of titles by ids.
-     * Titles is translated.
-     */
-    public function findTitlesById(array $ids): ?array
-    {
-        try
-        {
-            $dql = "SELECT a
-                FROM {$this->_entityName} a
-                WHERE a.titleid IN (:id)
-            ";
-
-            $query = $this->createTranslatebleQuery($dql);
-            $query->setParameter('id', $ids);
-
-            return $query->getArrayResult();
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return null;
-        }
-    }
-
-    /**
-     * Get list of titles.
-     */
-    public function getList(): array
-    {
-        $query = $this->createQueryBuilder('u');
-
-        try
-        {
-            $query->orderBy('u.dk', 'asc');
-
-            $query = $this->createTranslatebleQuery($query);
-
-            return $query->getResult();
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return [];
-        }
-    }
 }

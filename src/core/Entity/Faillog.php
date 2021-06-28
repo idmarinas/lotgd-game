@@ -25,7 +25,7 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="ip", columns={"ip"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\FaillogRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\FaillogRepository")
  */
 class Faillog
 {
