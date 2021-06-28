@@ -241,3 +241,6 @@ services:
     lotgd_core.combat.temp_stats:
         alias: Lotgd\Core\Combat\TempStat
         public: true
+    lotgd_core.combat.battle:
+        alias: Lotgd\Core\Combat\Battle
+        public: true
