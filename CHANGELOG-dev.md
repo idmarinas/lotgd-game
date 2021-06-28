@@ -18,6 +18,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **Entity Repositories** Moved to new location:
     -   From `src/core/EntityRepository/` to `src/core/Repository/` 
         -   Added transition classes in `src/core/EntityRepository/` to avoid BC, this clases will removed in version 6.0.0.
+-   **Battle** 
+    -   Refactor Battle to use services. See `public/battle.php`
 -   **THEME**
     -   Updated Fomantic UI version: 2.8.7 => 2.8.8
 
