@@ -8,12 +8,6 @@ use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/substitute.php';
-require_once 'lib/battle/functions.php';
-require_once 'lib/battle/buffs.php';
-require_once 'lib/battle/skills.php';
-require_once 'lib/battle/extended.php';
-require_once 'lib/buffs.php';
 
 //just in case we're called from within a function.Yuck is this ugly.
 global $badguy, $enemies, $newenemies, $session, $creatureattack, $creatureatkmod, $beta;
