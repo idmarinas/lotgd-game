@@ -15,12 +15,11 @@
 -   Sustituir la funcion lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
         -   Use `Symfony mailer` instead.
--   Se intetará pasar todas las paginas al sistema de controllador igual que home.php y about.php        
+-   Se intentará pasar todas las paginas al sistema de controllador igual que home.php y about.php
     -   Las páginas Grotto (las de configuración y administración) no se pasarán a un sistema de controllador.
         -   El panel de administración del juego se va a sustituir por **Sonata Admin**
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
--   Mover clases repositorios de `EntityRepository` a `Repository` 
 
 
 # Módulos
