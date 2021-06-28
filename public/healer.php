@@ -54,47 +54,6 @@ elseif ('companion' == $op)
     $method = 'companion';
 }
 
-if ($session['user']['hitpoints'] < $session['user']['maxhitpoints'])
-{
-    \LotgdNavigation::addHeader('category.heal.potion');
-    \LotgdNavigation::addNav('nav.heal.complete', "healer.php?op=buy&pct=100&return={$return}");
-
-    for ($i = 90; $i > 0; $i -= 10)
-    {
-        \LotgdNavigation::addNav('nav.heal.percent', "healer.php?op=buy&pct={$i}&return={$return}", [
-            'params' => [
-                'percent' => $i / 100,
-                'cost' => round($cost * ($i / 100), 0)
-            ]
-        ]);
-    }
-    \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_HEALER_POTION);
-    modulehook('potion');
-}
-\LotgdNavigation::addHeader('category.heal.companion');
-
-foreach ($companions as $name => $companion)
-{
-    if ($companion['cannotbehealed'] ?? false)
-    {
-        continue;
-    }
-
-    $points = $companion['maxhitpoints'] - $companion['hitpoints'];
-
-    if ($points > 0)
-    {
-        $name = rawurlencode($name);
-        $compcost = round(log($session['user']['level'] + 1) * ($points + 10) * 1.33);
-        \LotgdNavigation::addNav('nav.heal.companion', "healer.php?op=companion&name={$name}&compcost={$compcost}&return={$return}", [
-            'params' => [
-                'companionName' => $companion['name'],
-                'cost' => $compcost
-            ]
-        ]);
-    }
-}
-
 \LotgdNavigation::addHeader('category.return');
 
 if ('' == $return)
@@ -110,6 +69,8 @@ else
 {
     \LotgdNavigation::addNav('nav.return.return', $return);
 }
+
+$params['return'] = $return;
 
 \LotgdResponse::callController(\Lotgd\Core\Controller\HealerController::class, $method);
 

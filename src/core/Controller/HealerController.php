@@ -16,6 +16,7 @@ namespace Lotgd\Core\Controller;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Log;
+use Lotgd\Core\Navigation\Navigation;
 use Lotgd\Core\Tool\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -27,12 +28,14 @@ class HealerController extends AbstractController
     private $dispatcher;
     private $log;
     private $dateTime;
+    private $navigation;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, Log $log, DateTime $dateTime)
+    public function __construct(EventDispatcherInterface $eventDispatcher, Log $log, DateTime $dateTime, Navigation $navigation)
     {
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
         $this->dateTime   = $dateTime;
+        $this->navigation = $navigation;
     }
 
     public function index(array $params): Response
@@ -116,6 +119,49 @@ class HealerController extends AbstractController
 
     private function renderHealer(array $params): Response
     {
+        global $session, $companions;
+
+        if ($session['user']['hitpoints'] < $session['user']['maxhitpoints'])
+        {
+            $this->navigation->addHeader('category.heal.potion');
+            $this->navigation->addNav('nav.heal.complete', "healer.php?op=buy&pct=100&return={$params['return']}");
+
+            for ($i = 90; $i > 0; $i -= 10)
+            {
+                $this->navigation->addNav('nav.heal.percent', "healer.php?op=buy&pct={$i}&return={$params['return']}", [
+                    'params' => [
+                        'percent' => $i / 100,
+                        'cost' => round($params['healCost'] * ($i / 100), 0)
+                    ]
+                ]);
+            }
+            $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_HEALER_POTION);
+            modulehook('potion');
+        }
+        $this->navigation->addHeader('category.heal.companion');
+
+        foreach ($companions as $name => $companion)
+        {
+            if ($companion['cannotbehealed'] ?? false)
+            {
+                continue;
+            }
+
+            $points = $companion['maxhitpoints'] - $companion['hitpoints'];
+
+            if ($points > 0)
+            {
+                $name = rawurlencode($name);
+                $compcost = round(log($session['user']['level'] + 1) * ($points + 10) * 1.33);
+                $this->navigation->addNav('nav.heal.companion', "healer.php?op=companion&name={$name}&compcost={$compcost}&return={$params{'return'}}", [
+                    'params' => [
+                        'companionName' => $companion['name'],
+                        'cost' => $compcost
+                    ]
+                ]);
+            }
+        }
+
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_HEALER_POST);
