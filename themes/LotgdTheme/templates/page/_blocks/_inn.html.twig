@@ -6,7 +6,7 @@
             {% if bribeSuccess %}
                 {{ 'section.bartender.bribe.success'|trans({ 'barkeep': barkeep })|colorize }}
             {% else %}
-                {{ 'section.bartender.bribe.fail'|trans({ 'barkeep': barkeep })|colorize }}
+                {{ 'section.bartender.bribe.fail'|trans({ 'barkeep': barkeep, type, 'amt': amount })|colorize }}
             {% endif %}
         {% else %}
             {{ 'section.bartender.bribe.paragraph'|trans|colorize }}
