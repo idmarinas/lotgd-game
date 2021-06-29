@@ -155,7 +155,7 @@ class PlayerFunction
         }
 
         $strbonus    = (1 / 3) * $user['strength'];
-        $speedbonus  = (1 / 3) * get_player_speed($player);
+        $speedbonus  = (1 / 3) * $this->getPlayerSpeed($player);
         $wisdombonus = (1 / 6) * $user['wisdom'];
         $intbonus    = (1 / 6) * $user['intelligence'];
         $miscbonus   = $user['attack'] - 9;
@@ -184,7 +184,7 @@ class PlayerFunction
         }
 
         $strbonus    = round((1 / 3) * $user['strength'], 2);
-        $speedbonus  = round((1 / 3) * get_player_speed($player), 2);
+        $speedbonus  = round((1 / 3) * $this->getPlayerSpeed($player), 2);
         $wisdombonus = round((1 / 6) * $user['wisdom'], 2);
         $intbonus    = round((1 / 6) * $user['intelligence'], 2);
         $miscbonus   = round($user['attack'] - 9, 2);
@@ -260,7 +260,7 @@ class PlayerFunction
 
         $wisdombonus = (1 / 4) * $user['wisdom'];
         $constbonus  = (3 / 8) * $user['constitution'];
-        $speedbonus  = (3 / 8) * get_player_speed($player);
+        $speedbonus  = (3 / 8) * $this->getPlayerSpeed($player);
         $miscbonus   = $user['defense'] - 9;
         $defense     = $wisdombonus + $speedbonus + $constbonus + $miscbonus;
 
@@ -287,7 +287,7 @@ class PlayerFunction
 
         $wisdombonus = round((1 / 4) * $user['wisdom'], 2);
         $constbonus  = round((3 / 8) * $user['constitution'], 2);
-        $speedbonus  = round((3 / 8) * get_player_speed($player), 2);
+        $speedbonus  = round((3 / 8) * $this->getPlayerSpeed($player), 2);
         $miscbonus   = round($user['defense'] - 9, 2);
         // // $defense = $wisdombonus+$speedbonus+$constbonus+$miscbonus;
         $armordef   = (int) $user['armordef'];
