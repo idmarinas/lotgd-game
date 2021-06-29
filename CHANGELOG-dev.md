@@ -63,6 +63,29 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `convertgametime` use `LotgdKernel::get('lotgd_core.tool.date_time')->convertGameTime($intime, $debug)` instead
     -   `gametimedetails` use `LotgdKernel::get('lotgd_core.tool.date_time')->gameTimeDetails()` instead
     -   `secondstonextgameday` use `LotgdKernel::get('lotgd_core.tool.date_time')->secondsToNextGameDay($details)` instead
+-   **lib/increment_specialty.php** `increment_specialty` use `LotgdKernel::get('lotgd_core.tool.player_functions')->incrementSpecialty($colorcode, $spec)` instead
+-   **lib/playerfunctions.php** All functions (removed in future version)
+    -   `get_player_hitpoints` use `LotgdKernel::get('lotgd_core.tool.player_functions')->getPlayerHitpoints($player)` instead
+    -   `explained_get_player_hitpoints` use `LotgdKernel::get('lotgd_core.tool.player_functions')->explainedGetPlayerHitpoints($player, $colored)` instead
+    -   `get_player_attack` use `LotgdKernel::get('lotgd_core.tool.player_functions')->getPlayerAttack($player)` instead
+    -   `explained_row_get_player_attack` use `LotgdKernel::get('lotgd_core.tool.player_functions')->explainedRowGetPlayerAttack($player)` instead
+    -   `explained_get_player_attack` use `LotgdKernel::get('lotgd_core.tool.player_functions')->explainedGetPlayerAttack($player, $colored)` instead
+    -   `get_player_defense` use `LotgdKernel::get('lotgd_core.tool.player_functions')->getPlayerDefense($player)` instead
+    -   `explained_row_get_player_defense` use `LotgdKernel::get('lotgd_core.tool.player_functions')->explainedRowGetPlayerDefense($player)` instead
+    -   `explained_get_player_defense` use `LotgdKernel::get('lotgd_core.tool.player_functions')->explainedGetPlayerDefense($player, $colored)` instead
+    -   `get_player_speed` use `LotgdKernel::get('lotgd_core.tool.player_functions')->getPlayerSpeed($player)` instead
+    -   `get_player_physical_resistance` use `LotgdKernel::get('lotgd_core.tool.player_functions')->getPlayerPhysicalResistance($player)` instead
+-   **lib/creaturefunctions.php** All functions (removed in future version)
+    -   `lotgd_generate_creature_levels` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->lotgdGenerateCreatureLevels($level)` instead
+    -   `lotgd_generate_doppelganger` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->lotgdGenerateDoppelganger($level)` instead
+    -   `lotgd_transform_creature` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->lotgdTransformCreature($badguy, $debug)` instead
+    -   `lotgd_search_creature` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->lotgdSearchCreature($multi, $targetlevel, $mintargetlevel, $packofmonsters, $forest)` instead
+    -   `get_creature_stats` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->getCreatureStats($dk)` instead
+    -   `get_creature_hitpoints` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->getCreatureHitpoints($attrs)` instead
+    -   `get_creature_attack` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->getCreatureAttack($attrs)` instead
+    -   `get_creature_defense` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->getCreatureDefense($attrs)` instead
+    -   `get_creature_speed` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->getCreatureSpeed($attrs)` instead
+    -   `lotgd_show_debug_creature` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->lotgdShowDebugCreature($badguy)` instead
 
 ### :wrench: FIXES
 
