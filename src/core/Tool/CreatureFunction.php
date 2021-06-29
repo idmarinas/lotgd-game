@@ -12,9 +12,9 @@
 
 namespace Lotgd\Core\Tool;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Event\Creature;
 use Lotgd\Core\Http\Response;
-use Lotgd\Core\Repository\CreaturesRepository;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -24,6 +24,7 @@ class CreatureFunction
     private $dispatcher;
     private $response;
     private $cache;
+    /** @var \Lotgd\Core\Repository\CreaturesRepository */
     private $repository;
     private $translator;
 
@@ -31,13 +32,13 @@ class CreatureFunction
         EventDispatcherInterface $dispatcher,
         Response $response,
         CacheInterface $cache,
-        CreaturesRepository $repository,
+        EntityManagerInterface $repository,
         TranslatorInterface $translator
     ) {
         $this->dispatcher = $dispatcher;
-        $this->response = $response;
-        $this->cache = $cache;
-        $this->repository = $repository;
+        $this->response   = $response;
+        $this->cache      = $cache;
+        $this->repository = $repository->getRepository('LotgdCore:Creatures');
         $this->translator = $translator;
     }
 
@@ -102,30 +103,30 @@ class CreatureFunction
      * Generate a base creature stats
      * Can use for generated your own creatures in your modules.
      *
-     * @param null|int $level Level of creature
+     * @param int|null $level Level of creature
      *
      * @return array
      */
     public function lotgdGenerateCreatureLevels($level = null)
     {
         $maxLvl = getsetting('maxlevel', 15) + 5;
-        $stats   = $this->cache->get("lotgd-generate-creature-levels-{$maxLvl}", function () use ($maxLvl)
+        $stats  = $this->cache->get("lotgd-generate-creature-levels-{$maxLvl}", function () use ($maxLvl)
         {
-            $stats           = [];
-            $creatureexp     = 14;
-            $creaturegold    = 36;
+            $stats = [];
+            $creatureexp = 14;
+            $creaturegold = 36;
             $creaturedefense = 0;
 
             for ($i = 1; $i <= $maxLvl; ++$i)
             {
                 //apply algorithmic creature generation.
                 $creaturehealth = ($i * 10) + ($i - 1) - round(sqrt($i - 1));
-                $creatureattack = 1         + ($i - 1) * 2;
+                $creatureattack = 1 + ($i - 1) * 2;
                 $creaturedefense += ($i % 2 ? 1 : 2);
 
                 if ($i > 1)
                 {
-                    $creatureexp  += round(10 + 1.5 * log($i));
+                    $creatureexp += round(10 + 1.5 * log($i));
                     $creaturegold += (31 * ($i < 4 ? 2 : 1));
                     //give lower levels more gold
                 }
@@ -266,7 +267,7 @@ class CreatureFunction
         $multi = false === $packofmonsters ? $multi : 1;
         $limit = ($multi > 1 ? $multi : 1);
 
-        $query      = $this->repository->createQueryBuilder('u');
+        $query = $this->repository->createQueryBuilder('u');
         $query->orderBy('RAND()');
 
         if (true === $forest)

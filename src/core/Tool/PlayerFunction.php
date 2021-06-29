@@ -12,9 +12,9 @@
 
 namespace Lotgd\Core\Tool;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Event\Character;
 use Lotgd\Core\Http\Response;
-use Lotgd\Core\Repository\CharactersRepository;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -23,18 +23,19 @@ class PlayerFunction
     private $dispatcher;
     private $response;
     private $translator;
+    /** @var \Lotgd\Core\Repository\CharactersRepository */
     private $repository;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
         Response $response,
         TranslatorInterface $translator,
-        CharactersRepository $repository
+        EntityManagerInterface $repository
     ) {
         $this->dispatcher = $dispatcher;
         $this->response   = $response;
         $this->translator = $translator;
-        $this->repository = $repository;
+        $this->repository = $repository->getRepository('LotgdCore:Characters');
     }
 
     public function incrementSpecialty($colorcode, ?string $spec = null)
