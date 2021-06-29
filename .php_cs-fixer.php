@@ -1,14 +1,15 @@
 <?php
 /*
  * This document has been generated with
- * https://mlocati.github.io/php-cs-fixer-configurator/#version:2.17.3|configurator
+ * https://mlocati.github.io/php-cs-fixer-configurator/#version:3.0.0|configurator
  * you can change this configuration by importing this file.
  */
-return PhpCsFixer\Config::create()
+$config = new PhpCsFixer\Config();
+
+return $config
     ->setRiskyAllowed(true)
     ->setRules([
         '@DoctrineAnnotation' => true,
-        '@PHP56Migration'     => true,
         '@PHP70Migration'     => true,
         '@PHP71Migration'     => true,
         '@PSR2'               => true,
@@ -66,8 +67,6 @@ return PhpCsFixer\Config::create()
         'no_alternative_syntax' => true,
         // Properties MUST not be explicitly initialized with `null` except when they have a type declaration (PHP 7.4).
         'no_null_property_initialization' => true,
-        // Replaces short-echo `<?=` with long format `<?php echo` syntax.
-        'no_short_echo_tag' => true,
         // Variables must be set `null` instead of using `(unset)` casting.
         'no_unset_cast' => true,
         // There should not be an empty `return` statement at the end of a function.
@@ -84,8 +83,6 @@ return PhpCsFixer\Config::create()
         'php_unit_internal_class' => true,
         // Enforce camel (or snake) case for PHPUnit test methods, following configuration.
         'php_unit_method_casing' => true,
-        // Order `@covers` annotation of PHPUnit tests.
-        'php_unit_ordered_covers' => true,
         // Adds a default `@coversNothing` annotation to PHPUnit test classes that have no `@covers*` annotation.
         'php_unit_test_class_requires_covers' => true,
         // PHPDoc should contain `@param` for all params.
@@ -105,7 +102,8 @@ return PhpCsFixer\Config::create()
         // A return statement wishing to return `void` should not return `null`.
         'simplified_null_return' => true,
     ])
-    ->setFinder(PhpCsFixer\Finder::create()
+    ->setFinder(
+        PhpCsFixer\Finder::create()
     ->exclude('vendor')
     ->in(__DIR__)
     )
