@@ -26,7 +26,6 @@ use Twig\Test\IntegrationTestCase;
  * Test Twig Extensions.
  *
  * @internal
- * @coversNothing
  */
 class IntegrationTest extends IntegrationTestCase
 {
