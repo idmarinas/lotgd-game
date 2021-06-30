@@ -4,32 +4,46 @@
 // addnews ready
 // mail ready
 
-$settings = LotgdKernel::get(Lotgd\Core\Lib\Settings::class);
-
+/** @deprecated 5.5.0 use "LotgdKernel::get('lotgd_core.settings')->saveSetting($settingname, $value)" instead. Removed in future version. */
 function savesetting(string $settingname, $value)
 {
-    global $settings;
+    @trigger_error(sprintf(
+        'Usage of %s is obsolete since 5.5.0; and delete in future version. Use "LotgdKernel::get("lotgd_core.settings")->saveSetting($settingname, $value);" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $settings->saveSetting($settingname, $value);
+    return \LotgdKernel::get('lotgd_core.settings')->saveSetting($settingname, $value);
 }
 
+/** @deprecated 5.5.0 use "LotgdKernel::get('lotgd_core.settings')->clearSettings()" instead. Removed in future version. */
 function clearsettings()
 {
-    global $settings;
+    @trigger_error(sprintf(
+        'Usage of %s is obsolete since 5.5.0; and delete in future version. Use "LotgdKernel::get("lotgd_core.settings")->clearsettings();" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $settings->clearSettings();
+    return \LotgdKernel::get('lotgd_core.settings')->clearSettings();
 }
 
+/** @deprecated 5.5.0 use "LotgdKernel::get('lotgd_core.settings')->getSetting($settingname, $default)" instead. Removed in future version. */
 function getsetting(string $settingname, $default = false)
 {
-    global $settings;
+    @trigger_error(sprintf(
+        'Usage of %s is obsolete since 5.5.0; and delete in future version. Use "LotgdKernel::get("lotgd_core.settings")->getSetting($settingname, $default);" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $settings->getSetting($settingname, $default);
+    return \LotgdKernel::get('lotgd_core.settings')->getSetting($settingname, $default);
 }
 
+/** @deprecated 5.5.0 use "LotgdKernel::get('lotgd_core.settings')->getAllSettings()" instead. Removed in future version. */
 function getAllSettings()
 {
-    global $settings;
+    @trigger_error(sprintf(
+        'Usage of %s is obsolete since 5.5.0; and delete in future version. Use "LotgdKernel::get("lotgd_core.settings")->getAllSettings();" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $settings->getAllSettings();
+    return \LotgdKernel::get('lotgd_core.settings')->getAllSettings();
 }
