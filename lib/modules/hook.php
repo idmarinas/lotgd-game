@@ -21,7 +21,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
     global $session, $modulehook_queries;
     global $currenthook;
 
-    \trigger_error(\sprintf(
+    @trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.4.0; and delete in future version.',
         __METHOD__
     ), E_USER_DEPRECATED);
@@ -150,7 +150,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
             }
             else
             {
-                \trigger_error("Unknown function {$row['function']} for hookname {$hookname} in module {$row['module']}.", E_USER_WARNING);
+                @trigger_error("Unknown function {$row['function']} for hookname {$hookname} in module {$row['module']}.", E_USER_WARNING);
             }
 
             $endtime = \microtime(true);
@@ -179,7 +179,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 
             if ( ! \is_iterable($res))
             {
-                \trigger_error("<b>{$row['function']}</b> did not return an iterable in the module <b>{$row['modulename']}</b> for hook <b>{$hookname}</b>.", E_USER_WARNING);
+                @trigger_error("<b>{$row['function']}</b> did not return an iterable in the module <b>{$row['modulename']}</b> for hook <b>{$hookname}</b>.", E_USER_WARNING);
                 $res = $args;
             }
 
@@ -213,7 +213,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
  */
 function module_wipehooks(string $module)
 {
-    \trigger_error(\sprintf(
+    @trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.4.0; and delete in future version.',
         __METHOD__
     ), E_USER_DEPRECATED);
@@ -274,7 +274,7 @@ function module_drophook($hookname, $functioncall = false)
 {
     global $mostrecentmodule;
 
-    \trigger_error(\sprintf(
+    @trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.4.0; and delete in future version.',
         __METHOD__
     ), E_USER_DEPRECATED);
@@ -308,7 +308,7 @@ function module_drophook($hookname, $functioncall = false)
  */
 function module_addhook($hookname, $functioncall = false, $whenactive = false)
 {
-    \trigger_error(\sprintf(
+    @trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.4.0; and delete in future version.',
         __METHOD__
     ), E_USER_DEPRECATED);
@@ -332,7 +332,7 @@ function module_addhook_priority($hookname, $priority = 50, $functioncall = fals
 {
     global $mostrecentmodule;
 
-    \trigger_error(\sprintf(
+    @trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.4.0; and delete in future version.',
         __METHOD__
     ), E_USER_DEPRECATED);
