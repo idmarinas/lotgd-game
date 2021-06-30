@@ -33,7 +33,7 @@ trait Action
 
         if ('pvp' != $options['type'])
         {
-            $creaturedmg = report_power_move($atk, $creaturedmg);
+            $creaturedmg = $this->reportPowerMove($atk, $creaturedmg);
         }
 
         if (0 == $creaturedmg)
@@ -245,7 +245,7 @@ trait Action
         {
             $badguy['creaturegold'] = e_rand(0, $badguy['creaturegold']);
 
-            if (getsetting('dropmingold', 0))
+            if ($this->settings->getSetting('dropmingold', 0))
             {
                 $badguy['creaturegold'] = e_rand(\round($badguy['creaturegold'] / 4), \round(3 * $badguy['creaturegold'] / 4));
             }
@@ -307,12 +307,12 @@ trait Action
         $expbonus = \round($expbonus / $count, 0);
 
         //-- No gem hunters allowed!
-        $args = new Fight(['chance' => getsetting('forestgemchance', 25)]);
+        $args = new Fight(['chance' => $this->settings->getSetting('forestgemchance', 25)]);
         $this->dispatcher->dispatch($args, Fight::ALTER_GEM_CHANCE);
         $args       = modulehook('alter-gemchance', $args->getData());
         $gemchances = $args['chance'];
         //-- Gems only find in forest
-        if ($session['user']['level'] < getsetting('maxlevel', 15) && 1 == e_rand(1, $gemchances) && true === $forest)
+        if ($session['user']['level'] < $this->settings->getSetting('maxlevel', 15) && 1 == e_rand(1, $gemchances) && true === $forest)
         {
             $lotgdBattleContent['battleend'][] = ['combat.end.get.gem'];
             ++$session['user']['gems'];
@@ -419,7 +419,7 @@ trait Action
 
         $count = \count($enemies);
 
-        if (getsetting('instantexp', false))
+        if ($this->settings->getSetting('instantexp', false))
         {
             $expgained = 0;
 
@@ -438,7 +438,7 @@ trait Action
 
             if ($expbonus > 0)
             {
-                $expbonus                          = \round($expbonus * \pow(1 + (getsetting('addexp', 5) / 100), $count - 1), 0);
+                $expbonus                          = \round($expbonus * \pow(1 + ($this->settings->getSetting('addexp', 5) / 100), $count - 1), 0);
                 $lotgdBattleContent['battleend'][] = [
                     'combat.end.experience.forest.bonus',
                     [
@@ -476,7 +476,7 @@ trait Action
 
             if ($expbonus > 0)
             {
-                $expbonus                          = \round($expbonus * \pow(1 + (getsetting('addexp', 5) / 100), $count - 1), 0);
+                $expbonus                          = \round($expbonus * \pow(1 + ($this->settings->getSetting('addexp', 5) / 100), $count - 1), 0);
                 $lotgdBattleContent['battleend'][] = [
                     'combat.end.experience.forest.bonus',
                     [
@@ -531,7 +531,7 @@ trait Action
 
         if ($expbonus > 0)
         {
-            $expbonus                          = \round($expbonus * \pow(1 + (getsetting('addexp', 5) / 100), $count - 1), 0);
+            $expbonus                          = \round($expbonus * \pow(1 + ($this->settings->getSetting('addexp', 5) / 100), $count - 1), 0);
             $lotgdBattleContent['battleend'][] = [
                 'combat.end.experience.graveyard.bonus',
                 [
@@ -561,7 +561,7 @@ trait Action
                 'combat.end.experience.graveyard.total.favor',
                 [
                     'favor'              => $totalExp,
-                    'graveyardOwnerName' => (string) getsetting('deathoverlord', '`$Ramius`0'),
+                    'graveyardOwnerName' => (string) $this->settings->getSetting('deathoverlord', '`$Ramius`0'),
                 ],
             ];
             $session['user']['deathpower'] += $totalExp;
@@ -581,7 +581,7 @@ trait Action
     {
         global $session, $lotgdBattleContent;
 
-        $percent = getsetting('forestexploss', 10);
+        $percent = $this->settings->getSetting('forestexploss', 10);
         $killer  = false;
 
         foreach ($enemies as $index => $badguy)

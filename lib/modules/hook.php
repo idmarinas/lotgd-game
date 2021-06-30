@@ -160,7 +160,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
                 \LotgdResponse::pageDebug('Slow Hook ('.\round($endtime - $starttime, 2)."s): {$hookname} - {$row['modulename']}`n");
             }
 
-            if (getsetting('debug', 0))
+            if (LotgdSetting::getSetting('debug', 0))
             {
                 $repository = \Doctrine::getRepository('LotgdCore:Debug');
 

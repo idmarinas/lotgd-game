@@ -2,8 +2,8 @@
 
 use Lotgd\Core\Event\Graveyard;
 
-$hauntcost        = (int) getsetting('hauntcost', 25);
-$resurrectioncost = (int) getsetting('resurrectioncost', 100);
+$hauntcost        = (int) LotgdSetting::getSetting('hauntcost', 25);
+$resurrectioncost = (int) LotgdSetting::getSetting('resurrectioncost', 100);
 
 $default_actions = new Graveyard([
     [

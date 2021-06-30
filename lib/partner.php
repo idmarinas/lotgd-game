@@ -11,22 +11,22 @@ function get_partner($player = false)
 
     if (false === $player)
     {
-        $partner = getsetting('barmaid');
+        $partner = LotgdSetting::getSetting('barmaid');
 
         if (SEX_MALE == $session['user']['prefs']['sexuality'])
         {
-            $partner = getsetting('bard');
+            $partner = LotgdSetting::getSetting('bard');
         }
     }
     else
     {
         if (INT_MAX == $session['user']['marriedto'])
         {
-            $partner = getsetting('barmaid');
+            $partner = LotgdSetting::getSetting('barmaid');
 
             if (SEX_MALE == $session['user']['prefs']['sexuality'])
             {
-                $partner = getsetting('bard');
+                $partner = LotgdSetting::getSetting('bard');
             }
         }
         else
@@ -41,11 +41,11 @@ function get_partner($player = false)
             else
             {
                 $session['user']['marriedto'] = 0;
-                $partner                      = getsetting('barmaid', '`%Violet`0');
+                $partner                      = LotgdSetting::getSetting('barmaid', '`%Violet`0');
 
                 if (SEX_MALE == $session['user']['prefs']['sexuality'])
                 {
-                    $partner = getsetting('bard', '`^Seth`0');
+                    $partner = LotgdSetting::getSetting('bard', '`^Seth`0');
                 }
             }
         }

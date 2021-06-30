@@ -19,13 +19,13 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-$costGold = (int) getsetting('goldtostartclan', 10000);
-$costGems = (int) getsetting('gemstostartclan', 15);
+$costGold = (int) LotgdSetting::getSetting('goldtostartclan', 10000);
+$costGems = (int) LotgdSetting::getSetting('gemstostartclan', 15);
 
 $params = [
     'textDomain' => $textDomain,
     'clanInfo' => $claninfo,
-    'clanOwnerName' => getsetting('clanregistrar', '`%Karissa`0'),
+    'clanOwnerName' => LotgdSetting::getSetting('clanregistrar', '`%Karissa`0'),
     'costGold' => $costGold,
     'costGems' => $costGems,
     'includeTemplatesPre' => [],

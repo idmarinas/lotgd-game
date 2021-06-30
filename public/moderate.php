@@ -81,7 +81,7 @@ if ($session['user']['superuser'] & SU_MODERATE_CLANS)
 }
 elseif (
     ($session['user']['superuser'] & SU_EDIT_COMMENTS)
-    && getsetting('officermoderate', 0)
+    && LotgdSetting::getSetting('officermoderate', 0)
     && $session['user']['clanid']
     && $session['user']['clanrank'] >= CLAN_OFFICER
 ) {

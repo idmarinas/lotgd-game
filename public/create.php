@@ -20,20 +20,20 @@ $params['refer'] = '';
 
 if ($refer)
 {
-    $params['refer'] = '&r='.\htmlentities($refer, ENT_COMPAT, getsetting('charset', 'UTF-8'));
+    $params['refer'] = '&r='.\htmlentities($refer, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8'));
 }
 
 $textDomain = 'page_create'; //-- Namespace, textDomain for page
 
-$trash  = (int) getsetting('expiretrashacct', 1);
-$new    = (int) getsetting('expirenewacct', 10);
-$old    = (int) getsetting('expireoldacct', 45);
+$trash  = (int) LotgdSetting::getSetting('expiretrashacct', 1);
+$new    = (int) LotgdSetting::getSetting('expirenewacct', 10);
+$old    = (int) LotgdSetting::getSetting('expireoldacct', 45);
 $params = [
     'textDomain'        => $textDomain,
-    'allowCreation'     => (bool) getsetting('allowcreation', 1),
+    'allowCreation'     => (bool) LotgdSetting::getSetting('allowcreation', 1),
     'serverFull'        => ServerFunctions::isTheServerFull(),
-    'requireEmail'      => (int) getsetting('requireemail', 0),
-    'requireValidEmail' => (int) getsetting('requirevalidemail', 0),
+    'requireEmail'      => (int) LotgdSetting::getSetting('requireemail', 0),
+    'requireValidEmail' => (int) LotgdSetting::getSetting('requirevalidemail', 0),
     'acctTrash'         => $trash,
     'acctNew'           => $new,
     'acctOld'           => $old,
@@ -53,7 +53,7 @@ if ('val' == $op || 'forgotval' == $op)
 \LotgdNavigation::addNav('common.nav.login', 'index.php');
 
 //-- Check server are in maintenance
-if (getsetting('fullmaintenance', 0) || getsetting('maintenance', 0))
+if (LotgdSetting::getSetting('fullmaintenance', 0) || LotgdSetting::getSetting('maintenance', 0))
 {
     $params['maintenanceMode'] = true;
 }

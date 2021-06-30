@@ -11,14 +11,14 @@
     //Clean up old mails
 
     $repository = \Doctrine::getRepository('LotgdCore:Mail');
-    $time       = (int) getsetting('oldmail', 14);
+    $time       = (int) LotgdSetting::getSetting('oldmail', 14);
     $result     = $repository->deleteExpireMail($time);
 
     \LotgdLog::game("Deleted {$result} records from mail older than {$time} days.", 'maintenance');
 
     //CONTENT
 
-    $time = (int) getsetting('expirecontent', 180);
+    $time = (int) LotgdSetting::getSetting('expirecontent', 180);
 
     if ($time)
     {
@@ -35,7 +35,7 @@
         \LotgdLog::game("Deleted {$result} records from commentary older than {$time} days.", 'comment expiration');
 
         //-- Expire the faillog entries
-        $time = (int) getsetting('expirefaillog', 1);
+        $time = (int) LotgdSetting::getSetting('expirefaillog', 1);
 
         if ($time)
         {
@@ -47,7 +47,7 @@
     }
 
     //-- Clean up game log
-    $time = (int) getsetting('expiregamelog', 30);
+    $time = (int) LotgdSetting::getSetting('expiregamelog', 30);
 
     if ($time)
     {

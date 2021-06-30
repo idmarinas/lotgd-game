@@ -15,7 +15,7 @@ else
 
     suspend_companions('allowinshades', true);
 
-    if (0 != module_events('graveyard', getsetting('gravechance', 0)))
+    if (0 != module_events('graveyard', LotgdSetting::getSetting('gravechance', 0)))
     {
         if (\LotgdNavigation::checkNavs())
         {

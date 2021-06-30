@@ -13,7 +13,7 @@ require_once 'lib/pvpwarning.php';
 require_once 'lib/pvpsupport.php';
 require_once 'lib/taunt.php';
 
-$iname = getsetting('innname', LOCATION_INN);
+$iname = LotgdSetting::getSetting('innname', LOCATION_INN);
 $battle = false;
 
 $textDomain = 'page_pvp';
@@ -35,7 +35,7 @@ if ('' == $op && 'attack' != $act)
     pvpwarning();
 
     $pvp = \LotgdKernel::get(\Lotgd\Core\Pvp\Listing::class);
-    $pvptime = getsetting('pvptimeout', 600);
+    $pvptime = LotgdSetting::getSetting('pvptimeout', 600);
 
     $params['tpl'] = 'list';
     $params['paginator'] = $pvp->getPvpList($session['user']['location']);

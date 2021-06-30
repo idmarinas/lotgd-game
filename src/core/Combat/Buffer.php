@@ -15,6 +15,7 @@ namespace Lotgd\Core\Combat;
 
 use Lotgd\Core\Event\Character;
 use Lotgd\Core\Http\Response;
+use Lotgd\Core\Lib\Settings;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class Buffer
@@ -24,12 +25,14 @@ class Buffer
     private $response;
     private $dispatcher;
     private $tempStat;
+    private $settings;
 
-    public function __construct(Response $response, EventDispatcherInterface $dispatcher, TempStat $tempStat)
+    public function __construct(Response $response, EventDispatcherInterface $dispatcher, TempStat $tempStat, Settings $settings)
     {
         $this->response   = $response;
         $this->dispatcher = $dispatcher;
         $this->tempStat   = $tempStat;
+        $this->settings = $settings;
     }
 
     public function calculateBuffFields()
@@ -112,8 +115,8 @@ class Buffer
                                 else
                                 {
                                     $this->response->pageDebug("Buffs[{$buffname}][{$property}] has an evaluation error<br>"
-                                    .\htmlentities($origstring, ENT_COMPAT, getsetting('charset', 'UTF-8')).' becomes <br>'
-                                    .\htmlentities($value, ENT_COMPAT, getsetting('charset', 'UTF-8')).'<br>'
+                                    .\htmlentities($origstring, ENT_COMPAT, $this->settings->getSetting('charset', 'UTF-8')).' becomes <br>'
+                                    .\htmlentities($value, ENT_COMPAT, $this->settings->getSetting('charset', 'UTF-8')).'<br>'
                                     .$errors);
                                     $val = '';
                                 }
@@ -240,7 +243,7 @@ class Buffer
     {
         global $session, $companions;
 
-        $companionsallowed = getsetting('companionsallowed', 1);
+        $companionsallowed = $this->settings->getSetting('companionsallowed', 1);
         $args              = new Character(['maxallowed' => $companionsallowed]);
         $this->dispatcher->dispatch($args, Character::COMPANIONS_ALLOWED);
         $args = modulehook('companionsallowed', $args->getData());

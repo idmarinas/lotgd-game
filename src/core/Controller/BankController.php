@@ -17,6 +17,7 @@ require_once 'lib/systemmail.php';
 
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -27,11 +28,13 @@ class BankController extends AbstractController
 {
     private $dispatcher;
     private $log;
+    private $settings;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, Log $log)
+    public function __construct(EventDispatcherInterface $eventDispatcher, Log $log, Settings $settings)
     {
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
+        $this->settings   = $settings;
     }
 
     public function index(array $params): Response
@@ -44,8 +47,8 @@ class BankController extends AbstractController
         global $session;
 
         $params['opt']              = 'transfer';
-        $params['transferPerLevel'] = getsetting('transferperlevel', 25);
-        $params['maxTransfer']      = $session['user']['level'] * getsetting('maxtransferout', 25);
+        $params['transferPerLevel'] = $this->settings->getSetting('transferperlevel', 25);
+        $params['maxTransfer']      = $session['user']['level'] * $this->settings->getSetting('maxtransferout', 25);
 
         return $this->renderBank($params);
     }
@@ -53,7 +56,7 @@ class BankController extends AbstractController
     public function transfer2(array $params, Request $request): Response
     {
         $to  = $request->request->getInt('to');
-        $amt = \abs((int) $request->request->getInt('amount', 0));
+        $amt = abs((int) $request->request->getInt('amount', 0));
 
         $params['opt']    = 'transfer2';
         $params['amount'] = $amt;
@@ -72,9 +75,9 @@ class BankController extends AbstractController
     {
         global $session;
 
-        $amt    = \abs($request->request->getInt('amount'));
+        $amt    = abs($request->request->getInt('amount'));
         $to     = $request->request->getInt('to');
-        $maxout = $session['user']['level'] * getsetting('maxtransferout', 25);
+        $maxout = $session['user']['level'] * $this->settings->getSetting('maxtransferout', 25);
 
         $params['opt']    = 'transfer3';
         $params['maxOut'] = $maxout;
@@ -102,9 +105,9 @@ class BankController extends AbstractController
             $params['transferred'] = 0;
             if ($result)
             {
-                $maxtfer = $result->getLevel() * getsetting('transferperlevel', 25);
+                $maxtfer = $result->getLevel() * $this->settings->getSetting('transferperlevel', 25);
 
-                if ($result->getTransferredtoday() >= getsetting('transferreceive', 3))
+                if ($result->getTransferredtoday() >= $this->settings->getSetting('transferreceive', 3))
                 {
                     $params['transferred'] = 'tomanytfer';
                     $params['name']        = $result->getName();
@@ -158,7 +161,7 @@ class BankController extends AbstractController
     {
         global $session;
 
-        $amount = \abs($request->request->getInt('amount'));
+        $amount = abs($request->request->getInt('amount'));
         $amount = (0 == $amount) ? $session['user']['gold'] : $amount;
 
         $params['amount']    = $amount;
@@ -180,7 +183,7 @@ class BankController extends AbstractController
     {
         global $session;
 
-        $maxborrow = $session['user']['level'] * getsetting('borrowperlevel', 20);
+        $maxborrow = $session['user']['level'] * $this->settings->getSetting('borrowperlevel', 20);
 
         $params['opt']       = 'borrow';
         $params['maxborrow'] = $maxborrow;
@@ -199,7 +202,7 @@ class BankController extends AbstractController
     {
         global $session;
 
-        $amount = \abs($request->request->getInt('amount'));
+        $amount = abs($request->request->getInt('amount'));
         $amount = (0 == $amount) ? $session['user']['goldinbank'] : $amount;
 
         $params['opt']        = 'withdrawend';
@@ -209,7 +212,7 @@ class BankController extends AbstractController
         if ($amount > $session['user']['goldinbank'] && '' != $request->request->get('borrow'))
         {
             $lefttoborrow           = $amount;
-            $maxborrow              = $session['user']['level'] * getsetting('borrowperlevel', 20);
+            $maxborrow              = $session['user']['level'] * $this->settings->getSetting('borrowperlevel', 20);
             $params['withdrawal']   = 1;
             $params['lefttoborrow'] = $lefttoborrow;
             $params['maxborrow']    = $maxborrow;

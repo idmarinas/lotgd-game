@@ -34,9 +34,9 @@ $request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
 
 $params = [
     'textDomain' => $textDomain,
-    'innName' => getsetting('innname', LOCATION_INN),
-    'villageName' => getsetting('villagename', LOCATION_FIELDS),
-    'barkeep' => getsetting('barkeep', '`tCedrik`0'),
+    'innName' => LotgdSetting::getSetting('innname', LOCATION_INN),
+    'villageName' => LotgdSetting::getSetting('villagename', LOCATION_FIELDS),
+    'barkeep' => LotgdSetting::getSetting('barkeep', '`tCedrik`0'),
     'partner' => get_partner(),
     'showInnDescription' => ! $skipinndesc,
     'includeTemplatesPre' => [], //-- Templates that are in top of content (but below of title)
@@ -85,7 +85,7 @@ switch ($op)
 
         // Don't give people a chance at a special event if they are just browsing
         // the commentary (or talking) or dealing with any of the hooks in the inn.
-        if ('fleedragon' != $op && '' == $com && ! $comment && ! $commenting && 0 != module_events('inn', getsetting('innchance', 0)))
+        if ('fleedragon' != $op && '' == $com && ! $comment && ! $commenting && 0 != module_events('inn', LotgdSetting::getSetting('innchance', 0)))
         {
             if (\LotgdNavigation::checkNavs())
             {

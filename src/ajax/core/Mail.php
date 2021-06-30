@@ -106,7 +106,7 @@ class Mail extends AjaxAbstract
     {
         return [
             'textDomain'    => self::TEXT_DOMAIN,
-            'mailSizeLimit' => getsetting('mailsizelimit', 1024),
+            'mailSizeLimit' => \LotgdSetting::getSetting('mailsizelimit', 1024),
         ];
     }
 

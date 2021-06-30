@@ -14,16 +14,24 @@
 namespace Lotgd\Core\Form\Type;
 
 use Lotgd\Core\Event\Other;
+use Lotgd\Core\Lib\Settings;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LocationType extends ChoiceType
 {
+    private $settings;
+
+    public function __construct(Settings $settings)
+    {
+        $this->settings = $settings;
+    }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
 
-        $vname = getsetting('villagename', LOCATION_FIELDS);
+        $vname = LotgdSetting::getSetting('villagename', LOCATION_FIELDS);
         $locs  = new Other([
             $vname => [
                 'location.village.of',
@@ -38,7 +46,7 @@ class LocationType extends ChoiceType
             [],
             'app_default',
         ];
-        \ksort($locs);
+        ksort($locs);
 
         $defaultChoice = [];
 

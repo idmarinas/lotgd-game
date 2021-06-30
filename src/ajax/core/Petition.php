@@ -161,7 +161,7 @@ class Petition extends AjaxAbstract
      */
     private function emailPetitionAdmin(string $name, array $post): void
     {
-        if ( ! getsetting('emailpetitions', 0))
+        if ( ! \LotgdSetting::getSetting('emailpetitions', 0))
         {
             return;
         }
@@ -169,7 +169,7 @@ class Petition extends AjaxAbstract
         require_once 'lib/systemmail.php';
 
         $date = \date('Y-m-d H:i:s');
-        $url  = getsetting('serverurl', \LotgdRequest::getServer('SERVER_NAME'));
+        $url  = \LotgdSetting::getSetting('serverurl', \LotgdRequest::getServer('SERVER_NAME'));
 
         if ( ! \preg_match('/\\/$/', $url))
         {
@@ -188,7 +188,7 @@ class Petition extends AjaxAbstract
         $msg .= "{$tlDate} : {$date}\n";
         $msg .= "{$tlBody} :\n".Debugger::dump($post, 'Post', false)."\n";
 
-        lotgd_mail(getsetting('gameadminemail', 'postmaster@localhost.com'), $tlSubject, $msg);
+        lotgd_mail(\LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com'), $tlSubject, $msg);
     }
 
     /**
@@ -198,8 +198,8 @@ class Petition extends AjaxAbstract
     {
         return [
             'textDomain'  => self::TEXT_DOMAIN,
-            'daysPerDay'  => getsetting('daysperday', 2),
-            'multimaster' => (int) getsetting('multimaster', 1),
+            'daysPerDay'  => \LotgdSetting::getSetting('daysperday', 2),
+            'multimaster' => (int) \LotgdSetting::getSetting('multimaster', 1),
         ];
     }
 

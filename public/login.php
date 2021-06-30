@@ -15,8 +15,8 @@ require_once 'lib/serverfunctions.class.php';
 
 $op    = (string) \LotgdRequest::getQuery('op');
 $name  = (string) \LotgdRequest::getPost('name');
-$iname = (string) getsetting('innname', LOCATION_INN);
-$vname = (string) getsetting('villagename', LOCATION_FIELDS);
+$iname = (string) LotgdSetting::getSetting('innname', LOCATION_INN);
+$vname = (string) LotgdSetting::getSetting('villagename', LOCATION_FIELDS);
 $force = \LotgdRequest::getPost('force');
 
 if ('' != $name)

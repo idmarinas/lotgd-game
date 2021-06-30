@@ -81,7 +81,7 @@ elseif ('search' == $op)
         ]);
         modulehook('soberup', $args->getArguments());
 
-        if (0 != module_events('forest', getsetting('forestchance', 15)))
+        if (0 != module_events('forest', LotgdSetting::getSetting('forestchance', 15)))
         {
             if (\LotgdNavigation::checkNavs())
             {
@@ -149,15 +149,15 @@ elseif ('search' == $op)
             $targetlevel    = ($session['user']['level'] + $plev - $nlev);
             $mintargetlevel = $targetlevel;
 
-            if (getsetting('multifightdk', 10) <= $session['user']['dragonkills'])
+            if (LotgdSetting::getSetting('multifightdk', 10) <= $session['user']['dragonkills'])
             {
-                if (\mt_rand(1, 100) <= getsetting('multichance', 25))
+                if (\mt_rand(1, 100) <= LotgdSetting::getSetting('multichance', 25))
                 {
-                    $multi = e_rand(getsetting('multibasemin', 2), getsetting('multibasemax', 3));
+                    $multi = e_rand(LotgdSetting::getSetting('multibasemin', 2), LotgdSetting::getSetting('multibasemax', 3));
 
                     if ('slum' == $type)
                     {
-                        $multi -= e_rand(getsetting('multislummin', 0), getsetting('multislummax', 1));
+                        $multi -= e_rand(LotgdSetting::getSetting('multislummin', 0), LotgdSetting::getSetting('multislummax', 1));
 
                         $mintargetlevel = $targetlevel - 2;
 
@@ -168,7 +168,7 @@ elseif ('search' == $op)
                     }
                     elseif ('thrill' == $type)
                     {
-                        $multi += e_rand((int) getsetting('multithrillmin', 1), (int) getsetting('multithrillmax', 2));
+                        $multi += e_rand((int) LotgdSetting::getSetting('multithrillmin', 1), (int) LotgdSetting::getSetting('multithrillmax', 2));
 
                         $mintargetlevel = $targetlevel - 1;
 
@@ -180,7 +180,7 @@ elseif ('search' == $op)
                     }
                     elseif ('suicide' == $type)
                     {
-                        $multi += e_rand(getsetting('multisuimin', 2), getsetting('multisuimax', 4));
+                        $multi += e_rand(LotgdSetting::getSetting('multisuimin', 2), LotgdSetting::getSetting('multisuimax', 4));
 
                         if (\mt_rand(0, 1))
                         {
@@ -211,7 +211,7 @@ elseif ('search' == $op)
             }
             \LotgdResponse::pageDebug("Creatures: {$multi} Targetlevel: {$targetlevel} Mintargetlevel: {$mintargetlevel}");
 
-            $packofmonsters = (bool) (0 == \mt_rand(0, 5) && getsetting('allowpackofmonsters', true)); // true or false
+            $packofmonsters = (bool) (0 == \mt_rand(0, 5) && LotgdSetting::getSetting('allowpackofmonsters', true)); // true or false
             $packofmonsters = ($multi > 1) ? $packofmonsters : false;
 
             $result = lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmonsters, true);

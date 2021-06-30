@@ -17,6 +17,7 @@ use Lotgd\Core\Entity\Characters;
 use Lotgd\Core\Form\Type\ClanRankType;
 use Lotgd\Core\Form\Type\RaceType;
 use Lotgd\Core\Form\Type\SpecialtyType;
+use Lotgd\Core\Lib\Settings;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -32,6 +33,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CharactersType extends AbstractType
 {
+    private $settings;
+
+    public function __construct(Settings $settings)
+    {
+        $this->settings = $settings;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -57,7 +65,7 @@ class CharactersType extends AbstractType
                 'label'      => 'char.title',
                 'required'   => false,
                 'empty_data' => '',
-                'disabled'   => ! ((bool) getsetting('edittitles', 1)),
+                'disabled'   => ! ((bool) $this->settings->getSetting('edittitles', 1)),
             ])
             ->add('ctitle', TextType::class, [
                 'label'      => 'char.ctitle',

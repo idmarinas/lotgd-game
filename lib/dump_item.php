@@ -73,7 +73,7 @@ function dump_item_ascode($item, $indent = "\t")
     }
     else
     {
-        $out .= "'".\htmlentities(\addslashes($item), ENT_COMPAT, getsetting('charset', 'UTF-8'))."'";
+        $out .= "'".\htmlentities(\addslashes($item), ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8'))."'";
     }
 
     return $out;

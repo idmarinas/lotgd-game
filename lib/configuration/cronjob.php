@@ -34,7 +34,7 @@ if ('' == $op)
     $lotgdFormFactory = \LotgdKernel::get('form.factory');
 
     $form = $lotgdFormFactory->create(CronjobType::class, [
-        'newdaycron' => getsetting('newdaycron', 0),
+        'newdaycron' => LotgdSetting::getSetting('newdaycron', 0),
     ], [
         'action' => 'configuration.php?setting=cronjob&save=save',
         'attr'   => [

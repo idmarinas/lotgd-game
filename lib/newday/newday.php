@@ -10,7 +10,7 @@ use Lotgd\Core\Event\Other;
 $params['tpl']                 = 'default';
 $params['moduleStaminaSystem'] = is_module_active('staminasystem');
 $params['turnPerDay']          = $turnsperday;
-$params['maxGoldForInterest']  = getsetting('maxgoldforinterest', 100000);
+$params['maxGoldForInterest']  = LotgdSetting::getSetting('maxgoldforinterest', 100000);
 
 $params['resurrected'] = false;
 
@@ -40,7 +40,7 @@ if ($params['moduleStaminaSystem'])
 }
 else
 {
-    $canGetInterest = ($session['user']['turns'] > getsetting('fightsforinterest', 4) && $session['user']['goldinbank'] >= 0);
+    $canGetInterest = ($session['user']['turns'] > LotgdSetting::getSetting('fightsforinterest', 4) && $session['user']['goldinbank'] >= 0);
 }
 
 $params['canGetInterest'] = $canGetInterest;
@@ -116,11 +116,11 @@ if ('true' == $resurrection)
 {
     \LotgdTool::addNews('news.resurrected', [
         'playerName'    => $session['user']['name'],
-        'deathOverlord' => getsetting('deathoverlord', '`$Ramius`0'),
+        'deathOverlord' => LotgdSetting::getSetting('deathoverlord', '`$Ramius`0'),
     ], $textDomain);
 
     $spirits           = -6;
-    $resurrectionturns = getsetting('resurrectionturns', -6);
+    $resurrectionturns = LotgdSetting::getSetting('resurrectionturns', -6);
 
     if (\strstr($resurrectionturns, '%'))
     {
@@ -140,7 +140,7 @@ if ('true' == $resurrection)
             $resurrectionturns = -($turnsperday + $dkff);
         }
     }
-    $session['user']['deathpower'] -= getsetting('resurrectioncost', 100);
+    $session['user']['deathpower'] -= LotgdSetting::getSetting('resurrectioncost', 100);
     $session['user']['restorepage'] = 'village.php?c=1';
 }
 
@@ -199,7 +199,7 @@ $session['user']['fedmount']         = 0;
 if ('true' != $resurrection)
 {
     $session['user']['soulpoints']  = 50 + 10 * $session['user']['level'] + $session['user']['dragonkills'] * 2;
-    $session['user']['gravefights'] = getsetting('gravefightsperday', 10);
+    $session['user']['gravefights'] = LotgdSetting::getSetting('gravefightsperday', 10);
 }
 $session['user']['boughtroomtoday'] = 0;
 $session['user']['recentcomments']  = $session['user']['lasthit'];
@@ -245,10 +245,10 @@ require_once 'lib/battle/extended.php';
 unsuspend_companions('allowinshades');
 
 //-- Run new day if not run by cronjob
-if ( ! getsetting('newdaycron', 0))
+if ( ! LotgdSetting::getSetting('newdaycron', 0))
 {
     //check last time we did this vs now to see if it was a different game day.
-    $lastnewdaysemaphore = \LotgdKernel::get('lotgd_core.tool.date_time')->convertGameTime(\strtotime(getsetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
+    $lastnewdaysemaphore = \LotgdKernel::get('lotgd_core.tool.date_time')->convertGameTime(\strtotime(LotgdSetting::getSetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
     $gametoday           = \LotgdKernel::get('lotgd_core.tool.date_time')->gameTime();
 
     if (\gmdate('Ymd', $gametoday) != \gmdate('Ymd', $lastnewdaysemaphore))
@@ -256,7 +256,7 @@ if ( ! getsetting('newdaycron', 0))
         // it appears to be a different game day, acquire semaphore and
         // check again.
         clearsettings();
-        $lastnewdaysemaphore = \LotgdKernel::get('lotgd_core.tool.date_time')->convertGameTime(\strtotime(getsetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
+        $lastnewdaysemaphore = \LotgdKernel::get('lotgd_core.tool.date_time')->convertGameTime(\strtotime(LotgdSetting::getSetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
         $gametoday           = \LotgdKernel::get('lotgd_core.tool.date_time')->gameTime();
 
         if (\gmdate('Ymd', $gametoday) != \gmdate('Ymd', $lastnewdaysemaphore))

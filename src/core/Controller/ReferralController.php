@@ -15,6 +15,7 @@ namespace Lotgd\Core\Controller;
 
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Lib\Settings;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,27 +24,29 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class ReferralController extends AbstractController
 {
     private $dispatcher;
+    private $settings;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher)
+    public function __construct(EventDispatcherInterface $eventDispatcher, Settings $settings)
     {
         $this->dispatcher = $eventDispatcher;
+        $this->settings   = $settings;
     }
 
     public function index(array $params, Request $request): Response
     {
         global $session;
 
-        $url = getsetting('serverurl', \sprintf('%s://%s', $request->getServer('REQUEST_SCHEME'), $request->getServer('HTTP_HOST')));
+        $url = $this->settings->getSetting('serverurl', sprintf('%s://%s', $request->getServer('REQUEST_SCHEME'), $request->getServer('HTTP_HOST')));
 
-        if ( ! \preg_match('/\\/$/', $url))
+        if ( ! preg_match('/\\/$/', $url))
         {
             $url = $url.'/';
             savesetting('serverurl', $url);
         }
 
         $params['serverUrl']     = $url;
-        $params['refererAward']  = getsetting('refereraward', 25);
-        $params['referMinLevel'] = getsetting('referminlevel', 4);
+        $params['refererAward']  = $this->settings->getSetting('refereraward', 25);
+        $params['referMinLevel'] = $this->settings->getSetting('referminlevel', 4);
 
         /** @var Lotgd\Core\Repository\AccountsRepository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:Accounts');

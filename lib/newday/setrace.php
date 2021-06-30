@@ -6,7 +6,7 @@ $setrace = \LotgdRequest::getQuery('setrace');
 
 if ('' != $setrace)
 {
-    $vname = getsetting('villagename', LOCATION_FIELDS);
+    $vname = LotgdSetting::getSetting('villagename', LOCATION_FIELDS);
     //in case the module wants to reference it this way.
     $session['user']['race'] = $setrace;
     // Set the person to the main village/capital by default

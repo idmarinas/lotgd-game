@@ -16,13 +16,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Laminas\Filter;
 use Lotgd\Core\Entity as LotgdEntity;
 use Lotgd\Core\Entity\Commentary as EntityCommentary;
-use Lotgd\Core\Repository\CommentaryRepository;
 use Lotgd\Core\Event\Commentary as EventCommentary;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Lotgd\Core\Lib\Settings;
+use Lotgd\Core\Repository\CommentaryRepository;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Commentary
@@ -42,6 +43,7 @@ class Commentary
     protected $flashBag;
     protected $doctrine;
     protected $normalizer;
+    private $settings;
 
     public function __construct(
         TranslatorInterface $translator,
@@ -50,7 +52,8 @@ class Commentary
         EventDispatcherInterface $hook,
         FlashBagInterface $flashBag,
         EntityManagerInterface $doctrine,
-        DenormalizerInterface $normalizer
+        DenormalizerInterface $normalizer,
+        Settings $settings
     ) {
         $this->translator = $translator;
         $this->cache      = $appCache;
@@ -59,6 +62,7 @@ class Commentary
         $this->flashBag   = $flashBag;
         $this->doctrine   = $doctrine;
         $this->normalizer = $normalizer;
+        $this->settings   = $settings;
     }
 
     /**
@@ -188,7 +192,7 @@ class Commentary
         }
         //-- /game will have a specific function for the system
 
-        $command = \strtoupper($data['comment']);
+        $command = strtoupper($data['comment']);
 
         //-- Deletes the user's last written comment, only if no more than 24 hours have passed.
         // if ('GREM' == $command || '::GREM' == $command || '/GREM' == $command)
@@ -242,19 +246,19 @@ class Commentary
      */
     public function processSpecialCommands(array &$data): bool
     {
-        if ('/me' == \substr($data['comment'], 0, 3))
+        if ('/me' == substr($data['comment'], 0, 3))
         {
-            $data['comment'] = \trim(\substr($data['comment'], 3));
+            $data['comment'] = trim(substr($data['comment'], 3));
             $data['command'] = 'me';
         }
-        elseif ('::' == \substr($data['comment'], 0, 1))
+        elseif ('::' == substr($data['comment'], 0, 1))
         {
-            $data['comment'] = \trim(\substr($data['comment'], 2));
+            $data['comment'] = trim(substr($data['comment'], 2));
             $data['command'] = 'me';
         }
-        elseif (':' == \substr($data['comment'], 0, 1))
+        elseif (':' == substr($data['comment'], 0, 1))
         {
-            $data['comment'] = \trim(\substr($data['comment'], 1));
+            $data['comment'] = trim(substr($data['comment'], 1));
             $data['command'] = 'me';
         }
 
@@ -284,21 +288,21 @@ class Commentary
 
         //-- Only accept correct format, all italic open tag need close tag.
         //-- Other wise, italic format is removed.
-        if (\substr_count($comment, '`i') != \substr_count($comment, '´i'))
+        if (substr_count($comment, '`i') != substr_count($comment, '´i'))
         {
             $filterChain->attach(new Filter\PregReplace(['pattern' => ['/`i/', '/´i/'], 'replacement' => '']));
         }
 
         //-- Only accept correct format, all bold open tag need close tag.
         //-- Other wise, bold format is removed.
-        if (\substr_count($comment, '`b') != \substr_count($comment, '´b'))
+        if (substr_count($comment, '`b') != substr_count($comment, '´b'))
         {
             $filterChain->attach(new Filter\PregReplace(['pattern' => ['/`b/', '/´b/'], 'replacement' => '']));
         }
 
         //-- Only accept correct format, all center open tag need close tag.
         //-- Other wise, center format is removed.
-        if (\substr_count($comment, '`c') != \substr_count($comment, '´c'))
+        if (substr_count($comment, '`c') != substr_count($comment, '´c'))
         {
             $filterChain->attach(new Filter\PregReplace(['pattern' => ['/`c/', '/´c/'], 'replacement' => '']));
         }
@@ -323,11 +327,11 @@ class Commentary
             $item->expiresAt(new \DateTime('tomorrow'));
 
             $comsecs = [];
-            $comsecs['village'] = $this->translator->trans('section.village', ['village' => getsetting('villagename', LOCATION_FIELDS)], self::TEXT_DOMAIN);
+            $comsecs['village'] = $this->translator->trans('section.village', ['village' => $this->settings->getSetting('villagename', LOCATION_FIELDS)], self::TEXT_DOMAIN);
             $comsecs['superuser'] = $this->translator->trans('section.superuser', [], self::TEXT_DOMAIN);
             $comsecs['shade'] = $this->translator->trans('section.shade', [], self::TEXT_DOMAIN);
             $comsecs['grassyfield'] = $this->translator->trans('section.grassyfield', [], self::TEXT_DOMAIN);
-            $comsecs['inn'] = getsetting('innname', LOCATION_INN);
+            $comsecs['inn'] = $this->settings->getSetting('innname', LOCATION_INN);
             $comsecs['motd'] = $this->translator->trans('section.motd', [], self::TEXT_DOMAIN);
             $comsecs['veterans'] = $this->translator->trans('section.veterans', [], self::TEXT_DOMAIN);
             $comsecs['hunterlodge'] = $this->translator->trans('section.hunterlodge', [], self::TEXT_DOMAIN);

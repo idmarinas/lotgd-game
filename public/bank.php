@@ -20,7 +20,7 @@ $textDomainNavigation = $result['textDomainNavigation'];
 
 $params = [
     'textDomain' => $textDomain,
-    'ownerName' => getsetting('bankername', '`@Elessa`0')
+    'ownerName' => LotgdSetting::getSetting('bankername', '`@Elessa`0')
 ];
 
 /** @var Lotgd\Core\Http\Request */
@@ -74,7 +74,7 @@ if ($session['user']['goldinbank'] >= 0)
     \LotgdNavigation::addNav('nav.withdraw', 'bank.php?op=withdraw');
     \LotgdNavigation::addNav('nav.deposit.label', 'bank.php?op=deposit');
 
-    if (getsetting('borrowperlevel', 20))
+    if (LotgdSetting::getSetting('borrowperlevel', 20))
     {
         \LotgdNavigation::addNav('nav.borrow.label', 'bank.php?op=borrow');
     }
@@ -83,13 +83,13 @@ else
 {
     \LotgdNavigation::addNav('nav.deposit.pay', 'bank.php?op=deposit');
 
-    if (getsetting('borrowperlevel', 20))
+    if (LotgdSetting::getSetting('borrowperlevel', 20))
     {
         \LotgdNavigation::addNav('nav.borrow.more', 'bank.php?op=borrow');
     }
 }
 
-if (getsetting('allowgoldtransfer', 1) && ($session['user']['level'] >= getsetting('mintransferlev', 3) || $session['user']['dragonkills'] > 0))
+if (LotgdSetting::getSetting('allowgoldtransfer', 1) && ($session['user']['level'] >= LotgdSetting::getSetting('mintransferlev', 3) || $session['user']['dragonkills'] > 0))
 {
     \LotgdNavigation::addNav('nav.transfer', 'bank.php?op=transfer');
 }

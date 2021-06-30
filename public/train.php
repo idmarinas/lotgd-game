@@ -66,7 +66,7 @@ else
 
 $params['masterName'] = $master['creaturename'];
 
-if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
+if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxlevel', 15))
 {
     $params['master'] = $master;
 
@@ -191,7 +191,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
         \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_TRAIN_AUTOCHALLENGE);
         modulehook('master-autochallenge');
 
-        if (getsetting('displaymasternews', 1))
+        if (LotgdSetting::getSetting('displaymasternews', 1))
         {
             \LotgdTool::addNews('news.autochallenge', [
                 'playerName' => $session['user']['name'],
@@ -245,7 +245,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
             $session['user']['hitpoints'] = $session['user']['maxhitpoints'];
 
             // Fix the multimaster bug
-            if (1 == getsetting('multimaster', 1))
+            if (1 == LotgdSetting::getSetting('multimaster', 1))
             {
                 $session['user']['seenmaster'] = 0;
                 \LotgdLog::debug('Defeated master, setting seenmaster to 0');
@@ -265,14 +265,14 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
                 $lotgdBattleContent['battleend'][] = ['battle.end.victory.master.none', [], $textDomain];
             }
 
-            if ($session['user']['referer'] > 0 && ($session['user']['level'] >= getsetting('referminlevel', 4) || $session['user']['dragonkills'] > 0) && $session['user']['refererawarded'] < 1)
+            if ($session['user']['referer'] > 0 && ($session['user']['level'] >= LotgdSetting::getSetting('referminlevel', 4) || $session['user']['dragonkills'] > 0) && $session['user']['refererawarded'] < 1)
             {
                 $repository = \Doctrine::getRepository('LotgdCore:Accounts');
                 $entity = $repository->find($session['user']['referer']);
 
                 if ($entity)
                 {
-                    $donation = getsetting('refereraward', 25);
+                    $donation = LotgdSetting::getSetting('refereraward', 25);
 
                     $subject = [ 'mail.referer.subject', [], $textDomain ];
                     $message = [ 'mail.referer.message' , [
@@ -297,7 +297,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
             // Level-Up companions
             // We only get one level per pageload. So we just add the per-level-values.
             // No need to multiply and/or substract anything.
-            if (getsetting('companionslevelup', 1))
+            if (LotgdSetting::getSetting('companionslevelup', 1))
             {
                 $newcompanions = $companions;
 
@@ -312,11 +312,11 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
                 $companions = $newcompanions;
             }
 
-            if (getsetting('displaymasternews', 1))
+            if (LotgdSetting::getSetting('displaymasternews', 1))
             {
                 $days = (1 == $session['user']['age']) ? 'day' : 'days';
 
-                if (getsetting('displaymasternews', 1))
+                if (LotgdSetting::getSetting('displaymasternews', 1))
                 {
                     \LotgdTool::addNews('news.victory', [
                         'sex' => $session['user']['sex'],
@@ -348,7 +348,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
         }
         elseif ($defeat)
         {
-            if (getsetting('displaymasternews', 1))
+            if (LotgdSetting::getSetting('displaymasternews', 1))
             {
                 $taunt = \LotgdTool::selectTaunt();
 

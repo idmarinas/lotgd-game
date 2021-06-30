@@ -30,7 +30,7 @@ function do_forced_nav($anonymous, $overrideforced)
         $session['bufflist']            = $session['user']['bufflist']    ?? [];
         $session['user']['allowednavs'] = $session['user']['allowednavs'] ?? [];
 
-        if ( ! $session['user']['loggedin'] || ((\time() - $session['user']['laston']->getTimestamp()) > getsetting('LOGINTIMEOUT', 900)))
+        if ( ! $session['user']['loggedin'] || ((\time() - $session['user']['laston']->getTimestamp()) > LotgdSetting::getSetting('LOGINTIMEOUT', 900)))
         {
             $session = [];
 

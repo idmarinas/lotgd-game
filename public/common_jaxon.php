@@ -21,7 +21,7 @@ require_once './common_common.php';
 if (
     isset($session['lasthit'], $session['loggedin'])
 
-    && \strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit']
+    && \strtotime('-'.LotgdSetting::getSetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit']
     && $session['lasthit'] > 0 && $session['loggedin']
 ) {
     // force the abandoning of the session when the user should have been
@@ -44,7 +44,7 @@ $l  = \Lotgd\Core\Kernel::LICENSE;
 do_forced_nav(ALLOW_ANONYMOUS, OVERRIDE_FORCED_NAV);
 
 //-- Check if have a full maintenance mode activate force to log out all players
-if (getsetting('fullmaintenance', 0) && (($session['user']['loggedin'] ?? false) && 0 >= ($session['user']['superuser'] & SU_DEVELOPER)))
+if (LotgdSetting::getSetting('fullmaintenance', 0) && (($session['user']['loggedin'] ?? false) && 0 >= ($session['user']['superuser'] & SU_DEVELOPER)))
 {
     $session['user']['restorepage'] = 'news.php';
 

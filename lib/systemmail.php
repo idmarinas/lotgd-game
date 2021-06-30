@@ -45,7 +45,7 @@ function systemmail($to, $subject, $body, $from = 0, $noemail = false)
         $fromName = $acctRepository->getCharacterNameFromAcctId($from);
         $toName   = $acctRepository->getCharacterNameFromAcctId($to);
 
-        $fromline = \LotgdSanitize::fullSanitize($fromName) ?: getsetting('servername');
+        $fromline = \LotgdSanitize::fullSanitize($fromName) ?: LotgdSetting::getSetting('servername');
         $toline   = \LotgdSanitize::fullSanitize($toName);
 
         // We've inserted it into the database, so.. strip out any formatting

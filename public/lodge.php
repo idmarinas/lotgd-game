@@ -39,8 +39,8 @@ $entry = ($session['user']['donation'] > 0) || ($session['user']['superuser'] & 
 $params = [
     'textDomain' => $textDomain,
     'pointsAvailable' => $pointsavailable,
-    'innName' => getsetting('innname', LOCATION_INN),
-    'barkeep' => getsetting('barkeep', '`tCedrik`0'),
+    'innName' => LotgdSetting::getSetting('innname', LOCATION_INN),
+    'barkeep' => LotgdSetting::getSetting('barkeep', '`tCedrik`0'),
     'canEntry' => $entry
 ];
 

@@ -12,14 +12,14 @@ require_once 'lib/events.php';
 require_once 'lib/experience.php';
 
 //-- First check for autochallengeç
-if (getsetting('automaster', 1) && 1 != $session['user']['seenmaster'])
+if (LotgdSetting::getSetting('automaster', 1) && 1 != $session['user']['seenmaster'])
 {
     //masters hunt down truant students
     $level = $session['user']['level'] + 1;
     $dks = $session['user']['dragonkills'];
     $expreqd = \LotgdTool::expForNextLevel($level, $dks);
 
-    if ($session['user']['experience'] > $expreqd && $session['user']['level'] < getsetting('maxlevel', 15))
+    if ($session['user']['experience'] > $expreqd && $session['user']['level'] < LotgdSetting::getSetting('maxlevel', 15))
     {
         redirect('train.php?op=autochallenge');
     }
@@ -27,8 +27,8 @@ if (getsetting('automaster', 1) && 1 != $session['user']['seenmaster'])
 
 // See if the user is in a valid location and if not, put them back to
 // a place which is valid
-$vname = getsetting('villagename', LOCATION_FIELDS);
-$iname = getsetting('innname', LOCATION_INN);
+$vname = LotgdSetting::getSetting('villagename', LOCATION_FIELDS);
+$iname = LotgdSetting::getSetting('innname', LOCATION_INN);
 $valid_loc = [];
 $valid_loc[$vname] = 'village';
 $args = new GenericEvent(null, $valid_loc);
@@ -56,8 +56,8 @@ if (! isset($valid_loc[$session['user']['location']]))
 }
 
 //-- Newest player in realm
-$params['newestplayer'] = (int) getsetting('newestplayer', 0);
-$params['newestname'] = (string) getsetting('newestplayername', '');
+$params['newestplayer'] = (int) LotgdSetting::getSetting('newestplayer', 0);
+$params['newestname'] = (string) LotgdSetting::getSetting('newestplayername', '');
 
 $params['newtext'] = 'newestOther';
 if ($params['newestplayer'] == $session['user']['acctid'])
@@ -99,7 +99,7 @@ $comment = $request->request->get('comment');
 // Don't give people a chance at a special event if they are just browsing
 // the commentary (or talking) or dealing with any of the hooks in the village.
 // The '1' should really be sysadmin customizable.
-if (! $op && '' == $com && ! $comment && ! $commenting && 0 != module_events('village', getsetting('villagechance', 0)))
+if (! $op && '' == $com && ! $comment && ! $commenting && 0 != module_events('village', LotgdSetting::getSetting('villagechance', 0)))
 {
     if (\LotgdNavigation::checkNavs())
     {
@@ -123,7 +123,7 @@ if (! $op && '' == $com && ! $comment && ! $commenting && 0 != module_events('vi
 \LotgdNavigation::addHeader('headers.gate');
 \LotgdNavigation::addNav('navs.forest', 'forest.php');
 
-if (getsetting('pvp', 1))
+if (LotgdSetting::getSetting('pvp', 1))
 {
     \LotgdNavigation::addNav('navs.pvp', 'pvp.php');
 }
@@ -132,7 +132,7 @@ if (getsetting('pvp', 1))
 \LotgdNavigation::addHeader('headers.fields');
 \LotgdNavigation::addNav('navs.logout', 'login.php?op=logout');
 
-if (getsetting('enablecompanions', true))
+if (LotgdSetting::getSetting('enablecompanions', true))
 {
     \LotgdNavigation::addNav('navs.mercenarycamp', 'mercenarycamp.php');
 }
@@ -163,7 +163,7 @@ if (file_exists('public/lodge.php'))
 \LotgdNavigation::addNav('navs.gardens', 'gardens.php' );
 \LotgdNavigation::addNav('navs.rock', 'rock.php');
 
-if (getsetting('allowclans', 1))
+if (LotgdSetting::getSetting('allowclans', 1))
 {
     \LotgdNavigation::addnav('navs.clan', 'clan.php');
 }

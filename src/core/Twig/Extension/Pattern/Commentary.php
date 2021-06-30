@@ -94,7 +94,7 @@ trait Commentary
 
         $textDomain = ($textDomain ?? $this->textDomain) ?: $this->textDomain;
 
-        $logout  = (int) getsetting('LOGINTIMEOUT', 900);
+        $logout  = (int) $this->settings->getSetting('LOGINTIMEOUT', 900);
         $offline = new \DateTime('now');
         $offline->sub(new \DateInterval("PT{$logout}S"));
 
@@ -184,7 +184,7 @@ trait Commentary
             'textDomain' => $textDomain,
             'commentary' => $commentary,
             'colors'     => $this->color->getColors(),
-            'maxChars'   => getsetting('maxchars', 200) + 100,
+            'maxChars'   => $this->settings->getSetting('maxchars', 200) + 100,
         ];
 
         return $env->load('_blocks/_commentary.html.twig')->renderBlock('commentary_add', $params);

@@ -17,6 +17,7 @@ use Lotgd\Core\Event\Core;
 use Lotgd\Core\Event\Other;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
 use Lotgd\Core\Output\Color;
@@ -41,6 +42,7 @@ class InnController extends AbstractController
     private $pvpListing;
     private $color;
     private $dateTime;
+    private $settings;
 
     public function __construct(
         Navigation $navigation,
@@ -51,7 +53,8 @@ class InnController extends AbstractController
         Sanitize $sanitize,
         Listing $listing,
         Color $color,
-        DateTime $dateTime
+        DateTime $dateTime,
+        Settings $settings
     ) {
         $this->navigation = $navigation;
         $this->dispatcher = $eventDispatcher;
@@ -62,6 +65,7 @@ class InnController extends AbstractController
         $this->pvpListing = $listing;
         $this->color      = $color;
         $this->dateTime   = $dateTime;
+        $this->settings   = $settings;
     }
 
     public function converse(array $params): Response
@@ -167,7 +171,7 @@ class InnController extends AbstractController
                     }
                 }
 
-                $params['bribeSuccess'] = \mt_rand(0, 100) < $chance;
+                $params['bribeSuccess'] = mt_rand(0, 100) < $chance;
 
                 if ($params['bribeSuccess'])
                 {
@@ -175,13 +179,13 @@ class InnController extends AbstractController
                     $this->dispatcher->dispatch(new Other(), Other::INN_BARTENDER_BRIBE);
                     modulehook('bartenderbribe');
 
-                    if (getsetting('pvp', 1))
+                    if ($this->settings->getSetting('pvp', 1))
                     {
                         $this->navigation->addNav('nav.bribe.upstairs', 'inn.php?op=bartender&act=listupstairs');
                     }
                     $this->navigation->addNav('nav.bribe.color', 'inn.php?op=bartender&act=colors');
 
-                    if (getsetting('allowspecialswitch', true))
+                    if ($this->settings->getSetting('allowspecialswitch', true))
                     {
                         $this->navigation->addNav('nav.bribe.specialty', 'inn.php?op=bartender&act=specialty');
                     }
@@ -198,12 +202,12 @@ class InnController extends AbstractController
         }
         elseif ('listupstairs' == $action)
         {
-            $pvptime = getsetting('pvptimeout', 600);
+            $pvptime = $this->settings->getSetting('pvptimeout', 600);
 
             $params['paginator']  = $this->pvpListing->getPvpList($params['innName']);
             $params['sleepers']   = $this->pvpListing->getLocationSleepersCount($params['innName']);
             $params['returnLink'] = $request->getServer('REQUEST_URI');
-            $params['pvpTimeOut'] = new \DateTime(\date('Y-m-d H:i:s', \strtotime("-{$pvptime} seconds")));
+            $params['pvpTimeOut'] = new \DateTime(date('Y-m-d H:i:s', strtotime("-{$pvptime} seconds")));
             $params['isInn']      = true;
 
             $this->navigation->addNav('Refresh the list', 'inn.php?op=bartender&act=listupstairs');
@@ -215,12 +219,12 @@ class InnController extends AbstractController
 
             $colors = $this->color->getColors();
 
-            $params['colors'] = \array_map(function ($n)
+            $params['colors'] = array_map(function ($n)
             {
                 return "`{$n}&#96;{$n} - &#180;{$n}´{$n}";
-            }, \array_keys($colors));
+            }, array_keys($colors));
 
-            $params['colors'] = '<span class="ui basic small labels"><span class="ui label">'.\implode('</span> <span class="ui label">', $params['colors']).'</span></span>';
+            $params['colors'] = '<span class="ui basic small labels"><span class="ui label">'.implode('</span> <span class="ui label">', $params['colors']).'</span></span>';
         }
         elseif ('specialty' == $action)
         {
@@ -281,13 +285,13 @@ class InnController extends AbstractController
         $this->navigation->addHeader('category.other');
         $this->navigation->addNav('nav.return.inn', 'inn.php');
 
-        $expense     = \round(($session['user']['level'] * (10 + \log($session['user']['level']))), 0);
-        $fee         = getsetting('innfee', '5%');
-        $fee         = (\strpos($fee, '%')) ? \round($expense * (\str_replace('%', '', $fee) / 100), 0) : 0;
+        $expense     = round(($session['user']['level'] * (10 + log($session['user']['level']))), 0);
+        $fee         = $this->settings->getSetting('innfee', '5%');
+        $fee         = (strpos($fee, '%')) ? round($expense * (str_replace('%', '', $fee) / 100), 0) : 0;
         $bankexpense = $expense + $fee;
 
         $params['fee']             = $fee;
-        $params['feePercent']      = (\strpos($fee, '%')) ? \str_replace('%', '', $fee) / 100 : null;
+        $params['feePercent']      = (strpos($fee, '%')) ? str_replace('%', '', $fee) / 100 : null;
         $params['expense']         = $expense;
         $params['bankExpense']     = $bankexpense;
         $params['boughtRoomToday'] = $session['user']['boughtroomtoday'];
@@ -388,7 +392,7 @@ class InnController extends AbstractController
         if ('fleedragon' == $request->query->get('op'))
         {
             --$session['user']['charm'];
-            $session['user']['charm'] = \max(0, $session['user']['charm']);
+            $session['user']['charm'] = max(0, $session['user']['charm']);
         }
 
         $chats = new GenericEvent(null, [
@@ -396,10 +400,10 @@ class InnController extends AbstractController
                 'chats.dragon', [], $params['textDomain'],
             ],
             [
-                getsetting('bard', '`^Seth`0'), [], $params['textDomain'],
+                $this->settings->getSetting('bard', '`^Seth`0'), [], $params['textDomain'],
             ],
             [
-                getsetting('barmaid', '`%Violet`0'), [], $params['textDomain'],
+                $this->settings->getSetting('barmaid', '`%Violet`0'), [], $params['textDomain'],
             ],
             [
                 '`#MightyE`0', [], $params['textDomain'],
@@ -415,7 +419,7 @@ class InnController extends AbstractController
         $this->dispatcher->dispatch($chats, Events::PAGE_INN_CHATTER);
         $chats = modulehook('innchatter', $chats->getArguments());
 
-        $params['talk']      = $chats[\array_rand($chats)];
+        $params['talk']      = $chats[array_rand($chats)];
         $params['gameclock'] = $this->dateTime->getGameTime();
 
         return $this->renderInn($params);

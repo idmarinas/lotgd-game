@@ -17,6 +17,7 @@ use Lotgd\Core\Entity\Masters;
 use Lotgd\Core\Entity\MastersTranslation;
 use Lotgd\Core\EntityForm\Masters as CreaturesFieldType;
 use Lotgd\Core\Form\Type\TranslatableFieldType;
+use Lotgd\Core\Lib\Settings;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -25,6 +26,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MastersType extends AbstractType
 {
+    private $settings;
+
+    public function __construct(Settings $settings)
+    {
+        $this->settings = $settings;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -32,7 +40,7 @@ class MastersType extends AbstractType
                 'label' => 'creaturelevel',
                 'attr'  => [
                     'min'                   => 1,
-                    'max'                   => getsetting('maxlevel'),
+                    'max'                   => $this->settings->getSetting('maxlevel'),
                     'disable_slider_labels' => false,
                     'step'                  => 1,
                 ],

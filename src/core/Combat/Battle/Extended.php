@@ -29,7 +29,7 @@ trait Extended
         $user = &$session['user']; //fast and better
         $data = [];
 
-        $barDisplay                         = (int) ($user['prefs']['forestcreaturebar'] ?? getsetting('forestcreaturebar', 0));
+        $barDisplay                         = (int) ($user['prefs']['forestcreaturebar'] ?? $this->settings->getSetting('forestcreaturebar', 0));
         $user['prefs']['forestcreaturebar'] = $barDisplay;
 
         $hitpointstext = 'battlebars.death.hitpoints';
@@ -181,7 +181,7 @@ trait Extended
     public function prepareFight($options = [])
     {
         $basicoptions = [
-            'maxattacks' => getsetting('maxattacks', 4),
+            'maxattacks' => $this->settings->getSetting('maxattacks', 4),
         ];
 
         if ( ! \is_array($options))

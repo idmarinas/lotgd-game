@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Output\Color;
 use Lotgd\Core\Output\Commentary as CommentaryCore;
 use Lotgd\Core\Twig\NodeVisitor\CommentaryDefaultAddCommentNodeVisitor;
@@ -48,17 +49,20 @@ class Commentary extends AbstractExtension
      * @var array
      */
     protected $onlineStatus;
+    private $settings;
 
     public function __construct(
         CommentaryCore $commentary,
         TranslatorInterface $translator,
         Request $request,
-        Color $color
+        Color $color,
+        Settings $settings
     ) {
         $this->commentary = $commentary;
         $this->translator = $translator;
         $this->request    = $request;
         $this->color      = $color;
+        $this->settings   = $settings;
     }
 
     /**

@@ -14,22 +14,24 @@
 namespace Lotgd\Core\Controller;
 
 use Lotgd\Core\Events;
+use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Navigation\Navigation;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class ForestController extends AbstractController
 {
     private $dispatcher;
     private $navigation;
+    private $settings;
 
-    public function __construct(EventDispatcherInterface $dispatcher, Navigation $navigation)
+    public function __construct(EventDispatcherInterface $dispatcher, Navigation $navigation, Settings $settings)
     {
         $this->dispatcher = $dispatcher;
         $this->navigation = $navigation;
+        $this->settings   = $settings;
     }
 
     public function index(array $params): Response
@@ -51,14 +53,14 @@ class ForestController extends AbstractController
 
         $this->navigation->addNav('nav.thrill', 'forest.php?op=search&type=thrill');
 
-        (getsetting('suicide', 0) && getsetting('suicidedk', 10) <= $session['user']['dragonkills']) && $this->navigation->addNav('nav.suicide', 'forest.php?op=search&type=suicide');
+        ($this->settings->getSetting('suicide', 0) && $this->settings->getSetting('suicidedk', 10) <= $session['user']['dragonkills']) && $this->navigation->addNav('nav.suicide', 'forest.php?op=search&type=suicide');
 
         $this->navigation->addHeader('category.other');
 
         $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_FOREST_HEADER);
         modulehook('forest-header');
 
-        if ($session['user']['level'] >= getsetting('maxlevel', 15) && 0 == $session['user']['seendragon'])
+        if ($session['user']['level'] >= $this->settings->getSetting('maxlevel', 15) && 0 == $session['user']['seendragon'])
         {
             // Only put the green dragon link if we are a location which
             // should have a forest.   Don't even ask how we got into a forest()
@@ -66,15 +68,16 @@ class ForestController extends AbstractController
             // a superuser link, but it shouldn't happen otherwise.. We just
             // want to make sure however.
             $isforest = 0;
-            $args = new GenericEvent();
+            $args     = new GenericEvent();
             $this->dispatcher->dispatch($args, Events::PAGE_FOREST_VALID_FOREST_LOC);
-            $vloc     = modulehook('validforestloc', $args->getArguments());
+            $vloc = modulehook('validforestloc', $args->getArguments());
 
             foreach ($vloc as $i => $l)
             {
                 if ($session['user']['location'] == $i)
                 {
                     $isforest = 1;
+
                     break;
                 }
             }

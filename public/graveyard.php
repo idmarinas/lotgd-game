@@ -29,7 +29,7 @@ $skipgraveyardtext = handle_event('graveyard');
 
 $params = [
     'textDomain' => $textDomain,
-    'graveyardOwnerName' => (string) getsetting('deathoverlord', '`$Ramius`0'),
+    'graveyardOwnerName' => (string) LotgdSetting::getSetting('deathoverlord', '`$Ramius`0'),
     'showGraveyardDesc' => ! $skipgraveyardtext
 ];
 

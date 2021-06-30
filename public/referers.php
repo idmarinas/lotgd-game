@@ -37,7 +37,7 @@ if ('rebuild' == $op)
 }
 elseif('expire' == $op)
 {
-    $expire = (int) getsetting('expirecontent', 180);
+    $expire = (int) LotgdSetting::getSetting('expirecontent', 180);
 
     if ($expire > 0)
     {

@@ -25,7 +25,7 @@ $textDomain = 'page_prefs';
 
 $params = [
     'textDomain' => $textDomain,
-    'selfDelete' => (int) getsetting('selfdelete', 0)
+    'selfDelete' => (int) LotgdSetting::getSetting('selfdelete', 0)
 ];
 
 //-- Init page
@@ -221,11 +221,11 @@ else
 
         if ($email != $session['user']['emailaddress'])
         {
-            if (getsetting('playerchangeemail', 0))
+            if (LotgdSetting::getSetting('playerchangeemail', 0))
             {
                 if (is_email($email))
                 {
-                    if (1 == getsetting('requirevalidemail', 0))
+                    if (1 == LotgdSetting::getSetting('requirevalidemail', 0))
                     {
                         $emailverification = 'x'.md5(date('Y-m-d H:i:s').$email);
                         $emailverification = substr($emailverification, 0, strlen($emailverification) - 2);
@@ -246,13 +246,13 @@ else
                         $oldvalidationsent = \LotgdTranslator::t('mail.validation.old', [], $textDomain);
 
                         $changetimeoutwarning = '';
-                        if (getsetting('playerchangeemailauto', 0))
+                        if (LotgdSetting::getSetting('playerchangeemailauto', 0))
                         {
-                            $changetimeoutwarning = \LotgdTranslator::t('mail.timeout', [ 'days' => getsetting('playerchangeemaildays', 3)], $textDomain);
+                            $changetimeoutwarning = \LotgdTranslator::t('mail.timeout', [ 'days' => LotgdSetting::getSetting('playerchangeemaildays', 3)], $textDomain);
                         }
                         $footer = $changetimeoutwarning.\LotgdTranslator::t('mail.footer', [ 'server' => $serverurl], $textDomain);
 
-                        if (0 == getsetting('validationtarget', 0))
+                        if (0 == LotgdSetting::getSetting('validationtarget', 0))
                         {
                             // old account
                             $msg .= $oldconfirm.$footer;
@@ -264,26 +264,26 @@ else
                             $ownermsg .= $newvalidationsent.$footer;
                         }
 
-                        mail($email, $subj, str_replace('`n', "\n", $msg), 'From: '.getsetting('gameadminemail', 'postmaster@localhost.com'));
-                        mail($session['user']['emailaddress'], $subj, str_replace('`n', "\n", $ownermsg), 'From: '.getsetting('gameadminemail', 'postmaster@localhost.com'));
+                        mail($email, $subj, str_replace('`n', "\n", $msg), 'From: '.LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com'));
+                        mail($session['user']['emailaddress'], $subj, str_replace('`n', "\n", $ownermsg), 'From: '.LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com'));
 
                         $session['user']['replaceemail'] = $email.'|'.date('Y-m-d H:i:s');
                         $session['user']['emailvalidation'] = $emailverification;
 
                         \LotgdLog::debug('Email Change requested from '.$session['user']['emailaddress'].' to '.$email, $session['user']['acctid'], $session['user']['acctid'], 'Email');
 
-                        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.validate', [ 'target' => getsetting('validationtarget', 0) ], $textDomain));
+                        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.validate', [ 'target' => LotgdSetting::getSetting('validationtarget', 0) ], $textDomain));
 
-                        if (getsetting('playerchangeemailauto', 0))
+                        if (LotgdSetting::getSetting('playerchangeemailauto', 0))
                         {
-                            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.auto', [ 'days' => getsetting('playerchangeemaildays', 3) ], $textDomain));
+                            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.auto', [ 'days' => LotgdSetting::getSetting('playerchangeemaildays', 3) ], $textDomain));
 
-                            if (0 == getsetting('validationtarget', 0))
+                            if (0 == LotgdSetting::getSetting('validationtarget', 0))
                             {
                                 \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.trouble', [], $textDomain));
                             }
                         }
-                        elseif (0 == getsetting('validationtarget', 0))
+                        elseif (0 == LotgdSetting::getSetting('validationtarget', 0))
                         {
                             \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.account', [], $textDomain));
                         }
@@ -323,7 +323,7 @@ else
 
         'Display Preferences,title',
         'template' => 'Skin,theme',
-        'language' => 'Language,enum,'.getsetting('serverlanguages', 'en,English,de,Deutsch,fr,Français,dk,Danish,es,Español,it,Italian'),
+        'language' => 'Language,enum,'.LotgdSetting::getSetting('serverlanguages', 'en,English,de,Deutsch,fr,Français,dk,Danish,es,Español,it,Italian'),
         'tabconfig' => 'Show config sections in tabs,bool',
         'forestcreaturebar' => 'Forest Creatures show health ...,enum,0,Only Text,1,Only Healthbar,2,Healthbar AND Text',
 
@@ -347,7 +347,7 @@ else
 
     $prefs = &$session['user']['prefs'];
     $prefs['bio'] = $session['user']['bio'];
-    $prefs['template'] = \LotgdRequest::getCookie('template') ?: getsetting('defaultskin', 'jade.htm');
+    $prefs['template'] = \LotgdRequest::getCookie('template') ?: LotgdSetting::getSetting('defaultskin', 'jade.htm');
     $prefs['sexuality'] = $prefs['sexuality'] ?? ! $session['user']['sex'] ?: ! $session['user']['sex'];
     $prefs['email'] = $session['user']['emailaddress'];
     $prefs['timeformat'] = $prefs['timeformat'] ?? '[m/d h:ia]';
@@ -486,10 +486,10 @@ else
         //we have an email change request here
         $replacearray = explode('|', $session['user']['replaceemail']);
         \LotgdResponse::pageAddContent(\LotgdFormat::colorize(\LotgdTranslator::t('replace.email.pending', ['email' => $replacearray[0], 'time' => $replacearray[1]], $textDomain)));
-        $expirationdate = strtotime('+ '.getsetting('playerchangeemaildays', 3).' days', strtotime($replacearray[1]));
+        $expirationdate = strtotime('+ '.LotgdSetting::getSetting('playerchangeemaildays', 3).' days', strtotime($replacearray[1]));
         $left = $expirationdate - strtotime('now');
         $hoursleft = round($left / (60 * 60), 1);
-        $autoaccept = getsetting('playerchangeemailauto', 0);
+        $autoaccept = LotgdSetting::getSetting('playerchangeemailauto', 0);
 
         if ($autoaccept)
         {

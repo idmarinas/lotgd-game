@@ -20,10 +20,10 @@ $resline = ('true' == $resurrection) ? '&resurrection=true' : '';
 /***************
  **  SETTINGS **
  ***************/
-$turnsperday = getsetting('turns', 10);
-$maxinterest = ((float) getsetting('maxinterest', 10) / 100) + 1; //-- 1.1
-$mininterest = ((float) getsetting('mininterest', 1) / 100) + 1; //-- 1.1
-$dailypvpfights = getsetting('pvpday', 3);
+$turnsperday = LotgdSetting::getSetting('turns', 10);
+$maxinterest = ((float) LotgdSetting::getSetting('maxinterest', 10) / 100) + 1; //-- 1.1
+$mininterest = ((float) LotgdSetting::getSetting('mininterest', 1) / 100) + 1; //-- 1.1
+$dailypvpfights = LotgdSetting::getSetting('pvpday', 3);
 /******************
  ** End Settings **
  ******************/

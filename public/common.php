@@ -47,7 +47,7 @@ elseif (\file_exists('public/installer.php') && 'cli' != \substr(PHP_SAPI, 0, 3)
     \LotgdResponse::pageEnd(false);
 }
 
-if (isset($session['lasthit'], $session['loggedin']) && \strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit'] && $session['lasthit'] > 0 && $session['loggedin'])
+if (isset($session['lasthit'], $session['loggedin']) && \strtotime('-'.LotgdSetting::getSetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit'] && $session['lasthit'] > 0 && $session['loggedin'])
 {
     // force the abandoning of the session when the user should have been
     // sent to the fields.
@@ -65,7 +65,7 @@ $l  = \Lotgd\Core\Kernel::LICENSE;
 do_forced_nav(ALLOW_ANONYMOUS, OVERRIDE_FORCED_NAV);
 
 //-- Check if have a full maintenance mode activate force to log out all players
-if (getsetting('fullmaintenance', 0))
+if (LotgdSetting::getSetting('fullmaintenance', 0))
 {
     $title   = \LotgdTranslator::t('maintenance.server.closed.title', [], 'app_default');
     $message = \LotgdTranslator::t('maintenance.server.closed.message', [], 'app_default');
@@ -73,8 +73,8 @@ if (getsetting('fullmaintenance', 0))
     \LotgdFlashMessages::addErrorMessage([
         'header'     => $title,
         'message'    => $message,
-        'blockquote' => getsetting('maintenancenote', ''),
-        'author'     => getsetting('maintenanceauthor', ''),
+        'blockquote' => LotgdSetting::getSetting('maintenancenote', ''),
+        'author'     => LotgdSetting::getSetting('maintenanceauthor', ''),
         'addClass'   => 'icon',
         'icon'       => 'cog loading',
         'close'      => false,
@@ -101,7 +101,7 @@ if (getsetting('fullmaintenance', 0))
     }
 }
 //-- Check if have a maintenance mode that players cannot login anymore and show a message to log out immediateley at a safe location.
-elseif (getsetting('maintenance', 0))
+elseif (LotgdSetting::getSetting('maintenance', 0))
 {
     $title   = \LotgdTranslator::t('maintenance.server.warning.title', [], 'app_default');
     $message = \LotgdTranslator::t('maintenance.server.warning.message', [], 'app_default');
@@ -114,8 +114,8 @@ elseif (getsetting('maintenance', 0))
     \LotgdFlashMessages::addWarningMessage([
         'header'     => $title,
         'message'    => $message,
-        'blockquote' => getsetting('maintenancenote', ''),
-        'author'     => getsetting('maintenanceauthor', ''),
+        'blockquote' => LotgdSetting::getSetting('maintenancenote', ''),
+        'author'     => LotgdSetting::getSetting('maintenanceauthor', ''),
         'addClass'   => 'icon',
         'icon'       => 'cog loading',
         'close'      => false,
@@ -268,7 +268,7 @@ if ($session['user']['superuser'] & SU_MEGAUSER)
 }
 
 //Server runs in Debug mode, tell the superuser about it
-if (getsetting('debug', 0) && SU_EDIT_CONFIG == ($session['user']['superuser'] & SU_EDIT_CONFIG))
+if (LotgdSetting::getSetting('debug', 0) && SU_EDIT_CONFIG == ($session['user']['superuser'] & SU_EDIT_CONFIG))
 {
     \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('maintenance.debug.mode', [], 'app_default'));
 }
@@ -289,10 +289,10 @@ if ($session['user']['loggedin'])
     modulehook('everyhit-loggedin');
 }
 
-// This bit of code checks the current system load, so that high-intensity operations can be disabled or postponed during times of exceptionally high load.  Since checking system load can in itself be resource intensive, we'll only check system load once per thirty seconds, checking it against time retrieved from the database at the first load of getsetting().
+// This bit of code checks the current system load, so that high-intensity operations can be disabled or postponed during times of exceptionally high load.  Since checking system load can in itself be resource intensive, we'll only check system load once per thirty seconds, checking it against time retrieved from the database at the first load of LotgdSetting::getSetting().
 global $fiveminuteload;
-$lastcheck      = getsetting('systemload_lastcheck', 0);
-$fiveminuteload = getsetting('systemload_lastload', 0);
+$lastcheck      = LotgdSetting::getSetting('systemload_lastcheck', 0);
+$fiveminuteload = LotgdSetting::getSetting('systemload_lastload', 0);
 $currenttime    = \time();
 
 if ($currenttime - $lastcheck > 30)

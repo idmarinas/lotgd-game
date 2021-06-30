@@ -13,6 +13,7 @@
 namespace Lotgd\Core\Tool;
 
 use Laminas\Filter;
+use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Output\Code;
 use Lotgd\Core\Output\Color;
 
@@ -20,11 +21,13 @@ class Sanitize
 {
     protected $color;
     protected $code;
+    private $settings;
 
-    public function __construct(Color $color, Code $code)
+    public function __construct(Color $color, Code $code, Settings $settings)
     {
-        $this->color = $color;
-        $this->code  = $code;
+        $this->color    = $color;
+        $this->code     = $code;
+        $this->settings = $settings;
     }
 
     /**
@@ -33,9 +36,9 @@ class Sanitize
      */
     public function unColorize(string $string): string
     {
-        $colors = \preg_quote(\implode('', \array_keys($this->color->getColors())));
+        $colors = preg_quote(implode('', array_keys($this->color->getColors())));
 
-        return \preg_replace("/[`´][0{$colors}]/u", '', $string);
+        return preg_replace("/[`´][0{$colors}]/u", '', $string);
     }
 
     /**
@@ -43,10 +46,10 @@ class Sanitize
      */
     public function noLotgdCodes(string $string): string
     {
-        $codes = \array_merge($this->color->getColors(), $this->code->getCodes());
-        $codes = \preg_quote(\implode('', \array_keys($codes)));
+        $codes = array_merge($this->color->getColors(), $this->code->getCodes());
+        $codes = preg_quote(implode('', array_keys($codes)));
 
-        return \preg_replace("/[`´][{$codes}]/u", '', $string);
+        return preg_replace("/[`´][{$codes}]/u", '', $string);
     }
 
     /**
@@ -55,7 +58,7 @@ class Sanitize
      */
     public function fullSanitize(string $string): string
     {
-        return \preg_replace('/[`´]./u', '', $string);
+        return preg_replace('/[`´]./u', '', $string);
     }
 
     /**
@@ -63,7 +66,7 @@ class Sanitize
      */
     public function preventLotgdCodes(string $string): string
     {
-        return \str_replace(['`', '´'], ['&#96;', '&#180;'], $string);
+        return str_replace(['`', '´'], ['&#96;', '&#180;'], $string);
     }
 
     /**
@@ -71,7 +74,7 @@ class Sanitize
      */
     public function moduleNameSanitize(string $string): string
     {
-        return \preg_replace('/[^[:alnum:]_]/', '', $string);
+        return preg_replace('/[^[:alnum:]_]/', '', $string);
     }
 
     /**
@@ -88,7 +91,7 @@ class Sanitize
             $expr = '/[^[:alpha:] _-]/';
         }
 
-        return \preg_replace($expr, '', $name);
+        return preg_replace($expr, '', $name);
     }
 
     /**
@@ -100,9 +103,9 @@ class Sanitize
      */
     public function colorNameSanitize($spaceallowed, string $string, $admin = null): string
     {
-        $colors = \preg_quote(\implode('', $this->color->getColors()));
+        $colors = preg_quote(implode('', $this->color->getColors()));
 
-        if ($admin && getsetting('allowoddadminrenames', 0))
+        if ($admin && $this->settings->getSetting('allowoddadminrenames', 0))
         {
             return $string;
         }
@@ -114,7 +117,7 @@ class Sanitize
             $expr = "/([^[:alpha:]`´0{$colors} _-])/u";
         }
 
-        return \preg_replace($expr, '', $string);
+        return preg_replace($expr, '', $string);
     }
 
     /**
@@ -140,12 +143,12 @@ class Sanitize
      */
     public function cmdSanitize($string): string
     {
-        $string = \preg_replace('/[&?]c=[[:digit:]-]+/', '', $string);
+        $string = preg_replace('/[&?]c=[[:digit:]-]+/', '', $string);
 
         //-- Replace first & for ?
-        if (false === \strpos($string, '?') && false !== \strpos($string, '&'))
+        if (false === strpos($string, '?') && false !== strpos($string, '&'))
         {
-            $string = \preg_replace('/[&]/', '?', $string, 1);
+            $string = preg_replace('/[&]/', '?', $string, 1);
         }
 
         return $string;
@@ -156,7 +159,7 @@ class Sanitize
      */
     public function newLineSanitize(string $string): string
     {
-        return \preg_replace('/[`´]n/u', '', $string);
+        return preg_replace('/[`´]n/u', '', $string);
     }
 
     /**
@@ -164,11 +167,11 @@ class Sanitize
      */
     public function mbSanitize(string $string): string
     {
-        $encode = getsetting('charset', 'UTF-8');
+        $encode = $this->settings->getSetting('charset', 'UTF-8');
 
-        while ( ! \mb_check_encoding($string, $encode) && \strlen($string) > 0)
+        while ( ! mb_check_encoding($string, $encode) && \strlen($string) > 0)
         {
-            $string = \substr($string, 0, \strlen($string) - 1);
+            $string = substr($string, 0, \strlen($string) - 1);
         }
 
         return $string;
@@ -181,12 +184,12 @@ class Sanitize
      */
     public function logdnetSanitize(string $string): string
     {
-        $colors = \preg_quote(\implode('', $this->color->getColors()));
+        $colors = preg_quote(implode('', $this->color->getColors()));
         // to keep the regexp from boinging this, we need to make sure
         // that we're not replacing in with the ` mark.
-        $string = \preg_replace("/[`´](?=[^0{$colors}bicn])/u", \chr(1).\chr(1), $string);
+        $string = preg_replace("/[`´](?=[^0{$colors}bicn])/u", \chr(1).\chr(1), $string);
 
-        return \str_replace(\chr(1).\chr(1), '`', $string);
+        return str_replace(\chr(1).\chr(1), '`', $string);
     }
 
     /**

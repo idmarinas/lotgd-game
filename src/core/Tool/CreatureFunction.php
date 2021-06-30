@@ -15,6 +15,7 @@ namespace Lotgd\Core\Tool;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Event\Creature;
 use Lotgd\Core\Http\Response;
+use Lotgd\Core\Lib\Settings;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -27,19 +28,22 @@ class CreatureFunction
     /** @var \Lotgd\Core\Repository\CreaturesRepository */
     private $repository;
     private $translator;
+    private $settings;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
         Response $response,
         CacheInterface $cache,
         EntityManagerInterface $repository,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        Settings $settings
     ) {
         $this->dispatcher = $dispatcher;
         $this->response   = $response;
         $this->cache      = $cache;
         $this->repository = $repository->getRepository('LotgdCore:Creatures');
         $this->translator = $translator;
+        $this->settings   = $settings;
     }
 
     /**
@@ -61,7 +65,7 @@ class CreatureFunction
         $expflux = e_rand(-$expflux, $expflux);
         $badguy['creatureexp'] += $expflux;
 
-        if (getsetting('disablebonuses', 1))
+        if ($this->settings->getSetting('disablebonuses', 1))
         {
             //adapting flux as for people with many DKs they will just bathe in gold....
             $base = 30 - min(20, round(sqrt($session['user']['dragonkills']) / 2));
@@ -109,7 +113,7 @@ class CreatureFunction
      */
     public function lotgdGenerateCreatureLevels($level = null)
     {
-        $maxLvl = getsetting('maxlevel', 15) + 5;
+        $maxLvl = $this->settings->getSetting('maxlevel', 15) + 5;
         $stats  = $this->cache->get("lotgd-generate-creature-levels-{$maxLvl}", function () use ($maxLvl)
         {
             $stats = [];
@@ -280,7 +284,7 @@ class CreatureFunction
         }
 
         //-- Select creatures of diferent categories
-        if (getsetting('multicategory', 0) && $limit > 1)
+        if ($this->settings->getSetting('multicategory', 0) && $limit > 1)
         {
             $query->groupBy('u.creaturecategory')->addGroupBy('u.creatureid');
         }

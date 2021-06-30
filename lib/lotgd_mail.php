@@ -24,11 +24,11 @@ function lotgd_mail($to, $subject, $message, $additional_headers = '', $addition
     //-- Add a "From" header if not added
     if ( ! \strstr($additional_headers, 'From'))
     {
-        $headers[] = 'From: '.getsetting('servername', 'The Legend of the Green Dragon').' <'.getsetting('gameadminemail', 'postmaster@localhost.com').'>';
+        $headers[] = 'From: '.LotgdSetting::getSetting('servername', 'The Legend of the Green Dragon').' <'.LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com').'>';
     }
 
     //-- Send mail in HTML format
-    if (getsetting('sendhtmlmail', 0))
+    if (LotgdSetting::getSetting('sendhtmlmail', 0))
     {
         if ( ! \strstr($additional_headers, 'MIME-Version'))
         {
@@ -44,7 +44,7 @@ function lotgd_mail($to, $subject, $message, $additional_headers = '', $addition
             'title'     => $subject,
             'content'   => $message,
             'copyright' => \Lotgd\Core\Kernel::COPYRIGHT,
-            'url'       => getsetting('serverurl', '//'.$_SERVER['SERVER_NAME']),
+            'url'       => LotgdSetting::getSetting('serverurl', '//'.$_SERVER['SERVER_NAME']),
         ];
 
         try
@@ -60,7 +60,7 @@ function lotgd_mail($to, $subject, $message, $additional_headers = '', $addition
             //-- Add a "From" header if not added
             if ( ! \strstr($additional_headers, 'From'))
             {
-                $headers[] = 'From: '.getsetting('servername', 'The Legend of the Green Dragon').' <'.getsetting('gameadminemail', 'postmaster@localhost.com').'>';
+                $headers[] = 'From: '.LotgdSetting::getSetting('servername', 'The Legend of the Green Dragon').' <'.LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com').'>';
             }
         }
 

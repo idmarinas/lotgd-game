@@ -108,7 +108,7 @@ function check_su_access($level)
     $tpl = \LotgdTheme::load('admin/_blocks/_access.html.twig');
     \LotgdResponse::pageAddContent($tpl->renderBlock('access_infidel', [
         'textDomain'    => $textDomain,
-        'deathOverlord' => getsetting('deathoverlord', '`$Ramius'),
+        'deathOverlord' => LotgdSetting::getSetting('deathoverlord', '`$Ramius'),
     ]));
 
     \LotgdResponse::pageEnd();

@@ -6,7 +6,7 @@ class ServerFunctions
 {
     public static function isTheServerFull()
     {
-        if (\abs(getsetting('OnlineCountLast', 0) - \strtotime('now')) > 60)
+        if (\abs(LotgdSetting::getSetting('OnlineCountLast', 0) - \strtotime('now')) > 60)
         {
             $repository = \Doctrine::getRepository('LotgdCore:Accounts');
             $counter    = $repository->count(['locked' => 0, 'loggedin' => 1]);
@@ -15,11 +15,9 @@ class ServerFunctions
             savesetting('OnlineCountLast', \strtotime('now'));
         }
 
-        $onlinecount = (int) getsetting('OnlineCount', 0);
+        $onlinecount = (int) LotgdSetting::getSetting('OnlineCount', 0);
 
-        return (bool) ($onlinecount >= getsetting('maxonline', 0) && 0 != getsetting('maxonline', 0))
-
-         ;
+        return (bool) ($onlinecount >= LotgdSetting::getSetting('maxonline', 0) && 0 != LotgdSetting::getSetting('maxonline', 0));
     }
 
     public static function resetAllDragonkillPoints($acctid = false)

@@ -14,11 +14,12 @@
 namespace Lotgd\Core\Controller;
 
 use Lotgd\Core\Combat\Buffer;
-use Lotgd\Core\Repository\MountsRepository;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
+use Lotgd\Core\Repository\MountsRepository;
 use Lotgd\Core\Tool\Sanitize;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -33,14 +34,16 @@ class StableController extends AbstractController
     private $log;
     private $sanitize;
     private $buffs;
+    private $settings;
 
-    public function __construct(Navigation $navigation, EventDispatcherInterface $eventDispatcher, Log $log, Sanitize $sanitize, Buffer $buffs)
+    public function __construct(Navigation $navigation, EventDispatcherInterface $eventDispatcher, Log $log, Sanitize $sanitize, Buffer $buffs, Settings $settings)
     {
         $this->navigation = $navigation;
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
         $this->sanitize   = $sanitize;
         $this->buffs      = $buffs;
+        $this->settings   = $settings;
     }
 
     public function buy(array $params, Request $request): Response
@@ -101,7 +104,7 @@ class StableController extends AbstractController
                 $gemcost = $params['repaygems'] - $mount['mountcostgems'];
                 $session['user']['gems'] += $gemcost;
 
-                $this->log->debug(($goldcost <= 0 ? 'spent ' : 'gained ').\abs($goldcost).' gold and '.($gemcost <= 0 ? 'spent ' : 'gained ').\abs($gemcost)." gems trading {$debugmount1} for a new mount, a {$debugmount2}");
+                $this->log->debug(($goldcost <= 0 ? 'spent ' : 'gained ').abs($goldcost).' gold and '.($gemcost <= 0 ? 'spent ' : 'gained ').abs($gemcost)." gems trading {$debugmount1} for a new mount, a {$debugmount2}");
 
                 $mount['mountbuff']['schema'] = $mount['mountbuff']['schema'] ?? 'mounts' ?: 'mounts';
 
@@ -114,9 +117,9 @@ class StableController extends AbstractController
 
                 if ( ! empty($mount))
                 {
-                    $params['repaygold'] = \round($mount['mountcostgold'] * 2 / 3, 0);
-                    $params['repaygems'] = \round($mount['mountcostgems'] * 2 / 3, 0);
-                    $params['grubprice'] = \round($session['user']['level'] * $mount['mountfeedcost'], 0);
+                    $params['repaygold'] = round($mount['mountcostgold'] * 2 / 3, 0);
+                    $params['repaygems'] = round($mount['mountcostgems'] * 2 / 3, 0);
+                    $params['grubprice'] = round($session['user']['level'] * $mount['mountfeedcost'], 0);
                 }
 
                 // Recalculate the special name as well.
@@ -167,7 +170,7 @@ class StableController extends AbstractController
     {
         global $session;
 
-        $params['allowFeed'] = (int) getsetting('allowfeed', 0);
+        $params['allowFeed'] = (int) $this->settings->getSetting('allowfeed', 0);
         $params['haveGold']  = ($session['user']['gold'] >= $params['grubprice']);
 
         if ($params['haveGold'])
@@ -181,7 +184,7 @@ class StableController extends AbstractController
 
                 if ($params['halfHungry'])
                 {
-                    $params['grubprice'] = \round($params['grubprice'] / 2, 0);
+                    $params['grubprice'] = round($params['grubprice'] / 2, 0);
                 }
 
                 $params['grubPrice'] = $params['grubprice'];
@@ -241,7 +244,7 @@ class StableController extends AbstractController
                     ],
                 ]);
 
-                if (getsetting('allowfeed', 0) && 0 == $session['user']['fedmount'])
+                if ($this->settings->getSetting('allowfeed', 0) && 0 == $session['user']['fedmount'])
                 {
                     $this->navigation->addNav('nav.feed', 'stables.php?op=feed', [
                         'params' => [

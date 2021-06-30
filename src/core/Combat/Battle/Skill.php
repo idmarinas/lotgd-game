@@ -41,8 +41,8 @@ trait Skill
             {
                 $badguy['physicalresistance'] = 0;
             }
-            $powerattack      = (int) getsetting('forestpowerattackchance', 10);
-            $powerattackmulti = (float) getsetting('forestpowerattackmulti', 3);
+            $powerattack      = (int) $this->settings->getSetting('forestpowerattackchance', 10);
+            $powerattackmulti = (float) $this->settings->getSetting('forestpowerattackmulti', 3);
 
             while ( ! isset($creaturedmg) || ! isset($selfdmg) || 0 == $creaturedmg && 0 == $selfdmg)
             {

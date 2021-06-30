@@ -35,26 +35,26 @@ if ('' != $postSettings['defaultsuperuser'])
 }
 
 //-- Moving players if change name of village
-if ($postSettings['villagename'] && $postSettings['villagename'] != getsetting('villagename', LOCATION_FIELDS))
+if ($postSettings['villagename'] && $postSettings['villagename'] != LotgdSetting::getSetting('villagename', LOCATION_FIELDS))
 {
     \LotgdResponse::pageDebug('Updating village name -- moving players');
 
     //-- Moving from, to
-    $charRepository->movingPlayersToLocation(getsetting('villagename', LOCATION_FIELDS), $postSettings['villagename']);
+    $charRepository->movingPlayersToLocation(LotgdSetting::getSetting('villagename', LOCATION_FIELDS), $postSettings['villagename']);
 
-    if ($session['user']['location'] == getsetting('villagename', LOCATION_FIELDS))
+    if ($session['user']['location'] == LotgdSetting::getSetting('villagename', LOCATION_FIELDS))
     {
         $session['user']['location'] = $postSettings['villagename'];
     }
 }
 
 //-- Moving players if change name of Inn
-if ($postSettings['innname'] && $postSettings['innname'] != getsetting('innname', LOCATION_INN))
+if ($postSettings['innname'] && $postSettings['innname'] != LotgdSetting::getSetting('innname', LOCATION_INN))
 {
     //-- Moving from, to
-    $charRepository->movingPlayersToLocation(getsetting('innname', LOCATION_INN), $postSettings['innname']);
+    $charRepository->movingPlayersToLocation(LotgdSetting::getSetting('innname', LOCATION_INN), $postSettings['innname']);
 
-    if ($session['user']['location'] == getsetting('innname', LOCATION_INN))
+    if ($session['user']['location'] == LotgdSetting::getSetting('innname', LOCATION_INN))
     {
         $session['user']['location'] = $postSettings['innname'];
     }

@@ -89,14 +89,14 @@ trait Faq
                 'autofocus' => false,
             ];
 
-            $params['pvp']           = getsetting('pvp', 1);
-            $params['deathOverlord'] = getsetting('deathoverlord', '`$Ramius`0');
-            $params['pvpImmunity']   = getsetting('pvpimmunity', 5);
-            $params['pvpMinExp']     = getsetting('pvpminexp', 1500);
-            $params['pvpDeflose']    = getsetting('pvpdeflose', 5);
-            $params['pvpAttGain']    = getsetting('pvpattgain', 10);
-            $params['pvpAttLose']    = getsetting('pvpattlose', 15);
-            $params['pvpDefGain']    = getsetting('pvpdefgain', 10);
+            $params['pvp']           = \LotgdSetting::getSetting('pvp', 1);
+            $params['deathOverlord'] = \LotgdSetting::getSetting('deathoverlord', '`$Ramius`0');
+            $params['pvpImmunity']   = \LotgdSetting::getSetting('pvpimmunity', 5);
+            $params['pvpMinExp']     = \LotgdSetting::getSetting('pvpminexp', 1500);
+            $params['pvpDeflose']    = \LotgdSetting::getSetting('pvpdeflose', 5);
+            $params['pvpAttGain']    = \LotgdSetting::getSetting('pvpattgain', 10);
+            $params['pvpAttLose']    = \LotgdSetting::getSetting('pvpattlose', 15);
+            $params['pvpDefGain']    = \LotgdSetting::getSetting('pvpdefgain', 10);
 
             // Dialog content
             $content = $this->getTemplate()->renderBlock('petition_primer', $params);

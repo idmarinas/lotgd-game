@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Form\Type;
 
 use Lotgd\Core\Form\EventListener\AddTranslatableFieldSubscriber;
+use Lotgd\Core\Lib\Settings;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -23,12 +24,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class TranslatableFieldType extends AbstractType
 {
     protected const LABEL_CLASS = 'item disabled';
+    private $settings;
+
+    public function __construct(Settings $settings)
+    {
+        $this->settings = $settings;
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ( ! \class_exists($options['personal_translation']))
+        if ( ! class_exists($options['personal_translation']))
         {
-            throw new \InvalidArgumentException(\sprintf("Unable to find personal translation class: '%s'", $options['personal_translation']));
+            throw new \InvalidArgumentException(sprintf("Unable to find personal translation class: '%s'", $options['personal_translation']));
         }
 
         if ( ! $options['field'])
@@ -63,8 +70,8 @@ class TranslatableFieldType extends AbstractType
             'property_path'          => 'translations',
             'csrf_protection'        => false,
             'personal_translation'   => false, //Personal Translation class
-            'locales'                => \explode(',', getsetting('serverlanguages')), //the locales you wish to edit
-            'required_locale'        => [getsetting('defaultlanguage')], //the required locales cannot be blank
+            'locales'                => explode(',', $this->settings->getSetting('serverlanguages')), //the locales you wish to edit
+            'required_locale'        => [$this->settings->getSetting('defaultlanguage')], //the required locales cannot be blank
             'field'                  => false, //the field that you wish to translate
             'widget'                 => PersonalTranslationType::class, //change this to another widget like 'texarea' if needed
             'entity_manager_removal' => true, //auto removes the Personal Translation thru entity manager

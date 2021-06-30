@@ -8,7 +8,7 @@ require_once 'src/constants.php';
 require_once 'lib/charcleanup.php';
 require_once 'lib/gamelog.php';
 
-$lastexpire   = \strtotime(getsetting('last_char_expire', '0000-00-00 00:00:00'));
+$lastexpire   = \strtotime(LotgdSetting::getSetting('last_char_expire', '0000-00-00 00:00:00'));
 $needtoexpire = \strtotime('-23 hours');
 
 if ($lastexpire >= $needtoexpire)
@@ -18,9 +18,9 @@ if ($lastexpire >= $needtoexpire)
 
 savesetting('last_char_expire', \date('Y-m-d H:i:s'));
 
-$old   = (int) getsetting('expireoldacct', 45);
-$new   = (int) getsetting('expirenewacct', 10);
-$trash = (int) getsetting('expiretrashacct', 1);
+$old   = (int) LotgdSetting::getSetting('expireoldacct', 45);
+$new   = (int) LotgdSetting::getSetting('expirenewacct', 10);
+$trash = (int) LotgdSetting::getSetting('expiretrashacct', 1);
 
 $repository = \Doctrine::getRepository('LotgdCore:Characters');
 $query      = $repository->createQueryBuilder('u');
@@ -93,7 +93,7 @@ $msg .= 'Accounts: '.\implode(', ', $pinfo);
 \LotgdLog::game('Deleted '.\count($result)." accounts:\n{$msg}", 'char expiration');
 
 //adjust for notification - don't notify total newbie chars
-$old = \max(1, $old - (int) getsetting('notifydaysbeforedeletion', 5)); //a minimum of 1 day is necessary
+$old = \max(1, $old - (int) LotgdSetting::getSetting('notifydaysbeforedeletion', 5)); //a minimum of 1 day is necessary
 
 $repository = \Doctrine::getRepository('LotgdCore:Accounts');
 $query      = $repository->createQueryBuilder('a');
@@ -120,7 +120,7 @@ $query
 
 $result = $query->getQuery()->getResult();
 
-$server = (string) getsetting('serverurl', 'http://nodomain.notd');
+$server = (string) LotgdSetting::getSetting('serverurl', 'http://nodomain.notd');
 
 foreach ($result as $entity)
 {

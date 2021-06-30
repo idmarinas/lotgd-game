@@ -10,8 +10,8 @@ function pvpwarning($dokill = false)
 {
     global $session, $textDomain;
 
-    $days = (int) getsetting('pvpimmunity', 5);
-    $exp  = (int) getsetting('pvpminexp', 1500);
+    $days = (int) LotgdSetting::getSetting('pvpimmunity', 5);
+    $exp  = (int) LotgdSetting::getSetting('pvpminexp', 1500);
 
     if ($session['user']['age'] <= $days && 0 == $session['user']['dragonkills'] && 0 == $session['user']['pk'] && $session['user']['experience'] <= $exp)
     {

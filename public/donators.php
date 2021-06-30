@@ -62,7 +62,7 @@ if ('save' == $op)
     {
         $args = new GenericEvent(null, [
             'points' => $amt,
-            'amount' => $amt / getsetting('dpointspercurrencyunit', 100),
+            'amount' => $amt / LotgdSetting::getSetting('dpointspercurrencyunit', 100),
             'acctid' => $id,
             'messages' => []
         ]);

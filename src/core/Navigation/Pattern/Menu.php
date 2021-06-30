@@ -60,12 +60,12 @@ trait Menu
             $this->addNav('nav.abort', $script);
         }
 
-        if (getsetting('autofight', 0))
+        if ($this->settings->getSetting('autofight', 0))
         {
             $this->addHeader('category.automatic');
             $this->addNav('nav.auto.05', "{$script}op=fight&auto=five");
             $this->addNav('nav.auto.010', "{$script}op=fight&auto=ten");
-            $auto = getsetting('autofightfull', 0);
+            $auto = $this->settings->getSetting('autofightfull', 0);
 
             if ((1 == $auto || (2 == $auto && ! $allowflee)) && 1 == \count($newenemies))
             {

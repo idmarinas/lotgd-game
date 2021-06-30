@@ -40,9 +40,9 @@ trait Send
             $repositoryAcct = $this->getAcctRepository();
 
             $account = $repositoryAcct->find($post['to']);
-            $count   = $account ? $repository->countInboxOfCharacter($account->getAcctid(), (bool) getsetting('onlyunreadmails', true)) : null;
+            $count   = $account ? $repository->countInboxOfCharacter($account->getAcctid(), (bool) \LotgdSetting::getSetting('onlyunreadmails', true)) : null;
 
-            if ( ! $account || $count >= getsetting('inboxlimit', 50) || (empty($post['subject']) || empty($post['body'])))
+            if ( ! $account || $count >= \LotgdSetting::getSetting('inboxlimit', 50) || (empty($post['subject']) || empty($post['body'])))
             {
                 $message = $account ? 'jaxon.fail.send.inbox.full' : 'jaxon.fail.send.not.found';
                 $message = (empty($post['subject']) || empty($post['body'])) ? 'jaxon.fail.send.subject.body' : $message;
@@ -56,7 +56,7 @@ trait Send
             require_once 'lib/systemmail.php';
 
             $subject = $this->sanitize((string) $post['subject'], true);
-            $body    = \substr($this->sanitize((string) $post['body'], false), 0, (int) getsetting('mailsizelimit', 1024));
+            $body    = \substr($this->sanitize((string) $post['body'], false), 0, (int) \LotgdSetting::getSetting('mailsizelimit', 1024));
 
             systemmail($account->getAcctid(), $subject, $body, $from);
 

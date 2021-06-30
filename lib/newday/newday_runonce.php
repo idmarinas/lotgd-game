@@ -12,7 +12,7 @@ use Lotgd\Core\Event\Core;
 modulehook('newday-runonce', []);
 
 //only if not done by cron
-if ( ! getsetting('newdaycron', 0))
+if ( ! LotgdSetting::getSetting('newdaycron', 0))
 {
     require_once 'lib/gamelog.php';
 

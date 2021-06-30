@@ -91,7 +91,7 @@ else
                 }
 
                 if (('logd@mightye.org' != $receiver_email) &&
-                    ($receiver_email != getsetting('paypalemail', '')))
+                    ($receiver_email != LotgdSetting::getSetting('paypalemail', '')))
                 {
                     $emsg = "This payment isn't to me!  It's to $receiver_email.\n";
                     payment_error(E_WARNING, $emsg, __FILE__, __LINE__);
@@ -148,7 +148,7 @@ function writelog($response)
             }
 
             $args = new GenericEvent(null, [
-                'points' => $donation * (int) getsetting('dpointspercurrencyunit', 100),
+                'points' => $donation * (int) LotgdSetting::getSetting('dpointspercurrencyunit', 100),
                 'amount' => $donation,
                 'acctid' => $acctId,
                 'messages' => []
@@ -173,7 +173,7 @@ function writelog($response)
             }
 
             $processed = 1;
-            $args = new GenericEvent(null, ['id' => $acctId, 'amt' => $donation * getsetting('dpointspercurrencyunit', 100), 'manual' => false]);
+            $args = new GenericEvent(null, ['id' => $acctId, 'amt' => $donation * LotgdSetting::getSetting('dpointspercurrencyunit', 100), 'manual' => false]);
             \LotgdEventDispatcher::dispatch(Events::PAYMENT_DONATION_SUCCESS, $args);
             modulehook('donation', $args->getArguments());
         }
@@ -207,7 +207,7 @@ function payment_error($errno, $errstr, $errfile, $errline)
     }
 }
 
-$adminEmail = getsetting('gameadminemail', 'postmaster@localhost.com') ?: 'trash@mightye.org';
+$adminEmail = LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com') ?: 'trash@mightye.org';
 
 if ($payment_errors > '')
 {
@@ -227,7 +227,7 @@ if ($payment_errors > '')
     ob_end_clean();
     $payment_errors .= '<hr>'.$contents;
 
-    mail($adminEmail, 'Payment Error', $payment_errors.'<hr>', 'From: '.getsetting('gameadminemail', 'postmaster@localhost.com'));
+    mail($adminEmail, 'Payment Error', $payment_errors.'<hr>', 'From: '.LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com'));
 }
 $output = ob_get_contents();
 

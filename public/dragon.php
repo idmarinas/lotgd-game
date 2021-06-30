@@ -36,7 +36,7 @@ if ('' == $op)
         \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('battle.combat.run', [], $textDomain));
     }
 
-    $maxlevel = getsetting('maxlevel', 15);
+    $maxlevel = LotgdSetting::getSetting('maxlevel', 15);
     $badguy = [
         'creaturename' => \LotgdTranslator::t('creature.name', [], $textDomain),
         'creaturelevel' => $maxlevel + 2,
@@ -143,27 +143,27 @@ elseif ('prologue' == $op)
     }
 
     //-- Changed to custom default values for this
-    $session['user']['location'] = getsetting('villagename', LOCATION_FIELDS);
-    $session['user']['armor'] = getsetting('startarmor', 'T-Shirt');
-    $session['user']['weapon'] = getsetting('startweapon', 'Fists');
+    $session['user']['location'] = LotgdSetting::getSetting('villagename', LOCATION_FIELDS);
+    $session['user']['armor'] = LotgdSetting::getSetting('startarmor', 'T-Shirt');
+    $session['user']['weapon'] = LotgdSetting::getSetting('startweapon', 'Fists');
 
     $newtitle = get_dk_title($session['user']['dragonkills'], $session['user']['sex']);
 
-    $restartgold = $session['user']['gold'] + getsetting('newplayerstartgold', 50) * $session['user']['dragonkills'];
+    $restartgold = $session['user']['gold'] + LotgdSetting::getSetting('newplayerstartgold', 50) * $session['user']['dragonkills'];
     $restartgems = 0;
 
-    if ($restartgold > getsetting('maxrestartgold', 300))
+    if ($restartgold > LotgdSetting::getSetting('maxrestartgold', 300))
     {
-        $restartgold = getsetting('maxrestartgold', 300);
-        $restartgems = max(0, ($session['user']['dragonkills'] - (getsetting('maxrestartgold', 300) / getsetting('newplayerstartgold', 50)) - 1));
-        $restartgems = min($restartgems, getsetting('maxrestartgems', 10));
+        $restartgold = LotgdSetting::getSetting('maxrestartgold', 300);
+        $restartgems = max(0, ($session['user']['dragonkills'] - (LotgdSetting::getSetting('maxrestartgold', 300) / LotgdSetting::getSetting('newplayerstartgold', 50)) - 1));
+        $restartgems = min($restartgems, LotgdSetting::getSetting('maxrestartgems', 10));
     }
     $session['user']['gold'] = $restartgold;
     $session['user']['gems'] += $restartgems;
 
     if ($flawless)
     {
-        $session['user']['gold'] += 3 * getsetting('newplayerstartgold', 50);
+        $session['user']['gold'] += 3 * LotgdSetting::getSetting('newplayerstartgold', 50);
         $session['user']['gems']++;
     }
 

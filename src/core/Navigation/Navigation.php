@@ -15,6 +15,7 @@ namespace Lotgd\Core\Navigation;
 
 use Laminas\Stdlib\ArrayUtils;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Lib\Settings;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -78,11 +79,13 @@ class Navigation
 
     private $dispatcher;
     private $request;
+    private $settings;
 
-    public function __construct(EventDispatcherInterface $dispatcher, Request $request)
+    public function __construct(EventDispatcherInterface $dispatcher, Request $request, Settings $settings)
     {
         $this->dispatcher = $dispatcher;
         $this->request    = $request;
+        $this->settings   = $settings;
     }
 
     /**
@@ -332,9 +335,9 @@ class Navigation
             //-- Add link to allowed navs
             $extra = $this->getExtraParamLink($link);
 
-            if (false !== ($pos = \strpos($link, '#')))
+            if (false !== ($pos = strpos($link, '#')))
             {
-                $sublink                                         = \substr($link, 0, $pos);
+                $sublink                                         = substr($link, 0, $pos);
                 $session['user']['allowednavs'][$sublink]        = true;
                 $session['user']['allowednavs'][$sublink.$extra] = true;
             }
@@ -375,7 +378,7 @@ class Navigation
             return \count($navs);
         }
 
-        $key = \array_search($label, $navs);
+        $key = array_search($label, $navs);
 
         if (false === $key)
         {
@@ -398,14 +401,14 @@ class Navigation
         }
 
         //-- Replace first & for ?
-        if (false === \strpos($link, '?') && false !== \strpos($link, '&'))
+        if (false === strpos($link, '?') && false !== strpos($link, '&'))
         {
-            $link = \preg_replace('/[&]/', '?', $link, 1);
+            $link = preg_replace('/[&]/', '?', $link, 1);
         }
 
-        return \sprintf(
+        return sprintf(
             '%sc=%s',
-            (false === \strpos($link, '?') ? '?' : '&'),
+            (false === strpos($link, '?') ? '?' : '&'),
             $session['counter'] ?? 0 // Avoid error of undefined index, in /jaxon.php and in /login.php?op=logout (Don't know why)
         );
     }

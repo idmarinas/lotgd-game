@@ -18,6 +18,7 @@ require_once 'lib/systemmail.php';
 
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
 use Lotgd\Core\Output\Censor;
 use Lotgd\Core\Output\Format;
@@ -38,6 +39,7 @@ class CreateController extends AbstractController
     private $sanitize;
     private $format;
     private $log;
+    private $settings;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
@@ -45,7 +47,8 @@ class CreateController extends AbstractController
         Censor $censor,
         Sanitize $sanitize,
         Format $format,
-        Log $log
+        Log $log,
+        Settings $settings
     ) {
         $this->dispatcher = $dispatcher;
         $this->translator = $translator;
@@ -53,6 +56,7 @@ class CreateController extends AbstractController
         $this->sanitize   = $sanitize;
         $this->format     = $format;
         $this->log        = $log;
+        $this->settings   = $settings;
     }
 
     public function forgotVal(array $params, Request $request): Response
@@ -77,7 +81,7 @@ class CreateController extends AbstractController
         $this->getDoctrine()->getManager()->persist($account);
 
         //-- Rare case: we have somebody who deleted his first validation email and then requests a forgotten PW...
-        if ('' != $account->getEmailvalidation() && 'x' != \substr($account->getEmailvalidation(), 0, 1))
+        if ('' != $account->getEmailvalidation() && 'x' != substr($account->getEmailvalidation(), 0, 1))
         {
             $account->getEmailvalidation('');
         }
@@ -113,7 +117,7 @@ class CreateController extends AbstractController
         if ($account->getReplaceemail())
         {
             $params['emailChanged'] = true;
-            $replace_array          = \explode('|', $account->getReplaceemail());
+            $replace_array          = explode('|', $account->getReplaceemail());
             $replaceemail           = $replace_array[0]; //1==date
             $oldEmail               = $account->getEmailaddress();
 
@@ -185,7 +189,7 @@ class CreateController extends AbstractController
                 return $this->redirect('create.php?op=forgot');
             }
 
-            if ( ! \trim($account->getEmailaddress()))
+            if ( ! trim($account->getEmailaddress()))
             {
                 $this->addFlash('warning', $this->translator->trans('forgot.account.noEmail', [], $params['textDomain']));
 
@@ -194,10 +198,10 @@ class CreateController extends AbstractController
 
             if ('' == $account->getForgottenpassword())
             {
-                $account->setForgottenpassword(\substr('x'.\md5(\date('Y-m-d H:i:s').$account->getPassword()), 0, 32));
+                $account->setForgottenpassword(substr('x'.md5(date('Y-m-d H:i:s').$account->getPassword()), 0, 32));
             }
 
-            $language = ($account->getPrefs()['language'] ?? '') ?: getsetting('defaultlanguage', 'en');
+            $language = ($account->getPrefs()['language'] ?? '') ?: $this->settings->getSetting('defaultlanguage', 'en');
 
             $subj = $this->translator->trans('forgotpassword.subject', [], 'app_mail', $language);
             $msg  = $this->translator->trans('forgotpassword.body', [
@@ -230,8 +234,8 @@ class CreateController extends AbstractController
             $accountRepo = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Accounts::class);
 
             $emailverification = '';
-            $shortname         = \trim((string) $request->request->get('name'));
-            $shortname         = $this->sanitize->nameSanitize(getsetting('spaceinname', 0), $shortname);
+            $shortname         = trim((string) $request->request->get('name'));
+            $shortname         = $this->sanitize->nameSanitize($this->settings->getSetting('spaceinname', 0), $shortname);
             $blockaccount      = false;
 
             if ($this->censor->filter($shortname) != $shortname)
@@ -244,7 +248,7 @@ class CreateController extends AbstractController
             $pass1 = (string) $request->request->get('pass1');
             $pass2 = (string) $request->request->get('pass2');
 
-            if (1 == getsetting('blockdupeemail', 0) && 1 == getsetting('requireemail', 0))
+            if (1 == $this->settings->getSetting('blockdupeemail', 0) && 1 == $this->settings->getSetting('requireemail', 0))
             {
                 $result = $accountRepo->findBy(['emailaddress' => $email]);
 
@@ -257,7 +261,7 @@ class CreateController extends AbstractController
 
             $passlen = (int) $request->request->get('passlen');
 
-            if ('!md5!' != \substr($pass1, 0, 5) && '!md52!' != \substr($pass1, 0, 6))
+            if ('!md5!' != substr($pass1, 0, 5) && '!md52!' != substr($pass1, 0, 6))
             {
                 $passlen = \strlen($pass1);
             }
@@ -286,7 +290,7 @@ class CreateController extends AbstractController
                 $blockaccount = true;
             }
 
-            if (1 == (int) getsetting('requireemail', 0) && ! is_email($email))
+            if (1 == (int) $this->settings->getSetting('requireemail', 0) && ! is_email($email))
             {
                 $this->addFlash('error', $this->translator->trans('create.account.email.incorrect', [], $params['textDomain']));
                 $blockaccount = true;
@@ -301,7 +305,7 @@ class CreateController extends AbstractController
                 $blockaccount = true;
             }
 
-            $shortname = \preg_replace("/\s+/", ' ', $shortname);
+            $shortname = preg_replace("/\s+/", ' ', $shortname);
             $result    = $accountRepo->findOneBy(['login' => $shortname]);
 
             if ($result)
@@ -323,9 +327,9 @@ class CreateController extends AbstractController
 
                 $title = get_dk_title(0, $sex);
 
-                if (getsetting('requirevalidemail', 0))
+                if ($this->settings->getSetting('requirevalidemail', 0))
                 {
-                    $emailverification = \md5(\date('Y-m-d H:i:s').$email);
+                    $emailverification = md5(date('Y-m-d H:i:s').$email);
                 }
 
                 $refer = $request->query->get('r');
@@ -338,7 +342,7 @@ class CreateController extends AbstractController
                     $referer = $result->getAcctid();
                 }
 
-                $dbpass = '!md5!' == \substr($pass1, 0, 5) ? \md5(\substr($pass1, 5)) : \md5(\md5($pass1));
+                $dbpass = '!md5!' == substr($pass1, 0, 5) ? md5(substr($pass1, 5)) : md5(md5($pass1));
 
                 try
                 {
@@ -346,7 +350,7 @@ class CreateController extends AbstractController
                     $accountEntity = new \Lotgd\Core\Entity\Accounts();
                     $accountEntity->setLogin((string) $shortname)
                         ->setPassword((string) $dbpass)
-                        ->setSuperuser((int) getsetting('defaultsuperuser', 0))
+                        ->setSuperuser((int) $this->settings->getSetting('defaultsuperuser', 0))
                         ->setRegdate(new \DateTime())
                         ->setUniqueid($request->getCookie('lgi') ?: '')
                         ->setLastip($request->getServer('REMOTE_ADDR'))
@@ -365,8 +369,8 @@ class CreateController extends AbstractController
                         ->setSex($sex)
                         ->setName("{$title} {$shortname}")
                         ->setTitle($title)
-                        ->setGold((int) getsetting('newplayerstartgold', 50))
-                        ->setLocation(getsetting('villagename', LOCATION_FIELDS))
+                        ->setGold((int) $this->settings->getSetting('newplayerstartgold', 50))
+                        ->setLocation($this->settings->getSetting('villagename', LOCATION_FIELDS))
                         ->setAcct($accountEntity)
                     ;
 

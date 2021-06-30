@@ -19,6 +19,7 @@ use Lotgd\Core\Event\Clan as EventClan;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Http\Response as HttpResponse;
+use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
 use Lotgd\Core\Tool\Sanitize;
@@ -38,6 +39,7 @@ class ClanController extends AbstractController
     private $sanitize;
     private $navigation;
     private $response;
+    private $settings;
 
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
@@ -46,7 +48,8 @@ class ClanController extends AbstractController
         TagAwareCacheInterface $cache,
         Sanitize $sanitize,
         Navigation $navigation,
-        HttpResponse $response
+        HttpResponse $response,
+        Settings $settings
     ) {
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
@@ -55,6 +58,7 @@ class ClanController extends AbstractController
         $this->sanitize   = $sanitize;
         $this->navigation = $navigation;
         $this->response   = $response;
+        $this->settings   = $settings;
     }
 
     public function detail(array $params, Request $request): Response
@@ -187,7 +191,7 @@ class ClanController extends AbstractController
             $subj = ['mail.apply.subject', ['name' => $session['user']['name']], $params['textDomain']];
             $msg  = ['mail.apply.message', ['name' => $session['user']['name']], $params['textDomain']];
 
-            $mailRepository->deleteMailFromSystemBySubj(\serialize($subj));
+            $mailRepository->deleteMailFromSystemBySubj(serialize($subj));
 
             $leaders = $charRepository->getLeadersFromClan($session['user']['clanid'], $session['user']['acctid']);
 
@@ -199,7 +203,7 @@ class ClanController extends AbstractController
             //-- Send reminder mail if clan of choice has a description
             $result = $clanRepository->find($clanId);
 
-            if ('' != \trim($result->getClandesc()))
+            if ('' != trim($result->getClandesc()))
             {
                 $subj = ['mail.desc.reminder.subject', [], $params['textDomain']];
                 $msg  = ['mail.desc.reminder.message', [
@@ -243,7 +247,7 @@ class ClanController extends AbstractController
 
         $params['tpl'] = 'clan_applicant_new';
 
-        $params['clanShortNameLength'] = getsetting('clanshortnamelength', 5);
+        $params['clanShortNameLength'] = $this->settings->getSetting('clanshortnamelength', 5);
 
         $entity = new \Lotgd\Core\Entity\Clans();
         $form   = $this->createForm(\Lotgd\Core\Form\ClanNewType::class, $entity, [
@@ -326,11 +330,11 @@ class ClanController extends AbstractController
 
             $subj = ['mail.apply.subject', ['name' => $session['user']['name']], $params['textDomain']];
 
-            $mailRepository->deleteMailFromSystemBySubj(\serialize($subj), $session['user']['acctid']);
+            $mailRepository->deleteMailFromSystemBySubj(serialize($subj), $session['user']['acctid']);
 
             $subj = ['mail.desc.reminder.subject', [], $params['textDomain']];
 
-            $mailRepository->deleteMailFromSystemBySubj(\serialize($subj), $session['user']['acctid']);
+            $mailRepository->deleteMailFromSystemBySubj(serialize($subj), $session['user']['acctid']);
 
             $this->cache->invalidateTags(["clan-user-{$session['user']['acctid']}"]);
         }
@@ -410,9 +414,9 @@ class ClanController extends AbstractController
         $params['descAuthorName'] = $result['descauthname'] ?? '';
         unset($result);
 
-        $clanmotd  = $this->sanitize->mbSanitize(\mb_substr($request->request->get('clanmotd'), 0, 4096));
-        $clandesc  = $this->sanitize->mbSanitize(\mb_substr($request->request->get('clandesc'), 0, 4096));
-        $customsay = $this->sanitize->mbSanitize(\mb_substr($request->request->get('customsay'), 0, 15));
+        $clanmotd  = $this->sanitize->mbSanitize(mb_substr($request->request->get('clanmotd'), 0, 4096));
+        $clandesc  = $this->sanitize->mbSanitize(mb_substr($request->request->get('clandesc'), 0, 4096));
+        $customsay = $this->sanitize->mbSanitize(mb_substr($request->request->get('customsay'), 0, 15));
 
         $clanEntity = $clanRepository->find($claninfo['clanid']);
 
@@ -508,7 +512,7 @@ class ClanController extends AbstractController
             //delete unread application emails from this user.
             //breaks if the applicant has had their name changed via
             //dragon kill, superuser edit, or lodge color change
-            $subj = \serialize(['mail.apply.subject', ['name' => $character->getName()], $params['textDomain']]);
+            $subj = serialize(['mail.apply.subject', ['name' => $character->getName()], $params['textDomain']]);
 
             /** @var Lotgd\Core\Repository\MailRepository */
             $mailRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Mail::class);
@@ -535,7 +539,7 @@ class ClanController extends AbstractController
 
                 if ( ! ($args['handled'] ?? false))
                 {
-                    $character->setClanrank(\max(0, \min($session['user']['clanrank'], $setrank)));
+                    $character->setClanrank(max(0, min($session['user']['clanrank'], $setrank)));
 
                     $this->log->debug("Player {$session['user']['name']} changed rank of {$character->getName()} to {$setrank}.", $whoacctid);
 
@@ -547,7 +551,7 @@ class ClanController extends AbstractController
             }
         }
 
-        $params['validRanks'] = \array_intersect_key($params['ranksNames'], \range(0, $session['user']['clanrank']));
+        $params['validRanks'] = array_intersect_key($params['ranksNames'], range(0, $session['user']['clanrank']));
         $params['membership'] = $charRepository->getClanMembershipList($claninfo['clanid']);
 
         return $this->renderClan($params);
@@ -624,7 +628,7 @@ class ClanController extends AbstractController
         $subj = ['mail.withdraw.subject', ['name' => $session['user']['name']], $params['textDomain']];
         $msg  = ['mail.withdraw.message', ['name' => $session['user']['name']], $params['textDomain']];
 
-        $mailRepository->deleteMailFromSystemBySubj(\serialize($subj));
+        $mailRepository->deleteMailFromSystemBySubj(serialize($subj));
 
         $leaders = $charRepository->getLeadersFromClan($session['user']['clanid'], $session['user']['acctid']);
 

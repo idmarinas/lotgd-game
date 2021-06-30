@@ -43,7 +43,7 @@ $comment = $request->request->get('comment');
 
 // Don't give people a chance at a special event if they are just browsing
 // the commentary (or talking) or dealing with any of the hooks in the village.
-if (! $op && '' == $com && ! $comment && ! $refresh && ! $commenting && 0 != module_events('gardens', getsetting('gardenchance', 0)))
+if (! $op && '' == $com && ! $comment && ! $refresh && ! $commenting && 0 != module_events('gardens', LotgdSetting::getSetting('gardenchance', 0)))
 {
     if (\LotgdNavigation::checkNavs())
     {

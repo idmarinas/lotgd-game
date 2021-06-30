@@ -14,17 +14,19 @@ namespace Lotgd\Core\Pvp;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
+use Lotgd\Core\Lib\Settings;
 
 class Listing
 {
     protected $doctrine;
-    /** @var \Lotgd\Core\Repository\CharactersRepository */
     protected $repository;
     protected $query;
+    private $settings;
 
-    public function __construct(EntityManagerInterface $doctrine)
+    public function __construct(EntityManagerInterface $doctrine, Settings $settings)
     {
         $this->doctrine = $doctrine;
+        $this->settings = $settings;
     }
 
     /**
@@ -89,12 +91,13 @@ class Listing
 
         if ( ! $this->query)
         {
-            $days      = getsetting('pvpimmunity', 5);
-            $exp       = getsetting('pvpminexp', 1500);
-            $levdiff   = getsetting('pvprange', 2);
-            $pvpSameId = (bool) getsetting('pvpsameid', 0);
-            $pvpSameIp = (bool) getsetting('pvpsameip', 0);
+            $days      = $this->settings->getSetting('pvpimmunity', 5);
+            $exp       = $this->settings->getSetting('pvpminexp', 1500);
+            $levdiff   = $this->settings->getSetting('pvprange', 2);
+            $pvpSameId = (bool) $this->settings->getSetting('pvpsameid', 0);
+            $pvpSameIp = (bool) $this->settings->getSetting('pvpsameip', 0);
 
+            /** @var \Lotgd\Core\Repository\CharactersRepository */
             $this->repository = $this->doctrine->getRepository('LotgdCore:Characters');
             $this->query      = $this->repository->createQueryBuilder('u');
             $expr             = $this->query->expr();

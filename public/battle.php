@@ -592,7 +592,7 @@ if ('newtarget' != $op)
                     // experience would stay the same
                     // We'll also check if the user is actually alive. If we didn't, we would hand out
                     // experience for graveyard fights.
-                    if (true == getsetting('instantexp', false) && $session['user']['alive'] && 'pvp' != $options['type'] && 'train' != $options['type'])
+                    if (true == LotgdSetting::getSetting('instantexp', false) && $session['user']['alive'] && 'pvp' != $options['type'] && 'train' != $options['type'])
                     {
                         if (! isset($badguy['expgained']) || false == $badguy['expgained'])
                         {

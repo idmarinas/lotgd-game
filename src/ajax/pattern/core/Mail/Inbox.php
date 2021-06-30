@@ -39,8 +39,8 @@ trait Inbox
             $sortOrder     = (string) ($sortOrder ?: 'date');
             $sortDirection = (int) $sortDirection;
 
-            $params['inboxLimit']    = getsetting('inboxlimit', 50);
-            $params['oldMail']       = getsetting('oldmail', 14);
+            $params['inboxLimit']    = \LotgdSetting::getSetting('inboxlimit', 50);
+            $params['oldMail']       = \LotgdSetting::getSetting('oldmail', 14);
             $params['newDirection']  = (int) ! $sortDirection;
             $params['sortDirection'] = $sortDirection;
             $params['sortOrder']     = $sortOrder;

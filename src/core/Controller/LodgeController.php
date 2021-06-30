@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Controller;
 
 use Lotgd\Core\Events;
+use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Navigation\Navigation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -24,21 +25,23 @@ class LodgeController extends AbstractController
 {
     private $dispatcher;
     private $navigation;
+    private $settings;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, Navigation $navigation)
+    public function __construct(EventDispatcherInterface $eventDispatcher, Navigation $navigation, Settings $settings)
     {
         $this->dispatcher = $eventDispatcher;
         $this->navigation = $navigation;
+        $this->settings   = $settings;
     }
 
     public function points(array $params): Response
     {
         $params['tpl'] = 'points';
 
-        $params['currencySymbol'] = getsetting('paypalcurrency', 'USD');
-        $params['currencyUnits']  = getsetting('dpointspercurrencyunit', 100);
-        $params['refererAward']   = getsetting('refereraward', 25);
-        $params['referMinLevel']  = getsetting('referminlevel', 25);
+        $params['currencySymbol'] = $this->settings->getSetting('paypalcurrency', 'USD');
+        $params['currencyUnits']  = $this->settings->getSetting('dpointspercurrencyunit', 100);
+        $params['refererAward']   = $this->settings->getSetting('refereraward', 25);
+        $params['referMinLevel']  = $this->settings->getSetting('referminlevel', 25);
 
         $params['donatorPointMessages'] = [
             [

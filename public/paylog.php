@@ -56,7 +56,7 @@ foreach($months as $val)
     \LotgdNavigation::addNav('paylog.nav.month', "paylog.php?month={$val['month']}", [
         'params' => [
             'profit' => $val['profit'],
-            'symbol' => getsetting('paypalcurrency', 'USD'),
+            'symbol' => LotgdSetting::getSetting('paypalcurrency', 'USD'),
             'date' => $val['date']
         ]
     ]);

@@ -48,7 +48,7 @@ if (! empty($playermount))
 
 $params = [
     'textDomain' => $textDomain,
-    'barkeep' => getsetting('barkeep', '`tCedrik`0'),
+    'barkeep' => LotgdSetting::getSetting('barkeep', '`tCedrik`0'),
     'userSex' => $session['user']['sex'],
     'player_mount' => $playermount,
     'mountName' => $playermount['mountname'] ?? '',

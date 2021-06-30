@@ -231,7 +231,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             foreach ($skins as $skin)
             {
                 $name = \str_replace('-', ' ', \ucfirst(\substr($skin, 0, \strpos($skin, '.htm'))));
-                $select .= "<option value='{$skin}' ".($skin == $row[$key] ? 'selected' : null).'>'.\htmlentities($name, ENT_COMPAT, getsetting('charset', 'UTF-8')).'</option>';
+                $select .= "<option value='{$skin}' ".($skin == $row[$key] ? 'selected' : null).'>'.\htmlentities($name, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'</option>';
             }
             $select .= '</select>';
 
@@ -253,7 +253,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             }
 
             $vloc         = [];
-            $vname        = getsetting('villagename', LOCATION_FIELDS);
+            $vname        = LotgdSetting::getSetting('villagename', LOCATION_FIELDS);
             $vloc[$vname] = 'village';
             $vloc['all']  = 1;
             $vloc         = modulehook('validlocation', $vloc);
@@ -263,7 +263,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 
             foreach ($vloc as $loc => $val)
             {
-                $select .= "<option value='{$loc}' ".($loc == $location ? 'selected' : null).'>'.\htmlentities($loc, ENT_COMPAT, getsetting('charset', 'UTF-8')).'</option>';
+                $select .= "<option value='{$loc}' ".($loc == $location ? 'selected' : null).'>'.\htmlentities($loc, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'</option>';
             }
             $select .= '</select>';
 
@@ -342,18 +342,18 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 
             if ($cur && $cur < \date('Y-m-d H:i:s', $start))
             {
-                $select .= "<option value='{$cur}' selected>".\htmlentities($cur, ENT_COMPAT, getsetting('charset', 'UTF-8')).'</option>';
+                $select .= "<option value='{$cur}' selected>".\htmlentities($cur, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'</option>';
             }
 
             for ($j = $start; $j < $end; $j = \strtotime($step, $j))
             {
                 $d = \date('Y-m-d H:i:s', $j);
-                $select .= "<option value='{$d}'".($cur == $d ? ' selected' : '').'>'.\htmlentities("{$d}", ENT_COMPAT, getsetting('charset', 'UTF-8')).'</option>';
+                $select .= "<option value='{$d}'".($cur == $d ? ' selected' : '').'>'.\htmlentities("{$d}", ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'</option>';
             }
 
             if ($cur && $cur > \date('Y-m-d H:i:s', $end))
             {
-                $select .= "<option value='{$cur}' selected>".\htmlentities($cur, ENT_COMPAT, getsetting('charset', 'UTF-8')).'</option>';
+                $select .= "<option value='{$cur}' selected>".\htmlentities($cur, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'</option>';
             }
             $select .= '</select>';
 
@@ -379,7 +379,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 
             for ($j = $min; $j <= $max; $j += $step)
             {
-                $select .= "<option value='{$j}'".(isset($row[$key]) && $row[$key] == $j ? ' selected' : '').'>'.\htmlentities("{$j}", ENT_COMPAT, getsetting('charset', 'UTF-8')).'</option>';
+                $select .= "<option value='{$j}'".(isset($row[$key]) && $row[$key] == $j ? ' selected' : '').'>'.\htmlentities("{$j}", ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'</option>';
             }
             $select .= '</select>';
 
@@ -400,7 +400,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 
             for ($j = $min; $j <= $max; $j = \round($j + $step, 2))
             {
-                $select .= "<option value='{$j}'".($val == $j ? ' selected' : '').'>'.\htmlentities("{$j}", ENT_COMPAT, getsetting('charset', 'UTF-8')).'</option>';
+                $select .= "<option value='{$j}'".($val == $j ? ' selected' : '').'>'.\htmlentities("{$j}", ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'</option>';
             }
             $select .= '</select>';
 
@@ -470,7 +470,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 
             foreach ($vals as $k => $v)
             {
-                $select .= '<option value="'.\htmlentities($v, ENT_COMPAT, getsetting('charset', 'UTF-8')).'"'.($row[$key] == $v ? ' selected' : '').'>'.\htmlentities($v, ENT_COMPAT, getsetting('charset', 'UTF-8')).'</option>';
+                $select .= '<option value="'.\htmlentities($v, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'"'.($row[$key] == $v ? ' selected' : '').'>'.\htmlentities($v, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'</option>';
             }
             $select .= '</select>';
 
@@ -501,7 +501,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                     $selected = 1;
                 }
 
-                $select .= "<option value='{$optval}'".($selected ? ' selected' : '').'>'.\htmlentities("{$optdis}", ENT_COMPAT, getsetting('charset', 'UTF-8')).'</option>';
+                $select .= "<option value='{$optval}'".($selected ? ' selected' : '').'>'.\htmlentities("{$optdis}", ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'</option>';
             }
             $select .= '</select>';
 
@@ -518,7 +518,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 $out = '';
             }
 
-            return "<input type='password' name='{$keyout}' value='".\htmlentities($out, ENT_COMPAT, getsetting('charset', 'UTF-8'))."'>";
+            return "<input type='password' name='{$keyout}' value='".\htmlentities($out, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8'))."'>";
 
         break;
         case 'bool':
@@ -541,7 +541,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 $val = '';
             }
 
-            return "<input type='hidden' name='{$keyout}' value=\"".\htmlentities($val, ENT_COMPAT, getsetting('charset', 'UTF-8')).'">'.\htmlentities($val, ENT_COMPAT, getsetting('charset', 'UTF-8'));
+            return "<input type='hidden' name='{$keyout}' value=\"".\htmlentities($val, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'">'.\htmlentities($val, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8'));
 
         break;
         case 'viewonly':
@@ -587,17 +587,17 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 
             $text = $text ?: '';
 
-            return "<textarea class='input' name='{$keyout}'>".\htmlentities($text, ENT_COMPAT, getsetting('charset', 'UTF-8')).'</textarea>';
+            return "<textarea class='input' name='{$keyout}'>".\htmlentities($text, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'</textarea>';
 
         case 'int':
             $out = $row[$key] ?? $default ?: 0;
 
-            return "<input type='number' name='{$keyout}' value=\"".\htmlentities($out, ENT_COMPAT, getsetting('charset', 'UTF-8')).'">';
+            return "<input type='number' name='{$keyout}' value=\"".\htmlentities($out, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'">';
 
         case 'float':
             $text = $row[$key] ?? $default ?: 0;
 
-            return "<input type='number' name='{$keyout}' value=\"".\htmlentities($text, ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" step='any'>";
+            return "<input type='number' name='{$keyout}' value=\"".\htmlentities($text, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8'))."\" step='any'>";
 
         case 'string':
             $len    = 50;
@@ -632,7 +632,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 $val = '';
             }
 
-            return "<input size='{$minlen}' maxlength='{$len}' name='{$keyout}' value=\"".\htmlentities($val, ENT_COMPAT, getsetting('charset', 'UTF-8')).'">';
+            return "<input size='{$minlen}' maxlength='{$len}' name='{$keyout}' value=\"".\htmlentities($val, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'">';
 
         default:
             if (\array_key_exists($info[1], $extensions))
@@ -665,7 +665,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                     $val = $val->format(\DateTime::ISO8601);
                 }
 
-                return "<input type='text' name='{$keyout}' value=\"".\htmlentities($val, ENT_COMPAT, getsetting('charset', 'UTF-8')).'">';
+                return "<input type='text' name='{$keyout}' value=\"".\htmlentities($val, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'">';
             }
 
         break;
