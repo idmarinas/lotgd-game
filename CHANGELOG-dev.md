@@ -86,6 +86,11 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `get_creature_defense` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->getCreatureDefense($attrs)` instead
     -   `get_creature_speed` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->getCreatureSpeed($attrs)` instead
     -   `lotgd_show_debug_creature` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->lotgdShowDebugCreature($badguy)` instead
+-   **lib/settings.php** All functions (removed in future version)
+    -   `savesetting` use `LotgdSetting::saveSetting($settingname, $value)` instead
+    -   `clearsettings` use `LotgdSetting::clearSettings()` instead
+    -   `getsetting` use `LotgdSetting::getSetting($settingname, $default)` instead
+    -   `getallsettings` use `LotgdSetting::getAllSettings()` instead
 
 ### :wrench: FIXES
 
@@ -106,8 +111,9 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :notebook: NOTES
 
 -   Make some optimizations in files. (Code Smell/Duplicated)
--   **Notes**:
+-   **Important**:
     -   :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
+    -   :warning: Avoid, as far as possible, using static classes (e.g. LotgdSetting, Doctrine, LotgdTranslation...) as these classes will be deleted in a future version. Use autowire, dependency injection when possible.
 -   **Upgrade/Install for version 5.0.0 and up**
     -   First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
     -   If have problems:
