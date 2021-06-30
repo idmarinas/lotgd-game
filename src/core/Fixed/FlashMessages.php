@@ -13,37 +13,9 @@
 
 namespace Lotgd\Core\Fixed;
 
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag as ComponentFlashMessages;
-
 class FlashMessages
 {
-    /**
-     * Instance of FlashMessages.
-     *
-     * @var object
-     */
-    protected static $instance;
-
-    /**
-     * Add support for magic static method calls.
-     *
-     * @param string $name
-     * @param array  $arguments
-     * @param mixed  $method
-     *
-     * @return mixed the returned value from the resolved method
-     */
-    public static function __callStatic($method, $arguments)
-    {
-        if (\method_exists(self::$instance, $method))
-        {
-            return self::$instance->{$method}(...$arguments);
-        }
-
-        $methods = \implode(', ', \get_class_methods(self::$instance));
-
-        throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
-    }
+    use StaticTrait;
 
     /**
      * Add message.
@@ -104,14 +76,6 @@ class FlashMessages
     public static function addWarningMessage($message)
     {
         self::$instance->add('warning', $message);
-    }
-
-    /**
-     * Set container of FlashMessages.
-     */
-    public static function instance(ComponentFlashMessages $instance)
-    {
-        self::$instance = $instance;
     }
 }
 

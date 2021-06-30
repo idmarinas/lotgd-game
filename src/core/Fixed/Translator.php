@@ -13,16 +13,9 @@
 
 namespace Lotgd\Core\Fixed;
 
-use Symfony\Contracts\Translation\TranslatorInterface as CoreTranslator;
-
 class Translator
 {
-    /**
-     * Instance of Translator.
-     *
-     * @var Lotgd\Core\Translator\Translator
-     */
-    protected static $container;
+    use StaticTrait;
 
     /**
      * Add support for magic static method calls.
@@ -34,27 +27,19 @@ class Translator
      */
     public static function __callStatic($method, $arguments)
     {
-        if (\method_exists(self::$container, $method))
+        if (\method_exists(self::$instance, $method))
         {
-            return self::$container->{$method}(...$arguments);
+            return self::$instance->{$method}(...$arguments);
         }
         //-- Is an alias of trans()
         elseif ('translate' == $method || 't' == $method)
         {
-            return self::$container->trans(...$arguments);
+            return self::$instance->trans(...$arguments);
         }
 
-        $methods = \implode(', ', \get_class_methods(self::$container));
+        $methods = \implode(', ', \get_class_methods(self::$instance));
 
         throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
-    }
-
-    /**
-     * Set container of Translator.
-     */
-    public static function setContainer(CoreTranslator $container)
-    {
-        self::$container = $container;
     }
 }
 

@@ -13,12 +13,11 @@
 
 namespace Lotgd\Core\Fixed;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 
 class Doctrine
 {
-    protected static $wrapper;
+    use StaticTrait;
 
     /**
      * Add support for magic static method calls.
@@ -31,17 +30,17 @@ class Doctrine
      */
     public static function __callStatic($method, $arguments)
     {
-        if (\method_exists(self::$wrapper, $method))
+        if (\method_exists(self::$instance, $method))
         {
-            if ( ! self::$wrapper->isOpen())
+            if ( ! self::$instance->isOpen())
             {
-                self::$wrapper = self::$wrapper->create(self::$wrapper->getConnection(), self::$wrapper->getConfiguration());
+                self::$instance = self::$instance->create(self::$instance->getConnection(), self::$instance->getConfiguration());
             }
 
-            return self::$wrapper->{$method}(...$arguments);
+            return self::$instance->{$method}(...$arguments);
         }
 
-        $methods = \implode(', ', \get_class_methods(self::$wrapper));
+        $methods = \implode(', ', \get_class_methods(self::$instance));
 
         throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
@@ -76,13 +75,13 @@ class Doctrine
      */
     public static function updateSchema(array $entities, $dumpSql = null)
     {
-        $schemaTool = new SchemaTool(self::$wrapper);
+        $schemaTool = new SchemaTool(self::$instance);
 
         $metaData = [];
 
         foreach ($entities as $className)
         {
-            $metaData[] = self::$wrapper->getMetadataFactory()->getMetadataFor($className);
+            $metaData[] = self::$instance->getMetadataFactory()->getMetadataFor($className);
         }
         $sqls = $schemaTool->getUpdateSchemaSql($metaData, true);
 
@@ -105,7 +104,7 @@ class Doctrine
 
         \LotgdResponse::pageDebug(\sprintf('Database schema updated successfully! "<info>%s</info>" %s executed', \count($sqls), $pluralization));
 
-        $proxyFactory = self::$wrapper->getProxyFactory();
+        $proxyFactory = self::$instance->getProxyFactory();
         \LotgdResponse::pageDebug(\sprintf('Proxy classes generated to "%s"', $proxyFactory->generateProxyClasses($metaData)));
 
         return \count($sqls);
@@ -126,28 +125,18 @@ class Doctrine
      */
     public static function dropSchema(array $entities)
     {
-        $schemaTool = new SchemaTool(self::$wrapper);
+        $schemaTool = new SchemaTool(self::$instance);
 
         $classes = [];
 
         foreach ($entities as $className)
         {
-            $classes[] = self::$wrapper->getMetadataFactory()->getMetadataFor($className);
+            $classes[] = self::$instance->getMetadataFactory()->getMetadataFor($className);
         }
 
         $schemaTool->dropSchema($classes);
 
         \LotgdResponse::pageDebug(\sprintf('Drop schemas for %s classes: "%s"', \count($entities), \implode('", "', $entities)));
-    }
-
-    /**
-     * Add wrapper to script.
-     *
-     * @param Doctrine\ORM\EntityManager $wrapper
-     */
-    public static function wrapper(EntityManager $wrapper)
-    {
-        self::$wrapper = $wrapper;
     }
 }
 
