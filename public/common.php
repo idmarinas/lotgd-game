@@ -304,7 +304,7 @@ if ($currenttime - $lastcheck > 30)
         $load           = \explode('load average:', $load);
         $load           = \explode(', ', $load[1]);
         $fiveminuteload = $load[1];
-        savesetting('systemload_lastload', $fiveminuteload);
-        savesetting('systemload_lastcheck', $currenttime);
+        LotgdSetting::saveSetting('systemload_lastload', $fiveminuteload);
+        LotgdSetting::saveSetting('systemload_lastcheck', $currenttime);
     }
 }

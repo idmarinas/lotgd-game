@@ -69,7 +69,7 @@ elseif (! $params['newestname'] && $params['newestplayer'])
 {
     $characterRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
     $params['newestname'] = $characterRepository->getCharacterNameFromAcctId($params['newestplayer']) ?: 'Unknown';
-    savesetting('newestplayername', $params['newestname']);
+    LotgdSetting::saveSetting('newestplayername', $params['newestname']);
 }
 
 //-- Init page

@@ -41,7 +41,7 @@ class ReferralController extends AbstractController
         if ( ! preg_match('/\\/$/', $url))
         {
             $url = $url.'/';
-            savesetting('serverurl', $url);
+            $this->settings->saveSetting('serverurl', $url);
         }
 
         $params['serverUrl']     = $url;

@@ -174,7 +174,7 @@ class Petition extends AjaxAbstract
         if ( ! \preg_match('/\\/$/', $url))
         {
             $url = $url.'/';
-            savesetting('serverurl', $url);
+            \LotgdSetting::saveSetting('serverurl', $url);
         }
 
         $tlServer  = \LotgdTranslator::t('section.default.petition.mail.server', [], self::TEXT_DOMAIN);

@@ -6,13 +6,13 @@ class ServerFunctions
 {
     public static function isTheServerFull()
     {
-        if (\abs(LotgdSetting::getSetting('OnlineCountLast', 0) - \strtotime('now')) > 60)
+        if (\abs(\LotgdSetting::getSetting('OnlineCountLast', 0) - \strtotime('now')) > 60)
         {
             $repository = \Doctrine::getRepository('LotgdCore:Accounts');
             $counter    = $repository->count(['locked' => 0, 'loggedin' => 1]);
 
-            savesetting('OnlineCount', $counter);
-            savesetting('OnlineCountLast', \strtotime('now'));
+            \LotgdSetting::saveSetting('OnlineCount', $counter);
+            \LotgdSetting::saveSetting('OnlineCountLast', \strtotime('now'));
         }
 
         $onlinecount = (int) LotgdSetting::getSetting('OnlineCount', 0);

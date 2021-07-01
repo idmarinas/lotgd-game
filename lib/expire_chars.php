@@ -16,7 +16,7 @@ if ($lastexpire >= $needtoexpire)
     return;
 }
 
-savesetting('last_char_expire', \date('Y-m-d H:i:s'));
+LotgdSetting::saveSetting('last_char_expire', \date('Y-m-d H:i:s'));
 
 $old   = (int) LotgdSetting::getSetting('expireoldacct', 45);
 $new   = (int) LotgdSetting::getSetting('expirenewacct', 10);

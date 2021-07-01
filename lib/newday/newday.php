@@ -262,7 +262,7 @@ if ( ! LotgdSetting::getSetting('newdaycron', 0))
         if (\gmdate('Ymd', $gametoday) != \gmdate('Ymd', $lastnewdaysemaphore))
         {
             //we need to run the hook, update the setting, and unlock.
-            savesetting('newdaySemaphore', \gmdate('Y-m-d H:i:s'));
+            LotgdSetting::saveSetting('newdaySemaphore', \gmdate('Y-m-d H:i:s'));
 
             require 'lib/newday/newday_runonce.php';
         }

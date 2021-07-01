@@ -393,8 +393,8 @@ function charstats($return = true)
             ]);
         }
 
-        savesetting('OnlineCount', $onlinecount);
-        savesetting('OnlineCountLast', \strtotime('now'));
+        LotgdSetting::saveSetting('OnlineCount', $onlinecount);
+        LotgdSetting::saveSetting('OnlineCountLast', \strtotime('now'));
 
         return $ret;
     });

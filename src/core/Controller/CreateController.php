@@ -163,8 +163,8 @@ class CreateController extends AbstractController
 
         $params['account'] = $account;
 
-        savesetting('newestplayer', $account->getAcctid());
-        savesetting('newestplayername', $account->getCharacter()->getName());
+        $this->settings->saveSetting('newestplayer', $account->getAcctid());
+        $this->settings->saveSetting('newestplayername', $account->getCharacter()->getName());
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_CREATE_VAL);
@@ -407,8 +407,8 @@ class CreateController extends AbstractController
                         return $this->redirect('index.php');
                     }
 
-                    savesetting('newestplayer', $accountEntity->getAcctid());
-                    savesetting('newestplayername', $characterEntity->getName());
+                    $this->settings->saveSetting('newestplayer', $accountEntity->getAcctid());
+                    $this->settings->saveSetting('newestplayername', $characterEntity->getName());
 
                     $params['login']    = $shortname;
                     $params['password'] = $pass1;

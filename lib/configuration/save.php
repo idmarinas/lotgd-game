@@ -74,7 +74,7 @@ foreach ($postSettings as $key => $val)
             $old[$key] = '';
         }
 
-        savesetting($key, $val);
+        LotgdSetting::saveSetting($key, $val);
 
         $flashMessages .= \LotgdTranslator::t('flash.message.default.save.change.setting', ['key' => $key, 'oldValue' => $old[$key], 'newValue' => $val], $textDomain);
 
