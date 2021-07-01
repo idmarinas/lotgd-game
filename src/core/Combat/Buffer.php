@@ -32,7 +32,7 @@ class Buffer
         $this->response   = $response;
         $this->dispatcher = $dispatcher;
         $this->tempStat   = $tempStat;
-        $this->settings = $settings;
+        $this->settings   = $settings;
     }
 
     public function calculateBuffFields()
@@ -45,7 +45,7 @@ class Buffer
         }
 
         //run temp stats
-        \reset($session['bufflist']);
+        reset($session['bufflist']);
 
         foreach ($session['bufflist'] as $buffname => $buff)
         {
@@ -53,9 +53,9 @@ class Buffer
             {
                 foreach ($buff as $property => $value)
                 {
-                    if ('tempstat-' == \substr($property, 0, 9))
+                    if ('tempstat-' == substr($property, 0, 9))
                     {
-                        $this->tempStat->applyTempStat(\substr($property, 9), $value);
+                        $this->tempStat->applyTempStat(substr($property, 9), $value);
                     }
                 }//end foreach
                 $session['bufflist'][$buffname]['tempstats_calculated'] = true;
@@ -63,7 +63,7 @@ class Buffer
         }//end foreach
 
         //process calculated buff fields.
-        \reset($session['bufflist']);
+        reset($session['bufflist']);
 
         if ( ! \is_array($this->buffreplacements))
         {
@@ -79,9 +79,9 @@ class Buffer
                     //calculate dynamic buff fields
                     $origstring = $value;
                     //Simple <module|variable> replacements for get_module_pref('variable','module')
-                    $value = \preg_replace('/<([A-Za-z0-9]+)\\|([A-Za-z0-9]+)>/', "get_module_pref('\\2','\\1')", $value);
+                    $value = preg_replace('/<([A-Za-z0-9]+)\\|([A-Za-z0-9]+)>/', "get_module_pref('\\2','\\1')", $value);
                     //simple <variable> replacements for $session['user']['variable']
-                    $value = \preg_replace('/<([A-Za-z0-9]+)>/', "\$session['user']['\\1']", $value);
+                    $value = preg_replace('/<([A-Za-z0-9]+)>/', "\$session['user']['\\1']", $value);
 
                     if ( ! \defined('OLDSU'))
                     {
@@ -90,21 +90,21 @@ class Buffer
 
                     if ($value != $origstring)
                     {
-                        if ('debug:' == \strtolower(\substr($value, 0, 6)))
+                        if ('debug:' == strtolower(substr($value, 0, 6)))
                         {
                             $errors     = '';
-                            $origstring = \substr($origstring, 6);
-                            $value      = \substr($value, 6);
+                            $origstring = substr($origstring, 6);
+                            $value      = substr($value, 6);
 
                             if ( ! isset($this->debuggedbuffs[$buffname]))
                             {
                                 $this->debuggedbuffs[$buffname] = [];
                             }
 
-                            \ob_start();
+                            ob_start();
                             $val    = eval("return {$value};");
-                            $errors = \ob_get_contents();
-                            \ob_end_clean();
+                            $errors = ob_get_contents();
+                            ob_end_clean();
 
                             if ( ! isset($this->debuggedbuffs[$buffname][$property]))
                             {
@@ -115,8 +115,8 @@ class Buffer
                                 else
                                 {
                                     $this->response->pageDebug("Buffs[{$buffname}][{$property}] has an evaluation error<br>"
-                                    .\htmlentities($origstring, ENT_COMPAT, $this->settings->getSetting('charset', 'UTF-8')).' becomes <br>'
-                                    .\htmlentities($value, ENT_COMPAT, $this->settings->getSetting('charset', 'UTF-8')).'<br>'
+                                    .htmlentities($origstring, ENT_COMPAT, $this->settings->getSetting('charset', 'UTF-8')).' becomes <br>'
+                                    .htmlentities($value, ENT_COMPAT, $this->settings->getSetting('charset', 'UTF-8')).'<br>'
                                     .$errors);
                                     $val = '';
                                 }
@@ -138,7 +138,7 @@ class Buffer
 
                     $session['user']['superuser'] = OLDSU;
 
-                    if (\is_numeric($val) && (\is_nan($val) || \is_infinite($val)))
+                    if (is_numeric($val) && (is_nan($val) || is_infinite($val)))
                     {
                         $val = $value;
                     }
@@ -165,11 +165,11 @@ class Buffer
 
         if (\is_array($this->buffreplacements))
         {
-            \reset($this->buffreplacements);
+            reset($this->buffreplacements);
 
             foreach ($this->buffreplacements as $buffname => $val)
             {
-                \reset($val);
+                reset($val);
 
                 foreach ($val as $property => $value)
                 {
@@ -188,19 +188,19 @@ class Buffer
         {
             $session['bufflist'] = [];
         }
-        \reset($session['bufflist']);
+        reset($session['bufflist']);
 
         foreach ($session['bufflist'] as $buffname => $buff)
         {
             if (\array_key_exists('tempstats_calculated', $buff) && $buff['tempstats_calculated'])
             {
-                \reset($buff);
+                reset($buff);
 
                 foreach ($buff as $property => $value)
                 {
-                    if ('tempstat-' == \substr($property, 0, 9))
+                    if ('tempstat-' == substr($property, 0, 9))
                     {
-                        $this->tempStat->applyTempStat(\substr($property, 9), -$value);
+                        $this->tempStat->applyTempStat(substr($property, 9), -$value);
                     }
                 }//end foreach
                 unset($session['bufflist'][$buffname]['tempstats_calculated']);
