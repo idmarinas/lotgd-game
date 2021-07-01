@@ -219,10 +219,7 @@ class Buffer
             $buff['schema'] = $translation_namespace;
         }
 
-        if (isset($this->buffreplacements[$name]))
-        {
-            unset($this->buffreplacements[$name]);
-        }
+        unset($this->buffreplacements[$name]);
 
         if (isset($session['bufflist'][$name]))
         {
@@ -265,10 +262,7 @@ class Buffer
 
         if ($current < $companionsallowed || $ignorelimit)
         {
-            if (isset($companions[$name]))
-            {
-                unset($companions[$name]);
-            }
+            unset($companions[$name]);
 
             if ( ! isset($companion['ignorelimit']) && $ignorelimit)
             {
@@ -290,15 +284,9 @@ class Buffer
         global $session;
         $this->restoreBuffFields();
 
-        if (isset($session['bufflist'][$name]))
-        {
-            unset($session['bufflist'][$name]);
-        }
+        unset($session['bufflist'][$name]);
+        unset($this->buffreplacements[$name]);
 
-        if (isset($this->buffreplacements[$name]))
-        {
-            unset($this->buffreplacements[$name]);
-        }
         $this->calculateBuffFields();
     }
 
