@@ -1,31 +1,42 @@
 # security:
 #     encoders:
-#         legacy:
-#             algorithm: md5
-#             encode_as_base64: false
-#             iterations: 2
-#         Nucleos\UserBundle\Model\UserInterface:
+#         lotgd_old_encoder:
+#             id: Lotgd\Core\LotgdPasswordEncoder
+#         Lotgd\Core\Entity\User:
 #             algorithm: auto
-#             migrate_from:
-#                 - legacy
+#             migrate_from: ['lotgd_old_encoder']
 
 #     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
 #     providers:
-#         # used to reload user from session & other features (e.g. switch_user)
-#         nucleos_userbundle:
-#             id: nucleos_user.user_provider.username
+#         lotgd_core_user_provider:
+#             entity:
+#                 class: Lotgd\Core\Entity\User
+#                 property: username
+
 #     firewalls:
 #         dev:
 #             pattern: ^/(_(profiler|wdt)|css|images|js)/
 #             security: false
 #         main:
-#             anonymous: true
-#             lazy: true
-#             logout:       true
-#             provider: nucleos_userbundle
-#             form_login:
-#                 provider: nucleos_userbundle
-#                 csrf_token_generator: security.csrf.token_manager
+#             anonymous: lazy
+#             provider: lotgd_core_user_provider
+#             user_checker: Lotgd\Core\Security\UserChecker
+#             guard:
+#                 authenticators:
+#                     - Lotgd\Core\Security\LoginFormAuthenticator
+#             logout:
+#                 path: lotgd_core_logout
+#                 # where to redirect after logout
+#                 # target: app_any_route
+
+#             # https://symfony.com/doc/current/security/remember_me.html
+#             remember_me:
+#                 secret: '%kernel.secret%'
+#                 lifetime: 604800 # 1 week in seconds
+#                 path: /
+#                 secure: true
+#                 httponly: true
+#                 samesite: strict
 
 #             # activate different ways to authenticate
 #             # https://symfony.com/doc/current/security.html#firewalls-authentication
