@@ -4,8 +4,7 @@
  */
 chdir(realpath(__DIR__.'/..'));
 
-require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
-
+require \dirname(__DIR__).'/config/bootstrap.php';
 //-- Include constants
 require_once 'src/constants.php';
 
@@ -37,8 +36,6 @@ use Lotgd\Core\Fixed\Setting as LotgdSetting;
 use Lotgd\Core\Fixed\Theme as LotgdTheme;
 use Lotgd\Core\Fixed\Tool as LotgdTool;
 use Lotgd\Core\Fixed\Translator as LotgdTranslator;
-
-require \dirname(__DIR__).'/config/bootstrap.php';
 
 $isDevelopment = 'prod' != $_SERVER['APP_ENV'];
 //-- Init Debugger
