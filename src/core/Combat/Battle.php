@@ -15,6 +15,7 @@ namespace Lotgd\Core\Combat;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Http\Response;
+use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
 use Lotgd\Core\Tool\PlayerFunction;
@@ -42,6 +43,7 @@ class Battle
     private $sanitize;
     private $translator;
     private $playerFunction;
+    private $settings;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
@@ -54,7 +56,8 @@ class Battle
         Environment $twig,
         Sanitize $sanitize,
         TranslatorInterface $translator,
-        PlayerFunction $playerFunction
+        PlayerFunction $playerFunction,
+        Settings $settings
     ) {
         $this->tools          = $tools;
         $this->buffer         = $buffer;
@@ -67,5 +70,6 @@ class Battle
         $this->sanitize       = $sanitize;
         $this->translator     = $translator;
         $this->playerFunction = $playerFunction;
+        $this->settings       = $settings;
     }
 }
