@@ -24,6 +24,8 @@ unset($result);
 
 /** @var Lotgd\Core\Http\Request */
 $request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+/** @var \Lotgd\Core\Tool\CreatureFunction */
+$creatureFunctions = LotgdKernel::get('lotgd_core.tool.creature_functions');
 
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);
@@ -35,7 +37,7 @@ $params = [
     'showForestMessage' => ! $dontDisplayForestMessage,
 ];
 
-$op = (string) \LotgdRequest::getQuery('op');
+$op = (string) $request->query->get('op');
 
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
@@ -66,7 +68,7 @@ elseif ('search' == $op)
         \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.tired', [], $textDomain));
 
         $op = '';
-        \LotgdRequest::setQuery('op', '');
+        $request->query->set('op', '');
     }
     else
     {
@@ -96,7 +98,7 @@ elseif ('search' == $op)
             $params['showForestMessage']    = ! $dontDisplayForestMessage;
 
             $op = '';
-            \LotgdRequest::setQuery('op', '');
+            $request->query->set('op', '');
         }
         else
         {
@@ -112,7 +114,7 @@ elseif ('search' == $op)
                 $nlev = (1 == e_rand(1, 3) ? 1 : 0);
             }
 
-            $type = (string) \LotgdRequest::getQuery('type');
+            $type = (string) $request->query->get('type');
 
             $extrabuff = 0;
 
@@ -214,7 +216,7 @@ elseif ('search' == $op)
             $packofmonsters = (bool) (0 == \mt_rand(0, 5) && LotgdSetting::getSetting('allowpackofmonsters', true)); // true or false
             $packofmonsters = ($multi > 1) ? $packofmonsters : false;
 
-            $result = lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmonsters, true);
+            $result = $creatureFunctions->lotgdSearchCreature($multi, $targetlevel, $mintargetlevel, $packofmonsters, true);
 
             \LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields();
 
@@ -222,7 +224,7 @@ elseif ('search' == $op)
             {
                 // There is nothing in the database to challenge you, let's
                 // give you a doppelganger.
-                $badguy = lotgd_generate_doppelganger($session['user']['level']);
+                $badguy = $creatureFunctions->lotgdGenerateDoppelganger($session['user']['level']);
 
                 $stack[] = $badguy;
             }
@@ -244,7 +246,7 @@ elseif ('search' == $op)
                         $initialbadguy['creaturelevel'] = e_rand($mintargetlevel, $targetlevel);
                         $initialbadguy['playerstarthp'] = $session['user']['hitpoints'];
                         $initialbadguy['diddamage']     = 0;
-                        $badguy                         = buffbadguy($initialbadguy);
+                        $badguy                         = $creatureFunctions->buffBadguy($initialbadguy);
 
                         if ('thrill' == $type)
                         {
@@ -288,7 +290,7 @@ elseif ('search' == $op)
                         $badguy['playerstarthp'] = $session['user']['hitpoints'];
                         $badguy['diddamage']     = 0;
 
-                        $badguy = buffbadguy($badguy);
+                        $badguy = $creatureFunctions->buffBadguy($badguy);
                         // Okay, they are thrillseeking, let's give them a bit extra
                         // exp and gold.
                         if ('thrill' == $type)
@@ -332,9 +334,9 @@ elseif ('search' == $op)
             // If someone for any reason wanted to add a nav where the user cannot choose the number of rounds anymore
             // because they are already set in the nav itself, we need this here.
             // It will not break anything else. I hope.
-            if ('' != \LotgdRequest::getQuery('auto'))
+            if ('' != $request->query->get('auto'))
             {
-                \LotgdRequest::setQuery('op', 'fight');
+                $request->query->set('op', 'fight');
                 $op = 'fight';
             }
         }
@@ -350,8 +352,8 @@ elseif ('run' == $op)
         \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.run.success', [], $textDomain));
 
         $op = '';
-        \LotgdRequest::setQuery('op', '');
-        unsuspend_buffs();
+        $request->query->set('op', '');
+        \LotgdKernel::get('lotgd_core.combat.battle')->unsuspendBuffs();
 
         foreach ($companions as $index => $companion)
         {
@@ -384,11 +386,11 @@ if ($battle)
 
         $op = '';
         $battle = false;
-        \LotgdRequest::setQuery('op', '');
+        $request->query->set('op', '');
     }
     else
     {
-        fightnav();
+        \LotgdNavigation::fightNav();
     }
 }
 

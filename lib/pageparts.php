@@ -103,7 +103,7 @@ function getcharstats($buffs)
         {
             $arr               = $label;
             $charstattpl[$arr] = [];
-            \reset($section);
+            reset($section);
 
             foreach ($section as $name => $val)
             {
@@ -142,28 +142,30 @@ function charstats($return = true)
 
     if (isset($session['loggedin']) && $session['loggedin'])
     {
-        $u = &$session['user'];
+        /** @var \Lotgd\Core\Tool\PlayerFunction */
+        $playerFunctions = LotgdKernel::get('lotgd_core.tool.player_functions');
+        $u               = &$session['user'];
 
-        $u['hitpoints']  = \round($u['hitpoints'], 0);
-        $u['experience'] = \round($u['experience'], 0);
+        $u['hitpoints']  = round($u['hitpoints'], 0);
+        $u['experience'] = round($u['experience'], 0);
         $spirits         = [-6 => 'Resurrected', -2 => 'Very Low', -1 => 'Low', '0' => 'Normal', 1 => 'High', 2 => 'Very High'];
 
         if ( ! $u['alive'])
         {
             $spirits[(int) $u['spirits']] = 'DEAD';
         }
-        \reset($session['bufflist']);
+        reset($session['bufflist']);
 
         require_once 'lib/playerfunctions.php';
-        $oAtk              = $atk              = get_player_attack(); //Original Attack
-        $oDef              = $def              = get_player_defense(); //Original Defense
-        $spd               = get_player_speed();
-        $hitpoints         = get_player_hitpoints(); //Health of character
+        $oAtk              = $atk              = $playerFunctions->getPlayerAttack(); //Original Attack
+        $oDef              = $def              = $playerFunctions->getPlayerDefense(); //Original Defense
+        $spd               = $playerFunctions->getPlayerSpeed();
+        $hitpoints         = $playerFunctions->getPlayerHitpoints(); //Health of character
         $u['maxhitpoints'] = $hitpoints;
 
         $buffs = [];
 
-        $session['bufflist'] = \array_map('array_filter', $session['bufflist'] ?? []);
+        $session['bufflist'] = array_map('array_filter', $session['bufflist'] ?? []);
 
         foreach ($session['bufflist'] as $val)
         {
@@ -182,7 +184,7 @@ function charstats($return = true)
                 //	removed due to performance reasons. foreach is better with only $val than to have $key ONLY for the short happiness of one debug. much greater performance gain here
                 if (\is_array($val['name']))
                 {
-                    $val['name'][0] = \str_replace('`%', '`%%', $val['name'][0]);
+                    $val['name'][0] = str_replace('`%', '`%%', $val['name'][0]);
                     $val['name']    = \call_user_func_array('sprintf', $val['name']);
                 }
 
@@ -193,7 +195,7 @@ function charstats($return = true)
                     // We're about to sprintf, so, let's makes sure that
                     // `% is handled.
                     $b       = '`#%s `7(%s rounds left)`0`n';
-                    $b       = \sprintf($b, $val['name'], $val['rounds']);
+                    $b       = sprintf($b, $val['name'], $val['rounds']);
                     $buffs[] = \LotgdFormat::colorize($b, true);
                 }
                 elseif ($val['name'])
@@ -212,26 +214,26 @@ function charstats($return = true)
             $buffs[] = \LotgdFormat::colorize('`^None`0', true);
         }
 
-        $atk = \round($atk, 2);
+        $atk = round($atk, 2);
 
         if ($atk < $oAtk)
         {
-            $atk = \round($atk, 2).'(`$'.\round($atk - $oAtk, 2).'`0)';
+            $atk = round($atk, 2).'(`$'.round($atk - $oAtk, 2).'`0)';
         }
         elseif ($atk > $oAtk)
         {
-            $atk = \round($atk, 2).'(`@+'.\round($atk - $oAtk, 2).'`0)';
+            $atk = round($atk, 2).'(`@+'.round($atk - $oAtk, 2).'`0)';
         }
 
-        $def = \round($def, 2);
+        $def = round($def, 2);
 
         if ($def < $oDef)
         {
-            $def = \round($def, 2).'(`$'.\round($def - $oDef, 2).'`0)';
+            $def = round($def, 2).'(`$'.round($def - $oDef, 2).'`0)';
         }
         elseif ($def > $oDef)
         {
-            $def = \round($def, 2).'(`@+'.\round($def - $oDef, 2).'`0)';
+            $def = round($def, 2).'(`@+'.round($def - $oDef, 2).'`0)';
         }
 
         addcharstat(\LotgdTranslator::t('statistic.category.character.info', [], 'app_default'));
@@ -242,7 +244,7 @@ function charstats($return = true)
         if ($u['alive'])
         {
             //-- HitPoints are calculated in base to attributes
-            addcharstat(\LotgdTranslator::t('statistic.stat.hitpoints', [], 'app_default'), \sprintf('%s/%s `$<span title="%s">(?)</span>`0', $u['hitpoints'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('hitpoints', 1), $u['maxhitpoints'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('maxhitpoints', 1), explained_get_player_hitpoints()));
+            addcharstat(\LotgdTranslator::t('statistic.stat.hitpoints', [], 'app_default'), sprintf('%s/%s `$<span title="%s">(?)</span>`0', $u['hitpoints'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('hitpoints', 1), $u['maxhitpoints'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('maxhitpoints', 1), $playerFunctions->explainedGetPlayerHitpoints()));
 
             if (is_module_active('staminasystem'))
             {
@@ -258,8 +260,8 @@ function charstats($return = true)
                 addcharstat(\LotgdTranslator::t('statistic.stat.drunkeness', [], 'app_default'), '');
             }
             addcharstat(\LotgdTranslator::t('statistic.stat.experience', [], 'app_default'), LotgdFormat::numeral($u['experience'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('experience', 1)));
-            addcharstat(\LotgdTranslator::t('statistic.stat.attack', [], 'app_default'), \sprintf("{$atk} `\$<span title='%s'>(?)</span>`0", explained_get_player_attack().\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('attack', 1)));
-            addcharstat(\LotgdTranslator::t('statistic.stat.defense', [], 'app_default'), \sprintf("{$def} `\$<span title='%s'>(?)</span>`0", explained_get_player_defense().\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('defense', 1)));
+            addcharstat(\LotgdTranslator::t('statistic.stat.attack', [], 'app_default'), sprintf("{$atk} `\$<span title='%s'>(?)</span>`0", $playerFunctions->explainedGetPlayerAttack().\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('attack', 1)));
+            addcharstat(\LotgdTranslator::t('statistic.stat.defense', [], 'app_default'), sprintf("{$def} `\$<span title='%s'>(?)</span>`0", $playerFunctions->explainedGetPlayerDefense().\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('defense', 1)));
             addcharstat(\LotgdTranslator::t('statistic.stat.speed', [], 'app_default'), $spd.\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('speed', 1));
             addcharstat(\LotgdTranslator::t('statistic.stat.strength', [], 'app_default'), $u['strength'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('strength', 1));
             addcharstat(\LotgdTranslator::t('statistic.stat.dexterity', [], 'app_default'), $u['dexterity'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('dexterity', 1));
@@ -277,8 +279,8 @@ function charstats($return = true)
                 addcharstat(\LotgdTranslator::t('statistic.stat.stamina', [], 'app_default'), '');
             }
             addcharstat(\LotgdTranslator::t('statistic.stat.torments', [], 'app_default'), $u['gravefights'].\LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat('gravefights', 1));
-            addcharstat(\LotgdTranslator::t('statistic.stat.psyche', [], 'app_default'), 10 + \round(($u['level'] - 1) * 1.5));
-            addcharstat(\LotgdTranslator::t('statistic.stat.spirit', [], 'app_default'), 10 + \round(($u['level'] - 1) * 1.5));
+            addcharstat(\LotgdTranslator::t('statistic.stat.psyche', [], 'app_default'), 10 + round(($u['level'] - 1) * 1.5));
+            addcharstat(\LotgdTranslator::t('statistic.stat.spirit', [], 'app_default'), 10 + round(($u['level'] - 1) * 1.5));
         }
 
         addcharstat(\LotgdTranslator::t('statistic.stat.race', [], 'app_default'), \LotgdTranslator::t('character.racename', [], (RACE_UNKNOWN != $u['race']) ? $u['race'] : RACE_UNKNOWN));
@@ -291,7 +293,7 @@ function charstats($return = true)
             {
                 if ($companion['hitpoints'] > 0 || (isset($companion['cannotdie']) && true == $companion['cannotdie']))
                 {
-                    $companion['hitpoints'] = \max(0, $companion['hitpoints']);
+                    $companion['hitpoints'] = max(0, $companion['hitpoints']);
 
                     $color = '`@';
 
@@ -360,7 +362,8 @@ function charstats($return = true)
 
     $cache = \LotgdKernel::get('cache.app');
 
-    return $cache->get('char-list-home-page', function ($item) {
+    return $cache->get('char-list-home-page', function ($item)
+    {
         $item->expiresAfter(600);
 
         $onlinecount = 0;
@@ -372,16 +375,16 @@ function charstats($return = true)
         if (isset($list['handled']) && $list['handled'])
         {
             $onlinecount = $list['count'];
-            $ret         = $list['list'];
+            $ret = $list['list'];
         }
         else
         {
-            $result      = [];
+            $result = [];
             $onlinecount = 0;
 
             if (\Doctrine::isConnected())
             {
-                $repository  = \Doctrine::getRepository('LotgdCore:Accounts');
+                $repository = \Doctrine::getRepository('LotgdCore:Accounts');
                 $onlinecount = $repository->count(['loggedin' => '1', 'locked' => '0']);
             }
 
@@ -394,7 +397,7 @@ function charstats($return = true)
         }
 
         LotgdSetting::saveSetting('OnlineCount', $onlinecount);
-        LotgdSetting::saveSetting('OnlineCountLast', \strtotime('now'));
+        LotgdSetting::saveSetting('OnlineCountLast', strtotime('now'));
 
         return $ret;
     });
