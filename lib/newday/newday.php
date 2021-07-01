@@ -255,7 +255,7 @@ if ( ! LotgdSetting::getSetting('newdaycron', 0))
     {
         // it appears to be a different game day, acquire semaphore and
         // check again.
-        clearsettings();
+        LotgdSetting::clearSettings();
         $lastnewdaysemaphore = \LotgdKernel::get('lotgd_core.tool.date_time')->convertGameTime(\strtotime(LotgdSetting::getSetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
         $gametoday           = \LotgdKernel::get('lotgd_core.tool.date_time')->gameTime();
 
