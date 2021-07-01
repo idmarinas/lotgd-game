@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Http\Response;
 use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
+use Lotgd\Core\Tool\PlayerFunction;
 use Lotgd\Core\Tool\Sanitize;
 use Lotgd\Core\Tool\Tool;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
@@ -40,6 +41,7 @@ class Battle
     private $twig;
     private $sanitize;
     private $translator;
+    private $playerFunction;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
@@ -51,17 +53,19 @@ class Battle
         Response $response,
         Environment $twig,
         Sanitize $sanitize,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        PlayerFunction $playerFunction
     ) {
-        $this->tools      = $tools;
-        $this->buffer     = $buffer;
-        $this->dispatcher = $dispatcher;
-        $this->doctrine   = $doctrine;
-        $this->log        = $log;
-        $this->navigation = $navigation;
-        $this->response   = $response;
-        $this->twig       = $twig;
-        $this->sanitize   = $sanitize;
-        $this->translator = $translator;
+        $this->tools          = $tools;
+        $this->buffer         = $buffer;
+        $this->dispatcher     = $dispatcher;
+        $this->doctrine       = $doctrine;
+        $this->log            = $log;
+        $this->navigation     = $navigation;
+        $this->response       = $response;
+        $this->twig           = $twig;
+        $this->sanitize       = $sanitize;
+        $this->translator     = $translator;
+        $this->playerFunction = $playerFunction;
     }
 }

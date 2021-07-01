@@ -35,7 +35,7 @@ trait Skill
             }
 
             $creatureattack      = $badguy['creatureattack'] * $creatureatkmod;
-            $adjustedselfdefense = (get_player_defense() * $adjustment * $defmod);
+            $adjustedselfdefense = ($this->playerFunction->getPlayerDefense() * $adjustment * $defmod);
 
             if ( ! isset($badguy['physicalresistance']))
             {
@@ -46,7 +46,7 @@ trait Skill
 
             while ( ! isset($creaturedmg) || ! isset($selfdmg) || 0 == $creaturedmg && 0 == $selfdmg)
             {
-                $atk = get_player_attack() * $atkmod;
+                $atk = $this->playerFunction->getPlayerAttack() * $atkmod;
 
                 if (1 == \mt_rand(1, 20) && 'pvp' != $options['type'])
                 {
@@ -86,13 +86,13 @@ trait Skill
                 {
                     $selfdmg = (int) ($selfdmg / 2);
                     $selfdmg = \round($selfdmg * $buffset['dmgmod'], 0);
-                    $selfdmg = \min(0, \round($selfdmg - ((int) get_player_physical_resistance()), 0));
+                    $selfdmg = \min(0, \round($selfdmg - ((int) $this->playerFunction->getPlayerPhysicalResistance()), 0));
                 }
 
                 if ($selfdmg > 0)
                 {
                     $selfdmg = \round($selfdmg * $buffset['badguydmgmod'], 0);
-                    $selfdmg = \max(0, \round($selfdmg - ((int) get_player_physical_resistance()), 0));
+                    $selfdmg = \max(0, \round($selfdmg - ((int) $this->playerFunction->getPlayerPhysicalResistance()), 0));
                 }
             }
         }
@@ -114,7 +114,7 @@ trait Skill
     {
         global $session, $countround, $lotgdBattleContent;
 
-        $uatk = get_player_attack();
+        $uatk = $this->playerFunction->getPlayerAttack();
 
         if ($crit > $uatk)
         {
