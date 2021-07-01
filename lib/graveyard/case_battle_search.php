@@ -13,7 +13,12 @@ else
     require_once 'lib/battle/extended.php';
     require_once 'lib/creaturefunctions.php';
 
-    suspend_companions('allowinshades', true);
+    /** @var \Lotgd\Core\Tool\CreatureFunction */
+    $creaturefunctions = LotgdKernel::get('lotgd_core.tool.creature_functions');
+    /** @var \Lotgd\Core\Combat\Battle */
+    $serviceBattle = LotgdKernel::get('lotgd_core.combat.battle');
+
+    $serviceBattle->suspendCompanions('allowinshades', true);
 
     if (0 != module_events('graveyard', LotgdSetting::getSetting('gravechance', 0)))
     {
@@ -35,9 +40,9 @@ else
         --$session['user']['gravefights'];
         $level  = (int) $session['user']['level'];
         $battle = true;
-        $result = lotgd_search_creature(1, $level, $level, false, false);
+        $result = $creaturefunctions->lotgdSearchCreature(1, $level, $level, false, false);
 
-        $badguy = lotgd_transform_creature($result[0]);
+        $badguy = $creaturefunctions->lotgdTransformCreature($result[0]);
         $badguy['creaturehealth']    += 50;
         $badguy['creaturemaxhealth'] += 50;
 

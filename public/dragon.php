@@ -51,7 +51,7 @@ if ('' == $op)
 
     //--  Transform Dragon to adapt to player
     \LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields();
-    $badguy = lotgd_transform_creature($badguy);
+    $badguy = LotgdKernel::get('lotgd_core.tool.creature_functions')->lotgdTransformCreature($badguy);
     \LotgdKernel::get('lotgd_core.combat.buffer')->calculateBuffFields();
 
     $args = new GenericEvent(null, $badguy);
@@ -283,16 +283,16 @@ if ($battle)
         $result = modulehook('dragondeath', $args->getArguments());
         $lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result);
 
-        battleshowresults($lotgdBattleContent);
+        \LotgdKernel::get('lotgd_core.combat.battle')->battleShowResults($lotgdBattleContent);
 
         \LotgdResponse::pageEnd();
     }
     else
     {
-        fightnav(true, false);
+        \LotgdNavigation::fightNav(true, false);
     }
 
-    battleshowresults($lotgdBattleContent);
+    \LotgdKernel::get('lotgd_core.combat.battle')->battleShowResults($lotgdBattleContent);
 }
 
 //-- Finalize page
