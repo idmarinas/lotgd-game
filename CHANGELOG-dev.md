@@ -41,6 +41,43 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :fire: DEPRECATED
 
+-   **lib/battle/** All files and functions (removed in future version)
+    -   **lib/battle/buffs.php**
+        -   `activate_buffs` use `LotgdKernel::get('lotgd_core.combat.battle')->activateBuffs($tag)` instead
+        -   `process_lifetaps` use `LotgdKernel::get('lotgd_core.combat.battle')->processLifeTaps($ltaps, $damage)` instead
+        -   `process_dmgshield` use `LotgdKernel::get('lotgd_core.combat.battle')->processDmgShield($dshield, $damage)` instead
+        -   `expire_buffs` use `LotgdKernel::get('lotgd_core.combat.battle')->expireBuffs()` instead
+        -   `expire_buffs_afterbattle` use `LotgdKernel::get('lotgd_core.combat.battle')->expireBuffsAfterBattle()` instead
+    -   **lib/battle/extended.php**
+        -   `prepare_data_battlebars` use `LotgdKernel::get('lotgd_core.combat.battle')->prepareDataBattleBars($enemies)` instead
+        -   `prepare_fight` use `LotgdKernel::get('lotgd_core.combat.battle')->prepareFight($options)` instead
+        -   `prepare_companions` use `LotgdKernel::get('lotgd_core.combat.battle')->prepareCompanions()` instead
+        -   `suspend_companions` use `LotgdKernel::get('lotgd_core.combat.battle')->suspendCompanions($susp, $nomsg)` instead
+        -   `unsuspend_companions` use `LotgdKernel::get('lotgd_core.combat.battle')->unSuspendCompanions($susp, $nomsg)` instead
+        -   `autosettarget` use `LotgdKernel::get('lotgd_core.combat.battle')->autoSetTarget($localenemies)` instead
+        -   `report_companion_move` use `LotgdKernel::get('lotgd_core.combat.battle')->reportCompanionMove($companion, $activate)` instead
+        -   `rollcompaniondamage` use `LotgdKernel::get('lotgd_core.combat.battle')->rollCompanionDamage($companion)` instead
+        -   `battle_spawn` use `LotgdKernel::get('lotgd_core.combat.battle')->battleSpawn($creature)` instead
+        -   `battle_heal` use `LotgdKernel::get('lotgd_core.combat.battle')->battleHeal($amount, $target)` instead
+        -   `execute_ai_script` use `LotgdKernel::get('lotgd_core.combat.battle')->executeAiScript($script)` instead
+    -   **lib/battle/functions.php**
+        -   `battle_player_attacks` use `LotgdKernel::get('lotgd_core.combat.battle')->battlePlayerAttacks()` instead
+        -   `battle_badguy_attacks` use `LotgdKernel::get('lotgd_core.combat.battle')->battleBadguyAttacks()` instead
+        -   `battlevictory` use `LotgdKernel::get('lotgd_core.combat.battle')->battleVictory($enemies, $denyflawless, $forest)` instead
+        -   `battlegainexperienceforest` use `LotgdKernel::get('lotgd_core.combat.battle')->battleGainExperienceForest()` instead
+        -   `battlegainexperiencegraveyard` use `LotgdKernel::get('lotgd_core.combat.battle')->battleGainExperienceGraveyard()` instead
+        -   `battledefeat` use `LotgdKernel::get('lotgd_core.combat.battle')->battleDefeat($enemies, $where, $candie, $lostexp, $lostgold)` instead
+        -   `battleshowresults` use `LotgdKernel::get('lotgd_core.combat.battle')->battleShowResults($lotgdBattleContent)` instead
+    -   **lib/battle/skills.php**
+        -   `rolldamage` use `LotgdKernel::get('lotgd_core.combat.battle')->rollDamage()` instead
+        -   `report_power_move` use `LotgdKernel::get('lotgd_core.combat.battle')->reportPowerMove($crit, $dmg)` instead
+        -   `suspend_buffs` use `LotgdKernel::get('lotgd_core.combat.battle')->suspendBuffs($susp, $msg)` instead
+        -   `suspend_buff_by_name` use `"LotgdKernel::get('lotgd_core.combat.battle')->suspendBuffByName($name, $msg)` instead
+        -   `unsuspend_buff_by_name` use `LotgdKernel::get('lotgd_core.combat.battle')->unsuspendBuffByName($name, $msg)` instead
+        -   `is_buff_active` use `LotgdKernel::get('lotgd_core.combat.battle')->isBuffActive($name)` instead
+        -   `unsuspend_buffs` use `LotgdKernel::get('lotgd_core.combat.battle')->unsuspendBuffs($susp, $msg)` instead
+        -   `apply_bodyguard` use `LotgdKernel::get('lotgd_core.combat.battle')->applyBodyguard($level)` instead
+        -   `apply_skill` use `LotgdKernel::get('lotgd_core.combat.battle')->applySkill($skill, $l)` instead
 -   **lib/buffs.php** All functions (removed in future version)
     -   `calculate_buff_fields` use `LotgdKernel::get('lotgd_core.combat.buffs')->calculateBuffFields()` instead
     -   `restore_buff_fields` use `LotgdKernel::get('lotgd_core.combat.buffs')->restoreBuffFields()` instead
