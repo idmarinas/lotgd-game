@@ -13,8 +13,6 @@
 
 namespace Lotgd\Core\Controller;
 
-require_once 'lib/datetime.php';
-
 use Lotgd\Core\Events;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
