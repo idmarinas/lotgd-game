@@ -24,6 +24,7 @@
     </coverage>
 
     <php>
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
         <env name="BOOTSTRAP_CLEAR_CACHE_ENV" value="test" />
         <ini name="error_reporting" value="-1" />
         <server name="APP_ENV" value="test" force="true" />
