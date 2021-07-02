@@ -1,0 +1,10 @@
+--TEST--
+"lotgd_url" filter
+--TEMPLATE--
+{{ 'new.php?op=page'|lotgd_url }}
+{{ 'old.php?op=old'|lotgd_url }}
+--DATA--
+return []
+--EXPECT--
+new.php?op=page
+old.php?op=old

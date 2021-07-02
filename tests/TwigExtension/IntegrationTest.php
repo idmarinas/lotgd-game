@@ -14,11 +14,17 @@
 namespace Lotgd\Bundle\Tests\TwigExtension;
 
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Navigation\AccessKeys;
+use Lotgd\Core\Navigation\Navigation as NavigationNavigation;
 use Lotgd\Core\Output\Format;
 use Lotgd\Core\Tool\Sanitize;
+use Lotgd\Core\Twig\Extension\ApplyFilter;
 use Lotgd\Core\Twig\Extension\CensorExtension;
 use Lotgd\Core\Twig\Extension\FormatExtension;
 use Lotgd\Core\Twig\Extension\GameCore;
+use Lotgd\Core\Twig\Extension\Jaxon;
+use Lotgd\Core\Twig\Extension\Navigation;
+use Lotgd\Core\Twig\Extension\Translator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Twig\Test\IntegrationTestCase;
 
@@ -45,6 +51,16 @@ class IntegrationTest extends IntegrationTestCase
                 $container->get('lotgd_core.entity_manager'),
                 $container->get('session')
             ),
+            new Navigation(
+                $container->get('translator'),
+                $container->get(NavigationNavigation::class),
+                $container->get(AccessKeys::class),
+                $container->get(Format::class),
+                $container->get(Request::class)
+            ),
+            new ApplyFilter(),
+            new Translator($container->get('translator')),
+            new Jaxon($container->get('lotgd.core.jaxon')),
         ];
     }
 
