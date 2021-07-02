@@ -50,9 +50,7 @@ elseif ($session['user']['alive'])
 }
 else
 {
-    require_once 'lib/battle/extended.php';
-
-    suspend_companions('allowinshades', true);
+    \LotgdKernel::get('lotgd_core.combat.battle')->suspendCompanions('allowinshades', true);
 
     \LotgdNavigation::addHeader('news.category.logout');
     \LotgdNavigation::addNav('news.nav.logout', 'login.php?op=logout');

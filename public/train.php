@@ -28,6 +28,9 @@ unset($result);
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);
 
+/** @var \Lotgd\Core\Combat\Battle */
+$serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
+
 $params = [
     'textDomain' => $textDomain
 ];
@@ -128,7 +131,7 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
             {
                 \LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields();
 
-                $master = buffbadguy($master, 'buffmaster');
+                $master = \LotgdKernel::get('lotgd_core.tool.creature_functions')->buffBadguy($master, 'buffmaster');
 
                 $attackstack['enemies'][0] = $master;
                 $attackstack['options']['type'] = 'train';
@@ -224,8 +227,8 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
 
         require_once 'battle.php';
 
-        suspend_buffs('allowintrain');
-        suspend_companions('allowintrain');
+        $serviceBattle->suspendBuffs('allowintrain');
+        $serviceBattle->suspendCompanions('allowintrain');
 
         //-- Superuser Gain level
         if (\LotgdRequest::getQuery('victory'))
@@ -292,7 +295,7 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
                 $session['user']['refererawarded'] = 1;
             }
 
-            increment_specialty('`^');
+            LotgdKernel::get('lotgd_core.tool.player_functions')->incrementSpecialty('`^');
 
             // Level-Up companions
             // We only get one level per pageload. So we just add the per-level-values.
@@ -388,15 +391,15 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
         }
         else
         {
-            fightnav(false, false, "train.php?master=$masterId");
+            \LotgdNavigation::fightNav(false, false, "train.php?master=$masterId");
         }
 
-        battleshowresults($lotgdBattleContent);
+        $serviceBattle->battleShowResults($lotgdBattleContent);
 
         if ($victory || $defeat)
         {
-            unsuspend_buffs('allowintrain');
-            unsuspend_companions('allowintrain');
+            $serviceBattle->unsuspendBuffs('allowintrain');
+            $serviceBattle->unSuspendCompanions('allowintrain');
         }
     }
 }
