@@ -134,7 +134,7 @@ if ($battle)
     {
         require_once 'lib/fightnav.php';
 
-        fightnav(false, true, 'graveyard.php');
+        LotgdNavigation::fightNav(false, true, 'graveyard.php');
     }
 }
 

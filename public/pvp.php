@@ -196,10 +196,10 @@ if ($battle)
         {
             $extra = '?inn=1';
         }
-        fightnav(false, false, "pvp.php{$extra}");
+        \LotgdNavigation::fightNav(false, false, "pvp.php{$extra}");
     }
 
-    battleshowresults($lotgdBattleContent);
+    \LotgdKernel::get('lotgd_core.combat.battle')->battleShowResults($lotgdBattleContent);
 }
 
 $params['battle'] = $battle;

@@ -19,7 +19,7 @@ function savesetting(string $settingname, $value)
 function clearsettings()
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 5.5.0; and delete in future version. Use "LotgdKernel::get("lotgd_core.settings")->clearsettings();" instead.',
+        'Usage of %s is obsolete since 5.5.0; and delete in future version. Use "LotgdKernel::get("lotgd_core.settings")->clearSettings();" instead.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
