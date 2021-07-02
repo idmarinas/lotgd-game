@@ -33,92 +33,92 @@ Search.appendIndex(
         },                {
             "fqsen": "\\prepare_data_battlebars\u0028\u0029",
             "name": "prepare_data_battlebars",
-            "summary": "Prepare\u0020all\u0020data\u0020for\u0020show\u0020battle\u0020bars.",
+            "summary": "",
             "url": "namespaces/default.html#function_prepare_data_battlebars"
         },                {
             "fqsen": "\\prepare_fight\u0028\u0029",
             "name": "prepare_fight",
-            "summary": "This\u0020function\u0020prepares\u0020the\u0020fight,\u0020sets\u0020up\u0020options\u0020and\u0020gives\u0020hook\u0020a\u0020hook\u0020to\u0020change\u0020options\u0020on\u0020a\u0020per\u002Dplayer\u0020basis.",
+            "summary": "",
             "url": "namespaces/default.html#function_prepare_fight"
         },                {
             "fqsen": "\\prepare_companions\u0028\u0029",
             "name": "prepare_companions",
-            "summary": "This\u0020functions\u0020prepares\u0020companions\u0020to\u0020be\u0020able\u0020to\u0020take\u0020part\u0020in\u0020a\u0020fight.\u0020Uses\u0020global\u0020copies.",
+            "summary": "",
             "url": "namespaces/default.html#function_prepare_companions"
         },                {
             "fqsen": "\\suspend_companions\u0028\u0029",
             "name": "suspend_companions",
-            "summary": "Suspends\u0020companions\u0020on\u0020a\u0020given\u0020parameter.",
+            "summary": "",
             "url": "namespaces/default.html#function_suspend_companions"
         },                {
             "fqsen": "\\unsuspend_companions\u0028\u0029",
             "name": "unsuspend_companions",
-            "summary": "Enables\u0020suspended\u0020companions.",
+            "summary": "",
             "url": "namespaces/default.html#function_unsuspend_companions"
         },                {
             "fqsen": "\\autosettarget\u0028\u0029",
             "name": "autosettarget",
-            "summary": "Automatically\u0020chooses\u0020the\u0020first\u0020still\u0020living\u0020enemy\u0020as\u0020target\u0020for\u0020attacks.",
+            "summary": "",
             "url": "namespaces/default.html#function_autosettarget"
         },                {
             "fqsen": "\\report_companion_move\u0028\u0029",
             "name": "report_companion_move",
-            "summary": "Based\u0020upon\u0020the\u0020type\u0020of\u0020the\u0020companion\u0020different\u0020actions\u0020are\u0020performed\u0020and\u0020the\u0020companion\u0020is\u0020marked\u0020as\u0020\u0022used\u0022\u0020after\u0020that.",
+            "summary": "",
             "url": "namespaces/default.html#function_report_companion_move"
         },                {
             "fqsen": "\\rollcompaniondamage\u0028\u0029",
             "name": "rollcompaniondamage",
-            "summary": "Based\u0020upon\u0020the\u0020companion\u0027s\u0020stats\u0020damage\u0020values\u0020are\u0020calculated.",
+            "summary": "",
             "url": "namespaces/default.html#function_rollcompaniondamage"
         },                {
             "fqsen": "\\battle_spawn\u0028\u0029",
             "name": "battle_spawn",
-            "summary": "Adds\u0020a\u0020new\u0020creature\u0020to\u0020the\u0020badguy\u0020array.",
+            "summary": "",
             "url": "namespaces/default.html#function_battle_spawn"
         },                {
             "fqsen": "\\battle_heal\u0028\u0029",
             "name": "battle_heal",
-            "summary": "Allows\u0020creatures\u0020to\u0020heal\u0020themselves\u0020or\u0020another\u0020badguy.",
+            "summary": "",
             "url": "namespaces/default.html#function_battle_heal"
         },                {
             "fqsen": "\\execute_ai_script\u0028\u0029",
             "name": "execute_ai_script",
-            "summary": "Executes\u0020the\u0020given\u0020script\u0020or\u0020loads\u0020the\u0020script\u0020and\u0020then\u0020executes\u0020it.",
+            "summary": "",
             "url": "namespaces/default.html#function_execute_ai_script"
         },                {
             "fqsen": "\\battle_player_attacks\u0028\u0029",
             "name": "battle_player_attacks",
-            "summary": "Battle\u003A\u0020attack\u0020of\u0020player.",
+            "summary": "",
             "url": "namespaces/default.html#function_battle_player_attacks"
         },                {
             "fqsen": "\\battle_badguy_attacks\u0028\u0029",
             "name": "battle_badguy_attacks",
-            "summary": "Battle\u003A\u0020attack\u0020of\u0020badguy.",
+            "summary": "",
             "url": "namespaces/default.html#function_battle_badguy_attacks"
         },                {
             "fqsen": "\\battlevictory\u0028\u0029",
             "name": "battlevictory",
-            "summary": "Function\u0020to\u0020show\u0020result\u0020of\u0020victory\u0020battle.",
+            "summary": "",
             "url": "namespaces/default.html#function_battlevictory"
         },                {
             "fqsen": "\\battlegainexperienceforest\u0028\u0029",
             "name": "battlegainexperienceforest",
-            "summary": "Process\u0020win\u0020experiencie\u0020in\u0020battle\u0020win\u0020in\u0020forest.",
+            "summary": "",
             "url": "namespaces/default.html#function_battlegainexperienceforest"
         },                {
             "fqsen": "\\battlegainexperiencegraveyard\u0028\u0029",
             "name": "battlegainexperiencegraveyard",
-            "summary": "Process\u0020win\u0020experiencie\u0020in\u0020battle\u0020win\u0020in\u0020graveyard.",
+            "summary": "",
             "url": "namespaces/default.html#function_battlegainexperiencegraveyard"
         },                {
             "fqsen": "\\battledefeat\u0028\u0029",
             "name": "battledefeat",
-            "summary": "Function\u0020to\u0020show\u0020result\u0020of\u0020defeated\u0020battle.",
+            "summary": "",
             "url": "namespaces/default.html#function_battledefeat"
         },                {
             "fqsen": "\\battleshowresults\u0028\u0029",
             "name": "battleshowresults",
-            "summary": "Show\u0020result\u0020of.",
+            "summary": "",
             "url": "namespaces/default.html#function_battleshowresults"
         },                {
             "fqsen": "\\rolldamage\u0028\u0029",
@@ -218,22 +218,22 @@ Search.appendIndex(
         },                {
             "fqsen": "\\lotgd_generate_creature_levels\u0028\u0029",
             "name": "lotgd_generate_creature_levels",
-            "summary": "Generate\u0020a\u0020base\u0020creature\u0020stats\nCan\u0020use\u0020for\u0020generated\u0020your\u0020own\u0020creatures\u0020in\u0020your\u0020modules.",
+            "summary": "",
             "url": "namespaces/default.html#function_lotgd_generate_creature_levels"
         },                {
             "fqsen": "\\lotgd_generate_doppelganger\u0028\u0029",
             "name": "lotgd_generate_doppelganger",
-            "summary": "Generate\u0020a\u0020dummy\u0020creature\u0020Doppelganger.",
+            "summary": "",
             "url": "namespaces/default.html#function_lotgd_generate_doppelganger"
         },                {
             "fqsen": "\\lotgd_transform_creature\u0028\u0029",
             "name": "lotgd_transform_creature",
-            "summary": "Transform\u0020creature\u0020to\u0020adapt\u0020to\u0020player.",
+            "summary": "",
             "url": "namespaces/default.html#function_lotgd_transform_creature"
         },                {
             "fqsen": "\\lotgd_search_creature\u0028\u0029",
             "name": "lotgd_search_creature",
-            "summary": "Search\u0020for\u0020creature\u0020in\u0020data\u0020base.",
+            "summary": "",
             "url": "namespaces/default.html#function_lotgd_search_creature"
         },                {
             "fqsen": "\\get_creature_stats\u0028\u0029",
@@ -268,7 +268,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\checkday\u0028\u0029",
             "name": "checkday",
-            "summary": "Check\u0020if\u0020is\u0020a\u0020new\u0020day.",
+            "summary": "",
             "url": "namespaces/default.html#function_checkday"
         },                {
             "fqsen": "\\is_new_day\u0028\u0029",
@@ -283,7 +283,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\gametime\u0028\u0029",
             "name": "gametime",
-            "summary": "Undocumented\u0020function.",
+            "summary": "",
             "url": "namespaces/default.html#function_gametime"
         },                {
             "fqsen": "\\convertgametime\u0028\u0029",
@@ -343,7 +343,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\buffbadguy\u0028\u0029",
             "name": "buffbadguy",
-            "summary": "Buff\u0020creature\u0020for\u0020optimize\u0020to\u0020character\u0020stats.",
+            "summary": "",
             "url": "namespaces/default.html#function_buffbadguy"
         },                {
             "fqsen": "\\gamelog\u0028\u0029",
@@ -1341,6 +1341,371 @@ Search.appendIndex(
             "summary": "Array\u0020stats\u0020of\u0020character.",
             "url": "classes/Lotgd-Core-Character-Stats.html#property_stats"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Action",
+            "name": "Action",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Action.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Action\u003A\u003AbattlePlayerAttacks\u0028\u0029",
+            "name": "battlePlayerAttacks",
+            "summary": "Battle\u003A\u0020attack\u0020of\u0020player.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Action.html#method_battlePlayerAttacks"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Action\u003A\u003AbattleBadguyAttacks\u0028\u0029",
+            "name": "battleBadguyAttacks",
+            "summary": "Battle\u003A\u0020attack\u0020of\u0020badguy.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Action.html#method_battleBadguyAttacks"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Action\u003A\u003AbattleVictory\u0028\u0029",
+            "name": "battleVictory",
+            "summary": "Function\u0020to\u0020show\u0020result\u0020of\u0020victory\u0020battle.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Action.html#method_battleVictory"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Action\u003A\u003AbattleGainExperienceForest\u0028\u0029",
+            "name": "battleGainExperienceForest",
+            "summary": "Process\u0020win\u0020experiencie\u0020in\u0020battle\u0020win\u0020in\u0020forest.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Action.html#method_battleGainExperienceForest"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Action\u003A\u003AbattleGainExperienceGraveyard\u0028\u0029",
+            "name": "battleGainExperienceGraveyard",
+            "summary": "Process\u0020win\u0020experiencie\u0020in\u0020battle\u0020win\u0020in\u0020graveyard.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Action.html#method_battleGainExperienceGraveyard"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Action\u003A\u003AbattleDefeat\u0028\u0029",
+            "name": "battleDefeat",
+            "summary": "Function\u0020to\u0020show\u0020result\u0020of\u0020defeated\u0020battle.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Action.html#method_battleDefeat"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Action\u003A\u003AbattleShowResults\u0028\u0029",
+            "name": "battleShowResults",
+            "summary": "Show\u0020result\u0020of.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Action.html#method_battleShowResults"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Buff",
+            "name": "Buff",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Buff.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Buff\u003A\u003AactivateBuffs\u0028\u0029",
+            "name": "activateBuffs",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Buff.html#method_activateBuffs"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Buff\u003A\u003AprocessLifeTaps\u0028\u0029",
+            "name": "processLifeTaps",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Buff.html#method_processLifeTaps"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Buff\u003A\u003AprocessDmgShield\u0028\u0029",
+            "name": "processDmgShield",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Buff.html#method_processDmgShield"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Buff\u003A\u003AexpireBuffs\u0028\u0029",
+            "name": "expireBuffs",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Buff.html#method_expireBuffs"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Buff\u003A\u003AexpireBuffsAfterBattle\u0028\u0029",
+            "name": "expireBuffsAfterBattle",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Buff.html#method_expireBuffsAfterBattle"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Extended",
+            "name": "Extended",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Extended.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Extended\u003A\u003AprepareDataBattleBars\u0028\u0029",
+            "name": "prepareDataBattleBars",
+            "summary": "Prepare\u0020all\u0020data\u0020for\u0020show\u0020battle\u0020bars.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Extended.html#method_prepareDataBattleBars"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Extended\u003A\u003AprepareFight\u0028\u0029",
+            "name": "prepareFight",
+            "summary": "This\u0020function\u0020prepares\u0020the\u0020fight,\u0020sets\u0020up\u0020options\u0020and\u0020gives\u0020hook\u0020a\u0020hook\u0020to\u0020change\u0020options\u0020on\u0020a\u0020per\u002Dplayer\u0020basis.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Extended.html#method_prepareFight"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Extended\u003A\u003AprepareCompanions\u0028\u0029",
+            "name": "prepareCompanions",
+            "summary": "This\u0020functions\u0020prepares\u0020companions\u0020to\u0020be\u0020able\u0020to\u0020take\u0020part\u0020in\u0020a\u0020fight.\u0020Uses\u0020global\u0020copies.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Extended.html#method_prepareCompanions"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Extended\u003A\u003AsuspendCompanions\u0028\u0029",
+            "name": "suspendCompanions",
+            "summary": "Suspends\u0020companions\u0020on\u0020a\u0020given\u0020parameter.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Extended.html#method_suspendCompanions"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Extended\u003A\u003AunSuspendCompanions\u0028\u0029",
+            "name": "unSuspendCompanions",
+            "summary": "Enables\u0020suspended\u0020companions.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Extended.html#method_unSuspendCompanions"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Extended\u003A\u003AautoSetTarget\u0028\u0029",
+            "name": "autoSetTarget",
+            "summary": "Automatically\u0020chooses\u0020the\u0020first\u0020still\u0020living\u0020enemy\u0020as\u0020target\u0020for\u0020attacks.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Extended.html#method_autoSetTarget"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Extended\u003A\u003AreportCompanionMove\u0028\u0029",
+            "name": "reportCompanionMove",
+            "summary": "Based\u0020upon\u0020the\u0020type\u0020of\u0020the\u0020companion\u0020different\u0020actions\u0020are\u0020performed\u0020and\u0020the\u0020companion\u0020is\u0020marked\u0020as\u0020\u0022used\u0022\u0020after\u0020that.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Extended.html#method_reportCompanionMove"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Extended\u003A\u003ArollCompanionDamage\u0028\u0029",
+            "name": "rollCompanionDamage",
+            "summary": "Based\u0020upon\u0020the\u0020companion\u0027s\u0020stats\u0020damage\u0020values\u0020are\u0020calculated.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Extended.html#method_rollCompanionDamage"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Extended\u003A\u003AbattleSpawn\u0028\u0029",
+            "name": "battleSpawn",
+            "summary": "Adds\u0020a\u0020new\u0020creature\u0020to\u0020the\u0020badguy\u0020array.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Extended.html#method_battleSpawn"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Extended\u003A\u003AbattleHeal\u0028\u0029",
+            "name": "battleHeal",
+            "summary": "Allows\u0020creatures\u0020to\u0020heal\u0020themselves\u0020or\u0020another\u0020badguy.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Extended.html#method_battleHeal"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Extended\u003A\u003AexecuteAiScript\u0028\u0029",
+            "name": "executeAiScript",
+            "summary": "Executes\u0020the\u0020given\u0020script\u0020or\u0020loads\u0020the\u0020script\u0020and\u0020then\u0020executes\u0020it.",
+            "url": "classes/Lotgd-Core-Combat-Battle-Extended.html#method_executeAiScript"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Skill",
+            "name": "Skill",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Skill.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Skill\u003A\u003ArollDamage\u0028\u0029",
+            "name": "rollDamage",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Skill.html#method_rollDamage"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Skill\u003A\u003AreportPowerMove\u0028\u0029",
+            "name": "reportPowerMove",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Skill.html#method_reportPowerMove"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Skill\u003A\u003AsuspendBuffs\u0028\u0029",
+            "name": "suspendBuffs",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Skill.html#method_suspendBuffs"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Skill\u003A\u003AsuspendBuffByName\u0028\u0029",
+            "name": "suspendBuffByName",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Skill.html#method_suspendBuffByName"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Skill\u003A\u003AunsuspendBuffByName\u0028\u0029",
+            "name": "unsuspendBuffByName",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Skill.html#method_unsuspendBuffByName"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Skill\u003A\u003AisBuffActive\u0028\u0029",
+            "name": "isBuffActive",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Skill.html#method_isBuffActive"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Skill\u003A\u003AunsuspendBuffs\u0028\u0029",
+            "name": "unsuspendBuffs",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Skill.html#method_unsuspendBuffs"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Skill\u003A\u003AapplyBodyguard\u0028\u0029",
+            "name": "applyBodyguard",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Skill.html#method_applyBodyguard"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\\Skill\u003A\u003AapplySkill\u0028\u0029",
+            "name": "applySkill",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle-Skill.html#method_applySkill"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle",
+            "name": "Battle",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\u003A\u003A\u0024tools",
+            "name": "tools",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html#property_tools"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\u003A\u003A\u0024buffer",
+            "name": "buffer",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html#property_buffer"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\u003A\u003A\u0024dispatcher",
+            "name": "dispatcher",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html#property_dispatcher"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\u003A\u003A\u0024doctrine",
+            "name": "doctrine",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html#property_doctrine"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\u003A\u003A\u0024log",
+            "name": "log",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html#property_log"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\u003A\u003A\u0024navigation",
+            "name": "navigation",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html#property_navigation"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\u003A\u003A\u0024response",
+            "name": "response",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html#property_response"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\u003A\u003A\u0024twig",
+            "name": "twig",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html#property_twig"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\u003A\u003A\u0024sanitize",
+            "name": "sanitize",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html#property_sanitize"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html#property_translator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\u003A\u003A\u0024playerFunction",
+            "name": "playerFunction",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html#property_playerFunction"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html#property_settings"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer",
+            "name": "Buffer",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer\u003A\u003AcalculateBuffFields\u0028\u0029",
+            "name": "calculateBuffFields",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html#method_calculateBuffFields"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer\u003A\u003ArestoreBuffFields\u0028\u0029",
+            "name": "restoreBuffFields",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html#method_restoreBuffFields"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer\u003A\u003AapplyBuff\u0028\u0029",
+            "name": "applyBuff",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html#method_applyBuff"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer\u003A\u003AapplyCompanion\u0028\u0029",
+            "name": "applyCompanion",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html#method_applyCompanion"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer\u003A\u003AstripBuff\u0028\u0029",
+            "name": "stripBuff",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html#method_stripBuff"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer\u003A\u003AstripAllBuffs\u0028\u0029",
+            "name": "stripAllBuffs",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html#method_stripAllBuffs"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer\u003A\u003AhasBuff\u0028\u0029",
+            "name": "hasBuff",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html#method_hasBuff"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer\u003A\u003A\u0024buffreplacements",
+            "name": "buffreplacements",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html#property_buffreplacements"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer\u003A\u003A\u0024debuggedbuffs",
+            "name": "debuggedbuffs",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html#property_debuggedbuffs"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer\u003A\u003A\u0024response",
+            "name": "response",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html#property_response"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer\u003A\u003A\u0024dispatcher",
+            "name": "dispatcher",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html#property_dispatcher"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer\u003A\u003A\u0024tempStat",
+            "name": "tempStat",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html#property_tempStat"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Buffer\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Buffer.html#property_settings"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\TempStat",
+            "name": "TempStat",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-TempStat.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\TempStat\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-TempStat.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\TempStat\u003A\u003AapplyTempStat\u0028\u0029",
+            "name": "applyTempStat",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-TempStat.html#method_applyTempStat"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\TempStat\u003A\u003AcheckTempStat\u0028\u0029",
+            "name": "checkTempStat",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-TempStat.html#method_checkTempStat"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\TempStat\u003A\u003AsuspendTempStats\u0028\u0029",
+            "name": "suspendTempStats",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-TempStat.html#method_suspendTempStats"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\TempStat\u003A\u003ArestoreTempStats\u0028\u0029",
+            "name": "restoreTempStats",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-TempStat.html#method_restoreTempStats"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\TempStat\u003A\u003A\u0024temp_user_stats",
+            "name": "temp_user_stats",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-TempStat.html#property_temp_user_stats"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\TempStat\u003A\u003A\u0024response",
+            "name": "response",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-TempStat.html#property_response"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Command\\AboutCommand",
             "name": "AboutCommand",
             "summary": "Console\u0020command\u0020to\u0020display\u0020information\u0020about\u0020the\u0020current\u0020application.",
@@ -1586,10 +1951,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-AboutController.html#method_modules"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\AboutController\u003A\u003A\u0024bundles",
+            "name": "bundles",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-AboutController.html#property_bundles"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\AboutController\u003A\u003Alicense\u0028\u0029",
             "name": "license",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-AboutController.html#method_license"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\AboutController\u003A\u003AsetBundles\u0028\u0029",
+            "name": "setBundles",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-AboutController.html#method_setBundles"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\AboutController\u003A\u003ArenderAbout\u0028\u0029",
             "name": "renderAbout",
@@ -1610,6 +1985,11 @@ Search.appendIndex(
             "name": "cache",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-AboutController.html#property_cache"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\AboutController\u003A\u003A\u0024dateTime",
+            "name": "dateTime",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-AboutController.html#property_dateTime"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\AccountController",
             "name": "AccountController",
@@ -1736,6 +2116,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-BankController.html#property_log"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\BankController\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-BankController.html#property_settings"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\ClanController",
             "name": "ClanController",
             "summary": "",
@@ -1836,6 +2221,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-ClanController.html#property_response"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\ClanController\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-ClanController.html#property_settings"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\CreateController",
             "name": "CreateController",
             "summary": "",
@@ -1895,6 +2285,46 @@ Search.appendIndex(
             "name": "log",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-CreateController.html#property_log"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\CreateController\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-CreateController.html#property_settings"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\ForestController",
+            "name": "ForestController",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-ForestController.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\ForestController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-ForestController.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\ForestController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-ForestController.html#method_index"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\ForestController\u003A\u003ArenderForest\u0028\u0029",
+            "name": "renderForest",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-ForestController.html#method_renderForest"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\ForestController\u003A\u003A\u0024dispatcher",
+            "name": "dispatcher",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-ForestController.html#property_dispatcher"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\ForestController\u003A\u003A\u0024navigation",
+            "name": "navigation",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-ForestController.html#property_navigation"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\ForestController\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-ForestController.html#property_settings"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\GardenController",
             "name": "GardenController",
@@ -1961,6 +2391,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-GypsyController.html#property_log"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\GypsyController\u003A\u003A\u0024dateTime",
+            "name": "dateTime",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-GypsyController.html#property_dateTime"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\HealerController",
             "name": "HealerController",
             "summary": "",
@@ -2000,6 +2435,16 @@ Search.appendIndex(
             "name": "log",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-HealerController.html#property_log"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\HealerController\u003A\u003A\u0024dateTime",
+            "name": "dateTime",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-HealerController.html#property_dateTime"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\HealerController\u003A\u003A\u0024navigation",
+            "name": "navigation",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-HealerController.html#property_navigation"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\HofController",
             "name": "HofController",
@@ -2096,6 +2541,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-HomeController.html#property_translator"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\HomeController\u003A\u003A\u0024dateTime",
+            "name": "dateTime",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-HomeController.html#property_dateTime"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\InnController",
             "name": "InnController",
             "summary": "",
@@ -2170,6 +2620,16 @@ Search.appendIndex(
             "name": "color",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-InnController.html#property_color"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\InnController\u003A\u003A\u0024dateTime",
+            "name": "dateTime",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-InnController.html#property_dateTime"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\InnController\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-InnController.html#property_settings"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\ListController",
             "name": "ListController",
@@ -2265,6 +2725,11 @@ Search.appendIndex(
             "name": "navigation",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-LodgeController.html#property_navigation"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\LodgeController\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-LodgeController.html#property_settings"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\LogdnetController",
             "name": "LogdnetController",
@@ -2391,6 +2856,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-MercenaryCampController.html#property_log"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\MercenaryCampController\u003A\u003A\u0024buffs",
+            "name": "buffs",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-MercenaryCampController.html#property_buffs"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\NewsController",
             "name": "NewsController",
             "summary": "",
@@ -2450,6 +2920,11 @@ Search.appendIndex(
             "name": "dispatcher",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-ReferralController.html#property_dispatcher"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\ReferralController\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-ReferralController.html#property_settings"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\RockController",
             "name": "RockController",
@@ -2570,6 +3045,16 @@ Search.appendIndex(
             "name": "sanitize",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-StableController.html#property_sanitize"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\StableController\u003A\u003A\u0024buffs",
+            "name": "buffs",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-StableController.html#property_buffs"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\StableController\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-StableController.html#property_settings"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\VillageController",
             "name": "VillageController",
@@ -9181,6 +9666,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-EntityForm-CharactersType.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\EntityForm\\CharactersType\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-EntityForm-CharactersType.html#method___construct"
+        },                {
             "fqsen": "\\Lotgd\\Core\\EntityForm\\CharactersType\u003A\u003AbuildForm\u0028\u0029",
             "name": "buildForm",
             "summary": "",
@@ -9190,6 +9680,11 @@ Search.appendIndex(
             "name": "configureOptions",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityForm-CharactersType.html#method_configureOptions"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\EntityForm\\CharactersType\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-EntityForm-CharactersType.html#property_settings"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityForm\\Common\\BuffType",
             "name": "BuffType",
@@ -9481,6 +9976,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-EntityForm-MastersType.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\EntityForm\\MastersType\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-EntityForm-MastersType.html#method___construct"
+        },                {
             "fqsen": "\\Lotgd\\Core\\EntityForm\\MastersType\u003A\u003AbuildForm\u0028\u0029",
             "name": "buildForm",
             "summary": "",
@@ -9490,6 +9990,11 @@ Search.appendIndex(
             "name": "configureOptions",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityForm-MastersType.html#method_configureOptions"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\EntityForm\\MastersType\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-EntityForm-MastersType.html#property_settings"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityForm\\MotdEditType",
             "name": "MotdEditType",
@@ -9651,435 +10156,60 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-EntityForm-WeaponsType.html#method_configureOptions"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Bans",
-            "name": "Bans",
-            "summary": "Functions\u0020for\u0020bans\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Bans.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Bans\u003A\u003AbansSearchAccts\u0028\u0029",
-            "name": "bansSearchAccts",
-            "summary": "Search\u0020accounts.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Bans.html#method_bansSearchAccts"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Bans\u003A\u003AgetBasicInfoOfAccount\u0028\u0029",
-            "name": "getBasicInfoOfAccount",
-            "summary": "Get\u0020a\u0020basic\u0020information\u0020of\u0020account\u0020for\u0020ban.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Bans.html#method_getBasicInfoOfAccount"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Bans\u003A\u003AgetAccountsWithEqualId\u0028\u0029",
-            "name": "getAccountsWithEqualId",
-            "summary": "Get\u0020accounts\u0020with\u0020identical\u0020ID.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Bans.html#method_getAccountsWithEqualId"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Bans\u003A\u003AgetAccountsWithSimilarIp\u0028\u0029",
-            "name": "getAccountsWithSimilarIp",
-            "summary": "Get\u0020accounts\u0020with\u0020similar\u0020IP.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Bans.html#method_getAccountsWithSimilarIp"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Bans\u003A\u003AlogoutAffectedAccounts\u0028\u0029",
-            "name": "logoutAffectedAccounts",
-            "summary": "Log\u0020out\u0020affected\u0020players\u0020for\u0020a\u0020ban.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Bans.html#method_logoutAffectedAccounts"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Character",
-            "name": "Character",
-            "summary": "Functions\u0020for\u0020characters\u0020from\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Character.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Character\u003A\u003AgetCharacterInfoFromAcctId\u0028\u0029",
-            "name": "getCharacterInfoFromAcctId",
-            "summary": "Get\u0020information\u0020of\u0020character\u0020for\u0020bio\u0020page.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Character.html#method_getCharacterInfoFromAcctId"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Character\u003A\u003AgetCharacterNewsFromAcctId\u0028\u0029",
-            "name": "getCharacterNewsFromAcctId",
-            "summary": "Get\u0020recent\u0020news\u0020from\u0020account\u0020and\u0020character.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Character.html#method_getCharacterNewsFromAcctId"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Character\u003A\u003AgetCharacterNameFromAcctId\u0028\u0029",
-            "name": "getCharacterNameFromAcctId",
-            "summary": "Get\u0020character\u0020name\u0020from\u0020account\u0020ID.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Character.html#method_getCharacterNameFromAcctId"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Clan",
-            "name": "Clan",
-            "summary": "Functions\u0020for\u0020clans.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Clan.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Clan\u003A\u003AgetClanAuthorNameOfMotdDescFromAcctId\u0028\u0029",
-            "name": "getClanAuthorNameOfMotdDescFromAcctId",
-            "summary": "Get\u0020author\u0020name\u0020for\u0020description\u0020and\u0020motd.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Clan.html#method_getClanAuthorNameOfMotdDescFromAcctId"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Login",
-            "name": "Login",
-            "summary": "Functions\u0020for\u0020login\/logout\u0020user.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Login.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Login\u003A\u003AprocessLoginGetAcctData\u0028\u0029",
-            "name": "processLoginGetAcctData",
-            "summary": "Process\u0020login\u0020and\u0020get\u0020data.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Login.html#method_processLoginGetAcctData"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Login\u003A\u003AlogoutInactiveAccounts\u0028\u0029",
-            "name": "logoutInactiveAccounts",
-            "summary": "Logout\u0020inactive\u0020accounts.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Login.html#method_logoutInactiveAccounts"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Login\u003A\u003AgetAcctIdFromLogin\u0028\u0029",
-            "name": "getAcctIdFromLogin",
-            "summary": "Get\u0020acctid\u0020from\u0020login.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Login.html#method_getAcctIdFromLogin"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Superuser",
-            "name": "Superuser",
-            "summary": "Functions\u0020for\u0020superuser\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Superuser.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Superuser\u003A\u003AgetSuperuserWithPermit\u0028\u0029",
-            "name": "getSuperuserWithPermit",
-            "summary": "Get\u0020all\u0020superusers\u0020who\u0020have\u0020the\u0020given\u0020permission.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Superuser.html#method_getSuperuserWithPermit"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Superuser\u003A\u003AgetSuperuserCountWithPermit\u0028\u0029",
-            "name": "getSuperuserCountWithPermit",
-            "summary": "Get\u0020count\u0020of\u0020superusers\u0020who\u0020have\u0020the\u0020given\u0020permission.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Superuser.html#method_getSuperuserCountWithPermit"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\Superuser\u003A\u003AgetLoginSuperuserWithPermit\u0028\u0029",
-            "name": "getLoginSuperuserWithPermit",
-            "summary": "Superuser\u0020login.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-Superuser.html#method_getLoginSuperuserWithPermit"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\User",
-            "name": "User",
-            "summary": "Functions\u0020for\u0020user\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-User.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\User\u003A\u003AgetAcctPrefs\u0028\u0029",
-            "name": "getAcctPrefs",
-            "summary": "Get\u0020prefs\u0020of\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-User.html#method_getAcctPrefs"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account\\User\u003A\u003AuserSearchAccounts\u0028\u0029",
-            "name": "userSearchAccounts",
-            "summary": "Search\u0020users.",
-            "url": "classes/Lotgd-Core-EntityRepository-Account-User.html#method_userSearchAccounts"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\AccountsEverypageRepository",
             "name": "AccountsEverypageRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-AccountsEverypageRepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\AccountsEverypageRepository\u003A\u003AgetStatsPageGen\u0028\u0029",
-            "name": "getStatsPageGen",
-            "summary": "Get\u0020stats\u0020of\u0020page\u0020gen.",
-            "url": "classes/Lotgd-Core-EntityRepository-AccountsEverypageRepository.html#method_getStatsPageGen"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\AccountsOutput\\Backup",
-            "name": "Backup",
-            "summary": "Functions\u0020for\u0020backup\u0020data.",
-            "url": "classes/Lotgd-Core-EntityRepository-AccountsOutput-Backup.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\AccountsOutput\\Backup\u003A\u003AbackupDeleteDataFromAccount\u0028\u0029",
-            "name": "backupDeleteDataFromAccount",
-            "summary": "Delete\u0020output\u0020of\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-AccountsOutput-Backup.html#method_backupDeleteDataFromAccount"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\AccountsOutputRepository",
             "name": "AccountsOutputRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-AccountsOutputRepository.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\AccountsOutputRepository\u003A\u003AgetOutput\u0028\u0029",
-            "name": "getOutput",
-            "summary": "Get\u0020output\u0020code\u0020for\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-AccountsOutputRepository.html#method_getOutput"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\AccountsOutputRepository\u003A\u003AdeleteOutputOfAccount\u0028\u0029",
-            "name": "deleteOutputOfAccount",
-            "summary": "Delete\u0020output\u0020of\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-AccountsOutputRepository.html#method_deleteOutputOfAccount"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\AccountsRepository",
             "name": "AccountsRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-AccountsRepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\AccountsRepository\u003A\u003AgetUserById\u0028\u0029",
-            "name": "getUserById",
-            "summary": "Get\u0020data\u0020of\u0020user\u0020by\u0020ID\u0020of\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-AccountsRepository.html#method_getUserById"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\AccountsRepository\u003A\u003AgetCountAcctsOnline\u0028\u0029",
-            "name": "getCountAcctsOnline",
-            "summary": "Get\u0020total\u0020accounts\u0020that\u0020are\u0020online.",
-            "url": "classes/Lotgd-Core-EntityRepository-AccountsRepository.html#method_getCountAcctsOnline"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\AccountsRepository\u003A\u003AgetListAccountsOnline\u0028\u0029",
-            "name": "getListAccountsOnline",
-            "summary": "Get\u0020list\u0020of\u0020accounts\u0020online.",
-            "url": "classes/Lotgd-Core-EntityRepository-AccountsRepository.html#method_getListAccountsOnline"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\AccountsRepository\u003A\u003AprocessUserData\u0028\u0029",
-            "name": "processUserData",
-            "summary": "Private\u0020function\u0020to\u0020process\u0020data\u0020of\u0020user.",
-            "url": "classes/Lotgd-Core-EntityRepository-AccountsRepository.html#method_processUserData"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\ArmorRepository",
             "name": "ArmorRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-ArmorRepository.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ArmorRepository\u003A\u003AgetMaxArmorLevel\u0028\u0029",
-            "name": "getMaxArmorLevel",
-            "summary": "Get\u0020de\u0020max\u0020level\u0020of\u0020armors.",
-            "url": "classes/Lotgd-Core-EntityRepository-ArmorRepository.html#method_getMaxArmorLevel"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ArmorRepository\u003A\u003AgetNextDefenseLevel\u0028\u0029",
-            "name": "getNextDefenseLevel",
-            "summary": "Get\u0020next\u0020defense\u0020in\u0020level\u0020of\u0020armors.",
-            "url": "classes/Lotgd-Core-EntityRepository-ArmorRepository.html#method_getNextDefenseLevel"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ArmorRepository\u003A\u003AfindByLevel\u0028\u0029",
-            "name": "findByLevel",
-            "summary": "Get\u0020a\u0020translated\u0020list\u0020for\u0020a\u0020level.",
-            "url": "classes/Lotgd-Core-EntityRepository-ArmorRepository.html#method_findByLevel"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ArmorRepository\u003A\u003AfindOneArmorById\u0028\u0029",
-            "name": "findOneArmorById",
-            "summary": "Find\u0020one\u0020by\u0020id.",
-            "url": "classes/Lotgd-Core-EntityRepository-ArmorRepository.html#method_findOneArmorById"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ArmorRepository\u003A\u003AfindArmorsById\u0028\u0029",
-            "name": "findArmorsById",
-            "summary": "Get\u0020an\u0020array\u0020by\u0020ids.",
-            "url": "classes/Lotgd-Core-EntityRepository-ArmorRepository.html#method_findArmorsById"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\BansRepository",
             "name": "BansRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-BansRepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\BansRepository\u003A\u003AremoveExpireBans\u0028\u0029",
-            "name": "removeExpireBans",
-            "summary": "Remove\u0020expired\u0020bans.",
-            "url": "classes/Lotgd-Core-EntityRepository-BansRepository.html#method_removeExpireBans"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\BansRepository\u003A\u003AdeleteBan\u0028\u0029",
-            "name": "deleteBan",
-            "summary": "Delete\u0020ban\u0020from\u0020data\u0020base.",
-            "url": "classes/Lotgd-Core-EntityRepository-BansRepository.html#method_deleteBan"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Bio",
-            "name": "Bio",
-            "summary": "Functions\u0020for\u0020bio\u0020of\u0020characters.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Bio.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Bio\u003A\u003AgetCharactersUnblockedBio\u0028\u0029",
-            "name": "getCharactersUnblockedBio",
-            "summary": "Get\u0020all\u0020bios\u0020of\u0020characters\u0020that\u0020NOT\u0020are\u0020blocked.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Bio.html#method_getCharactersUnblockedBio"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Bio\u003A\u003AgetCharactersBlockedBio\u0028\u0029",
-            "name": "getCharactersBlockedBio",
-            "summary": "Get\u0020all\u0020bios\u0020of\u0020characters\u0020that\u0020are\u0020blocked.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Bio.html#method_getCharactersBlockedBio"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Bio\u003A\u003AblockCharacterBio\u0028\u0029",
-            "name": "blockCharacterBio",
-            "summary": "Block\u0020a\u0020bio\u0020of\u0020user.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Bio.html#method_blockCharacterBio"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Bio\u003A\u003AunblockCharacterBio\u0028\u0029",
-            "name": "unblockCharacterBio",
-            "summary": "Unblock\u0020a\u0020bio\u0020of\u0020user.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Bio.html#method_unblockCharacterBio"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Bio\u003A\u003AblockUnblockCharacterBio\u0028\u0029",
-            "name": "blockUnblockCharacterBio",
-            "summary": "",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Bio.html#method_blockUnblockCharacterBio"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Clan",
-            "name": "Clan",
-            "summary": "Functions\u0020for\u0020clan\u0020of\u0020characters.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Clan.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Clan\u003A\u003AgetClanMembershipList\u0028\u0029",
-            "name": "getClanMembershipList",
-            "summary": "Get\u0020list\u0020of\u0020membership\u0020of\u0020clan.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Clan.html#method_getClanMembershipList"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Clan\u003A\u003AgetClanMembershipDetails\u0028\u0029",
-            "name": "getClanMembershipDetails",
-            "summary": "Get\u0020details\u0020of\u0020membership\u0020of\u0020clan.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Clan.html#method_getClanMembershipDetails"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Clan\u003A\u003AgetClanLeadersCount\u0028\u0029",
-            "name": "getClanLeadersCount",
-            "summary": "Count\u0020leaders\u0020of\u0020a\u0020clan.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Clan.html#method_getClanLeadersCount"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Clan\u003A\u003AgetViableLeaderForClan\u0028\u0029",
-            "name": "getViableLeaderForClan",
-            "summary": "Get\u0020one\u0020member\u0020of\u0020clan\u0020that\u0020can\u0020be\u0020promote\u0020to\u0020leader.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Clan.html#method_getViableLeaderForClan"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Clan\u003A\u003AgetLeadersFromClan\u0028\u0029",
-            "name": "getLeadersFromClan",
-            "summary": "Get\u0020leaders\u0020of\u0020clan\u0020exclude\u0020select\u0020acctId.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Clan.html#method_getLeadersFromClan"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Clan\u003A\u003AsetNewClanLeader\u0028\u0029",
-            "name": "setNewClanLeader",
-            "summary": "Set\u0020new\u0020leader\u0020for\u0020a\u0020clan.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Clan.html#method_setNewClanLeader"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Clan\u003A\u003AgetCharacterFromAcctidAndRank\u0028\u0029",
-            "name": "getCharacterFromAcctidAndRank",
-            "summary": "Get\u0020information\u0020of\u0020character\u0020with\u0020acctId\u0020and\u0020rank\u0020less\u0020or\u0020equal\u0020to.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Clan.html#method_getCharacterFromAcctidAndRank"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Clan\u003A\u003AexpelPlayersFromDeletedClan\u0028\u0029",
-            "name": "expelPlayersFromDeletedClan",
-            "summary": "Expel\u0020characters\u0020from\u0020a\u0020deleted\u0020clan.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Clan.html#method_expelPlayersFromDeletedClan"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Setting",
-            "name": "Setting",
-            "summary": "Functions\u0020for\u0020settings\u0020of\u0020characters.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Setting.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character\\Setting\u003A\u003AmovingPlayersToLocation\u0028\u0029",
-            "name": "movingPlayersToLocation",
-            "summary": "Moving\u0020players\u0020to\u0020new\u0020location.",
-            "url": "classes/Lotgd-Core-EntityRepository-Character-Setting.html#method_movingPlayersToLocation"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\CharactersRepository",
             "name": "CharactersRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-CharactersRepository.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\CharactersRepository\u003A\u003AgetCharacterNameFromAcctId\u0028\u0029",
-            "name": "getCharacterNameFromAcctId",
-            "summary": "Get\u0020character\u0027s\u0020name\u0020from\u0020an\u0020account\u0020ID.",
-            "url": "classes/Lotgd-Core-EntityRepository-CharactersRepository.html#method_getCharacterNameFromAcctId"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\CharactersRepository\u003A\u003AfindLikeName\u0028\u0029",
-            "name": "findLikeName",
-            "summary": "Get\u0020a\u0020list\u0020of\u0020characters\u0020with\u0020similar\u0020name.",
-            "url": "classes/Lotgd-Core-EntityRepository-CharactersRepository.html#method_findLikeName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\CharactersRepository\u003A\u003AgetCharacterForPvp\u0028\u0029",
-            "name": "getCharacterForPvp",
-            "summary": "Get\u0020info\u0020of\u0020character\u0020for\u0020PvP.",
-            "url": "classes/Lotgd-Core-EntityRepository-CharactersRepository.html#method_getCharacterForPvp"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\ClansRepository",
             "name": "ClansRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-ClansRepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ClansRepository\u003A\u003AgetClanListWithMembersCount\u0028\u0029",
-            "name": "getClanListWithMembersCount",
-            "summary": "Get\u0020list\u0020of\u0020clans\u0020for\u0020apply\u0020to\u0020enter.",
-            "url": "classes/Lotgd-Core-EntityRepository-ClansRepository.html#method_getClanListWithMembersCount"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ClansRepository\u003A\u003AcreateClan\u0028\u0029",
-            "name": "createClan",
-            "summary": "Create\u0020a\u0020new\u0020clan.",
-            "url": "classes/Lotgd-Core-EntityRepository-ClansRepository.html#method_createClan"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Commentary\\Backup",
-            "name": "Backup",
-            "summary": "Functions\u0020for\u0020backup\u0020data.",
-            "url": "classes/Lotgd-Core-EntityRepository-Commentary-Backup.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Commentary\\Backup\u003A\u003AbackupGetDataFromAccount\u0028\u0029",
-            "name": "backupGetDataFromAccount",
-            "summary": "Get\u0020all\u0020mail\u0020to\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-Commentary-Backup.html#method_backupGetDataFromAccount"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Commentary\\Backup\u003A\u003AbackupDeleteDataFromAccount\u0028\u0029",
-            "name": "backupDeleteDataFromAccount",
-            "summary": "Delete\u0020comments\u0020of\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-Commentary-Backup.html#method_backupDeleteDataFromAccount"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\CommentaryRepository",
             "name": "CommentaryRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-CommentaryRepository.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\CommentaryRepository\u003A\u003AsaveComment\u0028\u0029",
-            "name": "saveComment",
-            "summary": "Save\u0020comment\u0020to\u0020data\u0020base.",
-            "url": "classes/Lotgd-Core-EntityRepository-CommentaryRepository.html#method_saveComment"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\CommentaryRepository\u003A\u003AmoderateComments\u0028\u0029",
-            "name": "moderateComments",
-            "summary": "Hide\/Unhide\u0020comments.",
-            "url": "classes/Lotgd-Core-EntityRepository-CommentaryRepository.html#method_moderateComments"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\CommentaryRepository\u003A\u003AgetPublishedSections\u0028\u0029",
-            "name": "getPublishedSections",
-            "summary": "Get\u0020all\u0020sections\u0020in\u0020comentary.",
-            "url": "classes/Lotgd-Core-EntityRepository-CommentaryRepository.html#method_getPublishedSections"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\CommentaryRepository\u003A\u003AdeleteExpireComments\u0028\u0029",
-            "name": "deleteExpireComments",
-            "summary": "Delte\u0020old\u0020comments\u0020in\u0020data\u0020base.",
-            "url": "classes/Lotgd-Core-EntityRepository-CommentaryRepository.html#method_deleteExpireComments"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\CompanionsRepository",
             "name": "CompanionsRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-CompanionsRepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\CompanionsRepository\u003A\u003AgetMercenaryList\u0028\u0029",
-            "name": "getMercenaryList",
-            "summary": "Get\u0020a\u0020list\u0020of\u0020available\u0020mecenaries.",
-            "url": "classes/Lotgd-Core-EntityRepository-CompanionsRepository.html#method_getMercenaryList"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\CompanionsRepository\u003A\u003AfindOneCompanionById\u0028\u0029",
-            "name": "findOneCompanionById",
-            "summary": "Find\u0020one\u0020by\u0020id.",
-            "url": "classes/Lotgd-Core-EntityRepository-CompanionsRepository.html#method_findOneCompanionById"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\CompanionsRepository\u003A\u003AfindCompanionsById\u0028\u0029",
-            "name": "findCompanionsById",
-            "summary": "Get\u0020an\u0020array\u0020by\u0020ids.",
-            "url": "classes/Lotgd-Core-EntityRepository-CompanionsRepository.html#method_findCompanionsById"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\CompanionsRepository\u003A\u003AgetList\u0028\u0029",
-            "name": "getList",
-            "summary": "Get\u0020list\u0020of\u0020companions.",
-            "url": "classes/Lotgd-Core-EntityRepository-CompanionsRepository.html#method_getList"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\CreaturesRepository",
             "name": "CreaturesRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-CreaturesRepository.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\CreaturesRepository\u003A\u003AfindOneCreatureById\u0028\u0029",
-            "name": "findOneCreatureById",
-            "summary": "Find\u0020one\u0020creature\u0020by\u0020id.",
-            "url": "classes/Lotgd-Core-EntityRepository-CreaturesRepository.html#method_findOneCreatureById"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\CreaturesRepository\u003A\u003AfindCreaturesById\u0028\u0029",
-            "name": "findCreaturesById",
-            "summary": "Get\u0020an\u0020array\u0020of\u0020creatures\u0020by\u0020ids.",
-            "url": "classes/Lotgd-Core-EntityRepository-CreaturesRepository.html#method_findCreaturesById"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\CronjobRepository",
             "name": "CronjobRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-CronjobRepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\CronjobRepository\u003A\u003AgetCharacterNameFromAcctId\u0028\u0029",
-            "name": "getCharacterNameFromAcctId",
-            "summary": "Get\u0020character\u0027s\u0020name\u0020from\u0020an\u0020account\u0020ID.",
-            "url": "classes/Lotgd-Core-EntityRepository-CronjobRepository.html#method_getCharacterNameFromAcctId"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\DebugRepository",
             "name": "DebugRepository",
@@ -10091,405 +10221,85 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-FaillogRepository.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\FaillogRepository\u003A\u003AdeleteExpireFaillogs\u0028\u0029",
-            "name": "deleteExpireFaillogs",
-            "summary": "Delte\u0020old\u0020fail\u0020logs\u0020in\u0020data\u0020base.",
-            "url": "classes/Lotgd-Core-EntityRepository-FaillogRepository.html#method_deleteExpireFaillogs"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\GamelogRepository",
             "name": "GamelogRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-GamelogRepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\GamelogRepository\u003A\u003AdeleteExpireGamelogs\u0028\u0029",
-            "name": "deleteExpireGamelogs",
-            "summary": "Delte\u0020old\u0020fail\u0020logs\u0020in\u0020data\u0020base.",
-            "url": "classes/Lotgd-Core-EntityRepository-GamelogRepository.html#method_deleteExpireGamelogs"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\LogdnetRepository",
             "name": "LogdnetRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-LogdnetRepository.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\LogdnetRepository\u003A\u003AdeletedOlderServer\u0028\u0029",
-            "name": "deletedOlderServer",
-            "summary": "Delete\u0020servers\u0020older\u0020than\u0020two\u0020weeks.",
-            "url": "classes/Lotgd-Core-EntityRepository-LogdnetRepository.html#method_deletedOlderServer"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\LogdnetRepository\u003A\u003AdegradePopularity\u0028\u0029",
-            "name": "degradePopularity",
-            "summary": "Degrade\u0020the\u0020popularity\u0020of\u0020any\u0020server\u0020which\u0020hasn\u0027t\u0020been\u0020updated\u0020in\u0020the\u0020past\u00205\u0020minutes\u0020by\u00201\u0025.",
-            "url": "classes/Lotgd-Core-EntityRepository-LogdnetRepository.html#method_degradePopularity"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\LogdnetRepository\u003A\u003AgetNetServerList\u0028\u0029",
-            "name": "getNetServerList",
-            "summary": "Get\u0020our\u0020list\u0020of\u0020servers.",
-            "url": "classes/Lotgd-Core-EntityRepository-LogdnetRepository.html#method_getNetServerList"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\LogdnetRepository\u003A\u003AapplyLogdnetBans\u0028\u0029",
-            "name": "applyLogdnetBans",
-            "summary": "",
-            "url": "classes/Lotgd-Core-EntityRepository-LogdnetRepository.html#method_applyLogdnetBans"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\LogdnetRepository\u003A\u003AlotgdSort\u0028\u0029",
-            "name": "lotgdSort",
-            "summary": "",
-            "url": "classes/Lotgd-Core-EntityRepository-LogdnetRepository.html#method_lotgdSort"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Mail\\Backup",
-            "name": "Backup",
-            "summary": "Functions\u0020for\u0020backup\u0020data.",
-            "url": "classes/Lotgd-Core-EntityRepository-Mail-Backup.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Mail\\Backup\u003A\u003AbackupGetDataFromAccount\u0028\u0029",
-            "name": "backupGetDataFromAccount",
-            "summary": "Get\u0020all\u0020mail\u0020to\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-Mail-Backup.html#method_backupGetDataFromAccount"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Mail\\Backup\u003A\u003AbackupDeleteDataFromAccount\u0028\u0029",
-            "name": "backupDeleteDataFromAccount",
-            "summary": "Delete\u0020mail\u0020of\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-Mail-Backup.html#method_backupDeleteDataFromAccount"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Mail\\Clan",
-            "name": "Clan",
-            "summary": "Functions\u0020for\u0020clan\u0020of\u0020mail.",
-            "url": "classes/Lotgd-Core-EntityRepository-Mail-Clan.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Mail\\Clan\u003A\u003AdeleteMailFromSystemBySubj\u0028\u0029",
-            "name": "deleteMailFromSystemBySubj",
-            "summary": "Delete\u0020mail\u0020from\u0020system\u0020by\u0020subject.",
-            "url": "classes/Lotgd-Core-EntityRepository-Mail-Clan.html#method_deleteMailFromSystemBySubj"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\MailRepository",
             "name": "MailRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-MailRepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MailRepository\u003A\u003AgetCountMailOfCharacter\u0028\u0029",
-            "name": "getCountMailOfCharacter",
-            "summary": "Get\u0020a\u0020count\u0020of\u0020see\u0020and\u0020unsee\u0020mail.",
-            "url": "classes/Lotgd-Core-EntityRepository-MailRepository.html#method_getCountMailOfCharacter"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MailRepository\u003A\u003AgetCharacterNameFromAcctId\u0028\u0029",
-            "name": "getCharacterNameFromAcctId",
-            "summary": "Get\u0020character\u0027s\u0020name\u0020from\u0020an\u0020account\u0020ID.",
-            "url": "classes/Lotgd-Core-EntityRepository-MailRepository.html#method_getCharacterNameFromAcctId"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MailRepository\u003A\u003AgetCharacterMail\u0028\u0029",
-            "name": "getCharacterMail",
-            "summary": "Get\u0020list\u0020of\u0020messages\u0020for\u0020a\u0020character.",
-            "url": "classes/Lotgd-Core-EntityRepository-MailRepository.html#method_getCharacterMail"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MailRepository\u003A\u003AgetMailSenderNames\u0028\u0029",
-            "name": "getMailSenderNames",
-            "summary": "Get\u0020a\u0020names\u0020of\u0020senders\u0020and\u0020count\u0020msgs.",
-            "url": "classes/Lotgd-Core-EntityRepository-MailRepository.html#method_getMailSenderNames"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MailRepository\u003A\u003AgetNextPreviousMail\u0028\u0029",
-            "name": "getNextPreviousMail",
-            "summary": "Get\u0020next\u0020and\u0020previous\u0020IDs\u0020of\u0020current\u0020mail.",
-            "url": "classes/Lotgd-Core-EntityRepository-MailRepository.html#method_getNextPreviousMail"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MailRepository\u003A\u003AdeleteBulkMail\u0028\u0029",
-            "name": "deleteBulkMail",
-            "summary": "Delete\u0020mail\u0020in\u0020bulk\u0020by\u0020ID.",
-            "url": "classes/Lotgd-Core-EntityRepository-MailRepository.html#method_deleteBulkMail"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MailRepository\u003A\u003AreplyToMessage\u0028\u0029",
-            "name": "replyToMessage",
-            "summary": "Get\u0020info\u0020of\u0020the\u0020reply\u0020message.",
-            "url": "classes/Lotgd-Core-EntityRepository-MailRepository.html#method_replyToMessage"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MailRepository\u003A\u003AcountInboxOfCharacter\u0028\u0029",
-            "name": "countInboxOfCharacter",
-            "summary": "Count\u0020messages\u0020in\u0020inbox\u0020of\u0020character.",
-            "url": "classes/Lotgd-Core-EntityRepository-MailRepository.html#method_countInboxOfCharacter"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MailRepository\u003A\u003AdeleteExpireMail\u0028\u0029",
-            "name": "deleteExpireMail",
-            "summary": "Delte\u0020old\u0020mails\u0020in\u0020data\u0020base.",
-            "url": "classes/Lotgd-Core-EntityRepository-MailRepository.html#method_deleteExpireMail"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\MastersRepository",
             "name": "MastersRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-MastersRepository.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MastersRepository\u003A\u003AfindOneMasterById\u0028\u0029",
-            "name": "findOneMasterById",
-            "summary": "Find\u0020one\u0020master\u0020by\u0020id.",
-            "url": "classes/Lotgd-Core-EntityRepository-MastersRepository.html#method_findOneMasterById"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MastersRepository\u003A\u003AfindMastersById\u0028\u0029",
-            "name": "findMastersById",
-            "summary": "Get\u0020an\u0020array\u0020of\u0020masters\u0020by\u0020ids.",
-            "url": "classes/Lotgd-Core-EntityRepository-MastersRepository.html#method_findMastersById"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Module\\Setting",
-            "name": "Setting",
-            "summary": "Functions\u0020for\u0020settings\u0020of\u0020modules.",
-            "url": "classes/Lotgd-Core-EntityRepository-Module-Setting.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Module\\Setting\u003A\u003AfindModulesEditorNav\u0028\u0029",
-            "name": "findModulesEditorNav",
-            "summary": "Find\u0020all\u0020modules\u0020that\u0020have.",
-            "url": "classes/Lotgd-Core-EntityRepository-Module-Setting.html#method_findModulesEditorNav"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\ModulesRepository",
             "name": "ModulesRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-ModulesRepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ModulesRepository\u003A\u003AreinstallModule\u0028\u0029",
-            "name": "reinstallModule",
-            "summary": "Restart\u0020filemoddate\u0020to\u0020default\u0020value.",
-            "url": "classes/Lotgd-Core-EntityRepository-ModulesRepository.html#method_reinstallModule"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ModulesRepository\u003A\u003AfindInfoKeyLike\u0028\u0029",
-            "name": "findInfoKeyLike",
-            "summary": "Find\u0020modules\u0020with\u0020this\u0020info\u0020key.",
-            "url": "classes/Lotgd-Core-EntityRepository-ModulesRepository.html#method_findInfoKeyLike"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ModuleUserprefs\\Backup",
-            "name": "Backup",
-            "summary": "Functions\u0020for\u0020backup\u0020data.",
-            "url": "classes/Lotgd-Core-EntityRepository-ModuleUserprefs-Backup.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ModuleUserprefs\\Backup\u003A\u003AbackupGetDataFromAccount\u0028\u0029",
-            "name": "backupGetDataFromAccount",
-            "summary": "Get\u0020all\u0020module\u0020user\u0020prefs\u0020to\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-ModuleUserprefs-Backup.html#method_backupGetDataFromAccount"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ModuleUserprefs\\Backup\u003A\u003AbackupDeleteDataFromAccount\u0028\u0029",
-            "name": "backupDeleteDataFromAccount",
-            "summary": "Delete\u0020all\u0020module\u0020user\u0020prefs\u0020of\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-ModuleUserprefs-Backup.html#method_backupDeleteDataFromAccount"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\ModuleUserprefsRepository",
             "name": "ModuleUserprefsRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-ModuleUserprefsRepository.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ModuleUserprefsRepository\u003A\u003AfindModulesPrefs\u0028\u0029",
-            "name": "findModulesPrefs",
-            "summary": "Find\u0020modules\u0020prefs\u0020for\u0020modules.",
-            "url": "classes/Lotgd-Core-EntityRepository-ModuleUserprefsRepository.html#method_findModulesPrefs"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\MotdRepository",
             "name": "MotdRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-MotdRepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MotdRepository\u003A\u003AgetLastMotd\u0028\u0029",
-            "name": "getLastMotd",
-            "summary": "Get\u0020last\u0020MOTD.",
-            "url": "classes/Lotgd-Core-EntityRepository-MotdRepository.html#method_getLastMotd"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MotdRepository\u003A\u003AgetEditMotdItem\u0028\u0029",
-            "name": "getEditMotdItem",
-            "summary": "Get\u0020MoTD\u0020item\u0020info.",
-            "url": "classes/Lotgd-Core-EntityRepository-MotdRepository.html#method_getEditMotdItem"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MotdRepository\u003A\u003AappendPollResults\u0028\u0029",
-            "name": "appendPollResults",
-            "summary": "Append\u0020results\u0020of\u0020a\u0020poll\u0020to\u0020MOTD\u0020item.",
-            "url": "classes/Lotgd-Core-EntityRepository-MotdRepository.html#method_appendPollResults"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MotdRepository\u003A\u003AgetMonthCountPerYear\u0028\u0029",
-            "name": "getMonthCountPerYear",
-            "summary": "Get\u0020a\u0020list\u0020of\u0020years\u0020with\u0020count\u0020of\u0020MoTD\u0020per\u0020month.",
-            "url": "classes/Lotgd-Core-EntityRepository-MotdRepository.html#method_getMonthCountPerYear"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MotdRepository\u003A\u003AgetLastMotdDate\u0028\u0029",
-            "name": "getLastMotdDate",
-            "summary": "Get\u0020last\u0020Motd\u0020date.",
-            "url": "classes/Lotgd-Core-EntityRepository-MotdRepository.html#method_getLastMotdDate"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\MountsRepository",
             "name": "MountsRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-MountsRepository.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MountsRepository\u003A\u003AgetList\u0028\u0029",
-            "name": "getList",
-            "summary": "Get\u0020list\u0020of\u0020mounts\u0020with\u0020owners.",
-            "url": "classes/Lotgd-Core-EntityRepository-MountsRepository.html#method_getList"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MountsRepository\u003A\u003ArefundMount\u0028\u0029",
-            "name": "refundMount",
-            "summary": "Refund\u0020cost\u0020of\u0020mount\u0020to\u0020players.",
-            "url": "classes/Lotgd-Core-EntityRepository-MountsRepository.html#method_refundMount"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MountsRepository\u003A\u003AgetMountsByLocation\u0028\u0029",
-            "name": "getMountsByLocation",
-            "summary": "Get\u0020mounts\u0020by\u0020location\u0020\u0028include\u0020all\u0029.",
-            "url": "classes/Lotgd-Core-EntityRepository-MountsRepository.html#method_getMountsByLocation"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MountsRepository\u003A\u003AfindOneMountById\u0028\u0029",
-            "name": "findOneMountById",
-            "summary": "Find\u0020one\u0020mount\u0020by\u0020id.",
-            "url": "classes/Lotgd-Core-EntityRepository-MountsRepository.html#method_findOneMountById"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\MountsRepository\u003A\u003AfindMountsById\u0028\u0029",
-            "name": "findMountsById",
-            "summary": "Get\u0020an\u0020array\u0020of\u0020mounts\u0020by\u0020ids.",
-            "url": "classes/Lotgd-Core-EntityRepository-MountsRepository.html#method_findMountsById"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\News\\Backup",
-            "name": "Backup",
-            "summary": "Functions\u0020for\u0020backup\u0020data.",
-            "url": "classes/Lotgd-Core-EntityRepository-News-Backup.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\News\\Backup\u003A\u003AbackupGetDataFromAccount\u0028\u0029",
-            "name": "backupGetDataFromAccount",
-            "summary": "Get\u0020all\u0020news\u0020of\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-News-Backup.html#method_backupGetDataFromAccount"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\News\\Backup\u003A\u003AbackupDeleteDataFromAccount\u0028\u0029",
-            "name": "backupDeleteDataFromAccount",
-            "summary": "Delete\u0020news\u0020of\u0020account.",
-            "url": "classes/Lotgd-Core-EntityRepository-News-Backup.html#method_backupDeleteDataFromAccount"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\NewsRepository",
             "name": "NewsRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-NewsRepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\NewsRepository\u003A\u003AdeleteNewsId\u0028\u0029",
-            "name": "deleteNewsId",
-            "summary": "Delete\u0020a\u0020news\u0020by\u0020ID.",
-            "url": "classes/Lotgd-Core-EntityRepository-NewsRepository.html#method_deleteNewsId"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\NewsRepository\u003A\u003AdeleteExpireNews\u0028\u0029",
-            "name": "deleteExpireNews",
-            "summary": "Delte\u0020old\u0020news\u0020in\u0020data\u0020base.",
-            "url": "classes/Lotgd-Core-EntityRepository-NewsRepository.html#method_deleteExpireNews"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\PaylogRepository",
             "name": "PaylogRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-PaylogRepository.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\PaylogRepository\u003A\u003AupdateProcessDate\u0028\u0029",
-            "name": "updateProcessDate",
-            "summary": "Update\u0020process\u0020of\u0020date.",
-            "url": "classes/Lotgd-Core-EntityRepository-PaylogRepository.html#method_updateProcessDate"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\PaylogRepository\u003A\u003AgetMonths\u0028\u0029",
-            "name": "getMonths",
-            "summary": "Get\u0020a\u0020list\u0020of\u0020months.",
-            "url": "classes/Lotgd-Core-EntityRepository-PaylogRepository.html#method_getMonths"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\PaylogRepository\u003A\u003AgetList\u0028\u0029",
-            "name": "getList",
-            "summary": "Get\u0020list\u0020paylog.",
-            "url": "classes/Lotgd-Core-EntityRepository-PaylogRepository.html#method_getList"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\PetitionsRepository",
             "name": "PetitionsRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-PetitionsRepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\PetitionsRepository\u003A\u003AgetStatusListCount\u0028\u0029",
-            "name": "getStatusListCount",
-            "summary": "Get\u0020a\u0020list\u0020count\u0020of\u0020petitions.",
-            "url": "classes/Lotgd-Core-EntityRepository-PetitionsRepository.html#method_getStatusListCount"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\PetitionsRepository\u003A\u003AgetCountPetitionsForNetwork\u0028\u0029",
-            "name": "getCountPetitionsForNetwork",
-            "summary": "Get\u0020count\u0020of\u0020petitions\u0020for\u0020network.",
-            "url": "classes/Lotgd-Core-EntityRepository-PetitionsRepository.html#method_getCountPetitionsForNetwork"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\PetitionsRepository\u003A\u003AdeleteOldPetitions\u0028\u0029",
-            "name": "deleteOldPetitions",
-            "summary": "Delete\u0020old\u0020petitions.",
-            "url": "classes/Lotgd-Core-EntityRepository-PetitionsRepository.html#method_deleteOldPetitions"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\ReferersRepository",
             "name": "ReferersRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-ReferersRepository.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ReferersRepository\u003A\u003AdeleteExpireReferers\u0028\u0029",
-            "name": "deleteExpireReferers",
-            "summary": "Delte\u0020old\u0020referers\u0020in\u0020data\u0020base.",
-            "url": "classes/Lotgd-Core-EntityRepository-ReferersRepository.html#method_deleteExpireReferers"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\SettingsRepository",
             "name": "SettingsRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-SettingsRepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\SettingsRepository\u003A\u003AgetInstalledVersion\u0028\u0029",
-            "name": "getInstalledVersion",
-            "summary": "Get\u0020a\u0020installed\u0020version,\u0020this\u0020avoid\u0020cache.",
-            "url": "classes/Lotgd-Core-EntityRepository-SettingsRepository.html#method_getInstalledVersion"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\SettingsRepository\u003A\u003AsetInstalledVersion\u0028\u0029",
-            "name": "setInstalledVersion",
-            "summary": "Set\u0020installed\u0020version.",
-            "url": "classes/Lotgd-Core-EntityRepository-SettingsRepository.html#method_setInstalledVersion"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\TitlesRepository",
             "name": "TitlesRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-TitlesRepository.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\TitlesRepository\u003A\u003AfindOneTitleById\u0028\u0029",
-            "name": "findOneTitleById",
-            "summary": "Find\u0020one\u0020title\u0020by\u0020id.",
-            "url": "classes/Lotgd-Core-EntityRepository-TitlesRepository.html#method_findOneTitleById"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\TitlesRepository\u003A\u003AfindTitlesById\u0028\u0029",
-            "name": "findTitlesById",
-            "summary": "Get\u0020an\u0020array\u0020of\u0020titles\u0020by\u0020ids.",
-            "url": "classes/Lotgd-Core-EntityRepository-TitlesRepository.html#method_findTitlesById"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\TitlesRepository\u003A\u003AgetList\u0028\u0029",
-            "name": "getList",
-            "summary": "Get\u0020list\u0020of\u0020titles.",
-            "url": "classes/Lotgd-Core-EntityRepository-TitlesRepository.html#method_getList"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\WeaponsRepository",
             "name": "WeaponsRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-WeaponsRepository.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\WeaponsRepository\u003A\u003AgetMaxWeaponLevel\u0028\u0029",
-            "name": "getMaxWeaponLevel",
-            "summary": "Get\u0020de\u0020max\u0020level\u0020of\u0020weapons.",
-            "url": "classes/Lotgd-Core-EntityRepository-WeaponsRepository.html#method_getMaxWeaponLevel"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\WeaponsRepository\u003A\u003AgetNextDamageLevel\u0028\u0029",
-            "name": "getNextDamageLevel",
-            "summary": "Get\u0020next\u0020damage\u0020in\u0020level\u0020of\u0020weapons.",
-            "url": "classes/Lotgd-Core-EntityRepository-WeaponsRepository.html#method_getNextDamageLevel"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\WeaponsRepository\u003A\u003AfindByLevel\u0028\u0029",
-            "name": "findByLevel",
-            "summary": "Get\u0020a\u0020translated\u0020list\u0020for\u0020a\u0020level.",
-            "url": "classes/Lotgd-Core-EntityRepository-WeaponsRepository.html#method_findByLevel"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\WeaponsRepository\u003A\u003AfindOneWeaponById\u0028\u0029",
-            "name": "findOneWeaponById",
-            "summary": "Find\u0020one\u0020by\u0020id.",
-            "url": "classes/Lotgd-Core-EntityRepository-WeaponsRepository.html#method_findOneWeaponById"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\WeaponsRepository\u003A\u003AfindWeaponsById\u0028\u0029",
-            "name": "findWeaponsById",
-            "summary": "Get\u0020an\u0020array\u0020by\u0020ids.",
-            "url": "classes/Lotgd-Core-EntityRepository-WeaponsRepository.html#method_findWeaponsById"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository\\WhostypingRepository",
             "name": "WhostypingRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-EntityRepository-WhostypingRepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\WhostypingRepository\u003A\u003AdeleteOld\u0028\u0029",
-            "name": "deleteOld",
-            "summary": "Delete\u0020old\u0020rows.",
-            "url": "classes/Lotgd-Core-EntityRepository-WhostypingRepository.html#method_deleteOld"
         },                {
             "fqsen": "\\Lotgd\\Core\\Event\\Character",
             "name": "Character",
@@ -11721,35 +11531,15 @@ Search.appendIndex(
             "summary": "Drops\u0020the\u0020database\u0020schema\u0020for\u0020the\u0020given\u0020classes.",
             "url": "classes/Lotgd-Core-Fixed-Doctrine.html#method_dropSchema"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Doctrine\u003A\u003A\u0024wrapper",
-            "name": "wrapper",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Fixed-Doctrine.html#property_wrapper"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\EventDispatcher",
             "name": "EventDispatcher",
             "summary": "",
             "url": "classes/Lotgd-Core-Fixed-EventDispatcher.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\EventDispatcher\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-EventDispatcher.html#method___callStatic"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\EventDispatcher\u003A\u003A\u0024instance",
-            "name": "instance",
-            "summary": "Instance.",
-            "url": "classes/Lotgd-Core-Fixed-EventDispatcher.html#property_instance"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\FlashMessages",
             "name": "FlashMessages",
             "summary": "",
             "url": "classes/Lotgd-Core-Fixed-FlashMessages.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\FlashMessages\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-FlashMessages.html#method___callStatic"
         },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\FlashMessages\u003A\u003AaddMessage\u0028\u0029",
             "name": "addMessage",
@@ -11776,45 +11566,20 @@ Search.appendIndex(
             "summary": "Add\u0020a\u0020\u0022warning\u0022\u0020message.",
             "url": "classes/Lotgd-Core-Fixed-FlashMessages.html#method_addWarningMessage"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\FlashMessages\u003A\u003A\u0024instance",
-            "name": "instance",
-            "summary": "Instance\u0020of\u0020FlashMessages.",
-            "url": "classes/Lotgd-Core-Fixed-FlashMessages.html#property_instance"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Format",
             "name": "Format",
             "summary": "This\u0020class\u0020is\u0020for\u0020format\u0020a\u0020string\nFor\u0020example\u003A\u0020format\u0020a\u0020number\u0020or\u0020a\u0020date.",
             "url": "classes/Lotgd-Core-Fixed-Format.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Format\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-Format.html#method___callStatic"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Format\u003A\u003A\u0024instance",
-            "name": "instance",
-            "summary": "Instance\u0020of\u0020Format.",
-            "url": "classes/Lotgd-Core-Fixed-Format.html#property_instance"
         },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Kernel",
             "name": "Kernel",
             "summary": "",
             "url": "classes/Lotgd-Core-Fixed-Kernel.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Kernel\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-Kernel.html#method___callStatic"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Kernel\u003A\u003Aget\u0028\u0029",
             "name": "get",
             "summary": "Short\u0020method\u0020for\u0020get\u0020a\u0020service.",
             "url": "classes/Lotgd-Core-Fixed-Kernel.html#method_get"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Kernel\u003A\u003A\u0024instance",
-            "name": "instance",
-            "summary": "Intance\u0020of\u0020Kernel.",
-            "url": "classes/Lotgd-Core-Fixed-Kernel.html#property_instance"
         },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Kernel\u003A\u003AgetInstance\u0028\u0029",
             "name": "getInstance",
@@ -11831,130 +11596,70 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Fixed-Log.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Log\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-Log.html#method___callStatic"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Log\u003A\u003A\u0024instance",
-            "name": "instance",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Fixed-Log.html#property_instance"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Navigation",
             "name": "Navigation",
             "summary": "",
             "url": "classes/Lotgd-Core-Fixed-Navigation.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Navigation\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-Navigation.html#method___callStatic"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Navigation\u003A\u003A\u0024instance",
-            "name": "instance",
-            "summary": "Instance\u0020of\u0020Navigation.",
-            "url": "classes/Lotgd-Core-Fixed-Navigation.html#property_instance"
         },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Request",
             "name": "Request",
             "summary": "",
             "url": "classes/Lotgd-Core-Fixed-Request.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Request\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-Request.html#method___callStatic"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Request\u003A\u003A\u0024instance",
-            "name": "instance",
-            "summary": "Instance\u0020of\u0020Request.",
-            "url": "classes/Lotgd-Core-Fixed-Request.html#property_instance"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Request\u003A\u003A_i\u0028\u0029",
-            "name": "_i",
-            "summary": "Get\u0020the\u0020instance.",
-            "url": "classes/Lotgd-Core-Fixed-Request.html#method__i"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Response",
             "name": "Response",
             "summary": "",
             "url": "classes/Lotgd-Core-Fixed-Response.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Response\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-Response.html#method___callStatic"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Response\u003A\u003A\u0024instance",
-            "name": "instance",
-            "summary": "Instance\u0020of\u0020Response.",
-            "url": "classes/Lotgd-Core-Fixed-Response.html#property_instance"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Response\u003A\u003A_i\u0028\u0029",
-            "name": "_i",
-            "summary": "Get\u0020the\u0020instance.",
-            "url": "classes/Lotgd-Core-Fixed-Response.html#method__i"
         },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Sanitize",
             "name": "Sanitize",
             "summary": "This\u0020class\u0020is\u0020for\u0020sanitize\u0020a\u0020string\nFor\u0020example\u003A\u0020sanitize\u0020a\u0020number\u0020or\u0020a\u0020date.",
             "url": "classes/Lotgd-Core-Fixed-Sanitize.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Sanitize\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-Sanitize.html#method___callStatic"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Sanitize\u003A\u003A\u0024instance",
-            "name": "instance",
-            "summary": "Instance\u0020of\u0020Sanitize.",
-            "url": "classes/Lotgd-Core-Fixed-Sanitize.html#property_instance"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Session",
             "name": "Session",
             "summary": "",
             "url": "classes/Lotgd-Core-Fixed-Session.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Session\u003A\u003A__callStatic\u0028\u0029",
+            "fqsen": "\\Lotgd\\Core\\Fixed\\Setting",
+            "name": "Setting",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Fixed-Setting.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Fixed\\StaticTrait",
+            "name": "StaticTrait",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Fixed-StaticTrait.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Fixed\\StaticTrait\u003A\u003A__callStatic\u0028\u0029",
             "name": "__callStatic",
             "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-Session.html#method___callStatic"
+            "url": "classes/Lotgd-Core-Fixed-StaticTrait.html#method___callStatic"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Session\u003A\u003A\u0024instance",
+            "fqsen": "\\Lotgd\\Core\\Fixed\\StaticTrait\u003A\u003A\u0024instance",
             "name": "instance",
-            "summary": "Instance\u0020of\u0020Session.",
-            "url": "classes/Lotgd-Core-Fixed-Session.html#property_instance"
+            "summary": "Instance\u0020object.",
+            "url": "classes/Lotgd-Core-Fixed-StaticTrait.html#property_instance"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Fixed\\StaticTrait\u003A\u003A_instance\u0028\u0029",
+            "name": "_instance",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Fixed-StaticTrait.html#method__instance"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Fixed\\StaticTrait\u003A\u003A_i\u0028\u0029",
+            "name": "_i",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Fixed-StaticTrait.html#method__i"
         },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Theme",
             "name": "Theme",
             "summary": "",
             "url": "classes/Lotgd-Core-Fixed-Theme.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Theme\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-Theme.html#method___callStatic"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Theme\u003A\u003A\u0024wrapper",
-            "name": "wrapper",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Fixed-Theme.html#property_wrapper"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Tool",
             "name": "Tool",
             "summary": "",
             "url": "classes/Lotgd-Core-Fixed-Tool.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Tool\u003A\u003A__callStatic\u0028\u0029",
-            "name": "__callStatic",
-            "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
-            "url": "classes/Lotgd-Core-Fixed-Tool.html#method___callStatic"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Tool\u003A\u003A\u0024instance",
-            "name": "instance",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Fixed-Tool.html#property_instance"
         },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Translator",
             "name": "Translator",
@@ -11965,16 +11670,6 @@ Search.appendIndex(
             "name": "__callStatic",
             "summary": "Add\u0020support\u0020for\u0020magic\u0020static\u0020method\u0020calls.",
             "url": "classes/Lotgd-Core-Fixed-Translator.html#method___callStatic"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Translator\u003A\u003AsetContainer\u0028\u0029",
-            "name": "setContainer",
-            "summary": "Set\u0020container\u0020of\u0020Translator.",
-            "url": "classes/Lotgd-Core-Fixed-Translator.html#method_setContainer"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Fixed\\Translator\u003A\u003A\u0024container",
-            "name": "container",
-            "summary": "Instance\u0020of\u0020Translator.",
-            "url": "classes/Lotgd-Core-Fixed-Translator.html#property_container"
         },                {
             "fqsen": "\\Lotgd\\Core\\Form\\AboutType\\BankType",
             "name": "BankType",
@@ -12551,6 +12246,21 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Form-DataTransformer-DateTimeTypeTransformer.html#method_reverseTransform"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Form\\DataTransformer\\NumberTransformer",
+            "name": "NumberTransformer",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Form-DataTransformer-NumberTransformer.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Form\\DataTransformer\\NumberTransformer\u003A\u003Atransform\u0028\u0029",
+            "name": "transform",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Form-DataTransformer-NumberTransformer.html#method_transform"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Form\\DataTransformer\\NumberTransformer\u003A\u003AreverseTransform\u0028\u0029",
+            "name": "reverseTransform",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Form-DataTransformer-NumberTransformer.html#method_reverseTransform"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Form\\DataTransformer\\UnTagifyTransformer",
             "name": "UnTagifyTransformer",
             "summary": "Convert\u0020format\u003A\n\u0020\u0020\u0020\u0020\u0020\u005B\u007B\u0022value\u0022\u003A\u0022tag_1\u0022\u007D,\u007B\u0022value\u0022\u003A\u0022tag_2\u0022\u007D\u005D\u0022\ninto\u003A\n\u0020\u0020\u0020\u0020\u0020tag_1,tag_2",
@@ -12741,10 +12451,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Form-Type-LocationType.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Form\\Type\\LocationType\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Form-Type-LocationType.html#method___construct"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Form\\Type\\LocationType\u003A\u003AconfigureOptions\u0028\u0029",
             "name": "configureOptions",
             "summary": "",
             "url": "classes/Lotgd-Core-Form-Type-LocationType.html#method_configureOptions"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Form\\Type\\LocationType\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Form-Type-LocationType.html#property_settings"
         },                {
             "fqsen": "\\Lotgd\\Core\\Form\\Type\\LotgdThemeType",
             "name": "LotgdThemeType",
@@ -12760,6 +12480,21 @@ Search.appendIndex(
             "name": "getThemeList",
             "summary": "Get\u0020list\u0020array.",
             "url": "classes/Lotgd-Core-Form-Type-LotgdThemeType.html#method_getThemeList"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Form\\Type\\NumberType",
+            "name": "NumberType",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Form-Type-NumberType.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Form\\Type\\NumberType\u003A\u003AbuildForm\u0028\u0029",
+            "name": "buildForm",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Form-Type-NumberType.html#method_buildForm"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Form\\Type\\NumberType\u003A\u003AconfigureOptions\u0028\u0029",
+            "name": "configureOptions",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Form-Type-NumberType.html#method_configureOptions"
         },                {
             "fqsen": "\\Lotgd\\Core\\Form\\Type\\PersonalTranslationType",
             "name": "PersonalTranslationType",
@@ -12836,6 +12571,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Form-Type-TranslatableFieldType.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Form\\Type\\TranslatableFieldType\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Form-Type-TranslatableFieldType.html#method___construct"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Form\\Type\\TranslatableFieldType\u003A\u003AbuildForm\u0028\u0029",
             "name": "buildForm",
             "summary": "",
@@ -12865,6 +12605,11 @@ Search.appendIndex(
             "name": "LABEL_CLASS",
             "summary": "",
             "url": "classes/Lotgd-Core-Form-Type-TranslatableFieldType.html#constant_LABEL_CLASS"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Form\\Type\\TranslatableFieldType\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Form-Type-TranslatableFieldType.html#property_settings"
         },                {
             "fqsen": "\\Lotgd\\Core\\Form\\Type\\ViewOnlyType",
             "name": "ViewOnlyType",
@@ -13921,25 +13666,15 @@ Search.appendIndex(
             "summary": "Get\u0020information\u0020of\u0020navs.",
             "url": "classes/Lotgd-Core-Navigation-Navigation.html#method_getNavs"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003Asuperuser\u0028\u0029",
-            "name": "superuser",
-            "summary": "Add\u0020navs\u0020for\u0020actions\u0020of\u0020superuser.",
-            "url": "classes/Lotgd-Core-Navigation-Navigation.html#method_superuser"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003AsuperuserGrottoNav\u0028\u0029",
-            "name": "superuserGrottoNav",
-            "summary": "Add\u0020navs\u0020for\u0020action\u0020of\u0020superuser\u0020in\u0020Grotto\u0020page.",
-            "url": "classes/Lotgd-Core-Navigation-Navigation.html#method_superuserGrottoNav"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003AvillageNav\u0028\u0029",
-            "name": "villageNav",
-            "summary": "Add\u0020nav\u0020to\u0020village\/shades.",
-            "url": "classes/Lotgd-Core-Navigation-Navigation.html#method_villageNav"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003AcheckNavs\u0028\u0029",
             "name": "checkNavs",
             "summary": "Determines\u0020if\u0020there\u0020are\u0020any\u0020navs\u0020for\u0020the\u0020player.",
             "url": "classes/Lotgd-Core-Navigation-Navigation.html#method_checkNavs"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003AgetDefaultTextDomain\u0028\u0029",
+            "name": "getDefaultTextDomain",
+            "summary": "Get\u0020default\u0020text\u0020domain.",
+            "url": "classes/Lotgd-Core-Navigation-Navigation.html#method_getDefaultTextDomain"
         },                {
             "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003AaddItem\u0028\u0029",
             "name": "addItem",
@@ -13960,11 +13695,6 @@ Search.appendIndex(
             "name": "DEFAULT_NAVIGATION_TEXT_DOMAIN",
             "summary": "Default\u0020text\u0020domain\u0020for\u0020navigation\u0020menu.",
             "url": "classes/Lotgd-Core-Navigation-Navigation.html#constant_DEFAULT_NAVIGATION_TEXT_DOMAIN"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003A\u0024dispatcher",
-            "name": "dispatcher",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Navigation-Navigation.html#property_dispatcher"
         },                {
             "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003A\u0024headers",
             "name": "headers",
@@ -13995,6 +13725,21 @@ Search.appendIndex(
             "name": "textDomainPrev",
             "summary": "Previous\u0020text\u0020domain.",
             "url": "classes/Lotgd-Core-Navigation-Navigation.html#property_textDomainPrev"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003A\u0024dispatcher",
+            "name": "dispatcher",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Navigation-Navigation.html#property_dispatcher"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003A\u0024request",
+            "name": "request",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Navigation-Navigation.html#property_request"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Navigation-Navigation.html#property_settings"
         },                {
             "fqsen": "\\Lotgd\\Core\\Navigation\\Pattern\\CustomClass",
             "name": "CustomClass",
@@ -14095,6 +13840,31 @@ Search.appendIndex(
             "name": "partialLinks",
             "summary": "List\u0020of\u0020partial\u0020links.",
             "url": "classes/Lotgd-Core-Navigation-Pattern-Links.html#property_partialLinks"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Navigation\\Pattern\\Menu",
+            "name": "Menu",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Navigation-Pattern-Menu.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Navigation\\Pattern\\Menu\u003A\u003AfightNav\u0028\u0029",
+            "name": "fightNav",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Navigation-Pattern-Menu.html#method_fightNav"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Navigation\\Pattern\\Menu\u003A\u003Asuperuser\u0028\u0029",
+            "name": "superuser",
+            "summary": "Add\u0020navs\u0020for\u0020actions\u0020of\u0020superuser.",
+            "url": "classes/Lotgd-Core-Navigation-Pattern-Menu.html#method_superuser"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Navigation\\Pattern\\Menu\u003A\u003AsuperuserGrottoNav\u0028\u0029",
+            "name": "superuserGrottoNav",
+            "summary": "Add\u0020navs\u0020for\u0020action\u0020of\u0020superuser\u0020in\u0020Grotto\u0020page.",
+            "url": "classes/Lotgd-Core-Navigation-Pattern-Menu.html#method_superuserGrottoNav"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Navigation\\Pattern\\Menu\u003A\u003AvillageNav\u0028\u0029",
+            "name": "villageNav",
+            "summary": "Add\u0020nav\u0020to\u0020village\/shades.",
+            "url": "classes/Lotgd-Core-Navigation-Pattern-Menu.html#method_villageNav"
         },                {
             "fqsen": "\\Lotgd\\Core\\Navigation\\Pattern\\Pagination",
             "name": "Pagination",
@@ -14340,6 +14110,11 @@ Search.appendIndex(
             "name": "normalizer",
             "summary": "",
             "url": "classes/Lotgd-Core-Output-Commentary.html#property_normalizer"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Output\\Commentary\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Output-Commentary.html#property_settings"
         },                {
             "fqsen": "\\Lotgd\\Core\\Output\\Format",
             "name": "Format",
@@ -14996,6 +14771,851 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Pvp-Listing.html#property_query"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Pvp\\Listing\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Pvp-Listing.html#property_settings"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Bans",
+            "name": "Bans",
+            "summary": "Functions\u0020for\u0020bans\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-Account-Bans.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Bans\u003A\u003AbansSearchAccts\u0028\u0029",
+            "name": "bansSearchAccts",
+            "summary": "Search\u0020accounts.",
+            "url": "classes/Lotgd-Core-Repository-Account-Bans.html#method_bansSearchAccts"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Bans\u003A\u003AgetBasicInfoOfAccount\u0028\u0029",
+            "name": "getBasicInfoOfAccount",
+            "summary": "Get\u0020a\u0020basic\u0020information\u0020of\u0020account\u0020for\u0020ban.",
+            "url": "classes/Lotgd-Core-Repository-Account-Bans.html#method_getBasicInfoOfAccount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Bans\u003A\u003AgetAccountsWithEqualId\u0028\u0029",
+            "name": "getAccountsWithEqualId",
+            "summary": "Get\u0020accounts\u0020with\u0020identical\u0020ID.",
+            "url": "classes/Lotgd-Core-Repository-Account-Bans.html#method_getAccountsWithEqualId"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Bans\u003A\u003AgetAccountsWithSimilarIp\u0028\u0029",
+            "name": "getAccountsWithSimilarIp",
+            "summary": "Get\u0020accounts\u0020with\u0020similar\u0020IP.",
+            "url": "classes/Lotgd-Core-Repository-Account-Bans.html#method_getAccountsWithSimilarIp"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Bans\u003A\u003AlogoutAffectedAccounts\u0028\u0029",
+            "name": "logoutAffectedAccounts",
+            "summary": "Log\u0020out\u0020affected\u0020players\u0020for\u0020a\u0020ban.",
+            "url": "classes/Lotgd-Core-Repository-Account-Bans.html#method_logoutAffectedAccounts"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Character",
+            "name": "Character",
+            "summary": "Functions\u0020for\u0020characters\u0020from\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-Account-Character.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Character\u003A\u003AgetCharacterInfoFromAcctId\u0028\u0029",
+            "name": "getCharacterInfoFromAcctId",
+            "summary": "Get\u0020information\u0020of\u0020character\u0020for\u0020bio\u0020page.",
+            "url": "classes/Lotgd-Core-Repository-Account-Character.html#method_getCharacterInfoFromAcctId"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Character\u003A\u003AgetCharacterNewsFromAcctId\u0028\u0029",
+            "name": "getCharacterNewsFromAcctId",
+            "summary": "Get\u0020recent\u0020news\u0020from\u0020account\u0020and\u0020character.",
+            "url": "classes/Lotgd-Core-Repository-Account-Character.html#method_getCharacterNewsFromAcctId"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Character\u003A\u003AgetCharacterNameFromAcctId\u0028\u0029",
+            "name": "getCharacterNameFromAcctId",
+            "summary": "Get\u0020character\u0020name\u0020from\u0020account\u0020ID.",
+            "url": "classes/Lotgd-Core-Repository-Account-Character.html#method_getCharacterNameFromAcctId"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Clan",
+            "name": "Clan",
+            "summary": "Functions\u0020for\u0020clans.",
+            "url": "classes/Lotgd-Core-Repository-Account-Clan.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Clan\u003A\u003AgetClanAuthorNameOfMotdDescFromAcctId\u0028\u0029",
+            "name": "getClanAuthorNameOfMotdDescFromAcctId",
+            "summary": "Get\u0020author\u0020name\u0020for\u0020description\u0020and\u0020motd.",
+            "url": "classes/Lotgd-Core-Repository-Account-Clan.html#method_getClanAuthorNameOfMotdDescFromAcctId"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Login",
+            "name": "Login",
+            "summary": "Functions\u0020for\u0020login\/logout\u0020user.",
+            "url": "classes/Lotgd-Core-Repository-Account-Login.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Login\u003A\u003AprocessLoginGetAcctData\u0028\u0029",
+            "name": "processLoginGetAcctData",
+            "summary": "Process\u0020login\u0020and\u0020get\u0020data.",
+            "url": "classes/Lotgd-Core-Repository-Account-Login.html#method_processLoginGetAcctData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Login\u003A\u003AlogoutInactiveAccounts\u0028\u0029",
+            "name": "logoutInactiveAccounts",
+            "summary": "Logout\u0020inactive\u0020accounts.",
+            "url": "classes/Lotgd-Core-Repository-Account-Login.html#method_logoutInactiveAccounts"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Login\u003A\u003AgetAcctIdFromLogin\u0028\u0029",
+            "name": "getAcctIdFromLogin",
+            "summary": "Get\u0020acctid\u0020from\u0020login.",
+            "url": "classes/Lotgd-Core-Repository-Account-Login.html#method_getAcctIdFromLogin"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Superuser",
+            "name": "Superuser",
+            "summary": "Functions\u0020for\u0020superuser\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-Account-Superuser.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Superuser\u003A\u003AgetSuperuserWithPermit\u0028\u0029",
+            "name": "getSuperuserWithPermit",
+            "summary": "Get\u0020all\u0020superusers\u0020who\u0020have\u0020the\u0020given\u0020permission.",
+            "url": "classes/Lotgd-Core-Repository-Account-Superuser.html#method_getSuperuserWithPermit"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Superuser\u003A\u003AgetSuperuserCountWithPermit\u0028\u0029",
+            "name": "getSuperuserCountWithPermit",
+            "summary": "Get\u0020count\u0020of\u0020superusers\u0020who\u0020have\u0020the\u0020given\u0020permission.",
+            "url": "classes/Lotgd-Core-Repository-Account-Superuser.html#method_getSuperuserCountWithPermit"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\Superuser\u003A\u003AgetLoginSuperuserWithPermit\u0028\u0029",
+            "name": "getLoginSuperuserWithPermit",
+            "summary": "Superuser\u0020login.",
+            "url": "classes/Lotgd-Core-Repository-Account-Superuser.html#method_getLoginSuperuserWithPermit"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\User",
+            "name": "User",
+            "summary": "Functions\u0020for\u0020user\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-Account-User.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\User\u003A\u003AgetAcctPrefs\u0028\u0029",
+            "name": "getAcctPrefs",
+            "summary": "Get\u0020prefs\u0020of\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-Account-User.html#method_getAcctPrefs"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account\\User\u003A\u003AuserSearchAccounts\u0028\u0029",
+            "name": "userSearchAccounts",
+            "summary": "Search\u0020users.",
+            "url": "classes/Lotgd-Core-Repository-Account-User.html#method_userSearchAccounts"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\AccountsEverypageRepository",
+            "name": "AccountsEverypageRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-AccountsEverypageRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\AccountsEverypageRepository\u003A\u003AgetStatsPageGen\u0028\u0029",
+            "name": "getStatsPageGen",
+            "summary": "Get\u0020stats\u0020of\u0020page\u0020gen.",
+            "url": "classes/Lotgd-Core-Repository-AccountsEverypageRepository.html#method_getStatsPageGen"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\AccountsOutput\\Backup",
+            "name": "Backup",
+            "summary": "Functions\u0020for\u0020backup\u0020data.",
+            "url": "classes/Lotgd-Core-Repository-AccountsOutput-Backup.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\AccountsOutput\\Backup\u003A\u003AbackupDeleteDataFromAccount\u0028\u0029",
+            "name": "backupDeleteDataFromAccount",
+            "summary": "Delete\u0020output\u0020of\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-AccountsOutput-Backup.html#method_backupDeleteDataFromAccount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\AccountsOutputRepository",
+            "name": "AccountsOutputRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-AccountsOutputRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\AccountsOutputRepository\u003A\u003AgetOutput\u0028\u0029",
+            "name": "getOutput",
+            "summary": "Get\u0020output\u0020code\u0020for\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-AccountsOutputRepository.html#method_getOutput"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\AccountsOutputRepository\u003A\u003AdeleteOutputOfAccount\u0028\u0029",
+            "name": "deleteOutputOfAccount",
+            "summary": "Delete\u0020output\u0020of\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-AccountsOutputRepository.html#method_deleteOutputOfAccount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\AccountsRepository",
+            "name": "AccountsRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-AccountsRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\AccountsRepository\u003A\u003AgetUserById\u0028\u0029",
+            "name": "getUserById",
+            "summary": "Get\u0020data\u0020of\u0020user\u0020by\u0020ID\u0020of\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-AccountsRepository.html#method_getUserById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\AccountsRepository\u003A\u003AgetCountAcctsOnline\u0028\u0029",
+            "name": "getCountAcctsOnline",
+            "summary": "Get\u0020total\u0020accounts\u0020that\u0020are\u0020online.",
+            "url": "classes/Lotgd-Core-Repository-AccountsRepository.html#method_getCountAcctsOnline"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\AccountsRepository\u003A\u003AgetListAccountsOnline\u0028\u0029",
+            "name": "getListAccountsOnline",
+            "summary": "Get\u0020list\u0020of\u0020accounts\u0020online.",
+            "url": "classes/Lotgd-Core-Repository-AccountsRepository.html#method_getListAccountsOnline"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\AccountsRepository\u003A\u003AprocessUserData\u0028\u0029",
+            "name": "processUserData",
+            "summary": "Private\u0020function\u0020to\u0020process\u0020data\u0020of\u0020user.",
+            "url": "classes/Lotgd-Core-Repository-AccountsRepository.html#method_processUserData"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ArmorRepository",
+            "name": "ArmorRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-ArmorRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ArmorRepository\u003A\u003AgetMaxArmorLevel\u0028\u0029",
+            "name": "getMaxArmorLevel",
+            "summary": "Get\u0020de\u0020max\u0020level\u0020of\u0020armors.",
+            "url": "classes/Lotgd-Core-Repository-ArmorRepository.html#method_getMaxArmorLevel"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ArmorRepository\u003A\u003AgetNextDefenseLevel\u0028\u0029",
+            "name": "getNextDefenseLevel",
+            "summary": "Get\u0020next\u0020defense\u0020in\u0020level\u0020of\u0020armors.",
+            "url": "classes/Lotgd-Core-Repository-ArmorRepository.html#method_getNextDefenseLevel"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ArmorRepository\u003A\u003AfindByLevel\u0028\u0029",
+            "name": "findByLevel",
+            "summary": "Get\u0020a\u0020translated\u0020list\u0020for\u0020a\u0020level.",
+            "url": "classes/Lotgd-Core-Repository-ArmorRepository.html#method_findByLevel"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ArmorRepository\u003A\u003AfindOneArmorById\u0028\u0029",
+            "name": "findOneArmorById",
+            "summary": "Find\u0020one\u0020by\u0020id.",
+            "url": "classes/Lotgd-Core-Repository-ArmorRepository.html#method_findOneArmorById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ArmorRepository\u003A\u003AfindArmorsById\u0028\u0029",
+            "name": "findArmorsById",
+            "summary": "Get\u0020an\u0020array\u0020by\u0020ids.",
+            "url": "classes/Lotgd-Core-Repository-ArmorRepository.html#method_findArmorsById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\BansRepository",
+            "name": "BansRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-BansRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\BansRepository\u003A\u003AremoveExpireBans\u0028\u0029",
+            "name": "removeExpireBans",
+            "summary": "Remove\u0020expired\u0020bans.",
+            "url": "classes/Lotgd-Core-Repository-BansRepository.html#method_removeExpireBans"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\BansRepository\u003A\u003AdeleteBan\u0028\u0029",
+            "name": "deleteBan",
+            "summary": "Delete\u0020ban\u0020from\u0020data\u0020base.",
+            "url": "classes/Lotgd-Core-Repository-BansRepository.html#method_deleteBan"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Bio",
+            "name": "Bio",
+            "summary": "Functions\u0020for\u0020bio\u0020of\u0020characters.",
+            "url": "classes/Lotgd-Core-Repository-Character-Bio.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Bio\u003A\u003AgetCharactersUnblockedBio\u0028\u0029",
+            "name": "getCharactersUnblockedBio",
+            "summary": "Get\u0020all\u0020bios\u0020of\u0020characters\u0020that\u0020NOT\u0020are\u0020blocked.",
+            "url": "classes/Lotgd-Core-Repository-Character-Bio.html#method_getCharactersUnblockedBio"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Bio\u003A\u003AgetCharactersBlockedBio\u0028\u0029",
+            "name": "getCharactersBlockedBio",
+            "summary": "Get\u0020all\u0020bios\u0020of\u0020characters\u0020that\u0020are\u0020blocked.",
+            "url": "classes/Lotgd-Core-Repository-Character-Bio.html#method_getCharactersBlockedBio"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Bio\u003A\u003AblockCharacterBio\u0028\u0029",
+            "name": "blockCharacterBio",
+            "summary": "Block\u0020a\u0020bio\u0020of\u0020user.",
+            "url": "classes/Lotgd-Core-Repository-Character-Bio.html#method_blockCharacterBio"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Bio\u003A\u003AunblockCharacterBio\u0028\u0029",
+            "name": "unblockCharacterBio",
+            "summary": "Unblock\u0020a\u0020bio\u0020of\u0020user.",
+            "url": "classes/Lotgd-Core-Repository-Character-Bio.html#method_unblockCharacterBio"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Bio\u003A\u003AblockUnblockCharacterBio\u0028\u0029",
+            "name": "blockUnblockCharacterBio",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-Character-Bio.html#method_blockUnblockCharacterBio"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Clan",
+            "name": "Clan",
+            "summary": "Functions\u0020for\u0020clan\u0020of\u0020characters.",
+            "url": "classes/Lotgd-Core-Repository-Character-Clan.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Clan\u003A\u003AgetClanMembershipList\u0028\u0029",
+            "name": "getClanMembershipList",
+            "summary": "Get\u0020list\u0020of\u0020membership\u0020of\u0020clan.",
+            "url": "classes/Lotgd-Core-Repository-Character-Clan.html#method_getClanMembershipList"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Clan\u003A\u003AgetClanMembershipDetails\u0028\u0029",
+            "name": "getClanMembershipDetails",
+            "summary": "Get\u0020details\u0020of\u0020membership\u0020of\u0020clan.",
+            "url": "classes/Lotgd-Core-Repository-Character-Clan.html#method_getClanMembershipDetails"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Clan\u003A\u003AgetClanLeadersCount\u0028\u0029",
+            "name": "getClanLeadersCount",
+            "summary": "Count\u0020leaders\u0020of\u0020a\u0020clan.",
+            "url": "classes/Lotgd-Core-Repository-Character-Clan.html#method_getClanLeadersCount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Clan\u003A\u003AgetViableLeaderForClan\u0028\u0029",
+            "name": "getViableLeaderForClan",
+            "summary": "Get\u0020one\u0020member\u0020of\u0020clan\u0020that\u0020can\u0020be\u0020promote\u0020to\u0020leader.",
+            "url": "classes/Lotgd-Core-Repository-Character-Clan.html#method_getViableLeaderForClan"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Clan\u003A\u003AgetLeadersFromClan\u0028\u0029",
+            "name": "getLeadersFromClan",
+            "summary": "Get\u0020leaders\u0020of\u0020clan\u0020exclude\u0020select\u0020acctId.",
+            "url": "classes/Lotgd-Core-Repository-Character-Clan.html#method_getLeadersFromClan"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Clan\u003A\u003AsetNewClanLeader\u0028\u0029",
+            "name": "setNewClanLeader",
+            "summary": "Set\u0020new\u0020leader\u0020for\u0020a\u0020clan.",
+            "url": "classes/Lotgd-Core-Repository-Character-Clan.html#method_setNewClanLeader"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Clan\u003A\u003AgetCharacterFromAcctidAndRank\u0028\u0029",
+            "name": "getCharacterFromAcctidAndRank",
+            "summary": "Get\u0020information\u0020of\u0020character\u0020with\u0020acctId\u0020and\u0020rank\u0020less\u0020or\u0020equal\u0020to.",
+            "url": "classes/Lotgd-Core-Repository-Character-Clan.html#method_getCharacterFromAcctidAndRank"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Clan\u003A\u003AexpelPlayersFromDeletedClan\u0028\u0029",
+            "name": "expelPlayersFromDeletedClan",
+            "summary": "Expel\u0020characters\u0020from\u0020a\u0020deleted\u0020clan.",
+            "url": "classes/Lotgd-Core-Repository-Character-Clan.html#method_expelPlayersFromDeletedClan"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Setting",
+            "name": "Setting",
+            "summary": "Functions\u0020for\u0020settings\u0020of\u0020characters.",
+            "url": "classes/Lotgd-Core-Repository-Character-Setting.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character\\Setting\u003A\u003AmovingPlayersToLocation\u0028\u0029",
+            "name": "movingPlayersToLocation",
+            "summary": "Moving\u0020players\u0020to\u0020new\u0020location.",
+            "url": "classes/Lotgd-Core-Repository-Character-Setting.html#method_movingPlayersToLocation"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CharactersRepository",
+            "name": "CharactersRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-CharactersRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CharactersRepository\u003A\u003AgetCharacterNameFromAcctId\u0028\u0029",
+            "name": "getCharacterNameFromAcctId",
+            "summary": "Get\u0020character\u0027s\u0020name\u0020from\u0020an\u0020account\u0020ID.",
+            "url": "classes/Lotgd-Core-Repository-CharactersRepository.html#method_getCharacterNameFromAcctId"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CharactersRepository\u003A\u003AfindLikeName\u0028\u0029",
+            "name": "findLikeName",
+            "summary": "Get\u0020a\u0020list\u0020of\u0020characters\u0020with\u0020similar\u0020name.",
+            "url": "classes/Lotgd-Core-Repository-CharactersRepository.html#method_findLikeName"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CharactersRepository\u003A\u003AgetCharacterForPvp\u0028\u0029",
+            "name": "getCharacterForPvp",
+            "summary": "Get\u0020info\u0020of\u0020character\u0020for\u0020PvP.",
+            "url": "classes/Lotgd-Core-Repository-CharactersRepository.html#method_getCharacterForPvp"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ClansRepository",
+            "name": "ClansRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-ClansRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ClansRepository\u003A\u003AgetClanListWithMembersCount\u0028\u0029",
+            "name": "getClanListWithMembersCount",
+            "summary": "Get\u0020list\u0020of\u0020clans\u0020for\u0020apply\u0020to\u0020enter.",
+            "url": "classes/Lotgd-Core-Repository-ClansRepository.html#method_getClanListWithMembersCount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ClansRepository\u003A\u003AcreateClan\u0028\u0029",
+            "name": "createClan",
+            "summary": "Create\u0020a\u0020new\u0020clan.",
+            "url": "classes/Lotgd-Core-Repository-ClansRepository.html#method_createClan"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Commentary\\Backup",
+            "name": "Backup",
+            "summary": "Functions\u0020for\u0020backup\u0020data.",
+            "url": "classes/Lotgd-Core-Repository-Commentary-Backup.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Commentary\\Backup\u003A\u003AbackupGetDataFromAccount\u0028\u0029",
+            "name": "backupGetDataFromAccount",
+            "summary": "Get\u0020all\u0020mail\u0020to\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-Commentary-Backup.html#method_backupGetDataFromAccount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Commentary\\Backup\u003A\u003AbackupDeleteDataFromAccount\u0028\u0029",
+            "name": "backupDeleteDataFromAccount",
+            "summary": "Delete\u0020comments\u0020of\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-Commentary-Backup.html#method_backupDeleteDataFromAccount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CommentaryRepository",
+            "name": "CommentaryRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-CommentaryRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CommentaryRepository\u003A\u003AsaveComment\u0028\u0029",
+            "name": "saveComment",
+            "summary": "Save\u0020comment\u0020to\u0020data\u0020base.",
+            "url": "classes/Lotgd-Core-Repository-CommentaryRepository.html#method_saveComment"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CommentaryRepository\u003A\u003AmoderateComments\u0028\u0029",
+            "name": "moderateComments",
+            "summary": "Hide\/Unhide\u0020comments.",
+            "url": "classes/Lotgd-Core-Repository-CommentaryRepository.html#method_moderateComments"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CommentaryRepository\u003A\u003AgetPublishedSections\u0028\u0029",
+            "name": "getPublishedSections",
+            "summary": "Get\u0020all\u0020sections\u0020in\u0020comentary.",
+            "url": "classes/Lotgd-Core-Repository-CommentaryRepository.html#method_getPublishedSections"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CommentaryRepository\u003A\u003AdeleteExpireComments\u0028\u0029",
+            "name": "deleteExpireComments",
+            "summary": "Delte\u0020old\u0020comments\u0020in\u0020data\u0020base.",
+            "url": "classes/Lotgd-Core-Repository-CommentaryRepository.html#method_deleteExpireComments"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CompanionsRepository",
+            "name": "CompanionsRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-CompanionsRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CompanionsRepository\u003A\u003AgetMercenaryList\u0028\u0029",
+            "name": "getMercenaryList",
+            "summary": "Get\u0020a\u0020list\u0020of\u0020available\u0020mecenaries.",
+            "url": "classes/Lotgd-Core-Repository-CompanionsRepository.html#method_getMercenaryList"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CompanionsRepository\u003A\u003AfindOneCompanionById\u0028\u0029",
+            "name": "findOneCompanionById",
+            "summary": "Find\u0020one\u0020by\u0020id.",
+            "url": "classes/Lotgd-Core-Repository-CompanionsRepository.html#method_findOneCompanionById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CompanionsRepository\u003A\u003AfindCompanionsById\u0028\u0029",
+            "name": "findCompanionsById",
+            "summary": "Get\u0020an\u0020array\u0020by\u0020ids.",
+            "url": "classes/Lotgd-Core-Repository-CompanionsRepository.html#method_findCompanionsById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CompanionsRepository\u003A\u003AgetList\u0028\u0029",
+            "name": "getList",
+            "summary": "Get\u0020list\u0020of\u0020companions.",
+            "url": "classes/Lotgd-Core-Repository-CompanionsRepository.html#method_getList"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CreaturesRepository",
+            "name": "CreaturesRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-CreaturesRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CreaturesRepository\u003A\u003AfindOneCreatureById\u0028\u0029",
+            "name": "findOneCreatureById",
+            "summary": "Find\u0020one\u0020creature\u0020by\u0020id.",
+            "url": "classes/Lotgd-Core-Repository-CreaturesRepository.html#method_findOneCreatureById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CreaturesRepository\u003A\u003AfindCreaturesById\u0028\u0029",
+            "name": "findCreaturesById",
+            "summary": "Get\u0020an\u0020array\u0020of\u0020creatures\u0020by\u0020ids.",
+            "url": "classes/Lotgd-Core-Repository-CreaturesRepository.html#method_findCreaturesById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CronjobRepository",
+            "name": "CronjobRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-CronjobRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\CronjobRepository\u003A\u003AgetCharacterNameFromAcctId\u0028\u0029",
+            "name": "getCharacterNameFromAcctId",
+            "summary": "Get\u0020character\u0027s\u0020name\u0020from\u0020an\u0020account\u0020ID.",
+            "url": "classes/Lotgd-Core-Repository-CronjobRepository.html#method_getCharacterNameFromAcctId"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\DebugRepository",
+            "name": "DebugRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-DebugRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\FaillogRepository",
+            "name": "FaillogRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-FaillogRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\FaillogRepository\u003A\u003AdeleteExpireFaillogs\u0028\u0029",
+            "name": "deleteExpireFaillogs",
+            "summary": "Delte\u0020old\u0020fail\u0020logs\u0020in\u0020data\u0020base.",
+            "url": "classes/Lotgd-Core-Repository-FaillogRepository.html#method_deleteExpireFaillogs"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\GamelogRepository",
+            "name": "GamelogRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-GamelogRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\GamelogRepository\u003A\u003AdeleteExpireGamelogs\u0028\u0029",
+            "name": "deleteExpireGamelogs",
+            "summary": "Delte\u0020old\u0020fail\u0020logs\u0020in\u0020data\u0020base.",
+            "url": "classes/Lotgd-Core-Repository-GamelogRepository.html#method_deleteExpireGamelogs"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\LogdnetRepository",
+            "name": "LogdnetRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-LogdnetRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\LogdnetRepository\u003A\u003AdeletedOlderServer\u0028\u0029",
+            "name": "deletedOlderServer",
+            "summary": "Delete\u0020servers\u0020older\u0020than\u0020two\u0020weeks.",
+            "url": "classes/Lotgd-Core-Repository-LogdnetRepository.html#method_deletedOlderServer"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\LogdnetRepository\u003A\u003AdegradePopularity\u0028\u0029",
+            "name": "degradePopularity",
+            "summary": "Degrade\u0020the\u0020popularity\u0020of\u0020any\u0020server\u0020which\u0020hasn\u0027t\u0020been\u0020updated\u0020in\u0020the\u0020past\u00205\u0020minutes\u0020by\u00201\u0025.",
+            "url": "classes/Lotgd-Core-Repository-LogdnetRepository.html#method_degradePopularity"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\LogdnetRepository\u003A\u003AgetNetServerList\u0028\u0029",
+            "name": "getNetServerList",
+            "summary": "Get\u0020our\u0020list\u0020of\u0020servers.",
+            "url": "classes/Lotgd-Core-Repository-LogdnetRepository.html#method_getNetServerList"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\LogdnetRepository\u003A\u003AapplyLogdnetBans\u0028\u0029",
+            "name": "applyLogdnetBans",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-LogdnetRepository.html#method_applyLogdnetBans"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\LogdnetRepository\u003A\u003AlotgdSort\u0028\u0029",
+            "name": "lotgdSort",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-LogdnetRepository.html#method_lotgdSort"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Mail\\Backup",
+            "name": "Backup",
+            "summary": "Functions\u0020for\u0020backup\u0020data.",
+            "url": "classes/Lotgd-Core-Repository-Mail-Backup.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Mail\\Backup\u003A\u003AbackupGetDataFromAccount\u0028\u0029",
+            "name": "backupGetDataFromAccount",
+            "summary": "Get\u0020all\u0020mail\u0020to\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-Mail-Backup.html#method_backupGetDataFromAccount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Mail\\Backup\u003A\u003AbackupDeleteDataFromAccount\u0028\u0029",
+            "name": "backupDeleteDataFromAccount",
+            "summary": "Delete\u0020mail\u0020of\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-Mail-Backup.html#method_backupDeleteDataFromAccount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Mail\\Clan",
+            "name": "Clan",
+            "summary": "Functions\u0020for\u0020clan\u0020of\u0020mail.",
+            "url": "classes/Lotgd-Core-Repository-Mail-Clan.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Mail\\Clan\u003A\u003AdeleteMailFromSystemBySubj\u0028\u0029",
+            "name": "deleteMailFromSystemBySubj",
+            "summary": "Delete\u0020mail\u0020from\u0020system\u0020by\u0020subject.",
+            "url": "classes/Lotgd-Core-Repository-Mail-Clan.html#method_deleteMailFromSystemBySubj"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MailRepository",
+            "name": "MailRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-MailRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MailRepository\u003A\u003AgetCountMailOfCharacter\u0028\u0029",
+            "name": "getCountMailOfCharacter",
+            "summary": "Get\u0020a\u0020count\u0020of\u0020see\u0020and\u0020unsee\u0020mail.",
+            "url": "classes/Lotgd-Core-Repository-MailRepository.html#method_getCountMailOfCharacter"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MailRepository\u003A\u003AgetCharacterNameFromAcctId\u0028\u0029",
+            "name": "getCharacterNameFromAcctId",
+            "summary": "Get\u0020character\u0027s\u0020name\u0020from\u0020an\u0020account\u0020ID.",
+            "url": "classes/Lotgd-Core-Repository-MailRepository.html#method_getCharacterNameFromAcctId"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MailRepository\u003A\u003AgetCharacterMail\u0028\u0029",
+            "name": "getCharacterMail",
+            "summary": "Get\u0020list\u0020of\u0020messages\u0020for\u0020a\u0020character.",
+            "url": "classes/Lotgd-Core-Repository-MailRepository.html#method_getCharacterMail"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MailRepository\u003A\u003AgetMailSenderNames\u0028\u0029",
+            "name": "getMailSenderNames",
+            "summary": "Get\u0020a\u0020names\u0020of\u0020senders\u0020and\u0020count\u0020msgs.",
+            "url": "classes/Lotgd-Core-Repository-MailRepository.html#method_getMailSenderNames"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MailRepository\u003A\u003AgetNextPreviousMail\u0028\u0029",
+            "name": "getNextPreviousMail",
+            "summary": "Get\u0020next\u0020and\u0020previous\u0020IDs\u0020of\u0020current\u0020mail.",
+            "url": "classes/Lotgd-Core-Repository-MailRepository.html#method_getNextPreviousMail"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MailRepository\u003A\u003AdeleteBulkMail\u0028\u0029",
+            "name": "deleteBulkMail",
+            "summary": "Delete\u0020mail\u0020in\u0020bulk\u0020by\u0020ID.",
+            "url": "classes/Lotgd-Core-Repository-MailRepository.html#method_deleteBulkMail"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MailRepository\u003A\u003AreplyToMessage\u0028\u0029",
+            "name": "replyToMessage",
+            "summary": "Get\u0020info\u0020of\u0020the\u0020reply\u0020message.",
+            "url": "classes/Lotgd-Core-Repository-MailRepository.html#method_replyToMessage"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MailRepository\u003A\u003AcountInboxOfCharacter\u0028\u0029",
+            "name": "countInboxOfCharacter",
+            "summary": "Count\u0020messages\u0020in\u0020inbox\u0020of\u0020character.",
+            "url": "classes/Lotgd-Core-Repository-MailRepository.html#method_countInboxOfCharacter"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MailRepository\u003A\u003AdeleteExpireMail\u0028\u0029",
+            "name": "deleteExpireMail",
+            "summary": "Delte\u0020old\u0020mails\u0020in\u0020data\u0020base.",
+            "url": "classes/Lotgd-Core-Repository-MailRepository.html#method_deleteExpireMail"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MastersRepository",
+            "name": "MastersRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-MastersRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MastersRepository\u003A\u003AfindOneMasterById\u0028\u0029",
+            "name": "findOneMasterById",
+            "summary": "Find\u0020one\u0020master\u0020by\u0020id.",
+            "url": "classes/Lotgd-Core-Repository-MastersRepository.html#method_findOneMasterById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MastersRepository\u003A\u003AfindMastersById\u0028\u0029",
+            "name": "findMastersById",
+            "summary": "Get\u0020an\u0020array\u0020of\u0020masters\u0020by\u0020ids.",
+            "url": "classes/Lotgd-Core-Repository-MastersRepository.html#method_findMastersById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Module\\Setting",
+            "name": "Setting",
+            "summary": "Functions\u0020for\u0020settings\u0020of\u0020modules.",
+            "url": "classes/Lotgd-Core-Repository-Module-Setting.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Module\\Setting\u003A\u003AfindModulesEditorNav\u0028\u0029",
+            "name": "findModulesEditorNav",
+            "summary": "Find\u0020all\u0020modules\u0020that\u0020have.",
+            "url": "classes/Lotgd-Core-Repository-Module-Setting.html#method_findModulesEditorNav"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ModulesRepository",
+            "name": "ModulesRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-ModulesRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ModulesRepository\u003A\u003AreinstallModule\u0028\u0029",
+            "name": "reinstallModule",
+            "summary": "Restart\u0020filemoddate\u0020to\u0020default\u0020value.",
+            "url": "classes/Lotgd-Core-Repository-ModulesRepository.html#method_reinstallModule"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ModulesRepository\u003A\u003AfindInfoKeyLike\u0028\u0029",
+            "name": "findInfoKeyLike",
+            "summary": "Find\u0020modules\u0020with\u0020this\u0020info\u0020key.",
+            "url": "classes/Lotgd-Core-Repository-ModulesRepository.html#method_findInfoKeyLike"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ModuleUserprefs\\Backup",
+            "name": "Backup",
+            "summary": "Functions\u0020for\u0020backup\u0020data.",
+            "url": "classes/Lotgd-Core-Repository-ModuleUserprefs-Backup.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ModuleUserprefs\\Backup\u003A\u003AbackupGetDataFromAccount\u0028\u0029",
+            "name": "backupGetDataFromAccount",
+            "summary": "Get\u0020all\u0020module\u0020user\u0020prefs\u0020to\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-ModuleUserprefs-Backup.html#method_backupGetDataFromAccount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ModuleUserprefs\\Backup\u003A\u003AbackupDeleteDataFromAccount\u0028\u0029",
+            "name": "backupDeleteDataFromAccount",
+            "summary": "Delete\u0020all\u0020module\u0020user\u0020prefs\u0020of\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-ModuleUserprefs-Backup.html#method_backupDeleteDataFromAccount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ModuleUserprefsRepository",
+            "name": "ModuleUserprefsRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-ModuleUserprefsRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ModuleUserprefsRepository\u003A\u003AfindModulesPrefs\u0028\u0029",
+            "name": "findModulesPrefs",
+            "summary": "Find\u0020modules\u0020prefs\u0020for\u0020modules.",
+            "url": "classes/Lotgd-Core-Repository-ModuleUserprefsRepository.html#method_findModulesPrefs"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MotdRepository",
+            "name": "MotdRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-MotdRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MotdRepository\u003A\u003AgetLastMotd\u0028\u0029",
+            "name": "getLastMotd",
+            "summary": "Get\u0020last\u0020MOTD.",
+            "url": "classes/Lotgd-Core-Repository-MotdRepository.html#method_getLastMotd"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MotdRepository\u003A\u003AgetEditMotdItem\u0028\u0029",
+            "name": "getEditMotdItem",
+            "summary": "Get\u0020MoTD\u0020item\u0020info.",
+            "url": "classes/Lotgd-Core-Repository-MotdRepository.html#method_getEditMotdItem"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MotdRepository\u003A\u003AappendPollResults\u0028\u0029",
+            "name": "appendPollResults",
+            "summary": "Append\u0020results\u0020of\u0020a\u0020poll\u0020to\u0020MOTD\u0020item.",
+            "url": "classes/Lotgd-Core-Repository-MotdRepository.html#method_appendPollResults"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MotdRepository\u003A\u003AgetMonthCountPerYear\u0028\u0029",
+            "name": "getMonthCountPerYear",
+            "summary": "Get\u0020a\u0020list\u0020of\u0020years\u0020with\u0020count\u0020of\u0020MoTD\u0020per\u0020month.",
+            "url": "classes/Lotgd-Core-Repository-MotdRepository.html#method_getMonthCountPerYear"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MotdRepository\u003A\u003AgetLastMotdDate\u0028\u0029",
+            "name": "getLastMotdDate",
+            "summary": "Get\u0020last\u0020Motd\u0020date.",
+            "url": "classes/Lotgd-Core-Repository-MotdRepository.html#method_getLastMotdDate"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MountsRepository",
+            "name": "MountsRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-MountsRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MountsRepository\u003A\u003AgetList\u0028\u0029",
+            "name": "getList",
+            "summary": "Get\u0020list\u0020of\u0020mounts\u0020with\u0020owners.",
+            "url": "classes/Lotgd-Core-Repository-MountsRepository.html#method_getList"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MountsRepository\u003A\u003ArefundMount\u0028\u0029",
+            "name": "refundMount",
+            "summary": "Refund\u0020cost\u0020of\u0020mount\u0020to\u0020players.",
+            "url": "classes/Lotgd-Core-Repository-MountsRepository.html#method_refundMount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MountsRepository\u003A\u003AgetMountsByLocation\u0028\u0029",
+            "name": "getMountsByLocation",
+            "summary": "Get\u0020mounts\u0020by\u0020location\u0020\u0028include\u0020all\u0029.",
+            "url": "classes/Lotgd-Core-Repository-MountsRepository.html#method_getMountsByLocation"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MountsRepository\u003A\u003AfindOneMountById\u0028\u0029",
+            "name": "findOneMountById",
+            "summary": "Find\u0020one\u0020mount\u0020by\u0020id.",
+            "url": "classes/Lotgd-Core-Repository-MountsRepository.html#method_findOneMountById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\MountsRepository\u003A\u003AfindMountsById\u0028\u0029",
+            "name": "findMountsById",
+            "summary": "Get\u0020an\u0020array\u0020of\u0020mounts\u0020by\u0020ids.",
+            "url": "classes/Lotgd-Core-Repository-MountsRepository.html#method_findMountsById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\News\\Backup",
+            "name": "Backup",
+            "summary": "Functions\u0020for\u0020backup\u0020data.",
+            "url": "classes/Lotgd-Core-Repository-News-Backup.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\News\\Backup\u003A\u003AbackupGetDataFromAccount\u0028\u0029",
+            "name": "backupGetDataFromAccount",
+            "summary": "Get\u0020all\u0020news\u0020of\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-News-Backup.html#method_backupGetDataFromAccount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\News\\Backup\u003A\u003AbackupDeleteDataFromAccount\u0028\u0029",
+            "name": "backupDeleteDataFromAccount",
+            "summary": "Delete\u0020news\u0020of\u0020account.",
+            "url": "classes/Lotgd-Core-Repository-News-Backup.html#method_backupDeleteDataFromAccount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\NewsRepository",
+            "name": "NewsRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-NewsRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\NewsRepository\u003A\u003AdeleteNewsId\u0028\u0029",
+            "name": "deleteNewsId",
+            "summary": "Delete\u0020a\u0020news\u0020by\u0020ID.",
+            "url": "classes/Lotgd-Core-Repository-NewsRepository.html#method_deleteNewsId"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\NewsRepository\u003A\u003AdeleteExpireNews\u0028\u0029",
+            "name": "deleteExpireNews",
+            "summary": "Delte\u0020old\u0020news\u0020in\u0020data\u0020base.",
+            "url": "classes/Lotgd-Core-Repository-NewsRepository.html#method_deleteExpireNews"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\PaylogRepository",
+            "name": "PaylogRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-PaylogRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\PaylogRepository\u003A\u003AupdateProcessDate\u0028\u0029",
+            "name": "updateProcessDate",
+            "summary": "Update\u0020process\u0020of\u0020date.",
+            "url": "classes/Lotgd-Core-Repository-PaylogRepository.html#method_updateProcessDate"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\PaylogRepository\u003A\u003AgetMonths\u0028\u0029",
+            "name": "getMonths",
+            "summary": "Get\u0020a\u0020list\u0020of\u0020months.",
+            "url": "classes/Lotgd-Core-Repository-PaylogRepository.html#method_getMonths"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\PaylogRepository\u003A\u003AgetList\u0028\u0029",
+            "name": "getList",
+            "summary": "Get\u0020list\u0020paylog.",
+            "url": "classes/Lotgd-Core-Repository-PaylogRepository.html#method_getList"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\PetitionsRepository",
+            "name": "PetitionsRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-PetitionsRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\PetitionsRepository\u003A\u003AgetStatusListCount\u0028\u0029",
+            "name": "getStatusListCount",
+            "summary": "Get\u0020a\u0020list\u0020count\u0020of\u0020petitions.",
+            "url": "classes/Lotgd-Core-Repository-PetitionsRepository.html#method_getStatusListCount"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\PetitionsRepository\u003A\u003AgetCountPetitionsForNetwork\u0028\u0029",
+            "name": "getCountPetitionsForNetwork",
+            "summary": "Get\u0020count\u0020of\u0020petitions\u0020for\u0020network.",
+            "url": "classes/Lotgd-Core-Repository-PetitionsRepository.html#method_getCountPetitionsForNetwork"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\PetitionsRepository\u003A\u003AdeleteOldPetitions\u0028\u0029",
+            "name": "deleteOldPetitions",
+            "summary": "Delete\u0020old\u0020petitions.",
+            "url": "classes/Lotgd-Core-Repository-PetitionsRepository.html#method_deleteOldPetitions"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ReferersRepository",
+            "name": "ReferersRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-ReferersRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ReferersRepository\u003A\u003AdeleteExpireReferers\u0028\u0029",
+            "name": "deleteExpireReferers",
+            "summary": "Delte\u0020old\u0020referers\u0020in\u0020data\u0020base.",
+            "url": "classes/Lotgd-Core-Repository-ReferersRepository.html#method_deleteExpireReferers"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\SettingsRepository",
+            "name": "SettingsRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-SettingsRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\SettingsRepository\u003A\u003AgetInstalledVersion\u0028\u0029",
+            "name": "getInstalledVersion",
+            "summary": "Get\u0020a\u0020installed\u0020version,\u0020this\u0020avoid\u0020cache.",
+            "url": "classes/Lotgd-Core-Repository-SettingsRepository.html#method_getInstalledVersion"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\SettingsRepository\u003A\u003AsetInstalledVersion\u0028\u0029",
+            "name": "setInstalledVersion",
+            "summary": "Set\u0020installed\u0020version.",
+            "url": "classes/Lotgd-Core-Repository-SettingsRepository.html#method_setInstalledVersion"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\TitlesRepository",
+            "name": "TitlesRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-TitlesRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\TitlesRepository\u003A\u003AfindOneTitleById\u0028\u0029",
+            "name": "findOneTitleById",
+            "summary": "Find\u0020one\u0020title\u0020by\u0020id.",
+            "url": "classes/Lotgd-Core-Repository-TitlesRepository.html#method_findOneTitleById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\TitlesRepository\u003A\u003AfindTitlesById\u0028\u0029",
+            "name": "findTitlesById",
+            "summary": "Get\u0020an\u0020array\u0020of\u0020titles\u0020by\u0020ids.",
+            "url": "classes/Lotgd-Core-Repository-TitlesRepository.html#method_findTitlesById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\TitlesRepository\u003A\u003AgetList\u0028\u0029",
+            "name": "getList",
+            "summary": "Get\u0020list\u0020of\u0020titles.",
+            "url": "classes/Lotgd-Core-Repository-TitlesRepository.html#method_getList"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\WeaponsRepository",
+            "name": "WeaponsRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-WeaponsRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\WeaponsRepository\u003A\u003AgetMaxWeaponLevel\u0028\u0029",
+            "name": "getMaxWeaponLevel",
+            "summary": "Get\u0020de\u0020max\u0020level\u0020of\u0020weapons.",
+            "url": "classes/Lotgd-Core-Repository-WeaponsRepository.html#method_getMaxWeaponLevel"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\WeaponsRepository\u003A\u003AgetNextDamageLevel\u0028\u0029",
+            "name": "getNextDamageLevel",
+            "summary": "Get\u0020next\u0020damage\u0020in\u0020level\u0020of\u0020weapons.",
+            "url": "classes/Lotgd-Core-Repository-WeaponsRepository.html#method_getNextDamageLevel"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\WeaponsRepository\u003A\u003AfindByLevel\u0028\u0029",
+            "name": "findByLevel",
+            "summary": "Get\u0020a\u0020translated\u0020list\u0020for\u0020a\u0020level.",
+            "url": "classes/Lotgd-Core-Repository-WeaponsRepository.html#method_findByLevel"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\WeaponsRepository\u003A\u003AfindOneWeaponById\u0028\u0029",
+            "name": "findOneWeaponById",
+            "summary": "Find\u0020one\u0020by\u0020id.",
+            "url": "classes/Lotgd-Core-Repository-WeaponsRepository.html#method_findOneWeaponById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\WeaponsRepository\u003A\u003AfindWeaponsById\u0028\u0029",
+            "name": "findWeaponsById",
+            "summary": "Get\u0020an\u0020array\u0020by\u0020ids.",
+            "url": "classes/Lotgd-Core-Repository-WeaponsRepository.html#method_findWeaponsById"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\WhostypingRepository",
+            "name": "WhostypingRepository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Repository-WhostypingRepository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\WhostypingRepository\u003A\u003AdeleteOld\u0028\u0029",
+            "name": "deleteOld",
+            "summary": "Delete\u0020old\u0020rows.",
+            "url": "classes/Lotgd-Core-Repository-WhostypingRepository.html#method_deleteOld"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Service\\HttpRequestFactory",
             "name": "HttpRequestFactory",
             "summary": "",
@@ -15015,6 +15635,16 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/Lotgd-Core-Service-Jaxon.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Service\\PaypalButtons",
+            "name": "PaypalButtons",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Service-PaypalButtons.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Service\\PaypalButtons\u003A\u003AonBlock\u0028\u0029",
+            "name": "onBlock",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Service-PaypalButtons.html#method_onBlock"
         },                {
             "fqsen": "\\Lotgd\\Core\\Service\\Twig\\SessionVariable",
             "name": "SessionVariable",
@@ -15166,6 +15796,251 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Tool-Backup.html#property_eventDispatcher"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction",
+            "name": "CreatureFunction",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003AbuffBadguy\u0028\u0029",
+            "name": "buffBadguy",
+            "summary": "Buff\u0020creature\u0020for\u0020optimize\u0020to\u0020character\u0020stats.",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#method_buffBadguy"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003AlotgdGenerateCreatureLevels\u0028\u0029",
+            "name": "lotgdGenerateCreatureLevels",
+            "summary": "Generate\u0020a\u0020base\u0020creature\u0020stats\nCan\u0020use\u0020for\u0020generated\u0020your\u0020own\u0020creatures\u0020in\u0020your\u0020modules.",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#method_lotgdGenerateCreatureLevels"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003AlotgdGenerateDoppelganger\u0028\u0029",
+            "name": "lotgdGenerateDoppelganger",
+            "summary": "Generate\u0020a\u0020dummy\u0020creature\u0020Doppelganger.",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#method_lotgdGenerateDoppelganger"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003AlotgdTransformCreature\u0028\u0029",
+            "name": "lotgdTransformCreature",
+            "summary": "Transform\u0020creature\u0020to\u0020adapt\u0020to\u0020player.",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#method_lotgdTransformCreature"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003AlotgdSearchCreature\u0028\u0029",
+            "name": "lotgdSearchCreature",
+            "summary": "Search\u0020for\u0020creature\u0020in\u0020data\u0020base.",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#method_lotgdSearchCreature"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003AgetCreatureStats\u0028\u0029",
+            "name": "getCreatureStats",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#method_getCreatureStats"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003AgetCreatureHitpoints\u0028\u0029",
+            "name": "getCreatureHitpoints",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#method_getCreatureHitpoints"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003AgetCreatureAttack\u0028\u0029",
+            "name": "getCreatureAttack",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#method_getCreatureAttack"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003AgetCreatureDefense\u0028\u0029",
+            "name": "getCreatureDefense",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#method_getCreatureDefense"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003AgetCreatureSpeed\u0028\u0029",
+            "name": "getCreatureSpeed",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#method_getCreatureSpeed"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003AlotgdShowDebugCreature\u0028\u0029",
+            "name": "lotgdShowDebugCreature",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#method_lotgdShowDebugCreature"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003A\u0024dispatcher",
+            "name": "dispatcher",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#property_dispatcher"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003A\u0024response",
+            "name": "response",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#property_response"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003A\u0024cache",
+            "name": "cache",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#property_cache"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003A\u0024repository",
+            "name": "repository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#property_repository"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#property_translator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\CreatureFunction\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-CreatureFunction.html#property_settings"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\DateTime",
+            "name": "DateTime",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-DateTime.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\DateTime\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-DateTime.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\DateTime\u003A\u003AcheckDay\u0028\u0029",
+            "name": "checkDay",
+            "summary": "Check\u0020if\u0020is\u0020a\u0020new\u0020day.",
+            "url": "classes/Lotgd-Core-Tool-DateTime.html#method_checkDay"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\DateTime\u003A\u003AisNewDay\u0028\u0029",
+            "name": "isNewDay",
+            "summary": "Check\u0020if\u0020is\u0020a\u0020new\u0020day.",
+            "url": "classes/Lotgd-Core-Tool-DateTime.html#method_isNewDay"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\DateTime\u003A\u003AgetGameTime\u0028\u0029",
+            "name": "getGameTime",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-DateTime.html#method_getGameTime"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\DateTime\u003A\u003AgameTime\u0028\u0029",
+            "name": "gameTime",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-DateTime.html#method_gameTime"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\DateTime\u003A\u003AconvertGameTime\u0028\u0029",
+            "name": "convertGameTime",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-DateTime.html#method_convertGameTime"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\DateTime\u003A\u003AgameTimeDetails\u0028\u0029",
+            "name": "gameTimeDetails",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-DateTime.html#method_gameTimeDetails"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\DateTime\u003A\u003AsecondsToNextGameDay\u0028\u0029",
+            "name": "secondsToNextGameDay",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-DateTime.html#method_secondsToNextGameDay"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\DateTime\u003A\u003A\u0024response",
+            "name": "response",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-DateTime.html#property_response"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\DateTime\u003A\u003A\u0024navigation",
+            "name": "navigation",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-DateTime.html#property_navigation"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\DateTime\u003A\u003A\u0024request",
+            "name": "request",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-DateTime.html#property_request"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\DateTime\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-DateTime.html#property_settings"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction",
+            "name": "PlayerFunction",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003AincrementSpecialty\u0028\u0029",
+            "name": "incrementSpecialty",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#method_incrementSpecialty"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003AgetPlayerHitpoints\u0028\u0029",
+            "name": "getPlayerHitpoints",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#method_getPlayerHitpoints"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003AexplainedGetPlayerHitpoints\u0028\u0029",
+            "name": "explainedGetPlayerHitpoints",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#method_explainedGetPlayerHitpoints"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003AgetPlayerAttack\u0028\u0029",
+            "name": "getPlayerAttack",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#method_getPlayerAttack"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003AexplainedRowGetPlayerAttack\u0028\u0029",
+            "name": "explainedRowGetPlayerAttack",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#method_explainedRowGetPlayerAttack"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003AexplainedGetPlayerAttack\u0028\u0029",
+            "name": "explainedGetPlayerAttack",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#method_explainedGetPlayerAttack"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003AgetPlayerDefense\u0028\u0029",
+            "name": "getPlayerDefense",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#method_getPlayerDefense"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003AexplainedRowGetPlayerDefense\u0028\u0029",
+            "name": "explainedRowGetPlayerDefense",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#method_explainedRowGetPlayerDefense"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003AexplainedGetPlayerDefense\u0028\u0029",
+            "name": "explainedGetPlayerDefense",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#method_explainedGetPlayerDefense"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003AgetPlayerSpeed\u0028\u0029",
+            "name": "getPlayerSpeed",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#method_getPlayerSpeed"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003AgetPlayerPhysicalResistance\u0028\u0029",
+            "name": "getPlayerPhysicalResistance",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#method_getPlayerPhysicalResistance"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003A\u0024dispatcher",
+            "name": "dispatcher",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#property_dispatcher"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003A\u0024response",
+            "name": "response",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#property_response"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#property_translator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\PlayerFunction\u003A\u003A\u0024repository",
+            "name": "repository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-PlayerFunction.html#property_repository"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Tool\\Sanitize",
             "name": "Sanitize",
             "summary": "",
@@ -15250,6 +16125,11 @@ Search.appendIndex(
             "name": "code",
             "summary": "",
             "url": "classes/Lotgd-Core-Tool-Sanitize.html#property_code"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\Sanitize\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-Sanitize.html#property_settings"
         },                {
             "fqsen": "\\Lotgd\\Core\\Tool\\Tool\\DeathMessage",
             "name": "DeathMessage",
@@ -15441,6 +16321,11 @@ Search.appendIndex(
             "summary": "Text\u0020for\u0020status\u0020of\u0020online\u0020player.",
             "url": "classes/Lotgd-Core-Twig-Extension-Commentary.html#property_onlineStatus"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Commentary\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-Commentary.html#property_settings"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\FlashMessages",
             "name": "FlashMessages",
             "summary": "",
@@ -15560,6 +16445,26 @@ Search.appendIndex(
             "name": "session",
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-GameCore.html#property_session"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameTimeExtension",
+            "name": "GameTimeExtension",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-GameTimeExtension.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameTimeExtension\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-GameTimeExtension.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameTimeExtension\u003A\u003AgetFunctions\u0028\u0029",
+            "name": "getFunctions",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-GameTimeExtension.html#method_getFunctions"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\GameTimeExtension\u003A\u003A\u0024dateTime",
+            "name": "dateTime",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Extension-GameTimeExtension.html#property_dateTime"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Helpers",
             "name": "Helpers",
@@ -15880,16 +16785,6 @@ Search.appendIndex(
             "name": "isValidProtocol",
             "summary": "Validating\u0020a\u0020protocol.",
             "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFunction.html#method_isValidProtocol"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFunction\u003A\u003Agametime\u0028\u0029",
-            "name": "gametime",
-            "summary": "Time\u0020in\u0020the\u0020game.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFunction.html#method_gametime"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFunction\u003A\u003Asecondstonextgameday\u0028\u0029",
-            "name": "secondstonextgameday",
-            "summary": "Seconds\u0020to\u0020next\u0020game\u0020day.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFunction.html#method_secondstonextgameday"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\CoreFunction\u003A\u003ApvpListTable\u0028\u0029",
             "name": "pvpListTable",
@@ -16556,6 +17451,16 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/lotgd-core-character.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle",
+            "name": "Battle",
+            "summary": "",
+            "url": "namespaces/lotgd-core-combat-battle.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat",
+            "name": "Combat",
+            "summary": "",
+            "url": "namespaces/lotgd-core-combat.html"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Command",
             "name": "Command",
             "summary": "",
@@ -16656,50 +17561,10 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/lotgd-core-entityform-weapons.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Account",
-            "name": "Account",
-            "summary": "",
-            "url": "namespaces/lotgd-core-entityrepository-account.html"
-        },                {
             "fqsen": "\\Lotgd\\Core\\EntityRepository",
             "name": "EntityRepository",
             "summary": "",
             "url": "namespaces/lotgd-core-entityrepository.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\AccountsOutput",
-            "name": "AccountsOutput",
-            "summary": "",
-            "url": "namespaces/lotgd-core-entityrepository-accountsoutput.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Character",
-            "name": "Character",
-            "summary": "",
-            "url": "namespaces/lotgd-core-entityrepository-character.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Commentary",
-            "name": "Commentary",
-            "summary": "",
-            "url": "namespaces/lotgd-core-entityrepository-commentary.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Mail",
-            "name": "Mail",
-            "summary": "",
-            "url": "namespaces/lotgd-core-entityrepository-mail.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\Module",
-            "name": "Module",
-            "summary": "",
-            "url": "namespaces/lotgd-core-entityrepository-module.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\ModuleUserprefs",
-            "name": "ModuleUserprefs",
-            "summary": "",
-            "url": "namespaces/lotgd-core-entityrepository-moduleuserprefs.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\EntityRepository\\News",
-            "name": "News",
-            "summary": "",
-            "url": "namespaces/lotgd-core-entityrepository-news.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Event",
             "name": "Event",
@@ -16835,6 +17700,51 @@ Search.appendIndex(
             "name": "Pvp",
             "summary": "",
             "url": "namespaces/lotgd-core-pvp.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Account",
+            "name": "Account",
+            "summary": "",
+            "url": "namespaces/lotgd-core-repository-account.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository",
+            "name": "Repository",
+            "summary": "",
+            "url": "namespaces/lotgd-core-repository.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\AccountsOutput",
+            "name": "AccountsOutput",
+            "summary": "",
+            "url": "namespaces/lotgd-core-repository-accountsoutput.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Character",
+            "name": "Character",
+            "summary": "",
+            "url": "namespaces/lotgd-core-repository-character.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Commentary",
+            "name": "Commentary",
+            "summary": "",
+            "url": "namespaces/lotgd-core-repository-commentary.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Mail",
+            "name": "Mail",
+            "summary": "",
+            "url": "namespaces/lotgd-core-repository-mail.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\Module",
+            "name": "Module",
+            "summary": "",
+            "url": "namespaces/lotgd-core-repository-module.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\ModuleUserprefs",
+            "name": "ModuleUserprefs",
+            "summary": "",
+            "url": "namespaces/lotgd-core-repository-moduleuserprefs.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Repository\\News",
+            "name": "News",
+            "summary": "",
+            "url": "namespaces/lotgd-core-repository-news.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Service",
             "name": "Service",

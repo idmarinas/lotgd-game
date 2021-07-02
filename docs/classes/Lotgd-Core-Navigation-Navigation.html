@@ -89,7 +89,7 @@
     
             <span class="phpdocumentor-element__extends">
             Uses
-                            <a href="classes/Lotgd-Core-Navigation-Pattern-CustomClass.html"><abbr title="\Lotgd\Core\Navigation\Pattern\CustomClass">CustomClass</abbr></a>,                             <a href="classes/Lotgd-Core-Navigation-Pattern-Links.html"><abbr title="\Lotgd\Core\Navigation\Pattern\Links">Links</abbr></a>,                             <a href="classes/Lotgd-Core-Navigation-Pattern-Pagination.html"><abbr title="\Lotgd\Core\Navigation\Pattern\Pagination">Pagination</abbr></a>                    </span>
+                            <a href="classes/Lotgd-Core-Navigation-Pattern-CustomClass.html"><abbr title="\Lotgd\Core\Navigation\Pattern\CustomClass">CustomClass</abbr></a>,                             <a href="classes/Lotgd-Core-Navigation-Pattern-Links.html"><abbr title="\Lotgd\Core\Navigation\Pattern\Links">Links</abbr></a>,                             <a href="classes/Lotgd-Core-Navigation-Pattern-Menu.html"><abbr title="\Lotgd\Core\Navigation\Pattern\Menu">Menu</abbr></a>,                             <a href="classes/Lotgd-Core-Navigation-Pattern-Pagination.html"><abbr title="\Lotgd\Core\Navigation\Pattern\Pagination">Pagination</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
@@ -200,6 +200,20 @@
 </dt>
 <dd></dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Lotgd-Core-Navigation-Navigation.html#property_request">$request</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Lotgd-Core-Navigation-Navigation.html#property_settings">$settings</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Navigation-Navigation.html#method___construct">__construct()</a>
     <span>
@@ -285,6 +299,13 @@
 <dd>Determines if there are any navs for the player.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Navigation-Pattern-Menu.html#method_fightNav">fightNav()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Navigation-Pattern-CustomClass.html#method_getClassHeader">getClassHeader()</a>
     <span>
                         &nbsp;: string    </span>
@@ -297,6 +318,13 @@
                         &nbsp;: string    </span>
 </dt>
 <dd>Get class name for nav.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Navigation-Navigation.html#method_getDefaultTextDomain">getDefaultTextDomain()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Get default text domain.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Navigation-Navigation.html#method_getHeaders">getHeaders()</a>
@@ -383,14 +411,14 @@
 <dd>Set text domain for translator.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Navigation-Navigation.html#method_superuser">superuser()</a>
+    <a href="classes/Lotgd-Core-Navigation-Pattern-Menu.html#method_superuser">superuser()</a>
     <span>
                         &nbsp;: void    </span>
 </dt>
 <dd>Add navs for actions of superuser.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Navigation-Navigation.html#method_superuserGrottoNav">superuserGrottoNav()</a>
+    <a href="classes/Lotgd-Core-Navigation-Pattern-Menu.html#method_superuserGrottoNav">superuserGrottoNav()</a>
     <span>
                         &nbsp;: void    </span>
 </dt>
@@ -411,7 +439,7 @@
 <dd>Unblock a partial link.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Navigation-Navigation.html#method_villageNav">villageNav()</a>
+    <a href="classes/Lotgd-Core-Navigation-Pattern-Menu.html#method_villageNav">villageNav()</a>
     <span>
                         &nbsp;: void    </span>
 </dt>
@@ -464,7 +492,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 </aside>
 
         <p class="phpdocumentor-summary">Default text domain for navigation menu.</p>
@@ -570,7 +598,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">43</span>
 </aside>
 
         <p class="phpdocumentor-summary">Headers for navigation menu with options.</p>
@@ -602,7 +630,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 </aside>
 
         <p class="phpdocumentor-summary">Last header created.</p>
@@ -666,7 +694,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 </aside>
 
         <p class="phpdocumentor-summary">Navigation menu.</p>
@@ -698,7 +726,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">56</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 </aside>
 
         <p class="phpdocumentor-summary">Navs for navigation menu with options.</p>
@@ -762,7 +790,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">77</span>
+    <span class="phpdocumentor-element-found-in__line">71</span>
 </aside>
 
         <p class="phpdocumentor-summary">Text domain for translator.</p>
@@ -794,7 +822,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">84</span>
+    <span class="phpdocumentor-element-found-in__line">78</span>
 </aside>
 
         <p class="phpdocumentor-summary">Previous text domain.</p>
@@ -826,7 +854,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 </aside>
 
     
@@ -834,6 +862,66 @@
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$dispatcher</span>
+    </code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_request">
+        $request
+        <a href="classes/Lotgd-Core-Navigation-Navigation.html#property_request" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">81</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$request</span>
+    </code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_settings">
+        $settings
+        <a href="classes/Lotgd-Core-Navigation-Navigation.html#property_settings" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">82</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$settings</span>
     </code>
 
     
@@ -860,13 +948,13 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">84</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Contracts\EventDispatcher\EventDispatcherInterface">EventDispatcherInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dispatcher</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Contracts\EventDispatcher\EventDispatcherInterface">EventDispatcherInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dispatcher</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Http-Request.html"><abbr title="\Lotgd\Core\Http\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Lib-Settings.html"><abbr title="\Lotgd\Core\Lib\Settings">Settings</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$settings</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -874,6 +962,20 @@
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$dispatcher</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Contracts\EventDispatcher\EventDispatcherInterface">EventDispatcherInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$request</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Http-Request.html"><abbr title="\Lotgd\Core\Http\Request">Request</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$settings</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Lib-Settings.html"><abbr title="\Lotgd\Core\Lib\Settings">Settings</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -902,7 +1004,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">106</span>
+    <span class="phpdocumentor-element-found-in__line">111</span>
 </aside>
 
         <p class="phpdocumentor-summary">Added nav header in navigation menu.</p>
@@ -969,7 +1071,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">129</span>
+    <span class="phpdocumentor-element-found-in__line">134</span>
 </aside>
 
         <p class="phpdocumentor-summary">Add header but not translate.</p>
@@ -1064,7 +1166,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">143</span>
+    <span class="phpdocumentor-element-found-in__line">148</span>
 </aside>
 
         <p class="phpdocumentor-summary">Add nav to navigation menu.</p>
@@ -1122,7 +1224,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">190</span>
+    <span class="phpdocumentor-element-found-in__line">195</span>
 </aside>
 
         <p class="phpdocumentor-summary">Add a allowed nav for user.</p>
@@ -1166,7 +1268,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">158</span>
+    <span class="phpdocumentor-element-found-in__line">163</span>
 </aside>
 
         <p class="phpdocumentor-summary">Add an external link to navigation menu.</p>
@@ -1225,7 +1327,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">175</span>
+    <span class="phpdocumentor-element-found-in__line">180</span>
 </aside>
 
         <p class="phpdocumentor-summary">Add a nav to navigation menu but not translate.</p>
@@ -1415,7 +1517,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">355</span>
+    <span class="phpdocumentor-element-found-in__line">277</span>
 </aside>
 
         <p class="phpdocumentor-summary">Determines if there are any navs for the player.</p>
@@ -1431,6 +1533,62 @@ Options can have a multiple values like:
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_fightNav">
+        fightNav()
+        <a href="classes/Lotgd-Core-Navigation-Pattern-Menu.html#method_fightNav" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Pattern/Menu.php"><a href="files/src-core-navigation-pattern-menu.html"><abbr title="src/core/Navigation/Pattern/Menu.php">Menu.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">22</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">fightNav</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$allowspecial</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$allowflee</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$script</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$allowspecial</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">true</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$allowflee</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">true</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$script</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -1510,6 +1668,40 @@ Options can have a multiple values like:
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getDefaultTextDomain">
+        getDefaultTextDomain()
+        <a href="classes/Lotgd-Core-Navigation-Navigation.html#method_getDefaultTextDomain" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">302</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Get default text domain.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getDefaultTextDomain</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getHeaders">
         getHeaders()
         <a href="classes/Lotgd-Core-Navigation-Navigation.html#method_getHeaders" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1517,7 +1709,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">252</span>
+    <span class="phpdocumentor-element-found-in__line">257</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get information of headers.</p>
@@ -1551,7 +1743,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">229</span>
+    <span class="phpdocumentor-element-found-in__line">234</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get the last header created.</p>
@@ -1585,7 +1777,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">242</span>
+    <span class="phpdocumentor-element-found-in__line">247</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get structure of navigation.</p>
@@ -1619,7 +1811,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">262</span>
+    <span class="phpdocumentor-element-found-in__line">267</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get information of navs.</p>
@@ -1653,7 +1845,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">221</span>
+    <span class="phpdocumentor-element-found-in__line">226</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get text domain for translator.</p>
@@ -1973,7 +2165,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">202</span>
+    <span class="phpdocumentor-element-found-in__line">207</span>
 </aside>
 
         <p class="phpdocumentor-summary">Set text domain for translator.</p>
@@ -2014,12 +2206,12 @@ Options can have a multiple values like:
 >
     <h4 class="phpdocumentor-element__name" id="method_superuser">
         superuser()
-        <a href="classes/Lotgd-Core-Navigation-Navigation.html#method_superuser" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Lotgd-Core-Navigation-Pattern-Menu.html#method_superuser" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Pattern/Menu.php"><a href="files/src-core-navigation-pattern-menu.html"><abbr title="src/core/Navigation/Pattern/Menu.php">Menu.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">272</span>
+    <span class="phpdocumentor-element-found-in__line">129</span>
 </aside>
 
         <p class="phpdocumentor-summary">Add navs for actions of superuser.</p>
@@ -2048,12 +2240,12 @@ Options can have a multiple values like:
 >
     <h4 class="phpdocumentor-element__name" id="method_superuserGrottoNav">
         superuserGrottoNav()
-        <a href="classes/Lotgd-Core-Navigation-Navigation.html#method_superuserGrottoNav" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Lotgd-Core-Navigation-Pattern-Menu.html#method_superuserGrottoNav" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Pattern/Menu.php"><a href="files/src-core-navigation-pattern-menu.html"><abbr title="src/core/Navigation/Pattern/Menu.php">Menu.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">299</span>
+    <span class="phpdocumentor-element-found-in__line">156</span>
 </aside>
 
         <p class="phpdocumentor-summary">Add navs for action of superuser in Grotto page.</p>
@@ -2170,12 +2362,12 @@ Options can have a multiple values like:
 >
     <h4 class="phpdocumentor-element__name" id="method_villageNav">
         villageNav()
-        <a href="classes/Lotgd-Core-Navigation-Navigation.html#method_villageNav" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Lotgd-Core-Navigation-Pattern-Menu.html#method_villageNav" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Pattern/Menu.php"><a href="files/src-core-navigation-pattern-menu.html"><abbr title="src/core/Navigation/Pattern/Menu.php">Menu.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">323</span>
+    <span class="phpdocumentor-element-found-in__line">180</span>
 </aside>
 
         <p class="phpdocumentor-summary">Add nav to village/shades.</p>
@@ -2220,7 +2412,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">382</span>
+    <span class="phpdocumentor-element-found-in__line">312</span>
 </aside>
 
         <p class="phpdocumentor-summary">Private function to add a nav in navigation menu.</p>
@@ -2329,7 +2521,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">464</span>
+    <span class="phpdocumentor-element-found-in__line">394</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get a extra param for link.</p>
@@ -2373,7 +2565,7 @@ Options can have a multiple values like:
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Navigation/Navigation.php"><a href="files/src-core-navigation-navigation.html"><abbr title="src/core/Navigation/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">444</span>
+    <span class="phpdocumentor-element-found-in__line">374</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get key for nav.</p>

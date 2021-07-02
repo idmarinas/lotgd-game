@@ -87,12 +87,15 @@
     
     
     
+            <span class="phpdocumentor-element__extends">
+            Uses
+                            <a href="classes/Lotgd-Core-Fixed-StaticTrait.html"><abbr title="\Lotgd\Core\Fixed\StaticTrait">StaticTrait</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/Doctrine.php"><a href="files/src-core-fixed-doctrine.html"><abbr title="src/core/Fixed/Doctrine.php">Doctrine.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 </aside>
 
         
@@ -111,11 +114,11 @@
 
 <dl class="phpdocumentor-table-of-contents">
                 <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Fixed-Doctrine.html#property_wrapper">$wrapper</a>
+    <a href="classes/Lotgd-Core-Fixed-StaticTrait.html#property_instance">$instance</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
-<dd></dd>
+<dd>Instance object.</dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Fixed-Doctrine.html#method___callStatic">__callStatic()</a>
@@ -123,6 +126,20 @@
                         &nbsp;: mixed    </span>
 </dt>
 <dd>Add support for magic static method calls.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Fixed-StaticTrait.html#method__i">_i()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Fixed-StaticTrait.html#method__instance">_instance()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Fixed-Doctrine.html#method_createSchema">createSchema()</a>
@@ -137,6 +154,13 @@
                         &nbsp;: mixed    </span>
 </dt>
 <dd>Drops the database schema for the given classes.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Fixed-StaticTrait.html#method_instance">instance()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd>Set/get a instance of object.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Fixed-Doctrine.html#method_syncEntities">syncEntities()</a>
@@ -160,13 +184,6 @@
 <dd>Updates the database schema of the given classes by comparing the ClassMetadata
 instances to the current database schema that is inspected.</dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Fixed-Doctrine.html#method_wrapper">wrapper()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd>Add wrapper to script.</dd>
-
         </dl>
 
 
@@ -186,26 +203,28 @@ instances to the current database schema that is inspected.</dd>
             -protected
             -static                                            "
 >
-    <h4 class="phpdocumentor-element__name" id="property_wrapper">
-        $wrapper
-        <a href="classes/Lotgd-Core-Fixed-Doctrine.html#property_wrapper" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_instance">
+        $instance
+        <a href="classes/Lotgd-Core-Fixed-StaticTrait.html#property_instance" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/Doctrine.php"><a href="files/src-core-fixed-doctrine.html"><abbr title="src/core/Fixed/Doctrine.php">Doctrine.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/StaticTrait.php"><a href="files/src-core-fixed-statictrait.html"><abbr title="src/core/Fixed/StaticTrait.php">StaticTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">21</span>
 </aside>
 
-    
+        <p class="phpdocumentor-summary">Instance object.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
     <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$wrapper</span>
+    <span class="phpdocumentor-signature__name">$instance</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -229,7 +248,7 @@ instances to the current database schema that is inspected.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/Doctrine.php"><a href="files/src-core-fixed-doctrine.html"><abbr title="src/core/Fixed/Doctrine.php">Doctrine.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 </aside>
 
         <p class="phpdocumentor-summary">Add support for magic static method calls.</p>
@@ -276,6 +295,70 @@ instances to the current database schema that is inspected.</dd>
             -public
                                     -static                    "
 >
+    <h4 class="phpdocumentor-element__name" id="method__i">
+        _i()
+        <a href="classes/Lotgd-Core-Fixed-StaticTrait.html#method__i" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/StaticTrait.php"><a href="files/src-core-fixed-statictrait.html"><abbr title="src/core/Fixed/StaticTrait.php">StaticTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">56</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">_i</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method__instance">
+        _instance()
+        <a href="classes/Lotgd-Core-Fixed-StaticTrait.html#method__instance" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/StaticTrait.php"><a href="files/src-core-fixed-statictrait.html"><abbr title="src/core/Fixed/StaticTrait.php">StaticTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">51</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">_instance</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
     <h4 class="phpdocumentor-element__name" id="method_createSchema">
         createSchema()
         <a href="classes/Lotgd-Core-Fixed-Doctrine.html#method_createSchema" class="headerlink"><i class="fas fa-link"></i></a>
@@ -283,7 +366,7 @@ instances to the current database schema that is inspected.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/Doctrine.php"><a href="files/src-core-fixed-doctrine.html"><abbr title="src/core/Fixed/Doctrine.php">Doctrine.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">119</span>
+    <span class="phpdocumentor-element-found-in__line">118</span>
 </aside>
 
         <p class="phpdocumentor-summary">Alias of updateSchema.</p>
@@ -335,7 +418,7 @@ instances to the current database schema that is inspected.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/Doctrine.php"><a href="files/src-core-fixed-doctrine.html"><abbr title="src/core/Fixed/Doctrine.php">Doctrine.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">127</span>
+    <span class="phpdocumentor-element-found-in__line">126</span>
 </aside>
 
         <p class="phpdocumentor-summary">Drops the database schema for the given classes.</p>
@@ -372,6 +455,50 @@ instances to the current database schema that is inspected.</dd>
             -public
                                     -static                    "
 >
+    <h4 class="phpdocumentor-element__name" id="method_instance">
+        instance()
+        <a href="classes/Lotgd-Core-Fixed-StaticTrait.html#method_instance" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/StaticTrait.php"><a href="files/src-core-fixed-statictrait.html"><abbr title="src/core/Fixed/StaticTrait.php">StaticTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">46</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Set/get a instance of object.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">instance</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$instance</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$instance</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
     <h4 class="phpdocumentor-element__name" id="method_syncEntities">
         syncEntities()
         <a href="classes/Lotgd-Core-Fixed-Doctrine.html#method_syncEntities" class="headerlink"><i class="fas fa-link"></i></a>
@@ -379,7 +506,7 @@ instances to the current database schema that is inspected.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/Doctrine.php"><a href="files/src-core-fixed-doctrine.html"><abbr title="src/core/Fixed/Doctrine.php">Doctrine.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 </aside>
 
         <p class="phpdocumentor-summary">Alias of updateSchema.</p>
@@ -431,7 +558,7 @@ instances to the current database schema that is inspected.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/Doctrine.php"><a href="files/src-core-fixed-doctrine.html"><abbr title="src/core/Fixed/Doctrine.php">Doctrine.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 </aside>
 
         <p class="phpdocumentor-summary">Alias of updateSchema.</p>
@@ -483,7 +610,7 @@ instances to the current database schema that is inspected.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/Doctrine.php"><a href="files/src-core-fixed-doctrine.html"><abbr title="src/core/Fixed/Doctrine.php">Doctrine.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">77</span>
+    <span class="phpdocumentor-element-found-in__line">76</span>
 </aside>
 
         <p class="phpdocumentor-summary">Updates the database schema of the given classes by comparing the ClassMetadata
@@ -522,51 +649,6 @@ instances to the current database schema that is inspected.</p>
             &mdash;
             <section class="phpdocumentor-description"><p>Number of queries</p>
 </section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_wrapper">
-        wrapper()
-        <a href="classes/Lotgd-Core-Fixed-Doctrine.html#method_wrapper" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/Doctrine.php"><a href="files/src-core-fixed-doctrine.html"><abbr title="src/core/Fixed/Doctrine.php">Doctrine.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">148</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Add wrapper to script.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">wrapper</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Lotgd\Core\Fixed\Doctrine\ORM\EntityManager">EntityManager</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$wrapper</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$wrapper</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Lotgd\Core\Fixed\Doctrine\ORM\EntityManager">EntityManager</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
 
     
 </article>
