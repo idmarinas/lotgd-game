@@ -6,6 +6,11 @@ function injectmodule($modulename, $force = false)
 {
     global $mostrecentmodule, $injected_modules;
 
+    if ( ! $modulename)
+    {
+        return false;
+    }
+
     //try to circumvent the array_key_exists() problem we've been having.
     $force = $force ? 1 : 0;
 
