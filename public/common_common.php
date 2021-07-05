@@ -202,7 +202,6 @@ $z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
 require_once 'lib/settings.php'; //-- Removed in future version
 require_once 'lib/gamelog.php'; //-- Removed in future version
 require_once 'lib/holiday_texts.php';
-require_once 'lib/debuglog.php'; //-- Removed in future version
 require_once 'lib/su_access.php';
 require_once 'lib/modules.php';
 require_once 'lib/tempstat.php'; //-- Removed in future version
