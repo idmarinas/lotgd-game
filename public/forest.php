@@ -8,7 +8,6 @@ use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/taunt.php';
 require_once 'lib/events.php';
 require_once 'lib/battle/skills.php';
 
