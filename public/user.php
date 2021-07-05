@@ -58,8 +58,6 @@ if ('edit' == $op)
 
 if ('del' == $op)
 {
-    require_once 'lib/charcleanup.php';
-
     $account = $repository->find($userId);
 
     if ($account)
