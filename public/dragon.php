@@ -5,7 +5,6 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
 require_once 'lib/titles.php';
-require_once 'lib/buffs.php';
 require_once 'lib/names.php';
 
 // Don't hook on to this text for your standard modules please, use "dragon" instead.
