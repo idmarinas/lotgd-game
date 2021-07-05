@@ -10,7 +10,6 @@ use Lotgd\Core\Event\Core;
 
 require_once 'common.php';
 require_once 'lib/systemmail.php';
-require_once 'lib/checkban.php';
 require_once 'lib/serverfunctions.class.php';
 
 $op    = (string) \LotgdRequest::getQuery('op');
