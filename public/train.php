@@ -9,7 +9,6 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
 require_once 'lib/systemmail.php';
-require_once 'lib/increment_specialty.php';
 require_once 'lib/taunt.php';
 require_once 'lib/substitute.php';
 
