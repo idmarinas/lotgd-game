@@ -5,7 +5,6 @@
 // mail ready
 
 require_once 'src/constants.php';
-require_once 'lib/gamelog.php';
 
 $lastexpire   = \strtotime(LotgdSetting::getSetting('last_char_expire', '0000-00-00 00:00:00'));
 $needtoexpire = \strtotime('-23 hours');

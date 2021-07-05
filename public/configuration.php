@@ -6,7 +6,6 @@
 
 require_once 'common.php';
 require_once 'lib/showform.php';
-require_once 'lib/gamelog.php';
 
 check_su_access(SU_EDIT_CONFIG);
 
