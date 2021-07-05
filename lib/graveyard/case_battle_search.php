@@ -10,8 +10,6 @@ if ($session['user']['gravefights'] <= 0)
 }
 else
 {
-    require_once 'lib/battle/extended.php';
-
     /** @var \Lotgd\Core\Tool\CreatureFunction */
     $creaturefunctions = LotgdKernel::get('lotgd_core.tool.creature_functions');
     /** @var \Lotgd\Core\Combat\Battle */
