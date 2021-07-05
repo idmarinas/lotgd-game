@@ -205,7 +205,6 @@ require_once 'lib/su_access.php';
 require_once 'lib/modules.php';
 require_once 'lib/tempstat.php'; //-- Removed in future version
 require_once 'lib/buffs.php'; //-- Removed in future version
-require_once 'lib/saveuser.php'; //-- Removed in future version
 require_once 'lib/forcednavigation.php';
 require_once 'lib/mounts.php';
 require_once 'lib/lotgd_mail.php';
