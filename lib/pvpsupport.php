@@ -9,7 +9,6 @@ use Lotgd\Core\Event\Character;
 require_once 'lib/pvpwarning.php';
 require_once 'lib/substitute.php';
 require_once 'lib/systemmail.php';
-require_once 'lib/datetime.php';
 
 /**
  * This contains functions to support pvp.

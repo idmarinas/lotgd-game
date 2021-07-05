@@ -204,7 +204,6 @@ require_once 'lib/gamelog.php'; //-- Removed in future version
 require_once 'lib/holiday_texts.php';
 require_once 'lib/debuglog.php'; //-- Removed in future version
 require_once 'lib/su_access.php';
-require_once 'lib/datetime.php'; //-- Removed in future version
 require_once 'lib/modules.php';
 require_once 'lib/tempstat.php'; //-- Removed in future version
 require_once 'lib/buffs.php'; //-- Removed in future version
