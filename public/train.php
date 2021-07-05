@@ -12,7 +12,6 @@ require_once 'lib/systemmail.php';
 require_once 'lib/increment_specialty.php';
 require_once 'lib/taunt.php';
 require_once 'lib/substitute.php';
-require_once 'lib/forestoutcomes.php';
 
 // Don't hook on to this text for your standard modules please, use "train" instead.
 // This hook is specifically to allow modules that do other trains to create ambience.

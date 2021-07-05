@@ -60,8 +60,6 @@ elseif ('search' == $op)
 {
     \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
-    require_once 'lib/forestoutcomes.php';
-
     if ($session['user']['turns'] <= 0)
     {
         \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.tired', [], $textDomain));
