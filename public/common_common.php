@@ -208,7 +208,6 @@ require_once 'lib/buffs.php'; //-- Removed in future version
 require_once 'lib/forcednavigation.php';
 require_once 'lib/mounts.php';
 require_once 'lib/lotgd_mail.php';
-require_once 'lib/playerfunctions.php'; //-- Removed in future version
 
 // Decline static file requests back to the PHP built-in webserver
 if ('cli-server' === \PHP_SAPI && is_file(__DIR__.parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH)))
