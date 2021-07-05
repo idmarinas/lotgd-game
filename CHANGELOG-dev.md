@@ -129,6 +129,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
         -   `check_temp_stat`
         -   `suspend_temp_stats`
         -   `restore_temp_stats`
+    -   **src/core/EntityRepository/** Removed deprecated classes in folder. Use `Lotgd\Core\Repository\**`
 
 ### :notebook: NOTES
 
