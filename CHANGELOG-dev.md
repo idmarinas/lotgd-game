@@ -28,7 +28,102 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :x: REMOVES
 
--   Nothing
+-   **Remove deprecated**
+    -   **lib/addnews.php** Removed deprecated function `addnews`, removed file too.
+    -   **lib/battle/** Removed all files and functions 
+        -   **lib/battle/buffs.php**
+            -   `activate_buffs`
+            -   `process_lifetaps`
+            -   `process_dmgshield`
+            -   `expire_buffs`
+            -   `expire_buffs_afterbattle`
+        -   **lib/battle/extended.php**
+            -   `prepare_data_battlebars`
+            -   `prepare_fight`
+            -   `prepare_companions`
+            -   `suspend_companions`
+            -   `unsuspend_companions`
+            -   `autosettarget`
+            -   `report_companion_move`
+            -   `rollcompaniondamage`
+            -   `battle_spawn`
+            -   `battle_heal`
+            -   `execute_ai_script`
+        -   **lib/battle/functions.php**
+            -   `battle_player_attacks`
+            -   `battle_badguy_attacks`
+            -   `battlevictory`
+            -   `battlegainexperienceforest`
+            -   `battlegainexperiencegraveyard`
+            -   `battledefeat`
+            -   `battleshowresults`
+        -   **lib/battle/skills.php**
+            -   `rolldamage`
+            -   `report_power_move`
+            -   `suspend_buffs`
+            -   `suspend_buff_by_name`
+            -   `unsuspend_buff_by_name`
+            -   `is_buff_active`
+            -   `unsuspend_buffs`
+            -   `apply_bodyguard`
+            -   `apply_skill`
+    -   **lib/charcleanup.php** Removed deprecated function `char_cleanup`, removed file too.
+    -   **lib/checkban.php** Removed deprecated function `checkban`, removed file too.
+    -   **lib/creaturefunctions.php** Removed file and functions:
+        -   `lotgd_generate_creature_levels`
+        -   `lotgd_generate_doppelganger`
+        -   `lotgd_transform_creature`
+        -   `lotgd_search_creature`
+        -   `get_creature_stats`
+        -   `get_creature_hitpoints`
+        -   `get_creature_attack`
+        -   `get_creature_defense`
+        -   `get_creature_speed`
+        -   `lotgd_show_debug_creature`
+    -   **lib/buffs.php** Removed all files and functions 
+        -   `calculate_buff_fields`
+        -   `restore_buff_fields`
+        -   `apply_buff`
+        -   `apply_companion`
+        -   `strip_buff`
+        -   `strip_all_buffs`
+        -   `has_buff`
+    -   **lib/datetime.php** Remove file and functions
+        -   `checkday`
+        -   `is_new_day`
+        -   `getgametime`
+        -   `gametime`
+        -   `convertgametime`
+        -   `gametimedetails`
+        -   `secondstonextgameday`
+    -   **lib/deathmessage.php** Removed deprecated function `select_deathmessage`, removed file too.
+    -   **lib/debuglog.php** Removed deprecated function `debuglog`, removed file too.
+    -   **lib/experience.php** Removed deprecated function `exp_for_next_level`, removed file too.
+    -   **lib/fightnav.php** Removed deprecated function `fightnav`, removed file too.
+    -   **lib/forestoutcomes.php** Removed deprecated function `buffbadguy`, removed file too.
+    -   **lib/gamelog.php** Removed deprecated function `gamelog`, removed file too.
+    -   **lib/increment_specialty.php** Removed deprecated function `increment_specialty`, removed file too.
+    -   **lib/playerfunctions.php** Removed all functions and file
+        -   `get_player_hitpoints`
+        -   `explained_get_player_hitpoints`
+        -   `get_player_attack`
+        -   `explained_row_get_player_attack`
+        -   `explained_get_player_attack`
+        -   `get_player_defense`
+        -   `explained_row_get_player_defense`
+        -   `explained_get_player_defense`
+        -   `get_player_speed`
+        -   `get_player_physical_resistance`
+    -   **lib/saveuser.php** Removed deprecated function `saveuser`, removed file too.
+    -   **lib/settings.php** Removed all functions and file
+        -   `savesetting`
+        -   `clearsettings`
+        -   `getsetting`
+        -   `getallsettings`
+    -   **lib/substitute.php** Removed all functions and file
+        -   `substitute`
+        -   `substitute_array`
+    -   **lib/taunt.php** Removed deprecated function `select_taunt`, removed file too.
 
 ### :notebook: NOTES
 
