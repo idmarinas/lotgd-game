@@ -268,7 +268,7 @@ final class LotgdInstallCommand extends Command
         }
 
         $this->style->title($this->translator->trans('installer.installation.user.create', [], InstallerAbstract::TRANSLATOR_DOMAIN));
-        $this->style->info($this->translator->trans('installer.installation.user.info', [], InstallerAbstract::TRANSLATOR_DOMAIN));
+        $this->style->text($this->translator->trans('installer.installation.user.info', [], InstallerAbstract::TRANSLATOR_DOMAIN));
 
         $command = $this->getApplication()->find('lotgd:user:create');
         $command->run($input, $output);

@@ -132,7 +132,7 @@ final class UserCreateCommand extends Command
         }
         catch (\Throwable $th)
         {
-            $style->info($th->getMessage());
+            $style->text($th->getMessage());
 
             $style->error($this->translator->trans('user.create.fail', [], self::TEXT_DOMAIN));
 
@@ -152,7 +152,7 @@ final class UserCreateCommand extends Command
         $question->setValidator(function ($value)
         {
             $errors = $this->validator->validate((string) $value, [
-                new Assert\Length(null, 3, 25),
+                new Assert\Length([ 'min' => 3, 'max' => 25]),
                 new Assert\Callback(function ($login, ExecutionContextInterface $context)
                 {
                     $exists = null !== $this->getAccountRepository()->findOneByLogin($login);
@@ -183,13 +183,9 @@ final class UserCreateCommand extends Command
         $question->setValidator(function ($value)
         {
             $errors = $this->validator->validate((string) $value, [
-                new Assert\AtLeastOneOf([
-                    'constraints' => [
-                        new Assert\Blank(),
-                        new Assert\IsNull(),
-                        new Assert\Email(),
-                    ],
-                ]),
+                new Assert\NotBlank(),
+                new Assert\NotNull(),
+                new Assert\Email(),
                 new Assert\Callback(function ($email, ExecutionContextInterface $context)
                 {
                     $exists = null !== $this->getAccountRepository()->findOneByEmailaddress($email);
@@ -224,7 +220,7 @@ final class UserCreateCommand extends Command
             $errors = $this->validator->validate((string) $value, [
                 new Assert\NotBlank(),
                 new Assert\NotNull(),
-                new Assert\Length(null, 3),
+                new Assert\Length([ 'min' => 3 ]),
                 new Assert\NotCompromisedPassword(),
             ]);
 
