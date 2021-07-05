@@ -13,7 +13,6 @@ require_once 'lib/increment_specialty.php';
 require_once 'lib/fightnav.php';
 require_once 'lib/taunt.php';
 require_once 'lib/substitute.php';
-require_once 'lib/experience.php';
 require_once 'lib/forestoutcomes.php';
 
 // Don't hook on to this text for your standard modules please, use "train" instead.

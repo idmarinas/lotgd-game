@@ -9,7 +9,6 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
 require_once 'lib/events.php';
-require_once 'lib/experience.php';
 
 //-- First check for autochallengeç
 if (LotgdSetting::getSetting('automaster', 1) && 1 != $session['user']['seenmaster'])
