@@ -124,6 +124,11 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
         -   `substitute`
         -   `substitute_array`
     -   **lib/taunt.php** Removed deprecated function `select_taunt`, removed file too.
+    -   **lib/tempstat.php** Removed all functions and file
+        -   `apply_temp_stat`
+        -   `check_temp_stat`
+        -   `suspend_temp_stats`
+        -   `restore_temp_stats`
 
 ### :notebook: NOTES
 
