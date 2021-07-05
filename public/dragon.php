@@ -4,7 +4,6 @@ use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/fightnav.php';
 require_once 'lib/titles.php';
 require_once 'lib/buffs.php';
 require_once 'lib/names.php';
