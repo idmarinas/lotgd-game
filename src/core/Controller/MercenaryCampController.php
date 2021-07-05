@@ -75,7 +75,7 @@ class MercenaryCampController extends AbstractController
 
     public function buy(array $params, Request $request): Response
     {
-        require_once 'lib/buffs.php';
+        global $session;
 
         $params['tpl'] = 'buy';
 

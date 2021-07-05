@@ -24,6 +24,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :wrench: FIXES
 
 -   **lib/modules/injectmodule.php** Fixed: return false when not have the name of module.
+-   **src/core/Controller/MercenaryCampController.php** Fixed: method `buy` now get `$session` global var.
 
 ### :x: REMOVES
 
