@@ -8,7 +8,6 @@ require_once 'lib/fightnav.php';
 require_once 'lib/titles.php';
 require_once 'lib/buffs.php';
 require_once 'lib/names.php';
-require_once 'lib/creaturefunctions.php';
 
 // Don't hook on to this text for your standard modules please, use "dragon" instead.
 // This hook is specifically to allow modules that do other dragons to create ambience.

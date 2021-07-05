@@ -4,7 +4,6 @@
 // addnews ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/creaturefunctions.php';
 require_once 'lib/showform.php';
 
 check_su_access(SU_EDIT_CREATURES);
