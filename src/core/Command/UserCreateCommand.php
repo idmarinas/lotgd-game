@@ -132,7 +132,7 @@ final class UserCreateCommand extends Command
         }
         catch (\Throwable $th)
         {
-            $style->info($th->getMessage());
+            $style->text($th->getMessage());
 
             $style->error($this->translator->trans('user.create.fail', [], self::TEXT_DOMAIN));
 
