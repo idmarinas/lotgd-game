@@ -205,7 +205,7 @@
 
             {% if bundle.lotgdDownload %}
                 {% set tag = 'a' %}
-                {% set htmlAttrs = 'href="' ~ bundle.lotgdDownload|e('url') ~ '" target="_blank" rel="noopener noreferrer"' %}
+                {% set htmlAttrs = 'href="' ~ bundle.lotgdDownload ~ '" target="_blank" rel="noopener noreferrer"' %}
             {% endif %}
 
             <{{ tag }} {{ htmlAttrs|raw }} class="item">

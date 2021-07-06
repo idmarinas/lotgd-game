@@ -27,8 +27,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **lib/modules/injectmodule.php** Fixed: return false when not have the name of module.
 -   **src/core/Controller/MercenaryCampController.php** Fixed: method `buy` now get `$session` global var.
 -   **src/core/Command/LotgdIntallCommand.php** and **src/core/Command/UserCreateCommand.php** Replace unexist method in class `Symfony\Component\Console\Style\SymfonyStyle` 
--   **src/core/Command/UserCreateCommand.php**
-    -   Fixed error with constraints
+-   **src/core/Command/UserCreateCommand.php** Fixed error with constraints
+-   **themes/LotgdTheme/templates/admin/page/about/_partial.html.twig** Fix error with url of download a bundle. Remove escape filter of url.
 
 ### :x: REMOVES
 
