@@ -15,7 +15,7 @@ function do_forced_nav($anonymous, $overrideforced)
     if ($session['user']['acctid'] ?? false)
     {
         //-- Using Doctrine repository to get data of account
-        $repositoryAccounts = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
+        $repositoryAccounts = \Doctrine::getRepository('LotgdCore:User');
         $account            = $repositoryAccounts->getUserById($session['user']['acctid']);
 
         if ( ! $account)

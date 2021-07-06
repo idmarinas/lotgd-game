@@ -16,7 +16,7 @@ namespace Lotgd\Ajax\Core;
 use Jaxon\Response\Response;
 use Lotgd\Ajax\Pattern\Core as PatternCore;
 use Lotgd\Core\AjaxAbstract;
-use Lotgd\Core\Repository\AccountsRepository;
+use Lotgd\Core\Repository\UserRepository;
 use Lotgd\Core\Repository\MailRepository;
 
 class Mail extends AjaxAbstract
@@ -89,9 +89,9 @@ class Mail extends AjaxAbstract
     /**
      * Get repository of Characters entity.
      */
-    protected function getAcctRepository(): AccountsRepository
+    protected function getAcctRepository(): UserRepository
     {
-        if ( ! $this->repositoryAcct instanceof AccountsRepository)
+        if ( ! $this->repositoryAcct instanceof UserRepository)
         {
             $this->repositoryAcct = \Doctrine::getRepository('LotgdCore:User');
         }

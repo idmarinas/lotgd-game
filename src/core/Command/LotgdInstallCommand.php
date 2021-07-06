@@ -257,7 +257,7 @@ final class LotgdInstallCommand extends Command
 
     private function createUserAdmin(InputInterface $input, OutputInterface $output)
     {
-        /** @var Lotgd\Core\Repository\AccountsRepository */
+        /** @var Lotgd\Core\Repository\UserRepository */
         $repository = $this->doctrine->getRepository('LotgdCore:User');
         $superusers = (bool) $repository->getSuperuserCountWithPermit(SU_MEGAUSER);
 

@@ -31,7 +31,7 @@ class Mounts extends AjaxAbstract
 
         try
         {
-            $repository = \Doctrine::getRepository('LotgdCore:Characters');
+            $repository = \Doctrine::getRepository('LotgdCore:Avatar');
             $entities   = $repository->findBy(['hashorse' => $mountId]);
         }
         catch (\Throwable $th)

@@ -360,7 +360,7 @@ class Commentary
             ->addSelect('a.loggedin', 'a.laston')
             ->addSelect('c.chatloc')
             ->leftJoin('LotgdCore:User', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.author'))
-            ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.id', 'a.character'))
+            ->leftJoin('LotgdCore:Avatar', 'c', 'WITH', $query->expr()->eq('c.id', 'a.avatar'))
             ->orderBy('u.postdate', 'DESC')
             ->addOrderBy('u.section', 'ASC')
         ;

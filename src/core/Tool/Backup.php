@@ -72,7 +72,7 @@ class Backup
         }
 
         $backupEntities = $return['entities'];
-        unset($backupEntities['LotgdCore:User'], $backupEntities['LotgdCore:Characters']); //-- Always backup Account and Character
+        unset($backupEntities['LotgdCore:User'], $backupEntities['LotgdCore:Avatar']); //-- Always backup Account and Character
 
         $accountLogin = $accountEntity->getLogin();
         //-- Backup and delete data from DataBase
@@ -128,7 +128,7 @@ class Backup
     private function processClan(int $accountId, $accountEntity): void
     {
         /** @var \Lotgd\Core\Repository\CharactersRepository */
-        $charRepository = $this->doctrine->getRepository('LotgdCore:Characters');
+        $charRepository = $this->doctrine->getRepository('LotgdCore:Avatar');
 
         if ($accountEntity->getCharacter()->getClanid() && (CLAN_LEADER == $accountEntity->getCharacter()->getClanrank() || CLAN_FOUNDER == $accountEntity->getCharacter()->getClanrank()))
         {

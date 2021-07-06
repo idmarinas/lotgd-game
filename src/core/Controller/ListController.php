@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
-use Lotgd\Core\Repository\AccountsRepository;
+use Lotgd\Core\Repository\UserRepository;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Navigation\Navigation;
@@ -27,7 +27,7 @@ class ListController extends AbstractController
     public const ITEM_PER_PAGE = 50;
 
     private $dispatcher;
-    /** @var \Lotgd\Core\Repository\AccountsRepository */
+    /** @var \Lotgd\Core\Repository\UserRepository */
     private $repository;
     private $navigation;
 
@@ -123,7 +123,7 @@ class ListController extends AbstractController
             ->select('u.acctid', 'u.login', 'u.laston', 'u.loggedin', 'u.lastip', 'u.uniqueid')
             ->addSelect('c.name', 'c.hitpoints', 'c.alive', 'c.location', 'c.race', 'c.sex', 'c.level')
             ->where('u.locked = 0')
-            ->leftJoin('LotgdCore:Characters', 'c', 'with', $query->expr()->eq('c.id', 'u.character'))
+            ->leftJoin('LotgdCore:Avatar', 'c', 'with', $query->expr()->eq('c.id', 'u.avatar'))
             ->orderBy('c.level', 'DESC')
             ->addOrderBy('c.dragonkills', 'DESC')
             ->addOrderBy('u.login', 'ASC')
@@ -139,9 +139,9 @@ class ListController extends AbstractController
         return $query;
     }
 
-    private function getRepository(): AccountsRepository
+    private function getRepository(): UserRepository
     {
-        if ( ! $this->repository instanceof AccountsRepository)
+        if ( ! $this->repository instanceof UserRepository)
         {
             $this->repository = $this->getDoctrine()->getRepository('LotgdCore:User');
         }

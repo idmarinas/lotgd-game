@@ -66,7 +66,7 @@ elseif ('prologue' == $op)
 
     \LotgdKernel::get('lotgd_core.combat.buffer')->stripAllBuffs();
     $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
-    $characterEntity = $hydrator->extract(new \Lotgd\Core\Entity\Characters());
+    $characterEntity = $hydrator->extract(new \Lotgd\Core\Entity\Avatar());
     $dkpoints = 0;
 
     \LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields();

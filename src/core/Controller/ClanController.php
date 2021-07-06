@@ -70,7 +70,7 @@ class ClanController extends AbstractController
         $clanId = $request->query->getInt('clanid');
 
         /** @var Lotgd\Core\Repository\CharactersRepository */
-        $charRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Characters::class);
+        $charRepository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
         /** @var Lotgd\Core\Repository\ClansRepository */
         $clanRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Clans::class);
 
@@ -176,7 +176,7 @@ class ClanController extends AbstractController
         if ($clanId > 0)
         {
             /** @var Lotgd\Core\Repository\CharactersRepository */
-            $charRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Characters::class);
+            $charRepository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
             /** @var \Lotgd\Core\Repository\MailRepository */
             $mailRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Mail::class);
 
@@ -349,10 +349,10 @@ class ClanController extends AbstractController
         $claninfo      = $params['clanInfo'];
         $params['tpl'] = 'clan_default';
 
-        /** @var Lotgd\Core\Repository\AccountsRepository */
-        $acctRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Accounts::class);
+        /** @var Lotgd\Core\Repository\UserRepository */
+        $acctRepository = $this->getDoctrine()->getRepository('LotgdCore:User');
         /** @var Lotgd\Core\Repository\CharactersRepository */
-        $charRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Characters::class);
+        $charRepository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
 
         $result = $acctRepository->getClanAuthorNameOfMotdDescFromAcctId($claninfo['motdauthor'], $claninfo['descauthor']);
 
@@ -404,8 +404,8 @@ class ClanController extends AbstractController
             return $this->redirect('clan.php');
         }
 
-        /** @var Lotgd\Core\Repository\AccountsRepository */
-        $acctRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Accounts::class);
+        /** @var Lotgd\Core\Repository\UserRepository */
+        $acctRepository = $this->getDoctrine()->getRepository('LotgdCore:User');
         $clanRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Clans::class);
 
         $result = $acctRepository->getClanAuthorNameOfMotdDescFromAcctId($claninfo['motdauthor'], $claninfo['descauthor']);
@@ -477,7 +477,7 @@ class ClanController extends AbstractController
         $params['tpl'] = 'clan_membership';
 
         /** @var Lotgd\Core\Repository\CharactersRepository */
-        $charRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Characters::class);
+        $charRepository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
 
         $setrank   = $request->request->getInt('setrank');
         $whoacctid = $request->request->getInt('whoacctid');
@@ -572,7 +572,7 @@ class ClanController extends AbstractController
         modulehook('clan-withdraw', $args->getData());
 
         /** @var \Lotgd\Core\Repository\CharactersRepository */
-        $charRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Characters::class);
+        $charRepository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
 
         if ($session['user']['clanrank'] >= CLAN_LEADER)
         {

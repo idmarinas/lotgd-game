@@ -48,7 +48,7 @@ trait Read
                 return $response;
             }
 
-            $charRepository = \Doctrine::getRepository('LotgdCore:Characters');
+            $charRepository = \Doctrine::getRepository('LotgdCore:Avatar');
 
             $params['message'] = clone $message;
             $params['sender']  = $charRepository->findOneByAcct($message->getMsgfrom());

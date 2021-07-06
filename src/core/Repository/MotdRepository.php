@@ -30,8 +30,8 @@ class MotdRepository extends DoctrineRepository
         try
         {
             $result = $qb->select('u', 'c.name as motdauthorname')
-                ->leftJoin(LotgdEntity\Accounts::class, 'a', Join::WITH, $qb->expr()->eq('a.acctid', 'u.motdauthor'))
-                ->leftJoin(LotgdEntity\Characters::class, 'c', Join::WITH, $qb->expr()->eq('c.id', 'a.character'))
+                ->leftJoin('LotgdCore:User', 'a', Join::WITH, $qb->expr()->eq('a.acctid', 'u.motdauthor'))
+                ->leftJoin('LotgdCore:Avatar', 'c', Join::WITH, $qb->expr()->eq('c.id', 'a.avatar'))
                 ->orderBy('u.motddate', 'DESC')
                 ->setMaxResults(1)
                 ->getQuery()
@@ -75,8 +75,8 @@ class MotdRepository extends DoctrineRepository
         try
         {
             $result = $qb->select('u', 'c.name as motdauthorname')
-                ->leftJoin(LotgdEntity\Accounts::class, 'a', Join::WITH, $qb->expr()->eq('a.acctid', 'u.motdauthor'))
-                ->leftJoin(LotgdEntity\Characters::class, 'c', Join::WITH, $qb->expr()->eq('c.id', 'a.character'))
+                ->leftJoin('LotgdCore:User', 'a', Join::WITH, $qb->expr()->eq('a.acctid', 'u.motdauthor'))
+                ->leftJoin('LotgdCore:Avatar', 'c', Join::WITH, $qb->expr()->eq('c.id', 'a.avatar'))
                 ->where('u.motdtype = 0 AND u.motditem = :id')
                 ->setParameter('id', $motdId)
                 ->setMaxResults(1)

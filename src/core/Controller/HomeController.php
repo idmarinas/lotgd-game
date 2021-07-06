@@ -61,7 +61,7 @@ class HomeController extends AbstractController
             if (0 != $new && $old != $new)
             {
                 /** @var Lotgd\Core\Repository\CharactersRepository */
-                $character = $this->getDoctrine()->getRepository('LotgdCore:Characters');
+                $character = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
                 $name      = $character->getCharacterNameFromAcctId($new);
                 $this->settings->saveSetting('newestPlayerName', $name);
                 $this->settings->saveSetting('newestPlayerOld', $new);
@@ -72,7 +72,7 @@ class HomeController extends AbstractController
 
         if (\abs($this->settings->getSetting('OnlineCountLast', 0) - \strtotime('now')) > 60)
         {
-            /** @var \Lotgd\Core\Repository\AccountsRepository */
+            /** @var \Lotgd\Core\Repository\UserRepository */
             $account = $this->getDoctrine()->getRepository('LotgdCore:User');
 
             $this->settings->saveSetting('OnlineCount', $account->getCountAcctsOnline((int) $this->settings->getSetting('LOGINTIMEOUT', 900)));

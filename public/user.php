@@ -180,7 +180,7 @@ elseif ('save' == $op)
         }
     }
 
-    $characterRepository = \Doctrine::getRepository('LotgdCore:Characters');
+    $characterRepository = \Doctrine::getRepository('LotgdCore:Avatar');
 
     $accountEntity   = $repository->find($userId);
     $characterEntity = $characterRepository->find($accountEntity->getCharacter()->getId());
@@ -277,7 +277,7 @@ switch ($op)
         {
             $lotgdFormFactory = \LotgdKernel::get('form.factory');
             $type                = (string) \LotgdRequest::getQuery('type') ?: 'acct';
-            $characterRepository = \Doctrine::getRepository('LotgdCore:Characters');
+            $characterRepository = \Doctrine::getRepository('LotgdCore:Avatar');
 
             $accountEntity   = $repository->find($userId);
             $characterEntity = $characterRepository->find($accountEntity->getCharacter()->getId());
@@ -392,8 +392,8 @@ switch ($op)
 
         $query->select('u.id', 'u.date', 'u.actor', 'u.target', 'u.message', 'u.field', 'u.value')
             ->addSelect('c.name AS actorName', 'c2.name AS targetName')
-            ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.acct', 'u.actor'))
-            ->leftJoin('LotgdCore:Characters', 'c2', 'WITH', $query->expr()->eq('c2.acct', 'u.target'))
+            ->leftJoin('LotgdCore:Avatar', 'c', 'WITH', $query->expr()->eq('c.acct', 'u.actor'))
+            ->leftJoin('LotgdCore:Avatar', 'c2', 'WITH', $query->expr()->eq('c2.acct', 'u.target'))
             ->where('u.actor = :acct OR u.target = :acct')
 
             ->orderBy('u.date', 'DESC')

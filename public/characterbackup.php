@@ -66,7 +66,7 @@ elseif ('restore' == $op && \file_exists($pathAccountData) && \file_exists($path
     $metadataAcct = \Doctrine::getClassMetadata('LotgdCore:User');
     $metadataAcct->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
     $metadataAcct->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
-    $metadataChar = \Doctrine::getClassMetadata('LotgdCore:Characters');
+    $metadataChar = \Doctrine::getClassMetadata('LotgdCore:Avatar');
     $metadataChar->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
     $metadataChar->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 

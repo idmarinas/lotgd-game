@@ -146,7 +146,7 @@ class Tool
         else
         {
             $repository = $this->doctrine->getRepository('LotgdCore:User');
-            /** @var \Lotgd\Core\Entity\Accounts */
+            /** @var \Lotgd\Core\Entity\User */
             $result = $repository->findOneBy(['login' => $login]);
 
             if ($result && ($result->getBanoverride() || ($result->getSuperuser() & ~SU_DOESNT_GIVE_GROTTO)))

@@ -35,7 +35,7 @@ class PlayerFunction
         $this->dispatcher = $dispatcher;
         $this->response   = $response;
         $this->translator = $translator;
-        $this->repository = $repository->getRepository('LotgdCore:Characters');
+        $this->repository = $repository->getRepository('LotgdCore:Avatar');
     }
 
     public function incrementSpecialty($colorcode, ?string $spec = null)

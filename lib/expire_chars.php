@@ -20,7 +20,7 @@ $old   = (int) LotgdSetting::getSetting('expireoldacct', 45);
 $new   = (int) LotgdSetting::getSetting('expirenewacct', 10);
 $trash = (int) LotgdSetting::getSetting('expiretrashacct', 1);
 
-$repository = \Doctrine::getRepository('LotgdCore:Characters');
+$repository = \Doctrine::getRepository('LotgdCore:Avatar');
 $query      = $repository->createQueryBuilder('u');
 $expr       = $query->expr();
 
@@ -108,7 +108,7 @@ $query
             $expr->eq('a.sentnotice', 0)
         )
     )
-    ->leftJoin('LotgdCore:Characters', 'u', 'with', $expr->eq('u.id', 'a.character'))
+    ->leftJoin('LotgdCore:Avatar', 'u', 'with', $expr->eq('u.id', 'a.avatar'))
 
     ->setParameter('permit', NO_ACCOUNT_EXPIRATION)
     ->setParameter('empty', '')

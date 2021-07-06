@@ -14,7 +14,6 @@
 namespace Lotgd\Core\Repository;
 
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
-use Lotgd\Core\Entity as EntityCore;
 use Tracy\Debugger;
 
 class ClansRepository extends DoctrineRepository
@@ -25,7 +24,7 @@ class ClansRepository extends DoctrineRepository
     public function getClanListWithMembersCount(int $order): array
     {
         $query      = $this->createQueryBuilder('u');
-        $countQuery = $this->_em->createQueryBuilder()->from(EntityCore\Characters::class, 'c');
+        $countQuery = $this->_em->createQueryBuilder()->from('LotgdCore:Avatar', 'c');
 
         try
         {

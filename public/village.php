@@ -66,7 +66,7 @@ if ($params['newestplayer'] == $session['user']['acctid'])
 }
 elseif (! $params['newestname'] && $params['newestplayer'])
 {
-    $characterRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
+    $characterRepository = \Doctrine::getRepository('LotgdCore:Avatar');
     $params['newestname'] = $characterRepository->getCharacterNameFromAcctId($params['newestplayer']) ?: 'Unknown';
     LotgdSetting::saveSetting('newestplayername', $params['newestname']);
 }

@@ -17,8 +17,10 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
         -   Removed some fields:
             -   `translatorlanguages` It has no use in this version and in the latest versions either.
             -   `beta` Feature of beta not is funcional, so no need this field. 
+        -   Renamed some fields:
+            -   `character` is now `avatar`. character and characters is a reserved word.
 -   **BC** **Change entity Characters to Avatar**
-    -   Rename Entity `Lotgd\Core\Entity\Characters` to `Lotgd\Core\Entity\Avatar`. Character and characters is a reserved word.
+    -   Rename Entity `Lotgd\Core\Entity\Characters` to `Lotgd\Core\Entity\Avatar`. character and characters is a reserved word.
 
 ### :star: FEATURES
 

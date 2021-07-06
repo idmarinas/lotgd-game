@@ -54,7 +54,7 @@ if ('' != $name)
     \LotgdTool::checkBan(); //check if this computer is banned
 
     //-- Using Doctrine repository to process login
-    $repositoryAccounts = Doctrine::getRepository(Lotgd\Core\Entity\Accounts::class);
+    $repositoryAccounts = Doctrine::getRepository('LotgdCore:User');
     $account            = $repositoryAccounts->processLoginGetAcctData($name, $password);
 
     //-- Not found account

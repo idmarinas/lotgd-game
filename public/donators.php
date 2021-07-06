@@ -23,7 +23,7 @@ $params = [
 
 $op = (string) \LotgdRequest::getQuery('op');
 $page = (int) \LotgdRequest::getQuery('page');
-$acctRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
+$acctRepository = \Doctrine::getRepository('LotgdCore:User');
 $paylogRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Paylog::class);
 
 $name = (string) \LotgdRequest::getPost('name');
@@ -144,10 +144,10 @@ if('add' == $op)
     $query->select('u.acctid', 'u.donation', 'u.donationspent')
         ->addSelect('c.name')
         ->join(
-            \Lotgd\Core\Entity\Characters::class,
+            'LotgdCore:Avatar',
             'c',
             \Doctrine\ORM\Query\Expr\Join::WITH,
-            $expr->eq('c.id', 'u.character')
+            $expr->eq('c.id', 'u.avatar')
         )
         ->where('u.login LIKE :name OR c.name LIKE :name')
         ->setParameter('name', "%{$name}%")
@@ -165,10 +165,10 @@ elseif ('' == $op || $op)
     $query->select('u.donation', 'u.donationspent')
         ->addSelect('c.name')
         ->join(
-            \Lotgd\Core\Entity\Characters::class,
+            'LotgdCore:Avatar',
             'c',
             \Doctrine\ORM\Query\Expr\Join::WITH,
-            $expr->eq('c.id', 'u.character')
+            $expr->eq('c.id', 'u.avatar')
         )
         ->where('u.donation > 0')
         ->orderBy('u.donation', 'DESC')

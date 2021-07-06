@@ -22,7 +22,7 @@ class ServerFunctions
 
     public static function resetAllDragonkillPoints($acctid = false)
     {
-        $repository = \Doctrine::getRepository('LotgdCore:Characters');
+        $repository = \Doctrine::getRepository('LotgdCore:Avatar');
         $query      = $repository->createQueryBuilder('u');
 
         $query->where("u.dragonpoints <> ''");

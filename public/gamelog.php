@@ -32,7 +32,7 @@ $query
     ->select('u.logid', 'u.message', 'u.category', 'u.filed', 'u.date', 'u.who')
     ->addSelect('c.name')
     ->leftJoin(
-        'LotgdCore:Characters',
+        'LotgdCore:Avatar',
         'c',
         \Doctrine\ORM\Query\Expr\Join::WITH,
         $query->expr()->eq('u.who', 'c.acct')

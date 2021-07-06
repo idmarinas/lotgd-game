@@ -33,7 +33,7 @@ trait Clan
         {
             return $query->select('u.name', 'IDENTITY(u.acct) AS acctid', 'u.clanrank', 'u.clanjoindate', 'u.dragonkills', 'u.level')
                 ->addSelect('a.laston', 'a.login')
-                ->leftJoin(EntityCore\Accounts::class, 'a', Join::WITH, $query->expr()->eq('a.acctid', 'u.acct'))
+                ->leftJoin('LotgdCore:User', 'a', Join::WITH, $query->expr()->eq('a.acctid', 'u.acct'))
                 ->where('u.clanid = :clan')
                 ->orderBy('u.clanrank', 'DESC')
                 ->addOrderBy('u.dragonkills', 'DESC')

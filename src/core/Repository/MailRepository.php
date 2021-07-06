@@ -114,8 +114,8 @@ class MailRepository extends DoctrineRepository
             return $query->select('u.messageid', 'u.subject', 'u.msgfrom', 'u.seen', 'u.sent')
                 ->addSelect('c.name')
                 ->addSelect('a.loggedin')
-                ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $expr->eq('c.acct', 'u.msgfrom'))
-                ->leftJoin('LotgdCore:Accounts', 'a', 'WITH', $expr->eq('a.acctid', 'u.msgfrom'))
+                ->leftJoin('LotgdCore:Avatar', 'c', 'WITH', $expr->eq('c.acct', 'u.msgfrom'))
+                ->leftJoin('LotgdCore:User', 'a', 'WITH', $expr->eq('a.acctid', 'u.msgfrom'))
 
                 ->orderBy($order, $direction)
 
@@ -147,7 +147,7 @@ class MailRepository extends DoctrineRepository
         {
             return $query->select('u.msgfrom', 'count(u.msgfrom) as count')
                 ->addSelect('c.name')
-                ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $expr->eq('c.acct', 'u.msgfrom'))
+                ->leftJoin('LotgdCore:Avatar', 'c', 'WITH', $expr->eq('c.acct', 'u.msgfrom'))
 
                 ->where('u.msgto = :acct')
 
@@ -253,8 +253,8 @@ class MailRepository extends DoctrineRepository
                 ->addSelect('a.acctid', 'a.superuser')
                 ->addSelect('c.name')
 
-                ->leftJoin('LotgdCore:Accounts', 'a', 'WITH', $expr->eq('a.acctid', 'u.msgfrom'))
-                ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $expr->eq('c.acct', 'u.msgfrom'))
+                ->leftJoin('LotgdCore:User', 'a', 'WITH', $expr->eq('a.acctid', 'u.msgfrom'))
+                ->leftJoin('LotgdCore:Avatar', 'c', 'WITH', $expr->eq('c.acct', 'u.msgfrom'))
 
                 //-- Can not reply to system messages
                 ->where('u.msgto = :acct AND u.messageid = :id AND u.msgfrom != 0')

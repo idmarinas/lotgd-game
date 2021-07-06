@@ -1,6 +1,6 @@
 <?php
 
-$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
+$repository = \Doctrine::getRepository('LotgdCore:User');
 
 //-- Logout accounts inactive
 $repository->logoutInactiveAccounts((int) LotgdSetting::getSetting('LOGINTIMEOUT', 900));

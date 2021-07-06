@@ -22,7 +22,7 @@ $userId = (int) \LotgdRequest::getQuery('userid');
 \LotgdNavigation::addNav('bans.nav.list', 'bans.php?op=removeban');
 \LotgdNavigation::addNav('bans.nav.search', 'bans.php?op=searchban');
 
-$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
+$repository = \Doctrine::getRepository('LotgdCore:User');
 
 switch ($op)
 {
