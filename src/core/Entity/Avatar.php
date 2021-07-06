@@ -8,7 +8,7 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.0.0
+ * @since 6.0.0
  */
 
 namespace Lotgd\Core\Entity;
@@ -16,11 +16,11 @@ namespace Lotgd\Core\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Structure of table "characters" in data base.
+ * Structure of table "avatars" in data base.
  *
- * This table store character info of users, only data related to character.
+ * This table store avatar info of users, only data related to avatar.
  *
- * @ORM\Table(name="characters",
+ * @ORM\Table(
  *     indexes={
  *         @ORM\Index(name="name", columns={"name"}),
  *         @ORM\Index(name="level", columns={"level"}),
@@ -29,16 +29,16 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="clanid", columns={"clanid"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\CharactersRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\AvatarRepository")
  */
-class Characters
+class Avatar
 {
     use Common\IdTrait;
 
     /**
      * @var int
      *
-     * @ORM\OneToOne(targetEntity="Accounts")
+     * @ORM\OneToOne(targetEntity="User")
      * @ORM\JoinColumn(referencedColumnName="acctid", nullable=true, onDelete="SET NULL")
      */
     private $acct;
