@@ -8,7 +8,7 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.0.0
+ * @since 6.0.0
  */
 
 namespace Lotgd\Core\Entity;
@@ -16,11 +16,11 @@ namespace Lotgd\Core\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Structure of table "accounts" in data base.
+ * Structure of table "user" in data base.
  *
- * This table store accounts of users, only data related to account.
+ * This table store users, only data related to user.
  *
- * @ORM\Table(name="accounts",
+ * @ORM\Table(
  *     indexes={
  *         @ORM\Index(name="login", columns={"login"}),
  *         @ORM\Index(name="laston", columns={"laston"}),
@@ -31,10 +31,16 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="emailvalidation", columns={"emailvalidation"})
  *     }
  * )
- * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\AccountsRepository")
+ * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\UserRepository")
  */
-class Accounts
+class User
 {
+    use User\Avatar;
+    use User\Ban;
+    use User\Donation;
+    use User\Referer;
+    use User\Security;
+
     /**
      * @var int
      *
@@ -45,26 +51,11 @@ class Accounts
     private $acctid;
 
     /**
-     * @var int
-     *
-     * @ORM\OneToOne(targetEntity="Characters")
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
-     */
-    private $character;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="laston", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $laston;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=32, nullable=false)
-     */
-    private $password;
 
     /**
      * @var bool
@@ -144,13 +135,6 @@ class Accounts
     private $emailvalidation = '';
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="forgottenpassword", type="string", length=32, nullable=true)
-     */
-    private $forgottenpassword = '';
-
-    /**
      * @var bool
      *
      * @ORM\Column(name="sentnotice", type="boolean", nullable=false, options={"default": 0})
@@ -181,65 +165,9 @@ class Accounts
     /**
      * @var int
      *
-     * @ORM\Column(name="donation", type="integer", nullable=false, options={"default": 0, "unsigned": true})
-     */
-    private $donation = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="donationspent", type="integer", nullable=false, options={"default": 0, "unsigned": true})
-     */
-    private $donationspent = 0;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="donationconfig", type="array")
-     */
-    private $donationconfig = [];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="referer", type="integer", nullable=false, options={"default": 0, "unsigned": true})
-     */
-    private $referer = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="refererawarded", type="integer", nullable=false, options={"default": 0, "unsigned": true})
-     */
-    private $refererawarded = 0;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="banoverride", type="boolean", nullable=true, options={"default": 0})
-     */
-    private $banoverride = 0;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="translatorlanguages", type="string", length=128, nullable=false, options={"default": "en"})
-     */
-    private $translatorlanguages = 'en';
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="amountouttoday", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $amountouttoday = 0;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="beta", type="boolean", nullable=false, options={"default": 0})
-     */
-    private $beta = 0;
 
     /**
      * @var \DateTime
@@ -282,30 +210,6 @@ class Accounts
     }
 
     /**
-     * Set the value of Character.
-     *
-     * @param int $character
-     *
-     * @return self
-     */
-    public function setCharacter($character)
-    {
-        $this->character = $character;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Character.
-     *
-     * @return int
-     */
-    public function getCharacter()
-    {
-        return $this->character;
-    }
-
-    /**
      * Set the value of Laston.
      *
      * @return self
@@ -323,28 +227,6 @@ class Accounts
     public function getLaston(): \DateTime
     {
         return $this->laston;
-    }
-
-    /**
-     * Set the value of Password.
-     *
-     * @param string $password
-     *
-     * @return self
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Password.
-     */
-    public function getPassword(): string
-    {
-        return $this->password;
     }
 
     /**
@@ -588,28 +470,6 @@ class Accounts
     }
 
     /**
-     * Set the value of Forgottenpassword.
-     *
-     * @param string $forgottenpassword
-     *
-     * @return self
-     */
-    public function setForgottenpassword($forgottenpassword)
-    {
-        $this->forgottenpassword = $forgottenpassword;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Forgottenpassword.
-     */
-    public function getForgottenpassword(): string
-    {
-        return $this->forgottenpassword;
-    }
-
-    /**
      * Set the value of Sentnotice.
      *
      * @param bool $sentnotice
@@ -698,162 +558,6 @@ class Accounts
     }
 
     /**
-     * Set the value of Donation.
-     *
-     * @param int $donation
-     *
-     * @return self
-     */
-    public function setDonation($donation)
-    {
-        $this->donation = $donation;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Donation.
-     */
-    public function getDonation(): int
-    {
-        return $this->donation;
-    }
-
-    /**
-     * Set the value of Donationspent.
-     *
-     * @param int $donationspent
-     *
-     * @return self
-     */
-    public function setDonationspent($donationspent)
-    {
-        $this->donationspent = $donationspent;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Donationspent.
-     */
-    public function getDonationspent(): int
-    {
-        return $this->donationspent;
-    }
-
-    /**
-     * Set the value of Donationconfig.
-     *
-     * @param string $donationconfig
-     *
-     * @return self
-     */
-    public function setDonationconfig(array $donationconfig)
-    {
-        $this->donationconfig = $donationconfig;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Donationconfig.
-     *
-     * @return string
-     */
-    public function getDonationconfig()
-    {
-        return $this->donationconfig;
-    }
-
-    /**
-     * Set the value of Referer.
-     *
-     * @param int $referer
-     *
-     * @return self
-     */
-    public function setReferer(int $referer)
-    {
-        $this->referer = $referer;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Referer.
-     */
-    public function getReferer(): int
-    {
-        return $this->referer;
-    }
-
-    /**
-     * Set the value of Refererawarded.
-     *
-     * @param int $refererawarded
-     *
-     * @return self
-     */
-    public function setRefererawarded($refererawarded)
-    {
-        $this->refererawarded = $refererawarded;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Refererawarded.
-     */
-    public function getRefererawarded(): int
-    {
-        return $this->refererawarded;
-    }
-
-    /**
-     * Set the value of Banoverride.
-     *
-     * @param bool $banoverride
-     *
-     * @return self
-     */
-    public function setBanoverride($banoverride)
-    {
-        $this->banoverride = $banoverride;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Banoverride.
-     */
-    public function getBanoverride(): bool
-    {
-        return $this->banoverride;
-    }
-
-    /**
-     * Set the value of Translatorlanguages.
-     *
-     * @param string $translatorlanguages
-     *
-     * @return self
-     */
-    public function setTranslatorlanguages($translatorlanguages)
-    {
-        $this->translatorlanguages = $translatorlanguages;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Translatorlanguages.
-     */
-    public function getTranslatorlanguages(): string
-    {
-        return $this->translatorlanguages;
-    }
-
-    /**
      * Set the value of Amountouttoday.
      *
      * @param int $amountouttoday
@@ -873,28 +577,6 @@ class Accounts
     public function getAmountouttoday(): int
     {
         return $this->amountouttoday;
-    }
-
-    /**
-     * Set the value of Beta.
-     *
-     * @param bool $beta
-     *
-     * @return self
-     */
-    public function setBeta($beta)
-    {
-        $this->beta = $beta;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Beta.
-     */
-    public function getBeta(): bool
-    {
-        return $this->beta;
     }
 
     /**
