@@ -8,10 +8,10 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.0.0
+ * @since 6.0.0
  */
 
-namespace Lotgd\Core\Repository\Character;
+namespace Lotgd\Core\Repository\Avatar;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Lotgd\Core\Entity as EntityCore;

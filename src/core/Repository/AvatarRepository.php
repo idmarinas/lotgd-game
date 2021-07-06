@@ -8,7 +8,7 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.0.0
+ * @since 6.0.0
  */
 
 namespace Lotgd\Core\Repository;
@@ -16,11 +16,11 @@ namespace Lotgd\Core\Repository;
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Tracy\Debugger;
 
-class CharactersRepository extends DoctrineRepository
+class AvatarRepository extends DoctrineRepository
 {
-    use Character\Bio;
-    use Character\Clan;
-    use Character\Setting;
+    use Avatar\Bio;
+    use Avatar\Clan;
+    use Avatar\Setting;
 
     /**
      * Get character's name from an account ID.
@@ -61,7 +61,7 @@ class CharactersRepository extends DoctrineRepository
         {
             $character = $qb
                 ->select('u.name', 'IDENTITY(u.acct) AS acctid', 'u.level', 'a.login', 'a.superuser', 'a.loggedin')
-                ->leftJoin('LotgdCore:Accounts', 'a', 'with', $qb->expr()->eq('a.character', 'u.id'))
+                ->leftJoin('LotgdCore:User', 'a', 'with', $qb->expr()->eq('a.avatar', 'u.id'))
                 ->where('u.name LIKE :name')
                 ->setParameter('name', "%{$name}%")
                 ->setMaxResults($limit)
@@ -69,9 +69,9 @@ class CharactersRepository extends DoctrineRepository
                 ->getArrayResult()
             ;
 
-            $account = $query->from('LotgdCore:Accounts', 'u')
+            $account = $query->from('LotgdCore:User', 'u')
                 ->select('c.name', 'IDENTITY(c.acct) AS acctid', 'c.level', 'u.login', 'u.superuser', 'u.loggedin')
-                ->leftJoin('LotgdCore:Characters', 'c', 'with', $qb->expr()->eq('c.id', 'u.character'))
+                ->leftJoin('LotgdCore:Avatar', 'c', 'with', $qb->expr()->eq('c.id', 'u.avatar'))
                 ->where('u.login LIKE :name AND u.acctid NOT IN (:acct)')
                 ->setParameter('name', "%{$name}%")
                 ->setParameter('acct', \array_map(function ($val)
@@ -104,7 +104,7 @@ class CharactersRepository extends DoctrineRepository
         {
             return $query->select('u.name AS creaturename', 'u.level AS creaturelevel', 'u.weapon AS creatureweapon', 'u.dragonkills', 'u.gold AS creaturegold', 'u.experience AS creatureexp', 'u.maxhitpoints AS creaturemaxhealth', 'u.hitpoints AS creaturehealth', 'u.attack AS creatureattack', 'u.defense AS creaturedefense', 'u.location', 'u.alive', 'u.pvpflag', 'u.boughtroomtoday', 'u.race')
                 ->addSelect('a.loggedin', 'a.laston', 'a.acctid')
-                ->leftJoin('LotgdCore:Accounts', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.acct'))
+                ->leftJoin('LotgdCore:User', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.acct'))
                 ->where('u.id = :char')
                 ->setParameter('char', $characterId)
 
