@@ -8,10 +8,10 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.0.0
+ * @since 6.0.0
  */
 
-namespace Lotgd\Core\Repository\Account;
+namespace Lotgd\Core\Repository\User;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Lotgd\Core\Entity as LotgdEntity;
@@ -48,7 +48,7 @@ trait Login
             //-- Fail if not found
             if (0 == \count($data))
             {
-                return;
+                return null;
             }
 
             return $this->processUserData($data);
@@ -57,7 +57,7 @@ trait Login
         {
             Debugger::log($th);
 
-            return;
+            return null;
         }
     }
 

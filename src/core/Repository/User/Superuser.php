@@ -8,10 +8,10 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.0.0
+ * @since 6.0.0
  */
 
-namespace Lotgd\Core\Repository\Account;
+namespace Lotgd\Core\Repository\User;
 
 /**
  * Functions for superuser account.

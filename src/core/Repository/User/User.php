@@ -8,10 +8,10 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.0.0
+ * @since 6.0.0
  */
 
-namespace Lotgd\Core\Repository\Account;
+namespace Lotgd\Core\Repository\User;
 
 use Laminas\Paginator\Paginator;
 use Tracy\Debugger;
@@ -60,7 +60,7 @@ trait User
         $query->select('u.acctid', 'u.emailaddress', 'u.lastip', 'u.laston', 'u.loggedin')
             ->addSelect('c.name', 'c.level')
             ->addSelect('p.gentimecount')
-            ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.id', 'u.character'))
+            ->leftJoin('LotgdCore:Avatar', 'c', 'WITH', $query->expr()->eq('c.id', 'u.avatar'))
             ->leftJoin('LotgdCore:AccountsEverypage', 'p', 'WITH', $query->expr()->eq('p.acctid', 'u.acctid'))
         ;
 

@@ -8,10 +8,10 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.0.0
+ * @since 6.0.0
  */
 
-namespace Lotgd\Core\Repository\Account;
+namespace Lotgd\Core\Repository\User;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Lotgd\Core\Entity as EntityCore;
@@ -33,12 +33,12 @@ trait Clan
         try
         {
             $descQuery->select('ch.name')
-                ->leftJoin(EntityCore\Characters::class, 'ch', Join::WITH, $descQuery->expr()->eq('ch.id', 's.character'))
+                ->leftJoin('LotgdCore:Avatar', 'ch', Join::WITH, $descQuery->expr()->eq('ch.id', 's.avatar'))
                 ->where('s.acctid = :acctDesc')
             ;
 
             return $query->select('cm.name AS motdauthname', '('.$descQuery->getDQL().') AS descauthname')
-                ->leftJoin(EntityCore\Characters::class, 'cm', Join::WITH, $query->expr()->eq('cm.id', 'u.character'))
+                ->leftJoin('LotgdCore:Avatar', 'cm', Join::WITH, $query->expr()->eq('cm.id', 'u.avatar'))
                 ->where('u.acctid = :acct')
                 ->setParameter('acct', $motdAuthor)
                 ->setParameter('acctDesc', $descAuthor)

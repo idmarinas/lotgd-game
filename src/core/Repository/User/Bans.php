@@ -8,10 +8,10 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.0.0
+ * @since 6.0.0
  */
 
-namespace Lotgd\Core\Repository\Account;
+namespace Lotgd\Core\Repository\User;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Laminas\Paginator\Paginator;
@@ -33,7 +33,7 @@ trait Bans
         $query->select('u.acctid', 'u.login', 'u.emailaddress', 'u.lastip', 'u.uniqueid', 'u.laston', 'u.loggedin')
             ->addSelect('c.name', 'c.level')
             ->addSelect('p.gentimecount')
-            ->leftJoin(LotgdEntity\Characters::class, 'c', Join::WITH, $query->expr()->eq('c.id', 'u.character'))
+            ->leftJoin('LotgdCore:Avatar', 'c', Join::WITH, $query->expr()->eq('c.id', 'u.avatar'))
             ->leftJoin(LotgdEntity\AccountsEverypage::class, 'p', Join::WITH, $query->expr()->eq('p.acctid', 'u.acctid'))
         ;
 
@@ -71,7 +71,7 @@ trait Bans
 
             return $query->select('u.acctid', 'u.lastip', 'u.uniqueid')
                 ->addSelect('c.name')
-                ->leftJoin(LotgdEntity\Characters::class, 'c', Join::WITH, $query->expr()->eq('c.id', 'u.character'))
+                ->leftJoin('LotgdCore:Avatar', 'c', Join::WITH, $query->expr()->eq('c.id', 'u.avatar'))
                 ->where('u.acctid = :id')
                 ->setParameter('id', $acctId)
                 ->setMaxResults(1)
@@ -99,7 +99,7 @@ trait Bans
             return $query->select('u.acctid', 'u.lastip', 'u.uniqueid', 'u.laston')
                 ->addSelect('c.name')
                 ->addSelect('p.gentimecount')
-                ->leftJoin(LotgdEntity\Characters::class, 'c', Join::WITH, $query->expr()->eq('c.id', 'u.character'))
+                ->leftJoin('LotgdCore:Avatar', 'c', Join::WITH, $query->expr()->eq('c.id', 'u.avatar'))
                 ->leftJoin(LotgdEntity\AccountsEverypage::class, 'p', Join::WITH, $query->expr()->eq('p.acctid', 'u.acctid'))
                 ->where('u.uniqueid = :id')
                 ->orderBy('u.lastip', 'DESC')
@@ -129,7 +129,7 @@ trait Bans
             $query->select('u.acctid', 'u.lastip', 'u.uniqueid', 'u.laston')
                 ->addSelect('c.name')
                 ->addSelect('p.gentimecount')
-                ->leftJoin(LotgdEntity\Characters::class, 'c', Join::WITH, $query->expr()->eq('c.id', 'u.character'))
+                ->leftJoin('LotgdCore:Avatar', 'c', Join::WITH, $query->expr()->eq('c.id', 'u.avatar'))
                 ->leftJoin(LotgdEntity\AccountsEverypage::class, 'p', Join::WITH, $query->expr()->eq('p.acctid', 'u.acctid'))
                 ->orderBy('u.uniqueid', 'DESC')
             ;

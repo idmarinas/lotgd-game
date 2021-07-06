@@ -8,25 +8,32 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.0.0
+ * @since 6.0.0
  */
 
 namespace Lotgd\Core\Repository;
 
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Laminas\Hydrator\ClassMethodsHydrator;
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Lotgd\Core\Entity as LotgdEntity;
 use Tracy\Debugger;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Entity\User as UserEntity;
 
-class AccountsRepository extends DoctrineRepository
+class UserRepository extends ServiceEntityRepository
 {
-    use Account\Bans;
-    use Account\Character;
-    use Account\Clan;
-    use Account\Login;
-    use Account\Superuser;
-    use Account\User;
+    use User\Bans;
+    use User\Avatar;
+    use User\Clan;
+    use User\Login;
+    use User\Superuser;
+    use User\User;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, UserEntity::class);
+    }
 
     /**
      * Get data of user by ID of account.
@@ -102,7 +109,7 @@ class AccountsRepository extends DoctrineRepository
             return $query
                 ->select('u.login')
                 ->select('c.name')
-                ->leftJoin('LotgdCore:Characters', 'c', 'with', $query->expr()->eq('c.acct', 'u.acctid'))
+                ->leftJoin('LotgdCore:Avatar', 'c', 'with', $query->expr()->eq('c.acct', 'u.acctid'))
                 ->where('u.loggedin = 1 AND u.locked = 0')
                 ->orderBy('c.level', 'DESC')
 
