@@ -12,7 +12,13 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   **BC** **Change entity Accounts to User**
+    -   Rename Entity `Lotgd\Core\Entity\Accounts` to `Lotgd\Core\Entity\User`. This is for preparing to Symfony App.
+        -   Removed some fields:
+            -   `translatorlanguages` It has no use in this version and in the latest versions either.
+            -   `beta` Feature of beta not is funcional, so no need this field. 
+-   **BC** **Change entity Characters to Avatar**
+    -   Rename Entity `Lotgd\Core\Entity\Characters` to `Lotgd\Core\Entity\Avatar`. Character and characters is a reserved word.
 
 ### :star: FEATURES
 
@@ -28,7 +34,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :x: REMOVES
 
--   **Remove deprecated**
+-   **BC** **Remove deprecated**
     -   **lib/addnews.php** Removed deprecated function `addnews`, removed file too.
     -   **lib/battle/** Removed all files and functions 
         -   **lib/battle/buffs.php**
