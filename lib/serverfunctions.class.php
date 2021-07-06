@@ -8,7 +8,7 @@ class ServerFunctions
     {
         if (\abs(\LotgdSetting::getSetting('OnlineCountLast', 0) - \strtotime('now')) > 60)
         {
-            $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+            $repository = \Doctrine::getRepository('LotgdCore:User');
             $counter    = $repository->count(['locked' => 0, 'loggedin' => 1]);
 
             \LotgdSetting::saveSetting('OnlineCount', $counter);

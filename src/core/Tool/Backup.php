@@ -60,7 +60,7 @@ class Backup
         $this->eventDispatcher->dispatch($return, CharacterEvent::CLEANUP);
         $return = modulehook('character-cleanup', $return->getData());
 
-        $accountRepository = $this->doctrine->getRepository('LotgdCore:Accounts');
+        $accountRepository = $this->doctrine->getRepository('LotgdCore:User');
         $accountEntity     = $accountRepository->find($accountId);
 
         //-- Not do nothing if not find account or fail in create basic backup
@@ -72,7 +72,7 @@ class Backup
         }
 
         $backupEntities = $return['entities'];
-        unset($backupEntities['LotgdCore:Accounts'], $backupEntities['LotgdCore:Characters']); //-- Always backup Account and Character
+        unset($backupEntities['LotgdCore:User'], $backupEntities['LotgdCore:Characters']); //-- Always backup Account and Character
 
         $accountLogin = $accountEntity->getLogin();
         //-- Backup and delete data from DataBase

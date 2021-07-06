@@ -106,7 +106,7 @@ class Listing
                 ->addSelect('a.acctid', 'a.loggedin', 'a.login', 'a.laston')
                 ->addSelect('c.clanshort', 'c.clanname')
 
-                ->leftJoin('LotgdCore:Accounts', 'a', 'WITH', $expr->eq('a.acctid', 'u.acct'))
+                ->leftJoin('LotgdCore:User', 'a', 'WITH', $expr->eq('a.acctid', 'u.acct'))
                 ->leftJoin('LotgdCore:Clans', 'c', 'WITH', $expr->eq('c.clanid', 'u.clanid'))
 
                 ->where('a.acctid != :acct')

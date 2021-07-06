@@ -100,7 +100,7 @@ if ('' != $name)
                 $query->select('u.ip', 'u.date', 'u.id', 'a.superuser', 'a.login')
                     ->from('LotgdCore:Faillog', 'u')
 
-                    ->join('LotgdCore:Accounts', 'a', 'with', $expr->eq('a.acctid', 'u.acctid'))
+                    ->join('LotgdCore:User', 'a', 'with', $expr->eq('a.acctid', 'u.acctid'))
 
                     ->where('u.ip = :ip AND u.date > :date')
 

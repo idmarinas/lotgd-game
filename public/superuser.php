@@ -16,7 +16,7 @@ $op = \LotgdRequest::getQuery('op');
 
 if ('keepalive' == $op)
 {
-    $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+    $repository = \Doctrine::getRepository('LotgdCore:User');
     $entity = $repository->find($session['user']['acctid']);
 
     $entity->setLaston(new \DateTime('now'));

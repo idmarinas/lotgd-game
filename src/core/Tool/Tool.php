@@ -145,7 +145,7 @@ class Tool
         }
         else
         {
-            $repository = $this->doctrine->getRepository('LotgdCore:Accounts');
+            $repository = $this->doctrine->getRepository('LotgdCore:User');
             /** @var \Lotgd\Core\Entity\Accounts */
             $result = $repository->findOneBy(['login' => $login]);
 
@@ -241,7 +241,7 @@ class Tool
 
         $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
 
-        $accountRep = $this->doctrine->getRepository('LotgdCore:Accounts');
+        $accountRep = $this->doctrine->getRepository('LotgdCore:User');
         $pageRep    = $this->doctrine->getRepository('LotgdCore:AccountsEverypage');
 
         $everypage = $hydrator->hydrate($session['user'], $pageRep->find((int) $session['user']['acctid']) ?: new \Lotgd\Core\Entity\AccountsEverypage());

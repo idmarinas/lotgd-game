@@ -301,7 +301,7 @@ final class UserCreateCommand extends Command
     {
         if ( ! $this->accountRepository instanceof AccountsRepository)
         {
-            $this->accountRepository = $this->doctrine->getRepository('LotgdCore:Accounts');
+            $this->accountRepository = $this->doctrine->getRepository('LotgdCore:User');
         }
 
         return $this->accountRepository;

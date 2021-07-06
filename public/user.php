@@ -30,7 +30,7 @@ $textDomain = 'grotto_user';
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);
 
-$repository = \Doctrine::getRepository('LotgdCore:Accounts');
+$repository = \Doctrine::getRepository('LotgdCore:User');
 
 $returnpetition = $petition ? "&returnpetition={$petition}" : '';
 $params         = [

@@ -63,7 +63,7 @@ elseif ('restore' == $op && \file_exists($pathAccountData) && \file_exists($path
     $hydrator->removeNamingStrategy(); //-- With this keyValue is keyValue. Otherwise it would be key_value
 
     //-- Overrides the automatic generation of IDs (avoid to change id of account and character)
-    $metadataAcct = \Doctrine::getClassMetadata('LotgdCore:Accounts');
+    $metadataAcct = \Doctrine::getClassMetadata('LotgdCore:User');
     $metadataAcct->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
     $metadataAcct->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
     $metadataChar = \Doctrine::getClassMetadata('LotgdCore:Characters');

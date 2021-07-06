@@ -31,7 +31,7 @@ function get_partner($player = false)
         }
         else
         {
-            $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+            $repository = \Doctrine::getRepository('LotgdCore:User');
             $name       = $repository->getCharacterNameFromAcctId($session['user']['marriedto']);
 
             if ($name)

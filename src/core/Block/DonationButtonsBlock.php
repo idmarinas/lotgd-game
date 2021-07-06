@@ -51,7 +51,7 @@ final class DonationButtonsBlock extends AbstractBlockService
         if ($this->settings->getSetting('logdnet', 0) && $session['user']['loggedin'] && ! $alreadyRegisteredLogdnet)
         {
             //account counting, just for my own records, I don't use this in the calculation for server order.
-            $c = $this->doctrine->getRepository('LotgdCore:Accounts')->count([]);
+            $c = $this->doctrine->getRepository('LotgdCore:User')->count([]);
             $a = $this->settings->getSetting('serverurl', "//{$host}/");
 
             if ( ! \preg_match("/\/$/", $a))

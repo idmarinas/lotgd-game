@@ -130,7 +130,7 @@ elseif ('view' == $op)
         ->addSelect('a.login', 'a.acctid')
         ->leftJoin('LotgdCore:Characters', 'c', 'with', $query->expr()->eq('c.acct', 'u.author'))
         ->leftJoin('LotgdCore:Characters', 'c1', 'with', $query->expr()->eq('c1.acct', 'u.closeuserid'))
-        ->leftJoin('LotgdCore:Accounts', 'a', 'with', $query->expr()->eq('a.acctid', 'u.author'))
+        ->leftJoin('LotgdCore:User', 'a', 'with', $query->expr()->eq('a.acctid', 'u.author'))
         ->where('u.petitionid = :petition')
         ->setParameter('petition', $petitionId)
 

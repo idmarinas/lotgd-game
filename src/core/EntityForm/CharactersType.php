@@ -45,7 +45,7 @@ class CharactersType extends AbstractType
         $builder
             ->add('acct', EntityType::class, [
                 'label'        => 'char.acct',
-                'class'        => 'LotgdCore:Accounts',
+                'class'        => 'LotgdCore:User',
                 'choice_value' => 'acctid',
                 'choice_label' => function ($account)
                 {

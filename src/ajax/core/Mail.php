@@ -93,7 +93,7 @@ class Mail extends AjaxAbstract
     {
         if ( ! $this->repositoryAcct instanceof AccountsRepository)
         {
-            $this->repositoryAcct = \Doctrine::getRepository('LotgdCore:Accounts');
+            $this->repositoryAcct = \Doctrine::getRepository('LotgdCore:User');
         }
 
         return $this->repositoryAcct;

@@ -264,7 +264,7 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
 
             if ($session['user']['referer'] > 0 && ($session['user']['level'] >= LotgdSetting::getSetting('referminlevel', 4) || $session['user']['dragonkills'] > 0) && $session['user']['refererawarded'] < 1)
             {
-                $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+                $repository = \Doctrine::getRepository('LotgdCore:User');
                 $entity = $repository->find($session['user']['referer']);
 
                 if ($entity)

@@ -26,7 +26,7 @@ $params = [
 \LotgdNavigation::addNav('stats.nav.graph', 'stats.php?op=graph');
 
 $repository = \Doctrine::getRepository('LotgdCore:AccountsEverypage');
-$acctRepository = \Doctrine::getRepository('LotgdCore:Accounts');
+$acctRepository = \Doctrine::getRepository('LotgdCore:User');
 
 $op = (string) \LotgdRequest::getQuery('op');
 
@@ -49,7 +49,7 @@ elseif ('referers' == $op)
 
     $result = $query->select('u')
         ->addSelect('a')
-        ->leftJoin('LotgdCore:Accounts', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.referer'))
+        ->leftJoin('LotgdCore:User', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.referer'))
         ->where('u.referer > 0')
         ->getQuery()
         ->getResult()

@@ -73,7 +73,7 @@ class HomeController extends AbstractController
         if (\abs($this->settings->getSetting('OnlineCountLast', 0) - \strtotime('now')) > 60)
         {
             /** @var \Lotgd\Core\Repository\AccountsRepository */
-            $account = $this->getDoctrine()->getRepository('LotgdCore:Accounts');
+            $account = $this->getDoctrine()->getRepository('LotgdCore:User');
 
             $this->settings->saveSetting('OnlineCount', $account->getCountAcctsOnline((int) $this->settings->getSetting('LOGINTIMEOUT', 900)));
             $this->settings->saveSetting('OnlineCountLast', \strtotime('now'));

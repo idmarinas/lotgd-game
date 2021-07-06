@@ -143,7 +143,7 @@ class ListController extends AbstractController
     {
         if ( ! $this->repository instanceof AccountsRepository)
         {
-            $this->repository = $this->getDoctrine()->getRepository('LotgdCore:Accounts');
+            $this->repository = $this->getDoctrine()->getRepository('LotgdCore:User');
         }
 
         return $this->repository;

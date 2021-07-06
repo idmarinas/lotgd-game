@@ -129,7 +129,7 @@ function writelog($response)
     {
         $match[1] = addslashes($match[1]);
 
-        $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+        $repository = \Doctrine::getRepository('LotgdCore:User');
         $account = $repository->findOneBy([ 'login' => $match[1] ]);
         $acctId = 0;
 

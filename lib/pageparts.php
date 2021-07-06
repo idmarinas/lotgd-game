@@ -383,7 +383,7 @@ function charstats($return = true)
 
             if (\Doctrine::isConnected())
             {
-                $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+                $repository = \Doctrine::getRepository('LotgdCore:User');
                 $onlinecount = $repository->count(['loggedin' => '1', 'locked' => '0']);
             }
 
