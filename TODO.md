@@ -12,6 +12,7 @@
 
 # Actualmente haciendo esto (6.0.0)
 
+-   Revisar los backups de cuentas y personajes (ahora es user y avatar)
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   Sustituir la función lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
