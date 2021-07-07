@@ -19,10 +19,12 @@ use Laminas\Hydrator\ClassMethodsHydrator;
 use Lotgd\Core\Entity as LotgdEntity;
 use Tracy\Debugger;
 use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\User as UserEntity;
 
 class UserRepository extends ServiceEntityRepository
 {
+    use EntityRepositoryTrait;
     use User\Bans;
     use User\Avatar;
     use User\Clan;
