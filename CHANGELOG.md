@@ -28,6 +28,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **src/core/Command/LotgdIntallCommand.php** and **src/core/Command/UserCreateCommand.php** Replace unexist method in class `Symfony\Component\Console\Style\SymfonyStyle` 
 -   **src/core/Command/UserCreateCommand.php** Fixed error with constraints
 -   **themes/LotgdTheme/templates/admin/page/about/_partial.html.twig** Fix error with url of download a bundle. Remove escape filter of url.
+-   **public/about.php** Fix error in secuence of if
 
 ### :x: REMOVES
 
