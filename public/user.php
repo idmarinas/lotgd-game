@@ -70,9 +70,9 @@ if ('del' == $op)
 
         if (\LotgdKernel::get('lotgd.core.backup')->characterCleanUp($userId, CHAR_DELETE_MANUAL))
         {
-            \LotgdTool::addNews('news.account.delete', ['playerName' => $account->getCharacter()->getName()], $textDomain, true);
+            \LotgdTool::addNews('news.account.delete', ['playerName' => $account->getAvatar()->getName()], $textDomain, true);
 
-            \LotgdLog::debug("Deleted account {$account->getCharacter()->getName()}");
+            \LotgdLog::debug("Deleted account {$account->getAvatar()->getName()}");
         }
     }
 }
@@ -100,19 +100,19 @@ elseif ('special' == $op)
 
     if ('' != \LotgdRequest::getPost('newday'))
     {
-        $character = $accountEntity->getCharacter();
+        $character = $accountEntity->getAvatar();
         $character->setLasthit(new \DateTime('0000-00-00 00:00:00'));
-        $accountEntity->setCharacter($character);
+        $accountEntity->setAvatar($character);
 
         \Doctrine::persist($character);
     }
     elseif ('' != \LotgdRequest::getPost('fixnavs'))
     {
-        $character = $accountEntity->getCharacter();
+        $character = $accountEntity->getAvatar();
         $character->setAllowednavs([])
             ->setSpecialinc('')
         ;
-        $accountEntity->setCharacter($character);
+        $accountEntity->setAvatar($character);
 
         \Doctrine::persist($character);
         $outputRepository = \Doctrine::getRepository('LotgdCore:AccountsOutput');
@@ -183,7 +183,7 @@ elseif ('save' == $op)
     $characterRepository = \Doctrine::getRepository('LotgdCore:Avatar');
 
     $accountEntity   = $repository->find($userId);
-    $characterEntity = $characterRepository->find($accountEntity->getCharacter()->getId());
+    $characterEntity = $characterRepository->find($accountEntity->getAvatar()->getId());
 
     $accountEntity   = $repository->hydrateEntity($postValues, $accountEntity);
     $characterEntity = $characterRepository->hydrateEntity($postValues, $characterEntity);
@@ -280,7 +280,7 @@ switch ($op)
             $characterRepository = \Doctrine::getRepository('LotgdCore:Avatar');
 
             $accountEntity   = $repository->find($userId);
-            $characterEntity = $characterRepository->find($accountEntity->getCharacter()->getId());
+            $characterEntity = $characterRepository->find($accountEntity->getAvatar()->getId());
 
             $class  = 'acct' == $type ? \Lotgd\Core\EntityForm\AccountsType::class : \Lotgd\Core\EntityForm\CharactersType::class;
             $entity = 'acct' == $type ? $accountEntity : $characterEntity;

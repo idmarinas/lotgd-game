@@ -126,7 +126,7 @@ final class UserCreateCommand extends Command
             $this->doctrine->flush(); //-- Persist objects
 
             //-- Set ID of character and update Account
-            $account->setCharacter($character);
+            $account->setAvatar($character);
             $this->doctrine->persist($account);
             $this->doctrine->flush(); //-- Persist objects
         }

@@ -246,9 +246,9 @@ class Tool
 
         $everypage = $hydrator->hydrate($session['user'], $pageRep->find((int) $session['user']['acctid']) ?: new \Lotgd\Core\Entity\AccountsEverypage());
         $account   = $hydrator->hydrate($session['user'], $accountRep->find((int) $session['user']['acctid']));
-        $character = $hydrator->hydrate($session['user'], $account->getCharacter());
+        $character = $hydrator->hydrate($session['user'], $account->getAvatar());
 
-        $account->setCharacter($character);
+        $account->setAvatar($character);
         $character->setAcct($account);
 
         $this->doctrine->persist($account);

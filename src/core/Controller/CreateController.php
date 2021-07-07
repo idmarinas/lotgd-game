@@ -164,7 +164,7 @@ class CreateController extends AbstractController
         $params['account'] = $account;
 
         $this->settings->saveSetting('newestplayer', $account->getAcctid());
-        $this->settings->saveSetting('newestplayername', $account->getCharacter()->getName());
+        $this->settings->saveSetting('newestplayername', $account->getAvatar()->getName());
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_CREATE_VAL);
@@ -379,7 +379,7 @@ class CreateController extends AbstractController
                     $this->getDoctrine()->getManager()->flush(); //-- Persist objects
 
                     //-- Set ID of character and update Account
-                    $accountEntity->setCharacter($characterEntity);
+                    $accountEntity->setAvatar($characterEntity);
                     $this->getDoctrine()->getManager()->persist($accountEntity);
                     $this->getDoctrine()->getManager()->flush(); //-- Persist objects
 
