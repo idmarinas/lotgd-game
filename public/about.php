@@ -33,7 +33,7 @@ if ('listmodules' == $op)
 
     $method = 'modules';
 }
-if ('bundles' == $op)
+elseif ('bundles' == $op)
 {
     \LotgdNavigation::blockLink('about.php?op=bundles');
 
