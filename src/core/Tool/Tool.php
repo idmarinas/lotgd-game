@@ -76,7 +76,7 @@ class Tool
         //the exp is first 3 times the starting one, then later goes down to <25% from the previous one. It is harder to obtain enough exp though.
         $expstring = $this->settings->getSetting('exp-array', '100,400,1002,1912,3140,4707,6641,8985,11795,15143,19121,23840,29437,36071,43930');
         $maxlevel  = (int) $this->settings->getSetting('maxlevel', 15);
-        $cacheKey  = 'exp-for-next-level-array-'.\md5($expstring)."-lvl-{$maxlevel}-dk-{$curdk}";
+        $cacheKey  = 'exp-for-next-level-array-'.md5($expstring)."-lvl-{$maxlevel}-dk-{$curdk}";
 
         //error!
         if ('' == $expstring)
@@ -90,12 +90,12 @@ class Tool
         //fetch all for that DK if already calculated!
         $exparray = $cache->get($cacheKey, function () use ($expstring, $curdk, $maxlevel)
         {
-            $exparray = \explode(',', $expstring);
+            $exparray = explode(',', $expstring);
             $count = \count($exparray);
 
             foreach ($exparray as $key => $val)
             {
-                $exparray[$key] = (int) \round($val + ($curdk / 4) * ($key + 1) * 100, 0);
+                $exparray[$key] = (int) round($val + ($curdk / 4) * ($key + 1) * 100, 0);
             }
 
             //-- Always +1 level max too avoid error of cant get exp need for next level if player are in máx level
@@ -105,7 +105,7 @@ class Tool
             {
                 for ($i = $count; $i < $maxlevel; ++$i)
                 {
-                    $exparray[$i] = (int) \round($exparray[$i - 1] * 1.2);
+                    $exparray[$i] = (int) round($exparray[$i - 1] * 1.2);
                 }
             }
 
@@ -113,7 +113,7 @@ class Tool
         });
 
         //-- Avoid level less than 0 and more than max lvl
-        $curlevel = \min(\max($curlevel - 1, 0), $maxlevel);
+        $curlevel = min(max($curlevel - 1, 0), $maxlevel);
 
         //-- If not find level invalidate cache and redo it
         if ( ! isset($exparray[$curlevel]))
@@ -204,7 +204,7 @@ class Tool
             $this->doctrine->flush();
 
             $session['message'] .= $translator->trans('checkban.note', [], 'page_bans');
-            \header('Location: index.php');
+            header('Location: index.php');
 
             exit();
         }
@@ -252,7 +252,6 @@ class Tool
         $character->setAcct($account);
 
         $this->doctrine->persist($account);
-        $this->doctrine->persist($character);
         $this->doctrine->persist($everypage);
 
         if ($session['output'] ?? false)
@@ -261,7 +260,7 @@ class Tool
             $acctOutput = $outputRep->find((int) $session['user']['acctid']) ?: new \Lotgd\Core\Entity\AccountsOutput();
 
             $acctOutput->setAcctid($session['user']['acctid'])
-                ->setOutput(\gzcompress($session['output'], 1))
+                ->setOutput(gzcompress($session['output'], 1))
             ;
 
             $this->doctrine->persist($acctOutput);
