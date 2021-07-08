@@ -16,7 +16,7 @@ namespace Lotgd\Core\Repository;
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Tracy\Debugger;
 
-class MailRepository extends DoctrineRepository
+class MailRepository extends DoctrineRepository implements RepositoryBackupInterface
 {
     use Mail\Backup;
     use Mail\Clan;

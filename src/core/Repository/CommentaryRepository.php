@@ -17,7 +17,7 @@ use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Lotgd\Core\Entity\Commentary as EntityCommentary;
 use Tracy\Debugger;
 
-class CommentaryRepository extends DoctrineRepository
+class CommentaryRepository extends DoctrineRepository implements RepositoryBackupInterface
 {
     use Commentary\Backup;
 
