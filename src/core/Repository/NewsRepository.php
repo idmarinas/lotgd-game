@@ -15,7 +15,7 @@ namespace Lotgd\Core\Repository;
 
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 
-class NewsRepository extends DoctrineRepository
+class NewsRepository extends DoctrineRepository implements RepositoryBackupInterface
 {
     use News\Backup;
 
