@@ -12,6 +12,7 @@
 
 # Actualmente haciendo esto (6.0.0)
 
+-   Eliminar paquete laminas/laminas-serializer en la versión 6.1.0
 -   Revisar los backups de cuentas y personajes (ahora es user y avatar)
 -   Comprobar si se puede cambiar el método de encriptación de la contraseña por algo similar a lo que hace symphony
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
