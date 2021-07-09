@@ -79,13 +79,13 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
         -   `apply_bodyguard` use `LotgdKernel::get('lotgd_core.combat.battle')->applyBodyguard($level)` instead
         -   `apply_skill` use `LotgdKernel::get('lotgd_core.combat.battle')->applySkill($skill, $l)` instead
 -   **lib/buffs.php** All functions (removed in future version)
-    -   `calculate_buff_fields` use `LotgdKernel::get('lotgd_core.combat.buffs')->calculateBuffFields()` instead
-    -   `restore_buff_fields` use `LotgdKernel::get('lotgd_core.combat.buffs')->restoreBuffFields()` instead
-    -   `apply_buff` use `LotgdKernel::get('lotgd_core.combat.buffs')->applyBuff($name, $buff)` instead
-    -   `apply_companion` use `LotgdKernel::get('lotgd_core.combat.buffs')->applyCompanion($name, $companion, $ignorelimit)` instead
-    -   `strip_buff` use `LotgdKernel::get('lotgd_core.combat.buffs')->stripBuff($name)` instead
-    -   `strip_all_buffs` use `LotgdKernel::get('lotgd_core.combat.buffs')->stripAllBuffs()` instead
-    -   `has_buff` use `LotgdKernel::get('lotgd_core.combat.buffs')->hasBuff($name)` instead
+    -   `calculate_buff_fields` use `LotgdKernel::get('lotgd_core.combat.buffer')->calculateBuffFields()` instead
+    -   `restore_buff_fields` use `LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields()` instead
+    -   `apply_buff` use `LotgdKernel::get('lotgd_core.combat.buffer')->applyBuff($name, $buff)` instead
+    -   `apply_companion` use `LotgdKernel::get('lotgd_core.combat.buffer')->applyCompanion($name, $companion, $ignorelimit)` instead
+    -   `strip_buff` use `LotgdKernel::get('lotgd_core.combat.buffer')->stripBuff($name)` instead
+    -   `strip_all_buffs` use `LotgdKernel::get('lotgd_core.combat.buffer')->stripAllBuffs()` instead
+    -   `has_buff` use `LotgdKernel::get('lotgd_core.combat.buffer')->hasBuff($name)` instead
 -   **lib/tempstat.php** All functions (removed in future version)
     -   `apply_temp_stat` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->applyTempStat($name, $value, $type)` instead
     -   `check_temp_stat` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat($name, $color)` instead
