@@ -45,7 +45,7 @@ class HofController extends AbstractController
         $params['order'] = $order;
         $params['subop'] = $subop;
 
-        return $method($params, $order, $subop);
+        return $this->$method($params, $order, $subop);
     }
 
     protected function hofDays(array $params): Response
