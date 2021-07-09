@@ -228,6 +228,9 @@ services:
     lotgd.core.backup:
         alias: Lotgd\Core\Tool\Backup
         public: true
+    lotgd.serializer.denormalizer: # Temporal
+        alias: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+        public: true
 
     # Twig extensions
     Marek\Twig\ByteUnitsExtension:
