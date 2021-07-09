@@ -34,6 +34,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Avatar
 {
     use Common\IdTrait;
+    use Avatar\Attribute;
+    use Avatar\Clan;
+    use Avatar\Equipment;
 
     /**
      * @var int
@@ -65,41 +68,6 @@ class Avatar
     private $sex = 0;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="strength", type="integer", nullable=false, options={"default": 10, "unsigned": true})
-     */
-    private $strength = 10;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="dexterity", type="integer", nullable=false, options={"default": 10, "unsigned": true})
-     */
-    private $dexterity = 10;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="intelligence", type="integer", nullable=false, options={"default": 10, "unsigned": true})
-     */
-    private $intelligence = 10;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="constitution", type="integer", nullable=false, options={"default": 10, "unsigned": true})
-     */
-    private $constitution = 10;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="wisdom", type="integer", nullable=false, options={"default": 10, "unsigned": true})
-     */
-    private $wisdom = 10;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="specialty", type="string", length=20, nullable=false)
@@ -119,20 +87,6 @@ class Avatar
      * @ORM\Column(name="gold", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $gold = 0;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="weapon", type="string", length=50, nullable=false, options={"default": "Fists"})
-     */
-    private $weapon = 'Fists';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="armor", type="string", length=50, nullable=false, options={"default": "T-Shirt"})
-     */
-    private $armor = 'T-Shirt';
 
     /**
      * @var bool
@@ -217,20 +171,6 @@ class Avatar
      * @ORM\Column(name="gems", type="integer", nullable=false, options={"default": 0})
      */
     private $gems = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="weaponvalue", type="integer", nullable=false, options={"default": 0})
-     */
-    private $weaponvalue = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="armorvalue", type="integer", nullable=false, options={"default": 0})
-     */
-    private $armorvalue = 0;
 
     /**
      * @var string
@@ -520,27 +460,6 @@ class Avatar
     private $fedmount = 0;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="clanid", type="integer", nullable=true, options={"default": 0, "unsigned": true})
-     */
-    private $clanid;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="clanrank", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
-     */
-    private $clanrank = 0;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="clanjoindate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
-     */
-    private $clanjoindate;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="chatloc", type="string", length=255, nullable=false)
@@ -651,116 +570,6 @@ class Avatar
     }
 
     /**
-     * Set the value of Strength.
-     *
-     * @param int $strength
-     *
-     * @return self
-     */
-    public function setStrength($strength)
-    {
-        $this->strength = (int) $strength;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Strength.
-     */
-    public function getStrength(): int
-    {
-        return $this->strength;
-    }
-
-    /**
-     * Set the value of Dexterity.
-     *
-     * @param int $dexterity
-     *
-     * @return self
-     */
-    public function setDexterity($dexterity)
-    {
-        $this->dexterity = (int) $dexterity;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Dexterity.
-     */
-    public function getDexterity(): int
-    {
-        return $this->dexterity;
-    }
-
-    /**
-     * Set the value of Intelligence.
-     *
-     * @param int $intelligence
-     *
-     * @return self
-     */
-    public function setIntelligence($intelligence)
-    {
-        $this->intelligence = (int) $intelligence;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Intelligence.
-     */
-    public function getIntelligence(): int
-    {
-        return $this->intelligence;
-    }
-
-    /**
-     * Set the value of Constitution.
-     *
-     * @param int $constitution
-     *
-     * @return self
-     */
-    public function setConstitution($constitution)
-    {
-        $this->constitution = (int) $constitution;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Constitution.
-     */
-    public function getConstitution(): int
-    {
-        return $this->constitution;
-    }
-
-    /**
-     * Set the value of Wisdom.
-     *
-     * @param int $wisdom
-     *
-     * @return self
-     */
-    public function setWisdom($wisdom)
-    {
-        $this->wisdom = (int) $wisdom;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Wisdom.
-     */
-    public function getWisdom(): int
-    {
-        return $this->wisdom;
-    }
-
-    /**
      * Set the value of Specialty.
      *
      * @param string $specialty
@@ -824,50 +633,6 @@ class Avatar
     public function getGold(): int
     {
         return $this->gold;
-    }
-
-    /**
-     * Set the value of Weapon.
-     *
-     * @param string $weapon
-     *
-     * @return self
-     */
-    public function setWeapon($weapon)
-    {
-        $this->weapon = $weapon;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Weapon.
-     */
-    public function getWeapon(): string
-    {
-        return $this->weapon;
-    }
-
-    /**
-     * Set the value of Armor.
-     *
-     * @param string $armor
-     *
-     * @return self
-     */
-    public function setArmor($armor)
-    {
-        $this->armor = $armor;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Armor.
-     */
-    public function getArmor(): string
-    {
-        return $this->armor;
     }
 
     /**
@@ -1132,50 +897,6 @@ class Avatar
     public function getGems(): int
     {
         return $this->gems;
-    }
-
-    /**
-     * Set the value of Weaponvalue.
-     *
-     * @param int $weaponvalue
-     *
-     * @return self
-     */
-    public function setWeaponvalue($weaponvalue)
-    {
-        $this->weaponvalue = (int) $weaponvalue;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Weaponvalue.
-     */
-    public function getWeaponvalue(): int
-    {
-        return $this->weaponvalue;
-    }
-
-    /**
-     * Set the value of Armorvalue.
-     *
-     * @param int $armorvalue
-     *
-     * @return self
-     */
-    public function setArmorvalue($armorvalue)
-    {
-        $this->armorvalue = (int) $armorvalue;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Armorvalue.
-     */
-    public function getArmorvalue(): int
-    {
-        return $this->armorvalue;
     }
 
     /**
@@ -2078,70 +1799,6 @@ class Avatar
     public function getFedmount(): bool
     {
         return $this->fedmount;
-    }
-
-    /**
-     * Set the value of Clanid.
-     *
-     * @param int $clanid
-     *
-     * @return self
-     */
-    public function setClanid(?int $clanid)
-    {
-        $this->clanid = $clanid;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Clanid.
-     */
-    public function getClanid(): ?int
-    {
-        return $this->clanid;
-    }
-
-    /**
-     * Set the value of Clanrank.
-     *
-     * @param int $clanrank
-     *
-     * @return self
-     */
-    public function setClanrank($clanrank)
-    {
-        $this->clanrank = (int) $clanrank;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Clanrank.
-     */
-    public function getClanrank(): int
-    {
-        return $this->clanrank;
-    }
-
-    /**
-     * Set the value of Clanjoindate.
-     *
-     * @return self
-     */
-    public function setClanjoindate(\DateTime $clanjoindate)
-    {
-        $this->clanjoindate = $clanjoindate;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Clanjoindate.
-     */
-    public function getClanjoindate(): \DateTime
-    {
-        return $this->clanjoindate;
     }
 
     /**
