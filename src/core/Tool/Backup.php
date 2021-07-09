@@ -15,6 +15,7 @@ namespace Lotgd\Core\Tool;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Event\Character as CharacterEvent;
 use Lotgd\Core\Event\Clan as ClanEvent;
+use Lotgd\Core\Http\Request;
 use Lotgd\Core\Log;
 use Lotgd\Core\Repository\RepositoryBackupInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -25,24 +26,28 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class Backup
 {
+    private $cipher = 'aes-128-cbc';
     private $doctrine;
     private $log;
     private $eventDispatcher;
     private $normalizer;
     private $serializer;
+    private $request;
 
     public function __construct(
         EntityManagerInterface $doctrine,
         Log $log,
         EventDispatcherInterface $eventDispatcher,
         NormalizerInterface $normalizer,
-        SerializerInterface $serializer
+        SerializerInterface $serializer,
+        Request $request
     ) {
         $this->doctrine        = $doctrine;
         $this->log             = $log;
         $this->eventDispatcher = $eventDispatcher;
         $this->normalizer      = $normalizer; //-- object to array
         $this->serializer      = $serializer;
+        $this->request = $request;
     }
 
     /**
@@ -136,6 +141,22 @@ class Backup
         $this->doctrine->flush();
 
         return true;
+    }
+
+    public function encryptContent(string $content): string
+    {
+        $ivlen  = openssl_cipher_iv_length($this->cipher);
+        $iv     = openssl_random_pseudo_bytes($ivlen);
+
+        return openssl_encrypt($content, $this->cipher, $this->request->getServer('APP_SECRET'), 0, $iv);
+    }
+
+    public function decryptContent(string $content): string
+    {
+        $ivlen  = openssl_cipher_iv_length($this->cipher);
+        $iv     = openssl_random_pseudo_bytes($ivlen);
+
+        return openssl_decrypt($content, $this->cipher, $this->request->getServer('APP_SECRET'), 0, $iv);
     }
 
     private function processClan(int $accountId, $accountEntity): void
@@ -267,11 +288,11 @@ class Backup
                 'rows'   => [$characterRow],
             ];
 
-            $fileSystem->dumpFile("{$path}/LotgdCore_User.json", $this->serializer->serialize($accountArray, 'json'));
+            $fileSystem->dumpFile("{$path}/LotgdCore_User.json", $this->encryptContent($this->serializer->serialize($accountArray, 'json')));
             $fileSystem->dumpFile("{$path}/LotgdCore_Avatar.json", $this->serializer->serialize($characterArray, 'json'));
 
             //-- Basic info of account
-            $fileSystem->dumpFile("{$path}/basic_info.json", $this->serializer->serialize($basicInfo, 'json'));
+            $fileSystem->dumpFile("{$path}/basic_info.json", $this->encryptContent($this->serializer->serialize($basicInfo, 'json')));
         }
         catch (\Throwable $th)
         {
