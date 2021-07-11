@@ -123,7 +123,7 @@ class Version60000 extends InstallerAbstract
                         $content = $this->backup->encryptContent($content);
                     }
 
-                    $fs->dumpFile($file, $content, LOCK_EX);
+                    $fs->dumpFile($file, $content);
                 }
             }
         }
