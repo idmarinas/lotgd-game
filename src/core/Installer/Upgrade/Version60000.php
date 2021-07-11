@@ -108,6 +108,15 @@ class Version60000 extends InstallerAbstract
                     //-- Encrypt data of user and basic info
                     $encrypt = (false !== stripos($file, 'LotgdCore_User') || false !== stripos($file, 'basic_info'));
 
+                    if (false !== stripos($file, 'LotgdCore_Avatar'))
+                    {
+                        $content['entity'] = 'Lotgd\Core\Entity\Avatar';
+                    }
+                    elseif (false !== stripos($file, 'LotgdCore_User'))
+                    {
+                        $content['entity'] = 'Lotgd\Core\Entity\User';
+                    }
+
                     $content = $this->serializer->serialize($content, 'json', [
                         AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object)
                         {
