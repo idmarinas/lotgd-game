@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ab4e5d8dc3ae2b8c4b5bb6e99f480b0",
+    "content-hash": "e7c85e24589af814c430293fa28e9845",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -2531,6 +2531,60 @@
                 }
             ],
             "time": "2021-07-05T11:46:58+00:00"
+        },
+        {
+            "name": "kitlabs/kit-crypt-bundle",
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kitlabs-cn/KitCryptBundle.git",
+                "reference": "3cebf808c4c4bc6e2af196f75991bee63f8a20bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kitlabs-cn/KitCryptBundle/zipball/3cebf808c4c4bc6e2af196f75991bee63f8a20bf",
+                "reference": "3cebf808c4c4bc6e2af196f75991bee63f8a20bf",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "php": ">=5.5.9"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Kit\\CryptBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "lcp0578",
+                    "email": "lcp0578@gmail.com",
+                    "homepage": "https://github.com/lcp0578"
+                },
+                {
+                    "name": "The contributors",
+                    "homepage": "https://github.com/kitlabs-cn/KitCryptBundle/contributors"
+                }
+            ],
+            "description": "Symfony Crypt Bundle",
+            "homepage": "https://github.com/kitlabs-cn/KitCryptBundle",
+            "keywords": [
+                "OPNESSL",
+                "aes",
+                "crypt bundle",
+                "des"
+            ],
+            "support": {
+                "email": "lcp0578@gmail.com",
+                "issues": "https://github.com/kitlabs-cn/KitCryptBundle/issues",
+                "source": "https://github.com/kitlabs-cn/KitCryptBundle/tree/v3.1.0"
+            },
+            "time": "2020-03-07T14:31:39+00:00"
         },
         {
             "name": "laminas/laminas-code",
