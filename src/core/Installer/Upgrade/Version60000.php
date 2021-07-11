@@ -14,9 +14,9 @@
 namespace Lotgd\Core\Installer\Upgrade;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Kit\CryptBundle\Service\OpensslService as Crypt;
 use Laminas\Serializer\Adapter\PhpSerialize;
 use Lotgd\Core\Installer\InstallerAbstract;
-use Lotgd\Core\Tool\Backup;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -29,14 +29,14 @@ class Version60000 extends InstallerAbstract
     protected $upgradeVersion = 60000;
     protected $hasMigration   = 20210707115250;
 
-    private $backup;
+    private $crypt;
     private $serializer;
 
-    public function __construct(EntityManagerInterface $doctrine, TranslatorInterface $translator, Backup $backup, SerializerInterface $serializer)
+    public function __construct(EntityManagerInterface $doctrine, TranslatorInterface $translator, Crypt $crypt, SerializerInterface $serializer)
     {
         $this->doctrine   = $doctrine;
         $this->translator = $translator;
-        $this->backup     = $backup;
+        $this->crypt      = $crypt;
         $this->serializer = $serializer;
     }
 
@@ -120,7 +120,7 @@ class Version60000 extends InstallerAbstract
 
                     if ($encrypt)
                     {
-                        $content = $this->backup->encryptContent($content);
+                        $content = $this->crypt->encrypt($content);
                     }
 
                     $fs->dumpFile($file, $content);
