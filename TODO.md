@@ -12,9 +12,12 @@
 
 # Actualmente haciendo esto (6.0.0)
 
--   Eliminar paquete laminas/laminas-serializer en la versión 6.1.0
 -   Revisar los backups de cuentas y personajes (ahora es user y avatar)
+    -   Cambiar la forma de crear los backups
+        -   Agregar opción para si se debe encriptar el string de contenido o no
 -   Comprobar si se puede cambiar el método de encriptación de la contraseña por algo similar a lo que hace symphony
+-   Se crear un nuevos sistema de batalla, usando service para poder personalizarlo.
+    -   Se creara un Event para esto
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   Sustituir la función lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
@@ -24,7 +27,14 @@
         -   El panel de administración del juego se va a sustituir por **Sonata Admin**
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
--   Se eliminan funciones obsoletas, para limpiar un poco el código.
+
+
+## Para la versión 7.0.0
+
+-   Se fusiona todos los installer a uno nuevo como clean version
+    -   El installer de la versión 6.0.0 depende de laminas/laminas-serializer
+        -   Es en el único sitio donde se utiliza este componente
+-   Eliminar paquete laminas/laminas-serializer
 
 
 # Módulos
