@@ -75,6 +75,10 @@ class Backup
                 'LotgdCore:ModuleUserprefs' => true,
                 'LotgdCore:Debuglog'        => true,
             ],
+            'encrypt' => [
+                // 'Entity:Name' => encrypt: true|false,
+                // Same name as in entities
+            ],
             'acctid'  => $accountId,
             'deltype' => $type,
         ]);
@@ -114,7 +118,7 @@ class Backup
                 {
                     $message = 'Could not create a backup for Entity %s, Account ID: %s, Login %s';
 
-                    if ($this->createBackupOfEntity($accountId, $repository, $entity))
+                    if ($this->createBackupOfEntity($accountId, $repository, $entity, $return['encrypt'][$entity] ?? false))
                     {
                         $message = 'A backup has been created for the Entity %s, account ID: %s, Login %s';
                     }
@@ -201,7 +205,7 @@ class Backup
      *
      * @param object $repository
      */
-    private function createBackupOfEntity(int $accountId, $repository, string $entityName): bool
+    private function createBackupOfEntity(int $accountId, $repository, string $entityName, bool $encrypt = false): bool
     {
         $fileSystem = new Filesystem();
 
@@ -225,7 +229,14 @@ class Backup
             ];
 
             $entityName = str_replace([':', '\\', '/'], '_', $entityName);
-            $fileSystem->dumpFile("storage/logd_snapshots/user-{$accountId}/{$entityName}.json", $this->serializer->serialize($data, 'json'), LOCK_EX);
+            $data = $this->serializer->serialize($data, 'json');
+
+            if ($encrypt)
+            {
+                $data = $this->crypt->encrypt($data);
+            }
+
+            $fileSystem->dumpFile("storage/logd_snapshots/user-{$accountId}/{$entityName}.json", $data);
         }
         catch (\Throwable $th)
         {
