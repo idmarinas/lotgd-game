@@ -142,11 +142,11 @@ class User
     private $sentnotice = false;
 
     /**
-     * @var string
+     * @var array
      *
      * @ORM\Column(name="prefs", type="array")
      */
-    private $prefs;
+    private $prefs = [];
 
     /**
      * @var int
@@ -494,7 +494,7 @@ class User
     /**
      * Set the value of Prefs.
      *
-     * @param string $prefs
+     * @param array $prefs
      *
      * @return self
      */

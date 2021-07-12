@@ -194,25 +194,25 @@ class Avatar
     private $title = '';
 
     /**
-     * @var string
+     * @var array
      *
      * @ORM\Column(name="badguy", type="array", nullable=false)
      */
-    private $badguy;
+    private $badguy = [];
 
     /**
-     * @var string
+     * @var array
      *
      * @ORM\Column(name="companions", type="array", nullable=false)
      */
-    private $companions;
+    private $companions = [];
 
     /**
-     * @var string
+     * @var array
      *
      * @ORM\Column(name="allowednavs", type="array", nullable=false)
      */
-    private $allowednavs;
+    private $allowednavs = [];
 
     /**
      * @var int
@@ -313,11 +313,11 @@ class Avatar
     private $hashorse;
 
     /**
-     * @var string
+     * @var array
      *
      * @ORM\Column(name="bufflist", type="array", nullable=false)
      */
-    private $bufflist;
+    private $bufflist = [];
 
     /**
      * @var string
@@ -968,11 +968,11 @@ class Avatar
     /**
      * Set the value of Badguy.
      *
-     * @param string $badguy
+     * @param array $badguy
      *
      * @return self
      */
-    public function setBadguy($badguy)
+    public function setBadguy($badguy): self
     {
         $this->badguy = $badguy;
 
@@ -982,7 +982,7 @@ class Avatar
     /**
      * Get the value of Badguy.
      *
-     * @return string
+     * @return array
      */
     public function getBadguy()
     {
@@ -992,7 +992,7 @@ class Avatar
     /**
      * Set the value of Companions.
      *
-     * @param string $companions
+     * @param array $companions
      *
      * @return self
      */
@@ -1006,7 +1006,7 @@ class Avatar
     /**
      * Get the value of Companions.
      *
-     * @return string
+     * @return array
      */
     public function getCompanions()
     {
@@ -1020,7 +1020,7 @@ class Avatar
      *
      * @return self
      */
-    public function setAllowednavs($allowednavs)
+    public function setAllowednavs($allowednavs): self
     {
         $this->allowednavs = $allowednavs;
 
