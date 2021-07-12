@@ -13,11 +13,9 @@
 # Actualmente haciendo esto (6.0.0)
 
 -   Revisar los backups de cuentas y personajes (ahora es user y avatar)
-    -   Cambiar la forma de crear los backups
-        -   Agregar opción para si se debe encriptar el string de contenido o no
 -   Comprobar si se puede cambiar el método de encriptación de la contraseña por algo similar a lo que hace symphony
--   Se crear un nuevos sistema de batalla, usando service para poder personalizarlo.
-    -   Se creara un Event para esto
+-   Se crea un nuevos sistema de batalla, usando service para poder personalizarlo.
+    -   Se creará un Event para esto
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   Sustituir la función lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
