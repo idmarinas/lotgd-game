@@ -21,8 +21,19 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
             -   `character` is now `avatar`. character and characters is a reserved word.
 -   **BC** **Change entity Characters to Avatar**
     -   Rename Entity `Lotgd\Core\Entity\Characters` to `Lotgd\Core\Entity\Avatar`. character and characters is a reserved word.
--   **Updated character restore** for new Avatar and User entities
-    -   **Installer of version 6.0.0** Update old backups to new Avatar and User entity
+-   **Character Backup**
+    -   Add option to encrypt data when save to file.
+        -   `encrypt` key same structure of entities
+            ```php
+            [
+                // 'Entity:Name' => encrypt: true|false
+                'LotgdLocal:SensitiveEntity' => true,
+                'Lotgdcore:SensitiveEntity' => true
+            ]
+            ```
+            -   Use same name in entities and encrypt
+    -   **Updated character restore** for new Avatar and User entities
+        -   **Installer of version 6.0.0** Update old backups to new Avatar and User entity
 
 ### :star: FEATURES
 
