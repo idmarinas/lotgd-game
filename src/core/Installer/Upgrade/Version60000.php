@@ -111,10 +111,19 @@ class Version60000 extends InstallerAbstract
                     if (false !== stripos($file, 'LotgdCore_Avatar'))
                     {
                         $content['entity'] = 'Lotgd\Core\Entity\Avatar';
+                        $avatar = &$content['rows'][0];
+
+                        $avatar['badguy'] = is_array($avatar['badguy']) ? $avatar['badguy'] : [];
+                        $avatar['companions'] = is_array($avatar['companions']) ? $avatar['companions'] : [];
+                        $avatar['allowednavs'] = is_array($avatar['allowednavs']) ? $avatar['allowednavs'] : [];
+                        $avatar['bufflist'] = is_array($avatar['bufflist']) ? $avatar['bufflist'] : [];
                     }
                     elseif (false !== stripos($file, 'LotgdCore_User'))
                     {
                         $content['entity'] = 'Lotgd\Core\Entity\User';
+                        $user = &$content['rows'][0];
+
+                        $user['prefs'] = is_array($user['prefs']) ? $user['prefs'] : [];
                     }
 
                     $content = $this->serializer->serialize($content, 'json', [
@@ -125,6 +134,7 @@ class Version60000 extends InstallerAbstract
 
                             return $object->{$method}();
                         },
+                        AbstractNormalizer::CALLBACKS => $this->serializeCallbacks()
                     ]);
 
                     if ($encrypt)
@@ -142,5 +152,95 @@ class Version60000 extends InstallerAbstract
         }
 
         return true;
+    }
+
+    //-- Update some fields
+    public function step2(): bool
+    {
+        try
+        {
+            $this->doctrine->getConnection()->executeQuery(sprintf(
+                "UPDATE `user` SET `prefs` = 'a:0:{}' WHERE `prefs` = '%s' OR `prefs` = '%s'",
+                's:0:"";',
+                'N;'
+            ));
+            $this->doctrine->getConnection()->executeQuery(sprintf(
+                "UPDATE `avatar` SET `badguy` = 'a:0:{}' WHERE `badguy` = '%s' OR `badguy` = '%s'",
+                's:0:"";',
+                'N;'
+            ));
+            $this->doctrine->getConnection()->executeQuery(sprintf(
+                "UPDATE `avatar` SET `companions` = 'a:0:{}' WHERE `companions` = '%s' OR `companions` = '%s'",
+                's:0:"";',
+                'N;'
+            ));
+            $this->doctrine->getConnection()->executeQuery(sprintf(
+                "UPDATE `avatar` SET `allowednavs` = 'a:0:{}' WHERE `allowednavs` = '%s' OR `allowednavs` = '%s'",
+                's:0:"";',
+                'N;'
+            ));
+            $this->doctrine->getConnection()->executeQuery(sprintf(
+                "UPDATE `avatar` SET `bufflist` = 'a:0:{}' WHERE `bufflist` = '%s' OR `bufflist` = '%s'",
+                's:0:"";',
+                'N;'
+            ));
+        }
+        catch (\Throwable $th)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private function serializeCallbacks(): array
+    {
+        return [
+            'prefs' => function ($innerObject, $outerObject)
+            {
+                if (is_array($outerObject->getPrefs()))
+                {
+                    return $outerObject->getPrefs();
+                }
+
+                return [];
+            },
+            'badguy' => function ($innerObject, $outerObject)
+            {
+                if (is_array($outerObject->getBadguy()))
+                {
+                    return $outerObject->getBadguy();
+                }
+
+                return [];
+            },
+            'companions' => function ($innerObject, $outerObject)
+            {
+                if (is_array($outerObject->getCompanions()))
+                {
+                    return $outerObject->getCompanions();
+                }
+
+                return [];
+            },
+            'allowednavs' => function ($innerObject, $outerObject)
+            {
+                if (is_array($outerObject->getAllowednavs()))
+                {
+                    return $outerObject->getAllowednavs();
+                }
+
+                return [];
+            },
+            'bufflist' => function ($innerObject, $outerObject)
+            {
+                if (is_array($outerObject->getBufflist()))
+                {
+                    return $outerObject->getBufflist();
+                }
+
+                return [];
+            },
+        ];
     }
 }
