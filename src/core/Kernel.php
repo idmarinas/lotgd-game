@@ -31,7 +31,6 @@ class Kernel extends BaseKernel
     public const RELEASE_VERSION     = 1;
     public const EXTRA_VERSION       = '';
     public const VERSION_NUMBER      = self::VERSION_ID; //-- Alias of VERSION_ID
-    public const FILE_DB_CONNECT     = 'config/autoload/local/dbconnect.php'; // The file where the database connection data is stored.
     public const TEXT_DOMAIN_DEFAULT = 'app_default';
 
     /**
