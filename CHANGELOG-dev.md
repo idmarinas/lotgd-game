@@ -21,6 +21,9 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
             -   `character` is now `avatar`. character and characters is a reserved word.
 -   **BC** **Change entity Characters to Avatar**
     -   Rename Entity `Lotgd\Core\Entity\Characters` to `Lotgd\Core\Entity\Avatar`. character and characters is a reserved word.
+-   **Login/passwords** Change method to login and hashed password
+    -   Using aproach of Symfony hash password and use migrating for not break old passwords.
+    -   All new accounts use new password hash, and old accounts migrated to new hash when login.
 -   **Character Backup**
     -   Add option to encrypt data when save to file.
         -   `encrypt` key same structure of entities
