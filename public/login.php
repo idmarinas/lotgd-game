@@ -35,30 +35,19 @@ if ('' != $name)
         redirect('home.php');
     }
 
-    $password = \stripslashes((string) \LotgdRequest::getPost('password'));
-
-    if ('!md5!' == \substr($password, 0, 5))
-    {
-        $password = \md5(\substr($password, 5));
-    }
-    elseif ('!md52!' == \substr($password, 0, 6) && 38 == \strlen($password) && $force)
-    {
-        $password = \substr($password, 6);
-        $password = \preg_replace('/[^a-f0-9]/', '', $password);
-    }
-    else
-    {
-        $password = \md5(\md5($password));
-    }
-
     \LotgdTool::checkBan(); //check if this computer is banned
 
+    /** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder */
+    $passwordEncoder = \LotgdKernel::get('security.password_encoder');
+    $password = \LotgdRequest::getPost('password');
+
     //-- Using Doctrine repository to process login
+    /** @var Lotgd\Core\Repository\UserRepository */
     $repositoryAccounts = Doctrine::getRepository('LotgdCore:User');
-    $account            = $repositoryAccounts->processLoginGetAcctData($name, $password);
+    $account            = $repositoryAccounts->findOneByLogin($name);
 
     //-- Not found account
-    if ( ! $account)
+    if ( ! $account || ! $passwordEncoder->isPasswordValid($account, $password))
     {
         \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('login.incorrect', [], 'page_login'));
 
@@ -169,7 +158,15 @@ if ('' != $name)
         redirect('index.php');
     }
 
-    $session['user'] = $account;
+    //-- Rehash password if need
+    if ($passwordEncoder->needsRehash($account))
+    {
+        $repositoryAccounts->upgradePassword($account, $passwordEncoder->encodePassword($account, $password));
+    }
+
+    unset($password, $passwordEncoder);
+
+    $session['user'] = $repositoryAccounts->getUserById($account->getAcctid());
 
     \LotgdTool::checkBan($session['user']['login']); //check if this account is banned
 
