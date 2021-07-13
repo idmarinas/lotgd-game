@@ -60,8 +60,8 @@ class Motd extends AjaxAbstract
         try
         {
             $qb->select('u', 'c.name as motdauthorname')
-                ->leftJoin(\Lotgd\Core\Entity\Accounts::class, 'a', 'with', $qb->expr()->eq('a.acctid', 'u.motdauthor'))
-                ->leftJoin(\Lotgd\Core\Entity\Characters::class, 'c', 'with', $qb->expr()->eq('c.id', 'a.character'))
+                ->leftJoin('LotgdCore:User', 'a', 'with', $qb->expr()->eq('a.acctid', 'u.motdauthor'))
+                ->leftJoin('LotgdCore:Avatar', 'c', 'with', $qb->expr()->eq('c.id', 'a.avatar'))
                 ->orderBy('u.motddate', 'DESC')
             ;
 

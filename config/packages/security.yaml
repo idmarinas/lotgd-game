@@ -1,55 +1,55 @@
-# security:
-#     encoders:
-#         lotgd_old_encoder:
-#             id: Lotgd\Core\LotgdPasswordEncoder
-#         Lotgd\Core\Entity\User:
-#             algorithm: auto
-#             migrate_from: ['lotgd_old_encoder']
+security:
+    encoders:
+        lotgd_old_encoder:
+            id: Lotgd\Core\Security\Encoder\LotgdPasswordEncoder
+        Lotgd\Core\Entity\User:
+            algorithm: auto
+            migrate_from: ['lotgd_old_encoder']
 
-#     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-#     providers:
-#         lotgd_core_user_provider:
-#             entity:
-#                 class: Lotgd\Core\Entity\User
-#                 property: username
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        lotgd_core_user_provider:
+            entity:
+                class: Lotgd\Core\Entity\User
+                property: login
 
-#     firewalls:
-#         dev:
-#             pattern: ^/(_(profiler|wdt)|css|images|js)/
-#             security: false
-#         main:
-#             anonymous: lazy
-#             provider: lotgd_core_user_provider
-#             user_checker: Lotgd\Core\Security\UserChecker
-#             guard:
-#                 authenticators:
-#                     - Lotgd\Core\Security\LoginFormAuthenticator
-#             logout:
-#                 path: lotgd_core_logout
-#                 # where to redirect after logout
-#                 # target: app_any_route
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: lazy
+            provider: lotgd_core_user_provider
+    #         user_checker: Lotgd\Core\Security\UserChecker
+    #         guard:
+    #             authenticators:
+    #                 - Lotgd\Core\Security\LoginFormAuthenticator
+    #         logout:
+    #             path: lotgd_core_logout
+    #             # where to redirect after logout
+    #             # target: app_any_route
 
-#             # https://symfony.com/doc/current/security/remember_me.html
-#             remember_me:
-#                 secret: '%kernel.secret%'
-#                 lifetime: 604800 # 1 week in seconds
-#                 path: /
-#                 secure: true
-#                 httponly: true
-#                 samesite: strict
+    #         # https://symfony.com/doc/current/security/remember_me.html
+    #         remember_me:
+    #             secret: '%kernel.secret%'
+    #             lifetime: 604800 # 1 week in seconds
+    #             path: /
+    #             secure: true
+    #             httponly: true
+    #             samesite: strict
 
-#             # activate different ways to authenticate
-#             # https://symfony.com/doc/current/security.html#firewalls-authentication
+    #         activate different ways to authenticate
+    #         https://symfony.com/doc/current/security.html#firewalls-authentication
 
-#             # https://symfony.com/doc/current/security/impersonating_user.html
-#             # switch_user: true
+    #         https://symfony.com/doc/current/security/impersonating_user.html
+    #         switch_user: true
 
-#     # Easy way to control access for large sections of your site
-#     # Note: Only the *first* access control that matches will be used
-#     # access_control:
-#     #     - { path: ^/change-password, role: IS_AUTHENTICATED_REMEMBERED }
-#     #     - { path: ^/admin, roles: ROLE_ADMIN }
-#     #     - { path: ^/profile, roles: ROLE_USER }
-#     role_hierarchy:
-#         ROLE_ADMIN:       ROLE_USER
-#         ROLE_SUPER_ADMIN: ROLE_ADMIN
+    # # Easy way to control access for large sections of your site
+    # # Note: Only the *first* access control that matches will be used
+    # # access_control:
+    # #     - { path: ^/change-password, role: IS_AUTHENTICATED_REMEMBERED }
+    # #     - { path: ^/admin, roles: ROLE_ADMIN }
+    # #     - { path: ^/profile, roles: ROLE_USER }
+    # role_hierarchy:
+    #     ROLE_ADMIN:       ROLE_USER
+    #     ROLE_SUPER_ADMIN: ROLE_ADMIN

@@ -9,7 +9,7 @@ function systemmail($to, $subject, $body, $from = 0, $noemail = false)
     global $session;
 
     $repository     = \Doctrine::getRepository('LotgdCore:Mail');
-    $acctRepository = \Doctrine::getRepository('LotgdCore:Accounts');
+    $acctRepository = \Doctrine::getRepository('LotgdCore:User');
 
     $accountEntityTo = $acctRepository->find($to);
     $prefs           = $accountEntityTo->getPrefs();

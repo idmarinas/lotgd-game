@@ -1,153 +1,162 @@
 # Changes of LoTGD IDMarinas Edition
 
-Visit the [Wiki](https://github.com/idmarinas/lotgd-game/wiki) for more details.  
-Visit the [Documentation](https://idmarinas.github.io/lotgd-game/) for more details.  
-Visit the [README](https://github.com/idmarinas/lotgd-game/blob/migration/README.md).   
-Visit **_latest_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG.md)  
-Visit **_V2_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V2.md)  
-Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V3.md)  
-Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V4.md)  
+Visit the [Wiki](https://github.com/idmarinas/lotgd-game/wiki) for more details.
+Visit the [Documentation](https://idmarinas.github.io/lotgd-game/) for more details.
+Visit the [README](https://github.com/idmarinas/lotgd-game/blob/migration/README.md).
+Visit **_latest_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG.md)
+Visit **_V2_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V2.md)
+Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V3.md)
+Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V4.md)
 
-# Version: 5.5.0 
+# Version: 6.0.0
 
 ### :cyclone: CHANGES
 
--   This pages use a controller to render content of page
-    -   `public/forest.php` use controller `Lotgd\Core\Controller\ForestController`
--   **src/core/Twig/Extension/GameCore.php** Moved date time function to a new Twig Extension
--   **Entity Repositories** Moved to new location:
-    -   From `src/core/EntityRepository/` to `src/core/Repository/` 
-        -   Added transition classes in `src/core/EntityRepository/` to avoid BC, this clases will removed in version 6.0.0.
--   **Battle** 
-    -   Refactor Battle to use services. See `public/battle.php`
--   **THEME**
-    -   Updated Fomantic UI version: 2.8.7 => 2.8.8
+-   **BC** **Change entity Accounts to User**
+    -   Rename Entity `Lotgd\Core\Entity\Accounts` to `Lotgd\Core\Entity\User`. This is for preparing to Symfony App.
+        -   Removed some fields:
+            -   `translatorlanguages` It has no use in this version and in the latest versions either.
+            -   `beta` Feature of beta not is funcional, so no need this field. 
+        -   Renamed some fields:
+            -   `character` is now `avatar`. character and characters is a reserved word.
+-   **BC** **Change entity Characters to Avatar**
+    -   Rename Entity `Lotgd\Core\Entity\Characters` to `Lotgd\Core\Entity\Avatar`. character and characters is a reserved word.
+-   **Login/passwords** Change method to login and hashed password
+    -   Using aproach of Symfony hash password and use migrating for not break old passwords.
+    -   All new accounts use new password hash, and old accounts migrated to new hash when login.
+-   **Character Backup**
+    -   Add option to encrypt data when save to file.
+        -   `encrypt` key same structure of entities
+            ```php
+            [
+                // 'Entity:Name' => encrypt: true|false
+                'LotgdLocal:SensitiveEntity' => true,
+                'Lotgdcore:SensitiveEntity' => true
+            ]
+            ```
+            -   Use same name in entities and encrypt
+    -   **Updated character restore** for new Avatar and User entities
+        -   **Installer of version 6.0.0** Update old backups to new Avatar and User entity
 
 ### :star: FEATURES
 
--   **Theme/Template**
-    -   Add **Sonata Block Event** to some templates:
-        -   **themes/LotgdTheme/templates/_layout.html.twig** 
-            -   Add sonata block event `lotgd_core.paypal`  
-                -   Example of usage in `src/core/Service/PaypalButtons` and see service `lotgd_core.service.paypal.buttons` in `config/service.yaml`
-        -   Add new Sonata Block Events: 
-            -   **themes/LotgdTheme/templates/page/home.html.twig**
-                -   `lotgd.core.page.home.pre` avoid using `includeTemplatesPre` in `$params`
-                -   `lotgd.core.page.home.index` avoid using `includeTemplatesIndex` in `$params`
-                -   `lotgd.core.page.home.text` avoid using `hookHomeText` in `$params`
-                -   `lotgd.core.page.home.middle` avoid using `hookHomeMiddle` in `$params`
-                -   `lotgd.core.page.home.post` avoid using `includeTemplatesPost` in `$params`
--   **Page About** Add new section "Bundle Info" like "Module Info" but for Bundles
+-   Nothing
 
 ### :fire: DEPRECATED
 
--   **lib/battle/** All files and functions (removed in future version)
-    -   **lib/battle/buffs.php**
-        -   `activate_buffs` use `LotgdKernel::get('lotgd_core.combat.battle')->activateBuffs($tag)` instead
-        -   `process_lifetaps` use `LotgdKernel::get('lotgd_core.combat.battle')->processLifeTaps($ltaps, $damage)` instead
-        -   `process_dmgshield` use `LotgdKernel::get('lotgd_core.combat.battle')->processDmgShield($dshield, $damage)` instead
-        -   `expire_buffs` use `LotgdKernel::get('lotgd_core.combat.battle')->expireBuffs()` instead
-        -   `expire_buffs_afterbattle` use `LotgdKernel::get('lotgd_core.combat.battle')->expireBuffsAfterBattle()` instead
-    -   **lib/battle/extended.php**
-        -   `prepare_data_battlebars` use `LotgdKernel::get('lotgd_core.combat.battle')->prepareDataBattleBars($enemies)` instead
-        -   `prepare_fight` use `LotgdKernel::get('lotgd_core.combat.battle')->prepareFight($options)` instead
-        -   `prepare_companions` use `LotgdKernel::get('lotgd_core.combat.battle')->prepareCompanions()` instead
-        -   `suspend_companions` use `LotgdKernel::get('lotgd_core.combat.battle')->suspendCompanions($susp, $nomsg)` instead
-        -   `unsuspend_companions` use `LotgdKernel::get('lotgd_core.combat.battle')->unSuspendCompanions($susp, $nomsg)` instead
-        -   `autosettarget` use `LotgdKernel::get('lotgd_core.combat.battle')->autoSetTarget($localenemies)` instead
-        -   `report_companion_move` use `LotgdKernel::get('lotgd_core.combat.battle')->reportCompanionMove($companion, $activate)` instead
-        -   `rollcompaniondamage` use `LotgdKernel::get('lotgd_core.combat.battle')->rollCompanionDamage($companion)` instead
-        -   `battle_spawn` use `LotgdKernel::get('lotgd_core.combat.battle')->battleSpawn($creature)` instead
-        -   `battle_heal` use `LotgdKernel::get('lotgd_core.combat.battle')->battleHeal($amount, $target)` instead
-        -   `execute_ai_script` use `LotgdKernel::get('lotgd_core.combat.battle')->executeAiScript($script)` instead
-    -   **lib/battle/functions.php**
-        -   `battle_player_attacks` use `LotgdKernel::get('lotgd_core.combat.battle')->battlePlayerAttacks()` instead
-        -   `battle_badguy_attacks` use `LotgdKernel::get('lotgd_core.combat.battle')->battleBadguyAttacks()` instead
-        -   `battlevictory` use `LotgdKernel::get('lotgd_core.combat.battle')->battleVictory($enemies, $denyflawless, $forest)` instead
-        -   `battlegainexperienceforest` use `LotgdKernel::get('lotgd_core.combat.battle')->battleGainExperienceForest()` instead
-        -   `battlegainexperiencegraveyard` use `LotgdKernel::get('lotgd_core.combat.battle')->battleGainExperienceGraveyard()` instead
-        -   `battledefeat` use `LotgdKernel::get('lotgd_core.combat.battle')->battleDefeat($enemies, $where, $candie, $lostexp, $lostgold)` instead
-        -   `battleshowresults` use `LotgdKernel::get('lotgd_core.combat.battle')->battleShowResults($lotgdBattleContent)` instead
-    -   **lib/battle/skills.php**
-        -   `rolldamage` use `LotgdKernel::get('lotgd_core.combat.battle')->rollDamage()` instead
-        -   `report_power_move` use `LotgdKernel::get('lotgd_core.combat.battle')->reportPowerMove($crit, $dmg)` instead
-        -   `suspend_buffs` use `LotgdKernel::get('lotgd_core.combat.battle')->suspendBuffs($susp, $msg)` instead
-        -   `suspend_buff_by_name` use `"LotgdKernel::get('lotgd_core.combat.battle')->suspendBuffByName($name, $msg)` instead
-        -   `unsuspend_buff_by_name` use `LotgdKernel::get('lotgd_core.combat.battle')->unsuspendBuffByName($name, $msg)` instead
-        -   `is_buff_active` use `LotgdKernel::get('lotgd_core.combat.battle')->isBuffActive($name)` instead
-        -   `unsuspend_buffs` use `LotgdKernel::get('lotgd_core.combat.battle')->unsuspendBuffs($susp, $msg)` instead
-        -   `apply_bodyguard` use `LotgdKernel::get('lotgd_core.combat.battle')->applyBodyguard($level)` instead
-        -   `apply_skill` use `LotgdKernel::get('lotgd_core.combat.battle')->applySkill($skill, $l)` instead
--   **lib/buffs.php** All functions (removed in future version)
-    -   `calculate_buff_fields` use `LotgdKernel::get('lotgd_core.combat.buffer')->calculateBuffFields()` instead
-    -   `restore_buff_fields` use `LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields()` instead
-    -   `apply_buff` use `LotgdKernel::get('lotgd_core.combat.buffer')->applyBuff($name, $buff)` instead
-    -   `apply_companion` use `LotgdKernel::get('lotgd_core.combat.buffer')->applyCompanion($name, $companion, $ignorelimit)` instead
-    -   `strip_buff` use `LotgdKernel::get('lotgd_core.combat.buffer')->stripBuff($name)` instead
-    -   `strip_all_buffs` use `LotgdKernel::get('lotgd_core.combat.buffer')->stripAllBuffs()` instead
-    -   `has_buff` use `LotgdKernel::get('lotgd_core.combat.buffer')->hasBuff($name)` instead
--   **lib/tempstat.php** All functions (removed in future version)
-    -   `apply_temp_stat` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->applyTempStat($name, $value, $type)` instead
-    -   `check_temp_stat` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->checkTempStat($name, $color)` instead
-    -   `suspend_temp_stats` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->suspendTempStats()` instead
-    -   `restore_temp_stats` use `LotgdKernel::get('lotgd_core.combat.temp_stats')->restoreTempStats()` instead
--   **lib/fightnav.php** `fightnav` use `LotgdNavigation::fightNav($allowspecial, $allowflee, $script)` instead
--   **lib/datetime.php** All functions (removed in future version)
-    -   `checkday` use `LotgdKernel::get('lotgd_core.tool.date_time')->checkDay()` instead
-    -   `is_new_day` use `LotgdKernel::get('lotgd_core.tool.date_time')->isNewDay()` instead
-    -   `getgametime` use `LotgdKernel::get('lotgd_core.tool.date_time')->getGameTime()` instead
-    -   `gametime` use `LotgdKernel::get('lotgd_core.tool.date_time')->gameTime()` instead
-    -   `convertgametime` use `LotgdKernel::get('lotgd_core.tool.date_time')->convertGameTime($intime, $debug)` instead
-    -   `gametimedetails` use `LotgdKernel::get('lotgd_core.tool.date_time')->gameTimeDetails()` instead
-    -   `secondstonextgameday` use `LotgdKernel::get('lotgd_core.tool.date_time')->secondsToNextGameDay($details)` instead
--   **lib/increment_specialty.php** `increment_specialty` use `LotgdKernel::get('lotgd_core.tool.player_functions')->incrementSpecialty($colorcode, $spec)` instead
--   **lib/playerfunctions.php** All functions (removed in future version)
-    -   `get_player_hitpoints` use `LotgdKernel::get('lotgd_core.tool.player_functions')->getPlayerHitpoints($player)` instead
-    -   `explained_get_player_hitpoints` use `LotgdKernel::get('lotgd_core.tool.player_functions')->explainedGetPlayerHitpoints($player, $colored)` instead
-    -   `get_player_attack` use `LotgdKernel::get('lotgd_core.tool.player_functions')->getPlayerAttack($player)` instead
-    -   `explained_row_get_player_attack` use `LotgdKernel::get('lotgd_core.tool.player_functions')->explainedRowGetPlayerAttack($player)` instead
-    -   `explained_get_player_attack` use `LotgdKernel::get('lotgd_core.tool.player_functions')->explainedGetPlayerAttack($player, $colored)` instead
-    -   `get_player_defense` use `LotgdKernel::get('lotgd_core.tool.player_functions')->getPlayerDefense($player)` instead
-    -   `explained_row_get_player_defense` use `LotgdKernel::get('lotgd_core.tool.player_functions')->explainedRowGetPlayerDefense($player)` instead
-    -   `explained_get_player_defense` use `LotgdKernel::get('lotgd_core.tool.player_functions')->explainedGetPlayerDefense($player, $colored)` instead
-    -   `get_player_speed` use `LotgdKernel::get('lotgd_core.tool.player_functions')->getPlayerSpeed($player)` instead
-    -   `get_player_physical_resistance` use `LotgdKernel::get('lotgd_core.tool.player_functions')->getPlayerPhysicalResistance($player)` instead
--   **lib/creaturefunctions.php** All functions (removed in future version)
-    -   `lotgd_generate_creature_levels` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->lotgdGenerateCreatureLevels($level)` instead
-    -   `lotgd_generate_doppelganger` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->lotgdGenerateDoppelganger($level)` instead
-    -   `lotgd_transform_creature` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->lotgdTransformCreature($badguy, $debug)` instead
-    -   `lotgd_search_creature` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->lotgdSearchCreature($multi, $targetlevel, $mintargetlevel, $packofmonsters, $forest)` instead
-    -   `get_creature_stats` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->getCreatureStats($dk)` instead
-    -   `get_creature_hitpoints` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->getCreatureHitpoints($attrs)` instead
-    -   `get_creature_attack` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->getCreatureAttack($attrs)` instead
-    -   `get_creature_defense` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->getCreatureDefense($attrs)` instead
-    -   `get_creature_speed` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->getCreatureSpeed($attrs)` instead
-    -   `lotgd_show_debug_creature` use `LotgdKernel::get('lotgd_core.tool.creature_functions')->lotgdShowDebugCreature($badguy)` instead
--   **lib/settings.php** All functions (removed in future version)
-    -   `savesetting` use `LotgdSetting::saveSetting($settingname, $value)` instead
-    -   `clearsettings` use `LotgdSetting::clearSettings()` instead
-    -   `getsetting` use `LotgdSetting::getSetting($settingname, $default)` instead
-    -   `getallsettings` use `LotgdSetting::getAllSettings()` instead
+-   Nothing
 
 ### :wrench: FIXES
 
--   **themes/LotgdTheme/templates/page/_blocks/_newday.html.twig** Now pass mount name if mount give turns.
--   **public/images/logdnet.php** Fixed error with required file
--   **src/core/Controller/LogdnetController.php** 
-    -   Fix error, use correct path of image.
-    -   Fix: Not overwrite $response var (with response of http get client)
-    -   Fix: use $session var and not getUser() method
+-   Nothing
 
 ### :x: REMOVES
 
--   **BC** **Remove script of Cookie Consent** only need in EU territory, if you need can use one of this:
-    -   https://github.com/kiprotect/klaro
-    -   https://github.com/nucleos/NucleosGDPRBundle
-    -   https://github.com/osano/cookieconsent/
+-   **BC** **Remove deprecated**
+    -   **lib/addnews.php** Removed deprecated function `addnews`, removed file too.
+    -   **lib/battle/** Removed all files and functions 
+        -   **lib/battle/buffs.php**
+            -   `activate_buffs`
+            -   `process_lifetaps`
+            -   `process_dmgshield`
+            -   `expire_buffs`
+            -   `expire_buffs_afterbattle`
+        -   **lib/battle/extended.php**
+            -   `prepare_data_battlebars`
+            -   `prepare_fight`
+            -   `prepare_companions`
+            -   `suspend_companions`
+            -   `unsuspend_companions`
+            -   `autosettarget`
+            -   `report_companion_move`
+            -   `rollcompaniondamage`
+            -   `battle_spawn`
+            -   `battle_heal`
+            -   `execute_ai_script`
+        -   **lib/battle/functions.php**
+            -   `battle_player_attacks`
+            -   `battle_badguy_attacks`
+            -   `battlevictory`
+            -   `battlegainexperienceforest`
+            -   `battlegainexperiencegraveyard`
+            -   `battledefeat`
+            -   `battleshowresults`
+        -   **lib/battle/skills.php**
+            -   `rolldamage`
+            -   `report_power_move`
+            -   `suspend_buffs`
+            -   `suspend_buff_by_name`
+            -   `unsuspend_buff_by_name`
+            -   `is_buff_active`
+            -   `unsuspend_buffs`
+            -   `apply_bodyguard`
+            -   `apply_skill`
+    -   **lib/charcleanup.php** Removed deprecated function `char_cleanup`, removed file too.
+    -   **lib/checkban.php** Removed deprecated function `checkban`, removed file too.
+    -   **lib/creaturefunctions.php** Removed file and functions:
+        -   `lotgd_generate_creature_levels`
+        -   `lotgd_generate_doppelganger`
+        -   `lotgd_transform_creature`
+        -   `lotgd_search_creature`
+        -   `get_creature_stats`
+        -   `get_creature_hitpoints`
+        -   `get_creature_attack`
+        -   `get_creature_defense`
+        -   `get_creature_speed`
+        -   `lotgd_show_debug_creature`
+    -   **lib/buffs.php** Removed all files and functions 
+        -   `calculate_buff_fields`
+        -   `restore_buff_fields`
+        -   `apply_buff`
+        -   `apply_companion`
+        -   `strip_buff`
+        -   `strip_all_buffs`
+        -   `has_buff`
+    -   **lib/datetime.php** Remove file and functions
+        -   `checkday`
+        -   `is_new_day`
+        -   `getgametime`
+        -   `gametime`
+        -   `convertgametime`
+        -   `gametimedetails`
+        -   `secondstonextgameday`
+    -   **lib/deathmessage.php** Removed deprecated function `select_deathmessage`, removed file too.
+    -   **lib/debuglog.php** Removed deprecated function `debuglog`, removed file too.
+    -   **lib/experience.php** Removed deprecated function `exp_for_next_level`, removed file too.
+    -   **lib/fightnav.php** Removed deprecated function `fightnav`, removed file too.
+    -   **lib/forestoutcomes.php** Removed deprecated function `buffbadguy`, removed file too.
+    -   **lib/gamelog.php** Removed deprecated function `gamelog`, removed file too.
+    -   **lib/increment_specialty.php** Removed deprecated function `increment_specialty`, removed file too.
+    -   **lib/playerfunctions.php** Removed all functions and file
+        -   `get_player_hitpoints`
+        -   `explained_get_player_hitpoints`
+        -   `get_player_attack`
+        -   `explained_row_get_player_attack`
+        -   `explained_get_player_attack`
+        -   `get_player_defense`
+        -   `explained_row_get_player_defense`
+        -   `explained_get_player_defense`
+        -   `get_player_speed`
+        -   `get_player_physical_resistance`
+    -   **lib/saveuser.php** Removed deprecated function `saveuser`, removed file too.
+    -   **lib/settings.php** Removed all functions and file
+        -   `savesetting`
+        -   `clearsettings`
+        -   `getsetting`
+        -   `getallsettings`
+    -   **lib/substitute.php** Removed all functions and file
+        -   `substitute`
+        -   `substitute_array`
+    -   **lib/taunt.php** Removed deprecated function `select_taunt`, removed file too.
+    -   **lib/tempstat.php** Removed all functions and file
+        -   `apply_temp_stat`
+        -   `check_temp_stat`
+        -   `suspend_temp_stats`
+        -   `restore_temp_stats`
+    -   **src/core/EntityRepository/** Removed deprecated classes in folder. Use `Lotgd\Core\Repository\**`
 
 ### :notebook: NOTES
 
--   Make some optimizations in files. (Code Smell/Duplicated)
 -   **Important**:
     -   :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
     -   :warning: Avoid, as far as possible, using static classes (e.g. LotgdSetting, Doctrine, LotgdTranslation...) as these classes will be deleted in a future version. Use autowire, dependency injection when possible.

@@ -156,7 +156,6 @@ function charstats($return = true)
         }
         reset($session['bufflist']);
 
-        require_once 'lib/playerfunctions.php';
         $oAtk              = $atk              = $playerFunctions->getPlayerAttack(); //Original Attack
         $oDef              = $def              = $playerFunctions->getPlayerDefense(); //Original Defense
         $spd               = $playerFunctions->getPlayerSpeed();
@@ -384,7 +383,7 @@ function charstats($return = true)
 
             if (\Doctrine::isConnected())
             {
-                $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+                $repository = \Doctrine::getRepository('LotgdCore:User');
                 $onlinecount = $repository->count(['loggedin' => '1', 'locked' => '0']);
             }
 

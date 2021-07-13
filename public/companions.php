@@ -81,8 +81,6 @@ elseif ('take' == $op)
         \LotgdEventDispatcher::dispatch($row, Other::COMPANION_ALTER);
         $row = modulehook('alter-companion', $row->getData());
 
-        require_once 'lib/buffs.php';
-
         $message = 'flash.message.take.fail';
         $paramsMessage = [];
         if (\LotgdKernel::get('lotgd_core.combat.buffer')->applyCompanion($row['name'], $row))

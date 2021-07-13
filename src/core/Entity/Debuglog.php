@@ -25,7 +25,7 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="field", columns={"actor", "field"})
  *     }
  * )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\DebuglogRepository")
  */
 class Debuglog
 {

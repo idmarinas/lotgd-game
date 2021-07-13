@@ -7,9 +7,7 @@
 use Lotgd\Core\Event\Character;
 
 require_once 'lib/pvpwarning.php';
-require_once 'lib/substitute.php';
 require_once 'lib/systemmail.php';
-require_once 'lib/datetime.php';
 
 /**
  * This contains functions to support pvp.
@@ -23,7 +21,7 @@ function setup_pvp_target(int $characterId)
     $pvptime    = LotgdSetting::getSetting('pvptimeout', 600);
     $pvptimeout = \date('Y-m-d H:i:s', \strtotime("-{$pvptime} seconds"));
 
-    $repository = \Doctrine::getRepository('LotgdCore:Characters');
+    $repository = \Doctrine::getRepository('LotgdCore:Avatar');
     $entity     = $repository->extractEntity($repository->getCharacterForPvp($characterId));
 
     $message = 'flash.message.pvp.start.not.found';
@@ -80,7 +78,7 @@ function pvpvictory($badguy, $killedloc)
     global $session, $lotgdBattleContent, $textDomain;
 
     // If the victim has logged on and banked some, give the lessor of the gold amounts.
-    $repository = \Doctrine::getRepository('LotgdCore:Characters');
+    $repository = \Doctrine::getRepository('LotgdCore:Avatar');
     $character  = $repository->find($badguy['character_id']);
 
     $badguy['creaturegold'] = ($character->getGold() > (int) $badguy['creaturegold'] ? (int) $badguy['creaturegold'] : $character->getGold());
@@ -235,7 +233,7 @@ function pvpdefeat($badguy, $killedloc)
         $winamount = 0;
     }
 
-    $repository = \Doctrine::getRepository('LotgdCore:Characters');
+    $repository = \Doctrine::getRepository('LotgdCore:Avatar');
     $character  = $repository->find($badguy['character_id']);
 
     $wonexp = \round($session['user']['experience'] * LotgdSetting::getSetting('pvpdefgain', 10) / 100, 0);

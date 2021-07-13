@@ -35,13 +35,13 @@ if ('searchban' == $op && $target)
 {
     $params['showing'] = ['removeban.showing.search', ['name' => $target]];
 
-    $repositoryChar = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
+    $repositoryChar = \Doctrine::getRepository('LotgdCore:Avatar');
     $query          = $repositoryChar->createQueryBuilder('u');
     $expr           = $query->expr();
 
     $query->select('b')
         ->join(
-            \Lotgd\Core\Entity\Accounts::class,
+            'LotgdCore:User',
             'a',
             \Doctrine\ORM\Query\Expr\Join::WITH,
             $expr->eq('a.acctid', 'u.acct')

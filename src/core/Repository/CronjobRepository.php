@@ -18,9 +18,9 @@ use Tracy\Debugger;
 
 class CronjobRepository extends DoctrineRepository
 {
-    use Character\Bio;
-    use Character\Clan;
-    use Character\Setting;
+    use Avatar\Bio;
+    use Avatar\Clan;
+    use Avatar\Setting;
 
     /**
      * Get character's name from an account ID.

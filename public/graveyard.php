@@ -8,7 +8,6 @@ use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/buffs.php';
 require_once 'lib/events.php';
 
 // Don't hook on to this text for your standard modules please, use "graveyard" instead.
@@ -132,8 +131,6 @@ if ($battle)
     }
     else
     {
-        require_once 'lib/fightnav.php';
-
         LotgdNavigation::fightNav(false, true, 'graveyard.php');
     }
 }
@@ -245,7 +242,7 @@ elseif ('haunt2' == $op)
 
     $name = (string) \LotgdRequest::getPost('name');
 
-    $repository = \Doctrine::getRepository('LotgdCore:Characters');
+    $repository = \Doctrine::getRepository('LotgdCore:Avatar');
     $params['characters'] = $repository->findLikeName("%{$name}%", 100);
 }
 elseif ('haunt3' == $op)
@@ -272,7 +269,7 @@ elseif ('haunt3' == $op)
 
     $characterId = (int) \LotgdRequest::getQuery('charid');
 
-    $repository = \Doctrine::getRepository('LotgdCore:Characters');
+    $repository = \Doctrine::getRepository('LotgdCore:Avatar');
     $params['character'] = $repository->find($characterId);
 
     $params['haunted'] = false;

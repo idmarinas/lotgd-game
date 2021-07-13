@@ -25,7 +25,7 @@ if ($ret)
     $return = trim($return, '/');
 }
 
-$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
+$repository = \Doctrine::getRepository('LotgdCore:User');
 
 //-- Legacy support
 if (! \is_numeric($char))

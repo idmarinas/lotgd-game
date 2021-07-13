@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\EntityForm;
 
-use Lotgd\Core\Entity\Characters;
+use Lotgd\Core\Entity\Avatar;
 use Lotgd\Core\Form\Type\ClanRankType;
 use Lotgd\Core\Form\Type\RaceType;
 use Lotgd\Core\Form\Type\SpecialtyType;
@@ -45,7 +45,7 @@ class CharactersType extends AbstractType
         $builder
             ->add('acct', EntityType::class, [
                 'label'        => 'char.acct',
-                'class'        => 'LotgdCore:Accounts',
+                'class'        => 'LotgdCore:User',
                 'choice_value' => 'acctid',
                 'choice_label' => function ($account)
                 {
@@ -210,7 +210,7 @@ class CharactersType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'         => Characters::class,
+            'data_class'         => Avatar::class,
             'translation_domain' => 'form_core_account',
         ]);
     }

@@ -7,7 +7,7 @@ require_once 'common.php';
 
 $search = (string) \LotgdRequest::getQuery('search');
 
-$repository = \Doctrine::getRepository('LotgdCore:Characters');
+$repository = \Doctrine::getRepository('LotgdCore:Avatar');
 
 $result = $repository->findLikeName($search, 15);
 

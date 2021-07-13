@@ -68,7 +68,6 @@ class TranslatableFieldType extends AbstractType
         $resolver->setDefaults([
             'remove_empty'           => true, //Personal Translations without content are removed
             'property_path'          => 'translations',
-            'csrf_protection'        => false,
             'personal_translation'   => false, //Personal Translation class
             'locales'                => explode(',', $this->settings->getSetting('serverlanguages')), //the locales you wish to edit
             'required_locale'        => [$this->settings->getSetting('defaultlanguage')], //the required locales cannot be blank

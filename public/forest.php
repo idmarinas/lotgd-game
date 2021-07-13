@@ -8,10 +8,7 @@ use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/fightnav.php';
-require_once 'lib/taunt.php';
 require_once 'lib/events.php';
-require_once 'lib/battle/skills.php';
 
 // Don't hook on to this text for your standard modules please, use "forest" instead.
 // This hook is specifically to allow modules that do other forests to create ambience.
@@ -60,8 +57,6 @@ if ('dragon' == $op)
 elseif ('search' == $op)
 {
     \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
-
-    require_once 'lib/forestoutcomes.php';
 
     if ($session['user']['turns'] <= 0)
     {

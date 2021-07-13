@@ -61,8 +61,8 @@ class CreateController extends AbstractController
 
     public function forgotVal(array $params, Request $request): Response
     {
-        /** @var Lotgd\Core\Repository\AccountsRepository */
-        $accountRepo   = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Accounts::class);
+        /** @var Lotgd\Core\Repository\UserRepository */
+        $accountRepo   = $this->getDoctrine()->getRepository('LotgdCore:User');
         $forgottenCode = $request->query->getInt('id');
 
         $account = $accountRepo->findOneBy(['forgottenpassword' => $forgottenCode]);
@@ -99,8 +99,8 @@ class CreateController extends AbstractController
 
     public function val(array $params, Request $request): Response
     {
-        /** @var Lotgd\Core\Repository\AccountsRepository */
-        $accountRepo = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Accounts::class);
+        /** @var Lotgd\Core\Repository\UserRepository */
+        $accountRepo = $this->getDoctrine()->getRepository('LotgdCore:User');
         $code        = $request->query->getInt('id');
 
         $account = $accountRepo->findOneBy(['emailvalidation' => $code]);
@@ -164,7 +164,7 @@ class CreateController extends AbstractController
         $params['account'] = $account;
 
         $this->settings->saveSetting('newestplayer', $account->getAcctid());
-        $this->settings->saveSetting('newestplayername', $account->getCharacter()->getName());
+        $this->settings->saveSetting('newestplayername', $account->getAvatar()->getName());
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_CREATE_VAL);
@@ -175,7 +175,7 @@ class CreateController extends AbstractController
 
     public function forgot(array $params, Request $request): Response
     {
-        $accountRepo = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Accounts::class);
+        $accountRepo = $this->getDoctrine()->getRepository('LotgdCore:User');
         $charname    = (string) $request->request->get('charname', '');
 
         if ($charname)
@@ -231,7 +231,7 @@ class CreateController extends AbstractController
     {
         if ('create' == $request->query->get('op'))
         {
-            $accountRepo = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Accounts::class);
+            $accountRepo = $this->getDoctrine()->getRepository('LotgdCore:User');
 
             $emailverification = '';
             $shortname         = trim((string) $request->request->get('name'));
@@ -347,7 +347,7 @@ class CreateController extends AbstractController
                 try
                 {
                     //-- Configure account
-                    $accountEntity = new \Lotgd\Core\Entity\Accounts();
+                    $accountEntity = new \Lotgd\Core\Entity\User();
                     $accountEntity->setLogin((string) $shortname)
                         ->setPassword((string) $dbpass)
                         ->setSuperuser((int) $this->settings->getSetting('defaultsuperuser', 0))
@@ -364,7 +364,7 @@ class CreateController extends AbstractController
                     $this->getDoctrine()->getManager()->flush(); //Persist objects
 
                     //-- Configure character
-                    $characterEntity = new \Lotgd\Core\Entity\Characters();
+                    $characterEntity = new \Lotgd\Core\Entity\Avatar();
                     $characterEntity->setPlayername((string) $shortname)
                         ->setSex($sex)
                         ->setName("{$title} {$shortname}")
@@ -379,7 +379,7 @@ class CreateController extends AbstractController
                     $this->getDoctrine()->getManager()->flush(); //-- Persist objects
 
                     //-- Set ID of character and update Account
-                    $accountEntity->setCharacter($characterEntity);
+                    $accountEntity->setAvatar($characterEntity);
                     $this->getDoctrine()->getManager()->persist($accountEntity);
                     $this->getDoctrine()->getManager()->flush(); //-- Persist objects
 

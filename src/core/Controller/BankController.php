@@ -63,7 +63,7 @@ class BankController extends AbstractController
         $params['to']     = $to;
 
         /** @var Lotgd\Core\Repository\CharactersRepository */
-        $repository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Characters::class);
+        $repository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
         $characters = $repository->findLikeName("%{$to}%", 100);
 
         $params['characters'] = $characters;
@@ -99,7 +99,7 @@ class BankController extends AbstractController
         }
         elseif (($session['user']['gold'] + $session['user']['goldinbank']) >= $amt)
         {
-            $repository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Characters::class);
+            $repository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
             $result     = $repository->find($to);
 
             $params['transferred'] = 0;

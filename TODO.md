@@ -10,8 +10,13 @@
     -   A partir de la versión **5.0.0** se empezará a usar un sistema de módulos tipo Bundle
 
 
-# Actualmente haciendo esto (5.5.0)
+# Actualmente haciendo esto (6.0.0)
 
+-   Revisar los backups de cuentas y personajes (ahora es user y avatar)
+-   Comprobar si se puede cambiar el método de encriptación de la contraseña por algo similar a lo que hace symphony
+-   Se crea un nuevos sistema de batalla, usando service para poder personalizarlo.
+    -   Se creará un Event para esto
+-   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   Sustituir la función lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
         -   Use `Symfony mailer` instead.
@@ -20,6 +25,14 @@
         -   El panel de administración del juego se va a sustituir por **Sonata Admin**
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
+
+
+## Para la versión 7.0.0
+
+-   Se fusiona todos los installer a uno nuevo como clean version
+    -   El installer de la versión 6.0.0 depende de laminas/laminas-serializer
+        -   Es en el único sitio donde se utiliza este componente
+-   Eliminar paquete laminas/laminas-serializer
 
 
 # Módulos

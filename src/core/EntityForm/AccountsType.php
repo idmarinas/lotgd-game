@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\EntityForm;
 
-use Lotgd\Core\Entity\Accounts;
+use Lotgd\Core\Entity\User;
 use Lotgd\Core\Form\Type\BitFieldType;
 use Lotgd\Core\Form\Type\DateTimeType;
 use Symfony\Component\Form\AbstractType;
@@ -134,7 +134,7 @@ class AccountsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'         => Accounts::class,
+            'data_class'         => User::class,
             'translation_domain' => 'form_core_account',
         ]);
     }

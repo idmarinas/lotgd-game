@@ -25,8 +25,8 @@ class Bans extends AjaxAbstract
 
         try
         {
-            $query = \Doctrine::createQuery("SELECT c.name FROM Lotgd\Core\Entity\Bans b, Lotgd\Core\Entity\Accounts a
-            LEFT JOIN Lotgd\Core\Entity\Characters c WITH c.acct = a.acctid
+            $query = \Doctrine::createQuery("SELECT c.name FROM Lotgd\Core\Entity\Bans b, LotgdCore:User a
+            LEFT JOIN LotgdCore:Avatar c WITH c.acct = a.acctid
             WHERE
                 (b.ipfilter = :ip AND b.uniqueid = :id) AND
                 ( (substring(a.lastip,1,length(b.ipfilter)) = b.ipfilter AND b.ipfilter != '') OR (a.uniqueid = b.uniqueid AND b.uniqueid != '') )

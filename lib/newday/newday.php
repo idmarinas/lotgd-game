@@ -241,7 +241,6 @@ if ($session['user']['hauntedby'] > '')
     $session['user']['hauntedby'] = '';
 }
 
-require_once 'lib/battle/extended.php';
 LotgdKernel::get('lotgd_core.combat.battle')->unSuspendCompanions('allowinshades');
 
 //-- Run new day if not run by cronjob

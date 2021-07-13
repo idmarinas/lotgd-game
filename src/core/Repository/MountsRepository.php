@@ -30,7 +30,7 @@ class MountsRepository extends DoctrineRepository
             $query->select('u.mountid', 'u.mountname', 'u.mountactive', 'u.mountcategory', 'u.mountforestfights', 'u.mountdkcost', 'u.mountcostgems', 'u.mountcostgold')
                 ->addSelect('count(c.hashorse) AS owners')
 
-                ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.hashorse', 'u.mountid'))
+                ->leftJoin('LotgdCore:Avatar', 'c', 'WITH', $query->expr()->eq('c.hashorse', 'u.mountid'))
 
                 ->groupBy('u.mountid')
             ;
@@ -56,7 +56,7 @@ class MountsRepository extends DoctrineRepository
     {
         try
         {
-            $query = $this->_em->createQuery("UPDATE LotgdCore:Characters u SET u.gems = u.gems+?2, u.goldinbank = u.goldinbank+?3, u.hashorse = '0' WHERE u.hashorse = ?1");
+            $query = $this->_em->createQuery("UPDATE LotgdCore:Avatar u SET u.gems = u.gems+?2, u.goldinbank = u.goldinbank+?3, u.hashorse = '0' WHERE u.hashorse = ?1");
 
             $query->setParameter(1, $entity->getMountid())
                 ->setParameter(2, $entity->getMountcostgems())

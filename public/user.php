@@ -8,7 +8,6 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
 require_once 'lib/showform.php';
-require_once 'lib/datetime.php';
 require_once 'lib/names.php';
 
 check_su_access(SU_EDIT_USERS);
@@ -31,7 +30,7 @@ $textDomain = 'grotto_user';
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);
 
-$repository = \Doctrine::getRepository('LotgdCore:Accounts');
+$repository = \Doctrine::getRepository('LotgdCore:User');
 
 $returnpetition = $petition ? "&returnpetition={$petition}" : '';
 $params         = [
@@ -58,8 +57,6 @@ if ('edit' == $op)
 
 if ('del' == $op)
 {
-    require_once 'lib/charcleanup.php';
-
     $account = $repository->find($userId);
 
     if ($account)
@@ -73,9 +70,9 @@ if ('del' == $op)
 
         if (\LotgdKernel::get('lotgd.core.backup')->characterCleanUp($userId, CHAR_DELETE_MANUAL))
         {
-            \LotgdTool::addNews('news.account.delete', ['playerName' => $account->getCharacter()->getName()], $textDomain, true);
+            \LotgdTool::addNews('news.account.delete', ['playerName' => $account->getAvatar()->getName()], $textDomain, true);
 
-            \LotgdLog::debug("Deleted account {$account->getCharacter()->getName()}");
+            \LotgdLog::debug("Deleted account {$account->getAvatar()->getName()}");
         }
     }
 }
@@ -103,19 +100,19 @@ elseif ('special' == $op)
 
     if ('' != \LotgdRequest::getPost('newday'))
     {
-        $character = $accountEntity->getCharacter();
+        $character = $accountEntity->getAvatar();
         $character->setLasthit(new \DateTime('0000-00-00 00:00:00'));
-        $accountEntity->setCharacter($character);
+        $accountEntity->setAvatar($character);
 
         \Doctrine::persist($character);
     }
     elseif ('' != \LotgdRequest::getPost('fixnavs'))
     {
-        $character = $accountEntity->getCharacter();
+        $character = $accountEntity->getAvatar();
         $character->setAllowednavs([])
             ->setSpecialinc('')
         ;
-        $accountEntity->setCharacter($character);
+        $accountEntity->setAvatar($character);
 
         \Doctrine::persist($character);
         $outputRepository = \Doctrine::getRepository('LotgdCore:AccountsOutput');
@@ -183,10 +180,10 @@ elseif ('save' == $op)
         }
     }
 
-    $characterRepository = \Doctrine::getRepository('LotgdCore:Characters');
+    $characterRepository = \Doctrine::getRepository('LotgdCore:Avatar');
 
     $accountEntity   = $repository->find($userId);
-    $characterEntity = $characterRepository->find($accountEntity->getCharacter()->getId());
+    $characterEntity = $characterRepository->find($accountEntity->getAvatar()->getId());
 
     $accountEntity   = $repository->hydrateEntity($postValues, $accountEntity);
     $characterEntity = $characterRepository->hydrateEntity($postValues, $characterEntity);
@@ -280,10 +277,10 @@ switch ($op)
         {
             $lotgdFormFactory = \LotgdKernel::get('form.factory');
             $type                = (string) \LotgdRequest::getQuery('type') ?: 'acct';
-            $characterRepository = \Doctrine::getRepository('LotgdCore:Characters');
+            $characterRepository = \Doctrine::getRepository('LotgdCore:Avatar');
 
             $accountEntity   = $repository->find($userId);
-            $characterEntity = $characterRepository->find($accountEntity->getCharacter()->getId());
+            $characterEntity = $characterRepository->find($accountEntity->getAvatar()->getId());
 
             $class  = 'acct' == $type ? \Lotgd\Core\EntityForm\AccountsType::class : \Lotgd\Core\EntityForm\CharactersType::class;
             $entity = 'acct' == $type ? $accountEntity : $characterEntity;
@@ -395,8 +392,8 @@ switch ($op)
 
         $query->select('u.id', 'u.date', 'u.actor', 'u.target', 'u.message', 'u.field', 'u.value')
             ->addSelect('c.name AS actorName', 'c2.name AS targetName')
-            ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.acct', 'u.actor'))
-            ->leftJoin('LotgdCore:Characters', 'c2', 'WITH', $query->expr()->eq('c2.acct', 'u.target'))
+            ->leftJoin('LotgdCore:Avatar', 'c', 'WITH', $query->expr()->eq('c.acct', 'u.actor'))
+            ->leftJoin('LotgdCore:Avatar', 'c2', 'WITH', $query->expr()->eq('c2.acct', 'u.target'))
             ->where('u.actor = :acct OR u.target = :acct')
 
             ->orderBy('u.date', 'DESC')

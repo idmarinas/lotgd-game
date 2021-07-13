@@ -1,7 +1,5 @@
 <?php
 
-    require_once 'lib/gamelog.php';
-
     //- Clean up referer entries
     $repository = \Doctrine::getRepository('LotgdCore:Referers');
     $result     = $repository->deleteExpireReferers(60);

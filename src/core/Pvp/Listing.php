@@ -98,7 +98,7 @@ class Listing
             $pvpSameIp = (bool) $this->settings->getSetting('pvpsameip', 0);
 
             /** @var \Lotgd\Core\Repository\CharactersRepository */
-            $this->repository = $this->doctrine->getRepository('LotgdCore:Characters');
+            $this->repository = $this->doctrine->getRepository('LotgdCore:Avatar');
             $this->query      = $this->repository->createQueryBuilder('u');
             $expr             = $this->query->expr();
 
@@ -106,7 +106,7 @@ class Listing
                 ->addSelect('a.acctid', 'a.loggedin', 'a.login', 'a.laston')
                 ->addSelect('c.clanshort', 'c.clanname')
 
-                ->leftJoin('LotgdCore:Accounts', 'a', 'WITH', $expr->eq('a.acctid', 'u.acct'))
+                ->leftJoin('LotgdCore:User', 'a', 'WITH', $expr->eq('a.acctid', 'u.acct'))
                 ->leftJoin('LotgdCore:Clans', 'c', 'WITH', $expr->eq('c.clanid', 'u.clanid'))
 
                 ->where('a.acctid != :acct')

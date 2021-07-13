@@ -31,7 +31,7 @@ elseif ('id' == $type && \LotgdRequest::getCookie('lgi') == $valueId)
 if ($process)
 {
     $repository     = \Doctrine::getRepository(\Lotgd\Core\Entity\Bans::class);
-    $repositoryAcct = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
+    $repositoryAcct = \Doctrine::getRepository('LotgdCore:User');
     $entity         = new \Lotgd\Core\Entity\Bans();
 
     $entity->setBanner($session['user']['name'])

@@ -4,19 +4,18 @@
 // addnews ready
 // translator ready
 
+use Lotgd\Core\Controller\LoginController;
 use Lotgd\Core\Event\Core;
 
 \define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
 require_once 'lib/systemmail.php';
-require_once 'lib/checkban.php';
 require_once 'lib/serverfunctions.class.php';
 
 $op    = (string) \LotgdRequest::getQuery('op');
 $name  = (string) \LotgdRequest::getPost('name');
 $iname = (string) LotgdSetting::getSetting('innname', LOCATION_INN);
-$vname = (string) LotgdSetting::getSetting('villagename', LOCATION_FIELDS);
 $force = \LotgdRequest::getPost('force');
 
 if ('' != $name)
@@ -36,30 +35,19 @@ if ('' != $name)
         redirect('home.php');
     }
 
-    $password = \stripslashes((string) \LotgdRequest::getPost('password'));
-
-    if ('!md5!' == \substr($password, 0, 5))
-    {
-        $password = \md5(\substr($password, 5));
-    }
-    elseif ('!md52!' == \substr($password, 0, 6) && 38 == \strlen($password) && $force)
-    {
-        $password = \substr($password, 6);
-        $password = \preg_replace('/[^a-f0-9]/', '', $password);
-    }
-    else
-    {
-        $password = \md5(\md5($password));
-    }
-
     \LotgdTool::checkBan(); //check if this computer is banned
 
+    /** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder */
+    $passwordEncoder = \LotgdKernel::get('security.password_encoder');
+    $password = \LotgdRequest::getPost('password');
+
     //-- Using Doctrine repository to process login
-    $repositoryAccounts = Doctrine::getRepository(Lotgd\Core\Entity\Accounts::class);
-    $account            = $repositoryAccounts->processLoginGetAcctData($name, $password);
+    /** @var Lotgd\Core\Repository\UserRepository */
+    $repositoryAccounts = Doctrine::getRepository('LotgdCore:User');
+    $account            = $repositoryAccounts->findOneByLogin($name);
 
     //-- Not found account
-    if ( ! $account)
+    if ( ! $account || ! $passwordEncoder->isPasswordValid($account, $password))
     {
         \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('login.incorrect', [], 'page_login'));
 
@@ -101,7 +89,7 @@ if ('' != $name)
                 $query->select('u.ip', 'u.date', 'u.id', 'a.superuser', 'a.login')
                     ->from('LotgdCore:Faillog', 'u')
 
-                    ->join('LotgdCore:Accounts', 'a', 'with', $expr->eq('a.acctid', 'u.acctid'))
+                    ->join('LotgdCore:User', 'a', 'with', $expr->eq('a.acctid', 'u.acctid'))
 
                     ->where('u.ip = :ip AND u.date > :date')
 
@@ -170,7 +158,15 @@ if ('' != $name)
         redirect('index.php');
     }
 
-    $session['user'] = $account;
+    //-- Rehash password if need
+    if ($passwordEncoder->needsRehash($account))
+    {
+        $repositoryAccounts->upgradePassword($account, $passwordEncoder->encodePassword($account, $password));
+    }
+
+    unset($password, $passwordEncoder);
+
+    $session['user'] = $repositoryAccounts->getUserById($account->getAcctid());
 
     \LotgdTool::checkBan($session['user']['login']); //check if this account is banned
 
@@ -234,36 +230,7 @@ if ('' != $name)
 }
 elseif ('logout' == $op)
 {
-    if ($session['user']['loggedin'])
-    {
-        $session['user']['restorepage'] = 'news.php';
-        if ($session['user']['superuser'] & (0xFFFFFFFF & ~SU_DOESNT_GIVE_GROTTO))
-        {
-            $session['user']['restorepage'] = 'superuser.php';
-        }
-        elseif ($session['user']['location'] == $iname)
-        {
-            $session['user']['restorepage'] = 'inn.php?op=strolldown';
-        }
-
-        $session['user']['loggedin'] = false;
-
-        \LotgdKernel::get('cache.app')->delete('char-list-home-page');
-
-        // Let's throw a logout module hook in here so that modules
-        // like the stafflist which need to invalidate the cache
-        // when someone logs in or off can do so.
-        \LotgdEventDispatcher::dispatch(new Core(), Core::LOGOUT_PLAYER);
-        modulehook('player-logout');
-        \LotgdTool::saveUser();
-
-        \LotgdSession::invalidate();
-
-        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('logout.success', [], 'page_login'));
-    }
-    $session = [];
-
-    redirect('index.php');
+    \LotgdResponse::callController(LoginController::class, 'logout');
 }
 
 //- If you enter an empty username, don't just say oops.. do something useful.

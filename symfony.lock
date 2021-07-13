@@ -151,6 +151,9 @@
     "jms/serializer": {
         "version": "3.12.3"
     },
+    "kitlabs/kit-crypt-bundle": {
+        "version": "v3.1.0"
+    },
     "laminas/laminas-code": {
         "version": "3.5.1"
     },
@@ -615,6 +618,9 @@
     },
     "symfony/property-access": {
         "version": "v4.4.20"
+    },
+    "symfony/property-info": {
+        "version": "v4.4.25"
     },
     "symfony/proxy-manager-bridge": {
         "version": "v4.4.18"

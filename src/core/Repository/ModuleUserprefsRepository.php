@@ -16,7 +16,7 @@ namespace Lotgd\Core\Repository;
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Tracy\Debugger;
 
-class ModuleUserprefsRepository extends DoctrineRepository
+class ModuleUserprefsRepository extends DoctrineRepository implements RepositoryBackupInterface
 {
     use ModuleUserprefs\Backup;
 

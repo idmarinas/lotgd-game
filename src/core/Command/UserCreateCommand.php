@@ -14,7 +14,7 @@
 namespace Lotgd\Core\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Lotgd\Core\Repository\AccountsRepository;
+use Lotgd\Core\Repository\UserRepository;
 use Lotgd\Core\Lib\Settings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -89,7 +89,7 @@ final class UserCreateCommand extends Command
         try
         {
             //-- Configure account
-            $account = new \Lotgd\Core\Entity\Accounts();
+            $account = new \Lotgd\Core\Entity\User();
             $account->setLogin($login)
                 ->setPassword($password)
                 ->setEmailaddress($email)
@@ -102,7 +102,7 @@ final class UserCreateCommand extends Command
 
             //-- Configure character
             $title     = $this->getCharacterTitle();
-            $character = new \Lotgd\Core\Entity\Characters();
+            $character = new \Lotgd\Core\Entity\Avatar();
             $character->setPlayername($login)
                 ->setName("{$title} {$login}")
                 ->setTitle($title)
@@ -126,7 +126,7 @@ final class UserCreateCommand extends Command
             $this->doctrine->flush(); //-- Persist objects
 
             //-- Set ID of character and update Account
-            $account->setCharacter($character);
+            $account->setAvatar($character);
             $this->doctrine->persist($account);
             $this->doctrine->flush(); //-- Persist objects
         }
@@ -253,7 +253,7 @@ final class UserCreateCommand extends Command
 
     private function getIsAdmin(InputInterface $input, OutputInterface $output): bool
     {
-        /** @var Lotgd\Core\Repository\AccountsRepository */
+        /** @var Lotgd\Core\Repository\UserRepository */
         $superusers = (bool) $this->getAccountRepository()->getSuperuserCountWithPermit(SU_MEGAUSER);
 
         if ($superusers)
@@ -297,11 +297,11 @@ final class UserCreateCommand extends Command
         return '';
     }
 
-    private function getAccountRepository(): AccountsRepository
+    private function getAccountRepository(): UserRepository
     {
-        if ( ! $this->accountRepository instanceof AccountsRepository)
+        if ( ! $this->accountRepository instanceof UserRepository)
         {
-            $this->accountRepository = $this->doctrine->getRepository('LotgdCore:Accounts');
+            $this->accountRepository = $this->doctrine->getRepository('LotgdCore:User');
         }
 
         return $this->accountRepository;

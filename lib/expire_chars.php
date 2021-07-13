@@ -5,8 +5,6 @@
 // mail ready
 
 require_once 'src/constants.php';
-require_once 'lib/charcleanup.php';
-require_once 'lib/gamelog.php';
 
 $lastexpire   = \strtotime(LotgdSetting::getSetting('last_char_expire', '0000-00-00 00:00:00'));
 $needtoexpire = \strtotime('-23 hours');
@@ -22,7 +20,7 @@ $old   = (int) LotgdSetting::getSetting('expireoldacct', 45);
 $new   = (int) LotgdSetting::getSetting('expirenewacct', 10);
 $trash = (int) LotgdSetting::getSetting('expiretrashacct', 1);
 
-$repository = \Doctrine::getRepository('LotgdCore:Characters');
+$repository = \Doctrine::getRepository('LotgdCore:Avatar');
 $query      = $repository->createQueryBuilder('u');
 $expr       = $query->expr();
 
@@ -43,7 +41,7 @@ $query
         $new ? $expr->andX($expr->lt('a.laston', ':dateNew'), $expr->eq('u.level', 1), $expr->eq('u.dragonkills', 0)) : null,
         $trash ? $expr->andX($expr->lt('a.regdate', ':dateTrash'), $expr->eq('a.laston', 'a.regdate')) : null
     ))
-    ->leftJoin('LotgdCore:Accounts', 'a', 'with', $expr->eq('a.acctid', 'u.acct'))
+    ->leftJoin('LotgdCore:User', 'a', 'with', $expr->eq('a.acctid', 'u.acct'))
 
     ->setParameter('permit', NO_ACCOUNT_EXPIRATION)
 ;
@@ -95,7 +93,7 @@ $msg .= 'Accounts: '.\implode(', ', $pinfo);
 //adjust for notification - don't notify total newbie chars
 $old = \max(1, $old - (int) LotgdSetting::getSetting('notifydaysbeforedeletion', 5)); //a minimum of 1 day is necessary
 
-$repository = \Doctrine::getRepository('LotgdCore:Accounts');
+$repository = \Doctrine::getRepository('LotgdCore:User');
 $query      = $repository->createQueryBuilder('a');
 
 $query
@@ -110,7 +108,7 @@ $query
             $expr->eq('a.sentnotice', 0)
         )
     )
-    ->leftJoin('LotgdCore:Characters', 'u', 'with', $expr->eq('u.id', 'a.character'))
+    ->leftJoin('LotgdCore:Avatar', 'u', 'with', $expr->eq('u.id', 'a.avatar'))
 
     ->setParameter('permit', NO_ACCOUNT_EXPIRATION)
     ->setParameter('empty', '')

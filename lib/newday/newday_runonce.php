@@ -14,8 +14,6 @@ modulehook('newday-runonce', []);
 //only if not done by cron
 if ( ! LotgdSetting::getSetting('newdaycron', 0))
 {
-    require_once 'lib/gamelog.php';
-
     require 'lib/newday/commentcleanup.php';
     require 'lib/newday/charcleanup.php';
     require 'lib/newday/logoutaccts.php';

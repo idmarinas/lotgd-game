@@ -9,7 +9,6 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
 require_once 'lib/events.php';
-require_once 'lib/experience.php';
 
 //-- First check for autochallengeç
 if (LotgdSetting::getSetting('automaster', 1) && 1 != $session['user']['seenmaster'])
@@ -67,7 +66,7 @@ if ($params['newestplayer'] == $session['user']['acctid'])
 }
 elseif (! $params['newestname'] && $params['newestplayer'])
 {
-    $characterRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
+    $characterRepository = \Doctrine::getRepository('LotgdCore:Avatar');
     $params['newestname'] = $characterRepository->getCharacterNameFromAcctId($params['newestplayer']) ?: 'Unknown';
     LotgdSetting::saveSetting('newestplayername', $params['newestname']);
 }

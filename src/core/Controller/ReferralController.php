@@ -48,14 +48,14 @@ class ReferralController extends AbstractController
         $params['refererAward']  = $this->settings->getSetting('refereraward', 25);
         $params['referMinLevel'] = $this->settings->getSetting('referminlevel', 4);
 
-        /** @var Lotgd\Core\Repository\AccountsRepository */
-        $repository = $this->getDoctrine()->getRepository('LotgdCore:Accounts');
+        /** @var Lotgd\Core\Repository\UserRepository */
+        $repository = $this->getDoctrine()->getRepository('LotgdCore:User');
         $query      = $repository->createQueryBuilder('u');
 
         $params['referrers'] = $query->select('u.refererawarded')
             ->addSelect('c.name', 'c.level', 'c.dragonkills')
             ->where('u.referer = :acct')
-            ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.id', 'u.character'))
+            ->leftJoin('LotgdCore:Avatar', 'c', 'WITH', $query->expr()->eq('c.id', 'u.avatar'))
             ->setParameter('acct', $session['user']['acctid'])
 
             ->getQuery()

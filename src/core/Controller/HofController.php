@@ -374,8 +374,8 @@ class HofController extends AbstractController
 
     private function renderHof(array $params): Response
     {
-        /** @var Lotgd\Core\Repository\AccountsRepository */
-        $repository = $this->getDoctrine()->getRepository('LotgdCore:Accounts');
+        /** @var Lotgd\Core\Repository\UserRepository */
+        $repository = $this->getDoctrine()->getRepository('LotgdCore:User');
 
         $params['paginator'] = $repository->getPaginator($params['query'], $params['page'], 25);
         unset($params['query'], $params['page']);
@@ -396,12 +396,12 @@ class HofController extends AbstractController
 
     private function getQuery()
     {
-        /** @var Lotgd\Core\Repository\AccountsRepository */
-        $repository = $this->getDoctrine()->getRepository('LotgdCore:Accounts');
+        /** @var Lotgd\Core\Repository\UserRepository */
+        $repository = $this->getDoctrine()->getRepository('LotgdCore:User');
         $query      = $repository->createQueryBuilder('u');
 
         $query
-            ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.acct', 'u.acctid'))
+            ->leftJoin('LotgdCore:Avatar', 'c', 'WITH', $query->expr()->eq('c.acct', 'u.acctid'))
             ->where('u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0')
             ->setParameter('permit', SU_HIDE_FROM_LEADERBOARD)
         ;

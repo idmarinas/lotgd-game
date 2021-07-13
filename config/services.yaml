@@ -228,6 +228,12 @@ services:
     lotgd.core.backup:
         alias: Lotgd\Core\Tool\Backup
         public: true
+    lotgd.serializer.denormalizer: # Temporal
+        alias: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+        public: true
+    Kit\CryptBundle\Service\OpensslService:
+        alias: kit_crypt.openssl
+        public: true
 
     # Twig extensions
     Marek\Twig\ByteUnitsExtension:
@@ -250,3 +256,4 @@ services:
     lotgd_core.combat.battle:
         alias: Lotgd\Core\Combat\Battle
         public: true
+

@@ -8,7 +8,6 @@ use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/buffs.php';
 
 $args = new GenericEvent();
 \LotgdEventDispatcher::dispatch($args, Events::PAGE_NEWDAY_INTERCEPT);

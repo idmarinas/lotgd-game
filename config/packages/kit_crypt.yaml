@@ -1,0 +1,7 @@
+kit_crypt:
+    clients:
+        default:
+            method: 'aes-256-cbc'
+            secret_key: '%env(APP_SECRET)%'
+            secret_iv: '%env(APP_SECRET_IV)%'
+            option: 0

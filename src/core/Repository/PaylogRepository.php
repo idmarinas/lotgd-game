@@ -90,8 +90,8 @@ class PaylogRepository extends DoctrineRepository
             return $query->select('u.payid', 'u.info', 'u.response', 'u.txnid', 'u.amount', 'u.name', 'u.acctid', 'u.processed', 'u.filed', 'u.txfee', 'u.processdate')
                 ->addSelect('c.name')
                 ->addSelect('a.donation', 'a.donationspent')
-                ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.acct', 'u.acctid'))
-                ->leftJoin('LotgdCore:Accounts', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.acctid'))
+                ->leftJoin('LotgdCore:Avatar', 'c', 'WITH', $query->expr()->eq('c.acct', 'u.acctid'))
+                ->leftJoin('LotgdCore:User', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.acctid'))
 
                 ->where('u.processdate >= :start AND u.processdate < :end ')
                 ->setParameter('start', $startDate)

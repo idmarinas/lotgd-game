@@ -2,7 +2,7 @@
 
 use Lotgd\Core\Event\Core;
 
-$charRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
+$charRepository = \Doctrine::getRepository('LotgdCore:Avatar');
 
 $flashMessages = '';
 

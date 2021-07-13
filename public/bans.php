@@ -2,7 +2,6 @@
 
 require_once 'common.php';
 require_once 'lib/showform.php';
-require_once 'lib/datetime.php';
 require_once 'lib/names.php';
 
 check_su_access(SU_EDIT_BANS);
@@ -23,7 +22,7 @@ $userId = (int) \LotgdRequest::getQuery('userid');
 \LotgdNavigation::addNav('bans.nav.list', 'bans.php?op=removeban');
 \LotgdNavigation::addNav('bans.nav.search', 'bans.php?op=searchban');
 
-$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
+$repository = \Doctrine::getRepository('LotgdCore:User');
 
 switch ($op)
 {

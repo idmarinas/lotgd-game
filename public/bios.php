@@ -16,7 +16,7 @@ $textDomain = 'page_bios';
 $op = (string) \LotgdRequest::getQuery('op');
 $userid = (int) \LotgdRequest::getQuery('charid');
 
-$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
+$repository = \Doctrine::getRepository('LotgdCore:Avatar');
 
 $params = [
     'textDomain' => $textDomain

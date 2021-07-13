@@ -6,9 +6,9 @@ require_once 'common.php';
 
 check_su_access(SU_EDIT_USERS);
 
-$op = (string) \LotgdRequest::getQuery('op');
+$op        = (string) \LotgdRequest::getQuery('op');
 $accountId = (int) \LotgdRequest::getQuery('acctid');
-$page = (int) \LotgdRequest::getQuery('page');
+$page      = (int) \LotgdRequest::getQuery('page');
 
 $params = [
     'textDomain' => 'grotto_characterbackup',
@@ -22,70 +22,67 @@ $params = [
 \LotgdNavigation::addNav('navigation.nav.update', 'characterbackup.php', ['textDomain' => $params['textDomain']]);
 
 $fileSystem = new \Symfony\Component\Filesystem\Filesystem();
-$serializer = new Laminas\Serializer\Adapter\PhpSerialize();
-$path = 'storage/logd_snapshots';
-$pathAccountData = "{$path}/account-{$accountId}/LotgdCore_Accounts.data";
-$pathCharacterData = "{$path}/account-{$accountId}/LotgdCore_Characters.data";
+/** @var \Symfony\Component\Serializer\Serializer */
+$serializer = \LotgdKernel::get('serializer');
+/** @var \Kit\CryptBundle\Service\OpensslService */
+$cryptService = \LotgdKernel::get('Kit\CryptBundle\Service\OpensslService');
+
+$path              = 'storage/logd_snapshots';
+$pathAccountData   = "{$path}/user-{$accountId}/LotgdCore_User.json";
+$pathCharacterData = "{$path}/user-{$accountId}/LotgdCore_Avatar.json";
 
 if ('delete' == $op)
 {
     $message = 'flash.message.del.error';
 
-    if (file_exists("{$path}/account-{$accountId}"))
+    if (file_exists("{$path}/user-{$accountId}"))
     {
-        $fileSystem->remove("{$path}/account-{$accountId}");
+        $fileSystem->remove("{$path}/user-{$accountId}");
         $message = 'flash.message.del.success';
     }
 
-    \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t($message, ['path' => "{$path}/account-{$accountId}"], $params['textDomain']));
+    \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t($message, ['path' => "{$path}/user-{$accountId}"], $params['textDomain']));
 
     $op = '';
     \LotgdRequest::setQuery('op', '');
 }
-elseif ('restore' == $op && \file_exists($pathAccountData) && \file_exists($pathCharacterData))
+elseif ('restore' == $op && file_exists($pathAccountData) && file_exists($pathCharacterData))
 {
-    $files = glob("{$path}/account-{$accountId}/[!basic_info]*.data", GLOB_BRACE);
+    $files = glob("{$path}/user-{$accountId}/[!basic_info]*.json", GLOB_BRACE);
     //-- Remove Account and character, is proccess individualy
-    $key = array_search($pathAccountData, $files);
-    unset($files[$key]);
-    $key = array_search($pathCharacterData, $files);
-    unset($files[$key]);
+    unset($files[array_search($pathAccountData, $files)], $files[array_search($pathCharacterData, $files)]);
 
     $files = array_map(function ($path) use ($serializer)
     {
-        $file = $serializer->unserialize(file_get_contents($path));
-        $file['shortNameEntity'] = str_replace('_', ':', basename($path, '.data'));
-
-        return $file;
+        return $serializer->decode(file_get_contents($path), 'json');
     }, $files);
 
-    $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
-    $hydrator->removeNamingStrategy(); //-- With this keyValue is keyValue. Otherwise it would be key_value
+    // $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
+    // $hydrator->removeNamingStrategy(); //-- With this keyValue is keyValue. Otherwise it would be key_value
 
     //-- Overrides the automatic generation of IDs (avoid to change id of account and character)
-    $metadataAcct = \Doctrine::getClassMetadata('LotgdCore:Accounts');
+    $metadataAcct = \Doctrine::getClassMetadata('LotgdCore:User');
     $metadataAcct->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
     $metadataAcct->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
-    $metadataChar = \Doctrine::getClassMetadata('LotgdCore:Characters');
+    $metadataChar = \Doctrine::getClassMetadata('LotgdCore:Avatar');
     $metadataChar->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
     $metadataChar->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
     //-- Restore account and character
-    $account = $serializer->unserialize(file_get_contents($pathAccountData));
-    $account = $hydrator->hydrate($account['rows'][0], new $account['entity']());
-    $character = $serializer->unserialize(file_get_contents($pathCharacterData));
-    $character = $hydrator->hydrate($character['rows'][0], new  $character['entity']());
+    $account   = $serializer->decode($cryptService->decrypt(file_get_contents($pathAccountData)), 'json');
+    $character = $serializer->decode(file_get_contents($pathCharacterData), 'json');
 
-    $account->setCharacter(null);
+    $account   = $serializer->denormalize($account['rows'][0], $account['entity']);
+    $character = $serializer->denormalize($character['rows'][0], $character['entity']);
+
+    $account->setAvatar(null);
+    $character->setAcct(null);
     \Doctrine::persist($account);
-    \Doctrine::flush();
-
-    $character->setAcct($account);
     \Doctrine::persist($character);
     \Doctrine::flush();
 
-    $account->setCharacter($character);
-    \Doctrine::persist($account);
+    $account->setAvatar($character);
+    $character->setAcct($account);
     \Doctrine::flush();
 
     //-- Restore automatic generation of IDs
@@ -94,11 +91,11 @@ elseif ('restore' == $op && \file_exists($pathAccountData) && \file_exists($path
     $metadataChar->setIdGenerator(new \Doctrine\ORM\Id\IdentityGenerator());
     $metadataChar->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_IDENTITY);
 
-    //-- First restore account and character
+    //-- Restore other entities
     foreach ($files as $file)
     {
         //-- Not do nothing if not have rows.
-        if (isset($file['rows']) && empty($file['rows']))
+        if ( ! isset($file['rows']) || (isset($file['rows']) && empty($file['rows'])))
         {
             continue;
         }
@@ -109,22 +106,22 @@ elseif ('restore' == $op && \file_exists($pathAccountData) && \file_exists($path
         $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
         $args = new Character([
-            'entity' => $file['shortNameEntity'],
-            'accountId' => $accountId,
-            'data' => $file,
-            'proccessed' => false
+            'entity'     => $file['entity'],
+            'accountId'  => $accountId,
+            'data'       => $file,
+            'proccessed' => false,
         ]);
         \LotgdEventDispatcher::dispatch($args, Character::BACKUP_RESTORE);
         $result = modulehook('character-restore', $args->getData());
 
         //-- Do nothing if it has been processed
-        if (! isset($result['proccessed']) || ! $result['proccessed'])
+        if ( ! isset($result['proccessed']) || ! $result['proccessed'])
         {
             try
             {
-                $repository = \Doctrine::getRepository($file['entity']);
+                $repository = \Doctrine::getRepository($result['entity']);
 
-                foreach ($file['rows'] as $row)
+                foreach ($result['rows'] as $row)
                 {
                     \Doctrine::persist($repository->hydrateEntity($row));
                 }
@@ -144,12 +141,12 @@ elseif ('restore' == $op && \file_exists($pathAccountData) && \file_exists($path
     }
 
     //-- Remove backup
-    $fileSystem->remove("{$path}/account-{$accountId}");
+    $fileSystem->remove("{$path}/user-{$accountId}");
 
     $op = '';
     \LotgdRequest::setQuery('op', '');
 }
-elseif ('restore' == $op && (! \file_exists($pathAccountData) || ! \file_exists($pathCharacterData)))
+elseif ('restore' == $op && ( ! file_exists($pathAccountData) || ! file_exists($pathCharacterData)))
 {
     \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.restore.miss.mandatory', [], $params['textDomain']));
 
@@ -161,33 +158,39 @@ if ('' == $op)
 {
     $params['tpl'] = 'default';
 
-    $dirs = glob("{$path}/account-*", GLOB_ONLYDIR);
-    //-- Clean directories invalid (not have basic_info.data, LotgdCore_Accounts.data or LotgdCore_Characters.data )
-    foreach ($dirs as $key => $dir)
+    $dirs = glob("{$path}/user-*", GLOB_ONLYDIR);
+    //-- Clean directories invalid (not have basic_info.json, LotgdCore_Accounts.json or LotgdCore_Characters.json )
+    $dirs = array_filter($dirs, function ($dir) use ($fileSystem)
     {
-        if (! \file_exists("{$dir}/basic_info.data") //-- Need for manage restore
-            || ! \file_exists("{$dir}/LotgdCore_Accounts.data") //-- Is basic for restore an account
-            || ! \file_exists("{$dir}/LotgdCore_Characters.data") //-- Is basic for restore an account
+        if ( ! file_exists("{$dir}/basic_info.json") //-- Need for manage restore
+        || ! file_exists("{$dir}/LotgdCore_User.json") //-- Is basic for restore an account
+        || ! file_exists("{$dir}/LotgdCore_Avatar.json") //-- Is basic for restore an account
         ) {
             $fileSystem->remove($dir);
-            unset($dirs[$key]);
-        }
-    }
 
-    $params['backups'] = array_map(function ($path) use ($serializer)
+            return false;
+        }
+
+        return true;
+    });
+
+    $params['backups'] = array_map(function ($path) use ($serializer, $cryptService)
     {
-        return $serializer->unserialize(file_get_contents("{$path}/basic_info.data"));
+        return $serializer->decode($cryptService->decrypt(file_get_contents("{$path}/basic_info.json")), 'json');
     }, $dirs);
 }
 elseif ('view' == $op)
 {
     $params['tpl'] = 'view';
-    $files = glob("{$path}/account-{$accountId}/[!basic_info]*.data", GLOB_BRACE);
+    $files         = glob("{$path}/user-{$accountId}/[!basic_info]*.json", GLOB_BRACE);
 
-    $params['account'] = $serializer->unserialize(file_get_contents("{$path}/account-{$accountId}/basic_info.data"));
-    $params['files'] = array_map(function ($path) use ($serializer)
+    $params['account'] = $serializer->decode($cryptService->decrypt(file_get_contents("{$path}/user-{$accountId}/basic_info.json")), 'json');
+    $params['files']   = array_map(function ($path) use ($serializer, $cryptService)
     {
-        return $serializer->unserialize(file_get_contents($path));
+        $content = file_get_contents($path);
+        $content = (false !== stripos($path, 'LotgdCore_User')) ? $cryptService->decrypt($content) : $content;
+
+        return $serializer->decode($content, 'json');
     }, $files);
 }
 

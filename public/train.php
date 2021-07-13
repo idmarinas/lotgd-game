@@ -9,12 +9,6 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
 require_once 'lib/systemmail.php';
-require_once 'lib/increment_specialty.php';
-require_once 'lib/fightnav.php';
-require_once 'lib/taunt.php';
-require_once 'lib/substitute.php';
-require_once 'lib/experience.php';
-require_once 'lib/forestoutcomes.php';
 
 // Don't hook on to this text for your standard modules please, use "train" instead.
 // This hook is specifically to allow modules that do other trains to create ambience.
@@ -270,7 +264,7 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
 
             if ($session['user']['referer'] > 0 && ($session['user']['level'] >= LotgdSetting::getSetting('referminlevel', 4) || $session['user']['dragonkills'] > 0) && $session['user']['refererawarded'] < 1)
             {
-                $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+                $repository = \Doctrine::getRepository('LotgdCore:User');
                 $entity = $repository->find($session['user']['referer']);
 
                 if ($entity)

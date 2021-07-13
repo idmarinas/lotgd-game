@@ -8,10 +8,8 @@ use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/fightnav.php';
 require_once 'lib/pvpwarning.php';
 require_once 'lib/pvpsupport.php';
-require_once 'lib/taunt.php';
 
 $iname = LotgdSetting::getSetting('innname', LOCATION_INN);
 $battle = false;
@@ -168,8 +166,6 @@ if ($battle)
         // whatever was needed.
         if (! $handled)
         {
-            require_once 'lib/taunt.php';
-
             $taunt = \LotgdTool::selectTaunt();
 
             $news = ($killedin == $iname) ? 'inn' : 'other';

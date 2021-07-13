@@ -4,6 +4,8 @@ php bin/console doctrine:schema:update --force --dump-sql
 
 php bin/console doctrine:migrations:diff
 
+php bin/console doctrine:migrations:migrate 'DoctrineMigrations\Version20210707115250'
+
 php bin/console assets:install public
 
 php phpDocumentor.phar
