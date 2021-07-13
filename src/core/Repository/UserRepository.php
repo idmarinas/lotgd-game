@@ -15,14 +15,17 @@ namespace Lotgd\Core\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
-use Laminas\Hydrator\ClassMethodsHydrator;
-use Lotgd\Core\Entity as LotgdEntity;
-use Tracy\Debugger;
 use Doctrine\Persistence\ManagerRegistry;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
+use Lotgd\Core\Entity as LotgdEntity;
 use Lotgd\Core\Entity\User as UserEntity;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Tracy\Debugger;
 
-class UserRepository extends ServiceEntityRepository
+class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     use EntityRepositoryTrait;
     use User\Bans;
@@ -35,6 +38,21 @@ class UserRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, UserEntity::class);
+    }
+
+    /**
+     * Used to upgrade (rehash) the user's password automatically over time.
+     */
+    public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
+    {
+        if ( ! $user instanceof UserEntity)
+        {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+        }
+
+        $user->setPassword($newEncodedPassword);
+        $this->_em->persist($user);
+        $this->_em->flush();
     }
 
     /**
@@ -151,6 +169,6 @@ class UserRepository extends ServiceEntityRepository
 
         unset($account['character'], $character['acct']);
 
-        return \array_merge($account, $character, $everypage);
+        return array_merge($account, $character, $everypage);
     }
 }
