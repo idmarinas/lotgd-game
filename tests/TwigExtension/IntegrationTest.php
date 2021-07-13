@@ -24,6 +24,7 @@ use Lotgd\Core\Twig\Extension\FormatExtension;
 use Lotgd\Core\Twig\Extension\GameCore;
 use Lotgd\Core\Twig\Extension\Jaxon;
 use Lotgd\Core\Twig\Extension\Navigation;
+use Lotgd\Core\Twig\Extension\SettingsExtension;
 use Lotgd\Core\Twig\Extension\Translator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Twig\Test\IntegrationTestCase;
@@ -61,6 +62,7 @@ class IntegrationTest extends IntegrationTestCase
             new ApplyFilter(),
             new Translator($container->get('translator')),
             new Jaxon($container->get('lotgd.core.jaxon')),
+            new SettingsExtension($container->get('lotgd_core.settings'))
         ];
     }
 
