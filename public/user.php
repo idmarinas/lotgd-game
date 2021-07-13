@@ -315,7 +315,7 @@ switch ($op)
                     $session['user'] = $repository->getUserById($userId);
                 }
             }
-            \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
+            \Doctrine::detach($entity); //-- Avoid Doctrine save a invalid Form
 
             \LotgdNavigation::addNavAllow("user.php?op=edit&type={$type}&userid={$userId}{$returnpetition}");
 

@@ -186,7 +186,7 @@ elseif ('edit' == $op || 'add' == $op)
                 ]
             ]);
         }
-        \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
+        \Doctrine::detach($entity); //-- Avoid Doctrine save a invalid Form
 
         //-- In this position can updated $mountId var
         \LotgdNavigation::addNavAllow("mounts.php?op=edit&id={$mountId}");
