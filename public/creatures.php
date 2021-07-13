@@ -170,7 +170,7 @@ elseif ('edit' == $op || 'add' == $op)
                 ]
             ]);
         }
-        \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
+        \Doctrine::detach($creatureEntity); //-- Avoid Doctrine save a invalid Form
 
         //-- In this position can updated $creatureId var
         \LotgdNavigation::addHeader('creatures.category.edit');

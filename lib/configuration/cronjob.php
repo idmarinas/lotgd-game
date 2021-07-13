@@ -111,7 +111,7 @@ elseif ('newcronjob' == $op)
             \LotgdFlashMessages::{$messageType}(\LotgdTranslator::t($message, $paramsFlashMessages, $textDomain));
         }
     }
-    \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
+    \Doctrine::detach($entity); //-- Avoid Doctrine save a invalid Form
 
     //-- In this position can updated $cronId var
     \LotgdNavigation::addNavAllow("configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}");
