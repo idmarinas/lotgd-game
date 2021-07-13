@@ -1,0 +1,8 @@
+--TEST--
+"get_setting" function
+--TEMPLATE--
+{{ get_setting('try', 'Catch') }}
+--DATA--
+return []
+--EXPECT--
+Catch
