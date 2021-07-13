@@ -139,15 +139,11 @@ else
         {
             if (strlen($pass1) > 3)
             {
-                if ('!md5!' != substr($pass1, 0, 5))
-                {
-                    $pass1 = md5(md5($pass1));
-                }
-                else
-                {
-                    $pass1 = md5(substr($pass1, 5));
-                }
-                $session['user']['password'] = $pass1;
+                /** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder */
+                $passwordEncoder = \LotgdKernel::get('security.password_encoder');
+                $account = \Doctrine::getRepository('LotgdCore:User')->find($session['user']['acctid']);
+
+                $session['user']['password'] = $passwordEncoder->encodePassword($account, $pass1);
 
                 \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.form.password.changed', [], $textDomain));
             }

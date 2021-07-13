@@ -143,7 +143,9 @@ elseif ('save' == $op)
         } //well, name is composed now
         elseif ('newpassword' == $key)
         {
-            $postValues['password'] = \md5(\md5($val));
+            /** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder */
+            $passwordEncoder = \LotgdKernel::get('security.password_encoder');
+            $postValues['password'] = $passwordEncoder->encodePassword($repository->find($userId), $val);
 
             continue;
         }

@@ -26,6 +26,7 @@ use Lotgd\Core\Tool\Sanitize;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -40,6 +41,7 @@ class CreateController extends AbstractController
     private $format;
     private $log;
     private $settings;
+    private $passwordEncoder;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
@@ -48,15 +50,17 @@ class CreateController extends AbstractController
         Sanitize $sanitize,
         Format $format,
         Log $log,
-        Settings $settings
+        Settings $settings,
+        UserPasswordEncoderInterface $passwordEncoder
     ) {
-        $this->dispatcher = $dispatcher;
-        $this->translator = $translator;
-        $this->censor     = $censor;
-        $this->sanitize   = $sanitize;
-        $this->format     = $format;
-        $this->log        = $log;
-        $this->settings   = $settings;
+        $this->dispatcher      = $dispatcher;
+        $this->translator      = $translator;
+        $this->censor          = $censor;
+        $this->sanitize        = $sanitize;
+        $this->format          = $format;
+        $this->log             = $log;
+        $this->settings        = $settings;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function forgotVal(array $params, Request $request): Response
@@ -259,14 +263,7 @@ class CreateController extends AbstractController
                 }
             }
 
-            $passlen = (int) $request->request->get('passlen');
-
-            if ('!md5!' != substr($pass1, 0, 5) && '!md52!' != substr($pass1, 0, 6))
-            {
-                $passlen = \strlen($pass1);
-            }
-
-            if ($passlen <= 3)
+            if (\strlen($pass1) <= 3)
             {
                 $this->addFlash('error', $this->translator->trans('create.account.password.length', [], $params['textDomain']));
                 $blockaccount = true;
@@ -333,7 +330,6 @@ class CreateController extends AbstractController
                 }
 
                 $refer = $request->query->get('r');
-
                 $referer = 0;
 
                 if ($refer > '')
@@ -342,14 +338,11 @@ class CreateController extends AbstractController
                     $referer = $result->getAcctid();
                 }
 
-                $dbpass = '!md5!' == substr($pass1, 0, 5) ? md5(substr($pass1, 5)) : md5(md5($pass1));
-
                 try
                 {
                     //-- Configure account
                     $accountEntity = new \Lotgd\Core\Entity\User();
                     $accountEntity->setLogin((string) $shortname)
-                        ->setPassword((string) $dbpass)
                         ->setSuperuser((int) $this->settings->getSetting('defaultsuperuser', 0))
                         ->setRegdate(new \DateTime())
                         ->setUniqueid($request->getCookie('lgi') ?: '')
@@ -358,6 +351,9 @@ class CreateController extends AbstractController
                         ->setEmailvalidation($emailverification)
                         ->setReferer($referer)
                     ;
+
+                    $dbpass = $this->passwordEncoder->encodePassword($accountEntity, $pass1);
+                    $accountEntity->setPassword($dbpass);
 
                     //-- Need for get a ID of new account
                     $this->getDoctrine()->getManager()->persist($accountEntity);

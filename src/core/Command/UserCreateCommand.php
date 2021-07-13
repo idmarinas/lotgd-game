@@ -22,6 +22,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -44,12 +45,14 @@ final class UserCreateCommand extends Command
     protected $validator;
     protected $settings;
     protected $accountRepository;
+    protected $passwordEncoder;
 
     public function __construct(
         EntityManagerInterface $doctrine,
         TranslatorInterface $translator,
         ValidatorInterface $validator,
-        Settings $settings
+        Settings $settings,
+        UserPasswordEncoderInterface $passwordEncoder
     ) {
         parent::__construct();
 
@@ -57,6 +60,7 @@ final class UserCreateCommand extends Command
         $this->translator = $translator;
         $this->validator  = $validator;
         $this->settings   = $settings;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     /**
@@ -83,7 +87,7 @@ final class UserCreateCommand extends Command
 
         $login    = $this->getLoginName($input, $output);
         $email    = $this->getEmail($input, $output);
-        $password = \md5(\md5(\stripslashes($this->getPassword($input, $output))));
+        $password = $this->getPassword($input, $output);
         $isAdmin  = $this->getIsAdmin($input, $output);
 
         try
@@ -91,10 +95,12 @@ final class UserCreateCommand extends Command
             //-- Configure account
             $account = new \Lotgd\Core\Entity\User();
             $account->setLogin($login)
-                ->setPassword($password)
                 ->setEmailaddress($email)
                 ->setRegdate(new \DateTime())
             ;
+
+            $password = $this->passwordEncoder->encodePassword($account, $password);
+            $account->setPassword($password);
 
             //-- Need for get a ID of new account
             $this->doctrine->persist($account);
