@@ -149,7 +149,7 @@ switch ($op)
                 ]
             ]);
         }
-        \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
+        \Doctrine::detach($entity); //-- Avoid Doctrine save a invalid Form
 
         //-- In this position can updated $id var
         \LotgdNavigation::addNavAllow("titleedit.php?op=edit&id={$id}");

@@ -202,7 +202,7 @@ elseif ('edit' == $op || 'add' == $op)
                 ]
             ]);
         }
-        \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
+        \Doctrine::detach($companionEntity); //-- Avoid Doctrine save a invalid Form
 
         \LotgdNavigation::addNavAllow("companions.php?op=edit&id={$id}");
 
