@@ -15,3 +15,6 @@ elseif (\method_exists(Dotenv::class, 'bootEnv'))
 {
     (new Dotenv())->bootEnv(\dirname(__DIR__).'/.env');
 }
+
+//-- Init Debugger
+\Tracy\Debugger::enable(\Tracy\Debugger::DEVELOPMENT, __DIR__.'/../storage/log/tracy');
