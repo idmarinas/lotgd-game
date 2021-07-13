@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Structure of table "user" in data base.
@@ -33,7 +34,7 @@ use Doctrine\ORM\Mapping as ORM;
  * )
  * @ORM\Entity(repositoryClass="Lotgd\Core\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     use User\Avatar;
     use User\Ban;
@@ -77,6 +78,11 @@ class User
      * @ORM\Column(name="login", type="string", unique=true, length=50, nullable=false)
      */
     private $login;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
     /**
      * @var \DateTime
@@ -293,6 +299,33 @@ class User
     public function getLogin(): string
     {
         return $this->login;
+    }
+
+    /**
+     * Get the value of Login.
+     */
+    public function getUsername(): string
+    {
+        return $this->getLogin();
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $merged = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $merged[] = 'ROLE_USER';
+
+        return \array_unique($merged);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     /**
