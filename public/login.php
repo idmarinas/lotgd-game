@@ -4,6 +4,7 @@
 // addnews ready
 // translator ready
 
+use Lotgd\Core\Controller\LoginController;
 use Lotgd\Core\Event\Core;
 
 \define('ALLOW_ANONYMOUS', true);
@@ -15,7 +16,6 @@ require_once 'lib/serverfunctions.class.php';
 $op    = (string) \LotgdRequest::getQuery('op');
 $name  = (string) \LotgdRequest::getPost('name');
 $iname = (string) LotgdSetting::getSetting('innname', LOCATION_INN);
-$vname = (string) LotgdSetting::getSetting('villagename', LOCATION_FIELDS);
 $force = \LotgdRequest::getPost('force');
 
 if ('' != $name)
@@ -230,36 +230,7 @@ if ('' != $name)
 }
 elseif ('logout' == $op)
 {
-    if ($session['user']['loggedin'])
-    {
-        $session['user']['restorepage'] = 'news.php';
-        if ($session['user']['superuser'] & (0xFFFFFFFF & ~SU_DOESNT_GIVE_GROTTO))
-        {
-            $session['user']['restorepage'] = 'superuser.php';
-        }
-        elseif ($session['user']['location'] == $iname)
-        {
-            $session['user']['restorepage'] = 'inn.php?op=strolldown';
-        }
-
-        $session['user']['loggedin'] = false;
-
-        \LotgdKernel::get('cache.app')->delete('char-list-home-page');
-
-        // Let's throw a logout module hook in here so that modules
-        // like the stafflist which need to invalidate the cache
-        // when someone logs in or off can do so.
-        \LotgdEventDispatcher::dispatch(new Core(), Core::LOGOUT_PLAYER);
-        modulehook('player-logout');
-        \LotgdTool::saveUser();
-
-        \LotgdSession::invalidate();
-
-        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('logout.success', [], 'page_login'));
-    }
-    $session = [];
-
-    redirect('index.php');
+    \LotgdResponse::callController(LoginController::class, 'logout');
 }
 
 //- If you enter an empty username, don't just say oops.. do something useful.
