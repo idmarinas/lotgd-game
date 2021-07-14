@@ -13,8 +13,6 @@
 
 namespace Lotgd\Core\Combat\Battle;
 
-use Lotgd\Core\Event\Fight;
-
 trait Extended
 {
     /**
@@ -172,59 +170,6 @@ trait Extended
     }
 
     /**
-     * This function prepares the fight, sets up options and gives hook a hook to change options on a per-player basis.
-     *
-     * @param array $options the options given by a module or basics
-     *
-     * @return array the complete options
-     */
-    public function prepareFight($options = [])
-    {
-        $basicoptions = [
-            'maxattacks' => $this->settings->getSetting('maxattacks', 4),
-        ];
-
-        if ( ! \is_array($options))
-        {
-            $options = [];
-        }
-
-        $fightoptions = new Fight($options + $basicoptions);
-        $this->dispatcher->dispatch($fightoptions, Fight::OPTIONS);
-        $fightoptions = modulehook('fightoptions', $fightoptions->getData());
-
-        // We'll also reset the companions here...
-        $this->prepareCompanions();
-
-        return $fightoptions;
-    }
-
-    /**
-     * This functions prepares companions to be able to take part in a fight. Uses global copies.
-     */
-    public function prepareCompanions()
-    {
-        global $companions;
-
-        $newcompanions = [];
-
-        if (\is_array($companions))
-        {
-            foreach ($companions as $name => $companion)
-            {
-                if ( ! isset($companion['suspended']) || ! $companion['suspended'])
-                {
-                    $companion['used'] = false;
-                }
-
-                $newcompanions[$name] = $companion;
-            }
-        }
-
-        $companions = $newcompanions;
-    }
-
-    /**
      * Suspends companions on a given parameter.
      *
      * @param string $susp  The type of suspension
@@ -311,52 +256,6 @@ trait Extended
         }
 
         $companions = $newcompanions;
-    }
-
-    /**
-     * Automatically chooses the first still living enemy as target for attacks.
-     *
-     * @param array $localenemies the stack of enemies to find a valid one from
-     *
-     * @return array $localenemies the stack with changed targetting
-     */
-    public function autoSetTarget($localenemies)
-    {
-        $targetted = 0;
-
-        if (\is_array($localenemies))
-        {
-            foreach ($localenemies as $index => $badguy)
-            {
-                $localenemies[$index] += ['dead' => false, 'istarget' => false]; // This line will add these two indices if they haven't been set.
-
-                if (1 == \count($localenemies))
-                {
-                    $localenemies[$index]['istarget'] = true;
-                }
-
-                if ($localenemies[$index]['istarget'] && ! $localenemies[$index]['dead'])
-                {
-                    ++$targetted;
-                }
-            }
-        }
-
-        if ( ! $targetted && \is_array($localenemies))
-        {
-            foreach ($localenemies as $index => $badguy)
-            {
-                if (! $localenemies[$index]['dead'] && ( ! isset($badguy['cannotbetarget']) || false === $badguy['cannotbetarget']))
-                {
-                    $localenemies[$index]['istarget'] = true;
-                    $targetted                        = true;
-
-                    break;
-                }
-            }
-        }
-
-        return $localenemies;
     }
 
     /**
