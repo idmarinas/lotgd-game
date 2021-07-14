@@ -15,6 +15,7 @@ namespace Lotgd\Core\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
@@ -29,12 +30,14 @@ class RegenerateAppSecretCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('Regenerate APP_SECRET for application in .env file')
+            ->setDescription('Regenerate APP_SECRET/APP_SECRET_IV for application in .env file')
             ->setHelp(
                 <<<'EOT'
-                    The <info>%command.name%</info> command regenerate APP_SECRET value of .env file for LoTGD application.
+                    The <info>%command.name%</info> command regenerate APP_SECRET/APP_SECRET_IV values of .env file for LoTGD application.
                     EOT
             )
+
+            ->addOption('iv', null, InputOption::VALUE_NONE, 'Regenerate value for APP_SECRET_IV')
         ;
     }
 
@@ -44,26 +47,31 @@ class RegenerateAppSecretCommand extends Command
 
         $file = '.env';
 
-        if (\is_file($file) && \is_readable($file) && \is_writable($file))
+        if (is_file($file) && is_readable($file) && is_writable($file))
         {
-            $str     = \file_get_contents($file);
-            $pattern = '/^(?<secret>APP_SECRET=.+)$/m';
+            $str         = file_get_contents($file);
+            $optionValue = $input->getOption('iv');
+            $fs          = new Filesystem();
 
-            \preg_match($pattern, $str, $matches);
+            $key    = $optionValue ? 'APP_SECRET_IV' : 'APP_SECRET';
+            $length = $optionValue ? 8 : 16;
+
+            $pattern = "/^(?<secret>{$key}=.+)$/m";
+
+            preg_match($pattern, $str, $matches);
 
             if (\is_string($matches['secret']))
             {
-                $fs     = new Filesystem();
-                $secret = \bin2hex(\random_bytes(16));
-                $str    = \preg_replace("/{$matches['secret']}/", "APP_SECRET={$secret}", $str);
+                $secret = bin2hex(random_bytes($length));
+                $str    = preg_replace("/{$matches['secret']}/", "{$key}={$secret}", $str);
 
-                $fs->dumpFile('.env', $str);
+                $fs->dumpFile($file, $str);
 
-                $io->success("New APP_SECRET was generated: {$secret}");
+                $io->success("New {$key} was generated: {$secret}");
             }
             else
             {
-                $io->warning('Not find APP_SECRET in file ".env"');
+                $io->warning("Not find {$key} in file '{$file}'");
             }
 
             return 0;
