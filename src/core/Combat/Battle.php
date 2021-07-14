@@ -14,14 +14,17 @@
 namespace Lotgd\Core\Combat;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Tool\PlayerFunction;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Battle
 {
     use BattleTrait;
+    use BattleProcess;
+    use BattleStart;
+    use BattleEnd;
     use Battle\Action;
     use Battle\Buff;
     use Battle\Extended;
@@ -30,23 +33,23 @@ class Battle
     private $buffer;
     private $dispatcher;
     private $doctrine;
-    private $translator;
     private $playerFunction;
     private $settings;
+    private $request;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
         EntityManagerInterface $doctrine,
         Buffer $buffer,
-        TranslatorInterface $translator,
         PlayerFunction $playerFunction,
-        Settings $settings
+        Settings $settings,
+        Request $request
     ) {
         $this->buffer         = $buffer;
         $this->dispatcher     = $dispatcher;
         $this->doctrine       = $doctrine;
-        $this->translator     = $translator;
         $this->playerFunction = $playerFunction;
         $this->settings       = $settings;
+        $this->request        = $request;
     }
 }
