@@ -18,6 +18,7 @@ use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
 use Lotgd\Core\Tool\Sanitize;
 use Lotgd\Core\Tool\Tool;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 trait BattleTrait
@@ -28,6 +29,15 @@ trait BattleTrait
     private $response;
     private $twig;
     private $sanitize;
+    private $translator;
+
+    /**
+     * @required
+     */
+    public function setTranslator(TranslatorInterface $translator): void
+    {
+        $this->translator = $translator;
+    }
 
     /**
      * @required
