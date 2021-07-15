@@ -48,7 +48,7 @@ trait Skill
             {
                 $atk = $this->playerFunction->getPlayerAttack() * $atkmod;
 
-                if (1 == \mt_rand(1, 20) && 'pvp' != $options['type'])
+                if (1 == mt_rand(1, 20) && 'pvp' != $options['type'])
                 {
                     $atk *= 3;
                 }
@@ -63,14 +63,14 @@ trait Skill
                 if ($creaturedmg < 0)
                 {
                     $creaturedmg = (int) ($creaturedmg / 2);
-                    $creaturedmg = \round($buffset['badguydmgmod'] * $creaturedmg, 0);
-                    $creaturedmg = \min(0, \round($creaturedmg - $badguy['physicalresistance']));
+                    $creaturedmg = round($buffset['badguydmgmod'] * $creaturedmg, 0);
+                    $creaturedmg = min(0, round($creaturedmg - $badguy['physicalresistance']));
                 }
 
                 if ($creaturedmg > 0)
                 {
-                    $creaturedmg = \round($buffset['dmgmod'] * $creaturedmg, 0);
-                    $creaturedmg = \max(0, \round($creaturedmg - $badguy['physicalresistance']));
+                    $creaturedmg = round($buffset['dmgmod'] * $creaturedmg, 0);
+                    $creaturedmg = max(0, round($creaturedmg - $badguy['physicalresistance']));
                 }
                 $pdefroll = bell_rand(0, $adjustedselfdefense);
                 $catkroll = bell_rand(0, $creatureattack);
@@ -85,14 +85,14 @@ trait Skill
                 if ($selfdmg < 0)
                 {
                     $selfdmg = (int) ($selfdmg / 2);
-                    $selfdmg = \round($selfdmg * $buffset['dmgmod'], 0);
-                    $selfdmg = \min(0, \round($selfdmg - ((int) $this->playerFunction->getPlayerPhysicalResistance()), 0));
+                    $selfdmg = round($selfdmg * $buffset['dmgmod'], 0);
+                    $selfdmg = min(0, round($selfdmg - ((int) $this->playerFunction->getPlayerPhysicalResistance()), 0));
                 }
 
                 if ($selfdmg > 0)
                 {
-                    $selfdmg = \round($selfdmg * $buffset['badguydmgmod'], 0);
-                    $selfdmg = \max(0, \round($selfdmg - ((int) $this->playerFunction->getPlayerPhysicalResistance()), 0));
+                    $selfdmg = round($selfdmg * $buffset['badguydmgmod'], 0);
+                    $selfdmg = max(0, round($selfdmg - ((int) $this->playerFunction->getPlayerPhysicalResistance()), 0));
                 }
             }
         }
@@ -100,13 +100,13 @@ trait Skill
         // Handle god mode's invulnerability
         if ($buffset['invulnerable'])
         {
-            $creaturedmg = \abs($creaturedmg);
-            $selfdmg     = -\abs($selfdmg);
+            $creaturedmg = abs($creaturedmg);
+            $selfdmg     = -abs($selfdmg);
         }
 
         return [
             'creaturedmg' => ($creaturedmg ?? 0),
-            'selfdmg' => ($selfdmg ?? 0)
+            'selfdmg'     => ($selfdmg ?? 0),
         ];
     }
 
@@ -146,66 +146,11 @@ trait Skill
                 $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 
                 $dmg += e_rand($crit / 4, $crit / 2);
-                $dmg = \max($dmg, 1);
+                $dmg = max($dmg, 1);
             }
         }
 
         return $dmg;
-    }
-
-    public function suspendBuffs($susp = false, $msg = false)
-    {
-        global $session, $badguy, $countround, $lotgdBattleContent;
-
-        $suspendnotify = 0;
-        \reset($session['bufflist']);
-
-        foreach ($session['bufflist'] as $key => $buff)
-        {
-            if (\array_key_exists('suspended', $buff) && $buff['suspended'])
-            {
-                continue;
-            }
-
-            // Suspend non pvp allowed buffs when in pvp
-            if ($susp && ( ! isset($buff[$susp]) || ! $buff[$susp]))
-            {
-                $session['bufflist'][$key]['suspended'] = 1;
-                $suspendnotify                          = 1;
-            }
-
-            // reset the 'used this round state'
-            $buff['used'] = 0;
-        }
-
-        if ($suspendnotify)
-        {
-            if (false === $msg)
-            {
-                $msg = 'skill.buffs.gods.suspended';
-            }
-
-            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $this->sanitize->mbSanitize($msg);
-        }
-    }
-
-    public function suspendBuffByName($name, $msg = false)
-    {
-        global $session, $countround, $lotgdBattleContent;
-
-        // If it's not already suspended.
-        if ($session['bufflist'][$name] && ! $session['bufflist'][$name]['suspended'])
-        {
-            $session['bufflist'][$name]['suspended'] = 1;
-
-            // And notify.
-            if (false === $msg)
-            {
-                $msg = 'skill.buffs.gods.suspended';
-            }
-
-            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
-        }
     }
 
     public function unsuspendBuffByName($name, $msg = false)
@@ -239,7 +184,7 @@ trait Skill
         global $session, $badguy, $countround, $lotgdBattleContent;
 
         $unsuspendnotify = 0;
-        \reset($session['bufflist']);
+        reset($session['bufflist']);
 
         foreach ($session['bufflist'] as $key => $buff)
         {
@@ -265,11 +210,14 @@ trait Skill
         }
     }
 
+    /**
+     * Apply buff of bodyguard.
+     *
+     * @param int $level
+     */
     public function applyBodyguard($level): void
     {
-        global $session;
-
-        if ( ! isset($session['bufflist']['bodyguard']))
+        if ( ! isset($this->userBuffs['bodyguard']))
         {
             return;
         }
@@ -281,30 +229,35 @@ trait Skill
                 $badguyatkmod = 1.05;
                 $defmod       = 0.95;
                 $rounds       = -1;
+
             break;
 
             case 2:
                 $badguyatkmod = 1.1;
                 $defmod       = 0.9;
                 $rounds       = -1;
+
             break;
 
             case 3:
                 $badguyatkmod = 1.2;
                 $defmod       = 0.8;
                 $rounds       = -1;
+
             break;
 
             case 4:
                 $badguyatkmod = 1.3;
                 $defmod       = 0.7;
                 $rounds       = -1;
+
             break;
 
             case 5:
                 $badguyatkmod = 1.4;
                 $defmod       = 0.6;
                 $rounds       = -1;
+
             break;
         }
 
@@ -321,10 +274,13 @@ trait Skill
         ]);
     }
 
-    public function applySkill($skill, $l)
+    /**
+     * Trigger apply specialties skills.
+     *
+     * @param int|string $skill
+     */
+    public function applySkill($skill)
     {
-        global $session;
-
         if ('godmode' == $skill)
         {
             $this->buffer->applyBuff('godmode', [
