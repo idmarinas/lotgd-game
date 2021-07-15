@@ -85,7 +85,7 @@ trait Option
      */
     public function optionsBattleActive(): self
     {
-        $this->options['isBattleActive'] = true;
+        $this->options['is_battle_active'] = true;
 
         return $this;
     }
