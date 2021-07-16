@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Combat;
 
+use Lotgd\Core\ExpressionLanguage\Battle as ExpressionLanguageBattle;
 use Lotgd\Core\Http\Response;
 use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
@@ -30,6 +31,7 @@ trait BattleTrait
     private $twig;
     private $sanitize;
     private $translator;
+    private $expression;
 
     /**
      * @required
@@ -85,5 +87,10 @@ trait BattleTrait
     public function setTools(Tool $tools): void
     {
         $this->tools = $tools;
+    }
+
+    public function setExpression(ExpressionLanguageBattle $expression): void
+    {
+        $this->expression = $expression;
     }
 }
