@@ -33,6 +33,7 @@ services:
             - "../src/core/Application.php"
             - "../src/core/EventManagerAware.php"
             - "../src/core/EventManager/EventManager.php"
+            - "../src/core/ExpressionLanguage/BattleProvider.php"
             - "../src/core/Fixed/HookManager.php"
             - "../src/core/Twig/Extension/AdvertisingGoogle.php"
             - "../src/core/Hook.php"
@@ -256,4 +257,3 @@ services:
     lotgd_core.combat.battle:
         alias: Lotgd\Core\Combat\Battle
         public: true
-
