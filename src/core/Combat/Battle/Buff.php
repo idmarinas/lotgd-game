@@ -443,14 +443,11 @@ trait Buff
 
     public function expireBuffsAfterBattle()
     {
-        global $session, $countround, $lotgdBattleContent;
-
         //this is a copy of the expire_buffs, but only to be called at the very end of a battle to strip buffs that are only meant to last until a victory/defeat
         //redundant due to the nature of having a check at the beginning of a battle, and now one at the end.
         //use a buff flag 'expireafterfight' which you set to 1 or TRUE
-        \reset($session['bufflist']);
 
-        foreach ($session['bufflist'] as $key => $buff)
+        foreach ($this->userBuffs as $key => $buff)
         {
             if (\array_key_exists('suspended', $buff) && $buff['suspended'])
             {
@@ -463,19 +460,11 @@ trait Buff
             ) {
                 if (isset($buff['wearoff']) && $buff['wearoff'])
                 {
-                    if (\is_array($buff['wearoff']))
-                    {
-                        $buff['wearoff'] = \str_replace('`%', '`%%', $buff['wearoff']);
-                        $msg             = $this->tools->substitute("`5{$buff['wearoff']}`0`n");
-                    }
-                    else
-                    {
-                        $msg = $this->tools->substitute("`5{$buff['wearoff']}`0`n");
-                    }
-                    $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
+                    $msg = $this->tools->substitute("`5{$buff['wearoff']}`0`n");
+                    $this->addContextToRoundAlly($msg);
                 }
 
-                $this->buffer->stripBuff($key);
+                $this->stripBuff($key);
             }
         }
     }
