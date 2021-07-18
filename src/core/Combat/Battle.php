@@ -26,19 +26,22 @@ class Battle
     use BattleStart;
     use BattleEnd;
     use Battle\Action;
-    // use Battle\Bar;
+    use Battle\Bar;
+    use Battle\BattleResult;
     use Battle\Buff;
-    // use Battle\Buffer;
-    // use Battle\Context;
+    use Battle\Buffer;
+    use Battle\Configuration;
+    use Battle\Context;
     use Battle\Enemy;
     use Battle\Extended;
     use Battle\Option;
     use Battle\Other;
-    // use Battle\Prepare;
+    use Battle\Prepare;
     use Battle\Skill;
-    // use Battle\Surprise;
-    // use Battle\Suspend;
+    use Battle\Surprise;
+    use Battle\Suspend;
     use Battle\Target;
+    use Battle\TempStat;
     use Battle\TranslationDomain;
 
     private $dispatcher;
@@ -63,16 +66,24 @@ class Battle
 
     /**
      * Get results of battle.
-     * Only get results not print results.
+     *
+     * @param bool $return Return content results of add to response (Default add results to response)
      */
-    public function battleResults(): string
+    public function battleResults(bool $return = false): string
     {
         if ( ! $this->battleIsEnded)
         {
             throw new \LogicException('Can not get the results of battle. Call Battle::battleEnd() before Battle::battleResults().');
         }
 
-        return $this->twig->render('page/battle.html.twig', $this->getContext());
+        $content = $this->twig->render('page/battle.html.twig', $this->getContext());
+
+        if ($return)
+        {
+            return $content;
+        }
+
+        $this->response->pageAddContent($content);
     }
 
     /**
