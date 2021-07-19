@@ -24,7 +24,6 @@ trait Suspend
     public function suspendBuffs($susp = '', $msg = ''): void
     {
         $notify = false;
-        \reset($this->userBuffs);
 
         foreach ($this->userBuffs as &$buff)
         {
@@ -52,6 +51,31 @@ trait Suspend
         }
     }
 
+    public function unsuspendBuffs($susp = false, $msg = null)
+    {
+        $unsuspendnotify = 0;
+
+        foreach ($this->userBuffs as &$buff)
+        {
+            if (\array_key_exists('expireafterfight', $buff) && $buff['expireafterfight'])
+            {
+                unset($buff);
+            }
+            elseif (\array_key_exists('suspended', $buff) && $buff['suspended'] && $susp && ( ! \array_key_exists($susp, $buff) || ! $buff[$susp]))
+            {
+                $buff['suspended'] = 0;
+                $unsuspendnotify   = 1;
+            }
+        }
+
+        if ($unsuspendnotify)
+        {
+            $msg = $msg ?: 'skill.buffs.gods.restored';
+
+            $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
+        }
+    }
+
     public function suspendBuffByName($name, $msg = '')
     {
         // If it's not already suspended.
@@ -60,10 +84,21 @@ trait Suspend
             $this->userBuffs[$name]['suspended'] = 1;
 
             // And notify.
-            if (! $msg)
-            {
-                $msg = 'skill.buffs.gods.suspended';
-            }
+            $msg = $msg ?: 'skill.buffs.gods.suspended';
+
+            $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
+        }
+    }
+
+    public function unsuspendBuffByName($name, $msg = false)
+    {
+        // If it's not already suspended.
+        if ($this->userBuffs[$name] && $this->userBuffs[$name]['suspended'])
+        {
+            $this->userBuffs[$name]['suspended'] = 0;
+
+            // And notify.
+            $msg = $msg ?: 'skill.buffs.gods.restored';
 
             $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
         }
