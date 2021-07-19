@@ -73,7 +73,7 @@ trait BattleProcess
                     ++$roundAttacks;
                 }
 
-                $this->buffModifiers = $this->activateBuffs('roundstart');
+                $this->buffModifiers = $this->activateBuffs('roundstart', $badguy);
 
                 //-- Check health of enemy and player
                 if ( ! $this->isEnemyAlive($badguy) || ! $this->isPlayerAlive())
