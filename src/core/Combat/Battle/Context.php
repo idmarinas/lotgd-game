@@ -36,8 +36,6 @@ trait Context
         $content['bars_end']           = $this->getBattleBarsEnd();
         $content['battle_has_winner']  = $this->battleHasWinner();
 
-        bdump($content);
-
         return $content;
     }
 
