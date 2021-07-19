@@ -31,7 +31,7 @@ trait Surprise
             if ($this->getEnemiesCount() > 1)
             {
                 $this->surprised = true;
-                $this->addContextToRoundEnemy(['combat.start.surprised.multiple', [], $this->getTextDomain()]);
+                $this->addContextToRoundEnemy(['combat.start.surprised.multiple', [], $this->getTranslationDomain()]);
 
                 return;
             }
@@ -68,7 +68,7 @@ trait Surprise
 
         if ( ! $this->surprised)
         {
-            $this->addContextToRoundAlly(['combat.start.surprised.no', [], $this->getTextDomain()]);
+            $this->addContextToRoundAlly(['combat.start.surprised.no', [], $this->getTranslationDomain()]);
         }
         else
         {
@@ -76,7 +76,7 @@ trait Surprise
 
             $this->addContextToRoundEnemy(['combat.start.surprised.'.$pvPve ? 'pvp' : 'pve', [
                 ($pvPve ? 'player' : 'creatureName') => $this->enemies[0]['creaturename'],
-            ], $this->getTextDomain()]);
+            ], $this->getTranslationDomain()]);
         }
 
         $this->setOption('surprised', true);
