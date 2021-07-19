@@ -153,25 +153,6 @@ trait Skill
         return $dmg;
     }
 
-    public function unsuspendBuffByName($name, $msg = false)
-    {
-        global $session, $countround, $lotgdBattleContent;
-
-        // If it's not already suspended.
-        if ($session['bufflist'][$name] && $session['bufflist'][$name]['suspended'])
-        {
-            $session['bufflist'][$name]['suspended'] = 0;
-
-            // And notify.
-            if (false === $msg)
-            {
-                $msg = 'skill.buffs.gods.restored';
-            }
-
-            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
-        }
-    }
-
     public function isBuffActive($name)
     {
         global $session;
@@ -179,45 +160,11 @@ trait Skill
         return ($session['bufflist'][$name] && ! $session['bufflist'][$name]['suspended']) ? 1 : 0;
     }
 
-    public function unsuspendBuffs($susp = false, $msg = false)
-    {
-        global $session, $badguy, $countround, $lotgdBattleContent;
-
-        $unsuspendnotify = 0;
-        reset($session['bufflist']);
-
-        foreach ($session['bufflist'] as $key => $buff)
-        {
-            if (\array_key_exists('expireafterfight', $buff) && $buff['expireafterfight'])
-            {
-                unset($session['bufflist'][$key]);
-            }
-            elseif (\array_key_exists('suspended', $buff) && $buff['suspended'] && $susp && ( ! \array_key_exists($susp, $buff) || ! $buff[$susp]))
-            {
-                $session['bufflist'][$key]['suspended'] = 0;
-                $unsuspendnotify                        = 1;
-            }
-        }
-
-        if ($unsuspendnotify)
-        {
-            if (false === $msg)
-            {
-                $msg = 'skill.buffs.gods.restored';
-            }
-
-            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
-        }
-    }
-
-    /**
-     * Apply buff of bodyguard.
-     *
-     * @param int $level
-     */
     public function applyBodyguard($level): void
     {
-        if ( ! isset($this->userBuffs['bodyguard']))
+        global $session;
+
+        if ( ! isset($session['bufflist']['bodyguard']))
         {
             return;
         }
@@ -261,7 +208,7 @@ trait Skill
             break;
         }
 
-        $this->buffer->applyBuff('bodyguard', [
+        $this->applyBuff('bodyguard', [
             'startmsg'         => $this->translator->trans('skill.bodyguard.startmsg', [], 'page_battle'),
             'name'             => $this->translator->trans('skill.bodyguard.name', [], 'page_battle'),
             'wearoff'          => $this->translator->trans('skill.bodyguard.wearoff', [], 'page_battle'),
@@ -274,16 +221,11 @@ trait Skill
         ]);
     }
 
-    /**
-     * Trigger apply specialties skills.
-     *
-     * @param int|string $skill
-     */
-    public function applySkill($skill)
+    public function applySkill($skill, $l)
     {
         if ('godmode' == $skill)
         {
-            $this->buffer->applyBuff('godmode', [
+            $this->applyBuff('godmode', [
                 'name'         => $this->translator->trans('skill.godmode.name', [], 'page_battle'),
                 'rounds'       => 1,
                 'wearoff'      => $this->translator->trans('skill.godmode.wearoff', [], 'page_battle'),
