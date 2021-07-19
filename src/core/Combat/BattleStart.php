@@ -69,13 +69,16 @@ trait BattleStart
         $this->userSafe = array_filter($this->user, function ($key)
         {
             return ! \in_array($key, [
+                //-- Data of user
                 'avatar', 'laston', 'loggedin', 'superuser', 'login', 'lastmotd', 'locked',
                 'lastip', 'uniqueid', 'boughtroomtoday', 'emailaddress', 'replaceemail', 'emailvalidation', 'sentnotice', 'prefs',
                 'transferredtoday', 'recentcomments', 'amountouttoday', 'regdate', 'banoverride', 'donation', 'donationspent',
                 'donationconfig', 'referer', 'refererawarded', 'password', 'forgottenpassword', 'roles',
+                //-- Other
+                'acct', 'badguy', 'allowednavs', 'companions', 'bufflist'
             ]);
         }, ARRAY_FILTER_USE_KEY);
-        $this->userBuffs  = $session['buffslist'] ?? [];
+        $this->userBuffs  = $this->user['buffslist'] ?? [];
         $this->userBuffs  = \is_array($this->userBuffs) ? $this->userBuffs : [];
         $this->companions = $companions;
 
