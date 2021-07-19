@@ -15,7 +15,7 @@ namespace Lotgd\Core\Combat\Battle;
 
 trait TempStat
 {
-    private $temp_user_stats = ['is_suspended' => false];
+    private $temp_user_stats = [];
 
     public function applyTempStat($name, $value, $type = 'add')
     {
@@ -36,7 +36,7 @@ trait TempStat
                 $temp[$name] += $value;
             }
 
-            if ( ! $this->temp_user_stats['is_suspended'])
+            if ( ! isset($this->temp_user_stats['is_suspended']) || ! $this->temp_user_stats['is_suspended'])
             {
                 $this->user[$name] += $value;
             }
@@ -81,7 +81,7 @@ trait TempStat
 
     public function suspendTempStats()
     {
-        if ( ! $this->temp_user_stats['is_suspended'])
+        if ( ! isset($this->temp_user_stats['is_suspended']) || ! $this->temp_user_stats['is_suspended'])
         {
             foreach ($this->temp_user_stats as $type => $collection)
             {
@@ -93,6 +93,7 @@ trait TempStat
                     }
                 }
             }
+
             $this->temp_user_stats['is_suspended'] = true;
 
             $this->updateData();
