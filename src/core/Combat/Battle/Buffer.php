@@ -39,7 +39,7 @@ trait Buffer
             {
                 if ('tempstat-' == substr($property, 0, 9))
                 {
-                    $this->tempStat->applyTempStat(substr($property, 9), $value);
+                    $this->applyTempStat(substr($property, 9), $value);
                 }
             }
 
@@ -124,7 +124,7 @@ trait Buffer
                 {
                     if ('tempstat-' == substr($property, 0, 9))
                     {
-                        $this->tempStat->applyTempStat(substr($property, 9), -$value);
+                        $this->applyTempStat(substr($property, 9), -$value);
                     }
                 }
                 unset($this->userBuffs[$buffname]['tempstats_calculated']);
