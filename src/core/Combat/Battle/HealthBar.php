@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Combat\Battle;
 
-trait Bar
+trait HealthBar
 {
     protected $battleBarStart = [];
     protected $battleBarEnd   = [];
@@ -157,7 +157,7 @@ trait Bar
         return $data;
     }
 
-    private function getPrefBarDisplay(): array
+    protected function getPrefBarDisplay(): array
     {
         $barDisplay = (int) ($this->user['prefs']['forestcreaturebar'] ?? $this->settings->getSetting('forestcreaturebar', 0));
 
