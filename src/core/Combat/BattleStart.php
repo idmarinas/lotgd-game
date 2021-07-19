@@ -69,7 +69,7 @@ trait BattleStart
         $this->userSafe = array_filter($this->user, function ($key)
         {
             return ! \in_array($key, [
-                'acctid', 'avatar_id', 'laston', 'loggedin', 'superuser', 'login', 'lastmotd', 'locked',
+                'avatar', 'laston', 'loggedin', 'superuser', 'login', 'lastmotd', 'locked',
                 'lastip', 'uniqueid', 'boughtroomtoday', 'emailaddress', 'replaceemail', 'emailvalidation', 'sentnotice', 'prefs',
                 'transferredtoday', 'recentcomments', 'amountouttoday', 'regdate', 'banoverride', 'donation', 'donationspent',
                 'donationconfig', 'referer', 'refererawarded', 'password', 'forgottenpassword', 'roles',
