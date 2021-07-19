@@ -16,6 +16,249 @@ namespace Lotgd\Core\Combat\Battle;
 trait Extended
 {
     /**
+     * Prepare all data for show battle bars.
+     *
+     * @return array
+     */
+    public function prepareDataBattleBars(array $enemies)
+    {
+        global $enemycounter, $companions, $session;
+
+        $user = &$session['user']; //fast and better
+        $data = [];
+
+        $barDisplay                         = (int) ($user['prefs']['forestcreaturebar'] ?? $this->settings->getSetting('forestcreaturebar', 0));
+        $user['prefs']['forestcreaturebar'] = $barDisplay;
+
+        $hitpointstext = 'battlebars.death.hitpoints';
+        $healthtext    = 'battlebars.death.health';
+
+        if ($user['alive'])
+        {
+            $hitpointstext = 'battlebars.alive.hitpoints';
+            $healthtext    = 'battlebars.alive.hitpoints';
+        }
+
+        $data['enemies'] = [];
+        //-- Prepare data for enemies
+        foreach ($enemies as $index => $badguy)
+        {
+            $ccode = '`2';
+
+            if ((isset($badguy['istarget']) && true == $badguy['istarget']) && $enemycounter > 1)
+            {
+                $ccode = '`#';
+            }
+
+            if (isset($badguy['hidehitpoints']) && true == $badguy['hidehitpoints'])
+            {
+                $maxhealth = $health = 'battlebars.unknownhp';
+            }
+            else
+            {
+                $health    = $badguy['creaturehealth'];
+                $maxhealth = $badguy['creaturemaxhealth'];
+            }
+
+            $data['enemies'][$index] = [
+                'showbar'       => false,
+                'showhptext'    => true,
+                'who'           => 'battlebars.who.enemy',
+                'isTarget'      => (isset($badguy['istarget']) && $badguy['istarget'] && $enemycounter > 1),
+                'name'          => $ccode.$badguy['creaturename'].$ccode,
+                'level'         => $badguy['creaturelevel'],
+                'hitpointstext' => $hitpointstext,
+                'healthtext'    => $healthtext,
+                'hpvalue'       => $badguy['creaturehealth'], //-- Real health of creature
+                'hptotal'       => $badguy['creaturemaxhealth'], //-- Real max health of creature
+                'hpvaluetext'   => $health,
+                'hptotaltext'   => $maxhealth,
+            ];
+
+            if (1 == $barDisplay)
+            {
+                $data['enemies'][$index]['showhptext'] = false;
+                $data['enemies'][$index]['showbar']    = true;
+            }
+            elseif (2 == $barDisplay)
+            {
+                $data['enemies'][$index]['showbar'] = true;
+            }
+        }
+
+        //-- Prepare data for player
+        if ($user['alive'])
+        {
+            $hitpointstext = $user['name'].'`0';
+            $dead          = false;
+        }
+        else
+        {
+            $hitpointstext = ['battlebars.death.player', ['name' => $user['name']]];
+            $dead          = true;
+            $maxsoul       = 50 + 10 * $user['level'] + $user['dragonkills'] * 2;
+        }
+
+        $data['user'] = [
+            'showbar'     => false,
+            'showhptext'  => true,
+            'who'         => 'battlebars.who.player',
+            'isTarget'    => false,
+            'name'        => $hitpointstext,
+            'level'       => $user['level'],
+            'healthtext'  => $healthtext,
+            'hpvalue'     => $user['hitpoints'],
+            'hptotal'     => ( ! $dead ? $user['maxhitpoints'] : $maxsoul),
+            'hpvaluetext' => $user['hitpoints'],
+            'hptotaltext' => ( ! $dead ? $user['maxhitpoints'] : $maxsoul),
+        ];
+
+        if (1 == $barDisplay)
+        {
+            $data['user']['showhptext'] = false;
+            $data['user']['showbar']    = true;
+        }
+        elseif (2 == $barDisplay)
+        {
+            $data['user']['showbar'] = true;
+        }
+
+        //-- Prepare data for companions
+        $data['companions'] = [];
+
+        foreach ($companions as $index => $companion)
+        {
+            $ccode = '`2';
+
+            if (isset($companion['hidehitpoints']) && true == $companion['hidehitpoints'])
+            {
+                $maxhealth = $health = 'battlebars.unknownhp';
+            }
+            else
+            {
+                $health    = $companion['hitpoints'];
+                $maxhealth = $companion['maxhitpoints'];
+            }
+
+            $data['companions'][$index] = [
+                'showbar'       => false,
+                'showhptext'    => true,
+                'who'           => 'battlebars.who.companion',
+                'isTarget'      => (isset($companion['istarget']) && $companion['istarget'] && $enemycounter > 1),
+                'name'          => $ccode.$companion['name'].$ccode,
+                'level'         => $session['user']['level'],
+                'hitpointstext' => $hitpointstext,
+                'healthtext'    => $healthtext,
+                'hpvalue'       => $companion['hitpoints'], //-- Real health of companion
+                'hptotal'       => $companion['maxhitpoints'], //-- Real max health of creature
+                'hpvaluetext'   => $health,
+                'hptotaltext'   => $maxhealth,
+            ];
+
+            if (1 == $barDisplay)
+            {
+                $data['companions'][$index]['showhptext'] = false;
+                $data['companions'][$index]['showbar']    = true;
+            }
+            elseif (2 == $barDisplay)
+            {
+                $data['companions'][$index]['showbar'] = true;
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * Suspends companions on a given parameter.
+     *
+     * @param string $susp  The type of suspension
+     * @param string $nomsg The message to be displayed upon suspending. If false, no message will be displayed.
+     */
+    public function suspendCompanions($susp, $nomsg = null)
+    {
+        global $companions, $countround, $lotgdBattleContent;
+
+        $newcompanions = [];
+        $suspended     = false;
+
+        if (\is_array($companions))
+        {
+            foreach ($companions as $name => $companion)
+            {
+                if (
+                    $susp
+                    && ( ! isset($companion[$susp]) || ! $companion[$susp])
+                    && ( ! isset($companion['suspended']) || ! $companion['suspended'])
+                ) {
+                    $suspended              = true;
+                    $companion['suspended'] = true;
+                }
+
+                $newcompanions[$name] = $companion;
+            }
+        }
+
+        if ($suspended)
+        {
+            if (false === $nomsg || null === $nomsg)
+            {
+                $nomsg = 'skill.companion.suspended';
+            }
+
+            if ($nomsg)
+            {
+                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $nomsg;
+            }
+        }
+
+        $companions = $newcompanions;
+    }
+
+    /**
+     * Enables suspended companions.
+     *
+     * @param string $susp  The type of suspension
+     * @param string $nomsg The message to be displayed upon unsuspending. If false, no message will be displayed.
+     */
+    public function unSuspendCompanions($susp, $nomsg = null)
+    {
+        global $companions, $countround, $lotgdBattleContent;
+
+        $notify        = false;
+        $newcompanions = [];
+
+        if (\is_array($companions))
+        {
+            foreach ($companions as $name => $companion)
+            {
+                if (isset($companion['suspended']) && true == $companion['suspended'])
+                {
+                    $notify                 = true;
+                    $companion['suspended'] = false;
+                }
+
+                $newcompanions[$name] = $companion;
+            }
+        }
+
+        if ($notify && false !== $nomsg)
+        {
+            if (null === $nomsg || false === $nomsg)
+            {
+                $nomsg = 'skill.companion.restored';
+            }
+
+            if ($nomsg)
+            {
+                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $nomsg;
+            }
+        }
+
+        $companions = $newcompanions;
+    }
+
+    /**
      * Based upon the type of the companion different actions are performed and the companion is marked as "used" after that.
      *
      * @param array  $companion The companion itself
@@ -612,6 +855,21 @@ trait Extended
                     ];
                 }
             }
+        }
+    }
+
+    /**
+     * Executes the given script or loads the script and then executes it.
+     *
+     * @param string $script the script to be executed
+     */
+    public function executeAiScript($script)
+    {
+        global $unsetme;
+
+        if ($script > '')
+        {
+            eval($script);
         }
     }
 }
