@@ -15,12 +15,10 @@ namespace Lotgd\Core\Combat\Battle;
 
 trait Buff
 {
-    public function activateBuffs($tag)
+    private $buffStarted = [];
+
+    public function activateBuffs($tag, &$badguy)
     {
-        global $session, $badguy, $countround, $lotgdBattleContent;
-
-        \reset($session['bufflist']);
-
         $result                 = [];
         $result['invulnerable'] = 0;
         $result['dmgmod']       = 1;
@@ -35,23 +33,23 @@ trait Buff
         $result['lifetap']      = [];
         $result['dmgshield']    = [];
 
-        foreach ($session['bufflist'] as $key => $buff)
+        foreach ($this->userBuffs as $key => &$buff)
         {
             if (\array_key_exists('suspended', $buff) && $buff['suspended'])
             {
                 continue;
             }
 
-            if (isset($buff['startmsg']))
+            if (isset($buff['startmsg']) && ! ($this->buffStarted[$key] ?? false))
             {
                 if (\is_array($buff['startmsg']))
                 {
                     $buff['startmsg'] = \str_replace('`%', '`%%', $buff['startmsg']);
                 }
 
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $this->tools->substitute("`5{$buff['startmsg']}`0`n");
+                $this->addContextToRoundAlly([$this->tools->substitute("`5{$buff['startmsg']}`0`n"), [], $this->getTranslationDomain()]);
 
-                unset($session['bufflist'][$key]['startmsg']);
+                $this->buffStarted[$key] = true;
             }
 
             // Figure out activate based on buff features
@@ -96,7 +94,7 @@ trait Buff
             if ($activate && ( ! \array_key_exists('used', $buff) || ! $buff['used']))
             {
                 // mark it used.
-                $session['bufflist'][$key]['used'] = 1;
+                $buff['used'] = 1;
                 // if it has a 'round message', run it.
                 if (isset($buff['roundmsg']))
                 {
@@ -105,7 +103,7 @@ trait Buff
                         $buff['roundmsg'] = \str_replace('`%', '`%%', $buff['roundmsg']);
                     }
 
-                    $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $this->tools->substitute("`5{$buff['roundmsg']}`0`n");
+                    $this->addContextToRoundAlly([$this->tools->substitute("`5{$buff['roundmsg']}`0`n"), [], $this->getTranslationDomain()]);
                 }
             }
 
@@ -173,7 +171,7 @@ trait Buff
             if (isset($buff['regen']) && 'roundstart' == $tag && $badguy['istarget'])
             {
                 $hptoregen = (int) $buff['regen'];
-                $hpdiff    = $session['user']['maxhitpoints'] - $session['user']['hitpoints'];
+                $hpdiff    = $this->user['maxhitpoints'] - $this->user['hitpoints'];
                 // Don't regen if we are above max hp
                 if ($hpdiff < 0)
                 {
@@ -184,7 +182,7 @@ trait Buff
                 {
                     $hptoregen = $hpdiff;
                 }
-                $session['user']['hitpoints'] += $hptoregen;
+                $this->user['hitpoints'] += $hptoregen;
                 // Now, take abs value just incase this was a damaging buff
                 $hptoregen = \abs($hptoregen);
 
@@ -195,9 +193,9 @@ trait Buff
                     $msg = $buff['effectnodmgmsg'] ?? '';
                 }
 
-                if ('' != $msg)
+                if ($msg)
                 {
-                    $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $this->tools->substitute("`){$msg}`0`n", ['{damage}'], [$hptoregen]);
+                    $this->addContextToRoundAlly([$this->tools->substitute("`){$msg}`0`n", ['{damage}'], [$hptoregen]), [], $this->getTranslationDomain()]);
                 }
 
                 if (isset($buff['aura']) && $buff['aura'])
@@ -210,7 +208,6 @@ trait Buff
                     {
                         foreach ($companions as $name => $companion)
                         {
-                            $unset = false;
                             // if a companion is damaged AND ( a companion ist still alive OR ( a companion is unconscious AND it's a healing effect))
                             if ($companion['hitpoints'] < $companion['maxhitpoints'] && ($companion['hitpoints'] > 0 || ($companion['cannotdie'] && $auraeffect > 0)))
                             {
@@ -218,22 +215,18 @@ trait Buff
                                 $companions[$name]['hitpoints'] += $hptoregen;
                                 $msg = $this->tools->substitute("`){$buff['auramsg']}`0`n", ['{damage}', '{companion}'], [$hptoregen, $companion['name']]);
 
-                                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
+                                $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
 
                                 if ($hptoregen < 0 && $companion['hitpoints'] <= 0)
                                 {
                                     if (isset($companion['dyingtext']))
                                     {
-                                        $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $companion['dyingtext'];
+                                        $this->addContextToRoundAlly([$companion['dyingtext'], [], $this->getTranslationDomain()]);
                                     }
 
-                                    if (isset($companion['cannotdie']) && true == $companion['cannotdie'])
+                                    if (isset($companion['cannotdie']) && $companion['cannotdie'])
                                     {
                                         $companion['hitpoints'] = 0;
-                                    }
-                                    else
-                                    {
-                                        $unset = true;
                                     }
                                 }
                             }
@@ -272,7 +265,7 @@ trait Buff
                     }
                     elseif (1 == $who)
                     {
-                        $session['user']['hitpoints'] -= $damage;
+                        $this->user['hitpoints'] -= $damage;
                     }
 
                     if ($damage < 0)
@@ -292,7 +285,7 @@ trait Buff
                     {
                         $msg = $this->tools->substitute("`){$msg}`0`n", ['{damage}'], [\abs($damage)]);
 
-                        $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
+                        $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
                     }
 
                     if ($badguy['dead'])
@@ -310,8 +303,6 @@ trait Buff
 
     public function processLifeTaps($ltaps, $damage)
     {
-        global $session, $countround, $lotgdBattleContent;
-
         foreach ($ltaps as $buff)
         {
             if (isset($buff['suspended']) && $buff['suspended'])
@@ -319,7 +310,7 @@ trait Buff
                 continue;
             }
 
-            $healhp = \max(0, $session['user']['maxhitpoints'] - $session['user']['hitpoints']);
+            $healhp = \max(0, $this->user['maxhitpoints'] - $this->user['hitpoints']);
 
             if (0 == $healhp)
             {
@@ -343,21 +334,18 @@ trait Buff
                     $msg = $buff['effectfailmsg'] ?? '';
                 }
             }
-            $session['user']['hitpoints'] += $healhp;
+            $this->user['hitpoints'] += $healhp;
 
-            if ($msg > '')
+            if ($msg)
             {
                 $msg = $this->tools->substitute("`){$msg}`0`n", ['{damage}'], [$healhp]);
-
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
+                $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
             }
         }
     }
 
-    public function processDmgShield($dshield, $damage)
+    public function processDmgShield($dshield, $damage, &$badguy)
     {
-        global $badguy, $countround, $lotgdBattleContent;
-
         foreach ($dshield as $buff)
         {
             if (isset($buff['suspended']) && $buff['suspended'])
@@ -390,20 +378,18 @@ trait Buff
                 $badguy['dead']     = true;
             }
 
-            if ($msg > '')
+            if ($msg)
             {
                 $msg = $this->tools->substitute("`){$msg}`0`n", ['{damage}'], [$realdamage]);
 
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
+                $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
             }
         }
     }
 
     public function expireBuffs()
     {
-        global $session, $countround, $lotgdBattleContent;
-
-        foreach ($session['bufflist'] as $key => $buff)
+        foreach ($this->userBuffs as $key => &$buff)
         {
             if (\array_key_exists('suspended', $buff) && $buff['suspended'])
             {
@@ -412,14 +398,14 @@ trait Buff
 
             if (\array_key_exists('used', $buff) && $buff['used'])
             {
-                $session['bufflist'][$key]['used'] = 0;
+                $buff['used'] = 0;
 
-                if ($session['bufflist'][$key]['rounds'] > 0)
+                if ($buff['rounds'] > 0)
                 {
-                    --$session['bufflist'][$key]['rounds'];
+                    --$buff['rounds'];
                 }
 
-                if (0 == (int) $session['bufflist'][$key]['rounds'])
+                if (0 == (int) $buff['rounds'])
                 {
                     if (isset($buff['wearoff']) && $buff['wearoff'])
                     {
@@ -433,9 +419,9 @@ trait Buff
                             $msg = $this->tools->substitute('`5'.$buff['wearoff'].'`0`n');
                         }
 
-                        $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
+                        $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
                     }
-                    $this->buffer->stripBuff($key);
+                    $this->stripBuff($key);
                 }
             }
         }
@@ -461,7 +447,8 @@ trait Buff
                 if (isset($buff['wearoff']) && $buff['wearoff'])
                 {
                     $msg = $this->tools->substitute("`5{$buff['wearoff']}`0`n");
-                    $this->addContextToRoundAlly($msg);
+
+                    $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
                 }
 
                 $this->stripBuff($key);
