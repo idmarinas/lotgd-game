@@ -57,6 +57,8 @@ trait Target
                 {
                     $badguy['istarget'] = true;
 
+                    $this->isChangeTarget = true;
+
                     $this->setTarget($index);
                 }
                 elseif ($badguy['cannotbetarget'])
