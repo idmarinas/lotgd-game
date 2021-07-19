@@ -25,7 +25,6 @@ class Battle
     use BattleProcess;
     use BattleStart;
     use BattleEnd;
-    use Battle\Action;
     use Battle\Bar;
     use Battle\BattleResult;
     use Battle\Buff;
@@ -34,9 +33,12 @@ class Battle
     use Battle\Context;
     use Battle\Enemy;
     use Battle\Extended;
+    use Battle\Movement;
     use Battle\Option;
     use Battle\Other;
     use Battle\Prepare;
+    use Battle\Process;
+    use Battle\Round;
     use Battle\Skill;
     use Battle\Surprise;
     use Battle\Suspend;
@@ -68,8 +70,10 @@ class Battle
      * Get results of battle.
      *
      * @param bool $return Return content results of add to response (Default add results to response)
+     *
+     * @return void|string
      */
-    public function battleResults(bool $return = false): string
+    public function battleResults(bool $return = false)
     {
         if ( ! $this->battleIsEnded)
         {

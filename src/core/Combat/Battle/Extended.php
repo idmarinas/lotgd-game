@@ -16,49 +16,6 @@ namespace Lotgd\Core\Combat\Battle;
 trait Extended
 {
     /**
-     * Enables suspended companions.
-     *
-     * @param string $susp  The type of suspension
-     * @param string $nomsg The message to be displayed upon unsuspending. If false, no message will be displayed.
-     */
-    public function unSuspendCompanions($susp, $nomsg = null)
-    {
-        global $companions, $countround, $lotgdBattleContent;
-
-        $notify        = false;
-        $newcompanions = [];
-
-        if (\is_array($companions))
-        {
-            foreach ($companions as $name => $companion)
-            {
-                if (isset($companion['suspended']) && true == $companion['suspended'])
-                {
-                    $notify                 = true;
-                    $companion['suspended'] = false;
-                }
-
-                $newcompanions[$name] = $companion;
-            }
-        }
-
-        if ($notify && false !== $nomsg)
-        {
-            if (null === $nomsg || false === $nomsg)
-            {
-                $nomsg = 'skill.companion.restored';
-            }
-
-            if ($nomsg)
-            {
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $nomsg;
-            }
-        }
-
-        $companions = $newcompanions;
-    }
-
-    /**
      * Based upon the type of the companion different actions are performed and the companion is marked as "used" after that.
      *
      * @param array  $companion The companion itself
@@ -655,21 +612,6 @@ trait Extended
                     ];
                 }
             }
-        }
-    }
-
-    /**
-     * Executes the given script or loads the script and then executes it.
-     *
-     * @param string $script the script to be executed
-     */
-    public function executeAiScript($script)
-    {
-        global $unsetme;
-
-        if ($script > '')
-        {
-            eval($script);
         }
     }
 }
