@@ -13,135 +13,32 @@
 
 namespace Lotgd\Core\Combat;
 
-use Lotgd\Core\Http\Response;
-
 class TempStat
 {
-    private $temp_user_stats = ['is_suspended' => false];
-    private $response;
+    private $battle;
 
-    public function __construct(Response $response)
+    public function __construct(Battle $battle)
     {
-        $this->response = $response;
+        $this->battle = $battle;
     }
 
     public function applyTempStat($name, $value, $type = 'add')
     {
-        global $session;
-
-        if ('add' == $type)
-        {
-            if ( ! isset($this->temp_user_stats['add']))
-            {
-                $this->temp_user_stats['add'] = [];
-            }
-            $temp = &$this->temp_user_stats['add'];
-
-            if ( ! isset($temp[$name]))
-            {
-                $temp[$name] = $value;
-            }
-            else
-            {
-                $temp[$name] += $value;
-            }
-
-            if ( ! $this->temp_user_stats['is_suspended'])
-            {
-                $session['user'][$name] += $value;
-            }
-
-            return true;
-        }
-
-        $this->response->pageDebug("Temp stat type {$type} is not supported.");
-
-        return false;
+        return $this->battle->applyTempStat($name, $value, $type);
     }
 
     public function checkTempStat($name, $color = false)
     {
-        global $session;
-
-        if (isset($this->temp_user_stats['add'][$name]))
-        {
-            $v = $this->temp_user_stats['add'][$name];
-        }
-        else
-        {
-            $v = 0;
-        }
-
-        if (false === $color)
-        {
-            return 0 == $v ? '' : $v;
-        }
-        else
-        {
-            if ($v > 0)
-            {
-                return ' `&('.($session['user'][$name] - \round($v, 1)).'`@+'.\round($v, 1).'`&)';
-            }
-            else
-            {
-                return 0 == $v ? '' : ' `&('.($session['user'][$name] + \round($v, 1)).'`$-'.\round($v, 1).'`&)';
-            }
-        }
+        return $this->battle->checkTempStat($name, $color);
     }
 
     public function suspendTempStats()
     {
-        global $session;
-
-        if ( ! $this->temp_user_stats['is_suspended'])
-        {
-            \reset($this->temp_user_stats);
-
-            foreach ($this->temp_user_stats as $type => $collection)
-            {
-                if ('add' == $type)
-                {
-                    \reset($collection);
-
-                    foreach ($collection as $attribute => $value)
-                    {
-                        $session['user'][$attribute] -= $value;
-                    }
-                }
-            }
-            $this->temp_user_stats['is_suspended'] = true;
-
-            return true;
-        }
-
-        return false;
+        return $this->battle->suspendTempStats();
     }
 
     public function restoreTempStats()
     {
-        global $session;
-
-        if ($this->temp_user_stats['is_suspended'])
-        {
-            \reset($this->temp_user_stats);
-
-            foreach ($this->temp_user_stats as $type => $collection)
-            {
-                if ('add' == $type)
-                {
-                    \reset($collection);
-
-                    foreach ($collection as $attribute => $value)
-                    {
-                        $session['user'][$attribute] += $value;
-                    }
-                }
-            }
-            $this->temp_user_stats['is_suspended'] = false;
-
-            return true;
-        }
-
-        return false;
+        return $this->battle->restoreTempStats();
     }
 }
