@@ -30,6 +30,13 @@ trait Enemy
     private $target = 0;
 
     /**
+     * Data of targed enemy.
+     *
+     * @var array
+     */
+    private $enemyTargeted;
+
+    /**
      * Get list of enemies.
      */
     public function getEnemies(): array
@@ -69,7 +76,8 @@ trait Enemy
      */
     public function setTarget(int $target): self
     {
-        $this->target = $this->validateTarget($target);
+        $this->target        = $this->validateTarget($target);
+        $this->enemyTargeted = $this->enemies[$this->target];
 
         return $this;
     }
