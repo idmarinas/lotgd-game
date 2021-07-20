@@ -36,20 +36,20 @@ trait Formula
             }
 
             $creatureattack      = $badguy['creatureattack'] * $this->buffModifiers['badguyatkmod'];
-            $adjustedselfdefense = (get_player_defense() * $this->buffModifiers['defmod']);
+            $adjustedselfdefense = ($this->playerFunction->getPlayerDefense() * $this->buffModifiers['defmod']);
 
             if ( ! isset($badguy['physicalresistance']))
             {
                 $badguy['physicalresistance'] = 0;
             }
-            $powerattack      = (int) getsetting('forestpowerattackchance', 10);
-            $powerattackmulti = (float) getsetting('forestpowerattackmulti', 3);
+            $powerattack      = (int) $this->settings->getSetting('forestpowerattackchance', 10);
+            $powerattackmulti = (float) $this->settings->getSetting('forestpowerattackmulti', 3);
 
             while (0 == $creaturedmg && 0 == $selfdmg)
             {
-                $atk = get_player_attack() * $this->buffModifiers['atkmod'];
+                $atk = $this->playerFunction->getPlayerAttack() * $this->buffModifiers['atkmod'];
 
-                if (1 == \mt_rand(1, 20) && 'pvp' != $this->getOptionType())
+                if (1 == mt_rand(1, 20) && 'pvp' != $this->getOptionType())
                 {
                     $atk *= 3;
                 }
@@ -65,14 +65,14 @@ trait Formula
                 if ($creaturedmg < 0)
                 {
                     $creaturedmg = (int) ($creaturedmg / 2);
-                    $creaturedmg = \round($this->buffModifiers['badguydmgmod'] * $creaturedmg, 0);
-                    $creaturedmg = \min(0, \round($creaturedmg - $badguy['physicalresistance']));
+                    $creaturedmg = round($this->buffModifiers['badguydmgmod'] * $creaturedmg, 0);
+                    $creaturedmg = min(0, round($creaturedmg - $badguy['physicalresistance']));
                 }
 
                 if ($creaturedmg > 0)
                 {
-                    $creaturedmg = \round($this->buffModifiers['dmgmod'] * $creaturedmg, 0);
-                    $creaturedmg = \max(0, \round($creaturedmg - $badguy['physicalresistance']));
+                    $creaturedmg = round($this->buffModifiers['dmgmod'] * $creaturedmg, 0);
+                    $creaturedmg = max(0, round($creaturedmg - $badguy['physicalresistance']));
                 }
                 $pdefroll = bell_rand(0, $adjustedselfdefense);
                 $catkroll = bell_rand(0, $creatureattack);
@@ -87,14 +87,14 @@ trait Formula
                 if ($selfdmg < 0)
                 {
                     $selfdmg = (int) ($selfdmg / 2);
-                    $selfdmg = \round($selfdmg * $this->buffModifiers['dmgmod'], 0);
-                    $selfdmg = \min(0, \round($selfdmg - ((int) get_player_physical_resistance()), 0));
+                    $selfdmg = round($selfdmg * $this->buffModifiers['dmgmod'], 0);
+                    $selfdmg = min(0, round($selfdmg - ((int) $this->playerFunction->getPlayerPhysicalResistance()), 0));
                 }
 
                 if ($selfdmg > 0)
                 {
-                    $selfdmg = \round($selfdmg * $this->buffModifiers['badguydmgmod'], 0);
-                    $selfdmg = \max(0, \round($selfdmg - ((int) get_player_physical_resistance()), 0));
+                    $selfdmg = round($selfdmg * $this->buffModifiers['badguydmgmod'], 0);
+                    $selfdmg = max(0, round($selfdmg - ((int) $this->playerFunction->getPlayerPhysicalResistance()), 0));
                 }
             }
         }
@@ -102,8 +102,8 @@ trait Formula
         // Handle god mode's invulnerability
         if ($this->buffModifiers['invulnerable'])
         {
-            $creaturedmg = \abs($creaturedmg);
-            $selfdmg     = -\abs($selfdmg);
+            $creaturedmg = abs($creaturedmg);
+            $selfdmg     = -abs($selfdmg);
         }
 
         return [
@@ -157,12 +157,12 @@ trait Formula
                 if ($creaturedmg < 0)
                 {
                     $creaturedmg = (int) ($creaturedmg / 2);
-                    $creaturedmg = \round($this->buffModifiers['badguydmgmod'] * $creaturedmg, 0);
+                    $creaturedmg = round($this->buffModifiers['badguydmgmod'] * $creaturedmg, 0);
                 }
 
                 if ($creaturedmg > 0)
                 {
-                    $creaturedmg = \round($this->buffModifiers['compdmgmod'] * $creaturedmg, 0);
+                    $creaturedmg = round($this->buffModifiers['compdmgmod'] * $creaturedmg, 0);
                 }
 
                 $pdefroll = bell_rand(0, $adjustedselfdefense);
@@ -173,12 +173,12 @@ trait Formula
                 if ($selfdmg < 0)
                 {
                     $selfdmg = (int) ($selfdmg / 2);
-                    $selfdmg = \round($selfdmg * $this->buffModifiers['compdmgmod'], 0);
+                    $selfdmg = round($selfdmg * $this->buffModifiers['compdmgmod'], 0);
                 }
 
                 if ($selfdmg > 0)
                 {
-                    $selfdmg = \round($selfdmg * $this->buffModifiers['badguydmgmod'], 0);
+                    $selfdmg = round($selfdmg * $this->buffModifiers['badguydmgmod'], 0);
                 }
             }
         }
@@ -186,8 +186,8 @@ trait Formula
         // Handle god mode's invulnerability
         if ($this->buffModifiers['invulnerable'])
         {
-            $creaturedmg = \abs($creaturedmg);
-            $selfdmg     = -\abs($selfdmg);
+            $creaturedmg = abs($creaturedmg);
+            $selfdmg     = -abs($selfdmg);
         }
 
         return [
