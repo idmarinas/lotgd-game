@@ -89,9 +89,9 @@ trait Result
             $args = new GenericEvent(null, $this->getEnemies());
             $this->dispatcher->dispatch($args, Events::PAGE_BATTLE_TURN_END);
             modulehook('battle-turn-end', $args->getArguments());
-
-            $this->setBattleBarEnd($this->prepareBattleBars());
         }
+
+        $this->setBattleBarEnd($this->prepareBattleBars());
     }
 
     protected function battleVictory()
