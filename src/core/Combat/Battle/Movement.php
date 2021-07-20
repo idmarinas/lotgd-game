@@ -576,7 +576,7 @@ trait Movement
 
     protected function reportPowerMove($crit, $dmg)
     {
-        $uatk = get_player_attack();
+        $uatk = $this->playerFunction->getPlayerAttack();
 
         if ($crit > $uatk)
         {
@@ -605,10 +605,10 @@ trait Movement
 
             if ($power)
             {
-                $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
+                $this->addContextToRoundAlly($msg);
 
                 $dmg += e_rand($crit / 4, $crit / 2);
-                $dmg = \max($dmg, 1);
+                $dmg = max($dmg, 1);
             }
         }
 
