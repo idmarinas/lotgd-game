@@ -62,25 +62,25 @@ trait Extended
                 if ($creaturedmg < 0)
                 {
                     $creaturedmg = (int) ($creaturedmg / 2);
-                    $creaturedmg = \round($buffset['badguydmgmod'] * $creaturedmg, 0);
+                    $creaturedmg = round($buffset['badguydmgmod'] * $creaturedmg, 0);
                 }
                 elseif ($creaturedmg > 0)
                 {
-                    $creaturedmg = \round($buffset['compdmgmod'] * $creaturedmg, 0);
+                    $creaturedmg = round($buffset['compdmgmod'] * $creaturedmg, 0);
                 }
 
                 $pdefroll = bell_rand(0, $adjustedselfdefense);
                 $catkroll = bell_rand(0, $creatureattack);
-                $selfdmg = 0 - (int) ($pdefroll - $catkroll);
+                $selfdmg  = 0 - (int) ($pdefroll - $catkroll);
 
                 if ($selfdmg < 0)
                 {
                     $selfdmg = (int) ($selfdmg / 2);
-                    $selfdmg = \round($selfdmg * $buffset['compdmgmod'], 0);
+                    $selfdmg = round($selfdmg * $buffset['compdmgmod'], 0);
                 }
                 elseif ($selfdmg > 0)
                 {
-                    $selfdmg = \round($selfdmg * $buffset['badguydmgmod'], 0);
+                    $selfdmg = round($selfdmg * $buffset['badguydmgmod'], 0);
                 }
             }
         }
@@ -88,8 +88,8 @@ trait Extended
         // Handle god mode's invulnerability
         if ($buffset['invulnerable'])
         {
-            $creaturedmg = \abs($creaturedmg);
-            $selfdmg     = -\abs($selfdmg);
+            $creaturedmg = abs($creaturedmg);
+            $selfdmg     = -abs($selfdmg);
         }
 
         return ['creaturedmg' => ($creaturedmg ?? 0), 'selfdmg' => ($selfdmg ?? 0)];
@@ -98,49 +98,39 @@ trait Extended
     /**
      * Adds a new creature to the badguy array.
      *
-     * @param mixed $creature A standard badguy array. If numeric, the corresponding badguy will be loaded from the database.
+     * @param array     $badguy   creature that spawn the new creature
+     * @param int|array $creature A standard badguy array. If numeric, the corresponding badguy will be loaded from the database.
      */
-    public function battleSpawn($creature)
+    public function battleSpawn(array $badguy, $creature = null): void
     {
-        global $enemies, $newenemies, $badguy, $nextindex, $countround, $lotgdBattleContent;
-
-        if ( ! \is_array($newenemies))
-        {
-            $newenemies = [];
-        }
-
-        if ( ! isset($nextindex))
-        {
-            $nextindex = \count($enemies);
-        }
-        else
-        {
-            ++$nextindex;
-        }
-
-        if (\is_numeric($creature))
+        if (is_numeric($creature))
         {
             $repository = $this->doctrine->getRepository('LotgdCore:Creatures');
             $entity     = $repository->find($creature);
 
             if ($entity)
             {
-                $newenemies[$nextindex]                                     = $repository->extractEntity($entity);
-                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                $this->addEnemy($repository->extractEntity($entity));
+                $this->addContextToRoundEnemy([
                     'combat.enemy.spawn',
                     [
                         'creatureName' => $badguy['creaturename'],
                         'summonName'   => $entity->getCreaturename(),
                     ],
-                ];
+                ]);
             }
         }
         elseif (\is_array($creature))
         {
-            $newenemies[$nextindex] = $creature;
+            $this->addEnemy($creature);
+            $this->addContextToRoundEnemy([
+                'combat.enemy.spawn',
+                [
+                    'creatureName' => $badguy['creaturename'],
+                    'summonName'   => $creature['creaturename'],
+                ],
+            ]);
         }
-
-        \ksort($newenemies);
     }
 
     /**
@@ -171,7 +161,7 @@ trait Extended
                 if (isset($newenemies[$target]))
                 {
                     // Target had its turn already...
-                    if (! $newenemies[$target]['dead'])
+                    if ( ! $newenemies[$target]['dead'])
                     {
                         $newenemies[$target]['creaturehealth'] += $amount;
                         $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
@@ -184,7 +174,7 @@ trait Extended
                         ];
                     }
                 }
-                elseif (! $enemies[$target]['dead'])
+                elseif ( ! $enemies[$target]['dead'])
                 {
                     $enemies[$target]['creaturehealth'] += $amount;
                     $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
