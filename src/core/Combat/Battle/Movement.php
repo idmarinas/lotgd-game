@@ -39,7 +39,7 @@ trait Movement
      */
     protected function companionMagic(&$badguy): void
     {
-        $this->buffModifiers = $this->activateBuffs('offense');
+        $this->buffModifiers = $this->activateBuffs('offense', $badguy);
 
         foreach ($this->companions as &$companion)
         {
@@ -104,7 +104,7 @@ trait Movement
 
     protected function enemyMove(&$badguy): void
     {
-        $this->buffModifiers = $this->activateBuffs('defense');
+        $this->buffModifiers = $this->activateBuffs('defense', $badguy);
 
         do
         {
@@ -153,7 +153,7 @@ trait Movement
                 ],
                 $this->getTranslationDomain(),
             ]);
-            $this->processDmgshield($badguy, $this->buffModifiers['dmgshield'], 0);
+            $this->processDmgshield($this->buffModifiers['dmgshield'], 0, $badguy);
             $this->processLifetaps($this->buffModifiers['lifetap'], 0);
         }
         elseif ($selfdmg < 0)
@@ -168,7 +168,7 @@ trait Movement
             ]);
             $badguy['creaturehealth'] += $selfdmg;
             $this->processLifetaps($this->buffModifiers['lifetap'], -$selfdmg);
-            $this->processDmgshield($badguy, $this->buffModifiers['dmgshield'], $selfdmg);
+            $this->processDmgshield($this->buffModifiers['dmgshield'], $selfdmg, $badguy);
         }
         else
         {
@@ -186,7 +186,7 @@ trait Movement
             {
                 $badguy['killedplayer'] = true;
             }
-            $this->processDmgshield($badguy, $this->buffModifiers['dmgshield'], $selfdmg);
+            $this->processDmgshield($this->buffModifiers['dmgshield'], $selfdmg, $badguy);
             $this->processLifetaps($this->buffModifiers['lifetap'], -$selfdmg);
             $badguy['diddamage'] = 1;
         }
@@ -250,7 +250,7 @@ trait Movement
             $badguy['creaturehealth'] -= $creaturedmg;
         }
 
-        $this->processDmgshield($badguy, $this->buffModifiers['dmgshield'], -$creaturedmg);
+        $this->processDmgshield($this->buffModifiers['dmgshield'], -$creaturedmg, $badguy);
         $this->processLifetaps($this->buffModifiers['lifetap'], $creaturedmg);
 
         if ( ! $this->isEnemyAlive($badguy))
