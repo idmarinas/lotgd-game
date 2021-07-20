@@ -110,4 +110,26 @@ class Battle
 
         return $this;
     }
+
+    protected function getSubstituteParams(array $badguy, array $search = [], array $replace = []): array
+    {
+        $search = array_merge([
+            '{badguyweapon}',
+            '{badguyname}',
+            '{badguy}',
+            '{creatureweapon}',
+        ], $search);
+
+        $replace = array_merge([
+            $badguy['creatureweapon'],
+            $badguy['creaturename'],
+            $badguy['creaturename'],
+            $badguy['creatureweapon'],
+        ], $replace);
+
+        return [
+            $search,
+            $replace
+        ];
+    }
 }
