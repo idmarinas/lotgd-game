@@ -142,7 +142,6 @@ trait BattleProcess
 
         $this->updateData();
 
-        dump($this);
         $this->battleIsProcessed = true;
 
         return $this;
