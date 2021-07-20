@@ -16,7 +16,7 @@ use Lotgd\Core\Event\Fight;
 use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-trait BattleResult
+trait Result
 {
     protected $battleHasWinner = false;
     protected $victory         = false;
