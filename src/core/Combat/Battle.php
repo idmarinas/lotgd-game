@@ -22,22 +22,22 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class Battle
 {
     use BattleTrait;
-    use BattleProcess;
     use BattleStart;
+    use BattleProcess;
     use BattleEnd;
-    use Battle\Bar;
-    use Battle\BattleResult;
     use Battle\Buff;
     use Battle\Buffer;
     use Battle\Configuration;
     use Battle\Context;
     use Battle\Enemy;
     use Battle\Extended;
+    use Battle\HealthBar;
     use Battle\Movement;
     use Battle\Option;
     use Battle\Other;
     use Battle\Prepare;
     use Battle\Process;
+    use Battle\Result;
     use Battle\Round;
     use Battle\Skill;
     use Battle\Surprise;
@@ -97,10 +97,12 @@ class Battle
     {
         global $session, $companions;
 
-        $session['user'] = $this->user;
-        $companions      = $this->companions;
+        $companions = $this->companions;
 
-        $session['user']['badguy'] = [
+        $session['user']               = $this->user;
+        $session['user']['buffslist']  = $this->userBuffs;
+        $session['user']['companions'] = $this->companions;
+        $session['user']['badguy']     = [
             'enemies' => $this->getEnemies(),
             'options' => $this->getOptions(),
         ];
