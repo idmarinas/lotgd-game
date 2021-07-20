@@ -33,6 +33,7 @@ class Battle
     use Battle\Extended;
     use Battle\Formula;
     use Battle\HealthBar;
+    use Battle\Menu;
     use Battle\Movement;
     use Battle\Option;
     use Battle\Other;
