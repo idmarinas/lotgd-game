@@ -24,21 +24,25 @@ class TempStat
 
     public function applyTempStat($name, $value, $type = 'add')
     {
+        $this->battle->initialize(true);
         return $this->battle->applyTempStat($name, $value, $type);
     }
 
     public function checkTempStat($name, $color = false)
     {
+        $this->battle->initialize(true);
         return $this->battle->checkTempStat($name, $color);
     }
 
     public function suspendTempStats()
     {
+        $this->battle->initialize(true);
         return $this->battle->suspendTempStats();
     }
 
     public function restoreTempStats()
     {
+        $this->battle->initialize(true);
         return $this->battle->restoreTempStats();
     }
 }
