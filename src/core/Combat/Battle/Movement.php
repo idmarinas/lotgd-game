@@ -154,7 +154,7 @@ trait Movement
                 $this->getTranslationDomain(),
             ]);
             $this->processDmgshield($this->buffModifiers['dmgshield'], 0, $badguy);
-            $this->processLifetaps($this->buffModifiers['lifetap'], 0);
+            $this->processLifetaps($this->buffModifiers['lifetap'], 0, $badguy);
         }
         elseif ($selfdmg < 0)
         {
@@ -167,7 +167,7 @@ trait Movement
                 $this->getTranslationDomain(),
             ]);
             $badguy['creaturehealth'] += $selfdmg;
-            $this->processLifetaps($this->buffModifiers['lifetap'], -$selfdmg);
+            $this->processLifetaps($this->buffModifiers['lifetap'], -$selfdmg, $badguy);
             $this->processDmgshield($this->buffModifiers['dmgshield'], $selfdmg, $badguy);
         }
         else
@@ -187,7 +187,7 @@ trait Movement
                 $badguy['killedplayer'] = true;
             }
             $this->processDmgshield($this->buffModifiers['dmgshield'], $selfdmg, $badguy);
-            $this->processLifetaps($this->buffModifiers['lifetap'], -$selfdmg);
+            $this->processLifetaps($this->buffModifiers['lifetap'], -$selfdmg, $badguy);
             $badguy['diddamage'] = 1;
         }
     }
@@ -251,7 +251,7 @@ trait Movement
         }
 
         $this->processDmgshield($this->buffModifiers['dmgshield'], -$creaturedmg, $badguy);
-        $this->processLifetaps($this->buffModifiers['lifetap'], $creaturedmg);
+        $this->processLifetaps($this->buffModifiers['lifetap'], $creaturedmg, $badguy);
 
         if ( ! $this->isEnemyAlive($badguy))
         {
