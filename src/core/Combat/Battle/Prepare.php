@@ -34,7 +34,7 @@ trait Prepare
         // We'll also reset the companions here...
         $this->prepareCompanions();
 
-        $this->options = $fightoptions;
+        $this->setOptions($fightoptions);
     }
 
     /**
