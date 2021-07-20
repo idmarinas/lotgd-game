@@ -75,7 +75,7 @@ trait BattleStart
                 'transferredtoday', 'recentcomments', 'amountouttoday', 'regdate', 'banoverride', 'donation', 'donationspent',
                 'donationconfig', 'referer', 'refererawarded', 'password', 'forgottenpassword', 'roles',
                 //-- Other
-                'acct', 'badguy', 'allowednavs', 'companions', 'bufflist'
+                'acct', 'badguy', 'allowednavs', 'companions', 'bufflist',
             ]);
         }, ARRAY_FILTER_USE_KEY);
         $this->userBuffs  = $this->user['buffslist'] ?? [];
@@ -85,7 +85,8 @@ trait BattleStart
         $this->setOptions($this->user['badguy']['options'] ?? []);
         $this->setEnemies($this->user['badguy']['enemies'] ?? []);
 
-        $this->battleIsInitalized = true;
+        //-- If is forced not mark as initialized
+        ( ! $force) && $this->battleIsInitalized = true;
 
         return $this;
     }
