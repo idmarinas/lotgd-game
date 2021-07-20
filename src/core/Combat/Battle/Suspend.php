@@ -137,4 +137,34 @@ trait Suspend
             $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
         }
     }
+
+    /**
+     * Enables suspended companions.
+     *
+     * @param string $susp  The type of suspension
+     * @param string $nomsg The message to be displayed upon unsuspending. If false, no message will be displayed.
+     */
+    public function unSuspendCompanions($susp, $nomsg = null)
+    {
+        $notify = false;
+
+        foreach ($this->companions as &$companion)
+        {
+            if (isset($companion['suspended']) && $companion['suspended'])
+            {
+                $notify                 = true;
+                $companion['suspended'] = false;
+            }
+        }
+
+        if ($notify && false !== $nomsg)
+        {
+            $nomsg = $nomsg ?: 'skill.companion.restored';
+
+            if ($nomsg)
+            {
+                $this->addContextToRoundAlly($nomsg);
+            }
+        }
+    }
 }
