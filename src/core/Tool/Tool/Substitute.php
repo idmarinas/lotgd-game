@@ -16,22 +16,18 @@ trait Substitute
 {
     function substitute(?string $string, ?array $extraSearch = null, ?array $extraReplace = null)
     {
-        global $badguy, $session;
+        global $session;
 
         $search = [
             '{himher}',
             '{heshe}',
             '{hisher}',
             '{goodguyweapon}',
-            '{badguyweapon}',
             '{goodguyarmor}',
-            '{badguyname}',
             '{goodguyname}',
-            '{badguy}',
             '{goodguy}',
             '{weapon}',
             '{armor}',
-            '{creatureweapon}',
         ];
 
         $replace = [
@@ -39,15 +35,11 @@ trait Substitute
             ($session['user']['sex'] ? 'she' : 'he'),
             ($session['user']['sex'] ? 'her' : 'his'),
             $session['user']['weapon'],
-            $badguy['creatureweapon'],
             $session['user']['armor'],
-            $badguy['creaturename'],
             '`^'.$session['user']['name'].'`0',
-            $badguy['creaturename'],
             '`^'.$session['user']['name'].'`0',
             $session['user']['weapon'],
             $session['user']['armor'],
-            $badguy['creatureweapon'],
         ];
 
         if (is_array($extraSearch) && is_array($extraReplace))
@@ -61,7 +53,7 @@ trait Substitute
 
     function substituteArray(?string $string, ?array $extraSearch = null, ?array $extraReplace = null)
     {
-        global $badguy, $session;
+        global $session;
         // separate substitutions for gender items (makes 2 translations per
         // substition that uses these)
         $search = [
@@ -79,28 +71,20 @@ trait Substitute
 
         $search = [
             '{goodguyweapon}',
-            '{badguyweapon}',
             '{goodguyarmor}',
-            '{badguyname}',
             '{goodguyname}',
-            '{badguy}',
             '{goodguy}',
             '{weapon}',
             '{armor}',
-            '{creatureweapon}',
         ];
 
         $replace = [
             $session['user']['weapon'],
-            $badguy['creatureweapon'] ?? '',
             $session['user']['armor'],
-            $badguy['creaturename'] ?? '',
             '`^'.$session['user']['name'].'`0',
-            $badguy['creaturename'] ?? '',
             '`^'.$session['user']['name'].'`0',
             $session['user']['weapon'],
             $session['user']['armor'],
-            $badguy['creatureweapon'] ?? '',
         ];
 
         if (is_array($extraSearch) && is_array($extraReplace))
