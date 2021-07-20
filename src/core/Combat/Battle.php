@@ -31,6 +31,7 @@ class Battle
     use Battle\Context;
     use Battle\Enemy;
     use Battle\Extended;
+    use Battle\Formula;
     use Battle\HealthBar;
     use Battle\Movement;
     use Battle\Option;
