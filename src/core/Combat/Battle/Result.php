@@ -177,7 +177,10 @@ trait Result
 
             if ($badguy['creaturewin'] ?? false)
             {
-                $this->addContextToBattleEnd($this->tools->substitute("`b`&{$badguy['creaturewin']}`0´b`n"));
+                $this->addContextToBattleEnd($this->tools->substitute(
+                    "`b`&{$badguy['creaturewin']}`0´b`n",
+                    ...$this->getSubstituteParams($badguy)
+                ));
             }
         }
 
@@ -252,7 +255,10 @@ trait Result
 
             if ($badguy['creaturelose'] ?? false)
             {
-                $this->addContextToBattleEnd($this->tools->substitute($badguy['creaturelose'].'`n'));
+                $this->addContextToBattleEnd($this->tools->substitute(
+                    $badguy['creaturelose'].'`n',
+                    ...$this->getSubstituteParams($badguy)
+                ));
             }
 
             $slain = $this->canGainFavor() ? 'tormented' : 'slain';

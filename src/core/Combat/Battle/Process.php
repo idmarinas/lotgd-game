@@ -98,7 +98,10 @@ trait Process
     {
         if ($companion['hitpoints'] <= 0)
         {
-            $msg = $this->tools->substitute($companion['dyingtext'] ?? 'combat.companion.die');
+            $msg = $this->tools->substitute(
+                $companion['dyingtext'] ?? 'combat.companion.die',
+                ...$this->getSubstituteParams($this->enemyTargeted)
+            );
 
             $this->addContextToRoundAlly([$msg, ['companion' => $companion['name']], $this->getTranslationDomain()]);
 

@@ -47,7 +47,10 @@ trait Buff
                     $buff['startmsg'] = \str_replace('`%', '`%%', $buff['startmsg']);
                 }
 
-                $this->addContextToRoundAlly([$this->tools->substitute("`5{$buff['startmsg']}`0`n"), [], $this->getTranslationDomain()]);
+                $this->addContextToRoundAlly(
+                    [$this->tools->substitute("`5{$buff['startmsg']}`0`n"), [], $this->getTranslationDomain()],
+                    ...$this->getSubstituteParams($badguy)
+                );
 
                 $this->buffStarted[$key] = true;
             }
@@ -103,7 +106,10 @@ trait Buff
                         $buff['roundmsg'] = \str_replace('`%', '`%%', $buff['roundmsg']);
                     }
 
-                    $this->addContextToRoundAlly([$this->tools->substitute("`5{$buff['roundmsg']}`0`n"), [], $this->getTranslationDomain()]);
+                    $this->addContextToRoundAlly(
+                        [$this->tools->substitute("`5{$buff['roundmsg']}`0`n"), [], $this->getTranslationDomain()],
+                        ...$this->getSubstituteParams($badguy)
+                    );
                 }
             }
 
@@ -195,7 +201,10 @@ trait Buff
 
                 if ($msg)
                 {
-                    $this->addContextToRoundAlly([$this->tools->substitute("`){$msg}`0`n", ['{damage}'], [$hptoregen]), [], $this->getTranslationDomain()]);
+                    $this->addContextToRoundAlly(
+                        [$this->tools->substitute("`){$msg}`0`n", ['{damage}'], [$hptoregen]), [], $this->getTranslationDomain()],
+                        ...$this->getSubstituteParams($badguy)
+                    );
                 }
 
                 if (isset($buff['aura']) && $buff['aura'])
@@ -213,7 +222,10 @@ trait Buff
                             {
                                 $hptoregen = \min($auraeffect, $companion['maxhitpoints'] - $companion['hitpoints']);
                                 $companions[$name]['hitpoints'] += $hptoregen;
-                                $msg = $this->tools->substitute("`){$buff['auramsg']}`0`n", ['{damage}', '{companion}'], [$hptoregen, $companion['name']]);
+                                $msg = $this->tools->substitute(
+                                    "`){$buff['auramsg']}`0`n",
+                                    ...$this->getSubstituteParams($badguy, ['{damage}', '{companion}'], [$hptoregen, $companion['name']])
+                                );
 
                                 $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
 
@@ -283,7 +295,10 @@ trait Buff
 
                     if ($msg > '')
                     {
-                        $msg = $this->tools->substitute("`){$msg}`0`n", ['{damage}'], [\abs($damage)]);
+                        $msg = $this->tools->substitute(
+                            "`){$msg}`0`n",
+                            ...$this->getSubstituteParams($badguy, ['{damage}'], [\abs($damage)])
+                        );
 
                         $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
                     }
@@ -301,7 +316,7 @@ trait Buff
         return $result;
     }
 
-    public function processLifeTaps($ltaps, $damage)
+    public function processLifeTaps($ltaps, $damage, $badguy)
     {
         foreach ($ltaps as $buff)
         {
@@ -338,7 +353,10 @@ trait Buff
 
             if ($msg)
             {
-                $msg = $this->tools->substitute("`){$msg}`0`n", ['{damage}'], [$healhp]);
+                $msg = $this->tools->substitute(
+                    "`){$msg}`0`n",
+                    ...$this->getSubstituteParams($badguy, ['{damage}'], [$healhp])
+                );
                 $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
             }
         }
@@ -380,7 +398,10 @@ trait Buff
 
             if ($msg)
             {
-                $msg = $this->tools->substitute("`){$msg}`0`n", ['{damage}'], [$realdamage]);
+                $msg = $this->tools->substitute(
+                    "`){$msg}`0`n",
+                    ...$this->getSubstituteParams($badguy, ['{damage}'], [$realdamage])
+                );
 
                 $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
             }
@@ -409,15 +430,10 @@ trait Buff
                 {
                     if (isset($buff['wearoff']) && $buff['wearoff'])
                     {
-                        if (\is_array($buff['wearoff']))
-                        {
-                            $buff['wearoff'] = \str_replace('`%', '`%%', $buff['wearoff']);
-                            $msg             = $this->tools->substitute('`5'.$buff['wearoff'].'`0`n');
-                        }
-                        else
-                        {
-                            $msg = $this->tools->substitute('`5'.$buff['wearoff'].'`0`n');
-                        }
+                        $msg = $this->tools->substitute(
+                            '`5'.$buff['wearoff'].'`0`n',
+                            ...$this->getSubstituteParams($this->enemyTargeted)
+                        );
 
                         $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
                     }
@@ -446,7 +462,10 @@ trait Buff
             ) {
                 if (isset($buff['wearoff']) && $buff['wearoff'])
                 {
-                    $msg = $this->tools->substitute("`5{$buff['wearoff']}`0`n");
+                    $msg = $this->tools->substitute(
+                        "`5{$buff['wearoff']}`0`n",
+                        ...$this->getSubstituteParams($this->enemyTargeted)
+                    );
 
                     $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
                 }
