@@ -82,8 +82,8 @@ trait BattleStart
         $this->userBuffs  = \is_array($this->userBuffs) ? $this->userBuffs : [];
         $this->companions = $companions;
 
-        $this->setOptions($session['user']['badguy']['options'] ?? []);
-        $this->setEnemies($session['user']['badguy']['enemies'] ?? []);
+        $this->setOptions($this->user['badguy']['options'] ?? []);
+        $this->setEnemies($this->user['badguy']['enemies'] ?? []);
 
         $this->battleIsInitalized = true;
 
