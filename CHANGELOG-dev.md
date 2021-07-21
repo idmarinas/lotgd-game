@@ -96,6 +96,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   Example in `public/forest.php`
 -   **BC** `src/core/Navigation/Navigation.php` method `fightNav` use `LotgdKernel::get('lotgd_core.combat.battle')->fightNav()` instead
     -   See in `public/forest.php`
+-   **BC** Delete `lib/e_dom.php` not used by core.
 -   **BC** **Remove deprecated**
     -   **lib/addnews.php** Removed deprecated function `addnews`, removed file too.
     -   **lib/battle/** Removed all files and functions 
