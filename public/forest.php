@@ -371,21 +371,36 @@ elseif ('fight' == $op || 'newtarget' == $op)
 
 if ($battle)
 {
-    require_once 'battle.php';
+    /** @var \Lotgd\Core\Combat\Battle */
+    $serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
 
-    if ($victory)
+    //-- Battle zone.
+    $serviceBattle
+        ->initialize() //--* Initialize the battle
+        //-- Configuration
+        ->setBattleZone('forest') //-- Battle zone is "forest" by default.
+        ->enableProccessBatteResults() //-- For procces results of victory/defeat (By default is enable)
+        // ->disableProccessBatteResults() //-- For avoid proccess results of victory/defeat, Simulate battle.
+        //-- Can make some changes
+        //-- ...
+        ->battleStart() //--* Start the battle.
+        ->battleProcess() //--* Proccess the battle rounds.
+        ->battleEnd() //--* End the battle for this petition
+        ->battleResults() //--* Add results to response by default (use ->battleResults(true) if you want result results)
+    ;
+
+    if ($serviceBattle->isVictory())
     {
         $dontDisplayForestMessage    = true;
         $params['tpl']               = 'default';
-        $params['showForestMessage'] = ! $dontDisplayForestMessage;
 
         $op = '';
         $battle = false;
         $request->query->set('op', '');
     }
-    else
+    elseif ( ! $serviceBattle->battleHasWinner())
     {
-        \LotgdNavigation::fightNav();
+        $serviceBattle->fightNav();
     }
 }
 
