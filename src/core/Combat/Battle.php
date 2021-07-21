@@ -99,6 +99,9 @@ class Battle
     {
         global $session, $companions;
 
+        //-- Not overwrite allowednavs
+        $allowedNavs = $session['user']['allowednavs'];
+
         $companions = $this->companions;
 
         $session['user']               = $this->user;
@@ -108,6 +111,7 @@ class Battle
             'enemies' => $this->getEnemies(),
             'options' => $this->getOptions(),
         ];
+        $session['user']['allowednavs'] = $allowedNavs;
 
         return $this;
     }
