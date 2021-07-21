@@ -56,57 +56,39 @@ trait Extended
     /**
      * Allows creatures to heal themselves or another badguy.
      *
-     * @param int   $amount Amount of helath to be restored
-     * @param mixed $target if false badguy will heal itself otherwise the enemy with this index
+     * @param int $amount Amount of health to be restored
+     * @param int $target Enemy to heal (index ID of array of enemies)
+     * @param int $self The healer ID (index ID of array of enemies)
      */
-    public function battleHeal($amount, $target = false)
+    public function battleHeal(int $amount, int $target, int $healer): void
     {
-        global $newenemies, $enemies, $badguy, $countround, $lotgdBattleContent;
-
-        if ($amount > 0)
+        if ($amount <= 0)
         {
-            if (false === $target)
-            {
-                $badguy['creaturehealth'] += $amount;
-                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
-                    'combat.enemy.heal.self',
-                    [
-                        'creatureName' => $badguy['creaturename'],
-                        'damage'       => $amount,
-                    ],
-                ];
-            }
-            else
-            {
-                if (isset($newenemies[$target]))
-                {
-                    // Target had its turn already...
-                    if ( ! $newenemies[$target]['dead'])
-                    {
-                        $newenemies[$target]['creaturehealth'] += $amount;
-                        $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
-                            'combat.enemy.heal.other',
-                            [
-                                'cretureName' => $badguy['creaturename'],
-                                'target'      => $newenemies[$target]['creaturename'],
-                                'damage'      => $amount,
-                            ],
-                        ];
-                    }
-                }
-                elseif ( ! $enemies[$target]['dead'])
-                {
-                    $enemies[$target]['creaturehealth'] += $amount;
-                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
-                        'combat.enemy.heal.other',
-                        [
-                            'creatureName' => $badguy['creaturename'],
-                            'target'       => $enemies[$target]['creaturename'],
-                            'damage'       => $amount,
-                        ],
-                    ];
-                }
-            }
+            return;
+        }
+
+        if ($target == $healer && isset($this->enemies[$healer]))
+        {
+            $this->enemies[$healer] += $amount;
+            $this->addContextToRoundEnemy([
+                'combat.enemy.heal.self',
+                [
+                    'creatureName' => $this->enemies[$healer]['creaturename'],
+                    'damage'       => $amount,
+                ],
+            ]);
+        }
+        else if (isset($this->enemies[$target]) && $this->isEnemyAlive($this->enemies[$target]))
+        {
+            $this->enemies[$target]['creaturehealth'] += $amount;
+            $this->addContextToRoundEnemy([
+                'combat.enemy.heal.other',
+                [
+                    'cretureName' => $this->enemies[$healer]['creaturename'],
+                    'target'      => $this->enemies[$target]['creaturename'],
+                    'damage'      => $amount,
+                ],
+            ]);
         }
     }
 }
