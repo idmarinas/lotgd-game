@@ -141,8 +141,8 @@ trait Suspend
     /**
      * Enables suspended companions.
      *
-     * @param string $susp  The type of suspension
-     * @param string $nomsg The message to be displayed upon unsuspending. If false, no message will be displayed.
+     * @param string      $susp  The type of suspension
+     * @param string|null $nomsg The message to be displayed upon unsuspending. If null, no message will be displayed.
      */
     public function unSuspendCompanions($susp, $nomsg = null)
     {
