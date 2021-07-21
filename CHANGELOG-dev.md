@@ -37,6 +37,46 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
             -   Use same name in entities and encrypt
     -   **Updated character restore** for new Avatar and User entities
         -   **Installer of version 6.0.0** Update old backups to new Avatar and User entity
+-   **Combat as service**
+    -   Deleted `public/battle.php` not use more in your modules/bundles not work as expected.
+    -   Method `fightNav` is part of Battle service
+    -   When calculate buffs now use Symfony Expression Language
+        -   Modules that use `<module|variable>` replacements for `get_module_pref('variable','module')`
+            -   Use `get_module_pref` normaly
+        -   Modules that use `<variable>` replacements for `$session['user']['variable']`
+            -   Use `character_attr('variable')`
+    -   Example:
+        ```php
+        /** @var \Lotgd\Core\Combat\Battle */
+        $serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
+
+        //-- Battle zone.
+        $serviceBattle
+            ->initialize() //--* Initialize the battle
+            //-- Configuration
+            ->setBattleZone('mine') //-- Battle zone, by default is "forest".
+            
+            ->battleStart() //--* Start the battle.
+            ->battleProcess() //--* Proccess the battle rounds.
+            ->battleEnd() //--* End the battle for this petition
+            ->battleResults() //--* Add results to response by default (use ->battleResults(true) if you want result results)
+        ;
+
+        if ($serviceBattle->isVictory())
+        {
+            //-- Do anything when victory
+        }
+        elseif ($serviceBattle->isDefeat())
+        {
+            //-- Do anything when defeated
+        }
+        //-- Only show figth navs when not have winner
+        elseif ( ! $serviceBattle->battleHasWinner())
+        {
+            $serviceBattle->fightNav();
+        }
+        ```
+
 
 ### :star: FEATURES
 
@@ -52,6 +92,10 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :x: REMOVES
 
+-   **BC** **public/battle.php** Removed, use `LotgdKernel::get('lotgd_core.combat.battle')` instead
+    -   Example in `public/forest.php`
+-   **BC** `src/core/Navigation/Navigation.php` method `fightNav` use `LotgdKernel::get('lotgd_core.combat.battle')->fightNav()` instead
+    -   See in `public/forest.php`
 -   **BC** **Remove deprecated**
     -   **lib/addnews.php** Removed deprecated function `addnews`, removed file too.
     -   **lib/battle/** Removed all files and functions 
