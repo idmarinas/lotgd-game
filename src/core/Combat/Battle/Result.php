@@ -165,7 +165,7 @@ trait Result
 
     protected function battleDefeat()
     {
-        $percent = $this->setting->getSetting('forestexploss', 10);
+        $percent = $this->settings->getSetting('forestexploss', 10);
         $killer  = false;
 
         foreach ($this->enemies as $badguy)
