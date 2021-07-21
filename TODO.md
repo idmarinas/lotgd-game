@@ -12,9 +12,8 @@
 
 # Actualmente haciendo esto (6.0.0)
 
--   Revisar los backups de cuentas y personajes (ahora es user y avatar)
 -   Se crea un nuevo sistema de batalla, usando service para poder personalizarlo.
-    -   Se creará un Event para esto
+    -   Cambiar los sitios donde se usa battle.php
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   Sustituir la función lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
@@ -32,26 +31,6 @@
     -   El installer de la versión 6.0.0 depende de laminas/laminas-serializer
         -   Es en el único sitio donde se utiliza este componente
 -   Eliminar paquete laminas/laminas-serializer
-
-
-# Módulos
-
--   ...
-
-
-## Para la versión X.Y.Z
--   Migrar los cronjobs a cron/cron bundle mediante comandos de symfony console.
--   Copiar el sistema de petition (y adaptarlo) en el app bundle.
--   **BC** Cambiar el sistema de login/user por el de Symfony
--   Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
-    -   Poner las opciones de la encuesta en una tabla separada. Permitiendo que las opciones también se puedan traducir.
--   Agregar sistema al core, para poder añadir términos y condiciones y politica de privacidad, sin necesidad de módulo.
--   **BC** Rehacer el sistema de combate, usando el principio del resto del juego y haciendo uso de una factoria.
-    -   Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
--   **BC** Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente como el sistema de combate nuevo.
-    -   Se simplifica la forma en la que se calcula las estadísticas del personaje, haciendo que tanto los personajes jugador como los creados por el servidor, tengan una forma de creación muy similar.
--   **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
-    -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
 -   **BC** Sustituir Fomantic UI por https://tailwindcss.com 
     -   Tailwind ofrece más flexibilidad para crear la UI.
     -   npm install tailwindcss
@@ -61,6 +40,23 @@
             -   El js se crea en una entry comun para todo (app por ejemplo) ya que puede dar problemas
                 -   webpack.encore.entry.js
                 -   webpack.encore.theme.js
+
+# Módulos
+
+-   ...
+
+
+## Para la versión X.Y.Z
+-   Migrar los cronjobs a cron/cron bundle mediante comandos de symfony console.
+-   Copiar el sistema de petition (y adaptarlo) en el app bundle.
+-   Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
+    -   Poner las opciones de la encuesta en una tabla separada. Permitiendo que las opciones también se puedan traducir.
+-   Agregar sistema al core, para poder añadir términos y condiciones y politica de privacidad, sin necesidad de módulo.
+-   **BC** Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
+-   **BC** Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente como el sistema de combate nuevo.
+    -   Se simplifica la forma en la que se calcula las estadísticas del personaje, haciendo que tanto los personajes jugador como los creados por el servidor, tengan una forma de creación muy similar.
+-   **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
+    -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
 -   Crear el bundle del inventario. Para sustituir el antiguo sistema de armadura y arma.
 -   Crear el bundle de energia, que permita poner energia o un sistema por turnos.
 -   Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
