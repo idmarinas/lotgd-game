@@ -203,7 +203,7 @@ trait Result
 
         if ($this->canLostGold())
         {
-            $this->log->debug("lost gold when they were slain {$this->battleZone()}", false, false, 'forestlose', -$this->user['gold']);
+            $this->log->debug("lost gold when they were slain {$this->getBattleZone()}", false, false, 'forestlose', -$this->user['gold']);
             $this->user['gold'] = 0;
 
             $this->addContextToBattleEnd(['combat.end.defeated.lost.gold', [], $this->getTranslationDomain()]);
