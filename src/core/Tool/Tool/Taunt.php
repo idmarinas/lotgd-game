@@ -21,7 +21,7 @@ trait Taunt
      */
     public function selectTaunt(array $extraParams = []): array
     {
-        global $session, $badguy;
+        global $session;
 
         $translator = $this->kernel->getContainer()->get('translator');
         $count      = $translator->trans('count', [], 'partial_taunt');
@@ -53,12 +53,6 @@ trait Taunt
             'hisHer' => $session['user']['sex'] ? 'her' : 'his',
             //-- Objective pronoun for the player (he she)
             'heShe' => $session['user']['sex'] ? 'she' : 'he',
-            //-- The monster's name (also can be specified as badGuy
-            'badGuyName' => $badguy['creaturename'],
-            'badGuy'     => $badguy['creaturename'],
-            //-- The monster's weapon (also can be specified as creatureWeapon
-            'badGuyWeapon'   => $badguy['creatureweapon'],
-            'creatureWeapon' => $badguy['creatureweapon'],
         ];
 
         $params = \array_merge($params, $extraParams);

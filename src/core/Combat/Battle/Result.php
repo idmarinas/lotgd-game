@@ -192,8 +192,17 @@ trait Result
         //-- If not want add a news when defeat use ::disableCreateNews()
         if ($this->allowCreateNews())
         {
-            $deathmessage = $this->tools->selectDeathMessage($this->getBattleZone());
-            $taunt        = $this->tools->selectTaunt();
+            $params = [
+                //-- The monster's name (also can be specified as badGuy
+                'badGuyName' => $killer['creaturename'],
+                'badGuy'     => $killer['creaturename'],
+                //-- The monster's weapon (also can be specified as creatureWeapon
+                'badGuyWeapon'   => $killer['creatureweapon'],
+                'creatureWeapon' => $killer['creatureweapon'],
+            ];
+
+            $deathmessage = $this->tools->selectDeathMessage($this->getBattleZone(), $params);
+            $taunt        = $this->tools->selectTaunt($params);
 
             $this->tools->addNews('deathmessage', [
                 'deathmessage' => $deathmessage,
