@@ -99,29 +99,28 @@ if ($battle)
     $params['tpl'] = 'default';
     $params['showGraveyardDesc'] = false;
 
-    //-- Any data for personalize results
-    $battleDefeatWhere = 'graveyard';
-    $battleInForest = false;
-    $battleDefeatLostGold = false;
-    $battleDefeatLostExp = false;
-    $battleDefeatCanDie = false;
+    /** @var \Lotgd\Core\Combat\Battle */
+    $serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
 
-    //make some adjustments to the user to put them on mostly even ground
-    //with the undead guy.
-    $originalhitpoints = $session['user']['hitpoints'];
-    $session['user']['hitpoints'] = $session['user']['soulpoints'];
-    $originalattack = $session['user']['attack'];
-    $originaldefense = $session['user']['defense'];
+    $serviceBattle
+        ->initialize()
+        //-- Configuration
+        ->setBattleZone('graveyard')
+        ->enableGhost() //-- Player is dead so configure as Ghost
+        ->disableGainGold()
+        ->disableGainExp()
+        ->disableDie()
+        ->disableLostExp()
+        ->disableLostGold()
+        ->enableGainFavor()
 
-    require_once 'battle.php';
+        ->battleStart()
+        ->battleProcess()
+        ->battleEnd()
+        ->battleResults()
+    ;
 
-    //reverse those adjustments, battle calculations are over.
-    $session['user']['attack'] = $originalattack;
-    $session['user']['defense'] = $originaldefense;
-    $session['user']['soulpoints'] = $session['user']['hitpoints'];
-    $session['user']['hitpoints'] = $originalhitpoints;
-
-    if ($victory || $defeat)
+    if ($serviceBattle->battleHasWinner())
     {
         $battle = false;
         $op = '';
@@ -131,8 +130,11 @@ if ($battle)
     }
     else
     {
-        LotgdNavigation::fightNav(false, true, 'graveyard.php');
+        $serviceBattle->fightNav(false, true, 'graveyard.php');
     }
+
+    //-- Revert changes not need more battle end
+    $serviceBattle->disableGhost(); //-- Remember call this if you enableGhost
 }
 
 if ('enter' == $op)
