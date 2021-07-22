@@ -77,6 +77,7 @@ section:
                 con: Constitution +1
                 int: Intelligence +1
                 wis: Wisdom +1
+                ff: Forest Fight
                 unknown: Unknown Spends (contact an admin to investigate!)
 
 
