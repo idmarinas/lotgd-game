@@ -64,6 +64,7 @@ class Version60000 extends InstallerAbstract
             $this->getProjectDir().'/lib/substitute.php',
             $this->getProjectDir().'/lib/taunt.php',
             $this->getProjectDir().'/lib/tempstat.php',
+            $this->getProjectDir().'/public/battle.php',
         ]);
     }
 
