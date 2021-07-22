@@ -24,6 +24,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :wrench: FIXES
 
 -   **public/forest.php** Fix error by show normal navs when see Dragon
+-   **translations/en/navigation_newday+intl-icu.yaml** and **translations/en/page_newday+intl-icu.yaml** Add translation for ff type key
 
 ### :x: REMOVES
 
