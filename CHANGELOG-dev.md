@@ -76,6 +76,12 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
             $serviceBattle->fightNav();
         }
         ```
+    -   Updated files with new Battle service:
+        -   `public/forest.php` 
+        -   `public/dragon.php` 
+        -   `public/graveyard.php` 
+        -   `public/train.php` 
+        -   `public/pvp.php` 
 
 
 ### :star: FEATURES
@@ -88,7 +94,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   Nothing
+-   **public/train.php** Fixed error by not allowed multiple challange to master when allow by config.
 
 ### :x: REMOVES
 
