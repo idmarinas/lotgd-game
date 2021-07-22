@@ -33,8 +33,6 @@ $params = [
 \LotgdNavigation::setTextDomain($textDomainNavigation);
 
 $battle = false;
-$victory = false;
-$defeat = false;
 
 $masterId = (int) \LotgdRequest::getQuery('master');
 
@@ -99,9 +97,6 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
 
         if (\LotgdRequest::getQuery('victory'))
         {
-            $victory = true;
-            $defeat = false;
-
             if ($session['user']['experience'] < $exprequired)
             {
                 $session['user']['experience'] = $exprequired;
@@ -109,7 +104,7 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
             $session['user']['seenmaster'] = 0;
         }
 
-        if ($session['user']['seenmaster'])
+        if ($session['user']['seenmaster'] && 0 == (int) \LotgdSetting::getSetting('multimaster', 0))
         {
             \LotgdNavigation::addHeader('category.navigation');
             \LotgdNavigation::villageNav();
@@ -132,12 +127,6 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
                 $session['user']['badguy'] = $attackstack;
 
                 $battle = true;
-
-                if ($victory)
-                {
-                    $badguy = $session['user']['badguy'];
-                    $badguy = $badguy['enemies'][0];
-                }
             }
             else
             {
@@ -211,27 +200,34 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
 
     if ($battle)
     {
-        //-- Any data for personalize results
-        $battleDefeatWhere = false; //-- Use for create a news, set to false for not create news
-        $battleInForest = 'train'; //-- Indicating if is a Forest (true) or Graveyard (false)
-        $battleDefeatLostGold = false; //-- Indicating if lost gold when lost in battle
-        $battleDefeatLostExp = false; //-- Indicating if lost exp when lost in battle
-        $battleDefeatCanDie = false; //-- Indicating if die when lost in battle
-        $battleShowResult = false; //-- Show result of battle. If no need any extra modification of result no need change this
-
-        require_once 'battle.php';
-
-        $serviceBattle->suspendBuffs('allowintrain');
-        $serviceBattle->suspendCompanions('allowintrain');
+        /** @var \Lotgd\Core\Combat\Battle */
+        $serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
 
         //-- Superuser Gain level
         if (\LotgdRequest::getQuery('victory'))
         {
-            $victory = true;
-            $defeat = false;
+            $session['user']['badguy']['enemies'][0]['creaturehealth'] = 0;
         }
 
-        if ($victory)
+        $badguy = $session['user']['badguy']['enemies'][0];
+
+        //-- Battle zone.
+        $serviceBattle->initialize(); //--* Initialize the battle
+        $serviceBattle->suspendBuffs('allowintrain');
+        $serviceBattle->suspendCompanions('allowintrain');
+        $serviceBattle
+            //-- Configuration
+            ->setBattleZone('train') //-- Battle zone is "forest" by default.
+            ->disableDie()
+            ->disableCreateNews()
+            ->disableProccessBatteResults()
+            //-- Battle
+            ->battleStart() //--* Start the battle.
+            ->battleProcess() //--* Proccess the battle rounds.
+            ->battleEnd() //--* End the battle for this petition
+        ;
+
+        if ($serviceBattle->isVictory())
         {
             $session['user']['level']++;
             $session['user']['maxhitpoints'] += 10;
@@ -247,19 +243,20 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
                 $session['user']['seenmaster'] = 0;
                 \LotgdLog::debug('Defeated master, setting seenmaster to 0');
             }
-            $lotgdBattleContent['battleend'][] = ['battle.end.victory.end', [], $textDomain];
-            $lotgdBattleContent['battleend'][] = ['battle.end.victory.level', ['level' => $session['user']['level']], $textDomain];
-            $lotgdBattleContent['battleend'][] = ['battle.end.victory.hitpoints', ['hitpoints' => $session['user']['maxhitpoints']], $textDomain];
-            $lotgdBattleContent['battleend'][] = ['battle.end.victory.attack', [], $textDomain];
-            $lotgdBattleContent['battleend'][] = ['battle.end.victory.defense', [], $textDomain];
+
+            $serviceBattle->addContextToBattleEnd(['battle.end.victory.end', [], $textDomain]);
+            $serviceBattle->addContextToBattleEnd(['battle.end.victory.level', ['level' => $session['user']['level']], $textDomain]);
+            $serviceBattle->addContextToBattleEnd(['battle.end.victory.hitpoints', ['hitpoints' => $session['user']['maxhitpoints']], $textDomain]);
+            $serviceBattle->addContextToBattleEnd(['battle.end.victory.attack', [], $textDomain]);
+            $serviceBattle->addContextToBattleEnd(['battle.end.victory.defense', [], $textDomain]);
 
             if ($session['user']['level'] < 15)
             {
-                $lotgdBattleContent['battleend'][] = ['battle.end.victory.master.new', [], $textDomain];
+                $serviceBattle->addContextToBattleEnd(['battle.end.victory.master.new', [], $textDomain]);
             }
             else
             {
-                $lotgdBattleContent['battleend'][] = ['battle.end.victory.master.none', [], $textDomain];
+                $serviceBattle->addContextToBattleEnd(['battle.end.victory.master.none', [], $textDomain]);
             }
 
             if ($session['user']['referer'] > 0 && ($session['user']['level'] >= LotgdSetting::getSetting('referminlevel', 4) || $session['user']['dragonkills'] > 0) && $session['user']['refererawarded'] < 1)
@@ -329,7 +326,10 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
             \LotgdEventDispatcher::dispatch($args, Events::PAGE_TRAIN_TRANING_VICTORY);
             $result = modulehook('training-victory', $args->getArguments());
 
-            $lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result['messages']);
+            array_walk($result['messages'], function ($elem) use ($serviceBattle)
+            {
+                $serviceBattle->addContextToBattleEnd($elem);
+            });
 
             \LotgdNavigation::addHeader('category.navigation');
             \LotgdNavigation::villageNav();
@@ -343,7 +343,7 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
                 \LotgdNavigation::addNav('nav.superuser', 'train.php?op=challenge&victory=1');
             }
         }
-        elseif ($defeat)
+        elseif ($serviceBattle->isDefeat())
         {
             if (LotgdSetting::getSetting('displaymasternews', 1))
             {
@@ -364,12 +364,15 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
 
             $session['user']['hitpoints'] = $session['user']['maxhitpoints'];
 
-            $lotgdBattleContent['battleend'][] = ['battle.end.defeat.end', ['masterName' => $badguy['creaturename']], $textDomain];
+            $serviceBattle->addContextToBattleEnd(['battle.end.defeat.end', ['masterName' => $badguy['creaturename']], $textDomain]);
 
             $args = new GenericEvent(null, ['badguy' => $badguy, 'messages' => []]);
             $result = modulehook('training-defeat', $args->getArguments());
 
-            $lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result['messages']);
+            array_walk($result['messages'], function ($elem) use ($serviceBattle)
+            {
+                $serviceBattle->addContextToBattleEnd($elem);
+            });
 
             \LotgdNavigation::addHeader('category.navigation');
             \LotgdNavigation::villageNav();
@@ -385,12 +388,13 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
         }
         else
         {
-            \LotgdNavigation::fightNav(false, false, "train.php?master=$masterId");
+            $serviceBattle->fightNav(false, false, "train.php?master=$masterId");
         }
 
-        $serviceBattle->battleShowResults($lotgdBattleContent);
+        //--* Add results to response by default (use ->battleResults(true) if you want result results)
+        $serviceBattle->battleResults();
 
-        if ($victory || $defeat)
+        if ($serviceBattle->battleHasWinner())
         {
             $serviceBattle->unsuspendBuffs('allowintrain');
             $serviceBattle->unSuspendCompanions('allowintrain');
