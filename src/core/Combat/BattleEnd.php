@@ -56,7 +56,8 @@ trait BattleEnd
 
         $this->battleIsEnded = true;
 
-        $this->updateData();
+        //-- Data is updated when disable ghost
+        ( ! $this->ghostActivated) && $this->updateData();
 
         return $this;
     }
