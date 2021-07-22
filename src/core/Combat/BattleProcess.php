@@ -60,7 +60,7 @@ trait BattleProcess
             {
                 if (
                     //-- Next enemy if this are dead
-                    ((isset($badguy['dead']) && $badguy['dead']) || $badguy['creaturehealth'] <= 0)
+                    ( ! $this->isEnemyAlive($badguy))
                     //-- Next enemy if not is target and research max attacks per round
                     || ($roundAttacks > $this->getOption('maxattacks') && ! $badguy['istarget'])
                 ) {
@@ -75,8 +75,8 @@ trait BattleProcess
 
                 $this->buffModifiers = $this->activateBuffs('roundstart', $badguy);
 
-                //-- Check health of enemy and player
-                if ( ! $this->isEnemyAlive($badguy) || ! $this->isPlayerAlive())
+                //-- Check health of player
+                if ( ! $this->isPlayerAlive())
                 {
                     //-- End Round attack
                     if ($this->surprised || 'run' == $op || 'fight' == $op)
@@ -86,7 +86,8 @@ trait BattleProcess
                         $badguy = modulehook('endofround', $args->getArguments()); //-- For Stamina System
                     }
 
-                    continue;
+                    //-- Break player cant continue
+                    break;
                 }
 
                 //-- First move is for heal companion
