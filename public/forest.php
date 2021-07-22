@@ -50,6 +50,8 @@ if ('dragon' == $op)
 {
     require_once 'lib/partner.php';
 
+    $method = 'dragon';
+    $params['tpl'] = 'dragon';
     $params['partner'] = get_partner();
 
     \LotgdNavigation::addNav('nav.cave', 'dragon.php');

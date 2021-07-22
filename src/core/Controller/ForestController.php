@@ -95,6 +95,13 @@ class ForestController extends AbstractController
         return $this->renderForest($params);
     }
 
+    public function dragon(array $params): Response
+    {
+        $params['tpl'] = 'dragon';
+
+        return $this->renderForest($params);
+    }
+
     private function renderForest(array $params): Response
     {
         //-- This is only for params not use for other purpose
