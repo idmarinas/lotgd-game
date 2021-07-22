@@ -55,7 +55,12 @@ if ('' == $op)
     \LotgdEventDispatcher::dispatch($args, Events::PAGE_DRAGON_BUFF);
     $badguy = modulehook('buffdragon', $args->getArguments());
 
-    $session['user']['badguy'] = $badguy;
+    $session['user']['badguy'] = [
+        'enemies' => [$badguy],
+        'options' => [
+            'type' => 'forest',
+        ],
+    ];
     $battle = true;
 }
 elseif ('prologue' == $op)
@@ -180,7 +185,6 @@ elseif ('prologue' == $op)
     $session['user']['charm'] += 5;
 
     $regname = get_player_basename();
-    $badguys = ! is_array($badguys) ? @unserialize($badguys) : $badguys;
 
     foreach ($badguys['enemies'] as $opponent)
     {
@@ -238,9 +242,29 @@ if ($battle)
     $battleInForest = 'dragon'; //-- Indicating if is a Forest (true) or Graveyard (false)
     $battleShowResult = false; //-- Show result of battle.
 
-    require_once 'battle.php';
+    /** @var \Lotgd\Core\Combat\Battle */
+    $serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
 
-    if ($victory)
+    $serviceBattle->initialize();
+
+    $serviceBattle
+        ->setBattleZone('dragon')
+        // ->disableProccessBatteResults()
+        ->battleStart() //--* Start the battle.
+        ->battleProcess() //--* Proccess the battle rounds.
+        ->battleEnd() //--* End the battle for this petition
+    ;
+
+    foreach ($session['user']['badguy']['enemies'] as $opponent)
+    {
+        if ('dragon' == $opponent['type'])
+        {
+            $badguy = $opponent;
+            break;
+        }
+    }
+
+    if ($serviceBattle->isVictory())
     {
         $flawless = 0;
 
@@ -251,45 +275,42 @@ if ($battle)
 
         \LotgdNavigation::addNav('common.nav.continue', "dragon.php?op=prologue&flawless=$flawless");
 
-        $lotgdBattleContent['battleend'][] = [
-            'battle.end.victory.slain',
-            [
-                'creatureName' => $badguy['creaturename']
-            ],
-            $textDomain
-        ];
-        $lotgdBattleContent['battleend'][] = [
+        $serviceBattle->addContextToBattleEnd([
             'battle.end.victory.blow',
             [
                 'creatureName' => $badguy['creaturename']
             ],
             $textDomain
-        ];
+        ]);
 
         \LotgdTool::addNews('battle.victory.news.slain', [
             'playerName' => $session['user']['name'],
             'creatureName' => $badguy['creaturename']
         ], $textDomain);
     }
-    elseif ($defeat)
+    elseif ($serviceBattle->isDefeat())
     {
         \LotgdNavigation::addNav('battle.nav.news', 'news.php', ['textDomain' => 'navigation_app']);
 
         $args = new GenericEvent();
         \LotgdEventDispatcher::dispatch($args, Events::PAGE_DRAGON_DEATH);
         $result = modulehook('dragondeath', $args->getArguments());
-        $lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result);
 
-        \LotgdKernel::get('lotgd_core.combat.battle')->battleShowResults($lotgdBattleContent);
+        foreach($result as $msg)
+        {
+            $serviceBattle->addContextToBattleEnd($msg);
+        }
+
+        $serviceBattle->battleResults();
 
         \LotgdResponse::pageEnd();
     }
-    else
+    elseif ( ! $serviceBattle->battleHasWinner())
     {
-        \LotgdNavigation::fightNav(true, false);
+        $serviceBattle->fightNav(true, false, 'dragon.php');
     }
 
-    \LotgdKernel::get('lotgd_core.combat.battle')->battleShowResults($lotgdBattleContent);
+    $serviceBattle->battleResults();
 }
 
 //-- Finalize page
