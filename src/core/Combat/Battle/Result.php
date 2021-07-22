@@ -154,6 +154,8 @@ trait Result
             {
                 $this->addContextToBattleEnd(['combat.end.forget.torment', [], $this->getTranslationDomain()]);
             }
+
+            $this->addContextToBattleEnd('`n');
         }
 
         if ($this->user['hitpoints'] <= 0)
