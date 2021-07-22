@@ -19,8 +19,6 @@ trait Menu
 {
     public function fightNav(bool $allowspecial = true, bool $allowflee = true, ?string $script = null)
     {
-        global $newenemies;
-
         //-- Change text domain for navigation
         $this->navigation->setTextDomain('navigation_fightnav');
 
@@ -59,7 +57,7 @@ trait Menu
             $this->navigation->addNav('nav.auto.010', "{$script}op=fight&auto=ten");
             $auto = $this->settings->getSetting('autofightfull', 0);
 
-            if ((1 == $auto || (2 == $auto && ! $allowflee)) && 1 == \count($newenemies))
+            if ((1 == $auto || (2 == $auto && ! $allowflee)) && 1 == $this->countEnemiesAlive())
             {
                 $this->navigation->addNav('nav.auto.end', "{$script}op=fight&auto=full");
             }
