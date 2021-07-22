@@ -74,7 +74,7 @@ trait Surprise
         {
             $pvPve = 'pvp' == $this->getOptionType();
 
-            $this->addContextToRoundEnemy(['combat.start.surprised.'.$pvPve ? 'pvp' : 'pve', [
+            $this->addContextToRoundEnemy(['combat.start.surprised.'.($pvPve ? 'pvp' : 'pve'), [
                 ($pvPve ? 'player' : 'creatureName') => $this->enemies[0]['creaturename'],
             ], $this->getTranslationDomain()]);
         }
