@@ -32,6 +32,7 @@ class Battle
     use Battle\Enemy;
     use Battle\Extended;
     use Battle\Formula;
+    use Battle\Ghost;
     use Battle\HealthBar;
     use Battle\Menu;
     use Battle\Movement;
@@ -53,6 +54,7 @@ class Battle
     private $playerFunction;
     private $settings;
     private $request;
+    private $battleShowedResults = false;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
@@ -83,6 +85,8 @@ class Battle
         }
 
         $content = $this->twig->render('page/battle.html.twig', $this->getContext());
+
+        $this->battleShowedResults = true;
 
         if ($return)
         {
