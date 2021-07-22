@@ -85,7 +85,7 @@ trait Skill
         ]);
     }
 
-    public function applySkill($skill, $l)
+    public function applySkill($skill)
     {
         if ('godmode' == $skill)
         {
