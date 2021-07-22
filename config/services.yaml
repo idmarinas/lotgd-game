@@ -173,6 +173,7 @@ services:
     # LoTGD PvP
     Lotgd\Core\Pvp\Listing:
         public: true
+        lazy: true
 
     # LoTGD Tools
     Lotgd\Core\Tool\Sanitize:
@@ -189,9 +190,13 @@ services:
     lotgd_core.tool.date_time:
         alias: Lotgd\Core\Tool\DateTime
         public: true
+    Lotgd\Core\Tool\PlayerFunction:
+        lazy: true
     lotgd_core.tool.player_functions:
         alias: Lotgd\Core\Tool\PlayerFunction
         public: true
+    Lotgd\Core\Tool\CreatureFunction:
+        lazy: true
     lotgd_core.tool.creature_functions:
         alias: Lotgd\Core\Tool\CreatureFunction
         public: true
@@ -226,14 +231,20 @@ services:
         alias: Lotgd\Core\Http\Response
     Symfony\Component\HttpFoundation\Request: # Temporal
         alias: Lotgd\Core\Http\Request
+    Lotgd\Core\Tool\Backup:
+        lazy: true
     lotgd.core.backup:
         alias: Lotgd\Core\Tool\Backup
         public: true
     lotgd.serializer.denormalizer: # Temporal
         alias: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
         public: true
+    # Kit\CryptBundle\Service\OpensslService:
+    #     lazy: true
     Kit\CryptBundle\Service\OpensslService:
-        alias: kit_crypt.openssl
+        arguments:
+            - '%kit_crypt.clients%'
+        lazy: true
         public: true
 
     # Twig extensions
