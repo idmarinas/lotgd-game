@@ -14,6 +14,10 @@
 
 -   Se crea un nuevo sistema de batalla, usando service para poder personalizarlo.
     -   Cambiar los sitios donde se usa battle.php
+-   Controladores para los módulos y el MODULE_run() y así poder migrarlos al sistema de bundle
+    -   El nombre del controlador se pasa por el request attributes
+-   Crear el bundle de settings para poder usarlo en sustitución de las `prefs` para usuario
+-   systemmail.php crear un service para reemplazar esto
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   Sustituir la función lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
