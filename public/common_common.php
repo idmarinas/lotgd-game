@@ -205,6 +205,7 @@ require_once 'lib/modules.php';
 require_once 'lib/forcednavigation.php';
 require_once 'lib/mounts.php';
 require_once 'lib/lotgd_mail.php';
+require_once 'lib/systemmail.php'; //-- For avoid require in controllers
 
 // Decline static file requests back to the PHP built-in webserver
 if ('cli-server' === \PHP_SAPI && is_file(__DIR__.parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH)))
