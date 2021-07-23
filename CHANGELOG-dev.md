@@ -90,7 +90,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   **lib/pvpwarning.php** Function `pvpwarning` use `LotgdKernel::get('Lotgd\Core\Pvp\Warning')->warning($dokill)`
 
 ### :wrench: FIXES
 
