@@ -14,7 +14,6 @@
 namespace Lotgd\Core\Controller;
 
 require_once 'lib/titles.php';
-require_once 'lib/systemmail.php';
 
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;

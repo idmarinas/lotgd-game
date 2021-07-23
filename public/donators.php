@@ -8,7 +8,6 @@ use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/systemmail.php';
 
 check_su_access(SU_EDIT_DONATIONS);
 

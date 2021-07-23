@@ -13,8 +13,6 @@
 
 namespace Lotgd\Core\Controller;
 
-require_once 'lib/systemmail.php';
-
 use Lotgd\Core\Event\Clan as EventClan;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;

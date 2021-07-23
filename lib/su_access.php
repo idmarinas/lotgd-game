@@ -83,8 +83,6 @@ function check_su_access($level)
     $repository = \Doctrine::getRepository('LotgdCore:User');
     $result     = $repository->getSuperuserWithPermit(SU_EDIT_USERS);
 
-    require_once 'lib/systemmail.php';
-
     foreach ($result as $row)
     {
         $subj = [

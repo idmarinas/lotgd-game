@@ -249,8 +249,6 @@ elseif ('haunt2' == $op)
 }
 elseif ('haunt3' == $op)
 {
-    require 'lib/systemmail.php';
-
     $params['tpl'] = 'haunt3';
 
     \LotgdNavigation::addNav('nav.question', 'graveyard.php?op=question', [

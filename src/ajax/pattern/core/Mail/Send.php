@@ -53,8 +53,6 @@ trait Send
                 return $response;
             }
 
-            require_once 'lib/systemmail.php';
-
             $subject = $this->sanitize((string) $post['subject'], true);
             $body    = \substr($this->sanitize((string) $post['body'], false), 0, (int) \LotgdSetting::getSetting('mailsizelimit', 1024));
 

@@ -166,8 +166,6 @@ class Petition extends AjaxAbstract
             return;
         }
 
-        require_once 'lib/systemmail.php';
-
         $date = \date('Y-m-d H:i:s');
         $url  = \LotgdSetting::getSetting('serverurl', \LotgdRequest::getServer('SERVER_NAME'));
 

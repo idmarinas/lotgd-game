@@ -8,7 +8,6 @@ use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/systemmail.php';
 
 // Don't hook on to this text for your standard modules please, use "train" instead.
 // This hook is specifically to allow modules that do other trains to create ambience.
