@@ -177,6 +177,9 @@ services:
     Lotgd\Core\Pvp\Warning:
         public: true
         lazy: true
+    Lotgd\Core\Pvp\Support:
+        public: true
+        lazy: true
 
     # LoTGD Tools
     Lotgd\Core\Tool\Sanitize:
