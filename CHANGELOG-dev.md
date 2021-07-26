@@ -90,6 +90,10 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :fire: DEPRECATED
 
+-   **lib/pvpsupport.php** All functions:
+    -   `setup_pvp_target` use `LotgdKernel::get("Lotgd\Core\Pvp\Support")->setupPvpTarget($characterId)` instead
+    -   `pvpvictory` use `LotgdKernel::get("Lotgd\Core\Pvp\Support")->pvpVictory($badguy, $killedloc)` instead
+    -   `pvpdefeat` use `LotgdKernel::get("Lotgd\Core\Pvp\Support")->pvpDefeat($badguy, $killedloc)` instead
 -   **lib/pvpwarning.php** Function `pvpwarning` use `LotgdKernel::get('Lotgd\Core\Pvp\Warning')->warning($dokill)`
 
 ### :wrench: FIXES
