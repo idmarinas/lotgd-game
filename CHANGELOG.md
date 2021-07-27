@@ -30,6 +30,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
         -   Fix error with compare to dates
     -   Function: `pvpvictory` and `pvpdefeat`
         -   Fixed error with translation keys
+    -   Function: `pvpvictory`
+        -   Now select correct max experience to lost
 -   **src/core/Repository/CharactersRepository.php** Function `getCharacterForPvp` Fix error, now add `character_id` to array
 
 ### :x: REMOVES
