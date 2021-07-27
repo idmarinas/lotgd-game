@@ -60,7 +60,7 @@ class Support
         global $session;
 
         $pvptime    = $this->settings->getSetting('pvptimeout', 600);
-        $pvptimeout = date('Y-m-d H:i:s', strtotime("-{$pvptime} seconds"));
+        $pvptimeout = new \DateTime(date('Y-m-d H:i:s', strtotime("-{$pvptime} seconds")));
 
         /** @var \Lotgd\Core\Repository\AvatarRepository */
         $repository = $this->doctrine->getRepository('LotgdCore:Avatar');
@@ -147,12 +147,12 @@ class Support
         $session['user']['gold'] += $winamount;
 
         $this->battle->addContextToBattleEnd([
-            'combat.end.slain',
+            'battle.victory.creature',
             ['creatureName' => $badguy['creaturename']],
             self::TRANSLATION_DOMAIN,
         ]);
         $this->battle->addContextToBattleEnd([
-            'combat.end.get.gold',
+            'battle.victory.gold',
             ['gold' => $winamount],
             self::TRANSLATION_DOMAIN,
         ]);
@@ -174,7 +174,7 @@ class Support
         if ($expbonus > 0)
         {
             $this->battle->addContextToBattleEnd([
-                'combat.end.experience.forest.bonus',
+                'battle.victory.difficult',
                 ['experience' => $expbonus],
                 self::TRANSLATION_DOMAIN,
             ]);
@@ -182,7 +182,7 @@ class Support
         elseif ($expbonus < 0)
         {
             $this->battle->addContextToBattleEnd([
-                'combat.end.experience.forest.penalize',
+                'battle.victory.simplistic',
                 ['experience' => abs($expbonus)],
                 self::TRANSLATION_DOMAIN,
             ]);
@@ -352,22 +352,22 @@ class Support
         $session['user']['experience']     = round($session['user']['experience'] * (100 - $this->settings->getSetting('pvpattlose', 15)) / 100, 0);
 
         $this->battle->addContextToBattleEnd([
-            'combat.end.defeated.die',
+            'battle.defeated.death',
             ['creatureName' => $badguy['creaturename']],
             self::TRANSLATION_DOMAIN,
         ]);
         $this->battle->addContextToBattleEnd([
-            'combat.end.defeated.lost.gold',
+            'battle.defeated.gold',
             [],
             self::TRANSLATION_DOMAIN,
         ]);
         $this->battle->addContextToBattleEnd([
-            'combat.end.defeated.lost.exp',
+            'battle.defeated.experience',
             ['experience' => $this->settings->getSetting('pvpattlose', 15) / 100],
             self::TRANSLATION_DOMAIN,
         ]);
         $this->battle->addContextToBattleEnd([
-            'combat.end.defeated.tomorrow.forest',
+            'battle.defeated.tomorrow',
             [],
             self::TRANSLATION_DOMAIN,
         ]);
