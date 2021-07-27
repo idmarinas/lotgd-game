@@ -26,6 +26,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **lib/pvpsupport.php** in `setup_pvp_target` function
     -   Fix error with translation key (now use correct)
     -   Not need extractEntity is an array
+-   **src/core/Repository/CharactersRepository.php** Function `getCharacterForPvp` Fix error, now add `character_id` to array
 
 ### :x: REMOVES
 
