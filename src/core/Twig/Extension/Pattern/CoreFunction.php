@@ -92,17 +92,6 @@ trait CoreFunction
     }
 
     /**
-     * Function to use bdump of Tracy debugger.
-     *
-     * @param mixed  $param
-     * @param string $name
-     */
-    public function bdump($param, $name = null): void
-    {
-        bdump($param, $name);
-    }
-
-    /**
      * Dump var and return a string.
      *
      * @param mixed $var
