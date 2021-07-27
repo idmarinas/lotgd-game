@@ -207,7 +207,7 @@ function pvpvictory($badguy, $killedloc)
         $character->setGoldinbank(max($character->getGoldinbank() - abs($goldLost), 0));
     }
 
-    $character->setExperience(max($character->getExperience() - $lostexp), 0);
+    $character->setExperience(max($character->getExperience() - $lostexp, 0));
 
     \Doctrine::persist($character);
     \Doctrine::flush();
