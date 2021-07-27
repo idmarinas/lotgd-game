@@ -188,9 +188,16 @@ elseif ('view' == $op)
     $params['files']   = array_map(function ($path) use ($serializer, $cryptService)
     {
         $content = file_get_contents($path);
-        $content = (false !== stripos($path, 'LotgdCore_User')) ? $cryptService->decrypt($content) : $content;
+        $content = $cryptService->decrypt($content) ?: $content;
+        $content = $serializer->decode($content, 'json');
 
-        return $serializer->decode($content, 'json');
+        //-- Not show password of User entity
+        if (isset($content['rows'][0]['password']))
+        {
+            unset($content['rows'][0]['password']);
+        }
+
+        return $content;
     }, $files);
 }
 
