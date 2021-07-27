@@ -40,7 +40,7 @@ function setup_pvp_target(int $characterId)
         }
         elseif ($entity['pvpflag'] > $pvptimeout)
         {
-            $message = 'flash.message.pvp.start.pvp.timeout';
+            $message = 'flash.message.pvp.start.timeout';
         }
         elseif ($entity['loggedin'])
         {
