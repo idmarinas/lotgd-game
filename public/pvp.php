@@ -8,11 +8,11 @@ use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/pvpwarning.php';
-require_once 'lib/pvpsupport.php';
 
-$iname = LotgdSetting::getSetting('innname', LOCATION_INN);
-$battle = false;
+/** @var Lotgd\Core\Http\Request */
+$request = LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+$iname   = LotgdSetting::getSetting('innname', LOCATION_INN);
+$battle  = false;
 
 $textDomain = 'page_pvp';
 
@@ -20,42 +20,37 @@ $textDomain = 'page_pvp';
 \LotgdResponse::pageStart('title', [], $textDomain);
 
 $params = [
-    'textDomain' => $textDomain
+    'textDomain' => $textDomain,
 ];
 
-$op = (string) \LotgdRequest::getQuery('op');
-$act = (string) \LotgdRequest::getQuery('act');
+$op    = (string) $request->query->get('op');
+$act   = (string) $request->query->get('act');
+$skill = (string) $request->query->get('skill');
+
+if ('' != $skill)
+{
+    \LotgdResponse::pageAddContent(\LotgdTranslator::t('honor', [], $textDomain));
+    $skill = '';
+    $request->query->set('skill', '');
+}
 
 if ('' == $op && 'attack' != $act)
 {
     \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
-    pvpwarning();
-
-    $pvp = \LotgdKernel::get(\Lotgd\Core\Pvp\Listing::class);
-    $pvptime = LotgdSetting::getSetting('pvptimeout', 600);
-
-    $params['tpl'] = 'list';
-    $params['paginator'] = $pvp->getPvpList($session['user']['location']);
-    $params['sleepers'] = $pvp->getLocationSleepersCount($session['user']['location']);
-    $params['returnLink'] = \LotgdRequest::getServer('REQUEST_URI');
-    $params['pvpTimeOut'] = new \DateTime(date('Y-m-d H:i:s', strtotime("-$pvptime seconds")));
-
-    \LotgdNavigation::addNav('common.nav.warriors', 'pvp.php');
-    \LotgdNavigation::villageNav();
+    $method = 'index';
 }
 elseif ('attack' == $act)
 {
-    $characterId = (int) \LotgdRequest::getQuery('character_id');
+    $characterId = $request->query->getInt('character_id');
 
-    $badguy = setup_pvp_target($characterId);
-    $options['type'] = 'pvp';
+    $badguy       = \LotgdKernel::get('Lotgd\Core\Pvp\Support')->setupPvpTarget($characterId);
     $failedattack = true;
 
-    if (is_array($badguy))
+    if (\is_array($badguy))
     {
         $failedattack = false;
-        $battle = true;
+        $battle       = true;
 
         if ($badguy['location'] == $iname)
         {
@@ -63,27 +58,27 @@ elseif ('attack' == $act)
         }
 
         $attackstack['enemies'][0] = $badguy;
-        $attackstack['options'] = $options;
+        $attackstack['options']    = ['type' => 'pvp'];
         $session['user']['badguy'] = $attackstack;
-        $session['user']['playerfights']--;
+        --$session['user']['playerfights'];
 
         \LotgdResponse::pageDebug($session['user']['badguy']);
     }
-    elseif (is_string($badguy))
+    elseif (\is_string($badguy))
     {
         \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t($badguy, [], $textDomain));
     }
 
     if ($failedattack)
     {
-        if (\LotgdRequest::getQuery('inn'))
+        $url = 'pvp.php';
+
+        if ($request->query->get('inn'))
         {
-            \LotgdNavigation::addNav('common.nav.listing', 'inn.php?op=bartender&act=listupstairs');
+            $url = 'inn.php?op=bartender&act=listupstairs';
         }
-        else
-        {
-            \LotgdNavigation::addNav('common.nav.listing', 'pvp.php');
-        }
+
+        \LotgdNavigation::addNav('common.nav.listing', $url);
     }
 }
 elseif ('run' == $op)
@@ -91,16 +86,7 @@ elseif ('run' == $op)
     \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.pvp.run', [], $textDomain));
 
     $op = 'fight';
-    \LotgdRequest::setQuery('op', $op);
-}
-
-$skill = \LotgdRequest::getQuery('skill');
-
-if ('' != $skill)
-{
-    \LotgdResponse::pageAddContent(\LotgdTranslator::t('honor', [], $textDomain));
-    $skill = '';
-    \LotgdRequest::setQuery('skill', '');
+    $request->query->set('op', $op);
 }
 
 if ('fight' == $op || 'run' == $op)
@@ -110,32 +96,43 @@ if ('fight' == $op || 'run' == $op)
 
 if ($battle)
 {
-    //-- Any data for personalize results
-    $battleShowResult = false; //-- Show result of battle.
-    $battleProcessVictoryDefeat = false; //-- Process victory or defeat functions when the battle is over
+    /** @var \Lotgd\Core\Combat\Battle */
+    $serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
 
-    require_once 'battle.php';
+    $serviceBattle->initialize();
+    $serviceBattle
+        ->setBattleZone('pvp')
+        ->disableProccessBatteResults()
 
-    if ($victory)
+        ->battleStart() //--* Start the battle.
+        ->battleProcess() //--* Proccess the battle rounds.
+        ->battleEnd() //--* End the battle for this petition
+    ;
+
+    $badguy = $session['user']['badguy']['enemies'][0];
+
+    bdump($badguy);
+
+    if ($serviceBattle->isVictory())
     {
         $killedin = $badguy['location'];
-        $handled = pvpvictory($badguy, $killedin);
+        $handled  = \LotgdKernel::get('Lotgd\Core\Pvp\Support')->pvpVictory($badguy, $killedin);
 
         // Handled will be true if a module has already done the addnews or
         // whatever was needed.
-        if (! $handled)
+        if ( ! $handled)
         {
             $news = ($killedin == $iname) ? 'inn' : 'other';
 
             \LotgdTool::addNews("pvp.victory.{$news}", [
-                'playerName' => $session['user']['name'],
+                'playerName'   => $session['user']['name'],
                 'creatureName' => $badguy['creaturename'],
-                'location' => $killedin
+                'location'     => $killedin,
             ]);
         }
 
         $op = '';
-        \LotgdRequest::setQuery('op', $op);
+        $request->query->set('op', $op);
 
         if ($killedin == $iname)
         {
@@ -148,23 +145,23 @@ if ($battle)
 
         if ($session['user']['hitpoints'] <= 0)
         {
-            $lotgdBattleContent['battleend'][] = [
+            $serviceBattle->addContextToBattleEnd([
                 'battle.end',
                 [],
-                $textDomain
-            ];
+                $textDomain,
+            ]);
             $session['user']['hitpoints'] = 1;
         }
     }
-    elseif ($defeat)
+    elseif ($serviceBattle->isDefeat())
     {
         $killedin = $badguy['location'];
         // This is okay because system mail which is all it's used for is
         // not translated
-        $handled = pvpdefeat($badguy, $killedin);
+        $handled = \LotgdKernel::get('Lotgd\Core\Pvp\Support')->pvpDefeat($badguy, $killedin);
         // Handled will be true if a module has already done the addnews or
         // whatever was needed.
-        if (! $handled)
+        if ( ! $handled)
         {
             $taunt = \LotgdTool::selectTaunt();
 
@@ -173,29 +170,25 @@ if ($battle)
             \LotgdTool::addNews('deathmessage', [
                 'deathmessage' => [
                     'deathmessage' => "pvp.defeated.{$news}",
-                    'params' => [
-                        'playerName' => $session['user']['name'],
+                    'params'       => [
+                        'playerName'   => $session['user']['name'],
                         'creatureName' => $badguy['creaturename'],
-                        'location' => $killedin
+                        'location'     => $killedin,
                     ],
-                    'textDomain' => $textDomain
+                    'textDomain' => $textDomain,
                 ],
-                'taunt' => $taunt
+                'taunt' => $taunt,
             ], '');
         }
     }
-    else
+    elseif ( ! $serviceBattle->battleHasWinner())
     {
-        $extra = '';
+        $extra = ($request->query->get('inn')) ? '?inn=1' : '';
 
-        if (\LotgdRequest::getQuery('inn'))
-        {
-            $extra = '?inn=1';
-        }
-        \LotgdNavigation::fightNav(false, false, "pvp.php{$extra}");
+        $serviceBattle->fightNav(false, false, "pvp.php{$extra}");
     }
 
-    \LotgdKernel::get('lotgd_core.combat.battle')->battleShowResults($lotgdBattleContent);
+    $serviceBattle->battleResults();
 }
 
 $params['battle'] = $battle;
@@ -204,7 +197,10 @@ $params['battle'] = $battle;
 $args = new GenericEvent(null, $params);
 \LotgdEventDispatcher::dispatch($args, Events::PAGE_PVP_POST);
 $params = modulehook('page-pvp-tpl-params', $args->getArguments());
-\LotgdResponse::pageAddContent(\LotgdTheme::render('page/pvp.html.twig', $params));
+
+$request->attributes->set('params', $params);
+
+( ! $battle && $method) && \LotgdResponse::callController(Lotgd\Core\Controller\PvpController::class, $method);
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
