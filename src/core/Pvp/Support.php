@@ -247,7 +247,7 @@ class Support
             $character->setGoldinbank(max($character->getGoldinbank() - abs($goldLost), 0));
         }
 
-        $character->setExperience(max($character->getExperience() - $lostexp), 0);
+        $character->setExperience(max($character->getExperience() - $lostexp, 0));
 
         $this->doctrine->persist($character);
         $this->doctrine->flush();
