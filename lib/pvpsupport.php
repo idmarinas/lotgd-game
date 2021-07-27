@@ -21,7 +21,7 @@ function setup_pvp_target(int $characterId)
     global $session, $textDomain;
 
     $pvptime    = LotgdSetting::getSetting('pvptimeout', 600);
-    $pvptimeout = \date('Y-m-d H:i:s', \strtotime("-{$pvptime} seconds"));
+    $pvptimeout = new DateTime(date('Y-m-d H:i:s', strtotime("-{$pvptime} seconds")));
 
     $repository = \Doctrine::getRepository('LotgdCore:Characters');
     $entity     = $repository->getCharacterForPvp($characterId);
@@ -34,7 +34,7 @@ function setup_pvp_target(int $characterId)
 
         $pvprange = (int) LotgdSetting::getSetting('pvprange', 2);
 
-        if (\abs((int) $session['user']['level'] - (int) $entity['creaturelevel']) > $pvprange)
+        if (abs((int) $session['user']['level'] - (int) $entity['creaturelevel']) > $pvprange)
         {
             $message = 'flash.message.pvp.start.out.range';
         }
@@ -58,7 +58,7 @@ function setup_pvp_target(int $characterId)
             \Doctrine::persist($entityCharacter);
             \Doctrine::flust();
 
-            $entity['creatureexp']    = \round($entity['creatureexp'], 0);
+            $entity['creatureexp']    = round($entity['creatureexp'], 0);
             $entity['playerstarthp']  = $session['user']['hitpoints'];
             $entity['fightstartdate'] = new \DateTime('now');
 
@@ -98,7 +98,7 @@ function pvpvictory($badguy, $killedloc)
     // and amount of gold they were carrying this can some times work to
     // their advantage, sometimes against.  The basic idea is to prevent
     // exhorbitant amounts of money from being transferred this way.
-    $winamount = \round(10 * $badguy['creaturelevel'] * \log(\max(1, $badguy['creaturegold'])), 0);
+    $winamount = round(10 * $badguy['creaturelevel'] * log(max(1, $badguy['creaturegold'])), 0);
 
     if (15 == $session['user']['level'])
     {
@@ -117,11 +117,11 @@ function pvpvictory($badguy, $killedloc)
         $textDomain,
     ];
 
-    $exp = \round(LotgdSetting::getSetting('pvpattgain', 10) * $badguy['creatureexp'] / 100, 0);
+    $exp = round(LotgdSetting::getSetting('pvpattgain', 10) * $badguy['creatureexp'] / 100, 0);
 
     if (LotgdSetting::getSetting('pvphardlimit', 0))
     {
-        $exp = \min(LotgdSetting::getSetting('pvphardlimitamount', 15000), $exp);
+        $exp = min(LotgdSetting::getSetting('pvphardlimitamount', 15000), $exp);
     }
 
     if (15 == $session['user']['level'])
@@ -129,7 +129,7 @@ function pvpvictory($badguy, $killedloc)
         $exp = 0;
     }
 
-    $expbonus = \round(($exp * (1 + .1 * ($badguy['creaturelevel'] - $session['user']['level']))) - $exp, 0);
+    $expbonus = round(($exp * (1 + .1 * ($badguy['creaturelevel'] - $session['user']['level']))) - $exp, 0);
 
     if ($expbonus > 0)
     {
@@ -143,7 +143,7 @@ function pvpvictory($badguy, $killedloc)
     {
         $lotgdBattleContent['battleend'][] = [
             'battle.victory.simplistic',
-            ['experience' => \abs($expbonus)],
+            ['experience' => abs($expbonus)],
             $textDomain,
         ];
     }
@@ -155,7 +155,7 @@ function pvpvictory($badguy, $killedloc)
     ];
     $session['user']['experience'] += $wonexp;
 
-    $lostexp = \round($badguy['creatureexp'] * LotgdSetting::getSetting('pvpdeflose', 5) / 100, 0);
+    $lostexp = round($badguy['creatureexp'] * LotgdSetting::getSetting('pvpdeflose', 5) / 100, 0);
 
     //player wins gold and exp from badguy
     \LotgdLog::debug("started the fight and defeated {$badguy['creaturename']} in {$killedloc} (earned {$winamount} of {$badguy['creaturegold']} gold and {$wonexp} of {$lostexp} exp)", false, $session['user']['acctid']);
@@ -204,10 +204,10 @@ function pvpvictory($badguy, $killedloc)
     {
         $character->setGold(0);
         //-- Avoid debs in bank of looser
-        $character->setGoldinbank(\max($character->getGoldinbank() - \abs($goldLost), 0));
+        $character->setGoldinbank(max($character->getGoldinbank() - abs($goldLost), 0));
     }
 
-    $character->setExperience(\max($character->getExperience() - $lostexp), 0);
+    $character->setExperience(max($character->getExperience() - $lostexp), 0);
 
     \Doctrine::persist($character);
     \Doctrine::flush();
@@ -228,7 +228,7 @@ function pvpdefeat($badguy, $killedloc)
     // and amount of gold they were carrying this can some times work to
     // their advantage, sometimes against.  The basic idea is to prevent
     // exhorbitant amounts of money from being transferred this way.
-    $winamount = \round(10 * $session['user']['level'] * \log(\max(1, $session['user']['gold'])), 0);
+    $winamount = round(10 * $session['user']['level'] * log(max(1, $session['user']['gold'])), 0);
 
     if (15 == $badguy['creaturelevel'])
     {
@@ -238,11 +238,11 @@ function pvpdefeat($badguy, $killedloc)
     $repository = \Doctrine::getRepository('LotgdCore:Characters');
     $character  = $repository->find($badguy['character_id']);
 
-    $wonexp = \round($session['user']['experience'] * LotgdSetting::getSetting('pvpdefgain', 10) / 100, 0);
+    $wonexp = round($session['user']['experience'] * LotgdSetting::getSetting('pvpdefgain', 10) / 100, 0);
 
     if (LotgdSetting::getSetting('pvphardlimit', 0))
     {
-        $wonexp = \min(LotgdSetting::getSetting('pvphardlimitamount', 15000), $wonexp);
+        $wonexp = min(LotgdSetting::getSetting('pvphardlimitamount', 15000), $wonexp);
     }
 
     if (15 == $badguy['creaturelevel'])
@@ -250,7 +250,7 @@ function pvpdefeat($badguy, $killedloc)
         $wonexp = 0;
     }
 
-    $lostexp = \round($session['user']['experience'] * LotgdSetting::getSetting('pvpattlose', 15) / 100, 0);
+    $lostexp = round($session['user']['experience'] * LotgdSetting::getSetting('pvpattlose', 15) / 100, 0);
 
     $args = new Character(['pvpmessageadd' => '', 'handled' => false, 'badguy' => $badguy]);
     \LotgdEventDispatcher::dispatch($args, Character::PVP_LOSS);
@@ -309,7 +309,7 @@ function pvpdefeat($badguy, $killedloc)
 
     $session['user']['gold']           = 0;
     $session['user']['hitpoints']      = 0;
-    $session['user']['experience']     = \round($session['user']['experience'] * (100 - LotgdSetting::getSetting('pvpattlose', 15)) / 100, 0);
+    $session['user']['experience']     = round($session['user']['experience'] * (100 - LotgdSetting::getSetting('pvpattlose', 15)) / 100, 0);
     $lotgdBattleContent['battleend'][] = [
         'battle.defeated.death',
         ['creatureName' => $badguy['creaturename']],
