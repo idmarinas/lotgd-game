@@ -44,7 +44,7 @@ class Kernel extends BaseKernel
      *
      * @var string
      */
-    public const COPYRIGHT = 'Game Design and Code: Copyright &copy; 2002-2005, Eric Stevens & JT Traub, &copy; 2006-2007, Dragonprime Development Team, &copy; 2015-2019 IDMarinas remodelling and enhancing';
+    public const COPYRIGHT = 'Game Design and Code: Copyright &copy; 2002-2005, Eric Stevens & JT Traub, &copy; 2006-2007, Dragonprime Development Team, &copy; 2015-2021 IDMarinas remodelling and enhancing';
 
     /**
      * This series of scripts (collectively known as Legend of the Green Dragon or LotGD) is licensed according to the Creating Commons Attribution
