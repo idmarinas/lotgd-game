@@ -50,6 +50,9 @@
     -   Se aprobecha el cambio a TailWind para revisar y mejorar las plantillas
     -   Usar macros y blocks donde se pueda.
 
+## Para la versión 8.0.0
+
+-   Esta versión posiblemente sea ya una Symfony App
 
 ## Para la versión X.Y.Z
 -   Migrar los cronjobs a cron/cron bundle mediante comandos de symfony console.
