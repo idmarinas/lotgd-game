@@ -13,6 +13,7 @@
 namespace Lotgd\Core\Tool;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Kit\CryptBundle\Service\OpensslService as Crypt;
 use Lotgd\Core\Event\Character as CharacterEvent;
 use Lotgd\Core\Event\Clan as ClanEvent;
 use Lotgd\Core\Http\Request;
@@ -23,7 +24,6 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use Kit\CryptBundle\Service\OpensslService as Crypt;
 
 class Backup
 {
@@ -49,8 +49,8 @@ class Backup
         $this->eventDispatcher = $eventDispatcher;
         $this->normalizer      = $normalizer; //-- object to array
         $this->serializer      = $serializer;
-        $this->request = $request;
-        $this->crypt      = $crypt;
+        $this->request         = $request;
+        $this->crypt           = $crypt;
     }
 
     /**
@@ -89,7 +89,7 @@ class Backup
         $accountEntity     = $accountRepository->find($accountId);
 
         //-- Not do nothing if not find account or fail in create basic backup
-        if ( ! $accountEntity || ! $this->createBackupBasicInfo($accountId, $accountEntity))
+        if ( ! $accountEntity || ! $this->createBackupBasicInfo($accountId, $accountEntity, $return['encrypt']))
         {
             $this->log->game("Could not create basic info backup for the account ID:{$accountEntity->getAcctid()}, Login {$accountEntity->getLogin()}, canceled", 'backup');
 
@@ -229,7 +229,7 @@ class Backup
             ];
 
             $entityName = str_replace([':', '\\', '/'], '_', $entityName);
-            $data = $this->serializer->serialize($data, 'json');
+            $data       = $this->serializer->serialize($data, 'json');
 
             if ($encrypt)
             {
@@ -253,7 +253,7 @@ class Backup
      *
      * @param mixed $account
      */
-    private function createBackupBasicInfo(int $accountId, $account): bool
+    private function createBackupBasicInfo(int $accountId, $account, array $encrypt): bool
     {
         $fileSystem = new Filesystem();
         $path       = "storage/logd_snapshots/user-{$accountId}";
@@ -267,6 +267,7 @@ class Backup
                 'login'       => $account->getLogin(),
                 'email'       => $account->getEmailaddress(),
                 'lastIp'      => $account->getLastip(),
+                'encrypted'   => $encrypt,
             ];
 
             $callback   = $this->circularReferenceHandler();
