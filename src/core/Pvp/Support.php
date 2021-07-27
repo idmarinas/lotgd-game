@@ -64,7 +64,7 @@ class Support
 
         /** @var \Lotgd\Core\Repository\AvatarRepository */
         $repository = $this->doctrine->getRepository('LotgdCore:Avatar');
-        $entity     = $repository->extractEntity($repository->getCharacterForPvp($characterId));
+        $entity     = $repository->getCharacterForPvp($characterId);
 
         $message = 'flash.message.pvp.start.not.found';
 
@@ -80,7 +80,7 @@ class Support
             }
             elseif ($entity['pvpflag'] > $pvptimeout)
             {
-                $message = 'flash.message.pvp.start.pvp.timeout';
+                $message = 'flash.message.pvp.start.timeout';
             }
             elseif ($entity['loggedin'])
             {
