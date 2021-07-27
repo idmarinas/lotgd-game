@@ -16,7 +16,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Kit\CryptBundle\Service\OpensslService as Crypt;
 use Lotgd\Core\Event\Character as CharacterEvent;
 use Lotgd\Core\Event\Clan as ClanEvent;
-use Lotgd\Core\Http\Request;
 use Lotgd\Core\Log;
 use Lotgd\Core\Repository\RepositoryBackupInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -32,7 +31,6 @@ class Backup
     private $eventDispatcher;
     private $normalizer;
     private $serializer;
-    private $request;
     private $crypt;
 
     public function __construct(
@@ -41,7 +39,6 @@ class Backup
         EventDispatcherInterface $eventDispatcher,
         NormalizerInterface $normalizer,
         SerializerInterface $serializer,
-        Request $request,
         Crypt $crypt
     ) {
         $this->doctrine        = $doctrine;
@@ -49,7 +46,6 @@ class Backup
         $this->eventDispatcher = $eventDispatcher;
         $this->normalizer      = $normalizer; //-- object to array
         $this->serializer      = $serializer;
-        $this->request         = $request;
         $this->crypt           = $crypt;
     }
 
