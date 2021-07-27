@@ -24,7 +24,7 @@ function setup_pvp_target(int $characterId)
     $pvptimeout = \date('Y-m-d H:i:s', \strtotime("-{$pvptime} seconds"));
 
     $repository = \Doctrine::getRepository('LotgdCore:Characters');
-    $entity     = $repository->extractEntity($repository->getCharacterForPvp($characterId));
+    $entity     = $repository->getCharacterForPvp($characterId);
 
     $message = 'flash.message.pvp.start.not.found';
 
@@ -40,7 +40,7 @@ function setup_pvp_target(int $characterId)
         }
         elseif ($entity['pvpflag'] > $pvptimeout)
         {
-            $message = 'flash.message.pvp.start.pvp.timeout';
+            $message = 'flash.message.pvp.start.timeout';
         }
         elseif ($entity['loggedin'])
         {
