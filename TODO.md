@@ -13,7 +13,7 @@
 # Actualmente haciendo esto (6.0.0)
 
 -   Se crea un nuevo sistema de batalla, usando service para poder personalizarlo.
-    -   Cambiar los sitios donde se usa battle.php
+    -   Cambiar los sitios donde se usa battle.php (MODULOS)
 -   Controladores para los módulos y el MODULE_run() y así poder migrarlos al sistema de bundle
     -   El nombre del controlador se pasa por el request attributes
 -   Crear el bundle de settings para poder usarlo en sustitución de las `prefs` para usuario
@@ -25,8 +25,6 @@
 -   Se intentará pasar todas las paginas al sistema de controlador igual que home.php y about.php
     -   Las páginas Grotto (las de configuración y administración) no se pasarán a un sistema de controlador.
         -   El panel de administración del juego se va a sustituir por **Sonata Admin**
--   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
-    -   Usar macros y blocks donde se pueda.
 
 
 ## Para la versión 7.0.0
@@ -44,6 +42,9 @@
             -   El js se crea en una entry comun para todo (app por ejemplo) ya que puede dar problemas
                 -   webpack.encore.entry.js
                 -   webpack.encore.theme.js
+-   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
+    -   Se aprobecha el cambio a TailWind para revisar y mejorar las plantillas
+    -   Usar macros y blocks donde se pueda.
 
 # Módulos
 
