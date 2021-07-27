@@ -67,6 +67,7 @@ try
         $profile = new Twig\Profiler\Profile();
         $twig    = LotgdKernel::get('twig');
         $twig->addExtension(new Twig\Extension\ProfilerExtension($profile));
+        $twig->addExtension(new \Idmarinas\TracyPanel\Twig\TracyExtension());
 
         \Idmarinas\TracyPanel\TwigBar::init($profile);
 
