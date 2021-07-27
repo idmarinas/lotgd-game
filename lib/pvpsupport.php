@@ -107,12 +107,12 @@ function pvpvictory($badguy, $killedloc)
     $session['user']['gold'] += $winamount;
 
     $lotgdBattleContent['battleend'][] = [
-        'combat.end.slain',
+        'battle.victory.creature',
         ['creatureName' => $badguy['creaturename']],
         $textDomain,
     ];
     $lotgdBattleContent['battleend'][] = [
-        'combat.end.get.gold',
+        'battle.victory.gold',
         ['gold' => $winamount],
         $textDomain,
     ];
@@ -134,7 +134,7 @@ function pvpvictory($badguy, $killedloc)
     if ($expbonus > 0)
     {
         $lotgdBattleContent['battleend'][] = [
-            'combat.end.experience.forest.bonus',
+            'battle.victory.difficult',
             ['experience' => $expbonus],
             $textDomain,
         ];
@@ -142,7 +142,7 @@ function pvpvictory($badguy, $killedloc)
     elseif ($expbonus < 0)
     {
         $lotgdBattleContent['battleend'][] = [
-            'combat.end.experience.forest.penalize',
+            'battle.victory.simplistic',
             ['experience' => \abs($expbonus)],
             $textDomain,
         ];
@@ -311,22 +311,22 @@ function pvpdefeat($badguy, $killedloc)
     $session['user']['hitpoints']      = 0;
     $session['user']['experience']     = \round($session['user']['experience'] * (100 - LotgdSetting::getSetting('pvpattlose', 15)) / 100, 0);
     $lotgdBattleContent['battleend'][] = [
-        'combat.end.defeated.die',
+        'battle.defeated.death',
         ['creatureName' => $badguy['creaturename']],
         $textDomain,
     ];
     $lotgdBattleContent['battleend'][] = [
-        'combat.end.defeated.lost.gold',
+        'battle.defeated.gold',
         [],
         $textDomain,
     ];
     $lotgdBattleContent['battleend'][] = [
-        'combat.end.defeated.lost.exp',
+        'battle.defeated.experience',
         ['experience' => LotgdSetting::getSetting('pvpattlose', 15) / 100],
         $textDomain,
     ];
     $lotgdBattleContent['battleend'][] = [
-        'combat.end.defeated.tomorrow.forest',
+        'battle.defeated.tomorrow',
         [],
         $textDomain,
     ];
