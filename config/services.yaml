@@ -206,6 +206,11 @@ services:
     lotgd_core.tool.creature_functions:
         alias: Lotgd\Core\Tool\CreatureFunction
         public: true
+    Lotgd\Core\Tool\Staff:
+        lazy: true
+    lotgd_core.tool.staff:
+        alias: Lotgd\Core\Tool\Staff
+        public: true
 
     # LoTGD navigation
     Lotgd\Core\Navigation\AccessKeys:
