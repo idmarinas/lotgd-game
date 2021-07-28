@@ -1,0 +1,3 @@
+lost:
+    exp: '`$You lose {experience,number} experience.`n'
+    gold: '`$You lose {gold,number} gold.`n'

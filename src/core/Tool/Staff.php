@@ -17,24 +17,30 @@ use Lotgd\Core\Http\Response;
 use Lotgd\Core\Navigation\Navigation;
 use Lotgd\Core\Output\Format;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Staff
 {
+    public const TRANSLATION_DOMAIN = 'grotto_staff';
+
     private $dispatcher;
     private $response;
     private $navigation;
     private $format;
+    private $translator;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
         Response $response,
         Navigation $navigation,
-        Format $format
+        Format $format,
+        TranslatorInterface $translator
     ) {
         $this->dispatcher = $dispatcher;
         $this->response   = $response;
         $this->navigation = $navigation;
         $this->format     = $format;
+        $this->translator = $translator;
     }
 
     public function killPlayer($explossproportion = 0.1, $goldlossproportion = 1)
@@ -64,7 +70,8 @@ class Staff
         if ($exploss > 0)
         {
             $session['user']['experience'] -= $exploss;
-            $this->response->pageAddContent($this->format->colorize(sprintf('`$You lose %s experience.`n', $exploss), true));
+            $text = $this->translator->trans('lost.exp', ['experience' => $exploss], self::TRANSLATION_DOMAIN);
+            $this->response->pageAddContent($this->format->colorize($text, true));
         }
 
         $gold     = $session['user']['gold'];
@@ -78,7 +85,8 @@ class Staff
         if ($goldloss > 0)
         {
             $session['user']['gold'] -= $goldloss;
-            $this->response->pageAddContent($this->format->colorize(sprintf('`$You lose %s gold.`n', $goldloss), true));
+            $text = $this->translator->trans('lost.exp', ['gold' => $goldloss], self::TRANSLATION_DOMAIN);
+            $this->response->pageAddContent($this->format->colorize($text, true));
         }
 
         $session['user']['hitpoints'] = 0;
