@@ -4,48 +4,18 @@
 // addnews ready
 // mail ready
 
+/** @deprecated 6.0.0 deleted in 7.0.0 version. Use "LotgdTool::validDkTitle($title, $dks, $gender)" instead. */
 function valid_dk_title($title, $dks, $gender)
 {
-    $repository = \Doctrine::getRepository('LotgdCore:Titles');
-    $query      = $repository->createQueryBuilder('u');
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 6.0.0; and delete in 7.0.0 version. Use "LotgdTool::validDkTitle($title, $dks, $gender)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    $query
-        ->where('u.dk <= :dk')
-        ->orderBy('u.dk', 'DESC')
-    ;
-
-    $query = $repository->createTranslatebleQuery($query);
-    $query->setParameter('dk', $dks);
-    $result = $query->getResult();
-
-    $d = -1;
-
-    foreach ($result as $row)
-    {
-        if (-1 == $d)
-        {
-            $d = $row['dk'];
-        }
-        // Only care about best dk rank for this person
-        if ($row->getDk() != $d)
-        {
-            break;
-        }
-
-        if ($gender && ($row->getFemale() == $title))
-        {
-            return true;
-        }
-
-        if ( ! $gender && ($row->getMale() == $title))
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return \LotgdTool::validDkTitle($title, $dks, $gender);
 }
 
+/** @deprecated 6.0.0 deleted in 7.0.0 version. Use "LotgdTool::getDkTitle($dks, $gender, $ref)" instead. */
 function get_dk_title($dks, $gender, $ref = false)
 {
     // $ref is an arbitrary string value.  The title picker will try to
@@ -57,75 +27,10 @@ function get_dk_title($dks, $gender, $ref = false)
     // We will prefer the dk level from the same $ref if we can, but if there
     // is a closer 'any' match, we will use that!
 
-    $repository = \Doctrine::getRepository('LotgdCore:Titles');
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 6.0.0; and delete in 7.0.0 version. Use "LotgdTool::getDkTitle($dks, $gender, $ref)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    $refdk = -1;
-
-    if (false !== $ref)
-    {
-        $query = $repository->createQueryBuilder('u');
-        $refdk = $query
-            ->select('max(u.dk)')
-            ->where('u.dk = :dk AND u.ref = :ref')
-
-            ->setParameter('dk', $dks)
-            ->setParameter('ref', $ref)
-
-            ->getQuery()
-            ->getSingleScalarResult()
-        ;
-    }
-
-    $query = $repository->createQueryBuilder('u');
-    $anydk = $query
-        ->select('max(u.dk)')
-        ->where('u.dk <= :dk')
-
-        ->setParameter('dk', $dks)
-
-        ->getQuery()
-        ->getSingleScalarResult()
-    ;
-
-    $targetdk = $anydk;
-
-    if ($refdk >= $anydk)
-    {
-        $targetdk = $refdk;
-    }
-
-    // Okay, we now have the right dk target to use, so select a title from
-    // any titles available at that level.  We will prefer titles that
-    // match the ref if possible.
-    $query = $repository->createQueryBuilder('u');
-    $query->where('u.dk = :dk')
-        ->orderBy('rand()')
-    ;
-
-    if ($refdk >= $anydk)
-    {
-        $query->andWhere('u.ref = :ref');
-    }
-
-    $query = $repository->createTranslatebleQuery($query);
-    $query->setParameter('dk', $targetdk);
-
-    if ($refdk >= $anydk)
-    {
-        $query->setParameter('ref', $ref);
-    }
-
-    $row = $query->getResult()[0];
-
-    if ( ! $row)
-    {
-        return '';
-    }
-
-    if (SEX_FEMALE == $gender)
-    {
-        return (string) $row->getFemale();
-    }
-
-    return (string) $row->getMale();
+    return \LotgdTool::getDkTitle($dks, $gender, $ref);
 }
