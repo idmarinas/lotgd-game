@@ -13,10 +13,12 @@
 namespace Lotgd\Core\Tool;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Lotgd\Core\Event\Other;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Http\Response;
 use Lotgd\Core\Lib\Settings as LibSettings;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class Tool
 {
@@ -26,21 +28,24 @@ class Tool
     use Tool\Taunt;
     use Tool\Title;
 
+    private $dispatcher;
     private $doctrine;
     private $settings;
     private $response;
     private $kernel;
 
     public function __construct(
+        EventDispatcherInterface $dispatcher,
         EntityManagerInterface $doctrine,
         LibSettings $settings,
         Response $response,
         KernelInterface $kernel
     ) {
-        $this->doctrine = $doctrine;
-        $this->settings = $settings;
-        $this->response = $response;
-        $this->kernel   = $kernel;
+        $this->dispatcher = $dispatcher;
+        $this->doctrine   = $doctrine;
+        $this->settings   = $settings;
+        $this->response   = $response;
+        $this->kernel     = $kernel;
     }
 
     /**
@@ -264,6 +269,24 @@ class Tool
         $session['user']['marriedto'] = 0;
 
         return SEX_MALE == $session['user']['prefs']['sexuality'] ? $partnerMale : $partnerFemale;
+    }
+
+    public function holidayize(string $text, string $type = 'unknown'): string
+    {
+        global $session;
+
+        $session['user']['prefs']['ihavenocheer'] = $session['user']['prefs']['ihavenocheer'] ?? 0;
+
+        if ($session['user']['prefs']['ihavenocheer'])
+        {
+            return $text;
+        }
+
+        $args = new Other(['text' => $text, 'type' => $type]);
+        $this->dispatcher->dispatch($args, Other::SPECIAL_HOLIDAY);
+        $args = modulehook('holiday', $args->getData());
+
+        return $args['text'];
     }
 
     /**
