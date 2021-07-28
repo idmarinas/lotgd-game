@@ -49,7 +49,7 @@ if ('dragon' == $op)
 
     $method = 'dragon';
     $params['tpl'] = 'dragon';
-    $params['partner'] = get_partner();
+    $params['partner'] = LotgdTool::getPartner();
 
     \LotgdNavigation::addNav('nav.cave', 'dragon.php');
     \LotgdNavigation::addNav('nav.baby', 'inn.php?op=fleedragon');

@@ -21,6 +21,7 @@ use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
 use Lotgd\Core\Repository\MountsRepository;
 use Lotgd\Core\Tool\Sanitize;
+use Lotgd\Core\Tool\Tool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,15 +36,24 @@ class StableController extends AbstractController
     private $sanitize;
     private $buffs;
     private $settings;
+    private $tool;
 
-    public function __construct(Navigation $navigation, EventDispatcherInterface $eventDispatcher, Log $log, Sanitize $sanitize, Buffer $buffs, Settings $settings)
-    {
+    public function __construct(
+        Navigation $navigation,
+        EventDispatcherInterface $eventDispatcher,
+        Log $log,
+        Sanitize $sanitize,
+        Buffer $buffs,
+        Settings $settings,
+        Tool $tool
+    ) {
         $this->navigation = $navigation;
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
         $this->sanitize   = $sanitize;
         $this->buffs      = $buffs;
         $this->settings   = $settings;
+        $this->tool = $tool;
     }
 
     public function buy(array $params, Request $request): Response
@@ -111,7 +121,7 @@ class StableController extends AbstractController
                 $this->buffs->applyBuff('mount', $mount['mountbuff']);
 
                 // Recalculate so the selling stuff works right
-                $params['player_mount'] = getmount($mount['mountid']);
+                $params['player_mount'] = $this->tool->getMount($mount['mountid']);
                 $params['mountName']    = $mount['mountname'];
                 $playermount            = $mount;
 

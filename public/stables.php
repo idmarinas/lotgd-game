@@ -21,7 +21,7 @@ unset($result);
 /** @var Lotgd\Core\Http\Request */
 $request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
 
-$playermount = getmount($session['user']['hashorse']);
+$playermount = LotgdTool::getMount($session['user']['hashorse']);
 
 $confirm = 0;
 

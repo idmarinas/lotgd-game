@@ -22,6 +22,7 @@ use Lotgd\Core\Log;
 use Lotgd\Core\Output\Censor;
 use Lotgd\Core\Output\Format;
 use Lotgd\Core\Tool\Sanitize;
+use Lotgd\Core\Tool\Tool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,6 +42,7 @@ class CreateController extends AbstractController
     private $log;
     private $settings;
     private $passwordEncoder;
+    private $tool;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
@@ -50,7 +52,8 @@ class CreateController extends AbstractController
         Format $format,
         Log $log,
         Settings $settings,
-        UserPasswordEncoderInterface $passwordEncoder
+        UserPasswordEncoderInterface $passwordEncoder,
+        Tool $tool
     ) {
         $this->dispatcher      = $dispatcher;
         $this->translator      = $translator;
@@ -60,6 +63,7 @@ class CreateController extends AbstractController
         $this->log             = $log;
         $this->settings        = $settings;
         $this->passwordEncoder = $passwordEncoder;
+        $this->tool            = $tool;
     }
 
     public function forgotVal(array $params, Request $request): Response
@@ -321,14 +325,14 @@ class CreateController extends AbstractController
                     $sex = SEX_FEMALE;
                 }
 
-                $title = get_dk_title(0, $sex);
+                $title = $this->tool->getDkTitle(0, $sex);
 
                 if ($this->settings->getSetting('requirevalidemail', 0))
                 {
                     $emailverification = md5(date('Y-m-d H:i:s').$email);
                 }
 
-                $refer = $request->query->get('r');
+                $refer   = $request->query->get('r');
                 $referer = 0;
 
                 if ($refer > '')

@@ -54,10 +54,10 @@ switch ($op)
             $otitle = $row->getTitle();
             $dk = $row->getDragonkills();
 
-            if (! valid_dk_title($otitle, $dk, $row->getSex()))
+            if (! LotgdTool::validDkTitle($otitle, $dk, $row->getSex()))
             {
-                $newtitle = get_dk_title($dk, $row->getSex());
-                $newname = change_player_title($newtitle, $row);
+                $newtitle = LotgdTool::getDkTitle($dk, $row->getSex());
+                $newname = LotgdTool::changePlayerTitle($newtitle, $row);
                 $id = $row->getAcctid();
 
                 if ($oname != $newname)

@@ -149,7 +149,7 @@ elseif ('prologue' == $op)
     $session['user']['armor'] = LotgdSetting::getSetting('startarmor', 'T-Shirt');
     $session['user']['weapon'] = LotgdSetting::getSetting('startweapon', 'Fists');
 
-    $newtitle = get_dk_title($session['user']['dragonkills'], $session['user']['sex']);
+    $newtitle = LotgdTool::getDkTitle($session['user']['dragonkills'], $session['user']['sex']);
 
     $restartgold = $session['user']['gold'] + LotgdSetting::getSetting('newplayerstartgold', 50) * $session['user']['dragonkills'];
     $restartgems = 0;
@@ -173,7 +173,7 @@ elseif ('prologue' == $op)
     $session['user']['hitpoints'] = $session['user']['maxhitpoints'];
 
     // Set the new title.
-    $newname = change_player_title($newtitle);
+    $newname = LotgdTool::changePlayerTitle($newtitle);
     $session['user']['title'] = $newtitle;
     $session['user']['name'] = $newname;
 
@@ -184,7 +184,7 @@ elseif ('prologue' == $op)
     $session['user']['companions'] = [];
     $session['user']['charm'] += 5;
 
-    $regname = get_player_basename();
+    $regname = LotgdTool::getPlayerBasename();
 
     foreach ($badguys['enemies'] as $opponent)
     {

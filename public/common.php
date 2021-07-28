@@ -222,7 +222,7 @@ $session['user']['superuser'] = $session['user']['superuser'] ?? 0;
 include_once 'lib/common.php';
 
 $session['user']['hashorse'] = $session['user']['hashorse'] ?? 0;
-$playermount                 = getmount($session['user']['hashorse']);
+$playermount                 = LotgdTool::getMount($session['user']['hashorse']);
 
 $temp_comp  = $session['user']['companions'] ?? [];
 $companions = [];
