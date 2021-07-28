@@ -108,6 +108,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `change_player_ctitle` use `LotgdTool::changePlayerCtitle($nctitle, $old)` instead.
     -   `change_player_title` use `LotgdTool::changePlayerTitle($ntitle, $old)` instead.
 -   **lib/personal_functions.php** Function `killplayer` use `LotgdKernel::get('lotgd_core.tool.staff')->killPlayer($explossproportion, $goldlossproportion)` instead.
+-   **lib/holiday_texts.php** Function `holidayize` use `LotgdTool::holidayize($text, $type)` instead.
 
 ### :wrench: FIXES
 
