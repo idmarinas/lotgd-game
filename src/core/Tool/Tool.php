@@ -231,6 +231,40 @@ class Tool
     }
 
     /**
+     * Get name of partner.
+     */
+    public function getPartner(bool $player = false): string
+    {
+        global $session;
+
+        if ( ! isset($session['user']['prefs']['sexuality']) || empty($session['user']['prefs']['sexuality']))
+        {
+            $session['user']['prefs']['sexuality'] = ! $session['user']['sex'];
+        }
+
+        $partnerFemale = $this->settings->getSetting('barmaid', '`%Violet`0');
+        $partnerMale   = $this->settings->getSetting('bard', '`^Seth`0');
+
+        if ( ! $player || ($player && INT_MAX == $session['user']['marriedto']))
+        {
+            return SEX_MALE == $session['user']['prefs']['sexuality'] ? $partnerMale : $partnerFemale;
+        }
+
+        /** @var \Lotgd\Core\Repository\UserRepository */
+        $repository = $this->doctrine->getRepository('LotgdCore:User');
+        $name       = $repository->getCharacterNameFromAcctId($session['user']['marriedto']);
+
+        if ($name)
+        {
+            return $name;
+        }
+
+        $session['user']['marriedto'] = 0;
+
+        return SEX_MALE == $session['user']['prefs']['sexuality'] ? $partnerMale : $partnerFemale;
+    }
+
+    /**
      * Save user data and character.
      */
     public function saveUser(bool $update_last_on = true): void
