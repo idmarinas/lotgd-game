@@ -4,27 +4,13 @@
 // translator ready
 // mail ready
 
-use Lotgd\Core\Event\Other;
-
-require_once 'lib/modules.php';
-
+/** @deprecated 6.0.0 deleted in 7.0.0 version. Use "LotgdTool::holidayize($text, $type)" */
 function holidayize($text, $type = 'unknown')
 {
-    global $session;
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 6.0.0; and delete in 7.0.0 version. Use "LotgdTool::holidayize($text, $type)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if ( ! isset($session['user']['prefs']['ihavenocheer']))
-    {
-        $session['user']['prefs']['ihavenocheer'] = 0;
-    }
-
-    if ($session['user']['prefs']['ihavenocheer'])
-    {
-        return $text;
-    }
-
-    $args = new Other(['text' => $text, 'type' => $type]);
-    \LotgdEventDispatcher::dispatch($args, Other::SPECIAL_HOLIDAY);
-    $args = modulehook('holiday', $args->getData());
-
-    return $args['text'];
+    return \LotgdTool::holidayize($text, $type);
 }
