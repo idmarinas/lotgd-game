@@ -1,55 +1,12 @@
 <?php
 
+/** @deprecated 6.0.0 deleted in 7.0.0 version. Use "LotgdTool::getPartner(bool $player)" */
 function get_partner($player = false)
 {
-    global $session;
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 6.0.0; and delete in 7.0.0 version. Use "LotgdTool::getPartner(bool $player);" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if ( ! isset($session['user']['prefs']['sexuality']) || '' == $session['user']['prefs']['sexuality'])
-    {
-        $session['user']['prefs']['sexuality'] = ! $session['user']['sex'];
-    }
-
-    if (false === $player)
-    {
-        $partner = LotgdSetting::getSetting('barmaid');
-
-        if (SEX_MALE == $session['user']['prefs']['sexuality'])
-        {
-            $partner = LotgdSetting::getSetting('bard');
-        }
-    }
-    else
-    {
-        if (INT_MAX == $session['user']['marriedto'])
-        {
-            $partner = LotgdSetting::getSetting('barmaid');
-
-            if (SEX_MALE == $session['user']['prefs']['sexuality'])
-            {
-                $partner = LotgdSetting::getSetting('bard');
-            }
-        }
-        else
-        {
-            $repository = \Doctrine::getRepository('LotgdCore:User');
-            $name       = $repository->getCharacterNameFromAcctId($session['user']['marriedto']);
-
-            if ($name)
-            {
-                $partner = $name;
-            }
-            else
-            {
-                $session['user']['marriedto'] = 0;
-                $partner                      = LotgdSetting::getSetting('barmaid', '`%Violet`0');
-
-                if (SEX_MALE == $session['user']['prefs']['sexuality'])
-                {
-                    $partner = LotgdSetting::getSetting('bard', '`^Seth`0');
-                }
-            }
-        }
-    }
-
-    return $partner;
+    return \LotgdTool::getPartner($player);
 }
