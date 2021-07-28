@@ -95,6 +95,19 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `pvpvictory` use `LotgdKernel::get("Lotgd\Core\Pvp\Support")->pvpVictory($badguy, $killedloc)` instead
     -   `pvpdefeat` use `LotgdKernel::get("Lotgd\Core\Pvp\Support")->pvpDefeat($badguy, $killedloc)` instead
 -   **lib/pvpwarning.php** Function `pvpwarning` use `LotgdKernel::get('Lotgd\Core\Pvp\Warning')->warning($dokill)`
+-   **lib/mountname.php** Function `getmountname` This function is not used by the core. And not need for know name of mount.
+-   **lib/mounts.php** Function `getmount` use `LotgdTool::getMount(int $horse)` instead.
+-   **lib/partner.php** Function `get_partner` use `LotgdTool::getPartner(bool $player)` instead.
+-   **lib/title.php** All functions:
+    -   `valid_dk_title` use `LotgdTool::validDkTitle($title, $dks, $gender)` instead.
+    -   `get_dk_title` use `LotgdTool::getDkTitle($dks, $gender, $ref)` instead.
+-   **lib/names.php** All functions:
+    -   `get_player_title` use `LotgdTool::getPlayerTitle($old)` instead.
+    -   `get_player_basename` use `LotgdTool::getPlayerBasename($old)` instead.
+    -   `change_player_name` use `LotgdTool::changePlayerName($newname, $old)` instead.
+    -   `change_player_ctitle` use `LotgdTool::changePlayerCtitle($nctitle, $old)` instead.
+    -   `change_player_title` use `LotgdTool::changePlayerTitle($ntitle, $old)` instead.
+-   **lib/personal_functions.php** Function `killplayer` use `LotgdKernel::get('lotgd_core.tool.staff')->killPlayer($explossproportion, $goldlossproportion)` instead.
 
 ### :wrench: FIXES
 
