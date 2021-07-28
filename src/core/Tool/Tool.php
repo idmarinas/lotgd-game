@@ -21,6 +21,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 class Tool
 {
     use Tool\DeathMessage;
+    use Tool\Name;
     use Tool\Substitute;
     use Tool\Taunt;
     use Tool\Title;
