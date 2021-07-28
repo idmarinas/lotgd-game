@@ -23,6 +23,7 @@ class Tool
     use Tool\DeathMessage;
     use Tool\Substitute;
     use Tool\Taunt;
+    use Tool\Title;
 
     private $doctrine;
     private $settings;
