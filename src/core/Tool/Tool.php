@@ -211,6 +211,26 @@ class Tool
     }
 
     /**
+     * Get info of mount by ID.
+     *
+     * @param int $horse
+     */
+    public function getMount($horse = 0): ?array
+    {
+        $horse = (int) $horse;
+
+        if ( ! $horse)
+        {
+            return null;
+        }
+
+        /** @var \Lotgd\Core\Repository\MountsRepository */
+        $repository = $this->doctrine->getRepository('LotgdCore:Mounts');
+
+        return $repository->extractEntity($repository->find($horse));
+    }
+
+    /**
      * Save user data and character.
      */
     public function saveUser(bool $update_last_on = true): void
