@@ -8,7 +8,6 @@
 \define('OVERRIDE_FORCED_NAV', true);
 
 require_once 'common.php';
-require_once 'lib/modules.php';
 
 $module     = (string) \LotgdRequest::getQuery('module');
 $admin      = (bool) \LotgdRequest::getQuery('admin');
