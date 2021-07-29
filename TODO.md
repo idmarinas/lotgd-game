@@ -16,9 +16,12 @@
 
 # Actualmente haciendo esto (6.0.0)
 
--   Controladores para los módulos y el MODULE_run() y así poder migrarlos al sistema de bundle
-    -   El nombre del controlador se pasa por el request attributes
--   Crear el bundle de settings para poder usarlo en sustitución de las `prefs` para usuario
+-   Crear bundle:
+    -   `Settings` para poder usarlo en sustitución de las `prefs` para usuario
+    -   `Special Events`: usando el componente even-dispatcher crear uno para los eventos especiales:
+        -   método que determina si se ejecuta el evento (segun probabilidad)
+        -   método que elige cual de los eventos adjuntos se ejecuta (teniendo encuenta la probabilidad)
+            -   Se filtran los eventos que cumplan con la probabilidad (chance) y se seleciona 1 teniendo encuenta sus probabilidades
 -   systemmail.php crear un service para reemplazar esto
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   Sustituir la función lotgd_mail por Symfony mailer
