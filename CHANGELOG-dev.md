@@ -86,7 +86,32 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :star: FEATURES
 
--   Nothing
+-   **Module/Bundle migrating**
+    -   Now `runmodule.php` script work with controllers too. So you can migrate your module to bundle more easy.
+        -   Usage:
+            -   Create controllers for your new Bundle
+            -   If your module use: 
+                ```php
+                    function MODULE_getmoduleinfo()
+                    {
+                        return [
+                            //....
+                            'allowanonymous'      => true,
+                            'override_forced_nav' => true,
+                            //....
+                        ];
+                    }
+                ```
+                -   Replace this with:
+                    -   Implement in controller interface `Lotgd\Core\Controller\LotgdControllerInterface` 
+                        -   Configure as you need. Remember that this configuration is for ALL methods in controller.
+                            -   If  you need some method public and other for user logged, create diferent controllers.
+            -   Replace `runmodule.php?module=MODULE_NAME` for `runmodule.php?method=METHOD_NAME&controller=urlencode(CONTROLLER_NAME)`
+                ```php 
+                    //-- Example
+                    $url = 'runmodule.php?method=index&controller='.urlencode(\Lotgd\Local\Controller\ModuleController::class);
+                    \LotgdNavigation::addNav('Do anything', $url);
+                ```
 
 ### :fire: DEPRECATED
 
