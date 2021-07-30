@@ -115,7 +115,7 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
             $session['user']['seenmaster'] = 0;
         }
 
-        if ($session['user']['seenmaster'])
+        if ($session['user']['seenmaster'] && 0 == (int) \LotgdSetting::getSetting('multimaster', 0))
         {
             \LotgdNavigation::addHeader('category.navigation');
             \LotgdNavigation::villageNav();
