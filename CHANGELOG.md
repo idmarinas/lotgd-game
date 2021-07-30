@@ -34,6 +34,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   Function: `pvpvictory`
         -   Now select correct max experience to lost
 -   **src/core/Repository/CharactersRepository.php** Function `getCharacterForPvp` Fix error, now add `character_id` to array
+-   **public/train.php** Fixed error by not allowed multiple challange to master when allow by config.
 
 ### :x: REMOVES
 
