@@ -41,6 +41,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **src/core/Repository/CharactersRepository.php** Function `getCharacterForPvp` Fix error, now add `character_id` to array
 -   **public/train.php** Fixed error by not allowed multiple challange to master when allow by config.
 -   **public/referers.php** Delete `require_once 'lib/dhms.php';` file not exists.
+-   **public/debug.php** Delete `require_once 'lib/dhms.php';` file not exists.
 
 ### :x: REMOVES
 
