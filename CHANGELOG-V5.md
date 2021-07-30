@@ -1,3 +1,8 @@
+# History of changes for IDMarinas Edition
+
+This is a list of changes made in versions __5.*.*__
+
+
 # Changes of LoTGD IDMarinas Edition
 
 Visit the [Wiki](https://github.com/idmarinas/lotgd-game/wiki) for more details.  
