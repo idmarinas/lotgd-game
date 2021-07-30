@@ -137,7 +137,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   **public/train.php** Fixed error by not allowed multiple challange to master when allow by config.
+-   Nothing
 
 ### :x: REMOVES
 
