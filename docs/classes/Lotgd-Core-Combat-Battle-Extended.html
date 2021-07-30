@@ -89,7 +89,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Combat/Battle/Extended.php"><a href="files/src-core-combat-battle-extended.html"><abbr title="src/core/Combat/Battle/Extended.php">Extended.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 </aside>
 
         
@@ -108,81 +108,18 @@
 
 <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_autoSetTarget">autoSetTarget()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Automatically chooses the first still living enemy as target for attacks.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_battleHeal">battleHeal()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: void    </span>
 </dt>
 <dd>Allows creatures to heal themselves or another badguy.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_battleSpawn">battleSpawn()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: void    </span>
 </dt>
 <dd>Adds a new creature to the badguy array.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_executeAiScript">executeAiScript()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd>Executes the given script or loads the script and then executes it.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_prepareCompanions">prepareCompanions()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd>This functions prepares companions to be able to take part in a fight. Uses global copies.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_prepareDataBattleBars">prepareDataBattleBars()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Prepare all data for show battle bars.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_prepareFight">prepareFight()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>This function prepares the fight, sets up options and gives hook a hook to change options on a per-player basis.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_reportCompanionMove">reportCompanionMove()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Based upon the type of the companion different actions are performed and the companion is marked as &quot;used&quot; after that.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_rollCompanionDamage">rollCompanionDamage()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Based upon the companion&#039;s stats damage values are calculated.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_suspendCompanions">suspendCompanions()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd>Suspends companions on a given parameter.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_unSuspendCompanions">unSuspendCompanions()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd>Enables suspended companions.</dd>
 
         </dl>
 
@@ -201,53 +138,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_autoSetTarget">
-        autoSetTarget()
-        <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_autoSetTarget" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Combat/Battle/Extended.php"><a href="files/src-core-combat-battle-extended.html"><abbr title="src/core/Combat/Battle/Extended.php">Extended.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">323</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Automatically chooses the first still living enemy as target for attacks.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">autoSetTarget</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$localenemies</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$localenemies</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>the stack of enemies to find a valid one from</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>$localenemies the stack with changed targetting</p>
-</section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_battleHeal">
         battleHeal()
         <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_battleHeal" class="headerlink"><i class="fas fa-link"></i></a>
@@ -255,14 +145,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Combat/Battle/Extended.php"><a href="files/src-core-combat-battle-extended.html"><abbr title="src/core/Combat/Battle/Extended.php">Extended.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">911</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 </aside>
 
         <p class="phpdocumentor-summary">Allows creatures to heal themselves or another badguy.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">battleHeal</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$amount</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">battleHeal</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$amount</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$healer</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -273,25 +163,32 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Amount of helath to be restored</p>
+                    <section class="phpdocumentor-description"><p>Amount of health to be restored</p>
 </section>
 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$target</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>if false badguy will heal itself otherwise the enemy with this index</p>
+                    <section class="phpdocumentor-description"><p>Enemy to heal (index ID of array of enemies)</p>
 </section>
 
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$healer</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
             </dd>
             </dl>
 
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -310,23 +207,32 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Combat/Battle/Extended.php"><a href="files/src-core-combat-battle-extended.html"><abbr title="src/core/Combat/Battle/Extended.php">Extended.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">862</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 </aside>
 
         <p class="phpdocumentor-summary">Adds a new creature to the badguy array.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">battleSpawn</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$creature</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">battleSpawn</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$badguy</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$creature</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$creature</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                <span class="phpdocumentor-signature__argument__name">$badguy</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>creature that spawn the new creature</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$creature</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|array&lt;string|int, mixed&gt;</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>A standard badguy array. If numeric, the corresponding badguy will be loaded from the database.</p>
 </section>
@@ -337,389 +243,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_executeAiScript">
-        executeAiScript()
-        <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_executeAiScript" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Combat/Battle/Extended.php"><a href="files/src-core-combat-battle-extended.html"><abbr title="src/core/Combat/Battle/Extended.php">Extended.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">967</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Executes the given script or loads the script and then executes it.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">executeAiScript</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$script</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$script</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>the script to be executed</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_prepareCompanions">
-        prepareCompanions()
-        <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_prepareCompanions" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Combat/Battle/Extended.php"><a href="files/src-core-combat-battle-extended.html"><abbr title="src/core/Combat/Battle/Extended.php">Extended.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">205</span>
-</aside>
-
-        <p class="phpdocumentor-summary">This functions prepares companions to be able to take part in a fight. Uses global copies.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">prepareCompanions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_prepareDataBattleBars">
-        prepareDataBattleBars()
-        <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_prepareDataBattleBars" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Combat/Battle/Extended.php"><a href="files/src-core-combat-battle-extended.html"><abbr title="src/core/Combat/Battle/Extended.php">Extended.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">25</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Prepare all data for show battle bars.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">prepareDataBattleBars</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$enemies</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$enemies</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_prepareFight">
-        prepareFight()
-        <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_prepareFight" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Combat/Battle/Extended.php"><a href="files/src-core-combat-battle-extended.html"><abbr title="src/core/Combat/Battle/Extended.php">Extended.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">181</span>
-</aside>
-
-        <p class="phpdocumentor-summary">This function prepares the fight, sets up options and gives hook a hook to change options on a per-player basis.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">prepareFight</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$options</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$options</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">[]</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>the options given by a module or basics</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>the complete options</p>
-</section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_reportCompanionMove">
-        reportCompanionMove()
-        <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_reportCompanionMove" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Combat/Battle/Extended.php"><a href="files/src-core-combat-battle-extended.html"><abbr title="src/core/Combat/Battle/Extended.php">Extended.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">370</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Based upon the type of the companion different actions are performed and the companion is marked as &quot;used&quot; after that.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">reportCompanionMove</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$companion</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$activate</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;fight&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$companion</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The companion itself</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$activate</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&#039;fight&#039;</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The stage of activation. Can be one of these: &quot;fight&quot;, &quot;defend&quot;, &quot;heal&quot; or &quot;magic&quot;.</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>The changed companion</p>
-</section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_rollCompanionDamage">
-        rollCompanionDamage()
-        <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_rollCompanionDamage" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Combat/Battle/Extended.php"><a href="files/src-core-combat-battle-extended.html"><abbr title="src/core/Combat/Battle/Extended.php">Extended.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">784</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Based upon the companion&#039;s stats damage values are calculated.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">rollCompanionDamage</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$companion</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$companion</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_suspendCompanions">
-        suspendCompanions()
-        <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_suspendCompanions" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Combat/Battle/Extended.php"><a href="files/src-core-combat-battle-extended.html"><abbr title="src/core/Combat/Battle/Extended.php">Extended.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">233</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Suspends companions on a given parameter.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">suspendCompanions</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$susp</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$nomsg</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$susp</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The type of suspension</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$nomsg</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The message to be displayed upon suspending. If false, no message will be displayed.</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_unSuspendCompanions">
-        unSuspendCompanions()
-        <a href="classes/Lotgd-Core-Combat-Battle-Extended.html#method_unSuspendCompanions" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Combat/Battle/Extended.php"><a href="files/src-core-combat-battle-extended.html"><abbr title="src/core/Combat/Battle/Extended.php">Extended.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">279</span>
-</aside>
-
-        <p class="phpdocumentor-summary">Enables suspended companions.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">unSuspendCompanions</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$susp</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$nomsg</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$susp</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The type of suspension</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$nomsg</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The message to be displayed upon unsuspending. If false, no message will be displayed.</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
