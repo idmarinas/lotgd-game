@@ -19,9 +19,9 @@
 
 '00': "`5&quot;`6Just wait for my revenge, `4{badGuy}`0. It will be swift!`0&quot; {goodGuy} declares.`0"
 '01': "`5&quot;`6I'm really going to enjoy this new `4{weapon}`0 that {goodGuy} had`0 &quot; exclaimed {badGuy}.`0"
-'02': "`5&quot;`6Aah, so `bthat's´b what `4{creatureweapon}`0 is for!`0&quot; exclaimed {badGuy}`0"
+'02': "`5&quot;`6Aah, so `bthat's´b what `4{creatureWeapon}`0 is for!`0&quot; exclaimed {badGuy}`0"
 '03': "`5&quot;`6Oh man! I didn't think you had it in you, `5{badGuy}`0,`0&quot; {goodGuy} exclaims.`0"
-'04': "`5{badGuy} was overheard saying, &quot;`6{hisher} `4{weapon}`0 was no match for my `4{creatureweapon}`0!`0&quot;`0"
+'04': "`5{badGuy} was overheard saying, &quot;`6{hisHer} `4{weapon}`0 was no match for my `4{creatureWeapon}`0!`0&quot;`0"
 '05': "`5&quot;`6You know, you really shouldn't have a `4{weapon}`0 unless you know how to use it,`0&quot; suggested {badGuy}.`0"
 '06': "`5&quot;`6`bARRRGGGGGGG´b!!`0&quot; {goodGuy} screams in frustration.`0"
 '07': "`5&quot;`6How could I be so feeble?`0&quot; {goodGuy} laments.`0"
@@ -45,7 +45,7 @@
 '025': "`5&quot;`6You know, `4{goodGuy}`0 really had it coming to {himHer} after all those things `bI´b said about `b{hisHer}´b mom`0,&quot; commented {badGuy}.`0"
 
 # Default taunt if not found (NO delete this taunt)
-default: "`5&quot;`6{badgyuname}'s mother wears combat boots`0&quot;, screams {goodguyname}.`0"
+default: "`5&quot;`6{badGuyName}'s mother wears combat boots`0&quot;, screams {goodGuyName}.`0"
 # Please update this with the real count of taunts
 count: 26 # This is total count of taunts messages
 
