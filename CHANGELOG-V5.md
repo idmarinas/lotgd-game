@@ -43,6 +43,9 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **public/train.php** Fixed error by not allowed multiple challange to master when allow by config.
 -   **public/referers.php** Delete `require_once 'lib/dhms.php';` file not exists.
 -   **public/debug.php** Delete `require_once 'lib/dhms.php';` file not exists.
+-   **public/healer.php** Fix error, now pass var `params` to controller.
+-   **src/core/Controller/HealerController.php** Use correct format for access value of index of array
+-   **translations/en/partial_taunt+intl-icu.en.yaml** Fix error with var names
 
 ### :x: REMOVES
 
