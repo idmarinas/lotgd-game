@@ -137,7 +137,10 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   Nothing
+-   **public/healer.php** 
+    -   Fix error, now pass var `params` to controller.
+    -   Use correct format for access value of index of array
+-   **translations/en/partial_taunt+intl-icu.en.yaml** Fix error with var names
 
 ### :x: REMOVES
 
