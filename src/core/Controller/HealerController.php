@@ -153,7 +153,7 @@ class HealerController extends AbstractController
             {
                 $name = rawurlencode($name);
                 $compcost = round(log($session['user']['level'] + 1) * ($points + 10) * 1.33);
-                $this->navigation->addNav('nav.heal.companion', "healer.php?op=companion&name={$name}&compcost={$compcost}&return={$params{'return'}}", [
+                $this->navigation->addNav('nav.heal.companion', "healer.php?op=companion&name={$name}&compcost={$compcost}&return={$params['return']}", [
                     'params' => [
                         'companionName' => $companion['name'],
                         'cost' => $compcost
