@@ -72,6 +72,8 @@ else
 
 $params['return'] = $return;
 
+$request->attributes->set('params', $params);
+
 \LotgdResponse::callController(\Lotgd\Core\Controller\HealerController::class, $method);
 
 //-- Restore text domain for navigation
