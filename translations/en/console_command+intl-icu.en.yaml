@@ -1,3 +1,4 @@
+command.running: 'The command "{name}" is already running in another process.'
 user.create:
     question:
         login: 'Login and character name: '
