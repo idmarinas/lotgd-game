@@ -117,6 +117,7 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
                     $url = 'runmodule.php?method=index&controller='.urlencode(\Lotgd\Local\Controller\ModuleController::class);
                     \LotgdNavigation::addNav('Do anything', $url);
                 ```
+-   **New console command** Logout all users with inactive sessions `lotgd:user:logout` 
 
 ### :fire: DEPRECATED
 
