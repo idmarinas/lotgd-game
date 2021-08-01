@@ -111,8 +111,6 @@ if ($battle)
 
     $badguy = $session['user']['badguy']['enemies'][0];
 
-    bdump($badguy);
-
     if ($serviceBattle->isVictory())
     {
         $killedin = $badguy['location'];
