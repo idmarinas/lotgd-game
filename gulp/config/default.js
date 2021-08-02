@@ -61,7 +61,7 @@ const config = {
             '!translations/en{,/**}', //-- No need in skeleton Can see examples in copy that you need have in "_core_files/translations/en" folder
             '!src/{Controller,Entity,Repository}{,/**}', //-- Not need for now this folders
             //-- Include .files
-            '{/**/.gitkeep,/.env,/.codeclimate.yml,/.editorconfig,/.eslintignore,/.eslintrc.js,/.gitignore,/.php_cs,/.stickler.yml,/.watchmanconfig}',
+            '{/**/.gitkeep,/.env,/.codeclimate.yml,/.editorconfig,/.eslintignore,/.eslintrc.js,/.gitignore,/.php_cs-fixer.php,/.stickler.yml,/.watchmanconfig}',
             //-- Ignore all dist folders/files
             '!{*.,}dist{,/**}',
             '!src/{functions,functions_old}.php',
