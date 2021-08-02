@@ -14,7 +14,7 @@
 -   Cambiar los sitios donde se usa battle.php
 -   Adaptarlos para la version 6.0.0
 
-# Actualmente haciendo esto (6.0.0)
+# Actualmente haciendo esto (6.1.0)
 
 -   Crear bundle:
     -   `Settings` para poder usarlo en sustitución de las `prefs` para usuario
