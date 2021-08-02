@@ -8,12 +8,16 @@
     <link rel="icon" href="images/favicon.ico"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
-            <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js" integrity="sha256-0vuk8LXoyrmCjp1f0O300qo1M75ZQyhH9X3J6d+scmk=" crossorigin="anonymous"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -48,7 +52,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -four phpdocumentor-sidebar">
-    
+        
     <section class="phpdocumentor-sidebar__category">
         <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                 <h3 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
@@ -59,6 +63,10 @@
                                     </ul>
                         </section>
 
+        <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                    <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/Application.html"><abbr title="\Application">Application</abbr></a></h3>
+                        </section>
     
     <section class="phpdocumentor-sidebar__category">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
@@ -84,6 +92,12 @@
     Events
 
     
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                            </ul>
+        </div>
     
     
     </h2>
@@ -92,7 +106,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">21</span>
-</aside>
+
+    </aside>
 
             <p class="phpdocumentor-summary">Events available in LoTGD Core. See also events in &#039;src/core/Event/&#039;.</p>
 
@@ -944,7 +959,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">33</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Special events.</p>
 
@@ -956,6 +972,7 @@
 </code>
 
 
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -971,7 +988,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">38</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Pages.</p>
 
@@ -983,6 +1001,7 @@
 </code>
 
 
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -998,7 +1017,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">39</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1009,7 +1029,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1023,7 +1046,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">42</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1034,7 +1058,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1048,7 +1075,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">41</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1059,7 +1087,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1073,7 +1104,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">45</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1084,7 +1116,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1098,7 +1133,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">44</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1109,7 +1145,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1123,7 +1162,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">48</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1134,7 +1174,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1148,7 +1191,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">47</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1159,7 +1203,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1173,7 +1220,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">58</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1184,7 +1232,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1198,7 +1249,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">57</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1209,7 +1261,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1223,7 +1278,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">56</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1234,7 +1290,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1248,7 +1307,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">55</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1259,7 +1319,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1273,7 +1336,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">54</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1284,7 +1348,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1298,7 +1365,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">53</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1309,7 +1377,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1323,7 +1394,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">52</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1334,7 +1406,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1348,7 +1423,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">50</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1359,7 +1435,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1373,7 +1452,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">61</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1384,7 +1464,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1398,7 +1481,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">60</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1409,7 +1493,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1423,7 +1510,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">65</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1434,7 +1522,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1448,7 +1539,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">66</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1459,7 +1551,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1473,7 +1568,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">68</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1484,7 +1580,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1498,7 +1597,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">69</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1509,7 +1609,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1523,7 +1626,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">64</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1534,7 +1638,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1548,7 +1655,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">63</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1559,7 +1667,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1573,7 +1684,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">70</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1584,7 +1696,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1598,7 +1713,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">67</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1609,7 +1725,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1623,7 +1742,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">75</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1634,7 +1754,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1648,7 +1771,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">74</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1659,7 +1783,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1673,7 +1800,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">77</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1684,7 +1812,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1698,7 +1829,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">78</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1709,7 +1841,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1723,7 +1858,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">76</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1734,7 +1870,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1748,7 +1887,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">73</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1759,7 +1899,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1773,7 +1916,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">72</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1784,7 +1928,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1798,7 +1945,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">80</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1809,7 +1957,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1823,7 +1974,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">85</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1834,7 +1986,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1848,7 +2003,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">86</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1859,7 +2015,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1873,7 +2032,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">82</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1884,7 +2044,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1898,7 +2061,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">81</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1909,7 +2073,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1923,7 +2090,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">83</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1934,7 +2102,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1948,7 +2119,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">84</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1959,7 +2131,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1973,7 +2148,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">87</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -1984,7 +2160,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -1998,7 +2177,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">89</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2009,7 +2189,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2023,7 +2206,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">91</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2034,7 +2218,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2048,7 +2235,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">90</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2059,7 +2247,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2073,7 +2264,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">93</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2084,7 +2276,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2098,7 +2293,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">96</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2109,7 +2305,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2123,7 +2322,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">95</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2134,7 +2334,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2148,7 +2351,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">94</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2159,7 +2363,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2173,7 +2380,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">98</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2184,7 +2392,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2198,7 +2409,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">100</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2209,7 +2421,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2223,7 +2438,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">99</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2234,7 +2450,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2248,7 +2467,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">102</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2259,7 +2479,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2273,7 +2496,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">105</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2284,7 +2508,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2298,7 +2525,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">104</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2309,7 +2537,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2323,7 +2554,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">106</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2334,7 +2566,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2348,7 +2583,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">103</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2359,7 +2595,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2373,7 +2612,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">108</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2384,7 +2624,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2398,7 +2641,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">111</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2409,7 +2653,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2423,7 +2670,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">110</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2434,7 +2682,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2448,7 +2699,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">109</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2459,7 +2711,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2473,7 +2728,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">113</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2484,7 +2740,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2498,7 +2757,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">114</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2509,7 +2769,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2523,7 +2786,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">116</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2534,7 +2798,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2548,7 +2815,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">115</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2559,7 +2827,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2573,7 +2844,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">118</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2584,7 +2856,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2598,7 +2873,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">123</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2609,7 +2885,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2623,7 +2902,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">122</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2634,7 +2914,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2648,7 +2931,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">120</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2659,7 +2943,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2673,7 +2960,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">119</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2684,7 +2972,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2698,7 +2989,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">121</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2709,7 +3001,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2723,7 +3018,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">125</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2734,7 +3030,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2748,7 +3047,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">127</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2759,7 +3059,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2773,7 +3076,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">129</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2784,7 +3088,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2798,7 +3105,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">128</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2809,7 +3117,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2823,7 +3134,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">132</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2834,7 +3146,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2848,7 +3163,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">131</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2859,7 +3175,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2873,7 +3192,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">140</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2884,7 +3204,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2898,7 +3221,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">134</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2909,7 +3233,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2923,7 +3250,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">138</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2934,7 +3262,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2948,7 +3279,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">137</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2959,7 +3291,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2973,7 +3308,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">136</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -2984,7 +3320,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -2998,7 +3337,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">135</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3009,7 +3349,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3023,7 +3366,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">142</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3034,7 +3378,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3048,7 +3395,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">143</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3059,7 +3407,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3073,7 +3424,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">145</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3084,7 +3436,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3098,7 +3453,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">175</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3109,7 +3465,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3123,7 +3482,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">148</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3134,7 +3494,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3148,7 +3511,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">147</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3159,7 +3523,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3173,7 +3540,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">149</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3184,7 +3552,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3198,7 +3569,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">151</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3209,7 +3581,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3223,7 +3598,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">153</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3234,7 +3610,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3248,7 +3627,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">156</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3259,7 +3639,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3273,7 +3656,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">155</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3284,7 +3668,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3298,7 +3685,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">159</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3309,7 +3697,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3323,7 +3714,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">158</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3334,7 +3726,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3348,7 +3743,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">164</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3359,7 +3755,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3373,7 +3772,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">163</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3384,7 +3784,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3398,7 +3801,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">162</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3409,7 +3813,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3423,7 +3830,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">161</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3434,7 +3842,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3448,7 +3859,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">165</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3459,7 +3871,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3473,7 +3888,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">169</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3484,7 +3900,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3498,7 +3917,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">168</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3509,7 +3929,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3523,7 +3946,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">167</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3534,7 +3958,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3548,7 +3975,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">171</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3559,7 +3987,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3573,7 +4004,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">170</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3584,7 +4016,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3598,7 +4033,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">173</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3609,7 +4045,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3623,7 +4062,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">177</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3634,7 +4074,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3648,7 +4091,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">180</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3659,7 +4103,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3673,7 +4120,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">179</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3684,7 +4132,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3698,7 +4149,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">178</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3709,7 +4161,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3723,7 +4178,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">183</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3734,7 +4190,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3748,7 +4207,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">182</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3759,7 +4219,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3773,7 +4236,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">28</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3784,7 +4248,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3798,7 +4265,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">27</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -3809,7 +4277,10 @@
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -3823,7 +4294,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Events.php"><a href="files/src-core-events.html"><abbr title="src/core/Events.php">Events.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">26</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Payment events.</p>
 
@@ -3835,6 +4307,7 @@
 </code>
 
 
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -3845,6 +4318,68 @@
         
 
         
+        
+    <script type="text/javascript">
+        function loadExternalCodeSnippets(line) {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                pre.setAttribute('data-line', line)
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        var modals = document.querySelectorAll("[data-modal]");
+
+        modals.forEach(function (trigger) {
+            trigger.addEventListener("click", function (event) {
+                //event.preventDefault();
+                const modal = document.getElementById(trigger.dataset.modal);
+                modal.classList.add("phpdocumentor-modal__open");
+                loadExternalCodeSnippets(trigger.dataset.line)
+                const exits = modal.querySelectorAll("[data-exit-button]");
+                exits.forEach(function (exit) {
+                    exit.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        modal.classList.remove("phpdocumentor-modal__open");
+                    });
+                });
+            });
+        });
+    </script>
+
     </article>
                 <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
@@ -3866,5 +4401,9 @@
     <script>
         cssVars({});
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
 </body>
 </html>

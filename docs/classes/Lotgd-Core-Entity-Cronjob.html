@@ -8,12 +8,16 @@
     <link rel="icon" href="images/favicon.ico"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
-            <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js" integrity="sha256-0vuk8LXoyrmCjp1f0O300qo1M75ZQyhH9X3J6d+scmk=" crossorigin="anonymous"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -48,7 +52,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -four phpdocumentor-sidebar">
-    
+        
     <section class="phpdocumentor-sidebar__category">
         <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                 <h3 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
@@ -59,6 +63,10 @@
                                     </ul>
                         </section>
 
+        <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                    <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/Application.html"><abbr title="\Application">Application</abbr></a></h3>
+                        </section>
     
     <section class="phpdocumentor-sidebar__category">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
@@ -85,22 +93,25 @@
     Cronjob
 
     
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                            </ul>
+        </div>
     
     
-            <span class="phpdocumentor-element__extends">
-            Uses
-                            <a href="classes/Lotgd-Core-Entity-Common-IdTrait.html"><abbr title="\Lotgd\Core\Entity\Common\IdTrait">IdTrait</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">26</span>
-</aside>
+
+    </aside>
 
             <p class="phpdocumentor-summary">Cronjob.</p>
 
-    <section class="phpdocumentor-description"></section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -139,14 +150,7 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Entity-Common-IdTrait.html#property_id">$id</a>
-    <span>
-                &nbsp;: int            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+                <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Lotgd-Core-Entity-Cronjob.html#property_command">$command</a>
     <span>
                 &nbsp;: string            </span>
@@ -329,13 +333,6 @@
 <dd>Get the value of Haltdir.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Entity-Common-IdTrait.html#method_getId">getId()</a>
-    <span>
-                        &nbsp;: int|null    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Entity-Cronjob.html#method_getMailer">getMailer()</a>
     <span>
                         &nbsp;: string    </span>
@@ -476,13 +473,6 @@
 <dd>Set the value of Haltdir.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Entity-Common-IdTrait.html#method_setId">setId()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Entity-Cronjob.html#method_setMailer">setMailer()</a>
     <span>
                         &nbsp;: self    </span>
@@ -596,69 +586,6 @@
         class="
             phpdocumentor-element
             -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_id">
-        $id
-        <a href="classes/Lotgd-Core-Entity-Common-IdTrait.html#property_id" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Common/IdTrait.php"><a href="files/src-core-entity-common-idtrait.html"><abbr title="src/core/Entity/Common/IdTrait.php">IdTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">27</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">int</span>
-    <span class="phpdocumentor-signature__name">$id</span>
-    </code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">ORM\Column</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>(type=&quot;integer&quot;, nullable=false, options={&quot;unsigned&quot;: true})</p>
-</section>
-
-                                    </dd>
-                                                <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">ORM\Id</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"></section>
-
-                                    </dd>
-                                                <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">ORM\GeneratedValue</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>(strategy=&quot;IDENTITY&quot;)</p>
-</section>
-
-                                    </dd>
-                        </dl>
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
             -private
                                                         "
 >
@@ -672,7 +599,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">59</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -681,8 +609,8 @@
     <span class="phpdocumentor-signature__name">$command</span>
      = <span class="phpdocumentor-signature__default-value">&#039;&#039;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -740,7 +668,8 @@ allowEmptyString=false
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">256</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -749,8 +678,8 @@ allowEmptyString=false
     <span class="phpdocumentor-signature__name">$dateformat</span>
      = <span class="phpdocumentor-signature__default-value">&#039;Y-m-d H:i:s&#039;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -799,7 +728,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">283</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -808,8 +738,8 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__name">$debug</span>
      = <span class="phpdocumentor-signature__default-value">false</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -845,7 +775,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">263</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -854,8 +785,8 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__name">$enabled</span>
      = <span class="phpdocumentor-signature__default-value">true</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -891,7 +822,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">217</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -900,8 +832,8 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__name">$environment</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -950,7 +882,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">276</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -959,8 +892,8 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__name">$haltdir</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1009,7 +942,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">87</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1018,8 +952,8 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__name">$mailer</span>
      = <span class="phpdocumentor-signature__default-value">&#039;sendmail&#039;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1068,7 +1002,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">100</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1077,8 +1012,8 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__name">$maxruntime</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1135,7 +1070,8 @@ max=42949672295
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">44</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1144,8 +1080,8 @@ max=42949672295
     <span class="phpdocumentor-signature__name">$name</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1212,7 +1148,8 @@ allowEmptyString=false
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">243</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1221,8 +1158,8 @@ allowEmptyString=false
     <span class="phpdocumentor-signature__name">$output</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1271,7 +1208,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">204</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1280,8 +1218,8 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__name">$runas</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1330,7 +1268,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">230</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1339,8 +1278,8 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__name">$runonhost</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1389,7 +1328,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">74</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1398,8 +1338,8 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__name">$schedule</span>
      = <span class="phpdocumentor-signature__default-value">&#039;&#039;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1457,7 +1397,8 @@ allowEmptyString=false
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">113</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1466,8 +1407,8 @@ allowEmptyString=false
     <span class="phpdocumentor-signature__name">$smtphost</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1516,7 +1457,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">152</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1525,8 +1467,8 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__name">$smtppassword</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1575,7 +1517,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">126</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1584,8 +1527,8 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__name">$smtpport</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1642,7 +1585,8 @@ max=65535
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">191</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1651,8 +1595,8 @@ max=65535
     <span class="phpdocumentor-signature__name">$smtpsecurity</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1701,7 +1645,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">165</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1710,8 +1655,8 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__name">$smtpsender</span>
      = <span class="phpdocumentor-signature__default-value">&#039;jobby@localhost&#039;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1760,7 +1705,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">178</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1769,8 +1715,8 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__name">$smtpsendername</span>
      = <span class="phpdocumentor-signature__default-value">&#039;Jobby&#039;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1819,7 +1765,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">139</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1828,8 +1775,8 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__name">$smtpusername</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -1882,7 +1829,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">324</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Command.</p>
 
@@ -1890,16 +1838,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getCommand</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -1916,7 +1862,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">674</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Dateformat.</p>
 
@@ -1924,16 +1871,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getDateformat</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -1950,7 +1895,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">742</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Debug.</p>
 
@@ -1958,16 +1904,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getDebug</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">bool</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -1984,7 +1928,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">696</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Enabled.</p>
 
@@ -1992,16 +1937,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getEnabled</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">bool</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2018,7 +1961,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">604</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Environment.</p>
 
@@ -2026,16 +1970,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getEnvironment</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2052,7 +1994,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">720</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Haltdir.</p>
 
@@ -2060,48 +2003,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getHaltdir</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getId">
-        getId()
-        <a href="classes/Lotgd-Core-Entity-Common-IdTrait.html#method_getId" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Common/IdTrait.php"><a href="files/src-core-entity-common-idtrait.html"><abbr title="src/core/Entity/Common/IdTrait.php">IdTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">36</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2118,7 +2027,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">368</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Mailer.</p>
 
@@ -2126,16 +2036,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getMailer</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2152,7 +2060,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">392</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Maxruntime.</p>
 
@@ -2160,16 +2069,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getMaxruntime</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">int</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2186,7 +2093,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">302</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Name.</p>
 
@@ -2194,16 +2102,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getName</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string|null</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2220,7 +2126,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">652</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Output.</p>
 
@@ -2228,16 +2135,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getOutput</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2254,7 +2159,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">580</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Runas.</p>
 
@@ -2262,16 +2168,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getRunas</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2288,7 +2192,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">628</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Runonhost.</p>
 
@@ -2296,16 +2201,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getRunonhost</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2322,7 +2225,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">346</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Schedule.</p>
 
@@ -2330,16 +2234,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getSchedule</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2356,7 +2258,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">416</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Smtphost.</p>
 
@@ -2364,16 +2267,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getSmtphost</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2390,7 +2291,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">488</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Smtppassword.</p>
 
@@ -2398,16 +2300,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getSmtppassword</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2424,7 +2324,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">440</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Smtpport.</p>
 
@@ -2432,16 +2333,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getSmtpport</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">int</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2458,7 +2357,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">556</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Smtpsecurity.</p>
 
@@ -2466,16 +2366,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getSmtpsecurity</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2492,7 +2390,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">510</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Smtpsender.</p>
 
@@ -2500,16 +2399,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getSmtpsender</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2526,7 +2423,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">532</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Smtpsendername.</p>
 
@@ -2534,16 +2432,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getSmtpsendername</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2560,7 +2456,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">464</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Get the value of Smtpusername.</p>
 
@@ -2568,16 +2465,14 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">getSmtpusername</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2594,7 +2489,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">314</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Command.</p>
 
@@ -2602,8 +2498,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setCommand</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$command</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -2611,8 +2506,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -2621,8 +2515,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2639,7 +2532,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">664</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Dateformat.</p>
 
@@ -2647,8 +2541,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setDateformat</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dateformat</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -2656,8 +2549,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -2666,8 +2558,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2684,7 +2575,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">732</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Debug.</p>
 
@@ -2692,8 +2584,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setDebug</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$debug</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -2701,8 +2592,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">bool</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -2711,8 +2601,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2729,7 +2618,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">686</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Enabled.</p>
 
@@ -2737,8 +2627,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setEnabled</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$enabled</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -2746,8 +2635,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">bool</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -2756,8 +2644,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2774,7 +2661,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">592</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Environment.</p>
 
@@ -2782,8 +2670,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setEnvironment</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$environment</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -2791,8 +2678,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -2801,8 +2687,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2819,7 +2704,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">708</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Haltdir.</p>
 
@@ -2827,56 +2713,12 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setHaltdir</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$haltdir</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$haltdir</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">self</span>
-            &mdash;
-            <section class="phpdocumentor-description"></section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_setId">
-        setId()
-        <a href="classes/Lotgd-Core-Entity-Common-IdTrait.html#method_setId" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Common/IdTrait.php"><a href="files/src-core-entity-common-idtrait.html"><abbr title="src/core/Entity/Common/IdTrait.php">IdTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">29</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">setId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$id</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -2886,10 +2728,9 @@ allowEmptyString=true
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2906,7 +2747,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">358</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Mailer.</p>
 
@@ -2914,8 +2756,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setMailer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mailer</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -2923,8 +2764,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -2933,8 +2773,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2951,7 +2790,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">380</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Maxruntime.</p>
 
@@ -2959,8 +2799,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setMaxruntime</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$maxruntime</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -2968,8 +2807,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -2978,8 +2816,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -2996,7 +2833,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">292</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Name.</p>
 
@@ -3004,8 +2842,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setName</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -3013,8 +2850,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -3023,8 +2859,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -3041,7 +2876,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">640</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Output.</p>
 
@@ -3049,8 +2885,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setOutput</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$output</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -3058,8 +2893,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -3068,8 +2902,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -3086,7 +2919,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">568</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Runas.</p>
 
@@ -3094,8 +2928,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setRunas</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$runas</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -3103,8 +2936,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -3113,8 +2945,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -3131,7 +2962,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">616</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Runonhost.</p>
 
@@ -3139,8 +2971,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setRunonhost</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$runonhost</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -3148,8 +2979,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -3158,8 +2988,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -3176,7 +3005,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">336</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Schedule.</p>
 
@@ -3184,8 +3014,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setSchedule</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$schedule</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -3193,8 +3022,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -3203,8 +3031,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -3221,7 +3048,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">404</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Smtphost.</p>
 
@@ -3229,8 +3057,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setSmtphost</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$smtphost</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -3238,8 +3065,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -3248,8 +3074,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -3266,7 +3091,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">476</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Smtppassword.</p>
 
@@ -3274,8 +3100,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setSmtppassword</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$smtppassword</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -3283,8 +3108,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -3293,8 +3117,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -3311,7 +3134,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">428</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Smtpport.</p>
 
@@ -3319,8 +3143,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setSmtpport</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$smtpport</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -3328,8 +3151,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -3338,8 +3160,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -3356,7 +3177,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">544</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Smtpsecurity.</p>
 
@@ -3364,8 +3186,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setSmtpsecurity</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$smtpsecurity</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -3373,8 +3194,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -3383,8 +3203,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -3401,7 +3220,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">500</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Smtpsender.</p>
 
@@ -3409,8 +3229,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setSmtpsender</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$smtpsender</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -3418,8 +3237,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -3428,8 +3246,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -3446,7 +3263,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">522</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Smtpsendername.</p>
 
@@ -3454,8 +3272,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setSmtpsendername</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$smtpsendername</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -3463,8 +3280,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -3473,8 +3289,7 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -3491,7 +3306,8 @@ allowEmptyString=true
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Entity/Cronjob.php"><a href="files/src-core-entity-cronjob.html"><abbr title="src/core/Entity/Cronjob.php">Cronjob.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">452</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Set the value of Smtpusername.</p>
 
@@ -3499,8 +3315,7 @@ allowEmptyString=true
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">setSmtpusername</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$smtpusername</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -3508,8 +3323,7 @@ allowEmptyString=true
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
@@ -3518,11 +3332,72 @@ allowEmptyString=true
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">self</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
             </section>
+
+        
+    <script type="text/javascript">
+        function loadExternalCodeSnippets(line) {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                pre.setAttribute('data-line', line)
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        var modals = document.querySelectorAll("[data-modal]");
+
+        modals.forEach(function (trigger) {
+            trigger.addEventListener("click", function (event) {
+                //event.preventDefault();
+                const modal = document.getElementById(trigger.dataset.modal);
+                modal.classList.add("phpdocumentor-modal__open");
+                loadExternalCodeSnippets(trigger.dataset.line)
+                const exits = modal.querySelectorAll("[data-exit-button]");
+                exits.forEach(function (exit) {
+                    exit.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        modal.classList.remove("phpdocumentor-modal__open");
+                    });
+                });
+            });
+        });
+    </script>
 
     </article>
                 <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
@@ -3545,5 +3420,9 @@ allowEmptyString=true
     <script>
         cssVars({});
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
 </body>
 </html>

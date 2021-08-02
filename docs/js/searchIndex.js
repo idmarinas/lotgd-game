@@ -2346,6 +2346,51 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Command-UserCreateCommand.html#property_passwordEncoder"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserLogoutCommand",
+            "name": "UserLogoutCommand",
+            "summary": "Command\u0020to\u0020logout\u00201\u0020user\u0020or\u0020all.",
+            "url": "classes/Lotgd-Core-Command-UserLogoutCommand.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserLogoutCommand\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserLogoutCommand.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserLogoutCommand\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Command-UserLogoutCommand.html#method_configure"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserLogoutCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserLogoutCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserLogoutCommand\u003A\u003ATRANSLATION_DOMAIN",
+            "name": "TRANSLATION_DOMAIN",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserLogoutCommand.html#constant_TRANSLATION_DOMAIN"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserLogoutCommand\u003A\u003A\u0024defaultName",
+            "name": "defaultName",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserLogoutCommand.html#property_defaultName"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserLogoutCommand\u003A\u003A\u0024repository",
+            "name": "repository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserLogoutCommand.html#property_repository"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserLogoutCommand\u003A\u003A\u0024cache",
+            "name": "cache",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserLogoutCommand.html#property_cache"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserLogoutCommand\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserLogoutCommand.html#property_settings"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\AboutController",
             "name": "AboutController",
             "summary": "",
