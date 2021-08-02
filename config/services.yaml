@@ -211,6 +211,11 @@ services:
     lotgd_core.tool.staff:
         alias: Lotgd\Core\Tool\Staff
         public: true
+    Lotgd\Core\Tool\Validator:
+        lazy: true
+    lotgd_core.tool.validator:
+        alias: Lotgd\Core\Tool\Validator
+        public: true
 
     # LoTGD navigation
     Lotgd\Core\Navigation\AccessKeys:
