@@ -216,6 +216,11 @@ services:
     lotgd_core.tool.validator:
         alias: Lotgd\Core\Tool\Validator
         public: true
+    Lotgd\Core\Tool\SystemMail:
+        lazy: true
+    lotgd_core.tool.system_mail:
+        alias: Lotgd\Core\Tool\SystemMail
+        public: true
 
     # LoTGD navigation
     Lotgd\Core\Navigation\AccessKeys:
