@@ -73,10 +73,17 @@ if ( ! \function_exists('is_email'))
      *
      * @param string $email
      *
+     * @deprecated 6.1.0 delete in version 7.0.0. Use symfony validator service
+     *
      * @return bool
      */
     function is_email($email)
     {
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 6.1.0; and delete in 7.0.0 version. Use service LotgdKernel::get("lotgd_core.tool.validator")->isMail(string) instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         $validator = new Laminas\Validator\EmailAddress();
 
         return $validator->isValid($email);
