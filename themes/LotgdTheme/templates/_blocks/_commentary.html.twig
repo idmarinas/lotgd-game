@@ -59,9 +59,15 @@
                 {{ display_status_online_player(comment) }}
                 {{ comment.postdate > user.recentcomments ? '<span data-tooltip="%1$s"><i class="caret right icon" aria-label="%1$s"></i></span>'|format(recent) : '' }}
                 <span {{ comment.hidden ? 'data-tooltip' : '' }}="{{ comment.hidden ? comment.hiddenComment|uncolorize : '' }}">
+                    {% set message = comment.comment %}
+
+                    {% if comment.extra.translation_domain|default(false) %}
+                        {% set message = comment.comment|trans({}, comment.extra.translation_domain) %}
+                    {% endif %}
+
                     {% if comment.command == 'game' %}
                         {# It's a message from the game, no associated author #}
-                        <span class="colDkMagenta"><em><strong>{{ comment.comment|uncolorize|trim|capitalize }}</strong></em></span>
+                        <span class="colDkMagenta"><em><strong>{{ message|uncolorize|trim|capitalize }}</strong></em></span>
                     {% else %}
                         {% if comment.clanName %}
                             <span data-tooltip="{{ comment.clanName|uncolorize }}">&#60;{{ comment.clanNameShort|colorize }}&#62;</span>
@@ -72,10 +78,10 @@
                         </span>
                         {# Represent a special action of player or not #}
                         {% if comment.command == 'me' %}
-                            <span class="colLtBlack">{{ comment.comment|uncolorize }}</span>
+                            <span class="colLtBlack">{{ message|uncolorize }}</span>
                         {% else %}
                             <em class="colDkCyan">{{ (commentary.customSay ? commentary.customSay : 'commentary.sayLine'|trans)|colorize|lower }}</em>,
-                            <span class="colDkCyan">"<span class="colLtCyan">{{ comment.comment|colorize }}</span>"</span>
+                            <span class="colDkCyan">"<span class="colLtCyan">{{ message|colorize }}</span>"</span>
                         {% endif %}
                     {% endif %}
                 </span>
