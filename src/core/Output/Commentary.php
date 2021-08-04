@@ -251,7 +251,7 @@ class Commentary
             $data['comment'] = trim(substr($data['comment'], 3));
             $data['command'] = 'me';
         }
-        elseif ('::' == substr($data['comment'], 0, 1))
+        elseif ('::' == substr($data['comment'], 0, 2))
         {
             $data['comment'] = trim(substr($data['comment'], 2));
             $data['command'] = 'me';
