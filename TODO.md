@@ -2,7 +2,7 @@
     -   mail.php
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
-# A tener encuenta desde la versión 5.0.0
+# A tener en cuenta desde la versión 5.0.0
 
 -   El antiguo sistema de módulos está obsoleto desde la versión **5.0.0**
     -   Los módulos antiguos seguiran funcionando pero estan obsoletos.
@@ -16,12 +16,17 @@
 
 # Actualmente haciendo esto (6.1.0)
 
+-   Commentary: permitir que ciertos mensajes se puedan traducir, esto permite que cuando el sistema añade comentarios estos se puedan traducir.
+    -   Asi se tiene en cuenta el idioma del juego en todo momento y no solo el idioma en el momento de añadir el comentario.
+    -   Idea: agregar el parametro: translation_domain para determinar si el comentario es traducible o no.
+        -   El comentario es la key de la traducción
+        -   Se procesan los comandos pero no el censor (para evitar que modifique la clave de traducción)
 -   Crear bundle:
     -   `Settings` para poder usarlo en sustitución de las `prefs` para usuario
     -   `Special Events`: usando el componente even-dispatcher crear uno para los eventos especiales:
-        -   método que determina si se ejecuta el evento (segun probabilidad)
-        -   método que elige cual de los eventos adjuntos se ejecuta (teniendo encuenta la probabilidad)
-            -   Se filtran los eventos que cumplan con la probabilidad (chance) y se seleciona 1 teniendo encuenta sus probabilidades
+        -   método que determina si se ejecuta el evento (según probabilidad)
+        -   método que elige cual de los eventos adjuntos se ejecuta (teniendo en cuenta la probabilidad)
+            -   Se filtran los eventos que cumplan con la probabilidad (chance) y se selecciona 1 teniendo en cuenta sus probabilidades
 -   systemmail.php crear un service para reemplazar esto
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   Sustituir la función lotgd_mail por Symfony mailer
