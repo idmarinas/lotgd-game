@@ -141,10 +141,20 @@ class Commentary
         $post['author']     = $session['user']['acctid'];
         $post['authorName'] = $session['user']['name'];
 
-        //-- Apply profanity filter
-        $post['comment']      = $this->censor->filter($post['comment']);
-        $post['commentOri']   = $this->censor->getOrigString();
-        $post['commentMatch'] = $this->censor->getMatchWords();
+        $post['commentOri']   = '';
+        $post['commentMatch'] = '';
+
+        //-- Apply profanity filter if not have translation_domain
+        if ( ! isset($post['translation_domain']) || empty($post['translation_domain']))
+        {
+            $post['comment']      = $this->censor->filter($post['comment']);
+            $post['commentOri']   = $this->censor->getOrigString();
+            $post['commentMatch'] = $this->censor->getMatchWords();
+        }
+        elseif (isset($post['translation_domain']) && ! empty($post['translation_domain']))
+        {
+            $post['extra']['translation_domain'] = $post['translation_domain'];
+        }
 
         $args = new EventCommentary(['data' => $post]);
         $this->hook->dispatch($args, EventCommentary::COMMENT_POST);
