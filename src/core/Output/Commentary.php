@@ -251,7 +251,7 @@ class Commentary
             $data['comment'] = trim(substr($data['comment'], 3));
             $data['command'] = 'me';
         }
-        elseif ('::' == substr($data['comment'], 0, 1))
+        elseif ('::' == substr($data['comment'], 0, 2))
         {
             $data['comment'] = trim(substr($data['comment'], 2));
             $data['command'] = 'me';
@@ -343,7 +343,7 @@ class Commentary
             // All of the ones after this will be translated in the modules.
             $this->hook->dispatch($comsecs, EventCommentary::MODERATE_SECTIONS);
 
-            return modulehook('moderate-comment-sections', $comsecs);
+            return modulehook('moderate-comment-sections', $comsecs->getData());
         });
     }
 
