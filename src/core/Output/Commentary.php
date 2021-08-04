@@ -343,7 +343,7 @@ class Commentary
             // All of the ones after this will be translated in the modules.
             $this->hook->dispatch($comsecs, EventCommentary::MODERATE_SECTIONS);
 
-            return modulehook('moderate-comment-sections', $comsecs);
+            return modulehook('moderate-comment-sections', $comsecs->getData());
         });
     }
 
