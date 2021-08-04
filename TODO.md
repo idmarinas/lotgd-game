@@ -16,11 +16,6 @@
 
 # Actualmente haciendo esto (6.1.0)
 
--   Commentary: permitir que ciertos mensajes se puedan traducir, esto permite que cuando el sistema añade comentarios estos se puedan traducir.
-    -   Asi se tiene en cuenta el idioma del juego en todo momento y no solo el idioma en el momento de añadir el comentario.
-    -   Idea: agregar el parametro: translation_domain para determinar si el comentario es traducible o no.
-        -   El comentario es la key de la traducción
-        -   Se procesan los comandos pero no el censor (para evitar que modifique la clave de traducción)
 -   Crear bundle:
     -   `Settings` para poder usarlo en sustitución de las `prefs` para usuario
     -   `Special Events`: usando el componente even-dispatcher crear uno para los eventos especiales:
