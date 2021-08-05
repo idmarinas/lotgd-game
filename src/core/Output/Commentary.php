@@ -154,6 +154,7 @@ class Commentary
         elseif (isset($post['translation_domain']) && ! empty($post['translation_domain']))
         {
             $post['extra']['translation_domain'] = $post['translation_domain'];
+            $post['translatable'] = true;
         }
 
         $args = new EventCommentary(['data' => $post]);
