@@ -27,6 +27,24 @@
 -   Sustituir la función lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
         -   Use `Symfony mailer` instead.
+-   **Correos** permitir usar una plantilla para así personalizar los mensajes
+    -   Se usara el `Symfony\Bridge\Twig\Mime\TemplatedEmail` para todos los correos del core. 
+    ```php
+        use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+
+        $email = (new TemplatedEmail())
+        // ...
+            // html mail
+            ->htmlTemplate('emails/signup.html.twig')
+            //-- or only text mail
+            ->textTemplate('emails/signup.txt.twig')
+        // ...
+        ;
+    ```
+    -   Habrá dos versiones de cada correo predeterminado version html y txt
+    -   Desde la configuración se podrá decidir si se envian correos en html o txt
+    -   Agregar opción para que el usuario pueda elegir.
+
 ---
 -   Se intentará pasar todas las paginas al sistema de controlador igual que home.php y about.php
     -   Las páginas Grotto (las de configuración y administración) no se pasarán a un sistema de controlador.
