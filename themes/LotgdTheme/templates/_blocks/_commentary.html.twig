@@ -59,11 +59,7 @@
                 {{ display_status_online_player(comment) }}
                 {{ comment.postdate > user.recentcomments ? '<span data-tooltip="%1$s"><i class="caret right icon" aria-label="%1$s"></i></span>'|format(recent) : '' }}
                 <span {{ comment.hidden ? 'data-tooltip' : '' }}="{{ comment.hidden ? comment.hiddenComment|uncolorize : '' }}">
-                    {% set message = comment.comment %}
-
-                    {% if comment.extra.translation_domain|default(false) %}
-                        {% set message = comment.comment|trans({}, comment.extra.translation_domain) %}
-                    {% endif %}
+                    {% set message = comment.translatable ? comment.comment|trans({}, comment.extra.translation_domain) : comment.comment %}
 
                     {% if comment.command == 'game' %}
                         {# It's a message from the game, no associated author #}
