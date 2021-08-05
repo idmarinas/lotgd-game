@@ -18,7 +18,6 @@ use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Output\Format;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
