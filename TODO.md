@@ -22,7 +22,6 @@
         -   método que determina si se ejecuta el evento (según probabilidad)
         -   método que elige cual de los eventos adjuntos se ejecuta (teniendo en cuenta la probabilidad)
             -   Se filtran los eventos que cumplan con la probabilidad (chance) y se selecciona 1 teniendo en cuenta sus probabilidades
--   systemmail.php crear un service para reemplazar esto
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   Sustituir la función lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
