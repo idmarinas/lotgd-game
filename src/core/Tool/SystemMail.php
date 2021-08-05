@@ -105,7 +105,7 @@ class SystemMail
             // codes from the actual email we send out... they make things
             // unreadable
             $body    = \is_array($body) ? $this->translator->trans($body[0], $body[1], $body[2], $prefs['language'] ?? null) : $body;
-            $body    = $this->sanitize->fullSanitize(preg_replace('`n', "\n", $body));
+            $body    = $this->sanitize->fullSanitize(preg_replace('/`n/', "\n", $body));
             $subject = \is_array($subject) ? $this->translator->trans($subject[0], $subject[1], $subject[2], $prefs['language'] ?? null) : $subject;
             $subject = $this->sanitize->fullSanitize($subject);
 
