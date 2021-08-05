@@ -17,11 +17,27 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :star: FEATURES
 
--   Nothing
+-   **Commentary system** 
+    -   A translatable comment can now be added so that when this comment is displayed it is translated into the current language of the game.
+        -   To add this comment only need add `translation_domain` to comment data array
+        -   Example: 
+            ```php
+            $commentaryService->saveComment([
+                'section' => 'any_section',
+                'comment' => 'translation.key', //-- Option 1
+                // 'comment' => '/me translation.key', //-- Option 2, add a comment with command (any available command can be used)
+                'translation_domain' => 'my_domain'
+            ]);
+            ```
+        -   _Note_: With this change the commentary is affected by the language of the game at all times and not only when the commentary is added.
+    -   **New command** for comments `/grem` or `:grem` or `::grem` in chat comment and and a small horde of Gremlin will delete the last comment you have written as long as it has not been more than 3 minutes.
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   **lib/systemmail.php** 
+    -   `systemmail` is deprecated. Use `LotgdKernel::get('lotgd_core.tool.system_mail')->send($to, $subject, $body, $from, $noemail)` instead.
+-   **src/core/functions.php** 
+    -   `is_email` is deprecated. Use service `LotgdKernel::get('lotgd_core.tool.validator')->isMail(string)` instead.
 
 ### :wrench: FIXES
 
