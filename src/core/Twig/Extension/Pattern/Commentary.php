@@ -108,30 +108,14 @@ trait Commentary
             'label'      => $status['online'],
         ];
 
-        //-- Is a message of the game
-        if ('GAME' == \strtoupper($comment['command']))
+        $singleIcon = $this->statusCommandSingleIcon($comment, $status);
+
+        if ($singleIcon)
         {
-            return \sprintf(
-                '<span data-tooltip="%1$s"><i class="gamepad icon" aria-label="%1$s"></i></span>',
-                $status['game']
-            );
+            return $singleIcon;
         }
-        //-- Is a deleted message by the author
-        elseif ('GREM' == \strtoupper($comment['command']))
-        {
-            return \sprintf(
-                '<span data-tooltip="%1$s"><i class="eraser icon" aria-label="%1$s"></i></span>',
-                $status['grem']
-            );
-        }
-        elseif ($session['user']['acctid'] == $comment['author'])
-        {
-            return \sprintf(
-                '<span data-tooltip="%1$s"><i class="user icon" aria-label="%1$s"></i></span>',
-                $status['you']
-            );
-        }
-        elseif ('AFK' == \strtoupper($comment['chatloc']))
+
+        if ('AFK' == \strtoupper($comment['chatloc']))
         {
             $icon = [
                 // 'icon' => 'images/icons/onlinestatus/afk.png',
@@ -177,6 +161,39 @@ trait Commentary
             $icon['insideIcon'],
             $icon['label']
         );
+    }
+
+    private function statusCommandSingleIcon(array $comment, array $status): ?string
+    {
+        global $session;
+
+        $icon = null;
+
+        //-- Is a message of the game
+        if ('GAME' == \strtoupper($comment['command']))
+        {
+            $icon = \sprintf(
+                '<span data-tooltip="%1$s"><i class="gamepad icon" aria-label="%1$s"></i></span>',
+                $status['game']
+            );
+        }
+        //-- Is a deleted message by the author
+        elseif ('GREM' == \strtoupper($comment['command']))
+        {
+            $icon = \sprintf(
+                '<span data-tooltip="%1$s"><i class="eraser icon" aria-label="%1$s"></i></span>',
+                $status['grem']
+            );
+        }
+        elseif ($session['user']['acctid'] == $comment['author'])
+        {
+            $icon = \sprintf(
+                '<span data-tooltip="%1$s"><i class="user icon" aria-label="%1$s"></i></span>',
+                $status['you']
+            );
+        }
+
+        return $icon;
     }
 
     /**
