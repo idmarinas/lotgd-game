@@ -64,6 +64,9 @@
                     {% if comment.command == 'game' %}
                         {# It's a message from the game, no associated author #}
                         <span class="colDkMagenta"><em><strong>{{ message|uncolorize|trim|capitalize }}</strong></em></span>
+                    {% elseif comment.command == 'grem' %}
+                        {# This message was deleted by the author #}
+                        <span>{{ message|colorize|trim }}</span>
                     {% else %}
                         {% if comment.clanName %}
                             <span data-tooltip="{{ comment.clanName|uncolorize }}">&#60;{{ comment.clanNameShort|colorize }}&#62;</span>
@@ -83,7 +86,7 @@
                 </span>
             </div>
             {# Actions for see bio and send mail to the author of comment #}
-            {% if comment.command != 'game' %}
+            {% if comment.command != 'game' and comment.command != 'grem' %}
                 {% set bioLink = ('bio.php?char=' ~ comment.author ~ '&ret=' ~ returnLink|e('url'))|lotgd_url %}
                 {% set bioLabel = 'form.button.bio'|trans({'name': comment.authorName|uncolorize|trim}, 'app_commentary') %}
                 {% set mailLabel = 'form.button.mail'|trans({'name': comment.authorName|uncolorize|trim}, 'app_commentary') %}

@@ -28,6 +28,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Commentary
 {
+    use Commentary\Command;
+
     public const TEXT_DOMAIN = 'app_commentary';
 
     /**
@@ -177,7 +179,7 @@ class Commentary
      *
      * @return Lotgd\Core\Entity\Commentary
      */
-    public function getRepository()
+    public function getRepository(): CommentaryRepository
     {
         if ( ! $this->repository instanceof CommentaryRepository)
         {
@@ -185,96 +187,6 @@ class Commentary
         }
 
         return $this->repository;
-    }
-
-    /**
-     * Process commands for comentary.
-     *
-     * @return array
-     */
-    public function processCommands(array &$data): bool
-    {
-        global $session;
-
-        //-- Special command for users
-        if ($this->processSpecialCommands($data))
-        {
-            return true;
-        }
-        //-- /game will have a specific function for the system
-
-        $command = strtoupper($data['comment']);
-
-        //-- Deletes the user's last written comment, only if no more than 24 hours have passed.
-        // if ('GREM' == $command || '::GREM' == $command || '/GREM' == $command)
-        // {
-        //     $last = $this->getRepository()->createQueryBuilder('u');
-
-        //     $date = new \DateTime('now');
-        //     $date->sub(new \DateInterval("P1D"));
-
-        //     $last->where('u.author = :id AND u.postdate >= :date')
-        //     ->setParameters([
-        //             'id' => $session['user']['acctid'],
-        //             'date' => $date
-        //         ])
-        //         ->setMaxResults(1)
-        //         ->getQuery()
-        //         ->getResult()
-        //     ;
-
-        //     $last = $this->getRepository()->findBy([
-        //         'author' => $session['user']['acctid'],
-        //         'postdate' => '',
-        //     ], ['postdate' => 'DESC'], 1);
-
-        //     return false;
-        // }
-
-        //-- Process additional commands
-        $args = new EventCommentary(['command' => $command, 'section' => $data['section'], 'data' => &$data]);
-        $this->hook->dispatch($args, EventCommentary::COMMANDS);
-        $returnedHook = modulehook('commentary-command', $args->getData());
-
-        $processed = true;
-
-        if (isset($returnedHook['skipCommand']) && ! $returnedHook['skipCommand'])
-        {
-            //if for some reason you're going to involve a command that can be a mix of upper and lower case, set $args['skipCommand'] and $args['ignore'] to true and handle it in postcomment instead.
-            if (isset($returnedHook['processed']) && ! $returnedHook['processed'])
-            {
-                $this->flashBag->add('info', $this->translator->trans('command.unrecognized', [], self::TEXT_DOMAIN));
-            }
-
-            $processed = false;
-        }
-
-        return $processed;
-    }
-
-    /**
-     * Process special commands that save to data base.
-     */
-    public function processSpecialCommands(array &$data): bool
-    {
-        if ('/me' == substr($data['comment'], 0, 3))
-        {
-            $data['comment'] = trim(substr($data['comment'], 3));
-            $data['command'] = 'me';
-        }
-        elseif ('::' == substr($data['comment'], 0, 2))
-        {
-            $data['comment'] = trim(substr($data['comment'], 2));
-            $data['command'] = 'me';
-        }
-        elseif (':' == substr($data['comment'], 0, 1))
-        {
-            $data['comment'] = trim(substr($data['comment'], 1));
-            $data['command'] = 'me';
-        }
-
-        //-- If process special commands return
-        return (bool) ($data['command'] ?? false);
     }
 
     /**
@@ -358,6 +270,11 @@ class Commentary
         });
     }
 
+    public function getTranslationDomain(): string
+    {
+        return self::TEXT_DOMAIN;
+    }
+
     /**
      * Get list of comments.
      *
@@ -367,7 +284,7 @@ class Commentary
     {
         $query = $this->getRepository()->createQueryBuilder('u');
 
-        $query->select('u.id', 'u.section', 'u.command', 'u.comment', 'u.postdate', 'u.extra', 'u.author', 'u.authorName', 'u.clanId', 'u.clanRank', 'u.clanName', 'u.clanNameShort', 'u.hidden', 'u.hiddenComment', 'u.hiddenBy', 'u.hiddenByName')
+        $query->select('u.id', 'u.section', 'u.command', 'u.comment', 'u.postdate', 'u.extra', 'u.author', 'u.authorName', 'u.clanId', 'u.clanRank', 'u.clanName', 'u.clanNameShort', 'u.hidden', 'u.hiddenComment', 'u.hiddenBy', 'u.hiddenByName', 'u.translatable')
             ->addSelect('a.loggedin', 'a.laston')
             ->addSelect('c.chatloc')
             ->leftJoin('LotgdCore:User', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.author'))

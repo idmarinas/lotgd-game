@@ -116,6 +116,14 @@ trait Commentary
                 $status['game']
             );
         }
+        //-- Is a deleted message by the author
+        elseif ('GREM' == \strtoupper($comment['command']))
+        {
+            return \sprintf(
+                '<span data-tooltip="%1$s"><i class="eraser icon" aria-label="%1$s"></i></span>',
+                $status['grem']
+            );
+        }
         elseif ($session['user']['acctid'] == $comment['author'])
         {
             return \sprintf(
@@ -225,6 +233,7 @@ trait Commentary
         {
             $this->onlineStatus = [
                 'game'    => $this->translator->trans('commentary.status.game', [], $textDomain),
+                'grem'    => $this->translator->trans('commentary.status.grem', [], $textDomain),
                 'you'     => $this->translator->trans('commentary.status.you', [], $textDomain),
                 'afk'     => $this->translator->trans('commentary.status.afk', [], $textDomain),
                 'nearby'  => $this->translator->trans('commentary.status.nearby', [], $textDomain),
