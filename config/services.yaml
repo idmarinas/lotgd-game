@@ -218,6 +218,8 @@ services:
         public: true
     Lotgd\Core\Tool\SystemMail:
         lazy: true
+        calls:
+            - setMailer: ['@mailer']
     lotgd_core.tool.system_mail:
         alias: Lotgd\Core\Tool\SystemMail
         public: true
