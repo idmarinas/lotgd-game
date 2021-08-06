@@ -100,10 +100,17 @@ if ( ! \function_exists('arraytourl'))
      *
      * @param array $array The array to turn into an URL
      *
+     * @deprecated 6.1.0 deleted in version 7.0.0. Use http_build_query
+     *
      * @return string The URL
      */
     function arraytourl($array)
     {
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 6.1.0; and delete in 7.0.0 version. Use php function "http_build_query" instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         //takes an array and encodes it in key=val&key=val form.
         $url = '';
         $i   = 0;
@@ -129,10 +136,17 @@ if ( ! \function_exists('urltoarray'))
      *
      * @param string $url The URL
      *
+     * @deprecated 6.1.0 deleted in version 7.0.0. Use "parse_str"
+     *
      * @return array The arguments from the URL
      */
     function urltoarray($url)
     {
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 6.1.0; and delete in 7.0.0 version. Use php function "parse_str" instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         //takes a URL and returns its arguments in array form.
         if (false !== \strpos($url, '?'))
         {
@@ -165,10 +179,17 @@ if ( ! \function_exists('createstring'))
      *
      * @param mixed $array
      *
+     * @deprecated 6.1.0 deleted in version 7.0.0. Use "serialize".
+     *
      * @return string The parameter converted to a string
      */
     function createstring($array)
     {
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 6.1.0; and delete in 7.0.0 version. Use php function "serialize" instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         if (\is_array($array) || \is_object($array))
         {
             $out = \serialize($array);
@@ -196,8 +217,14 @@ if ( ! \function_exists('myDefine'))
 
 if ( ! \function_exists('list_files'))
 {
+    /** @deprecated 6.1.0 deleted in version 7.0.0. Use Symfony Component Finder */
     function list_files($ruta, $sort)
     {
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 6.1.0; and delete in 7.0.0 version. Use php "Symfony Component Finder" instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         //abrir un directorio y listarlo recursivo
         if (\is_dir($ruta) && $dh = \opendir($ruta))
         {
@@ -227,8 +254,14 @@ if ( ! \function_exists('list_files'))
 
 if ( ! \function_exists('_curl'))
 {
+    /** @deprecated 6.1.0 deleted in version 7.0.0. Use service LotgdKernel::get('http_client') instead */
     function _curl($url)
     {
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 6.1.0; and delete in 7.0.0 version. Use service LotgdKernel::get("http_client") instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         $ch = \curl_init();
 
         if ( ! $ch)
@@ -267,8 +300,14 @@ if ( ! \function_exists('_curl'))
 
 if ( ! \function_exists('_sock'))
 {
+    /** @deprecated 6.1.0 deleted in version 7.0.0. Use service LotgdKernel::get('http_client') instead */
     function _sock($url)
     {
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 6.1.0; and delete in 7.0.0 version. Use service LotgdKernel::get("http_client") instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         $a = \preg_match('!http://([^/:]+)(:[0-9]+)?(/.*)!', $url, $matches);
 
         if ( ! $a)
@@ -336,8 +375,14 @@ if ( ! \function_exists('_sock'))
 
 if ( ! \function_exists('pullurl'))
 {
+    /** @deprecated 6.1.0 deleted in version 7.0.0. Use service LotgdKernel::get('http_client') instead */
     function pullurl($url)
     {
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 6.1.0; and delete in 7.0.0 version. Use service LotgdKernel::get("http_client") instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         //if (function_exists("curl_init")) return _curl($url);
         // For some reason the socket code isn't working
         //if (function_exists("fsockopen")) return _sock($url);
