@@ -43,6 +43,8 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `createstring` is deprecated. Use php function `serialize` instead.
     -   `list_files` is deprecated. Use component `Symfony Finder` instead.
     -   `_curl`, `_sock` and `pullurl` is deprecated. Use service `LotgdKernel::get('http_client')` instead
+-   **lib/dump_item.php**
+    -   `dump_item` and `dump_item_ascode` is deprecated and deleted un future version.
 
 ### :wrench: FIXES
 
