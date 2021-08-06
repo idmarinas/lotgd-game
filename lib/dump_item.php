@@ -3,6 +3,7 @@
 // addnews ready
 // translator ready
 // mail ready
+/** @deprecated 6.1.0 deleted in future version. */
 function dump_item($item)
 {
     $out = '';
@@ -38,6 +39,7 @@ function dump_item($item)
     return $out;
 }
 
+/** @deprecated 6.1.0 deleted in future version. */
 function dump_item_ascode($item, $indent = "\t")
 {
     $out = '';
