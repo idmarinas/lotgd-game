@@ -38,6 +38,11 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `systemmail` is deprecated. Use `LotgdKernel::get('lotgd_core.tool.system_mail')->send($to, $subject, $body, $from, $noemail)` instead.
 -   **src/core/functions.php** 
     -   `is_email` is deprecated. Use service `LotgdKernel::get('lotgd_core.tool.validator')->isMail(string)` instead.
+    -   `arraytourl` is deprecated. Use php function `http_build_query` instead.
+    -   `urltoarray` is deprecated. Use php function `parse_str` instead.
+    -   `createstring` is deprecated. Use php function `serialize` instead.
+    -   `list_files` is deprecated. Use component `Symfony Finder` instead.
+    -   `_curl`, `_sock` and `pullurl` is deprecated. Use service `LotgdKernel::get('http_client')` instead
 
 ### :wrench: FIXES
 
