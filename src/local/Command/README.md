@@ -34,7 +34,7 @@ final class YourCommand extends Command
 
         //-- Can see core commands for examples
 
-        return Command::SUCCESS;
+        return 0;
     }
 }
 
