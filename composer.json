@@ -72,7 +72,6 @@
         "symfony/intl": "4.4.*",
         "symfony/lock": "4.4.*",
         "symfony/mailer": "4.4.*",
-        "symfony/options-resolver": "4.4.*",
         "symfony/property-access": "4.4.*",
         "symfony/property-info": "4.4.*",
         "symfony/proxy-manager-bridge": "4.4.*",
