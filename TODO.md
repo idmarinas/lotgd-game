@@ -22,7 +22,9 @@
         -   método que determina si se ejecuta el evento (según probabilidad)
         -   método que elige cual de los eventos adjuntos se ejecuta (teniendo en cuenta la probabilidad)
             -   Se filtran los eventos que cumplan con la probabilidad (chance) y se selecciona 1 teniendo en cuenta sus probabilidades
+    -   `clans` Intentar migrar los clanes a un bundle, para poder hacerlo mas personalizable y extensible
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
+-----
 -   Sustituir la función lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
         -   Use `Symfony mailer` instead.
@@ -43,7 +45,6 @@
     -   Habrá dos versiones de cada correo predeterminado version html y txt
     -   Desde la configuración se podrá decidir si se envian correos en html o txt
     -   Agregar opción para que el usuario pueda elegir.
-
 ---
 -   Se intentará pasar todas las paginas al sistema de controlador igual que home.php y about.php
     -   Las páginas Grotto (las de configuración y administración) no se pasarán a un sistema de controlador.
