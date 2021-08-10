@@ -30,7 +30,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
             ]);
             ```
         -   _Note_: With this change the commentary is affected by the language of the game at all times and not only when the commentary is added.
-    -   **New command** for comments `/grem` or `:grem` or `::grem` in chat comment and and a small horde of Gremlin will delete the last comment you have written as long as it has not been more than 3 minutes.
+    -   **New command** for comments `/grem` or `:grem` or `::grem` in chat comment and a small horde of Gremlin will delete the last comment you have written as long as it has not been more than 3 minutes.
 
 ### :fire: DEPRECATED
 
