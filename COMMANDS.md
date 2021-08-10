@@ -8,6 +8,10 @@ php bin/console doctrine:migrations:migrate 'DoctrineMigrations\Version202107071
 
 php bin/console assets:install public
 
+symfony console debug:config BundleName
+
+symfony console config:dump-reference BundleName
+
 php phpDocumentor.phar
 
 php bin/console debug:container
