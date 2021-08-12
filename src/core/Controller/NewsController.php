@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Combat\Battle;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Navigation\Navigation;
@@ -27,15 +28,84 @@ class NewsController extends AbstractController
 
     private $navigation;
     private $dispatcher;
+    private $battle;
 
-    public function __construct(Navigation $navigation, EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        Navigation $navigation,
+        EventDispatcherInterface $eventDispatcher,
+        Battle $battle
+    ) {
         $this->navigation = $navigation;
         $this->dispatcher = $eventDispatcher;
+        $this->battle     = $battle;
     }
 
-    public function index(array $params, Request $request): Response
+    public function index(Request $request): Response
     {
+        global $session;
+
+        $args = new GenericEvent(null, ['showLastMotd' => true]);
+        $this->dispatcher->dispatch($args, Events::PAGE_NEWS_INTERCEPT);
+        $hookIntercept = modulehook('news-intercept', $args->getArguments());
+
+        $day       = $request->query->getInt('day');
+        $timestamp = strtotime("-{$day} days");
+        $params    = [
+            'timestamp' => $timestamp,
+            'date'      => $timestamp,
+        ];
+
+        if ($hookIntercept['showLastMotd'] ?? false)
+        {
+            /** @var \Lotgd\Core\Repository\MotdRepository */
+            $repository         = $this->getDoctrine()->getRepository('LotgdCore:Motd');
+            $params['lastMotd'] = $repository->getLastMotd($session['user']['acctid'] ?? null);
+        }
+
+        if ( ! $session['user']['loggedin'])
+        {
+            $this->navigation->addHeader('common.category.login');
+            $this->navigation->addNav('common.nav.login', 'index.php');
+        }
+        elseif ($session['user']['alive'])
+        {
+            $this->navigation->villageNav();
+        }
+        else
+        {
+            $this->battle->suspendCompanions('allowinshades', true);
+
+            $this->navigation->addHeader('news.category.logout');
+            $this->navigation->addNav('news.nav.logout', 'login.php?op=logout');
+
+            $this->navigation->addHeader('news.category.dead', [
+                'params' => [
+                    'sex' => (int) $session['user']['sex'],
+                ],
+            ]);
+            $this->navigation->addNav('news.nav.shades', 'shades.php');
+            $this->navigation->addNav('news.nav.graveyard', 'graveyard.php');
+        }
+
+        $this->navigation->addHeader('news.category.news');
+        $this->navigation->addNav('news.nav.previous', 'news.php?day='.($day + 1));
+
+        if ($day > 0)
+        {
+            $this->navigation->addNav('news.nav.next', 'news.php?day='.($day - 1));
+        }
+
+        if ($session['user']['loggedin'])
+        {
+            $this->navigation->addNav('common.nav.preferences', 'prefs.php');
+        }
+        $this->navigation->addNav('news.nav.about', 'about.php');
+
+        //-- Superuser menu
+        $this->navigation->superuser();
+
+        $params['SU_EDIT_COMMENTS'] = $session['user']['superuser'] & SU_EDIT_COMMENTS;
+
         /** @var Lotgd\Core\Repository\NewsRepository */
         $newsRepo = $this->getDoctrine()->getRepository('LotgdCore:News');
         $page     = $request->query->getInt('page');
@@ -44,7 +114,7 @@ class NewsController extends AbstractController
         $query = $newsRepo->createQueryBuilder('u');
         $query->orderBy('u.id', 'DESC')
             ->where('u.date = :date')
-            ->setParameter('date', \date('Y-m-d', $params['timestamp']))
+            ->setParameter('date', date('Y-m-d', $params['timestamp']))
         ;
 
         if ('delete' == $request->query->get('op'))
