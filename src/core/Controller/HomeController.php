@@ -16,12 +16,13 @@ namespace Lotgd\Core\Controller;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
+use Lotgd\Core\Navigation\Navigation;
+use Lotgd\Core\Tool\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Lotgd\Core\Tool\DateTime;
 
 class HomeController extends AbstractController
 {
@@ -29,17 +30,37 @@ class HomeController extends AbstractController
     private $dispatcher;
     private $translator;
     private $dateTime;
+    private $navigation;
 
-    public function __construct(Settings $settings, EventDispatcherInterface $eventDispatcher, TranslatorInterface $translator, DateTime $dateTime)
-    {
+    public function __construct(
+        Settings $settings,
+        EventDispatcherInterface $eventDispatcher,
+        TranslatorInterface $translator,
+        DateTime $dateTime,
+        Navigation $navigation
+    ) {
         $this->settings   = $settings;
         $this->dispatcher = $eventDispatcher;
         $this->translator = $translator;
-        $this->dateTime = $dateTime;
+        $this->dateTime   = $dateTime;
+        $this->navigation = $navigation;
     }
 
     public function index(Request $request): Response
     {
+        $this->navigation->addHeader('home.category.new');
+        $this->navigation->addNav('home.nav.create', 'create.php');
+
+        $this->navigation->addHeader('home.category.func');
+        $this->navigation->addNav('home.nav.forgot', 'create.php?op=forgot');
+        $this->navigation->addNav('home.nav.list', 'list.php');
+        $this->navigation->addNav('home.nav.news', 'news.php');
+
+        $this->navigation->addHeader('home.category.other');
+        $this->navigation->addNav('home.nav.about', 'about.php');
+        $this->navigation->addNav('home.nav.setup', 'about.php?op=setup');
+        $this->navigation->addNav('home.nav.net', 'logdnet.php?op=list');
+
         $params = [];
         //-- Parameters to be passed to the template
         $params = [
@@ -70,13 +91,13 @@ class HomeController extends AbstractController
             $params['newestplayer'] = $name;
         }
 
-        if (\abs($this->settings->getSetting('OnlineCountLast', 0) - \strtotime('now')) > 60)
+        if (abs($this->settings->getSetting('OnlineCountLast', 0) - strtotime('now')) > 60)
         {
             /** @var \Lotgd\Core\Repository\UserRepository */
             $account = $this->getDoctrine()->getRepository('LotgdCore:User');
 
             $this->settings->saveSetting('OnlineCount', $account->getCountAcctsOnline((int) $this->settings->getSetting('LOGINTIMEOUT', 900)));
-            $this->settings->saveSetting('OnlineCountLast', \strtotime('now'));
+            $this->settings->saveSetting('OnlineCountLast', strtotime('now'));
         }
 
         $params['OnlineCount'] = $this->settings->getSetting('OnlineCount', 0);
