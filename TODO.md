@@ -22,7 +22,20 @@
         -   método que determina si se ejecuta el evento (según probabilidad)
         -   método que elige cual de los eventos adjuntos se ejecuta (teniendo en cuenta la probabilidad)
             -   Se filtran los eventos que cumplan con la probabilidad (chance) y se selecciona 1 teniendo en cuenta sus probabilidades
-    -   `clans` Intentar migrar los clanes a un bundle, para poder hacerlo mas personalizable y extensible
+        -   Agregar opción para priorizar eventos.
+            -   Agregar la prioridad a los eventos esto es útil para los eventos que no tienen menú de opciones y los que sí
+                -   Se permitiria pasar antes los eventos que no tienen menús para así no entrar en conflicto con los que tienen menú
+        -   Se agregará unas constantes con diferentes prioridades (ideas):
+            -   `priority_needs_response` Para eventos que necesitan una respuesta por parte del usuario (tienen un menú de navegación)
+                -   Este evento impide que se puedan ejecutar más eventos.
+            -   `priority_interactive` Para eventos que no necesitan respuesta pero son interactivos, por ejemplo, se puede comentar (ejemplo es la pradera donde puede comer la montura y se puede escribir un comentario pero no hace falta una respuesta)
+            -   `priority_info` Para los eventos que no necesitan una respuesta y no son interactivos, solo son informativos de que ha pasado algo
+    -   `Amigos` poder añadir y eliminar amigos (pensar en si hacerlo por personaje o por usuario)
+        -   Permite un chat 1:1
+        -   Permite ver si esta online
+        -   ¿? agregar nivel/dragonkills
+        -   Limitar la lista a un maximo de 50, puediendo personalizar (opción premium por ejemplo)
+    -   `Mail` continuar con el que ya tengo iniciado `https://github.com/idmarinas/MessageBundle`
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -----
 -   Sustituir la función lotgd_mail por Symfony mailer
@@ -54,10 +67,7 @@
 
 ## Para la versión 7.0.0
 
--   Se fusiona todos los installer a uno nuevo como clean version
-    -   El installer de la versión 6.0.0 depende de laminas/laminas-serializer
-        -   Es en el único sitio donde se utiliza este componente
--   Eliminar paquete laminas/laminas-serializer
+-   Esta es la última versión que incluya compatibilidad con el antiguo sistema de módulos.
 -   **BC** Sustituir Fomantic UI por https://tailwindcss.com 
     -   Tailwind ofrece más flexibilidad para crear la UI.
     -   npm install tailwindcss
@@ -73,9 +83,21 @@
 
 ## Para la versión 8.0.0
 
--   Esta versión posiblemente sea ya una Symfony App
+-   **BC** Una versión intermedia en la que se eliminan los módulos, antes de pasar a una Symfony App
+    -   Por lo que la versión 7.0.0 sería la última versión compatible con los módulos.
+-   Con este paso intermedio se pretende hacer una transición un poquito más suave.
+
+## **BC** Para la versión 9.0.0
+
+-   Se fusiona todos los installer a uno nuevo como clean version
+    -   El installer de la versión 6.0.0 depende de laminas/laminas-serializer
+        -   Es en el único sitio donde se utiliza este componente
+-   Eliminar paquete laminas/laminas-serializer
+-   Esta versión será ya una Symfony App
+-   Se usará todo lo de Symfony (ruter incluido)
 
 ## Para la versión X.Y.Z
+
 -   Migrar los cronjobs a cron/cron bundle mediante comandos de symfony console.
 -   Copiar el sistema de petition (y adaptarlo) en el app bundle.
 -   Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
