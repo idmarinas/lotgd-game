@@ -15,7 +15,9 @@ namespace Lotgd\Core\Controller;
 
 use Lotgd\Bundle\Contract\LotgdBundleInterface;
 use Lotgd\Core\Events;
+use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
+use Lotgd\Core\Navigation\Navigation;
 use Lotgd\Core\Tool\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -30,14 +32,21 @@ class AboutController extends AbstractController
     private $settings;
     private $cache;
     private $dateTime;
+    private $navigation;
     private $bundles = [];
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, Settings $settings, CacheInterface $coreLotgdCache, DateTime $dateTime)
-    {
+    public function __construct(
+        EventDispatcherInterface $eventDispatcher,
+        Settings $settings,
+        CacheInterface $coreLotgdCache,
+        DateTime $dateTime,
+        Navigation $navigation
+    ) {
         $this->dispatcher = $eventDispatcher;
         $this->settings   = $settings;
         $this->cache      = $coreLotgdCache;
         $this->dateTime   = $dateTime;
+        $this->navigation = $navigation;
     }
 
     public function setup()
@@ -51,16 +60,16 @@ class AboutController extends AbstractController
             $details = $this->dateTime->gameTimeDetails();
             $secstonextday = $this->dateTime->secondsToNextGameDay($details);
             $useful_vals = [
-                'dayduration'   => \round(($details['dayduration'] / 60 / 60), 0).' hours',
+                'dayduration'   => round(($details['dayduration'] / 60 / 60), 0).' hours',
                 'curgametime'   => $this->dateTime->getGameTime(),
-                'curservertime' => \date('Y-m-d h:i:s a'),
-                'lastnewday'    => \date('h:i:s a', \strtotime("-{$details['realsecssofartoday']} seconds")),
-                'nextnewday'    => \date('h:i:s a', \strtotime("+{$details['realsecstotomorrow']} seconds")).' ('.\date('H\\h i\\m s\\s', $secstonextday).')',
+                'curservertime' => date('Y-m-d h:i:s a'),
+                'lastnewday'    => date('h:i:s a', strtotime("-{$details['realsecssofartoday']} seconds")),
+                'nextnewday'    => date('h:i:s a', strtotime("+{$details['realsecstotomorrow']} seconds")).' ('.date('H\\h i\\m s\\s', $secstonextday).')',
             ];
 
             $localsettings = $this->settings->getArray();
 
-            $vals = \array_merge($localsettings, $useful_vals);
+            $vals = array_merge($localsettings, $useful_vals);
 
             return [
                 'game_setup' => $vals,
@@ -83,22 +92,74 @@ class AboutController extends AbstractController
         return $this->renderAbout($params);
     }
 
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $params = [
-            'block_tpl' => 'about_home',
-        ];
+        global $session;
 
-        $args = new GenericEvent();
-        $this->dispatcher->dispatch($args, Events::PAGE_ABOUT);
-        $results = modulehook('about', $args->getArguments());
+        $op = (string) $request->query->get('op', '');
 
-        if (\is_array($results) && \count($results))
+        if ($session['user']['loggedin'])
         {
-            $params['hookAbout'] = $results;
+            $this->navigation->addNav('common.nav.news', 'news.php');
+        }
+        else
+        {
+            $this->navigation->addHeader('common.category.login');
+            $this->navigation->addNav('common.nav.login', 'index.php');
         }
 
-        return $this->renderAbout($params);
+        $this->navigation->addHeader('about.category.about');
+        $this->navigation->addNav('about.nav.about', 'about.php');
+        $this->navigation->addNav('about.nav.setup', 'about.php?op=setup');
+        $this->navigation->addNav('about.nav.module', 'about.php?op=listmodules');
+        $this->navigation->addNav('about.nav.bundle', 'about.php?op=bundles');
+        $this->navigation->addNav('about.nav.license', 'about.php?op=license');
+
+        if ('listmodules' == $op)
+        {
+            $this->navigation->blockLink('about.php?op=listmodules');
+
+            $method = 'modules';
+        }
+        elseif ('bundles' == $op)
+        {
+            $this->navigation->blockLink('about.php?op=bundles');
+
+            $method = 'bundles';
+        }
+        elseif ('setup' == $op)
+        {
+            $this->navigation->blockLink('about.php?op=setup');
+
+            $method = 'setup';
+        }
+        elseif ('license' == $op)
+        {
+            $this->navigation->blockLink('about.php?op=license');
+
+            $method = 'license';
+        }
+        else
+        {
+            $this->navigation->blockLink('about.php');
+
+            $params = [
+                'block_tpl' => 'about_home',
+            ];
+
+            $args = new GenericEvent();
+            $this->dispatcher->dispatch($args, Events::PAGE_ABOUT);
+            $results = modulehook('about', $args->getArguments());
+
+            if (\is_array($results) && \count($results))
+            {
+                $params['hookAbout'] = $results;
+            }
+
+            return $this->renderAbout($params);
+        }
+
+        return $this->{$method}();
     }
 
     public function modules()
@@ -115,8 +176,8 @@ class AboutController extends AbstractController
     {
         return $this->renderAbout([
             'block_tpl'             => 'about_bundles',
-            'bundles_total_enabled' => \is_countable($this->bundles) ? \count($this->bundles) : 0,
-            'bundles_lotgd_enabled' => \array_filter($this->bundles, function ($var)
+            'bundles_total_enabled' => is_countable($this->bundles) ? \count($this->bundles) : 0,
+            'bundles_lotgd_enabled' => array_filter($this->bundles, function ($var)
             {
                 return $var instanceof LotgdBundleInterface;
             }),
