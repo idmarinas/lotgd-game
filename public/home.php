@@ -16,19 +16,6 @@ if ($session['loggedin'] ?? false)
 //-- Init page
 \LotgdResponse::pageStart('title', [], 'page_home');
 
-\LotgdNavigation::addHeader('home.category.new');
-\LotgdNavigation::addNav('home.nav.create', 'create.php');
-
-\LotgdNavigation::addHeader('home.category.func');
-\LotgdNavigation::addNav('home.nav.forgot', 'create.php?op=forgot');
-\LotgdNavigation::addNav('home.nav.list', 'list.php');
-\LotgdNavigation::addNav('home.nav.news', 'news.php');
-
-\LotgdNavigation::addHeader('home.category.other');
-\LotgdNavigation::addNav('home.nav.about', 'about.php');
-\LotgdNavigation::addNav('home.nav.setup', 'about.php?op=setup');
-\LotgdNavigation::addNav('home.nav.net', 'logdnet.php?op=list');
-
 /**
  * First approach to controllers in LoTGD Core
  *
