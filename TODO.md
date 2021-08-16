@@ -30,13 +30,9 @@
                 -   Este evento impide que se puedan ejecutar más eventos.
             -   `priority_interactive` Para eventos que no necesitan respuesta pero son interactivos, por ejemplo, se puede comentar (ejemplo es la pradera donde puede comer la montura y se puede escribir un comentario pero no hace falta una respuesta)
             -   `priority_info` Para los eventos que no necesitan una respuesta y no son interactivos, solo son informativos de que ha pasado algo
-    -   `Amigos` poder añadir y eliminar amigos (pensar en si hacerlo por personaje o por usuario)
-        -   Permite un chat 1:1
-        -   Permite ver si esta online
-        -   ¿? agregar nivel/dragonkills
-        -   Limitar la lista a un maximo de 50, puediendo personalizar (opción premium por ejemplo)
     -   `Mail` continuar con el que ya tengo iniciado `https://github.com/idmarinas/MessageBundle`
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
+-   Migrar los cronjob a comandos de consola
 -----
 -   Sustituir la función lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
@@ -85,7 +81,9 @@
 
 -   **BC** Una versión intermedia en la que se eliminan los módulos, antes de pasar a una Symfony App
     -   Por lo que la versión 7.0.0 sería la última versión compatible con los módulos.
--   Con este paso intermedio se pretende hacer una transición un poquito más suave.
+-   Con este paso intermedio se pretende hacer una transición un poquito más suave y limpiar el código de todo lo obsoleto.
+-   Se revisará el código para hacer la transición más sencilla. 
+-   Esta versión se centrará en hacer la transición a la versión 9.0.0 más sencilla.
 
 ## **BC** Para la versión 9.0.0
 
