@@ -13,7 +13,21 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   **Changes in some files in `public/` folder**
+    -   I reduce code in this pages to this code:
+        ```php
+        require_once 'common.php';
+
+        //-- Init page
+        \LotgdResponse::pageStart();
+
+        //-- Call controller
+        \LotgdResponse::callController('CONTROLLER_NAME');
+
+        //-- Finalize page
+        \LotgdResponse::pageEnd();
+        ```
+    -   _Note_: with this I'm preparing the Core to migrate it to a Symfony App (Routing)
 
 ### :star: FEATURES
 
