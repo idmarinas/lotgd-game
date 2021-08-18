@@ -13,10 +13,12 @@
 
 namespace Lotgd\Core\Controller;
 
-use Lotgd\Core\Repository\WeaponsRepository;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Http\Response as HttpResponse;
 use Lotgd\Core\Log;
+use Lotgd\Core\Navigation\Navigation;
+use Lotgd\Core\Repository\WeaponsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,14 +29,67 @@ class WeaponController extends AbstractController
     private $dispatcher;
     private $log;
     private $repository;
+    private $response;
+    private $navigation;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, Log $log)
+    public function __construct(EventDispatcherInterface $eventDispatcher, Log $log, HttpResponse $response, Navigation $navigation)
     {
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
+        $this->response   = $response;
+        $this->navigation = $navigation;
     }
 
-    public function buy(array $params, Request $request): Response
+    public function index(Request $request): Response
+    {
+        global $session;
+
+        // Don't hook on to this text for your standard modules please, use "weapon" instead.
+        // This hook is specifically to allow modules that do other weapons to create ambience.
+        $args = new GenericEvent(null, ['textDomain' => 'page_weapon', 'textDomainNavigation' => 'navigation_weapon']);
+        $this->dispatcher->dispatch($args, Events::PAGE_WEAPONS_PRE);
+        $result               = modulehook('weapon-text-domain', $args->getArguments());
+        $textDomain           = $result['textDomain'];
+        $textDomainNavigation = $result['textDomainNavigation'];
+        unset($result);
+
+        $tradeinvalue = round(($session['user']['weaponvalue'] * .75), 0);
+
+        $params = [
+            'textDomain'   => $textDomain,
+            'tradeinvalue' => $tradeinvalue,
+        ];
+
+        //-- Init page
+        $this->response->pageTitle('title', [], $textDomain);
+
+        $op = (string) $request->query->get('op');
+
+        //-- Change text domain for navigation
+        $this->navigation->setTextDomain($textDomainNavigation);
+
+        $method = method_exists($this, $op) ? $op : 'enter';
+
+        $this->navigation->villageNav();
+
+        return $this->{$method}($params, $request);
+    }
+
+    protected function enter(array $params): Response
+    {
+        global $session;
+
+        $params['opt'] = 'default';
+        $weaponLevel   = $this->getRepository()->getMaxWeaponLevel($session['user']['dragonkills']);
+
+        $result = $this->getRepository()->findByLevel($weaponLevel);
+
+        $params['weapons'] = $result;
+
+        return $this->renderWeapon($params);
+    }
+
+    protected function buy(array $params, Request $request): Response
     {
         global $session;
 
@@ -52,7 +107,7 @@ class WeaponController extends AbstractController
             {
                 $params['buyIt'] = true;
 
-                $this->log->debug(\sprintf('spent "%s" gold on the "%s" weapon', ($row['value'] - $params['tradeinvalue']), $row['weaponname']));
+                $this->log->debug(sprintf('spent "%s" gold on the "%s" weapon', ($row['value'] - $params['tradeinvalue']), $row['weaponname']));
                 $session['user']['gold'] -= $row['value'];
                 $session['user']['weapon'] = $row['weaponname'];
                 $session['user']['gold'] += $params['tradeinvalue'];
@@ -62,20 +117,6 @@ class WeaponController extends AbstractController
                 $session['user']['weaponvalue'] = $row['value'];
             }
         }
-
-        return $this->renderWeapon($params);
-    }
-
-    public function index(array $params): Response
-    {
-        global $session;
-
-        $params['opt'] = 'default';
-        $weaponLevel   = $this->getRepository()->getMaxWeaponLevel($session['user']['dragonkills']);
-
-        $result = $this->getRepository()->findByLevel($weaponLevel);
-
-        $params['weapons'] = $result;
 
         return $this->renderWeapon($params);
     }
@@ -96,6 +137,9 @@ class WeaponController extends AbstractController
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_WEAPONS_POST);
         $params = modulehook('page-weapon-tpl-params', $args->getArguments());
+
+        //-- Restore text domain for navigation
+        $this->navigation->setTextDomain();
 
         return $this->render('page/weapon.html.twig', $params);
     }
