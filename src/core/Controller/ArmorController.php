@@ -15,7 +15,9 @@ namespace Lotgd\Core\Controller;
 
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Http\Response as HttpResponse;
 use Lotgd\Core\Log;
+use Lotgd\Core\Navigation\Navigation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,14 +27,52 @@ class ArmorController extends AbstractController
 {
     private $dispatcher;
     private $log;
+    private $response;
+    private $navigation;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, Log $log)
+    public function __construct(EventDispatcherInterface $eventDispatcher, Log $log, HttpResponse $response, Navigation $navigation)
     {
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
+        $this->response   = $response;
+        $this->navigation = $navigation;
     }
 
-    public function index(array $params): Response
+    public function index(Request $request): Response
+    {
+        global $session;
+
+        // Don't hook on to this text for your standard modules please, use "armor" instead.
+        // This hook is specifically to allow modules that do other armors to create ambience.
+        $args = new GenericEvent(null, ['textDomain' => 'page_armor', 'textDomainNavigation' => 'navigation_armor']);
+        $this->dispatcher->dispatch($args, Events::PAGE_ARMOR_PRE);
+        $result               = modulehook('armor-text-domain', $args->getArguments());
+        $textDomain           = $result['textDomain'];
+        $textDomainNavigation = $result['textDomainNavigation'];
+        unset($result);
+
+        $tradeinvalue = round(($session['user']['armorvalue'] * .75), 0);
+
+        $params = [
+            'textDomain'   => $textDomain,
+            'tradeinvalue' => $tradeinvalue
+        ];
+
+        $this->response->pageTitle('title', [], $textDomain);
+
+        //-- Change text domain for navigation
+        $this->navigation->setTextDomain($textDomainNavigation);
+
+        $op = $request->query->get('op');
+
+        $method = method_exists($this, $op) ? $op : 'enter';
+
+        $this->navigation->villageNav();
+
+        return $this->{$method}($params, $request);
+    }
+
+    protected function enter(array $params): Response
     {
         global $session;
 
@@ -49,7 +89,7 @@ class ArmorController extends AbstractController
         return $this->renderArmor($params);
     }
 
-    public function buy(array $params, Request $request): Response
+    protected function buy(array $params, Request $request): Response
     {
         global $session;
 
@@ -70,7 +110,7 @@ class ArmorController extends AbstractController
             {
                 $params['buyIt'] = true;
 
-                $this->log->debug(\sprintf('spent "%s" gold on the "%s" armor', ($row['value'] - $tradeinvalue), $row['armorname']));
+                $this->log->debug(sprintf('spent "%s" gold on the "%s" armor', ($row['value'] - $tradeinvalue), $row['armorname']));
                 $session['user']['gold'] -= $row['value'];
                 $session['user']['armor'] = $row['armorname'];
                 $session['user']['gold'] += $tradeinvalue;
@@ -90,6 +130,9 @@ class ArmorController extends AbstractController
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_ARMOR_POST);
         $params = modulehook('page-armor-tpl-params', $args->getArguments());
+
+        //-- Restore text domain for navigation
+        $this->navigation->setTextDomain();
 
         return $this->render('page/armor.html.twig', $params);
     }
