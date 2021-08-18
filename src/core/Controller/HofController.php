@@ -15,6 +15,8 @@ namespace Lotgd\Core\Controller;
 
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Http\Response as HttpResponse;
+use Lotgd\Core\Navigation\Navigation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,14 +25,34 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class HofController extends AbstractController
 {
     private $dispatcher;
+    private $response;
+    private $navigation;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher)
+    public function __construct(EventDispatcherInterface $eventDispatcher, HttpResponse $response, Navigation $navigation)
     {
         $this->dispatcher = $eventDispatcher;
+        $this->response   = $response;
+        $this->navigation = $navigation;
     }
 
-    public function index(array $params, Request $request): Response
+    public function index(Request $request): Response
     {
+        // Don't hook on to this text for your standard modules please, use "hof" instead.
+        // This hook is specifically to allow modules that do other hofs to create ambience.
+        $args = new GenericEvent(null, ['textDomain' => 'page_hof', 'textDomainNavigation' => 'navigation_hof']);
+        $this->dispatcher->dispatch($args, Events::PAGE_HOF_PRE);
+        $result               = modulehook('hof-text-domain', $args->getArguments());
+        $textDomain           = $result['textDomain'];
+        $textDomainNavigation = $result['textDomainNavigation'];
+        unset($result);
+
+        //-- Init page
+        $this->response->pageTitle('title', [], $textDomain);
+
+        $params = [
+            'textDomain' => $textDomain,
+        ];
+
         $op    = (string) $request->query->get('op');
         $subop = (string) $request->query->get('subop');
         $page  = $request->query->getInt('page');
@@ -38,14 +60,39 @@ class HofController extends AbstractController
         $op    = $op ?: 'kills';
         $order = ('worst' == $subop) ? 'ASC' : 'DESC';
 
-        $method = 'hof'.\ucfirst($op);
-        $method = \method_exists($this, $method) ? $method : 'hofKills';
+        //-- Change text domain for navigation
+        $this->navigation->setTextDomain($textDomainNavigation);
+
+        $this->navigation->addHeader('category.navigation');
+        $this->navigation->villageNav();
+
+        $this->navigation->addHeader('category.ranking');
+        $this->navigation->addNav('nav.dragonkill', "hof.php?op=kills&subop={$subop}&page=1");
+        $this->navigation->addNav('nav.gold', "hof.php?op=money&subop={$subop}&page=1");
+        $this->navigation->addNav('nav.gem', "hof.php?op=gems&subop={$subop}&page=1");
+        $this->navigation->addNav('nav.charm', "hof.php?op=charm&subop={$subop}&page=1");
+        $this->navigation->addNav('nav.tough', "hof.php?op=tough&subop={$subop}&page=1");
+        $this->navigation->addNav('nav.resurrect', "hof.php?op=resurrects&subop={$subop}&page=1");
+        $this->navigation->addNav('nav.dragonspeed', "hof.php?op=days&subop={$subop}&page=1");
+
+        $this->navigation->addHeader('category.sort');
+        $this->navigation->addNav('nav.best', "hof.php?op={$op}&subop=best&page={$page}");
+        $this->navigation->addNav('nav.worst', "hof.php?op={$op}&subop=worst&page={$page}");
+
+        $this->navigation->addHeader('category.other');
+
+        $args = new GenericEvent();
+        $this->dispatcher->dispatch($args, Events::PAGE_HOF_ADD);
+        modulehook('hof-add', $args->getArguments());
+
+        $method = 'hof'.ucfirst($op);
+        $method = method_exists($this, $method) ? $method : 'hofKills';
 
         $params['page']  = $page;
         $params['order'] = $order;
         $params['subop'] = $subop;
 
-        return $this->$method($params, $order, $subop);
+        return $this->{$method}($params, $order, $subop);
     }
 
     protected function hofDays(array $params): Response
@@ -379,10 +426,12 @@ class HofController extends AbstractController
 
         $params['paginator'] = $repository->getPaginator($params['query'], $params['page'], 25);
         unset($params['query'], $params['page']);
+
+        $percent = $params['paginator']->getTotalItemCount() ? round($params['myRank'] / $params['paginator']->getTotalItemCount(), 2) : 0;
         $params['footerTitle'] = [
             'section.footertitle',
             [
-                'percent' => \round($params['myRank'] / $params['paginator']->getTotalItemCount(), 2),
+                'percent' => $percent,
             ],
         ];
 
@@ -390,6 +439,9 @@ class HofController extends AbstractController
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_HOF_POST);
         $params = modulehook('page-hof-tpl-params', $params);
+
+        //-- Restore text domain for navigation
+        $this->navigation->setTextDomain();
 
         return $this->render('page/hof.html.twig', $params);
     }
