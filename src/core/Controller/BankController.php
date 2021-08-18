@@ -15,8 +15,10 @@ namespace Lotgd\Core\Controller;
 
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Http\Response as HttpResponse;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
+use Lotgd\Core\Navigation\Navigation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,20 +29,85 @@ class BankController extends AbstractController
     private $dispatcher;
     private $log;
     private $settings;
+    private $navigation;
+    private $response;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, Log $log, Settings $settings)
-    {
+    public function __construct(
+        EventDispatcherInterface $eventDispatcher,
+        Log $log,
+        Settings $settings,
+        Navigation $navigation,
+        HttpResponse $response
+    ) {
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
         $this->settings   = $settings;
+        $this->navigation = $navigation;
+        $this->response = $response;
     }
 
-    public function index(array $params): Response
+    public function index(Request $request): Response
+    {
+        global $session;
+
+        $args = new GenericEvent(null, ['textDomain' => 'page_bank', 'textDomainNavigation' => 'navigation_bank']);
+        $this->dispatcher->dispatch($args, Events::PAGE_BANK_PRE);
+        $result = modulehook('bank-text-domain', $args->getArguments());
+        $textDomain = $result['textDomain'];
+        $textDomainNavigation = $result['textDomainNavigation'];
+
+        $this->response->pageTitle('title', [], $textDomain);
+
+        $params = [
+            'textDomain' => $textDomain,
+            'ownerName' => $this->settings->getSetting('bankername', '`@Elessa`0')
+        ];
+
+        $op = (string) $request->query->get('op');
+        $method = method_exists($this, $op) ? $op : 'enter';
+
+        $this->navigation->villageNav();
+
+        //-- Change text domain for navigation
+        $this->navigation->setTextDomain($textDomainNavigation);
+        $this->navigation->addHeader('category.money');
+
+        if ($session['user']['goldinbank'] >= 0)
+        {
+            $this->navigation->addNav('nav.withdraw', 'bank.php?op=withdraw');
+            $this->navigation->addNav('nav.deposit.label', 'bank.php?op=deposit');
+
+            if ($this->settings->getSetting('borrowperlevel', 20))
+            {
+                $this->navigation->addNav('nav.borrow.label', 'bank.php?op=borrow');
+            }
+        }
+        else
+        {
+            $this->navigation->addNav('nav.deposit.pay', 'bank.php?op=deposit');
+
+            if ($this->settings->getSetting('borrowperlevel', 20))
+            {
+                $this->navigation->addNav('nav.borrow.more', 'bank.php?op=borrow');
+            }
+        }
+
+        if (
+            $this->settings->getSetting('allowgoldtransfer', 1)
+            && ($session['user']['level'] >= $this->settings->getSetting('mintransferlev', 3) || $session['user']['dragonkills'] > 0)
+        ) {
+            $this->navigation->addNav('nav.transfer', 'bank.php?op=transfer');
+        }
+
+        return $this->{$method}($params, $request);
+    }
+
+    protected function enter(array $params): Response
     {
         return $this->renderBank($params);
     }
 
-    public function transfer(array $params): Response
+    protected function transfer(array $params): Response
     {
         global $session;
 
@@ -51,7 +118,7 @@ class BankController extends AbstractController
         return $this->renderBank($params);
     }
 
-    public function transfer2(array $params, Request $request): Response
+    protected function transfer2(array $params, Request $request): Response
     {
         $to  = $request->request->getInt('to');
         $amt = abs((int) $request->request->getInt('amount', 0));
@@ -69,7 +136,7 @@ class BankController extends AbstractController
         return $this->renderBank($params);
     }
 
-    public function transfer3(array $params, Request $request): Response
+    protected function transfer3(array $params, Request $request): Response
     {
         global $session;
 
@@ -148,14 +215,14 @@ class BankController extends AbstractController
         return $this->renderBank($params);
     }
 
-    public function deposit(array $params): Response
+    protected function deposit(array $params): Response
     {
         $params['opt'] = 'deposit';
 
         return $this->renderBank($params);
     }
 
-    public function depositFinish(array $params, Request $request): Response
+    protected function depositfinish(array $params, Request $request): Response
     {
         global $session;
 
@@ -177,7 +244,7 @@ class BankController extends AbstractController
         return $this->renderBank($params);
     }
 
-    public function borrow(array $params): Response
+    protected function borrow(array $params): Response
     {
         global $session;
 
@@ -189,14 +256,14 @@ class BankController extends AbstractController
         return $this->renderBank($params);
     }
 
-    public function withdraw(array $params): Response
+    protected function withdraw(array $params): Response
     {
         $params['opt'] = 'withdraw';
 
         return $this->renderBank($params);
     }
 
-    public function withdrawFinish(array $params, Request $request): Response
+    protected function withdrawfinish(array $params, Request $request): Response
     {
         global $session;
 
@@ -261,6 +328,9 @@ class BankController extends AbstractController
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_BANK_POST);
         $params = modulehook('page-bank-tpl-params', $args->getArguments());
+
+        //-- Restore text domain for navigation
+        $this->navigation->setTextDomain();
 
         return $this->render('page/bank.html.twig', $params);
     }
