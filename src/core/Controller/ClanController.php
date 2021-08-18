@@ -59,6 +59,141 @@ class ClanController extends AbstractController
         $this->settings   = $settings;
     }
 
+    public function index(Request $request): Response
+    {
+        global $session, $claninfo;
+
+        // Don't hook on to this text for your standard modules please, use "clan" instead.
+        // This hook is specifically to allow modules that do other clans to create ambience.
+        $args = new GenericEvent(null, ['textDomain' => 'page_clan', 'textDomainNavigation' => 'navigation_clan']);
+        $this->dispatcher->dispatch($args, Events::PAGE_CLAN_PRE);
+        $result               = modulehook('clan-text-domain', $args->getArguments());
+        $textDomain           = $result['textDomain'];
+        $textDomainNavigation = $result['textDomainNavigation'];
+        unset($result);
+
+        $costGold = (int) $this->settings->getSetting('goldtostartclan', 10000);
+        $costGems = (int) $this->settings->getSetting('gemstostartclan', 15);
+
+        $params = [
+            'textDomain'           => $textDomain,
+            'clanInfo'             => $claninfo,
+            'clanOwnerName'        => $this->settings->getSetting('clanregistrar', '`%Karissa`0'),
+            'costGold'             => $costGold,
+            'costGems'             => $costGems,
+            'includeTemplatesPre'  => [],
+            'includeTemplatesPost' => [],
+        ];
+
+        //-- Change text domain for navigation
+        $this->navigation->setTextDomain($textDomainNavigation);
+
+        $this->navigation->addHeader('category.village');
+        $this->navigation->villageNav();
+
+        $this->navigation->addHeader('category.options');
+        $this->navigation->addNav('nav.list.list', 'clan.php?op=list');
+
+        $ranks = [
+            CLAN_APPLICANT      => 'ranks.00',
+            CLAN_MEMBER         => 'ranks.010',
+            CLAN_OFFICER        => 'ranks.020',
+            CLAN_ADMINISTRATIVE => 'ranks.025',
+            CLAN_LEADER         => 'ranks.030',
+            CLAN_FOUNDER        => 'ranks.031',
+        ];
+
+        $ranks = new EventClan(['ranks' => $ranks, 'textDomain' => $textDomain, 'clanid' => null]);
+        $this->dispatcher->dispatch($ranks, EventClan::RANK_LIST);
+        $ranks                = modulehook('clanranks', $ranks->getData());
+        $params['ranksNames'] = $ranks['ranks'];
+
+        $op     = (string) $request->query->get('op', '');
+        $method = method_exists($this, $op) ? $op : 'enter';
+
+        if (CLAN_APPLICANT == $session['user']['clanrank'] && 'apply' == $op)
+        {
+            $method = 'applicantApply';
+        }
+        elseif (CLAN_APPLICANT == $session['user']['clanrank'] && 'new' == $op)
+        {
+            $method = 'applicantNew';
+        }
+        elseif (CLAN_APPLICANT == $session['user']['clanrank'])
+        {
+            $method = 'applicant';
+        }
+
+        return $this->{$method}($params, $request);
+    }
+
+    public function enter(array $params)
+    {
+        global $session;
+
+        $claninfo = $params['clanInfo'];
+
+        $this->response->pageTitle('title.default', ['name' => $this->sanitize->fullSanitize($claninfo['clanname'])], $params['textDomain']);
+
+        $this->navigation->addHeader('category.options');
+
+        if ($session['user']['clanrank'] > CLAN_MEMBER)
+        {
+            $this->navigation->addNav('nav.default.update', 'clan.php?op=motd');
+        }
+
+        $this->navigation->addNav('nav.default.membership', 'clan.php?op=membership');
+        $this->navigation->addNav('nav.default.online', 'list.php?op=clan');
+        $this->navigation->addNav('nav.default.waiting.area', 'clan.php?op=waiting');
+        $this->navigation->addNav('nav.default.withdraw', 'clan.php?op=withdraw', [
+            'attributes' => [
+                'data-options' => json_encode(['text' => $this->translator->trans('section.withdraw.confirm', [], $params['textDomain'])]),
+                'onclick'      => 'Lotgd.confirm(this, event)',
+            ],
+        ]);
+
+        $claninfo      = $params['clanInfo'];
+        $params['tpl'] = 'clan_default';
+
+        /** @var Lotgd\Core\Repository\UserRepository */
+        $acctRepository = $this->getDoctrine()->getRepository('LotgdCore:User');
+        /** @var Lotgd\Core\Repository\CharactersRepository */
+        $charRepository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
+
+        $result = $acctRepository->getClanAuthorNameOfMotdDescFromAcctId($claninfo['motdauthor'], $claninfo['descauthor']);
+
+        $params['motdAuthorName'] = $result['motdauthname'] ?? '';
+        $params['descAuthorName'] = $result['descauthname'] ?? '';
+        unset($result);
+
+        $params['leaders']         = $charRepository->getClanLeadersCount($claninfo['clanid']);
+        $params['promotingLeader'] = false;
+
+        if (0 == $params['leaders'])
+        {
+            //There's no leader here, probably because the leader's account expired.
+            $result = $charRepository->getViableLeaderForClan($session['user']['clanid']);
+
+            if ($result)
+            {
+                $charRepository->setNewClanLeader($result['id']);
+                $params['newLeader'] = $result['name'];
+
+                if ($result['acctid'] == $session['user']['acctid'])
+                {
+                    //if it's the current user, we'll need to update their
+                    //session in order for the db write to take effect.
+                    $session['user']['clanrank'] = CLAN_LEADER;
+                }
+                $params['promotingLeader'] = true;
+            }
+        }
+
+        $params['membership'] = $charRepository->getClanMembershipDetails($claninfo['clanid']);
+
+        return $this->renderClan($params);
+    }
+
     public function detail(array $params, Request $request): Response
     {
         global $session;
@@ -126,6 +261,8 @@ class ClanController extends AbstractController
 
     public function list(array $params, Request $request): Response
     {
+        $this->response->pageTitle('title.list', [], $params['textDomain']);
+
         $params['tpl'] = 'clan_applicant_list';
 
         $order = $request->query->getInt('order');
@@ -157,13 +294,24 @@ class ClanController extends AbstractController
 
     public function waiting(array $params): Response
     {
+        global $session;
+
         $params['tpl'] = 'clan_applicant_waiting';
+
+        $this->response->pageTitle('title.applicant', [], $params['textDomain']);
+
+        $this->navigation->addHeader('category.options');
+
+        $nav = (CLAN_APPLICANT == $session['user']['clanrank']) ? 'lobby' : 'rooms';
+        $this->navigation->addNav("nav.applicant.waiting.area.{$nav}", 'clan.php');
 
         return $this->renderClan($params);
     }
 
     public function applicantApply(array $params, Request $request): Response
     {
+        $this->response->pageTitle('title.applicant', [], $params['textDomain']);
+
         $params['tpl'] = 'clan_applicant_apply';
 
         $clanId = $request->query->getInt('clanid');
@@ -243,6 +391,10 @@ class ClanController extends AbstractController
     {
         global $session;
 
+        $this->response->pageTitle('title.applicant', [], $params['textDomain']);
+
+        $this->navigation->addNav('nav.applicant.apply.lobby', 'clan.php');
+
         $params['tpl'] = 'clan_applicant_new';
 
         $params['clanShortNameLength'] = $this->settings->getSetting('clanshortnamelength', 5);
@@ -305,7 +457,25 @@ class ClanController extends AbstractController
     {
         global $session;
 
-        $claninfo      = $params['clanInfo'];
+        $claninfo = $params['clanInfo'];
+
+        $this->response->pageTitle('title.applicant', [], $params['textDomain']);
+
+        $this->navigation->addHeader('category.options');
+
+        if (($claninfo['clanid'] ?? 0) > 0)
+        {
+            //-- Applied for membership to a clan
+            $this->navigation->addNav('nav.applicant.waiting.label', 'clan.php?op=waiting');
+            $this->navigation->addNav('nav.applicant.withdraw', 'clan.php?op=withdraw');
+        }
+        else
+        {
+            //-- Hasn't applied for membership to any clan.
+            $this->navigation->addNav('nav.applicant.apply.membership', 'clan.php?op=apply');
+            $this->navigation->addNav('nav.applicant.apply.new', 'clan.php?op=new');
+        }
+
         $params['tpl'] = 'clan_applicant';
 
         $this->dispatcher->dispatch(new EventClan(), EventClan::ENTER);
@@ -340,55 +510,14 @@ class ClanController extends AbstractController
         return $this->renderClan($params);
     }
 
-    public function index(array $params): Response
-    {
-        global $session;
-
-        $claninfo      = $params['clanInfo'];
-        $params['tpl'] = 'clan_default';
-
-        /** @var Lotgd\Core\Repository\UserRepository */
-        $acctRepository = $this->getDoctrine()->getRepository('LotgdCore:User');
-        /** @var Lotgd\Core\Repository\CharactersRepository */
-        $charRepository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
-
-        $result = $acctRepository->getClanAuthorNameOfMotdDescFromAcctId($claninfo['motdauthor'], $claninfo['descauthor']);
-
-        $params['motdAuthorName'] = $result['motdauthname'] ?? '';
-        $params['descAuthorName'] = $result['descauthname'] ?? '';
-        unset($result);
-
-        $params['leaders']         = $charRepository->getClanLeadersCount($claninfo['clanid']);
-        $params['promotingLeader'] = false;
-
-        if (0 == $params['leaders'])
-        {
-            //There's no leader here, probably because the leader's account expired.
-            $result = $charRepository->getViableLeaderForClan($session['user']['clanid']);
-
-            if ($result)
-            {
-                $charRepository->setNewClanLeader($result['id']);
-                $params['newLeader'] = $result['name'];
-
-                if ($result['acctid'] == $session['user']['acctid'])
-                {
-                    //if it's the current user, we'll need to update their
-                    //session in order for the db write to take effect.
-                    $session['user']['clanrank'] = CLAN_LEADER;
-                }
-                $params['promotingLeader'] = true;
-            }
-        }
-
-        $params['membership'] = $charRepository->getClanMembershipDetails($claninfo['clanid']);
-
-        return $this->renderClan($params);
-    }
-
     public function motd(array $params, Request $request): Response
     {
         global $session;
+
+        $this->response->pageTitle('title.motd', [], $params['textDomain']);
+
+        $this->navigation->addHeader('category.options');
+        $this->navigation->addNav('nav.motd.return', 'clan.php');
 
         $claninfo      = $params['clanInfo'];
         $params['tpl'] = 'clan_motd';
@@ -469,7 +598,12 @@ class ClanController extends AbstractController
 
     public function membership(array $params, Request $request): Response
     {
-        global $session;
+        global $session, $claninfo;
+
+        $this->response->pageTitle('title.membership', ['name' => $this->sanitize->fullSanitize($claninfo['clanname'])], $params['textDomain']);
+
+        $this->navigation->addHeader('category.options');
+        $this->navigation->addNav('nav.membership.hall', 'clan.php');
 
         $claninfo      = $params['clanInfo'];
         $params['tpl'] = 'clan_membership';
@@ -654,6 +788,9 @@ class ClanController extends AbstractController
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_CLAN_POST);
         $params = modulehook('page-clan-tpl-params', $args->getArguments());
+
+        //-- Restore text domain for navigation
+        $this->navigation->setTextDomain();
 
         return $this->render('page/clan.html.twig', $params);
     }
