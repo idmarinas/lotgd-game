@@ -26,6 +26,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
                 'section' => 'any_section',
                 'comment' => 'translation.key', //-- Option 1
                 // 'comment' => '/me translation.key', //-- Option 2, add a comment with command (any available command can be used)
+                //-- Note: No use /grem command, since this command is special for deleting the last comment written by the user.
                 'translation_domain' => 'my_domain'
             ]);
             ```

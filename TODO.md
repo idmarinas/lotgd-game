@@ -31,8 +31,13 @@
             -   `priority_interactive` Para eventos que no necesitan respuesta pero son interactivos, por ejemplo, se puede comentar (ejemplo es la pradera donde puede comer la montura y se puede escribir un comentario pero no hace falta una respuesta)
             -   `priority_info` Para los eventos que no necesitan una respuesta y no son interactivos, solo son informativos de que ha pasado algo
     -   `Mail` continuar con el que ya tengo iniciado `https://github.com/idmarinas/MessageBundle`
+    -   `Energy` un bundle que permite determinar el tipo de sistema que se usa para las acciones turnos/stamina
+        -   Se puede elegir el minimo de energía y el máximo que puede tener el personaje
+        -   Se puede hacer que depende de algún atributo. (que tenga bono)
+        -   Tendrá funciones para poder aumentar y disminuir la energía.
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   Migrar los cronjob a comandos de consola
+-   Eliminar la dependencia de Jaxon-PHP usar Stimulus
 -----
 -   Sustituir la función lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
