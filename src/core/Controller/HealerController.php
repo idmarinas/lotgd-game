@@ -15,9 +15,9 @@ namespace Lotgd\Core\Controller;
 
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Http\Response as HttpResponse;
 use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
-use Lotgd\Core\Tool\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,22 +27,129 @@ class HealerController extends AbstractController
 {
     private $dispatcher;
     private $log;
-    private $dateTime;
     private $navigation;
+    private $response;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, Log $log, DateTime $dateTime, Navigation $navigation)
+    public function __construct(EventDispatcherInterface $eventDispatcher, Log $log, Navigation $navigation, HttpResponse $response)
     {
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
-        $this->dateTime   = $dateTime;
         $this->navigation = $navigation;
+        $this->response   = $response;
     }
 
-    public function index(array $params): Response
+    public function index(Request $request): Response
     {
         global $session;
 
-        $this->dateTime->checkDay();
+        // Don't hook on to this text for your standard modules please, use "healer" instead.
+        // This hook is specifically to allow modules that do other healers to create ambience.
+        $args = new GenericEvent(null, ['textDomain' => 'page_healer', 'textDomainNavigation' => 'navigation_healer']);
+        $this->dispatcher->dispatch($args, Events::PAGE_HEALER_PRE);
+        $result               = modulehook('healer-text-domain', $args->getArguments());
+        $textDomain           = $result['textDomain'];
+        $textDomainNavigation = $result['textDomainNavigation'];
+        unset($result);
+
+        //-- Init page
+        $this->response->pageTitle('title', [], $textDomain);
+
+        //-- Calculate cost for healing
+        $cost = log($session['user']['level']) * (($session['user']['maxhitpoints'] - $session['user']['hitpoints']) + 10);
+        $args = new GenericEvent(null, ['alterpct' => 1.0, 'cost' => $cost]);
+        $this->dispatcher->dispatch($args, Events::PAGE_HEALER_MULTIPLY);
+        $result = modulehook('healmultiply', $args->getArguments());
+        $cost   = round($result['alterpct'] * $result['cost'], 0);
+
+        $params = [
+            'textDomain' => $textDomain,
+            'healCost'   => $cost,
+        ];
+
+        $op     = (string) $request->query->get('op', '');
+        $method = method_exists($this, $op) ? $op : 'enter';
+        $return = (string) $request->query->get('return');
+
+        //-- Change text domain for navigation
+        $this->navigation->setTextDomain($textDomainNavigation);
+
+        $this->navigation->addHeader('category.return');
+
+        if ('' == $return)
+        {
+            $this->navigation->addNav('nav.return.forest', 'forest.php');
+            $this->navigation->villageNav();
+        }
+        elseif ('village.php' == $return)
+        {
+            $this->navigation->villageNav();
+        }
+        else
+        {
+            $this->navigation->addNav('nav.return.return', $return);
+        }
+
+        $params['return'] = $return;
+
+        return $this->{$method}($params, $request);
+    }
+
+    protected function buy(array $params, Request $request): Response
+    {
+        global $session;
+
+        $pct     = $request->query->getInt('pct');
+        $newcost = round($pct * $params['healCost'] / 100, 0);
+
+        $params['tpl']         = 'buy';
+        $params['newHealCost'] = $newcost;
+        $params['canHeal']     = false;
+
+        if ($session['user']['gold'] >= $newcost)
+        {
+            $diff = round(($session['user']['maxhitpoints'] - $session['user']['hitpoints']) * $pct / 100, 0);
+
+            $params['canHeal']    = true;
+            $params['healHealed'] = $diff;
+
+            $session['user']['gold'] -= $newcost;
+            $session['user']['hitpoints'] += $diff;
+
+            $this->log->debug('spent gold on healing', false, false, 'healing', $newcost);
+        }
+
+        return $this->renderHealer($params);
+    }
+
+    protected function companion(array $params, Request $request): Response
+    {
+        global $session, $companions;
+
+        $compcost = $request->query->getInt('compcost');
+
+        $params['tpl']         = 'companion';
+        $params['canHeal']     = false;
+        $params['newHealCost'] = $compcost;
+
+        if ($session['user']['gold'] >= $compcost)
+        {
+            $params['canHeal'] = true;
+
+            $name = stripslashes(rawurldecode($request->query->get('name')));
+
+            $session['user']['gold'] -= $compcost;
+            $companions[$name]['hitpoints'] = $companions[$name]['maxhitpoints'];
+
+            $params['companionName'] = $companions[$name]['name'];
+            $this->log->debug("spent gold on companion healing '{$name}'", false, false, 'healing-companion', $compcost);
+        }
+
+        return $this->renderHealer($params);
+    }
+
+    protected function enter(array $params): Response
+    {
+        global $session;
 
         $params['tpl']      = 'default';
         $params['needHeal'] = false;
@@ -64,59 +171,6 @@ class HealerController extends AbstractController
         return $this->renderHealer($params);
     }
 
-    public function buy(array $params, Request $request): Response
-    {
-        global $session;
-
-        $pct     = $request->query->getInt('pct');
-        $newcost = \round($pct * $params['healCost'] / 100, 0);
-
-        $params['tpl']         = 'buy';
-        $params['newHealCost'] = $newcost;
-        $params['canHeal']     = false;
-
-        if ($session['user']['gold'] >= $newcost)
-        {
-            $diff = \round(($session['user']['maxhitpoints'] - $session['user']['hitpoints']) * $pct / 100, 0);
-
-            $params['canHeal']    = true;
-            $params['healHealed'] = $diff;
-
-            $session['user']['gold'] -= $newcost;
-            $session['user']['hitpoints'] += $diff;
-
-            $this->log->debug('spent gold on healing', false, false, 'healing', $newcost);
-        }
-
-        return $this->renderHealer($params);
-    }
-
-    public function companion(array $params, Request $request): Response
-    {
-        global $session, $companions;
-
-        $compcost = $request->query->getInt('compcost');
-
-        $params['tpl']         = 'companion';
-        $params['canHeal']     = false;
-        $params['newHealCost'] = $compcost;
-
-        if ($session['user']['gold'] >= $compcost)
-        {
-            $params['canHeal'] = true;
-
-            $name = \stripslashes(\rawurldecode($request->query->get('name')));
-
-            $session['user']['gold'] -= $compcost;
-            $companions[$name]['hitpoints'] = $companions[$name]['maxhitpoints'];
-
-            $params['companionName'] = $companions[$name]['name'];
-            $this->log->debug("spent gold on companion healing '{$name}'", false, false, 'healing-companion', $compcost);
-        }
-
-        return $this->renderHealer($params);
-    }
-
     private function renderHealer(array $params): Response
     {
         global $session, $companions;
@@ -131,8 +185,8 @@ class HealerController extends AbstractController
                 $this->navigation->addNav('nav.heal.percent', "healer.php?op=buy&pct={$i}&return={$params['return']}", [
                     'params' => [
                         'percent' => $i / 100,
-                        'cost' => round($params['healCost'] * ($i / 100), 0)
-                    ]
+                        'cost'    => round($params['healCost'] * ($i / 100), 0),
+                    ],
                 ]);
             }
             $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_HEALER_POTION);
@@ -151,13 +205,13 @@ class HealerController extends AbstractController
 
             if ($points > 0)
             {
-                $name = rawurlencode($name);
+                $name     = rawurlencode($name);
                 $compcost = round(log($session['user']['level'] + 1) * ($points + 10) * 1.33);
                 $this->navigation->addNav('nav.heal.companion', "healer.php?op=companion&name={$name}&compcost={$compcost}&return={$params['return']}", [
                     'params' => [
                         'companionName' => $companion['name'],
-                        'cost' => $compcost
-                    ]
+                        'cost'          => $compcost,
+                    ],
                 ]);
             }
         }
@@ -166,6 +220,9 @@ class HealerController extends AbstractController
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_HEALER_POST);
         $params = modulehook('page-healer-tpl-params', $args->getArguments());
+
+        //-- Restore text domain for navigation
+        $this->navigation->setTextDomain();
 
         return $this->render('page/healer.html.twig', $params);
     }
