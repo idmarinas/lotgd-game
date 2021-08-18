@@ -25,6 +25,7 @@ commentary:
     charsLeft: 'You have %s characters left.'
     status: # This is optional
         game: 'Message of the Game Master'
+        grem: 'Message deleted by the author'
         you: "It's a comment from you."
         afk: 'Away from Keyboard'
         nearby: 'Nearby'
