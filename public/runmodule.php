@@ -14,7 +14,7 @@ $admin      = (bool) \LotgdRequest::getQuery('admin');
 $controller = (string) \LotgdRequest::getQuery('controller', '');
 $method     = (string) \LotgdRequest::getQuery('method', '');
 
-//-- For migrating modules to bundles (Temporal)
+//-- For migrating modules to bundles
 if ( ! $module && $controller && class_exists($controller))
 {
     $ctrl = \LotgdKernel::get($controller);
