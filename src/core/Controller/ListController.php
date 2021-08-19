@@ -13,10 +13,11 @@
 
 namespace Lotgd\Core\Controller;
 
-use Lotgd\Core\Repository\UserRepository;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Http\Response as HttpResponse;
 use Lotgd\Core\Navigation\Navigation;
+use Lotgd\Core\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,34 +31,84 @@ class ListController extends AbstractController
     /** @var \Lotgd\Core\Repository\UserRepository */
     private $repository;
     private $navigation;
+    private $response;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher, Navigation $navigation)
+    public function __construct(EventDispatcherInterface $eventDispatcher, Navigation $navigation, HttpResponse $response)
     {
         $this->dispatcher = $eventDispatcher;
         $this->navigation = $navigation;
+        $this->response   = $response;
     }
 
     public function index(Request $request): Response
     {
+        global $session;
+
+        //-- Init page
+        $this->response->pageTitle('title', [], 'page_list');
+
+        if ($session['user']['loggedin'])
+        {
+            if ($session['user']['alive'])
+            {
+                $this->navigation->villageNav();
+            }
+            else
+            {
+                $this->navigation->addNav('list.nav.graveyard', 'graveyard.php');
+            }
+
+            $this->navigation->addNav('list.nav.online', 'list.php');
+            $this->navigation->addNav('list.nav.full', 'list.php?page=1');
+
+            if ($session['user']['clanid'] > 0)
+            {
+                $this->navigation->addNav('Online Clan Members', 'list.php?op=clan');
+
+                if ($session['user']['alive'])
+                {
+                    $this->navigation->addNav('Clan Hall', 'clan.php');
+                }
+            }
+        }
+        else
+        {
+            $this->navigation->addHeader('common.category.login');
+            $this->navigation->addNav('common.nav.login', 'home.php');
+            $this->navigation->addNav('list.nav.online', 'list.php');
+            $this->navigation->addNav('list.nav.full', 'list.php?page=1');
+        }
+
+        $op   = $request->query->get('op');
+        $page = $request->query->getInt('page');
+        $method = method_exists($this, $op) ? $op : 'page';
+
+        if ( ! $page && '' == $op)
+        {
+            $method = 'enter';
+        }
+
+        return $this->{$method}([], $request);
+    }
+
+    protected function enter(array $params, Request $request): Response
+    {
         $search = (string) $request->request->getAlnum('name', '');
-        $params = [];
 
         $query = $this->queryList($search);
         $query->andWhere('u.loggedin = 1');
 
         $result = $this->getRepository()->getPaginator($query, 1, self::ITEM_PER_PAGE);
 
-        $params = [
-            'title'  => ['title' => 'list.warriors.online', 'params' => ['n' => $result->getTotalItemCount()]],
-            'result' => $result,
-        ];
+        $params['title'] = ['title' => 'list.warriors.online', 'params' => ['n' => $result->getTotalItemCount()]];
+        $params['result'] = $result;
 
         $this->navigation->pagination($result, 'list.php');
 
         return $this->renderList($params);
     }
 
-    public function clan(Request $request): Response
+    protected function clan(array $params, Request $request): Response
     {
         global $session;
 
@@ -72,27 +123,23 @@ class ListController extends AbstractController
         $result = $this->getRepository()->getPaginator($query, $page, self::ITEM_PER_PAGE);
         $this->navigation->pagination($result, 'list.php');
 
-        $params = [
-            'title' => ['title' => 'list.clan.online', 'params' => ['n' => $result->getTotalItemCount()]],
-        ];
+        $params['title'] = ['title' => 'list.clan.online', 'params' => ['n' => $result->getTotalItemCount()]];
 
         return $this->renderList($params);
     }
 
-    public function page(Request $request): Response
+    protected function page(array $params, Request $request): Response
     {
-        $page   = (int) $request->query->getInt('page');
-        $search = (string) $request->request->getAlnum('name', '');
+        $page   = $request->query->getInt('page');
+        $search = $request->request->getAlnum('name', '');
 
         $query  = $this->queryList($search);
         $result = $this->getRepository()->getPaginator($query, $page, self::ITEM_PER_PAGE);
 
-        $params = [
-            'title' => ['title' => 'list.warriors.singlepage'],
-            'result' => $result,
-        ];
+        $params['title'] = ['title' => 'list.warriors.singlepage'];
+        $params['result'] = $result;
 
-        if ($search)
+        if ( ! empty($search))
         {
             $params['title'] = ['title' => 'list.warriors.search', 'params' => [
                 'n'      => $result->getTotalItemCount(),
@@ -129,7 +176,7 @@ class ListController extends AbstractController
             ->addOrderBy('u.login', 'ASC')
         ;
 
-        if ($search)
+        if ( ! empty($search))
         {
             $query->andWhere('c.name LIKE :name')
                 ->setParameter('name', "%{$search}%")
