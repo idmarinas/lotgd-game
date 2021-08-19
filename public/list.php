@@ -7,6 +7,7 @@
 define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
+
 ($session['user']['loggedin'] ?? false) && \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
 //-- Init page
@@ -14,9 +15,6 @@ require_once 'common.php';
 
 //-- Call controller
 \LotgdResponse::callController(\Lotgd\Core\Controller\ListController::class);
-
-//-- Finalize page
-\LotgdResponse::pageEnd();
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
