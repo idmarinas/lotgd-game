@@ -14,7 +14,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :cyclone: CHANGES
 
 -   **Changes in some files in `public/` folder**
-    -   I reduce code in this pages to this code:
+    -   I have reduced the code of these pages to this code:
         ```php
         require_once 'common.php';
 
