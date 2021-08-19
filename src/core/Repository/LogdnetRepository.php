@@ -13,16 +13,28 @@
 
 namespace Lotgd\Core\Repository;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping;
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
+use Lotgd\Core\Entity\Logdnet;
 use Lotgd\Core\Installer\Pattern\Version;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Tracy\Debugger;
 
-class LogdnetRepository extends DoctrineRepository
+class LogdnetRepository extends ServiceEntityRepository
 {
+    use EntityRepositoryTrait;
+
+    private $cache;
+
+    public function __construct(ManagerRegistry $registry, CacheInterface $cache)
+    {
+        parent::__construct($registry, Logdnet::class);
+
+        $this->cache = $cache;
+    }
+
     /**
      * Delete servers older than two weeks.
      */
@@ -91,7 +103,7 @@ class LogdnetRepository extends DoctrineRepository
 
         try
         {
-            return \LotgdCache::get('logdnet-repository-'.__METHOD__, function (ItemInterface $item) use ($query)
+            return $this->cache->get('logdnet-repository-'.__METHOD__, function (ItemInterface $item) use ($query)
             {
                 $item->expiresAfter(1800); //-- Cache 1800 seconds (30 mins)
 
@@ -104,7 +116,7 @@ class LogdnetRepository extends DoctrineRepository
 
                 $result = $this->applyLogdnetBans($result);
 
-                \usort($result, [$this, 'lotgdSort']);
+                usort($result, [$this, 'lotgdSort']);
 
                 return $result;
             });
@@ -119,7 +131,7 @@ class LogdnetRepository extends DoctrineRepository
 
     private function applyLogdnetBans($logdnet)
     {
-        $repository = $this->getDoctrine()->getRepository('LotgdCore:Logdnetbans');
+        $repository = $this->_em->getRepository('LotgdCore:Logdnetbans');
         $entities   = $repository->findAll();
 
         foreach ($entities as $ban)
@@ -127,7 +139,7 @@ class LogdnetRepository extends DoctrineRepository
             foreach ($logdnet as $key => $net)
             {
                 $text = $ban->getBanvalue();
-                if (\preg_match("/{$text}/i", $net[$ban->getBantype()]))
+                if (preg_match("/{$text}/i", $net[$ban->getBantype()]))
                 {
                     unset($logdnet[$key]);
                 }
@@ -139,20 +151,21 @@ class LogdnetRepository extends DoctrineRepository
 
     private function lotgdSort($a, $b)
     {
-        $official_prefixes = (new class() {
+        $official_prefixes = (new class()
+        {
             use Version;
         })->getFullListOfVersion();
 
         unset($official_prefixes['Clean Install']);
-        $official_prefixes = \array_keys($official_prefixes);
+        $official_prefixes = array_keys($official_prefixes);
 
-        $aver = \strtolower(\str_replace(' ', '', $a['version']));
-        $bver = \strtolower(\str_replace(' ', '', $b['version']));
+        $aver = strtolower(str_replace(' ', '', $a['version']));
+        $bver = strtolower(str_replace(' ', '', $b['version']));
 
         // Okay, if $a and $b are the same version, use the priority
         // This is true whether or not they are the official version or not.
         // We bubble the official version to the top below.
-        if (0 == \strcmp($aver, $bver))
+        if (0 == strcmp($aver, $bver))
         {
             if ($a['priority'] == $b['priority'])
             {
@@ -163,11 +176,11 @@ class LogdnetRepository extends DoctrineRepository
         }
 
         // Unknown versions are always worse than non-unknown
-        if (0 == \strcmp($aver, 'unknown') && 0 != \strcmp($bver, 'unknown'))
+        if (0 == strcmp($aver, 'unknown') && 0 != strcmp($bver, 'unknown'))
         {
             return 1;
         }
-        elseif (0 == \strcmp($bver, 'unknown') && 0 != \strcmp($aver, 'unknown'))
+        elseif (0 == strcmp($bver, 'unknown') && 0 != strcmp($aver, 'unknown'))
         {
             return -1;
         }
@@ -178,12 +191,12 @@ class LogdnetRepository extends DoctrineRepository
 
         foreach ($official_prefixes as $index => $value)
         {
-            if (0 == \strncmp($aver, $value, \strlen($value)) && 10000 == $costa)
+            if (0 == strncmp($aver, $value, \strlen($value)) && 10000 == $costa)
             {
                 $costa = $index;
             }
 
-            if (0 == \strncmp($bver, $value, \strlen($value)) && 10000 == $costb)
+            if (0 == strncmp($bver, $value, \strlen($value)) && 10000 == $costb)
             {
                 $costb = $index;
             }
@@ -192,7 +205,7 @@ class LogdnetRepository extends DoctrineRepository
         // If both are the same prefix (or no prefix), just strcmp.
         if ($costa == $costb)
         {
-            return \strcmp($aver, $bver);
+            return strcmp($aver, $bver);
         }
 
         return ($costa < $costb) ? -1 : 1;
