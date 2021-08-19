@@ -14,11 +14,12 @@
 namespace Lotgd\Core\Controller;
 
 use Lotgd\Core\Combat\Buffer;
-use Lotgd\Core\Repository\CompanionsRepository;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Http\Response as HttpResponse;
 use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
+use Lotgd\Core\Repository\CompanionsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,25 +32,64 @@ class MercenaryCampController extends AbstractController
     private $repository;
     private $log;
     private $buffs;
+    private $response;
 
-    public function __construct(Navigation $navigation, EventDispatcherInterface $eventDispatcher, Log $log, Buffer $buffs)
-    {
+    public function __construct(
+        Navigation $navigation,
+        EventDispatcherInterface $eventDispatcher,
+        Log $log,
+        Buffer $buffs,
+        HttpResponse $response
+    ) {
         $this->navigation = $navigation;
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
-        $this->buffs = $buffs;
+        $this->buffs      = $buffs;
+        $this->response   = $response;
     }
 
-    public function heal(array $params, Request $request): Response
+    public function index(Request $request): Response
+    {
+        // Don't hook on to this text for your standard modules please, use "inn" instead.
+        // This hook is specifically to allow modules that do other inns to create ambience.
+        $args = new GenericEvent(null, ['textDomain' => 'page_mercenarycamp', 'textDomainNavigation' => 'navigation_mercenarycamp']);
+        $this->dispatcher->dispatch($args, Events::PAGE_MERCENARY_CAMP_PRE);
+        $result               = modulehook('mercenarycamp-text-domain', $args->getArguments());
+        $textDomain           = $result['textDomain'];
+        $textDomainNavigation = $result['textDomainNavigation'];
+        unset($result);
+
+        //-- Change text domain for navigation
+        $this->navigation->setTextDomain($textDomainNavigation);
+
+        $this->navigation->addHeader('category.navigation');
+
+        //-- Init page
+        $this->response->pageTitle('title', [], $textDomain);
+
+        $params = [
+            'textDomain' => $textDomain,
+        ];
+
+        $op     = (string) $request->query->get('op');
+        $method = method_exists($this, $op) ? $op : 'enter';
+
+        $this->navigation->addHeader('category.navigation');
+        $this->navigation->villageNav();
+
+        return $this->{$method}($params, $request);
+    }
+
+    protected function heal(array $params, Request $request): Response
     {
         global $session, $companions;
 
         $params['tpl'] = 'heal';
 
-        $name = \stripslashes(\rawurldecode($request->query->get('name')));
+        $name = stripslashes(rawurldecode($request->query->get('name')));
 
         $pointsToHeal = $companions[$name]['maxhitpoints'] - $companions[$name]['hitpoints'];
-        $costToHeal   = \round(\log($session['user']['level'] + 1) * ($pointsToHeal + 10) * 1.33);
+        $costToHeal   = round(log($session['user']['level'] + 1) * ($pointsToHeal + 10) * 1.33);
 
         $params['companionHealed'] = false;
         if ($session['user']['gold'] >= $costToHeal)
@@ -73,7 +113,7 @@ class MercenaryCampController extends AbstractController
         return $this->renderCamp($params);
     }
 
-    public function buy(array $params, Request $request): Response
+    protected function buy(array $params, Request $request): Response
     {
         global $session;
 
@@ -111,7 +151,7 @@ class MercenaryCampController extends AbstractController
         return $this->renderCamp($params);
     }
 
-    public function index(array $params, Request $request): Response
+    protected function enter(array $params, Request $request)
     {
         global $session, $companions;
 
@@ -161,6 +201,9 @@ class MercenaryCampController extends AbstractController
         $this->dispatcher->dispatch($args, Events::PAGE_MERCENARY_CAMP_POST);
         $params = modulehook('page-mercenarycamp-tpl-params', $args->getArguments());
 
+        //-- Restore text domain for navigation
+        $this->navigation->setTextDomain();
+
         return $this->render('page/mercenarycamp.html.twig', $params);
     }
 
@@ -197,7 +240,7 @@ class MercenaryCampController extends AbstractController
             if ($pointsToHeal > 0)
             {
                 $healable   = true;
-                $costToHeal = \round(\log($session['user']['level'] + 1) * ($pointsToHeal + 10) * 1.33);
+                $costToHeal = round(log($session['user']['level'] + 1) * ($pointsToHeal + 10) * 1.33);
 
                 $nav  = 'nav.companion.heal.not.have';
                 $link = '';
@@ -205,7 +248,7 @@ class MercenaryCampController extends AbstractController
                 if ($session['user']['gold'] >= $costToHeal)
                 {
                     $nav  = 'nav.companion.heal.have';
-                    $link = 'mercenarycamp.php?op=heal&name='.\rawurlencode($name);
+                    $link = 'mercenarycamp.php?op=heal&name='.rawurlencode($name);
                 }
 
                 $this->navigation->addNav($nav, $link, [
