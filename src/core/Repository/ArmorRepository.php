@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Repository;
 
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Tracy\Debugger;
 
 class ArmorRepository extends DoctrineRepository
 {

@@ -52,6 +52,46 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
 
+# Version: 5.5.6 
+
+### :cyclone: CHANGES
+
+-   Nothing
+
+### :star: FEATURES
+
+-   Nothing
+
+### :fire: DEPRECATED
+
+-   Nothing
+
+### :wrench: FIXES
+
+-   **src/core/Repository/LogdnetRepository.php** 
+    -   Fix error, method `getDoctrine` not exist in class
+-   **src/core/Repository/AccountsOutputRepository.php** Fix error, Import Tracy Debugger class
+-   **src/core/Repository/ArmorRepository.php** Fix error, Import Tracy Debugger class
+
+### :x: REMOVES
+
+-   Nothing
+
+### :notebook: NOTES
+
+-   **Important**:
+    -   :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
+    -   :warning: Avoid, as far as possible, using static classes (e.g. LotgdSetting, Doctrine, LotgdTranslation...) as these classes will be deleted in a future version. Use autowire, dependency injection when possible.
+-   **Upgrade/Install for version 5.0.0 and up**
+    -   First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
+    -   If have problems:
+        -   Read info in `storage/log/tracy/*` files, and see the problem.
+        -   Read info in `var/log/*` files, and see the problem.
+        -   Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS distribution) in your webserver.
+        -   If you can't solve the problem go to: [Repository issues](https://github.com/idmarinas/lotgd-game/issues)
+-   **composer.json** Updated/Added/Deleted dependencies
+-   **package.json** Updated/Added/Deleted dependencies
+
 # Version: 5.5.5 
 
 ### :cyclone: CHANGES
