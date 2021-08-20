@@ -17,6 +17,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Commentary as EntityCommentary;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Tracy\Debugger;
 
 class CommentaryRepository extends ServiceEntityRepository implements RepositoryBackupInterface
@@ -24,9 +25,13 @@ class CommentaryRepository extends ServiceEntityRepository implements Repository
     use Commentary\Backup;
     use EntityRepositoryTrait;
 
-    public function __construct(ManagerRegistry $registry)
+    private $translator;
+
+    public function __construct(ManagerRegistry $registry, TranslatorInterface $translator)
     {
         parent::__construct($registry, EntityCommentary::class);
+
+        $this->translator = $translator;
     }
 
     /**
@@ -81,11 +86,11 @@ class CommentaryRepository extends ServiceEntityRepository implements Repository
                 $comment->setHiddenByName($session['user']['name']);
 
                 //-- Hide message
-                $message = \LotgdTranslator::t('comment.moderation.hide', ['name' => $session['user']['name']], 'app_commentary');
+                $message = $this->translator->trans('comment.moderation.hide', ['name' => $session['user']['name']], 'app_commentary');
                 //--  Unhide message
                 if ($hiddenOld && ! $hiddenNew)
                 {
-                    $message = \LotgdTranslator::t('comment.moderation.unhide', ['name' => $session['user']['name']], 'app_commentary');
+                    $message = $this->translator->trans('comment.moderation.unhide', ['name' => $session['user']['name']], 'app_commentary');
                 }
 
                 $comment->setHiddenComment($message);
