@@ -102,7 +102,7 @@ class CharactersRepository extends DoctrineRepository
 
         try
         {
-            return $query->select('u.name AS creaturename', 'u.level AS creaturelevel', 'u.weapon AS creatureweapon', 'u.dragonkills', 'u.gold AS creaturegold', 'u.experience AS creatureexp', 'u.maxhitpoints AS creaturemaxhealth', 'u.hitpoints AS creaturehealth', 'u.attack AS creatureattack', 'u.defense AS creaturedefense', 'u.location', 'u.alive', 'u.pvpflag', 'u.boughtroomtoday', 'u.race')
+            return $query->select('u.id AS character_id', 'u.name AS creaturename', 'u.level AS creaturelevel', 'u.weapon AS creatureweapon', 'u.dragonkills', 'u.gold AS creaturegold', 'u.experience AS creatureexp', 'u.maxhitpoints AS creaturemaxhealth', 'u.hitpoints AS creaturehealth', 'u.attack AS creatureattack', 'u.defense AS creaturedefense', 'u.location', 'u.alive', 'u.pvpflag', 'u.boughtroomtoday', 'u.race')
                 ->addSelect('a.loggedin', 'a.laston', 'a.acctid')
                 ->leftJoin('LotgdCore:Accounts', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.acct'))
                 ->where('u.id = :char')

@@ -1,11 +1,94 @@
+# History of changes for IDMarinas Edition
+
+This is a list of changes made in versions __5.*.*__
+
+
 # Changes of LoTGD IDMarinas Edition
 
 Visit the [Wiki](https://github.com/idmarinas/lotgd-game/wiki) for more details.  
 Visit the [Documentation](https://idmarinas.github.io/lotgd-game/) for more details.  
 Visit the [README](https://github.com/idmarinas/lotgd-game/blob/migration/README.md).   
+Visit **_DEV_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-dev.md)  
 Visit **_V2_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V2.md)  
 Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V3.md)  
 Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V4.md)  
+
+# Version: 5.5.6 
+
+### :cyclone: CHANGES
+
+-   Nothing
+
+### :star: FEATURES
+
+-   Nothing
+
+### :fire: DEPRECATED
+
+-   Nothing
+
+### :wrench: FIXES
+
+-   **src/core/Repository/LogdnetRepository.php** 
+    -   Fix error, method `getDoctrine` not exist in class
+
+### :x: REMOVES
+
+-   Nothing
+
+### :notebook: NOTES
+
+-   **Important**:
+    -   :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
+    -   :warning: Avoid, as far as possible, using static classes (e.g. LotgdSetting, Doctrine, LotgdTranslation...) as these classes will be deleted in a future version. Use autowire, dependency injection when possible.
+-   **Upgrade/Install for version 5.0.0 and up**
+    -   First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
+    -   If have problems:
+        -   Read info in `storage/log/tracy/*` files, and see the problem.
+        -   Read info in `var/log/*` files, and see the problem.
+        -   Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS distribution) in your webserver.
+        -   If you can't solve the problem go to: [Repository issues](https://github.com/idmarinas/lotgd-game/issues)
+-   **composer.json** Updated/Added/Deleted dependencies
+-   **package.json** Updated/Added/Deleted dependencies
+
+# Version: 5.5.5 
+
+### :cyclone: CHANGES
+
+-   Nothing
+
+### :star: FEATURES
+
+-   Nothing
+
+### :fire: DEPRECATED
+
+-   Nothing
+
+### :wrench: FIXES
+
+-   **src/core/Output/Commentary.php** 
+    -   Fix error, now pass array to modulehook `moderate-comment-sections`
+    -   Fix error, substr length is 2 and not 1 in `processSpecialCommands` for `::` command
+
+### :x: REMOVES
+
+-   Nothing
+
+### :notebook: NOTES
+
+-   **Important**:
+    -   :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
+    -   :warning: Avoid, as far as possible, using static classes (e.g. LotgdSetting, Doctrine, LotgdTranslation...) as these classes will be deleted in a future version. Use autowire, dependency injection when possible.
+-   **Upgrade/Install for version 5.0.0 and up**
+    -   First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
+    -   If have problems:
+        -   Read info in `storage/log/tracy/*` files, and see the problem.
+        -   Read info in `var/log/*` files, and see the problem.
+        -   Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS distribution) in your webserver.
+        -   If you can't solve the problem go to: [Repository issues](https://github.com/idmarinas/lotgd-game/issues)
+-   **composer.json** Updated/Added/Deleted dependencies
+-   **package.json** Updated/Added/Deleted dependencies
 
 # Version: 5.5.4 
 
@@ -23,9 +106,22 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   **lib/pvpsupport.php** in `setup_pvp_target` function
-    -   Fix error with translation key (now use correct)
-    -   Not need extractEntity is an array
+-   **lib/pvpsupport.php** 
+    -   Function: `setup_pvp_target`
+        -   Fix error with translation key (now use correct)
+        -   Not need extractEntity is an array
+        -   Fix error with compare to dates
+    -   Function: `pvpvictory` and `pvpdefeat`
+        -   Fixed error with translation keys
+    -   Function: `pvpvictory`
+        -   Now select correct max experience to lost
+-   **src/core/Repository/CharactersRepository.php** Function `getCharacterForPvp` Fix error, now add `character_id` to array
+-   **public/train.php** Fixed error by not allowed multiple challange to master when allow by config.
+-   **public/referers.php** Delete `require_once 'lib/dhms.php';` file not exists.
+-   **public/debug.php** Delete `require_once 'lib/dhms.php';` file not exists.
+-   **public/healer.php** Fix error, now pass var `params` to controller.
+-   **src/core/Controller/HealerController.php** Use correct format for access value of index of array
+-   **translations/en/partial_taunt+intl-icu.en.yaml** Fix error with var names
 
 ### :x: REMOVES
 

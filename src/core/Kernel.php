@@ -24,11 +24,11 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    public const VERSION             = '5.5.4 IDMarinas Edition'; // Version of game in public display format.
-    public const VERSION_ID          = 50504; // Identify version of game in numeric format.
+    public const VERSION             = '5.5.6 IDMarinas Edition'; // Version of game in public display format.
+    public const VERSION_ID          = 50506; // Identify version of game in numeric format.
     public const MAJOR_VERSION       = 5;
     public const MINOR_VERSION       = 5;
-    public const RELEASE_VERSION     = 4;
+    public const RELEASE_VERSION     = 6;
     public const EXTRA_VERSION       = '';
     public const VERSION_NUMBER      = self::VERSION_ID; //-- Alias of VERSION_ID
     public const FILE_DB_CONNECT     = 'config/autoload/local/dbconnect.php'; // The file where the database connection data is stored.
@@ -44,7 +44,7 @@ class Kernel extends BaseKernel
      *
      * @var string
      */
-    public const COPYRIGHT = 'Game Design and Code: Copyright &copy; 2002-2005, Eric Stevens & JT Traub, &copy; 2006-2007, Dragonprime Development Team, &copy; 2015-2019 IDMarinas remodelling and enhancing';
+    public const COPYRIGHT = 'Game Design and Code: Copyright &copy; 2002-2005, Eric Stevens & JT Traub, &copy; 2006-2007, Dragonprime Development Team, &copy; 2015-2021 IDMarinas remodelling and enhancing';
 
     /**
      * This series of scripts (collectively known as Legend of the Green Dragon or LotGD) is licensed according to the Creating Commons Attribution
