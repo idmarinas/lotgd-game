@@ -119,7 +119,7 @@ class LogdnetRepository extends DoctrineRepository
 
     private function applyLogdnetBans($logdnet)
     {
-        $repository = $this->getDoctrine()->getRepository('LotgdCore:Logdnetbans');
+        $repository = $this->_em->getRepository('LotgdCore:Logdnetbans');
         $entities   = $repository->findAll();
 
         foreach ($entities as $ban)
