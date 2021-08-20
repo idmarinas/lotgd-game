@@ -13,11 +13,21 @@
 
 namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
+use Lotgd\Core\Entity\Clans;
 use Tracy\Debugger;
 
-class ClansRepository extends DoctrineRepository
+class ClansRepository extends ServiceEntityRepository
 {
+    use EntityRepositoryTrait;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Clans::class);
+    }
+
     /**
      * Get list of clans for apply to enter.
      */

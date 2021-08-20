@@ -13,14 +13,23 @@
 
 namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
+use Lotgd\Core\Entity\Avatar as AvatarEntity;
 use Tracy\Debugger;
 
-class AvatarRepository extends DoctrineRepository
+class AvatarRepository extends ServiceEntityRepository
 {
     use Avatar\Bio;
     use Avatar\Clan;
     use Avatar\Setting;
+    use EntityRepositoryTrait;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, AvatarEntity::class);
+    }
 
     /**
      * Get character's name from an account ID.
@@ -74,7 +83,7 @@ class AvatarRepository extends DoctrineRepository
                 ->leftJoin('LotgdCore:Avatar', 'c', 'with', $qb->expr()->eq('c.id', 'u.avatar'))
                 ->where('u.login LIKE :name AND u.acctid NOT IN (:acct)')
                 ->setParameter('name', "%{$name}%")
-                ->setParameter('acct', \array_map(function ($val)
+                ->setParameter('acct', array_map(function ($val)
                 {
                     return $val['acctid'];
                 }, $character))
@@ -83,7 +92,7 @@ class AvatarRepository extends DoctrineRepository
                 ->getArrayResult()
             ;
 
-            return \array_merge($character, $account);
+            return array_merge($character, $account);
         }
         catch (\Throwable $th)
         {

@@ -13,13 +13,21 @@
 
 namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Commentary as EntityCommentary;
 use Tracy\Debugger;
 
-class CommentaryRepository extends DoctrineRepository implements RepositoryBackupInterface
+class CommentaryRepository extends ServiceEntityRepository implements RepositoryBackupInterface
 {
     use Commentary\Backup;
+    use EntityRepositoryTrait;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, EntityCommentary::class);
+    }
 
     /**
      * Save comment to data base.
@@ -52,7 +60,7 @@ class CommentaryRepository extends DoctrineRepository implements RepositoryBacku
 
         try
         {
-            $keys = \array_keys($post);
+            $keys = array_keys($post);
 
             $result = $this->findBy(['id' => $keys]);
 

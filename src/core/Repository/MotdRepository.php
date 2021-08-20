@@ -13,13 +13,22 @@
 
 namespace Lotgd\Core\Repository;
 
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
-use Lotgd\Core\Entity as LotgdEntity;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
+use Lotgd\Core\Entity\Motd;
 use Tracy\Debugger;
 
-class MotdRepository extends DoctrineRepository
+class MotdRepository extends ServiceEntityRepository
 {
+    use EntityRepositoryTrait;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Motd::class);
+    }
+
     /**
      * Get last MOTD.
      */
@@ -45,7 +54,7 @@ class MotdRepository extends DoctrineRepository
 
             $motd = $result[0][0];
             unset($result[0][0]);
-            $motd = \array_merge($motd, $result[0]);
+            $motd = array_merge($motd, $result[0]);
 
             //-- Is a poll
             if ($motd['motdtype'])
@@ -92,7 +101,7 @@ class MotdRepository extends DoctrineRepository
             $motd = $result[0][0];
             unset($result[0][0]);
 
-            return \array_merge($motd, $result[0]);
+            return array_merge($motd, $result[0]);
         }
         catch (\Throwable $th)
         {
@@ -140,11 +149,11 @@ class MotdRepository extends DoctrineRepository
 
         if ($motd['pollResult']['opt'] ?? false)
         {
-            $motd['pollResult']['totalVotes'] = \array_sum($motd['pollResult']['opt']);
+            $motd['pollResult']['totalVotes'] = array_sum($motd['pollResult']['opt']);
         }
 
         //-- Unserialize information
-        $motd['motdbody'] = \unserialize($motd['motdbody']);
+        $motd['motdbody'] = unserialize($motd['motdbody']);
 
         return $motd;
     }

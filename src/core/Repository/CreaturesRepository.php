@@ -13,11 +13,21 @@
 
 namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
+use Lotgd\Core\Entity\Creatures;
 use Tracy\Debugger;
 
-class CreaturesRepository extends DoctrineRepository
+class CreaturesRepository extends ServiceEntityRepository
 {
+    use EntityRepositoryTrait;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Creatures::class);
+    }
+
     /**
      * Find one creature by id.
      * Creature is translated.

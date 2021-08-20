@@ -13,12 +13,21 @@
 
 namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
+use Lotgd\Core\Entity\Modules;
 use Tracy\Debugger;
 
-class ModulesRepository extends DoctrineRepository
+class ModulesRepository extends ServiceEntityRepository
 {
     use Module\Setting;
+    use EntityRepositoryTrait;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Modules::class);
+    }
 
     /**
      * Restart filemoddate to default value.

@@ -13,11 +13,21 @@
 
 namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
+use Lotgd\Core\Entity\AccountsEverypage;
 use Tracy\Debugger;
 
-class AccountsEverypageRepository extends DoctrineRepository
+class AccountsEverypageRepository extends ServiceEntityRepository
 {
+    use EntityRepositoryTrait;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, AccountsEverypage::class);
+    }
+
     /**
      * Get stats of page gen.
      */

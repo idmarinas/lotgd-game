@@ -13,14 +13,23 @@
 
 namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
+use Lotgd\Core\Entity\Cronjob;
 use Tracy\Debugger;
 
-class CronjobRepository extends DoctrineRepository
+class CronjobRepository extends ServiceEntityRepository
 {
     use Avatar\Bio;
     use Avatar\Clan;
     use Avatar\Setting;
+    use EntityRepositoryTrait;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Cronjob::class);
+    }
 
     /**
      * Get character's name from an account ID.

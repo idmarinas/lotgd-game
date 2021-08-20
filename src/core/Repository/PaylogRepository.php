@@ -13,11 +13,21 @@
 
 namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
+use Lotgd\Core\Entity\Paylog;
 use Tracy\Debugger;
 
-class PaylogRepository extends DoctrineRepository
+class PaylogRepository extends ServiceEntityRepository
 {
+    use EntityRepositoryTrait;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Paylog::class);
+    }
+
     /**
      * Update process of date.
      */
@@ -82,10 +92,10 @@ class PaylogRepository extends DoctrineRepository
 
         try
         {
-            $month     = $month ?: \date('n');
-            $month     = \date('Y').'-'.$month;
+            $month     = $month ?: date('n');
+            $month     = date('Y').'-'.$month;
             $startDate = $month.'-01 00:00:00';
-            $endDate   = \date('Y-m-d H:i:s', \strtotime('+1 month', \strtotime($startDate)));
+            $endDate   = date('Y-m-d H:i:s', strtotime('+1 month', strtotime($startDate)));
 
             return $query->select('u.payid', 'u.info', 'u.response', 'u.txnid', 'u.amount', 'u.name', 'u.acctid', 'u.processed', 'u.filed', 'u.txfee', 'u.processdate')
                 ->addSelect('c.name')

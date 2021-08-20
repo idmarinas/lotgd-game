@@ -13,11 +13,20 @@
 
 namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
+use Lotgd\Core\Entity\News as NewsEntity;
 
-class NewsRepository extends DoctrineRepository implements RepositoryBackupInterface
+class NewsRepository extends ServiceEntityRepository implements RepositoryBackupInterface
 {
     use News\Backup;
+    use EntityRepositoryTrait;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, NewsEntity::class);
+    }
 
     /**
      * Delete a news by ID.

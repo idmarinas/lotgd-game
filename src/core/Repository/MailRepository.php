@@ -13,13 +13,22 @@
 
 namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
+use Lotgd\Core\Entity\Mail as MailEntity;
 use Tracy\Debugger;
 
-class MailRepository extends DoctrineRepository implements RepositoryBackupInterface
+class MailRepository extends ServiceEntityRepository implements RepositoryBackupInterface
 {
     use Mail\Backup;
     use Mail\Clan;
+    use EntityRepositoryTrait;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, MailEntity::class);
+    }
 
     /**
      * Get a count of see and unsee mail.

@@ -13,11 +13,21 @@
 
 namespace Lotgd\Core\Repository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
+use Lotgd\Core\Entity\AccountsOutput as AccountsOutputEntity;
+use Tracy\Debugger;
 
-class AccountsOutputRepository extends DoctrineRepository
+class AccountsOutputRepository extends ServiceEntityRepository
 {
     use AccountsOutput\Backup;
+    use EntityRepositoryTrait;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, AccountsOutputEntity::class);
+    }
 
     /**
      * Get output code for account.
