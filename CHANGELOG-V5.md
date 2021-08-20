@@ -31,6 +31,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 -   **src/core/Repository/LogdnetRepository.php** 
     -   Fix error, method `getDoctrine` not exist in class
+-   **src/core/Repository/AccountsOutputRepository.php** Fix error, Import Tracy Debugger class
+-   **src/core/Repository/ArmorRepository.php** Fix error, Import Tracy Debugger class
 
 ### :x: REMOVES
 
