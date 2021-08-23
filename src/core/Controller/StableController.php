@@ -16,6 +16,7 @@ namespace Lotgd\Core\Controller;
 use Lotgd\Core\Combat\Buffer;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Http\Response as HttpResponse;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
@@ -37,6 +38,7 @@ class StableController extends AbstractController
     private $buffs;
     private $settings;
     private $tool;
+    private $response;
 
     public function __construct(
         Navigation $navigation,
@@ -45,7 +47,8 @@ class StableController extends AbstractController
         Sanitize $sanitize,
         Buffer $buffs,
         Settings $settings,
-        Tool $tool
+        Tool $tool,
+        HttpResponse $response
     ) {
         $this->navigation = $navigation;
         $this->dispatcher = $eventDispatcher;
@@ -53,10 +56,71 @@ class StableController extends AbstractController
         $this->sanitize   = $sanitize;
         $this->buffs      = $buffs;
         $this->settings   = $settings;
-        $this->tool = $tool;
+        $this->tool       = $tool;
+        $this->response   = $response;
     }
 
-    public function buy(array $params, Request $request): Response
+    public function index(Request $request): Response
+    {
+        global $session;
+
+        // Don't hook on to this text for your standard modules please, use "stable" instead.
+        // This hook is specifically to allow modules that do other stables to create ambience.
+        $args = new GenericEvent(null, ['textDomain' => 'page_stables', 'textDomainNavigation' => 'navigation_stables']);
+        $this->dipatcher->dispatch($args, Events::PAGE_STABLES_PRE);
+        $result               = modulehook('stables-text-domain', $args->getArguments());
+        $textDomain           = $result['textDomain'];
+        $textDomainNavigation = $result['textDomainNavigation'];
+        unset($result);
+
+        $playermount = $this->tool->getMount($session['user']['hashorse']);
+
+        //-- Change text domain for navigation
+        $this->navigation->setTextDomain($textDomainNavigation);
+
+        //-- Init page
+        $this->response->pageTitle('title', [], $textDomain);
+
+        $this->navigation->addHeader('category.other');
+        $this->navigation->villageNav();
+
+        $repaygold = 0;
+        $repaygems = 0;
+        $grubprice = 0;
+
+        if ( ! empty($playermount))
+        {
+            $repaygold = round($playermount['mountcostgold'] * 2 / 3, 0);
+            $repaygems = round($playermount['mountcostgems'] * 2 / 3, 0);
+            $grubprice = round($session['user']['level'] * $playermount['mountfeedcost'], 0);
+        }
+
+        $params = [
+            'textDomain'   => $textDomain,
+            'barkeep'      => $this->settings->getSetting('barkeep', '`tCedrik`0'),
+            'userSex'      => $session['user']['sex'],
+            'player_mount' => $playermount,
+            'mountName'    => $playermount['mountname'] ?? '',
+            'confirm'      => 0,
+            'repaygems'    => $repaygems,
+            'repaygold'    => $repaygold,
+            'grubprice'    => $grubprice,
+        ];
+
+        $op     = (string) $request->query->get('op');
+        $method = method_exists($this, $op) ? $op : 'enter';
+
+        return $this->{$method}($params, $request);
+    }
+
+    protected function enter(array $params, Request $request): Response
+    {
+        $params['tpl'] = 'default';
+
+        return $this->renderStable($params);
+    }
+
+    protected function buy(array $params, Request $request): Response
     {
         global $session;
 
@@ -79,7 +143,7 @@ class StableController extends AbstractController
         return $this->renderStable($params);
     }
 
-    public function buyConfirm(array $params, Request $request): Response
+    protected function buyconfirm(array $params, Request $request): Response
     {
         global $session, $playermount;
 
@@ -144,7 +208,7 @@ class StableController extends AbstractController
         return $this->renderStable($params);
     }
 
-    public function sell(array $params): Response
+    protected function sell(array $params): Response
     {
         $this->navigation->addHeader('category.confirm.sell');
         $this->navigation->addNav('nav.yes', 'stables.php?op=confirmsell');
@@ -155,7 +219,7 @@ class StableController extends AbstractController
         return $this->renderStable($params);
     }
 
-    public function sellConfirm(array $params): Response
+    protected function sellconfirm(array $params): Response
     {
         global $session;
 
@@ -176,7 +240,7 @@ class StableController extends AbstractController
         return $this->renderStable($params);
     }
 
-    public function feed(array $params): Response
+    protected function feed(array $params): Response
     {
         global $session;
 
@@ -211,7 +275,7 @@ class StableController extends AbstractController
         return $this->renderStable($params);
     }
 
-    public function examine(array $params, Request $request): Response
+    protected function examine(array $params, Request $request): Response
     {
         $mountId = $request->query->getInt('id');
 
@@ -223,13 +287,6 @@ class StableController extends AbstractController
             $this->navigation->addHeader('category.new', ['params' => ['name' => $params['mount']['mountname']]]);
             $this->navigation->addNav('nav.buy', "stables.php?op=buymount&id={$params['mount']['mountid']}");
         }
-
-        return $this->renderStable($params);
-    }
-
-    public function index(array $params): Response
-    {
-        $params['tpl'] = 'default';
 
         return $this->renderStable($params);
     }
@@ -292,6 +349,9 @@ class StableController extends AbstractController
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_STABLES_POST);
         $params = modulehook('page-stables-tpl-params', $args->getArguments());
+
+        //-- Restore text domain for navigation
+        $this->navigation->setTextDomain();
 
         return $this->render('page/stables.html.twig', $params);
     }
