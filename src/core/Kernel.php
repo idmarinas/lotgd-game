@@ -24,11 +24,11 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    public const VERSION             = '5.5.6 IDMarinas Edition'; // Version of game in public display format.
-    public const VERSION_ID          = 50506; // Identify version of game in numeric format.
+    public const VERSION             = '5.5.7 IDMarinas Edition'; // Version of game in public display format.
+    public const VERSION_ID          = 50507; // Identify version of game in numeric format.
     public const MAJOR_VERSION       = 5;
     public const MINOR_VERSION       = 5;
-    public const RELEASE_VERSION     = 6;
+    public const RELEASE_VERSION     = 7;
     public const EXTRA_VERSION       = '';
     public const VERSION_NUMBER      = self::VERSION_ID; //-- Alias of VERSION_ID
     public const FILE_DB_CONNECT     = 'config/autoload/local/dbconnect.php'; // The file where the database connection data is stored.
