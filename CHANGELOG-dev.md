@@ -28,6 +28,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
         \LotgdResponse::pageEnd();
         ```
     -   _Note_: with this I'm preparing the Core to migrate it to a Symfony App (Routing)
+-   **Repository**: Now all class extends `Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository` and use dependency injection when is necesary.
 
 ### :star: FEATURES
 
