@@ -29,7 +29,9 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   **themes/LotgdTheme/templates/admin/page/donators.html.twig** Fix error with template path
+-   **themes/LotgdTheme/templates/admin/page/donators.html.twig** 
+    -   Fix error with template path
+    -   Fix error with template extension for partials
 
 ### :x: REMOVES
 
