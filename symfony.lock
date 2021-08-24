@@ -208,6 +208,9 @@
     "lemonphp/event": {
         "version": "v1.0.0"
     },
+    "lotgd-core/lodge-title-change-bundle": {
+        "version": "0.1.0"
+    },
     "macfja/tracy-doctrine-sql": {
         "version": "9999999-dev"
     },
