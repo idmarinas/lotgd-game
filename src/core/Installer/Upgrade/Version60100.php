@@ -29,4 +29,16 @@ class Version60100 extends InstallerAbstract
         $this->doctrine   = $doctrine;
         $this->translator = $translator;
     }
+
+    //-- Delete old files
+    public function step0(): bool
+    {
+        return $this->removeFiles([
+            $this->getProjectDir().'/lib/newday/db_recalc.php',
+            $this->getProjectDir().'/lib/newday/dragonpointspend.php',
+            $this->getProjectDir().'/lib/newday/newday.php',
+            $this->getProjectDir().'/lib/newday/setrace.php',
+            $this->getProjectDir().'/lib/newday/setspecialty.php',
+        ]);
+    }
 }
