@@ -38,6 +38,27 @@
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   Migrar los cronjob a comandos de consola
 -   Eliminar la dependencia de Jaxon-PHP usar Stimulus
+-   Crear un service para el newday runonce (generar un nuevo día)
+-   `dragonpoints` para los puntos de dragón asignados actualmente es un array serializado
+    Se registra los valores que se han aumentado al personaje mediante las iniciales del atributo.
+    ```php
+        $points = [
+            'str',
+            'con',
+            'int',
+            'ff',
+            'dex',
+            'str',
+        ];
+    ```
+    Pasarlo a una tabla independiente para registrar los valores que se aumentan del personaje.
+    ```
+        Posible estructura de la tabla
+        'attribute'  El atributo que se esta mejorando del personaje. Ejem: `strength`, siempre con el nombre que aparece en la tabla.
+        'value' Valor es la cantidad que se añade de la mejora, puede ser positivo o negativo 
+        'createAt' Fecha en la que se añadio esta mejora
+    ```
+
 -----
 -   Sustituir la función lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
