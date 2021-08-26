@@ -28,8 +28,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NewdayController extends AbstractController
 {
-    use newdayController\DragonPointSpendTrait;
-    use newdayController\NewDayTrait;
+    use NewdayController\DragonPointSpendTrait;
+    use NewdayController\NewDayTrait;
     use NewdayController\RecalculateDragonPointTrait;
     use NewdayController\SetRaceTrait;
     use NewdayController\SetSpecialtyTrait;
