@@ -163,7 +163,7 @@ class Response extends HttpResponse
      *
      * @param string $class  Fully Qualified Class Name
      * @param string $method Method to call of controller
-     * @param bool   $send   Send content and not add to response content
+     * @param bool   $send   Send content or add to response content
      */
     public function callController(string $class, string $method = 'index', bool $send = false): void
     {
@@ -175,7 +175,7 @@ class Response extends HttpResponse
 
         $response = $controller(...$arguments);
 
-        //-- If is a instance of RedirectResponse|BinaryFileResponse|JsonResponse send response no add content.
+        //-- If is a instance of RedirectResponse|BinaryFileResponse|JsonResponse send response.
         if (
             $send
             || $response instanceof RedirectResponse
