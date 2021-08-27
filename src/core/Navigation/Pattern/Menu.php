@@ -100,4 +100,32 @@ trait Menu
         //-- User is dead
         $this->addNav('common.villagenav.shades', 'shades.php', ['textDomain' => $this->getDefaultTextDomain()]);
     }
+
+    /**
+     * Create a navigations navs for forest.
+     *
+     * @param string $translationDomain
+     * @return void
+     */
+    public function forestNav(string $translationDomain): void
+    {
+        global $session;
+
+        $this->addHeader('category.navigation', ['textDomain' => $translationDomain]);
+        $this->villageNav();
+
+        $this->addHeader('category.heal', ['textDomain' => $translationDomain]);
+        $this->addNav('nav.healer', 'healer.php', ['textDomain' => $translationDomain]);
+
+        $this->addHeader('category.fight', ['textDomain' => $translationDomain]);
+        $this->addNav('nav.search', 'forest.php?op=search', ['textDomain' => $translationDomain]);
+
+        ($session['user']['level'] > 1) && $this->addNav('nav.slum', 'forest.php?op=search&type=slum', ['textDomain' => $translationDomain]);
+
+        $this->addNav('nav.thrill', 'forest.php?op=search&type=thrill', ['textDomain' => $translationDomain]);
+
+        ($this->settings->getSetting('suicide', 0) && $this->settings->getSetting('suicidedk', 10) <= $session['user']['dragonkills']) && $this->addNav('nav.suicide', 'forest.php?op=search&type=suicide', ['textDomain' => $translationDomain]);
+
+        $this->addHeader('category.other');
+    }
 }
