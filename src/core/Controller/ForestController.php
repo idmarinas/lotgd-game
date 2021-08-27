@@ -40,22 +40,7 @@ class ForestController extends AbstractController
 
         $params['tpl'] = 'default';
 
-        $this->navigation->addHeader('category.navigation');
-        $this->navigation->villageNav();
-
-        $this->navigation->addHeader('category.heal');
-        $this->navigation->addNav('nav.healer', 'healer.php');
-
-        $this->navigation->addHeader('category.fight');
-        $this->navigation->addNav('nav.search', 'forest.php?op=search');
-
-        ($session['user']['level'] > 1) && $this->navigation->addNav('nav.slum', 'forest.php?op=search&type=slum');
-
-        $this->navigation->addNav('nav.thrill', 'forest.php?op=search&type=thrill');
-
-        ($this->settings->getSetting('suicide', 0) && $this->settings->getSetting('suicidedk', 10) <= $session['user']['dragonkills']) && $this->navigation->addNav('nav.suicide', 'forest.php?op=search&type=suicide');
-
-        $this->navigation->addHeader('category.other');
+        $this->navigation->forestNav($params['translation_domain_navigation']);
 
         $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_FOREST_HEADER);
         modulehook('forest-header');
