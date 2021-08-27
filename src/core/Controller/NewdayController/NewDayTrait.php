@@ -69,7 +69,7 @@ trait NewDayTrait
 
     protected function newDay(array &$params, $resurrection)
     {
-        global $session;
+        global $session, $playermount;
 
         $this->response->pageStart('title.default', [], $this->getTranslationDomain());
 
@@ -120,89 +120,15 @@ trait NewDayTrait
 
         $params['interestRate'] = $interestrate;
 
-        //clear all standard buffs
-        $tempbuf = $session['user']['bufflist'] ?? [];
-
-        $session['user']['bufflist'] = [];
-        $this->buffer->stripAllBuffs();
-
-        $params['buffMessages'] = [];
-
-        foreach ($tempbuf as $key => $val)
-        {
-            if (\array_key_exists('survivenewday', $val) && 1 == $val['survivenewday'])
-            {
-                $this->buffer->applyBuff($key, $val);
-
-                if (\array_key_exists('newdaymessage', $val) && $val['newdaymessage'])
-                {
-                    $params['buffMessages'][] = $val['newdaymessage'];
-                }
-            }
-        }
-
         $dkff = 0;
-
-        $params['forestTurnDragonKill'] = $dkff;
-
-        if ( ! $params['moduleStaminaSystem'])
-        {
-            foreach ($session['user']['dragonpoints'] as $key => $val)
-            {
-                if ('ff' == $val)
-                {
-                    ++$dkff;
-                }
-            }
-
-            $params['forestTurnDragonKill'] = $dkff;
-        }
-
-        if ($session['user']['hashorse'])
-        {
-            $buff = $playermount['mountbuff'];
-
-            if ( ! isset($buff['schema']) || '' == $buff['schema'])
-            {
-                $buff['schema'] = 'mounts';
-            }
-            $this->buffer->applyBuff('mount', $buff);
-        }
+        $this->proccessBuffs($params, $dkff);
 
         $r1                = mt_rand(-1, 1);
         $r2                = mt_rand(-1, 1);
         $spirits           = $r1 + $r2;
         $resurrectionturns = $spirits;
 
-        if ('true' == $resurrection)
-        {
-            $this->tool->addNews('news.resurrected', [
-                'playerName'    => $session['user']['name'],
-                'deathOverlord' => $this->settings->getSetting('deathoverlord', '`$Ramius`0'),
-            ], $this->getTranslationDomain());
-
-            $spirits           = -6;
-            $resurrectionturns = $this->settings->getSetting('resurrectionturns', -6);
-
-            if (strstr($resurrectionturns, '%'))
-            {
-                $resurrectionturns = strtok($resurrectionturns, '%');
-                $resurrectionturns = (int) $resurrectionturns;
-
-                if ($resurrectionturns < -100)
-                {
-                    $resurrectionturns = -100;
-                }
-                $resurrectionturns = round(($params['turns_per_day'] + $dkff) * ($resurrectionturns / 100), 0);
-            }
-            else
-            {
-                $resurrectionturns = -($params['turns_per_day'] + $dkff);
-            }
-
-            $session['user']['deathpower'] -= $this->settings->getSetting('resurrectioncost', 100);
-            $session['user']['restorepage'] = 'village.php?c=1';
-        }
+        $this->resurrection($params, $resurrectionturns, $spirits, $dkff, $resurrection);
 
         $params['spirits'] = [
             (-6) => 'spirits.00',
@@ -273,54 +199,12 @@ trait NewDayTrait
             $params['mountTurns'] = $mff;
         }
 
-        $params['haunted'] = false;
-
-        if ($session['user']['hauntedby'] > '')
-        {
-            $params['haunted'] = $session['user']['hauntedby'];
-
-            if ($params['moduleStaminaSystem'])
-            {
-                require_once 'modules/staminasystem/lib/lib.php';
-
-                removestamina(25000);
-                $turnstoday .= ', Haunted: Stamina reduction';
-            }
-            else
-            {
-                --$session['user']['turns'];
-                $turnstoday .= ', Haunted: -1';
-            }
-
-            $session['user']['hauntedby'] = '';
-        }
+        $this->checkHaunted($params, $turnstoday);
 
         $this->battle->unSuspendCompanions('allowinshades');
 
         //-- Run new day if not run by cronjob
-        if ( ! $this->settings->getSetting('newdaycron', 0))
-        {
-            //check last time we did this vs now to see if it was a different game day.
-            $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($this->settings->getSetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
-            $gametoday           = $this->dateTime->gameTime();
-
-            if (gmdate('Ymd', $gametoday) != gmdate('Ymd', $lastnewdaysemaphore))
-            {
-                // it appears to be a different game day, acquire semaphore and
-                // check again.
-                $this->settings->clearSettings();
-                $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($this->settings->getSetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
-                $gametoday           = $this->dateTime->gameTime();
-
-                if (gmdate('Ymd', $gametoday) != gmdate('Ymd', $lastnewdaysemaphore))
-                {
-                    //we need to run the hook, update the setting, and unlock.
-                    $this->settings->saveSetting('newdaySemaphore', gmdate('Y-m-d H:i:s'));
-
-                    require 'lib/newday/newday_runonce.php';
-                }
-            }
-        }
+        $this->generateNewGameDay();
 
         $args = new Core([
             'resurrection'         => $resurrection,
@@ -343,5 +227,152 @@ trait NewDayTrait
         $this->log->debug("New Day Turns: {$turnstoday}");
 
         $session['user']['sentnotice'] = 0;
+    }
+
+    private function checkHaunted(array &$params, &$turnstoday): void
+    {
+        global $session;
+
+        $params['haunted'] = false;
+
+        if ($session['user']['hauntedby'] > '')
+        {
+            $params['haunted'] = $session['user']['hauntedby'];
+
+            if ($params['moduleStaminaSystem'])
+            {
+                require_once 'modules/staminasystem/lib/lib.php';
+
+                removestamina(25000);
+                $turnstoday .= ', Haunted: Stamina reduction';
+            }
+            else
+            {
+                --$session['user']['turns'];
+                $turnstoday .= ', Haunted: -1';
+            }
+
+            $session['user']['hauntedby'] = '';
+        }
+    }
+
+    private function generateNewGameDay(): void
+    {
+        if ($this->settings->getSetting('newdaycron', 0))
+        {
+            return;
+        }
+
+        //check last time we did this vs now to see if it was a different game day.
+        $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($this->settings->getSetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
+        $gametoday           = $this->dateTime->gameTime();
+
+        if (gmdate('Ymd', $gametoday) != gmdate('Ymd', $lastnewdaysemaphore))
+        {
+            // it appears to be a different game day, acquire semaphore and
+            // check again.
+            $this->settings->clearSettings();
+            $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($this->settings->getSetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
+            $gametoday           = $this->dateTime->gameTime();
+
+            if (gmdate('Ymd', $gametoday) != gmdate('Ymd', $lastnewdaysemaphore))
+            {
+                //we need to run the hook, update the setting, and unlock.
+                $this->settings->saveSetting('newdaySemaphore', gmdate('Y-m-d H:i:s'));
+
+                require 'lib/newday/newday_runonce.php';
+            }
+        }
+    }
+
+    private function resurrection(array &$params, &$resurrectionturns, &$spirits, $dkff, $resurrection): void
+    {
+        global $session;
+
+        if ('true' != $resurrection)
+        {
+            return;
+        }
+
+        $this->tool->addNews('news.resurrected', [
+            'playerName'    => $session['user']['name'],
+            'deathOverlord' => $this->settings->getSetting('deathoverlord', '`$Ramius`0'),
+        ], $this->getTranslationDomain());
+
+        $spirits           = -6;
+        $resurrectionturns = $this->settings->getSetting('resurrectionturns', -6);
+
+        if (strstr($resurrectionturns, '%'))
+        {
+            $resurrectionturns = (int) strtok($resurrectionturns, '%');
+            $resurrectionturns = max(-100, $resurrectionturns);
+            $resurrectionturns = round(($params['turns_per_day'] + $dkff) * ($resurrectionturns / 100), 0);
+        }
+        else
+        {
+            $resurrectionturns = -($params['turns_per_day'] + $dkff);
+        }
+
+        $session['user']['deathpower'] -= $this->settings->getSetting('resurrectioncost', 100);
+        $session['user']['restorepage'] = 'village.php?c=1';
+    }
+
+    private function proccessBuffs(array &$params, &$dkff): void
+    {
+        global $session, $playermount;
+
+        //clear all standard buffs
+        $tempbuf = $session['user']['bufflist'] ?? [];
+
+        $session['user']['bufflist'] = [];
+        $this->buffer->stripAllBuffs();
+
+        $params['buffMessages'] = [];
+
+        foreach ($tempbuf as $key => $val)
+        {
+            if (\array_key_exists('survivenewday', $val) && 1 == $val['survivenewday'])
+            {
+                $this->buffer->applyBuff($key, $val);
+
+                if (\array_key_exists('newdaymessage', $val) && $val['newdaymessage'])
+                {
+                    $params['buffMessages'][] = $val['newdaymessage'];
+                }
+            }
+        }
+
+        $this->proccessTurns($params, $dkff);
+
+        if ($session['user']['hashorse'])
+        {
+            $buff = $playermount['mountbuff'];
+
+            if ( ! isset($buff['schema']) || '' == $buff['schema'])
+            {
+                $buff['schema'] = 'mounts';
+            }
+            $this->buffer->applyBuff('mount', $buff);
+        }
+    }
+
+    private function proccessTurns(array &$params, &$dkff): void
+    {
+        global $session;
+
+        $params['forestTurnDragonKill'] = $dkff;
+
+        if ( ! $params['moduleStaminaSystem'])
+        {
+            foreach ($session['user']['dragonpoints'] as $val)
+            {
+                if ('ff' == $val)
+                {
+                    ++$dkff;
+                }
+            }
+
+            $params['forestTurnDragonKill'] = $dkff;
+        }
     }
 }
