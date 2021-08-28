@@ -256,7 +256,8 @@ phan.csv
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
-/build/
+.phpunit.result.cache
+/phpunit.xml
 ###< symfony/phpunit-bridge ###
 
 ###> symfony/webpack-encore-bundle ###
