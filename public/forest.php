@@ -30,8 +30,10 @@ $creatureFunctions = LotgdKernel::get('lotgd_core.tool.creature_functions');
 $dontDisplayForestMessage = handle_event('forest');
 
 $params = [
-    'textDomain'        => $textDomain,
-    'showForestMessage' => ! $dontDisplayForestMessage,
+    'textDomain'                    => $textDomain,
+    'translation_domain'            => $textDomain,
+    'translation_domain_navigation' => $textDomainNavigation,
+    'showForestMessage'             => ! $dontDisplayForestMessage,
 ];
 
 $op = (string) $request->query->get('op');
@@ -45,10 +47,8 @@ $method = 'index';
 
 if ('dragon' == $op)
 {
-    require_once 'lib/partner.php';
-
-    $method = 'dragon';
-    $params['tpl'] = 'dragon';
+    $method            = 'dragon';
+    $params['tpl']     = 'dragon';
     $params['partner'] = LotgdTool::getPartner();
 
     \LotgdNavigation::addNav('nav.cave', 'dragon.php');
@@ -150,7 +150,7 @@ elseif ('search' == $op)
 
             if (LotgdSetting::getSetting('multifightdk', 10) <= $session['user']['dragonkills'])
             {
-                if (\mt_rand(1, 100) <= LotgdSetting::getSetting('multichance', 25))
+                if (mt_rand(1, 100) <= LotgdSetting::getSetting('multichance', 25))
                 {
                     $multi = e_rand(LotgdSetting::getSetting('multibasemin', 2), LotgdSetting::getSetting('multibasemax', 3));
 
@@ -160,7 +160,7 @@ elseif ('search' == $op)
 
                         $mintargetlevel = $targetlevel - 2;
 
-                        if (\mt_rand(0, 1))
+                        if (mt_rand(0, 1))
                         {
                             $mintargetlevel = $targetlevel - 1;
                         }
@@ -171,7 +171,7 @@ elseif ('search' == $op)
 
                         $mintargetlevel = $targetlevel - 1;
 
-                        if (\mt_rand(0, 1))
+                        if (mt_rand(0, 1))
                         {
                             ++$targetlevel;
                             $mintargetlevel = $targetlevel - 1;
@@ -181,7 +181,7 @@ elseif ('search' == $op)
                     {
                         $multi += e_rand(LotgdSetting::getSetting('multisuimin', 2), LotgdSetting::getSetting('multisuimax', 4));
 
-                        if (\mt_rand(0, 1))
+                        if (mt_rand(0, 1))
                         {
                             $mintargetlevel = $targetlevel - 1;
                         }
@@ -191,7 +191,7 @@ elseif ('search' == $op)
                             $mintargetlevel = $targetlevel - 1;
                         }
                     }
-                    $multi = \min($multi, $session['user']['level']);
+                    $multi = min($multi, $session['user']['level']);
                 }
             }
             else
@@ -199,9 +199,9 @@ elseif ('search' == $op)
                 $multi = 1;
             }
 
-            $multi          = (int) \max(1, $multi);
-            $targetlevel    = (int) \max(1, $targetlevel);
-            $mintargetlevel = (int) \max(1, \min($mintargetlevel, $targetlevel));
+            $multi          = (int) max(1, $multi);
+            $targetlevel    = (int) max(1, $targetlevel);
+            $mintargetlevel = (int) max(1, min($mintargetlevel, $targetlevel));
 
             if ($targetlevel > 17)
             {
@@ -210,7 +210,7 @@ elseif ('search' == $op)
             }
             \LotgdResponse::pageDebug("Creatures: {$multi} Targetlevel: {$targetlevel} Mintargetlevel: {$mintargetlevel}");
 
-            $packofmonsters = (bool) (0 == \mt_rand(0, 5) && LotgdSetting::getSetting('allowpackofmonsters', true)); // true or false
+            $packofmonsters = (bool) (0 == mt_rand(0, 5) && LotgdSetting::getSetting('allowpackofmonsters', true)); // true or false
             $packofmonsters = ($multi > 1) ? $packofmonsters : false;
 
             $result = $creatureFunctions->lotgdSearchCreature($multi, $targetlevel, $mintargetlevel, $packofmonsters, true);
@@ -228,7 +228,7 @@ elseif ('search' == $op)
             else
             {
                 $count  = (int) \LotgdTranslator::translate('prefix.creature.count', [], $textDomain);
-                $key    = \mt_rand(0, $count);
+                $key    = mt_rand(0, $count);
                 $prefix = \LotgdTranslator::translate("prefix.creature.0{$key}", [], $textDomain);
                 //-- Check if have a valid name
                 $prefix = "prefix.creature.0{$key}" == $prefix ? 'Elite' : $prefix;
@@ -248,9 +248,9 @@ elseif ('search' == $op)
                         if ('thrill' == $type)
                         {
                             // 10% more experience
-                            $badguy['creatureexp'] = \round($badguy['creatureexp'] * 1.1, 0);
+                            $badguy['creatureexp'] = round($badguy['creatureexp'] * 1.1, 0);
                             // 10% more gold
-                            $badguy['creaturegold'] = \round($badguy['creaturegold'] * 1.1, 0);
+                            $badguy['creaturegold'] = round($badguy['creaturegold'] * 1.1, 0);
                         }
 
                         if ('suicide' == $type)
@@ -258,14 +258,14 @@ elseif ('search' == $op)
                             // Okay, suicide fights give even more rewards, but
                             // are much harder
                             // 25% more experience
-                            $badguy['creatureexp'] = \round($badguy['creatureexp'] * 1.25, 0);
+                            $badguy['creatureexp'] = round($badguy['creatureexp'] * 1.25, 0);
                             // 25% more gold
-                            $badguy['creaturegold'] = \round($badguy['creaturegold'] * 1.25, 0);
+                            $badguy['creaturegold'] = round($badguy['creaturegold'] * 1.25, 0);
                             // Now, make it tougher.
                             $mul                       = 1.25 + $extrabuff;
-                            $badguy['creatureattack']  = \round($badguy['creatureattack'] * $mul, 0);
-                            $badguy['creaturedefense'] = \round($badguy['creaturedefense'] * $mul, 0);
-                            $badguy['creaturehealth']  = \round($badguy['creaturehealth'] * $mul, 0);
+                            $badguy['creatureattack']  = round($badguy['creatureattack'] * $mul, 0);
+                            $badguy['creaturedefense'] = round($badguy['creaturedefense'] * $mul, 0);
+                            $badguy['creaturehealth']  = round($badguy['creaturehealth'] * $mul, 0);
                             // And mark it as an 'elite' troop.
                             $badguy['creaturename'] = $prefix.' '.$badguy['creaturename'];
                         }
@@ -293,23 +293,23 @@ elseif ('search' == $op)
                         if ('thrill' == $type)
                         {
                             // 10% more experience
-                            $badguy['creatureexp'] = \round($badguy['creatureexp'] * 1.1, 0);
+                            $badguy['creatureexp'] = round($badguy['creatureexp'] * 1.1, 0);
                             // 10% more gold
-                            $badguy['creaturegold'] = \round($badguy['creaturegold'] * 1.1, 0);
+                            $badguy['creaturegold'] = round($badguy['creaturegold'] * 1.1, 0);
                         }
                         elseif ('suicide' == $type)
                         {
                             // Okay, suicide fights give even more rewards, but
                             // are much harder
                             // 25% more experience
-                            $badguy['creatureexp'] = \round($badguy['creatureexp'] * 1.25, 0);
+                            $badguy['creatureexp'] = round($badguy['creatureexp'] * 1.25, 0);
                             // 25% more gold
-                            $badguy['creaturegold'] = \round($badguy['creaturegold'] * 1.25, 0);
+                            $badguy['creaturegold'] = round($badguy['creaturegold'] * 1.25, 0);
                             // Now, make it tougher.
                             $mul                       = 1.25 + $extrabuff;
-                            $badguy['creatureattack']  = \round($badguy['creatureattack'] * $mul, 0);
-                            $badguy['creaturedefense'] = \round($badguy['creaturedefense'] * $mul, 0);
-                            $badguy['creaturehealth']  = \round($badguy['creaturehealth'] * $mul, 0);
+                            $badguy['creatureattack']  = round($badguy['creatureattack'] * $mul, 0);
+                            $badguy['creaturedefense'] = round($badguy['creaturedefense'] * $mul, 0);
+                            $badguy['creaturehealth']  = round($badguy['creaturehealth'] * $mul, 0);
                             // And mark it as an 'elite' troop.
                             $badguy['creaturename'] = $prefix.' '.$badguy['creaturename'];
                         }
@@ -393,10 +393,10 @@ if ($battle)
 
     if ($serviceBattle->isVictory())
     {
-        $dontDisplayForestMessage    = true;
-        $params['tpl']               = 'default';
+        $dontDisplayForestMessage = true;
+        $params['tpl']            = 'default';
 
-        $op = '';
+        $op     = '';
         $battle = false;
         $request->query->set('op', '');
     }
@@ -408,7 +408,7 @@ if ($battle)
 
 if ('' == $op)
 {
-    $method = 'index';
+    $method                      = 'index';
     $params['showForestMessage'] = ! $dontDisplayForestMessage;
 }
 
