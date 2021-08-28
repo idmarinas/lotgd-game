@@ -286,7 +286,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "9.3",
-            "ref": "68450b8fef6804047d9424c55d758c28b4340791"
+            "ref": "a6249a6c4392e9169b87abf93225f7f9f59025e6"
         },
         "files": [
             "./.env.test",
@@ -375,7 +375,7 @@
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "master",
             "version": "1.4",
-            "ref": "bfc222606aea5418345af70104d974a25dc7c441"
+            "ref": "9c8a1e8ce2b1f215015ed16652c4ed18eb5867fd"
         },
         "files": [
             "./config/packages/sonata_form.yaml"
@@ -420,7 +420,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "4.4",
-            "ref": "ea8c0eda34fda57e7d5cd8cbd889e2a387e3472c"
+            "ref": "fd5340d07d4c90504843b53da41525cf42e31f5c"
         },
         "files": [
             "./bin/console",
@@ -499,7 +499,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "4.4",
-            "ref": "df1f2fe60b8fbb5cf7e26a7af19445c128a13b90"
+            "ref": "5918a9e19931369d8a8c508c6c8135b541f4c9de"
         },
         "files": [
             "./config/bootstrap.php",
@@ -550,7 +550,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "4.3",
-            "ref": "15658c2a0176cda2e7dba66276a2030b52bd81b2"
+            "ref": "c3bab0c981b79d4085e3b6734f7b5eebe35a0ca7"
         },
         "files": [
             "./config/packages/mailer.yaml"
@@ -577,7 +577,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "5.3",
-            "ref": "0a3b084605bd384975df457a20e9f41ca09fd4ed"
+            "ref": "905679249e7b10f06c572917a9022a72cbfedc04"
         },
         "files": [
             "./.env.test",
@@ -709,7 +709,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "4.4",
-            "ref": "15a41bbd66a1323d09824a189b485c126bbefa51"
+            "ref": "73baff3f7b3cea12a73812a7cfd2c0924a9e250f"
         },
         "files": [
             "./config/packages/test/twig.yaml",
@@ -723,7 +723,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "4.3",
-            "ref": "d902da3e4952f18d3bf05aab29512eb61cabd869"
+            "ref": "3eb8df139ec05414489d55b97603c5f6ca0c44cb"
         },
         "files": [
             "./config/packages/test/validator.yaml",
@@ -756,7 +756,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "1.9",
-            "ref": "9399a0bfc6ee7a0c019f952bca46d6a6045dd451"
+            "ref": "5ff15d211e3d4a9216218f6b7f1572262efd74e2"
         },
         "files": [
             "./assets/app.js",
