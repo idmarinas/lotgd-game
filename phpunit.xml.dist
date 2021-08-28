@@ -19,6 +19,7 @@
 
         <report>
             <clover outputFile="./build/reports/phpunit.coverage.xml"/>
+            <!-- <html outputDirectory="./build/coverage" lowUpperBound="35" highLowerBound="70" /> -->
             <!-- <text outputFile="php://stdout" showUncoveredFiles="false"/> -->
         </report>
     </coverage>
@@ -26,6 +27,7 @@
     <php>
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
         <env name="BOOTSTRAP_CLEAR_CACHE_ENV" value="test" />
+        <!-- <ini name="display_errors" value="1" /> -->
         <ini name="error_reporting" value="-1" />
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
