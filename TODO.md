@@ -16,6 +16,7 @@
 
 # Actualmente haciendo esto (6.1.0)
 
+-   ////**** ACTUALIZAR LOS RECIPES CON `composer recipes`
 -   Crear bundle:
     -   `Settings` para poder usarlo en sustitución de las `prefs` para usuario
     -   `Special Events`: usando el componente even-dispatcher crear uno para los eventos especiales:
@@ -35,6 +36,9 @@
         -   Se puede elegir el minimo de energía y el máximo que puede tener el personaje
         -   Se puede hacer que depende de algún atributo. (que tenga bono)
         -   Tendrá funciones para poder aumentar y disminuir la energía.
+    -   `Occurrence`: (Sistema de eventos especiales) modificar el bundle para que gestione todo el evento.
+        -   La idea es encapsular el evento dentro de un bundle que controle toda la lógica de dicho evento.
+        -   De esta forma se puede controlar todo el evento y volver a la página que lanzó el evento más fácilmente.
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   Migrar los cronjob a comandos de consola
 -   Eliminar la dependencia de Jaxon-PHP usar Stimulus
