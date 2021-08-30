@@ -16,30 +16,31 @@
 
 # Actualmente haciendo esto (6.1.0)
 
--   ////**** ACTUALIZAR LOS RECIPES CON `composer recipes`
 -   Crear bundle:
     -   `Settings` para poder usarlo en sustitución de las `prefs` para usuario
     -   `Special Events`: usando el componente even-dispatcher crear uno para los eventos especiales:
-        -   método que determina si se ejecuta el evento (según probabilidad)
-        -   método que elige cual de los eventos adjuntos se ejecuta (teniendo en cuenta la probabilidad)
-            -   Se filtran los eventos que cumplan con la probabilidad (chance) y se selecciona 1 teniendo en cuenta sus probabilidades
+        -   El sistema se llama `Occurrence`, en referencia a que ha sucedido algo.
         -   Agregar opción para priorizar eventos.
             -   Agregar la prioridad a los eventos esto es útil para los eventos que no tienen menú de opciones y los que sí
                 -   Se permitiria pasar antes los eventos que no tienen menús para así no entrar en conflicto con los que tienen menú
         -   Se agregará unas constantes con diferentes prioridades (ideas):
-            -   `priority_needs_response` Para eventos que necesitan una respuesta por parte del usuario (tienen un menú de navegación)
-                -   Este evento impide que se puedan ejecutar más eventos.
-            -   `priority_interactive` Para eventos que no necesitan respuesta pero son interactivos, por ejemplo, se puede comentar (ejemplo es la pradera donde puede comer la montura y se puede escribir un comentario pero no hace falta una respuesta)
-            -   `priority_info` Para los eventos que no necesitan una respuesta y no son interactivos, solo son informativos de que ha pasado algo
+            -   Se establecen en orden de prioridad
+                -   `priority_info` Para los eventos que no necesitan una respuesta y no son interactivos, solo son informativos de que ha pasado algo.
+                    -   Este evento permite que se ejecute los otros dos.
+                -   `priority_interactive` Para eventos que no necesitan respuesta pero son interactivos, por ejemplo, se puede comentar (ejemplo es la pradera donde puede comer la montura y se puede escribir un comentario pero no hace falta una respuesta)
+                    -   Este evento impide que se ejecute otro evento con la misma prioridad, pero puede ejecutarse un evento de la prioridad anterior.
+                -   `priority_needs_response` Para eventos que necesitan una respuesta por parte del usuario (tienen un menú de navegación)
+                    -   Este tipo de evento impide que se ejecuten los otros dos eventos.
+        -   `En estudio` 
+            -   Comvertir en un bundle que gestione todo el evento.
+                -   La idea es encapsular el evento dentro de un bundle que controle toda la lógica de dicho evento.
+                -   De esta forma se puede controlar todo el evento y volver a la página que lanzó el evento más fácilmente.
+-   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
     -   `Mail` continuar con el que ya tengo iniciado `https://github.com/idmarinas/MessageBundle`
     -   `Energy` un bundle que permite determinar el tipo de sistema que se usa para las acciones turnos/stamina
         -   Se puede elegir el minimo de energía y el máximo que puede tener el personaje
         -   Se puede hacer que depende de algún atributo. (que tenga bono)
         -   Tendrá funciones para poder aumentar y disminuir la energía.
-    -   `Occurrence`: (Sistema de eventos especiales) modificar el bundle para que gestione todo el evento.
-        -   La idea es encapsular el evento dentro de un bundle que controle toda la lógica de dicho evento.
-        -   De esta forma se puede controlar todo el evento y volver a la página que lanzó el evento más fácilmente.
--   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   Migrar los cronjob a comandos de consola
 -   Eliminar la dependencia de Jaxon-PHP usar Stimulus
 -   Crear un service para el newday runonce (generar un nuevo día)
