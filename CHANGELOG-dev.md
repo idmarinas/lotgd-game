@@ -29,6 +29,41 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
         ```
     -   _Note_: with this I'm preparing the Core to migrate it to a Symfony App (Routing)
 -   **Repository**: Now all class extends `Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository` and use dependency injection when is necesary.
+-   **Occurrence system**
+    -   Is a reemplace of **Special events** in game.
+    -   Can add more occurrences to game only add your occurrences to file:
+        ```yaml
+            # config/packages/lotgd_occurrence.yaml
+            lotgd_occurrence: # Required
+                # Prototype
+                name: # Name for your occurrance
+                    # Probability of activate this event zone. Int 0-10000 (10000 is equal to 100.00%)
+                    probability: ~ # Required
+                    # Optional: Maximun number of events that can be activated in this zone.
+                    max_activation: 2
+        ```
+    -   Work similar to Symfony Event Dispatcher
+        -   Create a subscriber that implements `Lotgd\CoreBundle\OccurrenceBundle\OccurrenceSubscriberInterface` 
+            -   Example:
+            ```php
+                use Lotgd\CoreBundle\OccurrenceBundle\OccurrenceSubscriberInterface;
+                use Symfony\Component\EventDispatcher\GenericEvent;
+
+                class ExampleSubscriber implements OccurrenceSubscriberInterface
+                {
+                    public function onMessage(GenericEvent $event)
+                    {
+                        //-- Do something
+                    }
+
+                    public static function getSubscribedOccurrences()
+                    {
+                        return [
+                            'forest' => ['onMessage', 10000, OccurrenceSubscriberInterface::PRIORITY_INFO]
+                        ];
+                    }
+                }
+            ```
 
 ### :star: FEATURES
 
