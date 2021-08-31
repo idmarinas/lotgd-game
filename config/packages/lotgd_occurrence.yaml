@@ -1,0 +1,17 @@
+lotgd_occurrence: # Required
+    # # Prototype
+    # name:
+    #     # Probability of activate this event zone. Int 0-10000 (10000 is equal to 100.00%)
+    #     probability: ~ # Required
+    #     # Optional: Maximun number of events that can be activated in this zone.
+    #     max_activation: 2
+    forest:
+        probability: 1500
+    village:
+        probability: 500
+    inn:
+        probability: 500
+    graveyard:
+        probability: 1000
+    garden:
+        probability: 500
