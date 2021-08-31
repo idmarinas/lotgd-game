@@ -14,7 +14,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V4.md)  
 Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V6.md)  
 
-# Version: 5.5.6 
+# Version: 5.5.8 
 
 ### :cyclone: CHANGES
 
@@ -30,8 +30,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   **src/core/Repository/LogdnetRepository.php** 
-    -   Fix error, method `getDoctrine` not exist in class
+-   **src/core/Controller/InnController.php** Fix error, now use correct redirection
 
 ### :x: REMOVES
 

@@ -142,7 +142,9 @@ class InnController extends AbstractController
                     {
                         $this->addFlash('warning', $this->translator->trans('flash.message.bribe.no.gems', ['amt' => $amt], $params['textDomain']));
 
-                        redirect('inn.php?op=bartender&act=bribe');
+                        $this->navigation->addNavAllow('inn.php?op=bartender&act=bribe');
+
+                        return $this->redirect('inn.php?op=bartender&act=bribe');
                     }
                     else
                     {
@@ -158,7 +160,9 @@ class InnController extends AbstractController
                     {
                         $this->addFlash('warning', $this->translator->trans('flash.message.bribe.no.gold', ['amt' => $amt], $params['textDomain']));
 
-                        redirect('inn.php?op=bartender&act=bribe');
+                        $this->navigation->addNavAllow('inn.php?op=bartender&act=bribe');
+
+                        return $this->redirect('inn.php?op=bartender&act=bribe');
                     }
                     else
                     {
