@@ -32,9 +32,11 @@
                 -   `priority_needs_response` Para eventos que necesitan una respuesta por parte del usuario (tienen un menú de navegación)
                     -   Este tipo de evento impide que se ejecuten los otros dos eventos.
         -   `En estudio` 
-            -   Comvertir en un bundle que gestione todo el evento.
+            -   Convertir en un bundle que gestione todo el evento.
                 -   La idea es encapsular el evento dentro de un bundle que controle toda la lógica de dicho evento.
                 -   De esta forma se puede controlar todo el evento y volver a la página que lanzó el evento más fácilmente.
+                -   Se puede usar la sesion para pasar datos de una petición a otra (request)
+                    -   De esta forma se omite usar el query param
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
     -   `Mail` continuar con el que ya tengo iniciado `https://github.com/idmarinas/MessageBundle`
     -   `Energy` un bundle que permite determinar el tipo de sistema que se usa para las acciones turnos/stamina
