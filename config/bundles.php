@@ -19,4 +19,5 @@ return [
     Sonata\Form\Bridge\Symfony\SonataFormBundle::class                => ['all' => true],
     Sonata\BlockBundle\SonataBlockBundle::class                       => ['all' => true],
     Kit\CryptBundle\KitCryptBundle::class                             => ['all' => true],
+    Lotgd\CoreBundle\OccurrenceBundle\LotgdOccurrenceBundle::class    => ['all' => true],
 ];
