@@ -32,8 +32,10 @@ else
     }
     elseif ($event['skip_description'])
     {
-        $skipgraveyardtext = true;
-        $op                = '';
+        $skipgraveyardtext           = true;
+        $params['showGraveyardDesc'] = ! $skipgraveyardtext;
+
+        $op = '';
         \LotgdRequest::setQuery('op', '');
     }
     //-- Only execute when NOT occurrence is in progress.
@@ -49,8 +51,10 @@ else
         $session['user']['specialinc']  = '';
         $session['user']['specialmisc'] = '';
 
-        $skipgraveyardtext = true;
-        $op                = '';
+        $skipgraveyardtext           = true;
+        $params['showGraveyardDesc'] = ! $skipgraveyardtext;
+
+        $op = '';
         \LotgdRequest::setQuery('op', '');
     }
     else

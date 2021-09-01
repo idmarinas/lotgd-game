@@ -70,12 +70,15 @@ switch ($op)
 {
     case 'converse':
         $method = 'converse';
+
     break;
     case 'bartender':
         $method = 'bartender';
+
     break;
     case 'room':
         $method = 'room';
+
     break;
     default:
         $method = 'index';
@@ -102,6 +105,9 @@ switch ($op)
             elseif ($event['skip_description'])
             {
                 $skipinndesc = true;
+
+                $op = '';
+                \LotgdRequest::setQuery('op', '');
             }
             //-- Only execute when NOT occurrence is in progress.
             elseif (0 != module_events('inn', LotgdSetting::getSetting('innchance', 0)))
@@ -115,10 +121,12 @@ switch ($op)
                 $session['user']['specialinc']  = '';
                 $session['user']['specialmisc'] = '';
                 $skipinndesc                    = true;
-                $op                             = '';
+
+                $op = '';
                 \LotgdRequest::setQuery('op', '');
             }
         }
+
     break;
 }
 

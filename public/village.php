@@ -14,8 +14,8 @@ require_once 'lib/events.php';
 if (LotgdSetting::getSetting('automaster', 1) && 1 != $session['user']['seenmaster'])
 {
     //masters hunt down truant students
-    $level = $session['user']['level'] + 1;
-    $dks = $session['user']['dragonkills'];
+    $level   = $session['user']['level'] + 1;
+    $dks     = $session['user']['dragonkills'];
     $expreqd = \LotgdTool::expForNextLevel($level, $dks);
 
     if ($session['user']['experience'] > $expreqd && $session['user']['level'] < LotgdSetting::getSetting('maxlevel', 15))
@@ -26,11 +26,11 @@ if (LotgdSetting::getSetting('automaster', 1) && 1 != $session['user']['seenmast
 
 // See if the user is in a valid location and if not, put them back to
 // a place which is valid
-$vname = LotgdSetting::getSetting('villagename', LOCATION_FIELDS);
-$iname = LotgdSetting::getSetting('innname', LOCATION_INN);
-$valid_loc = [];
+$vname             = LotgdSetting::getSetting('villagename', LOCATION_FIELDS);
+$iname             = LotgdSetting::getSetting('innname', LOCATION_INN);
+$valid_loc         = [];
 $valid_loc[$vname] = 'village';
-$args = new GenericEvent(null, $valid_loc);
+$args              = new GenericEvent(null, $valid_loc);
 \LotgdEventDispatcher::dispatch($args, Events::PAGE_VILLAGE_LOCATION);
 $valid_loc = modulehook('validlocation', $args->getArguments());
 
@@ -38,35 +38,35 @@ $valid_loc = modulehook('validlocation', $args->getArguments());
 // This hook is specifically to allow modules that do other villages to create ambience.
 $args = new GenericEvent(null, ['textDomain' => 'page_village', 'textDomainNavigation' => 'navigation_village']);
 \LotgdEventDispatcher::dispatch($args, Events::PAGE_VILLAGE_PRE);
-$result = modulehook('village-text-domain', $args->getArguments());
-$textDomain = $result['textDomain'];
+$result               = modulehook('village-text-domain', $args->getArguments());
+$textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
 $params = [
-    'village' => $vname,
-    'inn' => $iname,
-    'textDomain' => $textDomain
+    'village'    => $vname,
+    'inn'        => $iname,
+    'textDomain' => $textDomain,
 ];
 
-if (! isset($valid_loc[$session['user']['location']]))
+if ( ! isset($valid_loc[$session['user']['location']]))
 {
     $session['user']['location'] = $vname;
 }
 
 //-- Newest player in realm
 $params['newestplayer'] = (int) LotgdSetting::getSetting('newestplayer', 0);
-$params['newestname'] = (string) LotgdSetting::getSetting('newestplayername', '');
+$params['newestname']   = (string) LotgdSetting::getSetting('newestplayername', '');
 
 $params['newtext'] = 'newestOther';
 if ($params['newestplayer'] == $session['user']['acctid'])
 {
-    $params['newtext'] = 'newestPlayer';
+    $params['newtext']    = 'newestPlayer';
     $params['newestname'] = $session['user']['name'];
 }
-elseif (! $params['newestname'] && $params['newestplayer'])
+elseif ( ! $params['newestname'] && $params['newestplayer'])
 {
-    $characterRepository = \Doctrine::getRepository('LotgdCore:Avatar');
+    $characterRepository  = \Doctrine::getRepository('LotgdCore:Avatar');
     $params['newestname'] = $characterRepository->getCharacterNameFromAcctId($params['newestplayer']) ?: 'Unknown';
     LotgdSetting::saveSetting('newestplayername', $params['newestname']);
 }
@@ -82,7 +82,7 @@ if (1 == $session['user']['slaydragon'])
     $session['user']['slaydragon'] = 0;
 }
 
-if (! $session['user']['alive'])
+if ( ! $session['user']['alive'])
 {
     redirect('shades.php');
 }
@@ -90,15 +90,15 @@ if (! $session['user']['alive'])
 /** @var Lotgd\Core\Http\Request */
 $request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
 
-$op = $request->query->get('op');
-$com = $request->query->getInt('commentPage');
+$op         = $request->query->get('op');
+$com        = $request->query->getInt('commentPage');
 $commenting = $request->query->get('commenting');
-$comment = $request->request->get('comment');
+$comment    = $request->request->get('comment');
 
 // Don't give people a chance at a special event if they are just browsing
 // the commentary (or talking) or dealing with any of the hooks in the village.
 // The '1' should really be sysadmin customizable.
-if (! $op && '' == $com && ! $comment && ! $commenting)
+if ( ! $op && '' == $com && ! $comment && ! $commenting)
 {
     /** New occurrence dispatcher for special events. */
     /** @var \Lotgd\CoreBundle\OccurrenceBundle\OccurrenceEvent */
@@ -116,9 +116,12 @@ if (! $op && '' == $com && ! $comment && ! $commenting)
     elseif ($event['skip_description'])
     {
         $skipvillagedesc = true;
+
+        $op = '';
+        $request->setQuery('op', '');
     }
     //-- Only execute when NOT occurrence is in progress.
-    elseif ( 0 != module_events('village', LotgdSetting::getSetting('villagechance', 0)))
+    elseif (0 != module_events('village', LotgdSetting::getSetting('villagechance', 0)))
     {
         if (\LotgdNavigation::checkNavs())
         {
@@ -127,9 +130,10 @@ if (! $op && '' == $com && ! $comment && ! $commenting)
         else
         {
             // Reset the special for good.
-            $session['user']['specialinc'] = '';
+            $session['user']['specialinc']  = '';
             $session['user']['specialmisc'] = '';
-            $skipvillagedesc = true;
+            $skipvillagedesc                = true;
+
             $op = '';
             $request->setQuery('op', '');
         }
@@ -145,9 +149,9 @@ if (! $op && '' == $com && ! $comment && ! $commenting)
 \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_VILLAGE);
 modulehook('village');
 
-$params['showVillageDesc'] = ! $skipvillagedesc; //-- Show or not village description
-$params['SU_EDIT_USERS'] = $session['user']['superuser'] & SU_EDIT_USERS;
-$params['blockCommentArea'] = false; //-- Show or not comment area
+$params['showVillageDesc']   = ! $skipvillagedesc; //-- Show or not village description
+$params['SU_EDIT_USERS']     = $session['user']['superuser'] & SU_EDIT_USERS;
+$params['blockCommentArea']  = false; //-- Show or not comment area
 $params['commentarySection'] = 'village'; //-- Commentary section
 
 $request->attributes->set('params', $params);

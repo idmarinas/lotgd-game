@@ -95,7 +95,11 @@ elseif ('search' == $op)
         }
         elseif ($event['skip_description'])
         {
-            $dontDisplayForestMessage = true;
+            $dontDisplayForestMessage    = true;
+            $params['showForestMessage'] = ! $dontDisplayForestMessage;
+
+            $op = '';
+            $request->query->set('op', '');
         }
         //-- Only execute when NOT occurrence is in progress.
         elseif (0 != module_events('forest', LotgdSetting::getSetting('forestchance', 15)))
