@@ -53,7 +53,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
             -   First: activate Occurrence system.
             -   Second: activate the old event system.
                 -   Only if Occurrence system is not active.
-    -   This system replace old **Special events** in game in version 9.0.0
+    -   This system replace old **Special events** in game in version 8.0.0
     -   Zones with this new system:
         - `forest`
         - `gardens`
@@ -104,7 +104,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
                 }
             ```
     -   _Note_: [Fairy event](https://github.com/lotgd-core/fairy-bundle) is an first example of usage of this new feature.
-    
+
 ### :fire: DEPRECATED
 
 -   **lib/systemmail.php** 
