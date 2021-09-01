@@ -1,4 +1,6 @@
 CHANGELOG-dev.md merge=ours
 README.md merge=ours
+composer.json merge=ours
+package.json merge=ours
 src/core/Installer/Pattern/Version.php merge=ours
 src/core/Kernel.php merge=ours
