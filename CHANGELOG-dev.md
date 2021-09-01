@@ -29,8 +29,47 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
         ```
     -   _Note_: with this I'm preparing the Core to migrate it to a Symfony App (Routing)
 -   **Repository**: Now all class extends `Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository` and use dependency injection when is necesary.
+
+### :star: FEATURES
+
+-   **Commentary system** 
+    -   A translatable comment can now be added so that when this comment is displayed it is translated into the current language of the game.
+        -   To add this comment only need add `translation_domain` to comment data array
+        -   Example: 
+            ```php
+            $commentaryService->saveComment([
+                'section' => 'any_section',
+                'comment' => 'translation.key', //-- Option 1
+                // 'comment' => '/me translation.key', //-- Option 2, add a comment with command (any available command can be used)
+                //-- Note: No use /grem command, since this command is special for deleting the last comment written by the user.
+                'translation_domain' => 'my_domain'
+            ]);
+            ```
+        -   _Note_: With this change the commentary is affected by the language of the game at all times and not only when the commentary is added.
+    -   **New command** for comments `/grem` or `:grem` or `::grem` in chat comment and a small horde of Gremlin will delete the last comment you have written as long as it has not been more than 3 minutes.
 -   **Occurrence system**
-    -   Is a reemplace of **Special events** in game.
+    -   The old and the new event system will work at the same time during the transition.
+        -   Activation order
+            -   First: activate Occurrence system.
+            -   Second: activate the old event system.
+                -   Only if Occurrence system is not active.
+    -   This system replace old **Special events** in game in version 9.0.0
+    -   Zones with this new system:
+        - `forest`
+        - `gardens`
+        - `graveyard`
+        - `inn`
+        - `village`
+            -   All these zones pass four parameters to an event object.
+            -   Example for `forest` zone:
+            ```php
+                $event = \LotgdKernel::get('occurrence_dispatcher')->dispatch('forest', null, [
+                    'translation_domain'            => $textDomain,
+                    'translation_domain_navigation' => $textDomainNavigation,
+                    'route'                         => 'forest.php',
+                    'navigation_method'             => 'forestNav',
+                ]);
+            ```
     -   Can add more occurrences to game only add your occurrences to file:
         ```yaml
             # config/packages/lotgd_occurrence.yaml
@@ -64,25 +103,8 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
                     }
                 }
             ```
-
-### :star: FEATURES
-
--   **Commentary system** 
-    -   A translatable comment can now be added so that when this comment is displayed it is translated into the current language of the game.
-        -   To add this comment only need add `translation_domain` to comment data array
-        -   Example: 
-            ```php
-            $commentaryService->saveComment([
-                'section' => 'any_section',
-                'comment' => 'translation.key', //-- Option 1
-                // 'comment' => '/me translation.key', //-- Option 2, add a comment with command (any available command can be used)
-                //-- Note: No use /grem command, since this command is special for deleting the last comment written by the user.
-                'translation_domain' => 'my_domain'
-            ]);
-            ```
-        -   _Note_: With this change the commentary is affected by the language of the game at all times and not only when the commentary is added.
-    -   **New command** for comments `/grem` or `:grem` or `::grem` in chat comment and a small horde of Gremlin will delete the last comment you have written as long as it has not been more than 3 minutes.
-
+    -   _Note_: [Fairy event](https://github.com/lotgd-core/fairy-bundle) is an first example of usage of this new feature.
+    
 ### :fire: DEPRECATED
 
 -   **lib/systemmail.php** 
