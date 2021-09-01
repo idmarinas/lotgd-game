@@ -98,99 +98,48 @@ $comment = $request->request->get('comment');
 // Don't give people a chance at a special event if they are just browsing
 // the commentary (or talking) or dealing with any of the hooks in the village.
 // The '1' should really be sysadmin customizable.
-if (! $op && '' == $com && ! $comment && ! $commenting && 0 != module_events('village', LotgdSetting::getSetting('villagechance', 0)))
+if (! $op && '' == $com && ! $comment && ! $commenting)
 {
-    if (\LotgdNavigation::checkNavs())
+    /** New occurrence dispatcher for special events. */
+    /** @var \Lotgd\CoreBundle\OccurrenceBundle\OccurrenceEvent */
+    $event = \LotgdKernel::get('occurrence_dispatcher')->dispatch('village', null, [
+        'translation_domain'            => $textDomain,
+        'translation_domain_navigation' => $textDomainNavigation,
+        'route'                         => 'village.php',
+        'navigation_method'             => 'townNav',
+    ]);
+
+    if ($event->isPropagationStopped())
     {
         \LotgdResponse::pageEnd();
     }
-    else
+    elseif ($event['skip_description'])
     {
-        // Reset the special for good.
-        $session['user']['specialinc'] = '';
-        $session['user']['specialmisc'] = '';
         $skipvillagedesc = true;
-        $op = '';
-        $request->setQuery('op', '');
+    }
+    //-- Only execute when NOT occurrence is in progress.
+    elseif ( 0 != module_events('village', LotgdSetting::getSetting('villagechance', 0)))
+    {
+        if (\LotgdNavigation::checkNavs())
+        {
+            \LotgdResponse::pageEnd();
+        }
+        else
+        {
+            // Reset the special for good.
+            $session['user']['specialinc'] = '';
+            $session['user']['specialmisc'] = '';
+            $skipvillagedesc = true;
+            $op = '';
+            $request->setQuery('op', '');
+        }
     }
 }
 
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
 
-//-- City gates
-\LotgdNavigation::addHeader('headers.gate');
-\LotgdNavigation::addNav('navs.forest', 'forest.php');
-
-if (LotgdSetting::getSetting('pvp', 1))
-{
-    \LotgdNavigation::addNav('navs.pvp', 'pvp.php');
-}
-
-//-- Fields
-\LotgdNavigation::addHeader('headers.fields');
-\LotgdNavigation::addNav('navs.logout', 'login.php?op=logout');
-
-if (LotgdSetting::getSetting('enablecompanions', true))
-{
-    \LotgdNavigation::addNav('navs.mercenarycamp', 'mercenarycamp.php');
-}
-
-//-- Fight street
-\LotgdNavigation::addHeader('headers.fight');
-\LotgdNavigation::addNav('navs.train', 'train.php');
-
-if (file_exists('public/lodge.php'))
-{
-    \LotgdNavigation::addNav('navs.lodge', 'lodge.php');
-}
-
-//-- Market street
-\LotgdNavigation::addHeader('headers.market');
-\LotgdNavigation::addNav('navs.weaponshop', 'weapons.php');
-\LotgdNavigation::addNav('navs.armorshop', 'armor.php');
-\LotgdNavigation::addNav('navs.bank', 'bank.php');
-\LotgdNavigation::addNav('navs.gypsy', 'gypsy.php');
-
-//-- Industrial street
-\LotgdNavigation::addHeader('headers.industrial');
-
-//-- Tavern street
-\LotgdNavigation::addHeader('headers.tavern');
-\LotgdNavigation::addNav('navs.innname', 'inn.php', ['params' => ['inn' => $iname]]);
-\LotgdNavigation::addNav('navs.stablename', 'stables.php');
-\LotgdNavigation::addNav('navs.gardens', 'gardens.php' );
-\LotgdNavigation::addNav('navs.rock', 'rock.php');
-
-if (LotgdSetting::getSetting('allowclans', 1))
-{
-    \LotgdNavigation::addnav('navs.clan', 'clan.php');
-}
-
-//-- Info street
-\LotgdNavigation::addHeader('headers.info');
-\LotgdNavigation::addNav('navs.faq', '#', [
-    'attributes' => [
-        'id' => 'village-petition-faq',
-        'onclick' => "JaxonLotgd.Ajax.Core.Petition.faq(); $(this).addClass('disabled')"
-    ]
-]);
-\LotgdNavigation::addNav('navs.news', 'news.php');
-\LotgdNavigation::addNav('navs.list', 'list.php');
-\LotgdNavigation::addNav('navs.hof', 'hof.php');
-
-//-- Other navs
-\LotgdNavigation::addHeader('headers.other');
-\LotgdNavigation::addNav('navs.account', 'account.php');
-\LotgdNavigation::addNav('navs.prefs', 'prefs.php');
-
-if (! file_exists('public/lodge.php'))
-{
-    \LotgdNavigation::addNav('navs.referral', 'referral.php');
-}
-
-//-- Superuser menu
-\LotgdNavigation::superuser();
+\LotgdNavigation::townNav($textDomainNavigation);
 
 //special hook for all villages... saves queries...
 \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_VILLAGE);

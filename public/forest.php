@@ -80,7 +80,25 @@ elseif ('search' == $op)
         ]);
         modulehook('soberup', $args->getArguments());
 
-        if (0 != module_events('forest', LotgdSetting::getSetting('forestchance', 15)))
+        /** New occurrence dispatcher for special events. */
+        /** @var \Lotgd\CoreBundle\OccurrenceBundle\OccurrenceEvent */
+        $event = \LotgdKernel::get('occurrence_dispatcher')->dispatch('forest', null, [
+            'translation_domain'            => $textDomain,
+            'translation_domain_navigation' => $textDomainNavigation,
+            'route'                         => 'forest.php',
+            'navigation_method'             => 'forestNav',
+        ]);
+
+        if ($event->isPropagationStopped())
+        {
+            \LotgdResponse::pageEnd();
+        }
+        elseif ($event['skip_description'])
+        {
+            $dontDisplayForestMessage = true;
+        }
+        //-- Only execute when NOT occurrence is in progress.
+        elseif (0 != module_events('forest', LotgdSetting::getSetting('forestchance', 15)))
         {
             if (\LotgdNavigation::checkNavs())
             {

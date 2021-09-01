@@ -14,8 +14,8 @@ require_once 'lib/events.php';
 // This hook is specifically to allow modules that do other graveyards to create ambience.
 $args = new GenericEvent(null, ['textDomain' => 'page_graveyard', 'textDomainNavigation' => 'navigation_graveyard']);
 \LotgdEventDispatcher::dispatch($args, Events::PAGE_GRAVEYARD_PRE);
-$result = modulehook('graveyard-text-domain', $args->getArguments());
-$textDomain = $result['textDomain'];
+$result               = modulehook('graveyard-text-domain', $args->getArguments());
+$textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
@@ -27,12 +27,14 @@ $op = (string) \LotgdRequest::getQuery('op');
 $skipgraveyardtext = handle_event('graveyard');
 
 $params = [
-    'textDomain' => $textDomain,
-    'graveyardOwnerName' => (string) LotgdSetting::getSetting('deathoverlord', '`$Ramius`0'),
-    'showGraveyardDesc' => ! $skipgraveyardtext
+    'textDomain'                    => $textDomain,
+    'translation_domain'            => $textDomain,
+    'translation_domain_navigation' => $textDomain,
+    'graveyardOwnerName'            => (string) LotgdSetting::getSetting('deathoverlord', '`$Ramius`0'),
+    'showGraveyardDesc'             => ! $skipgraveyardtext,
 ];
 
-if (! $skipgraveyardtext)
+if ( ! $skipgraveyardtext)
 {
     if ($session['user']['alive'])
     {
@@ -48,7 +50,7 @@ $battle = false;
 \LotgdNavigation::setTextDomain($textDomainNavigation);
 
 \LotgdKernel::get('lotgd_core.combat.buffer')->stripAllBuffs();
-$max = $session['user']['level'] * 10 + $session['user']['dragonkills'] * 2 + 50;
+$max  = $session['user']['level'] * 10 + $session['user']['dragonkills'] * 2 + 50;
 $args = new GenericEvent(null, ['favor' => round(10 * ($max - $session['user']['soulpoints']) / $max)]);
 \LotgdEventDispatcher::dispatch($args, Events::PAGE_GRAVEYARD_HEAL);
 $favortoheal = modulehook('favortoheal', $args->getArguments());
@@ -62,12 +64,12 @@ if ('search' == $op)
 {
     require_once 'lib/graveyard/case_battle_search.php';
 }
-elseif('run' == $op)
+elseif ('run' == $op)
 {
     if (1 == e_rand(0, 2))
     {
         \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.battle.run.success', [
-            'graveyardOwnerName' => $params['graveyardOwnerName']
+            'graveyardOwnerName' => $params['graveyardOwnerName'],
         ], $textDomain));
         $favor = 5 + e_rand(0, $session['user']['level']);
         $favor = min($favor, $session['user']['deathpower']);
@@ -75,8 +77,8 @@ elseif('run' == $op)
         if ($favor > 0)
         {
             \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.battle.run.lost', [
-                'favor' => $favor,
-                'graveyardOwnerName' => $params['graveyardOwnerName']
+                'favor'              => $favor,
+                'graveyardOwnerName' => $params['graveyardOwnerName'],
             ], $textDomain));
             $session['user']['deathpower'] -= $favor;
         }
@@ -96,7 +98,7 @@ elseif ('fight' == $op)
 
 if ($battle)
 {
-    $params['tpl'] = 'default';
+    $params['tpl']               = 'default';
     $params['showGraveyardDesc'] = false;
 
     /** @var \Lotgd\Core\Combat\Battle */
@@ -123,9 +125,9 @@ if ($battle)
     if ($serviceBattle->battleHasWinner())
     {
         $battle = false;
-        $op = '';
+        $op     = '';
         \LotgdRequest::setQuery('op', '');
-        $skipgraveyardtext = true;
+        $skipgraveyardtext           = true;
         $params['showGraveyardDesc'] = ! $skipgraveyardtext;
     }
     else
@@ -147,13 +149,13 @@ if ('enter' == $op)
     \LotgdNavigation::addHeader('category.souls');
     \LotgdNavigation::addNav('nav.question', 'graveyard.php?op=question', [
         'params' => [
-            'graveyardOwnerName' => $params['graveyardOwnerName']
-        ]
+            'graveyardOwnerName' => $params['graveyardOwnerName'],
+        ],
     ]);
     \LotgdNavigation::addNav('nav.restore', 'graveyard.php?op=restore', [
         'params' => [
-            'favor' => $favortoheal
-        ]
+            'favor' => $favortoheal,
+        ],
     ]);
 }
 elseif ('restore' == $op)
@@ -181,8 +183,8 @@ elseif ('restore' == $op)
     \LotgdNavigation::addHeader('category.souls');
     \LotgdNavigation::addNav('nav.question', 'graveyard.php?op=question', [
         'params' => [
-            'graveyardOwnerName' => $params['graveyardOwnerName']
-        ]
+            'graveyardOwnerName' => $params['graveyardOwnerName'],
+        ],
     ]);
 }
 elseif ('resurrection' == $op)
@@ -202,13 +204,13 @@ elseif ('question' == $op)
     \LotgdNavigation::addHeader('category.souls');
     \LotgdNavigation::addNav('nav.question', 'graveyard.php?op=question', [
         'params' => [
-            'graveyardOwnerName' => $params['graveyardOwnerName']
-        ]
+            'graveyardOwnerName' => $params['graveyardOwnerName'],
+        ],
     ]);
     \LotgdNavigation::addNav('nav.restore', 'graveyard.php?op=restore', [
         'params' => [
-            'favor' => $favortoheal
-        ]
+            'favor' => $favortoheal,
+        ],
     ]);
 
     require_once 'lib/graveyard/case_question.php';
@@ -228,13 +230,13 @@ elseif ('haunt2' == $op)
 
     \LotgdNavigation::addNav('nav.question', 'graveyard.php?op=question', [
         'params' => [
-            'graveyardOwnerName' => $params['graveyardOwnerName']
-        ]
+            'graveyardOwnerName' => $params['graveyardOwnerName'],
+        ],
     ]);
     \LotgdNavigation::addNav('nav.restore', 'graveyard.php?op=restore', [
         'params' => [
-            'favor' => $favortoheal
-        ]
+            'favor' => $favortoheal,
+        ],
     ]);
 
     \LotgdNavigation::addHeader('category.places');
@@ -244,7 +246,7 @@ elseif ('haunt2' == $op)
 
     $name = (string) \LotgdRequest::getPost('name');
 
-    $repository = \Doctrine::getRepository('LotgdCore:Avatar');
+    $repository           = \Doctrine::getRepository('LotgdCore:Avatar');
     $params['characters'] = $repository->findLikeName("%{$name}%", 100);
 }
 elseif ('haunt3' == $op)
@@ -253,13 +255,13 @@ elseif ('haunt3' == $op)
 
     \LotgdNavigation::addNav('nav.question', 'graveyard.php?op=question', [
         'params' => [
-            'graveyardOwnerName' => $params['graveyardOwnerName']
-        ]
+            'graveyardOwnerName' => $params['graveyardOwnerName'],
+        ],
     ]);
     \LotgdNavigation::addNav('nav.restore', 'graveyard.php?op=restore', [
         'params' => [
-            'favor' => $favortoheal
-        ]
+            'favor' => $favortoheal,
+        ],
     ]);
 
     \LotgdNavigation::addHeader('category.places');
@@ -269,14 +271,14 @@ elseif ('haunt3' == $op)
 
     $characterId = (int) \LotgdRequest::getQuery('charid');
 
-    $repository = \Doctrine::getRepository('LotgdCore:Avatar');
+    $repository          = \Doctrine::getRepository('LotgdCore:Avatar');
     $params['character'] = $repository->find($characterId);
 
     $params['haunted'] = false;
     if ($params['character'])
     {
         $params['haunted'] = 0;
-        if (! $params['character']['haunted'])
+        if ( ! $params['character']['haunted'])
         {
             $session['user']['deathpower'] -= 25;
 
@@ -284,10 +286,10 @@ elseif ('haunt3' == $op)
             $roll2 = e_rand(0, $session['user']['level']);
 
             $params['haunted'] = 1;
-            $news = 'news.haunted.fail';
+            $news              = 'news.haunted.fail';
             if ($roll2 > $roll1)
             {
-                $news = 'news.haunted.success';
+                $news              = 'news.haunted.success';
                 $params['haunted'] = true;
 
                 $params['character']->setHauntedby($session['user']['name']);
@@ -297,35 +299,24 @@ elseif ('haunt3' == $op)
 
                 $subject = ['mail.haunted.subject', [], $textDomain];
                 $message = ['mail.haunted.message', [
-                    'playerName' => $session['user']['name']
+                    'playerName' => $session['user']['name'],
                 ], $textDomain];
-
 
                 systemmail($params['character']->getAcct()->getAcctid(), $subject, $message);
             }
 
             \LotgdTool::addNews($text, [
-                'playerName' => $session['user']['name'],
-                'hauntedName' => $params['character']->getName()
+                'playerName'  => $session['user']['name'],
+                'hauntedName' => $params['character']->getName(),
             ], $textDomain);
         }
     }
 }
-elseif (! $battle)
+elseif ( ! $battle)
 {
     $params['tpl'] = 'default';
 
-    \LotgdNavigation::addNav('nav.return.shades', 'shades.php');
-
-    if ($session['user']['gravefights'])
-    {
-        \LotgdNavigation::addHeader('category.torment');
-        \LotgdNavigation::addNav('nav.torment', 'graveyard.php?op=search');
-    }
-
-    \LotgdNavigation::addHeader('category.places');
-    \LotgdNavigation::addNav('nav.warriors', 'list.php');
-    \LotgdNavigation::addNav('nav.mausoleum', 'graveyard.php?op=enter');
+    \LotgdNavigation::graveyardNav($textDomainNavigation);
 }
 
 \LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_GRAVEYARD);

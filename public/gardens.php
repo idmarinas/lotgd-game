@@ -17,8 +17,8 @@ $request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
 // This hook is specifically to allow modules that do other gardenss to create ambience.
 $args = new GenericEvent(null, ['textDomain' => 'page_gardens', 'textDomainNavigation' => 'navigation_gardens']);
 \LotgdEventDispatcher::dispatch($args, Events::PAGE_GARDEN_PRE);
-$result = modulehook('gardens-text-domain', $args->getArguments());
-$textDomain = $result['textDomain'];
+$result               = modulehook('gardens-text-domain', $args->getArguments());
+$textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
@@ -28,45 +28,69 @@ unset($result);
 $skipgardendesc = handle_event('gardens');
 
 $params = [
-    'textDomain' => $textDomain,
-    'showGardenDesc' => ! $skipgardendesc,
-    'includeTemplatesPre' => [],
-    'includeTemplatesPost' => []
+    'textDomain'           => $textDomain,
+    'showGardenDesc'       => ! $skipgardendesc,
+    'includeTemplatesPre'  => [],
+    'includeTemplatesPost' => [],
 ];
 
-$request->attributes->set('params', $params);
-
-$op = (string) $request->query->get('op');
-$com = $request->query->get('commentPage');
+$op         = (string) $request->query->get('op');
+$com        = $request->query->get('commentPage');
 $commenting = $request->query->get('commenting');
-$comment = $request->request->get('comment');
+$comment    = $request->request->get('comment');
 
 // Don't give people a chance at a special event if they are just browsing
 // the commentary (or talking) or dealing with any of the hooks in the village.
-if (! $op && '' == $com && ! $comment && ! $refresh && ! $commenting && 0 != module_events('gardens', LotgdSetting::getSetting('gardenchance', 0)))
+if ( ! $op && '' == $com && ! $comment && ! $refresh && ! $commenting)
 {
-    if (\LotgdNavigation::checkNavs())
+    /** New occurrence dispatcher for special events. */
+    /** @var \Lotgd\CoreBundle\OccurrenceBundle\OccurrenceEvent */
+    $event = \LotgdKernel::get('occurrence_dispatcher')->dispatch('gardens', null, [
+        'translation_domain'            => $textDomain,
+        'translation_domain_navigation' => $textDomainNavigation,
+        'route'                         => 'gardens.php',
+        'navigation_method'             => 'gardensNav',
+    ]);
+    if ($event->isPropagationStopped())
     {
         \LotgdResponse::pageEnd();
     }
-    else
+    elseif ($event['skip_description'])
     {
-        // Reset the special for good.
-        $session['user']['specialinc'] = '';
-        $session['user']['specialmisc'] = '';
         $skipgardendesc = true;
-        $params['showGardenDesc'] = ! $skipgardendesc;
-        $op = '';
-        \LotgdRequest::setQuery('op', '');
+        $op                = '';
+        $request->query->set('op', '');
+    }
+    //-- Only execute when NOT occurrence is in progress.
+    elseif (0 != module_events('gardens', LotgdSetting::getSetting('gardenchance', 0)))
+    {
+        if (\LotgdNavigation::checkNavs())
+        {
+            \LotgdResponse::pageEnd();
+        }
+        else
+        {
+            // Reset the special for good.
+            $session['user']['specialinc']  = '';
+            $session['user']['specialmisc'] = '';
+
+            $skipgardendesc           = true;
+            $op                       = '';
+            $request->query->set('op', '');
+        }
     }
 }
 
-if (! $skipgardendesc)
+if ( ! $skipgardendesc)
 {
     \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 }
 
-\LotgdNavigation::villageNav();
+$params['showGardenDesc'] = ! $skipgardendesc;
+
+\LotgdNavigation::gardensNav();
+
+$request->attributes->set('params', $params);
 
 \LotgdResponse::callController(\Lotgd\Core\Controller\GardenController::class);
 

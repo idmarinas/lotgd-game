@@ -17,7 +17,27 @@ else
 
     $serviceBattle->suspendCompanions('allowinshades', true);
 
-    if (0 != module_events('graveyard', LotgdSetting::getSetting('gravechance', 0)))
+    /** New occurrence dispatcher for special events. */
+    /** @var \Lotgd\CoreBundle\OccurrenceBundle\OccurrenceEvent */
+    $event = \LotgdKernel::get('occurrence_dispatcher')->dispatch('graveyard', null, [
+        'translation_domain'            => $textDomain,
+        'translation_domain_navigation' => $textDomainNavigation,
+        'route'                         => 'graveyard.php',
+        'navigation_method'             => 'graveyardNav',
+    ]);
+
+    if ($event->isPropagationStopped())
+    {
+        \LotgdResponse::pageEnd();
+    }
+    elseif ($event['skip_description'])
+    {
+        $skipgraveyardtext = true;
+        $op                = '';
+        \LotgdRequest::setQuery('op', '');
+    }
+    //-- Only execute when NOT occurrence is in progress.
+    elseif (0 != module_events('graveyard', LotgdSetting::getSetting('gravechance', 0)))
     {
         if (\LotgdNavigation::checkNavs())
         {
@@ -28,8 +48,9 @@ else
         // the special and the specialmisc
         $session['user']['specialinc']  = '';
         $session['user']['specialmisc'] = '';
-        $skipgraveyardtext              = true;
-        $op                             = '';
+
+        $skipgraveyardtext = true;
+        $op                = '';
         \LotgdRequest::setQuery('op', '');
     }
     else
