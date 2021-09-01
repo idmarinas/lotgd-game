@@ -1,2 +1,4 @@
 CHANGELOG-dev.md merge=ours
+composer.json merge=ours
+package.json merge=ours
 .gitattributes merge=ours
