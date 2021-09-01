@@ -76,7 +76,7 @@ trait Menu
     {
         global $session;
 
-        $extra = (false === \strpos($extra, '?') ? '?' : '');
+        $extra = (false === strpos($extra, '?') ? '?' : '');
         $extra = ('?' == $extra ? '' : $extra);
 
         $args = new GenericEvent();
@@ -103,9 +103,6 @@ trait Menu
 
     /**
      * Create a navigations navs for forest.
-     *
-     * @param string $translationDomain
-     * @return void
      */
     public function forestNav(string $translationDomain): void
     {
@@ -127,5 +124,114 @@ trait Menu
         ($this->settings->getSetting('suicide', 0) && $this->settings->getSetting('suicidedk', 10) <= $session['user']['dragonkills']) && $this->addNav('nav.suicide', 'forest.php?op=search&type=suicide', ['textDomain' => $translationDomain]);
 
         $this->addHeader('category.other');
+    }
+
+    /**
+     * Create a navigations navs for graveyard.
+     */
+    public function graveyardNav(string $translationDomain): void
+    {
+        global $session;
+
+        $this->addNav('nav.return.shades', 'shades.php', ['textDomain' => $translationDomain]);
+
+        if ($session['user']['gravefights'])
+        {
+            $this->addHeader('category.torment', ['textDomain' => $translationDomain]);
+            $this->addNav('nav.torment', 'graveyard.php?op=search', ['textDomain' => $translationDomain]);
+        }
+
+        $this->addHeader('category.places', ['textDomain' => $translationDomain]);
+        $this->addNav('nav.warriors', 'list.php', ['textDomain' => $translationDomain]);
+        $this->addNav('nav.mausoleum', 'graveyard.php?op=enter', ['textDomain' => $translationDomain]);
+    }
+
+    /**
+     * Create a navigations navs for gardens.
+     */
+    public function gardensNav(string $translationDomain): void
+    {
+        $this->villageNav();
+    }
+
+    public function townNav(string $translationDomain): void
+    {
+        //-- City gates
+        $this->addHeader('headers.gate', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.forest', 'forest.php', ['textDomain' => $translationDomain]);
+
+        if ($this->settings->getSetting('pvp', 1))
+        {
+            $this->addNav('navs.pvp', 'pvp.php', ['textDomain' => $translationDomain]);
+        }
+
+        //-- Fields
+        $this->addHeader('headers.fields', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.logout', 'login.php?op=logout', ['textDomain' => $translationDomain]);
+
+        if ($this->settings->getSetting('enablecompanions', true))
+        {
+            $this->addNav('navs.mercenarycamp', 'mercenarycamp.php', ['textDomain' => $translationDomain]);
+        }
+
+        //-- Fight street
+        $this->addHeader('headers.fight', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.train', 'train.php', ['textDomain' => $translationDomain]);
+
+        if (file_exists('public/lodge.php'))
+        {
+            $this->addNav('navs.lodge', 'lodge.php', ['textDomain' => $translationDomain]);
+        }
+
+        //-- Market street
+        $this->addHeader('headers.market', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.weaponshop', 'weapons.php', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.armorshop', 'armor.php', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.bank', 'bank.php', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.gypsy', 'gypsy.php', ['textDomain' => $translationDomain]);
+
+        //-- Industrial street
+        $this->addHeader('headers.industrial', ['textDomain' => $translationDomain]);
+
+        //-- Tavern street
+        $this->addHeader('headers.tavern', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.innname', 'inn.php', [
+            'textDomain' => $translationDomain,
+            'params' => ['inn' => $this->settings->getSetting('innname', LOCATION_INN)]
+        ]);
+        $this->addNav('navs.stablename', 'stables.php', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.gardens', 'gardens.php', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.rock', 'rock.php', ['textDomain' => $translationDomain]);
+
+        if ($this->settings->getSetting('allowclans', 1))
+        {
+            $this->addnav('navs.clan', 'clan.php', ['textDomain' => $translationDomain]);
+        }
+
+        //-- Info street
+        $this->addHeader('headers.info', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.faq', '#', [
+            'textDomain' => $translationDomain,
+            'attributes' => [
+                'id' => 'village-petition-faq',
+                'onclick' => "JaxonLotgd.Ajax.Core.Petition.faq(); $(this).addClass('disabled')"
+            ]
+        ]);
+        $this->addNav('navs.news', 'news.php', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.list', 'list.php', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.hof', 'hof.php', ['textDomain' => $translationDomain]);
+
+        //-- Other navs
+        $this->addHeader('headers.other', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.account', 'account.php', ['textDomain' => $translationDomain]);
+        $this->addNav('navs.prefs', 'prefs.php', ['textDomain' => $translationDomain]);
+
+        if (! file_exists('public/lodge.php',))
+        {
+            $this->addNav('navs.referral', 'referral.php', ['textDomain' => $translationDomain] );
+        }
+
+        //-- Superuser menu
+        $this->superuser();
     }
 }
