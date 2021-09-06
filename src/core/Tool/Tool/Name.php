@@ -33,6 +33,31 @@ trait Name
         return (string) ($old) ? $old['playername'] : $session['user']['playername'];
     }
 
+    public function getPlayerCBasename($old = null): string
+    {
+        global $session;
+
+        $name  = $session['user']['name'];
+        $title = $this->getPlayerTitle($old);
+
+        if ( ! empty($old))
+        {
+            $name = $old['name'];
+        }
+
+        if ($title)
+        {
+            $x = strpos($name, $title);
+
+            if (false !== $x)
+            {
+                $name = trim(substr($name, $x + \strlen($title)));
+            }
+        }
+
+        return $name;
+    }
+
     public function changePlayerName($newname, $old = null): string
     {
         if (empty($newname))
