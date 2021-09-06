@@ -11,19 +11,19 @@
 
 # Módulos
 
--   Cambiar los sitios donde se usa battle.php
--   Adaptarlos para la version 6.0.0
+-   Adaptarlos para la version 6.1.0
 
 # Actualmente haciendo esto (6.1.0)
 
 -   Crear bundle:
     -   `Settings` para poder usarlo en sustitución de las `prefs` para usuario
     -   `Special Events`: usando el componente even-dispatcher crear uno para los eventos especiales:
+        -   Ya creado, falta mejorarlo.
         -   El sistema se llama `Occurrence`, en referencia a que ha sucedido algo.
         -   Agregar opción para priorizar eventos.
             -   Agregar la prioridad a los eventos esto es útil para los eventos que no tienen menú de opciones y los que sí
                 -   Se permitiria pasar antes los eventos que no tienen menús para así no entrar en conflicto con los que tienen menú
-        -   Se agregará unas constantes con diferentes prioridades (ideas):
+        -   Se agregará unas constantes con diferentes prioridades:
             -   Se establecen en orden de prioridad
                 -   `priority_info` Para los eventos que no necesitan una respuesta y no son interactivos, solo son informativos de que ha pasado algo.
                     -   Este evento permite que se ejecute los otros dos.
