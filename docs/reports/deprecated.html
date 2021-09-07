@@ -93,6 +93,9 @@
                 <h3>Table of Contents</h3>
         <table class="phpdocumentor-table_of_contents">
                             <tr>
+                    <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/dump_item.php">lib/dump_item.php</a></td>
+                </tr>
+                            <tr>
                     <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/holiday_texts.php">lib/holiday_texts.php</a></td>
                 </tr>
                             <tr>
@@ -124,6 +127,9 @@
                 </tr>
                             <tr>
                     <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/showform.php">lib/showform.php</a></td>
+                </tr>
+                            <tr>
+                    <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/systemmail.php">lib/systemmail.php</a></td>
                 </tr>
                             <tr>
                     <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/titles.php">lib/titles.php</a></td>
@@ -182,8 +188,32 @@
                             <tr>
                     <td class="phpdocumentor-cell"><a href="reports/deprecated.html#src/core/Pattern/Translator.php">src/core/Pattern/Translator.php</a></td>
                 </tr>
+                            <tr>
+                    <td class="phpdocumentor-cell"><a href="reports/deprecated.html#src/functions.php">src/functions.php</a></td>
+                </tr>
                     </table>
         
+                    <a id="lib/dump_item.php"></a>
+            <h3><abbr title="lib/dump_item.php">dump_item.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">7</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_dump_item"><abbr title="\dump_item()">dump_item()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in future version.</p>
+</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">43</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_dump_item_ascode"><abbr title="\dump_item_ascode()">dump_item_ascode()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in future version.</p>
+</td>
+                        </tr>
+                                                </table>
                     <a id="lib/holiday_texts.php"></a>
             <h3><abbr title="lib/holiday_texts.php">holiday_texts.php</abbr></h3>
             <table>
@@ -406,6 +436,21 @@
                             <td class="phpdocumentor-cell">23</td>
                             <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_lotgd_showform"><abbr title="\lotgd_showform()">lotgd_showform()</abbr></a></td>
                             <td class="phpdocumentor-cell"></td>
+                        </tr>
+                                                </table>
+                    <a id="lib/systemmail.php"></a>
+            <h3><abbr title="lib/systemmail.php">systemmail.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">8</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_systemmail"><abbr title="\systemmail()">systemmail()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in 7.0.0 version. Use &quot;LotgdKernel::get('lotgd_core.tool.system_mail')-&gt;send($to, $subject, $body, $from, $noemail)&quot;</p>
+</td>
                         </tr>
                                                 </table>
                     <a id="lib/titles.php"></a>
@@ -696,6 +741,63 @@
                             <td class="phpdocumentor-cell">22</td>
                             <td class="phpdocumentor-cell"><a href="classes/Lotgd-Core-Pattern-Translator.html"><abbr title="\Lotgd\Core\Pattern\Translator">Translator</abbr></a></td>
                             <td class="phpdocumentor-cell"><p>use Dependency Injection when you can, and LotgdKernel::get(ServiceName) when not can use Dependency Injection.</p>
+</td>
+                        </tr>
+                                                </table>
+                    <a id="src/functions.php"></a>
+            <h3><abbr title="src/functions.php">functions.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">80</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_is_email"><abbr title="\is_email()">is_email()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>delete in version 7.0.0. Use symfony validator service</p>
+</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">107</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_arraytourl"><abbr title="\arraytourl()">arraytourl()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use http_build_query</p>
+</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">143</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_urltoarray"><abbr title="\urltoarray()">urltoarray()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use &quot;parse_str&quot;</p>
+</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">186</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_createstring"><abbr title="\createstring()">createstring()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use &quot;serialize&quot;.</p>
+</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">221</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_list_files"><abbr title="\list_files()">list_files()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use Symfony Component Finder</p>
+</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">258</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function__curl"><abbr title="\_curl()">_curl()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use service LotgdKernel::get('http_client') instead</p>
+</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">304</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function__sock"><abbr title="\_sock()">_sock()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use service LotgdKernel::get('http_client') instead</p>
+</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">379</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_pullurl"><abbr title="\pullurl()">pullurl()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use service LotgdKernel::get('http_client') instead</p>
 </td>
                         </tr>
                                                 </table>
