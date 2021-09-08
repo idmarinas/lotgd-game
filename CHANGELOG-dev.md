@@ -9,115 +9,61 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V5.md)  
 Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V6.md)  
 
-# Version: 6.1.0
+# Version: 6.2.0
 
 ### :cyclone: CHANGES
 
--   **Changes in some files in `public/` folder**
-    -   I have reduced the code of these pages to this code:
-        ```php
-        require_once 'common.php';
-
-        //-- Init page
-        \LotgdResponse::pageStart();
-
-        //-- Call controller
-        \LotgdResponse::callController('CONTROLLER_NAME');
-
-        //-- Finalize page
-        \LotgdResponse::pageEnd();
-        ```
-    -   _Note_: with this I'm preparing the Core to migrate it to a Symfony App (Routing)
--   **Repository**: Now all class extends `Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository` and use dependency injection when is necesary.
+-   Nothing
 
 ### :star: FEATURES
 
--   **Commentary system** 
-    -   A translatable comment can now be added so that when this comment is displayed it is translated into the current language of the game.
-        -   To add this comment only need add `translation_domain` to comment data array
-        -   Example: 
-            ```php
-            $commentaryService->saveComment([
-                'section' => 'any_section',
-                'comment' => 'translation.key', //-- Option 1
-                // 'comment' => '/me translation.key', //-- Option 2, add a comment with command (any available command can be used)
-                //-- Note: No use /grem command, since this command is special for deleting the last comment written by the user.
-                'translation_domain' => 'my_domain'
-            ]);
-            ```
-        -   _Note_: With this change the commentary is affected by the language of the game at all times and not only when the commentary is added.
-    -   **New command** for comments `/grem` or `:grem` or `::grem` in chat comment and a small horde of Gremlin will delete the last comment you have written as long as it has not been more than 3 minutes.
--   **Occurrence system**
-    -   The old and the new event system will work at the same time during the transition.
-        -   Activation order
-            -   First: activate Occurrence system.
-            -   Second: activate the old event system.
-                -   Only if Occurrence system is not active.
-    -   This system replace old **Special events** in game in version 8.0.0
-    -   Zones with this new system:
-        - `forest`
-        - `gardens`
-        - `graveyard`
-        - `inn`
-        - `village`
-            -   All these zones pass four parameters to an event object.
-            -   Example for `forest` zone:
-            ```php
-                $event = \LotgdKernel::get('occurrence_dispatcher')->dispatch('forest', null, [
-                    'translation_domain'            => $textDomain,
-                    'translation_domain_navigation' => $textDomainNavigation,
-                    'route'                         => 'forest.php',
-                    'navigation_method'             => 'forestNav',
-                ]);
-            ```
-    -   Can add more occurrences to game only add your occurrences to file:
-        ```yaml
-            # config/packages/lotgd_occurrence.yaml
-            lotgd_occurrence: # Required
-                # Prototype
-                name: # Name for your occurrance
-                    # Probability of activate this event zone. Int 0-10000 (10000 is equal to 100.00%)
-                    probability: ~ # Required
-                    # Optional: Maximun number of events that can be activated in this zone.
-                    max_activation: 2
+-   **Stmimulus "route"**
+    -   Added file `public/stimlus.php` You can use Stimulus for load a small blocks for HTML code.
+    -   Only need call to this route `stimulus.php?method=METHOD_NAME&controller=urlencode(CONTROLLER_NAME)`
+    -   Example:
+        ```html
+            <!-- In eny template -->
+            <div data-controller="content-loader" data-content-loader-url-value="stimulus.php?method=index&controller=<?php echo urlencode(ContentController::class) ?>"></div>
         ```
-    -   Work similar to Symfony Event Dispatcher
-        -   Create a subscriber that implements `Lotgd\CoreBundle\OccurrenceBundle\OccurrenceSubscriberInterface` 
-            -   Example:
-            ```php
-                use Lotgd\CoreBundle\OccurrenceBundle\OccurrenceSubscriberInterface;
-                use Symfony\Component\EventDispatcher\GenericEvent;
 
-                class ExampleSubscriber implements OccurrenceSubscriberInterface
+        ```php
+            // src/local/Controller/ContentController.php
+            use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+            class ContentController extends AbstractController
+            {
+                public function index()
                 {
-                    public function onMessage(GenericEvent $event)
-                    {
-                        //-- Do something
-                    }
-
-                    public static function getSubscribedOccurrences()
-                    {
-                        return [
-                            'forest' => ['onMessage', 10000, OccurrenceSubscriberInterface::PRIORITY_INFO]
-                        ];
-                    }
+                    return $this->render('some_template.html.twig', []);
                 }
-            ```
-    -   _Note_: [Fairy event](https://github.com/lotgd-core/fairy-bundle) is an first example of usage of this new feature.
+            }
+        ```
+
+        ```js
+            // src/controllers/content_loader_controller.js
+            import { Controller } from "stimulus"
+
+            export default class extends Controller 
+            {
+                static values = { url: String }
+
+                connect() 
+                {
+                    this.load()
+                }
+
+                load() 
+                {
+                    fetch(this.urlValue)
+                    .then(response => response.text())
+                    .then(html => this.element.innerHTML = html)
+                }
+            }
+        ```
 
 ### :fire: DEPRECATED
 
--   **lib/systemmail.php** 
-    -   `systemmail` is deprecated. Use `LotgdKernel::get('lotgd_core.tool.system_mail')->send($to, $subject, $body, $from, $noemail)` instead.
--   **src/core/functions.php** 
-    -   `is_email` is deprecated. Use service `LotgdKernel::get('lotgd_core.tool.validator')->isMail(string)` instead.
-    -   `arraytourl` is deprecated. Use php function `http_build_query` instead.
-    -   `urltoarray` is deprecated. Use php function `parse_str` instead.
-    -   `createstring` is deprecated. Use php function `serialize` instead.
-    -   `list_files` is deprecated. Use component `Symfony Finder` instead.
-    -   `_curl`, `_sock` and `pullurl` is deprecated. Use service `LotgdKernel::get('http_client')` instead
--   **lib/dump_item.php**
-    -   `dump_item` and `dump_item_ascode` is deprecated and deleted un future version.
+-   Nothing
 
 ### :wrench: FIXES
 
