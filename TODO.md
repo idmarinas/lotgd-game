@@ -108,10 +108,16 @@
                 -   webpack.encore.theme.js
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Se aprobecha el cambio a TailWind para revisar y mejorar las plantillas
-    -   Usar macros y blocks donde se pueda.
+    -   Usar macros y blocks donde se pueda.    
+-   `src/core/Controller/CreateController.php`
+    -   Recrearlo para  usar el Symfony form.
+    -   Permitir la personalización de los datos con el dispatcher.
+
 
 ## Para la versión 8.0.0
 
+-   Esta será la última versión que use la ordenación de carpetas `src/core` y `src/local`
+    -   La versión 9.0.0 usará la ordenación propia de Symfony.
 -   **BC** Una versión intermedia en la que se eliminan los módulos, antes de pasar a una Symfony App
     -   Por lo que la versión 7.0.0 sería la última versión compatible con los módulos.
 -   Con este paso intermedio se pretende hacer una transición un poquito más suave y limpiar el código de todo lo obsoleto.
@@ -126,6 +132,7 @@
 -   Eliminar paquete laminas/laminas-serializer
 -   Esta versión será ya una Symfony App
 -   Se usará todo lo de Symfony (ruter incluido)
+-   Todo el Core estará compuesto por Bundles, para así poder usar un Skeleton muy similar al de Symfony App Skeleton
 
 ## Para la versión X.Y.Z
 
