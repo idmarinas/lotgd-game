@@ -35,6 +35,9 @@
     "cron/cron": {
         "version": "1.5.0"
     },
+    "cron/cron-bundle": {
+        "version": "2.6.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -208,9 +211,6 @@
     "lemonphp/event": {
         "version": "v1.0.0"
     },
-    "lotgd-core/lodge-title-change-bundle": {
-        "version": "0.1.0"
-    },
     "lotgd-core/occurrence-bundle": {
         "version": "0.1.0"
     },
@@ -265,6 +265,9 @@
     "phpstan/phpdoc-parser": {
         "version": "0.5.4"
     },
+    "phpstan/phpstan": {
+        "version": "0.12.96"
+    },
     "phpunit/php-code-coverage": {
         "version": "9.2.6"
     },
@@ -305,6 +308,9 @@
     },
     "psr/log": {
         "version": "1.1.4"
+    },
+    "rector/rector": {
+        "version": "0.11.52"
     },
     "sabre/event": {
         "version": "5.1.2"

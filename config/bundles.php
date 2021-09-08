@@ -20,4 +20,5 @@ return [
     Sonata\BlockBundle\SonataBlockBundle::class                       => ['all' => true],
     Kit\CryptBundle\KitCryptBundle::class                             => ['all' => true],
     Lotgd\CoreBundle\OccurrenceBundle\LotgdOccurrenceBundle::class    => ['all' => true],
+    Cron\CronBundle\CronCronBundle::class                             => ['all' => true],
 ];
