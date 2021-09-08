@@ -11,9 +11,9 @@
 
 # Módulos
 
--   Adaptarlos para la version 6.1.0
+-   Adaptarlos para la version 6.2.0
 
-# Actualmente haciendo esto (6.1.0)
+# Actualmente haciendo esto (6.2.0)
 
 -   Crear bundle:
     -   `Settings` para poder usarlo en sustitución de las `prefs` para usuario
