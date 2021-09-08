@@ -13,11 +13,26 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   **New CronJob system**
+    -   LoTGD IDMarinas Edition user `Cron Bundle` to execute crons of core.
+    -   Usage of `public/cronjobs.php` is Deprecated.
+        -   For now not delete this file and crons register in DataBase.
+    -   To create a cron job on the new system, execute the command `php bin/console cron:create` and follow the steps below
+    -   Note: this new system commands to be executed are console commands, so they have to be registered and can be used with the `php bin/console command_to_use` command.
+    -   If you want use this feature, make sure you setup a cronjob on your machine confix/plesk/cpanel or any other admin panel. 
+        -   This is de unique cronjob need create copy:
+            -   `* * * * * /path/to/project/bin/console cron:run 1>> /dev/null 2>&1`
+                -   Change **_"/path/to/project"_** to where is the game installed.
+                -   This cronjob execute all CronJobs in the game, but only CronJobs registered with new CronJob System.
+    -   **IMPORTANT**: 
+        -   _New day cron_ in new cronjob system not execute hook of modules. If you need execute this old hook use old cronjob system for new day.
+            -   _New day cron_ in new cronjob system are disabled by default.
+        -   Remember deleted duplicated commands. If you want use both systems.
+
 
 ### :star: FEATURES
 
--   **Stmimulus "route"**
+-   **Stimulus "route"**
     -   Added file `public/stimlus.php` You can use Stimulus for load a small blocks for HTML code.
     -   Only need call to this route `stimulus.php?method=METHOD_NAME&controller=urlencode(CONTROLLER_NAME)`
     -   Example:
@@ -63,7 +78,8 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   **public/cronjobs.php** and **cronjob/** is Deprecated, use new Cron Bundle to execute and create your own crons.
+    -   This method of creating and running cron jobs will be removed in version 7.0.0
 
 ### :wrench: FIXES
 
