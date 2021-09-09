@@ -113,12 +113,14 @@ trait Version
         '5.5.6 IDMarinas Edition'         => 50506,
         '5.5.7 IDMarinas Edition'         => 50507,
         '5.5.8 IDMarinas Edition'         => 50508,
+        '5.5.9 IDMarinas Edition'         => 50509,
         '6.0.0 IDMarinas Edition'         => 60000,
         '6.0.1 IDMarinas Edition'         => 60001,
         '6.0.2 IDMarinas Edition'         => 60002,
         '6.0.3 IDMarinas Edition'         => 60003,
         '6.0.4 IDMarinas Edition'         => 60004,
         '6.1.0 IDMarinas Edition'         => 60100,
+        '6.1.1 IDMarinas Edition'         => 60101,
     ];
 
     /**
