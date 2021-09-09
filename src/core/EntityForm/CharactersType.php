@@ -33,7 +33,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CharactersType extends AbstractType
 {
-    private $settings;
+    protected $settings;
 
     public function __construct(Settings $settings)
     {
