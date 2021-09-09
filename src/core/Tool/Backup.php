@@ -101,7 +101,7 @@ class Backup
         {
             try
             {
-                /** @var Repository with backup option $repository */
+                /** @var |Lotgd\Core\Repository\RepositoryBackupInterface $repository */
                 $repository = $this->doctrine->getRepository($entity);
 
                 //-- Skip if not have methods for backup table

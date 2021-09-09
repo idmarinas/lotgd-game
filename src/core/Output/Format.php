@@ -71,7 +71,7 @@ class Format
         }
 
         //-- This avoid decimals with only ceros
-        $number = (float) \round($number, $decimals);
+        $number = \round($number, $decimals);
         //-- Count the decimals again
         $decimals = \strlen(\substr(\strrchr($number, '.'), 1));
 
