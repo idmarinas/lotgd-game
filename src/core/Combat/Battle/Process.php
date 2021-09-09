@@ -58,7 +58,11 @@ trait Process
                 $leader['istarget'] = false;
                 ++$leaderEnemyDies;
 
-                $this->addContextToRoundEnemy('battle.flee.multi', ['creatureName' => $leader['creaturename']], $this->getTranslationDomain());
+                $this->addContextToRoundEnemy([
+                    'battle.flee.multi',
+                    ['creatureName' => $leader['creaturename']],
+                    $this->getTranslationDomain()
+                ]);
             }
         }
         unset($leader);
@@ -71,7 +75,11 @@ trait Process
                 //-- Unset enemy if not want fight without leader
                 if (($enemy['fleesifalone'] ?? false) && $leadersEnemiesDie)
                 {
-                    $this->addContextToRoundEnemy('battle.flee.one', ['creatureName' => $enemy['creaturename']], $this->getTranslationDomain());
+                    $this->addContextToRoundEnemy([
+                        'battle.flee.one',
+                        ['creatureName' => $enemy['creaturename']],
+                        $this->getTranslationDomain()
+                    ]);
                     unset($enemy);
                 }
 

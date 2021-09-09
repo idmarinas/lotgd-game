@@ -47,10 +47,11 @@ trait Buff
                     $buff['startmsg'] = \str_replace('`%', '`%%', $buff['startmsg']);
                 }
 
-                $this->addContextToRoundAlly(
-                    [$this->tools->substitute("`5{$buff['startmsg']}`0`n"), [], $this->getTranslationDomain()],
-                    ...$this->getSubstituteParams($badguy)
-                );
+                $this->addContextToRoundAlly([
+                    $this->tools->substitute("`5{$buff['startmsg']}`0`n", ...$this->getSubstituteParams($badguy)),
+                    [] ,
+                    $this->getTranslationDomain()
+                ]);
 
                 $this->buffStarted[$key] = true;
             }
@@ -106,10 +107,11 @@ trait Buff
                         $buff['roundmsg'] = \str_replace('`%', '`%%', $buff['roundmsg']);
                     }
 
-                    $this->addContextToRoundAlly(
-                        [$this->tools->substitute("`5{$buff['roundmsg']}`0`n"), [], $this->getTranslationDomain()],
-                        ...$this->getSubstituteParams($badguy)
-                    );
+                    $this->addContextToRoundAlly([
+                        $this->tools->substitute("`5{$buff['roundmsg']}`0`n", ...$this->getSubstituteParams($badguy)),
+                        [],
+                        $this->getTranslationDomain()
+                    ]);
                 }
             }
 
@@ -201,10 +203,11 @@ trait Buff
 
                 if ($msg)
                 {
-                    $this->addContextToRoundAlly(
-                        [$this->tools->substitute("`){$msg}`0`n", ['{damage}'], [$hptoregen]), [], $this->getTranslationDomain()],
-                        ...$this->getSubstituteParams($badguy)
-                    );
+                    $this->addContextToRoundAlly([
+                        $this->tools->substitute("`){$msg}`0`n", ...$this->getSubstituteParams($badguy, ['{damage}'], [$hptoregen])),
+                        [],
+                        $this->getTranslationDomain()
+                    ]);
                 }
 
                 if (isset($buff['aura']) && $buff['aura'])
