@@ -90,7 +90,7 @@ trait Delete
             }
         }
 
-        if ( ! \count($post))
+        if ( \count($post) === 0)
         {
             $message = \LotgdTranslator::t('dialog.del.bulk.empty', [], $this->getTextDomain());
         }

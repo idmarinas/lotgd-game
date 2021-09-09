@@ -84,7 +84,7 @@ class Motd extends AjaxAbstract
 
             $lastMotd = $repository->getLastMotdDate();
 
-            if ($lastMotd)
+            if ($lastMotd !== null)
             {
                 $session['user']['lastmotd'] = $lastMotd;
             }
