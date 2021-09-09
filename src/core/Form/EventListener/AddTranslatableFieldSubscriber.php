@@ -145,7 +145,7 @@ class AddTranslatableFieldSubscriber implements EventSubscriberInterface
 
         foreach ($data as $Translation)
         {
-            if (\strtolower($Translation->getField()) == \strtolower($options['field']))
+            if (\strtolower($Translation->getField()) === \strtolower($options['field']))
             {
                 $availableTranslations[\strtolower($Translation->getLocale())] = $Translation;
             }

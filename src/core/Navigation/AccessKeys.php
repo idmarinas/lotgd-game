@@ -116,7 +116,7 @@ class AccessKeys
                 $ignoreuntil = \substr($label, $i + 1, 1);
             }
 
-            if ($ignoreuntil == $char)
+            if ($ignoreuntil === $char)
             {
                 $ignoreuntil = '';
             }
