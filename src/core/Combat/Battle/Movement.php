@@ -372,13 +372,14 @@ trait Movement
                 $this->user['hitpoints'] += $hptoheal;
                 $companion['used'] = true;
 
-                $this->addContextToRoundAlly($companion['healmsg'] ?? 'combat.companion.heal.player',
+                $this->addContextToRoundAlly([
+                    $companion['healmsg'] ?? 'combat.companion.heal.player',
                     [
                         'companionName' => $companion['name'],
                         'damage'        => $hptoheal,
                     ],
                     $this->getTranslationDomain(),
-                );
+                ]);
             }
             else
             {
@@ -399,14 +400,15 @@ trait Movement
                     $otherCompanion['hitpoints'] += $hptoheal;
                     $companion['used'] = true;
 
-                    $this->addContextToRoundAlly($companion['healcompanionmsg'] ?? 'combat.companion.heal.companion',
+                    $this->addContextToRoundAlly([
+                        $companion['healcompanionmsg'] ?? 'combat.companion.heal.companion',
                         [
                             'companionName' => $companion['name'],
                             'damage'        => $hptoheal,
                             'target'        => $otherCompanion['name'],
                         ],
                         $this->getTranslationDomain(),
-                    );
+                    ]);
 
                     $healed = true;
                 }
@@ -556,11 +558,15 @@ trait Movement
                 $msg = $companion['magicfailmsg'] ?? 'combat.companion.magic.miss';
             }
 
-            $this->addContextToRoundAlly($msg, [
-                'companionName' => $companion['name'],
-                'creatureName'  => $badguy['creaturename'],
-                'damage'        => $damage_done,
-            ], $this->getTranslationDomain());
+            $this->addContextToRoundAlly([
+                $msg,
+                [
+                    'companionName' => $companion['name'],
+                    'creatureName'  => $badguy['creaturename'],
+                    'damage'        => $damage_done,
+                ],
+                $this->getTranslationDomain()
+            ]);
 
             $companion['hitpoints'] -= $companion['abilities']['magic'];
             $companion['used'] = true;
