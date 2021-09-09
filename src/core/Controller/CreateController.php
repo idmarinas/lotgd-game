@@ -13,8 +13,6 @@
 
 namespace Lotgd\Core\Controller;
 
-require_once 'lib/titles.php';
-
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
