@@ -105,7 +105,7 @@ abstract class AbstractCommand extends Command
 
     protected function migrateDataBase(int $hasMigration)
     {
-        if ( ! $hasMigration)
+        if ( $hasMigration === 0)
         {
             return 0;
         }

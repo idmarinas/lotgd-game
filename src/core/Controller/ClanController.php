@@ -274,7 +274,7 @@ class ClanController extends AbstractController
 
         $this->navigation->addHeader('category.options');
 
-        if (\count($params['clanList']))
+        if (\count($params['clanList']) > 0)
         {
             $this->navigation->addNav('nav.list.lobby', 'clan.php');
 
@@ -370,7 +370,7 @@ class ClanController extends AbstractController
 
         $params['clanList'] = $clanRepository->getClanListWithMembersCount($order);
 
-        if (\count($params['clanList']))
+        if (($params['clanList'] !== []) > 0)
         {
             $this->navigation->addNav('nav.applicant.apply.lobby', 'clan.php');
 
@@ -615,7 +615,7 @@ class ClanController extends AbstractController
         $whoacctid = $request->request->getInt('whoacctid');
         $remove    = $request->query->getInt('remove');
 
-        if ($remove)
+        if ($remove !== 0)
         {
             $character = $charRepository->getCharacterFromAcctidAndRank($remove, $session['user']['clanrank']);
 

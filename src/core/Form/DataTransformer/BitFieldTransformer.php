@@ -26,7 +26,7 @@ class BitFieldTransformer implements DataTransformerInterface
 
         while ($current & BitFieldTransformer::MAX_BITFIELDS)
         {
-            if ($current & $bits)
+            if (($current & $bits) !== 0)
             {
                 $valid[] = $current;
             }

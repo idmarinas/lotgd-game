@@ -57,7 +57,7 @@ class Install extends InstallerAbstract
         }
 
         //-- Check for installations 4.12.0 and down.
-        if ( ! $versionInstalled)
+        if ( $versionInstalled === 0)
         {
             try
             {

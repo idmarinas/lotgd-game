@@ -69,8 +69,8 @@ class AccountsType extends AbstractType
                 'required' => false,
                 'disabled' => true,
             ])
-            ->add('boughtroomtoday', CheckBoxType::class, ['label' => 'acct.boughtroomtoday', 'required' => false])
-            ->add('banoverride', CheckBoxType::class, ['label' => 'acct.banoverride', 'required' => false])
+            ->add('boughtroomtoday', CheckboxType::class, ['label' => 'acct.boughtroomtoday', 'required' => false])
+            ->add('banoverride', CheckboxType::class, ['label' => 'acct.banoverride', 'required' => false])
             ->add('referer', NumberType::class, [
                 'label'    => 'acct.referer',
                 'required' => false,

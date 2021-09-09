@@ -78,7 +78,7 @@ trait RecalculateDragonPointTrait
             while ($count)
             {
                 --$count;
-                array_push($session['user']['dragonpoints'], $type);
+                $session['user']['dragonpoints'][] = $type;
             }
         }
     }

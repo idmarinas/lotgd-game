@@ -269,7 +269,7 @@ class Response extends HttpResponse
         $session['user']['gensize'] += \strlen($browserOutput);
         $session['output'] = $browserOutput;
 
-        if (true === $saveuser)
+        if ($saveuser)
         {
             $this->kernel->getContainer()->get('lotgd.core.tools')->saveUser();
         }

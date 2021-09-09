@@ -27,7 +27,7 @@ class EntityManager extends DoctrineEntityManager
      */
     public static function create($connection, Configuration $config, ?EventManager $eventManager = null)
     {
-        if ( ! $config->getMetadataDriverImpl())
+        if ( $config->getMetadataDriverImpl() === null)
         {
             throw \Doctrine\ORM\ORMException::missingMappingDriverImpl();
         }

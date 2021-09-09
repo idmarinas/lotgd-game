@@ -82,15 +82,15 @@ class Log
 
                 ->setParameter('user', $user)
                 ->setParameter('field', $field)
-                ->setParameter('date', new \DateTime(\date('Y-m-d 00:00:00')))
+                ->setParameter('date', new \DateTime(date('Y-m-d 00:00:00')))
 
                 ->getQuery()
                 ->getResult()
             ;
 
-            if (\count($result))
+            if ( ! empty($result))
             {
-                $result = $result[0];
+                $result  = $result[0];
                 $value   = $result->getValue() + $value;
                 $message = $result->getMessage();
                 $id      = $result->getId();

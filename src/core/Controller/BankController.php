@@ -77,7 +77,7 @@ class BankController extends AbstractController
             $this->navigation->addNav('nav.withdraw', 'bank.php?op=withdraw');
             $this->navigation->addNav('nav.deposit.label', 'bank.php?op=deposit');
 
-            if ($this->settings->getSetting('borrowperlevel', 20))
+            if ($this->settings->getSetting('borrowperlevel', 20) !== '' && $this->settings->getSetting('borrowperlevel', 20) !== '0')
             {
                 $this->navigation->addNav('nav.borrow.label', 'bank.php?op=borrow');
             }
@@ -86,7 +86,7 @@ class BankController extends AbstractController
         {
             $this->navigation->addNav('nav.deposit.pay', 'bank.php?op=deposit');
 
-            if ($this->settings->getSetting('borrowperlevel', 20))
+            if ($this->settings->getSetting('borrowperlevel', 20) !== '' && $this->settings->getSetting('borrowperlevel', 20) !== '0')
             {
                 $this->navigation->addNav('nav.borrow.more', 'bank.php?op=borrow');
             }
@@ -168,7 +168,7 @@ class BankController extends AbstractController
             $result     = $repository->find($to);
 
             $params['transferred'] = 0;
-            if ($result)
+            if ($result !== null)
             {
                 $maxtfer = $result->getLevel() * $this->settings->getSetting('transferperlevel', 25);
 
