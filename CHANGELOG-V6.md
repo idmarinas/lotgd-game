@@ -30,6 +30,11 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :wrench: FIXES
 
 -   **Include fixes of version 5.5.9**
+-   **src/core/Combat/Battle/Buff.php** 
+    -   Fix error, method `->addContextToRoundEnemy()` need only 1 param
+    -   Fix error with method `->substitute()` now pass correct params
+-   **src/core/Combat/Battle/Movement.php** Fix error, method `->addContextToRoundEnemy()` need only 1 param
+-   **src/core/Combat/Battle/Process.php** Fix error, method `->addContextToRoundEnemy()` need only 1 param
 
 ### :x: REMOVES
 
