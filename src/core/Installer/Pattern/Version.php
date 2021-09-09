@@ -86,7 +86,7 @@ trait Version
         '5.1.2 IDMarinas Edition'         => 50102,
         '5.1.3 IDMarinas Edition'         => 50103,
         '5.1.4 IDMarinas Edition'         => 50104,
-        '5.1.4 IDMarinas Edition'         => 50105,
+        '5.1.5 IDMarinas Edition'         => 50105,
         '5.1.6 IDMarinas Edition'         => 50106,
         '5.2.0 IDMarinas Edition'         => 50200,
         '5.2.1 IDMarinas Edition'         => 50201,

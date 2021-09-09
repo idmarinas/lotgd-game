@@ -344,7 +344,7 @@ class InnController extends AbstractController
             $this->navigation->addNav('nav.go.room', 'inn.php?op=room&pay=1');
         }
 
-        $bodyguards = ['Butch', 'Bruce', 'Alfonozo', 'Guido', 'Bruno', 'Bubba', 'Al', 'Chuck', 'Brutus', 'Nunzio', 'Terrance', 'Mitch', 'Rocco', 'Spike', 'Gregor', 'Sven', 'Draco'];
+        // $bodyguards = ['Butch', 'Bruce', 'Alfonozo', 'Guido', 'Bruno', 'Bubba', 'Al', 'Chuck', 'Brutus', 'Nunzio', 'Terrance', 'Mitch', 'Rocco', 'Spike', 'Gregor', 'Sven', 'Draco'];
 
         $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_INN_ROOMS);
         modulehook('innrooms');

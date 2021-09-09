@@ -31,7 +31,7 @@ class LocationType extends ChoiceType
     {
         parent::configureOptions($resolver);
 
-        $vname = LotgdSetting::getSetting('villagename', LOCATION_FIELDS);
+        $vname = $this->settings->getSetting('villagename', LOCATION_FIELDS);
         $locs  = new Other([
             $vname => [
                 'location.village.of',

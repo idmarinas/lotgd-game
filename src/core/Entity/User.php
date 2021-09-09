@@ -439,7 +439,6 @@ class User implements UserInterface
     /**
      * Set the value of Emailaddress.
      *
-     * @param string $emailaddress
      *
      * @return self
      */
@@ -620,11 +619,6 @@ class User implements UserInterface
     public function setRegdate(\DateTime $regdate)
     {
         $this->regdate = $regdate;
-
-        if ( ! $regdate instanceof \DateTimeInterface)
-        {
-            $this->regdate = new \DateTime($regdate);
-        }
 
         return $this;
     }

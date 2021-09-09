@@ -68,7 +68,7 @@ class CreateController extends AbstractController
 
     public function forgotVal(array $params, Request $request): Response
     {
-        /** @var Lotgd\Core\Repository\UserRepository */
+        /** @var Lotgd\Core\Repository\UserRepository $accountRepo */
         $accountRepo   = $this->getDoctrine()->getRepository('LotgdCore:User');
         $forgottenCode = $request->query->getInt('id');
 
@@ -106,7 +106,7 @@ class CreateController extends AbstractController
 
     public function val(array $params, Request $request): Response
     {
-        /** @var Lotgd\Core\Repository\UserRepository */
+        /** @var Lotgd\Core\Repository\UserRepository $accountRepo */
         $accountRepo = $this->getDoctrine()->getRepository('LotgdCore:User');
         $code        = $request->query->getInt('id');
 
@@ -119,7 +119,7 @@ class CreateController extends AbstractController
             return $this->redirect('home.php');
         }
 
-        $params['showLoginButton'] = (bool) ! ($account->getReplaceemail());
+        $params['showLoginButton'] = ! ($account->getReplaceemail());
 
         if ($account->getReplaceemail())
         {

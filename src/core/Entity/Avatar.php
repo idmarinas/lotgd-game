@@ -969,8 +969,6 @@ class Avatar
      * Set the value of Badguy.
      *
      * @param array $badguy
-     *
-     * @return self
      */
     public function setBadguy($badguy): self
     {
@@ -1017,8 +1015,6 @@ class Avatar
      * Set the value of Allowednavs.
      *
      * @param array $allowednavs
-     *
-     * @return self
      */
     public function setAllowednavs($allowednavs): self
     {
@@ -1586,7 +1582,6 @@ class Avatar
     /**
      * Set the value of Bio.
      *
-     * @param string $bio
      *
      * @return self
      */

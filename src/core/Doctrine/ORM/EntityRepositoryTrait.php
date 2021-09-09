@@ -95,9 +95,7 @@ trait EntityRepositoryTrait
     /**
      * Create query for translate entity.
      *
-     * @param string $dql
-     *                    Note: If pass a "Doctrine\ORM\QueryBuilder" auto-get a DQL string
-     *
+     * @param string $dql Note: If pass a "Doctrine\ORM\QueryBuilder" auto-get a DQL string
      * @return \Doctrine\ORM\Query
      */
     public function createTranslatebleQuery(string $dql)

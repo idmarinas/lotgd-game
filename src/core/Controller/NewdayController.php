@@ -164,6 +164,11 @@ class NewdayController extends AbstractController
         return $this->translationDomain;
     }
 
+    protected function getTranslationDomainNavigation(): string
+    {
+        return $this->translationDomainNavigation;
+    }
+
     private function dragonPointsLabels(): array
     {
         $labels = [

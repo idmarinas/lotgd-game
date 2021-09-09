@@ -52,7 +52,7 @@ abstract class AbstractCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        /** @var Lotgd\Core\Kernel */
+        /** @var Lotgd\Core\Kernel $app */
         $app    = $this->getApplication();
         $kernel = $app->getKernel();
 
@@ -122,6 +122,6 @@ abstract class AbstractCommand extends Command
 
         $command = $this->getApplication()->find('doctrine:migrations:migrate');
 
-        return (int) $command->run($input, new NullOutput());
+        return $command->run($input, new NullOutput());
     }
 }

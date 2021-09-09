@@ -121,13 +121,13 @@ class BankController extends AbstractController
     protected function transfer2(array $params, Request $request): Response
     {
         $to  = $request->request->getInt('to');
-        $amt = abs((int) $request->request->getInt('amount', 0));
+        $amt = abs($request->request->getInt('amount', 0));
 
         $params['opt']    = 'transfer2';
         $params['amount'] = $amt;
         $params['to']     = $to;
 
-        /** @var Lotgd\Core\Repository\CharactersRepository */
+        /** @var Lotgd\Core\Repository\CharactersRepository $repository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
         $characters = $repository->findLikeName("%{$to}%", 100);
 

@@ -57,7 +57,7 @@ class NewsController extends AbstractController
 
         if ($hookIntercept['showLastMotd'] ?? false)
         {
-            /** @var \Lotgd\Core\Repository\MotdRepository */
+            /** @var \Lotgd\Core\Repository\MotdRepository $repository */
             $repository         = $this->getDoctrine()->getRepository('LotgdCore:Motd');
             $params['lastMotd'] = $repository->getLastMotd($session['user']['acctid'] ?? null);
         }
@@ -106,7 +106,7 @@ class NewsController extends AbstractController
 
         $params['SU_EDIT_COMMENTS'] = $session['user']['superuser'] & SU_EDIT_COMMENTS;
 
-        /** @var Lotgd\Core\Repository\NewsRepository */
+        /** @var Lotgd\Core\Repository\NewsRepository $newsRepo */
         $newsRepo = $this->getDoctrine()->getRepository('LotgdCore:News');
         $page     = $request->query->getInt('page');
         $day      = $request->query->getInt('day');

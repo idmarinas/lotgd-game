@@ -109,7 +109,7 @@ final class LotgdInstallCommand extends Command
 
     private function doExecute(InputInterface $input, OutputInterface $output)
     {
-        /** @var Lotgd\Core\Kernel */
+        /** @var Lotgd\Core\Kernel $app */
         $app         = $this->getApplication();
         $kernel      = $app->getKernel();
         $this->style = new SymfonyStyle($input, $output);
@@ -217,7 +217,7 @@ final class LotgdInstallCommand extends Command
                 continue;
             }
 
-            /** @var Lotgd\Core\Installer\Command\AbstractCommand */
+            /** @var Lotgd\Core\Installer\Command\AbstractCommand  $command*/
             $command = $this->getApplication()->find("lotgd:install:v:{$v_id}");
             $command->setProgressBar($installerBar);
             $returnCode = (int) $command->run($input, $output);
@@ -257,7 +257,7 @@ final class LotgdInstallCommand extends Command
 
     private function createUserAdmin(InputInterface $input, OutputInterface $output)
     {
-        /** @var Lotgd\Core\Repository\UserRepository */
+        /** @var Lotgd\Core\Repository\UserRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:User');
         $superusers = (bool) $repository->getSuperuserCountWithPermit(SU_MEGAUSER);
 
