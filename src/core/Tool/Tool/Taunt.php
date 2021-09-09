@@ -16,8 +16,6 @@ trait Taunt
 {
     /**
      * Select 1 taunt.
-     *
-     * @param array $extraParams
      */
     public function selectTaunt(array $extraParams = []): array
     {

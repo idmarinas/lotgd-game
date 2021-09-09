@@ -153,7 +153,7 @@ class Tool
         else
         {
             $repository = $this->doctrine->getRepository('LotgdCore:User');
-            /** @var \Lotgd\Core\Entity\User */
+            /** @var \Lotgd\Core\Entity\User $result */
             $result = $repository->findOneBy(['login' => $login]);
 
             if ($result && ($result->getBanoverride() || ($result->getSuperuser() & ~SU_DOESNT_GIVE_GROTTO)))
@@ -167,7 +167,7 @@ class Tool
             $id = $result->getUniqueid();
         }
 
-        /** @var \Lotgd\Core\Repository\BansRepository */
+        /** @var \Lotgd\Core\Repository\BansRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Bans');
         $repository->removeExpireBans();
 
@@ -231,7 +231,7 @@ class Tool
             return null;
         }
 
-        /** @var \Lotgd\Core\Repository\MountsRepository */
+        /** @var \Lotgd\Core\Repository\MountsRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Mounts');
 
         return $repository->extractEntity($repository->find($horse));
@@ -257,7 +257,7 @@ class Tool
             return SEX_MALE == $session['user']['prefs']['sexuality'] ? $partnerMale : $partnerFemale;
         }
 
-        /** @var \Lotgd\Core\Repository\UserRepository */
+        /** @var \Lotgd\Core\Repository\UserRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:User');
         $name       = $repository->getCharacterNameFromAcctId($session['user']['marriedto']);
 

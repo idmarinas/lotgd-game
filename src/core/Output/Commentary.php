@@ -124,7 +124,7 @@ class Commentary
             {
                 $item->expiresAt(new \DateTime('tomorrow'));
 
-                /** @var Entity\Core\Repository\ClanRepository */
+                /** @var Entity\Core\Repository\ClanRepository $clanRep */
                 $clanRep = $this->doctrine->getRepository(\Lotgd\Core\Entity\Clans::class);
                 $clanInfo = $clanRep->findOneBy(['clanid' => $session['user']['clanid']]);
                 $clanInfo = $clanRep->extractEntity($clanInfo);

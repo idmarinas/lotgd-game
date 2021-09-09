@@ -63,12 +63,10 @@ class MessageFormatter extends CoreMessageFormatter implements MessageFormatterI
      */
     private function cleanParameters($param): bool
     {
-        return (bool) (
-            \is_string($param) //-- Allow string values
-            || \is_numeric($param) //-- Allow numeric values
-            || \is_bool($param) //-- Allow bool values
-            || \is_null($param) //-- Allow null value (Formatter can handle this value)
-            || $param instanceof \DateTime //-- Allow DateTime object
-        );
+        return \is_string($param) //-- Allow string values
+        || \is_numeric($param) //-- Allow numeric values
+        || \is_bool($param) //-- Allow bool values
+        || \is_null($param) //-- Allow null value (Formatter can handle this value)
+        || $param instanceof \DateTime; //-- Allow DateTime object
     }
 }

@@ -61,7 +61,7 @@ class AvatarCleanService
         $new   = (int) $this->settings->getSetting('expirenewacct', 10);
         $trash = (int) $this->settings->getSetting('expiretrashacct', 1);
 
-        /** @var \Lotgd\Core\Repository\AvatarRepository */
+        /** @var \Lotgd\Core\Repository\AvatarRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Avatar');
         $query      = $repository->createQueryBuilder('u');
         $expr       = $query->expr();
@@ -100,7 +100,7 @@ class AvatarCleanService
         //adjust for notification - don't notify total newbie chars
         $old = max(1, $old - (int) $this->settings->getSetting('notifydaysbeforedeletion', 5)); //a minimum of 1 day is necessary
 
-        /** @var \Lotgd\Core\Repository\UserRepository */
+        /** @var \Lotgd\Core\Repository\UserRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:User');
         $query      = $repository->createQueryBuilder('a');
 
@@ -126,7 +126,7 @@ class AvatarCleanService
 
         $result = $query->getQuery()->getResult();
 
-        $server = (string) $this->settings->getSetting('serverurl', 'http://nodomain.notd');
+        $server = $this->settings->getSetting('serverurl', 'https://nodomain.notd');
 
         foreach ($result as $entity)
         {

@@ -32,15 +32,15 @@ class ContentCleanService
 
     public function execute(): void
     {
-        //- Clean up referer entries
-        /** @var \Lotgd\Core\Repository\ReferersRepository */
+        //-- Clean up referer entries
+        /** @var \Lotgd\Core\Repository\ReferersRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Referers');
         $result     = $repository->deleteExpireReferers(60);
 
         $this->log->game("Deleted {$result} records from referers older than 60 days.", 'maintenance');
 
-        //Clean up old mails
-        /** @var \Lotgd\Core\Repository\MailRepository */
+        //-- Clean up old mails
+        /** @var \Lotgd\Core\Repository\MailRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Mail');
         $time       = (int) $this->settings->getSetting('oldmail', 14);
         $result     = $repository->deleteExpireMail($time);
@@ -53,14 +53,14 @@ class ContentCleanService
         if ($time)
         {
             //-- Clean up news
-            /** @var \Lotgd\Core\Repository\NewsRepository */
+            /** @var \Lotgd\Core\Repository\NewsRepository $repository */
             $repository = $this->doctrine->getRepository('LotgdCore:News');
             $result     = $repository->deleteExpireNews($time);
 
             $this->log->game("Deleted {$result} records from news older than {$time} days.", 'maintenance');
 
             //-- Clean up old comments
-            /** @var \Lotgd\Core\Repository\CommentaryRepository */
+            /** @var \Lotgd\Core\Repository\CommentaryRepository $repository */
             $repository = $this->doctrine->getRepository('LotgdCore:Commentary');
             $result     = $repository->deleteExpireComments($time);
 
@@ -71,7 +71,7 @@ class ContentCleanService
 
             if ($time)
             {
-                /** @var \Lotgd\Core\Repository\FaillogRepository */
+                /** @var \Lotgd\Core\Repository\FaillogRepository $repository */
                 $repository = $this->doctrine->getRepository('LotgdCore:Faillog');
                 $result     = $repository->deleteExpireFaillogs($time);
 
@@ -84,7 +84,7 @@ class ContentCleanService
 
         if ($time)
         {
-            /** @var \Lotgd\Core\Repository\GamelogRepository */
+            /** @var \Lotgd\Core\Repository\GamelogRepository $repository */
             $repository = $this->doctrine->getRepository('LotgdCore:Gamelog');
             $result     = $repository->deleteExpireGamelogs($time);
 

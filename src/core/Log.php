@@ -65,7 +65,7 @@ class Log
     {
         global $session;
 
-        /** @var Lotgd\Core\Repository\DebuglogRepository */
+        /** @var Lotgd\Core\Repository\DebuglogRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Debuglog');
 
         $corevalue = $value;
@@ -105,7 +105,7 @@ class Log
 
         $value = $value ?: 0;
 
-        /** @var Debuglog */
+        /** @var Debuglog $entity */
         $entity = $repository->find($id) ?: new Debuglog();
         $entity->setDate(new \DateTime('now'))
             ->setActor($user)

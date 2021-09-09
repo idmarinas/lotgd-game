@@ -126,8 +126,6 @@ trait Name
             $title = $ntitle;
         }
 
-        $newname = $title.' '.$newname;
-
-        return $newname;
+        return $title.' '.$newname;
     }
 }

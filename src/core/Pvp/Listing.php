@@ -19,6 +19,7 @@ use Lotgd\Core\Lib\Settings;
 class Listing
 {
     protected $doctrine;
+    /** @var \Lotgd\Core\Repository\CharactersRepository */
     protected $repository;
     protected $query;
     private $settings;
@@ -97,7 +98,6 @@ class Listing
             $pvpSameId = (bool) $this->settings->getSetting('pvpsameid', 0);
             $pvpSameIp = (bool) $this->settings->getSetting('pvpsameip', 0);
 
-            /** @var \Lotgd\Core\Repository\CharactersRepository */
             $this->repository = $this->doctrine->getRepository('LotgdCore:Avatar');
             $this->query      = $this->repository->createQueryBuilder('u');
             $expr             = $this->query->expr();
