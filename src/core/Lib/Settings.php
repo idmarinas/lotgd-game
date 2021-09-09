@@ -23,7 +23,7 @@ class Settings
 
     public function __construct(CacheInterface $cache, EntityManagerInterface $doctrine)
     {
-        $this->cache = $cache;
+        $this->cache    = $cache;
         $this->doctrine = $doctrine;
     }
 
@@ -99,7 +99,7 @@ class Settings
         {
             $item->expiresAt(new \DateTime('tomorrow'));
 
-            $sets   = [];
+            $sets = [];
 
             try
             {
@@ -116,7 +116,7 @@ class Settings
             }
 
             //-- If not found mark as expired
-            if ( ! \count($sets))
+            if (empty($sets))
             {
                 $item->expiresAt(new \DateTime('now'));
             }
@@ -178,7 +178,7 @@ class Settings
     {
         if ( ! $this->repository)
         {
-            $this->repository = $this->doctrine->getRepository('LotgdCore:'.\ucfirst($this->tablename));
+            $this->repository = $this->doctrine->getRepository('LotgdCore:'.ucfirst($this->tablename));
         }
 
         return $this->repository;
