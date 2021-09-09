@@ -32,7 +32,6 @@ trait Referer
     /**
      * Set the value of Referer.
      *
-     *
      * @return self
      */
     public function setReferer(int $referer)

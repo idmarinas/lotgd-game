@@ -138,7 +138,6 @@ class Weapons implements Translatable
     /**
      * Set the value of Weaponname.
      *
-     *
      * @return self
      */
     public function setWeaponname(string $weaponname)
@@ -158,7 +157,6 @@ class Weapons implements Translatable
 
     /**
      * Set the value of Value.
-     *
      *
      * @return self
      */
@@ -180,7 +178,6 @@ class Weapons implements Translatable
     /**
      * Set the value of Damage.
      *
-     *
      * @return self
      */
     public function setDamage(int $damage)
@@ -200,7 +197,6 @@ class Weapons implements Translatable
 
     /**
      * Set the value of Level.
-     *
      *
      * @return self
      */

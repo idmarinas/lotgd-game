@@ -201,9 +201,11 @@ class Mail
     /**
      * Set the value of Sent.
      *
+     * @param \DateTime|\DateTimeImmutable $sent
+     *
      * @return self
      */
-    public function setSent(\DateTime $sent)
+    public function setSent(\DateTimeInterface $sent)
     {
         $this->sent = $sent;
 
@@ -212,8 +214,10 @@ class Mail
 
     /**
      * Get the value of Sent.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getSent(): \DateTime
+    public function getSent(): \DateTimeInterface
     {
         return $this->sent;
     }

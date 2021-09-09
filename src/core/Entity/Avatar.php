@@ -1190,9 +1190,11 @@ class Avatar
     /**
      * Set the value of Lastmotd.
      *
+     * @param \DateTime|\DateTimeImmutable $lastmotd
+     *
      * @return self
      */
-    public function setLastmotd(\DateTime $lastmotd)
+    public function setLastmotd(\DateTimeInterface $lastmotd)
     {
         $this->lastmotd = $lastmotd;
 
@@ -1201,8 +1203,10 @@ class Avatar
 
     /**
      * Get the value of Lastmotd.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getLastmotd(): \DateTime
+    public function getLastmotd(): \DateTimeInterface
     {
         return $this->lastmotd;
     }
@@ -1232,9 +1236,11 @@ class Avatar
     /**
      * Set the value of Lasthit.
      *
+     * @param \DateTime|\DateTimeImmutable $lasthit
+     *
      * @return self
      */
-    public function setLasthit(\DateTime $lasthit)
+    public function setLasthit(\DateTimeInterface $lasthit)
     {
         $this->lasthit = $lasthit;
 
@@ -1243,8 +1249,10 @@ class Avatar
 
     /**
      * Get the value of Lasthit.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getLasthit(): \DateTime
+    public function getLasthit(): \DateTimeInterface
     {
         return $this->lasthit;
     }
@@ -1432,9 +1440,11 @@ class Avatar
     /**
      * Set the value of Pvpflag.
      *
+     * @param \DateTime|\DateTimeImmutable $pvpflag
+     *
      * @return self
      */
-    public function setPvpflag(\DateTime $pvpflag)
+    public function setPvpflag(\DateTimeInterface $pvpflag)
     {
         $this->pvpflag = $pvpflag;
 
@@ -1443,8 +1453,10 @@ class Avatar
 
     /**
      * Get the value of Pvpflag.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getPvpflag(): \DateTime
+    public function getPvpflag(): \DateTimeInterface
     {
         return $this->pvpflag;
     }
@@ -1562,9 +1574,11 @@ class Avatar
     /**
      * Set the value of Recentcomments.
      *
+     * @param \DateTime|\DateTimeImmutable $recentcomments
+     *
      * @return self
      */
-    public function setRecentcomments(\DateTime $recentcomments)
+    public function setRecentcomments(\DateTimeInterface $recentcomments)
     {
         $this->recentcomments = $recentcomments;
 
@@ -1573,15 +1587,16 @@ class Avatar
 
     /**
      * Get the value of Recentcomments.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getRecentcomments(): \DateTime
+    public function getRecentcomments(): \DateTimeInterface
     {
         return $this->recentcomments;
     }
 
     /**
      * Set the value of Bio.
-     *
      *
      * @return self
      */
@@ -1625,9 +1640,11 @@ class Avatar
     /**
      * Set the value of Biotime.
      *
+     * @param \DateTime|\DateTimeImmutable $biotime
+     *
      * @return self
      */
-    public function setBiotime(\DateTime $biotime)
+    public function setBiotime(\DateTimeInterface $biotime)
     {
         $this->biotime = $biotime;
 
@@ -1636,8 +1653,10 @@ class Avatar
 
     /**
      * Get the value of Biotime.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getBiotime(): \DateTime
+    public function getBiotime(): \DateTimeInterface
     {
         return $this->biotime;
     }

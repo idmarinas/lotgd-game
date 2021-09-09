@@ -276,9 +276,11 @@ class Modules
     /**
      * Set the value of Installdate.
      *
+     * @param \DateTime|\DateTimeImmutable $installdate
+     *
      * @return self
      */
-    public function setInstalldate(\DateTime $installdate)
+    public function setInstalldate(\DateTimeInterface $installdate)
     {
         $this->installdate = $installdate;
 
@@ -287,8 +289,10 @@ class Modules
 
     /**
      * Get the value of Installdate.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getInstalldate(): \DateTime
+    public function getInstalldate(): \DateTimeInterface
     {
         return $this->installdate;
     }
@@ -318,9 +322,11 @@ class Modules
     /**
      * Set the value of Filemoddate.
      *
+     * @param \DateTime|\DateTimeImmutable $filemoddate
+     *
      * @return self
      */
-    public function setFilemoddate(\DateTime $filemoddate)
+    public function setFilemoddate(\DateTimeInterface $filemoddate)
     {
         $this->filemoddate = $filemoddate;
 
@@ -329,8 +335,10 @@ class Modules
 
     /**
      * Get the value of Filemoddate.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getFilemoddate(): \DateTime
+    public function getFilemoddate(): \DateTimeInterface
     {
         return $this->filemoddate;
     }

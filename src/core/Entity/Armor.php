@@ -140,7 +140,6 @@ class Armor implements Translatable
     /**
      * Set the value of Armorname.
      *
-     *
      * @return self
      */
     public function setArmorname(string $armorname)
@@ -160,7 +159,6 @@ class Armor implements Translatable
 
     /**
      * Set the value of Value.
-     *
      *
      * @return self
      */
@@ -182,7 +180,6 @@ class Armor implements Translatable
     /**
      * Set the value of Defense.
      *
-     *
      * @return self
      */
     public function setDefense(int $defense)
@@ -202,7 +199,6 @@ class Armor implements Translatable
 
     /**
      * Set the value of Level.
-     *
      *
      * @return self
      */

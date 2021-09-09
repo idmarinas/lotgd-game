@@ -345,7 +345,7 @@ class Mounts implements Translatable
     {
         if (\is_string($this->mountbuff))
         {
-            $this->mountbuff = \unserialize($this->mountbuff);
+            $this->mountbuff = unserialize($this->mountbuff);
         }
 
         return $this->mountbuff;
