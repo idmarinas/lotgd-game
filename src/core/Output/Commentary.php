@@ -211,21 +211,21 @@ class Commentary
 
         //-- Only accept correct format, all italic open tag need close tag.
         //-- Other wise, italic format is removed.
-        if (substr_count($comment, '`i') != substr_count($comment, '´i'))
+        if (substr_count($comment, '`i') !== substr_count($comment, '´i'))
         {
             $filterChain->attach(new Filter\PregReplace(['pattern' => ['/`i/', '/´i/'], 'replacement' => '']));
         }
 
         //-- Only accept correct format, all bold open tag need close tag.
         //-- Other wise, bold format is removed.
-        if (substr_count($comment, '`b') != substr_count($comment, '´b'))
+        if (substr_count($comment, '`b') !== substr_count($comment, '´b'))
         {
             $filterChain->attach(new Filter\PregReplace(['pattern' => ['/`b/', '/´b/'], 'replacement' => '']));
         }
 
         //-- Only accept correct format, all center open tag need close tag.
         //-- Other wise, center format is removed.
-        if (substr_count($comment, '`c') != substr_count($comment, '´c'))
+        if (substr_count($comment, '`c') !== substr_count($comment, '´c'))
         {
             $filterChain->attach(new Filter\PregReplace(['pattern' => ['/`c/', '/´c/'], 'replacement' => '']));
         }

@@ -124,7 +124,10 @@ class NewdayController extends AbstractController
         $dp     = \count($session['user']['dragonpoints']);
         $dkills = $session['user']['dragonkills'];
 
-        (1 == $pdk) && $this->recalculateDragonPoints($labels, $dp, $request);
+        if (1 == $pdk)
+        {
+            $this->recalculateDragonPoints($labels, $dp, $request);
+        }
 
         if ($dp < $dkills)
         {
@@ -214,7 +217,7 @@ class NewdayController extends AbstractController
 
         if (\count($session['user']['dragonpoints']) < $session['user']['dragonkills'] && '' != $dk)
         {
-            array_push($session['user']['dragonpoints'], $dk);
+            $session['user']['dragonpoints'][] = $dk;
 
             switch ($dk)
             {

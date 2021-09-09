@@ -102,7 +102,7 @@ class Format
         $diff = $now->diff($indate);
 
         $params  = [];
-        $sufix   = $diff->invert ? 'ago' : 'left';
+        $sufix   = $diff->invert !== 0 ? 'ago' : 'left';
         $message = "{$sufix}.now";
 
         if ($diff->y > 0)

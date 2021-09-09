@@ -182,7 +182,7 @@ class Tool
             ->getResult()
         ;
 
-        if (\count($result))
+        if ( ! empty($result))
         {
             $translator = $this->kernel->getContainer()->get('translator');
             $session    = [];
@@ -226,7 +226,7 @@ class Tool
     {
         $horse = (int) $horse;
 
-        if ( ! $horse)
+        if ( $horse === 0)
         {
             return null;
         }
@@ -261,7 +261,7 @@ class Tool
         $repository = $this->doctrine->getRepository('LotgdCore:User');
         $name       = $repository->getCharacterNameFromAcctId($session['user']['marriedto']);
 
-        if ($name)
+        if ($name !== '' && $name !== '0')
         {
             return $name;
         }

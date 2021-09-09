@@ -34,7 +34,7 @@ class Stats
     {
         if (null !== $value)
         {
-            if ( ! $this->getLastCat())
+            if ( $this->getLastCat() === '' || $this->getLastCat() === '0')
             {
                 $this->addcharstat('Other Info');
             }

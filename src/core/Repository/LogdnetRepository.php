@@ -201,7 +201,7 @@ class LogdnetRepository extends ServiceEntityRepository
         }
 
         // If both are the same prefix (or no prefix), just strcmp.
-        if ($costa == $costb)
+        if ($costa === $costb)
         {
             return strcmp($aver, $bver);
         }

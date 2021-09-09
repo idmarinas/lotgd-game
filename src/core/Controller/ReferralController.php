@@ -80,7 +80,7 @@ class ReferralController extends AbstractController
 
         if ( ! preg_match('/\\/$/', $url))
         {
-            $url = $url.'/';
+            $url .= '/';
             $this->settings->saveSetting('serverurl', $url);
         }
 

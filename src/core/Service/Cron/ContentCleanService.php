@@ -50,7 +50,7 @@ class ContentCleanService
         //-- CONTENT
         $time = (int) $this->settings->getSetting('expirecontent', 180);
 
-        if ($time)
+        if ($time !== 0)
         {
             //-- Clean up news
             /** @var \Lotgd\Core\Repository\NewsRepository $repository */
@@ -69,7 +69,7 @@ class ContentCleanService
             //-- Expire the faillog entries
             $time = (int) $this->settings->getSetting('expirefaillog', 1);
 
-            if ($time)
+            if ($time !== 0)
             {
                 /** @var \Lotgd\Core\Repository\FaillogRepository $repository */
                 $repository = $this->doctrine->getRepository('LotgdCore:Faillog');
@@ -82,7 +82,7 @@ class ContentCleanService
         //-- Clean up game log
         $time = (int) $this->settings->getSetting('expiregamelog', 30);
 
-        if ($time)
+        if ($time !== 0)
         {
             /** @var \Lotgd\Core\Repository\GamelogRepository $repository */
             $repository = $this->doctrine->getRepository('LotgdCore:Gamelog');

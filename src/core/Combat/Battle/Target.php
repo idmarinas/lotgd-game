@@ -66,7 +66,7 @@ trait Target
                     $this->addContextToMessages([
                         'battle.untarget',
                         ['creature_name' => $badguy['creaturename']],
-                        $this->getTranslationDomain()
+                        $this->getTranslationDomain(),
                     ]);
 
                     $this->autoTarget(); //-- Select one target if selected targed cant be targeted
@@ -85,7 +85,7 @@ trait Target
         //-- Count enemies alive
         $enemies = array_filter($this->enemies, function ($val)
         {
-            return ! ((isset($val['dead']) && $val['dead']) || $val['creaturehealth'] <= 0);
+            return ! (isset($val['dead']) && $val['dead']) && $val['creaturehealth'] > 0;
         });
 
         return \count($enemies);

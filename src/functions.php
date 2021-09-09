@@ -190,9 +190,7 @@ if ( ! \function_exists('createstring'))
             __METHOD__
         ), E_USER_DEPRECATED);
 
-        $out = \is_array($array) || \is_object($array) ? \serialize($array) : (string) $array;
-
-        return $out;
+        return \is_array($array) || \is_object($array) ? \serialize($array) : (string) $array;
     }
 }
 

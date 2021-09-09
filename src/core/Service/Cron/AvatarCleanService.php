@@ -79,18 +79,18 @@ class AvatarCleanService
             ->where('BIT_AND(a.superuser, :permit) = 0')
             ->andWhere($expr->orX(
                 '1 = 0',
-                $old ? $expr->lt('a.laston', ':dateOld') : null,
-                $new ? $expr->andX($expr->lt('a.laston', ':dateNew'), $expr->eq('u.level', 1), $expr->eq('u.dragonkills', 0)) : null,
-                $trash ? $expr->andX($expr->lt('a.regdate', ':dateTrash'), $expr->eq('a.laston', 'a.regdate')) : null
+                $old !== 0 ? $expr->lt('a.laston', ':dateOld') : null,
+                $new !== 0 ? $expr->andX($expr->lt('a.laston', ':dateNew'), $expr->eq('u.level', 1), $expr->eq('u.dragonkills', 0)) : null,
+                $trash !== 0 ? $expr->andX($expr->lt('a.regdate', ':dateTrash'), $expr->eq('a.laston', 'a.regdate')) : null
             ))
             ->leftJoin('LotgdCore:User', 'a', 'with', $expr->eq('a.acctid', 'u.acct'))
 
             ->setParameter('permit', NO_ACCOUNT_EXPIRATION)
         ;
 
-        ($old) ? $query->setParameter('dateOld', $dateOld) : null;
-        ($new) ? $query->setParameter('dateNew', $dateNew) : null;
-        ($trash) ? $query->setParameter('dateTrash', $dateTrash) : null;
+        ($old !== 0) ? $query->setParameter('dateOld', $dateOld) : null;
+        ($new !== 0) ? $query->setParameter('dateNew', $dateNew) : null;
+        ($trash !== 0) ? $query->setParameter('dateTrash', $dateTrash) : null;
 
         $result = $query->getQuery()->getResult();
 
@@ -109,7 +109,7 @@ class AvatarCleanService
             ->andWhere(
                 $expr->orX(
                     '1 = 0',
-                    $old ? $expr->lt('a.laston', ':dateOld') : null
+                    $old !== 0 ? $expr->lt('a.laston', ':dateOld') : null
                 ),
                 $expr->andX(
                     $expr->neq('a.emailaddress', ':empty'),
@@ -122,7 +122,7 @@ class AvatarCleanService
             ->setParameter('empty', '')
         ;
 
-        ($old) ? $query->setParameter('dateOld', $dateOld) : null;
+        ($old !== 0) ? $query->setParameter('dateOld', $dateOld) : null;
 
         $result = $query->getQuery()->getResult();
 
@@ -165,7 +165,7 @@ class AvatarCleanService
                 continue;
             }
 
-            array_push($pinfo, "{$entity->getAcct()->getLogin()}:dk{$entity->getDragonkills()}-lv{$entity->getLevel()}");
+            $pinfo[] = "{$entity->getAcct()->getLogin()}:dk{$entity->getDragonkills()}-lv{$entity->getLevel()}";
 
             if (0 == $entity->getDragonkills())
             {

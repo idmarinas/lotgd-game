@@ -66,18 +66,18 @@ class HomeController extends AbstractController
             'includeTemplatesPre'   => [], //-- Templates that are in top of content (but below of title)
             'includeTemplatesIndex' => [], //-- Templates that are in index below of new player
             'includeTemplatesPost'  => [], //-- Templates that are in bottom of content
-            'gameclock'             => $this->settings->getSetting('homecurtime', 1) ? $this->dateTime->getGameTime() : null,
-            'newdaytimer'           => $this->settings->getSetting('homenewdaytime', 1) ? $this->dateTime->secondsToNextGameDay() : null,
+            'gameclock'             => '' !== $this->settings->getSetting('homecurtime', 1) && '0' !== $this->settings->getSetting('homecurtime', 1) ? $this->dateTime->getGameTime() : null,
+            'newdaytimer'           => '' !== $this->settings->getSetting('homenewdaytime', 1) && '0' !== $this->settings->getSetting('homenewdaytime', 1) ? $this->dateTime->secondsToNextGameDay() : null,
         ];
 
         //-- Get newest player name if show in home page
-        if ($this->settings->getSetting('homenewestplayer', 1))
+        if ('' !== $this->settings->getSetting('homenewestplayer', 1) && '0' !== $this->settings->getSetting('homenewestplayer', 1))
         {
             $name = $this->settings->getSetting('newestPlayerName', '');
             $old  = (int) $this->settings->getSetting('newestPlayerOld', 0);
             $new  = (int) $this->settings->getSetting('newestplayer', 0);
 
-            if (0 != $new && $old != $new)
+            if (0 != $new && $old !== $new)
             {
                 /** @var Lotgd\Core\Repository\CharactersRepository $character */
                 $character = $this->getDoctrine()->getRepository('LotgdCore:Avatar');

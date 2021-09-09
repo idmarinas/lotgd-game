@@ -123,7 +123,7 @@ class SystemMail
             $email = (new Email())
                 ->to($accountEntityTo->getEmailaddress())
                 ->subject($this->sanitize->fullSanitize($mailSubject))
-                ->html($this->format->colorize($mailMessage, true))
+                ->html($this->format->colorize($mailMessage))
             ;
 
             $this->mailer->send($email);

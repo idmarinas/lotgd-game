@@ -65,7 +65,7 @@ class CreatureFunction
         $expflux = e_rand(-$expflux, $expflux);
         $badguy['creatureexp'] += $expflux;
 
-        if ($this->settings->getSetting('disablebonuses', 1))
+        if ($this->settings->getSetting('disablebonuses', 1) !== '' && $this->settings->getSetting('disablebonuses', 1) !== '0')
         {
             //adapting flux as for people with many DKs they will just bathe in gold....
             $base = 30 - min(20, round(sqrt($session['user']['dragonkills']) / 2));
@@ -126,7 +126,7 @@ class CreatureFunction
                 //apply algorithmic creature generation.
                 $creaturehealth = ($i * 10) + ($i - 1) - round(sqrt($i - 1));
                 $creatureattack = 1 + ($i - 1) * 2;
-                $creaturedefense += ($i % 2 ? 1 : 2);
+                $creaturedefense += ($i % 2 !== 0 ? 1 : 2);
 
                 if ($i > 1)
                 {
@@ -195,8 +195,8 @@ class CreatureFunction
 
         //-- Apply multipliers
         $badguy['creaturegold']    = round($badguy['creaturegold'] * ($badguy['creaturegoldbonus'] ?? 1));
-        $badguy['creatureattack']  = $badguy['creatureattack']  * ($badguy['creatureattackbonus'] ?? 1);
-        $badguy['creaturedefense'] = $badguy['creaturedefense'] * ($badguy['creaturedefensebonus'] ?? 1);
+        $badguy['creatureattack'] *= $badguy['creatureattackbonus'] ?? 1;
+        $badguy['creaturedefense'] *= $badguy['creaturedefensebonus'] ?? 1;
         $badguy['creaturehealth']  = round($badguy['creaturehealth'] * ($badguy['creaturehealthbonus'] ?? 1));
 
         $creatureattr = $this->getCreatureStats($dk);
@@ -236,14 +236,7 @@ class CreatureFunction
         {
             $aiscriptfile = "{$badguy['creatureaiscript']}.php";
 
-            if (file_exists($aiscriptfile))
-            {
-                $badguy['creatureaiscript'] = "include '{$aiscriptfile}';";
-            }
-            else
-            {
-                $badguy['creatureaiscript'] = '';
-            }
+            $badguy['creatureaiscript'] = file_exists($aiscriptfile) ? "include '{$aiscriptfile}';" : '';
         }
 
         //-- Not show debug
@@ -268,7 +261,7 @@ class CreatureFunction
      */
     public function lotgdSearchCreature($multi, $targetlevel, $mintargetlevel, $packofmonsters = false, $forest = true): array
     {
-        $multi = false === $packofmonsters ? $multi : 1;
+        $multi = $packofmonsters ? 1 : $multi;
         $limit = ($multi > 1 ? $multi : 1);
 
         $query = $this->repository->createQueryBuilder('u');
@@ -294,11 +287,11 @@ class CreatureFunction
 
         $creatures = $query->getArrayResult();
 
-        if (\count($creatures))
+        if ( ! empty($creatures))
         {
-            foreach ($creatures as $key => $creature)
+            foreach ($creatures as &$creature)
             {
-                $creatures[$key]['creaturelevel'] = e_rand($mintargetlevel, $targetlevel);
+                $creature['creaturelevel'] = e_rand($mintargetlevel, $targetlevel);
             }
         }
 

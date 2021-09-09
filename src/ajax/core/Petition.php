@@ -171,7 +171,7 @@ class Petition extends AjaxAbstract
 
         if ( ! \preg_match('/\\/$/', $url))
         {
-            $url = $url.'/';
+            $url .= '/';
             \LotgdSetting::saveSetting('serverurl', $url);
         }
 
@@ -184,7 +184,7 @@ class Petition extends AjaxAbstract
         $msg = "{$tlServer}: {$url}\n";
         $msg .= "{$tlAuthor}: {$name}\n";
         $msg .= "{$tlDate} : {$date}\n";
-        $msg .= "{$tlBody} :\n".Debugger::dump($post, 'Post', false)."\n";
+        $msg .= "{$tlBody} :\n".Debugger::dump($post, 'Post')."\n";
 
         lotgd_mail(\LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com'), $tlSubject, $msg);
     }

@@ -71,7 +71,7 @@ class Translator extends AbstractExtension
         $msg = $formatter->format($parameters);
 
         //-- Dump error to debug
-        if ($formatter->getErrorCode())
+        if ($formatter->getErrorCode() !== 0)
         {
             bdump($formatter->getPattern());
             bdump($formatter->getErrorMessage());

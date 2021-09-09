@@ -56,7 +56,7 @@ final class DonationButtonsBlock extends AbstractBlockService
 
             if ( ! \preg_match("/\/$/", $a))
             {
-                $a = $a.'/';
+                $a .= '/';
                 $this->settings->saveSetting('serverurl', $a);
             }
 
@@ -67,7 +67,7 @@ final class DonationButtonsBlock extends AbstractBlockService
 
             if ( ! \preg_match("/\/$/", $u))
             {
-                $u = $u.'/';
+                $u .= '/';
                 $this->settings->saveSetting('logdnetserver', $u);
             }
 
