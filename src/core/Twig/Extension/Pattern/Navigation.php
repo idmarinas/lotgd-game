@@ -73,7 +73,7 @@ trait Navigation
 
         return $this->format->colorize(\sprintf(
             '<%1$s %2$s>%4$s %3$s %5$s</%1$s>',
-            ( ! $blocked ? 'a' : 'span'),
+            ( $blocked ? 'span' : 'a'),
             $attributes,
             $label,
             $options['current']['open'] ?? '', //-- Open style to nav if is current

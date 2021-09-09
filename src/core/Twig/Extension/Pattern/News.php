@@ -31,7 +31,7 @@ trait News
 
                 $message = '';
 
-                if (\count($deathmessage))
+                if ( ! empty($deathmessage))
                 {
                     $msg = $this->translator->trans($deathmessage['deathmessage'], $deathmessage['params'] ?? [], $deathmessage['textDomain']);
 
@@ -44,7 +44,7 @@ trait News
                     $message .= $msg;
                 }
 
-                if (\count($taunt))
+                if ( ! empty($taunt))
                 {
                     $msg = $this->translator->trans($taunt['taunt'], $taunt['params'] ?? [], $taunt['textDomain']);
 
@@ -66,6 +66,6 @@ trait News
         //-- This old of make news, are deprecated and deleted in future version.
         //-- Delete old news of your server.
 
-        return $this->sprintfnews(\str_replace('`%', '`%%', $item['text']), $item['arguments'] ?? []);
+        return $this->sprintfnews(str_replace('`%', '`%%', $item['text']), $item['arguments'] ?? []);
     }
 }

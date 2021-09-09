@@ -71,7 +71,7 @@ class Staff
         {
             $session['user']['experience'] -= $exploss;
             $text = $this->translator->trans('lost.exp', ['experience' => $exploss], self::TRANSLATION_DOMAIN);
-            $this->response->pageAddContent($this->format->colorize($text, true));
+            $this->response->pageAddContent($this->format->colorize($text));
         }
 
         $gold     = $session['user']['gold'];
@@ -86,7 +86,7 @@ class Staff
         {
             $session['user']['gold'] -= $goldloss;
             $text = $this->translator->trans('lost.exp', ['gold' => $goldloss], self::TRANSLATION_DOMAIN);
-            $this->response->pageAddContent($this->format->colorize($text, true));
+            $this->response->pageAddContent($this->format->colorize($text));
         }
 
         $session['user']['hitpoints'] = 0;

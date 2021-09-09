@@ -223,7 +223,7 @@ final class LotgdInstallCommand extends Command
             $returnCode = (int) $command->run($input, $output);
 
             //-- If command fail, abort installation
-            if ($returnCode)
+            if ($returnCode !== 0)
             {
                 $this->style->warning($this->translator->trans('installer.installation.abort.command', [
                     'version' => $this->installer->getNameVersion($v_id),
