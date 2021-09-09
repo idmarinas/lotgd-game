@@ -58,7 +58,7 @@ trait Extended
      *
      * @param int $amount Amount of health to be restored
      * @param int $target Enemy to heal (index ID of array of enemies)
-     * @param int $self The healer ID (index ID of array of enemies)
+     * @param int $self   The healer ID (index ID of array of enemies)
      */
     public function battleHeal(int $amount, int $target, int $healer): void
     {
@@ -78,7 +78,7 @@ trait Extended
                 ],
             ]);
         }
-        else if (isset($this->enemies[$target]) && $this->isEnemyAlive($this->enemies[$target]))
+        elseif (isset($this->enemies[$target]) && $this->isEnemyAlive($this->enemies[$target]))
         {
             $this->enemies[$target]['creaturehealth'] += $amount;
             $this->addContextToRoundEnemy([

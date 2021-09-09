@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Entity\User;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
@@ -187,7 +188,7 @@ class CreateController extends AbstractController
         {
             $account = $accountRepo->findOneBy(['login' => $charname]);
 
-            if (null === $account)
+            if ( ! $account instanceof \Lotgd\Core\Entity\User)
             {
                 $this->addFlash('warning', $this->translator->trans('forgot.account.notFound', [], $params['textDomain']));
 

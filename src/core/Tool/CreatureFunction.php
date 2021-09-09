@@ -65,7 +65,7 @@ class CreatureFunction
         $expflux = e_rand(-$expflux, $expflux);
         $badguy['creatureexp'] += $expflux;
 
-        if ($this->settings->getSetting('disablebonuses', 1) !== '' && $this->settings->getSetting('disablebonuses', 1) !== '0')
+        if ('' !== $this->settings->getSetting('disablebonuses', 1) && '0' !== $this->settings->getSetting('disablebonuses', 1))
         {
             //adapting flux as for people with many DKs they will just bathe in gold....
             $base = 30 - min(20, round(sqrt($session['user']['dragonkills']) / 2));
@@ -126,7 +126,7 @@ class CreatureFunction
                 //apply algorithmic creature generation.
                 $creaturehealth = ($i * 10) + ($i - 1) - round(sqrt($i - 1));
                 $creatureattack = 1 + ($i - 1) * 2;
-                $creaturedefense += ($i % 2 !== 0 ? 1 : 2);
+                $creaturedefense += (0 !== $i % 2 ? 1 : 2);
 
                 if ($i > 1)
                 {
@@ -194,10 +194,10 @@ class CreatureFunction
         $badguy['physicalresistance'] = $badguy['physicalresistance'] ?? 0;
 
         //-- Apply multipliers
-        $badguy['creaturegold']    = round($badguy['creaturegold'] * ($badguy['creaturegoldbonus'] ?? 1));
-        $badguy['creatureattack'] *= $badguy['creatureattackbonus'] ?? 1;
+        $badguy['creaturegold'] = round($badguy['creaturegold'] * ($badguy['creaturegoldbonus'] ?? 1));
+        $badguy['creatureattack']  *= $badguy['creatureattackbonus']   ?? 1;
         $badguy['creaturedefense'] *= $badguy['creaturedefensebonus'] ?? 1;
-        $badguy['creaturehealth']  = round($badguy['creaturehealth'] * ($badguy['creaturehealthbonus'] ?? 1));
+        $badguy['creaturehealth'] = round($badguy['creaturehealth'] * ($badguy['creaturehealthbonus'] ?? 1));
 
         $creatureattr = $this->getCreatureStats($dk);
 
@@ -287,12 +287,9 @@ class CreatureFunction
 
         $creatures = $query->getArrayResult();
 
-        if ( ! empty($creatures))
+        foreach ($creatures as &$creature)
         {
-            foreach ($creatures as &$creature)
-            {
-                $creature['creaturelevel'] = e_rand($mintargetlevel, $targetlevel);
-            }
+            $creature['creaturelevel'] = e_rand($mintargetlevel, $targetlevel);
         }
 
         //-- You can add more creatures. This is good, when not find nothing in data base

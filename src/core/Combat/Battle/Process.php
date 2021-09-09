@@ -28,7 +28,7 @@ trait Process
         //-- If all enemies are die finalize battle
         $enemies = array_filter($this->enemies, function ($val)
         {
-            return ! ((isset($val['dead']) && $val['dead']) || $val['creaturehealth'] <= 0);
+            return ! (isset($val['dead']) && $val['dead']) && $val['creaturehealth'] > 0;
         });
 
         return (bool) \count($enemies);
@@ -61,7 +61,7 @@ trait Process
                 $this->addContextToRoundEnemy([
                     'battle.flee.multi',
                     ['creatureName' => $leader['creaturename']],
-                    $this->getTranslationDomain()
+                    $this->getTranslationDomain(),
                 ]);
             }
         }
@@ -78,7 +78,7 @@ trait Process
                     $this->addContextToRoundEnemy([
                         'battle.flee.one',
                         ['creatureName' => $enemy['creaturename']],
-                        $this->getTranslationDomain()
+                        $this->getTranslationDomain(),
                     ]);
                     unset($enemy);
                 }
