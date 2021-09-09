@@ -12,23 +12,19 @@ $repository = \Doctrine::getRepository('LotgdCore:Avatar');
 $result = $repository->findLikeName($search, 15);
 
 $characters = [];
-
-if (\count($result))
+foreach ($result as $char)
 {
-    foreach ($result as $key => $char)
-    {
-        $superuser = ($char['superuser'] & SU_GIVES_YOM_WARNING) && ! ($char['superuser'] & SU_OVERRIDE_YOM_WARNING);
+    $superuser = ($char['superuser'] & SU_GIVES_YOM_WARNING) && ! ($char['superuser'] & SU_OVERRIDE_YOM_WARNING);
 
-        $characters[] = [
-            'value'     => $char['acctid'],
-            'icon'      => ($char['loggedin'] ? 'green' : 'red').' '.($superuser ? 'user secret' : 'user'),
-            'name'      => \LotgdSanitize::fullSanitize($char['name']),
-            'superuser' => $superuser,
-        ];
-    }
+    $characters[] = [
+        'value'     => $char['acctid'],
+        'icon'      => ($char['loggedin'] ? 'green' : 'red').' '.($superuser ? 'user secret' : 'user'),
+        'name'      => \LotgdSanitize::fullSanitize($char['name']),
+        'superuser' => $superuser,
+    ];
 }
 
-echo \json_encode([
+echo json_encode([
     'success' => (bool) \count($characters),
     'results' => $characters,
 ]);

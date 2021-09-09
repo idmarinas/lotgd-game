@@ -37,7 +37,7 @@ if ('edit' == $op || 'add' == $op)
     $armorEntity = $repository->find($id);
     $armorEntity = $armorEntity ?: new \Lotgd\Core\Entity\Armor();
 
-    if (!$id)
+    if ($id === 0)
     {
         $armorEntity->setLevel($armorEntity->getLevel() ?: $armorlevel);
         $armorEntity->setDefense($repository->getNextDefenseLevel($armorEntity->getLevel()));
@@ -60,7 +60,7 @@ if ('edit' == $op || 'add' == $op)
         \Doctrine::persist($entity);
         \Doctrine::flush();
 
-        $message = ($id) ? 'armor.form.edit' : 'armor.form.new';
+        $message = ($id !== 0) ? 'armor.form.edit' : 'armor.form.new';
 
         $id = $entity->getArmorId();
         $armorlevel = $entity->getLevel();

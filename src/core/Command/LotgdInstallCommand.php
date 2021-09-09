@@ -104,7 +104,7 @@ final class LotgdInstallCommand extends Command
 
         unset($text);
 
-        return $this->doExecute($input, $output);
+        return (int) $this->doExecute($input, $output);
     }
 
     private function doExecute(InputInterface $input, OutputInterface $output)

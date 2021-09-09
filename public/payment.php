@@ -56,7 +56,7 @@ if (! $fp)
 }
 else
 {
-    fputs($fp, $header.$req);
+    fwrite($fp, $header.$req);
 
     $repository = \Doctrine::getRepository('LotgdCore:Paylog');
 
@@ -167,7 +167,7 @@ function writelog($response)
                 $hookresult['messages'] = [$hookresult['messages']];
             }
 
-            foreach ($hookresult['messages'] as $id => $message)
+            foreach ($hookresult['messages'] as $message)
             {
                 \LotgdLog::debug($message, false, $acctId, 'donation', 0, false);
             }

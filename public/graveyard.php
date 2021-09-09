@@ -101,7 +101,7 @@ if ($battle)
     $params['tpl']               = 'default';
     $params['showGraveyardDesc'] = false;
 
-    /** @var \Lotgd\Core\Combat\Battle */
+    /** @var \Lotgd\Core\Combat\Battle $serviceBattle */
     $serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
 
     $serviceBattle

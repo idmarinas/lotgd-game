@@ -70,11 +70,11 @@ elseif ('take' == $op)
 
     $row = $hydrator->extract($companionEntity);
 
-    if ($row)
+    if ($row !== [])
     {
-        $row['attack'] = $row['attack'] + $row['attackperlevel'] * $session['user']['level'];
-        $row['defense'] = $row['defense'] + $row['defenseperlevel'] * $session['user']['level'];
-        $row['maxhitpoints'] = $row['maxhitpoints'] + $row['maxhitpointsperlevel'] * $session['user']['level'];
+        $row['attack'] += ($row['attackperlevel'] * $session['user']['level']);
+        $row['defense'] += ($row['defenseperlevel'] * $session['user']['level']);
+        $row['maxhitpoints'] += ($row['maxhitpointsperlevel'] * $session['user']['level']);
         $row['hitpoints'] = $row['maxhitpoints'];
 
         $row = new Other($row);

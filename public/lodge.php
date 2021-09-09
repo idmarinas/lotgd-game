@@ -19,7 +19,7 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-/** @var Lotgd\Core\Http\Request */
+/** @var Lotgd\Core\Http\Request $request */
 $request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
 
 $op = (string) $request->query->get('op');

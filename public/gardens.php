@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 require_once 'common.php';
 require_once 'lib/events.php';
 
-/** @var Lotgd\Core\Http\Request */
+/** @var Lotgd\Core\Http\Request $request */
 $request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
 
 // Don't hook on to this text for your standard modules please, use "gardens" instead.
@@ -44,7 +44,7 @@ $comment    = $request->request->get('comment');
 if ( ! $op && '' == $com && ! $comment && ! $refresh && ! $commenting)
 {
     /** New occurrence dispatcher for special events. */
-    /** @var \Lotgd\CoreBundle\OccurrenceBundle\OccurrenceEvent */
+    /** @var \Lotgd\CoreBundle\OccurrenceBundle\OccurrenceEvent $event */
     $event = \LotgdKernel::get('occurrence_dispatcher')->dispatch('gardens', null, [
         'translation_domain'            => $textDomain,
         'translation_domain_navigation' => $textDomainNavigation,

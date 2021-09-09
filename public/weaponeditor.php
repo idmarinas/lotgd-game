@@ -39,7 +39,7 @@ if ('edit' == $op || 'add' == $op)
     $weaponEntity     = $repository->find($id);
     $weaponEntity     = $weaponEntity ?: new \Lotgd\Core\Entity\Weapons();
 
-    if ( ! $id)
+    if ( $id === 0)
     {
         $weaponEntity->setLevel($weaponEntity->getLevel() ?: $weaponlevel);
         $weaponEntity->setDamage($repository->getNextDamageLevel($weaponEntity->getLevel()));
@@ -61,7 +61,7 @@ if ('edit' == $op || 'add' == $op)
         \Doctrine::persist($weaponEntity);
         \Doctrine::flush();
 
-        $message = ($id) ? 'weapon.form.edit' : 'weapon.form.new';
+        $message = ($id !== 0) ? 'weapon.form.edit' : 'weapon.form.new';
 
         $id          = $weaponEntity->getWeaponid();
         $weaponlevel = $weaponEntity->getLevel();

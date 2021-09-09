@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
 
-/** @var Lotgd\Core\Http\Request */
+/** @var Lotgd\Core\Http\Request $request */
 $request = LotgdKernel::get(\Lotgd\Core\Http\Request::class);
 $iname   = LotgdSetting::getSetting('innname', LOCATION_INN);
 $battle  = false;
@@ -96,7 +96,7 @@ if ('fight' == $op || 'run' == $op)
 
 if ($battle)
 {
-    /** @var \Lotgd\Core\Combat\Battle */
+    /** @var \Lotgd\Core\Combat\Battle $serviceBattle */
     $serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
 
     $serviceBattle->initialize();
@@ -198,7 +198,10 @@ $params = modulehook('page-pvp-tpl-params', $args->getArguments());
 
 $request->attributes->set('params', $params);
 
-( ! $battle && $method) && \LotgdResponse::callController(Lotgd\Core\Controller\PvpController::class, $method);
+if (! $battle && $method)
+{
+    \LotgdResponse::callController(Lotgd\Core\Controller\PvpController::class, $method);
+}
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

@@ -19,9 +19,9 @@ $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-/** @var Lotgd\Core\Http\Request */
+/** @var Lotgd\Core\Http\Request $request */
 $request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
-/** @var \Lotgd\Core\Tool\CreatureFunction */
+/** @var \Lotgd\Core\Tool\CreatureFunction $creatureFunctions */
 $creatureFunctions = LotgdKernel::get('lotgd_core.tool.creature_functions');
 
 //-- Init page
@@ -81,7 +81,7 @@ elseif ('search' == $op)
         modulehook('soberup', $args->getArguments());
 
         /** New occurrence dispatcher for special events. */
-        /** @var \Lotgd\CoreBundle\OccurrenceBundle\OccurrenceEvent */
+        /** @var \Symfony\Component\EventDispatcher\GenericEvent $event */
         $event = \LotgdKernel::get('occurrence_dispatcher')->dispatch('forest', null, [
             'translation_domain'            => $textDomain,
             'translation_domain_navigation' => $textDomainNavigation,
@@ -182,7 +182,7 @@ elseif ('search' == $op)
 
                         $mintargetlevel = $targetlevel - 2;
 
-                        if (mt_rand(0, 1))
+                        if (mt_rand(0, 1) !== 0)
                         {
                             $mintargetlevel = $targetlevel - 1;
                         }
@@ -193,7 +193,7 @@ elseif ('search' == $op)
 
                         $mintargetlevel = $targetlevel - 1;
 
-                        if (mt_rand(0, 1))
+                        if (mt_rand(0, 1) !== 0)
                         {
                             ++$targetlevel;
                             $mintargetlevel = $targetlevel - 1;
@@ -203,7 +203,7 @@ elseif ('search' == $op)
                     {
                         $multi += e_rand(LotgdSetting::getSetting('multisuimin', 2), LotgdSetting::getSetting('multisuimax', 4));
 
-                        if (mt_rand(0, 1))
+                        if (mt_rand(0, 1) !== 0)
                         {
                             $mintargetlevel = $targetlevel - 1;
                         }
@@ -232,8 +232,8 @@ elseif ('search' == $op)
             }
             \LotgdResponse::pageDebug("Creatures: {$multi} Targetlevel: {$targetlevel} Mintargetlevel: {$mintargetlevel}");
 
-            $packofmonsters = (bool) (0 == mt_rand(0, 5) && LotgdSetting::getSetting('allowpackofmonsters', true)); // true or false
-            $packofmonsters = ($multi > 1) ? $packofmonsters : false;
+            $packofmonsters = 0 == mt_rand(0, 5) && LotgdSetting::getSetting('allowpackofmonsters', true); // true or false
+            $packofmonsters = $multi > 1 && $packofmonsters;
 
             $result = $creatureFunctions->lotgdSearchCreature($multi, $targetlevel, $mintargetlevel, $packofmonsters, true);
 
@@ -304,7 +304,7 @@ elseif ('search' == $op)
                 }
                 else
                 {
-                    foreach ($result as $key => $badguy)
+                    foreach ($result as $badguy)
                     {
                         $badguy['playerstarthp'] = $session['user']['hitpoints'];
                         $badguy['diddamage']     = 0;
@@ -395,7 +395,6 @@ elseif ('fight' == $op || 'newtarget' == $op)
 
 if ($battle)
 {
-    /** @var \Lotgd\Core\Combat\Battle */
     $serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
 
     //-- Battle zone.
@@ -447,7 +446,9 @@ if ( ! $battle)
 \LotgdNavigation::setTextDomain();
 
 //-- Display events
-('' == $op) && module_display_events('forest', 'forest.php');
+if ('' == $op) {
+    module_display_events('forest', 'forest.php');
+}
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

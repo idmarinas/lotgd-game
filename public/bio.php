@@ -73,7 +73,7 @@ $params = [
 
 \LotgdNavigation::addHeader('common.category.return');
 
-if ($session['user']['superuser'] & SU_EDIT_USERS)
+if (($session['user']['superuser'] & SU_EDIT_USERS) !== 0)
 {
     \LotgdNavigation::addHeader('common.superuser.category');
     \LotgdNavigation::addNav('bio.nav.user', "user.php?op=edit&userid=$char");

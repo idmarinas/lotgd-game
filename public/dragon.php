@@ -163,7 +163,7 @@ elseif ('prologue' == $op)
     $session['user']['gold'] = $restartgold;
     $session['user']['gems'] += $restartgems;
 
-    if ($flawless)
+    if ($flawless !== 0)
     {
         $session['user']['gold'] += 3 * LotgdSetting::getSetting('newplayerstartgold', 50);
         $session['user']['gems']++;
@@ -242,7 +242,7 @@ if ($battle)
     $battleInForest = 'dragon'; //-- Indicating if is a Forest (true) or Graveyard (false)
     $battleShowResult = false; //-- Show result of battle.
 
-    /** @var \Lotgd\Core\Combat\Battle */
+    /** @var \Lotgd\Core\Combat\Battle $serviceBattle */
     $serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
 
     $serviceBattle->initialize();

@@ -18,7 +18,7 @@ $debug = (string) \LotgdRequest::getQuery('debug');
 $ascDescRaw = (int) \LotgdRequest::getQuery('direction');
 
 $order = $sort ?: 'sum';
-$ascDesc = $ascDescRaw ? 'ASC' : 'DESC';
+$ascDesc = $ascDescRaw !== 0 ? 'ASC' : 'DESC';
 $debug = $debug ?: 'pageruntime';
 
 \LotgdNavigation::superuserGrottoNav();

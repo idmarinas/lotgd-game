@@ -28,7 +28,7 @@ if ( ! $skipinndesc)
     \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 }
 
-/** @var Lotgd\Core\Http\Request */
+/** @var Lotgd\Core\Http\Request $request */
 $request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
 
 $params = [
@@ -90,7 +90,7 @@ switch ($op)
         if ('fleedragon' != $op && '' == $com && ! $comment && ! $commenting)
         {
             /** New occurrence dispatcher for special events. */
-            /** @var \Lotgd\CoreBundle\OccurrenceBundle\OccurrenceEvent */
+            /** @var \Lotgd\CoreBundle\OccurrenceBundle\OccurrenceEvent $event */
             $event = \LotgdKernel::get('occurrence_dispatcher')->dispatch('inn', null, [
                 'translation_domain'            => $textDomain,
                 'translation_domain_navigation' => $textDomainNavigation,

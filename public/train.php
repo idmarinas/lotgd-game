@@ -21,7 +21,7 @@ unset($result);
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);
 
-/** @var \Lotgd\Core\Combat\Battle */
+/** @var \Lotgd\Core\Combat\Battle $serviceBattle */
 $serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
 
 $params = [
@@ -37,7 +37,7 @@ $masterId = (int) \LotgdRequest::getQuery('master');
 
 $repository = \Doctrine::getRepository('LotgdCore:Masters');
 
-if ($masterId)
+if ($masterId !== 0)
 {
     $master = $repository->findOneMasterById($masterId);
 }
@@ -85,7 +85,7 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
         \LotgdNavigation::addNav('nav.question', "train.php?op=question&master=$masterId");
         \LotgdNavigation::addNav('nav.challenge', "train.php?op=challenge&master=$masterId");
 
-        if ($session['user']['superuser'] & SU_DEVELOPER)
+        if (($session['user']['superuser'] & SU_DEVELOPER) !== 0)
         {
             \LotgdNavigation::addNav('nav.superuser', "train.php?op=challenge&victory=1&master=$masterId");
         }
@@ -151,7 +151,7 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
         \LotgdNavigation::addNav('nav.question', "train.php?op=question&master=$masterId");
         \LotgdNavigation::addNav('nav.challenge', "train.php?op=challenge&master=$masterId");
 
-        if ($session['user']['superuser'] & SU_DEVELOPER)
+        if (($session['user']['superuser'] & SU_DEVELOPER) !== 0)
         {
             \LotgdNavigation::addNav('nav.superuser', "train.php?op=challenge&victory=1&master=$masterId");
         }
@@ -199,7 +199,7 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
 
     if ($battle)
     {
-        /** @var \Lotgd\Core\Combat\Battle */
+        /** @var \Lotgd\Core\Combat\Battle $serviceBattle */
         $serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
 
         //-- Superuser Gain level
@@ -296,9 +296,9 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
 
                 foreach ($companions as $name => $companion)
                 {
-                    $companion['attack'] = $companion['attack'] + ($companion['attackperlevel'] ?? 0);
-                    $companion['defense'] = $companion['defense'] + ($companion['defenseperlevel'] ?? 0);
-                    $companion['maxhitpoints'] = $companion['maxhitpoints'] + ($companion['maxhitpointsperlevel'] ?? 0);
+                    $companion['attack'] += $companion['attackperlevel'] ?? 0;
+                    $companion['defense'] += $companion['defenseperlevel'] ?? 0;
+                    $companion['maxhitpoints'] += $companion['maxhitpointsperlevel'] ?? 0;
                     $companion['hitpoints'] = $companion['maxhitpoints'];
                     $newcompanions[$name] = $companion;
                 }
@@ -337,7 +337,7 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
             \LotgdNavigation::addNav('nav.question', 'train.php?op=question');
             \LotgdNavigation::addNav('nav.challenge', 'train.php?op=challenge');
 
-            if ($session['user']['superuser'] & SU_DEVELOPER)
+            if (($session['user']['superuser'] & SU_DEVELOPER) !== 0)
             {
                 \LotgdNavigation::addNav('nav.superuser', 'train.php?op=challenge&victory=1');
             }
@@ -380,7 +380,7 @@ if ($master > 0 && $session['user']['level'] < LotgdSetting::getSetting('maxleve
             \LotgdNavigation::addNav('nav.question', "train.php?op=question&master=$masterId");
             \LotgdNavigation::addNav('nav.challenge', "train.php?op=challenge&master=$masterId");
 
-            if ($session['user']['superuser'] & SU_DEVELOPER)
+            if (($session['user']['superuser'] & SU_DEVELOPER) !== 0)
             {
                 \LotgdNavigation::addNav('nav.superuser', "train.php?op=challenge&victory=1&master=$masterId");
             }

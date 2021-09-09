@@ -14,7 +14,7 @@ $sort = (string) \LotgdRequest::getQuery('sort');
 $ascDescRaw = (int) \LotgdRequest::getQuery('direction');
 
 $sort = $sort ?: 'count';
-$ascDesc = $ascDescRaw ? 'ASC' : 'DESC';
+$ascDesc = $ascDescRaw !== 0 ? 'ASC' : 'DESC';
 
 if ('rebuild' == $op)
 {

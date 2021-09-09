@@ -16,7 +16,7 @@ $params = [
     'area' => $area
 ];
 
-if ($seen)
+if ($seen !== 0)
 {
     $session['user']['recentcomments'] = new \DateTime('now');
 }
@@ -64,10 +64,10 @@ foreach($sections as $section)
 
 if ('' == $op)
 {
-    $params['tpl'] = $area ? 'area' : 'default';
+    $params['tpl'] = $area !== '' && $area !== '0' ? 'area' : 'default';
 }
 
-if ($session['user']['superuser'] & SU_MODERATE_CLANS)
+if (($session['user']['superuser'] & SU_MODERATE_CLANS) !== 0)
 {
     $clanRepository = \Doctrine::getRepository('LotgdCore:Clans');
     $entities = $clanRepository->findAll();
