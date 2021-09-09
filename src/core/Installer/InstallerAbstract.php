@@ -25,7 +25,7 @@ abstract class InstallerAbstract
 {
     public const TRANSLATOR_DOMAIN = 'app_installer';
 
-    public $upgradeVersion;
+    protected $upgradeVersion;
 
     protected $totaSteps;
     protected $style;
