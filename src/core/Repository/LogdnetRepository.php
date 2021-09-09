@@ -25,6 +25,7 @@ use Tracy\Debugger;
 class LogdnetRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;
+    use Version;
 
     private $cache;
 
@@ -151,10 +152,7 @@ class LogdnetRepository extends ServiceEntityRepository
 
     private function lotgdSort($a, $b)
     {
-        $official_prefixes = (new class()
-        {
-            use Version;
-        })->getFullListOfVersion();
+        $official_prefixes = $this->getFullListOfVersion();
 
         unset($official_prefixes['Clean Install']);
         $official_prefixes = array_keys($official_prefixes);
