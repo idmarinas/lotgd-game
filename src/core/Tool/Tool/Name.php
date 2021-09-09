@@ -47,7 +47,7 @@ trait Name
 
         if ($title)
         {
-            $x = strpos($name, $title);
+            $x = strpos($name, (string) $title);
 
             if (false !== $x)
             {
@@ -69,7 +69,7 @@ trait Name
 
         if ($title)
         {
-            $x = strpos($newname, $title);
+            $x = strpos($newname, (string) $title);
 
             if (0 === $x)
             {

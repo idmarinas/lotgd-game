@@ -256,7 +256,7 @@ class LogdnetController extends AbstractController
                 ]);
 
                 $content = $response->getContent();
-                $content = 'application/json' == $response->getHeaders()['content-type'][0] ? \json_decode($content) : \explode("\n", $content);
+                $content = 'application/json' == $response->getHeaders()['content-type'][0] ? \json_decode($content, null, 512, JSON_THROW_ON_ERROR) : \explode("\n", $content);
 
                 $filterChain = new Filter\FilterChain();
                 $filterChain

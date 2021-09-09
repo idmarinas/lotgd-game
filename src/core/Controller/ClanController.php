@@ -147,7 +147,7 @@ class ClanController extends AbstractController
         $this->navigation->addNav('nav.default.waiting.area', 'clan.php?op=waiting');
         $this->navigation->addNav('nav.default.withdraw', 'clan.php?op=withdraw', [
             'attributes' => [
-                'data-options' => json_encode(['text' => $this->translator->trans('section.withdraw.confirm', [], $params['textDomain'])]),
+                'data-options' => json_encode(['text' => $this->translator->trans('section.withdraw.confirm', [], $params['textDomain'])], JSON_THROW_ON_ERROR),
                 'onclick'      => 'Lotgd.confirm(this, event)',
             ],
         ]);
