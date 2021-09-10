@@ -44,6 +44,8 @@
         -   Se puede hacer que depende de algún atributo. (que tenga bono)
         -   Tendrá funciones para poder aumentar y disminuir la energía.
 -   Migrar los cronjob a comandos de consola
+    -   Migrados todos a consola.
+        -   _Nota_ el cronjob del nuevo día (newdayrunonce) no es compatible con el sistema de módulos.
 -   Eliminar la dependencia de Jaxon-PHP usar Stimulus
 -   Crear un service para el newday runonce (generar un nuevo día)
 -   `dragonpoints` para los puntos de dragón asignados actualmente es un array serializado

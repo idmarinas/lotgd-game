@@ -28,6 +28,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
         -   _New day cron_ in new cronjob system not execute hook of modules. If you need execute this old hook use old cronjob system for new day.
             -   _New day cron_ in new cronjob system are disabled by default.
         -   Remember deleted duplicated commands. If you want use both systems.
+    -   _Note_: The complete migration from the OLD Cronjob system to the NEW one will be done in version 8.0.0. 
 
 
 ### :star: FEATURES
@@ -91,6 +92,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :notebook: NOTES
 
+-   Apply Rector rules to files in `src/` and `public/`
 -   **Important**:
     -   :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
     -   :warning: Avoid, as far as possible, using static classes (e.g. LotgdSetting, Doctrine, LotgdTranslation...) as these classes will be deleted in a future version. Use autowire, dependency injection when possible.
