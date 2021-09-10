@@ -29,7 +29,7 @@ final class AvatarCleanCommand extends Command
 
     public const TRANSLATION_DOMAIN = 'console_command';
 
-    protected static $defaultName = 'lotgd:cron:content:clean';
+    protected static $defaultName = 'lotgd:cron:avatar:clean';
 
     private $avatarClean;
 
