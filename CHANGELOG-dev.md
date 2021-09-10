@@ -80,7 +80,10 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :fire: DEPRECATED
 
 -   **public/cronjobs.php** and **cronjob/** is Deprecated, use new Cron Bundle to execute and create your own crons.
-    -   This method of creating and running cron jobs will be removed in version 7.0.0
+    -   This method of creating and running cron jobs will be removed in version 8.0.0
+-   **lib/serverfunctions.class.php** Is deprecated now is a service: 
+    -   `isTheServerFull` use `LotgdKernel::get("lotgd_core.service.server_functions")->isTheServerFull()` instead or dependency injection.
+    -   `resetAllDragonkillPoints` use `LotgdKernel::get("lotgd_core.service.server_functions")->resetAllDragonkillPoints($acctid)` instead or dependency injection
 
 ### :wrench: FIXES
 
