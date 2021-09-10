@@ -273,6 +273,9 @@ services:
         public: true
     Lotgd\Core\Service\Cron\AvatarCleanService:
         public: true
+    lotgd_core.service.server_functions:
+        alias: Lotgd\Core\Service\ServerFunction
+        public: true
 
     # Twig extensions
     Marek\Twig\ByteUnitsExtension:
