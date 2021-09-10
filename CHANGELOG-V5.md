@@ -30,7 +30,8 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :wrench: FIXES
 
 -   **src/core/Installer/Pattern/Version.php** Fix error, with version `50105` now have correct name `5.1.5 IDMarinas Edition`
-
+-   **lib/serverfunctions.class.php** Fix error with `$query` replace `addWhere` for `andWhere`, replace `setParamater` for `setParameter`
+ 
 ### :x: REMOVES
 
 -   Nothing
