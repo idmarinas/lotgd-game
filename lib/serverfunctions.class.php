@@ -8,6 +8,7 @@ class ServerFunctions
     {
         if (\abs(\LotgdSetting::getSetting('OnlineCountLast', 0) - \strtotime('now')) > 60)
         {
+            /** @var \Lotgd\Core\Repository\UserRepository $repository */
             $repository = \Doctrine::getRepository('LotgdCore:User');
             $counter    = $repository->count(['locked' => 0, 'loggedin' => 1]);
 
@@ -22,6 +23,7 @@ class ServerFunctions
 
     public static function resetAllDragonkillPoints($acctid = false)
     {
+        /** @var \Lotgd\Core\Repository\AvatarRepository $repository */
         $repository = \Doctrine::getRepository('LotgdCore:Avatar');
         $query      = $repository->createQueryBuilder('u');
 
@@ -29,14 +31,14 @@ class ServerFunctions
 
         if (\is_numeric($acctid))
         {
-            $query->addWhere('u.acct = :acct')
-                ->setParamater('acct', $acctid)
+            $query->andWhere('u.acct = :acct')
+                ->setParameter('acct', $acctid)
             ;
         }
         elseif (\is_array($acctid))
         {
-            $query->addWhere('u.acct IN (:acct)')
-                ->setParamater('acct', $acctid)
+            $query->andWhere('u.acct IN (:acct)')
+                ->setParameter('acct', $acctid)
             ;
         }
 
