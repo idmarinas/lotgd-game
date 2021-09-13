@@ -84,6 +84,14 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **lib/serverfunctions.class.php** Is deprecated now is a service: 
     -   `isTheServerFull` use `LotgdKernel::get("lotgd_core.service.server_functions")->isTheServerFull()` instead or dependency injection.
     -   `resetAllDragonkillPoints` use `LotgdKernel::get("lotgd_core.service.server_functions")->resetAllDragonkillPoints($acctid)` instead or dependency injection
+-   **lib/pageparts.php** All functions:
+    -   `wipe_charstats` use `LotgdKernel::get("Lotgd\Core\Character\Stats")->wipeStats()` instead.
+    -   `addcharstat` use `LotgdKernel::get("Lotgd\Core\Character\Stats")->addcharstat($label, $value)` instead.
+    -   `getcharstat` use `LotgdKernel::get("Lotgd\Core\Character\Stats")->getcharstat($cat, $label)` instead.
+    -   `setcharstat` use `LotgdKernel::get("Lotgd\Core\Character\Stats")->setcharstat($cat, $label, $val)` instead.
+    -   `getcharstat_value` use `LotgdKernel::get("Lotgd\Core\Character\Stats")->getcharstat($cat, $label)` instead.
+    -   `getcharstats` use `LotgdKernel::get("Lotgd\Core\Service\PageParts")->getCharStats($buffs)` instead.
+    -   `charstats` use `LotgdKernel::get("Lotgd\Core\Service\PageParts")->charStats($return)` instead.
 
 ### :wrench: FIXES
 
