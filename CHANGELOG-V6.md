@@ -35,6 +35,7 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   Fix error with method `->substitute()` now pass correct params
 -   **src/core/Combat/Battle/Movement.php** Fix error, method `->addContextToRoundEnemy()` need only 1 param
 -   **src/core/Combat/Battle/Process.php** Fix error, method `->addContextToRoundEnemy()` need only 1 param
+-   **public/shades.php** Fix error, now use correct controller
 
 ### :x: REMOVES
 
