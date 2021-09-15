@@ -61,7 +61,7 @@ class Navigation
      *
      * @var string
      */
-    protected $lastHeader;
+    protected $lastHeader = '';
 
     /**
      * Text domain for translator.
