@@ -99,7 +99,8 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :x: REMOVES
 
--   Nothing
+-   **lib/graveyard/** folder and content:
+    -   `lib/graveyard/case_battle_search.php` and `lib/graveyard/case_question.php` code are moved to controller.  
 
 ### :notebook: NOTES
 
