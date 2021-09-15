@@ -276,6 +276,8 @@ services:
     lotgd_core.service.server_functions:
         alias: Lotgd\Core\Service\ServerFunction
         public: true
+    Lotgd\Core\Service\PageParts:
+        public: true
 
     # Twig extensions
     Marek\Twig\ByteUnitsExtension:
