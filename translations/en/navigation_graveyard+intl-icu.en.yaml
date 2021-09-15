@@ -24,5 +24,6 @@ nav:
     question: 'Question `${graveyardOwnerName}`0 about the worth of your soul'
     restore: 'Restore Your Soul ({favor,plural, =1{1 favor} other{# favors}})'
     resurrection: Resurrection
+    haunt: Haunt a foe
     question.favor: '{text}`) ({favor,plural, =1{1 favor} other{# favors}})`0'
 
