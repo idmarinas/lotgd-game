@@ -14,7 +14,7 @@ if ($session['user']['alive'])
 \LotgdResponse::pageStart();
 
 //-- Call controller
-\LotgdResponse::callController(\Lotgd\Core\Controller\RockController::class);
+\LotgdResponse::callController(\Lotgd\Core\Controller\ShadesController::class);
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
