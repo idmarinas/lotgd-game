@@ -69,7 +69,7 @@ class AvatarRepository extends ServiceEntityRepository
         try
         {
             $character = $qb
-                ->select('u.name', 'IDENTITY(u.acct) AS acctid', 'u.level', 'a.login', 'a.superuser', 'a.loggedin')
+                ->select('u.name', 'IDENTITY(u.acct) AS acctid', 'u.id', 'u.level', 'a.login', 'a.superuser', 'a.loggedin')
                 ->leftJoin('LotgdCore:User', 'a', 'with', $qb->expr()->eq('a.avatar', 'u.id'))
                 ->where('u.name LIKE :name')
                 ->setParameter('name', "%{$name}%")
