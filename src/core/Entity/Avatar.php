@@ -482,7 +482,7 @@ class Avatar
     /**
      * Set the value of Acct.
      *
-     * @param int $acct
+     * @param User $acct
      *
      * @return self
      */
@@ -496,7 +496,7 @@ class Avatar
     /**
      * Get the value of Acct.
      *
-     * @return int
+     * @return User
      */
     public function getAcct()
     {
@@ -1372,7 +1372,7 @@ class Avatar
     /**
      * Set the value of Dragonpoints.
      *
-     * @param string $dragonpoints
+     * @param array $dragonpoints
      *
      * @return self
      */
@@ -1386,7 +1386,7 @@ class Avatar
     /**
      * Get the value of Dragonpoints.
      *
-     * @return string
+     * @return array
      */
     public function getDragonpoints()
     {
