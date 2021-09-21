@@ -574,7 +574,7 @@ class TrainController extends AbstractController
             ->setParameter('level', $session['user']['level'])
         ;
 
-        return $query->getArrayResult()[0];
+        return $query->getArrayResult()[0] ?? [];
     }
 
     private function renderTrain(array $params): Response
