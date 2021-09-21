@@ -30,7 +30,6 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
         -   Remember deleted duplicated commands. If you want use both systems.
     -   _Note_: The complete migration from the OLD Cronjob system to the NEW one will be done in version 8.0.0. 
 
-
 ### :star: FEATURES
 
 -   **Stimulus "route"**
@@ -95,7 +94,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   Nothing
+-   **src/core/Service/ServerFunction.php** Fix error when reset dragon kills
 
 ### :x: REMOVES
 
