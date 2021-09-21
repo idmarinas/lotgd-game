@@ -50,19 +50,21 @@ class ServerFunction
 
     public function resetAllDragonkillPoints($acctid = false)
     {
+        global $session;
+
         /** @var \Lotgd\Core\Repository\AvatarRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Avatar');
         $query      = $repository->createQueryBuilder('u');
 
         $query->where("u.dragonpoints <> ''");
 
-        if (\is_numeric($acctid))
+        if (\is_numeric($acctid) && 0 != $acctid)
         {
             $query->andWhere('u.acct = :acct')
                 ->setParameter('acct', $acctid)
             ;
         }
-        elseif (\is_array($acctid))
+        elseif (\is_array($acctid) && ! empty($acctid))
         {
             $query->andWhere('u.acct IN (:acct)')
                 ->setParameter('acct', $acctid)
@@ -83,15 +85,23 @@ class ServerFunction
 
             $distribution = \array_count_values($dkpoints);
 
-            $entity->setDragonpoints([])
-                ->setStrength($entity->getStrength() - (int) $distribution['str'])
-                ->setConstitution($entity->getConstitution() - (int) $distribution['con'])
-                ->setIntelligence($entity->getIntelligence() - (int) $distribution['int'])
-                ->setWisdom($entity->getWisdom() - (int) $distribution['wis'])
-                ->setDexterity($entity->getDexterity() - (int) $distribution['dex'])
-            ;
+            $entity->setDragonpoints([]);
+
+            isset($distribution['ff']) && $entity->setTurns($entity->getTurns() - (int) $distribution['ff']);
+            isset($distribution['str']) && $entity->setStrength($entity->getStrength() - (int) $distribution['str']);
+            isset($distribution['con']) && $entity->setConstitution($entity->getConstitution() - (int) $distribution['con']);
+            isset($distribution['int']) && $entity->setIntelligence($entity->getIntelligence() - (int) $distribution['int']);
+            isset($distribution['wis']) && $entity->setWisdom($entity->getWisdom() - (int) $distribution['wis']);
+            isset($distribution['dex']) && $entity->setDexterity($entity->getDexterity() - (int) $distribution['dex']);
 
             $this->doctrine->persist($entity);
+
+            if ($session['user']['acctid'] == $entity->getAcct()->getAcctid())
+            {
+                /** @var \Lotgd\Core\Repository\UserRepository */
+                $repository = $this->doctrine->getRepository('LotgdCore:User');
+                $session['user'] = $repository->getUserById($entity->getAcct()->getAcctid());
+            }
         }
 
         $this->doctrine->flush();
