@@ -97,7 +97,7 @@
                         <tr>
                             <td class="collapsing">{{ attribute|trans|colorize }}</td>
                             <td>&nbsp;&nbsp;</td>
-                            <td><input type="number" id="{{ type }}" name="{{ type }}" value="" onchange="pointsLeft(this)"></td>
+                            <td><input type="number" id="{{ type }}" min="0" max="{{ points }}" name="{{ type }}" value="0" onchange="pointsLeft(this)"></td>
                         </tr>
                     {% endif %}
                 {% endfor %}
