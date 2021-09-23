@@ -451,7 +451,7 @@ class GraveyardController extends AbstractController
 
         $params['texts'] = [];
 
-        foreach ($actions as $key => $value)
+        foreach ($actions as $value)
         {
             $this->navigation->addNav('nav.question.favor', $value['link'], [
                 'params' => [

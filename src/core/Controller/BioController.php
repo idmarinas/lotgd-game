@@ -61,13 +61,13 @@ class BioController extends AbstractController
         $char = (string) $request->query->get('char');
 
         $return = 'list.php';
-        if ($ret)
+        if ($ret !== '' && $ret !== '0')
         {
             $return = preg_replace('/[&?]c=[[:digit:]]+/', '', $ret);
             $return = trim($return, '/');
         }
 
-        /** @var \Lotgd\Core\Repository\UserRepository */
+        /** @var \Lotgd\Core\Repository\UserRepository $repository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:User');
 
         //-- Legacy support

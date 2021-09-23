@@ -26,26 +26,26 @@ class ServerFunction
 
     public function __construct(Settings $settings, EntityManagerInterface $doctrine, EventDispatcherInterface $dispatcher)
     {
-        $this->settings = $settings;
-        $this->doctrine = $doctrine;
+        $this->settings   = $settings;
+        $this->doctrine   = $doctrine;
         $this->dispatcher = $dispatcher;
     }
 
     public function isTheServerFull()
     {
-        if (\abs($this->settings->getSetting('OnlineCountLast', 0) - \strtotime('now')) > 60)
+        if (abs($this->settings->getSetting('OnlineCountLast', 0) - strtotime('now')) > 60)
         {
             /** @var \Lotgd\Core\Repository\UserRepository $repository */
             $repository = $this->doctrine->getRepository('LotgdCore:User');
             $counter    = $repository->count(['locked' => 0, 'loggedin' => 1]);
 
             $this->settings->saveSetting('OnlineCount', $counter);
-            $this->settings->saveSetting('OnlineCountLast', \strtotime('now'));
+            $this->settings->saveSetting('OnlineCountLast', strtotime('now'));
         }
 
         $onlinecount = (int) $this->settings->getSetting('OnlineCount', 0);
 
-        return (bool) ($onlinecount >= $this->settings->getSetting('maxonline', 0) && 0 != $this->settings->getSetting('maxonline', 0));
+        return $onlinecount >= $this->settings->getSetting('maxonline', 0) && 0 != $this->settings->getSetting('maxonline', 0);
     }
 
     public function resetAllDragonkillPoints($acctid = false)
@@ -58,7 +58,7 @@ class ServerFunction
 
         $query->where("u.dragonpoints <> ''");
 
-        if (\is_numeric($acctid) && 0 != $acctid)
+        if (is_numeric($acctid) && 0 != $acctid)
         {
             $query->andWhere('u.acct = :acct')
                 ->setParameter('acct', $acctid)
@@ -83,23 +83,23 @@ class ServerFunction
                 continue;
             } //-- Not do nothing if is an empty array
 
-            $distribution = \array_count_values($dkpoints);
+            $distribution = array_count_values($dkpoints);
 
             $entity->setDragonpoints([]);
 
-            isset($distribution['ff']) && $entity->setTurns($entity->getTurns() - (int) $distribution['ff']);
-            isset($distribution['str']) && $entity->setStrength($entity->getStrength() - (int) $distribution['str']);
-            isset($distribution['con']) && $entity->setConstitution($entity->getConstitution() - (int) $distribution['con']);
-            isset($distribution['int']) && $entity->setIntelligence($entity->getIntelligence() - (int) $distribution['int']);
-            isset($distribution['wis']) && $entity->setWisdom($entity->getWisdom() - (int) $distribution['wis']);
-            isset($distribution['dex']) && $entity->setDexterity($entity->getDexterity() - (int) $distribution['dex']);
+            $entity->setTurns($entity->getTurns() - ($distribution['ff'] ?? 0));
+            $entity->setStrength($entity->getStrength() - ($distribution['str'] ?? 0));
+            $entity->setConstitution($entity->getConstitution() - ($distribution['con'] ?? 0));
+            $entity->setIntelligence($entity->getIntelligence() - ($distribution['int'] ?? 0));
+            $entity->setWisdom($entity->getWisdom() - ($distribution['wis'] ?? 0));
+            $entity->setDexterity($entity->getDexterity() - ($distribution['dex'] ?? 0));
 
             $this->doctrine->persist($entity);
 
             if ($session['user']['acctid'] == $entity->getAcct()->getAcctid())
             {
-                /** @var \Lotgd\Core\Repository\UserRepository */
-                $repository = $this->doctrine->getRepository('LotgdCore:User');
+                /** @var \Lotgd\Core\Repository\UserRepository $repository */
+                $repository      = $this->doctrine->getRepository('LotgdCore:User');
                 $session['user'] = $repository->getUserById($entity->getAcct()->getAcctid());
             }
         }

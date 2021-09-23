@@ -67,7 +67,7 @@ class PageParts
 
         foreach ($charstatInfo as $label => $section)
         {
-            if (\count($section))
+            if ( ! empty($section))
             {
                 $arr               = $label;
                 $charstattpl[$arr] = [];
@@ -174,7 +174,7 @@ class PageParts
                 }
             }
 
-            if ( ! \count($buffs))
+            if (empty($buffs))
             {
                 $buffs[] = $this->format->colorize('`^None`0');
             }

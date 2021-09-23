@@ -60,13 +60,13 @@ class TrainController extends AbstractController
         Settings $settings,
         TranslatorInterface $translator
     ) {
-        $this->dispatcher = $eventDispatcher;
-        $this->navigation = $navigation;
-        $this->response   = $response;
+        $this->dispatcher    = $eventDispatcher;
+        $this->navigation    = $navigation;
+        $this->response      = $response;
         $this->serviceBattle = $battle;
-        $this->repository = $repository;
-        $this->settings = $settings;
-        $this->translator = $translator;
+        $this->repository    = $repository;
+        $this->settings      = $settings;
+        $this->translator    = $translator;
     }
 
     public function index(Request $request): Response
@@ -89,22 +89,22 @@ class TrainController extends AbstractController
         $this->navigation->setTextDomain($this->translationDomainNavigation);
 
         $masterId = $request->query->getInt('master');
-        $master = $this->getMasterInfo($masterId);
+        $master   = $this->getMasterInfo($masterId);
         $masterId = $master['creatureid'];
 
         $params = [
-            'textDomain' => $this->translationDomain,
-            'translation_domain' => $this->translationDomain,
+            'textDomain'                    => $this->translationDomain,
+            'translation_domain'            => $this->translationDomain,
             'translation_domain_navigation' => $this->translationDomainNavigation,
-            'master_id' => $masterId,
-            'master' => $master,
-            'battle' => false
+            'master_id'                     => $masterId,
+            'master'                        => $master,
+            'battle'                        => false,
         ];
 
-        $params['masterName'] = $params['master']['creaturename'];
+        $params['masterName']  = $params['master']['creaturename'];
         $params['master_name'] = $params['master']['creaturename'];
 
-        if ($masterId !== 0 && $session['user']['level'] < (int) $this->settings->getSetting('maxlevel', 15))
+        if (0 !== $masterId && $session['user']['level'] < (int) $this->settings->getSetting('maxlevel', 15))
         {
             return $this->training($params, $request);
         }
@@ -118,8 +118,8 @@ class TrainController extends AbstractController
 
         $masterId = $params['master_id'];
 
-        $level = $session['user']['level'];
-        $dks = $session['user']['dragonkills'];
+        $level       = $session['user']['level'];
+        $dks         = $session['user']['dragonkills'];
         $exprequired = $this->tool->expForNextLevel($level, $dks);
 
         $op = (string) $request->query->get('op', '');
@@ -134,12 +134,12 @@ class TrainController extends AbstractController
             $this->navigation->villageNav();
 
             $this->navigation->addHeader('category.actions');
-            $this->navigation->addNav('nav.question', "train.php?op=question&master=$masterId");
-            $this->navigation->addNav('nav.challenge', "train.php?op=challenge&master=$masterId");
+            $this->navigation->addNav('nav.question', "train.php?op=question&master={$masterId}");
+            $this->navigation->addNav('nav.challenge', "train.php?op=challenge&master={$masterId}");
 
             if (($session['user']['superuser'] & SU_DEVELOPER) !== 0)
             {
-                $this->navigation->addNav('nav.superuser', "train.php?op=challenge&victory=1&master=$masterId");
+                $this->navigation->addNav('nav.superuser', "train.php?op=challenge&victory=1&master={$masterId}");
             }
         }
         elseif ('fight' == $op)
@@ -160,16 +160,16 @@ class TrainController extends AbstractController
             $this->navigation->villageNav();
 
             $this->navigation->addHeader('category.actions');
-            $this->navigation->addNav('nav.question', "train.php?op=question&master=$masterId");
-            $this->navigation->addNav('nav.challenge', "train.php?op=challenge&master=$masterId");
+            $this->navigation->addNav('nav.question', "train.php?op=question&master={$masterId}");
+            $this->navigation->addNav('nav.challenge', "train.php?op=challenge&master={$masterId}");
 
             if (($session['user']['superuser'] & SU_DEVELOPER) !== 0)
             {
-                $this->navigation->addNav('nav.superuser', "train.php?op=challenge&victory=1&master=$masterId");
+                $this->navigation->addNav('nav.superuser', "train.php?op=challenge&victory=1&master={$masterId}");
             }
 
             $params['expRequired'] = $exprequired;
-            $params['expNeed'] = $exprequired - $session['user']['experience'];
+            $params['expNeed']     = $exprequired - $session['user']['experience'];
         }
         elseif ('autochallenge' == $op)
         {
@@ -183,13 +183,13 @@ class TrainController extends AbstractController
     {
         global $session;
 
-        $level = $session['user']['level'];
-        $dks = $session['user']['dragonkills'];
+        $level       = $session['user']['level'];
+        $dks         = $session['user']['dragonkills'];
         $exprequired = $this->tool->expForNextLevel($level, $dks);
 
         $params['tpl'] = 'challenge';
 
-        if ($request->query->getAlnum('victory'))
+        if ('' !== $request->query->getAlnum('victory') && '0' !== $request->query->getAlnum('victory'))
         {
             if ($session['user']['experience'] < $exprequired)
             {
@@ -217,9 +217,9 @@ class TrainController extends AbstractController
 
                 $params['master'] = $this->creatureFunction->buffBadguy($params['master'], 'buffmaster');
 
-                $attackstack['enemies'][0] = $params['master'];
+                $attackstack['enemies'][0]      = $params['master'];
                 $attackstack['options']['type'] = 'train';
-                $session['user']['badguy'] = $attackstack;
+                $session['user']['badguy']      = $attackstack;
 
                 $params['battle'] = true;
 
@@ -228,7 +228,7 @@ class TrainController extends AbstractController
             else
             {
                 $params['playerWeapon'] = $session['user']['weapon'];
-                $params['playerArmor'] = $session['user']['armor'];
+                $params['playerArmor']  = $session['user']['armor'];
 
                 $this->navigation->addHeader('category.navigation');
                 $this->navigation->villageNav();
@@ -244,26 +244,26 @@ class TrainController extends AbstractController
         global $session;
 
         $params['tpl'] = 'autochallenge';
-        $masterId = $params['master_id'];
+        $masterId      = $params['master_id'];
 
-        $this->navigation->addNav('nav.fight', "train.php?op=challenge&master=$masterId");
+        $this->navigation->addNav('nav.fight', "train.php?op=challenge&master={$masterId}");
 
         $params['playerHealed'] = false;
 
         if ($session['user']['hitpoints'] < $session['user']['maxhitpoints'])
         {
-            $params['playerHealed'] = true;
+            $params['playerHealed']       = true;
             $session['user']['hitpoints'] = $session['user']['maxhitpoints'];
         }
 
         $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_TRAIN_AUTOCHALLENGE);
         modulehook('master-autochallenge');
 
-        if ($this->settings->getSetting('displaymasternews', 1))
+        if ('' !== $this->settings->getSetting('displaymasternews', 1) && '0' !== $this->settings->getSetting('displaymasternews', 1))
         {
             $this->tool->addNews('news.autochallenge', [
                 'playerName' => $session['user']['name'],
-                'masterName' => $params['master']['creaturename']
+                'masterName' => $params['master']['creaturename'],
             ], $this->translationDomain);
         }
 
@@ -316,11 +316,11 @@ class TrainController extends AbstractController
 
             if ($this->serviceBattle->isVictory())
             {
-                $session['user']['level']++;
+                ++$session['user']['level'];
                 $session['user']['maxhitpoints'] += 10;
-                $session['user']['soulpoints'] += 5;
-                $session['user']['attack']++;
-                $session['user']['defense']++;
+                $session['user']['soulpoints']   += 5;
+                ++$session['user']['attack'];
+                ++$session['user']['defense'];
 
                 $session['user']['hitpoints'] = $session['user']['maxhitpoints'];
 
@@ -340,23 +340,23 @@ class TrainController extends AbstractController
                 $this->serviceBattle->addContextToBattleEnd([
                     (($session['user']['level'] < 15) ? 'battle.end.victory.master.new' : 'battle.end.victory.master.none'),
                     [],
-                    $this->translationDomain
+                    $this->translationDomain,
                 ]);
 
                 if ($session['user']['referer'] > 0 && ($session['user']['level'] >= $this->settings->getSetting('referminlevel', 4) || $session['user']['dragonkills'] > 0) && $session['user']['refererawarded'] < 1)
                 {
                     $entity = $this->getDoctrine()->getRepository('LotgdCore:User')->find($session['user']['referer']);
 
-                    if ($entity)
+                    if (null !== $entity)
                     {
                         $donation = $this->settings->getSetting('refereraward', 25);
 
-                        $subject = [ 'mail.referer.subject', [], $this->translationDomain ];
-                        $message = [ 'mail.referer.message' , [
-                            'playerName' => $session['user']['name'],
-                            'level' => $session['user']['level'],
-                            'donationPoints' => $donation
-                        ], $this->translationDomain ];
+                        $subject = ['mail.referer.subject', [], $this->translationDomain];
+                        $message = ['mail.referer.message', [
+                            'playerName'     => $session['user']['name'],
+                            'level'          => $session['user']['level'],
+                            'donationPoints' => $donation,
+                        ], $this->translationDomain];
 
                         $entity->setDonation($entity->getDonation() + $donation);
 
@@ -374,29 +374,29 @@ class TrainController extends AbstractController
                 // Level-Up companions
                 // We only get one level per pageload. So we just add the per-level-values.
                 // No need to multiply and/or substract anything.
-                if ($this->settings->getSetting('companionslevelup', 1))
+                if ('' !== $this->settings->getSetting('companionslevelup', 1) && '0' !== $this->settings->getSetting('companionslevelup', 1))
                 {
                     $newcompanions = $companions;
 
                     foreach ($companions as $name => $companion)
                     {
-                        $companion['attack'] += $companion['attackperlevel'] ?? 0;
-                        $companion['defense'] += $companion['defenseperlevel'] ?? 0;
+                        $companion['attack']       += $companion['attackperlevel']             ?? 0;
+                        $companion['defense']      += $companion['defenseperlevel']           ?? 0;
                         $companion['maxhitpoints'] += $companion['maxhitpointsperlevel'] ?? 0;
                         $companion['hitpoints'] = $companion['maxhitpoints'];
-                        $newcompanions[$name] = $companion;
+                        $newcompanions[$name]   = $companion;
                     }
                     $companions = $newcompanions;
                 }
 
-                if ($this->settings->getSetting('displaymasternews', 1))
+                if ('' !== $this->settings->getSetting('displaymasternews', 1) && '0' !== $this->settings->getSetting('displaymasternews', 1))
                 {
                     $this->tool->addNews('news.victory', [
-                        'sex' => $session['user']['sex'],
+                        'sex'        => $session['user']['sex'],
                         'playerName' => $session['user']['name'],
                         'masterName' => $badguy['creaturename'],
-                        'level' => $session['user']['level'],
-                        'age' => $session['user']['age']
+                        'level'      => $session['user']['level'],
+                        'age'        => $session['user']['age'],
                     ], $this->translationDomain);
                 }
 
@@ -423,18 +423,18 @@ class TrainController extends AbstractController
             }
             elseif ($this->serviceBattle->isDefeat())
             {
-                if ($this->settings->getSetting('displaymasternews', 1))
+                if ('' !== $this->settings->getSetting('displaymasternews', 1) && '0' !== $this->settings->getSetting('displaymasternews', 1))
                 {
                     $this->tool->addNews('deathmessage', [
                         'deathmessage' => [
                             'deathmessage' => 'news.defeated',
-                            'params' => [
+                            'params'       => [
                                 'playerName' => $session['user']['name'],
-                                'masterName' => $badguy['creaturename']
+                                'masterName' => $badguy['creaturename'],
                             ],
-                            'textDomain' => $this->translationDomain
+                            'textDomain' => $this->translationDomain,
                         ],
-                        'taunt' => $this->tool->selectTaunt()
+                        'taunt' => $this->tool->selectTaunt(),
                     ], '');
                 }
 
@@ -442,7 +442,7 @@ class TrainController extends AbstractController
 
                 $this->serviceBattle->addContextToBattleEnd(['battle.end.defeat.end', ['masterName' => $badguy['creaturename']], $this->translationDomain]);
 
-                $args = new GenericEvent(null, ['badguy' => $badguy, 'messages' => []]);
+                $args   = new GenericEvent(null, ['badguy' => $badguy, 'messages' => []]);
                 $result = modulehook('training-defeat', $args->getArguments());
 
                 array_walk($result['messages'], function ($elem)
@@ -557,7 +557,7 @@ class TrainController extends AbstractController
     {
         global $session;
 
-        if ($masterId !== 0)
+        if (0 !== $masterId)
         {
             return $this->repository->findOneMasterById($masterId);
         }
