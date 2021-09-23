@@ -36,6 +36,13 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **src/core/Combat/Battle/Movement.php** Fix error, method `->addContextToRoundEnemy()` need only 1 param
 -   **src/core/Combat/Battle/Process.php** Fix error, method `->addContextToRoundEnemy()` need only 1 param
 -   **public/shades.php** Fix error, now use correct controller
+-   **src/core/Controller/NewDayController.php** and **src/core/Controller/NewDayController/DragonPointSpendTrait.php**: Fix error, now invoke spend points when have more than 1 point to spend.
+-   **themes/LotgdTheme/templates/page/_blocks/_newday.html.twig**
+    -   Add class format to inputs.
+    -   Fix error, now show correct translate text
+    -   Fix error with colspan
+    -   Now show points left
+    -   Apply min and max values in input
 
 ### :x: REMOVES
 
