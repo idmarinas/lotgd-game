@@ -80,7 +80,7 @@
     {% if points > 1 %}
         {{ 'section.dragonpoints.multi.paragraph'|trans({ 'points': points })|colorize }}
 
-        <form id="dragon-points-form" action="{{ formUrl|lotgd_url }}" method="post">
+        <form id="dragon-points-form" action="{{ formUrl|lotgd_url }}" method="post" class="ui form">
             <table class="ui very compact basic collapsing centered table">
                 {% for type, label in labels %}
                     {% set head = label|split(',') %}
@@ -95,21 +95,21 @@
                     {% elseif canBuy[type] %}
                         {% set attribute = 'section.dragonpoints.buy.type.' ~ type %}
                         <tr>
-                            <td class="collapsing">{{ attribute|colorize }}</td>
+                            <td class="collapsing">{{ attribute|trans|colorize }}</td>
                             <td>&nbsp;&nbsp;</td>
-                            <td><input type="number" id="{{ type }}" name="{{ type }}" value="" onchange="pointsLeft(this)"></td>
+                            <td><input type="number" id="{{ type }}" min="0" max="{{ points }}" name="{{ type }}" value="0" onchange="pointsLeft(this)"></td>
                         </tr>
                     {% endif %}
                 {% endfor %}
-                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr><td colspan="3">&nbsp;</td></tr>
                 <tr>
-                    <td colspan="2" class="center aligned">
+                    <td colspan="3" class="center aligned">
                         <button type="submit" class="ui button">{{ 'section.dragonpoints.multi.form.button.submit'|trans|uncolorize }}</button>
                     </td>
                 </tr>
-                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr><td colspan="3">&nbsp;</td></tr>
                 <tr>
-                    <td colspan="2" class="center aligned"><div id="amt-left"></div></td>
+                    <td colspan="3" class="center aligned"><div id="amt-left"></div></td>
                 </tr>
             </table>
         </form>
@@ -118,8 +118,8 @@
             /* global $ */
             const points = parseInt('{{ points }}')
 
-            const textLeft = '{{ "section.dragonpoints.form.points.left"|trans|colorize }}'
-            const textOver = '{{ "section.dragonpoints.form.points.over"|trans|colorize }}'
+            const textLeft = '{{ "section.dragonpoints.multi.form.points.left"|trans|colorize|e("js") }}'
+            const textOver = '{{ "section.dragonpoints.multi.form.points.over"|trans|colorize|e("js") }}'
 
             // eslint-disable-next-line no-unused-vars
             function pointsLeft ()
@@ -127,13 +127,15 @@
                 let pointsTotal = 0
                 $('input[type="number"]').each(function (index, elem)
                 {
-                    pointsTotal += elem.val()
+                    pointsTotal += parseInt($(elem).val())
                 })
 
-                const text = (pointsTotal >= 0) ? textLeft : textOver
+                const text = (points - pointsTotal >= 0) ? textLeft : textOver
 
                 $('#amt-left').html(text.replace('%s', pointsTotal).replace('%s', (points - pointsTotal)))
             }
+
+            (function (){ pointsLeft(); })()
         </script>
     {% else %}
         {{ 'section.dragonpoints.single.paragraph'|trans(_context)|colorize }}

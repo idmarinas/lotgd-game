@@ -15,7 +15,7 @@ namespace Lotgd\Core\Controller\NewdayController;
 
 trait DragonPointSpendTrait
 {
-    protected function dragonPointSpend(int $dkills, int $dp, array $canbuy, string $resline, array $labels)
+    protected function dragonPointSpend(array &$params, int $dkills, int $dp, array $canbuy, string $resline)
     {
         global $session;
 

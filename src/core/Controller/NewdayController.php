@@ -131,7 +131,7 @@ class NewdayController extends AbstractController
 
         if ($dp < $dkills)
         {
-            $this->dragonPointSpend($dkills, $dp, $canbuy, $resline, $labels);
+            $this->dragonPointSpend($params, $dkills, $dp, $canbuy, $resline);
         }
         elseif ( ! $session['user']['race'] || RACE_UNKNOWN == $session['user']['race'])
         {
