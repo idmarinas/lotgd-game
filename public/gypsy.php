@@ -18,7 +18,7 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-/** @var Lotgd\Core\Http\Request */
+/** @var Lotgd\Core\Http\Request $request */
 $request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
 
 //-- Init page
@@ -63,7 +63,7 @@ else
         ]
     );
 
-    if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
+    if (($session['user']['superuser'] & SU_EDIT_COMMENTS) !== 0)
     {
         \LotgdNavigation::addNav('nav.superuser', 'gypsy.php?op=talk');
     }

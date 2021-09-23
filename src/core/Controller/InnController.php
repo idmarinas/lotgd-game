@@ -154,25 +154,21 @@ class InnController extends AbstractController
                         $this->log->debug("spent {$amt} gems on bribing {$params['barkeep']}");
                     }
                 }
+                elseif ($session['user']['gold'] < $amt)
+                {
+                    $this->addFlash('warning', $this->translator->trans('flash.message.bribe.no.gold', ['amt' => $amt], $params['textDomain']));
+                    $this->navigation->addNavAllow('inn.php?op=bartender&act=bribe');
+
+                    return $this->redirect('inn.php?op=bartender&act=bribe');
+                }
                 else
                 {
-                    if ($session['user']['gold'] < $amt)
-                    {
-                        $this->addFlash('warning', $this->translator->trans('flash.message.bribe.no.gold', ['amt' => $amt], $params['textDomain']));
+                    $sfactor = 50   / 90;
+                    $fact    = $amt / $session['user']['level'];
+                    $chance  = ($fact - 10) * $sfactor + 25;
+                    $session['user']['gold'] -= $amt;
 
-                        $this->navigation->addNavAllow('inn.php?op=bartender&act=bribe');
-
-                        return $this->redirect('inn.php?op=bartender&act=bribe');
-                    }
-                    else
-                    {
-                        $sfactor = 50   / 90;
-                        $fact    = $amt / $session['user']['level'];
-                        $chance  = ($fact - 10) * $sfactor + 25;
-                        $session['user']['gold'] -= $amt;
-
-                        $this->log->debug("spent {$amt} gold bribing {$params['barkeep']}");
-                    }
+                    $this->log->debug("spent {$amt} gold bribing {$params['barkeep']}");
                 }
 
                 $params['bribeSuccess'] = mt_rand(0, 100) < $chance;
@@ -183,13 +179,13 @@ class InnController extends AbstractController
                     $this->dispatcher->dispatch(new Other(), Other::INN_BARTENDER_BRIBE);
                     modulehook('bartenderbribe');
 
-                    if ($this->settings->getSetting('pvp', 1))
+                    if ('' !== $this->settings->getSetting('pvp', 1) && '0' !== $this->settings->getSetting('pvp', 1))
                     {
                         $this->navigation->addNav('nav.bribe.upstairs', 'inn.php?op=bartender&act=listupstairs');
                     }
                     $this->navigation->addNav('nav.bribe.color', 'inn.php?op=bartender&act=colors');
 
-                    if ($this->settings->getSetting('allowspecialswitch', true))
+                    if ('' !== $this->settings->getSetting('allowspecialswitch', true) && '0' !== $this->settings->getSetting('allowspecialswitch', true))
                     {
                         $this->navigation->addNav('nav.bribe.specialty', 'inn.php?op=bartender&act=specialty');
                     }
@@ -300,7 +296,7 @@ class InnController extends AbstractController
         $params['bankExpense']     = $bankexpense;
         $params['boughtRoomToday'] = $session['user']['boughtroomtoday'];
 
-        if ($pay)
+        if (0 !== $pay)
         {
             if (2 == $pay || $session['user']['gold'] >= $expense || $params['boughtRoomToday'])
             {
@@ -344,7 +340,7 @@ class InnController extends AbstractController
             $this->navigation->addNav('nav.go.room', 'inn.php?op=room&pay=1');
         }
 
-        $bodyguards = ['Butch', 'Bruce', 'Alfonozo', 'Guido', 'Bruno', 'Bubba', 'Al', 'Chuck', 'Brutus', 'Nunzio', 'Terrance', 'Mitch', 'Rocco', 'Spike', 'Gregor', 'Sven', 'Draco'];
+        // $bodyguards = ['Butch', 'Bruce', 'Alfonozo', 'Guido', 'Bruno', 'Bubba', 'Al', 'Chuck', 'Brutus', 'Nunzio', 'Terrance', 'Mitch', 'Rocco', 'Spike', 'Gregor', 'Sven', 'Draco'];
 
         $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_INN_ROOMS);
         modulehook('innrooms');

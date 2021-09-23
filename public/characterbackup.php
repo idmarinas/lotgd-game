@@ -22,9 +22,9 @@ $params = [
 \LotgdNavigation::addNav('navigation.nav.update', 'characterbackup.php', ['textDomain' => $params['textDomain']]);
 
 $fileSystem = new \Symfony\Component\Filesystem\Filesystem();
-/** @var \Symfony\Component\Serializer\Serializer */
+/** @var \Symfony\Component\Serializer\Serializer $serializer */
 $serializer = \LotgdKernel::get('serializer');
-/** @var \Kit\CryptBundle\Service\OpensslService */
+/** @var \Kit\CryptBundle\Service\OpensslService $cryptService */
 $cryptService = \LotgdKernel::get('Kit\CryptBundle\Service\OpensslService');
 
 $path              = 'storage/logd_snapshots';

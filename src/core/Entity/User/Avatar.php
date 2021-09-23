@@ -35,7 +35,7 @@ trait Avatar
     }
 
     /**
-     * Alias
+     * Alias.
      *
      * @deprecated 6.0.0 character is a reserve word and changed to avatar.
      */

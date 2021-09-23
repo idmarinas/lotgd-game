@@ -92,7 +92,7 @@ trait Movement
             //-- Process move of player
             ($this->isEnemyAlive($badguy) && $this->isPlayerAlive()) && $this->reportPlayerMove($badguy);
 
-            $r = \mt_rand(0, 100);
+            $r = mt_rand(0, 100);
 
             if ($r < $ggchancetodouble && $this->isEnemyAlive($badguy) && $this->isPlayerAlive())
             {
@@ -114,7 +114,7 @@ trait Movement
 
             ($this->isEnemyAlive($badguy) && $this->isPlayerAlive()) && $this->reportEnemyMove($badguy);
 
-            $r = \mt_rand(0, 100);
+            $r = mt_rand(0, 100);
 
             if ($r < $bgchancetodouble && $this->isEnemyAlive($badguy) && $this->isPlayerAlive())
             {
@@ -162,7 +162,7 @@ trait Movement
                 'combat.enemy.riposted', //-- Translator key
                 [ //--- Params
                     'creatureName' => $badguy['creaturename'],
-                    'damage'       => \abs($selfdmg),
+                    'damage'       => abs($selfdmg),
                 ],
                 $this->getTranslationDomain(),
             ]);
@@ -204,7 +204,7 @@ trait Movement
         $roll        = $this->rollDamage($badguy);
         $creaturedmg = $roll['creaturedmg'];
 
-        if ('pvp' != $this->getOptionType('type'))
+        if ('pvp' != $this->getOptionType())
         {
             $creaturedmg = $this->reportPowerMove($roll['atk'], $creaturedmg);
         }
@@ -225,7 +225,7 @@ trait Movement
                 'combat.ally.riposted', //-- Translator key
                 [
                     'creatureName' => $badguy['creaturename'],
-                    'damage'       => \abs($creaturedmg),
+                    'damage'       => abs($creaturedmg),
                 ],
                 $this->getTranslationDomain(),
             ]);
@@ -301,7 +301,7 @@ trait Movement
                     [
                         'companionName' => $companion['name'],
                         'creatureName'  => $badguy['creaturename'],
-                        'damage'        => \abs($damage_done),
+                        'damage'        => abs($damage_done),
                     ],
                     $this->getTranslationDomain(),
                 ]);
@@ -340,7 +340,7 @@ trait Movement
                     [
                         'creatureName'  => $badguy['creaturename'],
                         'companionName' => $companion['name'],
-                        'damage'        => \abs($damage_received),
+                        'damage'        => abs($damage_received),
                     ],
                     $this->getTranslationDomain(),
                 ]);
@@ -368,7 +368,7 @@ trait Movement
             // or any other companion or our fellow companion himself.
             if ($this->user['hitpoints'] < $this->user['maxhitpoints'])
             {
-                $hptoheal = \min($companion['abilities']['heal'], $this->user['maxhitpoints'] - $this->user['hitpoints']);
+                $hptoheal = min($companion['abilities']['heal'], $this->user['maxhitpoints'] - $this->user['hitpoints']);
                 $this->user['hitpoints'] += $hptoheal;
                 $companion['used'] = true;
 
@@ -396,7 +396,7 @@ trait Movement
                         continue;
                     }
 
-                    $hptoheal = \min($companion['abilities']['heal'], $otherCompanion['maxhitpoints'] - $otherCompanion['hitpoints']);
+                    $hptoheal = min($companion['abilities']['heal'], $otherCompanion['maxhitpoints'] - $otherCompanion['hitpoints']);
                     $otherCompanion['hitpoints'] += $hptoheal;
                     $companion['used'] = true;
 
@@ -435,7 +435,7 @@ trait Movement
                     [
                         'creatureName'  => $badguy['creaturename'],
                         'companionName' => $companion['name'],
-                        'damage'        => \abs($damage_received),
+                        'damage'        => abs($damage_received),
                     ],
                     $this->getTranslationDomain(),
                 ]);
@@ -460,7 +460,7 @@ trait Movement
         }
         elseif ('defend' == $activate && ($companion['abilities']['defend'] ?? false) && ! $this->defended && ! $companion['used'])
         {
-            $this->defended        = true;
+            $this->defended  = true;
             $roll            = $this->rollCompanionDamage($companion, $badguy);
             $damage_done     = $roll['creaturedmg'];
             $damage_received = $roll['selfdmg'];
@@ -483,7 +483,7 @@ trait Movement
                     [
                         'companionName' => $companion['name'],
                         'creatureName'  => $badguy['creaturename'],
-                        'damage'        => \abs($damage_done),
+                        'damage'        => abs($damage_done),
                     ],
                     $this->getTranslationDomain(),
                 ]);
@@ -523,7 +523,7 @@ trait Movement
                     [
                         'creatureName'  => $badguy['creaturename'],
                         'companionName' => $companion['name'],
-                        'damage'        => \abs($damage_received),
+                        'damage'        => abs($damage_received),
                     ],
                     $this->getTranslationDomain(),
                 ]);
@@ -549,7 +549,7 @@ trait Movement
         elseif ('magic' == $activate && ($companion['abilities']['magic'] ?? false) && ! $companion['used'])
         {
             $roll        = $this->rollCompanionDamage($companion);
-            $damage_done = \abs($roll['creaturedmg']);
+            $damage_done = abs($roll['creaturedmg']);
 
             $msg = $companion['magicmsg'] ?? 'combat.companion.magic.damage';
             $badguy['creaturehealth'] -= $damage_done;
@@ -565,7 +565,7 @@ trait Movement
                     'creatureName'  => $badguy['creaturename'],
                     'damage'        => $damage_done,
                 ],
-                $this->getTranslationDomain()
+                $this->getTranslationDomain(),
             ]);
 
             $companion['hitpoints'] -= $companion['abilities']['magic'];

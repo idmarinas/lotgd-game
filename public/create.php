@@ -11,14 +11,14 @@ require_once 'lib/serverfunctions.class.php';
 
 \LotgdTool::checkBan();
 
-/** @var Lotgd\Core\Http\Request */
+/** @var Lotgd\Core\Http\Request $request */
 $request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
 
 $refer = (string) $request->query->get('r');
 
 $params['refer'] = '';
 
-if ($refer)
+if ($refer !== '' && $refer !== '0')
 {
     $params['refer'] = '&r='.\htmlentities($refer, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8'));
 }

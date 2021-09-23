@@ -49,7 +49,7 @@ final class AboutCommand extends Command
     {
         $style = new SymfonyStyle($input, $output);
 
-        /** @var Kernel $sm */
+        /** @var Kernel $kernel */
         $kernel = $this->getApplication()->getKernel();
 
         $rows = [

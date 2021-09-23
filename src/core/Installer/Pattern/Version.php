@@ -148,7 +148,7 @@ trait Version
     {
         $version = \max(-1, $version) ?: -1;
 
-        return false !== \array_search($version, $this->lotgd_versions);
+        return in_array($version, $this->lotgd_versions);
     }
 
     /**

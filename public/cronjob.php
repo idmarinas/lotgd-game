@@ -29,7 +29,7 @@ $cronjobs = $cache->get('tablecronjobs', function ($item)
 });
 
 //-- Add all cronjobs to Jobby CronJob
-foreach ($cronjobs as $key => $job)
+foreach ($cronjobs as $job)
 {
     $shell = new \Cron\Job\ShellJob();
     $shell->setCommand("php {$job['command']}.php");

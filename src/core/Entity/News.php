@@ -113,7 +113,7 @@ class News
      *
      * @return self
      */
-    public function setDate($date)
+    public function setDate(\DateTimeInterface $date)
     {
         $this->date = $date;
 
@@ -122,8 +122,10 @@ class News
 
     /**
      * Get the value of date.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getDate(): \DateTime
+    public function getDate(): \DateTimeInterface
     {
         return $this->date;
     }

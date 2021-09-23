@@ -57,7 +57,7 @@ class Install extends InstallerAbstract
         }
 
         //-- Check for installations 4.12.0 and down.
-        if ( ! $versionInstalled)
+        if ( $versionInstalled === 0)
         {
             try
             {
@@ -87,7 +87,7 @@ class Install extends InstallerAbstract
     {
         return \array_filter($this->getInstallerVersions(), function ($version) use ($fromVersion, $toVersion)
         {
-            return (bool) ($version > $fromVersion && $version <= $toVersion || -1 == $fromVersion);
+            return ($version > $fromVersion && $version <= $toVersion) || -1 == $fromVersion;
         });
     }
 

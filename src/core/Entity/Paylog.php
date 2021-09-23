@@ -329,9 +329,11 @@ class Paylog
     /**
      * Set the value of Processdate.
      *
+     * @param \DateTime|\DateTimeImmutable $processdate
+     *
      * @return self
      */
-    public function setProcessdate(\DateTime $processdate)
+    public function setProcessdate(\DateTimeInterface $processdate)
     {
         $this->processdate = $processdate;
 
@@ -340,8 +342,10 @@ class Paylog
 
     /**
      * Get the value of Processdate.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getProcessdate(): \DateTime
+    public function getProcessdate(): \DateTimeInterface
     {
         return $this->processdate;
     }

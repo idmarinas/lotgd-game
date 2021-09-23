@@ -25,7 +25,7 @@ switch ($op)
         \LotgdNavigation::addNav('globaluserfunctions.nav.reset.now', 'globaluserfunctions.php?op=dkpointresetnow');
     break;
     case 'dkpointresetnow':
-        \ServerFunctions::resetAllDragonkillPoints();
+        \LotgdKernel::get('lotgd_core.service.server_functions')->resetAllDragonkillPoints();
 
         $params['tpl'] = 'reset-now';
     break;

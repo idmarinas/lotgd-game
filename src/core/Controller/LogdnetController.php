@@ -143,7 +143,7 @@ class LogdnetController extends AbstractController
      */
     public function net(): JsonResponse
     {
-        /** @var \Lotgd\Core\Repository\LogdnetRepository */
+        /** @var \Lotgd\Core\Repository\LogdnetRepository $repository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:Logdnet');
         $entities   = $repository->getNetServerList();
 
@@ -155,12 +155,12 @@ class LogdnetController extends AbstractController
      */
     public function register(Request $request)
     {
-        /** @var Lotgd\Bundle\CoreBundle\Repository\LogdnetRepository */
+        /** @var Lotgd\Bundle\CoreBundle\Repository\LogdnetRepository $repository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:Logdnet');
         //-- Get server from DB if exists
         $entity = $repository->findOneBy(['address' => $request->get('addy', '')]);
         $newRow = ( ! $entity);
-        /** @var Logdnet */
+        /** @var Logdnet $entity */
         $entity = $entity ?: new Logdnet();
 
         $vers  = (string) $request->get('version', 'Unknown');
@@ -178,7 +178,7 @@ class LogdnetController extends AbstractController
 
         //-- Set data
         $entity->setAddress((string) $request->get('addy', ''))
-            ->setDescription((string) $desc)
+            ->setDescription($desc)
             ->setVersion($vers ?: 'Unknown')
             ->setAdmin($admin)
             ->setCount((int) ($request->get('c', 0) * 1))
@@ -256,7 +256,7 @@ class LogdnetController extends AbstractController
                 ]);
 
                 $content = $response->getContent();
-                $content = 'application/json' == $response->getHeaders()['content-type'][0] ? \json_decode($content) : \explode("\n", $content);
+                $content = 'application/json' == $response->getHeaders()['content-type'][0] ? \json_decode($content, null, 512, JSON_THROW_ON_ERROR) : \explode("\n", $content);
 
                 $filterChain = new Filter\FilterChain();
                 $filterChain

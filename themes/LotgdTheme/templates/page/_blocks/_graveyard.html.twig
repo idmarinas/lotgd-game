@@ -31,7 +31,7 @@
 
     {{ 'section.haunt.paragraph'|trans({ 'graveyardOwnerName': graveyardOwnerName })|colorize }}
 
-    <form action="{{ 'graveyard.php?op=haunt2'|lotgd_url }}">
+    <form action="{{ 'graveyard.php?op=haunt2'|lotgd_url }}" method="POST">
         <div class="field">
             <label for="name">{{ 'section.haunt.form.label.name'|trans|colorize }}</label>
             <div class="ui action input">
@@ -48,7 +48,7 @@
     {% set count = characters|length %}
 
     {% if count %}
-        {{ 'section.haunt2.found'|trans|colorize }}
+        {{ 'section.haunt2.found'|trans(_context)|colorize }}
 
         <table class="ui very compact table">
             <thead>

@@ -168,12 +168,12 @@ trait Buff
 
             if (isset($buff['lifetap']))
             {
-                \array_push($result['lifetap'], $buff);
+                $result['lifetap'][] = $buff;
             }
 
             if (isset($buff['damageshield']))
             {
-                \array_push($result['dmgshield'], $buff);
+                $result['dmgshield'][] = $buff;
             }
 
             if (isset($buff['regen']) && 'roundstart' == $tag && $badguy['istarget'])

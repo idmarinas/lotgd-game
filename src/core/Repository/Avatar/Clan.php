@@ -225,8 +225,6 @@ trait Clan
         catch (\Throwable $th)
         {
             Debugger::log($th);
-
-            return;
         }
     }
 

@@ -47,7 +47,7 @@ class MotdRepository extends ServiceEntityRepository
                 ->getArrayResult()
             ;
 
-            if ( ! $result)
+            if (empty($result))
             {
                 return null;
             }
@@ -93,7 +93,7 @@ class MotdRepository extends ServiceEntityRepository
                 ->getArrayResult()
             ;
 
-            if ( ! $result)
+            if (empty($result))
             {
                 return null;
             }
@@ -135,7 +135,7 @@ class MotdRepository extends ServiceEntityRepository
             $motd['pollResult']['opt'][$value['choice']] = (int) $value['votes'];
         }
 
-        if ($userId)
+        if (0 !== $userId)
         {
             $q = $this->_em->createQuery('SELECT p.choice FROM Lotgd\Core\Entity\PollResults p WHERE p.motditem = :motditem AND p.account = :acct');
             $q->setParameters([

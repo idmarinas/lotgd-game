@@ -71,7 +71,7 @@ class Translator extends AbstractExtension
         $msg = $formatter->format($parameters);
 
         //-- Dump error to debug
-        if ($formatter->getErrorCode())
+        if ($formatter->getErrorCode() !== 0)
         {
             bdump($formatter->getPattern());
             bdump($formatter->getErrorMessage());
@@ -103,12 +103,10 @@ class Translator extends AbstractExtension
      */
     private function cleanParameters($param): bool
     {
-        return (bool) (
-            \is_string($param) //-- Allow string values
-            || \is_numeric($param) //-- Allow numeric values
-            || \is_bool($param) //-- Allow bool values
-            || \is_null($param) //-- Allow null value (Formatter can handle this value)
-            || $param instanceof \DateTime //-- Allow DateTime object
-        );
+        return \is_string($param) //-- Allow string values
+        || \is_numeric($param) //-- Allow numeric values
+        || \is_bool($param) //-- Allow bool values
+        || \is_null($param) //-- Allow null value (Formatter can handle this value)
+        || $param instanceof \DateTime; //-- Allow DateTime object
     }
 }

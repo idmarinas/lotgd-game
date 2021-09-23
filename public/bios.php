@@ -47,7 +47,7 @@ $params['blocked'] = $repository->getCharactersBlockedBio();
 
 \LotgdNavigation::addNav('bios.category.moderation');
 
-if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
+if (($session['user']['superuser'] & SU_EDIT_COMMENTS) !== 0)
 {
     \LotgdNavigation::addNav('bios.nav.moderation', 'moderate.php');
 }

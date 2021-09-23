@@ -129,10 +129,10 @@ class MercenaryCampController extends AbstractController
         {
             $row = $this->getRepository()->extractEntity($entity);
 
-            $row['attack']       = $row['attack']       + $row['attackperlevel']       * $session['user']['level'];
-            $row['defense']      = $row['defense']      + $row['defenseperlevel']      * $session['user']['level'];
-            $row['maxhitpoints'] = $row['maxhitpoints'] + $row['maxhitpointsperlevel'] * $session['user']['level'];
-            $row['hitpoints']    = $row['maxhitpoints'];
+            $row['attack']       += $row['attackperlevel']       * $session['user']['level'];
+            $row['defense']      += $row['defenseperlevel']      * $session['user']['level'];
+            $row['maxhitpoints'] += $row['maxhitpointsperlevel'] * $session['user']['level'];
+            $row['hitpoints'] = $row['maxhitpoints'];
 
             $params['companionHire'] = $this->buffs->applyCompanion($row['name'], $row);
 

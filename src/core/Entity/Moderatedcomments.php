@@ -122,9 +122,11 @@ class Moderatedcomments
     /**
      * Set the value of Moddate.
      *
+     * @param \DateTime|\DateTimeImmutable $moddate
+     *
      * @return self
      */
-    public function setModdate(\DateTime $moddate)
+    public function setModdate(\DateTimeInterface $moddate)
     {
         $this->moddate = $moddate;
 
@@ -133,8 +135,10 @@ class Moderatedcomments
 
     /**
      * Get the value of Moddate.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getModdate(): \DateTime
+    public function getModdate(): \DateTimeInterface
     {
         return $this->moddate;
     }

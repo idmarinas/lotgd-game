@@ -53,29 +53,19 @@ trait TempStat
 
     public function checkTempStat($name, $color = false)
     {
-        if (isset($this->temp_user_stats['add'][$name]))
-        {
-            $v = $this->temp_user_stats['add'][$name];
-        }
-        else
-        {
-            $v = 0;
-        }
+        $v = $this->temp_user_stats['add'][$name] ?? 0;
 
         if (false === $color)
         {
             return 0 == $v ? '' : $v;
         }
+        elseif ($v > 0)
+        {
+            return ' `&('.($this->user[$name] - round($v, 1)).'`@+'.round($v, 1).'`&)';
+        }
         else
         {
-            if ($v > 0)
-            {
-                return ' `&('.($this->user[$name] - round($v, 1)).'`@+'.round($v, 1).'`&)';
-            }
-            else
-            {
-                return 0 == $v ? '' : ' `&('.($this->user[$name] + round($v, 1)).'`$-'.round($v, 1).'`&)';
-            }
+            return 0 == $v ? '' : ' `&('.($this->user[$name] + round($v, 1)).'`$-'.round($v, 1).'`&)';
         }
     }
 

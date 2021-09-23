@@ -77,9 +77,11 @@ class Bans
     /**
      * Set the value of Banexpire.
      *
+     * @param \DateTime|\DateTimeImmutable $banexpire
+     *
      * @return self
      */
-    public function setBanexpire(\DateTime $banexpire)
+    public function setBanexpire(\DateTimeInterface $banexpire)
     {
         $this->banexpire = $banexpire;
 
@@ -88,8 +90,10 @@ class Bans
 
     /**
      * Get the value of Banexpire.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getBanexpire(): \DateTime
+    public function getBanexpire(): \DateTimeInterface
     {
         return $this->banexpire;
     }
@@ -185,9 +189,11 @@ class Bans
     /**
      * Set the value of Lasthit.
      *
+     * @param \DateTime|\DateTimeImmutable $lasthit
+     *
      * @return self
      */
-    public function setLasthit(\DateTime $lasthit)
+    public function setLasthit(\DateTimeInterface $lasthit)
     {
         $this->lasthit = $lasthit;
 
@@ -196,8 +202,10 @@ class Bans
 
     /**
      * Get the value of Lasthit.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getLasthit(): \DateTime
+    public function getLasthit(): \DateTimeInterface
     {
         return $this->lasthit;
     }

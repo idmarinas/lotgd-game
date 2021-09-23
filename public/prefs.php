@@ -139,7 +139,7 @@ else
         {
             if (strlen($pass1) > 3)
             {
-                /** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder */
+                /** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder $passwordEncoder */
                 $passwordEncoder = \LotgdKernel::get('security.password_encoder');
                 $account = \Doctrine::getRepository('LotgdCore:User')->find($session['user']['acctid']);
 
@@ -454,14 +454,14 @@ else
         }
 
         // If we found a user editable one
-        if ($everfound)
+        if ($everfound !== 0)
         {
             // Collect the values
             $foundmodules[] = $module;
         }
     }
 
-    if (count($foundmodules))
+    if ( ! empty($foundmodules))
     {
         $modulePrefsRepository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
         $result = $modulePrefsRepository->findModulesPrefs($foundmodules, $session['user']['acctid']);

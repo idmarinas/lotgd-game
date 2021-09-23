@@ -146,8 +146,6 @@ trait Comment
     /**
      * Set the value of Extra.
      *
-     * @param array $extra
-     *
      * @return self
      */
     public function setExtra(array $extra)

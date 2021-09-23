@@ -28,7 +28,7 @@ trait Buffer
         }
 
         //run temp stats
-        foreach ($this->userBuffs as $buffname => &$buff)
+        foreach ($this->userBuffs as &$buff)
         {
             if (isset($buff['tempstats_calculated']))
             {

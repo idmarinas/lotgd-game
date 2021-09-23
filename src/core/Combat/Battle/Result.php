@@ -67,7 +67,7 @@ trait Result
                 $result        = modulehook('battle-victory-end', $args->getArguments());
                 $this->enemies = $result['enemies'];
 
-                $this->context['battle_end'] = $this->context['battle_end'] + $result['messages'];
+                $this->context['battle_end'] += $result['messages'];
 
                 $this->allowProccessBatteResults() && $this->battleVictory();
             }
@@ -78,7 +78,7 @@ trait Result
                 $result        = modulehook('battle-defeat-end', $args->getArguments());
                 $this->enemies = $result['enemies'];
 
-                $this->context['battle_end'] = $this->context['battle_end'] + $result['messages'];
+                $this->context['battle_end'] += $result['messages'];
 
                 $this->allowProccessBatteResults() && $this->battleDefeat();
             }

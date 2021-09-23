@@ -160,9 +160,11 @@ class Referers
     /**
      * Set the value of Last.
      *
+     * @param \DateTime|\DateTimeImmutable $last
+     *
      * @return self
      */
-    public function setLast(\DateTime $last)
+    public function setLast(\DateTimeInterface $last)
     {
         $this->last = $last;
 
@@ -171,8 +173,10 @@ class Referers
 
     /**
      * Get the value of Last.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getLast(): \DateTime
+    public function getLast(): \DateTimeInterface
     {
         return $this->last;
     }

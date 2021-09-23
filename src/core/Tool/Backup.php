@@ -101,7 +101,7 @@ class Backup
         {
             try
             {
-                /** @var Repository with backup option */
+                /** @var |Lotgd\Core\Repository\RepositoryBackupInterface $repository */
                 $repository = $this->doctrine->getRepository($entity);
 
                 //-- Skip if not have methods for backup table
@@ -148,7 +148,7 @@ class Backup
 
     private function processClan(int $accountId, $accountEntity): void
     {
-        /** @var \Lotgd\Core\Repository\AvatarRepository */
+        /** @var \Lotgd\Core\Repository\AvatarRepository $charRepository */
         $charRepository = $this->doctrine->getRepository('LotgdCore:Avatar');
 
         if (

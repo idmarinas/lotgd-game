@@ -66,6 +66,6 @@ class MountsTranslation extends AbstractPersonalTranslation
 
     public function __toString()
     {
-        return (string) $this->getContent();
+        return $this->getContent();
     }
 }

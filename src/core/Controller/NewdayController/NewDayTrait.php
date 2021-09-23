@@ -143,7 +143,7 @@ trait NewDayTrait
         $params['resurrectionTurns'] = $resurrectionturns;
 
         $rp = $session['user']['restorepage'];
-        $x  = max(strrpos('&', $rp), strrpos('?', $rp));
+        $x  = max(strrpos('&', (string) $rp), strrpos('?', (string) $rp));
 
         if ($x > 0)
         {

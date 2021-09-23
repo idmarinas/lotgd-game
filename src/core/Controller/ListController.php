@@ -93,7 +93,7 @@ class ListController extends AbstractController
 
     protected function enter(array $params, Request $request): Response
     {
-        $search = (string) $request->request->getAlnum('name', '');
+        $search = $request->request->getAlnum('name', '');
 
         $query = $this->queryList($search);
         $query->andWhere('u.loggedin = 1');
@@ -112,8 +112,8 @@ class ListController extends AbstractController
     {
         global $session;
 
-        $page   = (int) $request->query->getInt('page');
-        $search = (string) $request->request->getAlnum('name', '');
+        $page   = $request->query->getInt('page');
+        $search = $request->request->getAlnum('name', '');
 
         $query = $this->queryList($search);
         $query->andWhere('u.loggedin = 1 AND c.clanid = :clan')

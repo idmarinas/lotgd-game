@@ -19,6 +19,8 @@ use Twig\TwigFilter;
 
 class FormatExtension extends AbstractExtension
 {
+    private $format;
+
     public function __construct(Format $format)
     {
         $this->format = $format;

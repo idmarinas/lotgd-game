@@ -39,7 +39,7 @@ if ('keepalive' == $op)
 
 ($session['user']['superuser'] & SU_EDIT_PETITIONS) && \LotgdNavigation::addNav('superuser.nav.petition', 'viewpetition.php');
 
-if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
+if (($session['user']['superuser'] & SU_EDIT_COMMENTS) !== 0)
 {
     \LotgdNavigation::addNav('superuser.nav.moderation', 'moderate.php');
     \LotgdNavigation::addNav('superuser.nav.bios', 'bios.php');
@@ -47,7 +47,10 @@ if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 
 ($session['user']['superuser'] & SU_EDIT_DONATIONS) && \LotgdNavigation::addNav('superuser.nav.donation', 'donators.php');
 
-(file_exists('public/paylog.php') && $session['user']['superuser'] & SU_EDIT_PAYLOG) && \LotgdNavigation::addNav('superuser.nav.paylog', 'paylog.php');
+if (file_exists('public/paylog.php') && $session['user']['superuser'] & SU_EDIT_PAYLOG)
+{
+    \LotgdNavigation::addNav('superuser.nav.paylog', 'paylog.php');
+}
 
 ($session['user']['superuser'] & SU_RAW_SQL) && \LotgdNavigation::addNav('superuser.nav.rawsql', 'rawsql.php');
 
@@ -55,7 +58,7 @@ if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 
 \LotgdNavigation::addHeader('superuser.category.editors');
 
-if ($session['user']['superuser'] & SU_EDIT_USERS)
+if (($session['user']['superuser'] & SU_EDIT_USERS) !== 0)
 {
     \LotgdNavigation::addNav('superuser.nav.user', 'user.php');
     \LotgdNavigation::addNav('superuser.nav.titleedit', 'titleedit.php');
@@ -63,19 +66,19 @@ if ($session['user']['superuser'] & SU_EDIT_USERS)
 
 ($session['user']['superuser'] & SU_EDIT_BANS) && \LotgdNavigation::addNav('superuser.nav.bans', 'bans.php');
 
-if ($session['user']['superuser'] & SU_EDIT_MOUNTS)
+if (($session['user']['superuser'] & SU_EDIT_MOUNTS) !== 0)
 {
     \LotgdNavigation::addNav('superuser.nav.mounts', 'mounts.php');
     \LotgdNavigation::addNav('superuser.nav.companions', 'companions.php');
 }
 
-if ($session['user']['superuser'] & SU_EDIT_CREATURES)
+if (($session['user']['superuser'] & SU_EDIT_CREATURES) !== 0)
 {
     \LotgdNavigation::addNav('superuser.nav.creatures', 'creatures.php');
     \LotgdNavigation::addNav('superuser.nav.masters', 'masters.php');
 }
 
-if ($session['user']['superuser'] & SU_EDIT_EQUIPMENT)
+if (($session['user']['superuser'] & SU_EDIT_EQUIPMENT) !== 0)
 {
     \LotgdNavigation::addNav('superuser.nav.weaponeditor', 'weaponeditor.php');
     \LotgdNavigation::addNav('superuser.nav.armoreditor', 'armoreditor.php');
@@ -88,7 +91,7 @@ if ($session['user']['superuser'] & SU_EDIT_EQUIPMENT)
 ($session['user']['superuser'] & SU_EDIT_CONFIG) && \LotgdNavigation::addNav('superuser.nav.configuration', 'configuration.php');
 ($session['user']['superuser'] & SU_EDIT_USERS) && \LotgdNavigation::addNav('superuser.nav.backup', 'characterbackup.php');
 
-if ($session['user']['superuser'] & SU_EDIT_CONFIG)
+if (($session['user']['superuser'] & SU_EDIT_CONFIG) !== 0)
 {
     \LotgdNavigation::addNav('superuser.nav.debug', 'debug.php');
     \LotgdNavigation::addNav('superuser.nav.referers', 'referers.php');

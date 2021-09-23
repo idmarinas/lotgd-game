@@ -36,12 +36,12 @@ if ('' != $name)
 
     \LotgdTool::checkBan(); //check if this computer is banned
 
-    /** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder */
+    /** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder $passwordEncoder */
     $passwordEncoder = \LotgdKernel::get('security.password_encoder');
     $password = \LotgdRequest::getPost('password');
 
     //-- Using Doctrine repository to process login
-    /** @var Lotgd\Core\Repository\UserRepository */
+    /** @var Lotgd\Core\Repository\UserRepository $repositoryAccounts */
     $repositoryAccounts = Doctrine::getRepository('LotgdCore:User');
     $account            = $repositoryAccounts->findOneByLogin($name);
 
@@ -62,11 +62,11 @@ if ('' != $name)
             ->getResult()
         ;
 
-        if (\count($result))
+        if (\count($result) > 0)
         {
             // just in case there manage to be multiple accounts on
             // this name.
-            foreach ($result as $key => $row)
+            foreach ($result as $row)
             {
                 $post = \LotgdRequest::getPostAll();
 

@@ -162,9 +162,11 @@ class Motd
     /**
      * Set the value of Motddate.
      *
+     * @param \DateTime|\DateTimeImmutable $motddate
+     *
      * @return self
      */
-    public function setMotddate(\DateTime $motddate)
+    public function setMotddate(\DateTimeInterface $motddate)
     {
         $this->motddate = $motddate;
 
@@ -173,8 +175,10 @@ class Motd
 
     /**
      * Get the value of Motddate.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getMotddate(): \DateTime
+    public function getMotddate(): \DateTimeInterface
     {
         return $this->motddate;
     }

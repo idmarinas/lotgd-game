@@ -127,7 +127,6 @@ trait Commentary
         elseif ('DNI' == \strtoupper($comment['chatloc']))
         {
             $icon = [
-                'icon'       => 'images/icons/onlinestatus/dni.png',
                 'icon'       => 'circle outline',
                 'insideIcon' => 'blue small circle',
                 'label'      => $status['dni'],

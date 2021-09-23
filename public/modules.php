@@ -68,7 +68,7 @@ reset($modules);
 
 $params['messages'] = null;
 
-foreach ($modules as $key => $module)
+foreach ($modules as $module)
 {
     $params['messages'][] = ['module.performing.'.$theOp, ['module' => $module]];
 
@@ -167,7 +167,7 @@ if ('' == $op && 'installed' != $cat && 'deactivated' != $cat && 'activated' != 
 {
     $params['cat'] = $cat;
 
-    if ($cat)
+    if ($cat !== '' && $cat !== '0')
     {
         $params['modules'] = $repository->findBy(['category' => $cat], ['installdate' => 'DESC']);
     }
@@ -175,7 +175,7 @@ if ('' == $op && 'installed' != $cat && 'deactivated' != $cat && 'activated' != 
     {
         $moduleinfo = [];
 
-        if (count($uninstmodules))
+        if (count($uninstmodules) > 0)
         {
             $invalidmodule = [
                 'version' => '',
@@ -226,7 +226,7 @@ if ('' == $op && 'installed' != $cat && 'deactivated' != $cat && 'activated' != 
 
                 $temp['canInstall'] = $canInstall;
 
-                array_push($moduleinfo, $temp);
+                $moduleinfo[] = $temp;
             }
         }
 

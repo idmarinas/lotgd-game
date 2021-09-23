@@ -57,7 +57,7 @@ if ('save' == $op)
     }
 
     $points = $amt;
-    if ($txnid)
+    if ($txnid !== '' && $txnid !== '0')
     {
         $args = new GenericEvent(null, [
             'points' => $amt,
@@ -74,7 +74,7 @@ if ('save' == $op)
             $result['messages'] = [$result['messages']];
         }
 
-        foreach ($result['messages'] as $messageid => $message)
+        foreach ($result['messages'] as $message)
         {
             \LotgdLog::debug($message, false, $id, 'donation', 0, false);
         }
@@ -95,7 +95,7 @@ if ('save' == $op)
     \LotgdEventDispatcher::dispatch($args, Events::PAYMENT_DONATION_SUCCESS);
     modulehook('donation', $args->getArguments());
 
-    if ($txnid)
+    if ($txnid !== '' && $txnid !== '0')
     {
         $paylog = $paylogRepository->findOneByTxnid($txnid);
 

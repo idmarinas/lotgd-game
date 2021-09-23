@@ -57,12 +57,12 @@ switch ($op)
         $repoAcctEveryPage = \Doctrine::getRepository(\Lotgd\Core\Entity\AccountsEverypage::class);
         $page = (int) \LotgdRequest::getQuery('page');
         $sort = (string) \LotgdRequest::getQuery('sort');
-        $order = (string) ($sort ?: 'acctid');
+        $order = $sort ?: 'acctid';
 
         $query = (string) \LotgdRequest::getPost('q');
         $query = (string) ($query ?: \LotgdRequest::getQuery('q'));
 
-        $params['query'] = $query ? "q={$query}" : '';
+        $params['query'] = $query !== '' && $query !== '0' ? "q={$query}" : '';
         $params['paginator'] = $repository->bansSearchAccts($query, $order, $page);
         $params['stats'] = $repoAcctEveryPage->getStatsPageGen();
 

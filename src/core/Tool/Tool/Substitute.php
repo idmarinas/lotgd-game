@@ -109,7 +109,7 @@ trait Substitute
 
                 if (\substr($replacement_array[0], $x, \strlen($sval)) == $sval)
                 {
-                    \array_push($replacement_array, $rval);
+                    $replacement_array[] = $rval;
                     $replacement_array[0] = \substr($replacement_array[0], 0, $x).'%s'.
                         \substr($replacement_array[0], $x + \strlen($sval));
                     // Making a replacement changes the length, so we need to

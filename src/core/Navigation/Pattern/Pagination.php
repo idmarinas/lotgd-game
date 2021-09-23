@@ -20,7 +20,6 @@ trait Pagination
     /**
      * Navigation menu used with Paginator.
      *
-     * @param Laminas\Paginator\Paginator $paginator
      * @param bool|null                   $forcePages Force to show pages if only have 1 page
      */
     public function pagination(Paginator $paginator, string $url, $forcePages = null)

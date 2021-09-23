@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Laminas\View\Helper\HeadTitle;
 use Lotgd\Core\Event\EveryRequest;
 use Lotgd\Core\Kernel;
+use Lotgd\Core\Service\PageParts;
 use Lotgd\Core\Template\Params;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -39,6 +40,7 @@ class Response extends HttpResponse
     /** @var Symfony\Component\EventDispatcher\EventDispatcher */
     private $eventDispatcher;
     private $kernel;
+    private $pageParts;
 
     public function __construct(
         EntityManagerInterface $doctrine,
@@ -46,7 +48,8 @@ class Response extends HttpResponse
         Environment $template,
         Request $request,
         Params $params,
-        KernelInterface $kernel
+        KernelInterface $kernel,
+        PageParts $pageParts
     ) {
         $this->translator      = $kernel->getContainer()->get('translator');
         $this->eventDispatcher = $kernel->getContainer()->get('event_dispatcher');
@@ -56,6 +59,7 @@ class Response extends HttpResponse
         $this->request         = $request;
         $this->params          = $params;
         $this->kernel          = $kernel;
+        $this->pageParts       = $pageParts;
 
         parent::__construct();
     }
@@ -83,7 +87,7 @@ class Response extends HttpResponse
         }
 
         $script = $this->request->getServer('SCRIPT_NAME');
-        $script = \substr($script, 0, \strpos($script, '.'));
+        $script = substr($script, 0, strpos($script, '.'));
         $module = (string) $this->request->getQuery('module');
 
         $args = new EveryRequest(['script' => $script, 'module' => $module]);
@@ -202,7 +206,7 @@ class Response extends HttpResponse
         global $session;
 
         $script = $this->request->getServer('SCRIPT_NAME');
-        $script = \substr($script, 0, \strpos($script, '.'));
+        $script = substr($script, 0, strpos($script, '.'));
         $module = (string) $this->request->getQuery('module');
 
         $args = new EveryRequest(['script' => $script, '__scriptfile__' => $script, 'module' => $module]);
@@ -269,7 +273,7 @@ class Response extends HttpResponse
         $session['user']['gensize'] += \strlen($browserOutput);
         $session['output'] = $browserOutput;
 
-        if (true === $saveuser)
+        if ($saveuser)
         {
             $this->kernel->getContainer()->get('lotgd.core.tools')->saveUser();
         }
@@ -302,7 +306,7 @@ class Response extends HttpResponse
     public function setCookie($name, $value, $duration = '+120 days', $path = '', $domain = '', $secure = true, $httponly = true)
     {
         $this->request->cookies->set($name, $value);
-        $this->headers->setCookie(Cookie::create($name, $value, \strtotime($duration), $path, $domain, $secure, $httponly));
+        $this->headers->setCookie(Cookie::create($name, $value, strtotime($duration), $path, $domain, $secure, $httponly));
     }
 
     /**
@@ -315,7 +319,7 @@ class Response extends HttpResponse
         $this->kernel->getContainer()->get('lotgd_core.combat.buffer')->restoreBuffFields();
         $this->kernel->getContainer()->get('lotgd_core.combat.buffer')->calculateBuffFields();
 
-        $charstats = charstats();
+        $charstats = $this->pageParts->charStats();
         $this->kernel->getContainer()->get('lotgd_core.combat.buffer')->restoreBuffFields();
 
         return $charstats;

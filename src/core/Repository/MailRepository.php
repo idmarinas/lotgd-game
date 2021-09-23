@@ -40,7 +40,7 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
             'notSeenCount' => 0,
         ];
 
-        if ( ! $acctId)
+        if ( $acctId === 0)
         {
             return $default;
         }
@@ -116,7 +116,7 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
             break;
         }
 
-        $direction = $direction ? 'ASC' : 'DESC';
+        $direction = $direction !== 0 ? 'ASC' : 'DESC';
 
         try
         {
@@ -292,7 +292,7 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
 
         try
         {
-            if ($onlyUnseen)
+            if ($onlyUnseen !== 0)
             {
                 $query->where('u.seen = 0');
             }

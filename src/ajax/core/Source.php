@@ -24,6 +24,8 @@ class Source extends AjaxAbstract
 {
     public const TEXT_DOMAIN = 'jaxon_source';
 
+    private $templatePetition;
+
     public function show(): Response
     {
         $response = new Response();

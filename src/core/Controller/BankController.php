@@ -77,7 +77,7 @@ class BankController extends AbstractController
             $this->navigation->addNav('nav.withdraw', 'bank.php?op=withdraw');
             $this->navigation->addNav('nav.deposit.label', 'bank.php?op=deposit');
 
-            if ($this->settings->getSetting('borrowperlevel', 20))
+            if ($this->settings->getSetting('borrowperlevel', 20) !== '' && $this->settings->getSetting('borrowperlevel', 20) !== '0')
             {
                 $this->navigation->addNav('nav.borrow.label', 'bank.php?op=borrow');
             }
@@ -86,7 +86,7 @@ class BankController extends AbstractController
         {
             $this->navigation->addNav('nav.deposit.pay', 'bank.php?op=deposit');
 
-            if ($this->settings->getSetting('borrowperlevel', 20))
+            if ($this->settings->getSetting('borrowperlevel', 20) !== '' && $this->settings->getSetting('borrowperlevel', 20) !== '0')
             {
                 $this->navigation->addNav('nav.borrow.more', 'bank.php?op=borrow');
             }
@@ -121,13 +121,13 @@ class BankController extends AbstractController
     protected function transfer2(array $params, Request $request): Response
     {
         $to  = $request->request->getInt('to');
-        $amt = abs((int) $request->request->getInt('amount', 0));
+        $amt = abs($request->request->getInt('amount', 0));
 
         $params['opt']    = 'transfer2';
         $params['amount'] = $amt;
         $params['to']     = $to;
 
-        /** @var Lotgd\Core\Repository\CharactersRepository */
+        /** @var Lotgd\Core\Repository\CharactersRepository $repository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
         $characters = $repository->findLikeName("%{$to}%", 100);
 
@@ -168,7 +168,7 @@ class BankController extends AbstractController
             $result     = $repository->find($to);
 
             $params['transferred'] = 0;
-            if ($result)
+            if ($result !== null)
             {
                 $maxtfer = $result->getLevel() * $this->settings->getSetting('transferperlevel', 25);
 

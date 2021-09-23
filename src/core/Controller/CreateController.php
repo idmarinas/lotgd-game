@@ -13,8 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
-require_once 'lib/titles.php';
-
+use Lotgd\Core\Entity\User;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
@@ -68,7 +67,7 @@ class CreateController extends AbstractController
 
     public function forgotVal(array $params, Request $request): Response
     {
-        /** @var Lotgd\Core\Repository\UserRepository */
+        /** @var Lotgd\Core\Repository\UserRepository $accountRepo */
         $accountRepo   = $this->getDoctrine()->getRepository('LotgdCore:User');
         $forgottenCode = $request->query->getInt('id');
 
@@ -106,7 +105,7 @@ class CreateController extends AbstractController
 
     public function val(array $params, Request $request): Response
     {
-        /** @var Lotgd\Core\Repository\UserRepository */
+        /** @var Lotgd\Core\Repository\UserRepository $accountRepo */
         $accountRepo = $this->getDoctrine()->getRepository('LotgdCore:User');
         $code        = $request->query->getInt('id');
 
@@ -119,7 +118,7 @@ class CreateController extends AbstractController
             return $this->redirect('home.php');
         }
 
-        $params['showLoginButton'] = (bool) ! ($account->getReplaceemail());
+        $params['showLoginButton'] = ! ($account->getReplaceemail());
 
         if ($account->getReplaceemail())
         {
@@ -143,7 +142,7 @@ class CreateController extends AbstractController
                 // send a system message to admin
                 $acctSuper = $accountRepo->getSuperuserWithPermit(SU_EDIT_USERS);
 
-                if (\count($acctSuper))
+                if ( ! empty($acctSuper))
                 {
                     $subj  = $this->translator->trans('yeoldemail.subject', ['name' => $account->getName()], $params['textDomain']);
                     $alert = $this->translator->trans('yeoldemail.alert', [
@@ -185,18 +184,18 @@ class CreateController extends AbstractController
         $accountRepo = $this->getDoctrine()->getRepository('LotgdCore:User');
         $charname    = (string) $request->request->get('charname', '');
 
-        if ($charname)
+        if ('' !== $charname && '0' !== $charname)
         {
             $account = $accountRepo->findOneBy(['login' => $charname]);
 
-            if ( ! $account)
+            if ( ! $account instanceof \Lotgd\Core\Entity\User)
             {
                 $this->addFlash('warning', $this->translator->trans('forgot.account.notFound', [], $params['textDomain']));
 
                 return $this->redirect('create.php?op=forgot');
             }
 
-            if ( ! trim($account->getEmailaddress()))
+            if ('' === trim($account->getEmailaddress()) || '0' === trim($account->getEmailaddress()))
             {
                 $this->addFlash('warning', $this->translator->trans('forgot.account.noEmail', [], $params['textDomain']));
 
@@ -220,7 +219,7 @@ class CreateController extends AbstractController
                 'forgottenid'  => $account->getForgottenpassword(),
             ], 'app_mail', $language);
 
-            lotgd_mail($account->getEmailaddress(), $subj, $this->format->colorize($msg, true));
+            lotgd_mail($account->getEmailaddress(), $subj, $this->format->colorize($msg));
 
             $this->addFlash('warning', $this->translator->trans('forgot.account.sent', [], $params['textDomain']));
 
@@ -245,7 +244,7 @@ class CreateController extends AbstractController
             $shortname         = $this->sanitize->nameSanitize($this->settings->getSetting('spaceinname', 0), $shortname);
             $blockaccount      = false;
 
-            if ($this->censor->filter($shortname) != $shortname)
+            if ($this->censor->filter($shortname) !== $shortname)
             {
                 $blockaccount = true;
                 $this->addFlash('error', $this->translator->trans('create.account.badLanguage', [], $params['textDomain']));
@@ -259,7 +258,7 @@ class CreateController extends AbstractController
             {
                 $result = $accountRepo->findBy(['emailaddress' => $email]);
 
-                if ($result)
+                if ( ! empty($result))
                 {
                     $this->addFlash('error', $this->translator->trans('create.account.email.duplicate', [], $params['textDomain']));
                     $blockaccount = true;
@@ -272,7 +271,7 @@ class CreateController extends AbstractController
                 $blockaccount = true;
             }
 
-            if ($pass1 != $pass2)
+            if ($pass1 !== $pass2)
             {
                 $this->addFlash('error', $this->translator->trans('create.account.password.notIdentical', [], $params['textDomain']));
                 $blockaccount = true;
@@ -308,7 +307,7 @@ class CreateController extends AbstractController
             $shortname = preg_replace("/\s+/", ' ', $shortname);
             $result    = $accountRepo->findOneBy(['login' => $shortname]);
 
-            if ($result)
+            if (null !== $result)
             {
                 $blockaccount = true;
 
@@ -327,7 +326,7 @@ class CreateController extends AbstractController
 
                 $title = $this->tool->getDkTitle(0, $sex);
 
-                if ($this->settings->getSetting('requirevalidemail', 0))
+                if ('' !== $this->settings->getSetting('requirevalidemail', 0) && '0' !== $this->settings->getSetting('requirevalidemail', 0))
                 {
                     $emailverification = md5(date('Y-m-d H:i:s').$email);
                 }
@@ -399,7 +398,7 @@ class CreateController extends AbstractController
                             'validationid' => $emailverification,
                         ], 'app_mail');
 
-                        lotgd_mail($email, $subj, $this->format->colorize($msg, true));
+                        lotgd_mail($email, $subj, $this->format->colorize($msg));
 
                         $this->addFlash('warning', $this->translator->trans('create.account.emailVerification', ['email' => $email], $params['textDomain']));
 

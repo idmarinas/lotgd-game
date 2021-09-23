@@ -112,7 +112,7 @@ trait Write
 
             if (($row['acctid'] ?? false) && ($row['superuser'] & SU_GIVES_YOM_WARNING) && ! ($row['superuser'] & SU_OVERRIDE_YOM_WARNING))
             {
-                \array_push($params['superusers'], $row['acctid']);
+                $params['superusers'][] = $row['acctid'];
             }
 
             $params['row']   = $row;

@@ -59,7 +59,6 @@ class Format
     public function numeral($number, int $decimals = 0, ?string $dec_point = null, ?string $thousands_sep = null)
     {
         $number   = (float) $number;
-        $decimals = (int) $decimals;
 
         //-- Check if use default value or custom
         $dec_point     = $dec_point ?: $this->dec_point;
@@ -72,7 +71,7 @@ class Format
         }
 
         //-- This avoid decimals with only ceros
-        $number = (float) \round($number, $decimals);
+        $number = \round($number, $decimals);
         //-- Count the decimals again
         $decimals = \strlen(\substr(\strrchr($number, '.'), 1));
 
@@ -103,7 +102,7 @@ class Format
         $diff = $now->diff($indate);
 
         $params  = [];
-        $sufix   = $diff->invert ? 'ago' : 'left';
+        $sufix   = $diff->invert !== 0 ? 'ago' : 'left';
         $message = "{$sufix}.now";
 
         if ($diff->y > 0)
@@ -234,12 +233,10 @@ class Format
      */
     private function cleanParameters($param): bool
     {
-        return (bool) (
-            \is_string($param) //-- Allow string values
-            || \is_numeric($param) //-- Allow numeric values
-            || \is_bool($param) //-- Allow bool values
-            || \is_null($param) //-- Allow null value (Formatter can handle this value)
-            || $param instanceof \DateTime //-- Allow DateTime object
-        );
+        return \is_string($param) //-- Allow string values
+        || \is_numeric($param) //-- Allow numeric values
+        || \is_bool($param) //-- Allow bool values
+        || \is_null($param) //-- Allow null value (Formatter can handle this value)
+        || $param instanceof \DateTime;
     }
 }

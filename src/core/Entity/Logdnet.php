@@ -198,9 +198,11 @@ class Logdnet
     /**
      * Set the value of Lastupdate.
      *
+     * @param \DateTime|\DateTimeImmutable $lastupdate
+     *
      * @return self
      */
-    public function setLastupdate(\DateTime $lastupdate)
+    public function setLastupdate(\DateTimeInterface $lastupdate)
     {
         $this->lastupdate = $lastupdate;
 
@@ -209,8 +211,10 @@ class Logdnet
 
     /**
      * Get the value of Lastupdate.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getLastupdate(): \DateTime
+    public function getLastupdate(): \DateTimeInterface
     {
         return $this->lastupdate;
     }
@@ -262,9 +266,11 @@ class Logdnet
     /**
      * Set the value of Lastping.
      *
+     * @param \DateTime|\DateTimeImmutable $lastping
+     *
      * @return self
      */
-    public function setLastping(\DateTime $lastping)
+    public function setLastping(\DateTimeInterface $lastping)
     {
         $this->lastping = $lastping;
 
@@ -273,8 +279,10 @@ class Logdnet
 
     /**
      * Get the value of Lastping.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getLastping(): \DateTime
+    public function getLastping(): \DateTimeInterface
     {
         return $this->lastping;
     }

@@ -39,14 +39,14 @@ $query
     )
 ;
 
-if ($category)
+if ($category !== '' && $category !== '0')
 {
     $query->where('u.category = :cat')
         ->setParameter('cat', $category)
     ;
 }
 
-if ($sortby)
+if ($sortby !== '' && $sortby !== '0')
 {
     $query->orderBy("u.{$sortby}", $asc_desc);
 }

@@ -53,10 +53,10 @@ class LoginController extends AbstractController
 
         if ($session['user']['loggedin'])
         {
-            $iname = (string) $this->settings->getSetting('innname', LOCATION_INN);
+            $iname = $this->settings->getSetting('innname', LOCATION_INN);
 
             $session['user']['restorepage'] = 'news.php';
-            if ($session['user']['superuser'] & (0xFFFFFFFF & ~SU_DOESNT_GIVE_GROTTO))
+            if (($session['user']['superuser'] & (0xFFFFFFFF & ~SU_DOESNT_GIVE_GROTTO)) !== 0)
             {
                 $session['user']['restorepage'] = 'superuser.php';
             }

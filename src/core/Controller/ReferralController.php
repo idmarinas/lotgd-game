@@ -80,7 +80,7 @@ class ReferralController extends AbstractController
 
         if ( ! preg_match('/\\/$/', $url))
         {
-            $url = $url.'/';
+            $url .= '/';
             $this->settings->saveSetting('serverurl', $url);
         }
 
@@ -88,7 +88,7 @@ class ReferralController extends AbstractController
         $params['refererAward']  = $this->settings->getSetting('refereraward', 25);
         $params['referMinLevel'] = $this->settings->getSetting('referminlevel', 4);
 
-        /** @var Lotgd\Core\Repository\UserRepository */
+        /** @var Lotgd\Core\Repository\UserRepository $repository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:User');
         $query      = $repository->createQueryBuilder('u');
 

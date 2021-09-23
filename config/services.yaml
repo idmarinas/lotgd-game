@@ -269,6 +269,15 @@ services:
             - '%kit_crypt.clients%'
         lazy: true
         public: true
+    Lotgd\Core\Service\Cron\ContentCleanService:
+        public: true
+    Lotgd\Core\Service\Cron\AvatarCleanService:
+        public: true
+    lotgd_core.service.server_functions:
+        alias: Lotgd\Core\Service\ServerFunction
+        public: true
+    Lotgd\Core\Service\PageParts:
+        public: true
 
     # Twig extensions
     Marek\Twig\ByteUnitsExtension:

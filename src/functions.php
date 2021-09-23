@@ -190,16 +190,7 @@ if ( ! \function_exists('createstring'))
             __METHOD__
         ), E_USER_DEPRECATED);
 
-        if (\is_array($array) || \is_object($array))
-        {
-            $out = \serialize($array);
-        }
-        else
-        {
-            $out = (string) $array;
-        }
-
-        return $out;
+        return \is_array($array) || \is_object($array) ? \serialize($array) : (string) $array;
     }
 }
 
@@ -308,7 +299,7 @@ if ( ! \function_exists('_sock'))
             __METHOD__
         ), E_USER_DEPRECATED);
 
-        $a = \preg_match('!http://([^/:]+)(:[0-9]+)?(/.*)!', $url, $matches);
+        $a = \preg_match('!http://([^/:]+)(:\d+)?(/.*)!', $url, $matches);
 
         if ( ! $a)
         {

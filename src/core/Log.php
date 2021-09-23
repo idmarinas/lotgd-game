@@ -65,7 +65,7 @@ class Log
     {
         global $session;
 
-        /** @var Lotgd\Core\Repository\DebuglogRepository */
+        /** @var Lotgd\Core\Repository\DebuglogRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Debuglog');
 
         $corevalue = $value;
@@ -82,15 +82,15 @@ class Log
 
                 ->setParameter('user', $user)
                 ->setParameter('field', $field)
-                ->setParameter('date', new \DateTime(\date('Y-m-d 00:00:00')))
+                ->setParameter('date', new \DateTime(date('Y-m-d 00:00:00')))
 
                 ->getQuery()
                 ->getResult()
             ;
 
-            if (\count($result))
+            if ( ! empty($result))
             {
-                $result = $result[0];
+                $result  = $result[0];
                 $value   = $result->getValue() + $value;
                 $message = $result->getMessage();
                 $id      = $result->getId();
@@ -105,7 +105,7 @@ class Log
 
         $value = $value ?: 0;
 
-        /** @var Debuglog */
+        /** @var Debuglog $entity */
         $entity = $repository->find($id) ?: new Debuglog();
         $entity->setDate(new \DateTime('now'))
             ->setActor($user)

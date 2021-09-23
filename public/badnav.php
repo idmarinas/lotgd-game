@@ -60,7 +60,7 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
 
     echo $outputHtml;
 
-    if ($session['user']['superuser'] & SU_MEGAUSER)
+    if (($session['user']['superuser'] & SU_MEGAUSER) !== 0)
     {
         \LotgdNavigation::addNavAllow("user.php?op=special&userid={$session['user']['acctid']}");
         echo '<br><br>';

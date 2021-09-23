@@ -522,7 +522,7 @@ class Companions implements Translatable
     {
         if (\is_string($this->abilities))
         {
-            $this->abilities = \unserialize($this->abilities);
+            $this->abilities = unserialize($this->abilities);
         }
 
         return $this->abilities;

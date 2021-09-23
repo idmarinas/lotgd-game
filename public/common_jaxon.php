@@ -117,13 +117,7 @@ $companions = [];
 
 if ( ! empty($temp_comp))
 {
-    foreach ($temp_comp as $name => $companion)
-    {
-        if (\is_array($companion))
-        {
-            $companions[$name] = $companion;
-        }
-    }
+    $companions = array_filter($temp_comp, 'is_array');
 }
 unset($temp_comp);
 
@@ -150,9 +144,9 @@ else
     $session['user']['clanrank'] = 0;
 }
 
-if ($session['user']['superuser'] & SU_MEGAUSER)
+if (($session['user']['superuser'] & SU_MEGAUSER) !== 0)
 {
-    $session['user']['superuser'] = $session['user']['superuser'] | SU_EDIT_USERS;
+    $session['user']['superuser'] |= SU_EDIT_USERS;
 }
 
 // WARNING:

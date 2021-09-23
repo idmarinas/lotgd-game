@@ -24,10 +24,10 @@ trait Configuration
     protected $lostGold = true;
 
     /** Indicating if gain gold when win in battle */
-    protected $gainGold = null;
+    protected $gainGold;
 
     /** Indicating if gain gem when win in battle */
-    protected $gainGem = null;
+    protected $gainGem;
 
     /** Indicating if lost exp when lost in battle */
     protected $lostExp = true;

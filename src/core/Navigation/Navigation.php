@@ -61,7 +61,7 @@ class Navigation
      *
      * @var string
      */
-    protected $lastHeader;
+    protected $lastHeader = '';
 
     /**
      * Text domain for translator.
@@ -233,7 +233,7 @@ class Navigation
      */
     public function getLastHeader(): string
     {
-        if ( ! $this->lastHeader)
+        if ( $this->lastHeader === '' || $this->lastHeader === '0')
         {
             $this->addHeader('common.category.navigation', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
         }
@@ -278,7 +278,7 @@ class Navigation
     {
         foreach ($this->navs as $navs)
         {
-            if ( ! \is_array($navs) || ! \count($navs))
+            if ( ! \is_array($navs) || ! empty($navs))
             {
                 continue;
             }

@@ -25,6 +25,8 @@ abstract class InstallerAbstract
 {
     public const TRANSLATOR_DOMAIN = 'app_installer';
 
+    protected $upgradeVersion;
+
     protected $totaSteps;
     protected $style;
     protected $output;
@@ -50,9 +52,9 @@ abstract class InstallerAbstract
         $this->stepsProcessedFile = $this->getDirData()."/upgrades/upgrade_{$this->upgradeVersion}_steps_process.data";
         $this->stepsProcessed     = [];
 
-        if (\is_file($this->stepsProcessedFile))
+        if (is_file($this->stepsProcessedFile))
         {
-            $this->stepsProcessed = \json_decode(\file_get_contents($this->stepsProcessedFile), true);
+            $this->stepsProcessed = json_decode(file_get_contents($this->stepsProcessedFile), true, 512, JSON_THROW_ON_ERROR);
 
             return true;
         }
@@ -63,7 +65,7 @@ abstract class InstallerAbstract
             $repo    = $this->doctrine->getRepository(EntitySettings::class);
             $version = $repo->findOneBy(['setting' => "installer_upgrade_v_{$this->upgradeVersion}"]);
 
-            $this->stepsProcessed = \json_decode($version->getValue(), true);
+            $this->stepsProcessed = json_decode($version->getValue(), true, 512, JSON_THROW_ON_ERROR);
         }
         catch (\Throwable $th)
         {
@@ -79,7 +81,7 @@ abstract class InstallerAbstract
     public function finish(): bool
     {
         //-- Save upgrade progress for version in file
-        (new Filesystem())->dumpFile($this->stepsProcessedFile, \json_encode($this->stepsProcessed));
+        (new Filesystem())->dumpFile($this->stepsProcessedFile, json_encode($this->stepsProcessed, JSON_THROW_ON_ERROR));
 
         //-- Save upgrade progress version in Data Base
         try
@@ -87,7 +89,7 @@ abstract class InstallerAbstract
             $version = new EntitySettings();
 
             $version->setSetting("installer_upgrade_v_{$this->upgradeVersion}")
-                ->setValue(\json_encode($this->stepsProcessed))
+                ->setValue(json_encode($this->stepsProcessed, JSON_THROW_ON_ERROR))
             ;
 
             $this->doctrine->persist($version);
@@ -106,11 +108,11 @@ abstract class InstallerAbstract
     {
         if ( ! $this->totaSteps)
         {
-            $methods = \get_class_methods($this);
+            $methods = get_class_methods($this);
             //-- Count only step{digits} methods
-            $steps = \array_filter($methods, function ($val)
+            $steps = array_filter($methods, function ($val)
             {
-                return (bool) \preg_match('/^step\d+$/im', $val);
+                return (bool) preg_match('/^step\d+$/im', $val);
             });
 
             $this->totaSteps = \count($steps);

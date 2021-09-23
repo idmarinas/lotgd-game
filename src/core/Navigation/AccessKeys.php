@@ -48,7 +48,7 @@ class AccessKeys
         {
             $attributes['accesskey'] = $key;
 
-            if (false === \strpos($label, $key))
+            if (false === \strpos($label, (string) $key))
             {
                 $label = '('.\strtoupper($key).') '.$label;
             }
@@ -116,7 +116,7 @@ class AccessKeys
                 $ignoreuntil = \substr($label, $i + 1, 1);
             }
 
-            if ($ignoreuntil == $char)
+            if ($ignoreuntil === $char)
             {
                 $ignoreuntil = '';
             }

@@ -52,7 +52,7 @@ if ('edit' == $op)
     //add the race
     $row           = $repository->extractEntity($repository->find($userId));
     $characterInfo = $row;
-    $row           = \array_merge($row, $repository->extractEntity($row['character']));
+    $row           = array_merge($row, $repository->extractEntity($row['character']));
 }
 
 if ('del' == $op)
@@ -88,9 +88,9 @@ elseif ('lasthit' == $op)
     }
     else
     {
-        $output2 = \gzuncompress($output2);
+        $output2 = gzuncompress($output2);
     }
-    echo \str_replace('.focus();', '.blur();', \str_replace('<iframe src=', '<iframe Xsrc=', $output2));
+    echo str_replace('.focus();', '.blur();', str_replace('<iframe src=', '<iframe Xsrc=', $output2));
 
     exit(0);
 }
@@ -143,8 +143,8 @@ elseif ('save' == $op)
         } //well, name is composed now
         elseif ('newpassword' == $key)
         {
-            /** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder */
-            $passwordEncoder = \LotgdKernel::get('security.password_encoder');
+            /** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder $passwordEncoder */
+            $passwordEncoder        = \LotgdKernel::get('security.password_encoder');
             $postValues['password'] = $passwordEncoder->encodePassword($repository->find($userId), $val);
 
             continue;
@@ -162,13 +162,13 @@ elseif ('save' == $op)
             }
             //strip off an attempt to set privs that the user doesn't
             //have authority to set.
-            $stripfield = ((int) $oldvalues['superuser'] | $session['user']['superuser'] | SU_ANYONE_CAN_SET | ($session['user']['superuser'] & SU_MEGAUSER ? 0xFFFFFFFF : 0));
-            $value      = $value & $stripfield;
+            $stripfield = ((int) $oldvalues['superuser'] | $session['user']['superuser'] | SU_ANYONE_CAN_SET | (($session['user']['superuser'] & SU_MEGAUSER) !== 0 ? 0xFFFFFFFF : 0));
+            $value &= $stripfield;
             //put back on privs that the user used to have but the
             //current user can't set.
-            $unremovable         = ~((int) $session['user']['superuser'] | SU_ANYONE_CAN_SET | ($session['user']['superuser'] & SU_MEGAUSER ? 0xFFFFFFFF : 0));
+            $unremovable         = ~((int) $session['user']['superuser'] | SU_ANYONE_CAN_SET | (($session['user']['superuser'] & SU_MEGAUSER) !== 0 ? 0xFFFFFFFF : 0));
             $filteredunremovable = (int) $oldvalues['superuser'] & $unremovable;
-            $value               = $value | $filteredunremovable;
+            $value |= $filteredunremovable;
 
             $postValues[$key] = $value;
             $val              = ($value);
@@ -214,7 +214,7 @@ elseif ('savemodule' == $op)
     }
     else
     {
-        \reset($post);
+        reset($post);
 
         $userPrefsRepository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
 
@@ -263,11 +263,11 @@ switch ($op)
         \LotgdNavigation::addHeader('user.category.operations');
         \LotgdNavigation::addNav('user.nav.last.hit', "user.php?op=lasthit&userid={$userId}");
         \LotgdNavigation::addNav('user.nav.debuglog', "user.php?op=debuglog&userid={$userId}{$returnpetition}");
-        \LotgdNavigation::addNav('user.nav.bio', "bio.php?char={$userId}&ret=".\urlencode(\LotgdRequest::getServer('REQUEST_URI')));
+        \LotgdNavigation::addNav('user.nav.bio', "bio.php?char={$userId}&ret=".urlencode(\LotgdRequest::getServer('REQUEST_URI')));
 
-        if ($session['user']['superuser'] & SU_EDIT_DONATIONS)
+        if (($session['user']['superuser'] & SU_EDIT_DONATIONS) !== 0)
         {
-            \LotgdNavigation::addNav('user.nav.donation', 'donators.php?op=add1&name='.\rawurlencode($row['login']).'&ret='.\urlencode(\LotgdRequest::getServer('REQUEST_URI')));
+            \LotgdNavigation::addNav('user.nav.donation', 'donators.php?op=add1&name='.rawurlencode($row['login']).'&ret='.urlencode(\LotgdRequest::getServer('REQUEST_URI')));
         }
 
         \LotgdNavigation::addHeader('user.category.bans');
@@ -277,7 +277,7 @@ switch ($op)
 
         if ('' == $subop)
         {
-            $lotgdFormFactory = \LotgdKernel::get('form.factory');
+            $lotgdFormFactory    = \LotgdKernel::get('form.factory');
             $type                = (string) \LotgdRequest::getQuery('type') ?: 'acct';
             $characterRepository = \Doctrine::getRepository('LotgdCore:Avatar');
 
@@ -342,13 +342,13 @@ switch ($op)
                     if (\is_array($val))
                     {
                         $v      = $val[0];
-                        $x      = \explode('|', $v);
+                        $x      = explode('|', $v);
                         $val[0] = $x[0];
                         $x[0]   = $val;
                     }
                     else
                     {
-                        $x = \explode('|', $val);
+                        $x = explode('|', $val);
                     }
                     $msettings[$key] = $x[0];
                     // Set up the defaults as well.
@@ -412,12 +412,12 @@ switch ($op)
 
         $page  = (int) \LotgdRequest::getQuery('page');
         $sort  = (string) \LotgdRequest::getQuery('sort');
-        $order = (string) ($sort ?: 'acctid');
+        $order = $sort ?: 'acctid';
 
         $query = (string) \LotgdRequest::getPost('q');
         $query = (string) ($query ?: \LotgdRequest::getQuery('q'));
 
-        $params['query']     = $query ? "q={$query}" : '';
+        $params['query']     = '' !== $query && '0' !== $query ? "q={$query}" : '';
         $params['paginator'] = $repository->userSearchAccounts($query, $order, $page);
         $params['stats']     = $repoAcctEveryPage->getStatsPageGen();
 
@@ -437,7 +437,7 @@ function show_bitfield($val)
 
     for ($i = 0; $i < 32; ++$i)
     {
-        $out .= (int) $val & (int) $v ? '1' : '0';
+        $out .= ((int) $val & $v) !== 0 ? '1' : '0';
         $v *= 2;
     }
 

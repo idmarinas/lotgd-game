@@ -8,22 +8,6 @@
     bootstrap="tests/bootstrap.php"
     convertDeprecationsToExceptions="false"
 >
-    <coverage processUncoveredFiles="true">
-        <include>
-            <directory suffix=".php">src</directory>
-        </include>
-
-        <exclude>
-            <directory>src/local</directory>
-        </exclude>
-
-        <report>
-            <clover outputFile="./build/reports/phpunit.coverage.xml"/>
-            <!-- <html outputDirectory="./build/coverage" lowUpperBound="35" highLowerBound="70" /> -->
-            <!-- <text outputFile="php://stdout" showUncoveredFiles="false"/> -->
-        </report>
-    </coverage>
-
     <php>
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
         <env name="BOOTSTRAP_CLEAR_CACHE_ENV" value="test" />
@@ -41,13 +25,29 @@
         </testsuite>
     </testsuites>
 
-    <logging>
-        <junit outputFile="./build/reports/phpunit.xml"/>
-    </logging>
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+
+        <exclude>
+            <directory>src/local</directory>
+        </exclude>
+
+        <report>
+            <clover outputFile="./build/reports/phpunit.coverage.xml"/>
+            <!-- <html outputDirectory="./build/coverage" lowUpperBound="35" highLowerBound="70" /> -->
+            <!-- <text outputFile="php://stdout" showUncoveredFiles="false"/> -->
+        </report>
+    </coverage>
 
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
     </listeners>
+
+    <logging>
+        <junit outputFile="./build/reports/phpunit.xml"/>
+    </logging>
 
     <!-- Run `composer require symfony/panther` before enabling this extension -->
     <!--

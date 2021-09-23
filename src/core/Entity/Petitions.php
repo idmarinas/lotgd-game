@@ -151,9 +151,11 @@ class Petitions
     /**
      * Set the value of Date.
      *
+     * @param \DateTime|\DateTimeImmutable $date
+     *
      * @return self
      */
-    public function setDate(\DateTime $date)
+    public function setDate(\DateTimeInterface $date)
     {
         $this->date = $date;
 
@@ -162,8 +164,10 @@ class Petitions
 
     /**
      * Get the value of Date.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getDate(): \DateTime
+    public function getDate(): \DateTimeInterface
     {
         return $this->date;
     }
@@ -237,9 +241,11 @@ class Petitions
     /**
      * Set the value of Closedate.
      *
+     * @param \DateTime|\DateTimeImmutable $closedate
+     *
      * @return self
      */
-    public function setClosedate(\DateTime $closedate)
+    public function setClosedate(\DateTimeInterface $closedate)
     {
         $this->closedate = $closedate;
 
@@ -248,8 +254,10 @@ class Petitions
 
     /**
      * Get the value of Closedate.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getClosedate(): \DateTime
+    public function getClosedate(): \DateTimeInterface
     {
         return $this->closedate;
     }

@@ -31,7 +31,7 @@ class UnTagifyTransformer implements DataTransformerInterface
     {
         if ('[' == $value[0])
         {
-            return \implode(',', \array_column(\json_decode($value), 'value'));
+            return \implode(',', \array_column(\json_decode($value, null, 512, JSON_THROW_ON_ERROR), 'value'));
         }
 
         return $value;
@@ -41,7 +41,7 @@ class UnTagifyTransformer implements DataTransformerInterface
     {
         if ('[' == $value[0])
         {
-            return \implode(',', \array_column(\json_decode($value), 'value'));
+            return \implode(',', \array_column(\json_decode($value, null, 512, JSON_THROW_ON_ERROR), 'value'));
         }
 
         return $value;

@@ -91,7 +91,7 @@ elseif ('view' == $op)
     \LotgdNavigation::addHeader('viewpetitions.category.petitions');
     \LotgdNavigation::addHeader('viewpetitions.category.details');
 
-    if ($viewpageinfo)
+    if ($viewpageinfo !== 0)
     {
         \LotgdNavigation::addNav('viewpetitions.nav.details.hide', "viewpetition.php?op=view&id={$petitionId}}");
     }
@@ -108,7 +108,7 @@ elseif ('view' == $op)
 
     $params['viewPageInfo'] = $viewpageinfo;
 
-    if (count($statuses))
+    if (count($statuses) > 0)
     {
         reset($statuses);
         foreach($statuses as $key => $val)

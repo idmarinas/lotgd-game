@@ -63,16 +63,16 @@ class SystemMail
     {
         global $session;
 
-        /** @var \Lotgd\Core\Repository\UserRepository */
+        /** @var \Lotgd\Core\Repository\UserRepository $acctRepository */
         $acctRepository = $this->doctrine->getRepository('LotgdCore:User');
 
-        /** @var \Lotgd\Core\Entity\User */
+        /** @var \Lotgd\Core\Entity\User $accountEntityTo */
         $accountEntityTo = $acctRepository->find($to);
         $prefs           = $accountEntityTo->getPrefs();
 
         $entity = (new Mail())
-            ->setMsgfrom((int) $from)
-            ->setMsgto((int) $to)
+            ->setMsgfrom($from)
+            ->setMsgto($to)
             ->setSubject(\is_array($subject) ? serialize($subject) : str_replace(["\n", '`n'], '', $subject))
             ->setBody(\is_array($body) ? serialize($body) : $body)
             ->setSent(new \DateTime('now'))
@@ -123,7 +123,7 @@ class SystemMail
             $email = (new Email())
                 ->to($accountEntityTo->getEmailaddress())
                 ->subject($this->sanitize->fullSanitize($mailSubject))
-                ->html($this->format->colorize($mailMessage, true))
+                ->html($this->format->colorize($mailMessage))
             ;
 
             $this->mailer->send($email);

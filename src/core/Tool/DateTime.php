@@ -82,7 +82,7 @@ class DateTime
         $d1 = gmdate('Y-m-d', $t1);
         $d2 = gmdate('Y-m-d', $t2);
 
-        return (bool) ($d1 != $d2);
+        return $d1 !== $d2;
     }
 
     public function getGameTime()

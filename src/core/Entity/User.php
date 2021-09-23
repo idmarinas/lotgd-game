@@ -218,9 +218,11 @@ class User implements UserInterface
     /**
      * Set the value of Laston.
      *
+     * @param \DateTime|\DateTimeImmutable $laston
+     *
      * @return self
      */
-    public function setLaston(\DateTime $laston)
+    public function setLaston(\DateTimeInterface $laston)
     {
         $this->laston = $laston;
 
@@ -229,8 +231,10 @@ class User implements UserInterface
 
     /**
      * Get the value of Laston.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getLaston(): \DateTime
+    public function getLaston(): \DateTimeInterface
     {
         return $this->laston;
     }
@@ -318,7 +322,7 @@ class User implements UserInterface
         // guarantee every user at least has ROLE_USER
         $merged[] = 'ROLE_USER';
 
-        return \array_unique($merged);
+        return array_unique($merged);
     }
 
     public function setRoles(array $roles): self
@@ -331,9 +335,11 @@ class User implements UserInterface
     /**
      * Set the value of Lastmotd.
      *
+     * @param \DateTime|\DateTimeImmutable $lastmotd
+     *
      * @return self
      */
-    public function setLastmotd(\DateTime $lastmotd)
+    public function setLastmotd(\DateTimeInterface $lastmotd)
     {
         $this->lastmotd = $lastmotd;
 
@@ -342,8 +348,10 @@ class User implements UserInterface
 
     /**
      * Get the value of Lastmotd.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getLastmotd(): \DateTime
+    public function getLastmotd(): \DateTimeInterface
     {
         return $this->lastmotd;
     }
@@ -438,8 +446,6 @@ class User implements UserInterface
 
     /**
      * Set the value of Emailaddress.
-     *
-     * @param string $emailaddress
      *
      * @return self
      */
@@ -573,9 +579,11 @@ class User implements UserInterface
     /**
      * Set the value of Recentcomments.
      *
+     * @param \DateTime|\DateTimeImmutable $recentcomments
+     *
      * @return self
      */
-    public function setRecentcomments(\DateTime $recentcomments)
+    public function setRecentcomments(\DateTimeInterface $recentcomments)
     {
         $this->recentcomments = $recentcomments;
 
@@ -584,8 +592,10 @@ class User implements UserInterface
 
     /**
      * Get the value of Recentcomments.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getRecentcomments(): \DateTime
+    public function getRecentcomments(): \DateTimeInterface
     {
         return $this->recentcomments;
     }
@@ -615,24 +625,23 @@ class User implements UserInterface
     /**
      * Set the value of Regdate.
      *
+     * @param \DateTime|\DateTimeImmutable $regdate
+     *
      * @return self
      */
-    public function setRegdate(\DateTime $regdate)
+    public function setRegdate(\DateTimeInterface $regdate)
     {
         $this->regdate = $regdate;
-
-        if ( ! $regdate instanceof \DateTimeInterface)
-        {
-            $this->regdate = new \DateTime($regdate);
-        }
 
         return $this;
     }
 
     /**
      * Get the value of Regdate.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getRegdate(): \DateTime
+    public function getRegdate(): \DateTimeInterface
     {
         return $this->regdate;
     }

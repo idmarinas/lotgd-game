@@ -119,7 +119,7 @@ trait Command
 
         $query = $this->getRepository()->createQueryBuilder('u');
 
-        /** @var \Lotgd\Core\Entity\Commentary */
+        /** @var \Lotgd\Core\Entity\Commentary $last */
         $last = $query
             ->where('u.author = :acct AND u.command <> :grem AND u.command <> :trans')
 

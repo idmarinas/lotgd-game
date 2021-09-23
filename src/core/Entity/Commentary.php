@@ -104,9 +104,11 @@ class Commentary implements EntityInterface
     /**
      * Set the value of Postdate.
      *
+     * @param \DateTime|\DateTimeImmutable $postdate
+     *
      * @return self
      */
-    public function setPostdate(\DateTime $postdate)
+    public function setPostdate(\DateTimeInterface $postdate)
     {
         $this->postdate = $postdate;
 
@@ -115,8 +117,10 @@ class Commentary implements EntityInterface
 
     /**
      * Get the value of Postdate.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getPostdate(): \DateTime
+    public function getPostdate(): \DateTimeInterface
     {
         return $this->postdate;
     }

@@ -56,11 +56,11 @@ if ('' == $op || 'search' == $op)
     \LotgdNavigation::addHeader('creatures.category.edit');
     \LotgdNavigation::addNav('creatures.nav.add', 'creatures.php?op=add');
 
-    $q = (string) trim(\LotgdRequest::getPost('q'));
+    $q = trim(\LotgdRequest::getPost('q'));
 
     $query = $repository->createQueryBuilder('u');
 
-    if ($q)
+    if ($q !== '' && $q !== '0')
     {
         $query->where('u.creaturename LIKE :q')
             ->orWhere('u.creaturecategory LIKE :q')

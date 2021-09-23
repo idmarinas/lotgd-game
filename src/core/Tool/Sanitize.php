@@ -86,7 +86,7 @@ class Sanitize
     {
         $expr = '/[^[:alpha:]]/';
 
-        if ($spaceAllowed)
+        if ($spaceAllowed !== 0)
         {
             $expr = '/[^[:alpha:] _-]/';
         }
@@ -112,7 +112,7 @@ class Sanitize
 
         $expr = "/([^[:alpha:]`´0{$colors}])/u";
 
-        if ($spaceallowed)
+        if ($spaceallowed !== 0)
         {
             $expr = "/([^[:alpha:]`´0{$colors} _-])/u";
         }

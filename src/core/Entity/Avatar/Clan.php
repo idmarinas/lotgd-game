@@ -83,9 +83,11 @@ trait Clan
     /**
      * Set the value of Clanjoindate.
      *
+     * @param \DateTime|\DateTimeImmutable $clanjoindate
+     *
      * @return self
      */
-    public function setClanjoindate(\DateTime $clanjoindate)
+    public function setClanjoindate(\DateTimeInterface $clanjoindate)
     {
         $this->clanjoindate = $clanjoindate;
 
@@ -94,10 +96,11 @@ trait Clan
 
     /**
      * Get the value of Clanjoindate.
+     *
+     * @return \DateTime|\DateTimeImmutable
      */
-    public function getClanjoindate(): \DateTime
+    public function getClanjoindate(): \DateTimeInterface
     {
         return $this->clanjoindate;
     }
-
 }

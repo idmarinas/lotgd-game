@@ -62,7 +62,7 @@ class Support
         $pvptime    = $this->settings->getSetting('pvptimeout', 600);
         $pvptimeout = new \DateTime(date('Y-m-d H:i:s', strtotime("-{$pvptime} seconds")));
 
-        /** @var \Lotgd\Core\Repository\AvatarRepository */
+        /** @var \Lotgd\Core\Repository\AvatarRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Avatar');
         $entity     = $repository->getCharacterForPvp($characterId);
 
@@ -159,7 +159,7 @@ class Support
 
         $exp = round($this->settings->getSetting('pvpattgain', 10) * $badguy['creatureexp'] / 100, 0);
 
-        if ($this->settings->getSetting('pvphardlimit', 0))
+        if ('' !== $this->settings->getSetting('pvphardlimit', 0) && '0' !== $this->settings->getSetting('pvphardlimit', 0))
         {
             $exp = min($this->settings->getSetting('pvphardlimitamount', 15000), $exp);
         }
@@ -280,7 +280,7 @@ class Support
 
         $wonexp = round($session['user']['experience'] * $this->settings->getSetting('pvpdefgain', 10) / 100, 0);
 
-        if ($this->settings->getSetting('pvphardlimit', 0))
+        if ('' !== $this->settings->getSetting('pvphardlimit', 0) && '0' !== $this->settings->getSetting('pvphardlimit', 0))
         {
             $wonexp = min($this->settings->getSetting('pvphardlimitamount', 15000), $wonexp);
         }
@@ -347,9 +347,9 @@ class Support
         $this->log->debug("started the fight and has been defeated by {$badguy['creaturename']} in {$killedloc} (lost {$session['user']['gold']} gold and {$lostexp} exp, victim tooks {$winamount} gold and {$wonexp} exp)", false, $session['user']['acctid']);
         $this->log->debug("was the victim and won aginst {$session['user']['name']} in {$killedloc} (earned {$winamount} gold and {$wonexp} exp)", false, $badguy['acctid']);
 
-        $session['user']['gold']           = 0;
-        $session['user']['hitpoints']      = 0;
-        $session['user']['experience']     = round($session['user']['experience'] * (100 - $this->settings->getSetting('pvpattlose', 15)) / 100, 0);
+        $session['user']['gold']       = 0;
+        $session['user']['hitpoints']  = 0;
+        $session['user']['experience'] = round($session['user']['experience'] * (100 - $this->settings->getSetting('pvpattlose', 15)) / 100, 0);
 
         $this->battle->addContextToBattleEnd([
             'battle.defeated.death',
