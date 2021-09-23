@@ -65,8 +65,8 @@ section:
                 button:
                     submit: Spend
                 points:
-                    left: "`&You have `^%s`0, %s left to spend.`0"
-                    over: "`&You have spent `$%s`0, %s too many!`0"
+                    left: "`&You have `^%s`0, `@%s`0 left to spend.`0"
+                    over: "`&You have spent `$%s`0,`$%s`0 too many!`0"
         buy:
             category:
                 attributes: Attributes
