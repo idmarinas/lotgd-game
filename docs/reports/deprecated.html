@@ -114,6 +114,9 @@
                     <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/names.php">lib/names.php</a></td>
                 </tr>
                             <tr>
+                    <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/pageparts.php">lib/pageparts.php</a></td>
+                </tr>
+                            <tr>
                     <td class="phpdocumentor-cell"><a href="reports/deprecated.html#lib/partner.php">lib/partner.php</a></td>
                 </tr>
                             <tr>
@@ -349,6 +352,57 @@
                             <td class="phpdocumentor-cell">52</td>
                             <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_change_player_title"><abbr title="\change_player_title()">change_player_title()</abbr></a></td>
                             <td class="phpdocumentor-cell"><p>deleted in 7.0.0 version. Use &quot;LotgdTool::changePlayerTitle($ntitle, $old)&quot; instead</p>
+</td>
+                        </tr>
+                                                </table>
+                    <a id="lib/pageparts.php"></a>
+            <h3><abbr title="lib/pageparts.php">pageparts.php</abbr></h3>
+            <table>
+                <tr>
+                    <th class="phpdocumentor-heading">Line</th>
+                    <th class="phpdocumentor-heading">Element</th>
+                    <th class="phpdocumentor-heading">Reason</th>
+                </tr>
+                                                            <tr>
+                            <td class="phpdocumentor-cell">22</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_wipe_charstats"><abbr title="\wipe_charstats()">wipe_charstats()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use &quot;LotgdKernel::get(&quot;Lotgd\Core\Character\Stats&quot;)-&gt;wipeStats()&quot; instead.</p>
+</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">40</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_addcharstat"><abbr title="\addcharstat()">addcharstat()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use &quot;LotgdKernel::get(&quot;Lotgd\Core\Character\Stats&quot;)-&gt;addcharstat($label, $value)&quot; instead.</p>
+</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">60</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_getcharstat"><abbr title="\getcharstat()">getcharstat()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use &quot;LotgdKernel::get(&quot;Lotgd\Core\Character\Stats&quot;)-&gt;getcharstat($cat, $label)&quot; instead.</p>
+</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">79</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_setcharstat"><abbr title="\setcharstat()">setcharstat()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use &quot;LotgdKernel::get(&quot;Lotgd\Core\Character\Stats&quot;)-&gt;setcharstat($cat, $label, $val)&quot; instead.</p>
+</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">99</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_getcharstat_value"><abbr title="\getcharstat_value()">getcharstat_value()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use &quot;LotgdKernel::get(&quot;Lotgd\Core\Character\Stats&quot;)-&gt;getcharstat($cat, $label)&quot; instead.</p>
+</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">119</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_getcharstats"><abbr title="\getcharstats()">getcharstats()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use &quot;LotgdKernel::get(&quot;Lotgd\Core\Service\PageParts&quot;)-&gt;getCharStats($buffs)&quot; instead.</p>
+</td>
+                        </tr>
+                                                                                <tr>
+                            <td class="phpdocumentor-cell">140</td>
+                            <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_charstats"><abbr title="\charstats()">charstats()</abbr></a></td>
+                            <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use &quot;LotgdKernel::get(&quot;Lotgd\Core\Service\PageParts&quot;)-&gt;charStats($return)&quot; instead.</p>
 </td>
                         </tr>
                                                 </table>
@@ -777,25 +831,25 @@
 </td>
                         </tr>
                                                                                 <tr>
-                            <td class="phpdocumentor-cell">221</td>
+                            <td class="phpdocumentor-cell">212</td>
                             <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_list_files"><abbr title="\list_files()">list_files()</abbr></a></td>
                             <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use Symfony Component Finder</p>
 </td>
                         </tr>
                                                                                 <tr>
-                            <td class="phpdocumentor-cell">258</td>
+                            <td class="phpdocumentor-cell">249</td>
                             <td class="phpdocumentor-cell"><a href="namespaces/default.html#function__curl"><abbr title="\_curl()">_curl()</abbr></a></td>
                             <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use service LotgdKernel::get('http_client') instead</p>
 </td>
                         </tr>
                                                                                 <tr>
-                            <td class="phpdocumentor-cell">304</td>
+                            <td class="phpdocumentor-cell">295</td>
                             <td class="phpdocumentor-cell"><a href="namespaces/default.html#function__sock"><abbr title="\_sock()">_sock()</abbr></a></td>
                             <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use service LotgdKernel::get('http_client') instead</p>
 </td>
                         </tr>
                                                                                 <tr>
-                            <td class="phpdocumentor-cell">379</td>
+                            <td class="phpdocumentor-cell">370</td>
                             <td class="phpdocumentor-cell"><a href="namespaces/default.html#function_pullurl"><abbr title="\pullurl()">pullurl()</abbr></a></td>
                             <td class="phpdocumentor-cell"><p>deleted in version 7.0.0. Use service LotgdKernel::get('http_client') instead</p>
 </td>
