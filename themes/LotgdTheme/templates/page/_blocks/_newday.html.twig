@@ -80,7 +80,7 @@
     {% if points > 1 %}
         {{ 'section.dragonpoints.multi.paragraph'|trans({ 'points': points })|colorize }}
 
-        <form id="dragon-points-form" action="{{ formUrl|lotgd_url }}" method="post">
+        <form id="dragon-points-form" action="{{ formUrl|lotgd_url }}" method="post" class="ui form">
             <table class="ui very compact basic collapsing centered table">
                 {% for type, label in labels %}
                     {% set head = label|split(',') %}
