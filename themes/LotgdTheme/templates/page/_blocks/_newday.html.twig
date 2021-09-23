@@ -95,7 +95,7 @@
                     {% elseif canBuy[type] %}
                         {% set attribute = 'section.dragonpoints.buy.type.' ~ type %}
                         <tr>
-                            <td class="collapsing">{{ attribute|colorize }}</td>
+                            <td class="collapsing">{{ attribute|trans|colorize }}</td>
                             <td>&nbsp;&nbsp;</td>
                             <td><input type="number" id="{{ type }}" name="{{ type }}" value="" onchange="pointsLeft(this)"></td>
                         </tr>
@@ -118,8 +118,8 @@
             /* global $ */
             const points = parseInt('{{ points }}')
 
-            const textLeft = '{{ "section.dragonpoints.form.points.left"|trans|colorize }}'
-            const textOver = '{{ "section.dragonpoints.form.points.over"|trans|colorize }}'
+            const textLeft = '{{ "section.dragonpoints.multi.form.points.left"|trans|colorize|e("js") }}'
+            const textOver = '{{ "section.dragonpoints.multi.form.points.over"|trans|colorize|e("js") }}'
 
             // eslint-disable-next-line no-unused-vars
             function pointsLeft ()
