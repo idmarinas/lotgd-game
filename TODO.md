@@ -1,7 +1,3 @@
--   Cambiar
-    -   mail.php
-        -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
-
 # A tener en cuenta desde la versión 5.0.0
 
 -   El antiguo sistema de módulos está obsoleto desde la versión **5.0.0**
@@ -13,10 +9,9 @@
 
 -   Adaptarlos para la version 6.2.0
 
-# Actualmente haciendo esto (6.2.0)
+# Cosas a mejorar
 
--   Crear bundle:
-    -   `Settings` para poder usarlo en sustitución de las `prefs` para usuario
+-   Bundles
     -   `Special Events`: usando el componente even-dispatcher crear uno para los eventos especiales:
         -   Ya creado, falta mejorarlo.
         -   El sistema se llama `Occurrence`, en referencia a que ha sucedido algo.
@@ -37,62 +32,16 @@
                 -   De esta forma se puede controlar todo el evento y volver a la página que lanzó el evento más fácilmente.
                 -   Se puede usar la sesion para pasar datos de una petición a otra (request)
                     -   De esta forma se omite usar el query param
--   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
-    -   `Mail` continuar con el que ya tengo iniciado `https://github.com/idmarinas/MessageBundle`
-    -   `Energy` un bundle que permite determinar el tipo de sistema que se usa para las acciones turnos/stamina
-        -   Se puede elegir el minimo de energía y el máximo que puede tener el personaje
-        -   Se puede hacer que depende de algún atributo. (que tenga bono)
-        -   Tendrá funciones para poder aumentar y disminuir la energía.
--   Migrar los cronjob a comandos de consola
-    -   Migrados todos a consola.
-        -   _Nota_ el cronjob del nuevo día (newdayrunonce) no es compatible con el sistema de módulos.
--   Eliminar la dependencia de Jaxon-PHP usar Stimulus
--   Crear un service para el newday runonce (generar un nuevo día)
--   `dragonpoints` para los puntos de dragón asignados actualmente es un array serializado
-    Se registra los valores que se han aumentado al personaje mediante las iniciales del atributo.
-    ```php
-        $points = [
-            'str',
-            'con',
-            'int',
-            'ff',
-            'dex',
-            'str',
-        ];
-    ```
-    Pasarlo a una tabla independiente para registrar los valores que se aumentan del personaje.
-    ```
-        Posible estructura de la tabla
-        'attribute'  El atributo que se esta mejorando del personaje. Ejem: `strength`, siempre con el nombre que aparece en la tabla.
-        'value' Valor es la cantidad que se añade de la mejora, puede ser positivo o negativo 
-        'createAt' Fecha en la que se añadio esta mejora
-    ```
-
------
--   Sustituir la función lotgd_mail por Symfony mailer
-    -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
-        -   Use `Symfony mailer` instead.
--   **Correos** permitir usar una plantilla para así personalizar los mensajes
-    -   Se usara el `Symfony\Bridge\Twig\Mime\TemplatedEmail` para todos los correos del core. 
-    ```php
-        use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-
-        $email = (new TemplatedEmail())
-        // ...
-            // html mail
-            ->htmlTemplate('emails/signup.html.twig')
-            //-- or only text mail
-            ->textTemplate('emails/signup.txt.twig')
-        // ...
-        ;
-    ```
-    -   Habrá dos versiones de cada correo predeterminado version html y txt
-    -   Desde la configuración se podrá decidir si se envian correos en html o txt
-    -   Agregar opción para que el usuario pueda elegir.
----
--   Se intentará pasar todas las paginas al sistema de controlador igual que home.php y about.php
+-   Todas las páginas se han migrado al sistema de controlador, queda mejorarlo
     -   Las páginas Grotto (las de configuración y administración) no se pasarán a un sistema de controlador.
         -   El panel de administración del juego se va a sustituir por **Sonata Admin**
+-   Se han migrado todos los cronjob a comandos de consola.
+    -   _Nota_ el cronjob del nuevo día (newdayrunonce) no es compatible con el sistema de módulos.
+    -   El nuevo sistema de CronJob se usará en la versión 8.0.0 donde se elimina la compatibilidad con los módulos
+
+# Actualmente haciendo esto (6.2.0)
+
+-   Eliminar la dependencia de Jaxon-PHP usar Stimulus
 
 # Futuras versiones
 
@@ -125,6 +74,38 @@
 -   Con este paso intermedio se pretende hacer una transición un poquito más suave y limpiar el código de todo lo obsoleto.
 -   Se revisará el código para hacer la transición más sencilla. 
 -   Esta versión se centrará en hacer la transición a la versión 9.0.0 más sencilla.
+-   Crear un service para el newday runonce (generar un nuevo día)
+-   Sustituir la función lotgd_mail por Symfony mailer
+    -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
+        -   Use `Symfony mailer` instead.
+-   `dragonpoints` para los puntos de dragón asignados actualmente es un array serializado
+    -   Se registra los valores que se han aumentado al personaje mediante las iniciales del atributo.
+        ```php
+            $points = [
+                'str',
+                'con',
+                'int',
+                'ff',
+                'dex',
+                'str',
+            ];
+        ```
+    -   Pasarlo a una tabla independiente para registrar los valores que se aumentan del personaje.
+        ```
+            Posible estructura de la tabla
+            'attribute'  El atributo que se esta mejorando del personaje. Ejem: `strength`, siempre con el nombre que aparece en la tabla.
+            'value' Valor es la cantidad que se añade de la mejora, puede ser positivo o negativo 
+            'createAt' Fecha en la que se añadio esta mejora
+        ```
+-   Crear bundle:
+    -   `Settings` para poder usarlo en sustitución de las `prefs` para usuario
+    -   `Mail` 
+        -   Continuar con el que ya tengo iniciado `https://github.com/idmarinas/MessageBundle`
+        -   En el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
+    -   `Energy` un bundle que permite determinar el tipo de sistema que se usa para las acciones turnos/stamina
+        -   Se puede elegir el minimo de energía y el máximo que puede tener el personaje
+        -   Se puede hacer que depende de algún atributo. (que tenga bono)
+        -   Tendrá funciones para poder aumentar y disminuir la energía.
 
 ## **BC** Para la versión 9.0.0
 
@@ -135,6 +116,24 @@
 -   Esta versión será ya una Symfony App
 -   Se usará todo lo de Symfony (ruter incluido)
 -   Todo el Core estará compuesto por Bundles, para así poder usar un Skeleton muy similar al de Symfony App Skeleton
+-   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
+-   **Correos** permitir usar una plantilla para así personalizar los mensajes
+    -   Se usara el `Symfony\Bridge\Twig\Mime\TemplatedEmail` para todos los correos del core. 
+    ```php
+        use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+
+        $email = (new TemplatedEmail())
+        // ...
+            // html mail
+            ->htmlTemplate('emails/signup.html.twig')
+            //-- or only text mail
+            ->textTemplate('emails/signup.txt.twig')
+        // ...
+        ;
+    ```
+    -   Habrá dos versiones de cada correo predeterminado version html y txt
+    -   Desde la configuración se podrá decidir si se envian correos en html o txt
+    -   Agregar opción para que el usuario pueda elegir.
 
 ## Para la versión X.Y.Z
 
