@@ -127,13 +127,15 @@
                 let pointsTotal = 0
                 $('input[type="number"]').each(function (index, elem)
                 {
-                    pointsTotal += elem.val()
+                    pointsTotal += parseInt($(elem).val())
                 })
 
-                const text = (pointsTotal >= 0) ? textLeft : textOver
+                const text = (points - pointsTotal >= 0) ? textLeft : textOver
 
                 $('#amt-left').html(text.replace('%s', pointsTotal).replace('%s', (points - pointsTotal)))
             }
+
+            (function (){ pointsLeft(); })()
         </script>
     {% else %}
         {{ 'section.dragonpoints.single.paragraph'|trans(_context)|colorize }}
