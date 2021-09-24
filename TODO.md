@@ -39,14 +39,9 @@
     -   _Nota_ el cronjob del nuevo día (newdayrunonce) no es compatible con el sistema de módulos.
     -   El nuevo sistema de CronJob se usará en la versión 8.0.0 donde se elimina la compatibilidad con los módulos
 
-# Actualmente haciendo esto (6.2.0)
+# Actualmente haciendo esto (7.0.0)
 
 -   Eliminar la dependencia de Jaxon-PHP usar Stimulus
-
-# Futuras versiones
-
-## Para la versión 7.0.0
-
 -   Esta es la última versión que incluya compatibilidad con el antiguo sistema de módulos.
 -   **BC** Sustituir Fomantic UI por https://tailwindcss.com 
     -   Tailwind ofrece más flexibilidad para crear la UI.
@@ -64,6 +59,7 @@
     -   Recrearlo para  usar el Symfony form.
     -   Permitir la personalización de los datos con el dispatcher.
 
+# Futuras versiones
 
 ## Para la versión 8.0.0
 
