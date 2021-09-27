@@ -8,14 +8,14 @@ This folder only contain the custom themes for your version.
 AcmeTheme
 ├── theme.json
 ├── public
-│   └── asset.jpg
+│   └── asset.jpg
 ├── templates
-│   ├── bundles
-│   │   └── AcmeBundle
-│   │       └── bundleTemplate.html.twig
+│   ├── bundles
+│   │   └── AcmeBundle
+│   │       └── bundleTemplate.html.twig
 |   └── template.html.twig
 └── translations
-    └── messages.en.yml
+   └── messages.en.yml
 ```
 
 ## Theme config reference (theme.json)
@@ -33,7 +33,7 @@ AcmeTheme
         }
     ],
     "parents": [
-        "lotgd/core-theme",
+        "lotgd/core-theme-modern",
         "vendor/not-so-cool-looking-theme"
     ]
 }
@@ -47,7 +47,7 @@ Theme system use de parent templates when not find custom.
 ```json
 {
     "name": "vedor/custom-theme",
-    "parents": ["lotgd/core-theme"]
+    "parents": ["lotgd/core-theme-modern"]
 }
 ```
 
