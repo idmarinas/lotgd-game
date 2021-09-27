@@ -5,6 +5,8 @@ on:
       - migration
   pull_request:
     types: [opened, synchronize, reopened]
+    tags-ignore:
+      - dependencies
 jobs:
   sonarcloud:
     name: SonarCloud
