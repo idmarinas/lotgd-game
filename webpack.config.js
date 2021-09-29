@@ -29,16 +29,15 @@ LotgdEncore
     */
     //-- This is the global entry used in all pages
     .addEntry('lotgd', './assets/lotgd/lib/index.js')
-    .addEntry('semantic_ui', './node_modules/fomantic-ui/dist/semantic.js')
     //-- This is the default theme
-    .addEntry('lotgd_theme', './assets/lotgd/lotgd.less') //-- If not want generate this theme, comment/eliminate this line
+    .addEntry('lotgd_theme', './assets/styles/lotgd.css') //-- If not want generate this theme, comment/eliminate this line
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     // .enableStimulusBridge('./assets/controllers.json')
 
     // enables Sass/SCSS support
-    .enableSassLoader()
+    // .enableSassLoader()
     // enables Less support
-    .enableLessLoader()
+    // .enableLessLoader()
 
 const LotgdConfig = LotgdEncore.getWebpackConfig()
 LotgdConfig.name = 'lotgd'
