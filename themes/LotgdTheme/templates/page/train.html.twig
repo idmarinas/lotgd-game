@@ -1,9 +1,0 @@
-{% use 'page/_blocks/_train.html.twig' %}
-
-{% trans_default_domain textDomain %}
-
-{% if not battle %}
-    {{ 'subtitle'|trans|colorize }}
-
-    {{ block('train_' ~ tpl|default('default')) }}
-{% endif %}

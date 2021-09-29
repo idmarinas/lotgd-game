@@ -1,8 +1,0 @@
-{% use 'page/_blocks/_forest.html.twig' %}
-
-{% trans_default_domain textDomain %}
-
-<!-- Avoid displaying forest text when in battle -->
-{% if not battle %}
-    {{ block('forest_' ~ tpl|default('default')) }}
-{% endif %}

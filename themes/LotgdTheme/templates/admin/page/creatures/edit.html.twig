@@ -1,9 +1,0 @@
-{% trans_default_domain textDomain %}
-
-{{ form(form) }}
-
-{% if creature.creatureaiscript %}
-    <br> <br>
-    <div class="ui top attached header">{{ 'section.edit.highlight'|trans|colorize }}</div>
-    <div class="ui bottom attached message">{{ (creature.creatureaiscript ~ '.php')|highlight_file }}</div>
-{% endif %}

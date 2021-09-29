@@ -1,7 +1,0 @@
-{% use 'page/_blocks/_pvp.html.twig' %}
-
-{% trans_default_domain textDomain %}
-
-{% if not battle %}
-    {{ block('pvp_' ~ tpl|default('default')) }}
-{% endif %}
