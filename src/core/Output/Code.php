@@ -27,7 +27,7 @@ class Code
      * @var array
      */
     protected $codesSpecialOpen = [
-        '`c' => '<div class="center aligned">',
+        '`c' => '<div class="text-center">',
         '`H' => '<span class="navhi">',
     ];
 
