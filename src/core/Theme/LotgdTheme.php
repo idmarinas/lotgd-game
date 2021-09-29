@@ -27,6 +27,6 @@ class LotgdTheme implements ThemeContextInterface
 
     public function getTheme(): ?ThemeInterface
     {
-        return $this->themeRepository->findOneByName('lotgd/core-theme');
+        return $this->themeRepository->findOneByName('lotgd/core-theme-modern');
     }
 }
