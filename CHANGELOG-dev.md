@@ -18,7 +18,8 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :star: FEATURES
 
--   Nothing
+-   **TailwindCSS** new Framework for style APP.
+    -   **For create new themes can use `tailwind.config.js`
 
 ### :fire: DEPRECATED
 
@@ -30,7 +31,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :x: REMOVES
 
--   Nothing
+-   **Semantic UI/Fomantic UI** is removed and remplace with **TailwindCSS**
 
 ### :notebook: NOTES
 
