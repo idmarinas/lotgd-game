@@ -1,0 +1,14 @@
+{
+    "name": "lotgd/core-theme-modern",
+    "title": "LoTGD Core Theme Modern",
+    "type": "lotgd-theme",
+    "description": "Core Theme for LoTGD >= 7.0.0 IDMarinas Edition",
+    "authors": [
+        {
+            "name": "Iván Diaz Marinas",
+            "email": "contacto@infommo.es",
+            "homepage": "https://github.com/idmarinas/lotgd-game",
+            "role": "Contributor, Maintainer"
+        }
+    ]
+}
