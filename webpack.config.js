@@ -1,68 +1,111 @@
-const Encore = require('@symfony/webpack-encore')
+const Encore = require('@symfony/webpack-encore');
 
-//-- Import base configuration
-const LotgdEncore = require('./webpack.encore.config')(Encore)
+// Manually configure the runtime environment if not already configured yet by the "encore" command.
+// It's useful when you use tools that rely on webpack.config.js file.
+if (!Encore.isRuntimeEnvironmentConfigured())
+{
+    Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
+}
 
-LotgdEncore
+Encore
     // directory where compiled assets will be stored
-    .setOutputPath('public/build/lotgd/')
+    .setOutputPath('public/build/')
     // public path used by the web server to access the output path
-    .setPublicPath('/build/lotgd')
-    //-- Add alias for theme
-    .addAliases({
-        '../../theme.config$': require('path').join(
-            __dirname,
-            './assets/lotgd/theme.config'
-        )
+    .setPublicPath('/build')
+    // only needed for CDN's or sub-directory deploy
+    //.setManifestKeyPrefix('build/')
+
+    .configureFilenames({
+        js: 'js/[name].[contenthash].js',
+        css: 'css/[name].[contenthash].css'
     })
-    // Copy files of images
+    .configureImageRule({
+        type: 'asset',
+        maxSize: 4 * 1024,
+        filename: 'images/[name].[hash:8].[ext]'
+    })
+    .configureFontRule({
+        filename: 'fonts/[name].[hash:8].[ext]'
+    })
+
+    //-- Useful alias for some files
+    .addAliases({
+        'sweetalert2.css$': 'sweetalert2/dist/sweetalert2.min.css',
+        'tagify.scss$': '@yaireo/tagify/dist/tagify.css'
+    })
+
+    //-- Copy files of images
     .copyFiles({
-        from: './assets/lotgd/css/core/assets/images/',
+        from: './assets/images/',
         // optional target path, relative to the output dir
         // if versioning is enabled, add the file hash too
         to: 'images/[path][name].[hash:8].[ext]'
     })
 
     /*
-    * Each entry will result in one JavaScript file (e.g. app.js)
-    * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
-    */
+     * ENTRY CONFIG
+     *
+     * Each entry will result in one JavaScript file (e.g. app.js)
+     * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
+     */
     //-- This is the global entry used in all pages
-    .addEntry('lotgd', './assets/lotgd/lib/index.js')
+    .addEntry('app', './assets/lotgd/lib/index.js')
     //-- This is the default theme
-    .addEntry('lotgd_theme', './assets/styles/lotgd.css') //-- If not want generate this theme, comment/eliminate this line
+    //-- For custom theme creation, use tailwind.config.js to change style
+    .addEntry('app_theme', './assets/styles/app.css')
+
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
-    // .enableStimulusBridge('./assets/controllers.json')
+    .enableStimulusBridge('./assets/controllers.json')
+
+
+    // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
+    .splitEntryChunks()
+
+    // will require an extra script tag for runtime.js
+    // but, you probably want this, unless you're building a single-page app
+    .enableSingleRuntimeChunk()
+
+    /*
+     * FEATURE CONFIG
+     *
+     * Enable & configure other features below. For a full
+     * list of features, see:
+     * https://symfony.com/doc/current/frontend.html#adding-more-features
+     */
+    .cleanupOutputBeforeBuild()
+    .enableBuildNotifications()
+    .enableSourceMaps(!Encore.isProduction())
+    // enables hashed filenames (e.g. app.abc123.css)
+    .enableVersioning(Encore.isProduction())
+
+    .configureBabel((config) => {
+        config.plugins.push('@babel/plugin-proposal-class-properties');
+    })
+
+    // enables @babel/preset-env polyfills
+    .configureBabelPresetEnv((config) => {
+        config.useBuiltIns = 'usage';
+        config.corejs = 3;
+    })
+
+    // autoprefixer
+    .enablePostCssLoader()
 
     // enables Sass/SCSS support
-    // .enableSassLoader()
-    // enables Less support
-    // .enableLessLoader()
+    //.enableSassLoader()
 
-const LotgdConfig = LotgdEncore.getWebpackConfig()
-LotgdConfig.name = 'lotgd'
+    // uncomment if you use TypeScript
+    //.enableTypeScriptLoader()
 
-/**
- * Custom themes/configs/entries
- */
+    // uncomment if you use React
+    //.enableReactPreset()
 
-/*
-const CustomEncore = require('./webpack.encore.config')(Encore)
+    // uncomment to get integrity="..." attributes on your script & link tags
+    // requires WebpackEncoreBundle 1.4 or higher
+    .enableIntegrityHashes(Encore.isProduction())
 
-CustomEncore
-    .setOutputPath('public/build/DIR_NAME/')
-    .setPublicPath('/build/DIR_NAME')
-    .addEntry('KEY_NAME_FOR_THEME', './assets/DIR_NAME/lotgd.less')
-    .addAliases({ //-- Alias for your "theme.config" file
-        '../../theme.config$': require('path').join(
-            __dirname,
-            './assets/DIR_NAME/theme.config'
-        )
-    })
-    // Other custom entries (pages js/css)
-    .addEntry('example', './assets/DIR_NAME/path/to/file.js')
+    // uncomment if you're having problems with a jQuery plugin
+    .autoProvidejQuery()
+    ;
 
-const CustomConfig = LotgdEncore.getWebpackConfig()
-CustomConfig.name = 'custom'
-*/
-module.exports = [LotgdConfig]
+module.exports = Encore.getWebpackConfig();
