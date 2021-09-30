@@ -1,14 +1,14 @@
 webpack_encore:
     # The path where Encore is building the assets - i.e. Encore.setOutputPath()
-    # output_path: '%kernel.project_dir%/public/build'
+    output_path: '%kernel.project_dir%/public/build'
     # If multiple builds are defined (as shown below), you can disable the default build:
-    output_path: false
+    # output_path: false
 
     # Set attributes that will be rendered on all script and link tags
     # script_attributes:
     #     defer: true
         # Uncomment (also under link_attributes) if using Turbo Drive
-        # https://turbo.hotwire.dev/handbook/drive#reloading-when-assets-change
+        # https://turbo.hotwired.dev/handbook/drive#reloading-when-assets-change
         # 'data-turbo-track': reload
     # link_attributes:
         # Uncomment if using Turbo Drive
@@ -24,11 +24,11 @@ webpack_encore:
     # strict_mode: false
 
     # If you have multiple builds:
-    builds:
+    # builds:
         # pass "frontend" as the 3rg arg to the Twig functions
         # {{ encore_entry_script_tags('entry1', null, 'frontend') }}
 
-        lotgd: '%kernel.project_dir%/public/build/lotgd'
+        # frontend: '%kernel.project_dir%/public/frontend/build'
 
     # Cache the entrypoints.json (rebuild Symfony's cache when entrypoints.json changes)
     # Put in config/packages/prod/webpack_encore.yaml
