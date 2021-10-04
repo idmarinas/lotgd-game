@@ -50,9 +50,9 @@ Encore
      */
     //-- This is the global entry used in all pages
     .addEntry('app', './assets/lotgd/lib/index.js')
-    //-- This is the default theme
+
     //-- For custom theme creation, use tailwind.config.js to change style
-    .addEntry('app_theme', './assets/styles/app.css')
+    .addEntry('app_theme', './assets/styles/app.css') //-- This is the default theme
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
