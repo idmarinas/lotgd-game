@@ -234,7 +234,7 @@ services:
     Lotgd\Core\Navigation\Navigation:
         public: true
         calls:
-            - setClassHeader: ['navhead']
+            - setClassHeader: ['header']
             - setClassNav: ['nav']
     Lotgd\Core\Http\Request:
         public: true
