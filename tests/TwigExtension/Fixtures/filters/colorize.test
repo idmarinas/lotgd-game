@@ -6,5 +6,5 @@
 --DATA--
 return []
 --EXPECT--
-<span class='colLtRed'>colorize</span>
+<span class='text-col-lt-red'>colorize</span>
 colorize
