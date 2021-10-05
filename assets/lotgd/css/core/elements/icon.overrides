@@ -1,8 +1,0 @@
-/*******************************
-         Theme Overrides
-*******************************/
-i.icons .icon:first-child
-{
-    width: @width;
-    height: @height;
-}

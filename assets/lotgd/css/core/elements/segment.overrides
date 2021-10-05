@@ -1,9 +1,0 @@
-/*******************************
-         Theme Overrides
-*******************************/
-
-// Hidde empty segments if not have class display
-.ui.segment:not(.display):empty
-{
-    display: none;
-}

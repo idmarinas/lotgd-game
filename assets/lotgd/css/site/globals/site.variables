@@ -1,6 +1,0 @@
-/*******************************
-     User Global Variables
-*******************************/
-
-//-- Not import Google fonts
-@importGoogleFonts: false;
