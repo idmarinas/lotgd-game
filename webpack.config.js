@@ -49,7 +49,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     //-- This is the global entry used in all pages
-    .addEntry('app', './assets/lotgd/lib/index.js')
+    .addEntry('app', './assets/lib/index.js')
 
     //-- For custom theme creation, use tailwind.config.js to change style
     .addEntry('app_theme', './assets/styles/app.css') //-- This is the default theme
