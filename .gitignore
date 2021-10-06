@@ -242,6 +242,7 @@ phan.csv
 # Ignore all files/folders that end in .dist
 *.dist
 !phpunit.xml.dist
+/build/
 
 ###< lotgd/core ###
 
