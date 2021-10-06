@@ -1,0 +1,43 @@
+{% block layout_header %}
+    <div class="flex">
+        <div class="flex-grow flex flex-wrap content-center lotgd-border-image"><h1>{{ head_title().renderTitle()|uncolorize }}</h1></div>
+        <div class="flex-none">
+            <img class="float-right" src="{{ asset('build/images/logo.jpg') }}" width="465" height="71" alt="The Legend of the Green Dragon Logo">
+        </div>
+    </div>
+    <div class="flex">
+        <div class="flex-grow">
+            {# Start advertising module #}
+            {# {{ google_ad('ad_header') }} #}
+            {# End advertising module #}
+        </div>
+        <div class="flex-none w-min whitespace-nowrap">
+            {{ message_of_the_day() }} |
+            {{ ye_olde_mail() }} |
+            {{ user_petition() }}
+            {{ admin_petition() }}
+        </div>
+    </div>
+{% endblock layout_header %}
+
+{% block layout_footer %}
+    <div class="flex flex-wrap gap-3 md:flex-nowrap lotgd-border-image">
+        <div class="flex-grow">
+            {{ game_copyright() }} <br> Design: Jade Template &copy; Josh Canning 2004 of <a href='http://hfs.cjb.net/' target="_blank" rel="noopener noreferrer">HFS</a>
+        </div>
+        <div class="flex-none w-full md:w-60 text-right">
+            {{ game_source() }}<br />{{ game_version() }}<br />{{ game_page_gen() }}
+        </div>
+    </div>
+{% endblock layout_footer %}
+
+{% block layout_navigation %}
+    {{ navigation_menu() }}
+{% endblock layout_navigation %}
+
+{% block layout_stats %}
+    {{ stats }}
+    <p>&nbsp;</p>
+    {{ paypal }}
+    {{ sonata_block_render_event('lotgd_core.paypal') }}
+{% endblock layout_stats %}

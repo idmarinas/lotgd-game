@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% use '_layout.html.twig' %}
+
+{% block lotgd_head_css %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('app_theme') }}
+{% endblock %}
+
+{% block lotgd_footer_js %}
+    {{ encore_entry_script_tags('app_theme') }}
+{% endblock %}
+
+{% block lotgd_body %}
+    <div class="container mx-auto">
+        {{ block('layout_header') }}
+        <div class="gap-1 flex">
+            <div class="flex-none w-60 lotgd-border-image">
+                {{ block('layout_navigation') }}
+                {# Start advertising module #}
+                {# {{ google_ad('ad_column_navigation_bottom') }} #}
+                {# End advertising module #}
+            </div>
+            <div class="p-2 flex-grow lotgd-border-image">
+                {# This is all content of game #}
+                {% block lotgd_body_content %}{{ content }}{% endblock %}
+            </div>
+            <div class="flex-none w-60 lotgd-border-image">
+                {{ block('layout_stats') }}
+            </div>
+        </div>
+        {{ block('layout_footer') }}
+    </div>
+{% endblock lotgd_body %}
+
+{% block lotgd_footer_css %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+{% endblock %}
