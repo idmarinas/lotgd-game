@@ -1,0 +1,23 @@
+{% use 'page/_blocks/_create.html.twig' %}
+
+{% trans_default_domain textDomain %}
+
+{% if maintenanceMode %}
+    <div class="flex justify-center">
+        <div class="flex-none w-60">
+            <img class="w-full" src="images/logindragon.gif" alt="{{ 'maintenance.server.creation.title'|trans({}, 'app_default')|uncolorize }}">
+        </div>
+    </div>
+    <div class="flex justify-center">
+        <div class="flex-none w-96">
+            <a class="header">{{ 'maintenance.server.creation.title'|trans({}, 'app_default') }}</a>
+            <div class="description">{{ 'maintenance.server.creation.message'|trans({}, 'app_default') }}</div>
+        </div>
+    </div>
+{% elseif not allowCreation %}
+    {{ block('create_account_disabled') }}
+{% elseif serverFull %}
+    {{ block('create_server_full') }}
+{% else %}
+    {{ block('create_account_create') }}
+{% endif %}
