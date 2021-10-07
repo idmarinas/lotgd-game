@@ -25,7 +25,7 @@ if ('' != $name)
     }
 
     //-- If server is full, not need proces any data.
-    if (ServerFunctions::isTheServerFull() && 1 != $force)
+    if (LotgdKernel::get("lotgd_core.service.server_functions")->isTheServerFull() && 1 != $force)
     {
         //sanity check if the server is / got full --> back to home
         $session['user'] = [];
