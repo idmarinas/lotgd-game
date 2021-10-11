@@ -1,0 +1,76 @@
+{% trans_default_domain 'page_list' %}
+
+{% if user.loggedin %}
+    <form action="{{ 'list.php?op=search'|lotgd_url }}" method="POST">
+        <div class="field inline">
+            <label for="">{{ 'form.search.label'|trans }}</label>
+            <div class="ui action input">
+                <input name='name'>
+                <button type='submit' class='ui button'>{{ 'form.search.button'|trans }}</button>
+            </div>
+        </div>
+    </form>
+    <br>
+{% endif %}
+<strong>{{ title.title|trans(title.params)|colorize }}</strong>
+<br>
+{% set writemail = 'table.opcs.writemail'|trans|uncolorize %}
+{% set alive = 'table.opcs.alive'|trans|colorize %}
+{% set dead = 'table.opcs.dead'|trans|colorize %}
+{% set unconscious = 'table.opcs.unconscious'|trans|colorize %}
+
+<div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+    <table class="min-w-full divide-y divide-lotgd-200">
+        <thead>
+            <tr>
+                <th scope="col">{{ 'table.header.alive'|trans }}</th>
+                <th scope="col">{{ 'table.header.level'|trans }}</th>
+                <th scope="col">{{ 'table.header.name'|trans }}</th>
+                <th scope="col">{{ 'table.header.location'|trans }}</th>
+                <th scope="col">{{ 'table.header.race'|trans }}</th>
+                <th scope="col">{{ 'table.header.sex'|trans }}</th>
+                <th scope="col">{{ 'table.header.last'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for warrior in result %}
+                <tr>
+                    <td>
+                        {% if warrior.alive %}
+                            {{ alive }}
+                        {% elseif warrior.hitpoints > 0 %}
+                            {{ unconscious }}
+                        {% else %}
+                            {{ dead }}
+                        {% endif %}
+                    </td>
+                    <td class="colLtYellow">{{ warrior.level }}</td>
+                    <td class="colLtWhite">
+                        {% if user.loggedin %}
+                            <a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.write('{{ warrior.acctid }}')">
+                                <img src="images/newscroll.GIF" width="16" height="16" alt="{{ writemail }}" border="0">
+                            </a>
+                            <a href="{{ ('bio.php?char=' ~ warrior.acctid)|lotgd_url }}">{{ warrior.name|colorize }}</a>
+                        {% else %}
+                            {{ warrior.name|colorize }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% set loggedin =  ('now'|date('U') - warrior.laston|date('U') < getsetting('LOGINTIMEOUT', 900) and warrior.loggedin) %}
+                        {{ '`&%s`0'|format(warrior.location)|colorize }}
+                        {% if loggedin %}
+                            {{ 'table.warrior.isOnline'|trans|colorize }}
+                        {% endif %}
+                    </td>
+                    <td>{{ ('character.racename'|trans({}, warrior.race ?: constant('RACE_UNKNOWN')))|colorize }}</td>
+                    <td>{{ 'table.warrior.sex'|trans({'sex': warrior.sex})|colorize }}</td>
+                    <td>{{ warrior.laston|relative_date }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td class="center aligned" colspan="7">{{ 'table.warrior.notfound'|trans|colorize }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
