@@ -13,7 +13,7 @@
 
 {% block character_stats %}
     {% for title, section in charstat %}
-        <div class="italic bg-gradient-to-r from-transparent via-lotgd-800 text-center font-bold border-t first:border-t-0 border-b border-lotgd-500 py-2 my-2 first:mt-0">{{ title }}</div>
+        <div class="italic bg-gradient-to-r from-transparent via-lotgd-800 text-center font-bold border-t border-b border-lotgd-500 py-2 my-2 first:mt-0">{{ title }}</div>
 
         {% for name, value in section %}
             <div class="flex text-sm">
