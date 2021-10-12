@@ -15,7 +15,7 @@
     <div class="container mx-auto">
         {{ block('layout_header') }}
         <div class="gap-1 flex">
-            <div class="flex-none w-64 lotgd-border-image">
+            <div class="flex-none w-64">
                 {{ block('layout_navigation') }}
                 {# Start advertising module #}
                 {# {{ google_ad('ad_column_navigation_bottom') }} #}
@@ -25,7 +25,7 @@
                 {# This is all content of game #}
                 {% block lotgd_body_content %}{{ content }}{% endblock %}
             </div>
-            <div class="flex-none w-72 lotgd-border-image">
+            <div class="flex-none w-72">
                 {{ block('layout_stats') }}
             </div>
         </div>

@@ -38,8 +38,11 @@
 {% endblock layout_navigation %}
 
 {% block layout_stats %}
-    {{ stats }}
-    <p>&nbsp;</p>
-    {{ paypal }}
-    {{ sonata_block_render_event('lotgd_core.paypal') }}
+    <div class="lotgd-border-image">
+        {{ stats }}
+    </div>
+    <div class="lotgd-border-image">
+        {{ paypal }}
+        {{ sonata_block_render_event('lotgd_core.paypal') }}
+    </div>
 {% endblock layout_stats %}
