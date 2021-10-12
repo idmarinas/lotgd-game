@@ -7,12 +7,12 @@ twig:
         '%kernel.project_dir%/templates_modules': 'module'
     # Globals variables
     globals:
-        userPre: ~ # Not remove, if for avoid errors
+        userPre: ~ # Not remove, is for avoid errors
         user: '@Lotgd\Core\Service\Twig\UserVariable'
-        sessionPre: ~ # Not remove, if for avoid errors
+        sessionPre: ~ # Not remove, is for avoid errors
         session: '@Lotgd\Core\Service\Twig\SessionVariable'
     form_themes: [
-        'form/semantic-ui-form-theme.html.twig'
+        'form/tailwind_2_layout.html.twig'
     ]
     debug: '%kernel.debug%'
     exception_controller: null
