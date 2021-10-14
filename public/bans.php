@@ -31,7 +31,7 @@ switch ($op)
 
         $params['account'] = $repository->getBasicInfoOfAccount($userId);
 
-        $params['equalId'] = $repository->getAccountsWithEqualId($params['account']['uniqueid']);
+        $params['equalId'] = $repository->getAccountsWithEqualId((string) $params['account']['uniqueid']);
         $params['similarIp'] = $repository->getAccountsWithSimilarIp($params['account']['lastip'], $params['account']['acctid']);
     break;
     case 'saveban':
