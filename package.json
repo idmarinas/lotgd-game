@@ -54,6 +54,7 @@
         "stimulus": "^2.0.0",
         "sweetalert2": "^11.0.18",
         "tailwindcss": "^2.2.15",
+        "tailwindcss-stimulus-components": "^3.0.0",
         "toastr": "^2.1.4",
         "url-loader": "^4.1.1",
         "webpack-notifier": "^1.13.0"
