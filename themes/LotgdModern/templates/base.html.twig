@@ -27,6 +27,7 @@
             {%- endblock lotgd_head_title -%}
         </title>
 
+        {{ encore_entry_link_tags('lotgd_lib') }}
         {{ encore_entry_link_tags('app') }}
         {% block lotgd_head_css %}
             {# Favicon can custom per theme #}
@@ -35,7 +36,7 @@
         <!-- Jaxon CSS styles -->
         {{ jaxon_css() }}
 
-        {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_script_tags('lotgd_lib') }}
         {% block lotgd_head_theme_js %}{% endblock %}
 
         <!-- Jaxon JS script -->
@@ -54,6 +55,7 @@
 
         {% block lotgd_footer_css %}{% endblock %}
 
+        {{ encore_entry_script_tags('app') }}
         {% block lotgd_footer_js %}{% endblock %}
 
         {# Render Sonata Blocks JS and CSS #}

@@ -2,15 +2,6 @@
 
 {% use '_layout.html.twig' %}
 
-{% block lotgd_head_css %}
-    {{ parent() }}
-    {{ encore_entry_link_tags('app_theme') }}
-{% endblock %}
-
-{% block lotgd_footer_js %}
-    {{ encore_entry_script_tags('app_theme') }}
-{% endblock %}
-
 {% block lotgd_body %}
     <div class="container mx-auto">
         {{ block('layout_header') }}
