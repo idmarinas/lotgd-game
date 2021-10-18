@@ -49,10 +49,11 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     //-- This is the global entry used in all pages
-    .addEntry('app', './assets/lib/index.js')
+    .addEntry('lotgd_lib', './assets/lib/index.js') //-- Leagcy Lib of LoTGD
 
+    //-- All JS and Theme for APP,
     //-- For custom theme creation, use tailwind.config.js to change style
-    .addEntry('app_theme', './assets/styles/app.css') //-- This is the default theme
+    .addEntry('app', './assets/app.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
