@@ -45,12 +45,13 @@ parts:
     pagination:
         description: 'Pagination results {firstItemNumber,number} to {lastItemNumber,number} out of {totalItemCount,number}'
         menu:
-            first: 'First page'
+            first: 'First'
             previous: 'Previous page'
             current: '{firstItemNumber,number} - {lastItemNumber,number} of {totalItemCount,number}'
+            showing: 'Showing {firstItemNumber,number} to {lastItemNumber,number} of {totalItemCount,number} results'
             page: 'Page {page,number}'
             next: 'Next page'
-            last: 'Last page'
+            last: 'Last'
 
 # Modal dialogs
 modal:
