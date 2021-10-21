@@ -203,12 +203,6 @@ $RECYCLE.BIN/
 
 ###> lotgd/core ###
 
-# Ignore all content of assets folder except lotgd folder and .gitkeep file (This ignore custom content)
-/assets/**
-!/assets/**/
-!/assets/lotgd/**
-!/assets/**/.gitkeep
-
 # Ignore local config
 /config/autoload/local/**
 !/config/autoload/local/**/
