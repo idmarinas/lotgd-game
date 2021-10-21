@@ -12,7 +12,7 @@ twig:
         sessionPre: ~ # Not remove, is for avoid errors
         session: '@Lotgd\Core\Service\Twig\SessionVariable'
     form_themes: [
-        'form/tailwind_2_layout.html.twig'
+        'form/tailwind-2-form-theme.html.twig'
     ]
     debug: '%kernel.debug%'
     exception_controller: null
