@@ -1,0 +1,84 @@
+{% use 'form/tailwind-2-form-theme.html.twig' %}
+
+{%- block form -%}
+    {# Render a tab menu #}
+    <div class="shadow overflow-hidden border border-lotgd-200 sm:rounded-lg" data-controller="tabs" data-tabs-active-tab="italic uppercase active">
+        {% if form.vars.label %}
+            <div class="italic bg-gradient-to-r from-transparent via-lotgd-800 text-center text-xl font-bold border-b border-lotgd-500 p-2">
+                {{ form.vars.label|trans({}, form.vars.translation_domain) }}
+            </div>
+        {% endif %}
+
+        <div class="grid grid-cols-4 divide-x divide-lotgd-200 border-b border-lotgd-200 py-3 px-2 text-center">
+            {# Max are 4 sections in menu #}
+            {% set formCopy = form.children|filter((v, k) => v.vars.block_prefixes[1] != 'hidden' and v.vars.block_prefixes[0] != 'button') %}
+            {% set batch = ((formCopy|length - 1) / 4)|round(0, 'ceil') %}
+            {% set errorTooltipText = 'fieldset.has.error'|trans({}, 'form_app') %}
+
+            {% for menuField in formCopy|batch(batch) %}
+                <div class="column">
+                    {% for index, tabfield in menuField %}
+                        <a class="w-full inline-block" data-tabs-target="tab" data-action="click->tabs#change" href="#">
+                            {{ tabfield.vars.label|trans(tabfield.vars.label_translation_parameters, tabfield.vars.translation_domain) }}
+
+                            {% if not tabfield.vars.valid %}
+                                <span data-tooltip="{{ errorTooltipText }}" aria-label="{{ errorTooltipText }}">
+                                    <i aria-hidden="true" class="fas fa-times text-lotgd-red-300"></i>
+                                </span>
+                            {% endif %}
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+        {{ form_start(form) }}
+            {% for index, tabField in form %}
+                {% if tabField.vars.block_prefixes[0] != 'button' and tabField.vars.block_prefixes[1] != 'hidden' %}
+                    <div class="hidden border-b border-lotgd-200 pb-3 px-2" data-tabs-target="panel">
+                        <div class="italic bg-gradient-to-r from-transparent via-lotgd-800 text-center font-bold border-b border-lotgd-500 py-2 mb-2">
+                            {{ tabField.vars.label|trans(tabField.vars.label_translation_parameters, tabField.vars.translation_domain) }}
+                        </div>
+
+                        {{- form_widget(tabField) -}}
+                    </div>
+                {% else %}
+                    {{- form_widget(tabField) -}}
+                {% endif %}
+            {% endfor %}
+        {{ form_end(form) }}
+    </div>
+{%- endblock form -%}
+
+{%- block form_start -%}
+    {%- set attr = attr|merge({class: ('ui ' ~ attr.class|default(''))|trim }) -%}
+    {%- set attr = attr|merge({class: attr.class ~ ' form' }) -%}
+    {%- set attr = attr|merge({class: attr.class ~ (errors|length ? ' error' : '') }) -%}
+
+    {# Allow url of action #}
+    {% if action %}
+        {% set action = action|lotgd_url %}
+    {% endif %}
+
+    {%- do form.setMethodRendered() -%}
+
+    {% set method = method|upper %}
+
+    {%- if method in ["GET", "POST"] -%}
+        {% set form_method = method %}
+    {%- else -%}
+        {% set form_method = "POST" %}
+    {%- endif -%}
+
+    <form
+        {% if name != '' %} name="{{ name }}"{% endif %}
+        method="{{ form_method|lower }}"
+        {% if action != '' %} action="{{ action }}"{% endif %}
+        {{ block('attributes') }}
+        {% if multipart %} enctype="multipart/form-data"{% endif %}
+    >
+
+    {%- if form_method != method -%}
+        <input type="hidden" name="_method" value="{{ method }}" />
+    {%- endif -%}
+{%- endblock form_start -%}
