@@ -1,6 +1,6 @@
 # History of changes for IDMarinas Edition
 
-This is a list of changes made in versions __4.*.*__
+This is a list of changes made in versions __4.Y.Z__
 
 
 ## Changes made for IDMarinas Edition

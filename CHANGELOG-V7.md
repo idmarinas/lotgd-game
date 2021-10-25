@@ -1,6 +1,6 @@
 # History of changes for IDMarinas Edition
 
-This is a list of changes made in versions __7.*.*__
+This is a list of changes made in versions __7.Y.Z__
 
 
 # Changes of LoTGD IDMarinas Edition
