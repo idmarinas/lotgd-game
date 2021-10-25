@@ -73,7 +73,6 @@ module.exports = function (theme, e)
     const radioCheckboxBase = (uncheck, checked) => {
         return {
             border: 0,
-            border: 0,
             clip: "rect(0 0 0 0)",
             height: "1px",
             margin: "-1px",
