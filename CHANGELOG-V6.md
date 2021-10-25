@@ -122,6 +122,44 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
 
+# Version: 6.2.1
+
+### :cyclone: CHANGES
+
+-   Nothing
+
+### :star: FEATURES
+
+-   Nothing
+
+### :fire: DEPRECATED
+
+-   Nothing
+
+### :wrench: FIXES
+
+-   **src/core/Repository/DebuglogRepository.php** Fix error, now can access to `getPaginator` method.
+
+### :x: REMOVES
+
+-   Nothing
+
+### :notebook: NOTES
+
+-   Apply Rector rules to files in `src/` and `public/`
+-   **Important**:
+    -   :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
+    -   :warning: Avoid, as far as possible, using static classes (e.g. LotgdSetting, Doctrine, LotgdTranslation...) as these classes will be deleted in a future version. Use autowire, dependency injection when possible.
+-   **Upgrade/Install for version 5.0.0 and up**
+    -   First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
+    -   If have problems:
+        -   Read info in `storage/log/tracy/*` files, and see the problem.
+        -   Read info in `var/log/*` files, and see the problem.
+        -   Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS distribution) in your webserver.
+        -   If you can't solve the problem go to: [Repository issues](https://github.com/idmarinas/lotgd-game/issues)
+-   **composer.json** Updated/Added/Deleted dependencies
+-   **package.json** Updated/Added/Deleted dependencies
+
 # Version: 6.2.0
 
 ### :cyclone: CHANGES

@@ -1,7 +1,7 @@
 {
     "name": "idmarinas/lotgd",
     "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization , migrating to a Symfony Application",
-    "version": "6.1.0",
+    "version": "6.2.1",
     "config": {
         "optimize-autoloader": true,
         "preferred-install": {
