@@ -44,8 +44,8 @@ define([
                 content: null,
                 input: null,
                 actions: null,
-                confirmButton: 'ui green button',
-                cancelButton: 'ui red button',
+                confirmButton: 'unstyle bg-lotgd-800 hover:bg-lotgd-500 px-3 py-2 rounded text-lotgd-gray-100 mr-1',
+                cancelButton: 'unstyle bg-lotgd-red-800 hover:bg-lotgd-red-500 px-3 py-2 rounded text-lotgd-gray-100 mr-1',
                 footer: null
             },
             confirmButtonText: 'OK',
