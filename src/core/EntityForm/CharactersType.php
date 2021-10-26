@@ -55,7 +55,7 @@ class CharactersType extends AbstractType
                     'class' => 'clearable',
                 ],
             ])
-            ->add('lasthit', DateType::class, ['label' => 'char.lasthit', 'required' => false, 'disabled' => true])
+            ->add('lasthit', DateType::class, ['label' => 'acct.lasthit', 'required' => false, 'disabled' => true])
             ->add('name', TextType::class, [
                 'label'    => 'char.name',
                 'required' => false,
