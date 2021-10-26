@@ -1,0 +1,83 @@
+{% trans_default_domain textDomain %}
+
+<div class="ui info message">
+    <h4 class="header">{{ 'section.default.message.title'|trans|colorize }}</h4>
+    {{ 'section.default.message.gentimecount'|trans({'n' : stats.gentimecount})|colorize }}
+    {{ 'section.default.message.gentime'|trans({'n' : stats.gentime})|colorize }}
+    {{ 'section.default.message.genavg'|trans({'n' : (stats.gentime / max(stats.gentimecount, 1))})|colorize }}
+    {{ 'section.default.message.gensize'|trans({'bytes' : stats.gensize|default(0)|byte_units_format_binary})|colorize }}
+</div>
+
+<div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-t-lg">
+    <table class="min-w-full divide-y divide-lotgd-200">
+        <thead>
+            <tr>
+                <th scope="col" class="two wide">{{ 'section.default.table.headers.ops'|trans|uncolorize }}</th>
+                <th scope="col" class="one wide"><a href="{{ ('user.php?sort=acctid' ~ query)|lotgd_url }}">{{ 'section.default.table.headers.acid'|trans|uncolorize }}</a></th>
+                <th scope="col"><a href="{{ ('user.php?sort=name' ~ query)|lotgd_url }}">{{ 'section.default.table.headers.nm'|trans|uncolorize }}</a></th>
+                <th scope="col" class="two wide"><a href="{{ ('user.php?sort=laston' ~ query)|lotgd_url }}">{{ 'section.default.table.headers.lon'|trans|uncolorize }}</a></th>
+                <th scope="col" class="one wide"><a href="{{ ('user.php?sort=gentimecount' ~ query)|lotgd_url }}">{{ 'section.default.table.headers.hits'|trans|uncolorize }}</a></th>
+                <th scope="col" class="two wide"><a href="{{ ('user.php?sort=lastip' ~ query)|lotgd_url }}">{{ 'section.default.table.headers.lip'|trans|uncolorize }}</a></th>
+                <th scope="col" class="three wide"><a href="{{ ('user.php?sort=emailaddress' ~ query)|lotgd_url }}">{{ 'section.default.table.headers.email'|trans|uncolorize }}</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set options = { 'text': 'section.default.table.tbody.del.confirm'|trans }|json_encode|e('html_attr') %}
+            {% set buttonDel = 'section.default.table.tbody.del.label'|trans|uncolorize %}
+            {% set buttonEditAcct = 'section.default.table.tbody.edit.account'|trans|uncolorize %}
+            {% set buttonEditChar = 'section.default.table.tbody.edit.character'|trans|uncolorize %}
+            {% set buttonBan = 'section.default.table.tbody.ban'|trans|uncolorize %}
+            {% set buttonLog = 'section.default.table.tbody.log'|trans|uncolorize %}
+
+            {% for row in paginator %}
+                <tr>
+                    <td>
+                        <div class="flex divide-x text-center">
+                            <div class="flex-auto px-1">
+                                <a href="{{ ('user.php?op=edit&type=acct&userid=' ~ row.acctid)|lotgd_url }}" data-tooltip="{{ buttonEditAcct }}" aria-label="{{ buttonEditAcct }}">
+                                    <i aria-hidden="true" class="far fa-edit"></i>
+                                </a>
+                            </div>
+                            <div class="flex-auto px-1">
+                                <a href="{{ ('user.php?op=edit&type=char&userid=' ~ row.acctid)|lotgd_url }}" data-tooltip="{{ buttonEditChar }}" aria-label="{{ buttonEditChar }}">
+                                    <i aria-hidden="true" class='far fa-user text-lotgd-blue-500 hover:text-lotgd-blue-100'></i>
+                                </a>
+                            </div>
+                            <div class="flex-auto px-1">
+                                <a href="{{ ('user.php?op=del&userid=' ~ row.acctid)|lotgd_url }}" onclick="Lotgd.confirm(this, event)" data-tooltip="{{ buttonDel }}" aria-label="{{ buttonDel }}" data-options="{{ options }}">
+                                    <i aria-hidden="true" class="far fa-trash-alt text-lotgd-red-500 hover:text-lotgd-red-100"></i>
+                                </a>
+                            </div>
+                            <div class="flex-auto px-1">
+                                <a href="{{ ('bans.php?op=setupban&userid=' ~ row.acctid)|lotgd_url }}" data-tooltip="{{ buttonBan }}" aria-label="{{ buttonBan }}">
+                                    <i aria-hidden="true" class="fas fa-ban text-lotgd-orange-500 hover:text-lotgd-orange-100"></i>
+                                </a>
+                            </div>
+                            <div class="flex-auto px-1">
+                                <a href="{{ ('user.php?op=debuglog&userid=' ~ row.acctid)|lotgd_url }}" data-tooltip="{{ buttonLog }}" aria-label="{{ buttonLog }}">
+                                    <i aria-hidden="true" class='far fa-file'></i>
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{ row.acctid|numeral }}</td>
+                    <td>
+                        {{ '(`^%s`0) `&%s`0'|format(row.level, row.name)|colorize }}
+                        {% if row.loggedin %}
+                            {{ 'section.default.table.tbody.online'|trans|colorize }}
+                        {% endif %}
+                    </td>
+                    <td>{{ '{date,date}'|tmf({'date': row.laston}) }}</td>
+                    <td>{{ row.gentimecount|numeral }}</td>
+                    <td>{{ row.lastip }}</td>
+                    <td>{{ row.emailaddress }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">{{ 'section.default.table.empty'|trans|colorize }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="shadow overflow-hidden sm:rounded-b-lg">{{ navigation_pagination(paginator, paginatorLink) }}</div>
