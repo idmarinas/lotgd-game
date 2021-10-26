@@ -206,21 +206,22 @@ module.exports = function (theme, e)
         //-- Checkbox
         "[type='checkbox']:not(.unstyle)": radioCheckboxBase('f0c8', 'f14a'),
 
-        //-- Checkbox toggle style
+        //-- Checkbox Switch style
         '.toggle-path': {
             transition: 'background 0.3s ease-in-out'
         },
         '.toggle-circle': {
-            top: '0.2rem',
-            left: '0.25rem',
+            // top: '0.2rem',
+            // left: '0.25rem',
             transition: 'all 0.3s ease-in-out'
         },
         "[type='checkbox']:checked": {
             '~ .toggle-circle': {
-                transform: 'translateX(100%)'
+                transform: `translateX(calc(${theme('width.14')} - ${theme('width.5')} - ${theme('inset.1')} - ${theme('inset.1')}))`,
+                backgroundColor: theme('colors.lotgd-green.800')
             },
             '~ .toggle-path': {
-                backgroundColor: theme('colors.lotgd.500')
+                backgroundColor: theme('colors.lotgd-green.600')
             }
         },
         "[type='checkbox']:disabled": {
