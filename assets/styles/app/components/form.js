@@ -125,20 +125,20 @@ module.exports = function (theme, e)
         // <input type="image">
 
         //- Inputs fields
-        "[type='text']": input,
-        "[type='email']": input,
-        "[type='url']": input,
-        "[type='password']": input,
-        "[type='number']": input,
-        "[type='date']": input,
-        "[type='datetime-local']": input,
-        "[type='month']": input,
-        "[type='search']": input,
-        "[type='tel']": input,
-        "[type='time']": input,
-        "[type='week']": input,
-        'textarea': input,
-        'select': input,
+        "[type='text']:not(.unstyle)": input,
+        "[type='email']:not(.unstyle)": input,
+        "[type='url']:not(.unstyle)": input,
+        "[type='password']:not(.unstyle)": input,
+        "[type='number']:not(.unstyle)": input,
+        "[type='date']:not(.unstyle)": input,
+        "[type='datetime-local']:not(.unstyle)": input,
+        "[type='month']:not(.unstyle)": input,
+        "[type='search']:not(.unstyle)": input,
+        "[type='tel']:not(.unstyle)": input,
+        "[type='time']:not(.unstyle)": input,
+        "[type='week']:not(.unstyle)": input,
+        'textarea:not(.unstyle)': input,
+        'select:not(.unstyle)': input,
 
         //-- Range input - https://www.cssportal.com/style-input-range/
         "[type='range']": {
@@ -234,8 +234,8 @@ module.exports = function (theme, e)
 
         //-- Buttons
         "[type='button']:not(.unstyle)": button,
-        "[type='submit']": button,
-        "[type='reset']": button,
+        "[type='submit']:not(.unstyle)": button,
+        "[type='reset']:not(.unstyle)": button,
 
         //-- Fields
         form: {
