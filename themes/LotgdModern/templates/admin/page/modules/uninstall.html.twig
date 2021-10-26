@@ -1,0 +1,77 @@
+{% trans_default_domain textDomain %}
+
+<h4>{{ 'subtitle.uninstall'|trans|colorize }}</h4>
+
+<form action="{{ ('modules.php?op=mass')|lotgd_url }}" method="POST" class="">
+    <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-lotgd-200">
+            <thead>
+                <tr>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">{{ 'table.thead.ops'|trans|uncolorize }}</th>
+                    <th scope="col">{{ 'table.thead.mname'|trans|uncolorize }}</th>
+                    <th scope="col">{{ 'table.thead.mauth'|trans|uncolorize }}</th>
+                    <th scope="col">{{ 'table.thead.categ'|trans|uncolorize }}</th>
+                    <th scope="col">{{ 'table.thead.fname'|trans|uncolorize }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for module in modules %}
+                    <tr>
+                        {% if not module.invalid %}
+                            <td class="w-1">
+                                <label for="module-{{ module.modulename }}" class="relative">
+                                    <input id="module-{{ module.modulename }}" type="checkbox" name="module[]" value="{{ module.modulename }}">
+                                    <!-- path -->
+                                    <div class="toggle-path bg-lotgd-red-600 w-14 h-7 rounded-full shadow-inner"></div>
+                                    <!-- circle -->
+                                    <div class="toggle-circle absolute w-5 h-5 bg-lotgd-red-800 rounded-full shadow top-1 left-1"></div>
+                                </label>
+                            </td>
+                            <td class="collapsing">
+                                <a class="ui mini icon {{ module.canInstall ? '' : 'red disabled' }} button" href="{{ ('modules.php?op=install&module=' ~ module.shortname ~ '&cat=' ~ module.category|e('url'))|lotgd_url }}" data-tooltip="{{ 'table.tbody.install'|trans|uncolorize }}">
+                                    <i aria-hidden="true" class="configure icon"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <span title="{{ module.description|default(module.name|uncolorize) }}">
+                                    {{ module.name|colorize }} <em>{{ module.version|colorize }}</em>
+                                </span>
+                            </td>
+                            <td class="whitespace-normal">{{ '`#%s`0'|format(module.author)|colorize }}</td>
+                            <td>{{ module.category|colorize }}</td>
+                            <td>{{ '%s.php'|format(module.shortname) }}</td>
+                        {% else %}
+                            <td></td>
+                            <td><a class="ui red disabled mini icon button" data-tooltip="{{ 'table.tbody.uninstallable'|trans|uncolorize }}"><i aria-hidden="true" class="configure icon"></i></a></td>
+                            <td colspan="4">
+                                <span title="{{ module.description|default(module.name|uncolorize) }}">
+                                    {{ module.name|colorize }} {{ 'table.tbody.invalid'|trans|colorize }} <em>{{ module.version|colorize }}</em>
+                                </span>
+                            </td>
+                        {% endif %}
+                    </tr>
+                    {% if module.requires %}
+                        <tr>
+                            <td colspan="7">
+                                {{ 'table.tbody.require'|trans|colorize }}
+                                {% for require in module.requiresCheck %}
+                                    <p>{{ '%s%s`0'|format(require.check ? '`@' : '`$', require.name)|colorize }}</p>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="center aligned">{{ 'table.tbody.not.modules'|trans|colorize }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="flex gap-4 mt-5 md:w-2/4">
+        <button type="submit" name="install" value="1">{{ 'table.tbody.button.install'|trans|uncolorize }}</button>
+        <button type="submit" name="activate" value="1">{{ 'table.tbody.button.activate'|trans|uncolorize }}</button>
+    </div>
+</form>
