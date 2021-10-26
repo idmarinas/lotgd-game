@@ -314,13 +314,15 @@ switch ($op)
                     $session['user'] = $repository->getUserById($userId);
                 }
             }
-            \Doctrine::detach($entity); //-- Avoid Doctrine save a invalid Form
 
             \LotgdNavigation::addNavAllow("user.php?op=edit&type={$type}&userid={$userId}{$returnpetition}");
 
             $params['form']         = $form->createView();
             $params['userLoggedIn'] = $accountEntity->getLoggedin();
             $params['type']         = $type;
+
+            //-- Avoid Doctrine save a invalid Form
+            unset($entity, $accountEntity, $characterEntity);
         }
         elseif ('module' == $subop)
         {
