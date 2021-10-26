@@ -33,7 +33,7 @@ module.exports = function (theme, e)
         '&:placeholder': {
             color: theme('colors.lotgd.gray.50')
         },
-        '&:hover': {
+        '&:hover:not(:disabled)': {
             ...hoverBase,
             color: theme('colors.lotgd.gray.200')
         },
