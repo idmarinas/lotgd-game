@@ -100,7 +100,7 @@ char:
             very_high: Very High
     resurrections: Resurrections
     location: Where is the user currently
-    specialty: Specialty,enumpretrans
+    specialty: Specialty
     deathpower: Favor with Overlord
     gravefights: Grave fights left
     soulpoints: Soulpoints (HP while dead)
