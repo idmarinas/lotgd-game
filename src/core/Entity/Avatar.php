@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Lotgd\Core\Entity\User;
 
 /**
  * Structure of table "avatars" in data base.
@@ -41,7 +42,7 @@ class Avatar
     /**
      * @var int
      *
-     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\OneToOne(targetEntity=User::class)
      * @ORM\JoinColumn(referencedColumnName="acctid", nullable=true, onDelete="SET NULL")
      */
     private $acct;
