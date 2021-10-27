@@ -11,8 +11,8 @@ module.exports = function (theme, e)
 
                 '> tr': {
                     '> th': {
-                        paddingLeft: theme('padding.6'),
-                        paddingRight: theme('padding.6'),
+                        paddingLeft: theme('padding.4'),
+                        paddingRight: theme('padding.4'),
                         paddingTop: theme('padding.3'),
                         paddingBottom: theme('padding.3'),
                         textAlign: 'left',
@@ -33,8 +33,8 @@ module.exports = function (theme, e)
 
                 '> tr': {
                     '> td': {
-                        paddingLeft: theme('padding.6'),
-                        paddingRight: theme('padding.6'),
+                        paddingLeft: theme('padding.4'),
+                        paddingRight: theme('padding.4'),
                         paddingTop: theme('padding.3'),
                         paddingBottom: theme('padding.3'),
                         whiteSpace: 'nowrap',
