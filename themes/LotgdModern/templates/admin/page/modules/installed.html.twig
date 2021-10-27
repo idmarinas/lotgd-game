@@ -19,7 +19,7 @@
                 {% set options = {'html': 'table.tbody.uninstall.confirm'|trans|uncolorize }|json_encode %}
                 {% for module in modules %}
                     <tr>
-                        <td class="w-1">
+                        <td class="w-1 pr-3 pl-3">
                             <label for="module-{{ module.modulename }}" class="relative">
                                 <input id="module-{{ module.modulename }}" type="checkbox" name="module[]" value="{{ module.modulename }}">
                                 <!-- path -->
@@ -28,26 +28,50 @@
                                 <div class="toggle-circle absolute w-5 h-5 bg-lotgd-red-800 rounded-full shadow top-1 left-1"></div>
                             </label>
                         </td>
-                        <td class="collapsing">
+                        <td class="w-1 pr-3 pl-3">
                             {% set activate = module.active ? 'deactivate' : 'activate' %}
                             {% set active = module.active ? 'active' : 'inactive' %}
-                            <div class="ui mini icon buttons">
-                                <a class="ui {{ module.active ? 'green' : 'orange' }} button" data-tooltip="{{ ('table.tbody.' ~ activate)|trans|uncolorize }}" href="{{ ('modules.php?op=' ~ activate ~ '&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}">
-                                    <i class="power icon"></i>
+
+                            <div class="flex rounded overflow-hidden">
+                                <a
+                                    class="unstyle p-2 text-xs {{ module.active ? 'bg-lotgd-green-700 hover:bg-lotgd-green-600' : 'bg-lotgd-orange-700 hover:bg-lotgd-orange-600' }}"
+                                    data-tooltip="{{ ('table.tbody.' ~ activate)|trans|uncolorize }}"
+                                    href="{{ ('modules.php?op=' ~ activate ~ '&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}"
+                                >
+                                    <i aria-disabled="true" class="fas fa-power-off"></i>
                                 </a>
-                                <a class="ui red button" id="{{ module.modulename }}" data-tooltip="{{ 'table.tbody.uninstall'|trans|uncolorize }}" href="{{ ('modules.php?op=uninstall&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">
-                                    <i class="remove icon"></i>
+                                <a
+                                    class="unstyle p-2 text-xs bg-lotgd-red-700 hover:bg-lotgd-red-600"
+                                    id="{{ module.modulename }}"
+                                    data-tooltip="{{ 'table.tbody.uninstall'|trans|uncolorize }}"
+                                    href="{{ ('modules.php?op=uninstall&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}"
+                                    data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)"
+                                >
+                                    <i aria-disabled="true" class="far fa-trash-alt"></i>
                                 </a>
-                                <a class="ui button" data-tooltip="{{ 'table.tbody.reinstall'|trans|uncolorize }}" href="{{ ('modules.php?op=reinstall&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}">
-                                    <i class="undo icon"></i>
+                                <a
+                                    class="unstyle p-2 text-xs bg-lotgd-700 hover:bg-lotgd-600"
+                                    data-tooltip="{{ 'table.tbody.reinstall'|trans|uncolorize }}"
+                                    href="{{ ('modules.php?op=reinstall&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}"
+                                >
+                                    <i aria-disabled="true" class="fas fa-undo"></i>
                                 </a>
                                 {% if SU_EDIT_CONFIG %}
                                     {% if '|settings|' in module.infokeys %}
-                                        <a class="ui blue button" data-tooltip="{{ 'table.tbody.strsettings'|trans|uncolorize }}" href="{{ ('configuration.php?setting=module&module=' ~ module.modulename)|lotgd_url }}">
-                                            <i class="settings icon"></i>
+                                        <a
+                                            class="unstyle p-2 text-xs bg-lotgd-blue-700 hover:bg-lotgd-blue-600"
+                                            data-tooltip="{{ 'table.tbody.strsettings'|trans|uncolorize }}"
+                                            href="{{ ('configuration.php?setting=module&module=' ~ module.modulename)|lotgd_url }}"
+                                        >
+                                            <i aria-disabled="true" class="fas fa-cog"></i>
                                         </a>
                                     {% else %}
-                                        <a class="ui disabled button" data-tooltip="{{ 'table.tbody.strnosettings'|trans|uncolorize }}"><i class="settings icon"></i></a>
+                                        <a
+                                            class="unstyle p-2 text-xs bg-lotgd-gray-700 text-lotgd-gray-200"
+                                            data-tooltip="{{ 'table.tbody.strnosettings'|trans|uncolorize }}"
+                                        >
+                                            <i aria-disabled="true" class="fas fa-cog"></i>
+                                        </a>
                                     {% endif %}
                                 {% endif %}
                             </div>

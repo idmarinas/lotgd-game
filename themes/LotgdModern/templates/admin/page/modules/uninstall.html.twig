@@ -19,7 +19,7 @@
                 {% for module in modules %}
                     <tr>
                         {% if not module.invalid %}
-                            <td class="w-1">
+                            <td class="w-1 pr-3 pl-3">
                                 <label for="module-{{ module.modulename }}" class="relative">
                                     <input id="module-{{ module.modulename }}" type="checkbox" name="module[]" value="{{ module.modulename }}">
                                     <!-- path -->
@@ -28,9 +28,15 @@
                                     <div class="toggle-circle absolute w-5 h-5 bg-lotgd-red-800 rounded-full shadow top-1 left-1"></div>
                                 </label>
                             </td>
-                            <td class="collapsing">
-                                <a class="ui mini icon {{ module.canInstall ? '' : 'red disabled' }} button" href="{{ ('modules.php?op=install&module=' ~ module.shortname ~ '&cat=' ~ module.category|e('url'))|lotgd_url }}" data-tooltip="{{ 'table.tbody.install'|trans|uncolorize }}">
-                                    <i aria-hidden="true" class="configure icon"></i>
+                            <td class="w-1 pr-3 pl-3 text-center">
+                                {% set url = ('modules.php?op=install&module=' ~ module.shortname ~ '&cat=' ~ module.category|e('url'))|lotgd_url %}
+                                {% set class = module.canInstall ? 'bg-lotgd-green-700 hover:bg-lotgd-green-600' : 'bg-lotgd-red-700 text-lotgd-gray-400 opacity-50' %}
+                                <a
+                                    class="unstyle px-3 py-2 rounded {{ class }}"
+                                    {% if module.canInstall %} href="{{ url }}" {% endif %}
+                                    data-tooltip="{{ 'table.tbody.install'|trans|uncolorize }}"
+                                >
+                                    <i aria-hidden="true" class="fas fa-cog"></i>
                                 </a>
                             </td>
                             <td>
