@@ -209,26 +209,31 @@
     <br>
 
     {% set downloadText = 'bundle.download_link'|trans %}
+    {% set privateText = 'bundle.private'|trans %}
 
     {% for name in bundles_lotgd_enabled|keys|sort %}
+
         {% set bundle = bundles_lotgd_enabled[name] %}
+
+        {% set gradient = 'from-lotgd-red-800 via-lotgd-800 to-lotgd-800' %}
         {% set border_color = 'border-lotgd-red-700' %}
-        {% set icon_color = 'text-lotgd-red-700' %}
+        {% set icon_color = 'text-lotgd-red-600' %}
 
         {% if bundle.lotgdDownload %}
+            {% set gradient = 'from-lotgd-green-800 via-lotgd-800 to-lotgd-800' %}
             {% set border_color = 'border-lotgd-green-700' %}
-            {% set icon_color = 'text-lotgd-green-700' %}
+            {% set icon_color = 'text-lotgd-green-600' %}
         {% endif %}
 
-        <div class="bg-lotgd-800 mx-auto border-lotgd-500 border rounded-sm  text-gray-200 mb-1">
+        <div class="bg-gradient-to-r {{ gradient }} mx-auto {{ border_color }} border rounded-sm  text-gray-200 mb-1">
             <div class="flex p-3  border-l-8 {{ border_color }}">
-                <div class="space-y-1 border-r-2 pr-3">
+                <div class="space-y-1 border-r-2 pr-3 w-20 text-center">
                     <div class="text-5xl leading-5 font-semibold {{ icon_color }}">
                         <i aria-disabled="true" class="fas {{ ('fa-' ~ bundle.lotgdIcon|default('fa-cube'))|replace({' ' : '-', 'fa-fa-': 'fa-'}) }}"></i>
                     </div>
                     <div class="text-sm font-semibold text-center">{{ bundle.lotgdVersion }}</div>
                 </div>
-                <div class="flex-1 border-r-2">
+                <div class="flex-1">
                     <div class="ml-3 space-y-1 pr-3">
                         <div class="text-base leading-6 font-normal">{{ bundle.lotgdName }}</div>
                         <div class="text-sm leading-4 font-normal">
@@ -244,22 +249,26 @@
                     </div>
                 </div> -->
 
-                {% if bundle.lotgdDownload %}
+                <div class="border-l-2">
                     <div class="ml-3 my-7 text-xs uppercase font-semibold">
-                        <a
-                            class="unstyle bg-lotgd-green-600 hover:bg-lotgd-green-500 py-2 px-3 w-20 rounded leading-4 -lotgd-green-100 hover:text-lotgd-green-50"
-                            href="{{ bundle.lotgdDownload }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >{{ downloadText }}</a>
+                        {% if bundle.lotgdDownload %}
+                            <a
+                                class="py-2 px-3 w-36 block text-center bg-lotgd-green-600 hover:bg-lotgd-green-500 rounded leading-4 text-lotgd-green-100 hover:text-lotgd-green-50"
+                                href="{{ bundle.lotgdDownload }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >{{ downloadText }}</a>
+                        {% else %}
+                            <div class="py-2 px-3 w-36 block text-center bg-lotgd-red-600 rounded leading-4 text-lotgd-red-100">{{ privateText }}</div>
+                        {% endif %}
                     </div>
-                {% endif %}
+                </div>
             </div>
         </div>
     {% else %}
-        <div class="bg-lotgd-800 mx-auto border-lotgd-500 border rounded-sm text-gray-200 mb-0.5 h-30">
+        <div class="bg-gradient-to-r from-lotgd-red-800 via-lotgd-800 to-lotgd-800 mx-auto border-lotgd-red-500 border rounded-sm text-gray-200 mb-0.5 h-30">
             <div class="flex p-3 border-l-8 border-lotgd-yellow-700">
-                <div class="space-y-1 border-r-2 pr-3">
+                <div class="space-y-1 border-r-2 pr-3 w-20 text-center">
                     <div class="text-5xl leading-5 font-semibold text-lotgd-red-300">
                         <i aria-disabled="true" class="fas fa-times"></i>
                     </div>
