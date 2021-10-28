@@ -20,7 +20,9 @@ bundle:
     none:
         title: No LoTGD Bundles
         desc: This game server not have a LoTGD Bundles enabled
-    download_link: Download Bundle
+    download_link: Download
+    private: Private
+    description: Description
 
     name: 'Bundle Name'
     version: 'Version'
