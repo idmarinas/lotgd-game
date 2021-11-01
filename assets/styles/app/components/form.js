@@ -208,11 +208,13 @@ module.exports = function (theme, e)
 
         //-- Checkbox Switch style
         '.toggle-path': {
+            backgroundColor: theme('colors.lotgd-red.600'),
             transition: 'background 0.3s ease-in-out'
         },
         '.toggle-circle': {
             // top: '0.2rem',
             // left: '0.25rem',
+            backgroundColor: theme('colors.lotgd-red.800'),
             transition: 'all 0.3s ease-in-out'
         },
         "[type='checkbox']:checked": {
