@@ -172,7 +172,7 @@ trait Commentary
         if ('GAME' == \strtoupper($comment['command']))
         {
             $icon = \sprintf(
-                '<span data-tooltip="%1$s"><i class="gamepad icon" aria-label="%1$s"></i></span>',
+                '<span data-tooltip="%1$s"><i class="fas fa-gamepad" aria-label="%1$s"></i></span>',
                 $status['game']
             );
         }
@@ -180,14 +180,14 @@ trait Commentary
         elseif ('GREM' == \strtoupper($comment['command']))
         {
             $icon = \sprintf(
-                '<span data-tooltip="%1$s"><i class="eraser icon" aria-label="%1$s"></i></span>',
+                '<span data-tooltip="%1$s"><i class="fas fa-eraser" aria-label="%1$s"></i></span>',
                 $status['grem']
             );
         }
         elseif ($session['user']['acctid'] == $comment['author'])
         {
             $icon = \sprintf(
-                '<span data-tooltip="%1$s"><i class="user icon" aria-label="%1$s"></i></span>',
+                '<span data-tooltip="%1$s"><i class="fas fa-user" aria-label="%1$s"></i></span>',
                 $status['you']
             );
         }
