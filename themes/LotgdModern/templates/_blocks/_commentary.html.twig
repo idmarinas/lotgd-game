@@ -1,0 +1,248 @@
+{% block commentary_block %}
+    {% trans_default_domain textDomain %}
+
+    {% if canAddComment %}
+        {# First the comment is saved in the database (if post method) otherwise the new comment will not be shown. #}
+        {{ save_comment() }}
+    {% endif %}
+
+    {# Show comments (new comment included) #}
+    <div class="ui minimal small comments">
+        <h5 class="ui dividing header">{{ 'commentary.talk'|trans|colorize }}</h5>
+
+        {% if not SU_EDIT_COMMENTS %}
+            {% for comment in comments|reverse %}
+                {% if not comment.hidden %}
+                    {{ display_one_comment(comment, textDomain, commentary) }}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <form action="{{ formUrl|lotgd_url }}" method="POST" autocomplete="off">
+                {% for comment in comments|reverse %}
+                    {{ display_one_comment(comment, textDomain, commentary) }}
+                {% endfor %}
+                <button type="submit" name="hidde" class="w-auto">{{ 'form.button.hide'|trans({}, 'app_commentary')|uncolorize }}</button>
+            </form>
+        {% endif %}
+    </div>
+
+    {% if canAddComment %}
+        {# Add new comment #}
+        <br>
+        {{ add_comment(commentary, textDomain) }}
+    {% endif %}
+
+    {% if showPagination %}
+        {# Show pagination for comments #}
+        <br>
+        {{ navigation_pagination(comments, paginationLinkUrl, ['commentary_pagination', '_blocks/_commentary.html.twig'] ) }}
+    {% endif %}
+{% endblock commentary_block %}
+
+{% block commentary_comment %}
+    {% trans_default_domain textDomain %}
+
+    {% if defaultTextDomainStatus %}
+        {# Set a default text domain for comentary status #}
+        {% commentary_domain_status defaultTextDomainStatus %}
+    {% endif %}
+
+    {% set recent = 'comment.recent'|trans({}, 'app_commentary') %}
+    <div class="comment text-sm {{ comment.hidden ? 'line-through' : '' }}">
+        <div class="content">
+            <div class="text">
+                {% if SU_EDIT_COMMENTS %}
+                    <label for="hideComment[{{ comment.id }}">
+                        <div class="relative inline-block">
+                            <input
+                                id="hideComment[{{ comment.id }}"
+                                name="hideComment[{{ comment.id }}]"
+                                type="checkbox"
+                                class="unstyle hidden"
+                                value="1"
+                                {% if comment.hidden %} checked="checked"{% endif %}
+                            />
+                            <!-- path -->
+                            <div class="toggle-path w-12 h-5 rounded-full shadow-inner"></div>
+                            <!-- circle -->
+                            <div class="toggle-circle absolute w-3 h-3 rounded-full shadow top-1 left-1"></div>
+                        </div>
+                    </label>
+                {% endif %}
+                {{ display_status_online_player(comment) }}
+                {{ comment.postdate > user.recentcomments ? '<span data-tooltip="%1$s"><i class="fas fa-caret-right" aria-label="%1$s"></i></span>'|format(recent) : '' }}
+                <span {{ comment.hidden ? 'data-tooltip="' ~ comment.hiddenComment|uncolorize ~ '"' : '' }}>
+                    {% set message = comment.translatable ? comment.comment|trans({}, comment.extra.translation_domain) : comment.comment %}
+
+                    {% if comment.command == 'game' %}
+                        {# It's a message from the game, no associated author #}
+                        <span class="text-col-dk-magenta"><em><strong>{{ message|uncolorize|trim|capitalize }}</strong></em></span>
+                    {% elseif comment.command == 'grem' %}
+                        {# This message was deleted by the author #}
+                        <span>{{ message|colorize|trim }}</span>
+                    {% else %}
+                        {% if comment.clanName %}
+                            <span data-tooltip="{{ comment.clanName|uncolorize }}">&#60;{{ comment.clanNameShort|colorize }}&#62;</span>
+                        {% endif %}
+                        {# It's a normal comment #}
+                        <span class="author">
+                            {{ comment.authorName|colorize }}
+                        </span>
+                        {# Represent a special action of player or not #}
+                        {% if comment.command == 'me' %}
+                            <span class="text-col-lt-black">{{ message|uncolorize }}</span>
+                        {% else %}
+                            <em class="text-col-dk-cyan">{{ (commentary.customSay ? commentary.customSay : 'commentary.sayLine'|trans)|colorize|lower }}</em>,
+                            <span class="text-col-dk-cyan">"<span class="colLtCyan">{{ message|colorize }}</span>"</span>
+                        {% endif %}
+                    {% endif %}
+                </span>
+            </div>
+            {# Actions for see bio and send mail to the author of comment #}
+            {% if comment.command != 'game' and comment.command != 'grem' %}
+                {% set bioLink = ('bio.php?char=' ~ comment.author ~ '&ret=' ~ returnLink|e('url'))|lotgd_url %}
+                {% set bioLabel = 'form.button.bio'|trans({'name': comment.authorName|uncolorize|trim}, 'app_commentary') %}
+                {% set mailLabel = 'form.button.mail'|trans({'name': comment.authorName|uncolorize|trim}, 'app_commentary') %}
+
+                <div class="actions">
+                    <a class="ui mini blue icon button" aria-label="{{ bioLabel }}" data-tooltip="{{ bioLabel }}" href="{{ bioLink }}">
+                        <i class="user icon"></i>
+                    </a>
+                    <a class="ui mini blue icon button" aria-label="{{ mailLabel }}" data-tooltip="{{ mailLabel }}" onclick="JaxonLotgd.Ajax.Core.Mail.write('{{ comment.author }}')">
+                        <i class="mail icon"></i>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock commentary_comment %}
+
+{% block commentary_add %}
+    {% trans_default_domain textDomain %}
+
+    <form id="commentary-form" action="{{ formUrl|lotgd_url }}" method="POST" autocomplete="off" class="flex flex-col">
+        <input type="hidden" name="section" value="{{ commentary.section }}">
+
+        <div class="flex z-10">
+            <input
+                type="text"
+                class="w-4/5 rounded-r-none"
+                name="comment"
+                id="comment"
+                autocomplete="off"
+                onkeyup="onKeyUp(this)" />
+            <button class="w-1/5 rounded-l-none border-l-0" type="submit">{{ 'commentary.button'|trans|uncolorize }}</button>
+        </div>
+
+        <div class="flex-1 bg-lotgd-gray-900 rounded-b p-3 -mt-1 hidden">
+            <div class="w-full text-lg text-lotgd-green-700 font-bold" id="charsleft-commentary-form"></div>
+            <p id="previewtext-commentary-form"></p>
+        </div>
+    </form>
+
+    {% do inline_script().captureStart() %}
+        Lotgd.set('colors', "{{ colors|json_encode()|e('js') }}")
+
+        function onKeyUp (element)
+        {
+            $(element).removeClass('hidden')
+            Lotgd.previewfield(element, '{{ user.name }}', '{{ maxChars }}', '{{ "commentary.sayLine"|trans }}', '{{ "commentary.charsLeft"|trans }}')
+        }
+    {% do inline_script().captureEnd() %}
+{% endblock commentary_add %}
+
+{% block commentary_pagination %}
+    {% trans_default_domain 'app_default' %}
+
+    {% if pageCount %}
+        <div class="flex items-center justify-between sm:px-6 pagination">
+            <div class="flex-1 flex justify-between sm:hidden">
+                <div class="items-center">
+                    {% if previous %}
+                        <!-- Link to first page -->
+                        <a class="items-center rounded-md" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ first)|lotgd_url }}">
+                            {{ 'parts.pagination.menu.first'|trans|uncolorize }}
+                        </a>
+
+                        <!-- Link to previous page -->
+                        <a class="items-center rounded-md" href="{{ (href ~ 'commentPage=' ~ previous)|lotgd_url }}">
+                            {{ 'parts.pagination.menu.previous'|trans|uncolorize }}
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="items-center">
+                    {% if next %}
+                        <!-- Link to next page -->
+                        <a class="items-center rounded-md" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ next)|lotgd_url }}">
+                            {{ 'parts.pagination.menu.next'|trans|uncolorize }}
+                        </a>
+                        <!-- Link to last page -->
+                        <a class="items-center rounded-md" aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ last)|lotgd_url }}">
+                            {{ 'parts.pagination.menu.last'|trans|uncolorize }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                <div>
+                    <p>
+                        {{ 'parts.pagination.menu.showing'|trans({ firstItemNumber, lastItemNumber, totalItemCount })|colorize }}
+                    </p>
+                </div>
+                <div>
+                    <nav class="overflow-auto shadow-sm -space-x-px" aria-label="{{ 'parts.pagination.description'|trans({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|uncolorize }}">
+                        {% if previous %}
+                            <a href="{{ (href ~ 'commentPage=' ~ previous)|lotgd_url }}" class="items-center px-2 py-2   ">
+                                <span class="sr-only">{{ 'parts.pagination.menu.previous'|trans|uncolorize }}</span>
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        {% endif %}
+                        <!-- Links to number pages -->
+                        {% for page in pagesInRange %}
+                            {% if page != current %}
+                                <a aria-label="{{ 'parts.pagination.menu.page'|trans({'page': page})|uncolorize }}" href="{{ (href ~ 'commentPage=' ~ page)|lotgd_url }}" class="items-center ">
+                                    {{ page }}
+                                </a>
+                            {% else %}
+                                <a aria-current="{{ 'parts.pagination.menu.page'|trans({'page': page})|uncolorize }}" class="current items-center ">
+                                    {{ page }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if next %}
+                            <a href="{{ (href ~ 'commentPage=' ~ next)|lotgd_url }}" class="items-center px-2 py-2   ">
+                                <span class="sr-only">{{ 'parts.pagination.menu.next'|trans|uncolorize }}</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        {% endif %}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock commentary_pagination %}
+
+{% block commentary_moderate %}
+    {% trans_default_domain textDomain %}
+
+    {# Show comments (new comment included) #}
+    <div class="ui minimal small comments">
+        <form action="{{ formUrl|lotgd_url }}" method="POST" autocomplete="off">
+            <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|trans({}, 'app_commentary')|uncolorize }}</button>
+            {% for section, comment in comments|reverse %}
+                <h5 class="ui dividing header">{{ sections[section]|default(section)  }}</h5>
+                {% for com in comment %}
+                    {{ display_one_comment(com, textDomain, commentary) }}
+                {% endfor %}
+            {% endfor %}
+            <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|trans({}, 'app_commentary')|uncolorize }}</button>
+        </form>
+    </div>
+
+    {% if showPagination %}
+        {# Show pagination for comments #}
+        {{ navigation_pagination(comments, paginationLinkUrl, 'parts/commentary/pagination.twig' ) }}
+    {% endif %}
+{% endblock commentary_moderate %}
