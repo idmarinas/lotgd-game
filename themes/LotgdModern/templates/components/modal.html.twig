@@ -25,7 +25,7 @@
 #}
 
 {% block dialog %}
-    <div data-controller="modal" data-modal-allow-background-close="false">
+    <div data-controller="modal" data-modal-allow-background-close="true">
         <a href="#" data-action="click->modal#open" class="{{ activator.class|default('bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded') }}">
             {{ activator.text }}
         </a>
