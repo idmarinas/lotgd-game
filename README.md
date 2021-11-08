@@ -1,3 +1,7 @@
+[![Changelog of DEV version](https://img.shields.io/badge/Changelog-DEV-orange)](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-dev.md)
+[![Changelog for last release version](https://img.shields.io/badge/Changelog-6.*-green)](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V6.md)
+[![Wiki of LoTGD](https://img.shields.io/badge/LoTGD-Wiki-green)](https://github.com/idmarinas/lotgd-game/wiki)
+
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=alert_status)](https://sonarcloud.io/dashboard?id=lotgd-game)
 ![PHP Composer](https://github.com/idmarinas/lotgd-game/workflows/PHP%20Composer/badge.svg?branch=migration)
 [![SonarCloud](https://github.com/idmarinas/lotgd-game/actions/workflows/sonar-cloud.yml/badge.svg)](https://github.com/idmarinas/lotgd-game/actions/workflows/sonar-cloud.yml)
