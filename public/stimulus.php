@@ -13,8 +13,8 @@ if ($controller && class_exists($controller))
 {
     $ctrl = \LotgdKernel::get($controller);
 
-    $allowAnonymous    = method_exists($ctrl, 'allowAnonymous') ? $ctrl->allowAnonymous() : false;
-    $overrideForcedNav = method_exists($ctrl, 'overrideForcedNav') ? $ctrl->overrideForcedNav() : false;
+    $allowAnonymous    = method_exists($ctrl, 'allowAnonymous') ? $ctrl->allowAnonymous() : true;
+    $overrideForcedNav = method_exists($ctrl, 'overrideForcedNav') ? $ctrl->overrideForcedNav() : true;
     do_forced_nav($allowAnonymous, $overrideForcedNav);
 
     \LotgdResponse::pageStart();
