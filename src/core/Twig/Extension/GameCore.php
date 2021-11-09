@@ -84,6 +84,10 @@ class GameCore extends AbstractExtension
     {
         return [
             new TwigFunction('url', [$this, 'baseUrl']),
+            new TwigFunction('stimulus_url', function (string $controller, string $method = 'index', string $query = ''): string
+            {
+                return "stimulus.php?method={$method}&controller=".urlencode($controller).$query;
+            }),
 
             new TwigFunction('trigger_event', [$this, 'triggerEvent']),
             new TwigFunction('modulehook', [$this, 'triggerEvent']), // Alias
