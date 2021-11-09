@@ -37,7 +37,7 @@ module.exports = function (theme, e)
             ...hoverBase,
             color: theme('colors.lotgd.gray.200')
         },
-        '&:focus': {
+        '&:focus:not(:disabled)': {
             ...focusBase,
             color: theme('colors.lotgd.gray.300')
         },
@@ -48,11 +48,11 @@ module.exports = function (theme, e)
         ...base,
         color: theme('colors.lotgd.gray.50'),
         cursor: theme('cursor.pointer'),
-        '&:hover': {
+        '&:hover:not(:disabled)': {
             ...hoverBase,
             color: theme('colors.lotgd.gray.100')
         },
-        '&:focus': {
+        '&:focus:not(:disabled)': {
             ...focusBase,
             color: theme('colors.lotgd.gray.200')
         },
