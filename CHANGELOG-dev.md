@@ -20,6 +20,10 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 -   **TailwindCSS** new Framework for style APP.
     -   **For create new themes can use `tailwind.config.js`
+-   **Twig Template System**
+    -   New functions:
+        -   `stimulus_url` Get a valid stimulus url like `"stimulus.php?method=index&controller=Controller`
+            -   Usage: `{{ stimulus_url('Controller\Name', 'method_name', '&query=value') }}`
 
 ### :fire: DEPRECATED
 
