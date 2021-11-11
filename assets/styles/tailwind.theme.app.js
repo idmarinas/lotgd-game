@@ -231,6 +231,24 @@ module.exports = plugin(({addComponents, addBase, e, theme}) => {
                 'col-wheat': '#F5DEB3',
                 'coltan': '#D2B48C',
                 'col-burlywood': '#DEB887',
+            },
+
+            keyframes: {
+                swinging: {
+                    '0%':  {
+                        transform: 'translateX(-100%)'
+                    },
+                    '50%': {
+                        transform: 'translateX(100%)'
+                    },
+                    '100%': {
+                        transform: 'translateX(-100%)'
+                    }
+                }
+            },
+
+            animation: {
+                swinging: 'swinging 2s ease infinite',
             }
         },
     },
