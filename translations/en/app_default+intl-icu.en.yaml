@@ -58,6 +58,8 @@ modal:
     buttons:
         cancel: 'Cancel'
         ok: 'Ok'
+        send: Send
+        save: Save
 
 # Jaxon petitions
 jaxon.fail.request: 'An error has occurred while processing your request'
