@@ -1,31 +1,33 @@
 import { Modal } from "tailwindcss-stimulus-components"
 
+//-- Helpers
+import { useLoading } from '../helpers'
+
 export default class extends Modal
 {
     remoteContent = ''
 
-    static targets = ['container', 'activator', 'loading']
+    static targets = ['activator', 'loading']
     static values = { url: String, reloadData: Boolean }
+
+    connect ()
+    {
+        super.connect()
+
+        useLoading(this)
+    }
 
     async open (event)
     {
         event.preventDefault()
 
-        //-- Disable button
-        this.activatorTarget.disabled = true
-
-        //-- Show loading
-        if (this.hasLoadingTarget) this.loadingTarget.classList.remove('hidden')
+        this.startLoading()
 
         let content = null
 
         content = await this.fetch()
 
-        //-- Enable button
-        this.activatorTarget.disabled = false
-
-        //-- Hidde loading
-        if (this.hasLoadingTarget) this.loadingTarget.classList.add('hidden')
+        this.stopLoading()
 
         if ( ! content) return
 
