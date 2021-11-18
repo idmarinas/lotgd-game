@@ -13,6 +13,12 @@
                 {# End advertising module #}
             </div>
             <div class="p-2 flex-grow lotgd-border-image">
+                {# Show notifications #}
+                {{ show_notifications() }}
+
+                {# Show all alert messages #}
+                {{ show_flash_messages() }}
+
                 {# This is all content of game #}
                 {% block lotgd_body_content %}{{ content }}{% endblock %}
             </div>
