@@ -24,6 +24,21 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   New functions:
         -   `stimulus_url` Get a valid stimulus url like `"stimulus.php?method=index&controller=Controller`
             -   Usage: `{{ stimulus_url('Controller\Name', 'method_name', '&query=value') }}`
+-   **Notifications System**
+    -   Add a new notifications system (Toast notifications)
+    -   Use Stimulus to show notifications
+    -   For add a notification you can use Trait `Lotgd\Core\Pattern\LotgdControllerTrait` in your controller.
+        -   Use method `$this->addNotification('type', 'Notification message');` this is the basic format.
+        -   This is the alternative format.
+            ```php
+                $this->addNotification('type', [
+                    'title' => 'Notification Title', 
+                    'notification' => 'Notification message', 
+                    'close' => false,
+                    'duration' => 7000 // Time in miliseconds
+                    'id' => 'id-for-notification' //-- By default is auto-generated
+                ]);
+            ```
 
 ### :fire: DEPRECATED
 
