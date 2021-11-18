@@ -1,0 +1,40 @@
+{#
+    This file is part of "LoTGD Core Package".
+
+    @see https://github.com/idmarinas/lotgd-game
+
+    @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.md
+    @author IDMarinas
+
+    @since 7.0.0
+
+    @file Template for show notifications.
+
+    Available variables:
+    - notifications<array>: List of notifications
+        -   Format 1:
+            -   $notifications['info'][] = 'Notification 1'
+            -   $notifications['info'][] = 'Notification 2'
+        -   Format 2:
+            -   $notifications['warning'][] = [
+                    'id' => 'id',
+                    'close' => true,
+                    'duration' => 3000, //-- In miliseconds
+                    'title' => 'Title of notification',
+                    'notification' => 'Notification 2'
+                ]
+#}
+
+{% import '_macros/_notifications.html.twig' as helper %}
+
+<div class="fixed inset-x-0 top-0 flex flex-col items-end justify-right px-4 py-6 sm:p-6 justify-end z-30 pointer-events-none">
+    {% for type, alert in notifications %}
+        {% set type_class = helper.notification_type(type) %}
+
+        {% for msg in alert %}
+            {% set id = loop.index0 + loop.parent.loop.index0 %}
+
+            {{ helper.notification(type_class, (type ~ '-' ~ id), id, msg) }}
+        {% endfor %}
+    {% endfor %}
+</div>
