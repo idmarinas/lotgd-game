@@ -278,6 +278,9 @@ services:
         public: true
     Lotgd\Core\Service\PageParts:
         public: true
+    session.notifications_bag:
+        alias: Lotgd\Core\Bag\NotificationsBag
+        public: true
 
     # Twig extensions
     Marek\Twig\ByteUnitsExtension:
