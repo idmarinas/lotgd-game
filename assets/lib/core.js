@@ -15,17 +15,24 @@ define([
      *
      * @description Converts a string to the camelCase format
      *
-     * @param {string} string String to format
+     * @param {string} str String to format
      *
      * @return {string}
      */
-    Lotgd.toCamelCase = function (string)
+    Lotgd.toCamelCase = function (str)
     {
-        return string.replace(/^([A-Z])|[\s-_](\w)/g, function (match, p1, p2, offset)
+        const string = str.match(/[a-z]+|\d+/gi)
+
+        return string.map((m, i) =>
         {
-            if (p2) return p2.toUpperCase()
-            return p1.toLowerCase()
-        })
+            let low = m.toLowerCase();
+            if (i != 0)
+            {
+                low = low.split('').map((s,k) => k==0 ? s.toUpperCase() : s).join``
+            }
+
+            return low
+        }).join``
     }
 
     /**
