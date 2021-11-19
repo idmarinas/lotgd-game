@@ -14,7 +14,7 @@ module.exports = function (theme, e)
 
     const disabledBase = {
         opacity: theme('opacity.40'),
-        cursor: theme('cursor.not.allowed')
+        cursor: theme('cursor.not-allowed')
     }
 
     const hoverBase = {
