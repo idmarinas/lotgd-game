@@ -12,9 +12,14 @@
 # Cosas a mejorar
 
 -   Bundles
-    -   `Special Events`: usando el componente even-dispatcher crear uno para los eventos especiales:
+    -   ¿? `Special Events`: usando el componente even-dispatcher crear uno para los eventos especiales:
         -   Ya creado, falta mejorarlo.
         -   El sistema se llama `Occurrence`, en referencia a que ha sucedido algo.
+            -   Este sistema no me convence, por lo que en la versión 8.0.0 planeo hacer otra cosa:
+                -   Crear bundles de cada zona:
+                    -   `village`, `forest`, `shop`...
+                    -   Con estos bundles se podria usar el sistema de event dispatcher de symfony para activar estos tipos de eventos especiales.
+                        -   Por ejemplo con el evento `request` antes de procesar toda la petición.
         -   Agregar opción para priorizar eventos.
             -   Agregar la prioridad a los eventos esto es útil para los eventos que no tienen menú de opciones y los que sí
                 -   Se permitiria pasar antes los eventos que no tienen menús para así no entrar en conflicto con los que tienen menú
@@ -41,6 +46,13 @@
 
 # Actualmente haciendo esto (7.0.0)
 
+-   Esta será la última versión que use la ordenación de carpetas `src/core` y `src/local`
+    -   La versión 7.0.0 será la última versión con esta estructura, y será la versión dedicada a facilitar la transción a la versión 8.0.0.
+        -   La estructura actual 7.0.0 y anterior es un poco caótica, por lo que se usará esta última versión para facilitar el salto a la versión 8.0.0.
+            -   (En la medida de lo posible)
+    -   La versión 8.0.0 usará la ordenación propia de Symfony.
+-   Se revisará el código para hacer la transición más sencilla. 
+-   Esta versión se centrará en hacer la transición a la versión 8.0.0 más sencilla.
 -   Eliminar la dependencia de Jaxon-PHP usar Stimulus
 -   Esta es la última versión que incluya compatibilidad con el antiguo sistema de módulos.
 -   **BC** Sustituir Fomantic UI por https://tailwindcss.com 
@@ -55,21 +67,23 @@
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Se aprobecha el cambio a TailWind para revisar y mejorar las plantillas
     -   Usar macros y blocks donde se pueda.    
+
+# Futuras versiones
+## **BC** Para la versión 8.0.0
+
+-   **BC** Esta versión será ya una Symfony App
+-   **BC** Se elimina la compatibilidad del antiguo sistema de módulos.
+    -   Por lo que la versión 7.0.0 sería la última versión compatible con los módulos.
+-   Se fusiona todos los installer a uno nuevo como clean version
+    -   El installer de la versión 6.0.0 depende de laminas/laminas-serializer
+        -   Es en el único sitio donde se utiliza este componente
+-   Eliminar paquete laminas/laminas-serializer
+-   Se usará todos los componentes del Framework de Symfony (ruter incluido)
+-   Todo el Core estará compuesto por Bundles, para así poder usar un Skeleton muy similar al de Symfony App Skeleton
+-   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   `src/core/Controller/CreateController.php`
     -   Recrearlo para  usar el Symfony form.
     -   Permitir la personalización de los datos con el dispatcher.
-
-# Futuras versiones
-
-## Para la versión 8.0.0
-
--   Esta será la última versión que use la ordenación de carpetas `src/core` y `src/local`
-    -   La versión 9.0.0 usará la ordenación propia de Symfony.
--   **BC** Una versión intermedia en la que se eliminan los módulos, antes de pasar a una Symfony App
-    -   Por lo que la versión 7.0.0 sería la última versión compatible con los módulos.
--   Con este paso intermedio se pretende hacer una transición un poquito más suave y limpiar el código de todo lo obsoleto.
--   Se revisará el código para hacer la transición más sencilla. 
--   Esta versión se centrará en hacer la transición a la versión 9.0.0 más sencilla.
 -   Crear un service para el newday runonce (generar un nuevo día)
 -   Sustituir la función lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
@@ -102,17 +116,6 @@
         -   Se puede elegir el minimo de energía y el máximo que puede tener el personaje
         -   Se puede hacer que depende de algún atributo. (que tenga bono)
         -   Tendrá funciones para poder aumentar y disminuir la energía.
-
-## **BC** Para la versión 9.0.0
-
--   Se fusiona todos los installer a uno nuevo como clean version
-    -   El installer de la versión 6.0.0 depende de laminas/laminas-serializer
-        -   Es en el único sitio donde se utiliza este componente
--   Eliminar paquete laminas/laminas-serializer
--   Esta versión será ya una Symfony App
--   Se usará todo lo de Symfony (ruter incluido)
--   Todo el Core estará compuesto por Bundles, para así poder usar un Skeleton muy similar al de Symfony App Skeleton
--   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   **Correos** permitir usar una plantilla para así personalizar los mensajes
     -   Se usara el `Symfony\Bridge\Twig\Mime\TemplatedEmail` para todos los correos del core. 
     ```php
