@@ -60,18 +60,25 @@ export default class extends Modal
         super.close(event)
     }
 
-    async fetch ()
+    async fetch (fetchUrl)
     {
+        let url = this.hasUrlValue ? this.urlValue : null
+
+        if (fetchUrl !== undefined && fetchUrl !== null && fetchUrl !== '')
+        {
+            url = fetchUrl
+        }
+
         if ( ! this.remoteContent)
         {
-            if ( ! this.hasUrlValue)
+            if (url === undefined || url === null || url === '')
             {
                 console.error('[stimulus-remote-modal] You need to pass an url to fetch the modal content.')
 
                 return
             }
 
-            const response = await fetch(this.urlValue)
+            const response = await fetch(url)
             this.remoteContent = await response.text()
         }
 
