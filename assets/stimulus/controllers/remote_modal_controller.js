@@ -7,7 +7,7 @@ export default class extends Modal
 {
     remoteContent = ''
 
-    static targets = ['activator', 'loading']
+    static targets = ['activator']
     static values = { url: String, reloadData: Boolean }
 
     connect ()
