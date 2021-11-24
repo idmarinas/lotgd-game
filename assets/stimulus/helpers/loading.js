@@ -33,3 +33,25 @@ export const useLoading = (controller) =>
 
     Object.assign(controller, { startLoading, stopLoading })
 }
+
+export const useLoadingBarTop = (controller) =>
+{
+    const loadingFragment = document.createElement('div')
+
+    loadingFragment.classList.add('fixed', 'inset-x-0', 'top-0', 'p-1', 'pointer-events-none', 'animate-swinging', 'bg-gradient-to-r','from-lotgd-500','via-lotgd-800','to-lotgd-500')
+    loadingFragment.style.zIndex = 9999
+
+    function startLoadingBarTop ()
+    {
+        //-- Add loading
+        document.getElementsByTagName('body')[0].appendChild(loadingFragment)
+    }
+
+    function stopLoadingBarTop ()
+    {
+        //-- Remove loading
+        document.getElementsByTagName('body')[0].removeChild(loadingFragment)
+    }
+
+    Object.assign(controller, { startLoadingBarTop, stopLoadingBarTop })
+}
