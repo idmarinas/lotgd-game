@@ -30,9 +30,16 @@ trait PageGen
     {
         global $session;
 
+        $avg = 0;
+
+        if (($session['user']['gentimecount'] ?? 0) !== 0)
+        {
+        $avg = ($session['user']['gentime'] / $session['user']['gentimecount']);
+        }
+
         return $env->load('_blocks/_partials.html.twig')->renderBlock('game_page_gen', [
             'genTime'          => Debugger::timer('page-generating'),
-            'avg'              => ($session['user']['gentime'] / $session['user']['gentimecount']),
+            'avg'              => $avg,
             'userGenTime'      => $session['user']['gentime'],
             'userGenTimeCount' => $session['user']['gentimecount'],
         ]);
