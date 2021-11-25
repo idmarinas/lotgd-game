@@ -55,3 +55,42 @@ export const useLoadingBarTop = (controller) =>
 
     Object.assign(controller, { startLoadingBarTop, stopLoadingBarTop })
 }
+
+export const useButtonLoading = (controller) =>
+{
+    const loadingFragment = document.createElement('div')
+
+    loadingFragment.classList.add('animate-swinging','opacity-60','absolute','top-0','left-0','rounded','w-full','h-full','bg-gradient-to-r','from-lotgd-gray-50','via-lotgd-red-200','to-lotgd-gray-50')
+
+    let hasRelative = false
+    let hasOverflowHidden = false
+
+    function startButtonLoading (activator)
+    {
+        //-- Disable button
+        activator.disabled = true
+
+        hasRelative = activator.classList.contains('relative')
+        hasOverflowHidden = activator.classList.contains('overflow-hidden')
+
+        if ( ! hasRelative) activator.classList.add('relative')
+        if ( ! hasOverflowHidden) activator.classList.add('overflow-hidden')
+
+        //-- Add loading
+        activator.appendChild(loadingFragment)
+    }
+
+    function stopButtonLoading (activator)
+    {
+        if ( ! hasRelative) activator.classList.remove('relative')
+        if ( ! hasOverflowHidden) activator.classList.remove('overflow-hidden')
+
+        //-- Enable button
+        activator.disabled = false
+
+        //-- Remove loading
+        activator.removeChild(loadingFragment)
+    }
+
+    Object.assign(controller, { startButtonLoading, stopButtonLoading })
+}
