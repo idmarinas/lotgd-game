@@ -1,0 +1,254 @@
+{% block petition_primer %}
+    {% trans_default_domain 'jaxon_petition' %}
+
+    <div class="max-h-screen w-full max-w-4xl relative">
+        <div class="m-1 bg-lotgd-900 rounded shadow text-left">
+            <div class="p-8">
+                <h2 class="text-xl mb-4 pb-1 font-bold border-b border-lotgd-500">{{ 'title.faq'|trans }}</h2>
+
+                <div class="mb-4">
+                    {{ 'section.primer.title'|trans|colorize }}
+
+                    {{ 'section.primer.section.village.title'|trans|colorize }}
+                    {{ 'section.primer.section.village.paragraph'|trans(_context)|colorize }}
+
+                    {{ 'section.primer.section.noob.title'|trans|colorize }}
+                    {{ 'section.primer.section.noob.paragraph'|trans(_context)|colorize }}
+                    {% if multimaster == 0 %}
+                        {{ 'section.primer.section.noob.multimaster'|trans|colorize }}
+                    {% endif %}
+
+                    {{ 'section.primer.section.death.title'|trans|colorize }}
+                    {{ 'section.primer.section.death.paragraph'|trans(_context)|colorize }}
+
+                    {{ 'section.primer.section.day.title'|trans|colorize }}
+                    {{ 'section.primer.section.day.paragraph'|trans(_context)|colorize }}
+
+                    {% if pvp %}
+                        {{ 'section.primer.section.pvp.title'|trans|colorize }}
+                        {{ 'section.primer.section.pvp.paragraph'|trans(_context)|colorize }}
+                    {% endif %}
+
+                    {{ 'section.primer.section.ready.title'|trans|colorize }}
+                    {{ 'section.primer.section.ready.paragraph'|trans(_context)|colorize }}
+                </div>
+
+                <div class="flex justify-end items-center flex-wrap mt-6 pt-3 border-t border-lotgd-500">
+                    <button
+                        type="button"
+                        class="bg-blue-500 hover:bg-blue-700 w-auto text-white font-bold mr-2 py-2 px-4 rounded"
+                        data-action="click->petition#return"
+                    >{{ 'section.return.content'|trans|colorize }}</button>
+                    <button
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        data-action="click->petition#close"
+                    >
+                        {{ 'modal.buttons.cancel'|trans({}, 'app_default') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock petition_primer %}
+
+{% block petition_faq %}
+    {% trans_default_domain 'jaxon_petition' %}
+
+    {% import '_macros/_attributes.html.twig' as helper %}
+
+    <div class="max-h-screen w-full max-w-4xl relative">
+        <div class="m-1 bg-lotgd-900 rounded shadow text-left">
+            <div class="p-8">
+                {{ 'section.faq.title'|trans|colorize }}
+                {{ 'section.faq.paragraph'|trans|colorize }}
+
+                {{ 'section.faq.content'|trans|colorize }}
+                <div class="ui list">
+                    {% for faq in faq_list %}
+                        <a href="#" {{ helper.html_attrs(faq.attr)}}>
+                            <i class="angle double right green icon"></i>
+                            <div class="content">{{ faq.link[0]|trans(faq.link[1], faq.link[2])|colorize }}</div>
+                        </a>
+                    {% endfor %}
+                </div>
+
+                {{ 'section.faq.end'|trans|colorize }}
+
+                <div class="flex justify-end items-center flex-wrap mt-6 pt-3 border-t border-lotgd-500">
+                    <button
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        data-action="click->petition#close"
+                    >
+                        {{ 'modal.buttons.cancel'|trans({}, 'app_default') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock petition_faq %}
+
+{% block petition_faq1 %}
+    {% trans_default_domain 'jaxon_petition' %}
+
+    <div class="max-h-screen w-full max-w-4xl relative">
+        <div class="m-1 bg-lotgd-900 rounded shadow text-left">
+            <div class="p-8">
+                <h2 class="text-xl mb-4 pb-1 font-bold border-b border-lotgd-500">{{ 'title.faq'|trans }}</h2>
+
+                <div class="mb-4">
+                    {{ 'section.faq1.content.one'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.two'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.three'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.four'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.five'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.six'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.seven'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.eight'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.nine'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.ten'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.eleven'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.twelve'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.thirteen'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.fourteen'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.fifteen'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.sixteen'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.seventeen'|trans(_context)|colorize }}
+
+                    {{ 'section.faq1.content.eightteen'|trans(_context)|colorize }}
+                </div>
+
+                <div class="flex justify-end items-center flex-wrap mt-6 pt-3 border-t border-lotgd-500">
+                    <button
+                        type="button"
+                        class="bg-blue-500 hover:bg-blue-700 w-auto text-white font-bold mr-2 py-2 px-4 rounded"
+                        data-action="click->petition#return"
+                    >{{ 'section.return.content'|trans|colorize }}</button>
+                    <button
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        data-action="click->petition#close"
+                    >
+                        {{ 'modal.buttons.cancel'|trans({}, 'app_default') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock petition_faq1 %}
+
+{% block petition_faq2 %}
+    {% trans_default_domain 'jaxon_petition' %}
+
+    <div class="max-h-screen w-full max-w-4xl relative">
+        <div class="m-1 bg-lotgd-900 rounded shadow text-left">
+            <div class="p-8">
+                <h2 class="text-xl mb-4 pb-1 font-bold border-b border-lotgd-500">{{ 'title.faq'|trans }}</h2>
+
+                <div class="mb-4">
+                    {{ 'section.faq2.warning'|trans|uncolorize }}
+
+                    <br>
+
+                    <button
+                        onclick="document.getElementById('spoiler').classList.toggle('hidden')"
+                        type="button"
+                        class="ui orange button"
+                    >{{ 'section.faq2.show.content'|trans|uncolorize }}</button>
+
+                    <div id="spoiler" class="ui hidden message">
+                        <br>
+                        {{ 'section.faq2.content.one'|trans(_context)|colorize }}
+
+                        {{ 'section.faq2.content.two'|trans(_context)|colorize }}
+
+                        {{ 'section.faq2.content.three'|trans(_context)|colorize }}
+
+                        {{ 'section.faq2.content.four'|trans(_context)|colorize }}
+
+                        {{ 'section.faq2.content.five'|trans(_context)|colorize }}
+
+                        {{ 'section.faq2.content.six'|trans(_context)|colorize }}
+
+                        {{ 'section.faq2.content.seven'|trans(_context)|colorize }}
+
+                        {{ 'section.faq2.content.eight'|trans(_context)|colorize }}
+
+                        {{ 'section.faq2.content.nine'|trans(_context)|colorize }}
+
+                        {{ 'section.faq2.content.ten'|trans(_context)|colorize }}
+
+                        {{ 'section.faq2.content.eleven'|trans(_context)|colorize }}
+                    </div>
+                </div>
+
+                <div class="flex justify-end items-center flex-wrap mt-6 pt-3 border-t border-lotgd-500">
+                    <button
+                        type="button"
+                        class="bg-blue-500 hover:bg-blue-700 w-auto text-white font-bold mr-2 py-2 px-4 rounded"
+                        data-action="click->petition#return"
+                    >{{ 'section.return.content'|trans|colorize }}</button>
+                    <button
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        data-action="click->petition#close"
+                    >
+                        {{ 'modal.buttons.cancel'|trans({}, 'app_default') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock petition_faq2 %}
+
+{% block petition_faq3 %}
+    {% trans_default_domain 'jaxon_petition' %}
+    <div class="max-h-screen w-full max-w-4xl relative">
+        <div class="m-1 bg-lotgd-900 rounded shadow text-left">
+            <div class="p-8">
+                <h2 class="text-xl mb-4 pb-1 font-bold border-b border-lotgd-500">{{ 'title.faq'|trans }}</h2>
+
+                <div class="mb-4">
+                    {{ 'section.faq3.title'|trans(_context)|colorize }}
+
+                    {{ 'section.faq3.content.one'|trans(_context)|colorize }}
+
+                    {{ 'section.faq3.content.two'|trans(_context)|colorize }}
+
+                    {{ 'section.faq3.content.three'|trans(_context)|colorize }}
+
+                    {{ 'section.faq3.content.four'|trans(_context)|colorize }}
+
+                    {{ 'section.faq3.content.five'|trans(_context)|colorize }}
+                </div>
+
+                <div class="flex justify-end items-center flex-wrap mt-6 pt-3 border-t border-lotgd-500">
+                    <button
+                        type="button"
+                        class="bg-blue-500 hover:bg-blue-700 w-auto text-white font-bold mr-2 py-2 px-4 rounded"
+                        data-action="click->petition#return"
+                    >{{ 'section.return.content'|trans|colorize }}</button>
+                    <button
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        data-action="click->petition#close"
+                    >
+                        {{ 'modal.buttons.cancel'|trans({}, 'app_default') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock petition_faq3 %}
