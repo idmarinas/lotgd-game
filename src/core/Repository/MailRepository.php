@@ -36,8 +36,8 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
     public function getCountMailOfCharacter(int $acctId): array
     {
         $default = [
-            'seenCount'    => 0,
-            'notSeenCount' => 0,
+            'seen_count'    => 0,
+            'not_seen_count' => 0,
         ];
 
         if ( $acctId === 0)
@@ -50,8 +50,8 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
         try
         {
             return $qb->select(
-                'SUM(CASE WHEN u.seen = 1 THEN 1 ELSE 0 END) AS seenCount',
-                'SUM(CASE WHEN u.seen = 0 THEN 1 ELSE 0 END) AS notSeenCount'
+                'SUM(CASE WHEN u.seen = 1 THEN 1 ELSE 0 END) AS seen_count',
+                'SUM(CASE WHEN u.seen = 0 THEN 1 ELSE 0 END) AS not_seen_count'
             )
                 ->where('u.msgto = :acct')
                 ->setParameters(['acct' => $acctId])
