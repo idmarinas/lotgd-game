@@ -71,7 +71,8 @@
 # Futuras versiones
 ## **BC** Para la versión 8.0.0
 
--   **BC** Esta versión será ya una Symfony App
+-   **BC** Esta versión será ya una Symfony App (En estudio, puede que la versión 9.0.0 sea la Symfony App)
+    -   Según se vea, dependiendo del sistema de eventos especiales, que parece ser que es el que más problemas va a dar.
 -   **BC** Se elimina la compatibilidad del antiguo sistema de módulos.
     -   Por lo que la versión 7.0.0 sería la última versión compatible con los módulos.
 -   Se fusiona todos los installer a uno nuevo como clean version
