@@ -35,8 +35,8 @@ trait Mail
         catch (\Throwable $th)
         {
             $result = [
-                'seenCount'    => 0,
-                'notSeenCount' => 0,
+                'seen_count'     => 0,
+                'not_seen_count' => 0,
             ];
         }
 
