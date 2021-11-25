@@ -46,7 +46,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   Nothing
+-   **Twig\Extension\Pattern\PageGen.php** Avoid error _division by cero_
 
 ### :x: REMOVES
 
