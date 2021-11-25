@@ -4,13 +4,17 @@ module.exports = function (theme, e)
     {
         const colors = ['gray', 'green', 'teal', 'cyan', 'blue', 'indigo', 'violet', 'purple', 'pink', 'red', 'orange', 'yellow', 'lime']
         const variations = {}
+        //-- https://stackoverflow.com/questions/21646738/convert-hex-to-rgba
+        const hex2rgba= (hex, alpha) => `rgba(${hex.substr(1).match(/../g).map(x => + `0x${x}`)}, ${alpha})`
 
         colors.forEach(value =>
         {
             Object.assign(variations, {
                 ['&.input-' + value]: {
-                    backgroundColor: theme(`colors.lotgd-${value}.${bg}`),
-                    borderColor: theme(`colors.lotgd-${value}.${border}`),
+                    '--tw-bg-opacity': '1',
+                    '--tw-border-opacity': '1',
+                    backgroundColor: hex2rgba(theme(`colors.lotgd-${value}.${bg}`), 'var(--tw-bg-opacity)'),
+                    borderColor: hex2rgba(theme(`colors.lotgd-${value}.${border}`), 'var(--tw-border-opacity)'),
                 }
             })
         })
