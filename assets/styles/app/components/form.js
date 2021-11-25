@@ -1,5 +1,23 @@
 module.exports = function (theme, e)
 {
+    const colorVariants = (bg = 700, border = 600) =>
+    {
+        const colors = ['gray', 'green', 'teal', 'cyan', 'blue', 'indigo', 'violet', 'purple', 'pink', 'red', 'orange', 'yellow', 'lime']
+        const variations = {}
+
+        colors.forEach(value =>
+        {
+            Object.assign(variations, {
+                ['&.input-' + value]: {
+                    backgroundColor: theme(`colors.lotgd-${value}.${bg}`),
+                    borderColor: theme(`colors.lotgd-${value}.${border}`),
+                }
+            })
+        })
+
+        return variations
+    }
+
     const base = {
         width: theme('width.full'),
         paddingTop: theme('padding.2'),
@@ -10,6 +28,7 @@ module.exports = function (theme, e)
         borderRadius: theme('borderRadius.DEFAULT'),
         backgroundColor: theme('colors.lotgd.700'),
         borderColor: theme('colors.lotgd.600'),
+        ...colorVariants()
     }
 
     const disabledBase = {
@@ -18,43 +37,45 @@ module.exports = function (theme, e)
     }
 
     const hoverBase = {
-        backgroundColor: theme('colors.lotgd.600'),
-        borderColor: theme('colors.lotgd.700'),
+        backgroundColor: theme("colors.lotgd.600"),
+        borderColor: theme("colors.lotgd.700"),
+        ...colorVariants(600, 700)
     }
 
     const focusBase = {
-        backgroundColor: theme('colors.lotgd.500'),
-        borderColor: theme('colors.lotgd.400'),
+        backgroundColor: theme("colors.lotgd.500"),
+        borderColor: theme("colors.lotgd.400"),
+        ...colorVariants(500, 400)
     }
 
     const input = {
         ...base,
-        color: theme('colors.lotgd.gray.100'),
+        color: theme('colors.lotgd-gray.100'),
         '&:placeholder': {
-            color: theme('colors.lotgd.gray.50')
+            color: theme('colors.lotgd-gray.50')
         },
         '&:hover:not(:disabled)': {
             ...hoverBase,
-            color: theme('colors.lotgd.gray.200')
+            color: theme('colors.lotgd-gray.200')
         },
         '&:focus:not(:disabled)': {
             ...focusBase,
-            color: theme('colors.lotgd.gray.300')
+            color: theme('colors.lotgd-gray.300')
         },
         '&:disabled': { ...disabledBase }
     }
 
     const button = {
         ...base,
-        color: theme('colors.lotgd.gray.50'),
+        color: theme('colors.lotgd-gray.50'),
         cursor: theme('cursor.pointer'),
         '&:hover:not(:disabled)': {
             ...hoverBase,
-            color: theme('colors.lotgd.gray.100')
+            color: theme('colors.lotgd-gray.100')
         },
         '&:focus:not(:disabled)': {
             ...focusBase,
-            color: theme('colors.lotgd.gray.200')
+            color: theme('colors.lotgd-gray.200')
         },
         '&:disabled': { ...disabledBase }
     }
@@ -149,14 +170,6 @@ module.exports = function (theme, e)
 
             '&:focus': {
                 outline: 'none',
-
-                // '&::-webkit-slider-runnable-track': {
-                //     background: '#205928'
-                // },
-
-                // '&::-ms-fill-lower, &::-ms-fill-upper': {
-                //     background: '#205928'
-                // }
             },
 
             '&::-webkit-slider-runnable-track': inputRangeTrack,
