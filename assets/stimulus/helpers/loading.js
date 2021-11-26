@@ -94,3 +94,46 @@ export const useButtonLoading = (controller) =>
 
     Object.assign(controller, { startButtonLoading, stopButtonLoading })
 }
+
+/**
+ * Show a Sync icon in top/bottom left/right
+ * @param {object} controller
+ */
+export const useSyncIcon = (controller, y = 'top', x = 'right', color = '') =>
+{
+    const span = document.createElement('span')
+    const icon = document.createElement('i')
+
+    span.classList.add('flex', 'absolute', 'w-auto', 'h-auto', `${y}-0`, `${x}-0`, `-m${y.charAt(0)}-1`, `-m${x.charAt(0)}-1`)
+    icon.classList.add('animate-spin', 'absolute', 'inline-flex', 'fas', 'fa-sync', color)
+
+    span.appendChild(icon)
+
+    let hasRelative = false
+
+    function startSyncIcon (activator)
+    {
+        //-- Disable button
+        activator.disabled = true
+
+        hasRelative = activator.classList.contains('relative')
+
+        if ( ! hasRelative) activator.classList.add('relative')
+
+        //-- Add loading
+        activator.appendChild(span)
+    }
+
+    function stopSyncIcon (activator)
+    {
+        if ( ! hasRelative) activator.classList.remove('relative')
+
+        //-- Enable button
+        activator.disabled = false
+
+        //-- Remove loading
+        activator.removeChild(span)
+    }
+
+    Object.assign(controller, { startSyncIcon, stopSyncIcon })
+}
