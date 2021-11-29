@@ -1,0 +1,22 @@
+{% trans_default_domain textDomain %}
+
+<div style='background-color: #FFFFFF; color: #000000; width: 100%'>
+    {{ highlight }}
+</div>
+
+{% if result %}
+    <div class="ui message">
+        <p>{{ result }}</p>
+    </div>
+{% endif %}
+
+<form action="{{ 'rawsql.php?op=php'|lotgd_url }}" method="POST" class="ui form">
+    <div class="field">
+        <label for="php">{{ 'section.php.form.textarea.php.label'|trans|uncolorize }}</label>
+        {{ '`$&lt;?php`0'|colorize }}
+        <textarea name="php" id="php">{{ php }}</textarea>
+    </div>
+    <div class="field">
+        <button type="submit" class="ui button">{{ 'section.php.form.button.submit'|trans|uncolorize }}</button>
+    </div>
+</form>

@@ -1,0 +1,57 @@
+{% trans_default_domain textDomain %}
+
+{{ 'section.edit.subtitle'|trans|colorize }}
+
+{{ form(form) }}
+
+<script>
+    /* global $ */
+    $(document).ready(function ()
+    {
+        if ($('#companions_abilities_defend').prop('checked'))
+        {
+            $('#companions_abilities_fighter').prop('disabled', true)
+            $('#companions_abilities_fighter').prop('checked', false)
+        }
+        else
+        {
+            $('#companions_abilities_fighter').prop('disabled', false)
+        }
+
+        if ($('#companions_abilities_fighter').prop('checked'))
+        {
+            $('#companions_abilities_defend').prop('disabled', true)
+            $('#companions_abilities_defend').prop('checked', false)
+        }
+        else
+        {
+            $('#companions_abilities_defend').prop('disabled', false)
+        }
+    })
+
+    $('#companions_abilities_defend').on('change', function ()
+    {
+        if ($('#companions_abilities_defend').prop('checked'))
+        {
+            $('#companions_abilities_fighter').prop('disabled', true)
+            $('#companions_abilities_fighter').prop('checked', false)
+        }
+        else
+        {
+            $('#companions_abilities_fighter').prop('disabled', false)
+        }
+    })
+
+    $('#companions_abilities_fighter').on('change', function ()
+    {
+        if ($('#companions_abilities_fighter').prop('checked'))
+        {
+            $('#companions_abilities_defend').prop('disabled', true)
+            $('#companions_abilities_defend').prop('checked', false)
+        }
+        else
+        {
+            $('#companions_abilities_defend').prop('disabled', false)
+        }
+    })
+</script>

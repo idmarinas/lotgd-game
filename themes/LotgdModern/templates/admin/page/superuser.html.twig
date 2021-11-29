@@ -1,0 +1,15 @@
+{% trans_default_domain textDomain %}
+
+{% set result = modulehook('superuser-headlines', []) %}
+<div class="center aligned">
+    {% for message in result %}
+        {{ message[0]|trans(message[1], message[2])|colorize }}
+    {% endfor %}
+</div>
+
+{{ 'paragraph'|trans({'sex': user.sex})|colorize }}
+
+{{ commentary_block({
+    'section': 'superuser',
+    'textDomainStatus': 'app_commentary'
+}, textDomain) }}

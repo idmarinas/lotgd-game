@@ -1,0 +1,52 @@
+{% trans_default_domain textDomain %}
+
+<div class="ui info message">{{ 'section.cronjob.note.info'|trans|uncolorize }}</div>
+
+<div class="ui red message">{{ 'section.cronjob.note.red'|trans|uncolorize }}</div>
+
+{{ form(form) }}
+<a class="ui right floated button" href="{{ 'configuration.php?setting=cronjob&op=newcronjob'|lotgd_url }}">{{ 'section.cronjob.form.button.new'|trans|uncolorize }}</a>
+<br>
+<br>
+
+{% set yes = 'section.cronjob.table.tbody.yes'|trans|colorize %}
+{% set no = 'section.cronjob.table.tbody.no'|trans|colorize %}
+{% set edit = 'section.cronjob.table.tbody.edit'|trans|colorize %}
+{% set delete = 'section.cronjob.table.tbody.delete'|trans|colorize %}
+{% set options = {'text': 'section.cronjob.table.tbody.confirm'|trans}|json_encode %}
+
+{{ 'section.cronjob.table.description'|trans|colorize }}
+
+<table class="ui very compact striped selectable table">
+    <thead>
+        <tr>
+            <th scope="col">{{ 'section.cronjob.table.thead.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.command'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.schedule'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.debug'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.enabled'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.opcs'|trans|uncolorize }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cronjob in paginator %}
+            <tr>
+                <td>{{ cronjob.name }}</td>
+                <td>php {{ cronjob.command }}</td>
+                <td>
+                    <a href="{{ ('https://crontab.guru/#' ~ cronjob.schedule|replace({' ': '_'}) )|lotgd_url }}" target="_blank" rel="noopener noreferrer">
+                        <i class="info icon"></i> {{ cronjob.schedule }}
+                    </a>
+                </td>
+                <td>{{ cronjob.debug ? yes : no  }}</td>
+                <td>{{ cronjob.enabled ? yes : no  }}</td>
+                <td>
+                    <a href="{{ ('configuration.php?setting=cronjob&op=newcronjob&cronid=' ~ cronjob.id)|lotgd_url }}">{{ edit }}</a> |
+                    <a href="{{ ('configuration.php?setting=cronjob&op=delcronjob&cronid=' ~ cronjob.id)|lotgd_url }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">{{ delete }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{{ navigation_pagination(paginator, 'configuration.php?setting=cronjob' ) }}

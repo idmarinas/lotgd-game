@@ -1,0 +1,10 @@
+{% trans_default_domain textDomain %}
+
+{{ 'section.default.title'|trans|colorize }}
+
+{{ 'section.default.stat.accounts'|trans({ 'n': stats.a })|colorize }}
+{{ 'section.default.stat.hits'|trans({ 'n': stats.c })|colorize }}
+{{ 'section.default.stat.time'|trans({ 'n': stats.t })|colorize }}
+{{ 'section.default.stat.size'|trans({ 'size': stats.s|byte_units_format_metric })|colorize }}
+{{ 'section.default.stat.avg.time'|trans({ 'n': (stats.t / stats.c) })|colorize }}
+{{ 'section.default.stat.avg.size'|trans({ 'size': (stats.s / stats.c)|byte_units_format_metric })|colorize }}

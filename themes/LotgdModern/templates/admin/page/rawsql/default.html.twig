@@ -1,0 +1,38 @@
+{% trans_default_domain textDomain %}
+
+{% if isResult %}
+    {{ 'section.default.result.count'|trans({'n': rowCount})|colorize }}
+{% endif %}
+
+<form action="{{ 'rawsql.php'|lotgd_url }}" method="POST" class="ui form">
+    <div class="field">
+        <label for="sql">{{ 'section.default.form.textarea.sql.label'|trans|uncolorize }}</label>
+        <textarea name="sql" id="sql">{{ sql }}</textarea>
+    </div>
+    <div class="field">
+        <button type="submit" class="ui button">{{ 'section.default.form.button.submit'|trans|uncolorize }}</button>
+    </div>
+</form>
+
+{% if resultSql %}
+    <table class="ui very compact striped table">
+        {% for row in resultSql %}
+            {% set keys = row|keys %}
+
+            {% if loop.index0 == 0 %}
+                <thead>
+                    <tr>
+                        {% for key in keys %}
+                            <th scope="col">{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+            {% endif %}
+            <tr>
+                {% for value in keys %}
+                    <td>{{ row[value] }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

@@ -1,0 +1,15 @@
+{% trans_default_domain textDomain %}
+
+<form action="{{ 'bans.php?op=search'|lotgd_url }}" autocomplete="off" method="POST" class="ui form">
+    <div class="inline field">
+        <label for="q">{{ 'default.form.search.label'|trans|colorize }}</label>
+        <div class="ui action input">
+            <input type="text" name="q" id="q">
+            <button type="submit" class="ui button">{{ 'default.form.search.button.submit'|trans|uncolorize }}</button>
+        </div>
+    </div>
+</form>
+
+<br>
+
+{% include 'admin/page/bans/' ~ tpl|default('default') ~ '.html.twig' %}

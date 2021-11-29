@@ -1,0 +1,55 @@
+{% trans_default_domain textDomain %}
+
+<div class="ui info message">
+    <h4 class="header">{{ 'setupban.title'|trans({'name': account.name})|colorize }}</h4>
+    {{ 'setupban.message'|trans|colorize }}
+</div>
+
+<form action="{{ 'bans.php?op=saveban'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+    <div class="field">
+        <label for="ip">{{ 'setupban.form.input.ip.label'|trans|colorize }}</label>
+        <input type="radio" value="ip" id="ipradio" name="type">
+        <input type="text" name="ip" id="ip" value="{{ account.lastip|e('html') }}">
+    </div>
+    <div class="field">
+        <label for="id"></label>
+        <input type="radio" value="id" name="type" checked>
+        <input type="text" name="id" value="{{ account.uniqueid|e('html') }}">
+    </div>
+    <div class="field">
+        <label for="duration">{{ 'setupban.form.input.duration.label'|trans|colorize }}</label>
+        <input name="duration" id="duration" value="14">
+        <div class='ui top pointing label'>
+            {{ 'setupban.form.input.duration.note'|trans|colorize }}
+        </div>
+    </div>
+    <div class="field">
+        <label for="reason">{{ 'setupban.form.input.reason.label'|trans|colorize }}</label>
+        <input name="reason" value="{{ reason|default('setupban.form.input.reason.default')|trans|uncolorize }}">
+    </div>
+    <div class="field">
+        {% set options = {'text': 'setupban.form.button.confirm'|trans|uncolorize } %}
+        <button class="ui button" type="submit" onclick="if (document.getElementById('duration').value <= 0) { Lotgd.confirm(this, event, true) }" data-options="{{ options|json_encode()|escape('html_attr') }}">
+            {{ 'setupban.form.button.submit'|trans|uncolorize }}
+        </button>
+    </div>
+</form>
+
+{{ 'setupban.paragraph'|trans|colorize }}
+
+{{ 'setupban.locate.paragraph'|trans({'name': account.name})|colorize }}
+
+<!-- Accounts with equal ID -->
+{{ 'setupban.locate.equalId.paragraph'|trans({'id': account.uniqueid})|colorize }}
+{% for row in equalId %}
+    {{ 'setupban.locate.equalId.account'|trans({'ip': row.lastip, 'name': row.name|uncolorize, 'count': row.gentimecount, 'date': row.laston})|colorize }}
+{% endfor %}
+
+<!-- Accounts with similar IP -->
+{{ 'setupban.locate.similarIp.paragraph'|trans|colorize }}
+{% for row in similarIp %}
+    &nbsp;&nbsp;
+    <a href onclick="document.getElementById('ip').value='{{ row.lastip }}'; document.getElementById('ipradio').checked = true; return false;">{{ 'setupban.locate.similarIp.filter'|trans|colorize }}</a>
+    {{ 'setupban.locate.similarIp.account'|trans({'ip': row.lastip, 'uniqueid': row.uniqueid, 'name': row.name|uncolorize, 'count': row.gentimecount, 'date': row.laston})|colorize }}
+{% endfor %}
+<br>

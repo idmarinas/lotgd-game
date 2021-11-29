@@ -1,0 +1,5 @@
+{% trans_default_domain 'grotto_globaluserfunctions' %}
+
+{{ 'subtitle'|trans|colorize }}
+
+{% include 'admin/page/globaluserfunctions/' ~ tpl|default('default') ~ '.html.twig' %}

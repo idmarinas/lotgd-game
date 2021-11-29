@@ -1,0 +1,60 @@
+{% trans_default_domain textDomain %}
+
+<form action="{{ 'creatures.php?op=search'|lotgd_url }}" method="POST" class="ui form">
+    <div class="field">
+        <div class="ui action input">
+            <input name="q" id="q" placeholder="{{ 'section.default.form.input.search'|trans|uncolorize }}">
+            <button type="submit" class="ui button">{{ 'section.default.form.button.submit'|trans|uncolorize }}</button>
+        </div>
+    </div>
+</form>
+
+{% set yes = 'section.default.table.tbody.yes'|trans %}
+{% set no = 'section.default.table.tbody.no'|trans %}
+{% set edit = 'section.default.table.tbody.edit'|trans %}
+{% set del = 'section.default.table.tbody.del'|trans %}
+{% set options = { 'text': 'section.default.table.tbody.confirm'|trans }|json_encode %}
+
+<table class="ui very compact striped selectable table">
+    <thead>
+        <tr>
+            <th scope="col">{{ 'section.default.table.thead.ops'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.cat'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.weapon'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.script'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.winmsg'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.diemsg'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.author'|trans|uncolorize }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for creature in paginator %}
+            <tr>
+                <td class="collapsing">
+                    <div class="ui mini icon buttons">
+                        <a data-tooltip="{{ edit|uncolorize }}" aria-label="{{ edit|uncolorize }}" href="{{ ('creatures.php?op=edit&creatureid=' ~ creature.creatureid)|lotgd_url }}" class="ui icon button">
+                            <i class='write icon'></i>
+                        </a>
+                        <a data-tooltip="{{ del|uncolorize }}" aria-label="{{ del|uncolorize }}" href="{{ ('creatures.php?op=del&creatureid=' ~ creature.creatureid)|lotgd_url }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)" class="ui red icon button">
+                            <i class='trash icon'></i>
+                        </a>
+                    </div>
+                </td>
+                <td>({{ creature.creatureid }}) {{ creature.creaturename }}</td>
+                <td>{{ creature.creaturecategory }}</td>
+                <td>{{ creature.creatureweapon }}</td>
+                <td>{{ creature.creatureaiscript ? yes : no }}</td>
+                <td>{{ creature.creaturewin }}</td>
+                <td>{{ creature.creaturelose }}</td>
+                <td>{{ creature.createdby }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td class="center aligned" colspan="8">{{ 'section.default.table.tbody.no.creatures'|trans|colorize }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{{ navigation_pagination(paginator, 'creatures.php' ) }}

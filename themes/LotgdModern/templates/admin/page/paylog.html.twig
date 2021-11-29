@@ -1,0 +1,48 @@
+{% trans_default_domain textDomain %}
+
+<table class="ui very compact striped table">
+    <thead>
+        <tr>
+            <th scope="col">{{ 'table.thead.date'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.id'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.type'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.gross'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.fee'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.net'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.processed'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.who'|trans|uncolorize }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set yes = 'table.tbody.yes'|trans|colorize %}
+        {% set no = 'table.tbody.no'|trans|colorize %}
+        {% for log in paylog %}
+            <tr>
+                <td>{{ '{date,date} <br> {date,time}'|tmf({ 'date': log.info.payment_date }) }}</td>
+                <td>{{ log.txnid }}</td>
+                <td>{{ log.info.txn_type }}</td>
+                <td>{{ '%.2f %s'|format(log.info.mc_gross, log.info.mc_currency) }}</td>
+                <td>{{ log.info.mc_fee }}</td>
+                <td>{{ '%.2f'|format(log.info.mc_gross - log.info.mc_fee) }}</td>
+                <td>{{ log.processed ? yes : no }}</td>
+                <td>
+                    {% if log.name %}
+                        <a href="{{ ('user.php?op=edit&user_id=' ~ log.acctid)|lotgd_url }}">
+                            {{ '`&%s`0 (%s/%s)'|format(log.name, log.donationspent|numeral, log.donation|numeral)|colorize }}
+                        </a>
+                    {% else %}
+                        {% set amt = (log.info.mc_gross * 100)|round %}
+                        {% set name = log.info.memo ?: '' %}
+                        -=(<a href="{{ ('donators.php?op=add1&name=' ~ memo|e('url') ~ '&amt=' ~ amt ~ '&txnid=' ~ log.txnid)|lotgd_url }}">
+                            {{ memo }}
+                        </a>)=-
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8" class="center aligned">{{ 'table.tbody.no.records'|trans|colorize }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

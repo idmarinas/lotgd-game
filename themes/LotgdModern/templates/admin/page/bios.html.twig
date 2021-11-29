@@ -1,0 +1,44 @@
+{% trans_default_domain textDomain %}
+
+<div class="ui top attached header">
+    {{ 'player.bios.unblocked'|trans|colorize }}
+</div>
+<div class="ui warning attached message">
+    {{ 'message.uncesored'|trans|colorize }}
+</div>
+
+{% set recent = 'recent'|trans %}
+{% set setblock = 'block'|trans %}
+{% set setunblock = 'unblock'|trans %}
+
+{% for row in unblocked %}
+    <div class="ui {{ loop.last ? 'bottom attached' : 'attached' }} segment">
+        <div class="header">
+            {{ row.postdate > user.recentcomments ? '<span class="ui tooltip" data-content="%1$s"><i class="caret right icon" aria-label="%1$s"></i></span>'|format(recent) : '' }}
+            <a href="{{ ('bios.php?op=block&charid=' ~ row.id)|lotgd_url }}">{{ setblock }}</a>
+            {{ row.name|colorize }}
+        </div>
+
+        {{ row.bio|colorize }}
+    </div>
+{% endfor %}
+
+<br>
+
+<div class="ui top attached header">
+    {{ 'player.bios.blocked'|trans|colorize }}
+</div>
+<div class="ui warning {{ blocked|length ?: 'bottom' }} attached message">
+    {{ 'message.cesored'|trans|colorize }}
+</div>
+
+{% for row in blocked %}
+    <div class="ui {{ loop.last ? 'bottom attached' : 'attached' }} segment">
+        <div class="header">
+            <a href="{{ ('bios.php?op=unblock&charid=' ~ row.id)|lotgd_url }}">{{ setblock }}</a>
+            {{ row.name|colorize }}
+        </div>
+
+        {{ row.bio|censor|colorize }}
+    </div>
+{% endfor %}

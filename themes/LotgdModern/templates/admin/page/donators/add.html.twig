@@ -1,0 +1,25 @@
+{% trans_default_domain textDomain %}
+
+{{ 'section.add.confirm'|trans({ 'amt': amt })|colorize }}
+
+{% if reason %}
+    <br>
+    {{ 'section.add.reason'|trans({ 'reason': reason })|colorize }}
+{% endif %}
+<div class="ui relaxed divided list">
+    {% for donation in paginator %}
+    <div class="item">
+        <i class="large middle aligned icons">
+            <i class="donate icon"></i>
+            <i class="top right corner add green icon"></i>
+        </i>
+        <div class="content">
+            <a class="header" href="{{ ('donators.php?op=save&id=' ~ donation.acctid ~ '&amt=' ~ amt ~ '&reason=' ~ reason|e('url') ~ '&txnid=' ~ txnid)|lotgd_url }}">
+                {{ donation.name|colorize }}
+            </a>
+            <div class="description">{{ 'section.add.donation.detail'|trans({ 'have': donation.donation, 'spent': donation.donationspent  })|colorize }}</div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+

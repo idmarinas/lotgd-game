@@ -1,0 +1,10 @@
+{% trans_default_domain textDomain %}
+
+<form action="{{ ('moderate.php?area=' ~ area)|lotgd_url }}" method="POST">
+    <button type="submit" class="ui labeled icon button">
+        <i class="refresh icon"></i>
+        {{ 'form.button.submit'|trans({ 'section': sectionName[area]|default(area|default('...'))})|uncolorize }}
+    </button>
+</form>
+
+{% include 'admin/page/moderate/' ~ tpl|default('default') ~ '.html.twig' %}

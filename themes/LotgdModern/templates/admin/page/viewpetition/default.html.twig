@@ -1,0 +1,76 @@
+{% trans_default_domain textDomain %}
+<div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+    <table class="min-w-full divide-y divide-lotgd-200">
+        <thead>
+            <tr>
+                <th scope="col">{{ 'section.default.table.thead.num'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.default.table.thead.ops'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.default.table.thead.from'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.default.table.thead.sent'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.default.table.thead.com'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.default.table.thead.last'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.default.table.thead.updated'|trans|uncolorize }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set lastStatus = -1 %}
+            {% set view = 'section.default.table.tbody.view'|trans|uncolorize %}
+            {% set close = 'section.default.table.tbody.close'|trans|uncolorize %}
+            {% set view = 'section.default.table.tbody.view'|trans|uncolorize %}
+
+            {% for petition in paginator %}
+                {% if lastStatus != petition.status %}
+                    <tr>
+                        <td colspan="7" class="{{ statuses[petition.status]|trans|uncolorize|lower }}">{{ statuses[petition.status]|trans|uncolorize }}</td>
+                    </tr>
+                    {% set lastStatus = petition.status %}
+                {% endif %}
+                <tr>
+                    <td class="collapsing">{{ petition.petitionid }}</td>
+                    <td class="collapsing">
+                        <div class="ui mini icon buttons">
+                            <a data-tooltip="{{ view }}" href="{{ ('viewpetition.php?op=view&id=' ~ petition.petitionid)|lotgd_url }}" class="ui button"><i class="unhide icon"></i></a>
+                            <a data-tooltip="{{ close }}" href="{{ ('viewpetition.php?setstat=2&id=' ~ petition.petitionid)|lotgd_url }}" class="ui button"><i class="remove icon"></i></a>
+                            <a data-tooltip="{{ statuses[0]|trans|uncolorize }}" href="{{ ('viewpetition.php?setstat=0&id=' ~ petition.petitionid)|lotgd_url }}" class="ui button">U</a>
+                            <a data-tooltip="{{ statuses[1]|trans|uncolorize }}" href="{{ ('viewpetition.php?setstat=1&id=' ~ petition.petitionid)|lotgd_url }}" class="ui button">P</a>
+                            <a data-tooltip="{{ statuses[4]|trans|uncolorize }}" href="{{ ('viewpetition.php?setstat=4&id=' ~ petition.petitionid)|lotgd_url }}" class="ui button">E</a>
+                        </div>
+                    </td>
+                    <td>
+                        {% if petition.authorName %}
+                            {{ petition.authorName|colorize }}
+                        {% else %}
+                            {{ '`$%s`0'|format(petition.email)|colorize }}
+                        {% endif %}
+                    </td>
+                    <td>{{ '`7%s`0'|format(petition.date|relative_date)|colorize }}</td>
+                    <td>{{ '`#%s`0'|format(petition.comments|numeral)|colorize }}</td>
+                    <td>{{ petition.closerName|default('')|colorize }}</td>
+                    <td>{{ '`7%s`0'|format(petition.closedate|relative_date)|colorize }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7" class="text-center">{{ 'section.default.table.tbody.not.found'|trans|colorize }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{{ 'section.default.paragraph'|trans|colorize }}
+<ul>
+    <li>{{ 'section.default.description.t'|trans|colorize }}</li>
+    <li>{{ 'section.default.description.e'|trans|colorize }}</li>
+    <li>{{ 'section.default.description.em'|trans|colorize }}</li>
+    <li>{{ 'section.default.description.u'|trans|colorize }}</li>
+    <li>{{ 'section.default.description.p'|trans|colorize }}</li>
+    <li>{{ 'section.default.description.b'|trans|colorize }}</li>
+    <li>{{ 'section.default.description.a'|trans|colorize }}</li>
+    <li>{{ 'section.default.description.i'|trans|colorize }}</li>
+    <li>{{ 'section.default.description.c'|trans|colorize }}</li>
+    {% set result = modulehook('petitions-descriptions', []) %}
+    {% for message in result %}
+        <li>{{ message[0]|trans(message[1], message[2])|colorize }}</li>
+    {% endfor %}
+</ul>
+{{ navigation_pagination(paginator ) }}
