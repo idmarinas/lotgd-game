@@ -5,7 +5,12 @@ module.exports = function (theme, e)
         const colors = ['gray', 'green', 'teal', 'cyan', 'blue', 'indigo', 'violet', 'purple', 'pink', 'red', 'orange', 'yellow', 'lime']
         const variations = {}
         //-- https://stackoverflow.com/questions/21646738/convert-hex-to-rgba
-        const hex2rgba= (hex, alpha) => `rgba(${hex.substr(1).match(/../g).map(x => + `0x${x}`)}, ${alpha})`
+        const hex2rgba= (hex, alpha) =>
+        {
+            const rgba = hex.substr(1).match(/../g).map(x => +`0x${x}`)
+
+            return `rgba(${rgba}, ${alpha})`
+        }
 
         colors.forEach(value =>
         {
