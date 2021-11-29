@@ -17,7 +17,7 @@ section:
             Petitions about problems we already know about just take up time we could be using to fix those problems.´b´c`n
         note: >
             Please be as descriptive as possible in your petition.
-            If you have questions about how the game works, please check out the <a href="#" onclick='JaxonLotgd.Ajax.Core.Petition.faq()'>FAQ</a>.
+            If you have questions about how the game works, please check out the {faq}.
             Petitions about game mechanics will more than likely not be answered unless they have something to do with a bug.
             Remember, if you are not signed in, and do not provide an email address, we have no way to contact you.
         petition.mail:
