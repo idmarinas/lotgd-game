@@ -31,7 +31,8 @@ Encore
     //-- Useful alias for some files
     .addAliases({
         'sweetalert2.css$': 'sweetalert2/dist/sweetalert2.min.css',
-        'tagify.scss$': '@yaireo/tagify/dist/tagify.css'
+        'tagify.scss$': '@yaireo/tagify/dist/tagify.css',
+        'stimulus$': '@hotwired/stimulus'
     })
 
     //-- Copy files of images
