@@ -227,15 +227,16 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
      *
      * @return int
      */
-    public function deleteBulkMail(array $ids)
+    public function deleteBulkMail(array $ids, int $userId)
     {
         $query = $this->_em->createQueryBuilder();
 
         try
         {
             return $query->delete($this->_entityName, 'u')
-                ->where('u.messageid IN (:ids)')
+                ->where('u.messageid IN (:ids) AND u.msgto = :user')
                 ->setParameter('ids', $ids)
+                ->setParameter('user', $userId)
                 ->getQuery()
                 ->execute()
             ;
