@@ -7,6 +7,8 @@ if (!Encore.isRuntimeEnvironmentConfigured())
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
 
+process.env.NODE_ENV = process.env.NODE_ENV || (Encore.isProduction() ? 'production' : 'development')
+
 Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
