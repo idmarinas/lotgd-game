@@ -51,7 +51,7 @@
 
 {%- block form_label -%}
     {%- set label_attr = label_attr|merge({ class: label_attr.class|default(label_class|default('block font-bold md:text-right mb-1 md:mb-0 pr-4')) }) -%}
-    <div class="md:w-1/3">{{- parent() -}}</div>
+    <div class="md:w-1/3">{{- parent()|colorize -}}</div>
 {%- endblock form_label -%}
 
 {%- block form_help -%}
