@@ -291,3 +291,37 @@
         {% endfor %}
     </div>
 {%- endblock -%}
+
+{%- block textarea_limit_row -%}
+    <div
+        class="md:flex md:items-center mb-6"
+        data-controller="limit-characters"
+        data-limit-characters-limit-value="{{ characters_limit }}"
+        {% with { attr: row_attr, translation_domain: 'app_default', colorize: true } %}{{ block('attributes') }}{% endwith %}
+    >
+        {{- form_label(form) -}}
+        <div class="md:w-2/3">
+            <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+            <div data-limit-characters-target="counter"></div>
+            {{- form_help(form) -}}
+            {{- form_errors(form) -}}
+        </div>
+    </div>
+{%- endblock textarea_limit_row -%}
+
+{% block attributes -%}
+    {%- for attrname, attrvalue in attr -%}
+        {{- " " -}}
+        {%- if attrname in ['placeholder', 'title'] or attrname starts with 'data-' and attrname ends with '-value' -%}
+            {% set attr_value = translation_domain is same as(false) or attrvalue is null ? attrvalue : attrvalue|trans(attr_translation_parameters, translation_domain) %}
+            {% if colorize is defined and colorize is same as(true) %}
+                {% set attr_value = attr_value|colorize %}
+            {% endif %}
+            {{- attrname }}="{{ attr_value }}"
+        {%- elseif attrvalue is same as(true) -%}
+            {{- attrname }}="{{ attrname }}"
+        {%- elseif attrvalue is not same as(false) -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- endif -%}
+    {%- endfor -%}
+{%- endblock attributes -%}
