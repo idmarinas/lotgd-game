@@ -1,10 +1,14 @@
 module.exports = {
     important: true,
-    purge: [
-        './themes/**/*.html',
-        './themes/**/*.twig',
-        './assets/**/*.js',
-    ],
+    purge: {
+        // enabled: true,
+        content: [
+            './themes/**/*.html',
+            './themes/**/*.twig',
+            './assets/**/*.js',
+        ],
+        safelist: []
+    },
     darkMode: 'media', // or 'media' or 'class'
     theme: {
         extend: {},
