@@ -60,7 +60,7 @@ export default class extends Modal
         super.close(event)
     }
 
-    async fetch (fetchUrl)
+    async fetch (fetchUrl, options = {})
     {
         let url = this.hasUrlValue ? this.urlValue : null
 
@@ -78,7 +78,7 @@ export default class extends Modal
                 return
             }
 
-            const response = await fetch(url)
+            const response = await fetch(url, options)
             this.remoteContent = await response.text()
         }
 
