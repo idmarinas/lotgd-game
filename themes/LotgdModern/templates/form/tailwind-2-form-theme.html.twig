@@ -301,8 +301,8 @@
     >
         {{- form_label(form) -}}
         <div class="md:w-2/3">
-            <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
             <div data-limit-characters-target="counter"></div>
+            <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
             {{- form_help(form) -}}
             {{- form_errors(form) -}}
         </div>
