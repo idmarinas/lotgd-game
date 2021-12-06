@@ -51,6 +51,7 @@
         "postcss": "^8.4.4",
         "postcss-loader": "^5.3.0",
         "regenerator-runtime": "^0.13.9",
+        "stimulus-autocomplete": "^3.0.0-rc.5",
         "stimulus-character-counter": "^4.0.0",
         "stimulus-notification": "^1.0.0",
         "stimulus-popover": "^5.0.1",
