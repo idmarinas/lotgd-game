@@ -39,6 +39,12 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
                     'id' => 'id-for-notification' //-- By default is auto-generated
                 ]);
             ```
+-   **Form system**
+    -   New Form Type Field 
+        -   `Lotgd\Core\Form\Type\TextareaLimitType`
+            -   This type create a text area with a counter of characters that have limit
+        -   `Lotgd\Core\Form\Type\AutocompleteType`
+            -   This ty pe create a input field for autocomplete from server.
 
 ### :fire: DEPRECATED
 
