@@ -1,7 +1,7 @@
 import { Modal } from "tailwindcss-stimulus-components"
 
-//-- Helpers
-import { useLoading } from '../helpers'
+//-- Mixins
+import { useLoading } from '../mixins'
 
 export default class extends Modal
 {

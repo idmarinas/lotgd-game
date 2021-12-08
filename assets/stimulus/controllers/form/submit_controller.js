@@ -1,7 +1,7 @@
 import { Controller } from 'stimulus'
 
-//-- Helpers
-import { useLoading } from '../../helpers'
+//-- Mixins
+import { useLoading } from '../../mixins'
 
 export default class extends Controller
 {

@@ -1,7 +1,7 @@
 import RemoteModal from './remote_modal_controller'
 
-//-- Helpers
-import { useLoadingBarTop, useButtonLoading } from '../helpers'
+//-- Mixins
+import { useLoadingBarTop, useButtonLoading } from '../mixins'
 
 export default class extends RemoteModal
 {
