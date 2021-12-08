@@ -48,7 +48,9 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   Deprecated trait: `Lotgd\Core\Controller\Pattern\RenderBlockTrait`
+    -   Use `Lotgd\Core\Pattern\LotgdControllerTrait` instead
+        -   This trait have other methods used in LoTGD
 
 ### :wrench: FIXES
 
