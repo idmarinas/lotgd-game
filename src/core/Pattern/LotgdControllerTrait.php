@@ -12,6 +12,8 @@
 
 namespace Lotgd\Core\Pattern;
 
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * Custom trait for LoTGD Controllers
  */
@@ -30,5 +32,22 @@ trait LotgdControllerTrait
         }
 
         $this->container->get('session')->getBag('notifications')->add($type, $message);
+    }
+
+    /**
+     * Renders a view block.
+     */
+    protected function renderBlock(string $view, string $block, array $parameters = [], ?Response $response = null): Response
+    {
+        $content = $this->container->get('twig')->load($view)->renderBlock($block, $parameters);
+
+        if (null === $response)
+        {
+            $response = new Response();
+        }
+
+        $response->setContent($content);
+
+        return $response;
     }
 }
