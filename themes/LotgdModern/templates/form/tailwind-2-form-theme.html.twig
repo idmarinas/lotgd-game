@@ -309,6 +309,25 @@
     </div>
 {%- endblock textarea_limit_row -%}
 
+{%- block autocomplete_row -%}
+    <div
+        class="md:flex md:items-center mb-6"
+        data-controller="{{ stimulus_controller }}"
+        data-{{ stimulus_controller }}-url-value="{{ url_value }}"
+        data-{{ stimulus_controller }}-min-length-value="{{ min_length_value }}"
+        {% with { attr: row_attr } %}{{ block('attributes') }}{% endwith %}
+    >
+        {{- form_label(form) -}}
+        <div class="md:w-2/3 relative">
+            <input type="text" data-{{ stimulus_controller }}-target="input" />
+            <input type="hidden" {{ block('widget_attributes') }} data-{{ stimulus_controller }}-target="hidden"/>
+            <ul class="divide-y divide-lotgd-300 absolute bg-lotgd-700 w-full border-b border-l border-r border-lotgd-300 rounded-b shadow-lg" data-{{ stimulus_controller }}-target="results"></ul>
+            {{- form_help(form) -}}
+            {{- form_errors(form) -}}
+        </div>
+    </div>
+{%- endblock autocomplete_row -%}
+
 {% block attributes -%}
     {%- for attrname, attrvalue in attr -%}
         {{- " " -}}
