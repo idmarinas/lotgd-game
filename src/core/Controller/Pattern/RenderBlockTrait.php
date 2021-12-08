@@ -15,6 +15,7 @@ namespace Lotgd\Core\Controller\Pattern;
 
 use Symfony\Component\HttpFoundation\Response;
 
+/** @deprecated 7.0.0 use Lotgd\Core\Pattern\LotgdControllerTrait */
 trait RenderBlockTrait
 {
     /**
