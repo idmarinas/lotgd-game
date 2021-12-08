@@ -29,7 +29,6 @@ use Tracy\Debugger;
 
 class PetitionController extends AbstractController
 {
-    use Pattern\RenderBlockTrait;
     use LotgdControllerTrait;
 
     public const TRANSLATION_DOMAIN = 'jaxon_petition';
