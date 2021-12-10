@@ -28,7 +28,7 @@
         "not ie <= 8"
     ],
     "devDependencies": {
-        "@symfony/stimulus-bridge": "^2.1.0",
+        "@symfony/stimulus-bridge": "^3.0.0",
         "@symfony/webpack-encore": "^1.7.0",
         "@yaireo/tagify": "^4.9.2",
         "ansi-colors": "^4.1.1",
