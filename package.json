@@ -10,15 +10,15 @@
     },
     "license": "SEE LICENSE IN <LICENSE.txt>",
     "scripts": {
-        "build": "encore production --progress",
-        "dev": "encore dev",
         "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress",
         "lotgd-dev": "npm run dev && gulp",
         "lotgd-docs": "php phpDocumentor.phar",
         "lotgd-prod": "npm run build && gulp --env prod",
         "lotgd-release": "npm run lotgd-prod && npm run lotgd-docs && npm run lotgd-skeleton",
-        "lotgd-skeleton": "gulp skeleton",
-        "watch": "encore dev --watch"
+        "lotgd-skeleton": "gulp skeleton"
     },
     "browserslist": [
         "> 0.1%",
@@ -28,7 +28,8 @@
         "not ie <= 8"
     ],
     "devDependencies": {
-        "@symfony/stimulus-bridge": "^2.1.0",
+        "@hotwired/stimulus": "^3.0.0",
+        "@symfony/stimulus-bridge": "^3.0.0",
         "@symfony/webpack-encore": "^1.7.0",
         "@yaireo/tagify": "^4.9.2",
         "ansi-colors": "^4.1.1",
