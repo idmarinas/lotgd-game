@@ -1,19 +1,11 @@
 module.exports = {
     important: true,
-    purge: {
-        // enabled: true,
-        content: [
-            './themes/**/*.html',
-            './themes/**/*.twig',
-            './assets/**/*.js',
-        ],
-        safelist: []
-    },
+    content: [
+        './themes/**/*.{html,twig}',
+        './assets/**/*.js',
+    ],
     darkMode: 'media', // or 'media' or 'class'
     theme: {
-        extend: {},
-    },
-    variants: {
         extend: {},
     },
     plugins: [

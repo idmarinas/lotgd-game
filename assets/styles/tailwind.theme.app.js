@@ -252,13 +252,4 @@ module.exports = plugin(({addComponents, addBase, e, theme}) => {
             }
         },
     },
-    variants: {
-        extend: {
-            opacity: ['disabled'],
-            cursor: ['disabled'],
-            borderWidth: ['first'],
-            margin: ['first'],
-            ringWidth: ['hover']
-        },
-    },
 })
