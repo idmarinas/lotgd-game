@@ -35,6 +35,7 @@ section:
             You will no longer be able to receive messages from players if you have more than {inboxLimit,number} unread messages in your inbox.`n
             Messages are automatically deleted (read or unread) after {oldMail,number} days.´i
     read:
+        subtitle: '`b`iRead message´i´b'
         button:
             top:
                 reply: Reply
@@ -43,7 +44,7 @@ section:
                 unread: 'Mark Unread'
         card:
             new: NEW
-            sent: '`b`2Sent:´b `^{date,date} {date,time}`0'
+            sent: '`b`2Sent:´b `^{sent,date} {sent,time}`0'
             from:
                 label: '`b`2From:´b `^{name}`0'
                 user:
@@ -69,6 +70,7 @@ section:
             button:
                 submit: Search
     write:
+        subtitle: '`b`iWrite message´i´b'
         reply:
             body: 'Original Message from {name} {date,date} {date,time}'
             subject: 'RE: {subject}'
@@ -79,9 +81,6 @@ section:
             to: '`2To:`0'
             subject: '`2Subject:`0'
             body: '`2Body:`0'
-            characters:
-                left: '`#Max message size is `@{size}`0, you have `^{left}`0 characters left.`0'
-                over: '`$Max message size is `@{size}`0, you are over by `^{over}`0 characters!`0'
             button:
                 submit: Send
     send:
@@ -126,3 +125,4 @@ jaxon:
         not.found: The message was not found
     success:
         send.mail.sent: 'Your message was sent!'
+        unread: 'Message marked as unread!'
