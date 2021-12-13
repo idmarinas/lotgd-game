@@ -1,5 +1,6 @@
 export const useLoading = (controller) =>
 {
+    let loading = false
     const loadingFragment = document.createElement('div')
 
     loadingFragment.classList.add('animate-swinging','opacity-60','absolute','top-0','left-0','rounded','w-full','h-full','bg-gradient-to-r','from-lotgd-gray-50','via-lotgd-red-200','to-lotgd-gray-50')
@@ -17,6 +18,7 @@ export const useLoading = (controller) =>
 
         //-- Add loading
         controller.activatorTarget.appendChild(loadingFragment)
+        loading = true
     }
 
     function stopLoading ()
@@ -29,13 +31,16 @@ export const useLoading = (controller) =>
 
         //-- Remove loading
         controller.activatorTarget.removeChild(loadingFragment)
+
+        loading = false
     }
 
-    Object.assign(controller, { startLoading, stopLoading })
+    Object.assign(controller, { startLoading, stopLoading, loading })
 }
 
 export const useLoadingBarTop = (controller) =>
 {
+    let loading = false
     const loadingFragment = document.createElement('div')
 
     loadingFragment.classList.add('fixed', 'inset-x-0', 'top-0', 'p-1', 'pointer-events-none', 'animate-swinging', 'bg-gradient-to-r','from-lotgd-500','via-lotgd-800','to-lotgd-500')
@@ -45,19 +50,22 @@ export const useLoadingBarTop = (controller) =>
     {
         //-- Add loading
         document.getElementsByTagName('body')[0].appendChild(loadingFragment)
+        loading = true
     }
 
     function stopLoadingBarTop ()
     {
         //-- Remove loading
         document.getElementsByTagName('body')[0].removeChild(loadingFragment)
+        loading = false
     }
 
-    Object.assign(controller, { startLoadingBarTop, stopLoadingBarTop })
+    Object.assign(controller, { startLoadingBarTop, stopLoadingBarTop, loading })
 }
 
 export const useButtonLoading = (controller) =>
 {
+    let loading = false
     const loadingFragment = document.createElement('div')
 
     loadingFragment.classList.add('animate-swinging','opacity-60','absolute','top-0','left-0','rounded','w-full','h-full','bg-gradient-to-r','from-lotgd-gray-50','via-lotgd-red-200','to-lotgd-gray-50')
@@ -78,6 +86,8 @@ export const useButtonLoading = (controller) =>
 
         //-- Add loading
         activator.appendChild(loadingFragment)
+
+        loading = true
     }
 
     function stopButtonLoading (activator)
@@ -90,9 +100,11 @@ export const useButtonLoading = (controller) =>
 
         //-- Remove loading
         activator.removeChild(loadingFragment)
+
+        loading = false
     }
 
-    Object.assign(controller, { startButtonLoading, stopButtonLoading })
+    Object.assign(controller, { startButtonLoading, stopButtonLoading, loading })
 }
 
 /**
@@ -101,6 +113,7 @@ export const useButtonLoading = (controller) =>
  */
 export const useSyncIcon = (controller, y = 'top', x = 'right', color = '') =>
 {
+    let loading = false
     const span = document.createElement('span')
     const icon = document.createElement('i')
 
@@ -122,6 +135,8 @@ export const useSyncIcon = (controller, y = 'top', x = 'right', color = '') =>
 
         //-- Add loading
         activator.appendChild(span)
+
+        loading = true
     }
 
     function stopSyncIcon (activator)
@@ -133,7 +148,9 @@ export const useSyncIcon = (controller, y = 'top', x = 'right', color = '') =>
 
         //-- Remove loading
         activator.removeChild(span)
+
+        loading = false
     }
 
-    Object.assign(controller, { startSyncIcon, stopSyncIcon })
+    Object.assign(controller, { startSyncIcon, stopSyncIcon, loading })
 }
