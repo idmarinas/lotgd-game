@@ -1,0 +1,33 @@
+{% block dialog %}
+    <div class="max-h-screen w-full max-w-6xl relative">
+        <div class="m-1 bg-lotgd-900 rounded shadow text-left">
+            <div
+                class="p-8"
+                data-controller="form--submit"
+                data-form--submit-url-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MailController', 'write') }}"
+            >
+                {{ block('content') }}
+            </div>
+        </div>
+    </div>
+{% endblock dialog %}
+
+{% block content %}
+    {% trans_default_domain 'jaxon_mail' %}
+
+    {# Show notifications #}
+    {{ show_notifications() }}
+
+    <h2 class="text-xl mb-4 pb-1 font-bold border-b border-lotgd-500">
+        {{ 'title'|trans }}
+        - {{ 'section.write.subtitle'|trans|colorize }}
+    </h2>
+
+    <div class="mb-4">
+        {{ form(form) }}
+    </div>
+
+    <div data-mail-target="buttons" class="flex justify-end items-center flex-wrap mt-6 pt-3 border-t border-lotgd-500">
+        {{ block('buttons_write', 'mail/_buttons.html.twig') }}
+    </div>
+{% endblock content %}

@@ -1,0 +1,131 @@
+{% block buttons_inbox %}
+    {% trans_default_domain 'jaxon_mail' %}
+
+    <button
+        type="button"
+        class="input-yellow w-auto"
+        data-action="click->mail#checkAll"
+    >{{ 'section.default.form.button.check.all'|trans|uncolorize }}</button>
+
+    <button
+        type="button"
+        class="input-red w-auto ml-1"
+        data-action="click->mail#deleteBulk"
+    >{{ 'section.default.form.button.submit'|trans|uncolorize }}</button>
+
+    <div class="flex-1"></div>
+
+    <button
+        type="button"
+        class="w-auto ml-1 input-green"
+        data-action="click->mail#inbox"
+    >{{ 'button.inbox'|trans|colorize }}</button>
+
+    <button
+        type="button"
+        class="w-auto ml-1 input-blue"
+        data-action="click->mail#write"
+    >{{ 'button.write'|trans|colorize }}</button>
+
+    <button
+        type="button"
+        class="input-red w-auto ml-1"
+        data-action="click->mail#close"
+    >{{ 'modal.buttons.cancel'|trans({}, 'app_default') }}</button>
+{% endblock buttons_inbox %}
+
+{% block buttons_write %}
+    {% trans_default_domain 'jaxon_mail' %}
+
+    <button
+        type="button"
+        class="w-auto ml-1 input-green"
+        data-action="click->mail#inbox"
+    >{{ 'button.inbox'|trans|colorize }}</button>
+
+    <div class="flex-1"></div>
+
+    <button
+        type="button"
+        class="w-auto ml-1 input-blue"
+        data-action="click->form--submit#send"
+        data-form--submit-target="activator"
+    >{{ 'section.write.form.button.submit'|trans|colorize }}</button>
+
+    <button
+        type="button"
+        class="input-red w-auto ml-1"
+        data-action="click->mail#close"
+    >{{ 'modal.buttons.cancel'|trans({}, 'app_default') }}</button>
+{% endblock buttons_write %}
+
+{% block buttons_read %}
+    {% trans_default_domain 'jaxon_mail' %}
+
+    <button
+        type="button"
+        class="w-auto ml-1 input-green"
+        data-action="click->mail#inbox"
+    >{{ 'button.inbox'|trans|colorize }}</button>
+
+    <div class="flex-1"></div>
+
+    <button
+        type="button"
+        {{ pagination.previous ? '' : 'disabled' }}
+        class="w-auto ml-1"
+        data-action="click->mail#read"
+        data-mail-id-param="{{ pagination.previous }}"
+        data-mail-is-button-param="true"
+    >{{ 'section.read.card.paginator.prev'|trans|uncolorize }}</button>
+
+    <button
+        type="button"
+        {{ pagination.next ? '' : 'disabled' }}
+        class="w-auto ml-1"
+        data-action="click->mail#read"
+        data-mail-id-param="{{ pagination.next }}"
+        data-mail-is-button-param="true"
+    >{{ 'section.read.card.paginator.next'|trans|uncolorize }}</button>
+
+    <div class="flex-1"></div>
+
+    <button
+        type="button"
+        class="w-auto ml-1 input-orange"
+        {{ message.msgfrom ? '' : 'disabled' }}
+        data-action="click->petition#report"
+        data-petition-target="activator"
+        data-petition-report-player-id-value="{{ message.msgfrom }}"
+        data-petition-report-message-value="{{ bodyDisplay }}"
+    >{{ 'section.read.button.top.report'|trans|uncolorize }}</button>
+
+    <button
+        type="button"
+        class="w-auto ml-1 input-blue"
+        data-action="click->mail#unread"
+        data-mail-id-param="{{ message.messageid }}"
+    >{{ 'section.read.button.top.unread'|trans|uncolorize }}</button>
+
+    <button
+        type="button"
+        class="w-auto ml-1 input-yellow"
+        data-action="click->mail#reply"
+        data-mail-id-param="{{ message.messageid }}"
+    >{{ 'section.read.button.top.reply'|trans|uncolorize }}</button>
+
+    <button
+        type="button"
+        class="w-auto ml-1 input-red"
+        data-action="click->mail#delete"
+        data-mail-id-param="{{ message.messageid }}"
+    >{{ 'section.read.button.top.del'|trans|uncolorize }}</button>
+
+    <div class="flex-1"></div>
+
+    <button
+        type="button"
+        class="input-red w-auto ml-1"
+        data-action="click->mail#close"
+    >{{ 'modal.buttons.cancel'|trans({}, 'app_default') }}</button>
+{% endblock buttons_read %}

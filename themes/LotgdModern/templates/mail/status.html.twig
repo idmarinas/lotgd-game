@@ -1,0 +1,27 @@
+{#
+    This file is part of "LoTGD Core Package".
+
+    @see https://github.com/idmarinas/lotgd-game
+
+    @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.md
+    @author IDMarinas
+
+    @since 7.0.0
+
+    @file Template for mail status.
+
+    Available variables:
+    - not_seen_count<int>: Count of new messages
+    - seen_count<int>: Count of old messages
+#}
+
+{% trans_default_domain 'app_default' %}
+
+{{ 'parts.mail.title'|trans({'new': not_seen_count, 'old': seen_count}) }}
+
+{% if not_seen_count %}
+    <span class="flex absolute w-auto h-auto top-0 right-0 -mt-1 -mr-1">
+        <i class="animate-ping absolute inline-flex far fa-envelope opacity-75 text-lotgd-green-600"></i>
+        <i class="relative inline-flex far fa-envelope text-lotgd-green-600"></i>
+    </span>
+{% endif %}

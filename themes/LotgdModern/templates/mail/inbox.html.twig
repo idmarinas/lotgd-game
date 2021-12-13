@@ -1,0 +1,148 @@
+{% trans_default_domain 'jaxon_mail' %}
+
+{# Show notifications #}
+{{ show_notifications() }}
+
+<div class="max-h-screen w-full max-w-6xl relative">
+    <div class="m-1 bg-lotgd-900 rounded shadow text-left">
+        <div class="p-8">
+            <h2 class="text-xl mb-4 pb-1 font-bold border-b border-lotgd-500">
+                {{ 'title'|trans }}
+                - {{ 'section.default.subtitle'|trans|colorize }}
+            </h2>
+
+            <div class="mb-4">
+                {% for msg in message %}
+                    <br>{{ msg[0]|trans(msg[1])|colorize }}
+                {% endfor %}
+                <br>
+                {% if mails|length %}
+                    {% set statusAltText = {
+                        'online': 'section.default.table.tbody.status.online'|trans|uncolorize,
+                        'offline': 'section.default.table.tbody.status.offline'|trans|uncolorize
+                    } %}
+                    {% set new_msg = 'section.default.table.tbody.msg.new'|trans|uncolorize %}
+                    {% set old_msg = 'section.default.table.tbody.msg.old'|trans|uncolorize %}
+
+                    {% set arrow = sort_direction ? '<i class="fas fa-sort-down"></i>' : '<i class="fas fa-sort-up"></i>' %}
+
+                    <form id="mail-inbox-form" method="POST" class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+                        <table class="min-w-full divide-y divide-lotgd-200">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">
+                                        {% set direction_subject = ('subject' == sort_order ? new_direction : sort_direction) %}
+                                        <a
+                                            href="#"
+                                            data-action="click->mail#inbox"
+                                            data-mail-sort-order-param="subject"
+                                            data-mail-sort-direction-param="{{ direction_subject }}"
+                                        >
+                                            {{ 'subject' == sort_order ? arrow : '' }}
+                                            {{ 'section.default.table.thead.subject'|trans|uncolorize }}
+                                        </a>
+                                    </th>
+                                    <th scope="col">
+                                        {% set direction_name = ('name' == sort_order ? new_direction : sort_direction) %}
+                                        <a
+                                            href="#"
+                                            data-action="click->mail#inbox"
+                                            data-mail-sort-order-param="name"
+                                            data-mail-sort-direction-param="{{ direction_name }}"
+                                        >
+                                            {{ 'name' == sort_order ? arrow : '' }}
+                                            {{ 'section.default.table.thead.from'|trans|uncolorize }}
+                                        </a>
+                                    </th>
+                                    <th scope="col">
+                                        {% set direction_date = ('date' == sort_order ? new_direction : sort_direction) %}
+                                        <a
+                                            href="#"
+                                            data-action="click->mail#inbox"
+                                            data-mail-sort-order-param="date"
+                                            data-mail-sort-direction-param="{{ direction_date }}"
+                                        >
+                                            {{ 'date' == sort_order ? arrow : '' }}
+                                            {{ 'section.default.table.thead.date'|trans|uncolorize }}
+                                        </a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="striped">
+                                {% for mail in mails %}
+                                    <tr id="mail-row-{{ mail.messageid }}">
+                                        <td class="w-1 pr-3 pl-3">
+                                            <div class="flex gap-3 flex-row">
+                                                <div class="w-1/2 py-1">
+                                                    <label for="module-{{ mail.messageid }}" class="relative block">
+                                                        <input id="module-{{ mail.messageid }}" type="checkbox" name="msg[]" value="{{ mail.messageid }}">
+                                                        <!-- path -->
+                                                        <div class="toggle-path w-14 h-7 rounded-full shadow-inner"></div>
+                                                        <!-- circle -->
+                                                        <div class="toggle-circle absolute w-5 h-5 rounded-full shadow top-1 left-1"></div>
+                                                    </label>
+                                                </div>
+                                                <div class="w-1/2">
+                                                    <button
+                                                        type="button"
+                                                        class="input-red w-auto text-xs"
+                                                        data-action="click->mail#delete"
+                                                        data-mail-id-param="{{ mail.messageid }}"
+                                                    ><i class="fas fa-trash"></i></button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {% if 0 == mail.msgfrom %}
+                                                {% set subject = mail.subject|stripslashes|unserialize %}
+                                            {% else %}
+                                                {% set subject = mail.subject %}
+                                            {% endif %}
+
+                                            <a
+                                                href
+                                                data-action="click->mail#read"
+                                                data-mail-id-param="{{ mail.messageid }}"
+                                                data-mail-is-button-param="false"
+                                            >
+                                                <img class="inline-block" src="images/{{ mail.seen ? 'old' : 'new' }}scroll.GIF" width="16px" height="16px" alt="{{ mail.seen ? old_msg : new_msg }}">
+                                                {% if subject is array %}
+                                                    {{ subject[0]|trans(subject[1], subject[2])|colorize }}
+                                                {% elseif not subject %}
+                                                    {{ mail.subject|default('section.default.table.tbody.no.subject'|trans)|e('html')|colorize }}
+                                                {% else %}
+                                                    {{ subject|e('html')|colorize }}
+                                                {% endif %}
+                                            </a>
+                                        </td>
+                                        <td class="w-1 whitespace-nowrap">
+                                            {% if 0 == mail.msgfrom %}
+                                                {{ 'section.default.table.tbody.from.system'|trans|colorize }}
+                                            {% elseif mail.name %}
+                                                {% set status_image = mail.loggedin ? 'online' : 'offline' %}
+
+                                                <img class="inline-block" src="images/{{ status_image }}.gif" alt="{{ statusAltText[status_image] }}">
+                                                {{ mail.name|colorize }}
+                                            {% else %}
+                                                {{ 'section.default.table.tbody.from.deleted.user'|trans|colorize }}
+                                            {% endif %}
+                                        </td>
+                                        <td class="w-1 whitespace-nowrap">{{ '{date,date} {date,time}'|tmf({ 'date': mail.sent }) }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </form>
+                {% else %}
+                    {{ 'section.default.no.mail'|trans|colorize }}
+                {% endif %}
+
+                {{ 'section.default.note'|trans({inboxCount, inboxLimit, oldMail })|colorize }}
+            </div>
+            <div data-mail-target="buttons" class="flex justify-end items-center flex-wrap mt-6 pt-3 border-t border-lotgd-500">
+                {{ block('buttons_inbox', 'mail/_buttons.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>

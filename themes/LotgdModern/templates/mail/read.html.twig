@@ -1,0 +1,89 @@
+{% block dialog %}
+    <div class="max-h-screen w-full max-w-6xl relative">
+        <div class="m-1 bg-lotgd-900 rounded shadow text-left">
+            <div
+                class="p-8"
+            >
+                {{ block('content') }}
+            </div>
+        </div>
+    </div>
+{% endblock dialog %}
+
+{% block content %}
+    {% trans_default_domain 'jaxon_mail' %}
+
+    {# Show notifications #}
+    {{ show_notifications() }}
+
+    <h2 class="text-xl mb-4 pb-1 font-bold border-b border-lotgd-500">
+        {{ 'title'|trans }}
+        - {{ 'section.read.subtitle'|trans|colorize }}
+    </h2>
+
+    <div class="mb-4">
+        {% set statusAltText = {
+            'online': 'section.read.card.user.status.online'|trans|uncolorize,
+            'offline': 'section.read.card.user.status.offline'|trans|uncolorize
+        } %}
+
+        {% if 0 == message.msgfrom %}
+            {% set subject = message.subject|stripslashes|unserialize %}
+            {% set body = message.body|stripslashes|unserialize %}
+        {% else %}
+            {% set subject = message.subject %}
+        {% endif %}
+
+        {% if not message %}.
+            {% set subjectDisplay = 'section.read.card.no.message.header'|trans|colorize %}
+        {% elseif subject is array %}
+            {% set subjectDisplay = subject[0]|trans(subject[1], subject[2])|colorize %}
+        {% elseif not subject %}
+            {% set subjectDisplay = message.subject|default('section.read.card.no.subject'|trans)|e('html')|colorize %}
+        {% else %}
+            {% set subjectDisplay = subject|e('html')|colorize %}
+        {% endif %}
+
+        {% if not message %}
+            {% set bodyDisplay = 'section.read.card.no.message.body'|trans|colorize %}
+        {% elseif body is array %}
+            {% set bodyDisplay = body[0]|trans(body[1], body[2])|colorize %}
+        {% else %}
+            {% set bodyDisplay = message.body %}
+        {% endif %}
+
+        <div class="ui fluid card">
+            <div class="content">
+                {% if not message.seen and message %}
+                    <span class="ui teal ribbon label">{{ 'section.read.card.new'|trans|uncolorize }}</span>
+                {% endif %}
+                <div class="right floated meta">{{ 'section.read.card.sent'|trans({ 'sent': message.sent })|colorize }}</div>
+
+                {% if 0 == message.msgfrom %}
+                    {% set senderName = 'section.read.card.from.user.system'|trans|colorize %}
+                {% elseif sender.name %}
+                    {% set statusImage = sender.acct.loggedin ? 'online' : 'offline' %}
+
+                    {% set senderName = '<img class="inline" src="images/' ~ statusImage ~ '.gif" alt="' ~ statusAltText[statusImage] ~ '"> ' ~ sender.name|colorize %}
+                {% else %}
+                    {% set senderName = 'section.read.card.from.user.deleted.user'|trans|colorize %}
+                {% endif %}
+
+                {{ 'section.read.card.from.label'|trans({ 'name': senderName })|colorize }}
+            </div>
+            <div class="border-l-4 border-lotgd-100 pl-3 mt-5">
+                <p class="text-3xl mb-5">
+                    {{ subjectDisplay }}
+                    {% if not message.seen and message %}
+                        <span class="bg-green-100 text-black text-sm p-1 rounded">{{ 'section.read.card.new'|trans|uncolorize }}</span>
+                    {% endif %}
+                </p>
+                <p class="">{{ bodyDisplay|colorize|nl2br }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div data-mail-target="buttons" class="flex justify-end items-center flex-wrap mt-6 pt-3 border-t border-lotgd-500">
+        {{ block('buttons_read', 'mail/_buttons.html.twig') }}
+    </div>
+{% endblock content %}
