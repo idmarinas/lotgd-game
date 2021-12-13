@@ -21,6 +21,7 @@ use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Pattern\LotgdControllerTrait;
 use Lotgd\Core\Repository\PetitionsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
@@ -139,15 +140,15 @@ class PetitionController extends AbstractController
 
         $form = $this->createForm(PetitionType::class);
         $form->remove('problem_type');
+        $form->add('playerAbuseId', HiddenType::class);
+        $form->add('abuseMessage', HiddenType::class);
         $formEmpty = clone $form;
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $post                  = $form->getData();
-            $post['playerAbuseId'] = $playerId;
-            $post['abuseMessage']  = $message;
+            $post = $form->getData();
 
             $this->proccessForm($request, $post, $form, $formEmpty);
 
@@ -157,8 +158,10 @@ class PetitionController extends AbstractController
         elseif ( ! $form->isSubmitted() && $session['user']['loggedin'] ?? false)
         {
             $form->setData([
-                'charname' => $session['user']['name'],
-                'email'    => $session['user']['emailaddress'],
+                'charname'      => $session['user']['name'],
+                'email'         => $session['user']['emailaddress'],
+                'playerAbuseId' => $playerId,
+                'abuseMessage'  => $message,
             ]);
         }
 
