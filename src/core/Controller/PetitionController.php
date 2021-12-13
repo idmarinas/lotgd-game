@@ -132,7 +132,7 @@ class PetitionController extends AbstractController
             return null;
         }
 
-        $playerId = $request->query->getInt('playerId', 0);
+        $playerId = $request->query->getInt('player_id', 0);
         $message  = $request->query->get('message', '');
 
         $params = $this->getParams();
