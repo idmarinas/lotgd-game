@@ -52,6 +52,9 @@ parts:
             page: 'Page {page,number}'
             next: 'Next page'
             last: 'Last'
+    characters_limit:
+        left: '`#Max message size is `@{size}`0, you have `^{left}`0 characters left.`0'
+        over: '`$Max message size is `@{size}`0, you are over by `^{over}`0 characters!`0'
 
 # Modal dialogs
 modal:
