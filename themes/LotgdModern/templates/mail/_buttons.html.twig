@@ -96,8 +96,8 @@
         {{ message.msgfrom ? '' : 'disabled' }}
         data-action="click->petition#report"
         data-petition-target="activator"
-        data-petition-report-player-id-value="{{ message.msgfrom }}"
-        data-petition-report-message-value="{{ bodyDisplay }}"
+        data-petition-player-id-param="{{ message.msgfrom }}"
+        data-petition-message-param="{{ bodyDisplay }}"
     >{{ 'section.read.button.top.report'|trans|uncolorize }}</button>
 
     <button
