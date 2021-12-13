@@ -28,7 +28,7 @@ The loader can be the name of any registered loader. By default, Symfony provide
 -   `.po:` Portable object format;
 -   `.qt:` QT Translations XML file;
 
-The choice of which loader to use is entirely up to you and is a matter of taste. The recommended option is to use YAML for simple projects and use XLIFF if you’re generating translations with specialized programs or teams.
+The choice of which loader to use is entirely up to you and is a matter of taste. The recommended option is to use YAML for simple projects and use XLIFF if you're generating translations with specialized programs or teams.
 
 > Note: LoTGD Core organize translations files into locales folder
 
