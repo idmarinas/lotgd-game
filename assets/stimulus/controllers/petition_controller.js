@@ -5,7 +5,7 @@ import { useLoadingBarTop, useButtonLoading } from '../mixins'
 
 export default class extends RemoteModal
 {
-    static values = { urlFaq: String, urlPrimer: String }
+    static values = { urlFaq: String, urlPrimer: String, urlReport: String }
 
     connect()
     {
@@ -59,6 +59,26 @@ export default class extends RemoteModal
         this.remoteContent = ''
 
         content = await this.fetch(this.urlFaqValue)
+
+        this.stopButtonLoading(event.target)
+
+        if ( ! content) return
+
+        this.containerTarget.innerHTML = ''
+
+        this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
+    }
+
+    async report(event)
+    {
+        this.startButtonLoading(event.target)
+
+        const params = event.params
+        let content = null
+
+        this.remoteContent = ''
+
+        content = await this.fetch(`${this.urlReportValue}&player_id=${params.playerId}&message=${encodeURIComponent(params.message)}`)
 
         this.stopButtonLoading(event.target)
 
