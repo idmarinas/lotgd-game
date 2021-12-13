@@ -5,8 +5,14 @@ export const useLoading = (controller) =>
 
     loadingFragment.classList.add('animate-swinging','opacity-60','absolute','top-0','left-0','rounded','w-full','h-full','bg-gradient-to-r','from-lotgd-gray-50','via-lotgd-red-200','to-lotgd-gray-50')
 
-    const hasRelative = controller.activatorTarget.classList.contains('relative')
-    const hasOverflowHidden = controller.activatorTarget.classList.contains('overflow-hidden')
+    let hasRelative = false
+    let hasOverflowHidden = false
+
+    if (controller.hasActivatorTarget)
+    {
+        hasRelative = controller.activatorTarget.classList.contains('relative')
+        hasOverflowHidden = controller.activatorTarget.classList.contains('overflow-hidden')
+    }
 
     function startLoading ()
     {
