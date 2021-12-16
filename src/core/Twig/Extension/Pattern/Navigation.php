@@ -71,9 +71,9 @@ trait Navigation
         }
         $attributes = $this->createAttributesString($attributes);
 
-        return $this->format->colorize(\sprintf(
+        return $this->format->colorize(sprintf(
             '<%1$s %2$s>%4$s %3$s %5$s</%1$s>',
-            ( $blocked ? 'span' : 'a'),
+            ($blocked ? 'span' : 'a'),
             $attributes,
             $label,
             $options['current']['open'] ?? '', //-- Open style to nav if is current
@@ -106,7 +106,7 @@ trait Navigation
         $attributes = $options['attributes'] ?? [];
         $attributes = $this->createAttributesString($attributes);
 
-        return \sprintf(
+        return sprintf(
             '<%1$s %2$s>%3$s</%1$s>',
             (string) ($options['tag'] ?? 'span'),
             $attributes,
@@ -126,20 +126,36 @@ trait Navigation
     {
         $scrollingStyle = $scrollingStyle ?: 'Sliding';
 
-        $pages = \get_object_vars($paginator->getPages($scrollingStyle));
+        $pages = get_object_vars($paginator->getPages($scrollingStyle));
 
         //-- Add params for template
         if (null !== $params)
         {
-            $pages = \array_merge($pages, (array) $params);
+            $pages = array_merge($pages, (array) $params);
         }
 
         //-- Is a pagination for Jaxon-PHP
-        if (0 === \strpos($link, 'JaxonLotgd.Ajax.Core.') || 0 === \strpos($link, 'JaxonLotgd.Ajax.Local.'))
+        if (0 === strpos($link, 'JaxonLotgd.Ajax.Core.') || 0 === strpos($link, 'JaxonLotgd.Ajax.Local.'))
         {
             $template = $template ?: ['pagination_jaxon', '_blocks/_partials.html.twig'];
 
             $pages['jaxon'] = $link;
+
+            return $this->renderPagination($env, $template, $pages);
+        }
+        //-- Is a pagination for Stimulus controller
+        /*
+         * Format for Pagination Stimulus controller:
+         *      stimulus:ControllerName:Url
+         */
+        elseif (0 === strpos($link, 'stimulus:'))
+        {
+            $template = $template ?: ['pagination_stimulus', '_blocks/_partials.html.twig'];
+
+            $stimulus = explode(':', $link);
+
+            $pages['stimulus_controller'] = $stimulus[1];
+            $pages['stimulus_url']        = $stimulus[2];
 
             return $this->renderPagination($env, $template, $pages);
         }
@@ -149,19 +165,19 @@ trait Navigation
         //-- Use request uri if not set link
         $link = $link ?: $this->request->getServer('REQUEST_URI');
         //-- Sanitize link / Delete previous queries of: "page", "c" and "commentPage"
-        $link = \preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)/i', '', $link);
+        $link = preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)/i', '', $link);
 
-        if (false === \strpos($link, '?') && false !== \strpos($link, '&'))
+        if (false === strpos($link, '?') && false !== strpos($link, '&'))
         {
-            $link = \preg_replace('/[&]/', '?', $link, 1);
+            $link = preg_replace('/[&]/', '?', $link, 1);
         }
 
         //-- Check if have a ?
-        if (false === \strpos($link, '?'))
+        if (false === strpos($link, '?'))
         {
             $link = "{$link}?";
         }
-        elseif (false !== \strpos($link, '?'))
+        elseif (false !== strpos($link, '?'))
         {
             $link = "{$link}&";
         }
