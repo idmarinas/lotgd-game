@@ -43,14 +43,14 @@ trait Motd
         $motd   = \array_merge($sub, $motd);
         $params = \array_merge(['motd' => $motd], $params);
 
-        $blockName = 'motd_item_item';
+        $template = 'motd/item.html.twig';
 
         if ($motd['motdtype'])
         {
-            $blockName      = 'motd_item_poll';
+            $template      = 'motd/poll.html.twig';
             $params['motd'] = $this->getMotdRepository()->appendPollResults($motd, $session['user']['acctid'] ?? null);
         }
 
-        return $env->load('_blocks/_motd.html.twig')->renderBlock($blockName, $params);
+        return $env->render($template, $params);
     }
 }
