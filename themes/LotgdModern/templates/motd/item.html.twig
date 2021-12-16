@@ -1,0 +1,25 @@
+{% trans_default_domain 'jaxon_motd' %}
+
+<div class="w-full bg-lotgd-800 rounded-lg shadow-sm duration-500 px-3 sm:px-6 py-4 mb-6">
+    <div>
+        <div class="sm:text-sm md:text-md lg:text-lg text-gray-200 font-bold">{{ motd.motdtitle }}</div>
+
+        <p class="mt-2 text-col-dk-green text-sm md:text-md">{{ motd.motdbody|nl2br|colorize|trim }}</p>
+    </div>
+
+    <!-- Meta -->
+    <div class="grid grid-cols-2 mt-4 my-auto border-t border-lotgd-100 pt-1">
+        <!-- Date  -->
+        <div class="col-span-8">
+            <span class="font-light text-col-lt-cyan">{{ '{d,date,medium} {d,time}'|tmf({'d': motd.motddate }) }}</span>
+        </div>
+
+        <!-- User -->
+        <div class="col-start-9 col-end-12">
+            <div class="flex gap-4 items-center">
+                <i class="fas fa-user" aria-hidden="true"></i>
+                <div class="text-gray-100 font-bold text-sm">{{ (motd.motdauthorname ?: 'item.author'|trans)|colorize }}</div>
+            </div>
+        </div>
+    </div>
+</div>
