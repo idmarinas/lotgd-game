@@ -43,11 +43,11 @@ trait Motd
         $motd   = \array_merge($sub, $motd);
         $params = \array_merge(['motd' => $motd], $params);
 
-        $template = 'motd/item.html.twig';
+        $template = 'motd/_item.html.twig';
 
         if ($motd['motdtype'])
         {
-            $template      = 'motd/poll.html.twig';
+            $template      = 'motd/_poll.html.twig';
             $params['motd'] = $this->getMotdRepository()->appendPollResults($motd, $session['user']['acctid'] ?? null);
         }
 
