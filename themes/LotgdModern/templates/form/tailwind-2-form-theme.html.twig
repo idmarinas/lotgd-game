@@ -17,7 +17,7 @@
 
 {%- block form_widget_simple -%}
     {%- if errors|length > 0 -%}
-        {% set attr = attr|merge({class: attr.class ~ ' border-lotgd-red-400 hover:border-lotgd-red-600'}) %}
+        {% set attr = attr|merge({class: attr.class ~ ' input-red'}) %}
     {%- endif -%}
 
     {{- parent() -}}
@@ -63,11 +63,19 @@
     {%- if errors|length > 0 -%}
         <ul>
             {%- for error in errors -%}
-                <li class="{{ error_item_class|default('text-red-700') }}">{{ error.message }}</li>
+                <li class="{{ error_item_class|default('text-red-600') }}">{{ error.message }}</li>
             {%- endfor -%}
         </ul>
     {%- endif -%}
 {%- endblock form_errors -%}
+
+{%- block textarea_widget -%}
+    {%- if errors|length > 0 -%}
+        {% set attr = attr|merge({class: attr.class ~ ' input-red'}) %}
+    {%- endif -%}
+
+    <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+{%- endblock textarea_widget -%}
 
 {%- block range_widget -%}
     <div data-controller="form--input-range" class="flex items-end gap-4">
