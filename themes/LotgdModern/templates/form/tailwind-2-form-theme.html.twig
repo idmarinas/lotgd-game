@@ -42,8 +42,8 @@
     <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
         {{- form_label(form) -}}
         <div class="md:w-2/3">
-            {{- form_errors(form) -}}
             {{- form_widget(form, widget_attr) -}}
+            {{- form_errors(form) -}}
             {{- form_help(form) -}}
         </div>
     </div>
@@ -151,8 +151,6 @@
             {{ block('form_widget_simple') }}
         {% else %}
             <div {{ block('widget_container_attributes') }}>
-                {{ form_errors(form.date) }}
-                {{ form_errors(form.time) }}
                 <div class="flex gap-2">
                     <div class="flex-1">
                         {{ form_widget(form.date) }}
@@ -161,6 +159,8 @@
                         {{ form_widget(form.time) }}
                     </div>
                 </div>
+                {{ form_errors(form.date) }}
+                {{ form_errors(form.time) }}
             </div>
         {% endif %}
     {% endapply %}
@@ -217,7 +217,6 @@
     <div class="md:flex md:items-center mb-6">
         {{- form_label(form) -}}
         <div class="md:w-2/3">
-            {{- form_errors(form) -}}
             <button
                 type="button"
                 class="unstyle absolute z-10 cursor-pointer rounded-full w-11 h-11 ring-inset ring-2 ring-blue-500 hover:ring-4 text-blue-500"
@@ -225,6 +224,7 @@
             >+</button>
 
             <input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+            {{- form_errors(form) -}}
             {{- form_help(form) -}}
         </div>
     </div>
@@ -285,8 +285,8 @@
         {% for locale in locales %}
             <div class="ui bottom attached tab segment {{ loop.first ? 'active':'' }}" data-tab="{{ sanitized_name ~ locale ~ "_tab" }}">
                 {{- form_widget(attribute(form, locale ~ '_' ~ name)) -}}
-                {{- form_help(attribute(form, locale ~ '_' ~ name)) -}}
                 {{- form_errors(attribute(form, locale ~ '_' ~ name)) -}}
+                {{- form_help(attribute(form, locale ~ '_' ~ name)) -}}
             </div>
         {% endfor %}
     </div>
@@ -303,8 +303,8 @@
         <div class="md:w-2/3">
             <div data-limit-characters-target="counter"></div>
             <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
-            {{- form_help(form) -}}
             {{- form_errors(form) -}}
+            {{- form_help(form) -}}
         </div>
     </div>
 {%- endblock textarea_limit_row -%}
@@ -322,8 +322,8 @@
             <input type="text" data-{{ stimulus_controller }}-target="input" />
             <input type="hidden" {{ block('widget_attributes') }} data-{{ stimulus_controller }}-target="hidden"/>
             <ul class="divide-y divide-lotgd-300 absolute bg-lotgd-700 w-full border-b border-l border-r border-lotgd-300 rounded-b shadow-lg" data-{{ stimulus_controller }}-target="results"></ul>
-            {{- form_help(form) -}}
             {{- form_errors(form) -}}
+            {{- form_help(form) -}}
         </div>
     </div>
 {%- endblock autocomplete_row -%}
