@@ -10,6 +10,7 @@ list:
             option:
                 descriptive: '{date,date,LLLL YYY}, {count,number} messages archived'
         button:
+            list: List MoTD
             descriptive:
                 submit: 'Show results for month selected'
                 current: 'Show current month and year'
@@ -39,7 +40,7 @@ item:
         success: 'MOTD edited successfully'
         form:
             title: 'Edit a MoTD'
-            original: '`bOriginally by `@{author}`0 on {date,date} {date,time}´b`n'
+            original: '`bOriginally by `@{author}`0 on {d,date} {d,time}´b`n'
             subject: 'Subject'
             body: 'Body'
             options: 'Options'
