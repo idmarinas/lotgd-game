@@ -152,6 +152,13 @@
     </label>
 {%- endblock checkbox_row -%}
 
+{%- block collection_widget -%}
+    {% if prototype is defined and not prototype.rendered %}
+        {%- set attr = attr|merge({'data-prototype': form_row(prototype)|e('html_attr') }) -%}
+    {% endif %}
+    {{- block('form_widget') -}}
+{%- endblock collection_widget -%}
+
 {%- block datetime_widget -%}
     {% apply spaceless %}
         {% if widget == 'single_text' %}
