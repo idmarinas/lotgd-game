@@ -24,7 +24,7 @@
 {%- endblock form_widget_simple -%}
 
 {%- block form_widget_compound -%}
-    <div compoud {{ block('widget_container_attributes') }}>
+    <div {{ block('widget_container_attributes') }}>
         {%- if form is rootform -%}
             {{ form_errors(form) }}
         {%- endif -%}
@@ -154,7 +154,10 @@
 
 {%- block collection_widget -%}
     {% if prototype is defined and not prototype.rendered %}
-        {%- set attr = attr|merge({'data-prototype': form_row(prototype)|e('html_attr') }) -%}
+        {%- set attr = attr|merge({
+            'data-prototype': form_row(prototype)|e('html_attr'),
+            'data-controller': 'form--collection-prototype'
+        }) -%}
     {% endif %}
     {{- block('form_widget') -}}
 {%- endblock collection_widget -%}
