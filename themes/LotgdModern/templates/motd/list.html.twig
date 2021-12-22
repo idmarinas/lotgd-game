@@ -1,0 +1,42 @@
+{% trans_default_domain translation_domain %}
+
+{# Show notifications #}
+{{ show_notifications() }}
+
+<div class="max-h-screen w-full max-w-6xl relative">
+    <div class="m-1 bg-lotgd-900 rounded shadow text-left">
+        <div class="p-8">
+            {% if SU_POST_MOTD %}
+                <div class="mb-8">
+                    <button
+                        type="button"
+                        class="input-green w-auto"
+                        data-action="click->motd#item"
+                    >{{ 'item.button.add.motd'|trans|uncolorize }}</button>
+                    <button
+                        type="button"
+                        class="input-green w-auto"
+                        data-action="click->motd#poll"
+                    >{{ 'item.button.add.poll'|trans|uncolorize }}</button>
+                </div>
+            {% endif %}
+
+            <div class="ui divided items">
+                {% for motd in pagination %}
+                    {{ motd_show_item(motd, { SU_POST_MOTD }) }}
+                {% else %}
+                    <div class="item">
+                        <div class="content">
+                            <div class="ui error message">
+                                {{ 'list.empty'|trans|uncolorize }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <hr class="border border-lotgd-100 mb-6">
+
+            {{ navigation_pagination(pagination, ('stimulus:motd:' ~ stimulus_url('Lotgd\\Core\\Controller\\MotdController'))) }}
+        </div>
+    </div>
+</div>
