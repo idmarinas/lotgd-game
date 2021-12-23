@@ -21,19 +21,12 @@ export default class extends Controller
         this.addOptButton.innerHTML = '<i class="fas fa-plus"></i>'
         this.removeOptButton.innerHTML = '<i class="fas fa-minus"></i>'
 
-        //-- Events for buttons
-        this.addOptButton.addEventListener('click', () =>
-        {
-            this.addPollOpt()
-        })
-
-        // this.addOptButton.childNodes
+        this.addOptButton.addEventListener('click', () => { this.addPollOpt() })
 
         for (let child of this.collectionHolder.childNodes)
         {
             this.pollOptDeleteLink(child)
         }
-
 
         this.collectionHolder.prepend(this.addOptButton)
 
@@ -60,7 +53,6 @@ export default class extends Controller
         // increase the index with one for the next item
         this.collectionHolder.dataset.index = index + 1
 
-        // Display the form option
         newForm = this.pollOptDeleteLink(newForm)
         this.collectionHolder.append(newForm)
     }
@@ -69,11 +61,7 @@ export default class extends Controller
     {
         const btn = this.removeOptButton.cloneNode(true)
 
-        btn.addEventListener('click', () =>
-        {
-            // remove the li for the tag form
-            element.remove()
-        })
+        btn.addEventListener('click', () => { element.remove() })
 
         element.firstChild.firstChild.prepend(btn)
 
