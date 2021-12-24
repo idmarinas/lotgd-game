@@ -31,7 +31,7 @@ item:
             fail: 'An error occurred and your vote could not be saved'
             success: 'The vote has been recorded correctly'
         result:
-            opt: '{votes,plural, =1{1 vote} other{# votes}} ({percent,number,percent})'
+            opt: '{votes,plural, =1{1 vote} other{# votes}}'
             warning: "`$It's no longer possible to change your vote.`0"
     edit:
         label: 'Edit'
