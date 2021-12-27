@@ -87,6 +87,7 @@
         "symfony/yaml": "4.4.*",
         "tracy/tracy": "^2.8",
         "twig/extra-bundle": "^2.12",
+        "twig/intl-extra": "^3.3",
         "twig/twig": "^2.14"
     },
     "require-dev": {

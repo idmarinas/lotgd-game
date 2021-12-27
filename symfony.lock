@@ -790,6 +790,9 @@
     "twig/extra-bundle": {
         "version": "v2.14.5"
     },
+    "twig/intl-extra": {
+        "version": "v3.3.4"
+    },
     "twig/twig": {
         "version": "v2.14.6"
     },
