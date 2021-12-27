@@ -1,0 +1,47 @@
+{% trans_default_domain translation_domain %}
+
+<div class="max-h-screen w-full max-w-4xl relative">
+    <div class="m-1 bg-lotgd-900 rounded shadow text-left">
+        <div
+            class="p-8"
+            data-controller="form--submit"
+            data-form--submit-url-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MotdController', 'poll') }}"
+        >
+            <h2 class="text-xl mb-4 pb-1 font-bold border-b border-lotgd-500">{{ 'item.add.poll.form.title'|trans|colorize }}</h2>
+
+            <div class="mb-4">
+                <p>{{ 'item.add.poll.form.note'|trans|colorize }}</p>
+
+                {{ form(form) }}
+            </div>
+
+            <div class="flex justify-end items-center flex-wrap mt-6 pt-3 border-t border-lotgd-500">
+                <button
+                    type="button"
+                    class="w-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                    data-action="click->motd#list"
+                >
+                    {{ 'list.form.button.list'|trans }}
+                </button>
+
+                <div class="flex-1"></div>
+
+                <button
+                    type="button"
+                    class="w-auto bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+                    data-action="click->form--submit#send"
+                    data-form--submit-target="activator"
+                >
+                    {{ 'modal.buttons.send'|trans({}, 'app_default') }}
+                </button>
+                <button
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    data-action="click->motd#close"
+                >
+                    {{ 'modal.buttons.cancel'|trans({}, 'app_default') }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

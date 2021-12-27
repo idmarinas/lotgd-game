@@ -1,0 +1,89 @@
+{% trans_default_domain 'jaxon_motd' %}
+<div class="w-full bg-lotgd-800 rounded-lg shadow-sm duration-500 px-3 sm:px-6 py-4 mb-6">
+    <div>
+        {% if SU_POST_MOTD %}
+            <button
+                type="button"
+                class="w-auto input-red float-right text-xs py-1"
+                data-action="click->motd#delete"
+                data-motd-item-id-param="{{ motd.motditem }}"
+                data-motd-text-param="{{ 'item.del.confirm'|trans|uncolorize }}"
+            >{{ 'item.del.label'|trans|uncolorize }} <i class="fas fa-trash" aria-hidden="true"></i></button>
+        {% endif %}
+
+        <div class="sm:text-sm md:text-md lg:text-lg text-gray-200 font-bold">{{ 'item.poll.poll'|trans|colorize }}: {{ motd.motdtitle }}</div>
+
+        <p class="mt-2 text-col-dk-green text-sm md:text-md">
+            {{ motd.motdbody.body|nl2br|colorize }}
+
+            <form class="flex gap-2 flex-col" action="{{ 'motd.php?op=vote'|lotgd_url }}" method="POST">
+                <input type="hidden" name="motditem" value="{{ motd.motditem }}">
+                {% set vote = 'item.poll.vote'|trans|uncolorize %}
+                {% if user.loggedin %}
+                    {% if motd.pollResult.userVote is defined and motd.pollResult.userVote is not null %}
+                        {{ 'item.poll.result.warning'|trans|colorize }}
+                    {% else %}
+                        {{ 'item.poll.warning'|trans|colorize }}
+                    {% endif %}
+                {% endif %}
+                {% for id, option in motd.motdbody.opt %}
+                    <div class="flex gap-2">
+                        <div class="flex-none">
+                            {% if user.loggedin %}
+                                {% set class = (motd.pollResult.userVote is defined and motd.pollResult.userVote is not null) ? 'grey disabled' : '' %}
+                                {% set class = (motd.pollResult.userVote is defined and motd.pollResult.userVote is not null and motd.pollResult.userVote == id) ? 'green disabled' : class %}
+                                <button
+                                    type="button"
+                                    class="py-1 text-xs {{ class }}"
+                                    aria-label="{{ vote }}"
+                                    data-action="click->motd#vote"
+                                    data-motd-item-id-param="{{ motd.motditem }}"
+                                    data-motd-option-id-param="{{ id }}"
+                                ><i class="far fa-thumbs-up" aria-hidden="true"></i> {{ vote }}</button>
+                            {% else %}
+                                <i aria-hidden="true" class="fas fa-dragon"></i>
+                            {% endif %}
+                        </div>
+                        <div class="flex-initial border-r border-lotgd-200 pr-2">{{ option|uncolorize }}</div>
+
+                        {% set percent = motd.pollResult.totalVotes ? (motd.pollResult.opt[id] / motd.pollResult.totalVotes) : 0 %}
+                        {% set params = {'votes': motd.pollResult.opt[id]} %}
+
+                        <div class="flex-initial">{{ 'item.poll.result.opt'|trans(params)|uncolorize }}</div>
+
+                        <div class="flex-1">
+                            <div
+                                class="bg-lotgd-700 rounded h-6 relative"
+                                role="progressbar"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                            >
+                                <div
+                                    class="bg-lotgd-500 rounded h-6 text-center text-gray-400 text-sm transition"
+                                    style="width: {{ (percent * 100) }}%; transition: width 2s;"
+                                ></div>
+                                <div class="absolute top-0 w-full h-6 text-center">{{ percent|format_percent_number }}</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </form>
+        </p>
+    </div>
+
+    <!-- Meta -->
+    <div class="grid grid-cols-2 mt-4 my-auto border-t border-lotgd-100 pt-1">
+        <!-- Date  -->
+        <div class="col-span-8">
+            <span class="font-light text-col-lt-cyan">{{ '{d,date,medium} {d,time}'|tmf({'d': motd.motddate }) }}</span>
+        </div>
+
+        <!-- User -->
+        <div class="col-start-9 col-end-12">
+            <div class="flex gap-4 items-center">
+                <i class="fas fa-poll" aria-hidden="true"></i>
+                <div class="text-gray-100 font-bold text-sm">{{ (motd.motdauthorname ?: 'item.author'|trans)|colorize }}</div>
+            </div>
+        </div>
+    </div>
+</div>
