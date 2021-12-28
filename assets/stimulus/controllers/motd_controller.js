@@ -2,7 +2,7 @@ import RemoteModal from './remote_modal_controller'
 import Swal from '../../external/swal'
 
 //-- Mixins
-import { useLoadingBarTop, useButtonLoading, useSyncIcon } from '../mixins'
+import { useButtonLoading } from '../mixins'
 
 export default class extends RemoteModal
 {
