@@ -1,0 +1,22 @@
+{#
+    This file is part of "LoTGD Core Package".
+
+    @see https://github.com/idmarinas/lotgd-game
+
+    @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.md
+    @author IDMarinas
+
+    @since 7.0.0
+
+    @file Template for show a container of notification of timeout.
+
+    Available variables:
+    - none
+#}
+
+{% if user.loggedin|default(false) %}
+    <div
+        class="fixed inset-x-0 top-0 flex flex-col items-end justify-right px-4 py-6 sm:p-6 justify-end z-30 pointer-events-none"
+        {{ stimulus_controller('timeout', { 'url': stimulus_url('Lotgd\\Core\\Controller\\Stimulus\\TimeoutController') }) }}
+    ></div>
+{% endif %}

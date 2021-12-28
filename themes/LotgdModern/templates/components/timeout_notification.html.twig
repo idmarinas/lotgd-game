@@ -1,0 +1,54 @@
+{#
+    This file is part of "LoTGD Core Package".
+
+    @see https://github.com/idmarinas/lotgd-game
+
+    @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.md
+    @author IDMarinas
+
+    @since 7.0.0
+
+    @file Template for show a notification of timeout.
+
+    Available variables:
+    - translation_domain<string>: Translation domain for use with trans filter
+    - timeout<int|float>: Time until forced disconnection
+#}
+
+{% import '_macros/_notifications.html.twig' as helper %}
+
+{% trans_default_domain translation_domain %}
+
+{% set type_class = helper.notification_type('warning') %}
+
+<div
+    class="hidden transition transform duration-1000 max-w-sm w-full shadow-lg px-4 py-3 mb-4 rounded relative pointer-events-auto border-l-4 {{ type_class }}"
+    data-controller="notification"
+    data-notification-delay-value="8000"
+    data-transition-enter-from="opacity-0 translate-x-6"
+    data-transition-enter-to="opacity-100 translate-x-0"
+    data-transition-leave-from="opacity-100 translate-x-0"
+    data-transition-leave-to="opacity-0 translate-x-6"
+>
+    <div class="p-2">
+        <div class="flex items-start">
+            <div class="ml-3 w-0 flex-1 pt-0.5">
+                <p class="text-sm leading-5 font-medium">
+                    {% if timeout <= 1 %}
+                        <strong>{{ 'session.timeout'|trans|uncolorize }}</strong>
+                    {% else %}
+                        {{ 'session.time_out_in'|trans({ 'n': timeout })|uncolorize }}
+                    {% endif %}
+                </p>
+            </div>
+            <div class="ml-4 flex-shrink-0 flex">
+                <button
+                    data-action="notification#hide"
+                    class="inline-flex text-white focus:outline-none focus:text-gray-300 transition ease-in-out duration-150"
+                >
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
