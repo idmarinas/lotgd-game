@@ -1,0 +1,162 @@
+{# Button of message of the day #}
+{% block message_of_the_day %}
+    {% trans_default_domain 'app_default' %}
+
+    <span
+        data-controller="motd"
+        data-motd-allow-background-close="true"
+        data-motd-url-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MotdController') }}"
+        data-motd-url-item-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MotdController', 'item') }}"
+        data-motd-url-poll-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MotdController', 'poll') }}"
+        data-motd-url-delete-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MotdController', 'delete') }}"
+        data-motd-url-vote-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MotdController', 'vote') }}"
+        data-motd-reload-data-value="true"
+    >
+        <button
+            type="button"
+            class="relative w-auto py-1 ml-2"
+            data-action="click->motd#open"
+            data-motd-target="activator"
+        >
+            {% if session.needtoviewmotd %}
+                <span class="flex absolute w-auto h-auto top-0 right-0 -mt-1 -mr-1" aria-hidden="true">
+                    <i class="animate-ping absolute inline-flex fas fa-certificate opacity-75 text-lotgd-green-600"></i>
+                    <i class="relative inline-flex fas fa-certificate text-lotgd-green-600"></i>
+                </span>
+            {% endif %}
+
+            {{ 'parts.motd.title'|trans }}
+        </button>
+
+        <div
+            data-motd-target="container"
+            data-action="click->motd#closeBackground keyup@window->motd#closeWithKeyboard"
+            class="transition duration-500 ease-in-out fixed inset-0 overflow-y-auto flex items-center justify-center whitespace-normal hidden"
+        ></div>
+    </span>
+{% endblock message_of_the_day %}
+
+{# Button for ye olde mail "Internal mail" #}
+{% block ye_olde_mail %}
+    {% trans_default_domain 'app_default' %}
+
+    {% if user.loggedin %}
+        <span
+            data-controller="mail petition"
+            data-mail-allow-background-close="true"
+            data-mail-url-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MailController', 'inbox') }}"
+            data-mail-url-status-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MailController', 'status') }}"
+            data-mail-url-write-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MailController', 'write') }}"
+            data-mail-url-reply-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MailController', 'reply') }}"
+            data-mail-url-read-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MailController', 'read') }}"
+            data-mail-url-unread-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MailController', 'unread') }}"
+            data-mail-url-delete-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MailController', 'delete') }}"
+            data-mail-url-delete-bulk-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MailController', 'deleteBulk') }}"
+            data-petition-url-report-value="{{ stimulus_url('Lotgd\\Core\\Controller\\PetitionController', 'report') }}"
+            data-mail-reload-data-value="true"
+            data-mail-trans-check-all-inactive-value="{{ "section.default.form.button.check.all"|trans({}, 'jaxon_mail')|uncolorize }}"
+            data-mail-trans-check-all-active-value="{{ "section.default.form.button.check.none"|trans({}, 'jaxon_mail')|uncolorize }}"
+        >
+            <button
+                type="button"
+                class="relative w-auto py-1 ml-2"
+                data-mail-target="activator"
+                data-action="click->mail#open"
+            >
+                {% include 'mail/status.html.twig' %}
+            </button>
+
+            <div
+                data-mail-target="container"
+                data-petition-target="container"
+                data-action="click->mail#closeBackground keyup@window->mail#closeWithKeyboard"
+                class="transition duration-500 ease-in-out fixed inset-0 overflow-y-auto flex items-center justify-center whitespace-normal hidden"
+            ></div>
+        </span>
+    {% else %}
+        <button type="button" class="w-auto py-1" disabled aria-disabled="true">{{ 'parts.mail.anonymous'|trans|colorize }}</button>
+    {% endif %}
+{% endblock ye_olde_mail %}
+
+{# Button for user petition of help #}
+{% block user_petition %}
+    {% trans_default_domain 'app_default' %}
+
+    <span
+        data-controller="petition"
+        data-petition-allow-background-close="true"
+        data-petition-url-value="{{ stimulus_url('Lotgd\\Core\\Controller\\PetitionController', 'help') }}"
+        data-petition-url-faq-value="{{ stimulus_url('Lotgd\\Core\\Controller\\PetitionController', 'faq') }}"
+        data-petition-url-primer-value="{{ stimulus_url('Lotgd\\Core\\Controller\\PetitionController', 'primer') }}"
+        data-petition-reload-data-value="true"
+    >
+        <button
+            type="button"
+            class="w-auto py-1 ml-2"
+            id="petition-button"
+            data-action="click->petition#open"
+            data-petition-target="activator"
+        >
+            {{ 'parts.petition.help'|trans|colorize }}
+        </button>
+
+        <div
+            data-petition-target="container"
+            data-action="click->petition#closeBackground keyup@window->petition#closeWithKeyboard"
+            class="transition duration-500 ease-in-out fixed inset-0 overflow-y-auto flex items-center justify-center whitespace-normal hidden"
+        ></div>
+    </span>
+{% endblock user_petition %}
+
+{# Button for Adminitrators, admin user and petitions #}
+{% block admin_petition %}
+    {% trans_default_domain 'app_default' %}
+
+    {# Show only to administrator that have user edit permits #}
+    {% if canEditUsers %}
+        {% set url_edit_user = "user.php"|lotgd_url %}
+        <button
+            type="button"
+            class="w-auto input-orange py-1 ml-2"
+            onclick="window.location.href = '{{ url_edit_user }}'"
+        >{{ 'parts.petition.editUser'|trans|colorize }}</button>
+    {% endif %}
+
+    {# Show only to administrators that have petitions edit permits #}
+    {% if canEditPetitions %}
+        <br>
+        <a class="ui tertiary button " href='{{ 'viewpetition.php'|lotgd_url }}'>{{ 'parts.petition.admin'|trans|colorize }}:</a>
+        {{ 'parts.petition.status.05'|trans({'n': petitions.5 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.04'|trans({'n': petitions.4 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.00'|trans({'n': petitions.0 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.01'|trans({'n': petitions.1 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.03'|trans({'n': petitions.3 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.07'|trans({'n': petitions.7 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.06'|trans({'n': petitions.6 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.02'|trans({'n': petitions.2 })|colorize }}
+    {% endif %}
+{% endblock admin_petition %}
+
+{# Button of source #}
+{% block game_source %}
+    {% with %}
+        {% set title = 'title'|trans({}, 'jaxon_source') %}
+        {% set max_width = 'max-w-3xl' %}
+        {% set activator = {
+            text: 'parts.source.title'|trans({}, 'app_default'),
+            class: ' '
+        } %}
+        {% set content = 'paragraph'|trans({
+            'dragonprime': '<a href="http://www.dragonprime.net" target="_blank" rel="noopener noreferrer">DragonPrime</a>',
+            'idmarinas': '<a href="https://github.com/idmarinas/lotgd-game" target="_blank" rel="noopener noreferrer">IDMarinas Edition</a>'
+        }, 'jaxon_source')|colorize %}
+
+        {% set content = content ~ "<ul class='list-disc list-inside'><li>" ~
+            'ul.li.releasing'|trans({}, 'jaxon_source')|colorize ~ "</li><li>" ~
+            'ul.li.removing'|trans({}, 'jaxon_source')|colorize ~ "</li><li>" ~
+            'ul.li.portions'|trans({}, 'jaxon_source')|colorize~ "</li><li>" ~
+            'ul.li.claiming'|trans({}, 'jaxon_source')|colorize ~ "</li></ul>" %}
+
+        {{ block("dialog", "components/modal.html.twig") }}
+    {% endwith %}
+{% endblock game_source %}
