@@ -84,7 +84,7 @@ class Battle
             throw new \LogicException('Can not get the results of battle. Call Battle::battleEnd() before Battle::battleResults().');
         }
 
-        $content = $this->twig->render('page/battle.html.twig', $this->getContext());
+        $content = $this->twig->render('battle/index.html.twig', $this->getContext());
 
         $this->battleShowedResults = true;
 
