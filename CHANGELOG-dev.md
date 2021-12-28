@@ -51,6 +51,9 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   Deprecated trait: `Lotgd\Core\Controller\Pattern\RenderBlockTrait`
     -   Use `Lotgd\Core\Pattern\LotgdControllerTrait` instead
         -   This trait have other methods used in LoTGD
+-   **JaxonPHP** is deprecated and deleted of core in version 8.0.0
+    -   You can add this dependencie if your use it in version 8.0.0 and up
+    -   Think about migrating all JaxonPHP classes to Stimulus.
 
 ### :wrench: FIXES
 
@@ -65,6 +68,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **Important**:
     -   :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
     -   :warning: Avoid, as far as possible, using static classes (e.g. LotgdSetting, Doctrine, LotgdTranslation...) as these classes will be deleted in a future version. Use autowire, dependency injection when possible.
+    -   :warning: Version 6.0.0 change templates for use **TailwindCSS**
 -   **Upgrade/Install for version 5.0.0 and up**
     -   First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
     -   If have problems:
