@@ -24,12 +24,6 @@ class Version60200 extends InstallerAbstract
     protected $upgradeVersion = 60200;
     protected $hasMigration   = 20210908113907;
 
-    public function __construct(EntityManagerInterface $doctrine, TranslatorInterface $translator)
-    {
-        $this->doctrine   = $doctrine;
-        $this->translator = $translator;
-    }
-
     //-- Delete old files
     public function step0(): bool
     {
