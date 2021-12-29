@@ -1,7 +1,7 @@
 {% block layout_header %}
     <div class="flex flex-col-reverse lg:flex-row">
         <div class="flex-grow flex flex-wrap content-center lotgd-border-image">
-            <h1>{{ head_title().renderTitle()|uncolorize }}</h1>
+            <h1 class="text-2xl">{{ head_title().renderTitle()|uncolorize }}</h1>
         </div>
         <div class="flex-none">
             <img class="float-right" src="{{ asset('build/images/logo.jpg') }}" width="465" height="71" alt="The Legend of the Green Dragon Logo">
