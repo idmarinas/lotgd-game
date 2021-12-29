@@ -13,9 +13,7 @@
 
 namespace Lotgd\Core\Installer\Upgrade;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Installer\InstallerAbstract;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Version60200 extends InstallerAbstract
 {
