@@ -1,0 +1,35 @@
+{% macro combat_health_bar(data, translation_domain) %}
+    {% trans_default_domain translation_domain %}
+
+    <div class="grid grid-cols-1">
+        <div>
+            {% set nametext = (data.name is iterable ? data.name[0]|trans(data.name[1], data.name[2]|default(translation_domain)) : data.name) %}
+
+            {% if data.is_target %}<i class="yellow bullseye icon"></i>{% endif %}
+            {{ '(%s) %s (Level `b%s´b)`0'|trans|format(data.who|trans, nametext, data.level)|colorize }}
+            {% if not data.show_bar %}
+                {% if data.hp_value > 0 %}: {% if data.show_hp_text %}{{ ( '`6' ~ data.hp_value_text ~ '`0')|colorize }}{% endif %}{% else %}{{ 'battle.defeated'|trans|colorize }}{% endif %}
+            {% endif %}
+        </div>
+        {% if not data.showbar %}
+            <div class="flex gap-2 flex-row items-center">
+                <div class="flex-initial">{{ data.health_text|trans|colorize }}:</div>
+                <div class="flex-1">
+                    {% set percent = (data.hp_value / data.hp_total) * 100 %}
+                    {% set class = 'style="width: ' ~ percent ~ '%;"' %}
+                    {% set color = 'bg-green-600' %}
+                    {% set color = percent < 75 ? 'bg-orange-600' : color %}
+                    {% set color = percent < 35 ? 'bg-red-600' : color %}
+
+                    <div class="w-full bg-gray-300 rounded-full dark:bg-gray-700">
+                        <div class="h-1.5 {{ color }} rounded-full" {{ class }}></div>
+                    </div>
+                </div>
+                {% if data.show_hp_text %}
+                    {% set text = data.hp_value > 0 ? '' : 'battle.defeated'|trans|colorize %}
+                    <div class="flex-initial">{{ '(%s/%s) %s`0`n'|format(data.hp_value_text, data.hp_total_text, text)|colorize }}</div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% endmacro %}

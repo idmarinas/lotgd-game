@@ -1,0 +1,114 @@
+{% from '_macros/_battle.html.twig' import combat_health_bar as health_bar %}
+
+{% trans_default_domain translation_domain %}
+
+{{ 'title'|trans|colorize }}
+
+{# Information of criature/s #}
+
+<ul class="mb-3">
+    {% for badguy in enemies %}
+        <li class="grid grid-cols-10 gap-4 justify-center items-center py-2">
+            {% if badguy.creatureimage|default(false) %}
+                <div class="flex justify-center items-center border-r-2 border-solid border-lotgd-200">
+                    <img src="{{ badguy.creatureimage }}" class="h-16 w-16" alt="{{ badguy.creaturename }}">
+                </div>
+            {% endif %}
+            <div class="{{ badguy.creatureimage|default(false) ? 'col-start-2 pl-8' : 'col-start-1' }} col-end-11">
+                {% if badguy.creaturecategory|default(false) %}
+                    <div class="">{{ 'category'|trans({'name': badguy.creaturecategory})|colorize }}</div>
+                {% endif %}
+                <p class="mt-1">{{ 'encounter'|trans({ 'name': badguy.creaturename, 'weapon': badguy.creatureweapon})|colorize }}</p>
+                {% if badguy.creaturedescription|default(false) %}
+                    <p class="mt-1 font-regular text-gray-100">{{ badguy.creaturedescription|trans|colorize }}</p>
+                {% endif %}
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+
+{# Information when battle start #}
+{% for msg in battle_start %}
+    {{ msg[0]|trans(msg[1]|default({}), msg[2]|default(translation_domain))|colorize }}
+{% endfor %}
+
+{% for msg in messages %}
+    {{ msg[0]|trans(msg[1]|default({}), msg[2]|default(translation_domain))|colorize }}
+{% endfor %}
+
+<div class="overflow-hidden rounded border border-lotgd-300">
+    {# Show HP of combatants #}
+    <div class="grid divide-x divide-lotgd-300 grid-cols-2">
+        <div class="p-2">
+            {{ health_bar(bars_start.user, translation_domain) }}
+            {% for companion in bars_start.companions %}
+                {{ health_bar(companion, translation_domain) }}
+            {% endfor %}
+        </div>
+        <div class="p-2">
+            {% for enemy in bars_start.enemies %}
+                {{ health_bar(enemy, translation_domain) }}
+            {% endfor %}
+        </div>
+    </div>
+
+    {# Rounds results #}
+    {% if battle_rounds|length %}
+        <h5 class="border-t p-2 font-bold text-lg border-lotgd-300 bg-gradient-to-r from-transparent to-lotgd-600">
+            {{ 'battle.result'|trans({'n': battle_rounds|length})|colorize }}
+        </h5>
+        <div class="border-t border-lotgd-300 divide-x divide-lotgd-300">
+            <div class="grid grid-cols-2 divide-x divide-lotgd-300">
+                {% for rounds in battle_rounds %}
+                    <div class="p-2 border-b border-lotgd-300">
+                        {% for allied in rounds.allied %}
+                            {% if allied is array %}
+                                {{ allied[0]|trans((allied[1] ?: {}), (allied[2] ?: 'page_battle'))|colorize }}
+                            {% else %}
+                                {{ allied|trans|colorize }}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="p-2 border-b border-lotgd-300">
+                        {% for enemy in rounds.enemy %}
+                            {% if enemy is array %}
+                                {{ enemy[0]|trans((enemy[1] ?: {}), (enemy[2] ?: 'page_battle'))|colorize }}
+                            {% else %}
+                                {{ enemy|trans|colorize }}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    {# Show HP of combatants #}
+    <div class="grid divide-x divide-lotgd-300 grid-cols-2">
+        <div class="p-2">
+            {{ health_bar(bars_end.user, translation_domain) }}
+            {% for companion in bars_end.companions %}
+                {{ health_bar(companion, translation_domain) }}
+            {% endfor %}
+        </div>
+        <div class="p-2">
+            {% for enemy in bars_end.enemies %}
+                {{ health_bar(enemy, translation_domain) }}
+            {% endfor %}
+        </div>
+    </div>
+
+    {# Information when battle has winner #}
+    {% if battle_has_winner %}
+        <h5 class="border-t p-2 font-bold text-lg border-lotgd-300 bg-gradient-to-r from-transparent to-lotgd-600">{{ 'battle.end'|trans|colorize }}</h5>
+        <div class="border-t p-2 border-lotgd-300 ui bottom attached divided segment">
+            {% for msg in battle_end %}
+                {% if msg is array %}
+                    {{ msg[0]|trans((msg[1]|default({})), (msg[2]|default(translation_domain)))|colorize }}
+                {% else %}
+                    {{ msg|trans|colorize }}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
