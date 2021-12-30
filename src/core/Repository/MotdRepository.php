@@ -32,7 +32,7 @@ class MotdRepository extends ServiceEntityRepository
     /**
      * Get last MOTD.
      */
-    public function getLastMotd(?int $userId = null): ?array
+    public function getLastMotd(): array
     {
         $qb = $this->createQueryBuilder('u');
 
@@ -47,22 +47,7 @@ class MotdRepository extends ServiceEntityRepository
                 ->getArrayResult()
             ;
 
-            if (empty($result))
-            {
-                return null;
-            }
-
-            $motd = $result[0][0];
-            unset($result[0][0]);
-            $motd = array_merge($motd, $result[0]);
-
-            //-- Is a poll
-            if ($motd['motdtype'])
-            {
-                $motd = $this->appendPollResults($motd, $userId);
-            }
-
-            return $motd;
+            return $result[0] ?? [];
         }
         catch (\Throwable $th)
         {
