@@ -1,0 +1,7 @@
+{% use 'page/_blocks/_weapon.html.twig' %}
+
+{% trans_default_domain textDomain %}
+
+{{ ('`c`b`&' ~ 'title'|trans ~ '`0´b´c')|colorize }}
+
+{{ block('weapon_' ~ opt|default('default')) }}

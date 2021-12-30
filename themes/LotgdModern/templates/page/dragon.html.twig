@@ -1,0 +1,21 @@
+{% trans_default_domain textDomain %}
+
+{% if flawless %}
+    {{ 'prologe.flawless.title'|trans|colorize }}
+{% endif %}
+
+{{ 'prologe.paragraph.1'|trans|colorize }}
+
+{% if flawless %}
+    {{ 'prologe.flawless.paragraph'|trans|colorize }}
+{% endif %}
+
+{{ 'prologe.paragraph.2'|trans|colorize }}
+
+{% set result = modulehook('dragonkilltext') %}
+{% for message in result %}
+    {{ message[0]|trans(message[1], message[2])|colorize }}
+{% endfor %}
+
+{{ 'prologe.paragraph.3'|trans({ 'playerName': user.name, 'creatureName': creatureName, 'times': user.dragonkills })|colorize }}
+

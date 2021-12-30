@@ -1,0 +1,7 @@
+{% use 'page/_blocks/_bank.html.twig' %}
+
+{% trans_default_domain textDomain %}
+
+{{ 'subtitle'|trans|colorize }}
+
+{{ block('bank_' ~ opt|default('enter')) }}

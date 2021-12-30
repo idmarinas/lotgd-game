@@ -1,0 +1,65 @@
+{#
+    This module hooks only get messages prepare to print in array format.
+    Example:
+        [
+            [
+                'translation.key',
+                ['params' => 'for use in translation'],
+                'textDomain'
+            ],
+            [
+                'translation.key.2',
+                ['params2' => 'for use in translation2'],
+                'textDomain2'
+            ]
+        ]
+#}
+{% trans_default_domain textDomain %}
+
+{% set result = modulehook('village-header') %}
+{% for message in result %}
+    {{ message[0]|trans(message[1], message[2])|colorize }}
+{% endfor %}
+
+{% if showVillageDesc %}
+    {{ 'description'|trans(_context)|colorize }}
+
+    {{ 'clock'|trans({'clock': gametime()})|colorize }}
+
+    {% set result = modulehook('village-desc') %}
+    {% for message in result %}
+        {% if message is array %}
+            {{ message[0]|trans(message[1]|default({}), message[2])|colorize }}
+        {% else %}
+            {{ message|colorize }}
+        {% endif %}
+    {% endfor %}
+
+    {% if newestplayer and newtext %}
+        {{ newtext|trans({'name': newestname })|colorize }}
+
+        {% if SU_EDIT_USERS and newestplayer %}
+            [<a href="{{ ('user.php?op=edit&userid=' ~ newestplayer)|lotgd_url }}">{{ 'opt.edit'|trans({}, 'app_default') }}</a>]
+        {% endif %}
+    {% endif %}
+    <br>
+{% endif %}
+
+{# Show or not comment area #}
+{% if not blockCommentArea %}
+    {# Set a limits of comments per page. Default is 25 #}
+    {% commentary_limit_comments 25 %}
+
+    {# Set if show pagination of comments. Default is true #}
+    {% commentary_show_pagination true %}
+
+    {# Set the url for links of pagination. Default is $_SERVER['REQUEST_URI'] #}
+    {% commentary_pagination_link_url 'village.php' %}
+
+    {# Set if can add new comments. Default is true #}
+    {% commentary_can_add_comments true %}
+
+    {{ commentary_block({
+        'section': commentarySection
+    }, textDomain) }}
+{% endif %}

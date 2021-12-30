@@ -1,0 +1,5 @@
+{% use 'page/_blocks/_rock.html.twig' %}
+
+{% trans_default_domain textDomain %}
+
+{{ block('rock_' ~ tpl|default('default')) }}

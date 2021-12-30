@@ -1,0 +1,13 @@
+{% use 'page/_blocks/_newday.html.twig' %}
+
+{% trans_default_domain textDomain %}
+
+{% for tpl, params in includeTemplatesPre %}
+    {% include tpl with params %}
+{% endfor %}
+
+{{ block('newday_' ~ tpl|default('default')) }}
+
+{% for tpl, params in includeTemplatesPost %}
+    {% include tpl with params %}
+{% endfor %}

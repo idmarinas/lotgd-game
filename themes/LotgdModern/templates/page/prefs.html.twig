@@ -1,0 +1,5 @@
+{% use 'page/_blocks/_prefs.html.twig' %}
+
+{% trans_default_domain textDomain %}
+
+{{ block('prefs_' ~ tpl|default('default')) }}

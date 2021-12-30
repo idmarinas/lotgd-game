@@ -1,0 +1,50 @@
+{% trans_default_domain textDomain %}
+
+{% set result = modulehook('biotop', { 'target': character, 'messages': {} }) %}
+{% for message in result.messages %}
+    {{ message[0]|trans(message[1], message[2])|colorize }}
+{% endfor %}
+
+{{ 'subtitle'|trans({ 'name': character.name })|colorize }}
+
+{% if user.loggedin %}
+    <a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.write('{{ character.acctid }}')" data-tooltip="{{ 'writeMail'|trans|uncolorize }}">
+        <img src="images/newscroll.GIF" width="16" height="16" alt="{{ 'writeMail'|trans|uncolorize }}" border="0">
+    </a>
+{% endif %}
+<br><br>
+{% if character.clanname and getsetting('allowclans', false) %}
+    {{ 'bio.clan'|trans({ 'player': character.name, 'rankName': ranks[character.clanrank]|default('ranks.00')|trans({}, 'page_clan'), 'clanName': character.clanname })|colorize }}
+{% endif %}
+
+{{ 'bio.title'|trans({ 'title': character.title })|colorize }}
+{{ 'bio.level'|trans({ 'level': character.level })|colorize }}
+{{ 'bio.dragonkills'|trans({ 'dragonkills': character.dragonkills })|colorize }}
+{{ 'bio.status'|trans({ 'status': character.loggedin })|colorize }}
+{{ 'bio.resurrections'|trans({ 'resurrections': character.resurrections  })|colorize }}
+{{ 'bio.race'|trans({ 'race': 'character.racename'|trans({}, character.race|default(RACE_UNKNOWN)) })|colorize }}
+{{ 'bio.gender'|trans({ 'sex': character.sex })|colorize }}
+{{ 'bio.specialty'|trans({ 'specialty': specialties[character.specialty] })|colorize }}
+{{ 'bio.creature'|trans({ 'mount': character.mountname|default('character.mount'|trans({}, 'app_default')) })|colorize }}
+
+{% set result = modulehook('biostat', { 'target': character, 'messages': {} }) %}
+{% for message in result.messages %}
+    {{ message[0]|trans(message[1], message[2])|colorize }}
+{% endfor %}
+
+{{ 'bio.bio'|trans({ 'bio': character.bio|default('character.bio'|trans({}, 'app_default'))|censor|colorize })|colorize }}
+
+{{ 'bio.news'|trans({'character': character.name})|colorize }}
+<br>
+{% set odate = '' %}
+{% for news in recentNews %}
+    {% if odate != news.date %}
+        {{ '`n`b`@{d,date,medium}`0´b`n'|tmf({'d': news.date})|colorize }}
+        {% set odate = news.date %}
+    {% endif %}
+
+    {{ show_news_item(news)|colorize }}
+    <br>
+{% else %}
+    {{ 'list.notFound'|trans|colorize }}
+{% endfor %}

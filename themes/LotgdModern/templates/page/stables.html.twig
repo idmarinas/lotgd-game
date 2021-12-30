@@ -1,0 +1,9 @@
+{% use 'page/_blocks/_stables.html.twig' %}
+
+{% trans_default_domain textDomain %}
+
+{{ block('stables_' ~ tpl|default('default')) }}
+
+{% if confirm == 0 and user.hashorse %}
+    {{ 'section.offer'|trans(_context)|colorize }}
+{% endif %}

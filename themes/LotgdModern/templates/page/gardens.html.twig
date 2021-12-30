@@ -1,0 +1,17 @@
+{% trans_default_domain textDomain %}
+
+{% for tpl, params in includeTemplatesPre %}
+    {% include tpl with params %}
+{% endfor %}
+
+{% if showGardenDesc %}
+    {{ 'description'|trans|colorize }}
+{% endif %}
+
+{% for tpl, params in includeTemplatesPost %}
+    {% include tpl with params %}
+{% endfor %}
+
+{{ commentary_block({
+    'section': 'gardens'
+}, textDomain) }}

@@ -1,0 +1,7 @@
+{% trans_default_domain 'page_badnav' %}
+
+{% if user.alive %}
+    {{ 'navsCorrupt.village'|trans({'location': user.location})|colorize }}
+{% else %}
+    {{ 'navsCorrupt.shades'|trans|colorize }}
+{% endif %}

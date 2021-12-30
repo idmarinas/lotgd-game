@@ -1,0 +1,7 @@
+{% use 'page/_blocks/_healer.html.twig' %}
+
+{% trans_default_domain textDomain %}
+
+{{ 'subtitle'|trans|colorize }}
+
+{{ block('healer_' ~ tpl|default('default')) }}
