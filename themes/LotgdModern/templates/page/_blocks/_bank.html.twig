@@ -1,0 +1,230 @@
+{% block bank_borrow %}
+    {% trans_default_domain textDomain %}
+
+    {% if user.goldinbank >= 0 %}
+        {{ 'borrow.balance.positive'|trans({ 'gold': user.goldinbank, 'ownerName': ownerName })|colorize }}
+    {% else %}
+        {{ 'borrow.balance.negative'|trans({ 'gold': user.goldinbank|abs, 'ownerName': ownerName })|colorize }}
+    {% endif %}
+
+    {{ 'borrow.paragraph'|trans({ 'name': user.name, 'n': maxborrow })|colorize }}
+
+    <form action="{{ 'bank.php?op=withdrawfinish'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+        <input type="hidden" name="borrow" value="x">
+        <div class="flex flex-col">
+            <div class="flex gap-4">
+                <input type="number" id="input" name="amount" class="flex-1">
+                <button type="submit" class="flex-initial w-auto">{{ 'borrow.form.button.submit'|trans|uncolorize }}</button>
+            </div>
+            {{ 'borrow.form.input.amount.note'|trans|colorize }}
+        </div>
+    </form>
+{% endblock bank_borrow %}
+
+{% block bank_deposit %}
+    {% trans_default_domain textDomain %}
+
+    {% if user.goldinbank >= 0 %}
+        {{ 'deposit.balance.positive'|trans({ 'gold': user.goldinbank, 'ownerName': ownerName })|colorize }}
+    {% else %}
+        {{ 'deposit.balance.negative'|trans({ 'gold': user.goldinbank|abs, 'ownerName': ownerName })|colorize }}
+    {% endif %}
+
+    {{ 'deposit.searching'|trans({ 'gold': user.gold, 'ownerName': ownerName })|colorize }}
+
+    <form action="{{ 'bank.php?op=depositfinish'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+        <div class="flex gap-4 flex-col">
+            <label for="amount">
+                {% if user.goldinbank >= 0 %}
+                    {{ 'deposit.form.input.amount.label.dep'|trans({'ownerName': ownerName})|colorize }}
+                {% else %}
+                    {{ 'deposit.form.input.amount.label.pay'|trans({'ownerName': ownerName})|colorize }}
+                {% endif %}
+            </label>
+            <div class="flex gap-4">
+                <input type="number" id="amount" name="amount" class="flex-1">
+                <button type="submit" class="flex-initial w-auto">{{ 'deposit.form.button.submit'|trans|uncolorize }}</button>
+            </div>
+            {{ 'deposit.form.input.amount.note'|trans(_context)|colorize }}
+        </div>
+    </form>
+{% endblock bank_deposit %}
+
+{# Deposit end #}
+{% block bank_depositend %}
+    {% trans_default_domain textDomain %}
+
+    {% if deposited %}
+        {% if user.goldinbank >= 0 %}
+            {{ 'deposit.finish.balance.positive'|trans({ 'amount': amount, 'name': user.name, 'bank': user.goldinbank, 'gold': user.gold, 'ownerName': ownerName })|colorize }}
+        {% else %}
+            {{ 'deposit.finish.balance.negativve'|trans({ 'amount': amount, 'name': user.name, 'bank': user.goldinbank|abs, 'gold': user.gold, 'ownerName': ownerName })|colorize }}
+        {% endif %}
+    {% else %}
+        {{ 'deposit.finish.fail'|trans({ 'gold': user.gold, 'amount': amount, 'ownerName': ownerName })|colorize }}
+    {% endif %}
+{% endblock bank_depositend %}
+
+{% block bank_enter %}
+    {% trans_default_domain textDomain %}
+
+    {{ 'default.paragraph'|trans({'name': user.name, 'ownerName': ownerName})|colorize }}
+
+    {% if user.goldinbank >= 0 %}
+        {{ 'default.balance.positive'|trans({ 'balance': user.goldinbank, 'ownerName': ownerName })|colorize }}
+    {% else %}
+        {{ 'default.balance.negative'|trans({ 'balance': user.goldinbank|abs, 'ownerName': ownerName })|colorize }}
+    {% endif %}
+{% endblock bank_enter %}
+
+{% block bank_transfer %}
+    {% trans_default_domain textDomain %}
+
+    {% if user.goldinbank >= 0 %}
+        {{ 'transfer.subtitle'|trans|colorize }}
+        {{ 'transfer.paragraph'|trans({'transferPerLevel': transferPerLevel, 'maxTransfer': maxTransfer, 'ownerName': ownerName})|colorize }}
+
+        {% if user.amountouttoday > 0 %}
+            {{ 'transfer.transferred'|trans({'transferred': user.amountouttoday})|colorize }}
+        {% endif %}
+        <br>
+        <form action="{{ 'bank.php?op=transfer2'|lotgd_url }}" method="POST" class="ui form" autocomplete="off">
+            <div class="field">
+                <label for="amount">{{ 'transfer.form.input.amount'|trans|colorize }}</label>
+                <input type="number" name="amount" id="amount">
+            </div>
+            <div class="field">
+                <label for="to">{{ 'transfer.form.input.to'|trans|colorize }}</label>
+                <input type="text" name="to" id="to">
+            </div>
+            <div class="field">
+                <button class="ui button" type="submit">{{ 'transfer.form.button.submit'|trans|uncolorize }}</button>
+            </div>
+        </form>
+    {% else %}
+        {{ 'transfer.refused'|trans|colorize }}
+    {% endif %}
+{% endblock bank_transfer %}
+
+{% block bank_transfer2 %}
+    {% trans_default_domain textDomain %}
+
+    {{ 'transfer2.subtitle'|trans|colorize }}
+
+    {% set count = characters|length %}
+
+    {% if count == 1 %}
+        <form action="{{ 'bank.php?op=transfer3'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+            <input type="hidden" name="to" value="{{ characters[0].id }}">
+            <input type="hidden" name="amount" value="{{ amount }}">
+            <div class="field">
+                {{ 'transfer2.form.confirm'|trans({ 'amount': amount, 'name': characters[0].name })|colorize }}
+            </div>
+            <div class="field">
+                <button class="ui button">{{ 'transfer2.form.button.submit'|trans|uncolorize }}</button>
+            </div>
+        </form>
+    {% elseif count > 1 %}
+        {% if count == 100 %}
+            {{ 'transfer2.results.toMuch'|trans({'ownerName': ownerName})|colorize }}
+        {% endif %}
+        <form action="{{ 'bank.php?op=transfer3'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+            <input type="hidden" name="amount" value="{{ amount }}">
+            <div class="field">
+                <label for="to">{{ 'transfer2.form.results'|trans({ 'amount': amount })|colorize }}</label>
+                <select name="to" id="to" class="ui search selection lotgd dropdown">
+                    {% for char in characters %}
+                        <option value="{{ char.id }}">{{ char.name|uncolorize }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="field">
+                <button class="ui button">{{ 'transfer2.form.button.submit'|trans|uncolorize }}</button>
+            </div>
+        </form>
+    {% else %}
+        {{ 'transfer2.notFound'|trans|colorize }}
+    {% endif %}
+{% endblock bank_transfer2 %}
+
+{% block bank_transfer3 %}
+    {% trans_default_domain textDomain %}
+
+    {{ 'transfer2.subtitle'|trans|colorize }}
+
+    {% if transferred is same as(true) %}
+        {{ 'transfer3.success.paragraph'|trans({'ownerName': ownerName})|colorize }}
+    {% elseif transferred is same as(false) %}
+        {{ 'transfer3.error.noGold'|trans({ 'amount': amount, 'gold': (user.gold + user.goldinbank), 'ownerName': ownerName })|colorize }}
+    {% elseif transferred is same as(0) %}
+        {{ 'transfer3.error.notFound'|trans({'ownerName': ownerName})|colorize }}
+    {% elseif transferred == 'sameAct' %}
+        {{ 'transfer3.error.sameAct'|trans({'ownerName': ownerName})|colorize }}
+    {% elseif transferred == 'maxOut' %}
+        {{ 'transfer3.error.maxOut'|trans({ 'n': maxOut, 'ownerName': ownerName })|colorize }}
+    {% elseif transferred == 'level' %}
+        {{ 'transfer3.error.level'|trans({'ownerName': ownerName})|colorize }}
+    {% elseif transferred == 'maxtfer' %}
+        {{ 'transfer3.error.maxtfer'|trans({'n': maxtfer, 'name': name, 'ownerName': ownerName })|colorize }}
+    {% elseif condition %}
+    {% elseif transferred == 'tomanytfer' %}
+        {{ 'transfer3.error.tomanytfer'|trans({'name': name, 'ownerName': ownerName})|colorize }}
+    {% endif %}
+{% endblock bank_transfer3 %}
+
+{% block bank_withdraw %}
+    {% trans_default_domain textDomain %}
+
+    {% if user.goldinbank >= 0 %}
+        {{ 'withdraw.balance.positive'|trans({ 'gold': user.goldinbank, 'ownerName': ownerName })|colorize }}
+    {% else %}
+        {{ 'withdraw.balance.negative'|trans({ 'gold': user.goldinbank|abs, 'ownerName': ownerName })|colorize }}
+    {% endif %}
+
+    {{ 'withdraw.paragraph'|trans({ 'name': user.name })|colorize }}
+
+    <form action="{{ 'bank.php?op=withdrawfinish'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+        <div class="flex flex-col">
+            <div class="flex gap-4">
+                <input type="number" id="input" name="amount" class="flex-1">
+                <button type="submit" class="flex-initial w-auto">{{ 'withdraw.form.button.submit'|trans|uncolorize }}</button>
+            </div>
+            {{ 'withdraw.form.input.amount.note'|trans|colorize }}
+        </div>
+    </form>
+{% endblock bank_withdraw %}
+
+{# Withdraw end #}
+{% block bank_withdrawend %}
+    {% trans_default_domain textDomain %}
+
+    {% if withdrawal is same as(false) %}
+        {{ 'withdraw.finish.fail'|trans({ 'bank': user.goldinbank, 'amount': amount, 'ownerName': ownerName })|colorize }}
+    {% elseif withdrawal is same as(true) %}
+        {{ 'withdraw.finish.withdraw.success'|trans({ 'name': user.name, 'gold': user.gold, 'bank': user.goldinbank, 'amount': amount, 'ownerName': ownerName })|colorize }}
+    {% elseif withdrawal == 1 %}
+        {{ 'withdraw.finish.borrow.fail'|trans({ 'borrow': (lefttoborrow - user.goldinbank), 'maxborrow': maxborrow, 'bank': user.goldinbank, 'ownerName': ownerName })|colorize }}
+    {% elseif withdrawal == 2 %}
+        {% if didwithdraw %}
+            {{ 'withdraw.finish.borrow.withdraw.success'|trans({'bank': goldInBank, 'ownerName': ownerName })|colorize }}
+        {% endif %}
+
+        {% if borrowed %}
+            {% if didwithdraw %}
+                {{ 'withdraw.finish.borrow.withdraw.can.additional'|trans({ 'gold': lefttoborrow, 'ownerName': ownerName })|colorize }}
+            {% else %}
+                {{ 'withdraw.finish.borrow.withdraw.can.ask'|trans({ 'gold': lefttoborrow, 'ownerName': ownerName })|colorize }}
+            {% endif %}
+
+            {{ 'withdraw.finish.borrow.withdraw.can.description'|trans({ 'name': user.name, 'amount': amount, 'bank': user.goldinbank|abs, 'gold': user.gold, 'ownerName': ownerName })|colorize }}
+        {% else %}
+            {% if didwithdraw %}
+                {{ 'withdraw.finish.borrow.withdraw.cant.additional'|trans({ 'gold': lefttoborrow, 'ownerName': ownerName })|colorize }}
+            {% else %}
+                {{ 'withdraw.finish.borrow.withdraw.cant.ask'|trans({ 'gold': lefttoborrow, 'ownerName': ownerName })|colorize }}
+            {% endif %}
+
+            {{ 'withdraw.finish.borrow.withdraw.cant.description'|trans({ 'gold': maxborrow, 'ownerName': ownerName })|colorize }}
+        {% endif %}
+    {% endif %}
+{% endblock bank_withdrawend %}

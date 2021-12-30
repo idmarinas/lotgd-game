@@ -1,0 +1,50 @@
+{% block home_login %}
+    {% trans_default_domain 'page_home' %}
+
+    <form action="{{ 'login.php'|lotgd_url }}" method="POST" onsubmit="Lotgd.md5PassLogin();">
+        {{ 'login.message'|trans|colorize }}
+        <br>
+        <div class="flex justify-center">
+            <div class="flex-initial"><img alt="" src='images/logindragon.gif' class='noborder'></div>
+        </div>
+        <div class="flex justify-center gap-4 py-3">
+            <div class="w-60">
+                <input type="text" name='name' id='name' accesskey='u' placeholder="{{ 'login.username'|trans|uncolorize }}">
+            </div>
+            <div class="w-60">
+                <input name='password' id='password' accesskey='p' type='password' placeholder="{{ 'login.password'|trans|uncolorize }}">
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class=""><input class="ui button" type='submit' value='{{ 'login.login'|trans }}'></div>
+        </div>
+
+        <br>
+        <p>{{ 'login.forgot'|trans|colorize }}</p>
+    </form>
+{% endblock home_login %}
+
+{% block home_select_skin %}
+    {% trans_default_domain 'page_home' %}
+
+    <br>
+    <div class="flex justify-center">
+        <div class="flex-initial">{{ form(selectSkin) }}</div>
+    </div>
+{% endblock home_select_skin %}
+
+{% block home_server_full %}
+    {% trans_default_domain 'page_home' %}
+
+    <div class="flex justify-center">
+        <div class="text-2xl">{{ 'serverfull.message'|trans|colorize }}</div>
+    </div>
+    <div class="flex justify-center">
+        <div class="flex-initial"><img src="images/Medallion-Red.gif" alt="{{ 'serverfull.message'|trans|colorize }}" class="noborder"></div>
+    </div>
+    <div class="flex justify-center">
+        <div class="">{{ 'serverfull.wait'|trans|colorize }}</div>
+    </div>
+
+    <div class="ui header">{{ 'serverfull.message'|trans|colorize }}</div>
+{% endblock home_server_full %}
