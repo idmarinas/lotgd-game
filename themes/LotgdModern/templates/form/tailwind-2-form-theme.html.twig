@@ -152,6 +152,14 @@
     </label>
 {%- endblock checkbox_row -%}
 
+{%- block choice_widget_expanded -%}
+    <div {{ block('widget_container_attributes') }}>
+        {%- for child in form %}
+            {{- form_row(child) -}}
+        {% endfor -%}
+    </div>
+{%- endblock choice_widget_expanded -%}
+
 {%- block collection_widget -%}
     {% if prototype is defined and not prototype.rendered %}
         {%- set attr = attr|merge({
