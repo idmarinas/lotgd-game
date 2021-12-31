@@ -2,8 +2,12 @@
 
 -   El antiguo sistema de módulos está obsoleto desde la versión **5.0.0**
     -   Los módulos antiguos seguiran funcionando pero estan obsoletos.
-    -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
+    -   El nuevo sistema tipo Bundle reemplaza al sistema de módulos antiguos.
     -   A partir de la versión **5.0.0** se empezará a usar un sistema de módulos tipo Bundle
+
+# A tener en cuenta desde la versión 7.0.0
+
+-   Esta es la última versión compatible con el antiguo sistema de módulos.
 
 # Módulos
 
@@ -53,7 +57,6 @@
     -   La versión 8.0.0 usará la ordenación propia de Symfony.
 -   Se revisará el código para hacer la transición más sencilla. 
 -   Esta versión se centrará en hacer la transición a la versión 8.0.0 más sencilla.
--   Eliminar la dependencia de Jaxon-PHP usar Stimulus
 -   Esta es la última versión que incluya compatibilidad con el antiguo sistema de módulos.
 -   **BC** Sustituir Fomantic UI por https://tailwindcss.com 
     -   Tailwind ofrece más flexibilidad para crear la UI.
@@ -79,6 +82,7 @@
     -   El installer de la versión 6.0.0 depende de laminas/laminas-serializer
         -   Es en el único sitio donde se utiliza este componente
 -   Eliminar paquete laminas/laminas-serializer
+-   Eliminar la dependencia de Jaxon-PHP, usar Stimulus
 -   Se usará todos los componentes del Framework de Symfony (ruter incluido)
 -   Todo el Core estará compuesto por Bundles, para así poder usar un Skeleton muy similar al de Symfony App Skeleton
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
@@ -89,6 +93,7 @@
 -   Sustituir la función lotgd_mail por Symfony mailer
     -   **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
         -   Use `Symfony mailer` instead.
+-   Eliminar https://github.com/Sylius/SyliusThemeBundle y hacerlo opcional
 -   `dragonpoints` para los puntos de dragón asignados actualmente es un array serializado
     -   Se registra los valores que se han aumentado al personaje mediante las iniciales del atributo.
         ```php
@@ -176,7 +181,6 @@
 -   Panel de administración, https://github.com/sonata-project/SonataAdminBundle 
 -   https://github.com/sonata-project/SonataPageBundle 
     -   Puede ser interesante para añadir páginas personalizadas, pero parece que no es compatible con la versión 5 de symfony
--   https://github.com/Sylius/SyliusThemeBundle para crear temas en LoTGD
 -   SonataBlockBundle puede ser interesante para agregar bloques en lugares concretos
     -   https://sonata-project.org/bundles/block/master/doc/reference/events.html
 -   https://symfony.com/doc/current/workflow.html
