@@ -1,4 +1,5 @@
 {% trans_default_domain 'jaxon_motd' %}
+
 <div class="w-full bg-lotgd-800 rounded-lg shadow-sm duration-500 px-3 sm:px-6 py-4 mb-6">
     <div>
         {% if SU_POST_MOTD %}
@@ -30,8 +31,8 @@
                     <div class="flex gap-2">
                         <div class="flex-none">
                             {% if user.loggedin %}
-                                {% set class = (motd.pollResult.userVote is defined and motd.pollResult.userVote is not null) ? 'grey disabled' : '' %}
-                                {% set class = (motd.pollResult.userVote is defined and motd.pollResult.userVote is not null and motd.pollResult.userVote == id) ? 'green disabled' : class %}
+                                {% set class = (motd.pollResult.userVote is defined and motd.pollResult.userVote is not null) ? 'input-gray' : '' %}
+                                {% set class = (motd.pollResult.userVote is defined and motd.pollResult.userVote is not null and motd.pollResult.userVote == id) ? 'input-green' : class %}
                                 <button
                                     type="button"
                                     class="py-1 text-xs {{ class }}"
@@ -39,6 +40,7 @@
                                     data-action="click->motd#vote"
                                     data-motd-item-id-param="{{ motd.motditem }}"
                                     data-motd-option-id-param="{{ id }}"
+                                    {% if (motd.pollResult.userVote is defined and motd.pollResult.userVote is not null) %} disabled {% endif %}
                                 ><i class="far fa-thumbs-up" aria-hidden="true"></i> {{ vote }}</button>
                             {% else %}
                                 <i aria-hidden="true" class="fas fa-dragon"></i>
