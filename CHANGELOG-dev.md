@@ -61,7 +61,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :x: REMOVES
 
--   **Semantic UI/Fomantic UI** is removed and remplace with **TailwindCSS**
+-   **BC** **Semantic UI/Fomantic UI** is removed and remplace with **TailwindCSS**
 
 ### :notebook: NOTES
 
