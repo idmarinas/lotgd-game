@@ -62,6 +62,48 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :x: REMOVES
 
 -   **BC** **Semantic UI/Fomantic UI** is removed and remplace with **TailwindCSS**
+-   **BC** **Removed deprecation functions**
+    -   **src/functions.php**
+        -   `is_email` Use service `LotgdKernel::get("lotgd_core.tool.validator")->isMail($string)` instead
+        -   `arraytourl` Use php function `http_build_query` instead.
+        -   `urltoarray` Use php function `parse_str` instead.
+        -   `createstring` Use php function `serialize` instead.
+        -   `list_files` Use php `Symfony Component Finder` instead.
+        -   `_curl` Use service `LotgdKernel::get("http_client")` instead.
+        -   `_sock` Use service `LotgdKernel::get("http_client")` instead.
+        -   `pullurl` Use service `LotgdKernel::get("http_client")` instead.
+    -   **BC** Removed files
+        -   **lib/holyday_texts.php** `holidayize` Use `LotgdTool::holidayize($text, $type)`
+        -   **lib/mountname.php** `getmountname` This function is not used by the core.
+        -   **lib/mounts.php** `getmount` Use `LotgdTool::getMount($horse)` instead.
+        -   **lib/partner.php** `get_partner` Use `LotgdTool::getPartner($player)` instead.
+        -   **lib/pvpwarning.php** `pvpwarning` Use `LotgdKernel::get("Lotgd\Core\Pvp\Warning")->warning($dokill)` instead.
+        -   **lib/pvpsupport.php** 
+            -   `setup_pvp_target` Use `LotgdKernel::get("Lotgd\Core\Pvp\Support")->setupPvpTarget($characterId)` instead.
+            -   `pvpvictory` Use `LotgdKernel::get("Lotgd\Core\Pvp\Support")->pvpVictory($badguy, $killedloc)` instead.
+            -   `pvpdefeat` Use `LotgdKernel::get("Lotgd\Core\Pvp\Support")->pvpDefeat($badguy, $killedloc)` instead.
+        -   **lib/names**
+            -   `get_player_title` Use `LotgdTool::getPlayerTitle($old)` instead.
+            -   `get_player_basename` Use `LotgdTool::getPlayerBasename($old)` instead.
+            -   `change_player_name` Use `LotgdTool::changePlayerName($newname, $old)` instead.
+            -   `change_player_ctitle` Use `LotgdTool::changePlayerCtitle($nctitle, $old)` instead.
+            -   `change_player_title` Use `LotgdTool::changePlayerTitle($ntitle, $old)` instead.
+        -   **lib/pageparts.php** 
+            -   `wipe_charstats` Use `LotgdKernel::get("Lotgd\Core\Character\Stats")->wipeStats()` instead.
+            -   `addcharstat` Use `LotgdKernel::get("Lotgd\Core\Character\Stats")->addcharstat($label, $value)` instead.
+            -   `getcharstat` Use `LotgdKernel::get("Lotgd\Core\Character\Stats")->getcharstat($cat, $label)` instead.
+            -   `setcharstat` Use `LotgdKernel::get("Lotgd\Core\Character\Stats")->setcharstat($cat, $label, $val)` instead.
+            -   `getcharstat_value` Use `LotgdKernel::get("Lotgd\Core\Character\Stats")->getcharstat($cat, $label)` instead.
+            -   `getcharstats` Use `LotgdKernel::get("Lotgd\Core\Service\PageParts")->getCharStats($buffs)` instead.
+            -   `charstats` Use `LotgdKernel::get("Lotgd\Core\Service\PageParts")->charStats($return)` instead.
+        -   **lib/personal_functions.php** `killplayer` Use `LotgdKernel::get('lotgd_core.tool.staff')->killPlayer($explossproportion, $goldlossproportion)` instead.
+        -   **lib/systemmail.php** `systemmail` Use `LotgdKernel::get('lotgd_core.tool.system_mail')->send($to, $subject, $body, $from, $noemail)` instead.
+        -   **lib/titles.php** 
+            -   `valid_dk_title` Use `LotgdTool::validDkTitle($title, $dks, $gender)` instead.
+            -   `get_dk_title` Use `LotgdTool::getDkTitle($dks, $gender, $ref)` instead.
+        -   **** `` Use `` instead.
+        -   **src/core/Application.php** `Lotgd\Core\Application` Use `Lotgd\Core\Kernel` instead.
+
 
 ### :notebook: NOTES
 
