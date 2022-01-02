@@ -8,7 +8,6 @@ use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/names.php';
 
 // Don't hook on to this text for your standard modules please, use "lodge" instead.
 // This hook is specifically to allow modules that do other lodges to create ambience.

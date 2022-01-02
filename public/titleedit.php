@@ -40,10 +40,6 @@ if ('delete' == $op)
 switch ($op)
 {
     case 'reset':
-
-        require_once 'lib/titles.php';
-        require_once 'lib/names.php';
-
         $charRepository = \Doctrine::getRepository('LotgdCore:Avatar');
         $characters = $charRepository->findAll();
 

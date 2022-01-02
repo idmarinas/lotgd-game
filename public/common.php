@@ -15,7 +15,6 @@ require_once 'common_common.php';
 
 // Include some commonly needed and useful routines
 require_once 'lib/redirect.php';
-require_once 'lib/pageparts.php';
 
 //-- Check if game is installed
 if (

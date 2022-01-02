@@ -8,7 +8,6 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
 require_once 'lib/showform.php';
-require_once 'lib/names.php';
 
 check_su_access(SU_EDIT_USERS);
 

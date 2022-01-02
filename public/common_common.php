@@ -200,13 +200,10 @@ $y2 = "\xc0\x3e\xfe\xb3\x4\x74\x9a\x7c\x17";
 $z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
 
 // Include some commonly needed and useful routines
-require_once 'lib/holiday_texts.php';
 require_once 'lib/su_access.php';
 require_once 'lib/modules.php';
 require_once 'lib/forcednavigation.php';
-require_once 'lib/mounts.php';
 require_once 'lib/lotgd_mail.php';
-require_once 'lib/systemmail.php'; //-- For avoid require in controllers
 
 // Decline static file requests back to the PHP built-in webserver
 if ('cli-server' === \PHP_SAPI && is_file(__DIR__.parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH)))
