@@ -1,0 +1,40 @@
+--TEST--
+"relative_date" filter
+--TEMPLATE--
+{{ yesterday|relative_date }}
+{{ three_day|relative_date }}
+{{ one_month|relative_date }}
+{{ three_month|relative_date }}
+{{ one_hour|relative_date }}
+{{ three_hour|relative_date }}
+{{ one_minute|relative_date }}
+{{ three_minute|relative_date }}
+{{ one_year|relative_date }}
+{{ three_year|relative_date }}
+{{ null_date|relative_date }}
+--DATA--
+return [
+    'yesterday' => (new \DateTime('now'))->sub(new DateInterval('P1D')),
+    'three_day' => (new \DateTime('now'))->sub(new DateInterval('P3D')),
+    'one_month' => (new \DateTime('now'))->sub(new DateInterval('P1M')),
+    'three_month' => (new \DateTime('now'))->sub(new DateInterval('P3M')),
+    'one_hour' => (new \DateTime('now'))->sub(new DateInterval('PT1H')),
+    'three_hour' => (new \DateTime('now'))->sub(new DateInterval('PT3H')),
+    'one_minute' => (new \DateTime('now'))->sub(new DateInterval('PT1M')),
+    'three_minute' => (new \DateTime('now'))->sub(new DateInterval('PT3M')),
+    'one_year' => (new \DateTime('now'))->sub(new DateInterval('P1Y')),
+    'three_year' => (new \DateTime('now'))->sub(new DateInterval('P3Y')),
+    'null_date' => '0000-00-00 00:00:00'
+]
+--EXPECT--
+Yesterday
+3 days ago
+1 month ago
+3 months ago
+1 hour ago
+3 hours ago
+1 min ago
+3 mins ago
+1 year ago
+3 years ago
+Never
