@@ -1,0 +1,312 @@
+{# List of online characters #}
+{% block online_list %}
+    {% trans_default_domain 'app_default' %}
+
+    {{ 'online.list.title'|trans({ 'n': onlineCount }, textDomain)|colorize }}
+
+    {% for row in list %}
+        {{ '`^%s`0`n'|format(row.name)|colorize }}
+    {% else %}
+        {{ 'online.list.none'|trans({}, textDomain)|colorize }}
+    {% endfor %}
+{% endblock online_list %}
+
+{# Stats of page generation #}
+{% block game_page_gen %}
+    {% trans_default_domain 'app_default' %}
+
+    {{ 'parts.pageGen'|trans({
+        'genTime': genTime,
+        'avg': avg,
+        'userGenTime': userGenTime,
+        'userGenTimeCount': userGenTimeCount
+    }, 'app_default')|colorize }}
+{% endblock game_page_gen %}
+
+{# Menu of navigation with all links #}
+{% block navigation_menu %}
+    {% trans_default_domain 'app_default' %}
+
+    <nav role="navigation" class="navigation lotgd-border-image">
+        {% for section, nav in navigation if nav|length > 0 or headers[section]['hiddeEmpty'] == false %}
+            {% set sectionText = navigation_create_header(section, headers[section]) %}
+            {% if sectionText %}
+                {{ sectionText }}
+            {% endif %}
+
+            {% for key, label in nav %}
+                {% set navText = navigation_create_link(label, navs[section][key]) %}
+                {% if navText %}
+                    {{ navText }}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </nav>
+{% endblock navigation_menu %}
+
+{% block pagination_stimulus %}
+    {% trans_default_domain 'app_default' %}
+
+    {% if pageCount %}
+        <div
+            class="flex items-center justify-between sm:px-6 pagination mt-2"
+        >
+            <div class="flex-1 flex justify-between sm:hidden">
+                <div class="items-center">
+                    {% if previous %}
+                        <!-- Link to first page -->
+                        <a
+                            class="items-center rounded-md" href
+                            aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}"
+                            {{ stimulus_action(stimulus_controller, 'list') }}
+                            data-{{ stimulus_controller }}-page-param="{{ first }}"
+                        >
+                            {{ 'parts.pagination.menu.first'|trans|uncolorize }}
+                        </a>
+
+                        <!-- Link to previous page -->
+                        <a
+                            class="items-center rounded-md" href
+                            {{ stimulus_action(stimulus_controller, 'list') }}
+                            data-{{ stimulus_controller }}-page-param="{{ previous }}"
+                        >
+                            {{ 'parts.pagination.menu.previous'|trans|uncolorize }}
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="items-center">
+                    {% if next %}
+                        <!-- Link to next page -->
+                        <a
+                            class="items-center rounded-md" href
+                            aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}"
+                            {{ stimulus_action(stimulus_controller, 'list') }}
+                            data-{{ stimulus_controller }}-page-param="{{ next }}"
+                        >
+                            {{ 'parts.pagination.menu.next'|trans|uncolorize }}
+                        </a>
+                        <!-- Link to last page -->
+                        <a
+                            class="items-center rounded-md" href
+                            aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}"
+                            {{ stimulus_action(stimulus_controller, 'list') }}
+                            data-{{ stimulus_controller }}-page-param="{{ last }}"
+                        >
+                            {{ 'parts.pagination.menu.last'|trans|uncolorize }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                <div>
+                    <p>
+                        {{ 'parts.pagination.menu.showing'|trans({ firstItemNumber, lastItemNumber, totalItemCount })|colorize }}
+                    </p>
+                </div>
+                <div>
+                    <nav class="overflow-auto shadow-sm -space-x-px" aria-label="{{ 'parts.pagination.description'|trans({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|uncolorize }}">
+                        {% if previous %}
+                            <a
+                                class="items-center px-2 py-2" href
+                                {{ stimulus_action(stimulus_controller, 'list') }}
+                                data-{{ stimulus_controller }}-page-param="{{ previous }}"
+                            >
+                                <span class="sr-only">{{ 'parts.pagination.menu.previous'|trans|uncolorize }}</span>
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        {% endif %}
+                        <!-- Links to number pages -->
+                        {% for page in pagesInRange %}
+                            {% if page != current %}
+                                <a
+                                    aria-label="{{ 'parts.pagination.menu.page'|trans({'page': page})|uncolorize }}"
+                                    class="items-center " href
+                                    {{ stimulus_action(stimulus_controller, 'list') }}
+                                    data-{{ stimulus_controller }}-page-param="{{ page }}"
+                                >
+                                    {{ page }}
+                                </a>
+                            {% else %}
+                                <a aria-current="{{ 'parts.pagination.menu.page'|trans({'page': page})|uncolorize }}" class="current items-center ">
+                                    {{ page }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if next %}
+                            <a
+                                class="items-center px-2 py-2" href
+                                {{ stimulus_action(stimulus_controller, 'list') }}
+                                data-{{ stimulus_controller }}-page-param="{{ next }}"
+                            >
+                                <span class="sr-only">{{ 'parts.pagination.menu.next'|trans|uncolorize }}</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        {% endif %}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock pagination_stimulus %}
+
+{% block pagination_jaxon %}
+    {% trans_default_domain 'app_default' %}
+
+    {% if pageCount %}
+        {% set link = jaxon ~ '(%s, ' ~ motdPerPage|default(5) ~ ", '" ~ monthSelected|default(null) ~ "')" %}
+        <div class="flex items-center justify-between sm:px-6 pagination mt-2">
+            <div class="flex-1 flex justify-between sm:hidden">
+                <div class="items-center">
+                    {% if previous %}
+                        <!-- Link to first page -->
+                        <a class="items-center rounded-md" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="javascript:;" onclick="{{ link|format(first) }}">
+                            {{ 'parts.pagination.menu.first'|trans|uncolorize }}
+                        </a>
+
+                        <!-- Link to previous page -->
+                        <a class="items-center rounded-md" href="javascript:;" onclick="{{ link|format(previous) }}">
+                            {{ 'parts.pagination.menu.previous'|trans|uncolorize }}
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="items-center">
+                    {% if next %}
+                        <!-- Link to next page -->
+                        <a class="items-center rounded-md" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ next)|lotgd_url }}">
+                            {{ 'parts.pagination.menu.next'|trans|uncolorize }}
+                        </a>
+                        <!-- Link to last page -->
+                        <a class="items-center rounded-md" aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ last)|lotgd_url }}">
+                            {{ 'parts.pagination.menu.last'|trans|uncolorize }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                <div>
+                    <p>
+                        {{ 'parts.pagination.menu.showing'|trans({ firstItemNumber, lastItemNumber, totalItemCount })|colorize }}
+                    </p>
+                </div>
+                <div>
+                    <nav class="overflow-auto shadow-sm -space-x-px" aria-label="{{ 'parts.pagination.description'|trans({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|uncolorize }}">
+                        {% if previous %}
+                            <a href="javascript:;" onclick="{{ link|format(previous) }}" class="items-center px-2 py-2   ">
+                                <span class="sr-only">{{ 'parts.pagination.menu.previous'|trans|uncolorize }}</span>
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        {% endif %}
+                        <!-- Links to number pages -->
+                        {% for page in pagesInRange %}
+                            {% if page != current %}
+                                <a aria-label="{{ 'parts.pagination.menu.page'|trans({'page': page})|uncolorize }}" href="javascript:;" onclick="{{ link|format(page) }}" class="items-center">
+                                    {{ page }}
+                                </a>
+                            {% else %}
+                                <a aria-current="{{ 'parts.pagination.menu.page'|trans({'page': page})|uncolorize }}" class="current items-center ">
+                                    {{ page }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if next %}
+                            <a href="javascript:;" onclick="{{ link|format(next) }}" class="items-center px-2 py-2   ">
+                                <span class="sr-only">{{ 'parts.pagination.menu.next'|trans|uncolorize }}</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        {% endif %}
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <script>
+            /* global $ */
+            $('.ui.pagination.menu a').on('click', function ()
+            {
+                $('.ui.pagination.menu a').addClass('disabled')
+                $('.ui.pagination.menu .active.item').addClass('loading')
+            })
+        </script>
+    {% endif %}
+{% endblock pagination_jaxon %}
+
+{% block pagination %}
+    {% trans_default_domain 'app_default' %}
+
+    {% if pageCount %}
+        <div class="flex items-center justify-between sm:px-6 pagination mt-2">
+            <div class="flex-1 flex justify-between sm:hidden">
+                <div class="items-center">
+                    {% if previous %}
+                        <!-- Link to first page -->
+                        <a class="items-center rounded-md" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ first)|lotgd_url }}">
+                            {{ 'parts.pagination.menu.first'|trans|uncolorize }}
+                        </a>
+
+                        <!-- Link to previous page -->
+                        <a class="items-center rounded-md" href="{{ (href ~ 'page=' ~ previous)|lotgd_url }}">
+                            {{ 'parts.pagination.menu.previous'|trans|uncolorize }}
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="items-center">
+                    {% if next %}
+                        <!-- Link to next page -->
+                        <a class="items-center rounded-md" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ next)|lotgd_url }}">
+                            {{ 'parts.pagination.menu.next'|trans|uncolorize }}
+                        </a>
+                        <!-- Link to last page -->
+                        <a class="items-center rounded-md" aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ last)|lotgd_url }}">
+                            {{ 'parts.pagination.menu.last'|trans|uncolorize }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                <div>
+                    <p>
+                        {{ 'parts.pagination.menu.showing'|trans({ firstItemNumber, lastItemNumber, totalItemCount })|colorize }}
+                    </p>
+                </div>
+                <div>
+                    <nav class="overflow-auto shadow-sm -space-x-px" aria-label="{{ 'parts.pagination.description'|trans({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|uncolorize }}">
+                        {% if previous %}
+                            <a href="{{ (href ~ 'page=' ~ previous)|lotgd_url }}" class="items-center px-2 py-2   ">
+                                <span class="sr-only">{{ 'parts.pagination.menu.previous'|trans|uncolorize }}</span>
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        {% endif %}
+                        <!-- Links to number pages -->
+                        {% for page in pagesInRange %}
+                            {% if page != current %}
+                                <a aria-label="{{ 'parts.pagination.menu.page'|trans({'page': page})|uncolorize }}" href="{{ (href ~ 'page=' ~ page)|lotgd_url }}" class="items-center ">
+                                    {{ page }}
+                                </a>
+                            {% else %}
+                                <a aria-current="{{ 'parts.pagination.menu.page'|trans({'page': page})|uncolorize }}" class="current items-center ">
+                                    {{ page }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if next %}
+                            <a href="{{ (href ~ 'page=' ~ next)|lotgd_url }}" class="items-center px-2 py-2   ">
+                                <span class="sr-only">{{ 'parts.pagination.menu.next'|trans|uncolorize }}</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        {% endif %}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock pagination %}
+
+{% block ad_wrapper %}
+    <div class="lotgd-border-image">{{ ad_content }}</div>
+{% endblock ad_wrapper %}

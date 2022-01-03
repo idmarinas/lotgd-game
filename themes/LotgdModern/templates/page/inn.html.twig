@@ -1,0 +1,20 @@
+{% use 'page/_blocks/_inn.html.twig' %}
+
+{% trans_default_domain textDomain %}
+
+<span class="text-purple-600">
+    {% for tpl, params in includeTemplatesPre %}
+        {% include tpl with params %}
+    {% endfor %}
+
+    {% if showInnDescription %}
+        <div class="text-center"><strong>{{ innName|colorize }}</strong></div>
+    {% endif %}
+
+    {{ block('inn_' ~ tpl|default('default')) }}
+
+    {% for tpl, params in includeTemplatesPost %}
+        {% include tpl with params %}
+    {% endfor %}
+</span>
+
