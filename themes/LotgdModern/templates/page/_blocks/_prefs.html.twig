@@ -1,0 +1,29 @@
+{% block prefs_cancelemail %}
+    {% trans_default_domain textDomain %}
+
+    {{ 'section.cancelemail'|trans({ 'email': email })|colorize }}
+{% endblock prefs_cancelemail %}
+
+{% block prefs_default %}
+    {% trans_default_domain textDomain %}
+
+    <form action="{{ 'prefs.php?op=save'|lotgd_url }}" method="POST" onsubmit="Lotgd.md5PassRegister()">
+        {{ form }}
+    </form>
+
+    <!-- Stop clueless lusers from deleting their character just because a monster killed them. -->
+    {% if user.alive and selfDelete %}
+        {% set options = { 'text' : 'section.default.form.confirm.delete'|trans|uncolorize }|json_encode %}
+        <form action="{{ 'prefs.php?op=suicide'|lotgd_url }}" method="POST">
+            <button type="submit" class="ui right floated red button" onclick="Lotgd.confirm(this, event)" data-options="{{ options|e('html_attr') }}">
+                {{ 'section.default.form.button.submit.delete.character'|trans|uncolorize }}
+            </button>
+        </form>
+    {% endif %}
+{% endblock prefs_default %}
+
+{% block prefs_forcechangeemail %}
+    {% trans_default_domain textDomain %}
+
+    {{ 'section.forcechangeemail'|trans({ 'email': email })|colorize }}
+{% endblock prefs_forcechangeemail %}

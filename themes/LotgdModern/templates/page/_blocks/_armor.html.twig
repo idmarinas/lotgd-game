@@ -1,0 +1,66 @@
+{% block armor_list %}
+    {% trans_default_domain textDomain %}
+
+    {{ 'description'|trans|colorize }}
+
+    {{ 'tradein'|trans({'armorname': user.armor, 'value': tradeinvalue})|colorize }}
+
+    <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-lotgd-200">
+            <thead>
+                <tr>
+                    <th scope="col">{{ 'table.header.name'|trans|uncolorize }}</th>
+                    <th scope="col">{{ 'table.header.defense'|trans|uncolorize }}</th>
+                    <th scope="col">{{ 'table.header.cost'|trans|uncolorize }}</th>
+                </tr>
+            </thead>
+            <tbody class="striped">
+                {% for row in stuff %}
+                    <tr>
+                        <td class="collapsing">
+                            {% set color = '`)' %}
+                            {% if row.value <= (user.gold + tradeinvalue) %}
+                                {% if not unavailable %}
+                                    {% set color = '`&' %}
+                                    <a href='{{ ('armor.php?op=buy&id=' ~ row.armorid)|lotgd_url }}'>{{ (color ~ row.armorname ~ '`0')|colorize }}</a>
+                                {% else %}
+                                    {% set color = '`7' %}
+                                    {{ (color ~ row.armorname ~ '`0')|colorize }}
+                                {% endif %}
+                            {% else %}
+                                {{ (color ~ row.armorname ~ '`0')|colorize }}
+                            {% endif %}
+                        </td>
+                        <td>{{ (color ~ row.defense)|colorize }}</td>
+                        <td>
+                            {% if row.alternatetext %}
+                                {{ (color ~ row.alternatetext)|colorize }}
+                            {% else %}
+                                {{ (color ~ row.value)|colorize }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">{{ 'table.notFound'|trans|colorize }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock armor_list %}
+
+{% block armor_buy %}
+    {% trans_default_domain textDomain %}
+
+    {% if result %}
+        {% if buyIt %}
+            {{ 'payarmor'|trans({'playerarmor': userPre.armor, 'armorname': result.armorname})|colorize }}
+        {% else %}
+            {{ 'notenoughgold'|trans({'armorname': result.armorname})|colorize }}
+        {% endif %}
+    {% else %}
+        {{ 'nosuchweapon'|trans|colorize }}
+        {{ 'tryagain'|trans|colorize }}
+    {% endif %}
+{% endblock armor_buy %}

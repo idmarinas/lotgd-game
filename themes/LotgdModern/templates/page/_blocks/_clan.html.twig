@@ -1,0 +1,316 @@
+{% block clan_applicant %}
+    {% trans_default_domain textDomain %}
+
+    {{ 'section.applicant.subtitle'|trans|colorize }}
+
+    {{ 'section.applicant.enter'|trans({ 'clanOwnerName': clanOwnerName })|colorize }}
+
+    {% if clanInfo.clanid > 0 %}
+        {{ 'section.applicant.waiting'|trans({ 'clanOwnerName': clanOwnerName, 'clanName': clanInfo.clanname })|colorize }}
+    {% else %}
+        {{ 'section.applicant.no.membership'|trans|colorize }}
+    {% endif %}
+{% endblock clan_applicant %}
+
+{% block clan_default %}
+    {% trans_default_domain textDomain %}
+
+    {% if clanInfo.clanmotd %}
+        <blockquote>
+            {{ 'section.default.current.motd'|trans({ author: motdAuthorName|uncolorize })|colorize }}
+            {{ clanInfo.clanmotd|nl2br|colorize }}
+        </blockquote>
+    {% endif %}
+
+    {{ commentary_block({
+        'section': ('clan-' ~ clanInfo.clanid),
+        'customSay': clanInfo.customsay
+    }, textDomain) }}
+
+    {% set result = modulehook('clanhall', { 'messages': {}, 'templates': {} }) %}
+    {% for tpl, params in result.templates %}
+        {% include tpl with params %}
+    {% endfor %}
+    {% for message in result.messages %}
+        {{ message[0]|trans(message[1], message[2])|colorize }}
+    {% endfor %}
+
+    {% if clanInfo.clandesc %}
+        <blockquote>
+            {{ 'section.default.current.desc'|trans({ author: descAuthorName|uncolorize })|colorize }}
+            {{ clanInfo.clandesc|nl2br|colorize }}
+        </blockquote>
+    {% endif %}
+
+    {% if leaders == 0 and promotingLeader %}
+        {{ 'section.default.no.leader.asigned'|trans( {'name': newLeader })|colorize }}
+    {% elseif leaders == 0 and promotingLeader %}
+        {{ 'section.default.no.leader.unasigned'|trans|colorize }}
+    {% endif %}
+
+    {{ 'section.default.membership'|trans|colorize }}
+
+    {% for member in membership %}
+        {{ ranksNames[member.clanrank]|default('ranks.unknown')|trans|colorize ~ ': ' ~ member.count }}<br>
+    {% endfor %}
+{% endblock clan_default %}
+
+{% block clan_membership %}
+    {% trans_default_domain textDomain %}
+
+    {{ 'section.membership.legend'|trans|colorize }}
+
+    <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-lotgd-200">
+            <thead>
+                <th scope="col">{{ 'section.membership.table.theader.rank'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.membership.table.theader.name'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.membership.table.theader.level'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.membership.table.theader.dragonkill'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.membership.table.theader.join.date'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.membership.table.theader.laston'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.membership.table.theader.ops'|trans|uncolorize }}</th>
+            </thead>
+            <tbody>
+                {% set totalDragonkills = 0 %}
+                {% set options = {'text': 'section.membership.form.confirm'|trans|uncolorize }|json_encode %}
+                {% set optionsFounder = {'text': 'section.membership.form.demote.founder'|trans|uncolorize }|json_encode %}
+                {% set stepdown = 'section.membership.form.stepdown'|trans|uncolorize %}
+                {% set remove = 'section.membership.form.remove'|trans|uncolorize %}
+                {% set submit = 'section.membership.form.submit'|trans|uncolorize %}
+
+                {% for member in membership %}
+                    {% set totalDragonkills = totalDragonkills + member.dragonkills %}
+                    <tr>
+                        <td>{{ ranksNames[member.clanrank]|trans|colorize }}</td>
+                        <td>{{ '`&%s`0'|format(member.name)|colorize }}</td>
+                        <td>{{ '`^%s`0'|format(member.level)|colorize }}</td>
+                        <td>{{ '`$%s`0'|format(member.dragonkills)|colorize }}</td>
+                        <td>{{ '`${date,date} {date,time}`0'|tmf({ 'date': member.clanjoindate })|colorize }}</td>
+                        <td>{{ '`#%s`0'|format(member.laston|relative_date)|colorize }}</td>
+                        <td class="collapsing">
+                            {% if user.clanrank >= constant('CLAN_OFFICER') and member.clanrank <= user.clanrank %}
+                                {% if member.clanrank <= user.clanrank and member.acctid != user.acctid and member.clanrank < constant('CLAN_FOUNDER') and user.clanrank >= constant('CLAN_ADMINISTRATIVE') %}
+                                    {% set deleteButton = '<a class="ui red icon button top aligned" data-tooltip="' ~ remove ~ '" href="' ~ ('clan.php?op=membership&remove=' ~ member.acctid)|lotgd_url ~ '" onclick="Lotgd.confirm(this, event)" data-options="' ~ options|e('html_attr') ~ '"><i class="remove user icon"></i></a>' %}
+                                {% else %}
+                                    {% set deleteButton = '<a class="ui disabled red icon button tooltip top aligned" data-tooltip="' ~ remove ~ '"><i class="remove user icon"></i></a>' %}
+                                {% endif %}
+
+                                {% if constant('CLAN_FOUNDER') == member.clanrank and member.acctid == user.acctid %}
+                                    <form action="{{ 'clan.php?op=membership'|lotgd_url }}" method="POST">
+                                        <input type="hidden" name="setrank" value="30">
+                                        <input type="hidden" name="whoacctid" value="{{ member.acctid }}">
+                                        <button type="submit" class="ui orange button" data-options="{{ optionsFounder|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">{{ stepdown }}</button>
+
+                                        {{ deleteButton }}
+                                    </form>
+                                {% elseif constant('CLAN_FOUNDER') != member.clanrank %}
+                                    <form action="{{ 'clan.php?op=membership'|lotgd_url }}" method="POST">
+                                        <input type="hidden" name="whoacctid" value="{{ member.acctid }}">
+                                        <select class='ui combo lotgd dropdown' name='setrank'>
+                                            {% for key, rank in validRanks if key <= user.clanrank and constant('CLAN_FOUNDER') != key %}
+                                                <option value="{{ key }}" {{ member.clanrank == key ? 'selected' : '' }}>{{ rank|trans|uncolorize }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <button class="ui icon button tooltip top aligned" data-tooltip="{{ submit }}" type="submit"><i class='configure icon'></i></button>
+
+                                        {{ deleteButton }}
+                                    </form>
+                                {% else %}
+                                    {{ deleteButton }}
+                                {% endif %}
+                            {% else %}
+                                {{ 'section.membership.table.tbody.none'|trans|colorize }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {{ 'section.membership.total.dragonkills'|trans({ dragonkills: totalDragonkills })|colorize }}
+{% endblock clan_membership %}
+
+{% block clan_motd %}
+    {% trans_default_domain textDomain %}
+
+    {% if clanInfo.clanmotd %}
+        <blockquote>
+            {{ 'section.motd.current.motd'|trans({ author: motdAuthorName|uncolorize })|colorize }}
+            {{ clanInfo.clanmotd|nl2br|colorize }}
+        </blockquote>
+    {% endif %}
+
+    {% if clanInfo.clandesc %}
+        <blockquote>
+            {{ 'section.motd.current.desc'|trans({ author: descAuthorName|uncolorize })|colorize }}
+            {{ clanInfo.clandesc|nl2br|colorize }}
+        </blockquote>
+    {% endif %}
+
+    <form action="{{ 'clan.php?op=motd'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+        <div class="field">
+            <label for="clanmotd">{{ 'section.motd.form.clanmotd.label'|trans|colorize }}</label>
+            <textarea name="clanmotd" id="clanmotd">{{ clanInfo.clanmotd|e('html') }}</textarea>
+        </div>
+        <div class="field">
+            {% if constant('INT_MAX') != clanInfo.descauthor %}
+                <label for="clandesc">{{ 'section.motd.form.clandesc.label'|trans|colorize }}</label>
+                <textarea name="clandesc">{{ clanInfo.clandesc|e('html') }}</textarea>
+            {% else %}
+                {{ 'section.motd.form.clandesc.blocked'|trans|colorize }}
+            {% endif %}
+        </div>
+
+        {% if user.clanrank >= constant('CLAN_LEADER') %}
+            <div class="field">
+                <label for="">{{ 'section.motd.form.customsay.label'|trans|colorize }}</label>
+                <input type="text" name='customsay' value="{{ clanInfo.customsay|e('html') }}" maxlength="15">
+            </div>
+        {% endif %}
+
+        <div class="field">
+            <button type="submit" class="ui button">{{ 'section.motd.form.button.submit'|trans|uncolorize }}</button>
+        </div>
+    </form>
+{% endblock clan_motd %}
+
+{% block clan_applicant_apply %}
+    {% trans_default_domain textDomain %}
+
+    {% if clanList|length %}
+        {{ 'section.applicant.apply.clan.list'|trans({ 'clanOwnerName': clanOwnerName, 'playerName': user.name, 'playerWeapon': user.weapon })|colorize }}
+    {% endif %}
+
+    {% for clan in clanList %}
+        &#149; <a href="{{ ('clan.php?op=apply&clanid=' ~ clan.clanid )|lotgd_url }}">{{ clan.clanname|uncolorize }}</a>
+        &#60;{{ clan.clanshort|uncolorize }}&#62;
+        ({{ 'section.applicant.apply.clan.members'|trans({ 'n': clan.members })|colorize }}) <br>
+    {% else %}
+        {{ 'section.applicant.apply.no.clans'|trans({ 'clanOwnerName': clanOwnerName })|colorize }}
+    {% endfor %}
+{% endblock clan_applicant_apply %}
+
+{% block clan_applicant_detail %}
+    {% trans_default_domain textDomain %}
+
+    {% if SU_AUDIT_MODERATION %}
+        <div class="ui modal editClan">
+            <i class="close icon"></i>
+            <div class="header">{{ 'section.detail.form.title'|trans|colorize }}</div>
+            <div class="content">
+                <form id="formEditClan" action="{{ ('clan.php?op=detail&clanid=' ~ clanDetail.clanid)|lotgd_url }}" method="POST" class="ui form">
+                    <div class="field">
+                        <label for="clanname">{{ 'section.detail.form.label.name'|trans|colorize }}</label>
+                        <input id="clanname" name="clanname" value="{{ clanDetail.clanname|e }}" />
+                    </div>
+                    <div class="field">
+                        <label for="clanshort">{{ 'section.detail.form.label.short'|trans|colorize }}</label>
+                        <input id="clanshort" name="clanname" value="{{ clanDetail.clanshort|e }}" />
+                    </div>
+                    <div class="field">
+                        {% if 4294967295 == clanDetail.descauthor %}
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" id="unblock" name="unblock" value="1">
+                                <label for="unblock">{{ 'section.detail.form.label.toggle.unblock'|trans|colorize }}</label>
+                            </div>
+                        {% else %}
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" id="block" name="block" value="1">
+                                <label for="block">{{ 'section.detail.form.label.toggle.block'|trans|colorize }}</label>
+                            </div>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+            <div class="actions">
+                <div class="ui black deny button">{{ 'section.detail.form.button.cancel'|trans|uncolorize }}</div>
+                <div class="ui positive right labeled icon button">{{ 'section.detail.form.button.submit'|trans|uncolorize }} <i class="edit icon"></i></div>
+            </div>
+        </div>
+
+        <button class="ui orange button" onclick="$('.ui.modal.editClan').modal({ onApprove : function() { $('#formEditClan').submit(); } }).modal('show')">{{ 'section.detail.button.modal'|trans|uncolorize }}</button>
+    {% endif %}
+
+    <div class="ui segment">{{ 'section.detail.description'|trans({ 'description': clanDetail.clandesc })|colorize }}</div>
+
+    {{ 'section.detail.membership'|trans({ 'clanName': clanDetail.clanname, 'clanShortName': clanDetail.clanshort })|colorize }}
+
+    <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-lotgd-200">
+            <thead>
+                <th scope="col">{{ 'section.detail.table.theader.rank'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.detail.table.theader.name'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.detail.table.theader.level'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.detail.table.theader.dragonkill'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.detail.table.theader.join.date'|trans|uncolorize }}</th>
+            </thead>
+            <tbody>
+                {% set totalDragonkills = 0 %}
+                {% for member in membership %}
+                    {% set totalDragonkills = totalDragonkills + member.dragonkills %}
+                    <tr>
+                        <td>{{ ranksNames[member.clanrank]|trans|colorize }}</td>
+                        <td>{{ '`&<a href="%s">%s</a>`0'|format(('bio.php?char=' ~ member.acctid ~ '&ret=' ~ returnLink|e('url'))|lotgd_url, member.name)|colorize }}</td>
+                        <td>{{ '`^%s`0'|format(member.level)|colorize }}</td>
+                        <td>{{ '`$%s`0'|format(member.dragonkills)|colorize }}</td>
+                        <td>{{ '`${date,date} {date,time}`0'|tmf({ 'date': member.clanjoindate })|colorize }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {{ 'section.membership.total.dragonkills'|trans({ dragonkills: totalDragonkills })|colorize }}
+{% endblock clan_applicant_detail %}
+
+{% block clan_applicant_list %}
+    {% trans_default_domain textDomain %}
+
+    {% if clanList|length %}
+        {{ 'section.list.description'|trans({ 'clanOwnerName': clanOwnerName })|colorize }}
+    {% endif %}
+
+    {% for clan in clanList %}
+        &#149; <a href="{{ ('clan.php?op=detail&clanid=' ~ clan.clanid )|lotgd_url }}">{{ clan.clanname|uncolorize }}</a>
+        &#60;{{ clan.clanshort|uncolorize }}&#62;
+        ({{ 'section.list.clan.members'|trans({ 'n': clan.members })|colorize }}) <br>
+    {% else %}
+        {{ 'section.list.no.clans'|trans({ 'clanOwnerName': clanOwnerName })|colorize }}
+    {% endfor %}
+{% endblock clan_applicant_list %}
+
+{% block clan_applicant_new %}
+    {% trans_default_domain textDomain %}
+
+    {{ 'section.applicant.new.description'|trans({ 'clanOwnerName': clanOwnerName, 'costGold': costGold, 'costGems': costGems })|colorize }}
+
+    <br>
+    <br>
+    {% if user.gold >= costGold and user.gems >= costGems and not clan_created %}
+        {{ 'section.applicant.new.register.requirements.fulfilled'|trans|colorize }}
+        <br>
+        <br>
+        {{ form(form) }}
+        <div class="ui info message">
+            {{ 'section.applicant.new.form.note'|trans|uncolorize }}
+        </div>
+    {% elseif user.gold < costGold %}
+        {{ 'section.applicant.new.register.requirements.no.gold'|trans|colorize }}
+    {% elseif user.gems < costGems %}
+        {{ 'section.applicant.new.register.requirements.no.gems'|trans|colorize }}
+    {% endif %}
+{% endblock clan_applicant_new %}
+
+{% block clan_applicant_waiting %}
+    {% trans_default_domain textDomain %}
+
+    {{ 'section.applicant.subtitle'|trans|colorize }}
+
+    {{ 'section.applicant.waiting.area'|trans|colorize }}
+
+    {{ commentary_block({
+        'section': 'waiting'
+    }, textDomain) }}
+{% endblock clan_applicant_waiting %}

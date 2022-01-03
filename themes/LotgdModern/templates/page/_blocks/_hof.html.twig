@@ -1,0 +1,233 @@
+{% block hof_charm %}
+    {% trans_default_domain textDomain %}
+
+    <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-lotgd-200">
+            <thead>
+                <th scope="col">{{ 'section.charm.table.thead.rank'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.charm.table.thead.name'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.charm.table.thead.gender'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.charm.table.thead.race'|trans|uncolorize }}</th>
+            </thead>
+            <tbody>
+                {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
+                {% for character in paginator %}
+                    <tr>
+                        <td>{{ loop.index + rank }}</td>
+                        <td>{{ character.name|colorize }}</td>
+                        <td>{{ 'section.charm.table.tbody.gender'|trans({ 'sex': character.sex })|colorize }}</td>
+                        <td>{{ 'character.racename'|trans({}, character.race)|colorize }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">{{ 'section.charm.table.tbody.none'|trans|colorize }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {{ footerTitle[0]|trans(footerTitle[1])|colorize }}
+
+    {{ navigation_pagination(paginator) }}
+{% endblock hof_charm %}
+
+{% block hof_days %}
+    {% trans_default_domain textDomain %}
+
+    <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-lotgd-200">
+            <thead>
+                <th scope="col">{{ 'section.days.table.thead.rank'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.days.table.thead.name'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.days.table.thead.best'|trans|uncolorize }}</th>
+            </thead>
+            <tbody>
+                {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
+                {% for character in paginator %}
+                    <tr>
+                        <td>{{ loop.index + rank }}</td>
+                        <td>{{ character.name|colorize }}</td>
+                        <td>{{ character.bestdragonage|numeral }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">{{ 'section.days.table.tbody.none'|trans|colorize }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {{ footerTitle[0]|trans(footerTitle[1])|colorize }}
+
+    {{ navigation_pagination(paginator) }}
+{% endblock hof_days %}
+
+{% block hof_default %}
+    {% trans_default_domain textDomain %}
+
+    <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-lotgd-200">
+            <thead>
+                <th scope="col">{{ 'section.default.table.thead.rank'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.default.table.thead.name'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.default.table.thead.kills'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.default.table.thead.level'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.default.table.thead.days'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.default.table.thead.best'|trans|uncolorize }}</th>
+            </thead>
+            <tbody>
+                {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
+                {% for character in paginator %}
+                    <tr>
+                        <td>{{ loop.index + rank }}</td>
+                        <td>{{ character.name|colorize }}</td>
+                        <td>{{ character.dragonkills|numeral }}</td>
+                        <td>{{ character.level|numeral }}</td>
+                        <td>{{ character.dragonage|numeral }}</td>
+                        <td>{{ character.bestdragonage|numeral }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">{{ 'section.default.table.tbody.none'|trans|colorize }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {{ footerTitle[0]|trans(footerTitle[1])|colorize }}
+
+    {{ navigation_pagination(paginator) }}
+{% endblock hof_default %}
+
+{% block hof_gems %}
+    {% trans_default_domain textDomain %}
+
+    <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-lotgd-200">
+            <thead>
+                <th scope="col">{{ 'section.gems.table.thead.rank'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.gems.table.thead.name'|trans|uncolorize }}</th>
+            </thead>
+            <tbody>
+                {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
+                {% for character in paginator %}
+                    <tr>
+                        <td>{{ loop.index + rank }}</td>
+                        <td>{{ character.name|colorize }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">{{ 'section.gems.table.tbody.none'|trans|colorize }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {{ footerTitle[0]|trans(footerTitle[1])|colorize }}
+
+    {{ navigation_pagination(paginator) }}
+{% endblock hof_gems %}
+
+{% block hof_money %}
+    {% trans_default_domain textDomain %}
+
+    <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-lotgd-200">
+            <thead>
+                <th scope="col">{{ 'section.money.table.thead.rank'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.money.table.thead.name'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.money.table.thead.gold'|trans|uncolorize }}</th>
+            </thead>
+            <tbody>
+                {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
+                {% for character in paginator %}
+                    <tr>
+                        <td>{{ loop.index + rank }}</td>
+                        <td>{{ character.name|colorize }}</td>
+                        <td>{{ character.gold|numeral }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">{{ 'section.money.table.tbody.none'|trans|colorize }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {{ 'section.money.table.tbody.footer'|trans|colorize }}
+
+    {{ footerTitle[0]|trans(footerTitle[1])|colorize }}
+
+    {{ navigation_pagination(paginator) }}
+{% endblock hof_money %}
+
+{% block hof_resurrects %}
+    {% trans_default_domain textDomain %}
+
+    <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-lotgd-200">
+            <thead>
+                <th scope="col">{{ 'section.days.table.thead.rank'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.days.table.thead.name'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.days.table.thead.level'|trans|uncolorize }}</th>
+            </thead>
+            <tbody>
+                {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
+                {% for character in paginator %}
+                    <tr>
+                        <td>{{ loop.index + rank }}</td>
+                        <td>{{ character.name|colorize }}</td>
+                        <td>{{ character.level }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">{{ 'section.days.table.tbody.none'|trans|colorize }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {{ footerTitle[0]|trans(footerTitle[1])|colorize }}
+
+    {{ navigation_pagination(paginator) }}
+{% endblock hof_resurrects %}
+
+{% block hof_tough %}
+    {% trans_default_domain textDomain %}
+
+    <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-lotgd-200">
+            <thead>
+                <th scope="col">{{ 'section.tough.table.thead.rank'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.tough.table.thead.name'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.tough.table.thead.gender'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'section.tough.table.thead.race'|trans|uncolorize }}</th>
+            </thead>
+            <tbody>
+                {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
+                {% for character in paginator %}
+                    <tr>
+                        <td>{{ loop.index + rank }}</td>
+                        <td>{{ character.name|colorize }}</td>
+                        <td>{{ 'section.tough.table.tbody.gender'|trans({ 'sex': character.sex })|colorize }}</td>
+                        <td>{{ 'character.racename'|trans({}, character.race)|colorize }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">{{ 'section.tough.table.tbody.none'|trans|colorize }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {{ footerTitle[0]|trans(footerTitle[1])|colorize }}
+
+    {{ navigation_pagination(paginator) }}
+{% endblock hof_tough %}

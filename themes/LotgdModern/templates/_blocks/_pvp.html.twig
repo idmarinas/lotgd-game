@@ -1,0 +1,66 @@
+{% block pvp_list %}
+    {% trans_default_domain 'partial_pvp' %}
+
+    <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-lotgd-200">
+            <thead>
+                <tr>
+                    <th scope="col">{{ 'list.table.thead.name'|trans|uncolorize }}</th>
+                    <th scope="col">{{ 'list.table.thead.level'|trans|uncolorize }}</th>
+                    <th scope="col">{{ 'list.table.thead.location'|trans|uncolorize }}</th>
+                    <th scope="col">{{ 'list.table.thead.ops'|trans|uncolorize }}</th>
+                </tr>
+            </thead>
+            <tbody class="striped">
+                {% for character in paginator %}
+                    <tr>
+                        <td>
+                            {% if character.clanshort and character.clanrank > constant('CLAN_APPLICANT') %}
+                                <span aria-label="{{ character.clanname|uncolorize }}" data-tooltip="{{ character.clanname|uncolorize }}">
+                                    {{ '&lt;`2%s`0&gt;'|format(character.clanshort)|colorize }}
+                                </span>
+                            {% endif %}
+                            {{ '`@%s`0'|format(character.name)|trans|colorize }}
+                        </td>
+                        <td>{{ character.level }}</td>
+                        <td>{{ character.location }}</td>
+                        <td class="collapsing">
+                            <span class="ui small buttons">
+                                <a class="ui icon button" data-tooltip="{{ 'list.table.tbody.ops.bio'|trans|uncolorize }}" aria-label="{{ 'list.table.tbody.ops.bio'|trans|uncolorize }}" href="{{ ('bio.php?char=' ~ character.acctid ~ '&ret=' ~ returnLink|e('url'))|lotgd_url }}">
+                                    <i class="user icon"></i>
+                                </a>
+                                {% if character.pvpflag > pvpTimeOut %}
+                                    <a class="ui grey icon button" data-tooltip="{{ 'list.table.tbody.ops.attacked'|trans|uncolorize }}" aria-label="{{ 'list.table.tbody.ops.attacked'|trans|uncolorize }}">
+                                        <i aria-hidden="true" class="skull crossbones icon"></i>
+                                    </a>
+                                {% else %}
+                                    <a class="ui red icon button" href="{{ (linkAttack ~ '&character_id=' ~ character.character_id)|lotgd_url }}" data-tooltip="{{ 'list.table.tbody.ops.attk'|trans|uncolorize }}" aria-label="{{ 'list.table.tbody.ops.attk'|trans|uncolorize }}">
+                                        <i aria-hidden="true" class="fire icon"></i>
+                                    </a>
+                                {% endif %}
+                            </span>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td class="center aligned" colspan="4">{{ 'list.table.tbody.no.one'|trans|colorize }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {{ navigation_pagination(paginator) }}
+{% endblock pvp_list %}
+
+{% block pvp_sleepers %}
+    {% trans_default_domain 'partial_pvp' %}
+
+    {% if sleepers|length %}
+        {{ 'sleepers.paragraph'|trans|colorize }}
+
+        {% for zone in sleepers %}
+            {{ 'sleepers.count'|trans({ 'count': zone.sleepers, 'location': zone.location })|colorize }}
+        {% endfor %}
+    {% endif %}
+{% endblock pvp_sleepers %}

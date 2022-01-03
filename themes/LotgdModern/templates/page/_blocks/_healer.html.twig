@@ -1,0 +1,39 @@
+{% block healer_buy %}
+    {% trans_default_domain textDomain %}
+
+    {% if canHeal is same as(true) %}
+        {{ 'section.buy.healed.paragraph'|trans|colorize }}
+
+        {% if healCost == newHealCost %}
+            {{ 'section.buy.healed.full'|trans|colorize }}
+        {% else %}
+            {{ 'section.buy.healed.partial'|trans|colorize }}
+        {% endif %}
+
+        {{ 'section.buy.healed.heal'|trans({ 'healed': healHealed })|colorize }}
+    {% else %}
+        {{ 'section.buy.unheal'|trans({ 'cost': newHealCost })|colorize }}
+    {% endif %}
+{% endblock healer_buy %}
+
+{% block healer_companion %}
+    {% trans_default_domain textDomain %}
+
+    {% if canHeal is same as(true) %}
+        {{ 'section.companion.heal.success'|trans({ 'companionName': companionName })|colorize }}
+    {% else %}
+        {{ 'section.companion.heal.fail'|trans({ 'cost': newHealCost })|colorize }}
+    {% endif %}
+{% endblock healer_companion %}
+
+{% block healer_default %}
+    {% trans_default_domain textDomain %}
+
+    {% if needHeal is same as(true) %}
+        {{ 'section.default.heal.damaged'|trans({ 'healCost': healCost })|colorize }}
+    {% elseif needHeal is same as(false) %}
+        {{ 'section.default.heal.overheal'|trans|colorize }}
+    {% else %}
+        {{ 'section.default.heal.equal'|trans|colorize }}
+    {% endif %}
+{% endblock healer_default %}

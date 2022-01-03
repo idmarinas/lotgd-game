@@ -1,0 +1,49 @@
+{% block mercenarycamp_buy %}
+    {% trans_default_domain textDomain %}
+
+    {% if companionHire is same as(true) %}
+        {{ 'section.buy.success'|trans|colorize }}
+
+        {% if companion.jointext %}
+            {{ companion.jointext|colorize }}
+        {% endif %}
+    {% elseif companionHire is same as(false) %}
+        {{ 'section.buy.too.many'|trans|colorize }}
+    {% else %}
+        {{ 'section.buy.error'|trans|colorize }}
+    {% endif %}
+{% endblock mercenarycamp_buy %}
+
+{% block mercenarycamp_default %}
+    {% trans_default_domain textDomain %}
+
+    {% if showDescription %}
+        {{ 'section.default.description'|trans(_context)|colorize }}
+    {% endif %}
+
+    {{ 'section.default.mercenary.join'|trans({ 'count': companions|length })|colorize }}
+
+    {% for companion in companions %}
+        {{ '`#%s`0`n`7%s`0`n`n'|format(companion.name, companion.description)|colorize }}
+    {% endfor %}
+
+    {% if companionWounds %}
+        {{ 'section.default.mercenary.wounds'|trans|colorize }}
+    {% endif %}
+{% endblock mercenarycamp_default %}
+
+{% block mercenarycamp_heal %}
+    {% trans_default_domain textDomain %}
+
+    {% if companionHealed %}
+        {{ 'section.heal.paid'|trans({ 'companionName': companionName })|colorize }}
+    {% else %}
+        {{ 'section.heal.not.enough'|trans|colorize }}
+    {% endif %}
+
+    <br>
+
+    {% if companionWounds %}
+        {{ 'section.default.mercenary.wounds'|trans|colorize }}
+    {% endif %}
+{% endblock mercenarycamp_heal %}
