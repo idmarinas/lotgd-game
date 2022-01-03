@@ -1,0 +1,16 @@
+--TEST--
+"numeral" filter
+--TEMPLATE--
+{{ numb|numeral }}
+{{ numb|numeral(0, ',', '.') }}
+{{ numb|numeral(2) }}
+{{ numb|numeral(-1) }}
+--DATA--
+return [
+    'numb' => 5000000.569872
+]
+--EXPECT--
+5,000,001
+5.000.001
+5,000,000.57
+5,000,000.569872
