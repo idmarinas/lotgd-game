@@ -101,7 +101,6 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
         -   **lib/titles.php** 
             -   `valid_dk_title` Use `LotgdTool::validDkTitle($title, $dks, $gender)` instead.
             -   `get_dk_title` Use `LotgdTool::getDkTitle($dks, $gender, $ref)` instead.
-        -   **** `` Use `` instead.
         -   **src/core/Application.php** `Lotgd\Core\Application` Use `Lotgd\Core\Kernel` instead.
 
 
@@ -110,7 +109,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **Important**:
     -   :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
     -   :warning: Avoid, as far as possible, using static classes (e.g. LotgdSetting, Doctrine, LotgdTranslation...) as these classes will be deleted in a future version. Use autowire, dependency injection when possible.
-    -   :warning: Version 6.0.0 change templates for use **TailwindCSS**
+    -   :warning: Version 7.0.0 change templates for use **TailwindCSS**
 -   **Upgrade/Install for version 5.0.0 and up**
     -   First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
     -   If have problems:
