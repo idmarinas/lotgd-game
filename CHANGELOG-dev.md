@@ -102,6 +102,24 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
             -   `valid_dk_title` Use `LotgdTool::validDkTitle($title, $dks, $gender)` instead.
             -   `get_dk_title` Use `LotgdTool::getDkTitle($dks, $gender, $ref)` instead.
         -   **src/core/Application.php** `Lotgd\Core\Application` Use `Lotgd\Core\Kernel` instead.
+-   **BC** Removed some traits 
+    -   `src/core/Pattern/Cache.php` 
+    -   `src/core/Pattern/Censor.php` 
+    -   `src/core/Pattern/Container.php` 
+    -   `src/core/Pattern/Doctrine.php` 
+    -   `src/core/Pattern/EntityHydrator.php` 
+    -   `src/core/Pattern/Format.php` 
+    -   `src/core/Pattern/Http.php` 
+    -   `src/core/Pattern/Jaxon.php` 
+    -   `src/core/Pattern/LotgdCore.php` 
+    -   `src/core/Pattern/Navigation.php` 
+    -   `src/core/Pattern/Output.php` 
+    -   `src/core/Pattern/Sanitize.php` 
+    -   `src/core/Pattern/Settings.php` 
+    -   `src/core/Pattern/Template.php` 
+    -   `src/core/Pattern/ThemeList.php` 
+    -   `src/core/Pattern/Translator.php` 
+    -   _Note_: use Dependency Injection.
 
 
 ### :notebook: NOTES
