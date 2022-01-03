@@ -1,0 +1,144 @@
+{#
+    This file is part of "LoTGD Core Package".
+
+    @see https://github.com/idmarinas/lotgd-game
+
+    @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.md
+    @author IDMarinas
+
+    @since 7.0.0
+
+    @file Template for show flash messages.
+
+    Available variables:
+    - flashes<array>: List of flash messages
+        -   Format 1:
+            -   $flashes['info'][] = 'Message 1'
+            -   $flashes['info'][] = 'Message 2'
+        -   Format 2:
+            -   $flashes['warning'][] = [
+                    'id' => 'id',
+                    'title' => 'Title of message',
+                    'message' => 'Message 1',
+                    'icon' => '<i class="fas fa-user"></i>'
+                ]
+#}
+
+{% for label, messages in flashes %}
+    {% for message in messages %}
+
+        {% if message is iterable %}
+            {% set title = message.title|default(message.header|default(null)) %}
+            {% set icon = message.icon|default(null) %}
+            {% set id = message.id|default(null) %}
+            {% set message = message.message %}
+        {% endif %}
+
+        <div
+            class="alert flex flex-row items-center {{ _self.flash_class_alert(label) }} p-5 rounded border-b-2 mb-2"
+            {% if id is defined and id is not empty %} id="{{ id }}" {% endif %}
+        >
+            <div class="alert-icon flex items-center {{ _self.flash_class_icon(label) }} border-2 justify-center h-10 w-10 flex-shrink-0 rounded-full">
+                <span class="{{ _self.flash_class_icon_fa(label) }}">
+                    {% if icon is defined and icon is not empty %}
+                        {{ icon|raw }}
+                    {% else %}
+                        {{ _self.flash_icon(label) }}
+                    {% endif %}
+                </span>
+            </div>
+            <div class="alert-content ml-4">
+                {% if title is defined and title is not empty %}
+                    <div class="alert-title font-semibold text-lg {{ _self.flash_class_title(label) }}">
+                        {{ title|uncolorize }}
+                    </div>
+                {% endif %}
+                <div class="alert-description text-sm {{ _self.flash_class_message(label) }}">{{ message|uncolorize }}</div>
+            </div>
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<div class="m-2"></div>
+
+{%- macro flash_class_icon(type) -%}
+    {% apply spaceless %}
+        {% if type == 'error' %}
+            bg-red-100 border-red-500
+        {% elseif type == 'success' %}
+            bg-green-100 border-green-500
+        {% elseif type == 'warning' %}
+            bg-yellow-100 border-yellow-500
+        {% else %}
+            bg-blue-100 border-blue-500
+        {% endif %}
+    {% endapply %}
+{%- endmacro -%}
+
+{%- macro flash_class_alert(type) -%}
+    {% apply spaceless %}
+        {% if type == 'error' %}
+            bg-red-200 border-red-300
+        {% elseif type == 'success' %}
+            bg-green-200 border-green-300
+        {% elseif type == 'warning' %}
+            bg-yellow-200 border-yellow-300
+        {% else %}
+            bg-blue-200 border-blue-300
+        {% endif %}
+    {% endapply %}
+{%- endmacro -%}
+
+{%- macro flash_class_icon_fa(type) -%}
+    {% apply spaceless %}
+        {% if type == 'error' %}
+            text-red-500
+        {% elseif type == 'success' %}
+            text-green-500
+        {% elseif type == 'warning' %}
+            text-yellow-500
+        {% else %}
+            text-blue-500
+        {% endif %}
+    {% endapply %}
+{%- endmacro -%}
+
+{%- macro flash_class_message(type) -%}
+    {% apply spaceless %}
+        {% if type == 'error' %}
+            text-red-600
+        {% elseif type == 'success' %}
+            text-green-600
+        {% elseif type == 'warning' %}
+            text-yellow-600
+        {% else %}
+            text-blue-600
+        {% endif %}
+    {% endapply %}
+{%- endmacro -%}
+
+{%- macro flash_class_title(type) -%}
+    {% apply spaceless %}
+        {% if type == 'error' %}
+            text-red-800
+        {% elseif type == 'success' %}
+            text-green-800
+        {% elseif type == 'warning' %}
+            text-yellow-800
+        {% else %}
+            text-blue-800
+        {% endif %}
+    {% endapply %}
+{%- endmacro -%}
+
+{% macro flash_icon(type) %}
+    {% if type == 'error' %}
+        <i class="fas fa-times"></i>
+    {% elseif type == 'success' %}
+        <i class="fas fa-check"></i>
+    {% elseif type == 'warning' %}
+        <i class="fas fa-exclamation-triangle"></i>
+    {% else %}
+        <i class="fas fa-info-circle"></i>
+    {% endif %}
+{% endmacro %}

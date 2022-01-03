@@ -21,13 +21,12 @@ use Twig\TwigFunction;
 
 class FlashMessages extends AbstractExtension
 {
+    /** @var \Symfony\Component\HttpFoundation\Session\Session */
     protected $session;
-    protected $sanitize;
 
-    public function __construct(SessionInterface $session, Sanitize $sanitize)
+    public function __construct(SessionInterface $session)
     {
         $this->session  = $session;
-        $this->sanitize = $sanitize;
     }
 
     /**
@@ -47,37 +46,17 @@ class FlashMessages extends AbstractExtension
      */
     public function display(Environment $env)
     {
-        $output   = '';
-        $flashBag = $this->session->getFlashBag();
+        $bag = $this->session->getFlashBag();
+        $flashes = $bag->all();
 
-        foreach ($flashBag->all() as $type => $messages)
+        if (empty($flashes))
         {
-            foreach ($messages as $id => $message)
-            {
-                $messageId = "{$type}-{$id}";
-
-                if (\is_array($message))
-                {
-                    $message['message'] = $this->sanitize->fullSanitize($message['message']);
-                    $message['id']      = $message['id'] ?? $messageId;
-                    $message['class']   = ($message['class'] ?? '').' '.$type;
-                    $message['close']   = $message['close'] ?? true;
-
-                    $output .= $env->render('semantic/collection/message.html.twig', $message);
-
-                    continue;
-                }
-
-                $output .= $env->render('semantic/collection/message.html.twig', [
-                    'message' => $this->sanitize->fullSanitize($message),
-                    'class'   => $type,
-                    'close'   => true,
-                    'id'      => $messageId,
-                ]);
-            }
+            return '';
         }
 
-        return $output;
+        return $env->render('components/_flash_messages.html.twig', [
+            'flashes' => $flashes
+        ]);
     }
 
     /**
