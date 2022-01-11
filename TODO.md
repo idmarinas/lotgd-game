@@ -48,7 +48,7 @@
     -   _Nota_ el cronjob del nuevo día (newdayrunonce) no es compatible con el sistema de módulos.
     -   El nuevo sistema de CronJob se usará en la versión 8.0.0 donde se elimina la compatibilidad con los módulos
 
-# Actualmente haciendo esto (7.0.0)
+# Actualmente haciendo esto (7.Y.0)
 
 -   Esta será la última versión que use la ordenación de carpetas `src/core` y `src/local`
     -   La versión 7.0.0 será la última versión con esta estructura, y será la versión dedicada a facilitar la transción a la versión 8.0.0.
@@ -72,7 +72,7 @@
     -   Usar macros y blocks donde se pueda.    
 
 # Futuras versiones
-## **BC** Para la versión 8.0.0
+## **BC** Para la versión X.0.0
 
 -   **BC** Esta versión será ya una Symfony App (En estudio, puede que la versión 9.0.0 sea la Symfony App)
     -   Según se vea, dependiendo del sistema de eventos especiales, que parece ser que es el que más problemas va a dar.
