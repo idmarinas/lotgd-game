@@ -37,6 +37,9 @@ return static function (ContainerConfigurator $containerConfigurator): void
     $containerConfigurator->import(SymfonySetList::SYMFONY_44);
     $containerConfigurator->import(TwigSetList::TWIG_240);
     $containerConfigurator->import(DoctrineSetList::DOCTRINE_25);
+    $containerConfigurator->import(DoctrineSetList::DOCTRINE_ORM_29);
+    $containerConfigurator->import(DoctrineSetList::DOCTRINE_DBAL_210);
+    $containerConfigurator->import(DoctrineSetList::DOCTRINE_DBAL_211);
 
     //-- Skip some rules/files ...
     $parameters->set(Option::SKIP, [
