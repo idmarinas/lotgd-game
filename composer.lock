@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "448d4bbb5ac4c169f31806dc793b9179",
+    "content-hash": "8a1450182d5fdfdafe5759e2a3ab777d",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -2312,16 +2312,16 @@
         },
         {
             "name": "jaxon-php/jaxon-core",
-            "version": "v3.6.2",
+            "version": "v3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaxon-php/jaxon-core.git",
-                "reference": "2a458bdd2b1b41d322f8bcc5aa9e7bf41eec2c5a"
+                "reference": "548923859376104a1bc498be55adb440a919ade7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaxon-php/jaxon-core/zipball/2a458bdd2b1b41d322f8bcc5aa9e7bf41eec2c5a",
-                "reference": "2a458bdd2b1b41d322f8bcc5aa9e7bf41eec2c5a",
+                "url": "https://api.github.com/repos/jaxon-php/jaxon-core/zipball/548923859376104a1bc498be55adb440a919ade7",
+                "reference": "548923859376104a1bc498be55adb440a919ade7",
                 "shasum": ""
             },
             "require": {
@@ -2378,7 +2378,7 @@
                 "issues": "https://github.com/jaxon-php/jaxon-core/issues",
                 "source": "https://github.com/jaxon-php/jaxon-core"
             },
-            "time": "2022-01-08T22:24:00+00:00"
+            "time": "2022-01-20T07:47:16+00:00"
         },
         {
             "name": "jaxon-php/jaxon-dialogs",
@@ -2923,34 +2923,37 @@
         },
         {
             "name": "laminas/laminas-hydrator",
-            "version": "3.2.1",
+            "version": "4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-hydrator.git",
-                "reference": "41aaccb9a0b8e25b1742f78427aa90504a6eb1cd"
+                "reference": "cc5ea6b42d318dbac872d94e8dca2d3013a37ab5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-hydrator/zipball/41aaccb9a0b8e25b1742f78427aa90504a6eb1cd",
-                "reference": "41aaccb9a0b8e25b1742f78427aa90504a6eb1cd",
+                "url": "https://api.github.com/repos/laminas/laminas-hydrator/zipball/cc5ea6b42d318dbac872d94e8dca2d3013a37ab5",
+                "reference": "cc5ea6b42d318dbac872d94e8dca2d3013a37ab5",
                 "shasum": ""
             },
             "require": {
                 "laminas/laminas-stdlib": "^3.3",
-                "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.3 || ~8.0.0"
+                "php": "^7.3 || ~8.0.0 || ~8.1.0",
+                "webmozart/assert": "^1.10"
             },
-            "replace": {
-                "zendframework/zend-hydrator": "^3.0.2"
+            "conflict": {
+                "zendframework/zend-hydrator": "*"
             },
             "require-dev": {
-                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-coding-standard": "~2.3.0",
                 "laminas/laminas-eventmanager": "^3.2.1",
                 "laminas/laminas-modulemanager": "^2.8",
                 "laminas/laminas-serializer": "^2.9",
                 "laminas/laminas-servicemanager": "^3.3.2",
-                "phpunit/phpunit": "~9.3.0",
-                "vimeo/psalm": "^3.16"
+                "phpbench/phpbench": "^1.0",
+                "phpunit/phpunit": "~9.5.5",
+                "psalm/plugin-phpunit": "^0.16.1",
+                "psr/cache": "1.0.1",
+                "vimeo/psalm": "^4.8.1"
             },
             "suggest": {
                 "laminas/laminas-eventmanager": "^3.2, to support aggregate hydrator usage",
@@ -2993,7 +2996,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-06-28T15:12:05+00:00"
+            "time": "2021-09-09T09:55:00+00:00"
         },
         {
             "name": "laminas/laminas-i18n",
@@ -6548,16 +6551,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.17.6",
+            "version": "v1.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "7a79135e1dc66b30042b4d968ecba0908f9374bc"
+                "reference": "90ee9ddddaadee602dff23ae530310a59936bc8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/7a79135e1dc66b30042b4d968ecba0908f9374bc",
-                "reference": "7a79135e1dc66b30042b4d968ecba0908f9374bc",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/90ee9ddddaadee602dff23ae530310a59936bc8b",
+                "reference": "90ee9ddddaadee602dff23ae530310a59936bc8b",
                 "shasum": ""
             },
             "require": {
@@ -6593,7 +6596,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.17.6"
+                "source": "https://github.com/symfony/flex/tree/v1.18.1"
             },
             "funding": [
                 {
@@ -6609,7 +6612,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-29T15:39:37+00:00"
+            "time": "2022-01-19T17:52:31+00:00"
         },
         {
             "name": "symfony/form",
@@ -10834,20 +10837,20 @@
         },
         {
             "name": "idmarinas/tracy-twig-bar",
-            "version": "0.3.0",
+            "version": "0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/idmarinas/tracy-twig-bar.git",
-                "reference": "7d76881da68e781362d367aea0a26916f3b10739"
+                "reference": "171f8b8756b2ee01610ed9e4334f7292eea7ace1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/idmarinas/tracy-twig-bar/zipball/7d76881da68e781362d367aea0a26916f3b10739",
-                "reference": "7d76881da68e781362d367aea0a26916f3b10739",
+                "url": "https://api.github.com/repos/idmarinas/tracy-twig-bar/zipball/171f8b8756b2ee01610ed9e4334f7292eea7ace1",
+                "reference": "171f8b8756b2ee01610ed9e4334f7292eea7ace1",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 | ^8.0",
+                "php": "^7.2 | ^8.0 | ^8.1",
                 "tracy/tracy": "^2.7",
                 "twig/twig": "^2.0 || ^3.0"
             },
@@ -10882,7 +10885,7 @@
             ],
             "support": {
                 "issues": "https://github.com/idmarinas/tracy-twig-bar/issues",
-                "source": "https://github.com/idmarinas/tracy-twig-bar/tree/0.3.0"
+                "source": "https://github.com/idmarinas/tracy-twig-bar/tree/0.3.1"
             },
             "funding": [
                 {
@@ -10890,7 +10893,7 @@
                     "type": "liberapay"
                 }
             ],
-            "time": "2021-11-28T15:23:42+00:00"
+            "time": "2022-01-18T08:29:23+00:00"
         },
         {
             "name": "macfja/tracy-doctrine-sql",
