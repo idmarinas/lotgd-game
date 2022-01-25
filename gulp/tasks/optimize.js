@@ -1,7 +1,6 @@
 //-- Dependencies
 const gulp = require('gulp')
 const print = require('gulp-print').default
-const gulpif = require('gulp-if')
 const uglify = require('gulp-uglify')
 const fancyLog = require('fancy-log')
 const colors = require('ansi-colors')
@@ -62,9 +61,14 @@ module.exports = function (callback)
     const destFolder = isProduction ? config.paths.build.prod : config.paths.build.dev
 
     //-- Resources folder - Only JS
-    return gulp.src(`${destFolder}/public/js/*.js`)
-        .pipe(gulpif(isProduction, uglify(settings.uglify.some)))
-        .on('error', function (err) { fancyLog(colors.red('[Error]'), err.toString()) })
+    let src = gulp.src(`${destFolder}/public/js/*.js`)
+
+    if (isProduction)
+    {
+        src.pipe(uglify(settings.uglify.some))
+    }
+
+    return src.on('error', function (err) { fancyLog(colors.red('[Error]'), err.toString()) })
         .pipe(gulp.dest(`${destFolder}/public/js`))
         .pipe(print(log.copied))
 }
