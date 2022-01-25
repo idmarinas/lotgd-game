@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Repository\Avatar;
 
+use Throwable;
+use DateTime;
 use Doctrine\ORM\Query\Expr\Join;
 use Lotgd\Core\Entity as EntityCore;
 use Tracy\Debugger;
@@ -44,7 +46,7 @@ trait Clan
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -70,7 +72,7 @@ trait Clan
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -95,7 +97,7 @@ trait Clan
                 ->getSingleScalarResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -120,7 +122,7 @@ trait Clan
                 ->orderBy('u.clanjoindate', 'DESC')
             ;
 
-            if ($acctId)
+            if ($acctId !== 0)
             {
                 $query->andWhere('u.acct != :acct')
                     ->setParameter('acct', $acctId)
@@ -132,7 +134,7 @@ trait Clan
                 ->getOneOrNullResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -157,7 +159,7 @@ trait Clan
                 ->setParameter('rank', CLAN_OFFICER)
             ;
 
-            if ($acctId)
+            if ($acctId !== 0)
             {
                 $query->andWhere('u.acct != :acct')
                     ->setParameter('acct', $acctId)
@@ -168,7 +170,7 @@ trait Clan
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -194,7 +196,7 @@ trait Clan
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -222,7 +224,7 @@ trait Clan
                 ->getOneOrNullResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
         }
@@ -240,14 +242,14 @@ trait Clan
             return $query
                 ->set('u.clanid', 0)
                 ->set('u.clanrank', CLAN_APPLICANT)
-                ->set('u.clanjoindate', new \DateTime('0000-00-00 00:00:00'))
+                ->set('u.clanjoindate', new DateTime('0000-00-00 00:00:00'))
                 ->where('u.clanid = :clan')
                 ->setParameter('clan', $clanId)
                 ->getQuery()
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

@@ -1,45 +1,47 @@
 <?php
 
+use Lotgd\Core\Output\Commentary;
+
 require_once 'common.php';
 
 check_su_access(SU_EDIT_COMMENTS);
 
-$op = (string) \LotgdRequest::getQuery('op');
-$area = (string) \LotgdRequest::getQuery('area');
-$subop = (string) \LotgdRequest::getQuery('subop');
-$seen = (int) \LotgdRequest::getQuery('seen');
+$op    = (string) LotgdRequest::getQuery('op');
+$area  = (string) LotgdRequest::getQuery('area');
+$subop = (string) LotgdRequest::getQuery('subop');
+$seen  = (int) LotgdRequest::getQuery('seen');
 
-$repository = \Doctrine::getRepository('LotgdCore:Commentary');
+$repository = Doctrine::getRepository('LotgdCore:Commentary');
 $textDomain = 'grotto_moderate';
-$params = [
+$params     = [
     'textDomain' => $textDomain,
-    'area' => $area
+    'area'       => $area,
 ];
 
-if ($seen !== 0)
+if (0 !== $seen)
 {
-    $session['user']['recentcomments'] = new \DateTime('now');
+    $session['user']['recentcomments'] = new DateTime('now');
 }
 
-\LotgdNavigation::superuserGrottoNav();
+LotgdNavigation::superuserGrottoNav();
 
-\LotgdNavigation::addHeader('moderate.category.other');
-\LotgdNavigation::addNav('moderate.nav.overview', 'moderate.php');
-\LotgdNavigation::addNav('moderate.nav.reset', 'moderate.php?seen=1');
-\LotgdNavigation::addNav('moderate.nav.bios', 'bios.php');
+LotgdNavigation::addHeader('moderate.category.other');
+LotgdNavigation::addNav('moderate.nav.overview', 'moderate.php');
+LotgdNavigation::addNav('moderate.nav.reset', 'moderate.php?seen=1');
+LotgdNavigation::addNav('moderate.nav.bios', 'bios.php');
 
 // ($session['user']['superuser'] & SU_AUDIT_MODERATION) && \LotgdNavigation::addNav('moderate.nav.audit', 'moderate.php?op=audit');
 
-\LotgdNavigation::addHeader('moderate.category.review');
-\LotgdNavigation::addHeader('moderate.category.commentary');
-\LotgdNavigation::addHeader('moderate.category.sections');
+LotgdNavigation::addHeader('moderate.category.review');
+LotgdNavigation::addHeader('moderate.category.commentary');
+LotgdNavigation::addHeader('moderate.category.sections');
 
-$commentary = \LotgdKernel::get(\Lotgd\Core\Output\Commentary::class);
+$commentary            = LotgdKernel::get(Commentary::class);
 $params['sectionName'] = $commentary->commentaryLocs();
-$cache = \LotgdKernel::get('cache.app');
-$item = $cache->getItem('commentary-published-sections');
+$cache                 = LotgdKernel::get('cache.app');
+$item                  = $cache->getItem('commentary-published-sections');
 
-if (! $item->isHit())
+if ( ! $item->isHit())
 {
     $sections = $repository->getPublishedSections();
 
@@ -49,34 +51,34 @@ if (! $item->isHit())
 
 $sections = $item->get();
 
-\LotgdNavigation::addHeader('moderate.category.sections');
-($session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO) && \LotgdNavigation::addNavNotl($params['sectionName']['superuser'], 'moderate.php?area=superuser');
+LotgdNavigation::addHeader('moderate.category.sections');
+($session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO) && LotgdNavigation::addNavNotl($params['sectionName']['superuser'], 'moderate.php?area=superuser');
 
-foreach($sections as $section)
+foreach ($sections as $section)
 {
-    \LotgdNavigation::addNavNotl($params['sectionName'][$section] ?? $section, "moderate.php?area={$section}");
+    LotgdNavigation::addNavNotl($params['sectionName'][$section] ?? $section, "moderate.php?area={$section}");
 }
 
-\LotgdNavigation::addHeader('moderate.category.clan.halls');
+LotgdNavigation::addHeader('moderate.category.clan.halls');
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], $textDomain);
+LotgdResponse::pageStart('title', [], $textDomain);
 
 if ('' == $op)
 {
-    $params['tpl'] = $area !== '' && $area !== '0' ? 'area' : 'default';
+    $params['tpl'] = '' !== $area && '0' !== $area ? 'area' : 'default';
 }
 
 if (($session['user']['superuser'] & SU_MODERATE_CLANS) !== 0)
 {
-    $clanRepository = \Doctrine::getRepository('LotgdCore:Clans');
-    $entities = $clanRepository->findAll();
+    $clanRepository = Doctrine::getRepository('LotgdCore:Clans');
+    $entities       = $clanRepository->findAll();
 
-    \LotgdNavigation::addHeader('moderate.category.clan.halls');
+    LotgdNavigation::addHeader('moderate.category.clan.halls');
 
     foreach ($entities as $clan)
     {
-        \LotgdNavigation::addNavNotl(sprintf('&lt;%s&gt; %s', $clan->getClanshort(), $clan->getClanname()), "moderate.php?area=clan-{$clan->getClanid()}");
+        LotgdNavigation::addNavNotl(sprintf('&lt;%s&gt; %s', $clan->getClanshort(), $clan->getClanname()), "moderate.php?area=clan-{$clan->getClanid()}");
     }
 }
 elseif (
@@ -95,22 +97,22 @@ elseif (
     // often trusted with at least the rank of officer in their respective
     // clans.
 
-    $clanRepository = \Doctrine::getRepository('LotgdCore:Clans');
-    $entity = $clanRepository->find($session['user']['clanid']);
+    $clanRepository = Doctrine::getRepository('LotgdCore:Clans');
+    $entity         = $clanRepository->find($session['user']['clanid']);
 
-    \LotgdNavigation::addHeader('moderate.category.clan.halls');
+    LotgdNavigation::addHeader('moderate.category.clan.halls');
 
     if ($entity)
     {
-        \LotgdNavigation::addNavNotl(sprintf('&lt;%s&gt; %s', $entity->getClanshort(), $entity->getClanname()), "moderate.php?area=clan-{$entity->getClanid()}");
+        LotgdNavigation::addNavNotl(sprintf('&lt;%s&gt; %s', $entity->getClanshort(), $entity->getClanname()), "moderate.php?area=clan-{$entity->getClanid()}");
     }
     else
     {
-        \LotgdResponse::pageDebug('There was an error while trying to access your clan.');
+        LotgdResponse::pageDebug('There was an error while trying to access your clan.');
     }
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/moderate.html.twig', $params));
+LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/moderate.html.twig', $params));
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

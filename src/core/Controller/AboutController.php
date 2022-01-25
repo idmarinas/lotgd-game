@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Form\AboutType;
 use Lotgd\Bundle\Contract\LotgdBundleInterface;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
@@ -82,7 +83,7 @@ class AboutController extends AbstractController
             ];
         });
 
-        $form = $this->createForm(\Lotgd\Core\Form\AboutType::class, $data, [
+        $form = $this->createForm(AboutType::class, $data, [
             'action' => 'none',
             'method' => 'none',
         ]);

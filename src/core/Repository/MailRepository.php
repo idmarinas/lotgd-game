@@ -13,6 +13,12 @@
 
 namespace Lotgd\Core\Repository;
 
+use Lotgd\Core\Repository\Mail\Backup;
+use Lotgd\Core\Repository\Mail\Clan;
+use Throwable;
+use Doctrine\Common\Collections\Criteria;
+use DateTime;
+use DateInterval;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -21,8 +27,8 @@ use Tracy\Debugger;
 
 class MailRepository extends ServiceEntityRepository implements RepositoryBackupInterface
 {
-    use Mail\Backup;
-    use Mail\Clan;
+    use Backup;
+    use Clan;
     use EntityRepositoryTrait;
 
     public function __construct(ManagerRegistry $registry)
@@ -59,7 +65,7 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->getSingleResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -85,7 +91,7 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->getSingleScalarResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -136,7 +142,7 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -168,7 +174,7 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -189,14 +195,14 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
         {
             $next->select('min(n.messageid)')
                 ->where('n.messageid > :mail AND n.msgto = :acct')
-                ->orderBy('n.messageid', 'ASC')
+                ->orderBy('n.messageid', Criteria::ASC)
 
                 ->setMaxResults(1)
             ;
 
             $prev->select('max(p.messageid)')
                 ->where('p.messageid < :mail AND p.msgto = :acct')
-                ->orderBy('p.messageid', 'DESC')
+                ->orderBy('p.messageid', Criteria::DESC)
 
                 ->setMaxResults(1)
             ;
@@ -214,7 +220,7 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->getSingleResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -241,7 +247,7 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -276,7 +282,7 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->getSingleResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -309,7 +315,7 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->getSingleScalarResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -326,8 +332,8 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
 
         try
         {
-            $date = new \DateTime('now');
-            $date->sub(new \DateInterval("P{$expire}D"));
+            $date = new DateTime('now');
+            $date->sub(new DateInterval("P{$expire}D"));
 
             return $query->delete($this->_entityName, 'u')
                 ->where('u.sent < :date')
@@ -336,7 +342,7 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

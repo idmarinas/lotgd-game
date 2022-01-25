@@ -1,8 +1,10 @@
 <?php
 
-define('ALLOW_ANONYMOUS', true);
-define('OVERRIDE_FORCED_NAV', true);
+use Lotgd\Core\Controller\LogdnetController;
 
-require_once dirname(__DIR__).'/common_common.php';
+\define('ALLOW_ANONYMOUS', true);
+\define('OVERRIDE_FORCED_NAV', true);
 
-\LotgdResponse::callController(\Lotgd\Core\Controller\LogdnetController::class, 'image', true);
+require_once \dirname(__DIR__).'/common_common.php';
+
+LotgdResponse::callController(LogdnetController::class, 'image', true);

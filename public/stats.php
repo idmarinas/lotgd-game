@@ -10,25 +10,25 @@ check_su_access(SU_EDIT_CONFIG);
 $textDomain = 'grotto_stats';
 
 $params = [
-    'textDomain' => $textDomain
+    'textDomain' => $textDomain,
 ];
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], $textDomain);
+LotgdResponse::pageStart('title', [], $textDomain);
 
-\LotgdNavigation::superuserGrottoNav();
+LotgdNavigation::superuserGrottoNav();
 
-\LotgdNavigation::addNav('stats.nav.refresh', 'stats.php');
+LotgdNavigation::addNav('stats.nav.refresh', 'stats.php');
 
-\LotgdNavigation::addHeader('stats.category.types');
-\LotgdNavigation::addNav('stats.nav.stats', 'stats.php?op=stats');
-\LotgdNavigation::addNav('stats.nav.referers', 'stats.php?op=referers');
-\LotgdNavigation::addNav('stats.nav.graph', 'stats.php?op=graph');
+LotgdNavigation::addHeader('stats.category.types');
+LotgdNavigation::addNav('stats.nav.stats', 'stats.php?op=stats');
+LotgdNavigation::addNav('stats.nav.referers', 'stats.php?op=referers');
+LotgdNavigation::addNav('stats.nav.graph', 'stats.php?op=graph');
 
-$repository = \Doctrine::getRepository('LotgdCore:AccountsEverypage');
-$acctRepository = \Doctrine::getRepository('LotgdCore:User');
+$repository     = Doctrine::getRepository('LotgdCore:AccountsEverypage');
+$acctRepository = Doctrine::getRepository('LotgdCore:User');
 
-$op = (string) \LotgdRequest::getQuery('op');
+$op = (string) LotgdRequest::getQuery('op');
 
 if ('stats' == $op || '' == $op)
 {
@@ -56,9 +56,9 @@ elseif ('referers' == $op)
     ;
 
     $params['paginator'] = [];
-    $params['referers'] = [];
+    $params['referers']  = [];
 
-    foreach($result as $row)
+    foreach ($result as $row)
     {
         if ($row->getReferer())
         {
@@ -84,8 +84,7 @@ elseif ('graph' == $op)
     ;
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/stats.html.twig', $params));
+LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/stats.html.twig', $params));
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
-
+LotgdResponse::pageEnd();

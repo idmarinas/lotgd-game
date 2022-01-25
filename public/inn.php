@@ -1,10 +1,12 @@
 <?php
 
+use Lotgd\Core\Controller\InnController;
+use Lotgd\Core\Events;
 // addnews ready
 // translator ready
 // mail ready
 
-use Lotgd\Core\Events;
+use Lotgd\Core\Http\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
@@ -13,7 +15,7 @@ require_once 'lib/events.php';
 // Don't hook on to this text for your standard modules please, use "inn" instead.
 // This hook is specifically to allow modules that do other inns to create ambience.
 $args = new GenericEvent(null, ['textDomain' => 'page_inn', 'textDomainNavigation' => 'navigation_inn']);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_INN_PRE);
+LotgdEventDispatcher::dispatch($args, Events::PAGE_INN_PRE);
 $result               = modulehook('inn-text-domain', $args->getArguments());
 $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
@@ -23,11 +25,11 @@ $skipinndesc = handle_event('inn');
 
 if ( ! $skipinndesc)
 {
-    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
+    LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 }
 
 /** @var Lotgd\Core\Http\Request $request */
-$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+$request = LotgdKernel::get(Request::class);
 
 $params = [
     'textDomain'           => $textDomain,
@@ -41,7 +43,7 @@ $params = [
 ];
 
 //-- Init page
-\LotgdResponse::pageStart('title', ['name' => \LotgdSanitize::fullSanitize($params['innName'])], $textDomain);
+LotgdResponse::pageStart('title', ['name' => LotgdSanitize::fullSanitize($params['innName'])], $textDomain);
 
 $op         = (string) $request->query->get('op');
 $subop      = (string) $request->query->get('subop');
@@ -59,10 +61,10 @@ if ('fleedragon' == $op)
 }
 
 //-- Change text domain for navigation
-\LotgdNavigation::setTextDomain($textDomainNavigation);
+LotgdNavigation::setTextDomain($textDomainNavigation);
 
-\LotgdNavigation::addHeader('category.other');
-\LotgdNavigation::villageNav();
+LotgdNavigation::addHeader('category.other');
+LotgdNavigation::villageNav();
 
 switch ($op)
 {
@@ -81,7 +83,7 @@ switch ($op)
     default:
         $method = 'index';
 
-        \LotgdNavigation::blockLink('inn.php');
+        LotgdNavigation::blockLink('inn.php');
 
         // Don't give people a chance at a special event if they are just browsing
         // the commentary (or talking) or dealing with any of the hooks in the inn.
@@ -89,7 +91,7 @@ switch ($op)
         {
             /** New occurrence dispatcher for special events. */
             /** @var \Lotgd\CoreBundle\OccurrenceBundle\OccurrenceEvent $event */
-            $event = \LotgdKernel::get('occurrence_dispatcher')->dispatch('inn', null, [
+            $event = LotgdKernel::get('occurrence_dispatcher')->dispatch('inn', null, [
                 'translation_domain'            => $textDomain,
                 'translation_domain_navigation' => $textDomainNavigation,
                 'route'                         => 'inn.php',
@@ -98,21 +100,21 @@ switch ($op)
 
             if ($event->isPropagationStopped())
             {
-                \LotgdResponse::pageEnd();
+                LotgdResponse::pageEnd();
             }
             elseif ($event['skip_description'])
             {
                 $skipinndesc = true;
 
                 $op = '';
-                \LotgdRequest::setQuery('op', '');
+                LotgdRequest::setQuery('op', '');
             }
             //-- Only execute when NOT occurrence is in progress.
             elseif (0 != module_events('inn', LotgdSetting::getSetting('innchance', 0)))
             {
-                if (\LotgdNavigation::checkNavs())
+                if (LotgdNavigation::checkNavs())
                 {
-                    \LotgdResponse::pageEnd();
+                    LotgdResponse::pageEnd();
                 }
 
                 // Reset the special for good.
@@ -121,7 +123,7 @@ switch ($op)
                 $skipinndesc                    = true;
 
                 $op = '';
-                \LotgdRequest::setQuery('op', '');
+                LotgdRequest::setQuery('op', '');
             }
         }
 
@@ -132,18 +134,18 @@ $params['showInnDescription'] = ! $skipinndesc;
 
 $request->attributes->set('params', $params);
 
-\LotgdResponse::callController(Lotgd\Core\Controller\InnController::class, $method);
+LotgdResponse::callController(InnController::class, $method);
 
 //-- Restore text domain for navigation
-\LotgdNavigation::setTextDomain();
+LotgdNavigation::setTextDomain();
 if ('default' == $params['tpl'])
 {
     $args = new GenericEvent();
-    \LotgdEventDispatcher::dispatch($args, Events::PAGE_INN);
+    LotgdEventDispatcher::dispatch($args, Events::PAGE_INN);
     modulehook('inn', $args->getArguments());
 
     module_display_events('inn', 'inn.php');
 }
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

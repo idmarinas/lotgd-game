@@ -13,6 +13,9 @@
 
 namespace Lotgd\Core\Repository;
 
+use Lotgd\Core\Repository\ModuleUserprefs\Backup;
+use Doctrine\Common\Collections\Criteria;
+use Throwable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -21,7 +24,7 @@ use Tracy\Debugger;
 
 class ModuleUserprefsRepository extends ServiceEntityRepository implements RepositoryBackupInterface
 {
-    use ModuleUserprefs\Backup;
+    use Backup;
     use EntityRepositoryTrait;
 
     public function __construct(ManagerRegistry $registry)
@@ -45,13 +48,13 @@ class ModuleUserprefsRepository extends ServiceEntityRepository implements Repos
                 ->setParameter('modules', $modules)
                 ->setParameter('acct', $acctId)
 
-                ->orderBy('u.modulename', 'DESC')
+                ->orderBy('u.modulename', Criteria::DESC)
 
                 ->getQuery()
                 ->getArrayResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

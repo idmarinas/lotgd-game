@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
+use Lotgd\Core\Twig\Extension\Pattern\CommentaryModerate;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Output\Color;
@@ -35,7 +36,7 @@ use Twig\TwigFunction;
 class Commentary extends AbstractExtension
 {
     use Pattern\Commentary;
-    use Pattern\CommentaryModerate;
+    use CommentaryModerate;
 
     protected $commentary;
     protected $translator;

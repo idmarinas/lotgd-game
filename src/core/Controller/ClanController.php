@@ -13,6 +13,10 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Entity\Clans;
+use Lotgd\Core\Entity\Mail;
+use DateTime;
+use Lotgd\Core\Form\ClanNewType;
 use Lotgd\Core\Event\Clan as EventClan;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
@@ -205,7 +209,7 @@ class ClanController extends AbstractController
         /** @var Lotgd\Core\Repository\CharactersRepository $charRepository */
         $charRepository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
         /** @var Lotgd\Core\Repository\ClansRepository $clanRepository */
-        $clanRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Clans::class);
+        $clanRepository = $this->getDoctrine()->getRepository(Clans::class);
 
         $params['clanDetail']          = $clanRepository->find($clanId);
         $params['SU_AUDIT_MODERATION'] = $session['user']['superuser'] & SU_AUDIT_MODERATION;
@@ -268,7 +272,7 @@ class ClanController extends AbstractController
         $order = $request->query->getInt('order');
 
         /** @var Lotgd\Core\Repository\ClansRepository $clanRepository */
-        $clanRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Clans::class);
+        $clanRepository = $this->getDoctrine()->getRepository(Clans::class);
 
         $params['clanList'] = $clanRepository->getClanListWithMembersCount($order);
 
@@ -317,14 +321,14 @@ class ClanController extends AbstractController
         $clanId = $request->query->getInt('clanid');
 
         /** @var \Lotgd\Core\Repository\ClansRepository $clanRepository */
-        $clanRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Clans::class);
+        $clanRepository = $this->getDoctrine()->getRepository(Clans::class);
 
         if ($clanId > 0)
         {
             /** @var Lotgd\Core\Repository\CharactersRepository $charRepository */
             $charRepository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
             /** @var \Lotgd\Core\Repository\MailRepository $mailRepository */
-            $mailRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Mail::class);
+            $mailRepository = $this->getDoctrine()->getRepository(Mail::class);
 
             $this->addFlash('success', $this->translator->trans('flash.message.applicant.apply', [
                 'clanOwnerName' => $this->sanitize->fullSanitize($params['clanOwnerName']),
@@ -332,7 +336,7 @@ class ClanController extends AbstractController
 
             $session['user']['clanid']       = $clanId;
             $session['user']['clanrank']     = CLAN_APPLICANT;
-            $session['user']['clanjoindate'] = new \DateTime('now');
+            $session['user']['clanjoindate'] = new DateTime('now');
 
             $subj = ['mail.apply.subject', ['name' => $session['user']['name']], $params['textDomain']];
             $msg  = ['mail.apply.message', ['name' => $session['user']['name']], $params['textDomain']];
@@ -399,8 +403,8 @@ class ClanController extends AbstractController
 
         $params['clanShortNameLength'] = $this->settings->getSetting('clanshortnamelength', 5);
 
-        $entity = new \Lotgd\Core\Entity\Clans();
-        $form   = $this->createForm(\Lotgd\Core\Form\ClanNewType::class, $entity, [
+        $entity = new Clans();
+        $form   = $this->createForm(ClanNewType::class, $entity, [
             'action' => 'clan.php?op=new',
             'attr'   => [
                 'autocomplete' => 'off',
@@ -436,7 +440,7 @@ class ClanController extends AbstractController
 
                 $session['user']['clanid']       = $entity->getClanid();
                 $session['user']['clanrank']     = CLAN_FOUNDER;
-                $session['user']['clanjoindate'] = new \DateTime('now');
+                $session['user']['clanjoindate'] = new DateTime('now');
                 $session['user']['gold'] -= $params['costGold'];
                 $session['user']['gems'] -= $params['costGems'];
 
@@ -484,7 +488,7 @@ class ClanController extends AbstractController
         if ('withdraw' == $request->query->get('op'))
         {
             /** @var Lotgd\Core\Repository\MailRepository $mailRepository */
-            $mailRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Mail::class);
+            $mailRepository = $this->getDoctrine()->getRepository(Mail::class);
 
             $this->addFlash('info', $this->sanitize->fullSanitize($this->translator->trans('flash.message.applicant.withdraw', [
                 'clanOwnerName' => $params['clanOwnerName'],
@@ -493,7 +497,7 @@ class ClanController extends AbstractController
 
             $session['user']['clanid']       = 0;
             $session['user']['clanrank']     = CLAN_APPLICANT;
-            $session['user']['clanjoindate'] = new \DateTime('0000-00-00 00:00:00');
+            $session['user']['clanjoindate'] = new DateTime('0000-00-00 00:00:00');
             $claninfo                        = [];
 
             $subj = ['mail.apply.subject', ['name' => $session['user']['name']], $params['textDomain']];
@@ -533,7 +537,7 @@ class ClanController extends AbstractController
 
         /** @var Lotgd\Core\Repository\UserRepository $acctRepository */
         $acctRepository = $this->getDoctrine()->getRepository('LotgdCore:User');
-        $clanRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Clans::class);
+        $clanRepository = $this->getDoctrine()->getRepository(Clans::class);
 
         $result = $acctRepository->getClanAuthorNameOfMotdDescFromAcctId($claninfo['motdauthor'], $claninfo['descauthor']);
 
@@ -633,7 +637,7 @@ class ClanController extends AbstractController
 
             $character->setClanrank(CLAN_APPLICANT)
                 ->setClanid(0)
-                ->setClanjoindate(new \DateTime('0000-00-00 00:00:00'))
+                ->setClanjoindate(new DateTime('0000-00-00 00:00:00'))
             ;
 
             $this->getDoctrine()->getManager()->persist($character);
@@ -647,7 +651,7 @@ class ClanController extends AbstractController
             $subj = serialize(['mail.apply.subject', ['name' => $character->getName()], $params['textDomain']]);
 
             /** @var Lotgd\Core\Repository\MailRepository $mailRepository */
-            $mailRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Mail::class);
+            $mailRepository = $this->getDoctrine()->getRepository(Mail::class);
             $mailRepository->deleteMailFromSystemBySubj($subj);
 
             unset($character);
@@ -730,7 +734,7 @@ class ClanController extends AbstractController
                 }
                 else
                 {
-                    $clanRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Clans::class);
+                    $clanRepository = $this->getDoctrine()->getRepository(Clans::class);
                     $clanEntity     = $clanRepository->find($session['user']['clanid']);
 
                     //-- There are no other members, we need to delete the clan.
@@ -755,7 +759,7 @@ class ClanController extends AbstractController
         }
 
         /** @var \Lotgd\Core\Repository\MailRepository $mailRepository */
-        $mailRepository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Mail::class);
+        $mailRepository = $this->getDoctrine()->getRepository(Mail::class);
 
         $subj = ['mail.withdraw.subject', ['name' => $session['user']['name']], $params['textDomain']];
         $msg  = ['mail.withdraw.message', ['name' => $session['user']['name']], $params['textDomain']];
@@ -773,7 +777,7 @@ class ClanController extends AbstractController
 
         $session['user']['clanid']       = 0;
         $session['user']['clanrank']     = CLAN_APPLICANT;
-        $session['user']['clanjoindate'] = new \DateTime('0000-00-00 00:00:00');
+        $session['user']['clanjoindate'] = new DateTime('0000-00-00 00:00:00');
 
         $this->addFlash('info', $this->translator->trans('flash.message.withdraw.withdraw', [], $params['textDomain']));
 

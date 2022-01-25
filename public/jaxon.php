@@ -1,5 +1,7 @@
 <?php
 
+use Tracy\Debugger;
+
 \define('OVERRIDE_FORCED_NAV', true);
 
 //-- Allow anonymous conections to Jaxon functions
@@ -10,18 +12,18 @@ require_once 'common_jaxon.php';
 
 try
 {
-    $jaxon = \LotgdKernel::get('lotgd.core.jaxon');
+    $jaxon = LotgdKernel::get('lotgd.core.jaxon');
 
     if ($jaxon->canProcessRequest())
     {
         $jaxon->processRequest();
 
-        \LotgdTool::saveUser(false); //-- Not updated laston (to avoid perma loggedin)
+        LotgdTool::saveUser(false); //-- Not updated laston (to avoid perma loggedin)
 
         exit;
     }
 }
-catch (\Throwable $th)
+catch (Throwable $th)
 {
-    \Tracy\Debugger::log($th);
+    Debugger::log($th);
 }

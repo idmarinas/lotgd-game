@@ -13,6 +13,10 @@
 
 namespace Lotgd\Core\Repository;
 
+use Lotgd\Core\Repository\Avatar\Bio;
+use Lotgd\Core\Repository\Avatar\Clan;
+use Lotgd\Core\Repository\Avatar\Setting;
+use Throwable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -21,9 +25,9 @@ use Tracy\Debugger;
 
 class CronjobRepository extends ServiceEntityRepository
 {
-    use Avatar\Bio;
-    use Avatar\Clan;
-    use Avatar\Setting;
+    use Bio;
+    use Clan;
+    use Setting;
     use EntityRepositoryTrait;
 
     public function __construct(ManagerRegistry $registry)
@@ -49,7 +53,7 @@ class CronjobRepository extends ServiceEntityRepository
                 ->getSingleScalarResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

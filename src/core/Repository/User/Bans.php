@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Repository\User;
 
+use Throwable;
 use Doctrine\ORM\Query\Expr\Join;
 use Laminas\Paginator\Paginator;
 use Lotgd\Core\Entity as LotgdEntity;
@@ -50,7 +51,7 @@ trait Bans
         }
         $query->orderBy($sort, 'ASC');
 
-        if ($search)
+        if ($search !== '' && $search !== '0')
         {
             $query->where('u.login LIKE :search OR c.name LIKE :search OR u.acctid = :search OR u.emailaddress LIKE :search OR u.lastip LIKE :search OR u.uniqueid LIKE :search')
                 ->setParameter('search', "%{$search}%")
@@ -79,7 +80,7 @@ trait Bans
                 ->getSingleResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -108,7 +109,7 @@ trait Bans
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -162,7 +163,7 @@ trait Bans
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -198,7 +199,7 @@ trait Bans
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

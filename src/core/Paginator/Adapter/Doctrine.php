@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Paginator\Adapter;
 
+use Throwable;
 use Doctrine\ORM\QueryBuilder;
 use Laminas\Paginator\Adapter\AdapterInterface;
 use Tracy\Debugger;
@@ -117,7 +118,7 @@ class Doctrine implements AdapterInterface
                 ->getSingleScalarResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

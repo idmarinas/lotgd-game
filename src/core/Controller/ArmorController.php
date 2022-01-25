@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Entity\Armor;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Http\Response as HttpResponse;
@@ -77,7 +78,7 @@ class ArmorController extends AbstractController
         global $session;
 
         /** @var Lotgd\Core\Repository\ArmorRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Armor::class);
+        $repository = $this->getDoctrine()->getRepository(Armor::class);
 
         $armorLevel = $repository->getMaxArmorLevel($session['user']['dragonkills']);
 
@@ -94,7 +95,7 @@ class ArmorController extends AbstractController
         global $session;
 
         /** @var Lotgd\Core\Repository\ArmorRepository $repository */
-        $repository   = $this->getDoctrine()->getRepository(\Lotgd\Core\Entity\Armor::class);
+        $repository   = $this->getDoctrine()->getRepository(Armor::class);
         $id           = $request->query->getInt('id');
         $tradeinvalue = $params['tradeinvalue'];
 

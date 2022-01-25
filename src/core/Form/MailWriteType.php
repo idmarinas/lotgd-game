@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Form;
 
+use Laminas\Filter\Digits;
+use Laminas\Filter\StripTags;
 use Laminas\Filter;
 use Lotgd\Core\Controller\MailController;
 use Lotgd\Core\Form\Type\AutocompleteType;
@@ -47,7 +49,7 @@ class MailWriteType extends AbstractType
         $builder
             ->add('return_to', HiddenType::class, [
                 'filters' => [
-                    new Filter\Digits(),
+                    new Digits(),
                 ],
             ])
             ->add('to', AutocompleteType::class, [
@@ -66,7 +68,7 @@ class MailWriteType extends AbstractType
                     new Assert\Length(['min' => 0, 'max' => 255]),
                 ],
                 'filters' => [
-                    new Filter\StripTags(),
+                    new StripTags(),
                 ],
             ])
             ->add('body', TextareaLimitType::class, [
@@ -77,7 +79,7 @@ class MailWriteType extends AbstractType
                     new Assert\Length(['min' => 0, 'max' => 65000]),
                 ],
                 'filters' => [
-                    new Filter\StripTags(),
+                    new StripTags(),
                 ],
             ])
         ;

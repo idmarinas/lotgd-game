@@ -23,33 +23,33 @@ $statuses = [
 ];
 
 $args = new GenericEvent(null, $statuses);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_PETITION_STATUS);
+LotgdEventDispatcher::dispatch($args, Events::PAGE_PETITION_STATUS);
 $statuses = modulehook('petition-status', $args->getArguments());
 reset($statuses);
 
-$op = (string) \LotgdRequest::getQuery('op');
-$petitionId = (int) \LotgdRequest::getQuery('id');
-$page = (int) \LotgdRequest::getQuery('page');
+$op         = (string) LotgdRequest::getQuery('op');
+$petitionId = (int) LotgdRequest::getQuery('id');
+$page       = (int) LotgdRequest::getQuery('page');
 
 $textDomain = 'grotto_viewpetition';
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], $textDomain);
+LotgdResponse::pageStart('title', [], $textDomain);
 
 $params = [
     'textDomain' => $textDomain,
-    'statuses' => $statuses
+    'statuses'   => $statuses,
 ];
 
-$repository = \Doctrine::getRepository('LotgdCore:Petitions');
+$repository = Doctrine::getRepository('LotgdCore:Petitions');
 
-\LotgdNavigation::superuserGrottoNav();
+LotgdNavigation::superuserGrottoNav();
 
 if ('' == $op)
 {
     $params['tpl'] = 'default';
 
-    $setstat = (int) \LotgdRequest::getQuery('setstat');
+    $setstat = (int) LotgdRequest::getQuery('setstat');
 
     if ('' != $setstat)
     {
@@ -59,10 +59,10 @@ if ('' == $op)
         {
             $result->setStatus($setstat)
                 ->setCloseuserid($session['user']['acctid'])
-                ->setClosedate(new \DateTime('now'))
+                ->setClosedate(new DateTime('now'))
             ;
-            \Doctrine::persist($result);
-            \Doctrine::flush();
+            Doctrine::persist($result);
+            Doctrine::flush();
         }
     }
 
@@ -80,44 +80,44 @@ if ('' == $op)
 
     $params['paginator'] = $repository->getPaginator($query, $page, 50);
 
-    \LotgdNavigation::addHeader('viewpetitions.category.petitions');
-    \LotgdNavigation::addNav('viewpetitions.nav.refresh', 'viewpetition.php');
+    LotgdNavigation::addHeader('viewpetitions.category.petitions');
+    LotgdNavigation::addNav('viewpetitions.nav.refresh', 'viewpetition.php');
 }
 elseif ('view' == $op)
 {
     $params['tpl'] = 'view';
-    $viewpageinfo = (int) \LotgdRequest::getQuery('viewpageinfo');
+    $viewpageinfo  = (int) LotgdRequest::getQuery('viewpageinfo');
 
-    \LotgdNavigation::addHeader('viewpetitions.category.petitions');
-    \LotgdNavigation::addHeader('viewpetitions.category.details');
+    LotgdNavigation::addHeader('viewpetitions.category.petitions');
+    LotgdNavigation::addHeader('viewpetitions.category.details');
 
-    if ($viewpageinfo !== 0)
+    if (0 !== $viewpageinfo)
     {
-        \LotgdNavigation::addNav('viewpetitions.nav.details.hide', "viewpetition.php?op=view&id={$petitionId}}");
+        LotgdNavigation::addNav('viewpetitions.nav.details.hide', "viewpetition.php?op=view&id={$petitionId}}");
     }
     else
     {
-        \LotgdNavigation::addNav('viewpetitions.nav.details.show', "viewpetition.php?op=view&id={$petitionId}&viewpageinfo=1");
+        LotgdNavigation::addNav('viewpetitions.nav.details.show', "viewpetition.php?op=view&id={$petitionId}&viewpageinfo=1");
     }
 
-    \LotgdNavigation::addHeader('common.category.navigation');
-    \LotgdNavigation::addNav('viewpetitions.nav.viewer', 'viewpetition.php');
+    LotgdNavigation::addHeader('common.category.navigation');
+    LotgdNavigation::addNav('viewpetitions.nav.viewer', 'viewpetition.php');
 
-    \LotgdNavigation::addHeader('viewpetitions.category.ops.user');
-    \LotgdNavigation::addHeader('viewpetitions.category.ops.petition');
+    LotgdNavigation::addHeader('viewpetitions.category.ops.user');
+    LotgdNavigation::addHeader('viewpetitions.category.ops.petition');
 
     $params['viewPageInfo'] = $viewpageinfo;
 
-    if (count($statuses) > 0)
+    if (\count($statuses) > 0)
     {
         reset($statuses);
-        foreach($statuses as $key => $val)
+        foreach ($statuses as $key => $val)
         {
-            \LotgdNavigation::addNav('viewpetitions.nav.mark', "viewpetition.php?setstat={$key}&id={$petitionId}", [
+            LotgdNavigation::addNav('viewpetitions.nav.mark', "viewpetition.php?setstat={$key}&id={$petitionId}", [
                 'params' => [
-                    'key' => substr(\LotgdSanitize::fullSanitize($val), 0, 1),
-                    'petition' => \LotgdTranslator::t($val, [], $textDomain)
-                ]
+                    'key'      => substr(LotgdSanitize::fullSanitize($val), 0, 1),
+                    'petition' => LotgdTranslator::t($val, [], $textDomain),
+                ],
             ]);
         }
     }
@@ -138,25 +138,24 @@ elseif ('view' == $op)
         ->getSingleResult()
     ;
 
-    \LotgdNavigation::addHeader('viewpetitions.category.ops.user');
+    LotgdNavigation::addHeader('viewpetitions.category.ops.user');
     if ($params['petition']['acctid'])
     {
-        \LotgdNavigation::addNav('viewpetitions.nav.user.bio', "bio.php?char={$params['petition']['acctid']}&ret=%2Fviewpetition.php%3Fop%3Dview%26id=$petitionId");
+        LotgdNavigation::addNav('viewpetitions.nav.user.bio', "bio.php?char={$params['petition']['acctid']}&ret=%2Fviewpetition.php%3Fop%3Dview%26id={$petitionId}");
     }
 
     if ($params['petition']['acctid'] > 0 && $session['user']['superuser'] & SU_EDIT_USERS)
     {
-        \LotgdNavigation::addNav('viewpetitions.nav.user.edit', "user.php?op=edit&userid={$params['petition']['acctid']}&returnpetition=$petitionId");
+        LotgdNavigation::addNav('viewpetitions.nav.user.edit', "user.php?op=edit&userid={$params['petition']['acctid']}&returnpetition={$petitionId}");
     }
 
     if ($params['petition']['acctid'] > 0 && $session['user']['superuser'] & SU_EDIT_DONATIONS)
     {
-        \LotgdNavigation::addNav('viewpetitions.nav.user.donation', 'donators.php?op=add&name='.rawurlencode($params['petition']['login']).'&ret='.urlencode($_SERVER['REQUEST_URI']));
+        LotgdNavigation::addNav('viewpetitions.nav.user.donation', 'donators.php?op=add&name='.rawurlencode($params['petition']['login']).'&ret='.urlencode($_SERVER['REQUEST_URI']));
     }
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/viewpetition.html.twig', $params));
+LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/viewpetition.html.twig', $params));
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
-
+LotgdResponse::pageEnd();

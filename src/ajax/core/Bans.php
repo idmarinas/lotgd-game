@@ -13,7 +13,13 @@
 
 namespace Lotgd\Ajax\Core;
 
+use Doctrine;
+use Jaxon\Response\Response;
 use Lotgd\Core\AjaxAbstract;
+use LotgdFormat;
+use LotgdTranslator;
+use Throwable;
+use Tracy\Debugger;
 
 class Bans extends AjaxAbstract
 {
@@ -21,11 +27,11 @@ class Bans extends AjaxAbstract
     {
         global $session;
 
-        $response = new \Jaxon\Response\Response();
+        $response = new Response();
 
         try
         {
-            $query = \Doctrine::createQuery("SELECT c.name FROM Lotgd\Core\Entity\Bans b, LotgdCore:User a
+            $query = Doctrine::createQuery("SELECT c.name FROM Lotgd\Core\Entity\Bans b, LotgdCore:User a
             LEFT JOIN LotgdCore:Avatar c WITH c.acct = a.acctid
             WHERE
                 (b.ipfilter = :ip AND b.uniqueid = :id) AND
@@ -38,16 +44,16 @@ class Bans extends AjaxAbstract
 
             $result = $query->execute();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             $result = [];
         }
         // The dialog buttons
         $buttons = [
             [
-                'title' => \LotgdTranslator::t('modal.buttons.cancel', [], 'app_default'),
+                'title' => LotgdTranslator::t('modal.buttons.cancel', [], 'app_default'),
                 'class' => 'ui red deny button',
             ],
         ];
@@ -56,7 +62,7 @@ class Bans extends AjaxAbstract
 
         foreach ($result as $acct)
         {
-            $content .= \LotgdFormat::colorize($acct['name'], true).'<br>';
+            $content .= LotgdFormat::colorize($acct['name'], true).'<br>';
         }
 
         // Show the dialog

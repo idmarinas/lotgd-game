@@ -12,6 +12,7 @@
 
 namespace Lotgd\Core\Output;
 
+use Throwable;
 use Snipe\BanBuilder\CensorWords;
 
 class Censor extends CensorWords
@@ -39,7 +40,7 @@ class Censor extends CensorWords
             //-- Try add locale dictionary
             $this->addDictionary($locale);
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             //-- If fail add en-base dictionary
             $this->addDictionary('en-base');

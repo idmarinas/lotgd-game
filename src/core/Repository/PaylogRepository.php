@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Repository;
 
+use Throwable;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -56,7 +58,7 @@ class PaylogRepository extends ServiceEntityRepository
 
             return true;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -75,7 +77,7 @@ class PaylogRepository extends ServiceEntityRepository
                 ->getArrayResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -107,13 +109,13 @@ class PaylogRepository extends ServiceEntityRepository
                 ->setParameter('start', $startDate)
                 ->setParameter('end', $endDate)
 
-                ->orderBy('u.processdate', 'DESC')
+                ->orderBy('u.processdate', Criteria::DESC)
 
                 ->getQuery()
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

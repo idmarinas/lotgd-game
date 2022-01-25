@@ -29,42 +29,42 @@ check_su_access(SU_EDIT_PAYLOG);
 
 $textDomain = 'grotto_paylog';
 
-$month = (int) \LotgdRequest::getQuery('month');
+$month = (int) LotgdRequest::getQuery('month');
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], $textDomain);
+LotgdResponse::pageStart('title', [], $textDomain);
 
-$repository = \Doctrine::getRepository('LotgdCore:Paylog');
+$repository = Doctrine::getRepository('LotgdCore:Paylog');
 
 $params = [
-    'textDomain' => $textDomain
+    'textDomain' => $textDomain,
 ];
 
-\LotgdNavigation::superuserGrottoNav();
-\LotgdNavigation::addNav('paylog.nav.refresh', 'paylog.php');
+LotgdNavigation::superuserGrottoNav();
+LotgdNavigation::addNav('paylog.nav.refresh', 'paylog.php');
 
 $args = new GenericEvent();
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_PAYLOG);
+LotgdEventDispatcher::dispatch($args, Events::PAGE_PAYLOG);
 modulehook('paylog', $args->getArguments());
 
 $repository->updateProcessDate();
 $months = $repository->getMonths();
 
-\LotgdNavigation::addHeader('paylog.category.months');
-foreach($months as $val)
+LotgdNavigation::addHeader('paylog.category.months');
+foreach ($months as $val)
 {
-    \LotgdNavigation::addNav('paylog.nav.month', "paylog.php?month={$val['month']}", [
+    LotgdNavigation::addNav('paylog.nav.month', "paylog.php?month={$val['month']}", [
         'params' => [
             'profit' => $val['profit'],
             'symbol' => LotgdSetting::getSetting('paypalcurrency', 'USD'),
-            'date' => $val['date']
-        ]
+            'date'   => $val['date'],
+        ],
     ]);
 }
 
 $params['paylog'] = $repository->getList($month);
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/paylog.html.twig', $params));
+LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/paylog.html.twig', $params));
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

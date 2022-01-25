@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Combat\Battle;
 
 use Lotgd\Core\Event\Character;
+use Throwable;
 
 trait Buffer
 {
@@ -72,7 +73,7 @@ trait Buffer
                         'character' => $this->userSafe,
                     ]);
                 }
-                catch (\Throwable $th)
+                catch (Throwable $th)
                 {
                     //-- Expression evaluation failed, use original value
                     $val = $value;
@@ -83,7 +84,7 @@ trait Buffer
                     $val = $value;
                 }
 
-                if ((string) $val != (string) $origstring)
+                if ((string) $val !== (string) $origstring)
                 {
                     $this->buffReplacements[$buffname][$property] = $origstring;
                     $this->userBuffs[$buffname][$property]        = $val;
@@ -162,9 +163,9 @@ trait Buffer
         $args = modulehook('companionsallowed', $args->getData());
 
         $companionsAllowed = $args['maxallowed'];
-        $current           = count(array_filter($this->companions, function ($val, $key) use ($name)
+        $current           = \count(array_filter($this->companions, function ($val, $key) use ($name)
         {
-            return (( ! isset($val['ignorelimit']) || ! $val['ignorelimit']) && ($key != $name));
+            return ( ! isset($val['ignorelimit']) || ! $val['ignorelimit']) && ($key != $name);
         }, ARRAY_FILTER_USE_BOTH));
 
         if (($ignoreLimit && $current < $companionsAllowed) || $ignoreLimit)
@@ -208,6 +209,6 @@ trait Buffer
 
     public function hasBuff($name): bool
     {
-        return (bool) (isset($this->userBuffs[$name]));
+        return isset($this->userBuffs[$name]);
     }
 }

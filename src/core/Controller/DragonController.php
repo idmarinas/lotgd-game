@@ -13,6 +13,10 @@
 
 namespace Lotgd\Core\Controller;
 
+use Laminas\Hydrator\ClassMethodsHydrator;
+use Lotgd\Core\Entity\Avatar;
+use DateTime;
+use DateInterval;
 use Lotgd\Core\Combat\Battle;
 use Lotgd\Core\Combat\Buffer;
 use Lotgd\Core\Events;
@@ -156,8 +160,8 @@ class DragonController extends AbstractController
         $params['flawless'] = $flawless;
 
         $this->buffer->stripAllBuffs();
-        $hydrator        = new \Laminas\Hydrator\ClassMethodsHydrator();
-        $characterEntity = $hydrator->extract(new \Lotgd\Core\Entity\Avatar());
+        $hydrator        = new ClassMethodsHydrator();
+        $characterEntity = $hydrator->extract(new Avatar());
         $dkpoints        = 0;
 
         $this->buffer->restoreBuffFields();
@@ -264,8 +268,8 @@ class DragonController extends AbstractController
         $session['user']['title'] = $newtitle;
         $session['user']['name']  = $newname;
 
-        $session['user']['laston'] = new \DateTime('now');
-        $session['user']['laston']->sub(new \DateInterval('P1D')); //-- remove 1 day
+        $session['user']['laston'] = new DateTime('now');
+        $session['user']['laston']->sub(new DateInterval('P1D')); //-- remove 1 day
         $session['user']['slaydragon'] = 1;
         $companions                    = [];
         $session['user']['companions'] = [];

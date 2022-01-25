@@ -13,6 +13,10 @@
 
 namespace Lotgd\Core\Navigation;
 
+use Laminas\Filter\FilterChain;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\StripNewlines;
 use Laminas\Filter;
 
 /**
@@ -136,10 +140,10 @@ class AccessKeys
     {
         if ( ! $this->filterChain)
         {
-            $this->filterChain = new Filter\FilterChain();
-            $this->filterChain->attach(new Filter\StringTrim())
-                ->attach(new Filter\StripTags())
-                ->attach(new Filter\StripNewlines())
+            $this->filterChain = new FilterChain();
+            $this->filterChain->attach(new StringTrim())
+                ->attach(new StripTags())
+                ->attach(new StripNewlines())
                 // ->attach(new Filter\HtmlEntities())
             ;
         }

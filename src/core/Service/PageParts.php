@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Service;
 
+use Lotgd\Core\Event\Character;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Character\Stats;
 use Lotgd\Core\Combat\TempStat;
@@ -307,7 +308,7 @@ class PageParts
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.creature', [], 'app_default'), $playermount['mountname'].'`0');
             }
 
-            $this->dispatcher->dispatch(new \Lotgd\Core\Event\Character(), \Lotgd\Core\Event\Character::STATS);
+            $this->dispatcher->dispatch(new Character(), Character::STATS);
             modulehook('charstats');
 
             if ($return)
@@ -331,8 +332,8 @@ class PageParts
 
             $onlinecount = 0;
             // If a module wants to do it's own display of the online chars, let it.
-            $list = new \Lotgd\Core\Event\Character();
-            $this->dispatcher->dispatch($list, \Lotgd\Core\Event\Character::ONLINE_LIST);
+            $list = new Character();
+            $this->dispatcher->dispatch($list, Character::ONLINE_LIST);
             $list = modulehook('onlinecharlist', $list->getData());
 
             if (isset($list['handled']) && $list['handled'])

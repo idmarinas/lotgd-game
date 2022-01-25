@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Controller\BankController;
+
 // translator ready
 // addnews ready
 // mail ready
@@ -7,10 +9,10 @@
 require_once 'common.php';
 
 //-- Init page
-\LotgdResponse::pageStart();
+LotgdResponse::pageStart();
 
 //-- Call controller
-\LotgdResponse::callController(\Lotgd\Core\Controller\BankController::class);
+LotgdResponse::callController(BankController::class);
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

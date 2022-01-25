@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Repository;
 
+use Throwable;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -51,7 +53,7 @@ class CompanionsRepository extends ServiceEntityRepository
 
             return $query->getArrayResult();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -77,7 +79,7 @@ class CompanionsRepository extends ServiceEntityRepository
 
             return $query->getArrayResult()[0];
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -103,7 +105,7 @@ class CompanionsRepository extends ServiceEntityRepository
 
             return $query->getArrayResult();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -120,14 +122,14 @@ class CompanionsRepository extends ServiceEntityRepository
 
         try
         {
-            $query->orderBy('u.category', 'DESC');
-            $query->addOrderBy('u.name', 'DESC');
+            $query->orderBy('u.category', Criteria::DESC);
+            $query->addOrderBy('u.name', Criteria::DESC);
 
             $query = $this->createTranslatebleQuery($query);
 
             return $query->getResult();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

@@ -43,12 +43,9 @@ class NotificationsExtension extends AbstractExtension
 
     /**
      * Show all notifications.
-     *
-     * @return string
      */
     public function display(Environment $env): string
     {
-        /** @var NotificationsBag */
         $bag = $this->session->getBag('notifications');
         $notifications = $bag->all();
 

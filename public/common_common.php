@@ -1,26 +1,12 @@
 <?php
-/**
- * For no repeat same parts in common and common_jaxon.
- */
-chdir(realpath(__DIR__.'/..'));
 
-require \dirname(__DIR__).'/config/bootstrap.php';
-//-- Include constants
-require_once 'src/constants.php';
-
-//-- Autoload annotations
-\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader(
-    function ($className)
-    {
-        return class_exists($className);
-    }
-);
-
-// Set some constant defaults in case they weren't set before the inclusion of
-// common.php
-\defined('OVERRIDE_FORCED_NAV') || \define('OVERRIDE_FORCED_NAV', false);
-\defined('ALLOW_ANONYMOUS')     || \define('ALLOW_ANONYMOUS', false);
-
+use Doctrine\Common\Annotations\AnnotationRegistry;
+use Idmarinas\TracyPanel\Twig\TracyExtension;
+use Idmarinas\TracyPanel\TwigBar;
+use Laminas\Code\Generator\DocBlockGenerator;
+use Laminas\Code\Generator\FileGenerator;
+use Laminas\Code\Generator\ValueGenerator;
+use Lotgd\Core\Exception\Exception;
 use Lotgd\Core\Fixed\Doctrine;
 use Lotgd\Core\Fixed\EventDispatcher as LotgdEventDispatcher;
 use Lotgd\Core\Fixed\FlashMessages as LotgdFlashMessages;
@@ -36,18 +22,45 @@ use Lotgd\Core\Fixed\Setting as LotgdSetting;
 use Lotgd\Core\Fixed\Theme as LotgdTheme;
 use Lotgd\Core\Fixed\Tool as LotgdTool;
 use Lotgd\Core\Fixed\Translator as LotgdTranslator;
+use MacFJA\Tracy\DoctrineSql;
+use Milo\VendorVersions\Panel;
+use Tracy\Debugger;
+use Twig\Extension\ProfilerExtension;
+use Twig\Profiler\Profile;
+
+/*
+ * For no repeat same parts in common and common_jaxon.
+ */
+chdir(realpath(__DIR__.'/..'));
+
+require \dirname(__DIR__).'/config/bootstrap.php';
+//-- Include constants
+require_once 'src/constants.php';
+
+//-- Autoload annotations
+AnnotationRegistry::registerLoader(
+    function ($className)
+    {
+        return class_exists($className);
+    }
+);
+
+// Set some constant defaults in case they weren't set before the inclusion of
+// common.php
+\defined('OVERRIDE_FORCED_NAV') || \define('OVERRIDE_FORCED_NAV', false);
+\defined('ALLOW_ANONYMOUS')     || \define('ALLOW_ANONYMOUS', false);
 
 $isDevelopment = 'prod' != $_SERVER['APP_ENV'];
 //-- Init Debugger
-$debuggerMode = $isDevelopment ? \Tracy\Debugger::DEVELOPMENT : \Tracy\Debugger::PRODUCTION;
-\Tracy\Debugger::enable($debuggerMode, __DIR__.'/../storage/log/tracy');
-\Tracy\Debugger::timer('page-generating');
-\Tracy\Debugger::timer('page-footer');
-\Tracy\Debugger::$maxDepth = 5; // default: 3
+$debuggerMode = $isDevelopment ? Debugger::DEVELOPMENT : Debugger::PRODUCTION;
+Debugger::enable($debuggerMode, __DIR__.'/../storage/log/tracy');
+Debugger::timer('page-generating');
+Debugger::timer('page-footer');
+Debugger::$maxDepth = 5; // default: 3
 //-- Extensions for Tracy
 if ($isDevelopment)
 {
-    \Tracy\Debugger::getBar()->addPanel(new \Milo\VendorVersions\Panel());
+    Debugger::getBar()->addPanel(new Panel());
 }
 
 //-- Prepare LoTGD Kernel
@@ -58,26 +71,26 @@ try
 
     if (file_exists('config/autoload/local/dbconnect.php') && ! file_exists('.env.local.php'))
     {
-        throw new Lotgd\Core\Exception\Exception('Need create ".env.local.php" from "config/autoload/local/dbconnect.php"');
+        throw new Exception('Need create ".env.local.php" from "config/autoload/local/dbconnect.php"');
     }
 
     if ($isDevelopment)
     {
         //-- Add Twig template in the Tracy debugger bar.
-        $profile = new Twig\Profiler\Profile();
+        $profile = new Profile();
         $twig    = LotgdKernel::get('twig');
-        $twig->addExtension(new Twig\Extension\ProfilerExtension($profile));
-        $twig->addExtension(new \Idmarinas\TracyPanel\Twig\TracyExtension());
+        $twig->addExtension(new ProfilerExtension($profile));
+        $twig->addExtension(new TracyExtension());
 
-        \Idmarinas\TracyPanel\TwigBar::init($profile);
+        TwigBar::init($profile);
 
         //-- Add Sql requests made by Doctrine in the Tracy debugger bar.
-        \MacFJA\Tracy\DoctrineSql::init(LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
+        DoctrineSql::init(LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
     }
 }
-catch (\Throwable $th)
+catch (Throwable $th)
 {
-    Tracy\Debugger::log($th);
+    Debugger::log($th);
 
     //-- Create a .env.local.php
     //-- This code will be deleted in future version
@@ -102,8 +115,8 @@ catch (\Throwable $th)
             'DATABASE_VERSION'  => '5.5',
         ];
 
-        $file = Laminas\Code\Generator\FileGenerator::fromArray([
-            'docblock' => Laminas\Code\Generator\DocBlockGenerator::fromArray([
+        $file = FileGenerator::fromArray([
+            'docblock' => DocBlockGenerator::fromArray([
                 'shortDescription' => sprintf('This file is automatically created in version %s.', Lotgd\Core\Kernel::VERSION),
                 'longDescription'  => null,
                 'tags'             => [
@@ -117,7 +130,7 @@ catch (\Throwable $th)
                     ],
                 ],
             ]),
-            'body' => 'return '.new Laminas\Code\Generator\ValueGenerator($configuration, Laminas\Code\Generator\ValueGenerator::TYPE_ARRAY_SHORT).';',
+            'body' => 'return '.new ValueGenerator($configuration, ValueGenerator::TYPE_ARRAY_SHORT).';',
         ]);
 
         $code   = $file->generate();

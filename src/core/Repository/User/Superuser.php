@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Repository\User;
 
+use Throwable;
+use Tracy\Debugger;
 /**
  * Functions for superuser account.
  */
@@ -36,9 +38,9 @@ trait Superuser
                 ->getArrayResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return null;
         }
@@ -60,9 +62,9 @@ trait Superuser
                 ->getSingleScalarResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return 0;
         }
@@ -89,9 +91,9 @@ trait Superuser
                 ->getArrayResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return null;
         }

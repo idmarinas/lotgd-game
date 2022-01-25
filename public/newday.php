@@ -1,12 +1,14 @@
 <?php
 
+use Lotgd\Core\Controller\NewdayController;
+
 // translator ready
 // addnews ready
 // mail ready
 
 require_once 'common.php';
 
-\LotgdResponse::callController(\Lotgd\Core\Controller\NewdayController::class);
+LotgdResponse::callController(NewdayController::class);
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

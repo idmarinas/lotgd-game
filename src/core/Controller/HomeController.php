@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Kernel;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
@@ -134,7 +135,7 @@ class HomeController extends AbstractController
         //-- By default not have banner are
         $params['loginBanner'] = $this->settings->getSetting('loginbanner');
         //-- Version of the game the server is running
-        $params['serverVersion'] = \Lotgd\Core\Kernel::VERSION;
+        $params['serverVersion'] = Kernel::VERSION;
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_HOME_POST);

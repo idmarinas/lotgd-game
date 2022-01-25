@@ -108,12 +108,21 @@ trait Result
         //-- Proccess find a gem only in forest
         $this->canGainGem() && $this->victoryProccessGemFind();
         //-- Gold for user only in forest
-        ($this->canGainGold() && $gold) && $this->victoryProccessGoldFind($gold);
+        if ($this->canGainGold() && $gold)
+        {
+            $this->victoryProccessGoldFind($gold);
+        }
 
         //-- Gain experience if can gain exp and not favor
-        ($this->canGainExp() && ! $this->canGainFavor()) && $this->victoryGainExperience($exp, $expBonus);
+        if ($this->canGainExp() && ! $this->canGainFavor())
+        {
+            $this->victoryGainExperience($exp, $expBonus);
+        }
         //-- Gain favor if can gain favor and not exp
-        ($this->canGainFavor() && ! $this->canGainExp()) && $this->victoryGainFavor($exp, $expBonus);
+        if ($this->canGainFavor() && ! $this->canGainExp())
+        {
+            $this->victoryGainFavor($exp, $expBonus);
+        }
 
         //-- Perfect battle
         if ( ! $didDamage)

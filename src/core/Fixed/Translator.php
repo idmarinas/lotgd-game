@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Fixed;
 
+use BadMethodCallException;
 class Translator
 {
     use StaticTrait;
@@ -39,7 +40,7 @@ class Translator
 
         $methods = \implode(', ', \get_class_methods(self::$instance));
 
-        throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
+        throw new BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
 }
 

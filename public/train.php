@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Controller\TrainController;
+
 //addnews ready
 // mail ready
 // translator ready
@@ -7,10 +9,10 @@
 require_once 'common.php';
 
 //-- Init page
-\LotgdResponse::pageStart();
+LotgdResponse::pageStart();
 
 //-- Call controller
-\LotgdResponse::callController(\Lotgd\Core\Controller\TrainController::class);
+LotgdResponse::callController(TrainController::class);
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

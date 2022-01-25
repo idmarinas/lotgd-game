@@ -14,6 +14,30 @@
 namespace Lotgd\Core\Combat;
 
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
+use Lotgd\Core\Combat\Battle\Buff;
+use Lotgd\Core\Combat\Battle\Buffer;
+use Lotgd\Core\Combat\Battle\Configuration;
+use Lotgd\Core\Combat\Battle\Context;
+use Lotgd\Core\Combat\Battle\Enemy;
+use Lotgd\Core\Combat\Battle\Extended;
+use Lotgd\Core\Combat\Battle\Formula;
+use Lotgd\Core\Combat\Battle\Ghost;
+use Lotgd\Core\Combat\Battle\HealthBar;
+use Lotgd\Core\Combat\Battle\Menu;
+use Lotgd\Core\Combat\Battle\Movement;
+use Lotgd\Core\Combat\Battle\Option;
+use Lotgd\Core\Combat\Battle\Other;
+use Lotgd\Core\Combat\Battle\Prepare;
+use Lotgd\Core\Combat\Battle\Process;
+use Lotgd\Core\Combat\Battle\Result;
+use Lotgd\Core\Combat\Battle\Round;
+use Lotgd\Core\Combat\Battle\Skill;
+use Lotgd\Core\Combat\Battle\Surprise;
+use Lotgd\Core\Combat\Battle\Suspend;
+use Lotgd\Core\Combat\Battle\Target;
+use Lotgd\Core\Combat\Battle\TempStat;
+use Lotgd\Core\Combat\Battle\TranslationDomain;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Tool\PlayerFunction;
@@ -25,29 +49,29 @@ class Battle
     use BattleStart;
     use BattleProcess;
     use BattleEnd;
-    use Battle\Buff;
-    use Battle\Buffer;
-    use Battle\Configuration;
-    use Battle\Context;
-    use Battle\Enemy;
-    use Battle\Extended;
-    use Battle\Formula;
-    use Battle\Ghost;
-    use Battle\HealthBar;
-    use Battle\Menu;
-    use Battle\Movement;
-    use Battle\Option;
-    use Battle\Other;
-    use Battle\Prepare;
-    use Battle\Process;
-    use Battle\Result;
-    use Battle\Round;
-    use Battle\Skill;
-    use Battle\Surprise;
-    use Battle\Suspend;
-    use Battle\Target;
-    use Battle\TempStat;
-    use Battle\TranslationDomain;
+    use Buff;
+    use Buffer;
+    use Configuration;
+    use Context;
+    use Enemy;
+    use Extended;
+    use Formula;
+    use Ghost;
+    use HealthBar;
+    use Menu;
+    use Movement;
+    use Option;
+    use Other;
+    use Prepare;
+    use Process;
+    use Result;
+    use Round;
+    use Skill;
+    use Surprise;
+    use Suspend;
+    use Target;
+    use TempStat;
+    use TranslationDomain;
 
     private $dispatcher;
     private $doctrine;
@@ -81,7 +105,7 @@ class Battle
     {
         if ( ! $this->battleIsEnded)
         {
-            throw new \LogicException('Can not get the results of battle. Call Battle::battleEnd() before Battle::battleResults().');
+            throw new LogicException('Can not get the results of battle. Call Battle::battleEnd() before Battle::battleResults().');
         }
 
         $content = $this->twig->render('battle/index.html.twig', $this->getContext());
@@ -138,7 +162,7 @@ class Battle
 
         return [
             $search,
-            $replace
+            $replace,
         ];
     }
 }

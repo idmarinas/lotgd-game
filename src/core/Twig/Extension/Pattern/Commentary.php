@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
+use DateTime;
+use DateInterval;
 use Twig\Environment;
 
 trait Commentary
@@ -95,8 +97,8 @@ trait Commentary
         $textDomain = ($textDomain ?? $this->textDomain) ?: $this->textDomain;
 
         $logout  = (int) $this->settings->getSetting('LOGINTIMEOUT', 900);
-        $offline = new \DateTime('now');
-        $offline->sub(new \DateInterval("PT{$logout}S"));
+        $offline = new DateTime('now');
+        $offline->sub(new DateInterval("PT{$logout}S"));
 
         $status = $this->getStatusMessages($textDomain);
 

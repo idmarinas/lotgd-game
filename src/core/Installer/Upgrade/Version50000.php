@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Installer\Upgrade;
 
+use Throwable;
 use Lotgd\Core\Installer\InstallerAbstract;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -36,7 +37,7 @@ class Version50000 extends InstallerAbstract
                 $this->getProjectDir().'/config/autoload/'
             ]);
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return false;
         }
@@ -51,7 +52,7 @@ class Version50000 extends InstallerAbstract
         {
             $this->doctrine->getConnection()->executeQuery('DROP TABLE IF EXISTS `translations`');
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return false;
         }
@@ -66,7 +67,7 @@ class Version50000 extends InstallerAbstract
         {
             $this->doctrine->getConnection()->executeQuery('DROP TABLE IF EXISTS `untranslated`');
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return false;
         }
@@ -81,7 +82,7 @@ class Version50000 extends InstallerAbstract
         {
             $this->doctrine->getConnection()->executeQuery('DROP TABLE IF EXISTS `nastywords`');
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return false;
         }
@@ -98,7 +99,7 @@ class Version50000 extends InstallerAbstract
         {
             $fs->remove($this->getProjectDir().'/storage/cache/');
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return false;
         }

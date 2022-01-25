@@ -20,9 +20,9 @@ trait FormaterTrait
         $version = (string) $version;
 
         $path    = (int) \substr($version, -2);
-        $version = (string) \substr_replace($version, '', -2);
+        $version = \substr_replace($version, '', -2);
         $minor   = (int) \substr($version, -2);
-        $version = (string) \substr_replace($version, '', -2);
+        $version = \substr_replace($version, '', -2);
         $major   = (int) \substr($version, -2);
 
         return "{$major}.{$minor}.{$path}";

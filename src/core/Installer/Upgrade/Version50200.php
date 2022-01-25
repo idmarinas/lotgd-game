@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Installer\Upgrade;
 
+use Throwable;
 use Lotgd\Core\Installer\InstallerAbstract;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -58,7 +59,7 @@ class Version50200 extends InstallerAbstract
                 $this->getProjectDir().'/src/core/Fixed/SymfonyForm.php',
             ]);
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return false;
         }

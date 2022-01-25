@@ -13,6 +13,9 @@
 
 namespace Lotgd\Core\Repository;
 
+use Throwable;
+use DateTime;
+use DateInterval;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -51,7 +54,7 @@ class PetitionsRepository extends ServiceEntityRepository
 
             return $petitions;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -68,8 +71,8 @@ class PetitionsRepository extends ServiceEntityRepository
 
         try
         {
-            $date = new \DateTime('now');
-            $date->sub(new \DateInterval('P1D'));
+            $date = new DateTime('now');
+            $date->sub(new DateInterval('P1D'));
 
             return $query->select('count(u.petitionid)')
                 ->where('inet_aton(u.ip) LIKE inet_aton(:ip) OR u.id = :lgi')
@@ -82,7 +85,7 @@ class PetitionsRepository extends ServiceEntityRepository
                 ->getSingleScalarResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -97,8 +100,8 @@ class PetitionsRepository extends ServiceEntityRepository
     {
         try
         {
-            $date = new \DateTime('now');
-            $date->sub(new \DateInterval('P7D'));
+            $date = new DateTime('now');
+            $date->sub(new DateInterval('P7D'));
 
             $query = $this->_em->createQueryBuilder();
 
@@ -110,7 +113,7 @@ class PetitionsRepository extends ServiceEntityRepository
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

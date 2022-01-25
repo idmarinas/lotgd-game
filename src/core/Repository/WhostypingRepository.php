@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Repository;
 
+use Throwable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -42,7 +43,7 @@ class WhostypingRepository extends ServiceEntityRepository
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

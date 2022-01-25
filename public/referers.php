@@ -7,14 +7,14 @@ require_once 'common.php';
 
 check_su_access(SU_EDIT_CONFIG);
 
-$repository = \Doctrine::getRepository('LotgdCore:Referers');
+$repository = Doctrine::getRepository('LotgdCore:Referers');
 
-$op = (string) \LotgdRequest::getQuery('op');
-$sort = (string) \LotgdRequest::getQuery('sort');
-$ascDescRaw = (int) \LotgdRequest::getQuery('direction');
+$op         = (string) LotgdRequest::getQuery('op');
+$sort       = (string) LotgdRequest::getQuery('sort');
+$ascDescRaw = (int) LotgdRequest::getQuery('direction');
 
-$sort = $sort ?: 'count';
-$ascDesc = $ascDescRaw !== 0 ? 'ASC' : 'DESC';
+$sort    = $sort ?: 'count';
+$ascDesc = 0 !== $ascDescRaw ? 'ASC' : 'DESC';
 
 if ('rebuild' == $op)
 {
@@ -31,10 +31,10 @@ if ('rebuild' == $op)
 
         $row->setSite($site);
 
-        \Doctrine::persist($row);
+        Doctrine::persist($row);
     }
 }
-elseif('expire' == $op)
+elseif ('expire' == $op)
 {
     $expire = (int) LotgdSetting::getSetting('expirecontent', 180);
 
@@ -44,29 +44,29 @@ elseif('expire' == $op)
     }
 }
 
-\Doctrine::flush();
+Doctrine::flush();
 
 $textDomain = 'grotto_referers';
 
 $params = [
-    'textDomain' => $textDomain
+    'textDomain' => $textDomain,
 ];
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], $textDomain);
+LotgdResponse::pageStart('title', [], $textDomain);
 
-\LotgdNavigation::superuserGrottoNav();
+LotgdNavigation::superuserGrottoNav();
 
-\LotgdNavigation::addHeader('referers.category.options');
-\LotgdNavigation::addNav('referers.nav.refresh', 'referers.php?sort='.urlencode($sort).'&direction='.$ascDescRaw);
-\LotgdNavigation::addNav('referers.nav.count', 'referers.php?sort=count&direction='.$ascDescRaw);
-\LotgdNavigation::addNav('referers.nav.url', 'referers.php?sort=uri&direction='.$ascDescRaw);
-\LotgdNavigation::addNav('referers.nav.time', 'referers.php?sort=last&direction='.$ascDescRaw);
-\LotgdNavigation::addNav('referers.nav.switch', 'referers.php?sort='.urlencode($sort).'&direction='.(! $ascDescRaw));
+LotgdNavigation::addHeader('referers.category.options');
+LotgdNavigation::addNav('referers.nav.refresh', 'referers.php?sort='.urlencode($sort).'&direction='.$ascDescRaw);
+LotgdNavigation::addNav('referers.nav.count', 'referers.php?sort=count&direction='.$ascDescRaw);
+LotgdNavigation::addNav('referers.nav.url', 'referers.php?sort=uri&direction='.$ascDescRaw);
+LotgdNavigation::addNav('referers.nav.time', 'referers.php?sort=last&direction='.$ascDescRaw);
+LotgdNavigation::addNav('referers.nav.switch', 'referers.php?sort='.urlencode($sort).'&direction='.( ! $ascDescRaw));
 
-\LotgdNavigation::addHeader('referers.category.optimization');
-\LotgdNavigation::addNav('referers.nav.rebuild', 'referers.php?op=rebuild');
-\LotgdNavigation::addNav('referers.nav.expire', 'referers.php?op=expire');
+LotgdNavigation::addHeader('referers.category.optimization');
+LotgdNavigation::addNav('referers.nav.rebuild', 'referers.php?op=rebuild');
+LotgdNavigation::addNav('referers.nav.expire', 'referers.php?op=expire');
 
 $query = $repository->createQueryBuilder('u');
 
@@ -81,16 +81,16 @@ $result = $query->select('u')
 
 $params['paginator'] = [];
 
-foreach($result as $row)
+foreach ($result as $row)
 {
     $params['paginator'][$row[0]->getSite()]['data'] = [
-        'total' => $row['total'],
-        'recent' => $row['recent']
+        'total'  => $row['total'],
+        'recent' => $row['recent'],
     ];
     $params['paginator'][$row[0]->getSite()]['rows'][] = $row[0];
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/referers.html.twig', $params));
+LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/referers.html.twig', $params));
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

@@ -1,5 +1,9 @@
 <?php
 
+use Laminas\Form\Form;
+use Laminas\Hydrator\ClassMethodsHydrator;
+use Lotgd\Core\Entity\Companions;
+use Lotgd\Core\EntityForm\CompanionsType;
 // addnews ready
 // mail ready
 // translator ready
@@ -13,54 +17,54 @@ require_once 'lib/showform.php';
 
 check_su_access(SU_EDIT_MOUNTS);
 
-$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Companions::class);
+$repository = Doctrine::getRepository(Companions::class);
 
 $textDomain = 'grotto_companions';
-$hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
+$hydrator   = new ClassMethodsHydrator();
 
 $params = [
-    'textDomain' => $textDomain
+    'textDomain' => $textDomain,
 ];
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], $textDomain);
+LotgdResponse::pageStart('title', [], $textDomain);
 
-\LotgdNavigation::superuserGrottoNav();
+LotgdNavigation::superuserGrottoNav();
 
-\LotgdNavigation::addHeader('companions.category.editor');
-\LotgdNavigation::addNav('companions.nav.add', 'companions.php?op=add');
+LotgdNavigation::addHeader('companions.category.editor');
+LotgdNavigation::addNav('companions.nav.add', 'companions.php?op=add');
 
-$op = (string) \LotgdRequest::getQuery('op');
-$id = (int) \LotgdRequest::getQuery('id');
+$op = (string) LotgdRequest::getQuery('op');
+$id = (int) LotgdRequest::getQuery('id');
 
 if ('deactivate' == $op)
 {
     $companionEntity = $repository->find($id);
     $companionEntity->setCompanionactive(0);
 
-    \Doctrine::persist($companionEntity);
+    Doctrine::persist($companionEntity);
 
     $op = '';
-    \LotgdRequest::setQuery('op', '');
+    LotgdRequest::setQuery('op', '');
 }
 elseif ('activate' == $op)
 {
     $companionEntity = $repository->find($id);
     $companionEntity->setCompanionactive(1);
 
-    \Doctrine::persist($companionEntity);
+    Doctrine::persist($companionEntity);
 
     $op = '';
-    \LotgdRequest::setQuery('op', '');
+    LotgdRequest::setQuery('op', '');
 }
 elseif ('del' == $op)
 {
     $companionEntity = $repository->find($id);
 
-    \Doctrine::remove($companionEntity);
+    Doctrine::remove($companionEntity);
 
     $op = '';
-    \LotgdRequest::setQuery('op', '');
+    LotgdRequest::setQuery('op', '');
 
     module_delete_objprefs('companions', $id);
 }
@@ -70,34 +74,34 @@ elseif ('take' == $op)
 
     $row = $hydrator->extract($companionEntity);
 
-    if ($row !== [])
+    if ([] !== $row)
     {
-        $row['attack'] += ($row['attackperlevel'] * $session['user']['level']);
-        $row['defense'] += ($row['defenseperlevel'] * $session['user']['level']);
+        $row['attack']       += ($row['attackperlevel'] * $session['user']['level']);
+        $row['defense']      += ($row['defenseperlevel'] * $session['user']['level']);
         $row['maxhitpoints'] += ($row['maxhitpointsperlevel'] * $session['user']['level']);
         $row['hitpoints'] = $row['maxhitpoints'];
 
         $row = new Other($row);
-        \LotgdEventDispatcher::dispatch($row, Other::COMPANION_ALTER);
+        LotgdEventDispatcher::dispatch($row, Other::COMPANION_ALTER);
         $row = modulehook('alter-companion', $row->getData());
 
-        $message = 'flash.message.take.fail';
+        $message       = 'flash.message.take.fail';
         $paramsMessage = [];
-        if (\LotgdKernel::get('lotgd_core.combat.buffer')->applyCompanion($row['name'], $row))
+        if (LotgdKernel::get('lotgd_core.combat.buffer')->applyCompanion($row['name'], $row))
         {
-            $message = 'flash.message.take.success';
+            $message       = 'flash.message.take.success';
             $paramsMessage = ['name' => $row['name']];
         }
 
-        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t($message, $paramsMessage, $textDomain));
+        LotgdFlashMessages::addInfoMessage(LotgdTranslator::t($message, $paramsMessage, $textDomain));
     }
 
     $op = '';
-    \LotgdRequest::setQuery('op', '');
+    LotgdRequest::setQuery('op', '');
 }
 
 unset($companionEntity);
-\Doctrine::flush();
+Doctrine::flush();
 
 if ('' == $op)
 {
@@ -109,22 +113,22 @@ elseif ('edit' == $op || 'add' == $op)
 {
     $params['tpl'] = 'edit';
 
-    \LotgdNavigation::addNav('companions.nav.editor', 'companions.php');
-    \LotgdNavigation::addNav('companions.nav.properties', "companions.php?op=edit&id={$id}");
+    LotgdNavigation::addNav('companions.nav.editor', 'companions.php');
+    LotgdNavigation::addNav('companions.nav.properties', "companions.php?op=edit&id={$id}");
 
     module_editor_navs('prefs-companions', "companions.php?op=edit&subop=module&id={$id}&module=");
 
-    $subop = (string) \LotgdRequest::getQuery('subop');
+    $subop = (string) LotgdRequest::getQuery('subop');
 
     if ('module' == $subop)
     {
-        $module = (string) \LotgdRequest::getQuery('module');
+        $module = (string) LotgdRequest::getQuery('module');
 
         $form = module_objpref_edit('companions', $module, $id);
 
-        $params['isLaminas'] = $form instanceof Laminas\Form\Form;
-        $params['module'] = $module;
-        $params['id'] = $id;
+        $params['isLaminas'] = $form instanceof Form;
+        $params['module']    = $module;
+        $params['id']        = $id;
 
         if ($params['isLaminas'])
         {
@@ -132,9 +136,9 @@ elseif ('edit' == $op || 'add' == $op)
             $params['formTypeTab'] = $form->getOption('form_type_tab');
         }
 
-        if (\LotgdRequest::isPost())
+        if (LotgdRequest::isPost())
         {
-            $post = \LotgdRequest::getPostAll();
+            $post = LotgdRequest::getPostAll();
 
             if ($params['isLaminas'])
             {
@@ -146,7 +150,7 @@ elseif ('edit' == $op || 'add' == $op)
 
                     process_post_save_data($data, $id, $module);
 
-                    \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
+                    LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
                 }
             }
             else
@@ -155,68 +159,68 @@ elseif ('edit' == $op || 'add' == $op)
 
                 process_post_save_data($post, $id, $module);
 
-                \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
+                LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
             }
         }
 
         $params['form'] = $form;
 
-        \LotgdNavigation::addNavAllow("companions.php?op=edit&subop=module&id={$id}&module={$module}");
+        LotgdNavigation::addNavAllow("companions.php?op=edit&subop=module&id={$id}&module={$module}");
 
-        \LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/companions/module.html.twig', $params));
+        LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/companions/module.html.twig', $params));
 
-        \LotgdResponse::pageEnd();
+        LotgdResponse::pageEnd();
     }
     else
     {
-        $lotgdFormFactory = \LotgdKernel::get('form.factory');
-        $companionEntity = $repository->find($id);
-        $creatureArray = $companionEntity ? $repository->extractEntity($companionEntity) : [];
-        $companionEntity = $companionEntity ?: new \Lotgd\Core\Entity\Companions();
+        $lotgdFormFactory = LotgdKernel::get('form.factory');
+        $companionEntity  = $repository->find($id);
+        $creatureArray    = $companionEntity ? $repository->extractEntity($companionEntity) : [];
+        $companionEntity  = $companionEntity ?: new Companions();
 
-        $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CompanionsType::class, $companionEntity, [
+        $form = $lotgdFormFactory->create(CompanionsType::class, $companionEntity, [
             'action' => "companions.php?op=edit&id={$id}",
-            'attr' => [
-                'autocomplete' => 'off'
-            ]
+            'attr'   => [
+                'autocomplete' => 'off',
+            ],
         ]);
 
-        $form->handleRequest(\LotgdRequest::_i());
+        $form->handleRequest(LotgdRequest::_i());
 
         if ($form->isSubmitted() && $form->isValid())
         {
             $entity = $form->getData();
 
-            \Doctrine::persist($entity);
-            \Doctrine::flush();
+            Doctrine::persist($entity);
+            Doctrine::flush();
 
             $id = $entity->getCompanionid();
 
-            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
+            LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
 
             //-- Redo form for change $id and set new data (generated IDs)
-            $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CompanionsType::class, $entity, [
+            $form = $lotgdFormFactory->create(CompanionsType::class, $entity, [
                 'action' => "companions.php?op=edit&id={$id}",
-                'attr' => [
-                    'autocomplete' => 'off'
-                ]
+                'attr'   => [
+                    'autocomplete' => 'off',
+                ],
             ]);
         }
-        \Doctrine::detach($companionEntity); //-- Avoid Doctrine save a invalid Form
+        Doctrine::detach($companionEntity); //-- Avoid Doctrine save a invalid Form
 
-        \LotgdNavigation::addNavAllow("companions.php?op=edit&id={$id}");
+        LotgdNavigation::addNavAllow("companions.php?op=edit&id={$id}");
 
         $params['form'] = $form->createView();
     }
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/companions.html.twig', $params));
+LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/companions.html.twig', $params));
 
 function process_post_save_data($data, $id, $module)
 {
     foreach ($data as $key => $val)
     {
-        if (is_array($val))
+        if (\is_array($val))
         {
             process_post_save_data($val, $id, $module);
 
@@ -228,4 +232,4 @@ function process_post_save_data($data, $id, $module)
 }
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

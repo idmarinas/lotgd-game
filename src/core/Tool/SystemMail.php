@@ -12,6 +12,7 @@
 
 namespace Lotgd\Core\Tool;
 
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Entity\Mail;
 use Lotgd\Core\Http\Request;
@@ -75,7 +76,7 @@ class SystemMail
             ->setMsgto($to)
             ->setSubject(\is_array($subject) ? serialize($subject) : str_replace(["\n", '`n'], '', $subject))
             ->setBody(\is_array($body) ? serialize($body) : $body)
-            ->setSent(new \DateTime('now'))
+            ->setSent(new DateTime('now'))
             ->setOriginator($session['user']['acctid'])
         ;
 

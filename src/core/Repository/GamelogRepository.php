@@ -13,6 +13,9 @@
 
 namespace Lotgd\Core\Repository;
 
+use DateTime;
+use DateInterval;
+use Throwable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -37,8 +40,8 @@ class GamelogRepository extends ServiceEntityRepository
 
         try
         {
-            $date = new \DateTime('now');
-            $date->sub(new \DateInterval("P{$expire}D"));
+            $date = new DateTime('now');
+            $date->sub(new DateInterval("P{$expire}D"));
 
             return $query->delete($this->_entityName, 'u')
                 ->where('u.date < :date')
@@ -47,7 +50,7 @@ class GamelogRepository extends ServiceEntityRepository
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

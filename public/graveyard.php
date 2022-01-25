@@ -8,10 +8,10 @@ require_once 'common.php';
 require_once 'lib/events.php';
 
 /** @var Lotgd\Core\Http\Request $request */
-$request = \LotgdKernel::get('Lotgd\Core\Http\Request');
+$request = LotgdKernel::get('Lotgd\Core\Http\Request');
 
 //-- Init page
-\LotgdResponse::pageStart();
+LotgdResponse::pageStart();
 
 $skipgraveyardtext = handle_event('graveyard');
 
@@ -27,13 +27,13 @@ if ( ! $skipgraveyardtext)
     }
 
     //-- Check new day
-    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
+    LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 }
 
 $request->attributes->set('params', $params);
 
 //-- Call controller
-\LotgdResponse::callController('Lotgd\Core\Controller\GraveyardController');
+LotgdResponse::callController('Lotgd\Core\Controller\GraveyardController');
 
 $params = $request->attributes->get('params');
 
@@ -43,4 +43,4 @@ if ('default' == $params['tpl'])
 }
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

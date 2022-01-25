@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
+use MessageFormatter;
+use DateTime;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -66,7 +68,7 @@ class Translator extends AbstractExtension
         //-- Delete all values that not are allowed (can cause a error when use \MessageFormatter::format($params))
         $parameters = \array_filter($parameters, [$this, 'cleanParameters']);
 
-        $formatter = new \MessageFormatter($locale, $message);
+        $formatter = new MessageFormatter($locale, $message);
 
         $msg = $formatter->format($parameters);
 
@@ -107,6 +109,6 @@ class Translator extends AbstractExtension
         || \is_numeric($param) //-- Allow numeric values
         || \is_bool($param) //-- Allow bool values
         || \is_null($param) //-- Allow null value (Formatter can handle this value)
-        || $param instanceof \DateTime; //-- Allow DateTime object
+        || $param instanceof DateTime; //-- Allow DateTime object
     }
 }

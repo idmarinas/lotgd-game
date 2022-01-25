@@ -1,5 +1,7 @@
 <?php
 
+use Tracy\Debugger;
+
 // translator ready
 // addnews ready
 // mail ready
@@ -10,25 +12,25 @@ check_su_access(SU_RAW_SQL);
 $textDomain = 'grotto_rawsql';
 
 $params = [
-    'textDomain' => $textDomain
+    'textDomain' => $textDomain,
 ];
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], $textDomain);
+LotgdResponse::pageStart('title', [], $textDomain);
 
-\LotgdNavigation::superuserGrottoNav();
+LotgdNavigation::superuserGrottoNav();
 
-\LotgdNavigation::addHeader('rawsql.category.execution');
-\LotgdNavigation::addNav('rawsql.nav.sql', 'rawsql.php');
-\LotgdNavigation::addNav('rawsql.nav.php', 'rawsql.php?op=php');
+LotgdNavigation::addHeader('rawsql.category.execution');
+LotgdNavigation::addNav('rawsql.nav.sql', 'rawsql.php');
+LotgdNavigation::addNav('rawsql.nav.php', 'rawsql.php?op=php');
 
-$op = (string) \LotgdRequest::getQuery('op');
+$op = (string) LotgdRequest::getQuery('op');
 
 if ('' == $op || 'sql' == $op)
 {
     $params['tpl'] = 'default';
 
-    $sql = (string) \LotgdRequest::getPost('sql');
+    $sql = (string) LotgdRequest::getPost('sql');
 
     if ('' != $sql)
     {
@@ -36,11 +38,11 @@ if ('' == $op || 'sql' == $op)
 
         $params['sql'] = $sql;
 
-        \LotgdResponse::pageDebug('Ran Raw SQL: '.$sql);
+        LotgdResponse::pageDebug('Ran Raw SQL: '.$sql);
 
         try
         {
-            $q = \Doctrine::getConnection()->prepare($sql);
+            $q = Doctrine::getConnection()->prepare($sql);
             $q->execute();
 
             $params['rowCount'] = $q->rowCount(); //-- Count affected rows
@@ -50,11 +52,11 @@ if ('' == $op || 'sql' == $op)
                 $params['resultSql'] = $q->fetchAll(); //-- Select results if have columns
             }
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             $params['resultSql'] = null;
-            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.sql.error.th', [ 'error' => $th->getMessage() ], $textDomain));
-            \Tracy\Debugger::log($th);
+            LotgdFlashMessages::addErrorMessage(LotgdTranslator::t('flash.message.sql.error.th', ['error' => $th->getMessage()], $textDomain));
+            Debugger::log($th);
         }
     }
 }
@@ -62,12 +64,12 @@ else
 {
     $params['tpl'] = 'php';
 
-    $php = stripslashes((string) \LotgdRequest::getPost('php'));
+    $php = stripslashes((string) LotgdRequest::getPost('php'));
 
     if ($php > '')
     {
-        $params['php'] = $php;
-        $params['highlight'] = highlight_string("<?php\n$php\n?>", true);
+        $params['php']       = $php;
+        $params['highlight'] = highlight_string("<?php\n{$php}\n?>", true);
 
         try
         {
@@ -78,13 +80,13 @@ else
         }
         catch (Exception $ex)
         {
-            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.php.error.th', [ 'error' => $ex->getMessage() ], $textDomain));
+            LotgdFlashMessages::addErrorMessage(LotgdTranslator::t('flash.message.php.error.th', ['error' => $ex->getMessage()], $textDomain));
         }
-        \LotgdLog::debug('Ran Raw PHP: '.$php);
+        LotgdLog::debug('Ran Raw PHP: '.$php);
     }
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/rawsql.html.twig', $params));
+LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/rawsql.html.twig', $params));
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

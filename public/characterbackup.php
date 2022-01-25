@@ -1,31 +1,36 @@
 <?php
 
+use Doctrine\ORM\Id\AssignedGenerator;
+use Doctrine\ORM\Id\IdentityGenerator;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Lotgd\Core\Event\Character;
+use Symfony\Component\Filesystem\Filesystem;
+use Tracy\Debugger;
 
 require_once 'common.php';
 
 check_su_access(SU_EDIT_USERS);
 
-$op        = (string) \LotgdRequest::getQuery('op');
-$accountId = (int) \LotgdRequest::getQuery('acctid');
-$page      = (int) \LotgdRequest::getQuery('page');
+$op        = (string) LotgdRequest::getQuery('op');
+$accountId = (int) LotgdRequest::getQuery('acctid');
+$page      = (int) LotgdRequest::getQuery('page');
 
 $params = [
     'textDomain' => 'grotto_characterbackup',
 ];
 
 //-- Init page
-\LotgdResponse::pageStart('title.default', [], $params['textDomain']);
+LotgdResponse::pageStart('title.default', [], $params['textDomain']);
 
-\LotgdNavigation::superuserGrottoNav();
+LotgdNavigation::superuserGrottoNav();
 
-\LotgdNavigation::addNav('navigation.nav.update', 'characterbackup.php', ['textDomain' => $params['textDomain']]);
+LotgdNavigation::addNav('navigation.nav.update', 'characterbackup.php', ['textDomain' => $params['textDomain']]);
 
-$fileSystem = new \Symfony\Component\Filesystem\Filesystem();
+$fileSystem = new Filesystem();
 /** @var \Symfony\Component\Serializer\Serializer $serializer */
-$serializer = \LotgdKernel::get('serializer');
+$serializer = LotgdKernel::get('serializer');
 /** @var \Kit\CryptBundle\Service\OpensslService $cryptService */
-$cryptService = \LotgdKernel::get('Kit\CryptBundle\Service\OpensslService');
+$cryptService = LotgdKernel::get('Kit\CryptBundle\Service\OpensslService');
 
 $path              = 'storage/logd_snapshots';
 $pathAccountData   = "{$path}/user-{$accountId}/LotgdCore_User.json";
@@ -41,10 +46,10 @@ if ('delete' == $op)
         $message = 'flash.message.del.success';
     }
 
-    \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t($message, ['path' => "{$path}/user-{$accountId}"], $params['textDomain']));
+    LotgdFlashMessages::addInfoMessage(LotgdTranslator::t($message, ['path' => "{$path}/user-{$accountId}"], $params['textDomain']));
 
     $op = '';
-    \LotgdRequest::setQuery('op', '');
+    LotgdRequest::setQuery('op', '');
 }
 elseif ('restore' == $op && file_exists($pathAccountData) && file_exists($pathCharacterData))
 {
@@ -61,12 +66,12 @@ elseif ('restore' == $op && file_exists($pathAccountData) && file_exists($pathCh
     // $hydrator->removeNamingStrategy(); //-- With this keyValue is keyValue. Otherwise it would be key_value
 
     //-- Overrides the automatic generation of IDs (avoid to change id of account and character)
-    $metadataAcct = \Doctrine::getClassMetadata('LotgdCore:User');
-    $metadataAcct->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
-    $metadataAcct->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
-    $metadataChar = \Doctrine::getClassMetadata('LotgdCore:Avatar');
-    $metadataChar->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
-    $metadataChar->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+    $metadataAcct = Doctrine::getClassMetadata('LotgdCore:User');
+    $metadataAcct->setIdGenerator(new AssignedGenerator());
+    $metadataAcct->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
+    $metadataChar = Doctrine::getClassMetadata('LotgdCore:Avatar');
+    $metadataChar->setIdGenerator(new AssignedGenerator());
+    $metadataChar->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
 
     //-- Restore account and character
     $account   = $serializer->decode($cryptService->decrypt(file_get_contents($pathAccountData)), 'json');
@@ -77,19 +82,19 @@ elseif ('restore' == $op && file_exists($pathAccountData) && file_exists($pathCh
 
     $account->setAvatar(null);
     $character->setAcct(null);
-    \Doctrine::persist($account);
-    \Doctrine::persist($character);
-    \Doctrine::flush();
+    Doctrine::persist($account);
+    Doctrine::persist($character);
+    Doctrine::flush();
 
     $account->setAvatar($character);
     $character->setAcct($account);
-    \Doctrine::flush();
+    Doctrine::flush();
 
     //-- Restore automatic generation of IDs
-    $metadataAcct->setIdGenerator(new \Doctrine\ORM\Id\IdentityGenerator());
-    $metadataAcct->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_IDENTITY);
-    $metadataChar->setIdGenerator(new \Doctrine\ORM\Id\IdentityGenerator());
-    $metadataChar->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_IDENTITY);
+    $metadataAcct->setIdGenerator(new IdentityGenerator());
+    $metadataAcct->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_IDENTITY);
+    $metadataChar->setIdGenerator(new IdentityGenerator());
+    $metadataChar->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_IDENTITY);
 
     //-- Restore other entities
     foreach ($files as $file)
@@ -101,9 +106,9 @@ elseif ('restore' == $op && file_exists($pathAccountData) && file_exists($pathCh
         }
 
         //-- Overrides the automatic generation of IDs
-        $metadata = \Doctrine::getClassMetadata($file['entity']);
-        $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
-        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+        $metadata = Doctrine::getClassMetadata($file['entity']);
+        $metadata->setIdGenerator(new AssignedGenerator());
+        $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
 
         $args = new Character([
             'entity'     => $file['entity'],
@@ -111,7 +116,7 @@ elseif ('restore' == $op && file_exists($pathAccountData) && file_exists($pathCh
             'data'       => $file,
             'proccessed' => false,
         ]);
-        \LotgdEventDispatcher::dispatch($args, Character::BACKUP_RESTORE);
+        LotgdEventDispatcher::dispatch($args, Character::BACKUP_RESTORE);
         $result = modulehook('character-restore', $args->getData());
 
         //-- Do nothing if it has been processed
@@ -119,39 +124,39 @@ elseif ('restore' == $op && file_exists($pathAccountData) && file_exists($pathCh
         {
             try
             {
-                $repository = \Doctrine::getRepository($result['entity']);
+                $repository = Doctrine::getRepository($result['entity']);
 
                 foreach ($result['rows'] as $row)
                 {
-                    \Doctrine::persist($repository->hydrateEntity($row));
+                    Doctrine::persist($repository->hydrateEntity($row));
                 }
             }
-            catch (\Throwable $th)
+            catch (Throwable $th)
             {
-                \Tracy\Debugger::log($th);
+                Debugger::log($th);
             }
         }
 
         //-- Restore automatic generation of IDs
-        $metadata = \Doctrine::getClassMetadata($file['entity']);
-        $metadata->setIdGenerator(new \Doctrine\ORM\Id\IdentityGenerator());
-        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_IDENTITY);
+        $metadata = Doctrine::getClassMetadata($file['entity']);
+        $metadata->setIdGenerator(new IdentityGenerator());
+        $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_IDENTITY);
 
-        \Doctrine::flush();
+        Doctrine::flush();
     }
 
     //-- Remove backup
     $fileSystem->remove("{$path}/user-{$accountId}");
 
     $op = '';
-    \LotgdRequest::setQuery('op', '');
+    LotgdRequest::setQuery('op', '');
 }
 elseif ('restore' == $op && ( ! file_exists($pathAccountData) || ! file_exists($pathCharacterData)))
 {
-    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.restore.miss.mandatory', [], $params['textDomain']));
+    LotgdFlashMessages::addErrorMessage(LotgdTranslator::t('flash.message.restore.miss.mandatory', [], $params['textDomain']));
 
     $op = '';
-    \LotgdRequest::setQuery('op', '');
+    LotgdRequest::setQuery('op', '');
 }
 
 if ('' == $op)
@@ -201,7 +206,7 @@ elseif ('view' == $op)
     }, $files);
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/characterbackup.html.twig', $params));
+LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/characterbackup.html.twig', $params));
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

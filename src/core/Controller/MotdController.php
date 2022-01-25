@@ -13,6 +13,9 @@
 
 namespace Lotgd\Core\Controller;
 
+use Doctrine\Common\Collections\Criteria;
+use Throwable;
+use DateTime;
 use Lotgd\Core\Entity\Motd;
 use Lotgd\Core\Entity\Pollresults;
 use Lotgd\Core\EntityForm\MotdEditType;
@@ -55,10 +58,10 @@ class MotdController extends AbstractController
             $qb->select('u', 'c.name as motdauthorname')
                 ->leftJoin('LotgdCore:User', 'a', 'with', $qb->expr()->eq('a.acctid', 'u.motdauthor'))
                 ->leftJoin('LotgdCore:Avatar', 'c', 'with', $qb->expr()->eq('c.id', 'a.avatar'))
-                ->orderBy('u.motddate', 'DESC')
+                ->orderBy('u.motddate', Criteria::DESC)
             ;
 
-            if ($month)
+            if ($month !== '' && $month !== '0')
             {
                 $params['month_selected'] = $month;
 
@@ -83,7 +86,7 @@ class MotdController extends AbstractController
                 $session['user']['lastmotd'] = $lastMotd;
             }
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -139,7 +142,7 @@ class MotdController extends AbstractController
             {
                 if ($form->get('changedate')->getData())
                 {
-                    $entity->setMotddate(new \DateTime('now'));
+                    $entity->setMotddate(new DateTime('now'));
                 }
 
                 if ($form->get('changeauthor')->getData())
@@ -274,7 +277,7 @@ class MotdController extends AbstractController
             $type    = 'success';
             $message = $this->translator->trans('item.poll.voting.success', [], self::TRANSLATION_DOMAIN);
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

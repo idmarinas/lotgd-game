@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
+use Lotgd\Core\Entity\Petitions;
 use Twig\Environment;
 
 /**
@@ -41,7 +42,7 @@ trait Petition
 
         if (isset($session['user']['superuser']) && $canEditPetitions)
         {
-            $petition  = $this->doctrine->getRepository(\Lotgd\Core\Entity\Petitions::class);
+            $petition  = $this->doctrine->getRepository(Petitions::class);
             $petitions = $petition->getStatusListCount();
         }
 

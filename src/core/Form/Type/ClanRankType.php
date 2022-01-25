@@ -13,6 +13,9 @@
 
 namespace Lotgd\Core\Form\Type;
 
+use LotgdEventDispatcher;
+use LotgdSanitize;
+use LotgdTranslator;
 use Lotgd\Core\Event\Clan;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -33,7 +36,7 @@ class ClanRankType extends ChoiceType
             CLAN_FOUNDER        => 'ranks.031',
         ];
         $ranksResult = new Clan(['ranks' => $ranks, 'textDomain' => 'page_clan', 'clanid' => null]);
-        \LotgdEventDispatcher::dispatch($ranksResult, Clan::RANK_LIST);
+        LotgdEventDispatcher::dispatch($ranksResult, Clan::RANK_LIST);
         $ranksResult = modulehook('clanranks', $ranksResult->getData());
         $ranks       = $ranksResult['ranks'];
 
@@ -41,7 +44,7 @@ class ClanRankType extends ChoiceType
 
         foreach ($ranks as $rankId => $rankName)
         {
-            $choices[\LotgdSanitize::fullSanitize(\LotgdTranslator::t($rankName, [], $ranksResult['textDomain']))] = $rankId;
+            $choices[LotgdSanitize::fullSanitize(LotgdTranslator::t($rankName, [], $ranksResult['textDomain']))] = $rankId;
         }
 
         $resolver->setDefaults([

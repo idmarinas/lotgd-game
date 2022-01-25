@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Command;
 
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
 use Symfony\Component\Console\Helper\Helper;
 
 trait FormatTrait
@@ -32,7 +34,7 @@ trait FormatTrait
         {
             $size = 0;
 
-            foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path, \RecursiveDirectoryIterator::SKIP_DOTS | \RecursiveDirectoryIterator::FOLLOW_SYMLINKS)) as $file)
+            foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::SKIP_DOTS | RecursiveDirectoryIterator::FOLLOW_SYMLINKS)) as $file)
             {
                 $size += $file->getSize();
             }

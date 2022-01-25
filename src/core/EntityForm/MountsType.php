@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\EntityForm;
 
+use Lotgd\Core\EntityForm\Common\BuffType;
 use Lotgd\Core\Entity\Mounts;
 use Lotgd\Core\Entity\MountsTranslation;
 use Lotgd\Core\EntityForm\Mounts as FieldType;
@@ -85,7 +86,7 @@ class MountsType extends AbstractType
                 'field'                => 'partrecharge',
                 'label'                => 'partrecharge',
             ])
-            ->add('mountbuff', Common\BuffType::class, [
+            ->add('mountbuff', BuffType::class, [
                 'label' => 'mountbuff',
             ])
 

@@ -13,6 +13,9 @@
 
 namespace Lotgd\Core\Repository;
 
+use Doctrine\Common\Collections\Criteria;
+use Throwable;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
@@ -41,7 +44,7 @@ class MotdRepository extends ServiceEntityRepository
             $result = $qb->select('u', 'c.name as motdauthorname')
                 ->leftJoin('LotgdCore:User', 'a', Join::WITH, $qb->expr()->eq('a.acctid', 'u.motdauthor'))
                 ->leftJoin('LotgdCore:Avatar', 'c', Join::WITH, $qb->expr()->eq('c.id', 'a.avatar'))
-                ->orderBy('u.motddate', 'DESC')
+                ->orderBy('u.motddate', Criteria::DESC)
                 ->setMaxResults(1)
                 ->getQuery()
                 ->getArrayResult()
@@ -49,7 +52,7 @@ class MotdRepository extends ServiceEntityRepository
 
             return $result[0] ?? [];
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -88,7 +91,7 @@ class MotdRepository extends ServiceEntityRepository
 
             return array_merge($motd, $result[0]);
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -162,7 +165,7 @@ class MotdRepository extends ServiceEntityRepository
     /**
      * Get last Motd date.
      */
-    public function getLastMotdDate(): ?\DateTime
+    public function getLastMotdDate(): ?DateTime
     {
         $query = $this->createQueryBuilder('u');
 
@@ -170,15 +173,15 @@ class MotdRepository extends ServiceEntityRepository
         {
             $date = $query
                 ->select('u.motddate')
-                ->orderBy('u.motddate', 'DESC')
+                ->orderBy('u.motddate', Criteria::DESC)
                 ->setMaxResults(1)
                 ->getQuery()
                 ->getSingleScalarResult()
             ;
 
-            return new \DateTime($date);
+            return new DateTime($date);
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

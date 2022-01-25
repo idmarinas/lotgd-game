@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Repository;
 
+use Throwable;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -49,7 +51,7 @@ class MountsRepository extends ServiceEntityRepository
 
             return $query->getResult();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -76,7 +78,7 @@ class MountsRepository extends ServiceEntityRepository
 
             return true;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -97,9 +99,9 @@ class MountsRepository extends ServiceEntityRepository
                 ->where('u.mountactive = 1')
                 ->andWhere('u.mountlocation = :all OR u.mountlocation = :loc')
 
-                ->orderBy('u.mountcategory', 'ASC')
-                ->addOrderBy('u.mountcostgems', 'ASC')
-                ->addOrderBy('u.mountcostgold', 'ASC')
+                ->orderBy('u.mountcategory', Criteria::ASC)
+                ->addOrderBy('u.mountcostgems', Criteria::ASC)
+                ->addOrderBy('u.mountcostgold', Criteria::ASC)
             ;
 
             $query = $this->createTranslatebleQuery($query);
@@ -109,7 +111,7 @@ class MountsRepository extends ServiceEntityRepository
 
             return $query->getResult();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -135,7 +137,7 @@ class MountsRepository extends ServiceEntityRepository
 
             return $query->getArrayResult()[0];
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -161,7 +163,7 @@ class MountsRepository extends ServiceEntityRepository
 
             return $query->getArrayResult();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

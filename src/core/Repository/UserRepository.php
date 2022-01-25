@@ -13,6 +13,15 @@
 
 namespace Lotgd\Core\Repository;
 
+use Lotgd\Core\Repository\User\Bans;
+use Lotgd\Core\Repository\User\Avatar;
+use Lotgd\Core\Repository\User\Clan;
+use Lotgd\Core\Repository\User\Login;
+use Lotgd\Core\Repository\User\Superuser;
+use Throwable;
+use DateTime;
+use DateInterval;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
@@ -28,11 +37,11 @@ use Tracy\Debugger;
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     use EntityRepositoryTrait;
-    use User\Bans;
-    use User\Avatar;
-    use User\Clan;
-    use User\Login;
-    use User\Superuser;
+    use Bans;
+    use Avatar;
+    use Clan;
+    use Login;
+    use Superuser;
     use User\User;
 
     public function __construct(ManagerRegistry $registry)
@@ -42,6 +51,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
+     * @return never
      */
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
@@ -72,7 +82,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return null;
         }
@@ -99,8 +109,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         try
         {
-            $date = new \DateTime('now');
-            $date->sub(new \DateInterval("PT{$timeout}S"));
+            $date = new DateTime('now');
+            $date->sub(new DateInterval("PT{$timeout}S"));
 
             return (int) $qb->select('COUNT(1)')
                 ->where('u.locked = 0 AND u.loggedin = 1 AND u.laston > :date')
@@ -109,7 +119,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 ->getSingleScalarResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -131,13 +141,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 ->select('c.name')
                 ->leftJoin('LotgdCore:Avatar', 'c', 'with', $query->expr()->eq('c.acct', 'u.acctid'))
                 ->where('u.loggedin = 1 AND u.locked = 0')
-                ->orderBy('c.level', 'DESC')
+                ->orderBy('c.level', Criteria::DESC)
 
                 ->getQuery()
                 ->getArrayResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Pvp;
 
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Combat\Battle;
 use Lotgd\Core\Event\Character;
@@ -60,7 +61,7 @@ class Support
         global $session;
 
         $pvptime    = $this->settings->getSetting('pvptimeout', 600);
-        $pvptimeout = new \DateTime(date('Y-m-d H:i:s', strtotime("-{$pvptime} seconds")));
+        $pvptimeout = new DateTime(date('Y-m-d H:i:s', strtotime("-{$pvptime} seconds")));
 
         /** @var \Lotgd\Core\Repository\AvatarRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Avatar');
@@ -93,14 +94,14 @@ class Support
             elseif ($session['user']['playerfights'] > 0)
             {
                 $entityCharacter = $repository->find($characterId);
-                $entityCharacter->setPvpflag(new \DateTime('now'));
+                $entityCharacter->setPvpflag(new DateTime('now'));
 
                 $this->doctrine->persist($entityCharacter);
                 $this->doctrine->flush();
 
                 $entity['creatureexp']    = round($entity['creatureexp'], 0);
                 $entity['playerstarthp']  = $session['user']['hitpoints'];
-                $entity['fightstartdate'] = new \DateTime('now');
+                $entity['fightstartdate'] = new DateTime('now');
 
                 $args = new Character(['entity' => $entity]);
                 $this->dispatcher->dispatch($args, Character::PVP_ADJUST);

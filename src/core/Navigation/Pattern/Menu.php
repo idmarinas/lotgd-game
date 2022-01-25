@@ -29,17 +29,17 @@ trait Menu
 
         $this->addHeader('common.superuser.category', ['textDomain' => $this->getDefaultTextDomain()]);
 
-        if ($superuser & SU_EDIT_COMMENTS)
+        if (($superuser & SU_EDIT_COMMENTS) !== 0)
         {
             $this->addNav('common.superuser.moderate', 'moderate.php', ['textDomain' => $this->getDefaultTextDomain()]);
         }
 
-        if ($superuser & ~SU_DOESNT_GIVE_GROTTO)
+        if (($superuser & ~SU_DOESNT_GIVE_GROTTO) !== 0)
         {
             $this->addNav('common.superuser.superuser', 'superuser.php', ['textDomain' => $this->getDefaultTextDomain()]);
         }
 
-        if ($superuser & SU_INFINITE_DAYS)
+        if (($superuser & SU_INFINITE_DAYS) !== 0)
         {
             $this->addNav('common.superuser.newday', 'newday.php', ['textDomain' => $this->getDefaultTextDomain()]);
         }
@@ -54,7 +54,7 @@ trait Menu
 
         $superuser = $session['user']['superuser'];
 
-        if ($superuser & ~SU_DOESNT_GIVE_GROTTO)
+        if (($superuser & ~SU_DOESNT_GIVE_GROTTO) !== 0)
         {
             $script = $this->request->getServer('SCRIPT_NAME');
 
@@ -117,11 +117,15 @@ trait Menu
         $this->addHeader('category.fight', ['textDomain' => $translationDomain]);
         $this->addNav('nav.search', 'forest.php?op=search', ['textDomain' => $translationDomain]);
 
-        ($session['user']['level'] > 1) && $this->addNav('nav.slum', 'forest.php?op=search&type=slum', ['textDomain' => $translationDomain]);
+        if ($session['user']['level'] > 1) {
+            $this->addNav('nav.slum', 'forest.php?op=search&type=slum', ['textDomain' => $translationDomain]);
+        }
 
         $this->addNav('nav.thrill', 'forest.php?op=search&type=thrill', ['textDomain' => $translationDomain]);
 
-        ($this->settings->getSetting('suicide', 0) && $this->settings->getSetting('suicidedk', 10) <= $session['user']['dragonkills']) && $this->addNav('nav.suicide', 'forest.php?op=search&type=suicide', ['textDomain' => $translationDomain]);
+        if ($this->settings->getSetting('suicide', 0) && $this->settings->getSetting('suicidedk', 10) <= $session['user']['dragonkills']) {
+            $this->addNav('nav.suicide', 'forest.php?op=search&type=suicide', ['textDomain' => $translationDomain]);
+        }
 
         $this->addHeader('category.other');
     }

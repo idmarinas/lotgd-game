@@ -1,5 +1,7 @@
 <?php
 
+use Doctrine\ORM\Query\Expr\Join;
+use Lotgd\Core\Entity\Paylog;
 // translator ready
 // addnews ready
 // mail ready
@@ -14,40 +16,40 @@ check_su_access(SU_EDIT_DONATIONS);
 $textDomain = 'grotto_donators';
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], $textDomain);
+LotgdResponse::pageStart('title', [], $textDomain);
 
 $params = [
-    'textDomain' => $textDomain
+    'textDomain' => $textDomain,
 ];
 
-$op = (string) \LotgdRequest::getQuery('op');
-$page = (int) \LotgdRequest::getQuery('page');
-$acctRepository = \Doctrine::getRepository('LotgdCore:User');
-$paylogRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Paylog::class);
+$op               = (string) LotgdRequest::getQuery('op');
+$page             = (int) LotgdRequest::getQuery('page');
+$acctRepository   = Doctrine::getRepository('LotgdCore:User');
+$paylogRepository = Doctrine::getRepository(Paylog::class);
 
-$name = (string) \LotgdRequest::getPost('name');
-$name = $name ?: (string) \LotgdRequest::getQuery('name');
+$name           = (string) LotgdRequest::getPost('name');
+$name           = $name ?: (string) LotgdRequest::getQuery('name');
 $params['name'] = $name;
 
-$amt = (int) \LotgdRequest::getPost('amt');
-$amt = $amt ?: (int) \LotgdRequest::getQuery('amt');
+$amt           = (int) LotgdRequest::getPost('amt');
+$amt           = $amt ?: (int) LotgdRequest::getQuery('amt');
 $params['amt'] = $amt;
 
-$reason = (string) \LotgdRequest::getPost('reason');
-$reason = $reason ?: (string) \LotgdRequest::getQuery('reason');
-$reason = $reason ?: \LotgdTranslator::t('form.value.reason', [], $textDomain);
+$reason           = (string) LotgdRequest::getPost('reason');
+$reason           = $reason ?: (string) LotgdRequest::getQuery('reason');
+$reason           = $reason ?: LotgdTranslator::t('form.value.reason', [], $textDomain);
 $params['reason'] = $reason;
 
-$txnid = (string) \LotgdRequest::getPost('txnid');
-$txnid = $txnid ?: (string) \LotgdRequest::getQuery('txnid');
+$txnid           = (string) LotgdRequest::getPost('txnid');
+$txnid           = $txnid ?: (string) LotgdRequest::getQuery('txnid');
 $params['txnid'] = $txnid;
 
-\LotgdNavigation::superuserGrottoNav();
-\LotgdNavigation::addNav('donators.nav.refresh', 'donators.php');
+LotgdNavigation::superuserGrottoNav();
+LotgdNavigation::addNav('donators.nav.refresh', 'donators.php');
 
 if ('save' == $op)
 {
-    $id = (int) \LotgdRequest::getQuery('id');
+    $id = (int) LotgdRequest::getQuery('id');
 
     $account = $acctRepository->find($id);
 
@@ -57,26 +59,26 @@ if ('save' == $op)
     }
 
     $points = $amt;
-    if ($txnid !== '' && $txnid !== '0')
+    if ('' !== $txnid && '0' !== $txnid)
     {
         $args = new GenericEvent(null, [
-            'points' => $amt,
-            'amount' => $amt / LotgdSetting::getSetting('dpointspercurrencyunit', 100),
-            'acctid' => $id,
-            'messages' => []
+            'points'   => $amt,
+            'amount'   => $amt / LotgdSetting::getSetting('dpointspercurrencyunit', 100),
+            'acctid'   => $id,
+            'messages' => [],
         ]);
-        \LotgdEventDispatcher::dispatch($args, Events::PAYMENT_DONATION_ADJUSTMENT);
+        LotgdEventDispatcher::dispatch($args, Events::PAYMENT_DONATION_ADJUSTMENT);
         $result = modulehook('donation_adjustments', $args->getArguments());
         $points = $result['points'];
 
-        if (! is_array($result['messages']))
+        if ( ! \is_array($result['messages']))
         {
             $result['messages'] = [$result['messages']];
         }
 
         foreach ($result['messages'] as $message)
         {
-            \LotgdLog::debug($message, false, $id, 'donation', 0, false);
+            LotgdLog::debug($message, false, $id, 'donation', 0, false);
         }
     }
 
@@ -84,18 +86,18 @@ if ('save' == $op)
     // value at the end of their page hit, and this will allow the display
     // table to update in real time.
     $account->setDonation($account->getDonation() + $points);
-    \Doctrine::persist($account);
-    \Doctrine::flush();
+    Doctrine::persist($account);
+    Doctrine::flush();
 
     $args = new GenericEvent(null, [
-        'id' => $id,
-        'amt' => $points,
-        'manual' => (bool) ($txnid)
+        'id'     => $id,
+        'amt'    => $points,
+        'manual' => (bool) ($txnid),
     ]);
-    \LotgdEventDispatcher::dispatch($args, Events::PAYMENT_DONATION_SUCCESS);
+    LotgdEventDispatcher::dispatch($args, Events::PAYMENT_DONATION_SUCCESS);
     modulehook('donation', $args->getArguments());
 
-    if ($txnid !== '' && $txnid !== '0')
+    if ('' !== $txnid && '0' !== $txnid)
     {
         $paylog = $paylogRepository->findOneByTxnid($txnid);
 
@@ -103,49 +105,48 @@ if ('save' == $op)
             ->setProcessed(1)
         ;
 
-        \Doctrine::persist($paylog);
-        \Doctrine::flush();
+        Doctrine::persist($paylog);
+        Doctrine::flush();
 
-        \LotgdLog::debug("Received donator points for donating -- Credited manually [$reason]", false, $id, 'donation', $points, false);
+        LotgdLog::debug("Received donator points for donating -- Credited manually [{$reason}]", false, $id, 'donation', $points, false);
 
         redirect('paylog.php');
     }
     else
     {
-        \LotgdLog::debug("Received donator points -- Manually assigned, not based on a known dollar donation [$reason]", false, $id, 'donation', $amt, false);
+        LotgdLog::debug("Received donator points -- Manually assigned, not based on a known dollar donation [{$reason}]", false, $id, 'donation', $amt, false);
     }
 
     $subj = ['mail.donation.subject', ['points' => $points], $textDomain];
-    $msg = ['mail.donation.message', [
+    $msg  = ['mail.donation.message', [
         'points' => $points,
-        'reason' => $reason
+        'reason' => $reason,
     ], $textDomain];
 
     systemmail($id, $subj, $msg);
 
-    \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.donation', [
-        'name' => $account->getCharacter()->getName(),
+    LotgdFlashMessages::addSuccessMessage(LotgdTranslator::t('flash.message.donation', [
+        'name'   => $account->getCharacter()->getName(),
         'points' => $points,
-        'reason' => $reason
+        'reason' => $reason,
     ], $textDomain));
 
     $op = '';
 }
 
-
-if('add' == $op)
+if ('add' == $op)
 {
     $params['tpl'] = 'add';
 
     $query = $acctRepository->createQueryBuilder('u');
-    $expr = $query->expr();
+    $expr  = $query->expr();
 
     $query->select('u.acctid', 'u.donation', 'u.donationspent')
         ->addSelect('c.name')
         ->join(
             'LotgdCore:Avatar',
             'c',
-            \Doctrine\ORM\Query\Expr\Join::WITH,
+            Join::WITH,
             $expr->eq('c.id', 'u.avatar')
         )
         ->where('u.login LIKE :name OR c.name LIKE :name')
@@ -159,14 +160,14 @@ elseif ('' == $op || $op)
     $params['tpl'] = 'default';
 
     $query = $acctRepository->createQueryBuilder('u');
-    $expr = $query->expr();
+    $expr  = $query->expr();
 
     $query->select('u.donation', 'u.donationspent')
         ->addSelect('c.name')
         ->join(
             'LotgdCore:Avatar',
             'c',
-            \Doctrine\ORM\Query\Expr\Join::WITH,
+            Join::WITH,
             $expr->eq('c.id', 'u.avatar')
         )
         ->where('u.donation > 0')
@@ -176,7 +177,7 @@ elseif ('' == $op || $op)
     $params['paginator'] = $acctRepository->getPaginator($query, $page);
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/donators.html.twig', $params));
+LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/donators.html.twig', $params));
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

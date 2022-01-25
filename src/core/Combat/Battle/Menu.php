@@ -46,7 +46,10 @@ trait Menu
         $this->navigation->addHeader('category.standard');
         $this->navigation->addNav($fight, "{$script}op=fight");
 
-        $allowflee && $this->navigation->addNav($run, "{$script}op=run");
+        if ($allowflee)
+        {
+            $this->navigation->addNav($run, "{$script}op=run");
+        }
 
         ($this->user['superuser'] & SU_DEVELOPER) && $this->navigation->addNav('nav.abort', $script);
 
@@ -81,7 +84,7 @@ trait Menu
             $this->dispatcher->dispatch($args, Fight::NAV_SPECIALTY);
             modulehook('fightnav-specialties', $args->getData());
 
-            if ($this->user['superuser'] & SU_DEVELOPER)
+            if (($this->user['superuser'] & SU_DEVELOPER) !== 0)
             {
                 $this->navigation->addHeader('category.superuser');
                 $this->navigation->addNav('nav.god', "{$script}op=fight&skill=godmode");

@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Installer\Upgrade;
 
+use Throwable;
 use Symfony\Component\Filesystem\Filesystem;
 
 trait DeleteFilesTrait
@@ -25,7 +26,7 @@ trait DeleteFilesTrait
         {
             $fs->remove($files);
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return false;
         }

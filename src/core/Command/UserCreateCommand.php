@@ -13,6 +13,11 @@
 
 namespace Lotgd\Core\Command;
 
+use Lotgd\Core\Entity\User;
+use DateTime;
+use Lotgd\Core\Entity\Avatar;
+use Throwable;
+use DomainException;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Repository\UserRepository;
 use Lotgd\Core\Lib\Settings;
@@ -93,10 +98,10 @@ final class UserCreateCommand extends Command
         try
         {
             //-- Configure account
-            $account = new \Lotgd\Core\Entity\User();
+            $account = new User();
             $account->setLogin($login)
                 ->setEmailaddress($email)
-                ->setRegdate(new \DateTime())
+                ->setRegdate(new DateTime())
             ;
 
             $password = $this->passwordEncoder->encodePassword($account, $password);
@@ -108,7 +113,7 @@ final class UserCreateCommand extends Command
 
             //-- Configure character
             $title     = $this->getCharacterTitle();
-            $character = new \Lotgd\Core\Entity\Avatar();
+            $character = new Avatar();
             $character->setPlayername($login)
                 ->setName("{$title} {$login}")
                 ->setTitle($title)
@@ -136,7 +141,7 @@ final class UserCreateCommand extends Command
             $this->doctrine->persist($account);
             $this->doctrine->flush(); //-- Persist objects
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             $style->text($th->getMessage());
 
@@ -172,7 +177,7 @@ final class UserCreateCommand extends Command
 
             foreach ($errors as $error)
             {
-                throw new \DomainException($error->getMessage());
+                throw new DomainException($error->getMessage());
             }
 
             return $value;
@@ -205,7 +210,7 @@ final class UserCreateCommand extends Command
 
             foreach ($errors as $error)
             {
-                throw new \DomainException($error->getMessage());
+                throw new DomainException($error->getMessage());
             }
 
             return $value;
@@ -232,7 +237,7 @@ final class UserCreateCommand extends Command
 
             foreach ($errors as $error)
             {
-                throw new \DomainException($error->getMessage());
+                throw new DomainException($error->getMessage());
             }
 
             return $value;

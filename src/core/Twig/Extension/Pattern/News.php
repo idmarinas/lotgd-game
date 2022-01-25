@@ -54,7 +54,7 @@ trait News
                         $msg = $this->translator->trans('default', $taunt['params'] ?? [], $taunt['textDomain']);
                     }
 
-                    $message .= ($message ? '`n' : '').$msg;
+                    $message .= ($message !== '' && $message !== '0' ? '`n' : '').$msg;
                 }
 
                 return $message;

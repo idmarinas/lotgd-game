@@ -13,6 +13,9 @@
 
 namespace Lotgd\Core\Repository;
 
+use DateTime;
+use DateInterval;
+use Throwable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -41,8 +44,8 @@ class LogdnetRepository extends ServiceEntityRepository
      */
     public function deletedOlderServer(): int
     {
-        $date = new \DateTime('now');
-        $date->sub(new \DateInterval('P2W'));
+        $date = new DateTime('now');
+        $date->sub(new DateInterval('P2W'));
 
         $query = $this->_em->createQueryBuilder();
 
@@ -55,7 +58,7 @@ class LogdnetRepository extends ServiceEntityRepository
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -73,13 +76,13 @@ class LogdnetRepository extends ServiceEntityRepository
 
         try
         {
-            $date = new \DateTime('now');
-            $date->sub(new \DateInterval('PT5M'));
+            $date = new DateTime('now');
+            $date->sub(new DateInterval('PT5M'));
 
             return $query->update($this->_entityName, 'u')
 
                 ->set('u.priority', 'u.priority * 0.99')
-                ->set('u.lastupdate', $query->expr()->literal((new \DateTime('now'))->format(\DateTime::ISO8601)))
+                ->set('u.lastupdate', $query->expr()->literal((new DateTime('now'))->format(DateTime::ISO8601)))
 
                 ->where('u.lastupdate < :date')
                 ->setParameter('date', $date)
@@ -87,7 +90,7 @@ class LogdnetRepository extends ServiceEntityRepository
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -110,7 +113,7 @@ class LogdnetRepository extends ServiceEntityRepository
 
                 $result = $query->select('u.address', 'u.description', 'u.version', 'u.admin', 'u.priority')
                     ->where('u.lastping > :date')
-                    ->setParameter('date', (new \DateTime('now'))->sub(new \DateInterval('P2W')))
+                    ->setParameter('date', (new DateTime('now'))->sub(new DateInterval('P2W')))
                     ->getQuery()
                     ->getArrayResult()
                 ;
@@ -122,7 +125,7 @@ class LogdnetRepository extends ServiceEntityRepository
                 return $result;
             });
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

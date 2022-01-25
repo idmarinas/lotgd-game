@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Combat;
 
+use LogicException;
 trait BattleEnd
 {
     /**
@@ -29,7 +30,7 @@ trait BattleEnd
     {
         if ( ! $this->battleIsProcessed)
         {
-            throw new \LogicException('The battle cannot be finalized if it is not processed first. Call Battle::battleProcess() before Battle::battleEnd().');
+            throw new LogicException('The battle cannot be finalized if it is not processed first. Call Battle::battleProcess() before Battle::battleEnd().');
         }
 
         $this->battleHasWinner = false;
@@ -57,7 +58,9 @@ trait BattleEnd
         $this->battleIsEnded = true;
 
         //-- Data is updated when disable ghost
-        ( ! $this->ghostActivated) && $this->updateData();
+        if (! $this->ghostActivated) {
+            $this->updateData();
+        }
 
         return $this;
     }

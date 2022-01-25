@@ -12,6 +12,10 @@
 
 namespace Lotgd\Core\Tool;
 
+use Throwable;
+use Tracy\Debugger;
+use Lotgd\Core\Entity\User;
+use Lotgd\Core\Entity\Avatar;
 use Doctrine\ORM\EntityManagerInterface;
 use Kit\CryptBundle\Service\OpensslService as Crypt;
 use Lotgd\Core\Event\Character as CharacterEvent;
@@ -124,9 +128,9 @@ class Backup
 
                 $repository->backupDeleteDataFromAccount($accountId);
             }
-            catch (\Throwable $th)
+            catch (Throwable $th)
             {
-                \Tracy\Debugger::log($th);
+                Debugger::log($th);
 
                 continue;
             }
@@ -234,9 +238,9 @@ class Backup
 
             $fileSystem->dumpFile("storage/logd_snapshots/user-{$accountId}/{$entityName}.json", $data);
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return false;
         }
@@ -274,12 +278,12 @@ class Backup
 
             $accountArray = [
                 // 'table'  => 'user',
-                'entity' => \Lotgd\Core\Entity\User::class,
+                'entity' => User::class,
                 'rows'   => [$accountRow],
             ];
             $characterArray = [
                 // 'table'  => 'avatar',
-                'entity' => \Lotgd\Core\Entity\Avatar::class,
+                'entity' => Avatar::class,
                 'rows'   => [$characterRow],
             ];
 
@@ -289,9 +293,9 @@ class Backup
             //-- Basic info of account
             $fileSystem->dumpFile("{$path}/basic_info.json", $this->crypt->encrypt($this->serializer->serialize($basicInfo, 'json')));
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return false;
         }

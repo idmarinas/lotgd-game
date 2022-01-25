@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use Doctrine\Common\Collections\Criteria;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Http\Response as HttpResponse;
@@ -171,9 +172,9 @@ class ListController extends AbstractController
             ->addSelect('c.name', 'c.hitpoints', 'c.alive', 'c.location', 'c.race', 'c.sex', 'c.level')
             ->where('u.locked = 0')
             ->leftJoin('LotgdCore:Avatar', 'c', 'with', $query->expr()->eq('c.id', 'u.avatar'))
-            ->orderBy('c.level', 'DESC')
-            ->addOrderBy('c.dragonkills', 'DESC')
-            ->addOrderBy('u.login', 'ASC')
+            ->orderBy('c.level', Criteria::DESC)
+            ->addOrderBy('c.dragonkills', Criteria::DESC)
+            ->addOrderBy('u.login', Criteria::ASC)
         ;
 
         if ( ! empty($search))

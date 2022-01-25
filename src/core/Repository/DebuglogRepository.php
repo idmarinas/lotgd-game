@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Repository;
 
+use Throwable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -45,7 +46,7 @@ class DebuglogRepository extends ServiceEntityRepository implements RepositoryBa
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -69,7 +70,7 @@ class DebuglogRepository extends ServiceEntityRepository implements RepositoryBa
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

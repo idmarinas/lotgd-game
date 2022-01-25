@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
+use Lotgd\Core\Twig\Extension\Pattern\AttributesString;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Navigation\AccessKeys;
 use Lotgd\Core\Navigation\Navigation as NavigationCore;
@@ -24,7 +25,7 @@ use Twig\TwigFunction;
 
 class Navigation extends AbstractExtension
 {
-    use Pattern\AttributesString;
+    use AttributesString;
     use Pattern\Navigation;
 
     protected $translator;

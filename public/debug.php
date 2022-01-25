@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Entity\Debug;
+
 // translator ready
 // addnews ready
 // mail ready
@@ -10,28 +12,28 @@ check_su_access(SU_EDIT_CONFIG);
 $textDomain = 'grotto_debug';
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], $textDomain);
+LotgdResponse::pageStart('title', [], $textDomain);
 
-$page = (int) \LotgdRequest::getQuery('page');
-$sort = (string) \LotgdRequest::getQuery('sort');
-$debug = (string) \LotgdRequest::getQuery('debug');
-$ascDescRaw = (int) \LotgdRequest::getQuery('direction');
+$page       = (int) LotgdRequest::getQuery('page');
+$sort       = (string) LotgdRequest::getQuery('sort');
+$debug      = (string) LotgdRequest::getQuery('debug');
+$ascDescRaw = (int) LotgdRequest::getQuery('direction');
 
-$order = $sort ?: 'sum';
-$ascDesc = $ascDescRaw !== 0 ? 'ASC' : 'DESC';
-$debug = $debug ?: 'pageruntime';
+$order   = $sort ?: 'sum';
+$ascDesc = 0 !== $ascDescRaw ? 'ASC' : 'DESC';
+$debug   = $debug ?: 'pageruntime';
 
-\LotgdNavigation::superuserGrottoNav();
-\LotgdNavigation::addHeader('debug.category.option');
-\LotgdNavigation::addNav('debug.nav.page', 'debug.php?debug=pageruntime&sort='.urlencode($sort));
-\LotgdNavigation::addNav('debug.nav.module', 'debug.php?debug=hooksort&sort='.urlencode($sort));
+LotgdNavigation::superuserGrottoNav();
+LotgdNavigation::addHeader('debug.category.option');
+LotgdNavigation::addNav('debug.nav.page', 'debug.php?debug=pageruntime&sort='.urlencode($sort));
+LotgdNavigation::addNav('debug.nav.module', 'debug.php?debug=hooksort&sort='.urlencode($sort));
 
-\LotgdNavigation::addHeader('debug.category.sorting');
-\LotgdNavigation::addNav('debug.nav.total', 'debug.php?debug='.$debug.'&sort=sum&direction='.$ascDescRaw);
-\LotgdNavigation::addNav('debug.nav.avg', 'debug.php?debug='.$debug.'&sort=medium&direction='.$ascDescRaw);
-\LotgdNavigation::addNav('debug.nav.switch', 'debug.php?debug='.$debug.'&sort='.urlencode($sort).'&direction='.(! $ascDescRaw));
+LotgdNavigation::addHeader('debug.category.sorting');
+LotgdNavigation::addNav('debug.nav.total', 'debug.php?debug='.$debug.'&sort=sum&direction='.$ascDescRaw);
+LotgdNavigation::addNav('debug.nav.avg', 'debug.php?debug='.$debug.'&sort=medium&direction='.$ascDescRaw);
+LotgdNavigation::addNav('debug.nav.switch', 'debug.php?debug='.$debug.'&sort='.urlencode($sort).'&direction='.( ! $ascDescRaw));
 
-$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Debug::class);
+$repository = Doctrine::getRepository(Debug::class);
 
 $query = $repository->createQueryBuilder('u');
 
@@ -49,7 +51,7 @@ if ('hooksort' == $debug)
 
 $params['paginator'] = $repository->getPaginator($query, $page, 50);
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/debug.html.twig', $params));
+LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/debug.html.twig', $params));
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

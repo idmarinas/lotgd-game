@@ -1,18 +1,20 @@
 <?php
 
+use Lotgd\Core\Controller\ReferralController;
+
 // translator ready
 // addnews ready
 // mail ready
 
-define('ALLOW_ANONYMOUS', true);
+\define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
 
 //-- Init page
-\LotgdResponse::pageStart();
+LotgdResponse::pageStart();
 
 //-- Call controller
-\LotgdResponse::callController(\Lotgd\Core\Controller\ReferralController::class);
+LotgdResponse::callController(ReferralController::class);
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

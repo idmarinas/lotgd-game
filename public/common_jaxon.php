@@ -1,12 +1,14 @@
 <?php
 
-/**
+use Jaxon\Response\Response;
+use Lotgd\Core\Event\EveryRequest;
+use Lotgd\Core\Kernel;
+
+/*
  * The intention of duplicating the "common.php" file is to remove everything
  * that does not make sense in a Jaxon-PHP request.
  * This will speed up the processing of a Jaxon-PHP request a bit.
  */
-
-use Lotgd\Core\Event\EveryRequest;
 
 // **** NOTICE *****
 // This series of scripts (collectively known as Legend of the Green Dragon
@@ -21,25 +23,25 @@ require_once './common_common.php';
 if (
     isset($session['lasthit'], $session['loggedin'])
 
-    && \strtotime('-'.LotgdSetting::getSetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit']
+    && strtotime('-'.LotgdSetting::getSetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit']
     && $session['lasthit'] > 0 && $session['loggedin']
 ) {
     // force the abandoning of the session when the user should have been
     // sent to the fields.
-    \LotgdSession::invalidate();
+    LotgdSession::invalidate();
 
     $session = [];
 
-    $response = new \Jaxon\Response\Response();
+    $response = new Response();
 
-    $response->dialog->warning(\LotgdTranslator::t('session.timeout', [], 'app_default'));
+    $response->dialog->warning(LotgdTranslator::t('session.timeout', [], 'app_default'));
 
     return $response;
 }
-$session['lasthit'] = \strtotime('now');
+$session['lasthit'] = strtotime('now');
 
-$cp = \Lotgd\Core\Kernel::COPYRIGHT;
-$l  = \Lotgd\Core\Kernel::LICENSE;
+$cp = Kernel::COPYRIGHT;
+$l  = Kernel::LICENSE;
 
 do_forced_nav(ALLOW_ANONYMOUS, OVERRIDE_FORCED_NAV);
 
@@ -53,16 +55,16 @@ if (LotgdSetting::getSetting('fullmaintenance', 0) && (($session['user']['logged
         $session['user']['restorepage'] = 'inn.php?op=strolldown';
     }
 
-    \LotgdKernel::get('cache.app')->delete('char-list-home-page');
+    LotgdKernel::get('cache.app')->delete('char-list-home-page');
 
-    \LotgdTool::saveUser();
+    LotgdTool::saveUser();
 
-    \LotgdSession::invalidate();
+    LotgdSession::invalidate();
 
     $session = [];
 }
 
-$script = \substr(LotgdRequest::getServer('SCRIPT_NAME'), 0, \strrpos(LotgdRequest::getServer('SCRIPT_NAME'), '.'));
+$script = substr(LotgdRequest::getServer('SCRIPT_NAME'), 0, strrpos(LotgdRequest::getServer('SCRIPT_NAME'), '.'));
 mass_module_prepare(['everyhit', "header-{$script}", "footer-{$script}", 'holiday', 'charstats']);
 
 // In the event of redirects, we want to have a version of their session we
@@ -96,7 +98,7 @@ if (isset($session['user']['hitpoints']) && 0 < $session['user']['hitpoints'])
     $session['user']['alive'] = true;
 }
 
-$session['bufflist'] = \array_map('array_filter', $session['user']['bufflist'] ?? []);
+$session['bufflist'] = array_map('array_filter', $session['user']['bufflist'] ?? []);
 
 if ( ! \is_array($session['bufflist']))
 {
@@ -125,7 +127,7 @@ $claninfo = [];
 
 if ($session['user']['clanid'] ?? false)
 {
-    $repository = \Doctrine::getRepository('LotgdCore:Clans');
+    $repository = Doctrine::getRepository('LotgdCore:Clans');
     $entity     = $repository->find($session['user']['clanid']);
 
     if ($entity)
@@ -156,11 +158,11 @@ if (($session['user']['superuser'] & SU_MEGAUSER) !== 0)
 // This however is the only context where blockmodule can be called safely!
 // You should do as LITTLE as possible here and consider if you can hook on
 // a page header instead.
-\LotgdEventDispatcher::dispatch(new EveryRequest(), EveryRequest::HIT);
+LotgdEventDispatcher::dispatch(new EveryRequest(), EveryRequest::HIT);
 modulehook('everyhit');
 
 if ($session['user']['loggedin'])
 {
-    \LotgdEventDispatcher::dispatch(new EveryRequest(), EveryRequest::HIT_AUTHENTICATED);
+    LotgdEventDispatcher::dispatch(new EveryRequest(), EveryRequest::HIT_AUTHENTICATED);
     modulehook('everyhit-loggedin');
 }

@@ -131,7 +131,7 @@ trait Navigation
         //-- Add params for template
         if (null !== $params)
         {
-            $pages = array_merge($pages, (array) $params);
+            $pages = array_merge($pages, $params);
         }
 
         //-- Is a pagination for Jaxon-PHP

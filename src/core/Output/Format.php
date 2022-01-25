@@ -12,6 +12,8 @@
 
 namespace Lotgd\Core\Output;
 
+use DateTime;
+use MessageFormatter;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -86,11 +88,11 @@ class Format
      */
     public function relativedate($indate, $default = 'never'): string
     {
-        if ( ! $indate instanceof \DateTime)
+        if ( ! $indate instanceof DateTime)
         {
-            $indate = new \DateTime($indate);
+            $indate = new DateTime($indate);
         }
-        $nullDate = new \DateTime('0000-00-00 00:00:00');
+        $nullDate = new DateTime('0000-00-00 00:00:00');
         $default  = $default ?: 'never';
 
         if ($nullDate == $indate)
@@ -98,7 +100,7 @@ class Format
             return $this->translator->trans($default, [], 'app_date');
         }
 
-        $now  = new \DateTime('now');
+        $now  = new DateTime('now');
         $diff = $now->diff($indate);
 
         $params  = [];
@@ -215,7 +217,7 @@ class Format
         //-- Delete all values that not are allowed (can cause a error when use \MessageFormatter::format($params))
         $parameters = \array_filter($parameters, [$this, 'cleanParameters']);
 
-        $formatter = new \MessageFormatter($locale, $message);
+        $formatter = new MessageFormatter($locale, $message);
 
         return $formatter->format($parameters);
     }
@@ -237,6 +239,6 @@ class Format
         || \is_numeric($param) //-- Allow numeric values
         || \is_bool($param) //-- Allow bool values
         || \is_null($param) //-- Allow null value (Formatter can handle this value)
-        || $param instanceof \DateTime;
+        || $param instanceof DateTime;
     }
 }

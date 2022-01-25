@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Combat;
 
+use LogicException;
 use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -86,7 +87,10 @@ trait BattleStart
         $this->setEnemies($this->user['badguy']['enemies'] ?? []);
 
         //-- If is forced not mark as initialized
-        ( ! $force) && $this->battleIsInitalized = true;
+        if (! $force)
+        {
+            $this->battleIsInitalized = true;
+        }
 
         return $this;
     }
@@ -98,7 +102,7 @@ trait BattleStart
     {
         if ( ! $this->battleIsInitalized)
         {
-            throw new \LogicException('The battle cannot be start if it is not initiated first. Call Battle::initialize() before Battle::battleStart().');
+            throw new LogicException('The battle cannot be start if it is not initiated first. Call Battle::initialize() before Battle::battleStart().');
         }
 
         $this->prepareFight(); //-- Prepares contenders for battle

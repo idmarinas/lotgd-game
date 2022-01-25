@@ -12,6 +12,17 @@
 
 namespace Lotgd\Core\Output;
 
+use Lotgd\Core\Output\Commentary\Command;
+use DateTime;
+use Lotgd\Core\Entity\Clans;
+use Laminas\Filter\FilterChain;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\StripNewlines;
+use Laminas\Filter\PregReplace;
+use Laminas\Filter\Callback;
+use HTMLPurifier;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Laminas\Filter;
 use Lotgd\Core\Entity as LotgdEntity;
@@ -28,7 +39,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Commentary
 {
-    use Commentary\Command;
+    use Command;
 
     public const TEXT_DOMAIN = 'app_commentary';
 
@@ -122,10 +133,10 @@ class Commentary
         {
             $clanInfo = $this->cache->get("commentary-claninfo-{$session['user']['clanid']}", function (ItemInterface $item) use ($session)
             {
-                $item->expiresAt(new \DateTime('tomorrow'));
+                $item->expiresAt(new DateTime('tomorrow'));
 
                 /** @var Entity\Core\Repository\ClanRepository $clanRep */
-                $clanRep = $this->doctrine->getRepository(\Lotgd\Core\Entity\Clans::class);
+                $clanRep = $this->doctrine->getRepository(Clans::class);
                 $clanInfo = $clanRep->findOneBy(['clanid' => $session['user']['clanid']]);
                 $clanInfo = $clanRep->extractEntity($clanInfo);
 
@@ -169,7 +180,7 @@ class Commentary
             return false;
         }
 
-        $session['user']['recentcomments'] = new \DateTime('now');
+        $session['user']['recentcomments'] = new DateTime('now');
 
         return $this->injectComment($args['data']);
     }
@@ -199,35 +210,35 @@ class Commentary
             return '';
         }
 
-        $filterChain = new Filter\FilterChain();
+        $filterChain = new FilterChain();
         $filterChain
-            ->attach(new Filter\StringTrim())
-            ->attach(new Filter\StripTags())
-            ->attach(new Filter\StripNewlines())
-            ->attach(new Filter\PregReplace(['pattern' => '/`n/', 'replacement' => '']))
-            ->attach(new Filter\PregReplace(['pattern' => '/([^[:space:]]{45,45})([^[:space:]])/', 'replacement' => '\\1 \\2']))
-            ->attach(new Filter\Callback([new \HTMLPurifier(), 'purify']), -1) //-- Executed last in query
+            ->attach(new StringTrim())
+            ->attach(new StripTags())
+            ->attach(new StripNewlines())
+            ->attach(new PregReplace(['pattern' => '/`n/', 'replacement' => '']))
+            ->attach(new PregReplace(['pattern' => '/([^[:space:]]{45,45})([^[:space:]])/', 'replacement' => '\\1 \\2']))
+            ->attach(new Callback([new HTMLPurifier(), 'purify']), -1) //-- Executed last in query
         ;
 
         //-- Only accept correct format, all italic open tag need close tag.
         //-- Other wise, italic format is removed.
         if (substr_count($comment, '`i') !== substr_count($comment, '´i'))
         {
-            $filterChain->attach(new Filter\PregReplace(['pattern' => ['/`i/', '/´i/'], 'replacement' => '']));
+            $filterChain->attach(new PregReplace(['pattern' => ['/`i/', '/´i/'], 'replacement' => '']));
         }
 
         //-- Only accept correct format, all bold open tag need close tag.
         //-- Other wise, bold format is removed.
         if (substr_count($comment, '`b') !== substr_count($comment, '´b'))
         {
-            $filterChain->attach(new Filter\PregReplace(['pattern' => ['/`b/', '/´b/'], 'replacement' => '']));
+            $filterChain->attach(new PregReplace(['pattern' => ['/`b/', '/´b/'], 'replacement' => '']));
         }
 
         //-- Only accept correct format, all center open tag need close tag.
         //-- Other wise, center format is removed.
         if (substr_count($comment, '`c') !== substr_count($comment, '´c'))
         {
-            $filterChain->attach(new Filter\PregReplace(['pattern' => ['/`c/', '/´c/'], 'replacement' => '']));
+            $filterChain->attach(new PregReplace(['pattern' => ['/`c/', '/´c/'], 'replacement' => '']));
         }
 
         $comment = $filterChain->filter($comment);
@@ -247,7 +258,7 @@ class Commentary
     {
         return $this->cache->get('commentary-comsecs', function (ItemInterface $item)
         {
-            $item->expiresAt(new \DateTime('tomorrow'));
+            $item->expiresAt(new DateTime('tomorrow'));
 
             $comsecs = [];
             $comsecs['village'] = $this->translator->trans('section.village', ['village' => $this->settings->getSetting('villagename', LOCATION_FIELDS)], self::TEXT_DOMAIN);
@@ -289,8 +300,8 @@ class Commentary
             ->addSelect('c.chatloc')
             ->leftJoin('LotgdCore:User', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.author'))
             ->leftJoin('LotgdCore:Avatar', 'c', 'WITH', $query->expr()->eq('c.id', 'a.avatar'))
-            ->orderBy('u.postdate', 'DESC')
-            ->addOrderBy('u.section', 'ASC')
+            ->orderBy('u.postdate', Criteria::DESC)
+            ->addOrderBy('u.section', Criteria::ASC)
         ;
 
         if ($section)

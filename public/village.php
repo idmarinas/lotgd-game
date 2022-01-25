@@ -1,10 +1,12 @@
 <?php
 
+use Lotgd\Core\Controller\VillageController;
+use Lotgd\Core\Events;
 // translator ready
 // addnews ready
 // mail ready
 
-use Lotgd\Core\Events;
+use Lotgd\Core\Http\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
@@ -16,7 +18,7 @@ if (LotgdSetting::getSetting('automaster', 1) && 1 != $session['user']['seenmast
     //masters hunt down truant students
     $level   = $session['user']['level'] + 1;
     $dks     = $session['user']['dragonkills'];
-    $expreqd = \LotgdTool::expForNextLevel($level, $dks);
+    $expreqd = LotgdTool::expForNextLevel($level, $dks);
 
     if ($session['user']['experience'] > $expreqd && $session['user']['level'] < LotgdSetting::getSetting('maxlevel', 15))
     {
@@ -31,13 +33,13 @@ $iname             = LotgdSetting::getSetting('innname', LOCATION_INN);
 $valid_loc         = [];
 $valid_loc[$vname] = 'village';
 $args              = new GenericEvent(null, $valid_loc);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_VILLAGE_LOCATION);
+LotgdEventDispatcher::dispatch($args, Events::PAGE_VILLAGE_LOCATION);
 $valid_loc = modulehook('validlocation', $args->getArguments());
 
 // Don't hook on to this text for your standard modules please, use "village" instead.
 // This hook is specifically to allow modules that do other villages to create ambience.
 $args = new GenericEvent(null, ['textDomain' => 'page_village', 'textDomainNavigation' => 'navigation_village']);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_VILLAGE_PRE);
+LotgdEventDispatcher::dispatch($args, Events::PAGE_VILLAGE_PRE);
 $result               = modulehook('village-text-domain', $args->getArguments());
 $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
@@ -66,16 +68,16 @@ if ($params['newestplayer'] == $session['user']['acctid'])
 }
 elseif ( ! $params['newestname'] && $params['newestplayer'])
 {
-    $characterRepository  = \Doctrine::getRepository('LotgdCore:Avatar');
+    $characterRepository  = Doctrine::getRepository('LotgdCore:Avatar');
     $params['newestname'] = $characterRepository->getCharacterNameFromAcctId($params['newestplayer']) ?: 'Unknown';
     LotgdSetting::saveSetting('newestplayername', $params['newestname']);
 }
 
 //-- Init page
-\LotgdResponse::pageStart('title', $params, $textDomain);
+LotgdResponse::pageStart('title', $params, $textDomain);
 
 $skipvillagedesc = handle_event('village');
-\LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
+LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
 if (1 == $session['user']['slaydragon'])
 {
@@ -88,7 +90,7 @@ if ( ! $session['user']['alive'])
 }
 
 /** @var Lotgd\Core\Http\Request $request */
-$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+$request = LotgdKernel::get(Request::class);
 
 $op         = $request->query->get('op');
 $com        = $request->query->getInt('commentPage');
@@ -102,7 +104,7 @@ if ( ! $op && '' == $com && ! $comment && ! $commenting)
 {
     /** New occurrence dispatcher for special events. */
     /** @var \Symfony\Component\EventDispatcher\GenericEvent $event */
-    $event = \LotgdKernel::get('occurrence_dispatcher')->dispatch('village', null, [
+    $event = LotgdKernel::get('occurrence_dispatcher')->dispatch('village', null, [
         'translation_domain'            => $textDomain,
         'translation_domain_navigation' => $textDomainNavigation,
         'route'                         => 'village.php',
@@ -111,7 +113,7 @@ if ( ! $op && '' == $com && ! $comment && ! $commenting)
 
     if ($event->isPropagationStopped())
     {
-        \LotgdResponse::pageEnd();
+        LotgdResponse::pageEnd();
     }
     elseif ($event['skip_description'])
     {
@@ -123,9 +125,9 @@ if ( ! $op && '' == $com && ! $comment && ! $commenting)
     //-- Only execute when NOT occurrence is in progress.
     elseif (0 != module_events('village', LotgdSetting::getSetting('villagechance', 0)))
     {
-        if (\LotgdNavigation::checkNavs())
+        if (LotgdNavigation::checkNavs())
         {
-            \LotgdResponse::pageEnd();
+            LotgdResponse::pageEnd();
         }
         else
         {
@@ -141,12 +143,12 @@ if ( ! $op && '' == $com && ! $comment && ! $commenting)
 }
 
 //-- Change text domain for navigation
-\LotgdNavigation::setTextDomain($textDomainNavigation);
+LotgdNavigation::setTextDomain($textDomainNavigation);
 
-\LotgdNavigation::townNav($textDomainNavigation);
+LotgdNavigation::townNav($textDomainNavigation);
 
 //special hook for all villages... saves queries...
-\LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_VILLAGE);
+LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_VILLAGE);
 modulehook('village');
 
 $params['showVillageDesc']   = ! $skipvillagedesc; //-- Show or not village description
@@ -156,12 +158,12 @@ $params['commentarySection'] = 'village'; //-- Commentary section
 
 $request->attributes->set('params', $params);
 
-\LotgdResponse::callController(Lotgd\Core\Controller\VillageController::class);
+LotgdResponse::callController(VillageController::class);
 
 //-- Restore text domain for navigation
-\LotgdNavigation::setTextDomain();
+LotgdNavigation::setTextDomain();
 
 module_display_events('village', 'village.php');
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

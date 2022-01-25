@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Form\Type;
 
+use LotgdEventDispatcher;
+use LotgdTranslator;
 use Lotgd\Core\Event\Other;
 use Lotgd\Core\Lib\Settings;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -39,7 +41,7 @@ class LocationType extends ChoiceType
                 'app_default',
             ],
         ]);
-        \LotgdEventDispatcher::dispatch($locs, Other::LOCATIONS);
+        LotgdEventDispatcher::dispatch($locs, Other::LOCATIONS);
         $locs        = modulehook('camplocs', $locs->getData());
         $locs['all'] = [
             'location.everywhere',
@@ -52,7 +54,7 @@ class LocationType extends ChoiceType
 
         foreach ($locs as $loc => $params)
         {
-            $value = \LotgdTranslator::t($params[0], $params[1], $params[2]);
+            $value = LotgdTranslator::t($params[0], $params[1], $params[2]);
 
             $defaultChoice[$value] = $loc;
         }

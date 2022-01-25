@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Doctrine\ORM;
 
+use Doctrine\ORM\ORMException;
 use Doctrine\Common\EventManager;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager as DoctrineEntityManager;
@@ -29,7 +30,7 @@ class EntityManager extends DoctrineEntityManager
     {
         if ( $config->getMetadataDriverImpl() === null)
         {
-            throw \Doctrine\ORM\ORMException::missingMappingDriverImpl();
+            throw ORMException::missingMappingDriverImpl();
         }
 
         $connection = static::createConnection($connection, $config, $eventManager);

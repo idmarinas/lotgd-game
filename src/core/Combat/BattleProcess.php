@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Combat;
 
+use LogicException;
 use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -32,7 +33,7 @@ trait BattleProcess
     {
         if ( ! $this->battleIsStarted)
         {
-            throw new \LogicException('The battle cannot be processed if it is not initiated first. Call Battle::battleStart() before Battle::battleProcess().');
+            throw new LogicException('The battle cannot be processed if it is not initiated first. Call Battle::battleStart() before Battle::battleProcess().');
         }
 
         //-- Not process if player change enemy target
@@ -91,7 +92,9 @@ trait BattleProcess
                 }
 
                 //-- First move is for heal companion
-                ($this->isEnemyAlive($badguy) && $this->isPlayerAlive() && $badguy['istarget']) && $this->companionHealer($badguy);
+                if ($this->isEnemyAlive($badguy) && $this->isPlayerAlive() && $badguy['istarget']) {
+                    $this->companionHealer($badguy);
+                }
 
                 if ('fight' == $op || 'run' == $op || $this->surprised)
                 {
@@ -100,9 +103,13 @@ trait BattleProcess
                         if ('fight' == $op)
                         {
                             //-- Second move is for magic companion
-                            ($this->isEnemyAlive($badguy) && $this->isPlayerAlive() && $badguy['istarget']) && $this->companionMagic($badguy);
+                            if ($this->isEnemyAlive($badguy) && $this->isPlayerAlive() && $badguy['istarget']) {
+                                $this->companionMagic($badguy);
+                            }
                             //-- Third move is for player
-                            ($this->isEnemyAlive($badguy) && $this->isPlayerAlive() && $badguy['istarget']) && $this->playerMove($badguy);
+                            if ($this->isEnemyAlive($badguy) && $this->isPlayerAlive() && $badguy['istarget']) {
+                                $this->playerMove($badguy);
+                            }
                         }
                         elseif ('run' == $op)
                         {
@@ -111,10 +118,14 @@ trait BattleProcess
                     }
 
                     //-- Fourth move is for enemy
-                    ($this->isEnemyAlive($badguy) && $this->isPlayerAlive() && $roundAttacks <= $this->getOption('maxattacks')) && $this->enemyMove($badguy);
+                    if ($this->isEnemyAlive($badguy) && $this->isPlayerAlive() && $roundAttacks <= $this->getOption('maxattacks')) {
+                        $this->enemyMove($badguy);
+                    }
 
                     //-- Fifth move is for figther companion
-                    ($this->isEnemyAlive($badguy) && $this->isPlayerAlive() && $badguy['istarget']) && $this->companionFighter($badguy);
+                    if ($this->isEnemyAlive($badguy) && $this->isPlayerAlive() && $badguy['istarget']) {
+                        $this->companionFighter($badguy);
+                    }
                 }
 
                 $this->enemyAiScript($badguy);

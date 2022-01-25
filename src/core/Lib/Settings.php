@@ -8,6 +8,10 @@
 
 namespace Lotgd\Core\Lib;
 
+use Throwable;
+use DateTime;
+use Exception;
+use Tracy\Debugger;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -74,7 +78,7 @@ class Settings
             $this->doctrine->persist($entity);
             $this->doctrine->flush();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return false;
         }
@@ -97,7 +101,7 @@ class Settings
     {
         $this->settings = $this->cache->get($this->getCacheKey(), function (ItemInterface $item)
         {
-            $item->expiresAt(new \DateTime('tomorrow'));
+            $item->expiresAt(new DateTime('tomorrow'));
 
             $sets = [];
 
@@ -110,15 +114,15 @@ class Settings
                     $sets[$row->getSetting()] = $row->getValue();
                 }
             }
-            catch (\Exception $ex)
+            catch (Exception $ex)
             {
-                \Tracy\Debugger::log($ex);
+                Debugger::log($ex);
             }
 
             //-- If not found mark as expired
             if (empty($sets))
             {
-                $item->expiresAt(new \DateTime('now'));
+                $item->expiresAt(new DateTime('now'));
             }
 
             return $sets;

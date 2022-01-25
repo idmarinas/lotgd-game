@@ -13,6 +13,11 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Controller\NewdayController\DragonPointSpendTrait;
+use Lotgd\Core\Controller\NewdayController\NewDayTrait;
+use Lotgd\Core\Controller\NewdayController\RecalculateDragonPointTrait;
+use Lotgd\Core\Controller\NewdayController\SetRaceTrait;
+use Lotgd\Core\Controller\NewdayController\SetSpecialtyTrait;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Http\Response as HttpResponse;
@@ -28,11 +33,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NewdayController extends AbstractController
 {
-    use NewdayController\DragonPointSpendTrait;
-    use NewdayController\NewDayTrait;
-    use NewdayController\RecalculateDragonPointTrait;
-    use NewdayController\SetRaceTrait;
-    use NewdayController\SetSpecialtyTrait;
+    use DragonPointSpendTrait;
+    use NewDayTrait;
+    use RecalculateDragonPointTrait;
+    use SetRaceTrait;
+    use SetSpecialtyTrait;
 
     private $translationDomain;
     private $translationDomainNavigation;

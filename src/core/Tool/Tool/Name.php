@@ -30,7 +30,7 @@ trait Name
     {
         global $session;
 
-        return (string) ($old) ? $old['playername'] : $session['user']['playername'];
+        return (string) ($old) !== '' && (string) ($old) !== '0' ? $old['playername'] : $session['user']['playername'];
     }
 
     public function getPlayerCBasename($old = null): string

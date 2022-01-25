@@ -59,7 +59,7 @@ class NewsController extends AbstractController
         {
             /** @var \Lotgd\Core\Repository\MotdRepository $repository */
             $repository         = $this->getDoctrine()->getRepository('LotgdCore:Motd');
-            $params['lastMotd'] = $repository->getLastMotd($session['user']['acctid'] ?? null);
+            $params['lastMotd'] = $repository->getLastMotd();
         }
 
         if ( ! $session['user']['loggedin'])

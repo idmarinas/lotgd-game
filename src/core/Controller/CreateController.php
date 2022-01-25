@@ -13,6 +13,11 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Controller\Pattern\RenderBlockTrait;
+use DateTime;
+use Lotgd\Core\Entity\Avatar;
+use Throwable;
+use Tracy\Debugger;
 use Lotgd\Core\Entity\User;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
@@ -31,7 +36,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CreateController extends AbstractController
 {
-    use Pattern\RenderBlockTrait;
+    use RenderBlockTrait;
 
     private $dispatcher;
     private $translator;
@@ -188,7 +193,7 @@ class CreateController extends AbstractController
         {
             $account = $accountRepo->findOneBy(['login' => $charname]);
 
-            if ( ! $account instanceof \Lotgd\Core\Entity\User)
+            if ( ! $account instanceof User)
             {
                 $this->addFlash('warning', $this->translator->trans('forgot.account.notFound', [], $params['textDomain']));
 
@@ -343,10 +348,10 @@ class CreateController extends AbstractController
                 try
                 {
                     //-- Configure account
-                    $accountEntity = new \Lotgd\Core\Entity\User();
+                    $accountEntity = new User();
                     $accountEntity->setLogin((string) $shortname)
                         ->setSuperuser((int) $this->settings->getSetting('defaultsuperuser', 0))
-                        ->setRegdate(new \DateTime())
+                        ->setRegdate(new DateTime())
                         ->setUniqueid($request->getCookie('lgi') ?: '')
                         ->setLastip($request->getServer('REMOTE_ADDR'))
                         ->setEmailaddress($email)
@@ -362,7 +367,7 @@ class CreateController extends AbstractController
                     $this->getDoctrine()->getManager()->flush(); //Persist objects
 
                     //-- Configure character
-                    $characterEntity = new \Lotgd\Core\Entity\Avatar();
+                    $characterEntity = new Avatar();
                     $characterEntity->setPlayername((string) $shortname)
                         ->setSex($sex)
                         ->setName("{$title} {$shortname}")
@@ -413,9 +418,9 @@ class CreateController extends AbstractController
 
                     return $this->renderBlock('page/_blocks/_create.html.twig', 'create_account_login', $params);
                 }
-                catch (\Throwable $th)
+                catch (Throwable $th)
                 {
-                    \Tracy\Debugger::log($th);
+                    Debugger::log($th);
 
                     $this->addFlash('error', $this->translator->trans('create.account.error', [], $params['textDomain']));
                 }

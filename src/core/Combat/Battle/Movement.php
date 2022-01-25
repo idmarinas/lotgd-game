@@ -90,7 +90,10 @@ trait Movement
         {
             $additionalattack = false;
             //-- Process move of player
-            ($this->isEnemyAlive($badguy) && $this->isPlayerAlive()) && $this->reportPlayerMove($badguy);
+            if ($this->isEnemyAlive($badguy) && $this->isPlayerAlive())
+            {
+                $this->reportPlayerMove($badguy);
+            }
 
             $r = mt_rand(0, 100);
 
@@ -112,7 +115,10 @@ trait Movement
             $bgchancetodouble = $this->user['dragonkills'];
             $this->defended   = false;
 
-            ($this->isEnemyAlive($badguy) && $this->isPlayerAlive()) && $this->reportEnemyMove($badguy);
+            if ($this->isEnemyAlive($badguy) && $this->isPlayerAlive())
+            {
+                $this->reportEnemyMove($badguy);
+            }
 
             $r = mt_rand(0, 100);
 
@@ -142,7 +148,10 @@ trait Movement
         $selfdmg = $roll['selfdmg'];
 
         //-- First defenders companions
-        ($this->isEnemyAlive($badguy) || $this->isPlayerAlive() && $badguy['istarget']) || $this->companionDefender($badguy);
+        if ( ! $this->isEnemyAlive($badguy) && ! ($this->isPlayerAlive() && $badguy['istarget']))
+        {
+            $this->companionDefender($badguy);
+        }
 
         if (0 == $selfdmg)
         {

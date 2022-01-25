@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity\Avatar;
 
+use DateTimeInterface;
 trait Clan
 {
     /**
@@ -87,7 +88,7 @@ trait Clan
      *
      * @return self
      */
-    public function setClanjoindate(\DateTimeInterface $clanjoindate)
+    public function setClanjoindate(DateTimeInterface $clanjoindate)
     {
         $this->clanjoindate = $clanjoindate;
 
@@ -99,7 +100,7 @@ trait Clan
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getClanjoindate(): \DateTimeInterface
+    public function getClanjoindate(): DateTimeInterface
     {
         return $this->clanjoindate;
     }

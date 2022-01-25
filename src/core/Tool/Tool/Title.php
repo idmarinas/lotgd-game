@@ -99,7 +99,9 @@ trait Title
         $query->where('u.dk = :dk')
             ->orderBy('rand()')
         ;
-        ($refdk >= $anydk) && $query->andWhere('u.ref = :ref');
+        if ($refdk >= $anydk) {
+            $query->andWhere('u.ref = :ref');
+        }
 
         $query = $repository->createTranslatebleQuery($query);
 

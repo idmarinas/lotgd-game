@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller\NewdayController;
 
+use DateTime;
 use Lotgd\Core\Combat\Battle;
 use Lotgd\Core\Combat\Buffer;
 use Lotgd\Core\Event\Core;
@@ -153,7 +154,7 @@ trait NewDayTrait
         $rp = ('badnav.php' == substr($rp, 0, 10) || '' == $rp) ? 'news.php' : $rp;
         $this->navigation->addNav('nav.continue', $this->sanitize->cmdSanitize($rp));
 
-        $session['user']['laston']     = new \DateTime('now');
+        $session['user']['laston']     = new DateTime('now');
         $bgold                         = $session['user']['goldinbank'];
         $session['user']['goldinbank'] = round($session['user']['goldinbank'] * $interestrate);
         $nbgold                        = $session['user']['goldinbank'] - $bgold;
@@ -184,7 +185,7 @@ trait NewDayTrait
         }
         $session['user']['boughtroomtoday'] = 0;
         $session['user']['recentcomments']  = $session['user']['lasthit'];
-        $session['user']['lasthit']         = new \DateTime('now');
+        $session['user']['lasthit']         = new DateTime('now');
 
         if ($session['user']['hashorse'])
         {
@@ -267,7 +268,7 @@ trait NewDayTrait
         $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($this->settings->getSetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
         $gametoday           = $this->dateTime->gameTime();
 
-        if (gmdate('Ymd', $gametoday) != gmdate('Ymd', $lastnewdaysemaphore))
+        if (gmdate('Ymd', $gametoday) !== gmdate('Ymd', $lastnewdaysemaphore))
         {
             // it appears to be a different game day, acquire semaphore and
             // check again.
@@ -275,7 +276,7 @@ trait NewDayTrait
             $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($this->settings->getSetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
             $gametoday           = $this->dateTime->gameTime();
 
-            if (gmdate('Ymd', $gametoday) != gmdate('Ymd', $lastnewdaysemaphore))
+            if (gmdate('Ymd', $gametoday) !== gmdate('Ymd', $lastnewdaysemaphore))
             {
                 //we need to run the hook, update the setting, and unlock.
                 $this->settings->saveSetting('newdaySemaphore', gmdate('Y-m-d H:i:s'));

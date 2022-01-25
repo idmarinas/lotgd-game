@@ -13,6 +13,13 @@
 
 namespace Lotgd\Core\Form;
 
+use Lotgd\Core\Form\AboutType\GameSetupType;
+use Lotgd\Core\Form\AboutType\NewdayType;
+use Lotgd\Core\Form\AboutType\BankType;
+use Lotgd\Core\Form\AboutType\ForestType;
+use Lotgd\Core\Form\AboutType\MailType;
+use Lotgd\Core\Form\AboutType\ContentType;
+use Lotgd\Core\Form\AboutType\MiscType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,19 +33,19 @@ class AboutType extends AbstractType
     {
         $builder
             // Game Setup
-            ->add('game_setup', AboutType\GameSetupType::class, ['label' => 'game.setup.title'])
+            ->add('game_setup', GameSetupType::class, ['label' => 'game.setup.title'])
             // New Days
-            ->add('newday', AboutType\NewdayType::class, ['label' => 'newday.title'])
+            ->add('newday', NewdayType::class, ['label' => 'newday.title'])
             // Bank settings
-            ->add('bank', AboutType\BankType::class, ['label' => 'bank.title'])
+            ->add('bank', BankType::class, ['label' => 'bank.title'])
             // Forest
-            ->add('forest', AboutType\ForestType::class, ['label' => 'forest.title'])
+            ->add('forest', ForestType::class, ['label' => 'forest.title'])
             // Mail Settings
-            ->add('mail', AboutType\MailType::class, ['label' => 'mail.title'])
+            ->add('mail', MailType::class, ['label' => 'mail.title'])
             // Content Expiration
-            ->add('content', AboutType\ContentType::class, ['label' => 'content.title'])
+            ->add('content', ContentType::class, ['label' => 'content.title'])
             // Useful Information
-            ->add('info', AboutType\MiscType::class, ['label' => 'info.title'])
+            ->add('info', MiscType::class, ['label' => 'info.title'])
         ;
 
         parent::buildForm($builder, $options);

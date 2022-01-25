@@ -13,6 +13,10 @@
 
 namespace Lotgd\Core\Navigation;
 
+use Lotgd\Core\Navigation\Pattern\CustomClass;
+use Lotgd\Core\Navigation\Pattern\Links;
+use Lotgd\Core\Navigation\Pattern\Menu;
+use Lotgd\Core\Navigation\Pattern\Pagination;
 use Laminas\Stdlib\ArrayUtils;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
@@ -25,10 +29,10 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  */
 class Navigation
 {
-    use Pattern\CustomClass;
-    use Pattern\Links;
-    use Pattern\Menu;
-    use Pattern\Pagination;
+    use CustomClass;
+    use Links;
+    use Menu;
+    use Pagination;
 
     /**
      * Default text domain for navigation menu.

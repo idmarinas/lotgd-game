@@ -13,6 +13,10 @@
 
 namespace Lotgd\Core\Form\ConfigurationType;
 
+use Laminas\Filter\StripTags;
+use LotgdKernel;
+use Lotgd\Core\Lib\Settings;
+use Symfony\Component\Intl\Languages;
 use Laminas\Filter;
 use Lotgd\Core\Form\Type\CheckboxType;
 use Lotgd\Core\Form\Type\TagifyType;
@@ -48,7 +52,7 @@ class GameSetupType extends AbstractType
                 new Assert\Length(['min' => 3, 'max' => 255, 'allowEmptyString' => false]),
             ],
             'filters' => [
-                new Filter\StripTags(),
+                new StripTags(),
             ],
         ]);
         // Server URL
@@ -67,7 +71,7 @@ class GameSetupType extends AbstractType
                 new Assert\Length(['min' => 1, 'max' => 255, 'allowEmptyString' => false]),
             ],
             'filters' => [
-                new Filter\StripTags(),
+                new StripTags(),
             ],
         ]);
         // Max # of players online
@@ -102,9 +106,9 @@ class GameSetupType extends AbstractType
             ],
         ]);
 
-        $settings = \LotgdKernel::get(\Lotgd\Core\Lib\Settings::class);
+        $settings = LotgdKernel::get(Settings::class);
         $server   = \explode(',', $settings->getSetting('serverlanguages'));
-        $langs    = \Symfony\Component\Intl\Languages::getNames();
+        $langs    = Languages::getNames();
         $choices  = \array_filter($langs, function ($key) use ($server)
         {
             return \in_array($key, $server);

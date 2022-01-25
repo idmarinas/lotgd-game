@@ -12,6 +12,7 @@
 
 namespace Lotgd\Core\Pattern;
 
+use LogicException;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -23,12 +24,13 @@ trait LotgdControllerTrait
      * Adds a notification to the current session for type.
      *
      * @throws \LogicException
+     * @return never
      */
     protected function addNotification(string $type, $message)
     {
         if (!$this->container->has('session'))
         {
-            throw new \LogicException('You can not use the addNotification method if sessions are disabled. Enable them in "config/packages/framework.yaml".');
+            throw new LogicException('You can not use the addNotification method if sessions are disabled. Enable them in "config/packages/framework.yaml".');
         }
 
         $this->container->get('session')->getBag('notifications')->add($type, $message);

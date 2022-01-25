@@ -13,6 +13,13 @@
 
 namespace Lotgd\Core\Controller;
 
+use Throwable;
+use DateTime;
+use DateInterval;
+use Laminas\Filter\FilterChain;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\StripNewlines;
 use Laminas\Filter;
 use Lotgd\Core\Entity\Logdnet;
 use Lotgd\Core\Lib\Settings;
@@ -102,7 +109,7 @@ class LogdnetController extends AbstractController
                     $info['note'] = "\n<!-- registered with logdnet successfully -->";
                     $info['note'] .= "\n<!-- {$url} -->";
                 }
-                catch (\Throwable $th)
+                catch (Throwable $th)
                 {
                     $info['when'] = \date('Y-m-d H:i:s');
                     $info['note'] = "\n<!-- There was trouble registering on logdnet. -->";
@@ -183,13 +190,13 @@ class LogdnetController extends AbstractController
             ->setAdmin($admin)
             ->setCount((int) ($request->get('c', 0) * 1))
             ->setLang((string) $request->get('l', ''))
-            ->setLastping(new \DateTime('now'))
-            ->setLastupdate(new \DateTime('now'))
+            ->setLastping(new DateTime('now'))
+            ->setLastupdate(new DateTime('now'))
             ->setRecentips($request->server->get('REMOTE_ADDR'))
         ;
 
-        $dateUpdate = new \DateTime('now');
-        $dateUpdate->sub(new \DateInterval('PT1M'));
+        $dateUpdate = new DateTime('now');
+        $dateUpdate->sub(new DateInterval('PT1M'));
 
         // Only one update per minute allowed.
         if ( ! $newRow && $entity->getLastping() < $dateUpdate)
@@ -245,7 +252,7 @@ class LogdnetController extends AbstractController
 
         $servers = $this->cache->get('lotgd_bundle.logdnet.central_server.net', function (ItemInterface $item) use ($serverCentral)
         {
-            $item->expiresAt(new \DateTime('tomorrow')); //-- Cache 1 day for not sature central_server
+            $item->expiresAt(new DateTime('tomorrow')); //-- Cache 1 day for not sature central_server
 
             try
             {
@@ -258,11 +265,11 @@ class LogdnetController extends AbstractController
                 $content = $response->getContent();
                 $content = 'application/json' == $response->getHeaders()['content-type'][0] ? \json_decode($content, null, 512, JSON_THROW_ON_ERROR) : \explode("\n", $content);
 
-                $filterChain = new Filter\FilterChain();
+                $filterChain = new FilterChain();
                 $filterChain
-                    ->attach(new Filter\StringTrim())
-                    ->attach(new Filter\StripTags())
-                    ->attach(new Filter\StripNewlines())
+                    ->attach(new StringTrim())
+                    ->attach(new StripTags())
+                    ->attach(new StripNewlines())
                 ;
 
                 foreach ($content as $key => &$server)
@@ -286,7 +293,7 @@ class LogdnetController extends AbstractController
 
                 return $content;
             }
-            catch (\Throwable $th)
+            catch (Throwable $th)
             {
                 return [];
             }

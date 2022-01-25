@@ -13,6 +13,9 @@
 
 namespace Lotgd\Core\Repository\User;
 
+use Throwable;
+use DateTime;
+use DateInterval;
 use Doctrine\ORM\Query\Expr\Join;
 use Lotgd\Core\Entity as LotgdEntity;
 use Tracy\Debugger;
@@ -53,7 +56,7 @@ trait Login
 
             return $this->processUserData($data);
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -68,8 +71,8 @@ trait Login
     {
         try
         {
-            $date = new \DateTime('now');
-            $date->sub(new \DateInterval("PT{$timeout}S"));
+            $date = new DateTime('now');
+            $date->sub(new DateInterval("PT{$timeout}S"));
 
             $query = $this->_em->createQueryBuilder();
 
@@ -81,7 +84,7 @@ trait Login
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -106,7 +109,7 @@ trait Login
                 ->getSingleScalarResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

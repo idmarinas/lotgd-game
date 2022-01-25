@@ -39,7 +39,7 @@ trait RecalculateDragonPointTrait
             $pdks[$type] = $request->request->getInt($type);
             $pdktotal += $pdks[$type];
 
-            if ((int) $pdks[$type] < 0)
+            if ($pdks[$type] < 0)
             {
                 $pdkneg = true;
             }

@@ -13,8 +13,11 @@
 
 namespace Lotgd\Core\Block;
 
+use DateInterval;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Http\Request;
+use Lotgd\Core\Kernel;
 use Lotgd\Core\Lib\Settings;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
@@ -32,8 +35,8 @@ final class DonationButtonsBlock extends AbstractBlockService
 
         $uri  = $this->request->getServer('REQUEST_URI');
         $host = $this->request->getServer('HTTP_HOST');
-        $now  = new \DateTime('now');
-        $now->sub(new \DateInterval('PT1H'));
+        $now  = new DateTime('now');
+        $now->sub(new DateInterval('PT1H'));
         $cacheTime = 900;
 
         $alreadyRegisteredLogdnet = true;
@@ -54,7 +57,7 @@ final class DonationButtonsBlock extends AbstractBlockService
             $c = $this->doctrine->getRepository('LotgdCore:User')->count([]);
             $a = $this->settings->getSetting('serverurl', "//{$host}/");
 
-            if ( ! \preg_match("/\/$/", $a))
+            if ( ! preg_match("/\/$/", $a))
             {
                 $a .= '/';
                 $this->settings->saveSetting('serverurl', $a);
@@ -65,26 +68,26 @@ final class DonationButtonsBlock extends AbstractBlockService
             $e = $this->settings->getSetting('gameadminemail', 'postmaster@localhost.com');
             $u = $this->settings->getSetting('logdnetserver', 'https://lotgd.net/');
 
-            if ( ! \preg_match("/\/$/", $u))
+            if ( ! preg_match("/\/$/", $u))
             {
                 $u .= '/';
                 $this->settings->saveSetting('logdnetserver', $u);
             }
 
             $author['register_logdnet'] = true;
-            $author['v']                = \rawurlencode(\Lotgd\Core\Kernel::VERSION);
-            $author['c']                = \rawurlencode($c);
-            $author['a']                = \rawurlencode($a);
-            $author['l']                = \rawurlencode($l);
-            $author['d']                = \rawurlencode($d);
-            $author['e']                = \rawurlencode($e);
-            $author['u']                = \rawurlencode($u);
+            $author['v']                = rawurlencode(Kernel::VERSION);
+            $author['c']                = rawurlencode($c);
+            $author['a']                = rawurlencode($a);
+            $author['l']                = rawurlencode($l);
+            $author['d']                = rawurlencode($d);
+            $author['e']                = rawurlencode($e);
+            $author['u']                = rawurlencode($u);
         }
 
         return $this->renderResponse('admin/paypal.html.twig', [
             'settings'    => $blockContext->getSettings(),
             'block'       => $blockContext->getBlock(),
-            'item_number' => \htmlentities($session['user']['login'], ENT_COMPAT, 'UTF-8').':'.$host.'/'.$uri,
+            'item_number' => htmlentities($session['user']['login'], ENT_COMPAT, 'UTF-8').':'.$host.'/'.$uri,
             'notify_url'  => '//'.$host.\dirname($uri).'/payment.php',
             'author'      => $author,
         ], $response)->setTtl($cacheTime);

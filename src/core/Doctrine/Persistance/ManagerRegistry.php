@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Doctrine\Persistance;
 
+use BadMethodCallException;
 use Doctrine\Persistence\AbstractManagerRegistry;
 
 class ManagerRegistry extends AbstractManagerRegistry
@@ -28,9 +29,12 @@ class ManagerRegistry extends AbstractManagerRegistry
         parent::__construct($name, $connections, \array_keys($managers), $defaultConnection, $defaultManager, $proxyInterfaceName);
     }
 
+    /**
+     * @return never
+     */
     public function getAliasNamespace($alias): void
     {
-        throw new \BadMethodCallException('Namespace aliases not supported');
+        throw new BadMethodCallException('Namespace aliases not supported');
     }
 
     protected function getService($name)

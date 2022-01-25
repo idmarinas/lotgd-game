@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Installer\Upgrade;
 
+use Throwable;
 use Lotgd\Core\Installer\InstallerAbstract;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -32,7 +33,7 @@ class Version50201 extends InstallerAbstract
                 $this->getProjectDir().'/src/core/Twig/Extension/AdvertisingGoogle.php',
             ]);
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return false;
         }

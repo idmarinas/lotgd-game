@@ -430,9 +430,8 @@ class GraveyardController extends AbstractController
         }
 
         asort($favorCostList);
-        end($favorCostList);
 
-        $high = key($favorCostList);
+        $high = array_key_last($favorCostList);
 
         if ($high !== null)
         {
@@ -460,7 +459,7 @@ class GraveyardController extends AbstractController
                 ],
             ]);
 
-            if ($value['text'] ?? '')
+            if (($value['text'] ?? '') !== '' && ($value['text'] ?? '') !== '0')
             {
                 $params['texts'] = [
                     $value['text'],

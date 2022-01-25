@@ -67,7 +67,7 @@ trait Extended
             return;
         }
 
-        if ($target == $healer && isset($this->enemies[$healer]))
+        if ($target === $healer && isset($this->enemies[$healer]))
         {
             $this->enemies[$healer] += $amount;
             $this->addContextToRoundEnemy([

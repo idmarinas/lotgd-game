@@ -13,6 +13,12 @@
 
 namespace Lotgd\Core\Controller;
 
+use Throwable;
+use Laminas\Filter\FilterChain;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\StripNewlines;
+use Laminas\Filter\PregReplace;
 use Laminas\Filter;
 use Lotgd\Core\Form\MailWriteType;
 use Lotgd\Core\Http\Request;
@@ -125,7 +131,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
         {
             $message = $this->translator->trans('dialog.del.bulk.empty', [], self::TRANSLATION_DOMAIN);
         }
-        elseif ($count)
+        elseif ($count !== 0)
         {
             $type    = 'success';
             $message = $this->translator->trans('dialog.del.bulk.success', [], self::TRANSLATION_DOMAIN);
@@ -143,7 +149,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
     {
         $search = (string) $request->query->get('q', '');
 
-        if ( ! $search)
+        if ( $search === '' || $search === '0')
         {
             return $this->json([]);
         }
@@ -174,7 +180,6 @@ class MailController extends AbstractController implements LotgdControllerInterf
     {
         global $session;
 
-        /** @var Lotgd\Core\Repository\MailRepository */
         $mail   = $this->getDoctrine()->getRepository('LotgdCore:Mail');
         $result = $mail->getCountMailOfCharacter((int) ($session['user']['acctid'] ?? 0));
 
@@ -196,7 +201,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
 
         $form = $this->createForm(MailWriteType::class);
 
-        if ($toPlayer)
+        if ($toPlayer !== 0)
         {
             /** @var Lotgd\Core\Entity\User $account */
             $account = $this->getDoctrine()->getRepository('LotgdCore:User')->find($toPlayer);
@@ -243,7 +248,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
             $row  = $this->repository->replyToMessage($messageId, $session['user']['acctid']);
 
             //-- Not found message to reply
-            if ( ! $row)
+            if ( $row === [])
             {
                 $this->addNotification('error', $this->translator->trans('jaxon.fail.message.not.found', [], self::TRANSLATION_DOMAIN));
 
@@ -298,7 +303,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
                 $form->setData($row);
             }
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -409,11 +414,11 @@ class MailController extends AbstractController implements LotgdControllerInterf
             $repositoryAcct = $this->getDoctrine()->getRepository('LotgdCore:User');
 
             $account = $repositoryAcct->find($post['to']);
-            $count   = $account ? $this->repository->countInboxOfCharacter($account->getAcctid(), (bool) $this->settings->getSetting('onlyunreadmails', true)) : null;
+            $count   = $account !== null ? $this->repository->countInboxOfCharacter($account->getAcctid(), (bool) $this->settings->getSetting('onlyunreadmails', true)) : null;
 
             if ( ! $account || $count >= $this->settings->getSetting('inboxlimit', 50) || (empty($post['subject']) || empty($post['body'])))
             {
-                $message = $account ? 'jaxon.fail.send.inbox.full' : 'jaxon.fail.send.not.found';
+                $message = $account !== null ? 'jaxon.fail.send.inbox.full' : 'jaxon.fail.send.not.found';
                 $message = (empty($post['subject']) || empty($post['body'])) ? 'jaxon.fail.send.subject.body' : $message;
 
                 $this->addNotification('warning', $this->translator->trans($message, [], self::TRANSLATION_DOMAIN));
@@ -430,7 +435,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
 
             $form = $formEmpty;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -443,17 +448,17 @@ class MailController extends AbstractController implements LotgdControllerInterf
      */
     private function sanitize(string $string, bool $isSubject): string
     {
-        $filterChain = new Filter\FilterChain();
+        $filterChain = new FilterChain();
         $filterChain
-            ->attach(new Filter\StringTrim())
-            ->attach(new Filter\StripTags())
-            ->attach(new Filter\StripNewlines(), -1)
+            ->attach(new StringTrim())
+            ->attach(new StripTags())
+            ->attach(new StripNewlines(), -1)
         ;
 
         if ( ! $isSubject)
         {
             $filterChain
-                ->attach(new Filter\PregReplace(['pattern' => '/\R/', 'replacement' => '`n']))
+                ->attach(new PregReplace(['pattern' => '/\R/', 'replacement' => '`n']))
             ;
         }
 

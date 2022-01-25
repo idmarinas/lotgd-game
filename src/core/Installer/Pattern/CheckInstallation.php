@@ -35,7 +35,7 @@ trait CheckInstallation
             $return = false;
         }
         //-- Can't install it: is the same version
-        elseif ($fromVersion == $toVersion)
+        elseif ($fromVersion === $toVersion)
         {
             $this->style->error($this->translator->trans('installer.check.installation.version.same', [], parent::TRANSLATOR_DOMAIN));
 

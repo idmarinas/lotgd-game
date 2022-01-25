@@ -13,6 +13,15 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
+use Lotgd\Core\Twig\Extension\Pattern\CharacterFunction;
+use Lotgd\Core\Twig\Extension\Pattern\CoreFilter;
+use Lotgd\Core\Twig\Extension\Pattern\CoreFunction;
+use Lotgd\Core\Twig\Extension\Pattern\Mail;
+use Lotgd\Core\Twig\Extension\Pattern\News;
+use Lotgd\Core\Twig\Extension\Pattern\PageGen;
+use Lotgd\Core\Twig\Extension\Pattern\Petition;
+use Lotgd\Core\Twig\Extension\Pattern\Source;
+use Lotgd\Core\Kernel;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Tool\Sanitize;
@@ -26,14 +35,14 @@ use Twig\TwigTest;
 
 class GameCore extends AbstractExtension
 {
-    use Pattern\CharacterFunction;
-    use Pattern\CoreFilter;
-    use Pattern\CoreFunction;
-    use Pattern\Mail;
-    use Pattern\News;
-    use Pattern\PageGen;
-    use Pattern\Petition;
-    use Pattern\Source;
+    use CharacterFunction;
+    use CoreFilter;
+    use CoreFunction;
+    use Mail;
+    use News;
+    use PageGen;
+    use Petition;
+    use Source;
 
     protected $request;
     protected $sanitize;
@@ -96,11 +105,11 @@ class GameCore extends AbstractExtension
             new TwigFunction('page_title', [$this, 'pageTitle']),
             new TwigFunction('game_version', function (): string
             {
-                return \Lotgd\Core\Kernel::VERSION;
+                return Kernel::VERSION;
             }),
             new TwigFunction('game_copyright', function (): string
             {
-                return \Lotgd\Core\Kernel::LICENSE.\Lotgd\Core\Kernel::COPYRIGHT;
+                return Kernel::LICENSE.Kernel::COPYRIGHT;
             }),
             new TwigFunction('game_source', [$this, 'gameSource'], ['needs_environment' => true]),
             new TwigFunction('game_page_gen', [$this, 'gamePageGen'], ['needs_environment' => true]),

@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Installer\Upgrade;
 
+use Throwable;
 use Doctrine\ORM\EntityManagerInterface;
 use Kit\CryptBundle\Service\OpensslService as Crypt;
 use Laminas\Serializer\Adapter\PhpSerialize;
@@ -147,7 +148,7 @@ class Version60000 extends InstallerAbstract
                 }
             }
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return false;
         }
@@ -186,7 +187,7 @@ class Version60000 extends InstallerAbstract
                 'N;'
             ));
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return false;
         }

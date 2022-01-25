@@ -13,6 +13,11 @@
 
 namespace Lotgd\Core\Repository;
 
+use Lotgd\Core\Repository\Commentary\Backup;
+use Throwable;
+use Doctrine\Common\Collections\Criteria;
+use DateTime;
+use DateInterval;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -22,7 +27,7 @@ use Tracy\Debugger;
 
 class CommentaryRepository extends ServiceEntityRepository implements RepositoryBackupInterface
 {
-    use Commentary\Backup;
+    use Backup;
     use EntityRepositoryTrait;
 
     private $translator;
@@ -48,7 +53,7 @@ class CommentaryRepository extends ServiceEntityRepository implements Repository
 
             return true;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -100,7 +105,7 @@ class CommentaryRepository extends ServiceEntityRepository implements Repository
 
             return true;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -120,7 +125,7 @@ class CommentaryRepository extends ServiceEntityRepository implements Repository
             $result = $query->select('u.section')
                 ->where('u.section NOT LIKE :section')
                 ->groupBy('u.section')
-                ->orderBy('u.section', 'ASC')
+                ->orderBy('u.section', Criteria::ASC)
 
                 ->setParameter('section', 'clan-%')
 
@@ -137,7 +142,7 @@ class CommentaryRepository extends ServiceEntityRepository implements Repository
 
             return $sections;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -154,8 +159,8 @@ class CommentaryRepository extends ServiceEntityRepository implements Repository
 
         try
         {
-            $date = new \DateTime('now');
-            $date->sub(new \DateInterval("P{$expire}D"));
+            $date = new DateTime('now');
+            $date->sub(new DateInterval("P{$expire}D"));
 
             return $query->delete($this->_entityName, 'u')
                 ->where('u.postdate < :date')
@@ -164,7 +169,7 @@ class CommentaryRepository extends ServiceEntityRepository implements Repository
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

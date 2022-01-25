@@ -13,14 +13,17 @@
 
 namespace Lotgd\Core\Installer;
 
+use Lotgd\Core\Installer\Pattern\CheckInstallation;
+use Lotgd\Core\Installer\Pattern\Version;
+use Throwable;
 use Lotgd\Core\Entity\Settings as EntitySettings;
 use Lotgd\Core\Kernel;
 use Symfony\Component\Filesystem\Filesystem;
 
 class Install extends InstallerAbstract
 {
-    use Pattern\CheckInstallation;
-    use Pattern\Version;
+    use CheckInstallation;
+    use Version;
 
     protected $installedVersionData;
     protected $installedVersionDataFile;
@@ -50,7 +53,7 @@ class Install extends InstallerAbstract
 
             $versionInstalled = (int) $version->getValue();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             //-- No version installed is a new install
             $versionInstalled = 0;
@@ -66,7 +69,7 @@ class Install extends InstallerAbstract
 
                 $versionInstalled = $this->getIntVersion($version->getValue());
             }
-            catch (\Throwable $th)
+            catch (Throwable $th)
             {
                 //-- No version installed is a new install
                 $versionInstalled = 0;
@@ -120,7 +123,7 @@ class Install extends InstallerAbstract
             $this->doctrine->persist($version);
             $this->doctrine->flush();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             //-- No need capture
         }

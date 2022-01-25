@@ -12,6 +12,7 @@
 
 namespace Lotgd\Core\Pvp;
 
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Lotgd\Core\Lib\Settings;
@@ -39,10 +40,10 @@ class Listing
     {
         $qr = clone $this->getQuery();
 
-        $qr->orderBy('u.location', 'DESC')
-            ->addOrderBy('u.level', 'DESC')
-            ->addOrderBy('u.experience', 'DESC')
-            ->addOrderBy('u.dragonkills', 'DESC')
+        $qr->orderBy('u.location', Criteria::DESC)
+            ->addOrderBy('u.level', Criteria::DESC)
+            ->addOrderBy('u.experience', Criteria::DESC)
+            ->addOrderBy('u.dragonkills', Criteria::DESC)
         ;
 
         if ($location)
@@ -68,7 +69,7 @@ class Listing
 
             ->groupBy('u.location')
 
-            ->orderBy('u.location', 'DESC')
+            ->orderBy('u.location', Criteria::DESC)
         ;
 
         if ($location)

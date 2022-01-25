@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Repository;
 
+use Lotgd\Core\Repository\AccountsOutput\Backup;
+use Throwable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -21,7 +23,7 @@ use Tracy\Debugger;
 
 class AccountsOutputRepository extends ServiceEntityRepository
 {
-    use AccountsOutput\Backup;
+    use Backup;
     use EntityRepositoryTrait;
 
     public function __construct(ManagerRegistry $registry)
@@ -46,9 +48,9 @@ class AccountsOutputRepository extends ServiceEntityRepository
                 ->getSingleScalarResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return '';
         }
@@ -70,7 +72,7 @@ class AccountsOutputRepository extends ServiceEntityRepository
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

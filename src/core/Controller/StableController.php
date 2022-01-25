@@ -30,6 +30,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class StableController extends AbstractController
 {
+    public $dipatcher;
     private $navigation;
     private $dispatcher;
     private $repository;
@@ -152,7 +153,7 @@ class StableController extends AbstractController
 
         $mount = $this->getRepository()->extractEntity($this->getRepository()->find($mountId));
 
-        if ($mount)
+        if ($mount !== [])
         {
             $params['mountBuyed'] = true;
 

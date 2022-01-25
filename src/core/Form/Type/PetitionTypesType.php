@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Form\Type;
 
+use LotgdKernel;
 use Lotgd\Core\Lib\Settings;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,7 +25,7 @@ class PetitionTypesType extends ChoiceType
         parent::configureOptions($resolver);
 
         //-- Get petitions available in server.
-        $settings  = \LotgdKernel::get(Settings::class);
+        $settings  = LotgdKernel::get(Settings::class);
         $petitions = \explode(',', $settings->getSetting('petition_types'));
 
         $choices = [];

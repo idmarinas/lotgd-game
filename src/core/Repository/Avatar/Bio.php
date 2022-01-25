@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Repository\Avatar;
 
+use Throwable;
+use DateTime;
 use Tracy\Debugger;
 
 /**
@@ -37,7 +39,7 @@ trait Bio
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -62,7 +64,7 @@ trait Bio
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -75,7 +77,7 @@ trait Bio
      */
     public function blockCharacterBio(int $char): bool
     {
-        return $this->blockUnblockCharacterBio($char, '`iBlocked for inappropriate usage´i', new \DateTime('9999-12-31 23:59:59'));
+        return $this->blockUnblockCharacterBio($char, '`iBlocked for inappropriate usage´i', new DateTime('9999-12-31 23:59:59'));
     }
 
     /**
@@ -83,7 +85,7 @@ trait Bio
      */
     public function unblockCharacterBio(int $char): bool
     {
-        return $this->blockUnblockCharacterBio($char, '', new \DateTime('0000-00-00 00:00:00'));
+        return $this->blockUnblockCharacterBio($char, '', new DateTime('0000-00-00 00:00:00'));
     }
 
     private function blockUnblockCharacterBio(int $char, string $block, $date): bool
@@ -103,7 +105,7 @@ trait Bio
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

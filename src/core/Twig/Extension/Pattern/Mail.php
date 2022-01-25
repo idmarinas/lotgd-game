@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
+use Throwable;
 use Twig\Environment;
 
 /**
@@ -32,7 +33,7 @@ trait Mail
             $mail   = $this->doctrine->getRepository(\Lotgd\Core\Entity\Mail::class);
             $result = $mail->getCountMailOfCharacter((int) ($session['user']['acctid'] ?? 0));
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             $result = [
                 'seen_count'     => 0,

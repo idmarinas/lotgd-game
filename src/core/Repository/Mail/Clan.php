@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Repository\Mail;
 
+use Throwable;
 use Tracy\Debugger;
 
 /**
@@ -34,7 +35,7 @@ trait Clan
                 ->setParameter('subj', $subject)
             ;
 
-            if ($toId)
+            if ($toId !== 0)
             {
                 $query->andWhere('u.msgto = :to')
                     ->setParameter('to', $toId)
@@ -45,7 +46,7 @@ trait Clan
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use DateTime;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Navigation\Navigation;
@@ -48,7 +49,7 @@ class PvpController extends AbstractController
         $params['paginator']  = $this->listing->getPvpList($session['user']['location']);
         $params['sleepers']   = $this->listing->getLocationSleepersCount($session['user']['location']);
         $params['returnLink'] = $request->getServer('REQUEST_URI');
-        $params['pvpTimeOut'] = new \DateTime(date('Y-m-d H:i:s', strtotime("-{$pvptime} seconds")));
+        $params['pvpTimeOut'] = new DateTime(date('Y-m-d H:i:s', strtotime("-{$pvptime} seconds")));
 
         $this->navigation->addNav('common.nav.warriors', 'pvp.php');
         $this->navigation->villageNav();

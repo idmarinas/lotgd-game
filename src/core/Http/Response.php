@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Http;
 
+use Tracy\Debugger;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Laminas\View\Helper\HeadTitle;
 use Lotgd\Core\Event\EveryRequest;
@@ -158,7 +160,7 @@ class Response extends HttpResponse
 
         if ($force || isset($session['user']['superuser']) && $session['user']['superuser'] & SU_DEBUG_OUTPUT)
         {
-            $this->pageAddContent(\Tracy\Debugger::dump($text, true));
+            $this->pageAddContent(Debugger::dump($text, true));
         }
     }
 
@@ -200,6 +202,7 @@ class Response extends HttpResponse
      * Page and send content to browser.
      *
      * @param bool $saveuser
+     * @return never
      */
     public function pageEnd($saveuser = true): void
     {
@@ -232,7 +235,7 @@ class Response extends HttpResponse
         $session['user']['login'] = $session['user']['login'] ?? '';
 
         //-- START - Check if see or not MoTD
-        $lastMotd = new \DateTime('0000-00-00 00:00:00');
+        $lastMotd = new DateTime('0000-00-00 00:00:00');
 
         if ($this->doctrine->isConnected())
         {
@@ -264,7 +267,7 @@ class Response extends HttpResponse
         $this->template->addGlobal('session', $sesion); //-- Update session info
 
         //-- output page generation time
-        $gentime = \Tracy\Debugger::timer('page_footer');
+        $gentime = Debugger::timer('page_footer');
         $session['user']['gentime'] += $gentime;
         ++$session['user']['gentimecount'];
 

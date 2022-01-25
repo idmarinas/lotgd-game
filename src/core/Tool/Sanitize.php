@@ -12,6 +12,13 @@
 
 namespace Lotgd\Core\Tool;
 
+use Laminas\Filter\FilterChain;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\StripNewlines;
+use Laminas\Filter\Callback;
+use HTMLPurifier;
+use Cocur\Slugify\Slugify;
 use Laminas\Filter;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Output\Code;
@@ -125,12 +132,12 @@ class Sanitize
      */
     public function htmlSanitize(string $string): string
     {
-        $filterChain = new Filter\FilterChain();
+        $filterChain = new FilterChain();
         $filterChain
-            ->attach(new Filter\StringTrim())
-            ->attach(new Filter\StripTags())
-            ->attach(new Filter\StripNewlines())
-            ->attach(new Filter\Callback([new \HTMLPurifier(), 'purify']))
+            ->attach(new StringTrim())
+            ->attach(new StripTags())
+            ->attach(new StripNewlines())
+            ->attach(new Callback([new HTMLPurifier(), 'purify']))
         ;
 
         return $filterChain->filter($string);
@@ -197,7 +204,7 @@ class Sanitize
      */
     public function slugify(string $string): string
     {
-        $slugify = new \Cocur\Slugify\Slugify();
+        $slugify = new Slugify();
 
         return $slugify->slugify($string);
     }

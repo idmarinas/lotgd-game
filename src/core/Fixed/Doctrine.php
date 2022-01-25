@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Fixed;
 
+use BadMethodCallException;
+use LotgdResponse;
 use Doctrine\ORM\Tools\SchemaTool;
 
 class Doctrine
@@ -42,7 +44,7 @@ class Doctrine
 
         $methods = implode(', ', get_class_methods(self::$instance));
 
-        throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
+        throw new BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
 
     /**
@@ -87,25 +89,25 @@ class Doctrine
 
         if (empty($sqls))
         {
-            \LotgdResponse::pageDebug('Nothing to update - your database is already in sync with the current entities metadata.');
+            LotgdResponse::pageDebug('Nothing to update - your database is already in sync with the current entities metadata.');
 
             return 0;
         }
 
         if ($dumpSql)
         {
-            \LotgdResponse::pageDebug(implode(';'.PHP_EOL, $sqls).';');
+            LotgdResponse::pageDebug(implode(';'.PHP_EOL, $sqls).';');
         }
 
-        \LotgdResponse::pageDebug('Updating database schema...');
+        LotgdResponse::pageDebug('Updating database schema...');
         $schemaTool->updateSchema($metaData, true);
 
         $pluralization = (1 === \count($sqls)) ? 'query was' : 'queries were';
 
-        \LotgdResponse::pageDebug(sprintf('Database schema updated successfully! "<info>%s</info>" %s executed', \count($sqls), $pluralization));
+        LotgdResponse::pageDebug(sprintf('Database schema updated successfully! "<info>%s</info>" %s executed', \count($sqls), $pluralization));
 
         $proxyFactory = self::$instance->getProxyFactory();
-        \LotgdResponse::pageDebug(sprintf('Proxy classes generated to "%s"', $proxyFactory->generateProxyClasses($metaData)));
+        LotgdResponse::pageDebug(sprintf('Proxy classes generated to "%s"', $proxyFactory->generateProxyClasses($metaData)));
 
         return \count($sqls);
     }
@@ -136,7 +138,7 @@ class Doctrine
 
         $schemaTool->dropSchema($classes);
 
-        \LotgdResponse::pageDebug(sprintf('Drop schemas for %s classes: "%s"', \count($entities), implode('", "', $entities)));
+        LotgdResponse::pageDebug(sprintf('Drop schemas for %s classes: "%s"', \count($entities), implode('", "', $entities)));
     }
 }
 

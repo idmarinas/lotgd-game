@@ -1,5 +1,8 @@
 <?php
 
+use Lotgd\Core\Entity\Titles;
+use Lotgd\Core\EntityForm\TitlesType;
+
 //Author: Lonny Luberts - 3/18/2005
 //Heavily modified by JT Traub
 require_once 'common.php';
@@ -9,71 +12,71 @@ check_su_access(SU_EDIT_USERS);
 $textDomain = 'grotto_titleedit';
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], $textDomain);
+LotgdResponse::pageStart('title', [], $textDomain);
 
 $params = [
-    'textDomain' => $textDomain
+    'textDomain' => $textDomain,
 ];
 
-$op = (string) \LotgdRequest::getQuery('op');
-$id = (int) \LotgdRequest::getQuery('id');
+$op = (string) LotgdRequest::getQuery('op');
+$id = (int) LotgdRequest::getQuery('id');
 
-\LotgdNavigation::addNav('titleedit.category.other');
+LotgdNavigation::addNav('titleedit.category.other');
 
-\LotgdNavigation::superuserGrottoNav();
+LotgdNavigation::superuserGrottoNav();
 
-$repository = \Doctrine::getRepository('LotgdCore:Titles');
+$repository = Doctrine::getRepository('LotgdCore:Titles');
 
-\LotgdNavigation::addHeader('titleedit.category.functions');
+LotgdNavigation::addHeader('titleedit.category.functions');
 
 if ('delete' == $op)
 {
     $entity = $repository->find($id);
 
-    \Doctrine::remove($entity);
+    Doctrine::remove($entity);
 
-    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('section.edit.delete.success', [], $textDomain));
+    LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('section.edit.delete.success', [], $textDomain));
 }
 
-\Doctrine::flush();
+Doctrine::flush();
 
 switch ($op)
 {
     case 'reset':
-        $charRepository = \Doctrine::getRepository('LotgdCore:Avatar');
-        $characters = $charRepository->findAll();
+        $charRepository = Doctrine::getRepository('LotgdCore:Avatar');
+        $characters     = $charRepository->findAll();
 
         foreach ($characters as $row)
         {
-            $oname = $row->getName();
-            $dk = $row->getDragonkills();
+            $oname  = $row->getName();
+            $dk     = $row->getDragonkills();
             $otitle = $row->getTitle();
-            $dk = $row->getDragonkills();
+            $dk     = $row->getDragonkills();
 
-            if (! LotgdTool::validDkTitle($otitle, $dk, $row->getSex()))
+            if ( ! LotgdTool::validDkTitle($otitle, $dk, $row->getSex()))
             {
                 $newtitle = LotgdTool::getDkTitle($dk, $row->getSex());
-                $newname = LotgdTool::changePlayerTitle($newtitle, $row);
-                $id = $row->getAcctid();
+                $newname  = LotgdTool::changePlayerTitle($newtitle, $row);
+                $id       = $row->getAcctid();
 
                 if ($oname != $newname)
                 {
                     $params['messages'][] = [
                         'section.reset.change.name',
                         [
-                            'oldName' => $oname,
-                            'newName' => $newname,
+                            'oldName'  => $oname,
+                            'newName'  => $newname,
                             'newTitle' => $newtitle,
-                            'dk' => $dk,
-                            'sex' => $row->getSex()
+                            'dk'       => $dk,
+                            'sex'      => $row->getSex(),
                         ],
-                        $textDomain
+                        $textDomain,
                     ];
 
                     if ($session['user']['acctid'] == $row->getAcctid())
                     {
                         $session['user']['title'] = $newtitle;
-                        $session['user']['name'] = $newname;
+                        $session['user']['name']  = $newname;
                     }
                 }
                 elseif ($otitle != $newtitle)
@@ -81,12 +84,12 @@ switch ($op)
                     $params['messages'][] = [
                         'section.reset.change.title',
                         [
-                            'oldName' => $oname,
+                            'oldName'  => $oname,
                             'newTitle' => $newtitle,
-                            'dk' => $dk,
-                            'sex' => $row->getSex()
+                            'dk'       => $dk,
+                            'sex'      => $row->getSex(),
                         ],
-                        $textDomain
+                        $textDomain,
                     ];
 
                     if ($session['user']['acctid'] == $row->getAcctid())
@@ -99,74 +102,77 @@ switch ($op)
                     ->setName($newname)
                 ;
 
-                \Doctrine::persist($row);
+                Doctrine::persist($row);
             }
         }
 
-        \Doctrine::flush();
+        Doctrine::flush();
 
-        \LotgdNavigation::addHeader('titleedit.category.functions');
-        \LotgdNavigation::addNav('titleedit.nav.main', 'titleedit.php');
+        LotgdNavigation::addHeader('titleedit.category.functions');
+        LotgdNavigation::addNav('titleedit.nav.main', 'titleedit.php');
+
     break;
 
     case 'edit': case 'add':
         $params['tpl'] = 'edit';
-        $params['id'] = $id;
+        $params['id']  = $id;
 
-        $lotgdFormFactory = \LotgdKernel::get('form.factory');
-        $entity = $repository->find($id);
-        $entity = $entity ?: new \Lotgd\Core\Entity\Titles();
+        $lotgdFormFactory = LotgdKernel::get('form.factory');
+        $entity           = $repository->find($id);
+        $entity           = $entity ?: new Titles();
 
-        $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\TitlesType::class, $entity, [
+        $form = $lotgdFormFactory->create(TitlesType::class, $entity, [
             'action' => "titleedit.php?op=edit&id={$id}",
-            'attr' => [
-                'autocomplete' => 'off'
-            ]
+            'attr'   => [
+                'autocomplete' => 'off',
+            ],
         ]);
 
-        $form->handleRequest(\LotgdRequest::_i());
+        $form->handleRequest(LotgdRequest::_i());
 
         if ($form->isSubmitted() && $form->isValid())
         {
             $entity = $form->getData();
 
-            \Doctrine::persist($entity);
-            \Doctrine::flush();
+            Doctrine::persist($entity);
+            Doctrine::flush();
 
             $id = $entity->getTitleid();
 
-            \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('section.edit.save.success', [], $textDomain));
+            LotgdFlashMessages::addSuccessMessage(LotgdTranslator::t('section.edit.save.success', [], $textDomain));
 
             //-- Redo form for change $id and set new data (generated IDs)
-            $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\TitlesType::class, $entity, [
+            $form = $lotgdFormFactory->create(TitlesType::class, $entity, [
                 'action' => "titleedit.php?op=edit&id={$id}",
-                'attr' => [
-                    'autocomplete' => 'off'
-                ]
+                'attr'   => [
+                    'autocomplete' => 'off',
+                ],
             ]);
         }
-        \Doctrine::detach($entity); //-- Avoid Doctrine save a invalid Form
+        Doctrine::detach($entity); //-- Avoid Doctrine save a invalid Form
 
         //-- In this position can updated $id var
-        \LotgdNavigation::addNavAllow("titleedit.php?op=edit&id={$id}");
+        LotgdNavigation::addNavAllow("titleedit.php?op=edit&id={$id}");
 
-        \LotgdNavigation::addHeader('titleedit.category.functions');
-        \LotgdNavigation::addNav('titleedit.nav.main', 'titleedit.php');
+        LotgdNavigation::addHeader('titleedit.category.functions');
+        LotgdNavigation::addNav('titleedit.nav.main', 'titleedit.php');
 
         $params['form'] = $form->createView();
+
     break;
 
     default:
         $params['paginator'] = $repository->getList();
 
-        \LotgdNavigation::addHeader('titleedit.category.functions');
-        \LotgdNavigation::addNav('titleedit.nav.add', 'titleedit.php?op=add');
-        \LotgdNavigation::addNav('titleedit.nav.refresh', 'titleedit.php');
-        \LotgdNavigation::addNav('titleedit.nav.reset', 'titleedit.php?op=reset');
+        LotgdNavigation::addHeader('titleedit.category.functions');
+        LotgdNavigation::addNav('titleedit.nav.add', 'titleedit.php?op=add');
+        LotgdNavigation::addNav('titleedit.nav.refresh', 'titleedit.php');
+        LotgdNavigation::addNav('titleedit.nav.reset', 'titleedit.php?op=reset');
+
     break;
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/titleedit.html.twig', $params));
+LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/titleedit.html.twig', $params));
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

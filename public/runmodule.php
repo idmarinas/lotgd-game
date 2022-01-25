@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Controller\LotgdControllerInterface;
+
 // translator ready
 // addnews ready
 // mail ready
@@ -9,20 +11,20 @@
 
 require_once 'common.php';
 
-$module     = (string) \LotgdRequest::getQuery('module');
-$admin      = (bool) \LotgdRequest::getQuery('admin');
-$controller = (string) \LotgdRequest::getQuery('controller', '');
-$method     = (string) \LotgdRequest::getQuery('method', '');
+$module     = (string) LotgdRequest::getQuery('module');
+$admin      = (bool) LotgdRequest::getQuery('admin');
+$controller = (string) LotgdRequest::getQuery('controller', '');
+$method     = (string) LotgdRequest::getQuery('method', '');
 
 //-- For migrating modules to bundles
 if ( ! $module && $controller && class_exists($controller))
 {
-    $ctrl = \LotgdKernel::get($controller);
+    $ctrl = LotgdKernel::get($controller);
 
     $allowAnonymous    = false;
     $overrideForcedNav = false;
 
-    if ($ctrl instanceof \Lotgd\Core\Controller\LotgdControllerInterface)
+    if ($ctrl instanceof LotgdControllerInterface)
     {
         $allowAnonymous    = $ctrl->allowAnonymous();
         $overrideForcedNav = $ctrl->overrideForcedNav();
@@ -30,9 +32,9 @@ if ( ! $module && $controller && class_exists($controller))
 
     do_forced_nav($allowAnonymous, $overrideForcedNav);
 
-    \LotgdResponse::pageStart();
-    \LotgdResponse::callController($controller, $method ?: 'index');
-    \LotgdResponse::pageEnd();
+    LotgdResponse::pageStart();
+    LotgdResponse::callController($controller, $method ?: 'index');
+    LotgdResponse::pageEnd();
 }
 elseif (injectmodule($module, $admin))
 {
@@ -52,14 +54,14 @@ elseif (injectmodule($module, $admin))
 
     if ($time >= 1.00 && ($session['user']['superuser'] & SU_DEBUG_OUTPUT))
     {
-        \LotgdResponse::pageDebug('Slow Module ('.round($time, 2)."s): {$mostrecentmodule}`n");
+        LotgdResponse::pageDebug('Slow Module ('.round($time, 2)."s): {$mostrecentmodule}`n");
     }
 }
 else
 {
     do_forced_nav(false, false);
 
-    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('redirect.module.unactive', [], 'app_default'));
+    LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('redirect.module.unactive', [], 'app_default'));
 
     if ($session['user']['loggedin'])
     {

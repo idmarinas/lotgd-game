@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Doctrine\ORM;
 
+use Doctrine\ORM\Query;
+use Locale;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Translatable\TranslatableListener;
 use Laminas\Hydrator\ClassMethodsHydrator;
@@ -102,9 +104,9 @@ trait EntityRepositoryTrait
     {
         $query = $this->_em->createQuery($dql);
 
-        $query->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker');
+        $query->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker');
         // take locale from session or request etc.
-        $query->setHint(TranslatableListener::HINT_TRANSLATABLE_LOCALE, \Locale::getDefault());
+        $query->setHint(TranslatableListener::HINT_TRANSLATABLE_LOCALE, Locale::getDefault());
         // fallback to default values in case if record is not translated
         $query->setHint(TranslatableListener::HINT_FALLBACK, 1);
 

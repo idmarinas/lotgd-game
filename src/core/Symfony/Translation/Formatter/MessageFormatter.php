@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Symfony\Translation\Formatter;
 
+use DateTime;
 use Symfony\Component\Translation\Formatter\IntlFormatterInterface;
 use Symfony\Component\Translation\Formatter\MessageFormatter as CoreMessageFormatter;
 use Symfony\Component\Translation\Formatter\MessageFormatterInterface;
@@ -67,6 +68,6 @@ class MessageFormatter extends CoreMessageFormatter implements MessageFormatterI
         || \is_numeric($param) //-- Allow numeric values
         || \is_bool($param) //-- Allow bool values
         || \is_null($param) //-- Allow null value (Formatter can handle this value)
-        || $param instanceof \DateTime; //-- Allow DateTime object
+        || $param instanceof DateTime; //-- Allow DateTime object
     }
 }

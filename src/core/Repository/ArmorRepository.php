@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Repository;
 
+use Throwable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -53,9 +54,9 @@ class ArmorRepository extends ServiceEntityRepository
                 ->getSingleScalarResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return 0;
         }
@@ -78,9 +79,9 @@ class ArmorRepository extends ServiceEntityRepository
                 ->getSingleScalarResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return 1;
         }
@@ -106,7 +107,7 @@ class ArmorRepository extends ServiceEntityRepository
 
             return $query->getArrayResult();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -132,7 +133,7 @@ class ArmorRepository extends ServiceEntityRepository
 
             return $query->getArrayResult()[0];
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -158,7 +159,7 @@ class ArmorRepository extends ServiceEntityRepository
 
             return $query->getArrayResult();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

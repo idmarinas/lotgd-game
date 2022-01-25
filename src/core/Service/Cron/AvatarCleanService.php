@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Service\Cron;
 
+use DateTime;
+use DateInterval;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
@@ -66,14 +68,14 @@ class AvatarCleanService
         $query      = $repository->createQueryBuilder('u');
         $expr       = $query->expr();
 
-        $dateOld = new \DateTime('now');
-        $dateOld->sub(new \DateInterval("P{$old}D"));
+        $dateOld = new DateTime('now');
+        $dateOld->sub(new DateInterval("P{$old}D"));
 
-        $dateNew = new \DateTime('now');
-        $dateNew->sub(new \DateInterval("P{$new}D"));
+        $dateNew = new DateTime('now');
+        $dateNew->sub(new DateInterval("P{$new}D"));
 
-        $dateTrash = new \DateTime('now');
-        $dateTrash->sub(new \DateInterval("P{$trash}D"));
+        $dateTrash = new DateTime('now');
+        $dateTrash->sub(new DateInterval("P{$trash}D"));
 
         $query
             ->where('BIT_AND(a.superuser, :permit) = 0')

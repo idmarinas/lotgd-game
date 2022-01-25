@@ -13,6 +13,11 @@
 
 namespace Lotgd\Core\Repository;
 
+use Lotgd\Core\Repository\News\Backup;
+use Throwable;
+use Tracy\Debugger;
+use DateTime;
+use DateInterval;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -20,7 +25,7 @@ use Lotgd\Core\Entity\News as NewsEntity;
 
 class NewsRepository extends ServiceEntityRepository implements RepositoryBackupInterface
 {
-    use News\Backup;
+    use Backup;
     use EntityRepositoryTrait;
 
     public function __construct(ManagerRegistry $registry)
@@ -44,9 +49,9 @@ class NewsRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return false;
         }
@@ -61,8 +66,8 @@ class NewsRepository extends ServiceEntityRepository implements RepositoryBackup
 
         try
         {
-            $date = new \DateTime('now');
-            $date->sub(new \DateInterval("P{$expire}D"));
+            $date = new DateTime('now');
+            $date->sub(new DateInterval("P{$expire}D"));
 
             return $query->delete($this->_entityName, 'u')
                 ->where('u.date < :date')
@@ -71,9 +76,9 @@ class NewsRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return 0;
         }

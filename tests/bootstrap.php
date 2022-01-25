@@ -1,6 +1,7 @@
 <?php
 
 use Symfony\Component\Dotenv\Dotenv;
+use Tracy\Debugger;
 
 require \dirname(__DIR__).'/vendor/autoload.php';
 
@@ -17,4 +18,4 @@ elseif (method_exists(Dotenv::class, 'bootEnv'))
 }
 
 //-- Init Debugger
-\Tracy\Debugger::enable(\Tracy\Debugger::DEVELOPMENT, __DIR__.'/../storage/log/tracy');
+Debugger::enable(Debugger::DEVELOPMENT, __DIR__.'/../storage/log/tracy');

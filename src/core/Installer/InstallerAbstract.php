@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Installer;
 
+use Throwable;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Entity\Settings as EntitySettings;
 use Symfony\Component\Console\Input\InputInterface;
@@ -67,7 +68,7 @@ abstract class InstallerAbstract
 
             $this->stepsProcessed = json_decode($version->getValue(), true, 512, JSON_THROW_ON_ERROR);
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             //-- No need capture
         }
@@ -95,7 +96,7 @@ abstract class InstallerAbstract
             $this->doctrine->persist($version);
             $this->doctrine->flush();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             //-- No need capture
         }

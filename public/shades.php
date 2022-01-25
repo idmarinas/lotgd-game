@@ -1,8 +1,10 @@
 <?php
 
+use Lotgd\Core\Controller\ShadesController;
+
 require_once 'common.php';
 
-\LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
+LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
 //-- You can only stay in the shades if you're dead.
 if ($session['user']['alive'])
@@ -11,10 +13,10 @@ if ($session['user']['alive'])
 }
 
 //-- Init page
-\LotgdResponse::pageStart();
+LotgdResponse::pageStart();
 
 //-- Call controller
-\LotgdResponse::callController(\Lotgd\Core\Controller\ShadesController::class);
+LotgdResponse::callController(ShadesController::class);
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

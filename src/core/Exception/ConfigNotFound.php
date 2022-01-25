@@ -13,9 +13,10 @@
 
 namespace Lotgd\Core\Exception;
 
+use RuntimeException;
 /**
  * Base exception for Legend of the Green dragon.
  */
-class ConfigNotFound extends \RuntimeException
+class ConfigNotFound extends RuntimeException
 {
 }

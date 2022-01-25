@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Repository;
 
+use Throwable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -46,7 +47,7 @@ class CreaturesRepository extends ServiceEntityRepository
 
             return $query->getArrayResult()[0];
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -72,7 +73,7 @@ class CreaturesRepository extends ServiceEntityRepository
 
             return $query->getArrayResult();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Repository\User;
 
+use Throwable;
 use Doctrine\ORM\Query\Expr\Join;
 use Lotgd\Core\Entity as EntityCore;
 use Tracy\Debugger;
@@ -45,7 +46,7 @@ trait Avatar
                 ->getSingleResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -71,7 +72,7 @@ trait Avatar
                 ->getArrayResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -99,7 +100,7 @@ trait Avatar
                 ->getSingleScalarResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

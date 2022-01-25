@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Form\Type;
 
+use LotgdKernel;
+use DateTime;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -37,7 +39,7 @@ class LotgdThemeType extends ChoiceType
      */
     private function getThemeList(): array
     {
-        $cache = \LotgdKernel::get('cache.app');
+        $cache = LotgdKernel::get('cache.app');
         $item  = $cache->getItem('lotgd-core-pattern-theme-list');
 
         if ( ! $item->isHit())
@@ -62,7 +64,7 @@ class LotgdThemeType extends ChoiceType
                 }
             }
 
-            $item->expiresAt(new \DateTime('tomorrow'));
+            $item->expiresAt(new DateTime('tomorrow'));
             $item->set($skins);
             $cache->save($item);
         }

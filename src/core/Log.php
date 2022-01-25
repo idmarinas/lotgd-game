@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core;
 
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Entity\Debuglog;
 use Lotgd\Core\Entity\Gamelog;
@@ -41,7 +42,7 @@ class Log
             ->setMessage($message)
             ->setCategory($category)
             ->setFiled($filed)
-            ->setDate(new \DateTime('now'))
+            ->setDate(new DateTime('now'))
             ->setWho((int) $session['user']['acctid'])
         ;
 
@@ -82,7 +83,7 @@ class Log
 
                 ->setParameter('user', $user)
                 ->setParameter('field', $field)
-                ->setParameter('date', new \DateTime(date('Y-m-d 00:00:00')))
+                ->setParameter('date', new DateTime(date('Y-m-d 00:00:00')))
 
                 ->getQuery()
                 ->getResult()
@@ -107,7 +108,7 @@ class Log
 
         /** @var Debuglog $entity */
         $entity = $repository->find($id) ?: new Debuglog();
-        $entity->setDate(new \DateTime('now'))
+        $entity->setDate(new DateTime('now'))
             ->setActor($user)
             ->setTarget($target)
             ->setMessage($message)

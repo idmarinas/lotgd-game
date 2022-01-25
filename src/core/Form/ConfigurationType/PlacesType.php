@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Form\ConfigurationType;
 
+use Laminas\Filter\StripTags;
 use Laminas\Filter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -32,7 +33,7 @@ class PlacesType extends AbstractType
         ];
 
         $filters = [
-            new Filter\StripTags(),
+            new StripTags(),
         ];
 
         $builder

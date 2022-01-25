@@ -13,6 +13,9 @@
 
 namespace Lotgd\Core\Repository;
 
+use DateTime;
+use Throwable;
+use Tracy\Debugger;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -38,14 +41,14 @@ class BansRepository extends ServiceEntityRepository
         {
             return $query->delete($this->_entityName, 'u')
                 ->where("u.banexpire < :date AND u.banexpire > '0000-00-00 00:00:00'")
-                ->setParameter('date', new \DateTime('now'))
+                ->setParameter('date', new DateTime('now'))
                 ->getQuery()
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return 0;
         }
@@ -73,9 +76,9 @@ class BansRepository extends ServiceEntityRepository
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return 0;
         }

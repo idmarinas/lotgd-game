@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Repository\ModuleUserprefs;
 
+use Throwable;
 use Tracy\Debugger;
 
 /**
@@ -37,7 +38,7 @@ trait Backup
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -61,7 +62,7 @@ trait Backup
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Controller\LogdnetController;
+
 // translator ready
 // addnews ready
 // mail ready
@@ -14,30 +16,30 @@ if ( ! isset($_GET['op']) || 'list' != $_GET['op'])
 
 require_once 'common.php';
 
-$op = \LotgdRequest::getQuery('op');
+$op = LotgdRequest::getQuery('op');
 
 if ('' == $op)
 {
-    \LotgdResponse::callController(\Lotgd\Core\Controller\LogdnetController::class, 'register', true);
+    LotgdResponse::callController(LogdnetController::class, 'register', true);
 }
 elseif ('net' == $op)
 {
     // Someone is requesting our list of servers, so give it to them.
 
-    $version = (int) \LotgdRequest::getQuery('version', 0);
+    $version = (int) LotgdRequest::getQuery('version', 0);
 
     //-- New format JSON
     if (1 == $version)
     {
-        \LotgdResponse::callController(\Lotgd\Core\Controller\LogdnetController::class, 'net');
+        LotgdResponse::callController(LogdnetController::class, 'net');
     }
     //-- Old format
     else
     {
         // I'm going to do a slightly niftier sort manually in a bit which always
         // pops the most recent 'official' versions to the top of the list.
-        $repository = \Doctrine::getRepository('LotgdCore:Logdnet');
-        $entities = $repository->getNetServerList();
+        $repository = Doctrine::getRepository('LotgdCore:Logdnet');
+        $entities   = $repository->getNetServerList();
 
         // Okay, they are now sorted, so output them
         foreach ($entities as $value)
@@ -50,13 +52,13 @@ elseif ('net' == $op)
 else
 {
     //-- Init page
-    \LotgdResponse::pageStart('title', [], 'page_logdnet');
+    LotgdResponse::pageStart('title', [], 'page_logdnet');
 
-    \LotgdNavigation::addHeader('common.category.login');
-    \LotgdNavigation::addNav('common.nav.login', 'index.php');
+    LotgdNavigation::addHeader('common.category.login');
+    LotgdNavigation::addNav('common.nav.login', 'index.php');
 
-    \LotgdResponse::callController(\Lotgd\Core\Controller\LogdnetController::class, 'list');
+    LotgdResponse::callController(LogdnetController::class, 'list');
 
     //-- Finalize page
-    \LotgdResponse::pageEnd();
+    LotgdResponse::pageEnd();
 }

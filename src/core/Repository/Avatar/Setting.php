@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Repository\Avatar;
 
+use Throwable;
 use Tracy\Debugger;
 
 /**
@@ -38,7 +39,7 @@ trait Setting
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

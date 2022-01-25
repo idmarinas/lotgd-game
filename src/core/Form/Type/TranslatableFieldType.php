@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Form\Type;
 
+use InvalidArgumentException;
 use Lotgd\Core\Form\EventListener\AddTranslatableFieldSubscriber;
 use Lotgd\Core\Lib\Settings;
 use Symfony\Component\Form\AbstractType;
@@ -31,16 +32,19 @@ class TranslatableFieldType extends AbstractType
         $this->settings = $settings;
     }
 
+    /**
+     * @return never
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ( ! class_exists($options['personal_translation']))
         {
-            throw new \InvalidArgumentException(sprintf("Unable to find personal translation class: '%s'", $options['personal_translation']));
+            throw new InvalidArgumentException(sprintf("Unable to find personal translation class: '%s'", $options['personal_translation']));
         }
 
         if ( ! $options['field'])
         {
-            throw new \InvalidArgumentException('You should provide a field to translate');
+            throw new InvalidArgumentException('You should provide a field to translate');
         }
 
         $subscriber = new AddTranslatableFieldSubscriber($builder->getFormFactory());

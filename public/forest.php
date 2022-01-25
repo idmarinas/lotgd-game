@@ -1,10 +1,12 @@
 <?php
 
+use Lotgd\Core\Controller\ForestController;
+use Lotgd\Core\Events;
 // addnews ready
 // translator ready
 // mail ready
 
-use Lotgd\Core\Events;
+use Lotgd\Core\Http\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
@@ -13,19 +15,19 @@ require_once 'lib/events.php';
 // Don't hook on to this text for your standard modules please, use "forest" instead.
 // This hook is specifically to allow modules that do other forests to create ambience.
 $args = new GenericEvent(null, ['textDomain' => 'page_forest', 'textDomainNavigation' => 'navigation_forest']);
-\LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_PRE);
+LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_PRE);
 $result               = modulehook('forest-text-domain', $args->getArguments());
 $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
 /** @var Lotgd\Core\Http\Request $request */
-$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
+$request = LotgdKernel::get(Request::class);
 /** @var \Lotgd\Core\Tool\CreatureFunction $creatureFunctions */
 $creatureFunctions = LotgdKernel::get('lotgd_core.tool.creature_functions');
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], $textDomain);
+LotgdResponse::pageStart('title', [], $textDomain);
 
 $dontDisplayForestMessage = handle_event('forest');
 
@@ -39,7 +41,7 @@ $params = [
 $op = (string) $request->query->get('op');
 
 //-- Change text domain for navigation
-\LotgdNavigation::setTextDomain($textDomainNavigation);
+LotgdNavigation::setTextDomain($textDomainNavigation);
 
 $battle = false;
 
@@ -51,18 +53,18 @@ if ('dragon' == $op)
     $params['tpl']     = 'dragon';
     $params['partner'] = LotgdTool::getPartner();
 
-    \LotgdNavigation::addNav('nav.cave', 'dragon.php');
-    \LotgdNavigation::addNav('nav.baby', 'inn.php?op=fleedragon');
+    LotgdNavigation::addNav('nav.cave', 'dragon.php');
+    LotgdNavigation::addNav('nav.baby', 'inn.php?op=fleedragon');
 
     $session['user']['seendragon'] = 1;
 }
 elseif ('search' == $op)
 {
-    \LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
+    LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
     if ($session['user']['turns'] <= 0)
     {
-        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.tired', [], $textDomain));
+        LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('flash.message.tired', [], $textDomain));
 
         $op = '';
         $request->query->set('op', '');
@@ -70,19 +72,19 @@ elseif ('search' == $op)
     else
     {
         $args = new GenericEvent();
-        \LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_SEARCH);
+        LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_SEARCH);
         modulehook('forestsearch', $args->getArguments());
 
         $args = new GenericEvent(null, [
             'soberval' => 0.9,
-            'sobermsg' => \LotgdTranslator::t('sober.message', [], $textDomain),
+            'sobermsg' => LotgdTranslator::t('sober.message', [], $textDomain),
             'schema'   => 'forest',
         ]);
         modulehook('soberup', $args->getArguments());
 
         /** New occurrence dispatcher for special events. */
         /** @var \Symfony\Component\EventDispatcher\GenericEvent $event */
-        $event = \LotgdKernel::get('occurrence_dispatcher')->dispatch('forest', null, [
+        $event = LotgdKernel::get('occurrence_dispatcher')->dispatch('forest', null, [
             'translation_domain'            => $textDomain,
             'translation_domain_navigation' => $textDomainNavigation,
             'route'                         => 'forest.php',
@@ -91,7 +93,7 @@ elseif ('search' == $op)
 
         if ($event->isPropagationStopped())
         {
-            \LotgdResponse::pageEnd();
+            LotgdResponse::pageEnd();
         }
         elseif ($event['skip_description'])
         {
@@ -104,9 +106,9 @@ elseif ('search' == $op)
         //-- Only execute when NOT occurrence is in progress.
         elseif (0 != module_events('forest', LotgdSetting::getSetting('forestchance', 15)))
         {
-            if (\LotgdNavigation::checkNavs())
+            if (LotgdNavigation::checkNavs())
             {
-                \LotgdResponse::pageEnd();
+                LotgdResponse::pageEnd();
             }
 
             // If we're showing the forest, make sure to reset the special
@@ -144,7 +146,7 @@ elseif ('search' == $op)
             elseif ('thrill' == $type)
             {
                 ++$plev;
-                \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.thrill', [], $textDomain));
+                LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('flash.message.thrill', [], $textDomain));
             }
             elseif ('suicide' == $type)
             {
@@ -163,7 +165,7 @@ elseif ('search' == $op)
                     ++$plev;
                     $extrabuff = .4;
                 }
-                \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.suicide', [], $textDomain));
+                LotgdFlashMessages::addErrorMessage(LotgdTranslator::t('flash.message.suicide', [], $textDomain));
             }
 
             $multi          = 1;
@@ -182,7 +184,7 @@ elseif ('search' == $op)
 
                         $mintargetlevel = $targetlevel - 2;
 
-                        if (mt_rand(0, 1) !== 0)
+                        if (0 !== mt_rand(0, 1))
                         {
                             $mintargetlevel = $targetlevel - 1;
                         }
@@ -193,7 +195,7 @@ elseif ('search' == $op)
 
                         $mintargetlevel = $targetlevel - 1;
 
-                        if (mt_rand(0, 1) !== 0)
+                        if (0 !== mt_rand(0, 1))
                         {
                             ++$targetlevel;
                             $mintargetlevel = $targetlevel - 1;
@@ -203,7 +205,7 @@ elseif ('search' == $op)
                     {
                         $multi += e_rand(LotgdSetting::getSetting('multisuimin', 2), LotgdSetting::getSetting('multisuimax', 4));
 
-                        if (mt_rand(0, 1) !== 0)
+                        if (0 !== mt_rand(0, 1))
                         {
                             $mintargetlevel = $targetlevel - 1;
                         }
@@ -230,14 +232,14 @@ elseif ('search' == $op)
                 $multi += $targetlevel - 17; //-- More dificult if have more level than 15
                 // $targetlevel = 17; //-- Not avoid level range setting
             }
-            \LotgdResponse::pageDebug("Creatures: {$multi} Targetlevel: {$targetlevel} Mintargetlevel: {$mintargetlevel}");
+            LotgdResponse::pageDebug("Creatures: {$multi} Targetlevel: {$targetlevel} Mintargetlevel: {$mintargetlevel}");
 
             $packofmonsters = 0 == mt_rand(0, 5) && LotgdSetting::getSetting('allowpackofmonsters', true); // true or false
-            $packofmonsters = $multi > 1 && $packofmonsters;
+            $packofmonsters = $multi > 1         && $packofmonsters;
 
             $result = $creatureFunctions->lotgdSearchCreature($multi, $targetlevel, $mintargetlevel, $packofmonsters, true);
 
-            \LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields();
+            LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields();
 
             if (empty($result))
             {
@@ -249,9 +251,9 @@ elseif ('search' == $op)
             }
             else
             {
-                $count  = (int) \LotgdTranslator::translate('prefix.creature.count', [], $textDomain);
+                $count  = (int) LotgdTranslator::translate('prefix.creature.count', [], $textDomain);
                 $key    = mt_rand(0, $count);
-                $prefix = \LotgdTranslator::translate("prefix.creature.0{$key}", [], $textDomain);
+                $prefix = LotgdTranslator::translate("prefix.creature.0{$key}", [], $textDomain);
                 //-- Check if have a valid name
                 $prefix = "prefix.creature.0{$key}" == $prefix ? 'Elite' : $prefix;
 
@@ -296,7 +298,7 @@ elseif ('search' == $op)
 
                     if ($multi > 1)
                     {
-                        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.group', [
+                        LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('flash.message.group', [
                             'multi'        => $multi,
                             'creatureName' => $badguy['creaturename'],
                         ], $textDomain));
@@ -339,14 +341,14 @@ elseif ('search' == $op)
                     }
                 }
             }
-            \LotgdKernel::get('lotgd_core.combat.buffer')->calculateBuffFields();
+            LotgdKernel::get('lotgd_core.combat.buffer')->calculateBuffFields();
             $args = new GenericEvent(null, [
                 'enemies' => $stack,
                 'options' => [
                     'type' => 'forest',
                 ],
             ]);
-            \LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_FIGHT_START);
+            LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_FIGHT_START);
             $attackstack = modulehook('forestfight-start', $args->getArguments());
 
             $session['user']['badguy'] = $attackstack;
@@ -368,11 +370,11 @@ elseif ('run' == $op)
         $battle        = false;
         $params['tpl'] = 'default';
 
-        \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.run.success', [], $textDomain));
+        LotgdFlashMessages::addSuccessMessage(LotgdTranslator::t('flash.message.run.success', [], $textDomain));
 
         $op = '';
         $request->query->set('op', '');
-        \LotgdKernel::get('lotgd_core.combat.battle')->unsuspendBuffs();
+        LotgdKernel::get('lotgd_core.combat.battle')->unsuspendBuffs();
 
         foreach ($companions as $index => $companion)
         {
@@ -385,7 +387,7 @@ elseif ('run' == $op)
     else
     {
         $battle = true;
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.run.fail', [], $textDomain));
+        LotgdFlashMessages::addErrorMessage(LotgdTranslator::t('flash.message.run.fail', [], $textDomain));
     }
 }
 elseif ('fight' == $op || 'newtarget' == $op)
@@ -395,7 +397,7 @@ elseif ('fight' == $op || 'newtarget' == $op)
 
 if ($battle)
 {
-    $serviceBattle = \LotgdKernel::get('lotgd_core.combat.battle');
+    $serviceBattle = LotgdKernel::get('lotgd_core.combat.battle');
 
     //-- Battle zone.
     $serviceBattle
@@ -439,16 +441,17 @@ $request->attributes->set('params', $params);
 
 if ( ! $battle)
 {
-    \LotgdResponse::callController(Lotgd\Core\Controller\ForestController::class, $method);
+    LotgdResponse::callController(ForestController::class, $method);
 }
 
 //-- Restore text domain for navigation
-\LotgdNavigation::setTextDomain();
+LotgdNavigation::setTextDomain();
 
 //-- Display events
-if ('' == $op) {
+if ('' == $op)
+{
     module_display_events('forest', 'forest.php');
 }
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

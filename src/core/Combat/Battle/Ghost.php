@@ -12,6 +12,8 @@
 
 namespace Lotgd\Core\Combat\Battle;
 
+use LogicException;
+
 trait Ghost
 {
     private $ghostActivated = false;
@@ -26,7 +28,7 @@ trait Ghost
     {
         if ($this->battleIsStarted || ! $this->battleIsInitalized)
         {
-            throw new \LogicException('The character cannot be activated as a ghost because the battle has already started or the battlefield has not been started.. Call Battle::enableGhost() before Battle::battleStart() but after Battle::initialize().');
+            throw new LogicException('The character cannot be activated as a ghost because the battle has already started or the battlefield has not been started.. Call Battle::enableGhost() before Battle::battleStart() but after Battle::initialize().');
         }
 
         $this->ghostStats['original_attack']    = $this->user['attack'];
@@ -47,7 +49,7 @@ trait Ghost
     {
         if ( ! $this->battleShowedResults || ! $this->ghostActivated)
         {
-            throw new \LogicException('The character cannot be restored because the results have not been processed and/or the ghost is not activated. Call Battle::enableGhost() and Battle::battleResults() before Battle::disableGhost().');
+            throw new LogicException('The character cannot be restored because the results have not been processed and/or the ghost is not activated. Call Battle::enableGhost() and Battle::battleResults() before Battle::disableGhost().');
         }
 
         $this->user['soulpoints'] = $this->user['hitpoints'];

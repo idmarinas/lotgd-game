@@ -13,6 +13,10 @@
 
 namespace Lotgd\Core\Repository;
 
+use DateTime;
+use DateInterval;
+use Throwable;
+use Tracy\Debugger;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -36,8 +40,8 @@ class FaillogRepository extends ServiceEntityRepository
 
         try
         {
-            $date = new \DateTime('now');
-            $date->sub(new \DateInterval("P{$expire}D"));
+            $date = new DateTime('now');
+            $date->sub(new DateInterval("P{$expire}D"));
 
             return $query->delete($this->_entityName, 'u')
                 ->where('u.date < :date')
@@ -46,9 +50,9 @@ class FaillogRepository extends ServiceEntityRepository
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return 0;
         }

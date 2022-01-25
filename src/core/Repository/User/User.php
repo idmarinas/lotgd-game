@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Repository\User;
 
+use Throwable;
 use Laminas\Paginator\Paginator;
 use Tracy\Debugger;
 
@@ -42,7 +43,7 @@ trait User
 
             return $result[0]['prefs'];
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -73,7 +74,7 @@ trait User
         }
         $query->orderBy($sort, 'ASC');
 
-        if ($search)
+        if ($search !== '' && $search !== '0')
         {
             $query->where('u.login LIKE :search OR c.name LIKE :search OR u.acctid = :search OR u.emailaddress LIKE :search OR u.lastip LIKE :search OR u.uniqueid LIKE :search')
                 ->setParameter('search', "%{$search}%")

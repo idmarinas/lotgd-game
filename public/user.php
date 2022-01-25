@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\EntityForm\AccountsType;
+use Lotgd\Core\EntityForm\CharactersType;
 //addnews ready
 // mail ready
 
@@ -11,12 +13,12 @@ require_once 'lib/showform.php';
 
 check_su_access(SU_EDIT_USERS);
 
-$op       = (string) \LotgdRequest::getQuery('op');
-$userId   = (int) \LotgdRequest::getQuery('userid');
-$page     = (int) \LotgdRequest::getQuery('page');
-$sort     = \LotgdRequest::getQuery('sort');
-$petition = \LotgdRequest::getQuery('returnpetition');
-$module   = (string) \LotgdRequest::getQuery('module');
+$op       = (string) LotgdRequest::getQuery('op');
+$userId   = (int) LotgdRequest::getQuery('userid');
+$page     = (int) LotgdRequest::getQuery('page');
+$sort     = LotgdRequest::getQuery('sort');
+$petition = LotgdRequest::getQuery('returnpetition');
+$module   = (string) LotgdRequest::getQuery('module');
 
 if ('lasthit' == $op)
 {
@@ -27,9 +29,9 @@ if ('lasthit' == $op)
 $textDomain = 'grotto_user';
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], $textDomain);
+LotgdResponse::pageStart('title', [], $textDomain);
 
-$repository = \Doctrine::getRepository('LotgdCore:User');
+$repository = Doctrine::getRepository('LotgdCore:User');
 
 $returnpetition = $petition ? "&returnpetition={$petition}" : '';
 $params         = [
@@ -38,12 +40,12 @@ $params         = [
     'returnPetition' => $returnpetition,
 ];
 
-\LotgdNavigation::superuserGrottoNav();
+LotgdNavigation::superuserGrottoNav();
 
-\LotgdNavigation::addHeader('user.category.bans');
-\LotgdNavigation::addNav('user.nav.ban.add', 'bans.php?op=setupban');
-\LotgdNavigation::addNav('user.nav.ban.list', 'bans.php?op=removeban');
-\LotgdNavigation::addNav('user.nav.ban.search', 'bans.php?op=searchban');
+LotgdNavigation::addHeader('user.category.bans');
+LotgdNavigation::addNav('user.nav.ban.add', 'bans.php?op=setupban');
+LotgdNavigation::addNav('user.nav.ban.list', 'bans.php?op=removeban');
+LotgdNavigation::addNav('user.nav.ban.search', 'bans.php?op=searchban');
 
 //all races here expect such ones no module covers, so we add the users race first.
 if ('edit' == $op)
@@ -62,22 +64,22 @@ if ('del' == $op)
     {
         if ($account->getSuperuser() > 0 && SU_MEGAUSER != ($session['user']['superuser'] & SU_MEGAUSER))
         {
-            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.account.del.fail', [], $textDomain));
+            LotgdFlashMessages::addErrorMessage(LotgdTranslator::t('flash.message.account.del.fail', [], $textDomain));
 
             redirect('user.php');
         }
 
-        if (\LotgdKernel::get('lotgd.core.backup')->characterCleanUp($userId, CHAR_DELETE_MANUAL))
+        if (LotgdKernel::get('lotgd.core.backup')->characterCleanUp($userId, CHAR_DELETE_MANUAL))
         {
-            \LotgdTool::addNews('news.account.delete', ['playerName' => $account->getAvatar()->getName()], $textDomain, true);
+            LotgdTool::addNews('news.account.delete', ['playerName' => $account->getAvatar()->getName()], $textDomain, true);
 
-            \LotgdLog::debug("Deleted account {$account->getAvatar()->getName()}");
+            LotgdLog::debug("Deleted account {$account->getAvatar()->getName()}");
         }
     }
 }
 elseif ('lasthit' == $op)
 {
-    $outputRepository = \Doctrine::getRepository('LotgdCore:AccountsOutput');
+    $outputRepository = Doctrine::getRepository('LotgdCore:AccountsOutput');
     $output2          = $outputRepository->getOutput($userId);
 
     if ('' == $output2)
@@ -97,15 +99,15 @@ elseif ('special' == $op)
 {
     $accountEntity = $repository->find($userId);
 
-    if ('' != \LotgdRequest::getPost('newday'))
+    if ('' != LotgdRequest::getPost('newday'))
     {
         $character = $accountEntity->getAvatar();
-        $character->setLasthit(new \DateTime('0000-00-00 00:00:00'));
+        $character->setLasthit(new DateTime('0000-00-00 00:00:00'));
         $accountEntity->setAvatar($character);
 
-        \Doctrine::persist($character);
+        Doctrine::persist($character);
     }
-    elseif ('' != \LotgdRequest::getPost('fixnavs'))
+    elseif ('' != LotgdRequest::getPost('fixnavs'))
     {
         $character = $accountEntity->getAvatar();
         $character->setAllowednavs([])
@@ -113,24 +115,24 @@ elseif ('special' == $op)
         ;
         $accountEntity->setAvatar($character);
 
-        \Doctrine::persist($character);
-        $outputRepository = \Doctrine::getRepository('LotgdCore:AccountsOutput');
+        Doctrine::persist($character);
+        $outputRepository = Doctrine::getRepository('LotgdCore:AccountsOutput');
         $outputRepository->deleteOutputOfAccount($userId);
     }
-    elseif ('' != \LotgdRequest::getPost('clearvalidation'))
+    elseif ('' != LotgdRequest::getPost('clearvalidation'))
     {
         $accountEntity->setEmailvalidation('');
     }
 
-    \Doctrine::persist($accountEntity);
-    \Doctrine::flush();
+    Doctrine::persist($accountEntity);
+    Doctrine::flush();
 
     redirect("user.php?op=edit&userid={$userId}");
 }
 elseif ('save' == $op)
 {
     $oldValues  = $repository->getUserById($userId);
-    $postValues = \LotgdRequest::getPostAll();
+    $postValues = LotgdRequest::getPostAll();
 
     $messages = '';
 
@@ -143,7 +145,7 @@ elseif ('save' == $op)
         elseif ('newpassword' == $key)
         {
             /** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder $passwordEncoder */
-            $passwordEncoder        = \LotgdKernel::get('security.password_encoder');
+            $passwordEncoder        = LotgdKernel::get('security.password_encoder');
             $postValues['password'] = $passwordEncoder->encodePassword($repository->find($userId), $val);
 
             continue;
@@ -175,13 +177,13 @@ elseif ('save' == $op)
 
         if ($oldValues[$key] != $val)
         {
-            $messages .= \LotgdTranslator::t('flash.message.account.edit.changed', ['key' => $key, 'oldVal' => $oldValues[$key], 'newVal' => $val], $textDomain).'<br>';
+            $messages .= LotgdTranslator::t('flash.message.account.edit.changed', ['key' => $key, 'oldVal' => $oldValues[$key], 'newVal' => $val], $textDomain).'<br>';
 
-            \LotgdLog::debug($session['user']['name']."`0 changed {$key} from {$oldValues[$key]} to {$val}", $userId);
+            LotgdLog::debug($session['user']['name']."`0 changed {$key} from {$oldValues[$key]} to {$val}", $userId);
         }
     }
 
-    $characterRepository = \Doctrine::getRepository('LotgdCore:Avatar');
+    $characterRepository = Doctrine::getRepository('LotgdCore:Avatar');
 
     $accountEntity   = $repository->find($userId);
     $characterEntity = $characterRepository->find($accountEntity->getAvatar()->getId());
@@ -189,33 +191,33 @@ elseif ('save' == $op)
     $accountEntity   = $repository->hydrateEntity($postValues, $accountEntity);
     $characterEntity = $characterRepository->hydrateEntity($postValues, $characterEntity);
 
-    \Doctrine::persist($accountEntity);
-    \Doctrine::persist($characterEntity);
-    \Doctrine::flush();
+    Doctrine::persist($accountEntity);
+    Doctrine::persist($characterEntity);
+    Doctrine::flush();
 
     if ($session['user']['acctid'] == $userId)
     {
         $session['user'] = $repository->getUserById($userId);
     }
 
-    ($messages) && \LotgdFlashMessages::addSuccessMessage($messages);
+    ($messages) && LotgdFlashMessages::addSuccessMessage($messages);
 }
 elseif ('savemodule' == $op)
 {
-    $post = \LotgdRequest::getPostAll();
+    $post = LotgdRequest::getPostAll();
     $args = new GenericEvent(null, $post);
-    \LotgdEventDispatcher::dispatch($args, Events::PAGE_USER_VALIDATE_PREFS);
+    LotgdEventDispatcher::dispatch($args, Events::PAGE_USER_VALIDATE_PREFS);
     $post = modulehook('validateprefs', $args->getArguments(), true, $module);
 
     if (isset($post['validation_error']) && $post['validation_error'])
     {
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.account.edit.module.error', ['error' => $post['validation_error']], $textDomain));
+        LotgdFlashMessages::addErrorMessage(LotgdTranslator::t('flash.message.account.edit.module.error', ['error' => $post['validation_error']], $textDomain));
     }
     else
     {
         reset($post);
 
-        $userPrefsRepository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+        $userPrefsRepository = Doctrine::getRepository('LotgdCore:ModuleUserprefs');
 
         $messages = '';
 
@@ -223,25 +225,25 @@ elseif ('savemodule' == $op)
         {
             $entity = $userPrefsRepository->findOneBy(['modulename' => $module, 'setting' => $key, 'userid' => $userId]);
 
-            \Doctrine::persist($userPrefsRepository->hydrateEntity([
+            Doctrine::persist($userPrefsRepository->hydrateEntity([
                 'modulename' => $module,
                 'setting'    => $key,
                 'userid'     => $userId,
                 'value'      => $val,
             ], $entity));
-            $messages .= \LotgdTranslator::t('flash.message.account.edit.module.setting', ['key' => $module, 'val' => $val], $textDomain);
+            $messages .= LotgdTranslator::t('flash.message.account.edit.module.setting', ['key' => $module, 'val' => $val], $textDomain);
         }
 
-        \Doctrine::flush();
+        Doctrine::flush();
 
-        $messages .= \LotgdTranslator::t('flash.message.account.edit.module.saved', ['module' => $module], $textDomain);
+        $messages .= LotgdTranslator::t('flash.message.account.edit.module.saved', ['module' => $module], $textDomain);
 
-        \LotgdFlashMessages::addSuccessMessage($messages);
+        LotgdFlashMessages::addSuccessMessage($messages);
     }
 
     $op = 'edit';
-    \LotgdRequest::setQuery('op', 'edit');
-    \LotgdRequest::setQuery('subop', 'module');
+    LotgdRequest::setQuery('op', 'edit');
+    LotgdRequest::setQuery('subop', 'module');
 }
 
 $row = $characterInfo ?? null;
@@ -251,39 +253,39 @@ switch ($op)
     case 'edit':
         $params['tpl'] = 'edit';
 
-        $subop = (string) \LotgdRequest::getQuery('subop');
+        $subop = (string) LotgdRequest::getQuery('subop');
 
         if ('' != $petition)
         {
-            \LotgdNavigation::addHeader('common.category.navigation');
-            \LotgdNavigation::addNav('user.nav.petition', "viewpetition.php?op=view&id={$petition}");
+            LotgdNavigation::addHeader('common.category.navigation');
+            LotgdNavigation::addNav('user.nav.petition', "viewpetition.php?op=view&id={$petition}");
         }
 
-        \LotgdNavigation::addHeader('user.category.operations');
-        \LotgdNavigation::addNav('user.nav.last.hit', "user.php?op=lasthit&userid={$userId}");
-        \LotgdNavigation::addNav('user.nav.debuglog', "user.php?op=debuglog&userid={$userId}{$returnpetition}");
-        \LotgdNavigation::addNav('user.nav.bio', "bio.php?char={$userId}&ret=".urlencode(\LotgdRequest::getServer('REQUEST_URI')));
+        LotgdNavigation::addHeader('user.category.operations');
+        LotgdNavigation::addNav('user.nav.last.hit', "user.php?op=lasthit&userid={$userId}");
+        LotgdNavigation::addNav('user.nav.debuglog', "user.php?op=debuglog&userid={$userId}{$returnpetition}");
+        LotgdNavigation::addNav('user.nav.bio', "bio.php?char={$userId}&ret=".urlencode(LotgdRequest::getServer('REQUEST_URI')));
 
         if (($session['user']['superuser'] & SU_EDIT_DONATIONS) !== 0)
         {
-            \LotgdNavigation::addNav('user.nav.donation', 'donators.php?op=add1&name='.rawurlencode($row['login']).'&ret='.urlencode(\LotgdRequest::getServer('REQUEST_URI')));
+            LotgdNavigation::addNav('user.nav.donation', 'donators.php?op=add1&name='.rawurlencode($row['login']).'&ret='.urlencode(LotgdRequest::getServer('REQUEST_URI')));
         }
 
-        \LotgdNavigation::addHeader('user.category.bans');
-        \LotgdNavigation::addNav('user.nav.ban.setup', "bans.php?op=setupban&userid={$userId}");
+        LotgdNavigation::addHeader('user.category.bans');
+        LotgdNavigation::addNav('user.nav.ban.setup', "bans.php?op=setupban&userid={$userId}");
 
         module_editor_navs('prefs', "user.php?op=edit&subop=module&userid={$userId}{$returnpetition}&module=");
 
         if ('' == $subop)
         {
-            $lotgdFormFactory    = \LotgdKernel::get('form.factory');
-            $type                = (string) \LotgdRequest::getQuery('type') ?: 'acct';
-            $characterRepository = \Doctrine::getRepository('LotgdCore:Avatar');
+            $lotgdFormFactory    = LotgdKernel::get('form.factory');
+            $type                = (string) LotgdRequest::getQuery('type') ?: 'acct';
+            $characterRepository = Doctrine::getRepository('LotgdCore:Avatar');
 
             $accountEntity   = $repository->find($userId);
             $characterEntity = $characterRepository->find($accountEntity->getAvatar()->getId());
 
-            $class  = 'acct' == $type ? \Lotgd\Core\EntityForm\AccountsType::class : \Lotgd\Core\EntityForm\CharactersType::class;
+            $class  = 'acct' == $type ? AccountsType::class : CharactersType::class;
             $entity = 'acct' == $type ? $accountEntity : $characterEntity;
 
             $form = $lotgdFormFactory->create($class, $entity, [
@@ -293,20 +295,20 @@ switch ($op)
                 ],
             ]);
 
-            $form->handleRequest(\LotgdRequest::_i());
+            $form->handleRequest(LotgdRequest::_i());
 
             if ($form->isSubmitted() && $form->isValid())
             {
                 $entity = $form->getData();
 
-                \Doctrine::persist($entity);
-                \Doctrine::flush();
+                Doctrine::persist($entity);
+                Doctrine::flush();
 
                 $message = ('acct' == $type) ? 'flash.message.account.edit.saved.account' : 'flash.message.account.edit.saved.character';
 
                 $name = 'acct' == $type ? 'getLogin' : 'getName';
 
-                \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t($message, ['name' => $entity->{$name}()], $textDomain));
+                LotgdFlashMessages::addSuccessMessage(LotgdTranslator::t($message, ['name' => $entity->{$name}()], $textDomain));
 
                 if ($session['user']['acctid'] == $userId)
                 {
@@ -314,7 +316,7 @@ switch ($op)
                 }
             }
 
-            \LotgdNavigation::addNavAllow("user.php?op=edit&type={$type}&userid={$userId}{$returnpetition}");
+            LotgdNavigation::addNavAllow("user.php?op=edit&type={$type}&userid={$userId}{$returnpetition}");
 
             $params['form']         = $form->createView();
             $params['userLoggedIn'] = $accountEntity->getLoggedin();
@@ -325,10 +327,10 @@ switch ($op)
         }
         elseif ('module' == $subop)
         {
-            $module = (string) \LotgdRequest::getQuery('module');
+            $module = (string) LotgdRequest::getQuery('module');
 
-            \LotgdNavigation::addHeader('user.category.operations');
-            \LotgdNavigation::addNav('user.nav.edit', "user.php?op=edit&userid={$userId}{$returnpetition}");
+            LotgdNavigation::addHeader('user.category.operations');
+            LotgdNavigation::addNav('user.nav.edit', "user.php?op=edit&userid={$userId}{$returnpetition}");
 
             $info = get_module_info($module);
 
@@ -359,7 +361,7 @@ switch ($op)
                     }
                 }
 
-                $userPrefsRepository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+                $userPrefsRepository = Doctrine::getRepository('LotgdCore:ModuleUserprefs');
                 $result              = $userPrefsRepository->findBy(['modulename' => $module, 'userid' => $userId]);
 
                 foreach ($result as $row)
@@ -367,29 +369,30 @@ switch ($op)
                     $data[$row->getSetting()] = $row->getValue();
                 }
 
-                \LotgdResponse::pageAddContent("<form action='user.php?op=savemodule&module={$module}&userid={$userId}{$returnpetition}' method='POST'>");
-                \LotgdNavigation::addNavAllow("user.php?op=savemodule&module={$module}&userid={$userId}{$returnpetition}");
+                LotgdResponse::pageAddContent("<form action='user.php?op=savemodule&module={$module}&userid={$userId}{$returnpetition}' method='POST'>");
+                LotgdNavigation::addNavAllow("user.php?op=savemodule&module={$module}&userid={$userId}{$returnpetition}");
                 lotgd_showform($msettings, $data);
-                \LotgdResponse::pageAddContent('</form>');
+                LotgdResponse::pageAddContent('</form>');
 
-                \LotgdResponse::pageEnd();
+                LotgdResponse::pageEnd();
             }
             else
             {
-                \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.account.edit.no.prefs', ['module' => $module], $textDomain));
+                LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('flash.message.account.edit.no.prefs', ['module' => $module], $textDomain));
 
                 redirect("user.php?op=edit&userid={$userId}{$returnpetition}");
             }
         }
+
     break;
     case 'debuglog':
         $params['tpl'] = 'debuglog';
 
-        \LotgdNavigation::addHeader('user.category.operations');
-        \LotgdNavigation::addNav('user.nav.edit', "user.php?op=edit&userid={$userId}{$returnpetition}");
-        \LotgdNavigation::addNav('user.nav.refresh', "user.php?op=debuglog&userid={$userId}{$returnpetition}");
+        LotgdNavigation::addHeader('user.category.operations');
+        LotgdNavigation::addNav('user.nav.edit', "user.php?op=edit&userid={$userId}{$returnpetition}");
+        LotgdNavigation::addNav('user.nav.refresh', "user.php?op=debuglog&userid={$userId}{$returnpetition}");
 
-        $debugLogRepository = \Doctrine::getRepository('LotgdCore:Debuglog');
+        $debugLogRepository = Doctrine::getRepository('LotgdCore:Debuglog');
 
         $query = $debugLogRepository->createQueryBuilder('u');
 
@@ -405,31 +408,33 @@ switch ($op)
         ;
 
         $params['paginator'] = $debugLogRepository->getPaginator($query, $page, 500);
+
     break;
     default:
         $params['tpl'] = 'default';
 
-        $repoAcctEveryPage = \Doctrine::getRepository('LotgdCore:AccountsEverypage');
+        $repoAcctEveryPage = Doctrine::getRepository('LotgdCore:AccountsEverypage');
 
-        $page  = (int) \LotgdRequest::getQuery('page');
-        $sort  = (string) \LotgdRequest::getQuery('sort');
+        $page  = (int) LotgdRequest::getQuery('page');
+        $sort  = (string) LotgdRequest::getQuery('sort');
         $order = $sort ?: 'acctid';
 
-        $query = (string) \LotgdRequest::getPost('q');
-        $query = (string) ($query ?: \LotgdRequest::getQuery('q'));
+        $query = (string) LotgdRequest::getPost('q');
+        $query = (string) ($query ?: LotgdRequest::getQuery('q'));
 
         $params['query']     = '' !== $query && '0' !== $query ? "q={$query}" : '';
         $params['paginator'] = $repository->userSearchAccounts($query, $order, $page);
         $params['stats']     = $repoAcctEveryPage->getStatsPageGen();
 
-        $params['paginatorLink'] = \LotgdRequest::getServer('REQUEST_URI');
+        $params['paginatorLink'] = LotgdRequest::getServer('REQUEST_URI');
+
     break;
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('admin/page/user.html.twig', $params));
+LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/user.html.twig', $params));
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();
 
 function show_bitfield($val)
 {

@@ -1,10 +1,12 @@
 <?php
 
+use Lotgd\Core\Controller\LoginController;
+use Lotgd\Core\Entity\Bans;
 // mail ready
 // addnews ready
 // translator ready
 
-use Lotgd\Core\Controller\LoginController;
+use Lotgd\Core\Entity\Faillog;
 use Lotgd\Core\Event\Core;
 
 \define('ALLOW_ANONYMOUS', true);
@@ -12,10 +14,10 @@ use Lotgd\Core\Event\Core;
 require_once 'common.php';
 require_once 'lib/serverfunctions.class.php';
 
-$op    = (string) \LotgdRequest::getQuery('op');
-$name  = (string) \LotgdRequest::getPost('name');
+$op    = (string) LotgdRequest::getQuery('op');
+$name  = (string) LotgdRequest::getPost('name');
 $iname = (string) LotgdSetting::getSetting('innname', LOCATION_INN);
-$force = \LotgdRequest::getPost('force');
+$force = LotgdRequest::getPost('force');
 
 if ('' != $name)
 {
@@ -25,20 +27,20 @@ if ('' != $name)
     }
 
     //-- If server is full, not need proces any data.
-    if (LotgdKernel::get("lotgd_core.service.server_functions")->isTheServerFull() && 1 != $force)
+    if (LotgdKernel::get('lotgd_core.service.server_functions')->isTheServerFull() && 1 != $force)
     {
         //sanity check if the server is / got full --> back to home
         $session['user'] = [];
-        \LotgdFlashMessaged::addWarningMessage(\LotgdTranslator::t('login.full', [], 'page_login'));
+        LotgdFlashMessaged::addWarningMessage(LotgdTranslator::t('login.full', [], 'page_login'));
 
         redirect('home.php');
     }
 
-    \LotgdTool::checkBan(); //check if this computer is banned
+    LotgdTool::checkBan(); //check if this computer is banned
 
     /** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder $passwordEncoder */
-    $passwordEncoder = \LotgdKernel::get('security.password_encoder');
-    $password = \LotgdRequest::getPost('password');
+    $passwordEncoder = LotgdKernel::get('security.password_encoder');
+    $password        = LotgdRequest::getPost('password');
 
     //-- Using Doctrine repository to process login
     /** @var Lotgd\Core\Repository\UserRepository $repositoryAccounts */
@@ -48,11 +50,11 @@ if ('' != $name)
     //-- Not found account
     if ( ! $account || ! $passwordEncoder->isPasswordValid($account, $password))
     {
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('login.incorrect', [], 'page_login'));
+        LotgdFlashMessages::addErrorMessage(LotgdTranslator::t('login.incorrect', [], 'page_login'));
 
         //now we'll log the failed attempt and begin to issue bans if
         //there are too many, plus notify the admins.
-        \LotgdTool::checkBan();
+        LotgdTool::checkBan();
 
         $result = $repositoryAccounts->createQueryBuilder('u')
             ->select('u.acctid')
@@ -68,21 +70,21 @@ if ('' != $name)
             // this name.
             foreach ($result as $row)
             {
-                $post = \LotgdRequest::getPostAll();
+                $post = LotgdRequest::getPostAll();
 
-                $failLog = new \Lotgd\Core\Entity\Faillog();
+                $failLog = new Faillog();
                 $failLog->setEventid(0)
                     ->setDate(new DateTime())
                     ->setPost($post)
-                    ->setIp(\LotgdRequest::getServer('REMOTE_ADDR'))
+                    ->setIp(LotgdRequest::getServer('REMOTE_ADDR'))
                     ->setAcctid($row['acctid'])
-                    ->setId(\LotgdRequest::getCookie('lgi') ?: '')
+                    ->setId(LotgdRequest::getCookie('lgi') ?: '')
                 ;
 
-                \Doctrine::persist($failLog);
-                \Doctrine::flush(); //Persist objects
+                Doctrine::persist($failLog);
+                Doctrine::flush(); //Persist objects
 
-                $query = \Doctrine::createQueryBuilder();
+                $query = Doctrine::createQueryBuilder();
                 $expr  = $query->expr();
 
                 $query->select('u.ip', 'u.date', 'u.id', 'a.superuser', 'a.login')
@@ -93,8 +95,8 @@ if ('' != $name)
                     ->where('u.ip = :ip AND u.date > :date')
 
                     ->setParameters([
-                        'ip'   => \LotgdRequest::getServer('REMOTE_ADDR'),
-                        'date' => \date('Y-m-d H:i:s', \strtotime('-1 day')),
+                        'ip'   => LotgdRequest::getServer('REMOTE_ADDR'),
+                        'date' => date('Y-m-d H:i:s', strtotime('-1 day')),
                     ])
                 ;
 
@@ -124,17 +126,17 @@ if ('' != $name)
                 if ($c >= 10)
                 {
                     // 5 failed attempts for superuser, 10 for regular user
-                    $bans      = new \Lotgd\Core\Entity\Bans();
-                    $banexpire = new \DateTime('now');
-                    $bans->setIpfilter(\LotgdRequest::getServer('REMOTE_ADDR'))
-                        ->setBanreason(\LotgdTranslator::t('login.banMessage', [], 'page_login'))
-                        ->setBanexpire($banexpire->add(new \DateInterval('PT15M'))) //-- Added 15 minutes
+                    $bans      = new Bans();
+                    $banexpire = new DateTime('now');
+                    $bans->setIpfilter(LotgdRequest::getServer('REMOTE_ADDR'))
+                        ->setBanreason(LotgdTranslator::t('login.banMessage', [], 'page_login'))
+                        ->setBanexpire($banexpire->add(new DateInterval('PT15M'))) //-- Added 15 minutes
                         ->setBanner('System')
-                        ->setLasthit(new \DateTime('0000-00-00 00:00:00'))
+                        ->setLasthit(new DateTime('0000-00-00 00:00:00'))
                     ;
 
-                    \Doctrine::persist($failLog);
-                    \Doctrine::flush(); //Persist objects
+                    Doctrine::persist($failLog);
+                    Doctrine::flush(); //Persist objects
 
                     if ($su)
                     {
@@ -142,11 +144,11 @@ if ('' != $name)
                         // this failed attempt if it includes superusers.
                         $result2 = $repositoryAccounts->getSuperuserWithPermit(SU_EDIT_USERS);
 
-                        $subj = \sprintf('%s failed to log in too many times!', \LotgdRequest::getServer('REMOTE_ADDR'));
+                        $subj = sprintf('%s failed to log in too many times!', LotgdRequest::getServer('REMOTE_ADDR'));
 
                         foreach ($result2 as $row2)
                         {
-                            $msg = \sprintf('This message is generated as a result of one or more of the accounts having been a superuser account.  Log Follows:`n`n%s', $alert);
+                            $msg = sprintf('This message is generated as a result of one or more of the accounts having been a superuser account.  Log Follows:`n`n%s', $alert);
                             systemmail($row2['acctid'], $subj, $msg, 0);
                         }//end for
                     }//end if($su)
@@ -167,48 +169,48 @@ if ('' != $name)
 
     $session['user'] = $repositoryAccounts->getUserById($account->getAcctid());
 
-    \LotgdTool::checkBan($session['user']['login']); //check if this account is banned
+    LotgdTool::checkBan($session['user']['login']); //check if this account is banned
 
     // If the player isn't allowed on for some reason, anything on
     // this hook should automatically call page_footer and exit
     // itself.
-    \LotgdEventDispatcher::dispatch(new Core(), Core::LOGIN_CHECK);
+    LotgdEventDispatcher::dispatch(new Core(), Core::LOGIN_CHECK);
     modulehook('check-login');
 
-    if ('' != $session['user']['emailvalidation'] && 'x' != \substr($session['user']['emailvalidation'], 0, 1))
+    if ('' != $session['user']['emailvalidation'] && 'x' != substr($session['user']['emailvalidation'], 0, 1))
     {
         $session['user'] = [];
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('login.validate', [], 'page_login'));
+        LotgdFlashMessages::addErrorMessage(LotgdTranslator::t('login.validate', [], 'page_login'));
 
         redirect('home.php');
     }
 
     $session['loggedin']       = true;
-    $session['laston']         = \date('Y-m-d H:i:s');
+    $session['laston']         = date('Y-m-d H:i:s');
     $session['sentnotice']     = 0;
-    $session['user']['laston'] = new \DateTime('now');
+    $session['user']['laston'] = new DateTime('now');
 
-    \LotgdKernel::get('cache.app')->delete('char-list-home-page');
+    LotgdKernel::get('cache.app')->delete('char-list-home-page');
 
     // Let's throw a login module hook in here so that modules
     // like the stafflist which need to invalidate the cache
     // when someone logs in or off can do so.
-    \LotgdEventDispatcher::dispatch(new Core(), Core::LOGIN_PLAYER);
+    LotgdEventDispatcher::dispatch(new Core(), Core::LOGIN_PLAYER);
     modulehook('player-login');
 
     //-- Check for valid restorepage
-    if (empty($session['user']['restorepage']) || \is_numeric($session['user']['restorepage']) || 'login.php' == $session['user']['restorepage'])
+    if (empty($session['user']['restorepage']) || is_numeric($session['user']['restorepage']) || 'login.php' == $session['user']['restorepage'])
     {
         $session['user']['restorepage'] = 'news.php';
     }
 
     if ($session['user']['loggedin'])
     {
-        $link = \sprintf('<a href="%s">%s</a>', $session['user']['restorepage'], $session['user']['restorepage']);
+        $link = sprintf('<a href="%s">%s</a>', $session['user']['restorepage'], $session['user']['restorepage']);
 
-        $str = \LotgdTranslator::t('login.redirect', ['link' => $link], 'page_login');
-        \header("Location: {$session['user']['restorepage']}");
-        \LotgdTool::saveUser();
+        $str = LotgdTranslator::t('login.redirect', ['link' => $link], 'page_login');
+        header("Location: {$session['user']['restorepage']}");
+        LotgdTool::saveUser();
         echo $str;
 
         exit();
@@ -229,11 +231,11 @@ if ('' != $name)
 }
 elseif ('logout' == $op)
 {
-    \LotgdResponse::callController(LoginController::class, 'logout');
+    LotgdResponse::callController(LoginController::class, 'logout');
 }
 
 //- If you enter an empty username, don't just say oops.. do something useful.
-\LotgdSession::invalidate();
-\LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('fail.empty', [], 'page_login'));
+LotgdSession::invalidate();
+LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('fail.empty', [], 'page_login'));
 
 redirect('index.php');

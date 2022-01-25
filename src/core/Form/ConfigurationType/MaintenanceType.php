@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Form\ConfigurationType;
 
+use Laminas\Filter\StripTags;
 use Laminas\Filter;
 use Lotgd\Core\Form\Type\CheckboxType;
 use Symfony\Component\Form\AbstractType;
@@ -51,7 +52,7 @@ class MaintenanceType extends AbstractType
                 new Assert\Length(['min' => 0, 'max' => 255, 'allowEmptyString' => true]),
             ],
             'filters' => [
-                new Filter\StripTags(),
+                new StripTags(),
             ],
         ]);
         $builder->add('maintenanceauthor', TextareaType::class, [
@@ -62,7 +63,7 @@ class MaintenanceType extends AbstractType
                 new Assert\Length(['min' => 0, 'max' => 255, 'allowEmptyString' => true]),
             ],
             'filters' => [
-                new Filter\StripTags(),
+                new StripTags(),
             ],
         ]);
 

@@ -13,6 +13,9 @@
 
 namespace Lotgd\Core\Repository;
 
+use Lotgd\Core\Repository\Module\Setting;
+use Throwable;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -21,7 +24,7 @@ use Tracy\Debugger;
 
 class ModulesRepository extends ServiceEntityRepository
 {
-    use Module\Setting;
+    use Setting;
     use EntityRepositoryTrait;
 
     public function __construct(ManagerRegistry $registry)
@@ -49,7 +52,7 @@ class ModulesRepository extends ServiceEntityRepository
                 ->execute()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -71,13 +74,13 @@ class ModulesRepository extends ServiceEntityRepository
 
                 ->setParameter('key', "%|{$key}|%")
 
-                ->orderBy('u.modulename', 'DESC')
+                ->orderBy('u.modulename', Criteria::DESC)
 
                 ->getQuery()
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 

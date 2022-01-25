@@ -1,12 +1,14 @@
 <?php
 
+use Lotgd\Core\Controller\DragonController;
+
 require_once 'common.php';
 
 //-- Init page
-\LotgdResponse::pageStart();
+LotgdResponse::pageStart();
 
 //-- Call controller
-\LotgdResponse::callController(\Lotgd\Core\Controller\DragonController::class);
+LotgdResponse::callController(DragonController::class);
 
 //-- Finalize page
-\LotgdResponse::pageEnd();
+LotgdResponse::pageEnd();

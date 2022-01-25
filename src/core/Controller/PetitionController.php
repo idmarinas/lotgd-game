@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use DateTime;
 use Lotgd\Core\Entity\Petitions;
 use Lotgd\Core\Event\Core;
 use Lotgd\Core\Form\PetitionType;
@@ -178,7 +179,7 @@ class PetitionController extends AbstractController
      */
     private function emailPetitionAdmin(Request $request, string $name, array $post): void
     {
-        if ( ! $this->settings->getSetting('emailpetitions', 0))
+        if ( $this->settings->getSetting('emailpetitions', 0) === '' || $this->settings->getSetting('emailpetitions', 0) === '0')
         {
             return;
         }
@@ -235,7 +236,7 @@ class PetitionController extends AbstractController
 
         $entity = (new Petitions())
             ->setAuthor($session['user']['acctid'])
-            ->setDate(new \DateTime('now'))
+            ->setDate(new DateTime('now'))
             ->setBody($post)
             ->setPageinfo($session)
             ->setIp($request->server->get('REMOTE_ADDR'))

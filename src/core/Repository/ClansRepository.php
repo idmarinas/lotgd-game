@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Repository;
 
+use Doctrine\Common\Collections\Criteria;
+use Throwable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
@@ -47,15 +49,15 @@ class ClansRepository extends ServiceEntityRepository
                 ->setParameter('rank', CLAN_APPLICANT)
             ;
 
-            $query->orderBy('members', 'DESC');
+            $query->orderBy('members', Criteria::DESC);
 
             if (1 == $order)
             {
-                $query->orderBy('u.clanname', 'ASC');
+                $query->orderBy('u.clanname', Criteria::ASC);
             }
             elseif (2 == $order)
             {
-                $query->orderBy('u.clanshort', 'ASC');
+                $query->orderBy('u.clanshort', Criteria::ASC);
             }
 
             return $query
@@ -63,7 +65,7 @@ class ClansRepository extends ServiceEntityRepository
                 ->getResult()
             ;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
@@ -85,7 +87,7 @@ class ClansRepository extends ServiceEntityRepository
 
             return $entity->getClanid();
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             Debugger::log($th);
 
