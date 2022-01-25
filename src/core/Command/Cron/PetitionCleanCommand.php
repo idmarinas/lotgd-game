@@ -13,12 +13,14 @@
 
 namespace Lotgd\Core\Command\Cron;
 
+use Throwable;
 use Lotgd\Core\Repository\PetitionsRepository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class PetitionCleanCommand extends Command
 {
@@ -29,12 +31,14 @@ final class PetitionCleanCommand extends Command
     protected static $defaultName = 'lotgd:cron:game:petition:clean';
 
     private $repository;
+    private $translator;
 
-    public function __construct(PetitionsRepository $repository)
+    public function __construct(PetitionsRepository $repository, TranslatorInterface $translator)
     {
         parent::__construct();
 
         $this->repository = $repository;
+        $this->translator = $translator;
     }
 
     /**
@@ -76,7 +80,7 @@ final class PetitionCleanCommand extends Command
 
             $style->text($text);
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return 1;
         }

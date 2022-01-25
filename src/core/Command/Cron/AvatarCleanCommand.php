@@ -13,12 +13,14 @@
 
 namespace Lotgd\Core\Command\Cron;
 
+use Throwable;
 use Lotgd\Core\Service\Cron\AvatarCleanService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Console command to display information about the current application.
@@ -27,17 +29,20 @@ final class AvatarCleanCommand extends Command
 {
     use LockableTrait;
 
+    private $translator;
+
     public const TRANSLATION_DOMAIN = 'console_command';
 
     protected static $defaultName = 'lotgd:cron:avatar:clean';
 
     private $avatarClean;
 
-    public function __construct(AvatarCleanService $avatarClean)
+    public function __construct(AvatarCleanService $avatarClean, TranslatorInterface $translator)
     {
         parent::__construct();
 
         $this->avatarClean = $avatarClean;
+        $this->translator = $translator;
     }
 
     /**
@@ -77,7 +82,7 @@ final class AvatarCleanCommand extends Command
 
             $style->text('Clean old content and comments of game data base');
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return 1;
         }

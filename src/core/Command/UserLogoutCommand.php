@@ -21,6 +21,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Command to logout 1 user or all.
@@ -36,14 +37,16 @@ final class UserLogoutCommand extends Command
     private $repository;
     private $cache;
     private $settings;
+    private $translator;
 
-    public function __construct(UserRepository $repository, CacheInterface $cache, Settings $settings)
+    public function __construct(UserRepository $repository, CacheInterface $cache, Settings $settings, TranslatorInterface $translator)
     {
         parent::__construct();
 
         $this->repository = $repository;
         $this->cache      = $cache;
         $this->settings   = $settings;
+        $this->translator = $translator;
     }
 
     /**

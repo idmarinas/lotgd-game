@@ -13,12 +13,14 @@
 
 namespace Lotgd\Core\Command\Cron;
 
+use Throwable;
 use Lotgd\Core\Service\Cron\ContentCleanService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ContentCleanCommand extends Command
 {
@@ -29,12 +31,14 @@ final class ContentCleanCommand extends Command
     protected static $defaultName = 'lotgd:cron:content:clean';
 
     private $contentClean;
+    private $translator;
 
-    public function __construct(ContentCleanService $contentClean)
+    public function __construct(ContentCleanService $contentClean, TranslatorInterface $translator)
     {
         parent::__construct();
 
         $this->contentClean = $contentClean;
+        $this->translator = $translator;
     }
 
     /**
@@ -74,7 +78,7 @@ final class ContentCleanCommand extends Command
 
             $style->text('Clean old content and comments of game data base');
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return 1;
         }

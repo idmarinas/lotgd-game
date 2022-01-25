@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Command\Cron;
 
+use Throwable;
 use Lotgd\Core\Event\Core;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\LockableTrait;
@@ -20,6 +21,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class NewDayCommand extends Command
 {
@@ -30,12 +32,14 @@ final class NewDayCommand extends Command
     protected static $defaultName = 'lotgd:cron:game:newday';
 
     private $dispatcher;
+    private $translator;
 
-    public function __construct(EventDispatcherInterface $dispatcher)
+    public function __construct(EventDispatcherInterface $dispatcher, TranslatorInterface $translator)
     {
         parent::__construct();
 
         $this->dispatcher = $dispatcher;
+        $this->translator = $translator;
     }
 
     /**
@@ -75,7 +79,7 @@ final class NewDayCommand extends Command
 
             $style->text('Generate a new game day');
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return 1;
         }
