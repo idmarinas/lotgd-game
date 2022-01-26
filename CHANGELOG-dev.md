@@ -10,7 +10,7 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V6.md)  
 Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V7.md)  
 
-# Version: 7.0.0
+# Version: 7.0.1
 
 ### :cyclone: CHANGES
 
@@ -18,109 +18,19 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :star: FEATURES
 
--   **TailwindCSS** new Framework for style APP.
-    -   **For create new themes can use `tailwind.config.js`
--   **Twig Template System**
-    -   New functions:
-        -   `stimulus_url` Get a valid stimulus url like `"stimulus.php?method=index&controller=Controller`
-            -   Usage: `{{ stimulus_url('Controller\Name', 'method_name', '&query=value') }}`
--   **Notifications System**
-    -   Add a new notifications system (Toast notifications)
-    -   Use Stimulus to show notifications
-    -   For add a notification you can use Trait `Lotgd\Core\Pattern\LotgdControllerTrait` in your controller.
-        -   Use method `$this->addNotification('type', 'Notification message');` this is the basic format.
-        -   This is the alternative format.
-            ```php
-                $this->addNotification('type', [
-                    'title' => 'Notification Title', 
-                    'notification' => 'Notification message', 
-                    'close' => false,
-                    'duration' => 7000 // Time in miliseconds
-                    'id' => 'id-for-notification' //-- By default is auto-generated
-                ]);
-            ```
--   **Form system**
-    -   New Form Type Field 
-        -   `Lotgd\Core\Form\Type\TextareaLimitType`
-            -   This type create a text area with a counter of characters that have limit
-        -   `Lotgd\Core\Form\Type\AutocompleteType`
-            -   This ty pe create a input field for autocomplete from server.
+-   Nothing
 
 ### :fire: DEPRECATED
 
--   Deprecated trait: `Lotgd\Core\Controller\Pattern\RenderBlockTrait`
-    -   Use `Lotgd\Core\Pattern\LotgdControllerTrait` instead
-        -   This trait have other methods used in LoTGD
--   **JaxonPHP** is deprecated and deleted of core in version 8.0.0
-    -   You can add this dependencie if your use it in version 8.0.0 and up
-    -   Think about migrating all JaxonPHP classes to Stimulus.
+-   Nothing
 
 ### :wrench: FIXES
 
--   **Twig\Extension\Pattern\PageGen.php** Avoid error _division by cero_
+-   **Cron commands** Fixed error, now import translator service.
 
 ### :x: REMOVES
 
--   **BC** **Semantic UI/Fomantic UI** is removed and remplace with **TailwindCSS**
--   **BC** **Removed deprecation functions**
-    -   **src/functions.php**
-        -   `is_email` Use service `LotgdKernel::get("lotgd_core.tool.validator")->isMail($string)` instead
-        -   `arraytourl` Use php function `http_build_query` instead.
-        -   `urltoarray` Use php function `parse_str` instead.
-        -   `createstring` Use php function `serialize` instead.
-        -   `list_files` Use php `Symfony Component Finder` instead.
-        -   `_curl` Use service `LotgdKernel::get("http_client")` instead.
-        -   `_sock` Use service `LotgdKernel::get("http_client")` instead.
-        -   `pullurl` Use service `LotgdKernel::get("http_client")` instead.
-    -   **BC** Removed files
-        -   **lib/holyday_texts.php** `holidayize` Use `LotgdTool::holidayize($text, $type)`
-        -   **lib/mountname.php** `getmountname` This function is not used by the core.
-        -   **lib/mounts.php** `getmount` Use `LotgdTool::getMount($horse)` instead.
-        -   **lib/partner.php** `get_partner` Use `LotgdTool::getPartner($player)` instead.
-        -   **lib/pvpwarning.php** `pvpwarning` Use `LotgdKernel::get("Lotgd\Core\Pvp\Warning")->warning($dokill)` instead.
-        -   **lib/pvpsupport.php** 
-            -   `setup_pvp_target` Use `LotgdKernel::get("Lotgd\Core\Pvp\Support")->setupPvpTarget($characterId)` instead.
-            -   `pvpvictory` Use `LotgdKernel::get("Lotgd\Core\Pvp\Support")->pvpVictory($badguy, $killedloc)` instead.
-            -   `pvpdefeat` Use `LotgdKernel::get("Lotgd\Core\Pvp\Support")->pvpDefeat($badguy, $killedloc)` instead.
-        -   **lib/names**
-            -   `get_player_title` Use `LotgdTool::getPlayerTitle($old)` instead.
-            -   `get_player_basename` Use `LotgdTool::getPlayerBasename($old)` instead.
-            -   `change_player_name` Use `LotgdTool::changePlayerName($newname, $old)` instead.
-            -   `change_player_ctitle` Use `LotgdTool::changePlayerCtitle($nctitle, $old)` instead.
-            -   `change_player_title` Use `LotgdTool::changePlayerTitle($ntitle, $old)` instead.
-        -   **lib/pageparts.php** 
-            -   `wipe_charstats` Use `LotgdKernel::get("Lotgd\Core\Character\Stats")->wipeStats()` instead.
-            -   `addcharstat` Use `LotgdKernel::get("Lotgd\Core\Character\Stats")->addcharstat($label, $value)` instead.
-            -   `getcharstat` Use `LotgdKernel::get("Lotgd\Core\Character\Stats")->getcharstat($cat, $label)` instead.
-            -   `setcharstat` Use `LotgdKernel::get("Lotgd\Core\Character\Stats")->setcharstat($cat, $label, $val)` instead.
-            -   `getcharstat_value` Use `LotgdKernel::get("Lotgd\Core\Character\Stats")->getcharstat($cat, $label)` instead.
-            -   `getcharstats` Use `LotgdKernel::get("Lotgd\Core\Service\PageParts")->getCharStats($buffs)` instead.
-            -   `charstats` Use `LotgdKernel::get("Lotgd\Core\Service\PageParts")->charStats($return)` instead.
-        -   **lib/personal_functions.php** `killplayer` Use `LotgdKernel::get('lotgd_core.tool.staff')->killPlayer($explossproportion, $goldlossproportion)` instead.
-        -   **lib/systemmail.php** `systemmail` Use `LotgdKernel::get('lotgd_core.tool.system_mail')->send($to, $subject, $body, $from, $noemail)` instead.
-        -   **lib/titles.php** 
-            -   `valid_dk_title` Use `LotgdTool::validDkTitle($title, $dks, $gender)` instead.
-            -   `get_dk_title` Use `LotgdTool::getDkTitle($dks, $gender, $ref)` instead.
-        -   **src/core/Application.php** `Lotgd\Core\Application` Use `Lotgd\Core\Kernel` instead.
--   **BC** Removed some traits 
-    -   `src/core/Pattern/Cache.php` 
-    -   `src/core/Pattern/Censor.php` 
-    -   `src/core/Pattern/Container.php` 
-    -   `src/core/Pattern/Doctrine.php` 
-    -   `src/core/Pattern/EntityHydrator.php` 
-    -   `src/core/Pattern/Format.php` 
-    -   `src/core/Pattern/Http.php` 
-    -   `src/core/Pattern/Jaxon.php` 
-    -   `src/core/Pattern/LotgdCore.php` 
-    -   `src/core/Pattern/Navigation.php` 
-    -   `src/core/Pattern/Output.php` 
-    -   `src/core/Pattern/Sanitize.php` 
-    -   `src/core/Pattern/Settings.php` 
-    -   `src/core/Pattern/Template.php` 
-    -   `src/core/Pattern/ThemeList.php` 
-    -   `src/core/Pattern/Translator.php` 
-    -   _Note_: use Dependency Injection.
-
+-   Nothing
 
 ### :notebook: NOTES
 
