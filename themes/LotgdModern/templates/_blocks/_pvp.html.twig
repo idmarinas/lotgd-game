@@ -27,15 +27,15 @@
                         <td class="collapsing">
                             <span class="ui small buttons">
                                 <a class="ui icon button" data-tooltip="{{ 'list.table.tbody.ops.bio'|trans|uncolorize }}" aria-label="{{ 'list.table.tbody.ops.bio'|trans|uncolorize }}" href="{{ ('bio.php?char=' ~ character.acctid ~ '&ret=' ~ returnLink|e('url'))|lotgd_url }}">
-                                    <i class="user icon"></i>
+                                    <i aria-hidden="true" class="user icon"></i>
                                 </a>
                                 {% if character.pvpflag > pvpTimeOut %}
                                     <a class="ui grey icon button" data-tooltip="{{ 'list.table.tbody.ops.attacked'|trans|uncolorize }}" aria-label="{{ 'list.table.tbody.ops.attacked'|trans|uncolorize }}">
-                                        <i aria-hidden="true" class="skull crossbones icon"></i>
+                                        <i aria-hidden="true" aria-hidden="true" class="skull crossbones icon"></i>
                                     </a>
                                 {% else %}
                                     <a class="ui red icon button" href="{{ (linkAttack ~ '&character_id=' ~ character.character_id)|lotgd_url }}" data-tooltip="{{ 'list.table.tbody.ops.attk'|trans|uncolorize }}" aria-label="{{ 'list.table.tbody.ops.attk'|trans|uncolorize }}">
-                                        <i aria-hidden="true" class="fire icon"></i>
+                                        <i aria-hidden="true" aria-hidden="true" class="fire icon"></i>
                                     </a>
                                 {% endif %}
                             </span>

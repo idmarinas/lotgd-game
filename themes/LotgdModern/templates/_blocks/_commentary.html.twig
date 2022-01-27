@@ -106,10 +106,10 @@
 
                 <div class="actions">
                     <a class="ui mini blue icon button" aria-label="{{ bioLabel }}" data-tooltip="{{ bioLabel }}" href="{{ bioLink }}">
-                        <i class="user icon"></i>
+                        <i aria-hidden="true" aria-hidden="true" class="user icon"></i>
                     </a>
                     <a class="ui mini blue icon button" aria-label="{{ mailLabel }}" data-tooltip="{{ mailLabel }}" onclick="JaxonLotgd.Ajax.Core.Mail.write('{{ comment.author }}')">
-                        <i class="mail icon"></i>
+                        <i aria-hidden="true" aria-hidden="true" class="mail icon"></i>
                     </a>
                 </div>
             {% endif %}
@@ -195,7 +195,7 @@
                         {% if previous %}
                             <a href="{{ (href ~ 'commentPage=' ~ previous)|lotgd_url }}" class="items-center px-2 py-2   ">
                                 <span class="sr-only">{{ 'parts.pagination.menu.previous'|trans|uncolorize }}</span>
-                                <i class="fas fa-chevron-left"></i>
+                                <i aria-hidden="true" class="fas fa-chevron-left"></i>
                             </a>
                         {% endif %}
                         <!-- Links to number pages -->
@@ -214,7 +214,7 @@
                         {% if next %}
                             <a href="{{ (href ~ 'commentPage=' ~ next)|lotgd_url }}" class="items-center px-2 py-2   ">
                                 <span class="sr-only">{{ 'parts.pagination.menu.next'|trans|uncolorize }}</span>
-                                <i class="fas fa-chevron-right"></i>
+                                <i aria-hidden="true" class="fas fa-chevron-right"></i>
                             </a>
                         {% endif %}
                     </nav>
