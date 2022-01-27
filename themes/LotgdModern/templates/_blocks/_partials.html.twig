@@ -113,7 +113,7 @@
                                 data-{{ stimulus_controller }}-page-param="{{ previous }}"
                             >
                                 <span class="sr-only">{{ 'parts.pagination.menu.previous'|trans|uncolorize }}</span>
-                                <i class="fas fa-chevron-left"></i>
+                                <i aria-hidden="true" class="fas fa-chevron-left"></i>
                             </a>
                         {% endif %}
                         <!-- Links to number pages -->
@@ -141,7 +141,7 @@
                                 data-{{ stimulus_controller }}-page-param="{{ next }}"
                             >
                                 <span class="sr-only">{{ 'parts.pagination.menu.next'|trans|uncolorize }}</span>
-                                <i class="fas fa-chevron-right"></i>
+                                <i aria-hidden="true" class="fas fa-chevron-right"></i>
                             </a>
                         {% endif %}
                     </nav>
@@ -197,7 +197,7 @@
                         {% if previous %}
                             <a href="javascript:;" onclick="{{ link|format(previous) }}" class="items-center px-2 py-2   ">
                                 <span class="sr-only">{{ 'parts.pagination.menu.previous'|trans|uncolorize }}</span>
-                                <i class="fas fa-chevron-left"></i>
+                                <i aria-hidden="true" class="fas fa-chevron-left"></i>
                             </a>
                         {% endif %}
                         <!-- Links to number pages -->
@@ -216,7 +216,7 @@
                         {% if next %}
                             <a href="javascript:;" onclick="{{ link|format(next) }}" class="items-center px-2 py-2   ">
                                 <span class="sr-only">{{ 'parts.pagination.menu.next'|trans|uncolorize }}</span>
-                                <i class="fas fa-chevron-right"></i>
+                                <i aria-hidden="true" class="fas fa-chevron-right"></i>
                             </a>
                         {% endif %}
                     </nav>
@@ -278,7 +278,7 @@
                         {% if previous %}
                             <a href="{{ (href ~ 'page=' ~ previous)|lotgd_url }}" class="items-center px-2 py-2   ">
                                 <span class="sr-only">{{ 'parts.pagination.menu.previous'|trans|uncolorize }}</span>
-                                <i class="fas fa-chevron-left"></i>
+                                <i aria-hidden="true" class="fas fa-chevron-left"></i>
                             </a>
                         {% endif %}
                         <!-- Links to number pages -->
@@ -297,7 +297,7 @@
                         {% if next %}
                             <a href="{{ (href ~ 'page=' ~ next)|lotgd_url }}" class="items-center px-2 py-2   ">
                                 <span class="sr-only">{{ 'parts.pagination.menu.next'|trans|uncolorize }}</span>
-                                <i class="fas fa-chevron-right"></i>
+                                <i aria-hidden="true" class="fas fa-chevron-right"></i>
                             </a>
                         {% endif %}
                     </nav>
