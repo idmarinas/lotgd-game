@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "148f6c73b5b13bfb02f243b4aac0a820",
+    "content-hash": "0d93619243c0541f9324f998abc5b214",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -6551,16 +6551,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.18.1",
+            "version": "v1.18.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "90ee9ddddaadee602dff23ae530310a59936bc8b"
+                "reference": "7e2319a42a8535a1011f9e09e353a61840000d2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/90ee9ddddaadee602dff23ae530310a59936bc8b",
-                "reference": "90ee9ddddaadee602dff23ae530310a59936bc8b",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/7e2319a42a8535a1011f9e09e353a61840000d2a",
+                "reference": "7e2319a42a8535a1011f9e09e353a61840000d2a",
                 "shasum": ""
             },
             "require": {
@@ -6596,7 +6596,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.18.1"
+                "source": "https://github.com/symfony/flex/tree/v1.18.2"
             },
             "funding": [
                 {
@@ -6612,7 +6612,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-19T17:52:31+00:00"
+            "time": "2022-01-27T09:44:20+00:00"
         },
         {
             "name": "symfony/form",
@@ -13638,7 +13638,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3 | ^7.4 | ^8.0",
+        "php": "^7.3",
         "ext-bcmath": "*",
         "ext-ctype": "*",
         "ext-curl": "*",
