@@ -23,25 +23,25 @@
                 <td class="collapsing">
                     <div class="ui mini icon buttons">
                         <a href="{{ ('mounts.php?op=edit&id=' ~ mount.mountid)|lotgd_url }}" class="ui button" data-tooltip="{{ 'section.default.table.tbody.edit'|trans|uncolorize }}">
-                            <i class="edit icon"></i>
+                            <i aria-hidden="true" class="edit icon"></i>
                         </a>
                         <a href="{{ ('mounts.php?op=give&id=' ~ mount.mountid)|lotgd_url }}" class="ui button" data-tooltip="{{ 'section.default.table.tbody.give'|trans|uncolorize }}">
-                            <i class="gift icon"></i>
+                            <i aria-hidden="true" class="gift icon"></i>
                         </a>
                         {% if not mount.mountactive %}
                             {% set options = {'html': 'section.default.table.tbody.del.confirm'|trans({ 'n': mount.owners })|uncolorize }|json_encode %}
                             <a href="{{ ('mounts.php?op=del&id=' ~ mount.mountid)|lotgd_url }}" class="ui red button" data-tooltip="{{ 'section.default.table.tbody.del'|trans|uncolorize }}" onclick="Lotgd.confirm(this, event)" data-options="{{ options|e('html_attr') }}">
-                                <i class="trash icon"></i>
+                                <i aria-hidden="true" class="trash icon"></i>
                             </a>
                         {% endif %}
 
                         {% if mount.mountactive %}
                             <a href="{{ ('mounts.php?op=deactivate&id=' ~ mount.mountid)|lotgd_url }}" class="ui button" data-tooltip="{{ 'section.default.table.tbody.deac'|trans|uncolorize }}">
-                                <i class="cog icon"></i>
+                                <i aria-hidden="true" class="cog icon"></i>
                             </a>
                         {% else %}
                             <a href="{{ ('mounts.php?op=activate&id=' ~ mount.mountid)|lotgd_url }}" class="ui orange button" data-tooltip="{{ 'section.default.table.tbody.act'|trans|uncolorize }}">
-                                <i class="cog icon"></i>
+                                <i aria-hidden="true" class="cog icon"></i>
                             </a>
                         {% endif %}
                     </div>

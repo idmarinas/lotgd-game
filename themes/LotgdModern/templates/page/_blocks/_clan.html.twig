@@ -91,9 +91,9 @@
                         <td class="collapsing">
                             {% if user.clanrank >= constant('CLAN_OFFICER') and member.clanrank <= user.clanrank %}
                                 {% if member.clanrank <= user.clanrank and member.acctid != user.acctid and member.clanrank < constant('CLAN_FOUNDER') and user.clanrank >= constant('CLAN_ADMINISTRATIVE') %}
-                                    {% set deleteButton = '<a class="ui red icon button top aligned" data-tooltip="' ~ remove ~ '" href="' ~ ('clan.php?op=membership&remove=' ~ member.acctid)|lotgd_url ~ '" onclick="Lotgd.confirm(this, event)" data-options="' ~ options|e('html_attr') ~ '"><i class="remove user icon"></i></a>' %}
+                                    {% set deleteButton = '<a class="ui red icon button top aligned" data-tooltip="' ~ remove ~ '" href="' ~ ('clan.php?op=membership&remove=' ~ member.acctid)|lotgd_url ~ '" onclick="Lotgd.confirm(this, event)" data-options="' ~ options|e('html_attr') ~ '"><i aria-hidden="true" class="remove user icon"></i></a>' %}
                                 {% else %}
-                                    {% set deleteButton = '<a class="ui disabled red icon button tooltip top aligned" data-tooltip="' ~ remove ~ '"><i class="remove user icon"></i></a>' %}
+                                    {% set deleteButton = '<a class="ui disabled red icon button tooltip top aligned" data-tooltip="' ~ remove ~ '"><i aria-hidden="true" class="remove user icon"></i></a>' %}
                                 {% endif %}
 
                                 {% if constant('CLAN_FOUNDER') == member.clanrank and member.acctid == user.acctid %}
@@ -112,7 +112,7 @@
                                                 <option value="{{ key }}" {{ member.clanrank == key ? 'selected' : '' }}>{{ rank|trans|uncolorize }}</option>
                                             {% endfor %}
                                         </select>
-                                        <button class="ui icon button tooltip top aligned" data-tooltip="{{ submit }}" type="submit"><i class='configure icon'></i></button>
+                                        <button class="ui icon button tooltip top aligned" data-tooltip="{{ submit }}" type="submit"><i aria-hidden="true" class='configure icon'></i></button>
 
                                         {{ deleteButton }}
                                     </form>

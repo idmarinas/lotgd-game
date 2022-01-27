@@ -9,9 +9,9 @@
 <div class="ui relaxed divided list">
     {% for donation in paginator %}
     <div class="item">
-        <i class="large middle aligned icons">
-            <i class="donate icon"></i>
-            <i class="top right corner add green icon"></i>
+        <i aria-hidden="true" class="large middle aligned icons">
+            <i aria-hidden="true" class="donate icon"></i>
+            <i aria-hidden="true" class="top right corner add green icon"></i>
         </i>
         <div class="content">
             <a class="header" href="{{ ('donators.php?op=save&id=' ~ donation.acctid ~ '&amt=' ~ amt ~ '&reason=' ~ reason|e('url') ~ '&txnid=' ~ txnid)|lotgd_url }}">

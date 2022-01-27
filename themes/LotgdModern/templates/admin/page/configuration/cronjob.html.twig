@@ -35,7 +35,7 @@
                 <td>php {{ cronjob.command }}</td>
                 <td>
                     <a href="{{ ('https://crontab.guru/#' ~ cronjob.schedule|replace({' ': '_'}) )|lotgd_url }}" target="_blank" rel="noopener noreferrer">
-                        <i class="info icon"></i> {{ cronjob.schedule }}
+                        <i aria-hidden="true" class="info icon"></i> {{ cronjob.schedule }}
                     </a>
                 </td>
                 <td>{{ cronjob.debug ? yes : no  }}</td>

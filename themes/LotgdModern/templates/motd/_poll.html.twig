@@ -9,7 +9,7 @@
                 data-action="click->motd#delete"
                 data-motd-item-id-param="{{ motd.motditem }}"
                 data-motd-text-param="{{ 'item.del.confirm'|trans|uncolorize }}"
-            >{{ 'item.del.label'|trans|uncolorize }} <i class="fas fa-trash" aria-hidden="true"></i></button>
+            >{{ 'item.del.label'|trans|uncolorize }} <i aria-hidden="true" class="fas fa-trash" aria-hidden="true"></i></button>
         {% endif %}
 
         <div class="sm:text-sm md:text-md lg:text-lg text-gray-200 font-bold">{{ 'item.poll.poll'|trans|colorize }}: {{ motd.motdtitle }}</div>

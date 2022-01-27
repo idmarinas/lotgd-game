@@ -10,7 +10,7 @@
 
 <div class="ui accordion">
     {% for file in files %}
-        <div class="title"><i class="dropdown icon"></i> {{ file.entity }}</div>
+        <div class="title"><i aria-hidden="true" class="dropdown icon"></i> {{ file.entity }}</div>
         <div class="content">
             {% for row in file.rows %}
                 <div class="ui list">

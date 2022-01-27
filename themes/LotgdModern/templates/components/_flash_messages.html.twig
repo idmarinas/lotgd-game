@@ -133,12 +133,12 @@
 
 {% macro flash_icon(type) %}
     {% if type == 'error' %}
-        <i class="fas fa-times"></i>
+        <i aria-hidden="true" class="fas fa-times"></i>
     {% elseif type == 'success' %}
-        <i class="fas fa-check"></i>
+        <i aria-hidden="true" class="fas fa-check"></i>
     {% elseif type == 'warning' %}
-        <i class="fas fa-exclamation-triangle"></i>
+        <i aria-hidden="true" class="fas fa-exclamation-triangle"></i>
     {% else %}
-        <i class="fas fa-info-circle"></i>
+        <i aria-hidden="true" class="fas fa-info-circle"></i>
     {% endif %}
 {% endmacro %}

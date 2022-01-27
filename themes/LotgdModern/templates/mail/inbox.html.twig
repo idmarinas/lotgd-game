@@ -24,7 +24,7 @@
                     {% set new_msg = 'section.default.table.tbody.msg.new'|trans|uncolorize %}
                     {% set old_msg = 'section.default.table.tbody.msg.old'|trans|uncolorize %}
 
-                    {% set arrow = sort_direction ? '<i class="fas fa-sort-down"></i>' : '<i class="fas fa-sort-up"></i>' %}
+                    {% set arrow = sort_direction ? '<i aria-hidden="true" class="fas fa-sort-down"></i>' : '<i aria-hidden="true" class="fas fa-sort-up"></i>' %}
 
                     <form id="mail-inbox-form" method="POST" class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
                         <table class="min-w-full divide-y divide-lotgd-200">
@@ -89,7 +89,7 @@
                                                         class="input-red w-auto text-xs"
                                                         data-action="click->mail#delete"
                                                         data-mail-id-param="{{ mail.messageid }}"
-                                                    ><i class="fas fa-trash"></i></button>
+                                                    ><i aria-hidden="true" class="fas fa-trash"></i></button>
                                                 </div>
                                             </div>
                                         </td>

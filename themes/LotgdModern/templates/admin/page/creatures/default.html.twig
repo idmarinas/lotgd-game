@@ -34,10 +34,10 @@
                 <td class="collapsing">
                     <div class="ui mini icon buttons">
                         <a data-tooltip="{{ edit|uncolorize }}" aria-label="{{ edit|uncolorize }}" href="{{ ('creatures.php?op=edit&creatureid=' ~ creature.creatureid)|lotgd_url }}" class="ui icon button">
-                            <i class='write icon'></i>
+                            <i aria-hidden="true" class='write icon'></i>
                         </a>
                         <a data-tooltip="{{ del|uncolorize }}" aria-label="{{ del|uncolorize }}" href="{{ ('creatures.php?op=del&creatureid=' ~ creature.creatureid)|lotgd_url }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)" class="ui red icon button">
-                            <i class='trash icon'></i>
+                            <i aria-hidden="true" class='trash icon'></i>
                         </a>
                     </div>
                 </td>

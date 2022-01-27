@@ -24,13 +24,13 @@
                 <td class="collapsing">
                     <div class="ui mini icon buttons">
                         <a href="{{ ('characterbackup.php?op=view&acctid=' ~ backup.accountId)|lotgd_url }}" class="ui green button" data-tooltip="{{ 'section.default.table.tbody.button.view'|trans|uncolorize }}">
-                            <i class="eye icon"></i>
+                            <i aria-hidden="true" class="eye icon"></i>
                         </a>
                         <a href="{{ ('characterbackup.php?op=restore&acctid=' ~ backup.accountId)|lotgd_url }}" class="ui yellow button" data-tooltip="{{ 'section.default.table.tbody.button.restore'|trans|uncolorize }}" data-options="{{ restoreOptions|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">
-                            <i class="undo icon"></i>
+                            <i aria-hidden="true" class="undo icon"></i>
                         </a>
                         <a class="ui red button" href="{{ ('characterbackup.php?op=delete&acctid=' ~ backup.accountId)|lotgd_url }}" data-options="{{ delOptions|e('html_attr') }}" onclick="Lotgd.confirm(this, event)" data-tooltip="{{ 'section.default.table.tbody.button.del'|trans|uncolorize }}">
-                            <i class="trash icon"></i>
+                            <i aria-hidden="true" class="trash icon"></i>
                         </a>
                     </div>
                 </td>

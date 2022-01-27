@@ -9,14 +9,14 @@
                 data-action="click->motd#delete"
                 data-motd-item-id-param="{{ motd.motditem }}"
                 data-motd-text-param="{{ 'item.del.confirm'|trans|uncolorize }}"
-            >{{ 'item.del.label'|trans|uncolorize }} <i class="fas fa-trash" aria-hidden="true"></i></button>
+            >{{ 'item.del.label'|trans|uncolorize }} <i aria-hidden="true" class="fas fa-trash" aria-hidden="true"></i></button>
 
             <button
                 type="button"
                 class="w-auto input-green mr-3 float-right text-xs py-1"
                 data-action="click->motd#item"
                 data-motd-item-id-param="{{ motd.motditem }}"
-            >{{ 'item.edit.label'|trans|uncolorize}} <i class="fas fa-edit" aria-hidden="true"></i></button>
+            >{{ 'item.edit.label'|trans|uncolorize}} <i aria-hidden="true" class="fas fa-edit" aria-hidden="true"></i></button>
         {% endif %}
 
         <div class="sm:text-sm md:text-md lg:text-lg text-gray-200 font-bold">{{ motd.motdtitle }}</div>
@@ -34,7 +34,7 @@
         <!-- User -->
         <div class="col-start-9 col-end-12">
             <div class="flex gap-4 items-center">
-                <i class="fas fa-user" aria-hidden="true"></i>
+                <i aria-hidden="true" class="fas fa-user" aria-hidden="true"></i>
                 <div class="text-gray-100 font-bold text-sm">{{ (motd.motdauthorname ?: 'item.author'|trans)|colorize }}</div>
             </div>
         </div>

@@ -17,9 +17,9 @@
             <tr>
                 <td>
                     <div class="ui mini icon buttons">
-                        <a data-tooltip="{{ 'section.default.table.tbody.edit'|trans|uncolorize }}" href="{{ ('masters.php?op=edit&master_id=' ~ master.creatureid)|lotgd_url }}" class="ui icon button"><i class="edit icon"></i></a>
+                        <a data-tooltip="{{ 'section.default.table.tbody.edit'|trans|uncolorize }}" href="{{ ('masters.php?op=edit&master_id=' ~ master.creatureid)|lotgd_url }}" class="ui icon button"><i aria-hidden="true" class="edit icon"></i></a>
                         <a data-tooltip="{{ 'section.default.table.tbody.del'|trans|uncolorize }}" href="{{ ('masters.php?op=del&master_id=' ~ master.creatureid)|lotgd_url }}" class="ui red icon button" onclick="Lotgd.confirm(this, event)" data-options="{{ options|e('html_attr') }}">
-                            <i class="trash icon"></i>
+                            <i aria-hidden="true" class="trash icon"></i>
                         </a>
                     </div>
                 </td>
