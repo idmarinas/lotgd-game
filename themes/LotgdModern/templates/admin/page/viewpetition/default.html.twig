@@ -29,8 +29,8 @@
                     <td class="collapsing">{{ petition.petitionid }}</td>
                     <td class="collapsing">
                         <div class="ui mini icon buttons">
-                            <a data-tooltip="{{ view }}" href="{{ ('viewpetition.php?op=view&id=' ~ petition.petitionid)|lotgd_url }}" class="ui button"><i class="unhide icon"></i></a>
-                            <a data-tooltip="{{ close }}" href="{{ ('viewpetition.php?setstat=2&id=' ~ petition.petitionid)|lotgd_url }}" class="ui button"><i class="remove icon"></i></a>
+                            <a data-tooltip="{{ view }}" href="{{ ('viewpetition.php?op=view&id=' ~ petition.petitionid)|lotgd_url }}" class="ui button"><i aria-hidden="true" class="unhide icon"></i></a>
+                            <a data-tooltip="{{ close }}" href="{{ ('viewpetition.php?setstat=2&id=' ~ petition.petitionid)|lotgd_url }}" class="ui button"><i aria-hidden="true" class="remove icon"></i></a>
                             <a data-tooltip="{{ statuses[0]|trans|uncolorize }}" href="{{ ('viewpetition.php?setstat=0&id=' ~ petition.petitionid)|lotgd_url }}" class="ui button">U</a>
                             <a data-tooltip="{{ statuses[1]|trans|uncolorize }}" href="{{ ('viewpetition.php?setstat=1&id=' ~ petition.petitionid)|lotgd_url }}" class="ui button">P</a>
                             <a data-tooltip="{{ statuses[4]|trans|uncolorize }}" href="{{ ('viewpetition.php?setstat=4&id=' ~ petition.petitionid)|lotgd_url }}" class="ui button">E</a>

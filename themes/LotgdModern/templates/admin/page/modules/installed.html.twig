@@ -78,7 +78,7 @@
                         </td>
                         <td>{{ ('table.tbody.' ~ active)|trans|colorize }}</td>
                         <td>
-                            <span data-tooltip="{{ module.description|default(module.formalname|uncolorize) }}"><i class="info icon"></i></span>
+                            <span data-tooltip="{{ module.description|default(module.formalname|uncolorize) }}"><i aria-hidden="true" class="info icon"></i></span>
                             {{ module.formalname|colorize }}<br>
                             ({{ module.modulename|colorize }}) V{{ module.version }}
                         </td>

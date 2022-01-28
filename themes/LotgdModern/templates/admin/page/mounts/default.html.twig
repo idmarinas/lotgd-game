@@ -49,7 +49,7 @@
                 <td>{{ '`&%s`0'|format(mount.mountname)|colorize }}</td>
                 <td>{{ 'section.default.table.tbody.cost'|trans({ 'gems': mount.mountcostgems, 'gold': mount.mountcostgold })|colorize }}</td>
                 <td>FF: {{ mount.mountforestfights|numeral }}, DKs: {{ mount.mountdkcost }}</td>
-                <td>{{ '<a href onclick="return JaxonLotgd.Ajax.Core.Mounts.getListOfOwners(%s)"><i class="list icon"></i></a> `#%s`0'|format(mount.mountid, mount.owners)|colorize }}</td>
+                <td>{{ '<a href onclick="return JaxonLotgd.Ajax.Core.Mounts.getListOfOwners(%s)"><i aria-hidden="true" class="list icon"></i></a> `#%s`0'|format(mount.mountid, mount.owners)|colorize }}</td>
             </tr>
         {% endfor %}
     </tbody>

@@ -5,7 +5,7 @@
         <div>
             {% set nametext = (data.name is iterable ? data.name[0]|trans(data.name[1], data.name[2]|default(translation_domain)) : data.name) %}
 
-            {% if data.is_target %}<i class="yellow bullseye icon"></i>{% endif %}
+            {% if data.is_target %}<i aria-hidden="true" class="yellow bullseye icon"></i>{% endif %}
             {{ '(%s) %s (Level `b%s´b)`0'|trans|format(data.who|trans, nametext, data.level)|colorize }}
             {% if not data.show_bar %}
                 {% if data.hp_value > 0 %}: {% if data.show_hp_text %}{{ ( '`6' ~ data.hp_value_text ~ '`0')|colorize }}{% endif %}{% else %}{{ 'battle.defeated'|trans|colorize }}{% endif %}
