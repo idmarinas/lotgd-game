@@ -3,6 +3,10 @@
     "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization, migrating to a Symfony Application",
     "version": "7.0.0",
     "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "symfony/flex": true
+        },
         "optimize-autoloader": true,
         "preferred-install": {
             "*": "dist"
