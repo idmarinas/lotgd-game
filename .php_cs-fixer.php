@@ -1,7 +1,7 @@
 <?php
 /*
  * This document has been generated with
- * https://mlocati.github.io/php-cs-fixer-configurator/#version:3.0.0|configurator
+ * https://mlocati.github.io/php-cs-fixer-configurator/#version:3.5.0|configurator
  * you can change this configuration by importing this file.
  */
 $config = new PhpCsFixer\Config();
@@ -47,6 +47,8 @@ return $config
         'explicit_string_variable' => true,
         // Replace core functions calls returning constants with the constants.
         'function_to_constant' => true,
+        // // There MUST be group use for the same namespaces.
+        // 'group_import' => true,
         // Convert `heredoc` to `nowdoc` where possible.
         'heredoc_to_nowdoc' => true,
         // Ensure there is no code on the same line as the PHP open tag.
@@ -104,7 +106,7 @@ return $config
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
-    ->exclude('vendor')
-    ->in(__DIR__)
+            ->exclude('vendor')
+            ->in(__DIR__)
     )
 ;
