@@ -27,6 +27,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :wrench: FIXES
 
 -   **Cron commands** Fixed error, now import translator service.
+-   **src/core/Repository/MotdRepository.php** Fixed error with type of value returned for method `getLastMotd`
 
 ### :x: REMOVES
 
