@@ -35,7 +35,7 @@ class MotdRepository extends ServiceEntityRepository
     /**
      * Get last MOTD.
      */
-    public function getLastMotd(): array
+    public function getLastMotd(): ?array
     {
         $qb = $this->createQueryBuilder('u');
 
