@@ -6,6 +6,7 @@ require_once 'src/constants.php';
 
 use Rector\CodeQuality\Rector\Array_\CallableThisArrayToAnonymousFunctionRector;
 use Rector\CodeQuality\Rector\Include_\AbsolutizeRequireAndIncludePathRector;
+use Rector\CodeQuality\Rector\If_\ShortenElseIfRector;
 use Rector\Symfony\Set\SymfonySetList;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
