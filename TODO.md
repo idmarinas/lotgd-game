@@ -8,10 +8,16 @@
 # A tener en cuenta desde la versión 7.0.0
 
 -   Esta es la última versión compatible con el antiguo sistema de módulos.
+    -   Es posible que se alargue la compatibilidad durante algunas versiones más para hacer la transición más suave.
+-   Se ha cambiado de Fomantic UI a TailwindCSS
 
 # Módulos
 
 -   Adaptarlos para la version 6.2.0
+
+# Actualmente haciendo esto (7.Y.0)
+
+-   **BC** Eliminar compatibilidad con la versión 7.3 de PHP en la versión 7.1.0
 
 # Cosas a mejorar
 
@@ -46,34 +52,26 @@
         -   El panel de administración del juego se va a sustituir por **Sonata Admin**
 -   Se han migrado todos los cronjob a comandos de consola.
     -   _Nota_ el cronjob del nuevo día (newdayrunonce) no es compatible con el sistema de módulos.
-    -   El nuevo sistema de CronJob se usará en la versión 8.0.0 donde se elimina la compatibilidad con los módulos
-
-# Actualmente haciendo esto (7.Y.0)
-
--   Esta será la última versión que use la ordenación de carpetas `src/core` y `src/local`
-    -   La versión 7.0.0 será la última versión con esta estructura, y será la versión dedicada a facilitar la transción a la versión 8.0.0.
-        -   La estructura actual 7.0.0 y anterior es un poco caótica, por lo que se usará esta última versión para facilitar el salto a la versión 8.0.0.
-            -   (En la medida de lo posible)
-    -   La versión 8.0.0 usará la ordenación propia de Symfony.
--   Se revisará el código para hacer la transición más sencilla. 
--   Esta versión se centrará en hacer la transición a la versión 8.0.0 más sencilla.
--   Esta es la última versión que incluya compatibilidad con el antiguo sistema de módulos.
--   **BC** Sustituir Fomantic UI por https://tailwindcss.com 
-    -   Tailwind ofrece más flexibilidad para crear la UI.
-    -   npm install tailwindcss
-    -   WebpackEncore (Se tiene que revisar como seria con Tailwind)
-        -   Organizar mejor los archivos js/css
-            -   El tema se crea en una configuración nueva para personalizar
-            -   El js se crea en una entry comun para todo (app por ejemplo) ya que puede dar problemas
-                -   webpack.encore.entry.js
-                -   webpack.encore.theme.js
--   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
-    -   Se aprobecha el cambio a TailWind para revisar y mejorar las plantillas
-    -   Usar macros y blocks donde se pueda.    
-
+    -   El nuevo sistema de CronJob se usará en la versión X.0.0 donde se elimina la compatibilidad con los módulos
 # Futuras versiones
 ## **BC** Para la versión X.0.0
 
+-   Esta será la última versión que use la ordenación de carpetas `src/core` y `src/local`
+    -   La versión X.0.0 será la última versión con esta estructura, y será la versión dedicada a facilitar la transición a la versión LoTGD APP Symfony.
+        -   La estructura actual X.0.0 y anterior es un poco caótica, por lo que se usará esta última versión para facilitar el salto a la versión LoTGD APP Symfony.
+            -   (En la medida de lo posible)
+    -   La versión LoTGD APP Symfony usará la ordenación propia de Symfony.
+-   Se revisará el código para hacer la transición más sencilla. 
+-   Esta versión se centrará en hacer la transición a la versión LoTGD APP Symfony más sencilla.
+-   Esta es la última versión que incluya compatibilidad con el antiguo sistema de módulos.
+-   WebpackEncore (Se tiene que revisar como seria con Tailwind)
+    -   Organizar mejor los archivos js/css
+        -   El tema se crea en una configuración nueva para personalizar
+        -   El js se crea en una entry comun para todo (app por ejemplo) ya que puede dar problemas
+            -   webpack.encore.entry.js
+            -   webpack.encore.theme.js
+-   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
+    -   Usar macros y blocks donde se pueda.    
 -   **BC** Esta versión será ya una Symfony App (En estudio, puede que la versión 9.0.0 sea la Symfony App)
     -   Según se vea, dependiendo del sistema de eventos especiales, que parece ser que es el que más problemas va a dar.
 -   **BC** Se elimina la compatibilidad del antiguo sistema de módulos.
