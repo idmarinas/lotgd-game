@@ -29,7 +29,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **Cron commands** Fixed error, now import translator service.
 -   **src/core/Repository/MotdRepository.php** Fixed error with type of value returned for method `getLastMotd`
 -   **src/functions_old.php** Fix error, now check if function exists
--   **src/core/Character/Stats.php** Make "$vall" optional argument too
+-   **src/core/Character/Stats.php** Make "$val" optional argument too
 
 ### :x: REMOVES
 
