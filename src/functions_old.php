@@ -11,7 +11,7 @@
  * @since 4.10.0
  */
 
-if ( ! function_exists(''))
+if ( ! function_exists('bell_rand'))
 {
     function bell_rand($min = false, $max = false)
     {
