@@ -58,7 +58,7 @@ class Stats
      * @param string $label (Optional) The label associated with the value
      * @param string $val   The value of the attribute
      */
-    public function setcharstat($cat, $label = null, $val)
+    public function setcharstat($cat, $label = null, $val = null)
     {
         if ( ! $label)
         {
