@@ -18,6 +18,7 @@
 # Actualmente haciendo esto (7.Y.0)
 
 -   **BC** Eliminar compatibilidad con la versión 7.3 de PHP en la versión 7.1.0
+-   Crear un bundle `lotgd-core-bundle` que agrege todos los paquetes que se requieran como base "7.1.0"
 
 # Cosas a mejorar
 
