@@ -50,7 +50,22 @@ class MotdRepository extends ServiceEntityRepository
                 ->getArrayResult()
             ;
 
-            return $result[0] ?? [];
+            if ( ! $result)
+            {
+                return null;
+            }
+
+            $motd = $result[0][0];
+            unset($result[0][0]);
+            $motd = \array_merge($motd, $result[0]);
+
+            //-- Is a poll
+            if ($motd['motdtype'])
+            {
+                $motd = $this->appendPollResults($motd, 0);
+            }
+
+            return $motd;
         }
         catch (Throwable $th)
         {
