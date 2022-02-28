@@ -50,11 +50,6 @@ export default class extends Autocomplete
             return false;
         }
 
-        if (typeof item === "object" && item !== null)
-        {
-            return true;
-        }
-
-        return false;
+        return (typeof item === "object" && item !== null)
     }
 }
