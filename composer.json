@@ -91,6 +91,7 @@
         "twig/twig": "^2.14"
     },
     "require-dev": {
+        "idmarinas/maker-bundle": "^1.0",
         "idmarinas/tracy-twig-bar": "^0.3",
         "macfja/tracy-doctrine-sql": "dev-master",
         "milo/vendor-versions": "^1.1",

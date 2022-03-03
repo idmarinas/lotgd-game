@@ -139,6 +139,9 @@
     "idmarinas/lotgd-contracts": {
         "version": "0.2.0"
     },
+    "idmarinas/maker-bundle": {
+        "version": "1.0.1"
+    },
     "idmarinas/tracy-twig-bar": {
         "version": "0.1.2"
     },
@@ -177,9 +180,6 @@
     },
     "laminas/laminas-json": {
         "version": "3.2.0"
-    },
-    "laminas/laminas-loader": {
-        "version": "2.7.0"
     },
     "laminas/laminas-log": {
         "version": "2.13.1"
@@ -233,7 +233,7 @@
         "version": "v1.1.5"
     },
     "myclabs/deep-copy": {
-        "version": "1.10.2"
+        "version": "1.10.3"
     },
     "netresearch/jsonmapper": {
         "version": "v2.1.0"
@@ -245,10 +245,10 @@
         "version": "3.2.10"
     },
     "phar-io/manifest": {
-        "version": "2.0.1"
+        "version": "2.0.3"
     },
     "phar-io/version": {
-        "version": "3.1.0"
+        "version": "3.2.1"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -260,19 +260,19 @@
         "version": "1.4.0"
     },
     "phpspec/prophecy": {
-        "version": "1.13.0"
+        "version": "v1.15.0"
     },
     "phpstan/phpdoc-parser": {
         "version": "0.5.4"
     },
     "phpstan/phpstan": {
-        "version": "0.12.96"
+        "version": "0.12.99"
     },
     "phpunit/php-code-coverage": {
-        "version": "9.2.6"
+        "version": "9.2.14"
     },
     "phpunit/php-file-iterator": {
-        "version": "3.0.5"
+        "version": "3.0.6"
     },
     "phpunit/php-invoker": {
         "version": "3.1.1"
@@ -284,7 +284,7 @@
         "version": "5.0.3"
     },
     "phpunit/phpunit": {
-        "version": "9.3",
+        "version": "9.5",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
@@ -310,7 +310,7 @@
         "version": "1.1.4"
     },
     "rector/rector": {
-        "version": "0.11.52"
+        "version": "0.11.60"
     },
     "sabre/event": {
         "version": "5.1.2"
@@ -337,10 +337,10 @@
         "version": "5.1.3"
     },
     "sebastian/exporter": {
-        "version": "4.0.3"
+        "version": "4.0.4"
     },
     "sebastian/global-state": {
-        "version": "5.0.3"
+        "version": "5.0.5"
     },
     "sebastian/lines-of-code": {
         "version": "1.0.3"
@@ -464,7 +464,7 @@
         "version": "v4.4.24"
     },
     "symfony/dotenv": {
-        "version": "v4.4.20"
+        "version": "v4.4.37"
     },
     "symfony/error-handler": {
         "version": "v4.4.23"
@@ -625,14 +625,11 @@
     "symfony/process": {
         "version": "v4.4.22"
     },
-    "symfony/profiler-pack": {
-        "version": "v1.0.5"
-    },
     "symfony/property-access": {
         "version": "v4.4.20"
     },
     "symfony/property-info": {
-        "version": "v4.4.25"
+        "version": "v4.4.37"
     },
     "symfony/proxy-manager-bridge": {
         "version": "v4.4.18"
@@ -686,9 +683,6 @@
     },
     "symfony/string": {
         "version": "v5.2.8"
-    },
-    "symfony/test-pack": {
-        "version": "v1.0.8"
     },
     "symfony/translation": {
         "version": "3.3",
@@ -782,7 +776,7 @@
         "version": "v4.4.24"
     },
     "theseer/tokenizer": {
-        "version": "1.2.0"
+        "version": "1.2.1"
     },
     "tracy/tracy": {
         "version": "v2.8.4"
