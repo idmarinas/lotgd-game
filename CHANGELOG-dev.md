@@ -26,7 +26,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   **Service** Make public `http_client` service.
+-   **Service** Create a public service `lotgd_http_client` use this instead of `http_client`
 
 ### :x: REMOVES
 
