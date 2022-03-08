@@ -281,6 +281,9 @@ services:
     session.notifications_bag:
         alias: Lotgd\Core\Bag\NotificationsBag
         public: true
+    http_client:
+        class: Symfony\Contracts\HttpClient\HttpClientInterface
+        public: true
 
     # Twig extensions
     Marek\Twig\ByteUnitsExtension:
