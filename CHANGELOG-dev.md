@@ -10,7 +10,7 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V6.md)  
 Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V7.md)  
 
-# Version: 7.0.1
+# Version: 7.0.2
 
 ### :cyclone: CHANGES
 
@@ -26,10 +26,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   **Cron commands** Fixed error, now import translator service.
--   **src/core/Repository/MotdRepository.php** Fixed error with type of value returned for method `getLastMotd`
--   **src/functions_old.php** Fix error, now check if function exists
--   **src/core/Character/Stats.php** Make "$val" optional argument too
+-   **Service** Make public `http_client` service.
 
 ### :x: REMOVES
 

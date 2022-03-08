@@ -14,7 +14,7 @@
 ![Upgrade](https://img.shields.io/badge/upgrade-success-green.svg?maxAge=2592000)
 ![Working](https://img.shields.io/badge/working-succes-green.svg?maxAge=2592000)
 
-![Dev version](https://img.shields.io/badge/version%40dev-7.0.1-blue)
+![Dev version](https://img.shields.io/badge/version%40dev-7.0.2-blue)
 ![GitHub issues](https://img.shields.io/github/issues/idmarinas/lotgd-game.svg)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/idmarinas/lotgd-game.svg)
 ![Github commits (since latest release)](https://img.shields.io/github/commits-since/idmarinas/lotgd-game/latest.svg)
