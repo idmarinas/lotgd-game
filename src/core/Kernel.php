@@ -25,11 +25,11 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    public const VERSION             = '7.0.1 IDMarinas Edition'; // Version of game in public display format.
-    public const VERSION_ID          = 70001; // Identify version of game in numeric format.
+    public const VERSION             = '7.0.2 IDMarinas Edition'; // Version of game in public display format.
+    public const VERSION_ID          = 70002; // Identify version of game in numeric format.
     public const MAJOR_VERSION       = 7;
     public const MINOR_VERSION       = 0;
-    public const RELEASE_VERSION     = 1;
+    public const RELEASE_VERSION     = 2;
     public const EXTRA_VERSION       = '';
     public const VERSION_NUMBER      = self::VERSION_ID; //-- Alias of VERSION_ID
     public const TEXT_DOMAIN_DEFAULT = 'app_default';
