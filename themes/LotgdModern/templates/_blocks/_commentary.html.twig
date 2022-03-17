@@ -141,7 +141,9 @@
     </form>
 
     {% do inline_script().captureStart() %}
-        Lotgd.set('colors', "{{ colors|json_encode()|e('js') }}")
+        document.addEventListener('DOMContentLoaded', (event) => {
+            Lotgd.set('colors', "{{ colors|json_encode()|e('js') }}")
+        })
 
         function onKeyUp (element)
         {
