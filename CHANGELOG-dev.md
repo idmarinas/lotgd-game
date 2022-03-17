@@ -27,6 +27,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :wrench: FIXES
 
 -   **Service** Create a public service `lotgd_http_client` use this instead of `http_client`
+-   **Comentary** Fixed error with undefined "Lotgd"
 
 ### :x: REMOVES
 
