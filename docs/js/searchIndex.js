@@ -1861,6 +1861,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Command-Cron-AvatarCleanCommand.html#constant_TRANSLATION_DOMAIN"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\Cron\\AvatarCleanCommand\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-Cron-AvatarCleanCommand.html#property_translator"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Command\\Cron\\AvatarCleanCommand\u003A\u003A\u0024defaultName",
             "name": "defaultName",
             "summary": "",
@@ -1906,6 +1911,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Command-Cron-ContentCleanCommand.html#property_contentClean"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\Cron\\ContentCleanCommand\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-Cron-ContentCleanCommand.html#property_translator"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Command\\Cron\\NewDayCommand",
             "name": "NewDayCommand",
             "summary": "",
@@ -1941,6 +1951,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Command-Cron-NewDayCommand.html#property_dispatcher"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\Cron\\NewDayCommand\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-Cron-NewDayCommand.html#property_translator"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Command\\Cron\\PetitionCleanCommand",
             "name": "PetitionCleanCommand",
             "summary": "",
@@ -1975,6 +1990,11 @@ Search.appendIndex(
             "name": "repository",
             "summary": "",
             "url": "classes/Lotgd-Core-Command-Cron-PetitionCleanCommand.html#property_repository"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\Cron\\PetitionCleanCommand\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-Cron-PetitionCleanCommand.html#property_translator"
         },                {
             "fqsen": "\\Lotgd\\Core\\Command\\FormatTrait",
             "name": "FormatTrait",
@@ -2225,6 +2245,11 @@ Search.appendIndex(
             "name": "settings",
             "summary": "",
             "url": "classes/Lotgd-Core-Command-UserLogoutCommand.html#property_settings"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Command\\UserLogoutCommand\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Command-UserLogoutCommand.html#property_translator"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\AboutController",
             "name": "AboutController",
@@ -4310,6 +4335,11 @@ Search.appendIndex(
             "name": "getRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-StableController.html#method_getRepository"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\StableController\u003A\u003A\u0024dipatcher",
+            "name": "dipatcher",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-StableController.html#property_dipatcher"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\StableController\u003A\u003A\u0024navigation",
             "name": "navigation",
