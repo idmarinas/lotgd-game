@@ -126,6 +126,7 @@ trait Version
         '7.0.0 IDMarinas Edition'         => 70000, //-- Latest version compatible with the old module system (May be)
         '7.0.1 IDMarinas Edition'         => 70001,
         '7.0.2 IDMarinas Edition'         => 70002,
+        '7.0.3 IDMarinas Edition'         => 70003,
     ];
 
     /**

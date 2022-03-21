@@ -10,7 +10,7 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V6.md)  
 Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V7.md)  
 
-# Version: 7.0.2
+# Version: 7.0.3
 
 ### :cyclone: CHANGES
 
@@ -26,8 +26,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   **Service** Create a public service `lotgd_http_client` use this instead of `http_client`
--   **Comentary** Fixed error with undefined "Lotgd"
+-   **lib/showform.php** Updated for show form with Tailwind CSS
 
 ### :x: REMOVES
 
