@@ -44,18 +44,10 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
     $i          = false;
     $tabMenu    = [];
     $tabContent = [];
-    $tabActive  = '';
 
     foreach ($layout as $key => $val)
     {
-        if (false !== $keypref)
-        {
-            $keyout = \sprintf($keypref, $key);
-        }
-        else
-        {
-            $keyout = $key;
-        }
+        $keyout = (false !== $keypref) ? \sprintf($keypref, $key) : $key;
 
         if (\is_array($val))
         {
@@ -73,14 +65,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
             $info[0] = \call_user_func_array('sprintf', $info[0]);
         }
 
-        if (isset($info[1]))
-        {
-            $info[1] = \trim($info[1]);
-        }
-        else
-        {
-            $info[1] = '';
-        }
+        $info[1] = (isset($info[1])) ? \trim($info[1]) : '';
 
         if ('title' == $info[1])
         {
@@ -88,12 +73,11 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
 
             if (1 == $title_id)
             {
-                $tabActive = $info[0];
-                $tabMenu[] = \sprintf('<a class="item active" data-tab="tab-%s">%s</a>', $title_id, $info[0]);
+                $tabMenu[] = \sprintf('<a class="w-full inline-block" data-tabs-target="tab" data-action="click->tabs#change" href="#">%s</a>', $info[0]);
             }
             else
             {
-                $tabMenu[] = \sprintf('<a class="item" data-tab="tab-%s">%s</a>', $title_id, $info[0]);
+                $tabMenu[] = \sprintf('<a class="w-full inline-block" data-tabs-target="tab" data-action="click->tabs#change" href="#">%s</a>', $info[0]);
             }
         }
         elseif ('note' == $info[1])
@@ -106,7 +90,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
             $result   = $callback($info, $row, $key, $keyout, $val, $extensions);
 
             $tabContent[$title_id][] = \sprintf(
-                '<div class="inline field"><label class="left floated">%s</label>%s</div>',
+                '<label class="md:flex md:items-center mb-6"><div class="md:w-1/3">%s</div><div class="md:w-2/3">%s</div></label>',
                 \LotgdFormat::colorize($info[0]),
                 $result
             );
@@ -127,9 +111,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
         if (0 < $key)
         {
             $text = \sprintf(
-                '<div class="ui tab segment %s" data-tab="tab-%s">%s</div>',
-                (1 == $key ? 'active' : null),
-                $key,
+                '<div class="hidden border-b border-lotgd-200 pb-3 px-2" data-tabs-target="panel"><div class="italic bg-gradient-to-r from-transparent via-lotgd-800 text-center font-bold border-b border-lotgd-500 py-2 mb-2">%s</div></div>',
                 $text
             );
         }
@@ -143,22 +125,16 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
     {
         $tabMenu = \array_chunk($tabMenu, \ceil(\count($tabMenu) / 4));
 
-        $popupMenu = '<div class="ui flowing popup transition hidden lotgd form">';
-        $popupMenu .= '<div class="ui stackable equal width divided grid">';
+        $popupMenu = '';
 
         foreach ($tabMenu as $menu)
         {
-            $popupMenu .= '<div class="column"><div class="ui list">';
-            $popupMenu .= \implode('', $menu);
-            $popupMenu .= '</div></div>';
+            $popupMenu .= '<div class="column">'.\implode('', $menu).'</div>';
         }
-        $popupMenu .= '</div></div>';
 
         $menu = \sprintf(
-            '<div class="ui menu lotgd form "><a class="browse item active">%s <i class="dropdown icon"></i></a>%s<div class="header item">%s</div></div>',
-            'Browse',
-            $popupMenu,
-            $tabActive
+            '<div class="grid grid-cols-4 divide-x divide-lotgd-200 border-b border-lotgd-200 py-3 px-2 text-center">%s</div>',
+            $popupMenu
         );
 
         $content = $menu.$content;
@@ -166,30 +142,24 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
         unset($popupMenu, $menu);
     }
 
-    if ($print)
-    {
-        \LotgdResponse::pageAddContent($content);
-    }
-
+    $content = '<div class="shadow overflow-hidden border border-lotgd-200 sm:rounded-lg" data-controller="tabs" data-tabs-active-tab="italic uppercase active">'.$content;
     $save = 'Save';
 
     if ( ! $nosave)
     {
-        if ($print)
-        {
-            \LotgdResponse::pageAddContent("<input class='ui button' type='submit' value='{$save}'>");
-        }
-        else
-        {
-            $content .= "<input class='ui button' type='submit' value='{$save}'>";
-        }
+        $content .= "<input class='ui button' type='submit' value='{$save}'>";
     }
 
-    if ( ! $print)
+    $content = $content.'</div>';
+
+    if ($print)
+    {
+        \LotgdResponse::pageAddContent($content);
+    }
+    else
     {
         return $content;
     }
-
     unset($tabContent, $content, $tabMenu);
 }
 
@@ -524,12 +494,14 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
         case 'bool':
             $value = $row[$key] ?? $default ?: 0;
 
-            $select = '<div class="ui lotgd toggle checkbox">';
-            $select .= '<input type="hidden" name="'.$keyout.'" value="0">';
-            $select .= '<input type="checkbox" value="1" name="'.$keyout.'" '.(1 == $value ? ' checked' : '').'>';
-            $select .= '</div>';
-
-            return $select;
+            return '<div class="relative">
+                <input type="hidden" name="'.$keyout.'" value="0" class="unstyle hidden">
+                <input type="checkbox" value="1" name="'.$keyout.'" class="unstyle hidden" '.(1 == $value ? ' checked' : '').'>
+                <!-- path -->
+                <div class="toggle-path w-14 h-7 rounded-full shadow-inner"></div>
+                <!-- circle -->
+                <div class="toggle-circle absolute w-5 h-5 rounded-full shadow top-1 left-1"></div>
+            </div>';
 
         case 'hidden':
             if (\array_key_exists($key, $row))
@@ -632,7 +604,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 $val = '';
             }
 
-            return "<input size='{$minlen}' maxlength='{$len}' name='{$keyout}' value=\"".\htmlentities($val, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'">';
+            return "<input type='text' size='{$minlen}' maxlength='{$len}' name='{$keyout}' value=\"".\htmlentities($val, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'">';
 
         default:
             if (\array_key_exists($info[1], $extensions))
