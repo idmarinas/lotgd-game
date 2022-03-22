@@ -71,14 +71,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
         {
             ++$title_id;
 
-            if (1 == $title_id)
-            {
-                $tabMenu[] = \sprintf('<a class="w-full inline-block" data-tabs-target="tab" data-action="click->tabs#change" href="#">%s</a>', $info[0]);
-            }
-            else
-            {
-                $tabMenu[] = \sprintf('<a class="w-full inline-block" data-tabs-target="tab" data-action="click->tabs#change" href="#">%s</a>', $info[0]);
-            }
+            $tabMenu[] = \sprintf('<a class="w-full inline-block" data-tabs-target="tab" data-action="click->tabs#change" href="#">%s</a>', $info[0]);
         }
         elseif ('note' == $info[1])
         {
