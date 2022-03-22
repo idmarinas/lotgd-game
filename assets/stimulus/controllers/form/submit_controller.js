@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus'
+import { Controller } from '@hotwired/stimulus'
 
 //-- Mixins
 import { useLoading } from '../../mixins'
