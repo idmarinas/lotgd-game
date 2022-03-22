@@ -41,7 +41,6 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
     ++$showform_id;
     $extensions = modulehook('showformextensions', []);
 
-    $i          = false;
     $tabMenu    = [];
     $tabContent = [];
 
@@ -87,8 +86,6 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
                 \LotgdFormat::colorize($info[0]),
                 $result
             );
-
-            $i = ! $i;
         }
     }
 
@@ -162,7 +159,8 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
     $title   = $default[0];
     $default = $default[1] ?? null;
 
-    switch ($title) {
+    switch ($title)
+    {
         case 'title':
         case 'note':
             break;
@@ -251,13 +249,10 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 
                 if (\is_array($row[$key]))
                 {
+                    $checked = false;
                     if ($row[$key][$optval])
                     {
                         $checked = true;
-                    }
-                    else
-                    {
-                        $checked = false;
                     }
                 }
                 else
@@ -472,13 +467,10 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 
         break;
         case 'password':
+            $out = '';
             if (\array_key_exists($key, $row))
             {
                 $out = $row[$key];
-            }
-            else
-            {
-                $out = '';
             }
 
             return "<input type='password' name='{$keyout}' value='".\htmlentities($out, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8'))."'>";
@@ -497,13 +489,10 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             </div>';
 
         case 'hidden':
+            $val = '';
             if (\array_key_exists($key, $row))
             {
                 $val = $row[$key];
-            }
-            else
-            {
-                $val = '';
             }
 
             return "<input type='hidden' name='{$keyout}' value=\"".\htmlentities($val, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'">'.\htmlentities($val, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8'));
@@ -588,13 +577,10 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 $minlen = 70;
             }
 
+            $val = '';
             if (\array_key_exists($key, $row))
             {
                 $val = $row[$key];
-            }
-            else
-            {
-                $val = '';
             }
 
             return "<input type='text' size='{$minlen}' maxlength='{$len}' name='{$keyout}' value=\"".\htmlentities($val, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8')).'">';
@@ -604,25 +590,19 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             {
                 $func = $extensions[$info[1]];
 
+                $val = '';
                 if (\array_key_exists($key, $row))
                 {
                     $val = $row[$key];
-                }
-                else
-                {
-                    $val = '';
                 }
                 \call_user_func($func, $keyout, $val, $info);
             }
             else
             {
+                $val = '';
                 if (\array_key_exists($key, $row))
                 {
                     $val = $row[$key];
-                }
-                else
-                {
-                    $val = '';
                 }
 
                 if ($val instanceof \DateTime)
