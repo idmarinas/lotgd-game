@@ -217,7 +217,7 @@ else
         {
             if (LotgdSetting::getSetting('playerchangeemail', 0))
             {
-                if (is_email($email))
+                if (LotgdKernel::get("lotgd_core.tool.validator")->isMail($email))
                 {
                     if (1 == LotgdSetting::getSetting('requirevalidemail', 0))
                     {

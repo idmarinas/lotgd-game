@@ -28,6 +28,7 @@ use Lotgd\Core\Output\Format;
 use Lotgd\Core\Tool\Sanitize;
 use Lotgd\Core\Tool\SystemMail;
 use Lotgd\Core\Tool\Tool;
+use Lotgd\Core\Tool\Validator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,6 +50,7 @@ class CreateController extends AbstractController
     private $passwordEncoder;
     private $tool;
     private $systemMail;
+    private $validator;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
@@ -60,7 +62,8 @@ class CreateController extends AbstractController
         Settings $settings,
         UserPasswordEncoderInterface $passwordEncoder,
         Tool $tool,
-        SystemMail $systemMail
+        SystemMail $systemMail,
+        Validator $validator
     ) {
         $this->dispatcher      = $dispatcher;
         $this->translator      = $translator;
@@ -72,6 +75,7 @@ class CreateController extends AbstractController
         $this->passwordEncoder = $passwordEncoder;
         $this->tool            = $tool;
         $this->systemMail      = $systemMail;
+        $this->validator       = $validator;
     }
 
     public function forgotVal(array $params, Request $request): Response
@@ -298,7 +302,7 @@ class CreateController extends AbstractController
                 $blockaccount = true;
             }
 
-            if (1 == (int) $this->settings->getSetting('requireemail', 0) && ! is_email($email))
+            if (1 == (int) $this->settings->getSetting('requireemail', 0) && ! $this->validator->isMail($email))
             {
                 $this->addFlash('error', $this->translator->trans('create.account.email.incorrect', [], $params['textDomain']));
                 $blockaccount = true;
