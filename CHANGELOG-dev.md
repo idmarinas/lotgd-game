@@ -30,6 +30,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   Use new name of Stimulus package, this avoid some errors.
     -   **asssets/stimulus/controllers/form/input_range_controller.js**
     -   **asssets/stimulus/controllers/form/submit_controller.js**
+- **systemmail** Remplace `systemmail()` function for service method.
 
 ### :x: REMOVES
 
