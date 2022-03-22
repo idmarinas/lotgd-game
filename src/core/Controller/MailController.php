@@ -19,7 +19,6 @@ use Laminas\Filter\StringTrim;
 use Laminas\Filter\StripTags;
 use Laminas\Filter\StripNewlines;
 use Laminas\Filter\PregReplace;
-use Laminas\Filter;
 use Lotgd\Core\Form\MailWriteType;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
@@ -27,6 +26,7 @@ use Lotgd\Core\Pattern\LotgdControllerTrait;
 use Lotgd\Core\Repository\AvatarRepository;
 use Lotgd\Core\Repository\MailRepository;
 use Lotgd\Core\Tool\Sanitize;
+use Lotgd\Core\Tool\SystemMail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -45,19 +45,22 @@ class MailController extends AbstractController implements LotgdControllerInterf
     private $translator;
     private $avatarRepository;
     private $sanitize;
+    private $systemMail;
 
     public function __construct(
         MailRepository $repository,
         Settings $settings,
         TranslatorInterface $translator,
         AvatarRepository $avatarRepository,
-        Sanitize $sanitize
+        Sanitize $sanitize,
+        SystemMail $systemMail
     ) {
         $this->repository       = $repository;
         $this->settings         = $settings;
         $this->translator       = $translator;
         $this->avatarRepository = $avatarRepository;
         $this->sanitize         = $sanitize;
+        $this->systemMail       = $systemMail;
     }
 
     public function inbox(Request $request): Response
@@ -429,7 +432,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
             $subject = $this->sanitize((string) $post['subject'], true);
             $body    = substr($this->sanitize((string) $post['body'], false), 0, (int) $this->settings->getSetting('mailsizelimit', 1024));
 
-            systemmail($account->getAcctid(), $subject, $body, $from);
+            $this->systemMail->send($account->getAcctid(), $subject, $body, $from);
 
             $this->addNotification('success', $this->translator->trans('jaxon.success.send.mail.sent', [], self::TRANSLATION_DOMAIN));
 

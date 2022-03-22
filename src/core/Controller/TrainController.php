@@ -25,6 +25,7 @@ use Lotgd\Core\Repository\MastersRepository;
 use Lotgd\Core\Tool\CreatureFunction;
 use Lotgd\Core\Tool\DateTime;
 use Lotgd\Core\Tool\PlayerFunction;
+use Lotgd\Core\Tool\SystemMail;
 use Lotgd\Core\Tool\Tool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -50,6 +51,7 @@ class TrainController extends AbstractController
     private $buffer;
     private $playerFunction;
     private $creatureFunction;
+    private $systemMail;
 
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
@@ -58,7 +60,8 @@ class TrainController extends AbstractController
         Battle $battle,
         MastersRepository $repository,
         Settings $settings,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        SystemMail $systemMail
     ) {
         $this->dispatcher    = $eventDispatcher;
         $this->navigation    = $navigation;
@@ -67,6 +70,7 @@ class TrainController extends AbstractController
         $this->repository    = $repository;
         $this->settings      = $settings;
         $this->translator    = $translator;
+        $this->systemMail    = $systemMail;
     }
 
     public function index(Request $request): Response
@@ -363,7 +367,7 @@ class TrainController extends AbstractController
                         $this->getDoctrine()->getManager()->persist($entity);
                         $this->getDoctrine()->getManager()->flush();
 
-                        systemmail($session['user']['referer'], $subject, $message);
+                        $this->systemMail->send($session['user']['referer'], $subject, $message);
                     }
 
                     $session['user']['refererawarded'] = 1;

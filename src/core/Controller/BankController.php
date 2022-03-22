@@ -19,6 +19,7 @@ use Lotgd\Core\Http\Response as HttpResponse;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
+use Lotgd\Core\Tool\SystemMail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,19 +32,22 @@ class BankController extends AbstractController
     private $settings;
     private $navigation;
     private $response;
+    private $systemMail;
 
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
         Log $log,
         Settings $settings,
         Navigation $navigation,
-        HttpResponse $response
+        HttpResponse $response,
+        SystemMail $systemMail
     ) {
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
         $this->settings   = $settings;
         $this->navigation = $navigation;
-        $this->response = $response;
+        $this->response   = $response;
+        $this->systemMail = $systemMail;
     }
 
     public function index(Request $request): Response
@@ -52,18 +56,18 @@ class BankController extends AbstractController
 
         $args = new GenericEvent(null, ['textDomain' => 'page_bank', 'textDomainNavigation' => 'navigation_bank']);
         $this->dispatcher->dispatch($args, Events::PAGE_BANK_PRE);
-        $result = modulehook('bank-text-domain', $args->getArguments());
-        $textDomain = $result['textDomain'];
+        $result               = modulehook('bank-text-domain', $args->getArguments());
+        $textDomain           = $result['textDomain'];
         $textDomainNavigation = $result['textDomainNavigation'];
 
         $this->response->pageTitle('title', [], $textDomain);
 
         $params = [
             'textDomain' => $textDomain,
-            'ownerName' => $this->settings->getSetting('bankername', '`@Elessa`0')
+            'ownerName'  => $this->settings->getSetting('bankername', '`@Elessa`0'),
         ];
 
-        $op = (string) $request->query->get('op');
+        $op     = (string) $request->query->get('op');
         $method = method_exists($this, $op) ? $op : 'enter';
 
         $this->navigation->villageNav();
@@ -77,7 +81,7 @@ class BankController extends AbstractController
             $this->navigation->addNav('nav.withdraw', 'bank.php?op=withdraw');
             $this->navigation->addNav('nav.deposit.label', 'bank.php?op=deposit');
 
-            if ($this->settings->getSetting('borrowperlevel', 20) !== '' && $this->settings->getSetting('borrowperlevel', 20) !== '0')
+            if ('' !== $this->settings->getSetting('borrowperlevel', 20) && '0' !== $this->settings->getSetting('borrowperlevel', 20))
             {
                 $this->navigation->addNav('nav.borrow.label', 'bank.php?op=borrow');
             }
@@ -86,7 +90,7 @@ class BankController extends AbstractController
         {
             $this->navigation->addNav('nav.deposit.pay', 'bank.php?op=deposit');
 
-            if ($this->settings->getSetting('borrowperlevel', 20) !== '' && $this->settings->getSetting('borrowperlevel', 20) !== '0')
+            if ('' !== $this->settings->getSetting('borrowperlevel', 20) && '0' !== $this->settings->getSetting('borrowperlevel', 20))
             {
                 $this->navigation->addNav('nav.borrow.more', 'bank.php?op=borrow');
             }
@@ -168,7 +172,7 @@ class BankController extends AbstractController
             $result     = $repository->find($to);
 
             $params['transferred'] = 0;
-            if ($result !== null)
+            if (null !== $result)
             {
                 $maxtfer = $result->getLevel() * $this->settings->getSetting('transferperlevel', 25);
 
@@ -207,7 +211,7 @@ class BankController extends AbstractController
                     $subj = ['transfer3.success.mail.subject', [], $params['textDomain']];
                     $body = ['transfer3.success.mail.message', ['name' => $session['user']['name'], 'amount' => $amt], $params['textDomain']];
 
-                    systemmail($result->getAcct()->getAcctid(), $subj, $body);
+                    $this->systemMail->send($result->getAcct()->getAcctid(), $subj, $body);
                 }
             }
         }

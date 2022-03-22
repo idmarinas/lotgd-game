@@ -26,6 +26,7 @@ use Lotgd\Core\Log;
 use Lotgd\Core\Output\Censor;
 use Lotgd\Core\Output\Format;
 use Lotgd\Core\Tool\Sanitize;
+use Lotgd\Core\Tool\SystemMail;
 use Lotgd\Core\Tool\Tool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -47,6 +48,7 @@ class CreateController extends AbstractController
     private $settings;
     private $passwordEncoder;
     private $tool;
+    private $systemMail;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
@@ -57,7 +59,8 @@ class CreateController extends AbstractController
         Log $log,
         Settings $settings,
         UserPasswordEncoderInterface $passwordEncoder,
-        Tool $tool
+        Tool $tool,
+        SystemMail $systemMail
     ) {
         $this->dispatcher      = $dispatcher;
         $this->translator      = $translator;
@@ -68,6 +71,7 @@ class CreateController extends AbstractController
         $this->settings        = $settings;
         $this->passwordEncoder = $passwordEncoder;
         $this->tool            = $tool;
+        $this->systemMail      = $systemMail;
     }
 
     public function forgotVal(array $params, Request $request): Response
@@ -159,7 +163,7 @@ class CreateController extends AbstractController
 
                     foreach ($acctSuper as $user)
                     {
-                        systemmail($user['acctid'], $subj, $msg, 0);
+                        $this->systemMail->send($user['acctid'], $subj, $msg, 0);
                     }
                 }
             }

@@ -25,6 +25,7 @@ use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
 use Lotgd\Core\Tool\Sanitize;
+use Lotgd\Core\Tool\SystemMail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,6 +43,7 @@ class ClanController extends AbstractController
     private $navigation;
     private $response;
     private $settings;
+    private $systemMail;
 
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
@@ -51,7 +53,8 @@ class ClanController extends AbstractController
         Sanitize $sanitize,
         Navigation $navigation,
         HttpResponse $response,
-        Settings $settings
+        Settings $settings,
+        SystemMail $systemMail
     ) {
         $this->dispatcher = $eventDispatcher;
         $this->log        = $log;
@@ -61,6 +64,7 @@ class ClanController extends AbstractController
         $this->navigation = $navigation;
         $this->response   = $response;
         $this->settings   = $settings;
+        $this->systemMail = $systemMail;
     }
 
     public function index(Request $request): Response
@@ -347,7 +351,7 @@ class ClanController extends AbstractController
 
             foreach ($leaders as $leader)
             {
-                systemmail($leader['acctid'], $subj, $msg);
+                $this->systemMail->send($leader['acctid'], $subj, $msg);
             }
 
             //-- Send reminder mail if clan of choice has a description
@@ -362,7 +366,7 @@ class ClanController extends AbstractController
                     'description'   => $result->getClandesc(),
                 ], $params['textDomain']];
 
-                systemmail($session['user']['acctid'], $subj, $msg);
+                $this->systemMail->send($session['user']['acctid'], $subj, $msg);
             }
 
             $this->navigation->addNavAllow('clan.php?op=waiting');
@@ -770,7 +774,7 @@ class ClanController extends AbstractController
 
         foreach ($leaders as $leader)
         {
-            systemmail($leader['acctid'], $subj, $msg);
+            $this->systemMail->send($leader['acctid'], $subj, $msg);
         }
 
         $this->log->debug($session['user']['login'].' has withdrawn from his/her clan nº. '.$session['user']['clanid']);

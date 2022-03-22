@@ -123,7 +123,7 @@ if ('save' == $op)
         'reason' => $reason,
     ], $textDomain];
 
-    systemmail($id, $subj, $msg);
+    LotgdKernel::get('lotgd_core.tool.system_mail')->send($id, $subj, $msg);
 
     LotgdFlashMessages::addSuccessMessage(LotgdTranslator::t('flash.message.donation', [
         'name'   => $account->getCharacter()->getName(),

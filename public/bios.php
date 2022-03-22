@@ -34,7 +34,7 @@ if ('block' == $op || 'unblock' == $op)
         $subj = ["mail.{$op}.subject", [], $textDomain];
         $msg  = ["mail.{$op}.message", [], $textDomain];
 
-        systemmail($userid, $subj, $msg);
+        LotgdKernel::get('lotgd_core.tool.system_mail')->send($userid, $subj, $msg);
     }
 
     LotgdFlashMessages::{$flashMessage}(LotgdTranslator::t($message, [], $textDomain));

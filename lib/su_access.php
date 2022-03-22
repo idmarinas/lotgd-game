@@ -100,7 +100,7 @@ function check_su_access($level)
             $textDomain,
         ];
 
-        systemmail($row['acctid'], $subj, $body);
+        LotgdKernel::get('lotgd_core.tool.system_mail')->send($row['acctid'], $subj, $body);
     }
 
     $tpl = \LotgdTheme::load('admin/_blocks/_access.html.twig');

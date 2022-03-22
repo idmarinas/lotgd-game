@@ -23,6 +23,7 @@ use Lotgd\Core\Http\Response as HttpResponse;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Navigation\Navigation;
 use Lotgd\Core\Tool\CreatureFunction;
+use Lotgd\Core\Tool\SystemMail;
 use Lotgd\Core\Tool\Tool;
 use Lotgd\CoreBundle\OccurrenceBundle\OccurrenceDispatcher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,6 +48,7 @@ class GraveyardController extends AbstractController
     private $tool;
     private $translator;
     private $doctrine;
+    private $systemMail;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
@@ -55,7 +57,8 @@ class GraveyardController extends AbstractController
         Navigation $navigation,
         Buffer $buffer,
         Tool $tool,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        SystemMail $systemMail
     ) {
         $this->dispatcher = $dispatcher;
         $this->response   = $response;
@@ -64,6 +67,7 @@ class GraveyardController extends AbstractController
         $this->buffer     = $buffer;
         $this->tool       = $tool;
         $this->translator = $translator;
+        $this->systemMail = $systemMail;
     }
 
     public function index(array $params, Request $request): Response
@@ -573,7 +577,7 @@ class GraveyardController extends AbstractController
                         'playerName' => $session['user']['name'],
                     ], $this->translationDomain];
 
-                    systemmail($params['character']->getAcct()->getAcctid(), $subject, $message);
+                    $this->systemMail->send($params['character']->getAcct()->getAcctid(), $subject, $message);
                 }
 
                 $this->tool->addNews($news, [

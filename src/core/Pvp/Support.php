@@ -21,6 +21,7 @@ use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
 use Lotgd\Core\Navigation\Navigation;
 use Lotgd\Core\Output\Format;
+use Lotgd\Core\Tool\SystemMail;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class Support
@@ -35,6 +36,7 @@ class Support
     private $navigation;
     private $pvpWarning;
     private $battle;
+    private $systemMail;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
@@ -44,7 +46,8 @@ class Support
         Format $format,
         Navigation $navigation,
         Warning $warning,
-        Battle $battle
+        Battle $battle,
+        SystemMail $systemMail
     ) {
         $this->dispatcher = $dispatcher;
         $this->doctrine   = $doctrine;
@@ -54,6 +57,7 @@ class Support
         $this->navigation = $navigation;
         $this->pvpWarning = $warning;
         $this->battle     = $battle;
+        $this->systemMail = $systemMail;
     }
 
     public function setupPvpTarget(int $characterId)
@@ -233,7 +237,7 @@ class Support
         ];
 
         // /\- Gunnar Kreitz
-        systemmail($badguy['acctid'], $subject, $message);
+        $this->systemMail->send($badguy['acctid'], $subject, $message);
         // /\- Gunnar Kreitz
 
         $character->setAlive(false);
@@ -341,7 +345,7 @@ class Support
             self::TRANSLATION_DOMAIN,
         ];
 
-        systemmail($badguy['acctid'], $subject, $message);
+        $this->systemMail->send($badguy['acctid'], $subject, $message);
 
         $session['user']['alive'] = false;
 

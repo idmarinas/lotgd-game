@@ -149,7 +149,7 @@ if ('' != $name)
                         foreach ($result2 as $row2)
                         {
                             $msg = sprintf('This message is generated as a result of one or more of the accounts having been a superuser account.  Log Follows:`n`n%s', $alert);
-                            systemmail($row2['acctid'], $subj, $msg, 0);
+                            LotgdKernel::get('lotgd_core.tool.system_mail')->send($row2['acctid'], $subj, $msg, 0);
                         }//end for
                     }//end if($su)
                 }//end if($c>=10)
