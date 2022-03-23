@@ -2486,6 +2486,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-BankController.html#property_response"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\BankController\u003A\u003A\u0024systemMail",
+            "name": "systemMail",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-BankController.html#property_systemMail"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\BioController",
             "name": "BioController",
             "summary": "",
@@ -2641,6 +2646,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-ClanController.html#property_settings"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\ClanController\u003A\u003A\u0024systemMail",
+            "name": "systemMail",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-ClanController.html#property_systemMail"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\CreateController",
             "name": "CreateController",
             "summary": "",
@@ -2715,6 +2725,16 @@ Search.appendIndex(
             "name": "tool",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-CreateController.html#property_tool"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\CreateController\u003A\u003A\u0024systemMail",
+            "name": "systemMail",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-CreateController.html#property_systemMail"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\CreateController\u003A\u003A\u0024validator",
+            "name": "validator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-CreateController.html#property_validator"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\DragonController",
             "name": "DragonController",
@@ -3035,6 +3055,11 @@ Search.appendIndex(
             "name": "doctrine",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-GraveyardController.html#property_doctrine"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\GraveyardController\u003A\u003A\u0024systemMail",
+            "name": "systemMail",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-GraveyardController.html#property_systemMail"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\GypsyController",
             "name": "GypsyController",
@@ -3680,6 +3705,11 @@ Search.appendIndex(
             "name": "avatarRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-MailController.html#property_avatarRepository"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\MailController\u003A\u003A\u0024systemMail",
+            "name": "systemMail",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-MailController.html#property_systemMail"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\MercenaryCampController",
             "name": "MercenaryCampController",
@@ -4575,6 +4605,11 @@ Search.appendIndex(
             "name": "creatureFunction",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-TrainController.html#property_creatureFunction"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\TrainController\u003A\u003A\u0024systemMail",
+            "name": "systemMail",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-TrainController.html#property_systemMail"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\VillageController",
             "name": "VillageController",
@@ -16345,6 +16380,11 @@ Search.appendIndex(
             "name": "battle",
             "summary": "",
             "url": "classes/Lotgd-Core-Pvp-Support.html#property_battle"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Pvp\\Support\u003A\u003A\u0024systemMail",
+            "name": "systemMail",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Pvp-Support.html#property_systemMail"
         },                {
             "fqsen": "\\Lotgd\\Core\\Pvp\\Warning",
             "name": "Warning",
