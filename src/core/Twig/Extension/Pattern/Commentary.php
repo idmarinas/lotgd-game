@@ -105,8 +105,8 @@ trait Commentary
         //-- Add basic status icons for online/offline/nearby/afk/dnd
         $icon = [ //-- Online in other chat
             // 'icon' => 'images/icons/onlinestatus/online.png',
-            'outIcon'    => ' olive circle outline pulse transition looping',
-            'insideIcon' => 'green small circle',
+            'outIcon'    => 'text-green-300 far fa-circle pulse transition looping',
+            'insideIcon' => 'fas fa-circle text-green-800',
             'label'      => $status['online'],
         ];
 
@@ -121,16 +121,16 @@ trait Commentary
         {
             $icon = [
                 // 'icon' => 'images/icons/onlinestatus/afk.png',
-                'outIcon'    => 'circle outline',
-                'insideIcon' => 'grey small circle',
+                'outIcon'    => 'far fa-circle',
+                'insideIcon' => 'text-grey-500 fas fa-circle',
                 'label'      => $status['afk'],
             ];
         }
         elseif ('DNI' == \strtoupper($comment['chatloc']))
         {
             $icon = [
-                'icon'       => 'circle outline',
-                'insideIcon' => 'blue small circle',
+                'icon'       => 'far fa-circle',
+                'insideIcon' => 'text-blue-500 fas fa-circle',
                 'label'      => $status['dni'],
             ];
         }
@@ -138,8 +138,8 @@ trait Commentary
         {
             $icon = [
                 // 'icon' => 'images/icons/onlinestatus/offline.png',
-                'outIcon'    => 'circle outline',
-                'insideIcon' => 'red small circle',
+                'outIcon'    => 'far fa-circle',
+                'insideIcon' => 'text-red-500 fas fa-circle',
                 'label'      => $status['offline'],
             ];
         }
@@ -147,17 +147,17 @@ trait Commentary
         { //-- Online and in same chat
             $icon = [
                 // 'icon' => 'images/icons/onlinestatus/nearby.png',
-                'outIcon'    => ' olive circle outline tada transition looping',
-                'insideIcon' => 'orange small circle',
+                'outIcon'    => 'text-green-300 far fa-circle tada transition looping',
+                'insideIcon' => 'text-orange-500 fas fa-circle',
                 'label'      => $status['nearby'],
             ];
         }
 
         return \sprintf(
-            '<span data-tooltip="%3$s"><i class="icons" aria-label="%3$s">
-                <i class="%1$s icon" aria-hidden="true"></i>
-                <i class="%2$s icon" aria-hidden="true"></i>
-            </i></span>',
+            '<span data-tooltip="%3$s"><span class="fa-stack" aria-label="%3$s" style="font-size: 0.5em;">
+                <i class="%1$s fa-stack-2x" aria-hidden="true"></i>
+                <i class="%2$s fa-stack-1x" aria-hidden="true"></i>
+            </span></span>',
             $icon['outIcon'],
             $icon['insideIcon'],
             $icon['label']
@@ -174,7 +174,7 @@ trait Commentary
         if ('GAME' == \strtoupper($comment['command']))
         {
             $icon = \sprintf(
-                '<span data-tooltip="%1$s"><i class="fas fa-gamepad" aria-label="%1$s"></i></span>',
+                '<span data-tooltip="%1$s" class="fa-stack" style="font-size: 0.5em;"><i class="fas fa-gamepad fa-stack-2x" aria-label="%1$s"></i></span>',
                 $status['game']
             );
         }
@@ -182,14 +182,14 @@ trait Commentary
         elseif ('GREM' == \strtoupper($comment['command']))
         {
             $icon = \sprintf(
-                '<span data-tooltip="%1$s"><i class="fas fa-eraser" aria-label="%1$s"></i></span>',
+                '<span data-tooltip="%1$s" class="fa-stack" style="font-size: 0.5em;"><i class="fas fa-eraser fa-stack-2x" aria-label="%1$s"></i></span>',
                 $status['grem']
             );
         }
         elseif ($session['user']['acctid'] == $comment['author'])
         {
             $icon = \sprintf(
-                '<span data-tooltip="%1$s"><i class="fas fa-user" aria-label="%1$s"></i></span>',
+                '<span data-tooltip="%1$s" class="fa-stack" style="font-size: 0.5em;"><i class="fas fa-user fa-stack-2x" aria-label="%1$s"></i></span>',
                 $status['you']
             );
         }
