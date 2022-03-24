@@ -1,5 +1,6 @@
 [![Changelog of DEV version](https://img.shields.io/badge/Changelog-DEV-orange)](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-dev.md)
-[![Changelog for last release version](https://img.shields.io/badge/Changelog-6.*-green)](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V6.md)
+[![Changelog for last release version](https://img.shields.io/badge/Changelog-6.*-yellow)](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V6.md)
+[![Changelog for last release version](https://img.shields.io/badge/Changelog-7.*-green)](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V7.md)
 [![Wiki of LoTGD](https://img.shields.io/badge/LoTGD-Wiki-green)](https://github.com/idmarinas/lotgd-game/wiki)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=alert_status)](https://sonarcloud.io/dashboard?id=lotgd-game)
@@ -14,7 +15,7 @@
 ![Upgrade](https://img.shields.io/badge/upgrade-success-green.svg?maxAge=2592000)
 ![Working](https://img.shields.io/badge/working-succes-green.svg?maxAge=2592000)
 
-![Dev version](https://img.shields.io/badge/version%40dev-7.0.3-blue)
+![Dev version](https://img.shields.io/badge/version%40dev-7.0.4-blue)
 ![GitHub issues](https://img.shields.io/github/issues/idmarinas/lotgd-game.svg)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/idmarinas/lotgd-game.svg)
 ![Github commits (since latest release)](https://img.shields.io/github/commits-since/idmarinas/lotgd-game/latest.svg)
@@ -54,7 +55,7 @@ The version **IDMarinas Edition** is based on the version **1.1.2 Dragonprime** 
 
 ## IDMarinas Edition
 
-Version of the IDMarinas Edition: **_7.0.3_**
+Version of the IDMarinas Edition: **_7.0.4_**
 
 The intention to make a new branch of the Core, is to be able to update certain aspects, which were outdated, such as the script that is used to access the database, while correcting certain errors, and adding new options of customization.
 

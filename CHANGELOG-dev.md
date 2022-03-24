@@ -10,7 +10,7 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V6.md)  
 Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V7.md)  
 
-# Version: 7.0.3
+# Version: 7.0.4
 
 ### :cyclone: CHANGES
 
@@ -26,12 +26,8 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   **lib/showform.php** Updated for show form with Tailwind CSS
--   Use new name of Stimulus package, this avoid some errors.
-    -   **asssets/stimulus/controllers/form/input_range_controller.js**
-    -   **asssets/stimulus/controllers/form/submit_controller.js**
--   **systemmail** Remplace `systemmail()` function for service method.
--   **is_email** Remplace `is_email()` function for service method.
+-   Updated for use Tailwind CSS
+    -   **src/core/Twig/Extension/Pattern/Commentary.php** Icons now use FontAwesome class names
 
 ### :x: REMOVES
 
