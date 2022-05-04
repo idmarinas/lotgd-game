@@ -18,7 +18,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :star: FEATURES
 
--   Nothing
+-   Add file `.htaccess` for redirect to the folder "public/".
 
 ### :fire: DEPRECATED
 
