@@ -30,7 +30,7 @@
     "devDependencies": {
         "@hotwired/stimulus": "^3.0.1",
         "@symfony/stimulus-bridge": "^3.0.0",
-        "@symfony/webpack-encore": "^1.7.0",
+        "@symfony/webpack-encore": "^2.0.0",
         "@yaireo/tagify": "^4.9.4",
         "ansi-colors": "^4.1.1",
         "autoprefixer": "^10.4.1",
