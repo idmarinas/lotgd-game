@@ -1,0 +1,2 @@
+# Redirect to the folder "public/".
+DirectoryIndex /public/
