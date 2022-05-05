@@ -18,7 +18,8 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :star: FEATURES
 
--   Add file `.htaccess` for redirect to the folder "public/".
+-   Add file `.htaccess` to root folder for redirect to the folder "public/".
+    -   You can change `DocumentRoot` in the Apache `VirtualHost` configuration file.
 
 ### :fire: DEPRECATED
 
