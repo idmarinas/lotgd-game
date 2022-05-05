@@ -20,9 +20,6 @@
     "cocur/slugify": {
         "version": "v4.0.0"
     },
-    "composer/package-versions-deprecated": {
-        "version": "1.11.99.1"
-    },
     "composer/semver": {
         "version": "3.2.4"
     },
