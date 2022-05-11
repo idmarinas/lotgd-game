@@ -53,7 +53,7 @@
         "stimulus-character-counter": "^4.0.0",
         "stimulus-notification": "^2.0.0",
         "stimulus-popover": "^5.0.1",
-        "stimulus-use": "^0.41.0",
+        "stimulus-use": "^0.50.0",
         "sweetalert2": "^11.3.3",
         "tailwindcss": "^3.0.9",
         "tailwindcss-stimulus-components": "^3.0.1",
