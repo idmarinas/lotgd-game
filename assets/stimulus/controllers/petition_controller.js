@@ -50,6 +50,36 @@ export default class extends RemoteModal
         await this.#faqPrivate(this.urlPrimerValue)
     }
 
+    async loadFaq(event)
+    {
+        event.preventDefault()
+
+        this.startLoadingBarTop()
+
+        let params = event.params
+
+        if (params.url === undefined || params.url === '')
+        {
+            this.stopLoadingBarTop()
+
+            return
+        }
+
+        let content = null
+
+        this.remoteContent = ''
+
+        content = await this.fetch(`stimulus.php${params.url}`)
+
+        this.stopLoadingBarTop()
+
+        if ( ! content) return
+
+        this.containerTarget.innerHTML = ''
+
+        this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
+    }
+
     async return(event)
     {
         this.startButtonLoading(event.target)
