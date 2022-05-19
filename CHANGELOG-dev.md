@@ -10,7 +10,7 @@ Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V6.md)  
 Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V7.md)  
 
-# Version: 7.0.4
+# Version: 7.1.0
 
 ### :cyclone: CHANGES
 
@@ -18,8 +18,22 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :star: FEATURES
 
--   Add file `.htaccess` to root folder for redirect to the folder "public/".
-    -   You can change `DocumentRoot` in the Apache `VirtualHost` configuration file.
+-   `stimulus-controller` Petition, add new function for load custom faq. Need pass url as param.
+    -   Example of usage
+    ```php
+        // Not need add "stimulus.php" 
+        $args[] = [
+            'attr' => [
+                'data-action' => 'click->petition#loadFaq',
+                'data-petitition-url-param' => '?method=NameOfMethod&controller=NamespaceOfController'
+            ],
+            'link'    => [
+                'section.faq.toc.cities',
+                [],
+                'cities_module',
+            ],
+        ];
+    ```
 
 ### :fire: DEPRECATED
 
@@ -27,8 +41,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   Updated for use Tailwind CSS
-    -   **src/core/Twig/Extension/Pattern/Commentary.php** Icons now use FontAwesome class names
+-   Nothing
 
 ### :x: REMOVES
 
