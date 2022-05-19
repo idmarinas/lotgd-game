@@ -20,14 +20,14 @@
     "cocur/slugify": {
         "version": "v4.0.0"
     },
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99.5"
+    },
     "composer/semver": {
         "version": "3.2.4"
     },
     "composer/xdebug-handler": {
         "version": "1.4.6"
-    },
-    "container-interop/container-interop": {
-        "version": "1.2.0"
     },
     "cron/cron": {
         "version": "1.5.0"
