@@ -69,7 +69,7 @@ export default class extends RemoteModal
 
         this.remoteContent = ''
 
-        content = await this.fetch(`stimulus.php${params.url}`)
+        content = await this.fetch(params.url)
 
         this.stopLoadingBarTop()
 
