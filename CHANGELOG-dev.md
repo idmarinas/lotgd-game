@@ -21,11 +21,10 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   `stimulus-controller` Petition, add new function for load custom faq. Need pass url as param.
     -   Example of usage
     ```php
-        // Not need add "stimulus.php" 
         $args[] = [
             'attr' => [
                 'data-action' => 'click->petition#loadFaq',
-                'data-petitition-url-param' => '?method=NameOfMethod&controller=NamespaceOfController'
+                'data-petitition-url-param' => 'stimulus.php?method=NameOfMethod&controller=NamespaceOfController'
             ],
             'link'    => [
                 'section.faq.toc.cities',
