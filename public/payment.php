@@ -5,6 +5,7 @@
 // translator ready
 
 use Lotgd\Core\Events;
+use Lotgd\Core\Http\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 ob_start();
@@ -207,19 +208,18 @@ function payment_error($errno, $errstr, $errfile, $errline)
 
 $adminEmail = LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com') ?: 'trash@mightye.org';
 
+$request = LotgdKernel::get(Request::class);
+
 if ($payment_errors > '')
 {
     // $payment_errors not translated
     ob_start();
     echo '<b>GET:</b><pre>';
-    reset($_GET);
-    var_dump($_GET);
+    var_dump($request->query);
     echo '</pre><b>POST:</b><pre>';
-    reset($_POST);
-    var_dump($_POST);
+    var_dump($request->request);
     echo '</pre><b>SERVER:</b><pre>';
-    reset($_SERVER);
-    var_dump($_SERVER);
+    var_dump($request->server);
     echo '</pre>';
     $contents = ob_get_contents();
     ob_end_clean();
@@ -232,14 +232,11 @@ $output = ob_get_contents();
 if ($output > '')
 {
     echo '<b>GET:</b><pre>';
-    reset($_GET);
-    var_dump($_GET);
+    var_dump($request->query);
     echo '</pre><b>POST:</b><pre>';
-    reset($_POST);
-    var_dump($_POST);
+    var_dump($request->request);
     echo '</pre><b>SERVER:</b><pre>';
-    reset($_SERVER);
-    var_dump($_SERVER);
+    var_dump($request->server);
     echo '</pre>';
     mail($adminEmail, "Serious LoGD Payment Problems on {$_SERVER['HTTP_HOST']}", ob_get_contents(), 'Content-Type: text/html');
 }
