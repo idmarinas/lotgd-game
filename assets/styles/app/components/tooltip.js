@@ -1,4 +1,4 @@
-module.exports = function (theme, e)
+module.exports = function (theme, _e)
 {
     return {
         '[data-tooltip]': {

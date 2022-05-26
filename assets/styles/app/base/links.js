@@ -6,7 +6,7 @@
  *
  * @returns object
  */
-module.exports = function (theme, e)
+module.exports = function (theme, _e)
 {
     return {
         'a:not(.unstyle)': {

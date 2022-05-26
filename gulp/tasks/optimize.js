@@ -15,7 +15,7 @@ const log = configTasks.log
 const isProduction = configTasks.isProduction()
 const settings = configTasks.settings
 
-module.exports = function (callback)
+module.exports = function (_callback)
 {
     //-- This files not is necesary in production
     if (isProduction)

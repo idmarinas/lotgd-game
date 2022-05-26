@@ -71,7 +71,7 @@ jaxon.command.handler.register('semantic.show', function (args)
     $(jaxon.dialogs.semantic.modal).modal(options).modal('show')
 })
 
-jaxon.command.handler.register('semantic.hide', function (args)
+jaxon.command.handler.register('semantic.hide', function (_args)
 {
     if (jaxon.dialogs.semantic.modal != null)
     {

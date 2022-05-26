@@ -5,8 +5,6 @@ define([
 {
     'use strict'
 
-    // import Tagify from '@yaireo/tagify/src/tagify'
-
     /**
      * @lotgdDoc function
      * @name Lotgd.tagify

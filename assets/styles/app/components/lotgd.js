@@ -1,4 +1,4 @@
-module.exports = function (theme, e)
+module.exports = function (_theme, _e)
 {
     const path = require('path')
 

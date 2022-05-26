@@ -9,7 +9,7 @@ const config = require('../config/default')
 const configTasks = require('../config/tasks')
 const log = configTasks.log
 
-module.exports = function (callback)
+module.exports = function (_callback)
 {
     return gulp.src(config.files.skeleton, { base: '.' })
         .on('error', function (err) { fancyLog(colors.red('[Error]'), err.toString()) })
