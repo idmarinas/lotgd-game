@@ -40,7 +40,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   Nothing
+-   Fixed some code smells and vulnerabilities
 
 ### :x: REMOVES
 
