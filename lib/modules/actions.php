@@ -22,15 +22,8 @@ function deactivate_module($module)
 {
     if ( ! is_module_installed($module))
     {
-        if ( ! install_module($module))
-        {
-            return false;
-        }
-        else
-        {
-            //modules that weren't installed go to deactivated state by default in install_module
-            return true;
-        }
+        // modules that weren't installed go to deactivated state by default in install_module
+        return ! install_module($module);
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:Modules');
@@ -112,98 +105,92 @@ function install_module($module, $force = true)
 
         return false;
     }
-    else
+
+    $repository = \Doctrine::getRepository('LotgdCore:Modules');
+    // If we are forcing an install, then whack the old version.
+    if ($force)
     {
-        $repository = \Doctrine::getRepository('LotgdCore:Modules');
-        // If we are forcing an install, then whack the old version.
-        if ($force)
-        {
-            $entity = $repository->find($module);
+        $entity = $repository->find($module);
 
-            if ($entity)
-            {
-                \Doctrine::remove($entity);
-                \Doctrine::flush();
-            }
+        if ($entity)
+        {
+            \Doctrine::remove($entity);
+            \Doctrine::flush();
+        }
+    }
+
+    // We want to do the inject so that it auto-upgrades any installed
+    // version correctly.
+    if (injectmodule($module, true))
+    {
+        // If we're not forcing and this is already installed, we are done
+        if ( ! $force && is_module_installed($module))
+        {
+            return true;
         }
 
-        // We want to do the inject so that it auto-upgrades any installed
-        // version correctly.
-        if (injectmodule($module, true))
+        $info = get_module_info($module);
+        // check installation requirements
+        if ( ! module_check_requirements($info['requires']))
         {
-            // If we're not forcing and this is already installed, we are done
-            if ( ! $force && is_module_installed($module))
-            {
-                return true;
-            }
-
-            $info = get_module_info($module);
-            //check installation requirements
-            if ( ! module_check_requirements($info['requires']))
-            {
-                \LotgdResponse::pageDebug('`$Module could not installed -- it did not meet its prerequisites.`n');
-
-                return false;
-            }
-            else
-            {
-                $entity = $repository->hydrateEntity([
-                    'modulename'   => $mostrecentmodule,
-                    'formalname'   => $info['name'],
-                    'moduleauthor' => $info['author'],
-                    'active'       => 0,
-                    'filename'     => "{$mostrecentmodule}.php",
-                    'installdate'  => new \DateTime('now'),
-                    'installedby'  => $name,
-                    'category'     => $info['category'],
-                    'infokeys'     => \sprintf('|%s|', \implode('|', \array_keys($info))),
-                    'version'      => $info['version'],
-                    'download'     => $info['download'],
-                    'description'  => $info['description'],
-                ]);
-                \Doctrine::persist($entity);
-                \Doctrine::flush();
-
-                $fname = $mostrecentmodule.'_install';
-
-                if (isset($info['settings']) && \count($info['settings']) > 0)
-                {
-                    foreach ($info['settings'] as $key => $val)
-                    {
-                        if (\is_array($val))
-                        {
-                            $x = \explode('|', $val[0]);
-                        }
-                        else
-                        {
-                            $x = \explode('|', $val);
-                        }
-
-                        if (isset($x[1]))
-                        {
-                            set_module_setting($key, $x[1]);
-                            \LotgdResponse::pageDebug("Setting {$key} to default {$x[1]}");
-                        }
-                    }
-                }
-
-                if (false === $fname())
-                {
-                    return false;
-                }
-
-                \LotgdResponse::pageDebug('`^Module installed.  It is not yet active.`n');
-
-                return true;
-            }
-        }
-        else
-        {
-            \LotgdResponse::pageDebug('`$Module could not be injected.');
-            \LotgdResponse::pageDebug('Module not installed.');
-            \LotgdResponse::pageDebug('This is probably due to the module file having a parse error or not existing in the filesystem.`n');
+            \LotgdResponse::pageDebug('`$Module could not installed -- it did not meet its prerequisites.`n');
 
             return false;
         }
+
+        $entity = $repository->hydrateEntity([
+            'modulename'   => $mostrecentmodule,
+            'formalname'   => $info['name'],
+            'moduleauthor' => $info['author'],
+            'active'       => 0,
+            'filename'     => "{$mostrecentmodule}.php",
+            'installdate'  => new \DateTime('now'),
+            'installedby'  => $name,
+            'category'     => $info['category'],
+            'infokeys'     => sprintf('|%s|', implode('|', array_keys($info))),
+            'version'      => $info['version'],
+            'download'     => $info['download'],
+            'description'  => $info['description'],
+        ]);
+        \Doctrine::persist($entity);
+        \Doctrine::flush();
+
+        $fname = $mostrecentmodule.'_install';
+
+        if (isset($info['settings']) && \count($info['settings']) > 0)
+        {
+            foreach ($info['settings'] as $key => $val)
+            {
+                if (\is_array($val))
+                {
+                    $x = explode('|', $val[0]);
+                }
+                else
+                {
+                    $x = explode('|', $val);
+                }
+
+                if (isset($x[1]))
+                {
+                    set_module_setting($key, $x[1]);
+                    \LotgdResponse::pageDebug("Setting {$key} to default {$x[1]}");
+                }
+            }
+        }
+
+        if (false === $fname())
+        {
+            return false;
+        }
+
+        \LotgdResponse::pageDebug('`^Module installed.  It is not yet active.`n');
+
+        return true;
     }
+
+    \LotgdResponse::pageDebug('`$Module could not be injected.');
+    \LotgdResponse::pageDebug('Module not installed.');
+    \LotgdResponse::pageDebug('This is probably due to the module file having a parse error or not existing in the filesystem.`n');
+
+    return false;
 }
