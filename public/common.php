@@ -77,7 +77,7 @@ if (LotgdSetting::getSetting('fullmaintenance', 0))
         'blockquote' => LotgdSetting::getSetting('maintenancenote', ''),
         'author'     => LotgdSetting::getSetting('maintenanceauthor', ''),
         'addClass'   => 'icon',
-        'icon'       => 'cog loading',
+        'icon'       => '<i aria-hidden="true" class="fas fa-cog animate-spin"></i>',
         'close'      => false,
     ]);
 
@@ -118,7 +118,7 @@ elseif (LotgdSetting::getSetting('maintenance', 0))
         'blockquote' => LotgdSetting::getSetting('maintenancenote', ''),
         'author'     => LotgdSetting::getSetting('maintenanceauthor', ''),
         'addClass'   => 'icon',
-        'icon'       => 'cog loading',
+        'icon'       => '<i aria-hidden="true" class="fas fa-cog animate-spin"></i>',
         'close'      => false,
     ]);
 }
