@@ -69,11 +69,6 @@ try
     LotgdKernel::instance(new Lotgd\Core\Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']));
     LotgdKernel::boot();
 
-    if (file_exists('config/autoload/local/dbconnect.php') && ! file_exists('.env.local.php'))
-    {
-        throw new Exception('Need create ".env.local.php" from "config/autoload/local/dbconnect.php"');
-    }
-
     if ($isDevelopment)
     {
         //-- Add Twig template in the Tracy debugger bar.
@@ -91,77 +86,6 @@ try
 catch (Throwable $th)
 {
     Debugger::log($th);
-
-    //-- Create a .env.local.php
-    //-- This code will be deleted in future version
-    if (file_exists('config/autoload/local/dbconnect.php') && ! file_exists('.env.local.php'))
-    {
-        //-- Check if exist old dbconnect.php and updated to new format
-        //-- Only for upgrade from previous versions (1.0.0 IDMarinas edition and up / 2.7.0 IDMarinas edition and below)
-        $dbconnect = include 'config/autoload/local/dbconnect.php';
-        $doctrine  = $dbconnect['doctrine']['connection']['orm_default']['params'];
-        $laminas   = $dbconnect['lotgd_core']['db'];
-
-        //-- New configuration file ".env.local.php"
-        $configuration = [
-            'APP_ENV'           => 'prod',
-            'APP_SECRET'        => bin2hex(random_bytes(16)),
-            'DATABASE_NAME'     => $doctrine['dbname'],
-            'DATABASE_PREFIX'   => $laminas['prefix'],
-            'DATABASE_USER'     => $doctrine['user'],
-            'DATABASE_PASSWORD' => $doctrine['password'],
-            'DATABASE_HOST'     => 'localhost' == $laminas['adapter']['hostname'] ? '127.0.0.1' : $laminas['adapter']['hostname'],
-            'DATABASE_DRIVER'   => $doctrine['driver'],
-            'DATABASE_VERSION'  => '5.5',
-        ];
-
-        $file = FileGenerator::fromArray([
-            'docblock' => DocBlockGenerator::fromArray([
-                'shortDescription' => sprintf('This file is automatically created in version %s.', Lotgd\Core\Kernel::VERSION),
-                'longDescription'  => null,
-                'tags'             => [
-                    [
-                        'name'        => 'important',
-                        'description' => 'Remember configure DATABASE_VERSION with version of your DB Server',
-                    ],
-                    [
-                        'name'        => 'created',
-                        'description' => date('M d, Y h:i a'),
-                    ],
-                ],
-            ]),
-            'body' => 'return '.new ValueGenerator($configuration, ValueGenerator::TYPE_ARRAY_SHORT).';',
-        ]);
-
-        $code   = $file->generate();
-        $result = file_put_contents('.env.local.php', $code);
-
-        if (false !== $result)
-        {
-            $host = $_SERVER['HTTP_HOST'];
-
-            header(sprintf(
-                'Location: //%s/%s',
-                $host,
-                'home.php'
-            ));
-
-            exit();
-        }
-        else
-        {
-            $message = 'Unfortunately, I was not able to write your ".env.local.php" file.<br>';
-            $message .= 'You will have to create this file yourself, and upload it to your web server.<br>';
-            $message .= 'The contents of this file should be as follows:<br>';
-            $message .= '<blockquote><pre>'.htmlentities($code, ENT_COMPAT, 'UTF-8').'</pre></blockquote>';
-            $message .= 'Create a new file, past the entire contents from above into it.';
-            $message .= "When you have that done, save the file as '.env.local.php' and upload this to the location you have LoGD at.";
-            $message .= 'You can refresh this page to see if you were successful.';
-
-            exit($message);
-        }
-    }
-    //-- End - This code will be deleted in future version
 }
 
 /*
