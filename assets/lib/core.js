@@ -6,7 +6,7 @@ define([
 {
     'use strict'
 
-    var Lotgd = {}
+    let Lotgd = {}
 
     /**
      * @LotgdDoc function

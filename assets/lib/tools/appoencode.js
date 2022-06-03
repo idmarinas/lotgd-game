@@ -18,7 +18,7 @@ define([
     {
         const colors = jQuery.parseJSON(Lotgd.get('colors'))
 
-        for (var x in colors)
+        for (let x in colors)
         {
             const re = '`' + x
             const pattern = new RegExp(Lotgd.escapeRegex(re), 'g')

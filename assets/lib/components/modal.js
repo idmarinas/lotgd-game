@@ -5,7 +5,7 @@ define([
 {
     'use strict'
 
-    var lotgdModalId = 0
+    let lotgdModalId = 0
 
     /**
      * @lotgd function

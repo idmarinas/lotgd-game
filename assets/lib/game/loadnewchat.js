@@ -5,7 +5,7 @@ define([
 {
     'use strict'
 
-    var timer = {}
+    let timer = {}
 
     /**
      * @lotgdDoc function
