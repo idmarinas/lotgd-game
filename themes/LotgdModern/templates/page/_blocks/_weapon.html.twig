@@ -21,7 +21,7 @@
     {{ 'trade.in'|trans(_context|merge({'weaponName': user.weapon, 'value': tradeinvalue}))|colorize }}
 
     <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
-        <table class="min-w-full divide-y divide-lotgd-200">
+        <table class="min-w-full divide-y divide-lotgd-200" aria-describedby="page-title">
             <thead>
                 <tr>
                     <th scope="col">{{ 'Name'|trans }}</th>

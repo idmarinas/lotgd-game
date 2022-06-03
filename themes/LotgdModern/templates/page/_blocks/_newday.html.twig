@@ -82,7 +82,7 @@
 
         <form id="dragon-points-form" action="{{ formUrl|lotgd_url }}" method="post" class="ui form">
             <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
-                <table class="min-w-full divide-y divide-lotgd-200">
+                <table class="min-w-full divide-y divide-lotgd-200" aria-describedby="page-title">
                     {% for type, label in labels %}
                         {% set head = label|split(',') %}
 
@@ -143,7 +143,7 @@
         {{ 'section.dragonpoints.single.paragraph'|trans(_context)|colorize }}
 
         <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
-            <table class="min-w-full divide-y divide-lotgd-200">
+            <table class="min-w-full divide-y divide-lotgd-200" aria-describedby="page-title">
                 {% for type, label in labels %}
                     {% set head = label|split(',') %}
 

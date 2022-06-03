@@ -3,38 +3,38 @@
 {{ 'paragraph'|trans|colorize }}
 
 <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
-    <table class="min-w-full divide-y divide-lotgd-200">
+    <table class="min-w-full divide-y divide-lotgd-200" aria-describedby="page-title">
         <tbody class="striped">
             <tr>
-                <td class="text-right whitespace-nowrap w-1">{{ 'table.title.created'|trans }}</td>
+                <th scope="row" class="text-right whitespace-nowrap w-1">{{ 'table.title.created'|trans }}</th>
                 <td>{{ 'table.value.created'|trans({'date': user.regdate}) }}</td>
             </tr>
             <tr>
-                <td class="text-right whitespace-nowrap w-1">{{ 'table.title.commented'|trans }}</td>
+                <th scope="row" class="text-right whitespace-nowrap w-1">{{ 'table.title.commented'|trans }}</th>
                 <td>{{ 'table.value.commented'|trans({'date': user.recentcomments}) }}</td>
             </tr>
             <tr>
-                <td class="text-right whitespace-nowrap w-1">{{ 'table.title.pvped'|trans }}</td>
+                <th scope="row" class="text-right whitespace-nowrap w-1">{{ 'table.title.pvped'|trans }}</th>
                 <td>{{ 'table.value.pvped'|trans({'date': user.pvpflag}) }}</td>
             </tr>
             <tr>
-                <td class="text-right whitespace-nowrap w-1">{{ 'table.title.dragonkills'|trans }}</td>
+                <th scope="row" class="text-right whitespace-nowrap w-1">{{ 'table.title.dragonkills'|trans }}</th>
                 <td>{{ user.dragonkills|numeral }}</td>
             </tr>
             <tr>
-                <td class="text-right whitespace-nowrap w-1">{{ 'table.title.gentimecount'|trans }}</td>
+                <th scope="row" class="text-right whitespace-nowrap w-1">{{ 'table.title.gentimecount'|trans }}</th>
                 <td>{{ user.gentimecount|numeral }}</td>
             </tr>
             <tr>
-                <td class="text-right whitespace-nowrap w-1">{{ 'table.title.gentime'|trans }}</td>
+                <th scope="row" class="text-right whitespace-nowrap w-1">{{ 'table.title.gentime'|trans }}</th>
                 <td>{{ 'table.value.gentime'|trans({'n': user.gentime, 'avg': (user.gentime / user.gentimecount)}) }}</td>
             </tr>
             <tr>
-                <td class="text-right whitespace-nowrap w-1">{{ 'table.title.acctnumber'|trans }}</td>
+                <th scope="row" class="text-right whitespace-nowrap w-1">{{ 'table.title.acctnumber'|trans }}</th>
                 <td>{{ (user.acctid - 1)|numeral }}</td>
             </tr>
             <tr>
-                <td class="text-right whitespace-nowrap w-1">{{ 'table.title.dragonpoints'|trans }}</td>
+                <th scope="row" class="text-right whitespace-nowrap w-1">{{ 'table.title.dragonpoints'|trans }}</th>
                 <td>
                     {% for key, value in dragonpoints %}
                         <div class="ui label">

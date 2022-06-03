@@ -61,7 +61,7 @@
     {{ 'section.membership.legend'|trans|colorize }}
 
     <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
-        <table class="min-w-full divide-y divide-lotgd-200">
+        <table class="min-w-full divide-y divide-lotgd-200" aria-describedby="page-title">
             <thead>
                 <th scope="col">{{ 'section.membership.table.theader.rank'|trans|uncolorize }}</th>
                 <th scope="col">{{ 'section.membership.table.theader.name'|trans|uncolorize }}</th>
@@ -238,7 +238,7 @@
     {{ 'section.detail.membership'|trans({ 'clanName': clanDetail.clanname, 'clanShortName': clanDetail.clanshort })|colorize }}
 
     <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
-        <table class="min-w-full divide-y divide-lotgd-200">
+        <table class="min-w-full divide-y divide-lotgd-200" aria-describedby="page-title">
             <thead>
                 <th scope="col">{{ 'section.detail.table.theader.rank'|trans|uncolorize }}</th>
                 <th scope="col">{{ 'section.detail.table.theader.name'|trans|uncolorize }}</th>
