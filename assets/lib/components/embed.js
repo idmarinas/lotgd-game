@@ -14,7 +14,7 @@ define([
      *
      * @param {Object} element
      */
-    Lotgd.embed = function (element)
+    Lotgd.embed = function (element, event)
     {
         event.preventDefault()
 
