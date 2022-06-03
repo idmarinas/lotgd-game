@@ -214,11 +214,11 @@ if ($payment_errors > '')
 {
     // $payment_errors not translated
     ob_start();
-    echo '<b>GET:</b><pre>';
+    echo '<strong>GET:</strong><pre>';
     var_dump($request->query);
-    echo '</pre><b>POST:</b><pre>';
+    echo '</pre><strong>POST:</strong><pre>';
     var_dump($request->request);
-    echo '</pre><b>SERVER:</b><pre>';
+    echo '</pre><strong>SERVER:</strong><pre>';
     var_dump($request->server);
     echo '</pre>';
     $contents = ob_get_contents();
@@ -231,11 +231,11 @@ $output = ob_get_contents();
 
 if ($output > '')
 {
-    echo '<b>GET:</b><pre>';
+    echo '<strong>GET:</strong><pre>';
     var_dump($request->query);
-    echo '</pre><b>POST:</b><pre>';
+    echo '</pre><strong>POST:</strong><pre>';
     var_dump($request->request);
-    echo '</pre><b>SERVER:</b><pre>';
+    echo '</pre><strong>SERVER:</strong><pre>';
     var_dump($request->server);
     echo '</pre>';
     mail($adminEmail, "Serious LoGD Payment Problems on {$_SERVER['HTTP_HOST']}", ob_get_contents(), 'Content-Type: text/html');

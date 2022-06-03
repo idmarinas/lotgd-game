@@ -269,7 +269,7 @@ stage10:
     post:
         passwordNotMatch: "Oops, your passwords don't match."
         passwordShort: "Whoa, that's a short password, you really should make it longer."
-        success: "Your superuser account has been created as Admin <b>{name}</b>!"
+        success: "Your superuser account has been created as Admin <strong>{name}</strong>!"
     form:
         label:
             name: 'Enter a name for your superuser account'

@@ -24,7 +24,7 @@ function fetchDOM (filename) // eslint-disable-line no-unused-vars
     }
     catch (e)
     {
-        xmldom.parseXML('<b>Failed to load ' + filename + '</b>')
+        xmldom.parseXML('<strong>Failed to load ' + filename + '</strong>')
     }
     return xmldom
 }
@@ -78,7 +78,7 @@ function fetchDOMasync (filename, args, theCode) // eslint-disable-line no-unuse
 
 function createXML (node) // eslint-disable-line no-unused-vars
 {
-    if (!node) { return '<b>You cannot pass null to createXML</b>' }
+    if (!node) { return '<strong>You cannot pass null to createXML</strong>' }
     if (node.xml) { return node.xml }
 
     var out = ''

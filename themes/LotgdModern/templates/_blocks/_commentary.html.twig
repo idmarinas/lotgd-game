@@ -70,7 +70,7 @@
                     </label>
                 {% endif %}
                 {{ display_status_online_player(comment) }}
-                {{ comment.postdate > user.recentcomments ? '<span data-tooltip="%1$s"><i class="fas fa-caret-right" aria-label="%1$s"></i></span>'|format(recent) : '' }}
+                {{ comment.postdate > user.recentcomments ? '<span data-tooltip="%1$s" aria-label="%1$s"><i class="fas fa-caret-right" aria aria-hidden="true"></i></span>'|format(recent) : '' }}
                 <span {{ comment.hidden ? 'data-tooltip="' ~ comment.hiddenComment|uncolorize ~ '"' : '' }}>
                     {% set message = comment.translatable ? comment.comment|trans({}, comment.extra.translation_domain) : comment.comment %}
 
