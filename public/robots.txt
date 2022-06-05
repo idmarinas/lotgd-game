@@ -2,4 +2,4 @@
 User-agent: *
 Disallow: /lib
 Disallow: /modules
-Disallow: /public/payment.php
+Disallow: /payment.php
