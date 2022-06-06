@@ -1,7 +1,7 @@
 {% trans_default_domain textDomain %}
 
 {% set options = {'text': 'section.default.table.tbody.confirm.del'|trans|uncolorize }|json_encode %}
-<table class="ui very compact striped table">
+<table class="ui very compact striped table" aria-describedby="page-title">
     <thead>
         <tr>
             <th scope="col">{{ 'section.default.table.thead.ops'|trans|uncolorize }}</th>

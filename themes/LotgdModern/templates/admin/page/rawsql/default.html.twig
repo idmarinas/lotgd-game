@@ -15,7 +15,7 @@
 </form>
 
 {% if resultSql %}
-    <table class="ui very compact striped table">
+    <table class="ui very compact striped table" aria-describedby="page-title">
         {% for row in resultSql %}
             {% set keys = row|keys %}
 
