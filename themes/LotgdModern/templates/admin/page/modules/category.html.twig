@@ -38,7 +38,7 @@
                                     data-tooltip="{{ ('table.tbody.' ~ activate)|trans|uncolorize }}"
                                     href="{{ ('modules.php?op=' ~ activate ~ '&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}"
                                 >
-                                    <i aria-disabled="true" class="fas fa-power-off"></i>
+                                    <i aria-hidden="true" class="fas fa-power-off"></i>
                                 </a>
                                 <a
                                     class="unstyle p-2 text-xs bg-lotgd-red-700 hover:bg-lotgd-red-600"
@@ -47,14 +47,14 @@
                                     href="{{ ('modules.php?op=uninstall&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}"
                                     data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)"
                                 >
-                                    <i aria-disabled="true" class="far fa-trash-alt"></i>
+                                    <i aria-hidden="true" class="far fa-trash-alt"></i>
                                 </a>
                                 <a
                                     class="unstyle p-2 text-xs bg-lotgd-700 hover:bg-lotgd-600"
                                     data-tooltip="{{ 'table.tbody.reinstall'|trans|uncolorize }}"
                                     href="{{ ('modules.php?op=reinstall&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}"
                                 >
-                                    <i aria-disabled="true" class="fas fa-undo"></i>
+                                    <i aria-hidden="true" class="fas fa-undo"></i>
                                 </a>
                                 {% if SU_EDIT_CONFIG %}
                                     {% if '|settings|' in module.infokeys %}
@@ -63,14 +63,14 @@
                                             data-tooltip="{{ 'table.tbody.strsettings'|trans|uncolorize }}"
                                             href="{{ ('configuration.php?setting=module&module=' ~ module.modulename)|lotgd_url }}"
                                         >
-                                            <i aria-disabled="true" class="fas fa-cog"></i>
+                                            <i aria-hidden="true" class="fas fa-cog"></i>
                                         </a>
                                     {% else %}
                                         <a
                                             class="unstyle p-2 text-xs bg-lotgd-gray-700 text-lotgd-gray-200"
                                             data-tooltip="{{ 'table.tbody.strnosettings'|trans|uncolorize }}"
                                         >
-                                            <i aria-disabled="true" class="fas fa-cog"></i>
+                                            <i aria-hidden="true" class="fas fa-cog"></i>
                                         </a>
                                     {% endif %}
                                 {% endif %}
