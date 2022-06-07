@@ -23,9 +23,9 @@
 {{ 'section.view.body'|trans|colorize }}
 <table class="ui very compact very basic table">
     <tr>
-        <td class="collapsing right aligned">{{ '`$[ipaddress]`0'|colorize }}</td>
-        <td class="collapsing">{{ '`^=`0'|colorize }}</td>
-        <td>{{ '`#%s`0'|format(petition.ip)|colorize }}</td>
+        <th scope="col" class="collapsing right aligned">{{ '`$[ipaddress]`0'|colorize }}</th>
+        <th scope="col" class="collapsing">{{ '`^=`0'|colorize }}</th>
+        <th scope="col">{{ '`#%s`0'|format(petition.ip)|colorize }}</th>
     </tr>
     {% for key, val in petition.body %}
         <tr>

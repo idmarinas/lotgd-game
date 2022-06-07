@@ -14,7 +14,7 @@
 {% for row in unblocked %}
     <div class="ui {{ loop.last ? 'bottom attached' : 'attached' }} segment">
         <div class="header">
-            {{ row.postdate > user.recentcomments ? '<span class="ui tooltip" data-content="%1$s"><i class="caret right icon" aria-label="%1$s"></i></span>'|format(recent) : '' }}
+            {{ row.postdate > user.recentcomments ? '<span class="ui tooltip" data-content="%1$s" aria-label="%1$s"><i class="caret right icon" aria-hidden="true"></i></span>'|format(recent) : '' }}
             <a href="{{ ('bios.php?op=block&charid=' ~ row.id)|lotgd_url }}">{{ setblock }}</a>
             {{ row.name|colorize }}
         </div>
