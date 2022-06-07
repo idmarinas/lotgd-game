@@ -3,14 +3,14 @@
 {{ 'default.paragraph'|trans|colorize }}
 
 <div class="ui info message">
-    <h4 class="header">{{ 'default.message.title'|trans|colorize }}</h4>
+    <h4 id="page-subtitle" class="header">{{ 'default.message.title'|trans|colorize }}</h4>
     {{ 'default.message.gentimecount'|trans({'n' : stats.gentimecount})|colorize }}
     {{ 'default.message.gentime'|trans({'n' : stats.gentime})|colorize }}
     {{ 'default.message.genavg'|trans({'n' : (stats.gentime / max(stats.gentimecount, 1))})|colorize }}
     {{ 'default.message.gensize'|trans({'bytes' : stats.gensize|default(0)|byte_units_format_binary})|colorize }}
 </div>
 
-<table class="ui very compact striped selectable table">
+<table class="ui very compact striped selectable table" aria-describedby="page-subtitle">
     <thead>
         <tr>
             <th>{{ 'default.table.headers.ops'|trans|uncolorize }}</th>
