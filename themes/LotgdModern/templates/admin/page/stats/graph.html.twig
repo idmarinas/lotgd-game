@@ -3,7 +3,7 @@
 <table class="ui very basic very compact table">
     {% for row in paginator %}
         <tr>
-            <td>{{ '{date,date}'|tmf({ 'date': row.laston }) }}</td>
+            <th>{{ '{date,date}'|tmf({ 'date': row.laston }) }}</th>
             <td>{{ row.c|numeral }}</td>
         </tr>
     {% endfor %}
