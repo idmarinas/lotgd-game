@@ -59,8 +59,6 @@ class BansRepository extends ServiceEntityRepository
      *
      * @param string $ip
      * @param string $id
-     *
-     * @return bool
      */
     public function deleteBan($ip, $id): int
     {

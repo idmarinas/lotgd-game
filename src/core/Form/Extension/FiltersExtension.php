@@ -67,7 +67,7 @@ class FiltersExtension extends AbstractTypeExtension
                 unset($filters[$key]);
             }
 
-            return (array) $filters;
+            return $filters;
         };
 
         $resolver->setDefaults([

@@ -85,7 +85,7 @@ class AccessKeys
 
             if ( ! ($this->accesskeys[\strtolower($char)] ?? false))
             {
-                $i = \strpos($label, $char, 2);
+                $i = \strpos($label, (string) $char, 2);
 
                 $key = \substr($label, $i, 1);
 

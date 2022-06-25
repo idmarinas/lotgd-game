@@ -66,7 +66,7 @@ trait Process
             }
         }
         unset($leader);
-        $leadersEnemiesDie = ($leaderEnemyDies == \count($leaderEnemy));
+        $leadersEnemiesDie = ($leaderEnemyDies === \count($leaderEnemy));
 
         foreach ($this->enemies as &$enemy)
         {

@@ -100,8 +100,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * Get total accounts that are online.
-     *
-     * @return string
      */
     public function getCountAcctsOnline(int $timeout): int
     {

@@ -278,7 +278,7 @@ trait Buff
                             $badguy['dead']     = true;
                         }
                     }
-                    elseif (1 == $who)
+                    elseif (1 === $who)
                     {
                         $this->user['hitpoints'] -= $damage;
                     }
