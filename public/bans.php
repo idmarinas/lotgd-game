@@ -28,7 +28,7 @@ $repository = Doctrine::getRepository('LotgdCore:User');
 switch ($op)
 {
     case 'setupban':
-        $params['opt'] = 'setupban';
+        $params['tpl'] = 'setupban';
 
         $params['account'] = $repository->getBasicInfoOfAccount($userId);
 
@@ -37,7 +37,7 @@ switch ($op)
 
     break;
     case 'saveban':
-        $params['opt'] = 'saveban';
+        $params['tpl'] = 'saveban';
 
         require_once 'lib/bans/case_saveban.php';
 
@@ -50,14 +50,14 @@ switch ($op)
         // no break
     case 'removeban':
     case 'delban':
-        $params['opt'] = 'removeban';
+        $params['tpl'] = 'removeban';
 
         require_once 'lib/bans/case_removeban.php';
 
     break;
     case 'search':
     default:
-        $params['opt'] = 'default';
+        $params['tpl'] = 'default';
 
         $repoAcctEveryPage = Doctrine::getRepository(AccountsEverypage::class);
         $page              = (int) LotgdRequest::getQuery('page');
