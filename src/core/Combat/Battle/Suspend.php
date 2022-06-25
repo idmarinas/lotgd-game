@@ -161,7 +161,7 @@ trait Suspend
         {
             $nomsg = $nomsg ?: 'skill.companion.restored';
 
-            if ($nomsg)
+            if ($nomsg !== '' && $nomsg !== '0')
             {
                 $this->addContextToRoundAlly($nomsg);
             }

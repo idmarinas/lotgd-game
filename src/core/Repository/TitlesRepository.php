@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Repository;
 
+use Doctrine\Common\Collections\Criteria;
 use Throwable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -90,7 +91,7 @@ class TitlesRepository extends ServiceEntityRepository
 
         try
         {
-            $query->orderBy('u.dk', 'asc');
+            $query->orderBy('u.dk', Criteria::ASC);
 
             $query = $this->createTranslatebleQuery($query);
 
