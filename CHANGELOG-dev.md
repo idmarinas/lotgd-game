@@ -15,6 +15,8 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :cyclone: CHANGES
 
 -   `assets/lib/components/embed.js` `Lotgd.embed(this)` now also receives the event parameter `Lotgd.embed(this, event)`
+-   `Faq menu` moved from Village/Shades menu to Top menu.
+    -   Now can see FAQ always.
 
 ### :star: FEATURES
 
@@ -36,10 +38,15 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   `assets/lib/game/datacache.js` Deleted unused functions
+    -   Use console to clear cache.
 
 ### :wrench: FIXES
 
+-   `src/core/Repository/UserRepository.php` Fixed error with place of `Debugger::log()` in function `getUserById`
+-   `themes/LotgdModern/templates/page/bio.html.twig` Fixed error with key of translation
+-   `translations/en/page_bio+intl-icu.en.yaml` add missin key translation
+-   `src/core/Repository/User/Avatar.php` Fixed error when not found news for user, now return a correct empty array
 -   Fixed some code smells and vulnerabilities
 
 ### :x: REMOVES
