@@ -47,6 +47,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   `themes/LotgdModern/templates/page/bio.html.twig` Fixed error with key of translation
 -   `translations/en/page_bio+intl-icu.en.yaml` add missin key translation
 -   `src/core/Repository/User/Avatar.php` Fixed error when not found news for user, now return a correct empty array
+-   `public/bans.php` Fixed error that can add bans
 -   Fixed some code smells and vulnerabilities
 
 ### :x: REMOVES
