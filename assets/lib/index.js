@@ -8,7 +8,6 @@ define([
     //-- Functions used in LOTGD
     './game/md5passregister',
     './game/md5passlogin',
-    './game/datacache',
     './game/previewfield',
     './game/loadnewchat',
     './game/recommended-modules',
