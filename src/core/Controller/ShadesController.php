@@ -71,12 +71,6 @@ class ShadesController extends AbstractController
         // read the FAQs, and if they first try to speak when dead
         // there is no way for them to unmute themselves without this link.
         $this->navigation->addHeader('category.other');
-        $this->navigation->addNav('nav.faq', '#', [
-            'attributes' => [
-                'id'      => 'shades-petition-faq',
-                'onclick' => "JaxonLotgd.Ajax.Core.Petition.faq(); $(this).addClass('disabled')",
-            ],
-        ]);
 
         //-- Superuser menu
         $this->navigation->superuser();
