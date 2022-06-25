@@ -63,7 +63,7 @@ trait Avatar
 
         try
         {
-            return $query->select('n')
+            $results = $query->select('n')
                 ->leftJoin(EntityCore\News::class, 'n', Join::WITH, $query->expr()->eq('n.accountId', 'u.acctid'))
                 ->where('u.acctid = :acct')
                 ->setParameter('acct', $account)
@@ -71,6 +71,8 @@ trait Avatar
                 ->getQuery()
                 ->getArrayResult()
             ;
+
+            return ! empty($results) && is_array($results[0]) ? $results : [];
         }
         catch (Throwable $th)
         {
