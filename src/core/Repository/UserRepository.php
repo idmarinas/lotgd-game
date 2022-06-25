@@ -84,14 +84,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
         catch (Throwable $th)
         {
+            Debugger::log($th);
+
             return null;
         }
 
         //-- Fail if not found
         if (0 == \count($data))
         {
-            Debugger::log($th);
-
             return null;
         }
 
