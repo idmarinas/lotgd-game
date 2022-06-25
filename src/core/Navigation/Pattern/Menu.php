@@ -214,13 +214,6 @@ trait Menu
 
         //-- Info street
         $this->addHeader('headers.info', ['textDomain' => $translationDomain]);
-        $this->addNav('navs.faq', '#', [
-            'textDomain' => $translationDomain,
-            'attributes' => [
-                'id' => 'village-petition-faq',
-                'onclick' => "JaxonLotgd.Ajax.Core.Petition.faq(); $(this).addClass('disabled')"
-            ]
-        ]);
         $this->addNav('navs.news', 'news.php', ['textDomain' => $translationDomain]);
         $this->addNav('navs.list', 'list.php', ['textDomain' => $translationDomain]);
         $this->addNav('navs.hof', 'hof.php', ['textDomain' => $translationDomain]);

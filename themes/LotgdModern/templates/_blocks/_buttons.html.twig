@@ -106,6 +106,34 @@
             class="transition duration-500 ease-in-out fixed inset-0 overflow-y-auto flex items-center justify-center whitespace-normal hidden"
         ></div>
     </span>
+
+    {% if user.loggedin %}
+        <span
+            data-controller="petition"
+            data-petition-allow-background-close="true"
+            data-petition-url-value="{{ stimulus_url('Lotgd\\Core\\Controller\\PetitionController', 'faq') }}"
+            data-petition-url-faq-value="{{ stimulus_url('Lotgd\\Core\\Controller\\PetitionController', 'faq') }}"
+            data-petition-url-primer-value="{{ stimulus_url('Lotgd\\Core\\Controller\\PetitionController', 'primer') }}"
+            data-petition-reload-data-value="true"
+        >
+            <button
+                type="button"
+                class="w-auto py-1 ml-2 input-cyan"
+                id="faq-button"
+                data-action="click->petition#open"
+                data-petition-target="activator"
+            >
+                {{ 'navs.faq'|trans({}, 'navigation_village')|colorize }}
+            </button>
+
+            <div
+                data-petition-target="container"
+                data-action="click->petition#closeBackground keyup@window->petition#closeWithKeyboard"
+                class="transition duration-500 ease-in-out fixed inset-0 overflow-y-auto flex items-center justify-center whitespace-normal hidden"
+            ></div>
+        </span>
+    {% endif %}
+
 {% endblock user_petition %}
 
 {# Button for Adminitrators, admin user and petitions #}
