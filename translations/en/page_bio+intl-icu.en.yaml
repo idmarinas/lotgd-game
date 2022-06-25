@@ -21,3 +21,4 @@ bio:
     creature: '`^Creature: `@{mount}`0`0`n'
     bio: '`^Bio: `n`@{bio}`0`0`n'
     news: '`n`^Recent accomplishments (and defeats) of {character}`0'
+    list.not_found: '`bNot found recent accomplishments´b'
