@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,54 +26,54 @@ use Doctrine\ORM\Mapping as ORM;
 class Bans
 {
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(name="banexpire", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="banexpire", type="datetime")
      */
     private $banexpire;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="uniqueid", type="string", length=32, nullable=false)
+     * @ORM\Column(name="uniqueid", type="string", length=32)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $uniqueid = '';
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="ipfilter", type="string", length=40, nullable=false)
+     * @ORM\Column(name="ipfilter", type="string", length=40)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $ipfilter = '';
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="banreason", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="banreason", type="text", length=65535)
      */
     private $banreason;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="banner", type="string", length=50, nullable=false)
+     * @ORM\Column(name="banner", type="string", length=50)
      */
     private $banner;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(name="lasthit", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="lasthit", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
     private $lasthit;
 
     public function __construct()
     {
-        $this->lasthit = new \DateTime('now');
+        $this->lasthit = new DateTime('now');
     }
 
     /**
@@ -81,7 +83,7 @@ class Bans
      *
      * @return self
      */
-    public function setBanexpire(\DateTimeInterface $banexpire)
+    public function setBanexpire(DateTimeInterface $banexpire)
     {
         $this->banexpire = $banexpire;
 
@@ -93,7 +95,7 @@ class Bans
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getBanexpire(): \DateTimeInterface
+    public function getBanexpire(): DateTimeInterface
     {
         return $this->banexpire;
     }
@@ -193,7 +195,7 @@ class Bans
      *
      * @return self
      */
-    public function setLasthit(\DateTimeInterface $lasthit)
+    public function setLasthit(DateTimeInterface $lasthit)
     {
         $this->lasthit = $lasthit;
 
@@ -205,7 +207,7 @@ class Bans
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getLasthit(): \DateTimeInterface
+    public function getLasthit(): DateTimeInterface
     {
         return $this->lasthit;
     }

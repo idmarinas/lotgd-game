@@ -31,7 +31,7 @@ trait Clan
     private $clanrank = 0;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      *
      * @ORM\Column(name="clanjoindate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */

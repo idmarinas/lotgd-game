@@ -18,9 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
 trait IdTrait
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */

@@ -29,16 +29,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Armor implements Translatable
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="armorid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="armorid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $armorid;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="armorname", type="string", length=128, nullable=true)
@@ -46,9 +46,9 @@ class Armor implements Translatable
     private $armorname;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="value", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="value", type="integer", options={"unsigned"=true})
      *
      * @Assert\Range(
      *     min=0,
@@ -59,9 +59,9 @@ class Armor implements Translatable
     private $value = 0;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="defense", type="smallint", nullable=false, options={"unsigned": true, "default": "1"})
+     * @ORM\Column(name="defense", type="smallint", options={"unsigned"=true, "default"="1"})
      *
      * @Assert\Range(
      *     min=1,
@@ -72,9 +72,9 @@ class Armor implements Translatable
     private $defense = 1;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="level", type="smallint", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="level", type="smallint", options={"unsigned"=true})
      *
      * @Assert\Range(
      *     min=0,
@@ -85,6 +85,8 @@ class Armor implements Translatable
     private $level = 0;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection<\Lotgd\Core\Entity\ArmorTranslation>
+     *
      * @ORM\OneToMany(targetEntity="ArmorTranslation", mappedBy="object", cascade={"all"})
      */
     private $translations;

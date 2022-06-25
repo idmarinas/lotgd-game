@@ -24,32 +24,32 @@ use Doctrine\ORM\Mapping as ORM;
 class AccountsEverypage
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="acctid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="acctid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $acctid;
 
     /**
-     * @var float
+     * @var float|null
      *
-     * @ORM\Column(name="gentime", type="float", precision=10, scale=0, nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="gentime", type="float", precision=10, options={"unsigned"=true})
      */
     private $gentime = 0;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="gentimecount", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="gentimecount", type="integer", options={"unsigned"=true})
      */
     private $gentimecount = 0;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="gensize", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="gensize", type="integer", options={"unsigned"=true})
      */
     private $gensize = 0;
 

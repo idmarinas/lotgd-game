@@ -24,18 +24,18 @@ use Doctrine\ORM\Mapping as ORM;
 class AccountsOutput
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="acctid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="acctid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $acctid;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="output", type="blob", length=16777215, nullable=false)
+     * @ORM\Column(name="output", type="blob", length=16777215)
      */
     private $output;
 
