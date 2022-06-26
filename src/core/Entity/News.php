@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,59 +31,59 @@ use Doctrine\ORM\Mapping as ORM;
 class News
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(type="date", nullable=false, options={"default": "0000-00-00"})
+     * @ORM\Column(type="date", options={"default"="0000-00-00"})
      */
     private $date;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="text", length=65535, nullable=false)
+     * @ORM\Column(type="text", length=65535)
      */
     private $text;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(type="integer", options={"unsigned"=true})
      */
     private $accountId = 0;
 
     /**
-     * @var string
+     * @var array
      *
      * @ORM\Column(type="array")
      */
     private $arguments = [];
 
     /**
-     * @var bool
+     * @var bool|null
      *
-     * @ORM\Column(type="boolean", nullable=false, options={"default": 1})
+     * @ORM\Column(type="boolean", options={"default"=1})
      */
     private $newFormat = true;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="string", length=255, nullable=false, options={"default": "partial_news"})
+     * @ORM\Column(type="string", length=255, options={"default"="partial_news"})
      */
     private $textDomain = '';
 
     public function __construct()
     {
-        $this->date = new \DateTime('now');
+        $this->date = new DateTime('now');
     }
 
     /**
@@ -113,7 +115,7 @@ class News
      *
      * @return self
      */
-    public function setDate(\DateTimeInterface $date)
+    public function setDate(DateTimeInterface $date)
     {
         $this->date = $date;
 
@@ -125,7 +127,7 @@ class News
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getDate(): \DateTimeInterface
+    public function getDate(): DateTimeInterface
     {
         return $this->date;
     }

@@ -24,45 +24,45 @@ use Doctrine\ORM\Mapping as ORM;
 class ModuleObjprefs
 {
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="modulename", type="string", length=50, nullable=false)
+     * @ORM\Column(name="modulename", type="string", length=50)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $modulename;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="objtype", type="string", length=50, nullable=false)
+     * @ORM\Column(name="objtype", type="string", length=50)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $objtype;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="setting", type="string", length=50, nullable=false)
+     * @ORM\Column(name="setting", type="string", length=50)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $setting;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="objid", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
+     * @ORM\Column(name="objid", type="integer", options={"unsigned"=true, "default"="0"})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $objid = '0';
+    private $objid = 0;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="value", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="value", type="text", length=65535)
      */
     private $value;
 

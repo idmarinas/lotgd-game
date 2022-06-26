@@ -28,45 +28,45 @@ use Doctrine\ORM\Mapping as ORM;
 class ModuleHooks
 {
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="modulename", type="string", length=50, nullable=false)
+     * @ORM\Column(name="modulename", type="string", length=50)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $modulename;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="location", type="string", length=50, nullable=false)
+     * @ORM\Column(name="location", type="string", length=50)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $location;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="function", type="string", length=50, nullable=false)
+     * @ORM\Column(name="function", type="string", length=50)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $function;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="whenactive", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="whenactive", type="text", length=65535)
      */
     private $whenactive;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="priority", type="integer", nullable=false, options={"default": "50"})
+     * @ORM\Column(name="priority", type="integer", options={"default"="50"})
      */
-    private $priority = '50';
+    private $priority = 50;
 
     /**
      * Set the value of Modulename.

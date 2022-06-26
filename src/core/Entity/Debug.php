@@ -24,37 +24,37 @@ use Doctrine\ORM\Mapping as ORM;
 class Debug
 {
     /**
-     * @var int
+     * @var string|null
      *
-     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="bigint")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="type", type="string", length=100, nullable=true)
      */
     private $type;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="category", type="string", length=100, nullable=true)
      */
     private $category;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="subcategory", type="string", length=100, nullable=true)
      */
     private $subcategory;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="value", type="string", length=100, nullable=true)
      */

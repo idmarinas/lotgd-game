@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use Lotgd\Core\Entity\Common\IdTrait;
 use Bukashk0zzz\FilterBundle\Annotation\FilterAnnotation as Filter;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -25,12 +26,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Cronjob
 {
-    use Common\IdTrait;
+    use IdTrait;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false, unique=true, options={"collation": "utf8_general_ci"})
+     * @ORM\Column(name="name", type="string", length=255, unique=true, options={"collation"="utf8_general_ci"})
      *
      * @Filter("StripTags")
      * @Filter(filter="Laminas\I18n\Filter\Alnum", options={"allowWhiteSpace": false, "locale": "en_US"})
@@ -44,9 +45,9 @@ class Cronjob
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="command", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="command", type="text", length=65535)
      *
      * @Filter("StringTrim")
      *
@@ -59,9 +60,9 @@ class Cronjob
     private $command = '';
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="schedule", type="string", length=255, nullable=false)
+     * @ORM\Column(name="schedule", type="string", length=255)
      *
      * @Filter("StringTrim")
      *
@@ -74,7 +75,7 @@ class Cronjob
     private $schedule = '';
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="mailer", type="string", length=255, nullable=true)
      *
@@ -87,7 +88,7 @@ class Cronjob
     private $mailer = 'sendmail';
 
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Column(name="maxRuntime", type="integer", nullable=true, options={"unsigned": true})
      *
@@ -100,7 +101,7 @@ class Cronjob
     private $maxruntime;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="smtpHost", type="string", length=255, nullable=true)
      *
@@ -113,7 +114,7 @@ class Cronjob
     private $smtphost;
 
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Column(name="smtpPort", type="smallint", nullable=true)
      *
@@ -126,7 +127,7 @@ class Cronjob
     private $smtpport;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="smtpUsername", type="string", length=255, nullable=true)
      *
@@ -139,7 +140,7 @@ class Cronjob
     private $smtpusername;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="smtpPassword", type="string", length=255, nullable=true)
      *
@@ -152,7 +153,7 @@ class Cronjob
     private $smtppassword;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="smtpSender", type="string", length=255, nullable=true)
      *
@@ -165,7 +166,7 @@ class Cronjob
     private $smtpsender = 'jobby@localhost';
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="smtpSenderName", type="string", length=255, nullable=true)
      *
@@ -178,7 +179,7 @@ class Cronjob
     private $smtpsendername = 'Jobby';
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="smtpSecurity", type="string", length=255, nullable=true)
      *
@@ -191,7 +192,7 @@ class Cronjob
     private $smtpsecurity;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="runAs", type="string", length=255, nullable=true)
      *
@@ -204,7 +205,7 @@ class Cronjob
     private $runas;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="environment", type="text", length=65535, nullable=true)
      *
@@ -217,7 +218,7 @@ class Cronjob
     private $environment;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="runOnHost", type="string", length=255, nullable=true)
      *
@@ -230,7 +231,7 @@ class Cronjob
     private $runonhost;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="output", type="string", length=255, nullable=true)
      *
@@ -243,7 +244,7 @@ class Cronjob
     private $output;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="dateFormat", type="string", length=100, nullable=true)
      *
@@ -256,14 +257,14 @@ class Cronjob
     private $dateformat = 'Y-m-d H:i:s';
 
     /**
-     * @var bool
+     * @var bool|null
      *
      * @ORM\Column(name="enabled", type="boolean", nullable=true)
      */
     private $enabled = true;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="haltDir", type="string", length=255, nullable=true)
      *
@@ -276,7 +277,7 @@ class Cronjob
     private $haltdir;
 
     /**
-     * @var bool
+     * @var bool|null
      *
      * @ORM\Column(name="debug", type="boolean", nullable=true)
      */

@@ -24,18 +24,18 @@ use Doctrine\ORM\Mapping as ORM;
 class Settings
 {
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="setting", type="string", length=25, nullable=false)
+     * @ORM\Column(name="setting", type="string", length=25)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $setting;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="value", type="string", length=255, nullable=false)
+     * @ORM\Column(name="value", type="string", length=255)
      */
     private $value;
 

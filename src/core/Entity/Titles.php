@@ -33,33 +33,33 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Titles implements Translatable
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="titleid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="titleid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $titleid;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="dk", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="dk", type="integer", options={"unsigned"=true})
      */
     private $dk = 0;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="ref", type="string", length=100, nullable=false)
+     * @ORM\Column(name="ref", type="string", length=100)
      */
     private $ref;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Gedmo\Translatable
-     * @ORM\Column(name="male", type="string", length=25, nullable=false)
+     * @ORM\Column(name="male", type="string", length=25)
      *
      * @Assert\Length(
      *     min=1,
@@ -70,10 +70,10 @@ class Titles implements Translatable
     private $male;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Gedmo\Translatable
-     * @ORM\Column(name="female", type="string", length=25, nullable=false)
+     * @ORM\Column(name="female", type="string", length=25)
      *
      * @Assert\Length(
      *     min=1,
@@ -84,6 +84,8 @@ class Titles implements Translatable
     private $female;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection<\Lotgd\Core\Entity\TitlesTranslation>
+     *
      * @ORM\OneToMany(targetEntity="TitlesTranslation", mappedBy="object", cascade={"all"})
      */
     private $translations;

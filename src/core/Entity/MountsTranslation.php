@@ -29,7 +29,7 @@ use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
 class MountsTranslation extends AbstractPersonalTranslation
 {
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Column(type="integer", options={"unsigned": true})
      * @ORM\Id
@@ -38,13 +38,15 @@ class MountsTranslation extends AbstractPersonalTranslation
     protected $id;
 
     /**
+     * @var \Lotgd\Core\Entity\Mounts|null
+     *
      * @ORM\ManyToOne(targetEntity="Mounts", inversedBy="translations", cascade={"all"})
      * @ORM\JoinColumn(name="object_id", referencedColumnName="mountid", onDelete="CASCADE")
      */
     protected $object;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(type="text", nullable=true,  options={"collation": "utf8mb4_unicode_ci"})
      */

@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,87 +26,88 @@ use Doctrine\ORM\Mapping as ORM;
 class Logdnet
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="serverid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="serverid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $serverid;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="address", type="string", length=255, nullable=false)
+     * @ORM\Column(name="address", type="string", length=255)
      */
     private $address;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="description", type="string", length=255, nullable=false)
+     * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
 
     /**
-     * @var float
+     * @var float|null
      *
-     * @ORM\Column(name="priority", type="float", precision=10, scale=0, nullable=false, options={"default": "100"})
+     * @ORM\Column(name="priority", type="float", precision=10, options={"default"="100"})
      */
     private $priority = '100';
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(name="lastupdate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="lastupdate", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
     private $lastupdate;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="version", type="string", length=255, nullable=false, options={"default": "Unknown"})
+     * @ORM\Column(name="version", type="string", length=255, options={"default"="Unknown"})
      */
     private $version = 'Unknown';
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="admin", type="string", length=255, nullable=false, options={"default": "unknown"})
+     * @ORM\Column(name="admin", type="string", length=255, options={"default"="unknown"})
      */
     private $admin = 'unknown';
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(name="lastping", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="lastping", type="datetime")
      */
-    private $lastping = '0000-00-00 00:00:00';
+    private $lastping;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="recentips", type="string", length=255, nullable=false)
+     * @ORM\Column(name="recentips", type="string", length=255)
      */
     private $recentips;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="count", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="count", type="integer", options={"unsigned"=true})
      */
-    private $count = '0';
+    private $count = 0;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="lang", type="string", length=20, nullable=false)
+     * @ORM\Column(name="lang", type="string", length=20)
      */
     private $lang;
 
     public function __construct()
     {
-        $this->lastupdate = new \DateTime('now');
+        $this->lastupdate = new DateTime('now');
+        $this->lastping = new DateTime('0000-00-00 00:00:00');
     }
 
     /**
@@ -202,7 +205,7 @@ class Logdnet
      *
      * @return self
      */
-    public function setLastupdate(\DateTimeInterface $lastupdate)
+    public function setLastupdate(DateTimeInterface $lastupdate)
     {
         $this->lastupdate = $lastupdate;
 
@@ -214,7 +217,7 @@ class Logdnet
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getLastupdate(): \DateTimeInterface
+    public function getLastupdate(): DateTimeInterface
     {
         return $this->lastupdate;
     }
@@ -270,7 +273,7 @@ class Logdnet
      *
      * @return self
      */
-    public function setLastping(\DateTimeInterface $lastping)
+    public function setLastping(DateTimeInterface $lastping)
     {
         $this->lastping = $lastping;
 
@@ -282,7 +285,7 @@ class Logdnet
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getLastping(): \DateTimeInterface
+    public function getLastping(): DateTimeInterface
     {
         return $this->lastping;
     }

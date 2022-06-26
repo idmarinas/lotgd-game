@@ -29,27 +29,27 @@ use Doctrine\ORM\Mapping as ORM;
 class ModuleEventHooks
 {
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="event_type", type="string", length=20, nullable=false)
+     * @ORM\Column(name="event_type", type="string", length=20)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $eventType;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="modulename", type="string", length=50, nullable=false)
+     * @ORM\Column(name="modulename", type="string", length=50)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $modulename;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="event_chance", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="event_chance", type="text", length=65535)
      */
     private $eventChance;
 

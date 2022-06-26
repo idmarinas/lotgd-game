@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,46 +32,46 @@ use Doctrine\ORM\Mapping as ORM;
 class Faillog
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="eventid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="eventid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $eventid;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="date", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
     private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="post", type="array", nullable=false)
+     * @ORM\Column(name="post", type="array")
      */
     private $post;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="ip", type="string", length=40, nullable=false)
+     * @ORM\Column(name="ip", type="string", length=40)
      */
     private $ip;
 
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Column(name="acctid", type="integer", nullable=true, options={"unsigned": true})
      */
     private $acctid;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="id", type="string", length=32, nullable=false)
+     * @ORM\Column(name="id", type="string", length=32)
      */
     private $id;
 
@@ -78,7 +80,7 @@ class Faillog
      */
     public function __construct()
     {
-        $this->date = new \DateTime('0000-00-00 00:00:00');
+        $this->date = new DateTime('0000-00-00 00:00:00');
     }
 
     /**
@@ -110,7 +112,7 @@ class Faillog
      *
      * @return self
      */
-    public function setDate(\DateTimeInterface $date)
+    public function setDate(DateTimeInterface $date)
     {
         $this->date = $date;
 
@@ -122,7 +124,7 @@ class Faillog
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getDate(): \DateTimeInterface
+    public function getDate(): DateTimeInterface
     {
         return $this->date;
     }

@@ -29,16 +29,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Masters implements Translatable
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="creatureid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="creatureid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $creatureid;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="creaturename", type="string", length=50, nullable=true)
@@ -51,7 +51,7 @@ class Masters implements Translatable
     private $creaturename;
 
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Column(name="creaturelevel", type="integer", nullable=true, options={"unsigned": true})
      *
@@ -60,7 +60,7 @@ class Masters implements Translatable
     private $creaturelevel = 1;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="creatureweapon", type="string", length=50, nullable=true)
@@ -68,7 +68,7 @@ class Masters implements Translatable
     private $creatureweapon;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="creaturelose", type="string", length=120, nullable=true)
@@ -76,7 +76,7 @@ class Masters implements Translatable
     private $creaturelose;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="creaturewin", type="string", length=120, nullable=true)
@@ -84,6 +84,8 @@ class Masters implements Translatable
     private $creaturewin;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection<\Lotgd\Core\Entity\MastersTranslation>
+     *
      * @ORM\OneToMany(targetEntity="MastersTranslation", mappedBy="object", cascade={"all"})
      */
     private $translations;

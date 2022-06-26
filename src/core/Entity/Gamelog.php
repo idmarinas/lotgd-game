@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,48 +30,53 @@ use Doctrine\ORM\Mapping as ORM;
 class Gamelog
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="logid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="logid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $logid;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="message", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="message", type="text", length=65535)
      */
     private $message;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="category", type="string", length=50, nullable=false)
+     * @ORM\Column(name="category", type="string", length=50)
      */
     private $category;
 
     /**
-     * @var bool
+     * @var bool|null
      *
-     * @ORM\Column(name="filed", type="boolean", nullable=false)
+     * @ORM\Column(name="filed", type="boolean")
      */
-    private $filed = '0';
+    private $filed = false;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="date", type="datetime")
      */
-    private $date = '0000-00-00 00:00:00';
+    private $date;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="who", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="who", type="integer", options={"unsigned"=true})
      */
-    private $who = '0';
+    private $who = 0;
+
+    public function __construct()
+    {
+        $this->date = new DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * Set the value of Logid.
@@ -166,7 +173,7 @@ class Gamelog
      *
      * @return self
      */
-    public function setDate(\DateTimeInterface $date)
+    public function setDate(DateTimeInterface $date)
     {
         $this->date = $date;
 
@@ -178,7 +185,7 @@ class Gamelog
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getDate(): \DateTimeInterface
+    public function getDate(): DateTimeInterface
     {
         return $this->date;
     }

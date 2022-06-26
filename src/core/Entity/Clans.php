@@ -33,8 +33,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Clans
 {
     /**
-     * @var int
+     * @var int|null
      *
+     * @ORM\Column(name="clanid", type="integer", options={"unsigned"=true})
      * @ORM\Column(name="clanid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -42,8 +43,9 @@ class Clans
     private $clanid;
 
     /**
-     * @var string
+     * @var string|null
      *
+     * @ORM\Column(name="clanname", type="string", length=255)
      * @ORM\Column(name="clanname", type="string", length=255, nullable=false)
      *
      * @Assert\Length(
@@ -58,9 +60,9 @@ class Clans
     private $clanname;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="clanshort", type="string", length=50, nullable=false)
+     * @ORM\Column(name="clanshort", type="string", length=50)
      *
      * @Assert\Length(
      *     min=2,
@@ -74,37 +76,37 @@ class Clans
     private $clanshort;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="clanmotd", type="text", nullable=false, length=65535)
+     * @ORM\Column(name="clanmotd", type="text", length=65535)
      */
     private $clanmotd = '';
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="clandesc", type="text", nullable=false, length=65535)
+     * @ORM\Column(name="clandesc", type="text", length=65535)
      */
     private $clandesc = '';
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="motdauthor", type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(name="motdauthor", type="integer", options={"default"=0, "unsigned"=true})
      */
     private $motdauthor = 0;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="descauthor", type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(name="descauthor", type="integer", options={"default"=0, "unsigned"=true})
      */
     private $descauthor = 0;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="customsay", type="string", length=15, nullable=false)
+     * @ORM\Column(name="customsay", type="string", length=15)
      */
     private $customsay = '';
 

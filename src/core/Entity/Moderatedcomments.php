@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,34 +26,38 @@ use Doctrine\ORM\Mapping as ORM;
 class Moderatedcomments
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="modid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="modid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $modid;
-
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="comment", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="comment", type="text", length=65535)
      */
     private $comment;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="moderator", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
+     * @ORM\Column(name="moderator", type="integer", options={"unsigned"=true, "default"="0"})
      */
     private $moderator = 0;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(name="moddate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="moddate", type="datetime")
      */
-    private $moddate = '0000-00-00 00:00:00';
+    private $moddate;
+
+    public function __construct()
+    {
+        $this->moddate = new DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * Set the value of Modid.
@@ -126,7 +132,7 @@ class Moderatedcomments
      *
      * @return self
      */
-    public function setModdate(\DateTimeInterface $moddate)
+    public function setModdate(DateTimeInterface $moddate)
     {
         $this->moddate = $moddate;
 
@@ -138,7 +144,7 @@ class Moderatedcomments
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getModdate(): \DateTimeInterface
+    public function getModdate(): DateTimeInterface
     {
         return $this->moddate;
     }

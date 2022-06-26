@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -25,83 +27,83 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Petitions
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="petitionid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="petitionid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $petitionid;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="author", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="author", type="integer", options={"unsigned"=true})
      */
     private $author = 0;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="date", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
     private $date;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="status", type="smallint", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="status", type="smallint", options={"unsigned"=true})
      */
     private $status = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="array", nullable=false)
+     * @ORM\Column(name="body", type="array")
      */
     private $body = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pageinfo", type="array", nullable=false)
+     * @ORM\Column(name="pageinfo", type="array")
      */
     private $pageinfo = [];
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(name="closedate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="closedate", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
     private $closedate;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="closeuserid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="closeuserid", type="integer", options={"unsigned"=true})
      *
      * @Assert\DivisibleBy(1)
      */
     private $closeuserid = 0;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="ip", type="string", length=40, nullable=false)
+     * @ORM\Column(name="ip", type="string", length=40)
      */
     private $ip = '';
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="id", type="string", length=32, nullable=false)
+     * @ORM\Column(name="id", type="string", length=32)
      */
     private $id = '';
 
     public function __construct()
     {
-        $this->date      = new \DateTime('0000-00-00 00:00:00');
-        $this->closedate = new \DateTime('0000-00-00 00:00:00');
+        $this->date      = new DateTime('0000-00-00 00:00:00');
+        $this->closedate = new DateTime('0000-00-00 00:00:00');
     }
 
     /**
@@ -155,7 +157,7 @@ class Petitions
      *
      * @return self
      */
-    public function setDate(\DateTimeInterface $date)
+    public function setDate(DateTimeInterface $date)
     {
         $this->date = $date;
 
@@ -167,7 +169,7 @@ class Petitions
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getDate(): \DateTimeInterface
+    public function getDate(): DateTimeInterface
     {
         return $this->date;
     }
@@ -245,7 +247,7 @@ class Petitions
      *
      * @return self
      */
-    public function setClosedate(\DateTimeInterface $closedate)
+    public function setClosedate(DateTimeInterface $closedate)
     {
         $this->closedate = $closedate;
 
@@ -257,7 +259,7 @@ class Petitions
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getClosedate(): \DateTimeInterface
+    public function getClosedate(): DateTimeInterface
     {
         return $this->closedate;
     }

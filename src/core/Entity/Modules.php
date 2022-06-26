@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,7 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Modules
 {
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="modulename", type="string", length=50)
      * @ORM\Id
@@ -35,100 +37,100 @@ class Modules
     private $modulename;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="formalname", type="string", length=255, nullable=false)
+     * @ORM\Column(name="formalname", type="string", length=255)
      */
     private $formalname;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="description", type="text", length=65535)
      */
     private $description;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="moduleauthor", type="string", length=255, nullable=false)
+     * @ORM\Column(name="moduleauthor", type="string", length=255)
      */
     private $moduleauthor;
 
     /**
-     * @var bool
+     * @var bool|null
      *
-     * @ORM\Column(name="active", type="boolean", nullable=false, options={"default": "0"})
+     * @ORM\Column(name="active", type="boolean", options={"default"="0"})
      */
     private $active = false;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="filename", type="string", length=255, nullable=false)
+     * @ORM\Column(name="filename", type="string", length=255)
      */
     private $filename;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(name="installdate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="installdate", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
     private $installdate;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="installedby", type="string", length=50, nullable=false)
+     * @ORM\Column(name="installedby", type="string", length=50)
      */
     private $installedby;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(name="filemoddate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="filemoddate", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
     private $filemoddate;
 
     /**
-     * @var bool
+     * @var bool|null
      *
-     * @ORM\Column(name="type", type="boolean", nullable=false, options={"default": "0"})
+     * @ORM\Column(name="type", type="boolean", options={"default"="0"})
      */
-    private $type = '0';
+    private $type = false;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="extras", type="text", length=65535, nullable=true)
      */
     private $extras;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="category", type="string", length=50, nullable=false)
+     * @ORM\Column(name="category", type="string", length=50)
      */
     private $category;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="infokeys", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="infokeys", type="text", length=65535)
      */
     private $infokeys;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="version", type="string", length=10, nullable=false)
+     * @ORM\Column(name="version", type="string", length=10)
      */
     private $version;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="download", type="string", length=200, nullable=false)
+     * @ORM\Column(name="download", type="string", length=200)
      */
     private $download;
 
@@ -137,8 +139,8 @@ class Modules
      */
     public function __construct()
     {
-        $this->installdate = new \DateTime('0000-00-00 00:00:00');
-        $this->filemoddate = new \DateTime('0000-00-00 00:00:00');
+        $this->installdate = new DateTime('0000-00-00 00:00:00');
+        $this->filemoddate = new DateTime('0000-00-00 00:00:00');
     }
 
     /**
@@ -280,7 +282,7 @@ class Modules
      *
      * @return self
      */
-    public function setInstalldate(\DateTimeInterface $installdate)
+    public function setInstalldate(DateTimeInterface $installdate)
     {
         $this->installdate = $installdate;
 
@@ -292,7 +294,7 @@ class Modules
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getInstalldate(): \DateTimeInterface
+    public function getInstalldate(): DateTimeInterface
     {
         return $this->installdate;
     }
@@ -326,7 +328,7 @@ class Modules
      *
      * @return self
      */
-    public function setFilemoddate(\DateTimeInterface $filemoddate)
+    public function setFilemoddate(DateTimeInterface $filemoddate)
     {
         $this->filemoddate = $filemoddate;
 
@@ -338,7 +340,7 @@ class Modules
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getFilemoddate(): \DateTimeInterface
+    public function getFilemoddate(): DateTimeInterface
     {
         return $this->filemoddate;
     }

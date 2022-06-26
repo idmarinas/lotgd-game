@@ -29,16 +29,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Weapons implements Translatable
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="weaponid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="weaponid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $weaponid;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="weaponname", type="string", length=128, nullable=true)
@@ -46,9 +46,9 @@ class Weapons implements Translatable
     private $weaponname;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="value", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="value", type="integer", options={"unsigned"=true})
      *
      * @Assert\Range(
      *     min=0,
@@ -59,9 +59,9 @@ class Weapons implements Translatable
     private $value = 0;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="damage", type="smallint", nullable=false, options={"unsigned": true, "default": "1"})
+     * @ORM\Column(name="damage", type="smallint", options={"unsigned"=true, "default"="1"})
      *
      * @Assert\Range(
      *     min=1,
@@ -72,9 +72,9 @@ class Weapons implements Translatable
     private $damage = 1;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="level", type="smallint", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="level", type="smallint", options={"unsigned"=true})
      *
      * @Assert\Range(
      *     min=0,
@@ -85,6 +85,8 @@ class Weapons implements Translatable
     private $level = 0;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection<\Lotgd\Core\Entity\WeaponsTranslation>
+     *
      * @ORM\OneToMany(targetEntity="WeaponsTranslation", mappedBy="object", cascade={"all"})
      */
     private $translations;

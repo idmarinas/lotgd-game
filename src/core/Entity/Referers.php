@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,53 +30,53 @@ use Doctrine\ORM\Mapping as ORM;
 class Referers
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="refererid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="refererid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $refererid;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="string", length=1000, nullable=false)
+     * @ORM\Column(type="string", length=1000)
      */
     private $uri;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
     private $count = 0;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(type="datetime")
      */
     private $last;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=50)
      */
     private $site;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $dest;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="string", length=40, nullable=false)
+     * @ORM\Column(type="string", length=40)
      */
     private $ip;
 
@@ -164,7 +165,7 @@ class Referers
      *
      * @return self
      */
-    public function setLast(\DateTimeInterface $last)
+    public function setLast(DateTimeInterface $last)
     {
         $this->last = $last;
 
@@ -176,7 +177,7 @@ class Referers
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getLast(): \DateTimeInterface
+    public function getLast(): DateTimeInterface
     {
         return $this->last;
     }

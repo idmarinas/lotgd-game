@@ -24,7 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Whostyping
 {
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="name", type="string", length=255, options={"collation": "utf8_general_ci"})
      * @ORM\Id
@@ -33,16 +33,16 @@ class Whostyping
     private $name;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="time", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="time", type="integer", options={"unsigned"=true})
      */
     private $time;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="section", type="string", length=255, nullable=false)
+     * @ORM\Column(name="section", type="string", length=255)
      */
     private $section;
 

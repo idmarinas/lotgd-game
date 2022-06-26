@@ -28,32 +28,32 @@ use Doctrine\ORM\Mapping as ORM;
 class Pollresults
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="resultid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="resultid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $resultid;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="choice", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="choice", type="integer", options={"unsigned"=true})
      */
     private $choice = 0;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="account", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="account", type="integer", options={"unsigned"=true})
      */
     private $account = 0;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="motditem", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="motditem", type="integer", options={"unsigned"=true})
      */
     private $motditem = 0;
 

@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Bukashk0zzz\FilterBundle\Annotation\FilterAnnotation as Filter;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -26,16 +28,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Motd
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="motditem", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="motditem", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $motditem;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="motdtitle", type="string", length=200, nullable=true)
      *
@@ -50,9 +52,9 @@ class Motd
     private $motdtitle = '';
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="motdbody", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="motdbody", type="text", length=65535)
      *
      * @Filter("StripTags")
      * @Filter("StringTrim")
@@ -66,22 +68,23 @@ class Motd
     private $motdbody = '';
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="motddate", type="datetime", nullable=true, options={"default": "0000-00-00 00:00:00"})
      */
     private $motddate;
 
     /**
-     * @var bool
+     * @var bool|null
      *
-     * @ORM\Column(name="motdtype", type="boolean", nullable=false, options={"default": "0"})
+     * @ORM\Column(name="motdtype", type="boolean", options={"default"="0"})
      */
     private $motdtype = false;
 
     /**
-     * @var int
+     * @var int|null
      *
+     * @ORM\Column(name="motdauthor", type="integer", options={"unsigned"=true, "default"="0"})
      * @ORM\Column(name="motdauthor", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
      *
      * @Assert\DivisibleBy(1)
@@ -90,7 +93,7 @@ class Motd
 
     public function __construct()
     {
-        $this->motddate = new \DateTime('now');
+        $this->motddate = new DateTime('now');
     }
 
     /**
@@ -166,7 +169,7 @@ class Motd
      *
      * @return self
      */
-    public function setMotddate(\DateTimeInterface $motddate)
+    public function setMotddate(DateTimeInterface $motddate)
     {
         $this->motddate = $motddate;
 
@@ -178,7 +181,7 @@ class Motd
      *
      * @return \DateTime|\DateTimeImmutable
      */
-    public function getMotddate(): \DateTimeInterface
+    public function getMotddate(): DateTimeInterface
     {
         return $this->motddate;
     }
