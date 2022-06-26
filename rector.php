@@ -22,13 +22,12 @@ return static function (RectorConfig $rectorConfig): void
         __DIR__ . '/tests',
     ]);
 
-    $rectorConfig->phpVersion(PhpVersion::PHP_73);
+    $rectorConfig->phpVersion(PhpVersion::PHP_74);
     $rectorConfig->importNames(true, false);
     $rectorConfig->symfonyContainerXml(__DIR__ . '/var/cache/dev/coreLotgd_Core_KernelDevDebugContainer.xml');
 
     $rectorConfig->import(SetList::DEAD_CODE);
     $rectorConfig->import(SetList::CODE_QUALITY);
-    $rectorConfig->import(SetList::PHP_73);
     $rectorConfig->import(SetList::PHP_74);
     $rectorConfig->import(SetList::PHP_80);
     $rectorConfig->import(SetList::PHP_81);
