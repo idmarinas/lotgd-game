@@ -57,7 +57,7 @@ trait TempStat
 
         if (false === $color)
         {
-            return 0 == $v ? '' : $v;
+            return 0 === $v ? '' : $v;
         }
         elseif ($v > 0)
         {
@@ -65,7 +65,7 @@ trait TempStat
         }
         else
         {
-            return 0 == $v ? '' : ' `&('.($this->user[$name] + round($v, 1)).'`$-'.round($v, 1).'`&)';
+            return 0 === $v ? '' : ' `&('.($this->user[$name] + round($v, 1)).'`$-'.round($v, 1).'`&)';
         }
     }
 
