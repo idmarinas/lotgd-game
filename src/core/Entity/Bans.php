@@ -30,46 +30,42 @@ class Bans
      *
      * @ORM\Column(name="banexpire", type="datetime")
      */
-    private $banexpire;
+    private ?\DateTimeInterface $banexpire = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="uniqueid", type="string", length=32)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $uniqueid = '';
+    private ?string $uniqueid = '';
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="ipfilter", type="string", length=40)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $ipfilter = '';
+    private ?string $ipfilter = '';
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="banreason", type="text", length=65535)
      */
-    private $banreason;
+    private ?string $banreason = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="banner", type="string", length=50)
      */
-    private $banner;
+    private ?string $banner = null;
 
     /**
      * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="lasthit", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
-    private $lasthit;
+    private ?\DateTimeInterface $lasthit = null;
 
     public function __construct()
     {

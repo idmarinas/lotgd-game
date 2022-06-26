@@ -33,17 +33,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Clans
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="clanid", type="integer", options={"unsigned"=true})
      * @ORM\Column(name="clanid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $clanid;
+    private ?int $clanid = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="clanname", type="string", length=255)
      * @ORM\Column(name="clanname", type="string", length=255, nullable=false)
@@ -57,10 +55,9 @@ class Clans
      *     match=false,
      * )
      */
-    private $clanname;
+    private ?string $clanname = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="clanshort", type="string", length=50)
      *
@@ -73,42 +70,37 @@ class Clans
      *     match=false,
      * )
      */
-    private $clanshort;
+    private ?string $clanshort = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="clanmotd", type="text", length=65535)
      */
-    private $clanmotd = '';
+    private ?string $clanmotd = '';
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="clandesc", type="text", length=65535)
      */
-    private $clandesc = '';
+    private ?string $clandesc = '';
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="motdauthor", type="integer", options={"default"=0, "unsigned"=true})
      */
-    private $motdauthor = 0;
+    private ?int $motdauthor = 0;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="descauthor", type="integer", options={"default"=0, "unsigned"=true})
      */
-    private $descauthor = 0;
+    private ?int $descauthor = 0;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="customsay", type="string", length=15)
      */
-    private $customsay = '';
+    private ?string $customsay = '';
 
     /**
      * Set the value of Clanid.

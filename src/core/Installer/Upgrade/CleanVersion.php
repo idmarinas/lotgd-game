@@ -19,7 +19,7 @@ use Lotgd\Core\Installer\InstallerAbstract;
 class CleanVersion extends InstallerAbstract
 {
     protected $upgradeVersion = 'clean';
-    protected $hasMigration = 20210127183022;
+    protected $hasMigration = 20_210_127_183_022;
 
     //-- Insert data of armors.
     public function step0(): bool

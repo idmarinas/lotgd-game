@@ -57,10 +57,7 @@ elseif ('restore' == $op && file_exists($pathAccountData) && file_exists($pathCh
     //-- Remove Account and character, is proccess individualy
     unset($files[array_search($pathAccountData, $files)], $files[array_search($pathCharacterData, $files)]);
 
-    $files = array_map(function ($path) use ($serializer)
-    {
-        return $serializer->decode(file_get_contents($path), 'json');
-    }, $files);
+    $files = array_map(fn($path) => $serializer->decode(file_get_contents($path), 'json'), $files);
 
     // $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
     // $hydrator->removeNamingStrategy(); //-- With this keyValue is keyValue. Otherwise it would be key_value
@@ -179,10 +176,7 @@ if ('' == $op)
         return true;
     });
 
-    $params['backups'] = array_map(function ($path) use ($serializer, $cryptService)
-    {
-        return $serializer->decode($cryptService->decrypt(file_get_contents("{$path}/basic_info.json")), 'json');
-    }, $dirs);
+    $params['backups'] = array_map(fn($path) => $serializer->decode($cryptService->decrypt(file_get_contents("{$path}/basic_info.json")), 'json'), $dirs);
 }
 elseif ('view' == $op)
 {

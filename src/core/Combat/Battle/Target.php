@@ -83,10 +83,7 @@ trait Target
     protected function countEnemiesAlive(): int
     {
         //-- Count enemies alive
-        $enemies = array_filter($this->enemies, function ($val)
-        {
-            return ! (isset($val['dead']) && $val['dead']) && $val['creaturehealth'] > 0;
-        });
+        $enemies = array_filter($this->enemies, fn($val) => ! (isset($val['dead']) && $val['dead']) && $val['creaturehealth'] > 0);
 
         return \count($enemies);
     }

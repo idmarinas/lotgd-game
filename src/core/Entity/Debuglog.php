@@ -32,49 +32,44 @@ use Doctrine\ORM\Mapping as ORM;
 class Debuglog
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="id", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private ?int $id = null;
     /**
      * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="date", type="datetime")
      */
-    private $date;
+    private ?\DateTimeInterface $date = null;
     /**
-     * @var int|null
      *
      * @ORM\Column(name="actor", type="integer", nullable=true, options={"unsigned": true})
      */
-    private $actor;
+    private ?int $actor = null;
     /**
-     * @var int|null
      *
      * @ORM\Column(name="target", type="integer", nullable=true, options={"unsigned": true})
      */
-    private $target;
+    private ?int $target = null;
     /**
-     * @var string|null
      *
      * @ORM\Column(name="message", type="text", length=65535)
      */
-    private $message;
+    private ?string $message = null;
     /**
-     * @var string|null
      *
      * @ORM\Column(name="field", type="string", length=20)
      */
-    private $field;
+    private ?string $field = null;
     /**
      * @var float|null
      *
      * @ORM\Column(name="value", type="float", precision=9, scale=2, options={"default"="0.00"})
      */
-    private $value = '0.00';
+    private float $value = 0.00;
 
     public function __construct()
     {

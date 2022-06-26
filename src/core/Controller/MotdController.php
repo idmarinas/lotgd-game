@@ -166,7 +166,7 @@ class MotdController extends AbstractController
 
         $params['form']    = $form->createView();
 
-        $isSubmitted = $isSubmitted ?? $form->isSubmitted();
+        $isSubmitted ??= $form->isSubmitted();
 
         return $this->renderBlock('motd/edit_item.html.twig', $isSubmitted ? 'content' : 'dialog', array_merge($params, [
             'is_post' => $isSubmitted,

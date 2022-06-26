@@ -29,7 +29,6 @@ class Cronjob
     use IdTrait;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true, options={"collation"="utf8_general_ci"})
      *
@@ -42,10 +41,9 @@ class Cronjob
      *     allowEmptyString=false
      * )
      */
-    private $name;
+    private ?string $name = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="command", type="text", length=65535)
      *
@@ -57,10 +55,9 @@ class Cronjob
      *     allowEmptyString=false
      * )
      */
-    private $command = '';
+    private ?string $command = '';
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="schedule", type="string", length=255)
      *
@@ -72,10 +69,9 @@ class Cronjob
      *     allowEmptyString=false
      * )
      */
-    private $schedule = '';
+    private ?string $schedule = '';
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="mailer", type="string", length=255, nullable=true)
      *
@@ -85,10 +81,9 @@ class Cronjob
      *     allowEmptyString=true
      * )
      */
-    private $mailer = 'sendmail';
+    private ?string $mailer = 'sendmail';
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="maxRuntime", type="integer", nullable=true, options={"unsigned": true})
      *
@@ -98,10 +93,9 @@ class Cronjob
      * )
      * @Assert\DivisibleBy(1)
      */
-    private $maxruntime;
+    private ?int $maxruntime = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="smtpHost", type="string", length=255, nullable=true)
      *
@@ -111,10 +105,9 @@ class Cronjob
      *     allowEmptyString=true
      * )
      */
-    private $smtphost;
+    private ?string $smtphost = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="smtpPort", type="smallint", nullable=true)
      *
@@ -124,10 +117,9 @@ class Cronjob
      * )
      * @Assert\DivisibleBy(1)
      */
-    private $smtpport;
+    private ?int $smtpport = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="smtpUsername", type="string", length=255, nullable=true)
      *
@@ -137,10 +129,9 @@ class Cronjob
      *     allowEmptyString=true
      * )
      */
-    private $smtpusername;
+    private ?string $smtpusername = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="smtpPassword", type="string", length=255, nullable=true)
      *
@@ -150,10 +141,9 @@ class Cronjob
      *     allowEmptyString=true
      * )
      */
-    private $smtppassword;
+    private ?string $smtppassword = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="smtpSender", type="string", length=255, nullable=true)
      *
@@ -163,10 +153,9 @@ class Cronjob
      *     allowEmptyString=true
      * )
      */
-    private $smtpsender = 'jobby@localhost';
+    private string $smtpsender = 'jobby@localhost';
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="smtpSenderName", type="string", length=255, nullable=true)
      *
@@ -176,10 +165,9 @@ class Cronjob
      *     allowEmptyString=true
      * )
      */
-    private $smtpsendername = 'Jobby';
+    private ?string $smtpsendername = 'Jobby';
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="smtpSecurity", type="string", length=255, nullable=true)
      *
@@ -189,10 +177,9 @@ class Cronjob
      *     allowEmptyString=true
      * )
      */
-    private $smtpsecurity;
+    private ?string $smtpsecurity = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="runAs", type="string", length=255, nullable=true)
      *
@@ -202,10 +189,9 @@ class Cronjob
      *     allowEmptyString=true
      * )
      */
-    private $runas;
+    private ?string $runas = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="environment", type="text", length=65535, nullable=true)
      *
@@ -215,10 +201,9 @@ class Cronjob
      *     allowEmptyString=true
      * )
      */
-    private $environment;
+    private ?string $environment = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="runOnHost", type="string", length=255, nullable=true)
      *
@@ -228,10 +213,9 @@ class Cronjob
      *     allowEmptyString=true
      * )
      */
-    private $runonhost;
+    private ?string $runonhost = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="output", type="string", length=255, nullable=true)
      *
@@ -241,10 +225,9 @@ class Cronjob
      *     allowEmptyString=true
      * )
      */
-    private $output;
+    private ?string $output = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="dateFormat", type="string", length=100, nullable=true)
      *
@@ -254,17 +237,15 @@ class Cronjob
      *     allowEmptyString=true
      * )
      */
-    private $dateformat = 'Y-m-d H:i:s';
+    private ?string $dateformat = 'Y-m-d H:i:s';
 
     /**
-     * @var bool|null
      *
      * @ORM\Column(name="enabled", type="boolean", nullable=true)
      */
-    private $enabled = true;
+    private ?bool $enabled = true;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="haltDir", type="string", length=255, nullable=true)
      *
@@ -274,14 +255,13 @@ class Cronjob
      *     allowEmptyString=true
      * )
      */
-    private $haltdir;
+    private ?string $haltdir = null;
 
     /**
-     * @var bool|null
      *
      * @ORM\Column(name="debug", type="boolean", nullable=true)
      */
-    private $debug = false;
+    private ?bool $debug = false;
 
     /**
      * Set the value of Name.

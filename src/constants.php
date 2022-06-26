@@ -25,14 +25,14 @@
 \defined('SU_AUDIT_MODERATION')     || \define('SU_AUDIT_MODERATION', 131072);
 \defined('SU_IS_TRANSLATOR')        || \define('SU_IS_TRANSLATOR', 262144);
 \defined('SU_RAW_SQL')              || \define('SU_RAW_SQL', 524288);
-\defined('SU_VIEW_SOURCE')          || \define('SU_VIEW_SOURCE', 1048576);
-\defined('SU_NEVER_EXPIRE')         || \define('SU_NEVER_EXPIRE', 2097152);
-\defined('SU_EDIT_ITEMS')           || \define('SU_EDIT_ITEMS', 4194304);
-\defined('SU_GIVE_GROTTO')          || \define('SU_GIVE_GROTTO', 8388608);
-\defined('SU_OVERRIDE_YOM_WARNING') || \define('SU_OVERRIDE_YOM_WARNING', 16777216);
-\defined('SU_SHOW_PHPNOTICE')       || \define('SU_SHOW_PHPNOTICE', 33554432);
-\defined('SU_IS_GAMEMASTER')        || \define('SU_IS_GAMEMASTER', 67108864);
-\defined('SU_IS_BANMASTER')         || \define('SU_IS_BANMASTER', 134217728);
+\defined('SU_VIEW_SOURCE')          || \define('SU_VIEW_SOURCE', 1_048_576);
+\defined('SU_NEVER_EXPIRE')         || \define('SU_NEVER_EXPIRE', 2_097_152);
+\defined('SU_EDIT_ITEMS')           || \define('SU_EDIT_ITEMS', 4_194_304);
+\defined('SU_GIVE_GROTTO')          || \define('SU_GIVE_GROTTO', 8_388_608);
+\defined('SU_OVERRIDE_YOM_WARNING') || \define('SU_OVERRIDE_YOM_WARNING', 16_777_216);
+\defined('SU_SHOW_PHPNOTICE')       || \define('SU_SHOW_PHPNOTICE', 33_554_432);
+\defined('SU_IS_GAMEMASTER')        || \define('SU_IS_GAMEMASTER', 67_108_864);
+\defined('SU_IS_BANMASTER')         || \define('SU_IS_BANMASTER', 134_217_728);
 
 \defined('SU_ANYONE_CAN_SET')        || \define('SU_ANYONE_CAN_SET', SU_DEBUG_OUTPUT | SU_INFINITE_DAYS | SU_OVERRIDE_YOM_WARNING | SU_SHOW_PHPNOTICE);
 \defined('SU_DOESNT_GIVE_GROTTO')    || \define('SU_DOESNT_GIVE_GROTTO', SU_DEBUG_OUTPUT | SU_INFINITE_DAYS | SU_VIEW_SOURCE | SU_NEVER_EXPIRE);
@@ -60,7 +60,7 @@
 \defined('SEX_FEMALE') || \define('SEX_FEMALE', 1);
 
 //Miscellaneous
-\defined('INT_MAX') || \define('INT_MAX', 4294967295);
+\defined('INT_MAX') || \define('INT_MAX', 4_294_967_295);
 
 \defined('RACE_UNKNOWN') || \define('RACE_UNKNOWN', 'app_unknown');
 

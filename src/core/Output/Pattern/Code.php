@@ -40,10 +40,7 @@ trait Code
     {
         if ( ! $this->codePatternOpen)
         {
-            $this->codePatternOpen = \array_map(function ($k)
-            {
-                return "`{$k}";
-            }, \array_keys($this->getCodes()));
+            $this->codePatternOpen = \array_map(fn($k) => "`{$k}", \array_keys($this->getCodes()));
         }
 
         return $this->codePatternOpen;
@@ -58,10 +55,7 @@ trait Code
     {
         if ( ! $this->codePatternClose)
         {
-            $this->codePatternClose = \array_map(function ($k)
-            {
-                return "´{$k}";
-            }, \array_keys($this->getCodes()));
+            $this->codePatternClose = \array_map(fn($k) => "´{$k}", \array_keys($this->getCodes()));
         }
 
         return $this->codePatternClose;
@@ -74,10 +68,7 @@ trait Code
     {
         if ( ! $this->codeReplacementOpen)
         {
-            $this->codeReplacementOpen = \array_map(function ($k)
-            {
-                return "<{$k}>";
-            }, \array_values($this->getCodes()));
+            $this->codeReplacementOpen = \array_map(fn($k) => "<{$k}>", \array_values($this->getCodes()));
         }
 
         return $this->codeReplacementOpen;
@@ -90,10 +81,7 @@ trait Code
     {
         if ( ! $this->codeReplacementClose)
         {
-            $this->codeReplacementClose = \array_map(function ($k)
-            {
-                return "</{$k}>";
-            }, \array_values($this->getCodes()));
+            $this->codeReplacementClose = \array_map(fn($k) => "</{$k}>", \array_values($this->getCodes()));
         }
 
         return $this->codeReplacementClose;

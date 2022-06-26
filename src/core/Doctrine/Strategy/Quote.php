@@ -77,10 +77,7 @@ class Quote implements QuoteStrategy
             // Association defined as Id field
             $joinColumns            = $class->associationMappings[$fieldName]['joinColumns'];
             $assocQuotedColumnNames = \array_map(
-                function ($joinColumn) use ($platform)
-                {
-                    return $platform->quoteIdentifier($joinColumn['name']);
-                },
+                fn($joinColumn) => $platform->quoteIdentifier($joinColumn['name']),
                 $joinColumns
             );
             $quotedColumnNames = \array_merge($quotedColumnNames, $assocQuotedColumnNames);

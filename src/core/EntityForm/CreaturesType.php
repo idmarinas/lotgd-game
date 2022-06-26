@@ -132,14 +132,8 @@ class CreaturesType extends AbstractType
         ;
 
         $callback = new CallbackTransformer(
-            function ($toString)
-            {
-                return (float) $toString;
-            },
-            function ($toFloat)
-            {
-                return (string) $toFloat;
-            }
+            fn($toString) => (float) $toString,
+            fn($toFloat) => (string) $toFloat
         );
 
         $builder->get('creaturegoldbonus')->addModelTransformer($callback);

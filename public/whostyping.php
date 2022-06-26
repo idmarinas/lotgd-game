@@ -11,7 +11,7 @@ require_once 'common.php';
 $now    = time();
 $minute = round($now / 60) * 60;
 
-$session['typerequests'][$minute] = $session['typerequests'][$minute] ?? 0;
+$session['typerequests'][$minute] ??= 0;
 ++$session['typerequests'][$minute];
 
 if ($session['typerequests'][$minute] >= 200)

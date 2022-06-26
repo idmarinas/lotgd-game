@@ -279,7 +279,7 @@ final class LotgdInstallCommand extends Command
         ProgressBar::setPlaceholderFormatterDefinition('memory', function ()
         {
             $mem = \memory_get_usage();
-            $colors = $mem > 24000000 ? '41;37' : '44;37';
+            $colors = $mem > 24_000_000 ? '41;37' : '44;37';
 
             return "\033[".$colors.'m '.Helper::formatMemory($mem)." \033[0m";
         });

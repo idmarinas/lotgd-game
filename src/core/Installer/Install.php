@@ -88,10 +88,7 @@ class Install extends InstallerAbstract
      */
     public function getVersionsToInstall(int $fromVersion, int $toVersion): array
     {
-        return \array_filter($this->getInstallerVersions(), function ($version) use ($fromVersion, $toVersion)
-        {
-            return ($version > $fromVersion && $version <= $toVersion) || -1 == $fromVersion;
-        });
+        return \array_filter($this->getInstallerVersions(), fn($version) => ($version > $fromVersion && $version <= $toVersion) || -1 == $fromVersion);
     }
 
     public function start(): bool

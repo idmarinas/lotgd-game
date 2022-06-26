@@ -26,10 +26,7 @@ trait Process
         }
 
         //-- If all enemies are die finalize battle
-        $enemies = array_filter($this->enemies, function ($val)
-        {
-            return ! (isset($val['dead']) && $val['dead']) && $val['creaturehealth'] > 0;
-        });
+        $enemies = array_filter($this->enemies, fn($val) => ! (isset($val['dead']) && $val['dead']) && $val['creaturehealth'] > 0);
 
         return (bool) \count($enemies);
     }
@@ -45,10 +42,7 @@ trait Process
         }
 
         $leaderEnemyDies = 0;
-        $leaderEnemy     = array_filter($this->enemies, function ($enemy)
-        {
-            return $enemy['essentialleader'] ?? false;
-        });
+        $leaderEnemy     = array_filter($this->enemies, fn($enemy) => $enemy['essentialleader'] ?? false);
 
         //-- Check if leaders are dead
         foreach ($leaderEnemy as &$leader)

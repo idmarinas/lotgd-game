@@ -163,10 +163,7 @@ trait Buffer
         $args = modulehook('companionsallowed', $args->getData());
 
         $companionsAllowed = $args['maxallowed'];
-        $current           = \count(array_filter($this->companions, function ($val, $key) use ($name)
-        {
-            return ( ! isset($val['ignorelimit']) || ! $val['ignorelimit']) && ($key != $name);
-        }, ARRAY_FILTER_USE_BOTH));
+        $current           = \count(array_filter($this->companions, fn($val, $key) => ( ! isset($val['ignorelimit']) || ! $val['ignorelimit']) && ($key != $name), ARRAY_FILTER_USE_BOTH));
 
         if (($ignoreLimit && $current < $companionsAllowed) || $ignoreLimit)
         {

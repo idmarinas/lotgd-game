@@ -95,10 +95,7 @@ class ConfigurationType extends AbstractType
                 }
 
                 //-- Deleted fields that are disabled
-                $fieldsField = \array_filter($fieldsField, function ($val)
-                {
-                    return ! $val->isDisabled();
-                });
+                $fieldsField = \array_filter($fieldsField, fn($val) => ! $val->isDisabled());
 
                 $data[$name] = \array_intersect_key($data[$name], $fieldsField);
             }

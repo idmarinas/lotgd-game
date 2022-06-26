@@ -165,10 +165,7 @@ trait Version
     public function getInstallerVersions(): array
     {
         //-- Only version up of 4.12.0 IDMarinas Edition is allowed in installer
-        return \array_filter($this->lotgd_versions, function ($version)
-        {
-            return $version > 41200 || -1 == $version;
-        });
+        return \array_filter($this->lotgd_versions, fn($version) => $version > 41200 || -1 == $version);
     }
 
     /**

@@ -111,10 +111,7 @@ abstract class InstallerAbstract
         {
             $methods = get_class_methods($this);
             //-- Count only step{digits} methods
-            $steps = array_filter($methods, function ($val)
-            {
-                return (bool) preg_match('/^step\d+$/im', $val);
-            });
+            $steps = array_filter($methods, fn($val) => (bool) preg_match('/^step\d+$/im', $val));
 
             $this->totaSteps = \count($steps);
         }

@@ -24,34 +24,31 @@ use Doctrine\ORM\Mapping as ORM;
 class AccountsEverypage
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="acctid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $acctid;
+    private ?int $acctid = null;
 
     /**
      * @var float|null
      *
      * @ORM\Column(name="gentime", type="float", precision=10, options={"unsigned"=true})
      */
-    private $gentime = 0;
+    private ?float $gentime = 0;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="gentimecount", type="integer", options={"unsigned"=true})
      */
-    private $gentimecount = 0;
+    private ?int $gentimecount = 0;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="gensize", type="integer", options={"unsigned"=true})
      */
-    private $gensize = 0;
+    private ?int $gensize = 0;
 
     /**
      * Set the value of Acctid.

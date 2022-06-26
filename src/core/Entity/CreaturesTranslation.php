@@ -35,7 +35,7 @@ class CreaturesTranslation extends AbstractPersonalTranslation
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    protected $id;
+    protected ?int $id = null;
 
     /**
      * @var \Lotgd\Core\Entity\Creatures|null
@@ -43,14 +43,14 @@ class CreaturesTranslation extends AbstractPersonalTranslation
      * @ORM\ManyToOne(targetEntity="Creatures", inversedBy="translations", cascade={"all"})
      * @ORM\JoinColumn(name="object_id", referencedColumnName="creatureid", onDelete="CASCADE")
      */
-    protected $object;
+    protected ?Creatures $object = null;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true,  options={"collation": "utf8mb4_unicode_ci"})
      */
-    protected $content;
+    protected ?string $content = null;
 
     /**
      * Convenient constructor.

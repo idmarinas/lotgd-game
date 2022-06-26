@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Service;
 
+use Lotgd\Core\Doctrine\ORM\EntityManager;
 use Lotgd\Core\Event\Character;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Character\Stats;
@@ -35,8 +36,7 @@ class PageParts
     private $dispatcher;
     private $translator;
     private $tempStat;
-    /** @var \Lotgd\Core\Doctrine\ORM\EntityManager */
-    private $doctrine;
+    private EntityManager $doctrine;
     private $cache;
 
     public function __construct(
@@ -142,7 +142,7 @@ class PageParts
                 $atk *= ($val['atkmod'] ?? 1);
                 $def *= ($val['defmod'] ?? 1);
 
-                $val['name'] = $val['name'] ?? '';
+                $val['name'] ??= '';
 
                 // Short circuit if the name is blank
                 if ($val['name'] > '' || $session['user']['superuser'] & SU_DEBUG_OUTPUT)
@@ -154,7 +154,7 @@ class PageParts
                         $val['name']    = \call_user_func_array('sprintf', $val['name']);
                     }
 
-                    $val['rounds'] = $val['rounds'] ?? 0;
+                    $val['rounds'] ??= 0;
 
                     if ($val['rounds'] >= 0)
                     {

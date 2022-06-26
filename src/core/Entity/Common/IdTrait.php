@@ -24,7 +24,7 @@ trait IdTrait
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    protected $id;
+    protected ?int $id = null;
 
     public function setId(?int $id)
     {

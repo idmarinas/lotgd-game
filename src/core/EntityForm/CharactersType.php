@@ -181,28 +181,16 @@ class CharactersType extends AbstractType
 
         $builder->get('hashorse')
             ->addModelTransformer(new CallbackTransformer(
-                function ($toInt)
-                {
-                    return \is_object($toInt) ? $toInt->getMountid() : $toInt;
-                },
-                function ($toInt)
-                {
-                    // transform the string back to an array
-                    return \is_object($toInt) ? $toInt->getMountid() : $toInt;
-                }
+                fn($toInt) => \is_object($toInt) ? $toInt->getMountid() : $toInt,
+                fn($toInt) => // transform the string back to an array
+\is_object($toInt) ? $toInt->getMountid() : $toInt
             ))
         ;
         $builder->get('clanid')
             ->addModelTransformer(new CallbackTransformer(
-                function ($toInt)
-                {
-                    return \is_object($toInt) ? $toInt->getClanid() : $toInt;
-                },
-                function ($toInt)
-                {
-                    // transform the string back to an array
-                    return \is_object($toInt) ? $toInt->getClanid() : $toInt;
-                }
+                fn($toInt) => \is_object($toInt) ? $toInt->getClanid() : $toInt,
+                fn($toInt) => // transform the string back to an array
+\is_object($toInt) ? $toInt->getClanid() : $toInt
             ))
         ;
     }

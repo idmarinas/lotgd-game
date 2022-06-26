@@ -105,13 +105,13 @@ if ( ! \is_array($session['bufflist']))
     $session['bufflist'] = [];
 }
 $session['user']['lastip']    = LotgdRequest::getServer('REMOTE_ADDR');
-$session['user']['superuser'] = $session['user']['superuser'] ?? 0;
+$session['user']['superuser'] ??= 0;
 
 //check the account's hash to detect player cheats which
 // we don't catch elsewhere.
 include_once 'lib/common.php';
 
-$session['user']['hashorse'] = $session['user']['hashorse'] ?? 0;
+$session['user']['hashorse'] ??= 0;
 $playermount                 = LotgdTool::getMount($session['user']['hashorse']);
 
 $temp_comp  = $session['user']['companions'] ?? [];

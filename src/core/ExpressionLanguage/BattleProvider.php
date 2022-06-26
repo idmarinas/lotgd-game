@@ -23,10 +23,7 @@ class BattleProvider implements ExpressionFunctionProviderInterface
         return [
             new ExpressionFunction(
                 'get_module_pref',
-                function ($name, $module, $user = null)
-                {
-                    return sprintf('get_module_pref(%s, %s, %s)', $name, $module, $user);
-                },
+                fn($name, $module, $user = null) => sprintf('get_module_pref(%s, %s, %s)', $name, $module, $user),
                 function (array $variables, $name, $module, $user = null)
                 {
                     $user = $user ?: ($variables['character']['acctid'] ?? null);
@@ -36,14 +33,8 @@ class BattleProvider implements ExpressionFunctionProviderInterface
             ),
             new ExpressionFunction(
                 'character_attr',
-                function ($attr)
-                {
-                    return sprintf('$character[%s]', $attr);
-                },
-                function (array $variables, $attr)
-                {
-                    return $variables['character'][$attr] ?? null;
-                }
+                fn($attr) => sprintf('$character[%s]', $attr),
+                fn(array $variables, $attr) => $variables['character'][$attr] ?? null
             ),
         ];
     }

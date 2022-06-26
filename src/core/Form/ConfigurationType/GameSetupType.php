@@ -109,10 +109,7 @@ class GameSetupType extends AbstractType
         $settings = LotgdKernel::get(Settings::class);
         $server   = \explode(',', $settings->getSetting('serverlanguages'));
         $langs    = Languages::getNames();
-        $choices  = \array_filter($langs, function ($key) use ($server)
-        {
-            return \in_array($key, $server);
-        }, ARRAY_FILTER_USE_KEY);
+        $choices  = \array_filter($langs, fn($key) => \in_array($key, $server), ARRAY_FILTER_USE_KEY);
 
         // Default Language
         $builder->add('defaultlanguage', ChoiceType::class, [
@@ -148,16 +145,10 @@ class GameSetupType extends AbstractType
         //-- Transform value of server languages
         $builder->get('serverlanguages')
             ->addModelTransformer(new CallbackTransformer(
-                function ($value)
-                {
-                    // transform the string to an array
-                    return \explode(',', $value);
-                },
-                function ($value)
-                {
-                    // transform the arraty back to a string
-                    return \implode(',', $value);
-                }
+                fn($value) => // transform the string to an array
+\explode(',', $value),
+                fn($value) => // transform the arraty back to a string
+\implode(',', $value)
             ))
         ;
 

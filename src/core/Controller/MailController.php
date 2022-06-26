@@ -230,7 +230,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
 
         $params['form'] = $form->createView();
 
-        $isSubmitted = $isSubmitted ?? $form->isSubmitted();
+        $isSubmitted ??= $form->isSubmitted();
 
         return $this->renderBlock('mail/write.html.twig', $isSubmitted ? 'content' : 'dialog', $params);
     }
@@ -255,7 +255,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
             {
                 $this->addNotification('error', $this->translator->trans('jaxon.fail.message.not.found', [], self::TRANSLATION_DOMAIN));
 
-                $isSubmitted = $isSubmitted ?? $form->isSubmitted();
+                $isSubmitted ??= $form->isSubmitted();
 
                 $params['form'] = $form->createView();
 
@@ -313,7 +313,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
             $this->addNotification('error', $this->translator->trans('jaxon.fail.reply', [], self::TRANSLATION_DOMAIN));
         }
 
-        $isSubmitted = $isSubmitted ?? $form->isSubmitted();
+        $isSubmitted ??= $form->isSubmitted();
 
         $params['form'] = $form->createView();
 

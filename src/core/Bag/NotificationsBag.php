@@ -15,8 +15,8 @@ namespace Lotgd\Core\Bag;
 
 class NotificationsBag implements NotificationsBagInterface
 {
-    private $name = 'notifications';
-    private $flashes = [];
+    private string $name = 'notifications';
+    private array $flashes = [];
     private $storageKey;
 
     /**
@@ -30,12 +30,12 @@ class NotificationsBag implements NotificationsBagInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }

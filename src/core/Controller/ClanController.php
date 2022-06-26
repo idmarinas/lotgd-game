@@ -242,7 +242,7 @@ class ClanController extends AbstractController
 
             if ($blockDesc)
             {
-                $params['clanDetail']->setDescauthor(4294967295)
+                $params['clanDetail']->setDescauthor(4_294_967_295)
                     ->setClandesc($this->translator->trans('section.detail.superuser.update.clan.description.reason', [], $params['textDomain']))
                 ;
 

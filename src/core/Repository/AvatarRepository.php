@@ -87,10 +87,7 @@ class AvatarRepository extends ServiceEntityRepository
                 ->leftJoin('LotgdCore:Avatar', 'c', 'with', $qb->expr()->eq('c.id', 'u.avatar'))
                 ->where('u.login LIKE :name AND u.acctid NOT IN (:acct)')
                 ->setParameter('name', "%{$name}%")
-                ->setParameter('acct', array_map(function ($val)
-                {
-                    return $val['acctid'];
-                }, $character))
+                ->setParameter('acct', array_map(fn($val) => $val['acctid'], $character))
                 ->setMaxResults($limit - \count($character))
                 ->getQuery()
                 ->getArrayResult()

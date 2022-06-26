@@ -93,24 +93,15 @@ class GameCore extends AbstractExtension
     {
         return [
             new TwigFunction('url', [$this, 'baseUrl']),
-            new TwigFunction('stimulus_url', function (string $controller, string $method = 'index', string $query = ''): string
-            {
-                return "stimulus.php?method={$method}&controller=".urlencode($controller).$query;
-            }),
+            new TwigFunction('stimulus_url', fn(string $controller, string $method = 'index', string $query = ''): string => "stimulus.php?method={$method}&controller=".urlencode($controller).$query),
 
             new TwigFunction('trigger_event', [$this, 'triggerEvent']),
             new TwigFunction('modulehook', [$this, 'triggerEvent']), // Alias
             new TwigFunction('is_valid_protocol', [$this, 'isValidProtocol']),
 
             new TwigFunction('page_title', [$this, 'pageTitle']),
-            new TwigFunction('game_version', function (): string
-            {
-                return Kernel::VERSION;
-            }),
-            new TwigFunction('game_copyright', function (): string
-            {
-                return Kernel::LICENSE.Kernel::COPYRIGHT;
-            }),
+            new TwigFunction('game_version', fn(): string => Kernel::VERSION),
+            new TwigFunction('game_copyright', fn(): string => Kernel::LICENSE.Kernel::COPYRIGHT),
             new TwigFunction('game_source', [$this, 'gameSource'], ['needs_environment' => true]),
             new TwigFunction('game_page_gen', [$this, 'gamePageGen'], ['needs_environment' => true]),
 
@@ -138,18 +129,9 @@ class GameCore extends AbstractExtension
     public function getTests()
     {
         return [
-            new TwigTest('array', function ($value)
-            {
-                return \is_array($value);
-            }),
-            new TwigTest('object', function ($value)
-            {
-                return \is_object($value);
-            }),
-            new TwigTest('instanceof', function ($instance, $class)
-            {
-                return $instance instanceof $class;
-            }),
+            new TwigTest('array', fn($value) => \is_array($value)),
+            new TwigTest('object', fn($value) => \is_object($value)),
+            new TwigTest('instanceof', fn($instance, $class) => $instance instanceof $class),
         ];
     }
 

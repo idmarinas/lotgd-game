@@ -28,7 +28,7 @@ class Version60000 extends InstallerAbstract
     use DeleteFilesTrait;
 
     protected $upgradeVersion = 60000;
-    protected $hasMigration   = 20210707115250;
+    protected $hasMigration   = 20_210_707_115_250;
 
     private $crypt;
     private $serializer;

@@ -26,83 +26,75 @@ use Doctrine\ORM\Mapping as ORM;
 class Logdnet
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="serverid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $serverid;
+    private ?int $serverid = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="address", type="string", length=255)
      */
-    private $address;
+    private ?string $address = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="description", type="string", length=255)
      */
-    private $description;
+    private ?string $description = null;
 
     /**
      * @var float|null
      *
      * @ORM\Column(name="priority", type="float", precision=10, options={"default"="100"})
      */
-    private $priority = '100';
+    private float $priority = 100;
 
     /**
      * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="lastupdate", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
-    private $lastupdate;
+    private ?\DateTimeInterface $lastupdate = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="version", type="string", length=255, options={"default"="Unknown"})
      */
-    private $version = 'Unknown';
+    private ?string $version = 'Unknown';
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="admin", type="string", length=255, options={"default"="unknown"})
      */
-    private $admin = 'unknown';
+    private ?string $admin = 'unknown';
 
     /**
      * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="lastping", type="datetime")
      */
-    private $lastping;
+    private ?\DateTimeInterface $lastping = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="recentips", type="string", length=255)
      */
-    private $recentips;
+    private ?string $recentips = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="count", type="integer", options={"unsigned"=true})
      */
-    private $count = 0;
+    private ?int $count = 0;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="lang", type="string", length=20)
      */
-    private $lang;
+    private ?string $lang = null;
 
     public function __construct()
     {

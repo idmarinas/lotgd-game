@@ -93,7 +93,7 @@ class PetitionController extends AbstractController
             ]);
         }
 
-        $isSubmitted = $isSubmitted ?? $form->isSubmitted();
+        $isSubmitted ??= $form->isSubmitted();
 
         return $this->renderBlock('petition/help.html.twig', $isSubmitted ? 'content' : 'dialog', array_merge($params, [
             'is_post' => $isSubmitted,
@@ -166,7 +166,7 @@ class PetitionController extends AbstractController
             ]);
         }
 
-        $isSubmitted = $isSubmitted ?? $form->isSubmitted();
+        $isSubmitted ??= $form->isSubmitted();
 
         return $this->renderBlock('petition/report.html.twig', $isSubmitted ? 'content' : 'dialog', array_merge($params, [
             'is_post' => $isSubmitted,
@@ -211,13 +211,13 @@ class PetitionController extends AbstractController
     {
         global $session;
 
-        $session['user']['acctid']   = $session['user']['acctid']   ?? 0;
-        $session['user']['password'] = $session['user']['password'] ?? '';
+        $session['user']['acctid'] ??= 0;
+        $session['user']['password'] ??= '';
 
         $p = $session['user']['password'];
         unset($session['user']['password']);
 
-        $post['cancelpetition'] = $post['cancelpetition'] ?? false;
+        $post['cancelpetition'] ??= false;
         $post['cancelreason']   = $post['cancelreason']   ?? '' ?: $this->translator->trans('section.default.post.cancel', [], self::TRANSLATION_DOMAIN);
 
         $post = new Core($post);

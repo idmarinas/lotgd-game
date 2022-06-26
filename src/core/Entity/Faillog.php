@@ -32,48 +32,43 @@ use Doctrine\ORM\Mapping as ORM;
 class Faillog
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="eventid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $eventid;
+    private ?int $eventid = null;
 
     /**
      * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="date", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
-    private $date;
+    private ?\DateTimeInterface $date = null;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="post", type="array")
      */
-    private $post;
+    private string $post;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="ip", type="string", length=40)
      */
-    private $ip;
+    private ?string $ip = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="acctid", type="integer", nullable=true, options={"unsigned": true})
      */
-    private $acctid;
+    private ?int $acctid = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="id", type="string", length=32)
      */
-    private $id;
+    private ?string $id = null;
 
     /**
      * Configure some default values.

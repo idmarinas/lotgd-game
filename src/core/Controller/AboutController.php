@@ -29,12 +29,12 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class AboutController extends AbstractController
 {
-    private $dispatcher;
-    private $settings;
-    private $cache;
-    private $dateTime;
-    private $navigation;
-    private $bundles = [];
+    private EventDispatcherInterface $dispatcher;
+    private Settings $settings;
+    private CacheInterface $cache;
+    private DateTime $dateTime;
+    private Navigation $navigation;
+    private array $bundles = [];
 
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
@@ -178,10 +178,7 @@ class AboutController extends AbstractController
         return $this->renderAbout([
             'block_tpl'             => 'about_bundles',
             'bundles_total_enabled' => is_countable($this->bundles) ? \count($this->bundles) : 0,
-            'bundles_lotgd_enabled' => array_filter($this->bundles, function ($var)
-            {
-                return $var instanceof LotgdBundleInterface;
-            }),
+            'bundles_lotgd_enabled' => array_filter($this->bundles, fn($var) => $var instanceof LotgdBundleInterface),
         ]);
     }
 

@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -29,24 +30,21 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Armor implements Translatable
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="armorid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $armorid;
+    private ?int $armorid = null;
 
     /**
-     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="armorname", type="string", length=128, nullable=true)
      */
-    private $armorname;
+    private ?string $armorname = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="value", type="integer", options={"unsigned"=true})
      *
@@ -56,10 +54,9 @@ class Armor implements Translatable
      * )
      * @Assert\DivisibleBy(1)
      */
-    private $value = 0;
+    private ?int $value = 0;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="defense", type="smallint", options={"unsigned"=true, "default"="1"})
      *
@@ -69,10 +66,9 @@ class Armor implements Translatable
      * )
      * @Assert\DivisibleBy(1)
      */
-    private $defense = 1;
+    private ?int $defense = 1;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="level", type="smallint", options={"unsigned"=true})
      *
@@ -82,14 +78,14 @@ class Armor implements Translatable
      * )
      * @Assert\DivisibleBy(1)
      */
-    private $level = 0;
+    private ?int $level = 0;
 
     /**
      * @var \Doctrine\Common\Collections\Collection<\Lotgd\Core\Entity\ArmorTranslation>
      *
      * @ORM\OneToMany(targetEntity="ArmorTranslation", mappedBy="object", cascade={"all"})
      */
-    private $translations;
+    private Collection $translations;
 
     public function __construct()
     {

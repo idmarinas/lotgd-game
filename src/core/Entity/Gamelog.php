@@ -30,48 +30,43 @@ use Doctrine\ORM\Mapping as ORM;
 class Gamelog
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="logid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $logid;
+    private ?int $logid = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="message", type="text", length=65535)
      */
-    private $message;
+    private ?string $message = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="category", type="string", length=50)
      */
-    private $category;
+    private ?string $category = null;
 
     /**
-     * @var bool|null
      *
      * @ORM\Column(name="filed", type="boolean")
      */
-    private $filed = false;
+    private ?bool $filed = false;
 
     /**
      * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="date", type="datetime")
      */
-    private $date;
+    private ?\DateTimeInterface $date = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="who", type="integer", options={"unsigned"=true})
      */
-    private $who = 0;
+    private ?int $who = 0;
 
     public function __construct()
     {

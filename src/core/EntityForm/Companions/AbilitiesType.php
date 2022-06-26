@@ -51,24 +51,12 @@ class AbilitiesType extends AbstractType
         ;
 
         $builder->get('fighter')->addModelTransformer(new CallbackTransformer(
-            function ($value)
-            {
-                return (bool) $value;
-            },
-            function ($value)
-            {
-                return (int) $value;
-            }
+            fn($value) => (bool) $value,
+            fn($value) => (int) $value
         ));
         $builder->get('defend')->addModelTransformer(new CallbackTransformer(
-            function ($value)
-            {
-                return (bool) $value;
-            },
-            function ($value)
-            {
-                return (int) $value;
-            }
+            fn($value) => (bool) $value,
+            fn($value) => (int) $value
         ));
     }
 

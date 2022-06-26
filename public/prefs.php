@@ -348,9 +348,9 @@ else
     $prefs['template']   = LotgdRequest::getCookie('template') ?: LotgdSetting::getSetting('defaultskin', 'jade.htm');
     $prefs['sexuality']  = $prefs['sexuality'] ?? ! $session['user']['sex'] ?: ! $session['user']['sex'];
     $prefs['email']      = $session['user']['emailaddress'];
-    $prefs['timeformat'] = $prefs['timeformat'] ?? '[m/d h:ia]';
+    $prefs['timeformat'] ??= '[m/d h:ia]';
     // Default tabbed config to true
-    $prefs['tabconfig'] = $prefs['tabconfig'] ?? 1;
+    $prefs['tabconfig'] ??= 1;
 
     // Okay, allow modules to add prefs one at a time.
     // We are going to do it this way to *ensure* that modules don't conflict

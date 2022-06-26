@@ -219,10 +219,7 @@ class InnController extends AbstractController
 
             $colors = $this->color->getColors();
 
-            $params['colors'] = array_map(function ($n)
-            {
-                return "`{$n}&#96;{$n} - &#180;{$n}´{$n}";
-            }, array_keys($colors));
+            $params['colors'] = array_map(fn($n) => "`{$n}&#96;{$n} - &#180;{$n}´{$n}", array_keys($colors));
 
             $params['colors'] = '<span class="ui basic small labels"><span class="ui label">'.implode('</span> <span class="ui label">', $params['colors']).'</span></span>';
         }
