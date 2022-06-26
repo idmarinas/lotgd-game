@@ -13,7 +13,6 @@
 
 namespace Lotgd\Core\Http;
 
-use Tracy\Debugger;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Laminas\View\Helper\HeadTitle;
@@ -28,6 +27,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Tracy\Debugger;
 use Twig\Environment;
 
 class Response extends HttpResponse
@@ -43,6 +43,10 @@ class Response extends HttpResponse
     private $eventDispatcher;
     private $kernel;
     private $pageParts;
+    /** @var \Lotgd\Core\Combat\Buffer */
+    private $buffer;
+    /** @var \Lotgd\Core\Tool\Tool */
+    private $tool;
 
     public function __construct(
         EntityManagerInterface $doctrine,
@@ -62,6 +66,8 @@ class Response extends HttpResponse
         $this->params          = $params;
         $this->kernel          = $kernel;
         $this->pageParts       = $pageParts;
+        $this->buffer          = $this->kernel->getContainer()->get('lotgd_core.combat.buffer');
+        $this->tool            = $this->kernel->getContainer()->get('lotgd.core.tools');
 
         parent::__construct();
     }
@@ -84,7 +90,7 @@ class Response extends HttpResponse
         global $session;
 
         if ($title)
-        { //-- If not have title not overwrite page title
+        { // -- If not have title not overwrite page title
             $this->pageTitle($title, $parameters, $textDomain, $locale);
         }
 
@@ -102,7 +108,7 @@ class Response extends HttpResponse
             modulehook('everyheader-loggedin', $args->getData());
         }
 
-        $this->kernel->getContainer()->get('lotgd_core.combat.buffer')->calculateBuffFields();
+        $this->buffer->calculateBuffFields();
 
         $userPre   = $session['user'] ?? [];
         $sesionPre = $session         ?? [];
@@ -176,19 +182,19 @@ class Response extends HttpResponse
         $resolver   = new ArgumentResolver();
         $controller = [$this->kernel->getContainer()->get($class), $method];
 
-        //-- Controller arguments
+        // -- Controller arguments
         $arguments = $resolver->getArguments($this->request, $controller);
 
         $response = $controller(...$arguments);
 
-        //-- If is a instance of RedirectResponse|BinaryFileResponse|JsonResponse send response.
+        // -- If is a instance of RedirectResponse|BinaryFileResponse|JsonResponse send response.
         if (
             $send
             || $response instanceof RedirectResponse
             || $response instanceof BinaryFileResponse
             || $response instanceof JsonResponse
         ) {
-            $this->kernel->getContainer()->get('lotgd.core.tools')->saveUser();
+            $this->tool->saveUser();
 
             $response->send();
 
@@ -202,6 +208,7 @@ class Response extends HttpResponse
      * Page and send content to browser.
      *
      * @param bool $saveuser
+     *
      * @return never
      */
     public function pageEnd($saveuser = true): void
@@ -224,7 +231,7 @@ class Response extends HttpResponse
 
         $replacementbits = $args->getData();
         unset($replacementbits['__scriptfile__'], $replacementbits['script']);
-        //output any template part replacements that above hooks need (eg, advertising)º
+        // output any template part replacements that above hooks need (eg, advertising)º
         foreach ($replacementbits as $key => $val)
         {
             $content = $this->params->get($key, '').$val;
@@ -234,7 +241,7 @@ class Response extends HttpResponse
         $session['user']['name']  = $session['user']['name']  ?? '';
         $session['user']['login'] = $session['user']['login'] ?? '';
 
-        //-- START - Check if see or not MoTD
+        // -- START - Check if see or not MoTD
         $lastMotd = new DateTime('0000-00-00 00:00:00');
 
         if ($this->doctrine->isConnected())
@@ -249,9 +256,9 @@ class Response extends HttpResponse
         ) {
             $session['needtoviewmotd'] = true;
         }
-        //-- END - Check if see or not MoTD
+        // -- END - Check if see or not MoTD
 
-        //-- Character Stats
+        // -- Character Stats
         $charstats = $this->getOutputCharacterStats();
 
         $user   = $session['user'] ?? [];
@@ -259,14 +266,14 @@ class Response extends HttpResponse
         unset($sesion['user'], $user['password']);
 
         $this->params
-            ->set('stats', $charstats) //-- Output character stats
-            ->set('content', $this->getContent()) //-- Set content
+            ->set('stats', $charstats) // -- Output character stats
+            ->set('content', $this->getContent()) // -- Set content
         ;
-        //-- Twig Globals
-        $this->template->addGlobal('user', $user); //-- Update user info
-        $this->template->addGlobal('session', $sesion); //-- Update session info
+        // -- Twig Globals
+        $this->template->addGlobal('user', $user); // -- Update user info
+        $this->template->addGlobal('session', $sesion); // -- Update session info
 
-        //-- output page generation time
+        // -- output page generation time
         $gentime = Debugger::timer('page_footer');
         $session['user']['gentime'] += $gentime;
         ++$session['user']['gentimecount'];
@@ -278,7 +285,7 @@ class Response extends HttpResponse
 
         if ($saveuser)
         {
-            $this->kernel->getContainer()->get('lotgd.core.tools')->saveUser();
+            $this->tool->saveUser();
         }
 
         unset($session['output']);
@@ -287,9 +294,9 @@ class Response extends HttpResponse
         $this->doctrine->clear();
 
         $this->setContent($browserOutput);
-        $this->prepare($this->request); //-- Fix any incompatibility with the HTTP specification
+        $this->prepare($this->request); // -- Fix any incompatibility with the HTTP specification
 
-        //-- Send content to browser
+        // -- Send content to browser
         $this->send();
 
         exit;
@@ -319,11 +326,11 @@ class Response extends HttpResponse
      */
     private function getOutputCharacterStats()
     {
-        $this->kernel->getContainer()->get('lotgd_core.combat.buffer')->restoreBuffFields();
-        $this->kernel->getContainer()->get('lotgd_core.combat.buffer')->calculateBuffFields();
+        $this->buffer->restoreBuffFields();
+        $this->buffer->calculateBuffFields();
 
         $charstats = $this->pageParts->charStats();
-        $this->kernel->getContainer()->get('lotgd_core.combat.buffer')->restoreBuffFields();
+        $this->buffer->restoreBuffFields();
 
         return $charstats;
     }
