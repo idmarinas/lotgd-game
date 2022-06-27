@@ -78,6 +78,7 @@ If you want more modules, in ([DragonPrime](http://dragonprime.net)) you can fin
 -   From the 4.0.0 IDMarinas Edition you need PHP 7.1 or better
 -   From the 4.2.0 IDMarinas Edition you need PHP 7.2 or better
 -   From the 4.6.0 IDMarinas Edition you need PHP 7.3 or better
+-   From the 7.1.0 IDMarinas Edition you need PHP 7.4 or better
 
 # Other
 
