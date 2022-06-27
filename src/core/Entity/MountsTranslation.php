@@ -35,7 +35,7 @@ class MountsTranslation extends AbstractPersonalTranslation
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    protected ?int $id = null;
+    protected $id = null;
 
     /**
      * @var \Lotgd\Core\Entity\Mounts|null
@@ -43,14 +43,14 @@ class MountsTranslation extends AbstractPersonalTranslation
      * @ORM\ManyToOne(targetEntity="Mounts", inversedBy="translations", cascade={"all"})
      * @ORM\JoinColumn(name="object_id", referencedColumnName="mountid", onDelete="CASCADE")
      */
-    protected ?Mounts $object = null;
+    protected $object = null;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true,  options={"collation": "utf8mb4_unicode_ci"})
      */
-    protected ?string $content = null;
+    protected $content = null;
 
     /**
      * Convenient constructor.
