@@ -23,7 +23,6 @@ use Lotgd\Core\Kernel;
 use Lotgd\Core\Service\PageParts;
 use Lotgd\Core\Template\Params;
 use Lotgd\Core\Tool\Tool;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -31,6 +30,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Tracy\Debugger;
 use Twig\Environment;
 
@@ -42,7 +42,7 @@ class Response extends HttpResponse
     private $template;
     private $request;
     private $params;
-    private EventDispatcher $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
     private $kernel;
     private $pageParts;
     private Buffer $buffer;
