@@ -16,10 +16,14 @@ namespace Lotgd\Core\Http;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Laminas\View\Helper\HeadTitle;
+use Lotgd\Core\Combat\Buffer;
+use Lotgd\Core\Doctrine\ORM\EntityManager;
 use Lotgd\Core\Event\EveryRequest;
 use Lotgd\Core\Kernel;
 use Lotgd\Core\Service\PageParts;
 use Lotgd\Core\Template\Params;
+use Lotgd\Core\Tool\Tool;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -33,20 +37,16 @@ use Twig\Environment;
 class Response extends HttpResponse
 {
     private $translator;
-    /** @var Lotgd\Core\Doctrine\ORM\EntityManager */
-    private $doctrine;
+    private EntityManager $doctrine;
     private $headTitle;
     private $template;
     private $request;
     private $params;
-    /** @var Symfony\Component\EventDispatcher\EventDispatcher */
-    private $eventDispatcher;
+    private EventDispatcher $eventDispatcher;
     private $kernel;
     private $pageParts;
-    /** @var \Lotgd\Core\Combat\Buffer */
-    private $buffer;
-    /** @var \Lotgd\Core\Tool\Tool */
-    private $tool;
+    private Buffer $buffer;
+    private Tool $tool;
 
     public function __construct(
         EntityManagerInterface $doctrine,
@@ -238,8 +238,8 @@ class Response extends HttpResponse
             $this->params->set($key, $content);
         }
 
-        $session['user']['name']  = $session['user']['name']  ?? '';
-        $session['user']['login'] = $session['user']['login'] ?? '';
+        $session['user']['name']  ??= '';
+        $session['user']['login'] ??= '';
 
         // -- START - Check if see or not MoTD
         $lastMotd = new DateTime('0000-00-00 00:00:00');
@@ -248,7 +248,7 @@ class Response extends HttpResponse
         {
             $lastMotd = $this->doctrine->getRepository('LotgdCore:Motd')->getLastMotdDate();
         }
-        $session['needtoviewmotd'] = $session['needtoviewmotd'] ?? false;
+        $session['needtoviewmotd'] ??= false;
 
         if (isset($session['user']['lastmotd'])
             && ($lastMotd > $session['user']['lastmotd'])

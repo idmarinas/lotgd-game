@@ -15,6 +15,7 @@ namespace Lotgd\Core\Tool;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Laminas\Hydrator\ClassMethodsHydrator;
+use Lotgd\Core\Combat\Buffer;
 use Lotgd\Core\Entity\AccountsEverypage;
 use Lotgd\Core\Entity\AccountsOutput;
 use Lotgd\Core\Entity\News;
@@ -28,7 +29,9 @@ use Lotgd\Core\Tool\Tool\Substitute;
 use Lotgd\Core\Tool\Tool\Taunt;
 use Lotgd\Core\Tool\Tool\Title;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Tool
 {
@@ -43,13 +46,10 @@ class Tool
     private $settings;
     private $response;
     private $kernel;
-    /** @var \Symfony\Contracts\Cache\CacheInterface */
-    private $cache;
-    /** @var \Lotgd\Core\Http\Request */
-    private $request;
-    private $translator;
-    /** @var \Lotgd\Core\Combat\Buffer */
-    private $buffer;
+    private CacheInterface $cache;
+    private Request $request;
+    private TranslatorInterface $translator;
+    private Buffer $buffer;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
@@ -294,7 +294,7 @@ class Tool
     {
         global $session;
 
-        $session['user']['prefs']['ihavenocheer'] = $session['user']['prefs']['ihavenocheer'] ?? 0;
+        $session['user']['prefs']['ihavenocheer'] ??= 0;
 
         if ($session['user']['prefs']['ihavenocheer'])
         {
