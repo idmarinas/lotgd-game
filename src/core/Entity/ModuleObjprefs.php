@@ -24,47 +24,42 @@ use Doctrine\ORM\Mapping as ORM;
 class ModuleObjprefs
 {
     /**
-     * @var string|null
      *
      * @ORM\Column(name="modulename", type="string", length=50)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $modulename;
+    private ?string $modulename = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="objtype", type="string", length=50)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $objtype;
+    private ?string $objtype = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="setting", type="string", length=50)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $setting;
+    private ?string $setting = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="objid", type="integer", options={"unsigned"=true, "default"="0"})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $objid = 0;
+    private ?int $objid = 0;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="value", type="text", length=65535)
      */
-    private $value;
+    private ?string $value = null;
 
     /**
      * Set the value of Modulename.

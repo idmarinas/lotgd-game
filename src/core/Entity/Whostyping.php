@@ -24,27 +24,24 @@ use Doctrine\ORM\Mapping as ORM;
 class Whostyping
 {
     /**
-     * @var string|null
      *
      * @ORM\Column(name="name", type="string", length=255, options={"collation": "utf8_general_ci"})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $name;
+    private ?string $name = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="time", type="integer", options={"unsigned"=true})
      */
-    private $time;
+    private ?int $time = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="section", type="string", length=255)
      */
-    private $section;
+    private ?string $section = null;
 
     /**
      * Set the value of Name.

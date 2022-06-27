@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -29,24 +30,21 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Weapons implements Translatable
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="weaponid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $weaponid;
+    private ?int $weaponid = null;
 
     /**
-     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="weaponname", type="string", length=128, nullable=true)
      */
-    private $weaponname;
+    private ?string $weaponname = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="value", type="integer", options={"unsigned"=true})
      *
@@ -56,10 +54,9 @@ class Weapons implements Translatable
      * )
      * @Assert\DivisibleBy(1)
      */
-    private $value = 0;
+    private ?int $value = 0;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="damage", type="smallint", options={"unsigned"=true, "default"="1"})
      *
@@ -69,10 +66,9 @@ class Weapons implements Translatable
      * )
      * @Assert\DivisibleBy(1)
      */
-    private $damage = 1;
+    private ?int $damage = 1;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="level", type="smallint", options={"unsigned"=true})
      *
@@ -82,14 +78,14 @@ class Weapons implements Translatable
      * )
      * @Assert\DivisibleBy(1)
      */
-    private $level = 0;
+    private ?int $level = 0;
 
     /**
      * @var \Doctrine\Common\Collections\Collection<\Lotgd\Core\Entity\WeaponsTranslation>
      *
      * @ORM\OneToMany(targetEntity="WeaponsTranslation", mappedBy="object", cascade={"all"})
      */
-    private $translations;
+    private Collection $translations;
 
     public function __construct()
     {

@@ -27,78 +27,70 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Petitions
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="petitionid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $petitionid;
+    private ?int $petitionid = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="author", type="integer", options={"unsigned"=true})
      */
-    private $author = 0;
+    private ?int $author = 0;
 
     /**
      * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="date", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
-    private $date;
+    private ?\DateTimeInterface $date = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="status", type="smallint", options={"unsigned"=true})
      */
-    private $status = 0;
+    private ?int $status = 0;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="body", type="array")
      */
-    private $body = '';
+    private string $body = '';
 
     /**
-     * @var string
      *
      * @ORM\Column(name="pageinfo", type="array")
      */
-    private $pageinfo = [];
+    private string $pageinfo = [];
 
     /**
      * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="closedate", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
-    private $closedate;
+    private ?\DateTimeInterface $closedate = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="closeuserid", type="integer", options={"unsigned"=true})
      *
      * @Assert\DivisibleBy(1)
      */
-    private $closeuserid = 0;
+    private ?int $closeuserid = 0;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="ip", type="string", length=40)
      */
-    private $ip = '';
+    private ?string $ip = '';
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="id", type="string", length=32)
      */
-    private $id = '';
+    private ?string $id = '';
 
     public function __construct()
     {

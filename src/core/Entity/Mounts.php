@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -29,16 +30,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Mounts implements Translatable
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="mountid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $mountid;
+    private ?int $mountid = null;
 
     /**
-     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="mountname", type="string", length=50)
@@ -49,10 +48,9 @@ class Mounts implements Translatable
      *     allowEmptyString=false
      * )
      */
-    private $mountname;
+    private ?string $mountname = null;
 
     /**
-     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="mountdesc", type="text", length=65535, nullable=true)
@@ -63,10 +61,9 @@ class Mounts implements Translatable
      *     allowEmptyString=false
      * )
      */
-    private $mountdesc;
+    private ?string $mountdesc = null;
 
     /**
-     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="mountcategory", type="string", length=50)
@@ -77,7 +74,7 @@ class Mounts implements Translatable
      *     allowEmptyString=false
      * )
      */
-    private $mountcategory;
+    private ?string $mountcategory = null;
 
     /**
      * @var array
@@ -87,7 +84,6 @@ class Mounts implements Translatable
     private $mountbuff = [];
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="mountcostgems", type="integer", options={"unsigned"=true, "default"="0"})
      *
@@ -97,10 +93,9 @@ class Mounts implements Translatable
      * )
      * @Assert\DivisibleBy(1)
      */
-    private $mountcostgems = 0;
+    private ?int $mountcostgems = 0;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="mountcostgold", type="integer", options={"unsigned"=true, "default"="0"})
      *
@@ -110,17 +105,15 @@ class Mounts implements Translatable
      * )
      * @Assert\DivisibleBy(1)
      */
-    private $mountcostgold = 0;
+    private ?int $mountcostgold = 0;
 
     /**
-     * @var bool|null
      *
      * @ORM\Column(name="mountactive", type="boolean", options={"default"="1"})
      */
-    private $mountactive = true;
+    private ?bool $mountactive = true;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="mountforestfights", type="integer", options={"default"="0"})
      *
@@ -130,10 +123,9 @@ class Mounts implements Translatable
      * )
      * @Assert\DivisibleBy(1)
      */
-    private $mountforestfights = 0;
+    private ?int $mountforestfights = 0;
 
     /**
-     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="newday", type="text", length=65535)
@@ -144,10 +136,9 @@ class Mounts implements Translatable
      *     allowEmptyString=false
      * )
      */
-    private $newday;
+    private ?string $newday = null;
 
     /**
-     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="recharge", type="text", length=65535)
@@ -158,10 +149,9 @@ class Mounts implements Translatable
      *     allowEmptyString=false
      * )
      */
-    private $recharge;
+    private ?string $recharge = null;
 
     /**
-     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="partrecharge", type="text", length=65535)
@@ -172,10 +162,9 @@ class Mounts implements Translatable
      *     allowEmptyString=false
      * )
      */
-    private $partrecharge;
+    private ?string $partrecharge = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="mountfeedcost", type="integer", options={"unsigned"=true, "default"="20"})
      *
@@ -185,17 +174,15 @@ class Mounts implements Translatable
      * )
      * @Assert\DivisibleBy(1)
      */
-    private $mountfeedcost = 20;
+    private ?int $mountfeedcost = 20;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="mountlocation", type="string", length=25, options={"default"="all"})
      */
-    private $mountlocation = 'all';
+    private ?string $mountlocation = 'all';
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="mountdkcost", type="integer", options={"unsigned"=true, "default"="0"})
      *
@@ -205,14 +192,14 @@ class Mounts implements Translatable
      * )
      * @Assert\DivisibleBy(1)
      */
-    private $mountdkcost = 0;
+    private ?int $mountdkcost = 0;
 
     /**
      * @var \Doctrine\Common\Collections\Collection<\Lotgd\Core\Entity\MountsTranslation>
      *
      * @ORM\OneToMany(targetEntity="MountsTranslation", mappedBy="object", cascade={"all"})
      */
-    private $translations;
+    private Collection $translations;
 
     public function __construct()
     {

@@ -28,39 +28,35 @@ use Doctrine\ORM\Mapping as ORM;
 class ModuleUserprefs
 {
     /**
-     * @var string|null
      *
      * @ORM\Column(name="modulename", type="string", length=50)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $modulename;
+    private ?string $modulename = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="setting", type="string", length=50)
      * @ORM\Column(name="setting", type="string", length=50, nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $setting;
+    private ?string $setting = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="userid", type="integer", options={"unsigned"=true, "default"="0"})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $userid = 0;
+    private ?int $userid = 0;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="value", type="text", length=65535)
      */
-    private $value;
+    private ?string $value = null;
 
     /**
      * Set the value of Modulename.

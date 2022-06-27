@@ -28,111 +28,98 @@ use Doctrine\ORM\Mapping as ORM;
 class Modules
 {
     /**
-     * @var string|null
      *
      * @ORM\Column(name="modulename", type="string", length=50)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $modulename;
+    private ?string $modulename = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="formalname", type="string", length=255)
      */
-    private $formalname;
+    private ?string $formalname = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="description", type="text", length=65535)
      */
-    private $description;
+    private ?string $description = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="moduleauthor", type="string", length=255)
      */
-    private $moduleauthor;
+    private ?string $moduleauthor = null;
 
     /**
-     * @var bool|null
      *
      * @ORM\Column(name="active", type="boolean", options={"default"="0"})
      */
-    private $active = false;
+    private ?bool $active = false;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="filename", type="string", length=255)
      */
-    private $filename;
+    private ?string $filename = null;
 
     /**
      * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="installdate", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
-    private $installdate;
+    private ?\DateTimeInterface $installdate = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="installedby", type="string", length=50)
      */
-    private $installedby;
+    private ?string $installedby = null;
 
     /**
      * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="filemoddate", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
-    private $filemoddate;
+    private ?\DateTimeInterface $filemoddate = null;
 
     /**
-     * @var bool|null
      *
      * @ORM\Column(name="type", type="boolean", options={"default"="0"})
      */
-    private $type = false;
+    private ?bool $type = false;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="extras", type="text", length=65535, nullable=true)
      */
-    private $extras;
+    private ?string $extras = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="category", type="string", length=50)
      */
-    private $category;
+    private ?string $category = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="infokeys", type="text", length=65535)
      */
-    private $infokeys;
+    private ?string $infokeys = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="version", type="string", length=10)
      */
-    private $version;
+    private ?string $version = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="download", type="string", length=200)
      */
-    private $download;
+    private ?string $download = null;
 
     /**
      * Configure some default values.

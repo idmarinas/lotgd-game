@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -33,30 +34,26 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Titles implements Translatable
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="titleid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $titleid;
+    private ?int $titleid = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="dk", type="integer", options={"unsigned"=true})
      */
-    private $dk = 0;
+    private ?int $dk = 0;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="ref", type="string", length=100)
      */
-    private $ref;
+    private ?string $ref = null;
 
     /**
-     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="male", type="string", length=25)
@@ -67,10 +64,9 @@ class Titles implements Translatable
      *     allowEmptyString=false
      * )
      */
-    private $male;
+    private ?string $male = null;
 
     /**
-     * @var string|null
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="female", type="string", length=25)
@@ -81,14 +77,14 @@ class Titles implements Translatable
      *     allowEmptyString=false
      * )
      */
-    private $female;
+    private ?string $female = null;
 
     /**
      * @var \Doctrine\Common\Collections\Collection<\Lotgd\Core\Entity\TitlesTranslation>
      *
      * @ORM\OneToMany(targetEntity="TitlesTranslation", mappedBy="object", cascade={"all"})
      */
-    private $translations;
+    private Collection $translations;
 
     public function __construct()
     {

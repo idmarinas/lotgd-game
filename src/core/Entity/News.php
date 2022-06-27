@@ -31,55 +31,48 @@ use Doctrine\ORM\Mapping as ORM;
 class News
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
-     * @var \DateTimeInterface|null
      *
      * @ORM\Column(type="date", options={"default"="0000-00-00"})
      */
-    private $date;
+    private ?\DateTimeInterface $date;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(type="text", length=65535)
      */
-    private $text;
+    private ?string $text = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(type="integer", options={"unsigned"=true})
      */
-    private $accountId = 0;
+    private ?int $accountId = 0;
 
     /**
-     * @var array
      *
      * @ORM\Column(type="array")
      */
-    private $arguments = [];
+    private array $arguments = [];
 
     /**
-     * @var bool|null
      *
      * @ORM\Column(type="boolean", options={"default"=1})
      */
-    private $newFormat = true;
+    private ?bool $newFormat = true;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(type="string", length=255, options={"default"="partial_news"})
      */
-    private $textDomain = '';
+    private ?string $textDomain = '';
 
     public function __construct()
     {

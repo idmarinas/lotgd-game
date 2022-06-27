@@ -30,55 +30,49 @@ use Doctrine\ORM\Mapping as ORM;
 class Referers
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="refererid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $refererid;
+    private ?int $refererid = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(type="string", length=1000)
      */
-    private $uri;
+    private ?string $uri = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(type="integer")
      */
-    private $count = 0;
+    private ?int $count = 0;
 
     /**
      * @var \DateTimeInterface|null
      *
      * @ORM\Column(type="datetime")
      */
-    private $last;
+    private ?\DateTimeInterface $last = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(type="string", length=50)
      */
-    private $site;
+    private ?string $site = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $dest;
+    private ?string $dest = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(type="string", length=40)
      */
-    private $ip;
+    private ?string $ip = null;
 
     /**
      * Set the value of Refererid.

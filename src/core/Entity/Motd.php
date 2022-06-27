@@ -28,16 +28,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Motd
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="motditem", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $motditem;
+    private ?int $motditem = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="motdtitle", type="string", length=200, nullable=true)
      *
@@ -49,10 +47,9 @@ class Motd
      *     max=200
      * )
      */
-    private $motdtitle = '';
+    private ?string $motdtitle = '';
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="motdbody", type="text", length=65535)
      *
@@ -65,31 +62,29 @@ class Motd
      *     max=65535
      * )
      */
-    private $motdbody = '';
+    private ?string $motdbody = '';
 
     /**
      * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="motddate", type="datetime", nullable=true, options={"default": "0000-00-00 00:00:00"})
      */
-    private $motddate;
+    private ?\DateTimeInterface $motddate = null;
 
     /**
-     * @var bool|null
      *
      * @ORM\Column(name="motdtype", type="boolean", options={"default"="0"})
      */
-    private $motdtype = false;
+    private ?bool $motdtype = false;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="motdauthor", type="integer", options={"unsigned"=true, "default"="0"})
      * @ORM\Column(name="motdauthor", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
      *
      * @Assert\DivisibleBy(1)
      */
-    private $motdauthor = 0;
+    private ?int $motdauthor = 0;
 
     public function __construct()
     {

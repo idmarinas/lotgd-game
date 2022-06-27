@@ -12,6 +12,7 @@
 
 namespace Lotgd\Core\Tool;
 
+use Lotgd\Core\Repository\CreaturesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Event\Creature;
 use Lotgd\Core\Http\Response;
@@ -25,8 +26,7 @@ class CreatureFunction
     private $dispatcher;
     private $response;
     private $cache;
-    /** @var \Lotgd\Core\Repository\CreaturesRepository */
-    private $repository;
+    private CreaturesRepository $repository;
     private $translator;
     private $settings;
 
@@ -189,9 +189,9 @@ class CreatureFunction
         $badguy = array_merge($this->lotgdGenerateCreatureLevels($badguy['creaturelevel']), $badguy);
 
         $badguy['playerdragonkills']  = $dk;
-        $badguy['creaturespeed']      = $badguy['creaturespeed']      ?? 2.5;
-        $badguy['creatureexp']        = $badguy['creatureexp']        ?? 0;
-        $badguy['physicalresistance'] = $badguy['physicalresistance'] ?? 0;
+        $badguy['creaturespeed'] ??= 2.5;
+        $badguy['creatureexp'] ??= 0;
+        $badguy['physicalresistance'] ??= 0;
 
         //-- Apply multipliers
         $badguy['creaturegold'] = round($badguy['creaturegold'] * ($badguy['creaturegoldbonus'] ?? 1));
