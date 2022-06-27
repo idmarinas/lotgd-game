@@ -52,6 +52,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :x: REMOVES
 
+-   **BC** Min PHP version needed is `7.4`
 -   `public/common_common.php` Deleted code to create file `.env.local.php`
     -   You need to create this file before upgrading from a version earlier than 4.9.0
 
