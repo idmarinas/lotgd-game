@@ -63,7 +63,7 @@ class Petitions
      *
      * @ORM\Column(name="pageinfo", type="array")
      */
-    private string $pageinfo = [];
+    private array $pageinfo = [];
 
     /**
      * @var \DateTimeInterface|null
@@ -213,7 +213,7 @@ class Petitions
     /**
      * Set the value of Pageinfo.
      *
-     * @param string $pageinfo
+     * @param array $pageinfo
      *
      * @return self
      */
@@ -227,7 +227,7 @@ class Petitions
     /**
      * Get the value of Pageinfo.
      */
-    public function getPageinfo(): string
+    public function getPageinfo(): array
     {
         return $this->pageinfo;
     }
