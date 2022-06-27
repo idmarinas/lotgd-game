@@ -24,27 +24,24 @@ use Doctrine\ORM\Mapping as ORM;
 class Logdnetbans
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="banid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $banid;
+    private ?int $banid = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="bantype", type="string", length=20)
      */
-    private $bantype;
+    private ?string $bantype = null;
 
     /**
-     * @var string|null
      *
      * @ORM\Column(name="banvalue", type="string", length=255)
      */
-    private $banvalue;
+    private ?string $banvalue = null;
 
     /**
      * Set the value of Banid.

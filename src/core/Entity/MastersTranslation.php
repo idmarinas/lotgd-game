@@ -35,7 +35,7 @@ class MastersTranslation extends AbstractPersonalTranslation
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    protected $id;
+    protected ?int $id = null;
 
     /**
      * @var \Lotgd\Core\Entity\Masters|null
@@ -43,14 +43,14 @@ class MastersTranslation extends AbstractPersonalTranslation
      * @ORM\ManyToOne(targetEntity="Masters", inversedBy="translations", cascade={"all"})
      * @ORM\JoinColumn(name="object_id", referencedColumnName="creatureid", onDelete="CASCADE")
      */
-    protected $object;
+    protected ?Masters $object = null;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text", nullable=true,  options={"collation": "utf8mb4_unicode_ci"})
      */
-    protected $content;
+    protected ?string $content = null;
 
     /**
      * Convenient constructor.

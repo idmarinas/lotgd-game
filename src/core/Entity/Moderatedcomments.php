@@ -26,33 +26,30 @@ use Doctrine\ORM\Mapping as ORM;
 class Moderatedcomments
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(name="modid", type="integer", options={"unsigned"=true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $modid;
+    private ?int $modid = null;
     /**
-     * @var string|null
      *
      * @ORM\Column(name="comment", type="text", length=65535)
      */
-    private $comment;
+    private ?string $comment = null;
 
     /**
-     * @var int|null
      *
      * @ORM\Column(name="moderator", type="integer", options={"unsigned"=true, "default"="0"})
      */
-    private $moderator = 0;
+    private ?int $moderator = 0;
 
     /**
      * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="moddate", type="datetime")
      */
-    private $moddate;
+    private ?\DateTimeInterface $moddate = null;
 
     public function __construct()
     {
