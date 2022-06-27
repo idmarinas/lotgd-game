@@ -183,6 +183,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
     {
         global $session;
 
+        /** @var \Lotgd\Core\Repository\MailRepository */
         $mail   = $this->getDoctrine()->getRepository('LotgdCore:Mail');
         $result = $mail->getCountMailOfCharacter((int) ($session['user']['acctid'] ?? 0));
 
@@ -255,7 +256,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
             {
                 $this->addNotification('error', $this->translator->trans('jaxon.fail.message.not.found', [], self::TRANSLATION_DOMAIN));
 
-                $isSubmitted ??= $form->isSubmitted();
+                $isSubmitted = $form->isSubmitted();
 
                 $params['form'] = $form->createView();
 
