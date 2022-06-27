@@ -183,7 +183,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
     {
         global $session;
 
-        /** @var \Lotgd\Core\Repository\MailRepository */
+        /** @var \Lotgd\Core\Repository\MailRepository $mail */
         $mail   = $this->getDoctrine()->getRepository('LotgdCore:Mail');
         $result = $mail->getCountMailOfCharacter((int) ($session['user']['acctid'] ?? 0));
 
