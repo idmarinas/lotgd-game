@@ -45,29 +45,27 @@ class Tool
     private $doctrine;
     private $settings;
     private $response;
-    private $kernel;
-    private CacheInterface $cache;
-    private Request $request;
-    private TranslatorInterface $translator;
-    private Buffer $buffer;
+    private $cache;
+    private $request;
+    private $translator;
+    private $buffer;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
         EntityManagerInterface $doctrine,
         LibSettings $settings,
-        Response $response,
-        KernelInterface $kernel,
-        Request $request
+        Request $request,
+        TranslatorInterface $translator,
+        Buffer $buffer,
+        CacheInterface $cacheApp
     ) {
         $this->dispatcher = $dispatcher;
         $this->doctrine   = $doctrine;
         $this->settings   = $settings;
-        $this->response   = $response;
-        $this->kernel     = $kernel;
-        $this->cache      = $this->kernel->getContainer()->get('cache.app');
+        $this->cache      = $cacheApp;
         $this->request    = $request;
-        $this->translator = $this->kernel->getContainer()->get('translator');
-        $this->buffer     = $this->kernel->getContainer()->get('lotgd_core.combat.buffer');
+        $this->translator = $translator;
+        $this->buffer     = $buffer;
     }
 
     /**
@@ -370,5 +368,14 @@ class Tool
             'acctid'   => $session['user']['acctid'],
             'loggedin' => $session['user']['loggedin'],
         ];
+    }
+
+
+    /** @required */
+    public function setResponse(Response $response): self
+    {
+        $this->response = $response;
+
+        return $this;
     }
 }
