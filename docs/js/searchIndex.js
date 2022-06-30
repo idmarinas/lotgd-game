@@ -7866,6 +7866,11 @@ Search.appendIndex(
             "summary": "Debuglog.",
             "url": "classes/Lotgd-Core-Entity-Debuglog.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Entity\\Debuglog\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Entity-Debuglog.html#method___construct"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Entity\\Debuglog\u003A\u003AsetId\u0028\u0029",
             "name": "setId",
             "summary": "Set\u0020the\u0020value\u0020of\u0020Id.",
@@ -7976,111 +7981,6 @@ Search.appendIndex(
             "summary": "DebuglogArchive.",
             "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003AsetId\u0028\u0029",
-            "name": "setId",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Id.",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#method_setId"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003AgetId\u0028\u0029",
-            "name": "getId",
-            "summary": "Get\u0020the\u0020value\u0020of\u0020Id.",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#method_getId"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003AsetDate\u0028\u0029",
-            "name": "setDate",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Date.",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#method_setDate"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003AgetDate\u0028\u0029",
-            "name": "getDate",
-            "summary": "Get\u0020the\u0020value\u0020of\u0020Date.",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#method_getDate"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003AsetActor\u0028\u0029",
-            "name": "setActor",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Actor.",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#method_setActor"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003AgetActor\u0028\u0029",
-            "name": "getActor",
-            "summary": "Get\u0020the\u0020value\u0020of\u0020Actor.",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#method_getActor"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003AsetTarget\u0028\u0029",
-            "name": "setTarget",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Target.",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#method_setTarget"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003AgetTarget\u0028\u0029",
-            "name": "getTarget",
-            "summary": "Get\u0020the\u0020value\u0020of\u0020Target.",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#method_getTarget"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003AsetMessage\u0028\u0029",
-            "name": "setMessage",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Message.",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#method_setMessage"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003AgetMessage\u0028\u0029",
-            "name": "getMessage",
-            "summary": "Get\u0020the\u0020value\u0020of\u0020Message.",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#method_getMessage"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003AsetField\u0028\u0029",
-            "name": "setField",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Field.",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#method_setField"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003AgetField\u0028\u0029",
-            "name": "getField",
-            "summary": "Get\u0020the\u0020value\u0020of\u0020Field.",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#method_getField"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003AsetValue\u0028\u0029",
-            "name": "setValue",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Value.",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#method_setValue"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003AgetValue\u0028\u0029",
-            "name": "getValue",
-            "summary": "Get\u0020the\u0020value\u0020of\u0020Value.",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#method_getValue"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003A\u0024id",
-            "name": "id",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#property_id"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003A\u0024date",
-            "name": "date",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#property_date"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003A\u0024actor",
-            "name": "actor",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#property_actor"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003A\u0024target",
-            "name": "target",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#property_target"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003A\u0024message",
-            "name": "message",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#property_message"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003A\u0024field",
-            "name": "field",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#property_field"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\DebuglogArchive\u003A\u003A\u0024value",
-            "name": "value",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-DebuglogArchive.html#property_value"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Entity\\EntityInterface",
             "name": "EntityInterface",
             "summary": "",
@@ -8190,6 +8090,11 @@ Search.appendIndex(
             "name": "Gamelog",
             "summary": "Gamelog.",
             "url": "classes/Lotgd-Core-Entity-Gamelog.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Entity\\Gamelog\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Entity-Gamelog.html#method___construct"
         },                {
             "fqsen": "\\Lotgd\\Core\\Entity\\Gamelog\u003A\u003AsetLogid\u0028\u0029",
             "name": "setLogid",
@@ -8780,6 +8685,11 @@ Search.appendIndex(
             "name": "Moderatedcomments",
             "summary": "Moderatedcomments.",
             "url": "classes/Lotgd-Core-Entity-Moderatedcomments.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Entity\\Moderatedcomments\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Entity-Moderatedcomments.html#method___construct"
         },                {
             "fqsen": "\\Lotgd\\Core\\Entity\\Moderatedcomments\u003A\u003AsetModid\u0028\u0029",
             "name": "setModid",
@@ -14426,6 +14336,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Http-Response.html#property_pageParts"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003A\u0024buffer",
+            "name": "buffer",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Http-Response.html#property_buffer"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Http\\Response\u003A\u003A\u0024tool",
+            "name": "tool",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Http-Response.html#property_tool"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Command\\AbstractCommand",
             "name": "AbstractCommand",
             "summary": "Command\u0020for\u0020upgrade\u0020to\u0020clean\u0020install.",
@@ -18451,6 +18371,11 @@ Search.appendIndex(
             "summary": "Save\u0020user\u0020data\u0020and\u0020character.",
             "url": "classes/Lotgd-Core-Tool-Tool.html#method_saveUser"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\Tool\u003A\u003AsetResponse\u0028\u0029",
+            "name": "setResponse",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-Tool.html#method_setResponse"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Tool\\Tool\u003A\u003A\u0024dispatcher",
             "name": "dispatcher",
             "summary": "",
@@ -18471,10 +18396,25 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Tool-Tool.html#property_response"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Tool\\Tool\u003A\u003A\u0024kernel",
-            "name": "kernel",
+            "fqsen": "\\Lotgd\\Core\\Tool\\Tool\u003A\u003A\u0024cache",
+            "name": "cache",
             "summary": "",
-            "url": "classes/Lotgd-Core-Tool-Tool.html#property_kernel"
+            "url": "classes/Lotgd-Core-Tool-Tool.html#property_cache"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\Tool\u003A\u003A\u0024request",
+            "name": "request",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-Tool.html#property_request"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\Tool\u003A\u003A\u0024translator",
+            "name": "translator",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-Tool.html#property_translator"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Tool\\Tool\u003A\u003A\u0024buffer",
+            "name": "buffer",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Tool-Tool.html#property_buffer"
         },                {
             "fqsen": "\\Lotgd\\Core\\Tool\\Validator",
             "name": "Validator",
@@ -19635,31 +19575,6 @@ Search.appendIndex(
             "name": "getTag",
             "summary": "Gets\u0020the\u0020tag\u0020name\u0020associated\u0020with\u0020this\u0020token\u0020parser.",
             "url": "classes/Lotgd-Core-Twig-TokenParser-CommentaryDefaultPaginationUrlTokenParser.html#method_getTag"
-        },                {
-            "fqsen": "\\e_rand\u0028\u0029",
-            "name": "e_rand",
-            "summary": "Alias\u0020of\u0020mt_rand\u0020with\u0020some\u0020improvements.",
-            "url": "namespaces/default.html#function_e_rand"
-        },                {
-            "fqsen": "\\r_rand\u0028\u0029",
-            "name": "r_rand",
-            "summary": "Same\u0020as\u0020e_rand\u0020but\u0020\u0024min\u0020and\u0020\u0024max\u0020are\u0020multiplied\u0020by\u00201000.",
-            "url": "namespaces/default.html#function_r_rand"
-        },                {
-            "fqsen": "\\myDefine\u0028\u0029",
-            "name": "myDefine",
-            "summary": "",
-            "url": "namespaces/default.html#function_myDefine"
-        },                {
-            "fqsen": "\\safeescape\u0028\u0029",
-            "name": "safeescape",
-            "summary": "",
-            "url": "namespaces/default.html#function_safeescape"
-        },                {
-            "fqsen": "\\nltoappon\u0028\u0029",
-            "name": "nltoappon",
-            "summary": "",
-            "url": "namespaces/default.html#function_nltoappon"
         },                {
             "fqsen": "\\bell_rand\u0028\u0029",
             "name": "bell_rand",
