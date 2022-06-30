@@ -68,8 +68,14 @@ if ( ! \function_exists('r_rand'))
 
 if ( ! \function_exists('myDefine'))
 {
+    /** @deprecated 7.1 Use syntax "defined() || define();". Example in src/constants.php */
     function myDefine($name, $value)
     {
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 7.1.0; and delete in future version. Use syntax "defined() || define();". Example in src/constants.php',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         //-- No try to define a defined constant
         if ( ! \defined($name))
         {
@@ -80,8 +86,14 @@ if ( ! \function_exists('myDefine'))
 
 if ( ! \function_exists('safeescape'))
 {
+    /** @deprecated 7.1 */
     function safeescape($input)
     {
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 7.1.0; and delete in future version.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         $prevchar = '';
         $out      = '';
 
@@ -103,8 +115,14 @@ if ( ! \function_exists('safeescape'))
 
 if ( ! \function_exists('nltoappon'))
 {
+    /** @deprecated 7.1 */
     function nltoappon($in)
     {
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 7.1.0; and delete in future version.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         $out = \str_replace("\r\n", "\n", $in);
         $out = \str_replace("\r", "\n", $out);
 
