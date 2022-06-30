@@ -14,6 +14,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :cyclone: CHANGES
 
+-   **BC** Min PHP version needed is `7.4`
 -   `assets/lib/components/embed.js` `Lotgd.embed(this)` now also receives the event parameter `Lotgd.embed(this, event)`
 -   `Faq menu` moved from Village/Shades menu to Top menu.
     -   Now can see FAQ always.
@@ -38,8 +39,10 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :fire: DEPRECATED
 
--   `assets/lib/game/datacache.js` Deleted unused functions
-    -   Use console to clear cache.
+-   `src/functions.php` Mark functions as deprecated:
+    -   `myDefine`
+    -   `safeescape`
+    -   `nltoappon`
 
 ### :wrench: FIXES
 
@@ -52,9 +55,10 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :x: REMOVES
 
--   **BC** Min PHP version needed is `7.4`
 -   `public/common_common.php` Deleted code to create file `.env.local.php`
     -   You need to create this file before upgrading from a version earlier than 4.9.0
+-   `assets/lib/game/datacache.js` Deleted unused functions
+    -   Use console to clear cache.
 
 ### :notebook: NOTES
 
