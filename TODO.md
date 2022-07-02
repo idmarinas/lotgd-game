@@ -8,8 +8,11 @@
 # A tener en cuenta desde la versión 7.0.0
 
 -   Esta es la última versión compatible con el antiguo sistema de módulos.
-    -   Es posible que se alargue la compatibilidad durante algunas versiones más para hacer la transición más suave.
 -   Se ha cambiado de Fomantic UI a TailwindCSS
+
+# A tener en cuenta desde la versión 7.1.0
+
+-   La versión mínima de PHP es 7.4
 
 # Módulos
 
@@ -17,7 +20,6 @@
 
 # Actualmente haciendo esto (7.Y.0)
 
--   **BC** Eliminar compatibilidad con la versión 7.3 de PHP en la versión 7.1.0
 -   Crear un bundle `lotgd-core-bundle` que agrege todos los paquetes que se requieran como base "7.1.0"
 
 # Cosas a mejorar
