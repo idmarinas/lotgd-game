@@ -18,9 +18,9 @@
 
 -   Adaptarlos para la version 6.2.0
 
-# Actualmente haciendo esto (7.Y.0)
+# Actualmente haciendo esto (8.0.0)
 
--   Crear un bundle `lotgd-core-bundle` que agrege todos los paquetes que se requieran como base "7.1.0"
+-   **BC** Se elimina la compatibilidad con el antiguo sistema de módulos
 
 # Cosas a mejorar
 
@@ -56,9 +56,11 @@
 -   Se han migrado todos los cronjob a comandos de consola.
     -   _Nota_ el cronjob del nuevo día (newdayrunonce) no es compatible con el sistema de módulos.
     -   El nuevo sistema de CronJob se usará en la versión X.0.0 donde se elimina la compatibilidad con los módulos
+
 # Futuras versiones
 ## **BC** Para la versión X.0.0
 
+-   Crear un bundle `lotgd-core-bundle` que agrege todos los paquetes que se requieran como base "7.1.0"
 -   Esta será la última versión que use la ordenación de carpetas `src/core` y `src/local`
     -   La versión X.0.0 será la última versión con esta estructura, y será la versión dedicada a facilitar la transición a la versión LoTGD APP Symfony.
         -   La estructura actual X.0.0 y anterior es un poco caótica, por lo que se usará esta última versión para facilitar el salto a la versión LoTGD APP Symfony.
