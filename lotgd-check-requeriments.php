@@ -49,6 +49,7 @@
     $requeriments = [
         //-- LotgdVersion => Requeriments
         '5.0' => $default,
+        '7.1' => array_merge($default, ['php_version' => '7.4.0'])
     ];
 
     $results = [];
