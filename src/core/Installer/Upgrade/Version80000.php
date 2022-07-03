@@ -33,7 +33,7 @@ class Version80000 extends InstallerAbstract
             $this->getProjectDir().'/public/modules.php',
             $this->getProjectDir().'/themes/LotgdModern/templates/admin/page/modules',
             $this->getProjectDir().'/themes/LotgdModern/templates/admin/page/configuration/module.html.twig',
-            $this->getProjectDir().'/src/ajax/core/Mounts.php',
+            $this->getProjectDir().'/src/ajax/core',
         ]);
     }
 }
