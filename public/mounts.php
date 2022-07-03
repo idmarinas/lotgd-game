@@ -22,7 +22,7 @@ $params = [
 
 $repository = Doctrine::getRepository('LotgdCore:Mounts');
 
-//-- Init page
+// -- Init page
 LotgdResponse::pageStart('title', [], $textDomain);
 
 LotgdNavigation::superuserGrottoNav();
@@ -52,11 +52,11 @@ elseif ('activate' == $op)
 }
 elseif ('del' == $op)
 {
-    //refund for anyone who has a mount of this type.
+    // refund for anyone who has a mount of this type.
     $entity = $repository->find($mountId);
     $repository->refundMount($entity);
 
-    //drop the mount.
+    // drop the mount.
     Doctrine::remove($entity);
 
     module_delete_objprefs('mounts', $mountId);
@@ -104,99 +104,45 @@ elseif ('edit' == $op || 'add' == $op)
     module_editor_navs('prefs-mounts', "mounts.php?op=edit&subop=module&id={$mountId}&module=");
     $subop = LotgdRequest::getQuery('subop');
 
-    if ('module' == $subop)
+    $params['tpl'] = 'edit';
+
+    $lotgdFormFactory = LotgdKernel::get('form.factory');
+    $entity           = $entity ?: new Mounts();
+
+    $form = $lotgdFormFactory->create(MountsType::class, $entity, [
+        'action' => "mounts.php?op=edit&id={$mountId}",
+        'attr'   => [
+            'autocomplete' => 'off',
+        ],
+    ]);
+
+    $form->handleRequest(LotgdRequest::_i());
+
+    if ($form->isSubmitted() && $form->isValid())
     {
-        $module = (string) LotgdRequest::getQuery('module');
+        $entity = $form->getData();
 
-        $form = module_objpref_edit('mounts', $module, $mountId);
+        Doctrine::persist($entity);
+        Doctrine::flush();
 
-        $params['isLaminas'] = $form instanceof Form;
-        $params['module']    = $module;
-        $params['mountId']   = $mountId;
+        $mountId = $entity->getMountid();
 
-        if ($params['isLaminas'])
-        {
-            $form->setAttribute('action', "mounts.php?op=edit&subop=module&id={$mountId}&module={$module}");
-            $params['formTypeTab'] = $form->getOption('form_type_tab');
-        }
+        LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
 
-        if (LotgdRequest::isPost())
-        {
-            $post = LotgdRequest::getPostAll();
-
-            if ($params['isLaminas'])
-            {
-                $form->setData($post);
-
-                if ($form->isValid())
-                {
-                    $data = $form->getData();
-
-                    process_post_save_data($data, $mountId, $module);
-
-                    LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
-                }
-            }
-            else
-            {
-                reset($post);
-
-                process_post_save_data($post, $mountId, $module);
-
-                LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
-            }
-        }
-
-        $params['form'] = $form;
-
-        LotgdNavigation::addNav('', "mounts.php?op=edit&subop=module&id={$mountId}&module={$module}");
-
-        LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/mounts/module.html.twig', $params));
-
-        LotgdResponse::pageEnd();
-    }
-    else
-    {
-        $params['tpl'] = 'edit';
-
-        $lotgdFormFactory = LotgdKernel::get('form.factory');
-        $entity           = $entity ?: new Mounts();
-
+        // -- Redo form for change $mountId and set new data (generated IDs)
         $form = $lotgdFormFactory->create(MountsType::class, $entity, [
             'action' => "mounts.php?op=edit&id={$mountId}",
             'attr'   => [
                 'autocomplete' => 'off',
             ],
         ]);
-
-        $form->handleRequest(LotgdRequest::_i());
-
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $entity = $form->getData();
-
-            Doctrine::persist($entity);
-            Doctrine::flush();
-
-            $mountId = $entity->getMountid();
-
-            LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
-
-            //-- Redo form for change $mountId and set new data (generated IDs)
-            $form = $lotgdFormFactory->create(MountsType::class, $entity, [
-                'action' => "mounts.php?op=edit&id={$mountId}",
-                'attr'   => [
-                    'autocomplete' => 'off',
-                ],
-            ]);
-        }
-        Doctrine::detach($entity); //-- Avoid Doctrine save a invalid Form
-
-        //-- In this position can updated $mountId var
-        LotgdNavigation::addNavAllow("mounts.php?op=edit&id={$mountId}");
-
-        $params['form'] = $form->createView();
     }
+    Doctrine::detach($entity); // -- Avoid Doctrine save a invalid Form
+
+    // -- In this position can updated $mountId var
+    LotgdNavigation::addNavAllow("mounts.php?op=edit&id={$mountId}");
+
+    $params['form'] = $form->createView();
 }
 
 LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/mounts.html.twig', $params));
@@ -216,5 +162,5 @@ function process_post_save_data($data, $mountId, $module)
     }
 }
 
-//-- Finalize page
+// -- Finalize page
 LotgdResponse::pageEnd();
