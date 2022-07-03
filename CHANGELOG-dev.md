@@ -15,11 +15,14 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   `src/ajax/core/Mounts.php` migrate this class to Stimulus controller
+    -   `src/core/Controller/MountsController.php` use `remote-modal` Stimulus controller to load this.
+-   `src/ajax/core/Bans.php` migrate this class to Stimulus controller
+    -   `src/core/Controller/BansController.php` use `remote-modal` Stimulus controller to load this.
 
 ### :star: FEATURES
 
--   Nothing
+-   `assets/stimulus/constrollers/remote_modal_controller.js` Add new function `queryParameters` this add query parameters to url
 
 ### :fire: DEPRECATED
 
@@ -32,6 +35,8 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :x: REMOVES
 
 -   **BC** Deleted old system of modules. Use bundles instead.
+-   `src/ajax/core/Mounts.php` deleted, now is a Stimulus controller
+-   `src/ajax/core/Bans.php` deleted, now is a Stimulus controller
 
 ### :notebook: NOTES
 
