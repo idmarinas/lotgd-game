@@ -63,7 +63,7 @@ export default class extends Modal
     queryParameters(params)
     {
         let url = this.hasUrlValue ? this.urlValue : null
-        let query = ''
+        let query = url.includes('?') ? '&' : '?'
 
         let keys = Object.keys(params)
 
@@ -71,7 +71,10 @@ export default class extends Modal
         {
             keys.forEach(item =>
             {
-                query =  `${query}${(query == '' ? '&' : '?')}${item}=${params[item]}`
+                if (params[item] !== '')
+                {
+                    query =  `${query}${item}=${params[item]}`
+                }
             })
 
             return `${url}${query}`
