@@ -25,7 +25,7 @@ export default class extends Modal
 
         let content = null
 
-        content = await this.fetch()
+        content = await this.fetch(this.queryParameters(event.params))
 
         this.stopLoading()
 
@@ -58,6 +58,26 @@ export default class extends Modal
         }
 
         super.close(event)
+    }
+
+    queryParameters(params)
+    {
+        let url = this.hasUrlValue ? this.urlValue : null
+        let query = ''
+
+        let keys = Object.keys(params)
+
+        if (keys.length > 0)
+        {
+            keys.forEach(item =>
+            {
+                query =  `${query}${(query == '' ? '&' : '?')}${item}=${params[item]}`
+            })
+
+            return `${url}${query}`
+        }
+
+        return url
     }
 
     async fetch (fetchUrl, options = {})
