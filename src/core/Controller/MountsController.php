@@ -13,26 +13,11 @@
 
 namespace Lotgd\Core\Controller;
 
-use Lotgd\Core\Controller\NewdayController\DragonPointSpendTrait;
-use Lotgd\Core\Controller\NewdayController\NewDayTrait;
-use Lotgd\Core\Controller\NewdayController\RecalculateDragonPointTrait;
-use Lotgd\Core\Controller\NewdayController\SetRaceTrait;
-use Lotgd\Core\Controller\NewdayController\SetSpecialtyTrait;
-use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
-use Lotgd\Core\Http\Response as HttpResponse;
-use Lotgd\Core\Lib\Settings;
-use Lotgd\Core\Log;
-use Lotgd\Core\Navigation\Navigation;
 use Lotgd\Core\Repository\AvatarRepository;
-use Lotgd\Core\Tool\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use Tracy\Debugger;
 use Throwable;
+use Tracy\Debugger;
 
 class MountsController extends AbstractController implements LotgdControllerInterface
 {
@@ -61,13 +46,13 @@ class MountsController extends AbstractController implements LotgdControllerInte
         return $this->render('admin/page/mounts/owners-list-modal.html.twig', ['entities' => $entities]);
     }
 
-    /** @inheritDoc */
+    /** {@inheritDoc} */
     public function allowAnonymous(): bool
     {
         return false;
     }
 
-    /** @inheritDoc */
+    /** {@inheritDoc} */
     public function overrideForcedNav(): bool
     {
         return true;
