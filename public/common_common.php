@@ -3,10 +3,6 @@
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Idmarinas\TracyPanel\Twig\TracyExtension;
 use Idmarinas\TracyPanel\TwigBar;
-use Laminas\Code\Generator\DocBlockGenerator;
-use Laminas\Code\Generator\FileGenerator;
-use Laminas\Code\Generator\ValueGenerator;
-use Lotgd\Core\Exception\Exception;
 use Lotgd\Core\Fixed\Doctrine;
 use Lotgd\Core\Fixed\EventDispatcher as LotgdEventDispatcher;
 use Lotgd\Core\Fixed\FlashMessages as LotgdFlashMessages;
@@ -34,12 +30,12 @@ use Twig\Profiler\Profile;
 chdir(realpath(__DIR__.'/..'));
 
 require \dirname(__DIR__).'/config/bootstrap.php';
-//-- Include constants
+// -- Include constants
 require_once 'src/constants.php';
 
-//-- Autoload annotations
+// -- Autoload annotations
 AnnotationRegistry::registerLoader(
-    fn($className) => class_exists($className)
+    fn ($className) => class_exists($className)
 );
 
 // Set some constant defaults in case they weren't set before the inclusion of
@@ -48,19 +44,19 @@ AnnotationRegistry::registerLoader(
 \defined('ALLOW_ANONYMOUS')     || \define('ALLOW_ANONYMOUS', false);
 
 $isDevelopment = 'prod' != $_SERVER['APP_ENV'];
-//-- Init Debugger
+// -- Init Debugger
 $debuggerMode = $isDevelopment ? Debugger::DEVELOPMENT : Debugger::PRODUCTION;
 Debugger::enable($debuggerMode, __DIR__.'/../storage/log/tracy');
 Debugger::timer('page-generating');
 Debugger::timer('page-footer');
 Debugger::$maxDepth = 5; // default: 3
-//-- Extensions for Tracy
+// -- Extensions for Tracy
 if ($isDevelopment)
 {
     Debugger::getBar()->addPanel(new Panel());
 }
 
-//-- Prepare LoTGD Kernel
+// -- Prepare LoTGD Kernel
 try
 {
     LotgdKernel::instance(new Lotgd\Core\Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']));
@@ -68,7 +64,7 @@ try
 
     if ($isDevelopment)
     {
-        //-- Add Twig template in the Tracy debugger bar.
+        // -- Add Twig template in the Tracy debugger bar.
         $profile = new Profile();
         $twig    = LotgdKernel::get('twig');
         $twig->addExtension(new ProfilerExtension($profile));
@@ -76,7 +72,7 @@ try
 
         TwigBar::init($profile);
 
-        //-- Add Sql requests made by Doctrine in the Tracy debugger bar.
+        // -- Add Sql requests made by Doctrine in the Tracy debugger bar.
         DoctrineSql::init(LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
     }
 }
@@ -89,45 +85,45 @@ catch (Throwable $th)
  * Prepare static classes
  */
 
-//-- Configure Session
+// -- Configure Session
 LotgdSession::instance(LotgdKernel::get('session'));
-//-- Init session
+// -- Init session
 LotgdSession::start();
 
-//-- Configure Doctrine
+// -- Configure Doctrine
 Doctrine::instance(LotgdKernel::get('doctrine.orm.entity_manager'));
-//-- Configure Flash Messages
+// -- Configure Flash Messages
 LotgdFlashMessages::instance(LotgdKernel::get('session')->getFlashBag());
-//-- Configure format instance
+// -- Configure format instance
 LotgdFormat::instance(LotgdKernel::get(\Lotgd\Core\Output\Format::class));
-//-- Configure Request instance
+// -- Configure Request instance
 LotgdRequest::instance(LotgdKernel::get(\Lotgd\Core\Http\Request::class));
-//-- Configure Response instance
+// -- Configure Response instance
 LotgdResponse::instance(LotgdKernel::get(\Lotgd\Core\Http\Response::class));
-//-- Configure Navigation instance
+// -- Configure Navigation instance
 LotgdNavigation::instance(LotgdKernel::get(\Lotgd\Core\Navigation\Navigation::class));
-//-- Configure Theme template
+// -- Configure Theme template
 LotgdTheme::instance(LotgdKernel::get('twig'));
-//-- Configure Sanitize instance
+// -- Configure Sanitize instance
 LotgdSanitize::instance(LotgdKernel::get(\Lotgd\Core\Tool\Sanitize::class));
-//-- Configure Translator
+// -- Configure Translator
 LotgdTranslator::instance(LotgdKernel::get('translator'));
-//-- Configure Event dispatcher instance
+// -- Configure Event dispatcher instance
 LotgdEventDispatcher::instance(LotgdKernel::get('event_dispatcher'));
-//-- Configure Log instance
+// -- Configure Log instance
 LotgdLog::instance(LotgdKernel::get('lotgd.core.log'));
-//-- Configure Tool instance
+// -- Configure Tool instance
 LotgdTool::instance(LotgdKernel::get('lotgd.core.tools'));
-//-- Configure Settings instance
+// -- Configure Settings instance
 LotgdSetting::instance(LotgdKernel::get('lotgd_core.settings'));
 
 $session = &$_SESSION['session'];
 
-$session['user']['gentime'] ??= 0;
+$session['user']['gentime']      ??= 0;
 $session['user']['gentimecount'] ??= 0;
-$session['user']['gensize'] ??= 0;
-$session['user']['acctid'] ??= 0;
-$session['user']['restorepage'] ??= '';
+$session['user']['gensize']      ??= 0;
+$session['user']['acctid']       ??= 0;
+$session['user']['restorepage']  ??= '';
 $session['counter'] = ($session['counter'] ?? 0) + 1;
 
 $y2 = "\xc0\x3e\xfe\xb3\x4\x74\x9a\x7c\x17";
