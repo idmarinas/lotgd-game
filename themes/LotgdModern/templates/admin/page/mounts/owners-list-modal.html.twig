@@ -6,6 +6,8 @@
             <div class="mb-4">
                 {% for entity in entities %}
                     {{ entity.name|colorize }}<br>
+                {% else %}
+                    ---
                 {% endfor %}
             </div>
             <div class="flex justify-end items-center flex-wrap mt-6 pt-3 border-t border-lotgd-500">
