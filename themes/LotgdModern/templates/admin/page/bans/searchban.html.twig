@@ -27,7 +27,31 @@
                 </td>
                 <td>{{ row.banexpire|relative_date('perma') }}</td>
                 <td>{{ row.banreason|colorize }}</td>
-                <td><a href onclick="JaxonLotgd.Ajax.Core.Bans.showAffected('{{ row.ipfilter }}', '{{ row.uniqueid }}'); return false;">{{ affected }}</a></td>
+                <td>
+                    <span
+                        data-controller="remote-modal"
+                        data-remote-modal-allow-background-close="true"
+                        data-remote-modal-url-value="{{ stimulus_url('Lotgd\\Core\\Controller\\BansController', 'showAffected') }}"
+                        data-remote-modal-reload-data-value="true"
+                    >
+                        <button
+                            type="button"
+                            class="relative w-auto py-1 ml-2"
+                            data-remote-modal-target="activator"
+                            data-action="click->remote-modal#open"
+                            data-remote-modal-ip-param="{{ row.ipfilter }}"
+                            data-remote-modal-id-param="{{ row.uniqueid }}"
+                        >
+                            {{ affected }}
+                        </button>
+
+                        <div
+                            data-remote-modal-target="container"
+                            data-action="click->remote-modal#closeBackground keyup@window->remote-modal#closeWithKeyboard"
+                            class="transition duration-500 ease-in-out fixed inset-0 overflow-y-auto flex items-center justify-center whitespace-normal hidden"
+                        ></div>
+                    </span>
+                </td>
                 <td>{{ row.lasthit|relative_date }}</td>
             </tr>
         {% else %}
