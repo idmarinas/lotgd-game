@@ -21,6 +21,8 @@
 # Actualmente haciendo esto (8.0.0)
 
 -   **BC** Se elimina la compatibilidad con el antiguo sistema de módulos
+    -   Seguir eliminando las funciones referentes a los modulos
+-   Eliminar jaxon del core
 
 # Cosas a mejorar
 
