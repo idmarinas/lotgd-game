@@ -13,12 +13,14 @@
 
 namespace Lotgd\Core\Service\Cron;
 
-use DateTime;
 use DateInterval;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
+use Lotgd\Core\Service\LotgdMail;
 use Lotgd\Core\Tool\Backup;
+use Symfony\Component\Mime\Address;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AvatarCleanService
@@ -32,19 +34,22 @@ class AvatarCleanService
     private $translator;
     private $doctrine;
     private $backup;
+    private LotgdMail $mailer;
 
     public function __construct(
         Settings $settings,
         Log $log,
         TranslatorInterface $translator,
         EntityManagerInterface $doctrine,
-        Backup $backup
+        Backup $backup,
+        LotgdMail $mailer
     ) {
         $this->settings   = $settings;
         $this->log        = $log;
         $this->translator = $translator;
         $this->doctrine   = $doctrine;
         $this->backup     = $backup;
+        $this->mailer     = $mailer;
     }
 
     public function execute(): void
@@ -81,26 +86,26 @@ class AvatarCleanService
             ->where('BIT_AND(a.superuser, :permit) = 0')
             ->andWhere($expr->orX(
                 '1 = 0',
-                $old !== 0 ? $expr->lt('a.laston', ':dateOld') : null,
-                $new !== 0 ? $expr->andX($expr->lt('a.laston', ':dateNew'), $expr->eq('u.level', 1), $expr->eq('u.dragonkills', 0)) : null,
-                $trash !== 0 ? $expr->andX($expr->lt('a.regdate', ':dateTrash'), $expr->eq('a.laston', 'a.regdate')) : null
+                0 !== $old ? $expr->lt('a.laston', ':dateOld') : null,
+                0 !== $new ? $expr->andX($expr->lt('a.laston', ':dateNew'), $expr->eq('u.level', 1), $expr->eq('u.dragonkills', 0)) : null,
+                0 !== $trash ? $expr->andX($expr->lt('a.regdate', ':dateTrash'), $expr->eq('a.laston', 'a.regdate')) : null
             ))
             ->leftJoin('LotgdCore:User', 'a', 'with', $expr->eq('a.acctid', 'u.acct'))
 
             ->setParameter('permit', NO_ACCOUNT_EXPIRATION)
         ;
 
-        ($old !== 0) ? $query->setParameter('dateOld', $dateOld) : null;
-        ($new !== 0) ? $query->setParameter('dateNew', $dateNew) : null;
-        ($trash !== 0) ? $query->setParameter('dateTrash', $dateTrash) : null;
+        (0 !== $old) ? $query->setParameter('dateOld', $dateOld) : null;
+        (0 !== $new) ? $query->setParameter('dateNew', $dateNew) : null;
+        (0 !== $trash) ? $query->setParameter('dateTrash', $dateTrash) : null;
 
         $result = $query->getQuery()->getResult();
 
-        //-- Delete users and backups data
+        // -- Delete users and backups data
         $this->deleteAndBackup($result);
 
-        //adjust for notification - don't notify total newbie chars
-        $old = max(1, $old - (int) $this->settings->getSetting('notifydaysbeforedeletion', 5)); //a minimum of 1 day is necessary
+        // adjust for notification - don't notify total newbie chars
+        $old = max(1, $old - (int) $this->settings->getSetting('notifydaysbeforedeletion', 5)); // a minimum of 1 day is necessary
 
         /** @var \Lotgd\Core\Repository\UserRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:User');
@@ -111,7 +116,7 @@ class AvatarCleanService
             ->andWhere(
                 $expr->orX(
                     '1 = 0',
-                    $old !== 0 ? $expr->lt('a.laston', ':dateOld') : null
+                    0 !== $old ? $expr->lt('a.laston', ':dateOld') : null
                 ),
                 $expr->andX(
                     $expr->neq('a.emailaddress', ':empty'),
@@ -124,7 +129,7 @@ class AvatarCleanService
             ->setParameter('empty', '')
         ;
 
-        ($old !== 0) ? $query->setParameter('dateOld', $dateOld) : null;
+        (0 !== $old) ? $query->setParameter('dateOld', $dateOld) : null;
 
         $result = $query->getQuery()->getResult();
 
@@ -140,7 +145,7 @@ class AvatarCleanService
                 'server'   => $server,
             ], 'app_mail', $prefs['language'] ?? null);
 
-            lotgd_mail($entity->getEmailaddress(), $subject, $message);
+            $this->mailer->sendEmail(new Address($entity->getEmailaddress()), $subject, $message);
 
             $entity->setSentnotice(true);
 
@@ -161,7 +166,7 @@ class AvatarCleanService
 
         foreach ($result as $entity)
         {
-            //-- Delete account and data related
+            // -- Delete account and data related
             if ( ! $this->backup->characterCleanUp($entity->getAcct()->getAcctid(), CHAR_DELETE_AUTO))
             {
                 continue;
@@ -182,10 +187,10 @@ class AvatarCleanService
             $dks += $entity->getDragonkills();
         }
 
-        //Log which accounts were deleted.
-        $msg = "[{$dk0ct}] with 0 dk avg lvl [".round($dk0lvl / max(1, $dk0ct), 2)."]\n";
+        // Log which accounts were deleted.
+        $msg = "[{$dk0ct}] with 0 dk avg lvl [".round($dk0lvl  / max(1, $dk0ct), 2)."]\n";
         $msg .= "[{$dk1ct}] with 1 dk avg lvl [".round($dk1lvl / max(1, $dk1ct), 2)."]\n";
-        $msg .= 'Avg DK: ['.round($dks / max(1, \count($result)), 2)."]\n";
+        $msg .= 'Avg DK: ['.round($dks                         / max(1, \count($result)), 2)."]\n";
         $msg .= 'Accounts: '.implode(', ', $pinfo);
 
         $this->log->game('Deleted '.\count($result)." accounts:\n{$msg}", 'char expiration');
