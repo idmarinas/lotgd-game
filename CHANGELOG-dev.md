@@ -44,6 +44,10 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **BC** Deleted JaxonPHP from core.
     -   This include all relation code of JaxonPHP
     -   *Note:* If you want to use its capabilities you will have to add the package yourself.
+-   **BC** Deleted files:
+    -   `lib/showform.php`
+    -   `lib/showtabs.php`
+        -  *Note:* use Symfony Forms for build forms.
 -   `src/ajax/core/Mounts.php` deleted, now is a Stimulus controller
 -   `src/ajax/core/Bans.php` deleted, now is a Stimulus controller
 
