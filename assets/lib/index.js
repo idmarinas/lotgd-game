@@ -14,12 +14,8 @@ define([
 
     //-- Components
     './components/confirmation',
-    './components/embed',
-    './components/modal-form',
-    './components/modal',
     './components/notify',
     './components/numeral',
-    './components/redirect-post',
     './components/swal',
     './components/tagify',
 
