@@ -30,11 +30,20 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
--   Nothing
+-   `assets/lib/game/previewfield.js` Updated for use classes of TailwindCSS
 
 ### :x: REMOVES
 
+-   **BC** Removed unused code
+    -  `assets/lib/components/embed.js`
+    -  `assets/lib/components/modal-form.js`
+    -  `assets/lib/components/modal.js`
+    -  `assets/lib/components/redirect-post.js`
+       -  This components use old Fomantic UI
 -   **BC** Deleted old system of modules. Use bundles instead.
+-   **BC** Deleted JaxonPHP from core.
+    -   This include all relation code of JaxonPHP
+    -   *Note:* If you want to use its capabilities you will have to add the package yourself.
 -   `src/ajax/core/Mounts.php` deleted, now is a Stimulus controller
 -   `src/ajax/core/Bans.php` deleted, now is a Stimulus controller
 
