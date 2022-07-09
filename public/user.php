@@ -325,64 +325,6 @@ switch ($op)
             //-- Avoid Doctrine save a invalid Form
             unset($entity, $accountEntity, $characterEntity);
         }
-        elseif ('module' == $subop)
-        {
-            $module = (string) LotgdRequest::getQuery('module');
-
-            LotgdNavigation::addHeader('user.category.operations');
-            LotgdNavigation::addNav('user.nav.edit', "user.php?op=edit&userid={$userId}{$returnpetition}");
-
-            $info = get_module_info($module);
-
-            if (\count($info['prefs']) > 0)
-            {
-                $data      = [];
-                $msettings = [];
-
-                foreach ($info['prefs'] as $key => $val)
-                {
-                    // Handle vals which are arrays.
-                    if (\is_array($val))
-                    {
-                        $v      = $val[0];
-                        $x      = explode('|', $v);
-                        $val[0] = $x[0];
-                        $x[0]   = $val;
-                    }
-                    else
-                    {
-                        $x = explode('|', $val);
-                    }
-                    $msettings[$key] = $x[0];
-                    // Set up the defaults as well.
-                    if (isset($x[1]))
-                    {
-                        $data[$key] = $x[1];
-                    }
-                }
-
-                $userPrefsRepository = Doctrine::getRepository('LotgdCore:ModuleUserprefs');
-                $result              = $userPrefsRepository->findBy(['modulename' => $module, 'userid' => $userId]);
-
-                foreach ($result as $row)
-                {
-                    $data[$row->getSetting()] = $row->getValue();
-                }
-
-                LotgdResponse::pageAddContent("<form action='user.php?op=savemodule&module={$module}&userid={$userId}{$returnpetition}' method='POST'>");
-                LotgdNavigation::addNavAllow("user.php?op=savemodule&module={$module}&userid={$userId}{$returnpetition}");
-                lotgd_showform($msettings, $data);
-                LotgdResponse::pageAddContent('</form>');
-
-                LotgdResponse::pageEnd();
-            }
-            else
-            {
-                LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('flash.message.account.edit.no.prefs', ['module' => $module], $textDomain));
-
-                redirect("user.php?op=edit&userid={$userId}{$returnpetition}");
-            }
-        }
 
     break;
     case 'debuglog':
