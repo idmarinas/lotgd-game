@@ -103,7 +103,6 @@ LotgdNavigation::addHeader('superuser.category.module');
 
 $args = new Superuser([]);
 LotgdEventDispatcher::dispatch($args, Superuser::SUPERUSER);
-modulehook('superuser', $args->getData());
 
 LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/superuser.html.twig', [
     'textDomain' => $textDomain,

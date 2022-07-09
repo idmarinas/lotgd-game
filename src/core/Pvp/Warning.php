@@ -62,6 +62,5 @@ class Warning
 
         $args = new Character(['dokill' => $doKill]);
         $this->dispatcher->dispatch($args, Character::PVP_DO_KILL);
-        modulehook('pvpwarning', $args->getData());
     }
 }

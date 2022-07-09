@@ -100,12 +100,10 @@ class Response extends HttpResponse
 
         $args = new EveryRequest(['script' => $script, 'module' => $module]);
         $this->eventDispatcher->dispatch($args, EveryRequest::HEADER);
-        $args->setData(modulehook('everyheader', $args->getData()));
 
         if ($session['user']['loggedin'] ?? false)
         {
             $this->eventDispatcher->dispatch($args, EveryRequest::HEADER_AUTHENTICATED);
-            modulehook('everyheader-loggedin', $args->getData());
         }
 
         $this->buffer->calculateBuffFields();
@@ -221,12 +219,10 @@ class Response extends HttpResponse
 
         $args = new EveryRequest(['script' => $script, '__scriptfile__' => $script, 'module' => $module]);
         $this->eventDispatcher->dispatch($args, EveryRequest::FOOTER);
-        $args->setData(modulehook('everyfooter', $args->getData()));
 
         if ($session['user']['loggedin'] ?? false)
         {
             $this->eventDispatcher->dispatch($args, EveryRequest::FOOTER_AUTHENTICATED);
-            $args->setData(modulehook('everyfooter-loggedin', $args->getData()));
         }
 
         $replacementbits = $args->getData();

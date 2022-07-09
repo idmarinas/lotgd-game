@@ -175,7 +175,6 @@ if ('' != $name)
     // this hook should automatically call page_footer and exit
     // itself.
     LotgdEventDispatcher::dispatch(new Core(), Core::LOGIN_CHECK);
-    modulehook('check-login');
 
     if ('' != $session['user']['emailvalidation'] && 'x' != substr($session['user']['emailvalidation'], 0, 1))
     {
@@ -196,7 +195,6 @@ if ('' != $name)
     // like the stafflist which need to invalidate the cache
     // when someone logs in or off can do so.
     LotgdEventDispatcher::dispatch(new Core(), Core::LOGIN_PLAYER);
-    modulehook('player-login');
 
     //-- Check for valid restorepage
     if (empty($session['user']['restorepage']) || is_numeric($session['user']['restorepage']) || 'login.php' == $session['user']['restorepage'])

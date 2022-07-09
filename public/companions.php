@@ -83,7 +83,7 @@ elseif ('take' == $op)
 
         $row = new Other($row);
         LotgdEventDispatcher::dispatch($row, Other::COMPANION_ALTER);
-        $row = modulehook('alter-companion', $row->getData());
+        $row = $row->getData();
 
         $message       = 'flash.message.take.fail';
         $paramsMessage = [];

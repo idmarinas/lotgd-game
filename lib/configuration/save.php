@@ -83,7 +83,6 @@ foreach ($postSettings as $key => $val)
         // Notify every module
         $args = new Core(['module' => 'core', 'setting' => $key, 'old' => $old[$key], 'new' => $val]);
         \LotgdEventDispatcher::dispatch($args, Core::SETTING_CHANGE);
-        modulehook('changesetting', $args->getData(), true);
     }
 }
 
