@@ -21,7 +21,7 @@ use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Pattern\LotgdControllerTrait;
 use Lotgd\Core\Repository\PetitionsRepository;
-use Lotgd\Core\Service\LotgdMail;
+use Lotgd\Core\Tool\LotgdMail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;

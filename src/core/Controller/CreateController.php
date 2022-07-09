@@ -23,7 +23,7 @@ use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
 use Lotgd\Core\Output\Censor;
 use Lotgd\Core\Output\Format;
-use Lotgd\Core\Service\LotgdMail;
+use Lotgd\Core\Tool\LotgdMail;
 use Lotgd\Core\Tool\Sanitize;
 use Lotgd\Core\Tool\SystemMail;
 use Lotgd\Core\Tool\Tool;

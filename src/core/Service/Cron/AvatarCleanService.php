@@ -18,8 +18,8 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
-use Lotgd\Core\Service\LotgdMail;
 use Lotgd\Core\Tool\Backup;
+use Lotgd\Core\Tool\LotgdMail;
 use Symfony\Component\Mime\Address;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
