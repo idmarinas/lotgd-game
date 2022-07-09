@@ -134,21 +134,12 @@ trait Navigation
             $pages = array_merge($pages, $params);
         }
 
-        //-- Is a pagination for Jaxon-PHP
-        if (0 === strpos($link, 'JaxonLotgd.Ajax.Core.') || 0 === strpos($link, 'JaxonLotgd.Ajax.Local.'))
-        {
-            $template = $template ?: ['pagination_jaxon', '_blocks/_partials.html.twig'];
-
-            $pages['jaxon'] = $link;
-
-            return $this->renderPagination($env, $template, $pages);
-        }
         //-- Is a pagination for Stimulus controller
         /*
          * Format for Pagination Stimulus controller:
          *      stimulus:ControllerName:Url
          */
-        elseif (0 === strpos($link, 'stimulus:'))
+        if (0 === strpos($link, 'stimulus:'))
         {
             $template = $template ?: ['pagination_stimulus', '_blocks/_partials.html.twig'];
 
