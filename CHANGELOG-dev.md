@@ -23,6 +23,8 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :star: FEATURES
 
 -   `assets/stimulus/constrollers/remote_modal_controller.js` Add new function `queryParameters` this add query parameters to url
+-   **New** `src/core/Tool/LotgdMail.php`
+    -   Can use this tool for send email.
 
 ### :fire: DEPRECATED
 
@@ -40,7 +42,7 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -  `assets/lib/components/modal.js`
     -  `assets/lib/components/redirect-post.js`
        -  This components use old Fomantic UI
--   **BC** Deleted old system of modules. Use bundles instead.
+-   **BC** Deleted old modules system. Use bundles instead.
 -   **BC** Deleted JaxonPHP from core.
     -   This include all relation code of JaxonPHP
     -   *Note:* If you want to use its capabilities you will have to add the package yourself.
@@ -48,8 +50,14 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `lib/showform.php`
     -   `lib/showtabs.php`
         -  *Note:* use Symfony Forms for build forms.
+    -   `lib/lotgd_mail.php` Use Symfony mailer or `Lotgd\Core\Tool\LotgdMail`
 -   `src/ajax/core/Mounts.php` deleted, now is a Stimulus controller
 -   `src/ajax/core/Bans.php` deleted, now is a Stimulus controller
+-   **Deprecated functions**
+    -   `src/functions.php`
+        -   `myDefine`
+        -   `safeescape`
+        -   `nltoappon`
 
 ### :notebook: NOTES
 
@@ -57,6 +65,7 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
     -   :warning: Avoid, as far as possible, using static classes (e.g. LotgdSetting, Doctrine, LotgdTranslation...) as these classes will be deleted in a future version. Use autowire, dependency injection when possible.
     -   :warning: Version 7.0.0 change templates for use **TailwindCSS**
+    -   :warning: Version 8.0.0 deleted old modules system and JaxonPHP
 -   **Upgrade/Install for version 5.0.0 and up**
     -   First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
     -   If have problems:
