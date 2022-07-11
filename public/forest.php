@@ -16,7 +16,7 @@ require_once 'lib/events.php';
 // This hook is specifically to allow modules that do other forests to create ambience.
 $args = new GenericEvent(null, ['textDomain' => 'page_forest', 'textDomainNavigation' => 'navigation_forest']);
 LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_PRE);
-$result               = modulehook('forest-text-domain', $args->getArguments());
+$result               = $args->getArguments();
 $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -73,14 +73,12 @@ elseif ('search' == $op)
     {
         $args = new GenericEvent();
         LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_SEARCH);
-        modulehook('forestsearch', $args->getArguments());
 
         $args = new GenericEvent(null, [
             'soberval' => 0.9,
             'sobermsg' => LotgdTranslator::t('sober.message', [], $textDomain),
             'schema'   => 'forest',
         ]);
-        modulehook('soberup', $args->getArguments());
 
         /** New occurrence dispatcher for special events. */
         /** @var \Symfony\Component\EventDispatcher\GenericEvent $event */
@@ -349,7 +347,7 @@ elseif ('search' == $op)
                 ],
             ]);
             LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_FIGHT_START);
-            $attackstack = modulehook('forestfight-start', $args->getArguments());
+            $attackstack = $args->getArguments();
 
             $session['user']['badguy'] = $attackstack;
             // If someone for any reason wanted to add a nav where the user cannot choose the number of rounds anymore

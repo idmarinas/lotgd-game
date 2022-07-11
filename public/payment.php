@@ -102,7 +102,6 @@ else
             {
                 $args = new GenericEvent(null, $post);
                 LotgdEventDispatcher::dispatch($args, Events::PAYMENT_DONATION_ERROR);
-                modulehook('donation-error', $args->getArguments());
                 payment_error(E_ERROR, "Payment Status isn't 'Completed' it's '{$payment_status}'", __FILE__, __LINE__);
             }
         }
@@ -154,7 +153,7 @@ function writelog($response)
                 'messages' => [],
             ]);
             LotgdEventDispatcher::dispatch($args, Events::PAYMENT_DONATION_ADJUSTMENT);
-            $hookresult           = modulehook('donation_adjustments', $args->getArguments());
+            $hookresult           = $args->getArguments();
             $hookresult['points'] = round($hookresult['points']);
 
             $account->setDonation($account->getDonation() + $hookresult['points']);
@@ -175,7 +174,6 @@ function writelog($response)
             $processed = 1;
             $args      = new GenericEvent(null, ['id' => $acctId, 'amt' => $donation * LotgdSetting::getSetting('dpointspercurrencyunit', 100), 'manual' => false]);
             LotgdEventDispatcher::dispatch(Events::PAYMENT_DONATION_SUCCESS, $args);
-            modulehook('donation', $args->getArguments());
         }
     }
 

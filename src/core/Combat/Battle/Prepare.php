@@ -29,7 +29,7 @@ trait Prepare
 
         $fightoptions = new Fight($this->options + $basicoptions);
         $this->dispatcher->dispatch($fightoptions, Fight::OPTIONS);
-        $fightoptions = modulehook('fightoptions', $fightoptions->getData());
+        $fightoptions = $fightoptions->getData();
 
         // We'll also reset the companions here...
         $this->prepareCompanions();
