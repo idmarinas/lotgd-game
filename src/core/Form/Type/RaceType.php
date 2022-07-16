@@ -13,24 +13,27 @@
 
 namespace Lotgd\Core\Form\Type;
 
-use LotgdEventDispatcher;
-use LotgdTranslator;
 use Lotgd\Core\Event\Character;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RaceType extends ChoiceType
 {
+    private $eventDispatcher;
+    private $translator;
+
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
 
         $args = new Character();
-        LotgdEventDispatcher::dispatch($args, Character::RACE_NAMES);
-        $races = modulehook('racenames', $args->getData());
-        $races = \array_flip($races);
+        $this->eventDispatcher->dispatch($args, Character::RACE_NAMES);
+        $races = $args->getData();
+        $races = array_flip($races);
         $races = [
-            LotgdTranslator::t('character.racename', [], RACE_UNKNOWN) => RACE_UNKNOWN,
+            $this->translator->trans('character.racename', [], RACE_UNKNOWN) => RACE_UNKNOWN,
         ] + $races;
 
         $resolver->setDefaults([
@@ -41,5 +44,21 @@ class RaceType extends ChoiceType
         ]);
 
         return $resolver;
+    }
+
+    /** @required */
+    public function setDispatcher(EventDispatcherInterface $dispatcher): self
+    {
+        $this->eventDispatcher = $dispatcher;
+
+        return $this;
+    }
+
+    /** @required */
+    public function setTranslator(TranslatorInterface $translatorInterface): self
+    {
+        $this->translator = $translatorInterface;
+
+        return $this;
     }
 }

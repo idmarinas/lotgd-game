@@ -13,21 +13,18 @@
 
 namespace Lotgd\Core\Form\Type;
 
-use LotgdEventDispatcher;
-use LotgdTranslator;
 use Lotgd\Core\Event\Other;
 use Lotgd\Core\Lib\Settings;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LocationType extends ChoiceType
 {
     private $settings;
-
-    public function __construct(Settings $settings)
-    {
-        $this->settings = $settings;
-    }
+    private $eventDispatcher;
+    private $translator;
 
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -41,8 +38,8 @@ class LocationType extends ChoiceType
                 'app_default',
             ],
         ]);
-        LotgdEventDispatcher::dispatch($locs, Other::LOCATIONS);
-        $locs        = modulehook('camplocs', $locs->getData());
+        $this->eventDispatcher->dispatch($locs, Other::LOCATIONS);
+        $locs        = $locs->getData();
         $locs['all'] = [
             'location.everywhere',
             [],
@@ -54,7 +51,7 @@ class LocationType extends ChoiceType
 
         foreach ($locs as $loc => $params)
         {
-            $value = LotgdTranslator::t($params[0], $params[1], $params[2]);
+            $value = $this->translator->trans($params[0], $params[1], $params[2]);
 
             $defaultChoice[$value] = $loc;
         }
@@ -67,5 +64,27 @@ class LocationType extends ChoiceType
         ]);
 
         return $resolver;
+    }
+
+    /** @required */
+    public function setSettings(Settings $settings)
+    {
+        $this->settings = $settings;
+    }
+
+    /** @required */
+    public function setDispatcher(EventDispatcherInterface $dispatcher): self
+    {
+        $this->eventDispatcher = $dispatcher;
+
+        return $this;
+    }
+
+    /** @required */
+    public function setTranslator(TranslatorInterface $translatorInterface): self
+    {
+        $this->translator = $translatorInterface;
+
+        return $this;
     }
 }
