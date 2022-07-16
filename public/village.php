@@ -9,9 +9,6 @@ use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-require_once 'common.php';
-require_once 'lib/events.php';
-
 //-- First check for autochallengeç
 if (LotgdSetting::getSetting('automaster', 1) && 1 != $session['user']['seenmaster'])
 {
@@ -76,7 +73,7 @@ elseif ( ! $params['newestname'] && $params['newestplayer'])
 //-- Init page
 LotgdResponse::pageStart('title', $params, $textDomain);
 
-$skipvillagedesc = handle_event('village');
+$skipvillagedesc = false;
 LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
 if (1 == $session['user']['slaydragon'])

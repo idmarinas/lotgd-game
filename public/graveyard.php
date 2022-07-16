@@ -5,7 +5,6 @@
 // mail ready
 
 require_once 'common.php';
-require_once 'lib/events.php';
 
 /** @var Lotgd\Core\Http\Request $request */
 $request = LotgdKernel::get('Lotgd\Core\Http\Request');
@@ -13,7 +12,7 @@ $request = LotgdKernel::get('Lotgd\Core\Http\Request');
 //-- Init page
 LotgdResponse::pageStart();
 
-$skipgraveyardtext = handle_event('graveyard');
+$skipgraveyardtext = false;
 
 $params = [
     'showGraveyardDesc' => ! $skipgraveyardtext,

@@ -10,7 +10,6 @@ use Lotgd\Core\Http\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/events.php';
 
 /** @var Lotgd\Core\Http\Request $request */
 $request = LotgdKernel::get(Request::class);
@@ -27,7 +26,7 @@ unset($result);
 //-- Init page
 LotgdResponse::pageStart('title', [], $textDomain);
 
-$skipgardendesc = handle_event('gardens');
+$skipgardendesc = false;
 
 $params = [
     'textDomain'           => $textDomain,

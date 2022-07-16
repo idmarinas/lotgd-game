@@ -10,7 +10,6 @@ use Lotgd\Core\Http\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/events.php';
 
 // Don't hook on to this text for your standard modules please, use "forest" instead.
 // This hook is specifically to allow modules that do other forests to create ambience.
@@ -29,7 +28,7 @@ $creatureFunctions = LotgdKernel::get('lotgd_core.tool.creature_functions');
 //-- Init page
 LotgdResponse::pageStart('title', [], $textDomain);
 
-$dontDisplayForestMessage = handle_event('forest');
+$dontDisplayForestMessage = false;
 
 $params = [
     'textDomain'                    => $textDomain,
