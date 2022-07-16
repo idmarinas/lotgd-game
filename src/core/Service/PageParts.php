@@ -212,19 +212,8 @@ class PageParts
                 //-- HitPoints are calculated in base to attributes
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.hitpoints', [], 'app_default'), sprintf('%s/%s `$<span title="%s">(?)</span>`0', $u['hitpoints'].$this->tempStat->checkTempStat('hitpoints', 1), $u['maxhitpoints'].$this->tempStat->checkTempStat('maxhitpoints', 1), $this->playerFunction->explainedGetPlayerHitpoints()));
 
-                if (is_module_active('staminasystem'))
-                {
-                    $this->stats->addcharstat($this->translator->trans('statistic.stat.stamina', [], 'app_default'), '');
-                }
-                else
-                {
-                    $this->stats->addcharstat($this->translator->trans('statistic.stat.turns', [], 'app_default'), $u['turns'].$this->tempStat->checkTempStat('turns', 1));
-                }
+                $this->stats->addcharstat($this->translator->trans('statistic.stat.turns', [], 'app_default'), $u['turns'].$this->tempStat->checkTempStat('turns', 1));
 
-                if (is_module_active('displaycp'))
-                {
-                    $this->stats->addcharstat($this->translator->trans('statistic.stat.drunkeness', [], 'app_default'), '');
-                }
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.experience', [], 'app_default'), $this->format->numeral($u['experience'].$this->tempStat->checkTempStat('experience', 1)));
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.attack', [], 'app_default'), sprintf("{$atk} `\$<span title='%s'>(?)</span>`0", $this->playerFunction->explainedGetPlayerAttack().$this->tempStat->checkTempStat('attack', 1)));
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.defense', [], 'app_default'), sprintf("{$def} `\$<span title='%s'>(?)</span>`0", $this->playerFunction->explainedGetPlayerDefense().$this->tempStat->checkTempStat('defense', 1)));
@@ -240,10 +229,6 @@ class PageParts
                 $maxsoul = 50 + 10 * $u['level'] + $u['dragonkills'] * 2;
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.soulpoints', [], 'app_default'), $u['soulpoints'].$this->tempStat->checkTempStat('soulpoints', 1).'`0/'.$maxsoul);
 
-                if (is_module_active('staminasystem'))
-                {
-                    $this->stats->addcharstat($this->translator->trans('statistic.stat.stamina', [], 'app_default'), '');
-                }
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.torments', [], 'app_default'), $u['gravefights'].$this->tempStat->checkTempStat('gravefights', 1));
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.psyche', [], 'app_default'), 10 + round(($u['level'] - 1) * 1.5));
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.spirit', [], 'app_default'), 10 + round(($u['level'] - 1) * 1.5));
@@ -296,10 +281,6 @@ class PageParts
 
             $this->stats->addcharstat($this->translator->trans('statistic.category.character.equip', [], 'app_default'));
 
-            if (is_module_active('inventorypopup'))
-            {
-                $this->stats->addcharstat($this->translator->trans('statistic.stat.inventory', [], 'app_default'), '');
-            }
             $this->stats->addcharstat($this->translator->trans('statistic.stat.weapon', [], 'app_default'), $u['weapon']);
             $this->stats->addcharstat($this->translator->trans('statistic.stat.armor', [], 'app_default'), $u['armor']);
 
@@ -309,7 +290,6 @@ class PageParts
             }
 
             $this->dispatcher->dispatch(new Character(), Character::STATS);
-            modulehook('charstats');
 
             if ($return)
             {
@@ -334,7 +314,7 @@ class PageParts
             // If a module wants to do it's own display of the online chars, let it.
             $list = new Character();
             $this->dispatcher->dispatch($list, Character::ONLINE_LIST);
-            $list = modulehook('onlinecharlist', $list->getData());
+            $list = $list->getData();
 
             if (isset($list['handled']) && $list['handled'])
             {

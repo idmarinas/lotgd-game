@@ -39,7 +39,7 @@ trait CoreFunction
         $data = new GenericEvent(null, $data);
         $this->dispatcher->dispatch($name, $data);
 
-        return modulehook($name, $data->getArguments());
+        return $data->getArguments();
     }
 
     /**

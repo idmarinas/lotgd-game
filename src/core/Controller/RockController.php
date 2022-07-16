@@ -42,7 +42,7 @@ class RockController extends AbstractController
         // This hook is specifically to allow modules that do other rocks to create ambience.
         $args = new GenericEvent(null, ['textDomain' => 'page_rock', 'textDomainNavigation' => 'navigation_rock']);
         $this->dispatcher->dispatch($args, Events::PAGE_ROCK_PRE);
-        $result               = modulehook('rock-text-domain', $args->getArguments());
+        $result               = $args->getArguments();
         $textDomain           = $result['textDomain'];
         $textDomainNavigation = $result['textDomainNavigation'];
         unset($result);
@@ -71,7 +71,7 @@ class RockController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_ROCK_POST);
-        $params = modulehook('page-rock-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->render('page/rock.html.twig', $params);
     }

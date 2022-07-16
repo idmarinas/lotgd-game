@@ -104,7 +104,7 @@ class ReferralController extends AbstractController
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_REFERRAL_POST);
-        $params = modulehook('page-referral-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->render('page/referral.html.twig', $params);
     }

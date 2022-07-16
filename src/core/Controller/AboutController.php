@@ -150,7 +150,7 @@ class AboutController extends AbstractController
 
             $args = new GenericEvent();
             $this->dispatcher->dispatch($args, Events::PAGE_ABOUT);
-            $results = modulehook('about', $args->getArguments());
+            $results = $args->getArguments();
 
             if (\is_array($results) && \count($results))
             {
@@ -198,7 +198,7 @@ class AboutController extends AbstractController
     {
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_ABOUT_POST);
-        $params = modulehook('page-about-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->render('admin/page/about.html.twig', $params);
     }

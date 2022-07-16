@@ -83,7 +83,7 @@ class Backup
             'deltype' => $type,
         ]);
         $this->eventDispatcher->dispatch($return, CharacterEvent::CLEANUP);
-        $return = modulehook('character-cleanup', $return->getData());
+        $return = $return->getData();
 
         $accountRepository = $this->doctrine->getRepository('LotgdCore:User');
         $accountEntity     = $accountRepository->find($accountId);
@@ -184,7 +184,6 @@ class Backup
                     //-- There are no other members, we need to delete the clan.
                     $return = new ClanEvent(['clanid' => $accountEntity->getAvatar()->getClanid(), 'clanEntity' => $clanEntity]);
                     $this->eventDispatcher->dispatch($return, ClanEvent::DELETE);
-                    modulehook('clan-delete', $return->getData());
 
                     $this->doctrine->remove($clanEntity);
 

@@ -227,7 +227,7 @@ class PetitionController extends AbstractController
 
         $post = new Core($post);
         $this->dispatcher->dispatch($post, Core::PETITION_ADD);
-        $post = modulehook('addpetition', $post->getData());
+        $post = $post->getData();
 
         if ($post['cancelpetition'])
         {
@@ -323,6 +323,6 @@ class PetitionController extends AbstractController
 
         $this->dispatcher->dispatch($args, Core::PETITION_FAQ_TOC);
 
-        return modulehook('faq-toc', $args->getData());
+        return $args->getData();
     }
 }

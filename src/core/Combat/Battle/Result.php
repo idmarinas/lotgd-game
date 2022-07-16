@@ -64,7 +64,7 @@ trait Result
             {
                 $args = new GenericEvent(null, ['enemies' => $this->getEnemies(), 'options' => $this->getOptions(), 'messages' => []]);
                 $this->dispatcher->dispatch($args, Events::PAGE_BATTLE_END_VICTORY);
-                $result        = modulehook('battle-victory-end', $args->getArguments());
+                $result        = $args->getArguments();
                 $this->enemies = $result['enemies'];
 
                 $this->context['battle_end'] += $result['messages'];
@@ -75,7 +75,7 @@ trait Result
             {
                 $args = new GenericEvent(null, ['enemies' => $this->getEnemies(), 'options' => $this->getOptions(), 'messages' => []]);
                 $this->dispatcher->dispatch($args, Events::PAGE_BATTLE_END_DEFEAT);
-                $result        = modulehook('battle-defeat-end', $args->getArguments());
+                $result        = $args->getArguments();
                 $this->enemies = $result['enemies'];
 
                 $this->context['battle_end'] += $result['messages'];
@@ -88,7 +88,6 @@ trait Result
         {
             $args = new GenericEvent(null, $this->getEnemies());
             $this->dispatcher->dispatch($args, Events::PAGE_BATTLE_TURN_END);
-            modulehook('battle-turn-end', $args->getArguments());
         }
 
         $this->setBattleBarEnd($this->prepareBattleBars());
@@ -141,23 +140,15 @@ trait Result
                     $this->addContextToBattleEnd(['combat.end.get.torment', [], $this->getTranslationDomain()]);
                     ++$this->user['gravefights'];
                 }
-                //-- TODO upgrade for not need this
-                elseif (is_module_active('staminasystem'))
-                {
-                    require_once 'modules/staminasystem/lib/lib.php';
-
-                    $this->addContextToBattleEnd(['combat.end.get.stamina', [], $this->getTranslationDomain()]);
-                    addstamina(25000);
-                }
                 else
                 {
                     $this->addContextToBattleEnd(['combat.end.get.turn', [], $this->getTranslationDomain()]);
                     ++$this->user['turns'];
                 }
             }
-            elseif (is_module_active('staminasystem') && $this->canGainExp())
+            elseif ($this->canGainExp())
             {
-                $this->addContextToBattleEnd(['combat.end.forget.stamina', [], $this->getTranslationDomain()]);
+                $this->addContextToBattleEnd(['combat.end.forget.turn', [], $this->getTranslationDomain()]);
             }
             elseif ($this->canGainFavor())
             {
@@ -329,7 +320,7 @@ trait Result
         //-- No gem hunters allowed!
         $args = new Fight(['chance' => $this->settings->getSetting('forestgemchance', 25)]);
         $this->dispatcher->dispatch($args, Fight::ALTER_GEM_CHANCE);
-        $args       = modulehook('alter-gemchance', $args->getData());
+        $args       = $args->getData();
         $gemchances = max(0, $args['chance']);
 
         //-- Gems only find in forest

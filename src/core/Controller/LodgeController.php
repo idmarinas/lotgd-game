@@ -65,7 +65,6 @@ class LodgeController extends AbstractController
         {
             $this->navigation->addHeader('category.use.points');
             $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_LODGE);
-            modulehook('lodge');
         }
 
         return $this->renderLodge($params);
@@ -76,8 +75,7 @@ class LodgeController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_LODGE_POST);
-        $params = modulehook('page-lodge-tpl-params', $args->getArguments());
 
-        return $this->render('page/lodge.html.twig', $params);
+        return $this->render('page/lodge.html.twig', $args->getArguments());
     }
 }

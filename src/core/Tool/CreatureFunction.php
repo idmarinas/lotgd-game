@@ -79,7 +79,7 @@ class CreatureFunction
         //-- Activate hook when find a creature
         $badguy = new Creature($badguy);
         $this->dispatcher->dispatch($badguy, Creature::ENCOUNTER);
-        $badguy->setData(modulehook('creatureencounter', $badguy->getData()));
+        $badguy->setData($badguy->getData());
 
         $hookNew = $hook;
 
@@ -93,12 +93,11 @@ class CreatureFunction
         }
         //-- Activate hook custom or default (buffbadguy)
         $this->dispatcher->dispatch($badguy, Creature::BUFF_FOR.$hookNew);
-        $badguy = modulehook($hook, $badguy->getData());
 
         //-- Update max creature health
         $badguy['creaturemaxhealth'] = $badguy['creaturehealth'];
 
-        $this->lotgdShowDebugCreature($badguy);
+        $this->lotgdShowDebugCreature($badguy->getData());
 
         return $badguy;
     }
@@ -302,7 +301,6 @@ class CreatureFunction
             'forest'         => $forest,
         ]);
         $this->dispatcher->dispatch($creatures, Creature::SEARCH);
-        $creatures = modulehook('creature-search', $creatures->getData());
 
         return $creatures['creatures'];
     }

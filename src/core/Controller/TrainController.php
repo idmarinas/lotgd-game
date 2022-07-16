@@ -81,7 +81,7 @@ class TrainController extends AbstractController
         // This hook is specifically to allow modules that do other trains to create ambience.
         $args = new GenericEvent(null, ['textDomain' => 'page_train', 'textDomainNavigation' => 'navigation_train']);
         $this->dispatcher->dispatch($args, Events::PAGE_TRAIN_PRE);
-        $result = modulehook('train-text-domain', $args->getArguments());
+        $result = $args->getArguments();
 
         $this->translationDomain           = $result['textDomain'];
         $this->translationDomainNavigation = $result['textDomainNavigation'];
@@ -261,7 +261,6 @@ class TrainController extends AbstractController
         }
 
         $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_TRAIN_AUTOCHALLENGE);
-        modulehook('master-autochallenge');
 
         if ('' !== $this->settings->getSetting('displaymasternews', 1) && '0' !== $this->settings->getSetting('displaymasternews', 1))
         {
@@ -406,7 +405,7 @@ class TrainController extends AbstractController
 
                 $args = new GenericEvent(null, ['badguy' => $badguy, 'messages' => []]);
                 $this->dispatcher->dispatch($args, Events::PAGE_TRAIN_TRANING_VICTORY);
-                $result = modulehook('training-victory', $args->getArguments());
+                $result = $args->getArguments();
 
                 array_walk($result['messages'], function ($elem)
                 {
@@ -447,7 +446,7 @@ class TrainController extends AbstractController
                 $this->serviceBattle->addContextToBattleEnd(['battle.end.defeat.end', ['masterName' => $badguy['creaturename']], $this->translationDomain]);
 
                 $args   = new GenericEvent(null, ['badguy' => $badguy, 'messages' => []]);
-                $result = modulehook('training-defeat', $args->getArguments());
+                $result = $args->getArguments();
 
                 array_walk($result['messages'], function ($elem)
                 {
@@ -589,7 +588,7 @@ class TrainController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_TRAIN_POST);
-        $params = modulehook('page-train-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->render('page/train.html.twig', $params);
     }

@@ -32,12 +32,11 @@ class GardenController extends AbstractController
     {
         $args = new GenericEvent();
         $this->dispatcher->dispatch($args, Events::PAGE_GARDEN);
-        modulehook('gardens', $args->getArguments());
 
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_GARDEN_POST);
-        $params = modulehook('page-gardens-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->render('page/gardens.html.twig', $params);
     }

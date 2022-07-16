@@ -73,7 +73,6 @@ class LoginController extends AbstractController
             // like the stafflist which need to invalidate the cache
             // when someone logs in or off can do so.
             $this->dispatcher->dispatch(new Core(), Core::LOGOUT_PLAYER);
-            modulehook('player-logout');
             $this->tools->saveUser();
 
             $this->sessionHttp->invalidate();

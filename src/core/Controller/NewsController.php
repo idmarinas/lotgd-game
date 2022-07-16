@@ -46,7 +46,7 @@ class NewsController extends AbstractController
 
         $args = new GenericEvent(null, ['showLastMotd' => true]);
         $this->dispatcher->dispatch($args, Events::PAGE_NEWS_INTERCEPT);
-        $hookIntercept = modulehook('news-intercept', $args->getArguments());
+        $hookIntercept = $args->getArguments();
 
         $day       = $request->query->getInt('day');
         $timestamp = strtotime("-{$day} days");
@@ -127,7 +127,7 @@ class NewsController extends AbstractController
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_NEWS_POST);
-        $params = modulehook('page-news-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         $params['result'] = $newsRepo->getPaginator($query, $page, self::NEWS_PER_PAGE);
 

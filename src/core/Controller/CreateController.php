@@ -114,7 +114,7 @@ class CreateController extends AbstractController
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_CREATE_FORGOTVAL);
-        $params = modulehook('page-create-forgotval-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->renderBlock('page/_blocks/_create.html.twig', 'create_forgot_val', $params);
     }
@@ -190,7 +190,7 @@ class CreateController extends AbstractController
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_CREATE_VAL);
-        $params = modulehook('page-create-val-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->renderBlock('page/_blocks/_create.html.twig', 'create_email_val', $params);
     }
@@ -244,7 +244,7 @@ class CreateController extends AbstractController
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_CREATE_FORGOT);
-        $params = modulehook('page-create-forgot-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->renderBlock('page/_blocks/_create.html.twig', 'create_forgot', $params);
     }
@@ -313,7 +313,7 @@ class CreateController extends AbstractController
 
             $args = new GenericEvent(null, $request->request->all());
             $this->dispatcher->dispatch($args, Events::PAGE_CREATE_CHECK_CREATION);
-            $args = modulehook('check-create', $args->getArguments());
+            $args = $args->getArguments();
 
             if (isset($args['blockaccount']) && $args['blockaccount'])
             {
@@ -401,7 +401,6 @@ class CreateController extends AbstractController
                     $args['acctid'] = $accountEntity->getAcctid();
                     $args           = new GenericEvent(null, $args);
                     $this->dispatcher->dispatch($args, Events::PAGE_CREATE_PROCESS_CREATION);
-                    modulehook('process-create', $args->getArguments());
 
                     if ('' != $emailverification)
                     {
@@ -447,13 +446,13 @@ class CreateController extends AbstractController
          */
         $args = new GenericEvent(null, ['templates' => []]);
         $this->dispatcher->dispatch($args, Events::PAGE_CREATE_FORM);
-        $result = modulehook('create-form', $args->getArguments());
+        $result = $args->getArguments();
 
         $params['templates'] = $result['templates'];
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_CREATE_POST);
-        $params = modulehook('page-create-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->render('page/create.html.twig', $params);
     }

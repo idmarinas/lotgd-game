@@ -201,7 +201,7 @@ class ListController extends AbstractController
     {
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_LIST_POST);
-        $params = modulehook('page-list-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->render('page/list.html.twig', $params);
     }
