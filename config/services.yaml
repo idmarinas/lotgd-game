@@ -38,6 +38,7 @@ services:
             - "../src/core/Twig/Extension/AdvertisingGoogle.php"
             - "../src/core/Hook.php"
             - "../src/core/Kernel.php"
+            - "../src/core/Service/Jaxon.php"
     Lotgd\Local\:
         resource: "../src/local/"
         exclude:
