@@ -75,7 +75,6 @@ trait NewDayTrait
         $this->response->pageStart('title.default', [], $this->getTranslationDomain());
 
         $params['tpl']                 = 'default';
-        $params['moduleStaminaSystem'] = is_module_active('staminasystem');
         $params['maxGoldForInterest']  = $this->settings->getSetting('maxgoldforinterest', 100000);
 
         $params['resurrected'] = false;
@@ -93,18 +92,12 @@ trait NewDayTrait
         $turnstoday = "Base: {$params['turns_per_day']}";
         $args       = new Core(['resurrection' => $resurrection, 'turnstoday' => $turnstoday]);
         $this->dispatcher->dispatch($args, Core::NEWDAY_PRE);
-        $args       = modulehook('pre-newday', $args->getData());
+        $args       = $args->getData();
         $turnstoday = $args['turnstoday'];
 
         $interestrate = e_rand($params['min_interest'] * 100, $params['max_interest'] * 100) / (float) 100;
 
         $canGetInterest = ($session['user']['turns'] > $this->settings->getSetting('fightsforinterest', 4) && $session['user']['goldinbank'] >= 0);
-        if ($params['moduleStaminaSystem'])
-        {
-            require_once 'modules/staminasystem/lib/lib.php';
-            $stamina        = get_stamina(3);
-            $canGetInterest = ($stamina <= 40);
-        }
 
         $params['canGetInterest'] = $canGetInterest;
         $params['maxInterest']    = false;
@@ -214,7 +207,7 @@ trait NewDayTrait
             'includeTemplatesPost' => $params['includeTemplatesPost'],
         ]);
         $this->dispatcher->dispatch($args, Core::NEWDAY);
-        $args = modulehook('newday', $args->getData());
+        $args = $args->getData();
 
         $turnstoday                     = $args['turnstoday'];
         $params['includeTemplatesPre']  = $args['includeTemplatesPre'];
@@ -223,7 +216,6 @@ trait NewDayTrait
         //## Process stamina for spirit
         $args = new Other(['spirits' => $spirits]);
         $this->dispatcher->dispatch($args, Other::STAMINA_NEWDAY);
-        modulehook('stamina-newday', $args->getData());
 
         $this->log->debug("New Day Turns: {$turnstoday}");
 
@@ -240,18 +232,8 @@ trait NewDayTrait
         {
             $params['haunted'] = $session['user']['hauntedby'];
 
-            if ($params['moduleStaminaSystem'])
-            {
-                require_once 'modules/staminasystem/lib/lib.php';
-
-                removestamina(25000);
-                $turnstoday .= ', Haunted: Stamina reduction';
-            }
-            else
-            {
-                --$session['user']['turns'];
-                $turnstoday .= ', Haunted: -1';
-            }
+            --$session['user']['turns'];
+            $turnstoday .= ', Haunted: -1';
 
             $session['user']['hauntedby'] = '';
         }
@@ -361,19 +343,14 @@ trait NewDayTrait
     {
         global $session;
 
-        $params['forestTurnDragonKill'] = $dkff;
-
-        if ( ! $params['moduleStaminaSystem'])
+        foreach ($session['user']['dragonpoints'] as $val)
         {
-            foreach ($session['user']['dragonpoints'] as $val)
+            if ('ff' == $val)
             {
-                if ('ff' == $val)
-                {
-                    ++$dkff;
-                }
+                ++$dkff;
             }
-
-            $params['forestTurnDragonKill'] = $dkff;
         }
+
+        $params['forestTurnDragonKill'] = $dkff;
     }
 }
