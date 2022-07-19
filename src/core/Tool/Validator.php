@@ -35,6 +35,6 @@ class Validator
             new Assert\Email(),
         ]);
 
-        return (bool) \count($errors);
+        return ! (bool) \count($errors);
     }
 }
