@@ -56,7 +56,7 @@ class BankController extends AbstractController
 
         $args = new GenericEvent(null, ['textDomain' => 'page_bank', 'textDomainNavigation' => 'navigation_bank']);
         $this->dispatcher->dispatch($args, Events::PAGE_BANK_PRE);
-        $result               = modulehook('bank-text-domain', $args->getArguments());
+        $result               = $args->getArguments();
         $textDomain           = $result['textDomain'];
         $textDomainNavigation = $result['textDomainNavigation'];
 
@@ -331,7 +331,7 @@ class BankController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_BANK_POST);
-        $params = modulehook('page-bank-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         //-- Restore text domain for navigation
         $this->navigation->setTextDomain();

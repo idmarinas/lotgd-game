@@ -73,7 +73,6 @@ class NewdayController extends AbstractController
 
         $args = new GenericEvent();
         $this->dispatcher->dispatch($args, Events::PAGE_NEWDAY_INTERCEPT);
-        modulehook('newday-intercept', $args->getArguments());
 
         $resurrection = (string) $request->query->get('resurrection');
         $resline      = ('true' == $resurrection) ? '&resurrection=true' : '';
@@ -93,7 +92,7 @@ class NewdayController extends AbstractController
         // This hook is specifically to allow modules that do other newdays to create ambience.
         $args = new GenericEvent(null, ['textDomain' => 'page_newday', 'textDomainNavigation' => 'navigation_newday']);
         $this->dispatcher->dispatch($args, Events::PAGE_NEWDAY_PRE);
-        $result               = modulehook('newday-text-domain', $args->getArguments());
+        $result               = $args->getArguments();
         $textDomain           = $result['textDomain'];
         $textDomainNavigation = $result['textDomainNavigation'];
         unset($result);
@@ -162,7 +161,7 @@ class NewdayController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_NEWS_POST);
-        $params = modulehook('page-newday-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return parent::render($template, $params, $response);
     }
@@ -204,14 +203,10 @@ class NewdayController extends AbstractController
             'unknown' => 0,
         ];
 
-        if (is_module_active('staminasystem'))
-        {
-            $canbuy['ff'] = 0;
-        }
         $args = new GenericEvent(null, ['desc' => $labels, 'buy' => $canbuy]);
         $this->dispatcher->dispatch($args, Events::PAGE_NEWDAY_DK_POINT_LABELS);
 
-        return modulehook('dkpointlabels', $args->getArguments());
+        return $args->getArguments();
     }
 
     private function asignDragonPoints(Request $request)

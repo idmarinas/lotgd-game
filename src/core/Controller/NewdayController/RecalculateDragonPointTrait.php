@@ -46,7 +46,6 @@ trait RecalculateDragonPointTrait
         }
 
         $this->dispatcher->dispatch(new Core(), Core::DK_POINT_RECALC);
-        modulehook('pdkpointrecalc');
 
         if ($pdktotal != $dkills - $dp || $pdkneg)
         {

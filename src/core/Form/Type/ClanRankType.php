@@ -13,20 +13,24 @@
 
 namespace Lotgd\Core\Form\Type;
 
-use LotgdEventDispatcher;
-use LotgdSanitize;
-use LotgdTranslator;
 use Lotgd\Core\Event\Clan;
+use Lotgd\Core\Tool\Sanitize;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ClanRankType extends ChoiceType
 {
+    private $eventDispatcher;
+    private $sanitize;
+    private $translator;
+
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
 
-        //Inserted for v1.1.0 Dragonprime Edition to extend clan possibilities
+        // Inserted for v1.1.0 Dragonprime Edition to extend clan possibilities
         $ranks = [
             CLAN_APPLICANT      => 'ranks.00',
             CLAN_MEMBER         => 'ranks.010',
@@ -36,15 +40,15 @@ class ClanRankType extends ChoiceType
             CLAN_FOUNDER        => 'ranks.031',
         ];
         $ranksResult = new Clan(['ranks' => $ranks, 'textDomain' => 'page_clan', 'clanid' => null]);
-        LotgdEventDispatcher::dispatch($ranksResult, Clan::RANK_LIST);
-        $ranksResult = modulehook('clanranks', $ranksResult->getData());
+        $this->eventDispatcher->dispatch($ranksResult, Clan::RANK_LIST);
+        $ranksResult = $ranksResult->getData();
         $ranks       = $ranksResult['ranks'];
 
         $choices = [];
 
         foreach ($ranks as $rankId => $rankName)
         {
-            $choices[LotgdSanitize::fullSanitize(LotgdTranslator::t($rankName, [], $ranksResult['textDomain']))] = $rankId;
+            $choices[$this->sanitize->fullSanitize($this->translator->trans($rankName, [], $ranksResult['textDomain']))] = $rankId;
         }
 
         $resolver->setDefaults([
@@ -55,5 +59,29 @@ class ClanRankType extends ChoiceType
         ]);
 
         return $resolver;
+    }
+
+    /** @required */
+    public function setDispatcher(EventDispatcherInterface $dispatcher): self
+    {
+        $this->eventDispatcher = $dispatcher;
+
+        return $this;
+    }
+
+    /** @required */
+    public function setSanitize(Sanitize $sanitize): self
+    {
+        $this->sanitize = $sanitize;
+
+        return $this;
+    }
+
+    /** @required */
+    public function setTranslator(TranslatorInterface $translatorInterface): self
+    {
+        $this->translator = $translatorInterface;
+
+        return $this;
     }
 }

@@ -301,7 +301,6 @@ class Tool
 
         $args = new Other(['text' => $text, 'type' => $type]);
         $this->dispatcher->dispatch($args, Other::SPECIAL_HOLIDAY);
-        $args = modulehook('holiday', $args->getData());
 
         return $args['text'];
     }

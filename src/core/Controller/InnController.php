@@ -177,7 +177,6 @@ class InnController extends AbstractController
                 {
                     $this->navigation->addHeader('category.want');
                     $this->dispatcher->dispatch(new Other(), Other::INN_BARTENDER_BRIBE);
-                    modulehook('bartenderbribe');
 
                     if ('' !== $this->settings->getSetting('pvp', 1) && '0' !== $this->settings->getSetting('pvp', 1))
                     {
@@ -234,7 +233,7 @@ class InnController extends AbstractController
             {
                 $specialities = new Core();
                 $this->dispatcher->dispatch($specialities, Core::SPECIALTY_NAMES);
-                $specialities = modulehook('specialtynames', $specialities->getData());
+                $specialities = $specialities->getData();
 
                 $this->navigation->addHeader('category.specialty');
 
@@ -262,7 +261,7 @@ class InnController extends AbstractController
 
             $result = new Other(['includeTemplatesPre' => $params['includeTemplatesPre'], 'includeTemplatesPost' => $params['includeTemplatesPost']]);
             $this->dispatcher->dispatch($result, Other::INN_ALE);
-            $result = modulehook('ale', $result->getData());
+            $result = $result->getData();
 
             $params['includeTemplatesPre']  = $result['includeTemplatesPre'];
             $params['includeTemplatesPost'] = $result['includeTemplatesPost'];
@@ -340,7 +339,6 @@ class InnController extends AbstractController
         // $bodyguards = ['Butch', 'Bruce', 'Alfonozo', 'Guido', 'Bruno', 'Bubba', 'Al', 'Chuck', 'Brutus', 'Nunzio', 'Terrance', 'Mitch', 'Rocco', 'Spike', 'Gregor', 'Sven', 'Draco'];
 
         $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_INN_ROOMS);
-        modulehook('innrooms');
 
         $this->navigation->addHeader('category.buy.room');
         $this->navigation->addNav('nav.room.buy.hand', 'inn.php?op=room&pay=1', [
@@ -371,7 +369,7 @@ class InnController extends AbstractController
 
         $args = new GenericEvent(null, ['section' => 'inn']);
         $this->dispatcher->dispatch($args, Events::PAGE_INN_BLOCK_COMMENT_AREA);
-        $args = modulehook('blockcommentarea', $args->getArguments());
+        $args = $args->getArguments();
 
         if ( ! ($args['block'] ?? false) || ! $args['block'])
         {
@@ -414,7 +412,7 @@ class InnController extends AbstractController
         ]);
 
         $this->dispatcher->dispatch($chats, Events::PAGE_INN_CHATTER);
-        $chats = modulehook('innchatter', $chats->getArguments());
+        $chats = $chats->getArguments();
 
         $params['talk']      = $chats[array_rand($chats)];
         $params['gameclock'] = $this->dateTime->getGameTime();
@@ -427,7 +425,7 @@ class InnController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_INN_POST);
-        $params = modulehook('page-inn-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->render('page/inn.html.twig', $params);
     }

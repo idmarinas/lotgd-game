@@ -24,7 +24,7 @@ $statuses = [
 
 $args = new GenericEvent(null, $statuses);
 LotgdEventDispatcher::dispatch($args, Events::PAGE_PETITION_STATUS);
-$statuses = modulehook('petition-status', $args->getArguments());
+$statuses = $args->getArguments();
 reset($statuses);
 
 $op         = (string) LotgdRequest::getQuery('op');

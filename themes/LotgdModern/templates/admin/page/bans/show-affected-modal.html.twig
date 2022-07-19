@@ -1,0 +1,23 @@
+<!-- Modal Inner Container -->
+<div class="max-h-screen w-full max-w-3xl relative">
+<!-- Modal Card -->
+    <div class="m-1 bg-lotgd-900 rounded shadow text-left">
+        <div class="p-8">
+            <div class="mb-4">
+                {% for entity in result %}
+                    {{ entity.name|colorize }}<br>
+                {% else %}
+                    ---
+                {% endfor %}
+            </div>
+            <div class="flex justify-end items-center flex-wrap mt-6 pt-3 border-t border-lotgd-500">
+                <button
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    data-action="click->remote-modal#close"
+                >
+                    {{ 'modal.buttons.cancel'|trans({}, 'app_default') }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

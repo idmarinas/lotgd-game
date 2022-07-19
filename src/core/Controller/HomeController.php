@@ -103,7 +103,7 @@ class HomeController extends AbstractController
 
         $args = new GenericEvent();
         $this->dispatcher->dispatch($args, Events::PAGE_HOME_TEXT);
-        $results = modulehook('hometext', $args->getArguments());
+        $results = $args->getArguments();
 
         if (\is_array($results) && \count($results))
         {
@@ -125,7 +125,7 @@ class HomeController extends AbstractController
 
         $args = new GenericEvent();
         $this->dispatcher->dispatch($args, Events::PAGE_HOME_MIDDLE);
-        $results = modulehook('homemiddle', $args->getArguments());
+        $results = $args->getArguments();
 
         if (\is_array($results) && \count($results))
         {
@@ -139,7 +139,7 @@ class HomeController extends AbstractController
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_HOME_POST);
-        $params = modulehook('page-home-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->render('page/home.html.twig', $params);
     }

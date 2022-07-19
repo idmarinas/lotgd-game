@@ -9,9 +9,6 @@ use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-require_once 'common.php';
-require_once 'lib/events.php';
-
 //-- First check for autochallengeç
 if (LotgdSetting::getSetting('automaster', 1) && 1 != $session['user']['seenmaster'])
 {
@@ -34,13 +31,13 @@ $valid_loc         = [];
 $valid_loc[$vname] = 'village';
 $args              = new GenericEvent(null, $valid_loc);
 LotgdEventDispatcher::dispatch($args, Events::PAGE_VILLAGE_LOCATION);
-$valid_loc = modulehook('validlocation', $args->getArguments());
+$valid_loc = $args->getArguments();
 
 // Don't hook on to this text for your standard modules please, use "village" instead.
 // This hook is specifically to allow modules that do other villages to create ambience.
 $args = new GenericEvent(null, ['textDomain' => 'page_village', 'textDomainNavigation' => 'navigation_village']);
 LotgdEventDispatcher::dispatch($args, Events::PAGE_VILLAGE_PRE);
-$result               = modulehook('village-text-domain', $args->getArguments());
+$result               = $args->getArguments();
 $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -76,7 +73,7 @@ elseif ( ! $params['newestname'] && $params['newestplayer'])
 //-- Init page
 LotgdResponse::pageStart('title', $params, $textDomain);
 
-$skipvillagedesc = handle_event('village');
+$skipvillagedesc = false;
 LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
 if (1 == $session['user']['slaydragon'])
@@ -149,7 +146,6 @@ LotgdNavigation::townNav($textDomainNavigation);
 
 //special hook for all villages... saves queries...
 LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_VILLAGE);
-modulehook('village');
 
 $params['showVillageDesc']   = ! $skipvillagedesc; //-- Show or not village description
 $params['SU_EDIT_USERS']     = $session['user']['superuser'] & SU_EDIT_USERS;

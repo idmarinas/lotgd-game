@@ -81,7 +81,7 @@ trait Menu
 
         $args = new GenericEvent();
         $this->dispatcher->dispatch($args, Events::PAGE_NAVIGATION_VILLAGE);
-        $args = modulehook('villagenav', $args->getArguments());
+        $args = $args->getArguments();
 
         if ($args['handled'] ?? false)
         {

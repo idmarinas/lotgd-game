@@ -10,7 +10,6 @@ use Lotgd\Core\Http\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/events.php';
 
 /** @var Lotgd\Core\Http\Request $request */
 $request = LotgdKernel::get(Request::class);
@@ -19,7 +18,7 @@ $request = LotgdKernel::get(Request::class);
 // This hook is specifically to allow modules that do other gardenss to create ambience.
 $args = new GenericEvent(null, ['textDomain' => 'page_gardens', 'textDomainNavigation' => 'navigation_gardens']);
 LotgdEventDispatcher::dispatch($args, Events::PAGE_GARDEN_PRE);
-$result               = modulehook('gardens-text-domain', $args->getArguments());
+$result               = $args->getArguments();
 $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -27,7 +26,7 @@ unset($result);
 //-- Init page
 LotgdResponse::pageStart('title', [], $textDomain);
 
-$skipgardendesc = handle_event('gardens');
+$skipgardendesc = false;
 
 $params = [
     'textDomain'           => $textDomain,

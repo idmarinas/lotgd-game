@@ -28,14 +28,12 @@ trait SetSpecialtyTrait
         {
             $session['user']['specialty'] = $setspecialty;
             $this->dispatcher->dispatch(new Core(), Core::SPECIALTY_SET);
-            modulehook('set-specialty');
             $this->navigation->addNav('nav.continue', "newday.php?continue=1{$resline}");
         }
         else
         {
             $this->addFlash('info', $this->translator->trans('flash.message.choose.specialty', [], $this->getTranslationDomain()));
             $this->dispatcher->dispatch(new Core(), Core::SPECIALTY_CHOOSE);
-            modulehook('choose-specialty');
         }
 
         //-- Have navs

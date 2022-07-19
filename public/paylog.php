@@ -45,7 +45,6 @@ LotgdNavigation::addNav('paylog.nav.refresh', 'paylog.php');
 
 $args = new GenericEvent();
 LotgdEventDispatcher::dispatch($args, Events::PAGE_PAYLOG);
-modulehook('paylog', $args->getArguments());
 
 $repository->updateProcessDate();
 $months = $repository->getMonths();

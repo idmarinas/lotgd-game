@@ -10,18 +10,17 @@ use Lotgd\Core\Http\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/events.php';
 
 // Don't hook on to this text for your standard modules please, use "inn" instead.
 // This hook is specifically to allow modules that do other inns to create ambience.
 $args = new GenericEvent(null, ['textDomain' => 'page_inn', 'textDomainNavigation' => 'navigation_inn']);
 LotgdEventDispatcher::dispatch($args, Events::PAGE_INN_PRE);
-$result               = modulehook('inn-text-domain', $args->getArguments());
+$result               = $args->getArguments();
 $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-$skipinndesc = handle_event('inn');
+$skipinndesc = false;
 
 if ( ! $skipinndesc)
 {
@@ -142,7 +141,6 @@ if ('default' == $params['tpl'])
 {
     $args = new GenericEvent();
     LotgdEventDispatcher::dispatch($args, Events::PAGE_INN);
-    modulehook('inn', $args->getArguments());
 
     module_display_events('inn', 'inn.php');
 }

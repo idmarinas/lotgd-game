@@ -120,7 +120,6 @@ trait BattleStart
         {
             $args = new GenericEvent(null, $this->enemies);
             $this->dispatcher->dispatch($args, Events::PAGE_BATTLE_TURN_START);
-            modulehook('battle-turn-start', $args->getArguments());
 
             $this->setBattleBarStart($this->prepareBattleBars());
         }

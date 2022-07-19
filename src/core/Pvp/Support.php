@@ -109,7 +109,7 @@ class Support
 
                 $args = new Character(['entity' => $entity]);
                 $this->dispatcher->dispatch($args, Character::PVP_ADJUST);
-                $entity = modulehook('pvpadjust', $args->getData()['entity']);
+                $entity = $args->getData()['entity'];
 
                 $this->pvpWarning->warning(true);
 
@@ -208,7 +208,7 @@ class Support
 
         $args = new Character(['pvpmessageadd' => '', 'handled' => false, 'badguy' => $badguy]);
         $this->dispatcher->dispatch($args, Character::PVP_WIN);
-        $args = modulehook('pvpwin', $args->getData());
+        $args = $args->getData();
 
         $subject = ['mail.victory.subject', ['location' => $killedloc], self::TRANSLATION_DOMAIN];
 
@@ -299,7 +299,7 @@ class Support
 
         $args = new Character(['pvpmessageadd' => '', 'handled' => false, 'badguy' => $badguy]);
         $this->dispatcher->dispatch($args, Character::PVP_LOSS);
-        $args = modulehook('pvploss', $args->getData());
+        $args = $args->getData();
 
         if ($character->getLevel() < $badguy['creaturelevel'])
         {

@@ -21,15 +21,14 @@ define([
         const message = escape(target.val())
         const length = message.length
         const charsleft = maxchars - length
-        const color = (charsleft > 0) ? 'green' : (charsleft === 0) ? 'orange' : 'red'
+        let color = (charsleft > 0) ? 'border-green-500' : 'border-red-500'
+        color = (charsleft === 0) ? 'border-orange-500' : color
         const charsLeftText = youhave.replace('%s', escape(charsleft))
         const playerName = Lotgd.appoencode(player)
 
         if (length === 0)
         {
-            jQuery('#previewtext-commentary-form').parent().addClass('hidden').removeClass('red orange green')
-            jQuery('#commentary-form input').attr('style', '')
-            jQuery('#commentary-form button').removeClass('top attached')
+            jQuery('#previewtext-commentary-form').parent().addClass('hidden').removeClass('border-red-500 border-orange-500 border-green-500')
 
             return
         }
@@ -41,11 +40,11 @@ define([
         const commandMe3 = message.substr(0, 3)
         const commandGame = message.substr(0, 5)
 
-        let text = '<i class="eye icon"></i>'
+        let text = '<i class="far fa-eye"></i>'
 
         if (commandMe1 === '::' || commandMe2 === ':' || commandMe3 === '/me')
         {
-            text += '<span class="colLtWhite">' + playerName + '</span> '
+            text += '<span class="text-col-lt-black">' + playerName + '</span> '
             let colorizeMenssage = ''
 
             if (commandMe1 === '::')
@@ -61,18 +60,16 @@ define([
                 colorizeMenssage = Lotgd.appoencode(message.replace(commandMe3, ''))
             }
 
-            text += '<span class="colLtBlack">' + colorizeMenssage + '</span>'
+            text += '<span class="text-col-lt-black">' + colorizeMenssage + '</span>'
         }
-        else if (commandGame === '/game') { text += '<span class="colDkMagenta">' + Lotgd.appoencode(message.replace(commandGame, '')) + '</span>' }
+        else if (commandGame === '/game') { text += '<span class="text-col-dk-magenta">' + Lotgd.appoencode(message.replace(commandGame, '')) + '</span>' }
         else
         {
-            text += '<span class="colLtWhite">' + playerName + '</span> '
-            text += '<span class="colDkCyan">' + Lotgd.appoencode(talkline) + ',</span> "' + Lotgd.appoencode(message) + '"</span>'
+            text += '<span class="text-col-lt-black">' + playerName + '</span> '
+            text += '<span class="text-col-dk-cyan">' + Lotgd.appoencode(talkline) + ',</span> "' + Lotgd.appoencode(message) + '"</span>'
         }
 
-        jQuery('#previewtext-commentary-form').html(text).parent().removeClass('hidden').removeClass('red orange green').addClass(color)
-        jQuery('#commentary-form input').attr('style', 'border-bottom-left-radius: 0 !important;')
-        jQuery('#commentary-form button').addClass('top attached')
+        jQuery('#previewtext-commentary-form').html(text).parent().removeClass('hidden').removeClass('border-red-500 border-orange-500 border-green-500').addClass(color)
     }
 
     return Lotgd

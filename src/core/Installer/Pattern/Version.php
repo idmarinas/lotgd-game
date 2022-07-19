@@ -130,6 +130,7 @@ trait Version
         '7.0.4 IDMarinas Edition'         => 70004,
         '7.1.0 IDMarinas Edition'         => 70100,
         '7.1.1 IDMarinas Edition'         => 70101,
+        '8.0.0 IDMarinas Edition'         => 80000,//-- Remove old system of modules
     ];
 
     /**

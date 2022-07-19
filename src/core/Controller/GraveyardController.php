@@ -78,7 +78,7 @@ class GraveyardController extends AbstractController
         // This hook is specifically to allow modules that do other graveyards to create ambience.
         $args = new GenericEvent(null, ['textDomain' => 'page_graveyard', 'textDomainNavigation' => 'navigation_graveyard']);
         $this->dispatcher->dispatch($args, Events::PAGE_GRAVEYARD_PRE);
-        $result                            = modulehook('graveyard-text-domain', $args->getArguments());
+        $result                            = $args->getArguments();
         $this->translationDomain           = $result['textDomain'];
         $this->translationDomainNavigation = $result['textDomainNavigation'];
 
@@ -98,7 +98,7 @@ class GraveyardController extends AbstractController
         $max  = $session['user']['level'] * 10 + $session['user']['dragonkills'] * 2 + 50;
         $args = new GenericEvent(null, ['favor' => round(10 * ($max - $session['user']['soulpoints']) / $max)]);
         $this->dispatcher->dispatch($args, Events::PAGE_GRAVEYARD_HEAL);
-        $favortoheal = modulehook('favortoheal', $args->getArguments());
+        $favortoheal = $args->getArguments();
         $favortoheal = (int) $favortoheal['favor'];
 
         $params['favorToHeal'] = $favortoheal;
@@ -270,7 +270,7 @@ class GraveyardController extends AbstractController
                 //no multifights currently, so this hook passes the badguy to modify
                 $attackstack = new Graveyard($attackstack);
                 $this->dispatcher->dispatch($attackstack, Graveyard::FIGHT_START);
-                $attackstack = modulehook('graveyardfight-start', $attackstack->getData());
+                $attackstack = $attackstack->getData();
 
                 $session['user']['badguy'] = $attackstack;
             }
@@ -412,7 +412,7 @@ class GraveyardController extends AbstractController
 
         //build navigation
         $this->dispatcher->dispatch($default_actions, Graveyard::DEATH_OVERLORD_ACTIONS);
-        $actions = modulehook('deathoverlord_actions', $default_actions->getData());
+        $actions = $default_actions->getData();
 
         $favorCostList = [];
 
@@ -476,7 +476,6 @@ class GraveyardController extends AbstractController
         $this->navigation->addHeader('category.other');
 
         $this->dispatcher->dispatch(new Graveyard(), Graveyard::DEATH_OVERLORD_FAVORS);
-        modulehook('ramiusfavors');
 
         return $this->renderGraveyard($params, $request);
     }
@@ -630,12 +629,11 @@ class GraveyardController extends AbstractController
     private function renderGraveyard(array $params, Request $request): Response
     {
         $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_GRAVEYARD);
-        modulehook('deathoverlord');
 
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_GRAVEYARD_POST);
-        $params = modulehook('page-graveyard-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         $this->navigation->setTextDomain();
 

@@ -32,14 +32,12 @@ trait SetRaceTrait
             // Set the person to the main village/capital by default
             $session['user']['location'] = $vname;
             $this->dispatcher->dispatch(new Core(), Core::RACE_SET);
-            modulehook('setrace');
             $this->navigation->addNav('nav.continue', "newday.php?continue=1{$resline}");
         }
         else
         {
             $this->addFlash('info', $this->translator->trans('flash.message.choose.race', [], $this->getTranslationDomain()));
             $this->dispatcher->dispatch(new Core(), Core::RACE_CHOOSE);
-            modulehook('chooserace');
         }
 
         //-- Have navs

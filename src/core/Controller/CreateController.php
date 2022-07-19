@@ -13,11 +13,9 @@
 
 namespace Lotgd\Core\Controller;
 
-use Lotgd\Core\Controller\Pattern\RenderBlockTrait;
 use DateTime;
+use Lotgd\Core\Controller\Pattern\RenderBlockTrait;
 use Lotgd\Core\Entity\Avatar;
-use Throwable;
-use Tracy\Debugger;
 use Lotgd\Core\Entity\User;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
@@ -25,6 +23,7 @@ use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
 use Lotgd\Core\Output\Censor;
 use Lotgd\Core\Output\Format;
+use Lotgd\Core\Tool\LotgdMail;
 use Lotgd\Core\Tool\Sanitize;
 use Lotgd\Core\Tool\SystemMail;
 use Lotgd\Core\Tool\Tool;
@@ -32,9 +31,12 @@ use Lotgd\Core\Tool\Validator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Throwable;
+use Tracy\Debugger;
 
 class CreateController extends AbstractController
 {
@@ -51,6 +53,7 @@ class CreateController extends AbstractController
     private $tool;
     private $systemMail;
     private $validator;
+    private LotgdMail $mailer;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
@@ -93,25 +96,25 @@ class CreateController extends AbstractController
             return $this->redirect('home.php');
         }
 
-        //-- Delete code of fogotten password
+        // -- Delete code of fogotten password
         $account->setForgottenpassword('');
 
-        //-- Save
+        // -- Save
         $this->getDoctrine()->getManager()->persist($account);
 
-        //-- Rare case: we have somebody who deleted his first validation email and then requests a forgotten PW...
+        // -- Rare case: we have somebody who deleted his first validation email and then requests a forgotten PW...
         if ('' != $account->getEmailvalidation() && 'x' != substr($account->getEmailvalidation(), 0, 1))
         {
             $account->getEmailvalidation('');
         }
 
-        $this->getDoctrine()->getManager()->flush(); //-- Persist objects
+        $this->getDoctrine()->getManager()->flush(); // -- Persist objects
 
         $params['account'] = $account;
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_CREATE_FORGOTVAL);
-        $params = modulehook('page-create-forgotval-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->renderBlock('page/_blocks/_create.html.twig', 'create_forgot_val', $params);
     }
@@ -137,18 +140,18 @@ class CreateController extends AbstractController
         {
             $params['emailChanged'] = true;
             $replace_array          = explode('|', $account->getReplaceemail());
-            $replaceemail           = $replace_array[0]; //1==date
+            $replaceemail           = $replace_array[0]; // 1==date
             $oldEmail               = $account->getEmailaddress();
 
             $this->log->debug('Email change request validated by link from '.$oldEmail.' to '.$replaceemail, $account->getAcctid(), $account->getAcctid(), 'Email');
 
-            //-- Note: remove any forgotten password request!
+            // -- Note: remove any forgotten password request!
             $account->setReplaceemail('')
                 ->setEmailaddress($replaceemail)
                 ->setForgottenpassword('')
             ;
 
-            //-- If a superuser changes email, we want to know about it... at least those who can ee it anyway, the user editors...
+            // -- If a superuser changes email, we want to know about it... at least those who can ee it anyway, the user editors...
             if ($account->getSuperuser() > 0)
             {
                 // 5 failed attempts for superuser, 10 for regular user
@@ -173,12 +176,12 @@ class CreateController extends AbstractController
             }
         }
 
-        //-- Delete code of email validation
+        // -- Delete code of email validation
         $account->setEmailvalidation('');
 
-        //-- Save
+        // -- Save
         $this->getDoctrine()->getManager()->persist($account);
-        $this->getDoctrine()->getManager()->flush(); //-- Persist objects
+        $this->getDoctrine()->getManager()->flush(); // -- Persist objects
 
         $params['account'] = $account;
 
@@ -187,7 +190,7 @@ class CreateController extends AbstractController
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_CREATE_VAL);
-        $params = modulehook('page-create-val-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->renderBlock('page/_blocks/_create.html.twig', 'create_email_val', $params);
     }
@@ -232,7 +235,7 @@ class CreateController extends AbstractController
                 'forgottenid'  => $account->getForgottenpassword(),
             ], 'app_mail', $language);
 
-            lotgd_mail($account->getEmailaddress(), $subj, $this->format->colorize($msg));
+            $this->mailer->sendEmail(new Address($account->getEmailaddress()), $subj, $msg);
 
             $this->addFlash('warning', $this->translator->trans('forgot.account.sent', [], $params['textDomain']));
 
@@ -241,7 +244,7 @@ class CreateController extends AbstractController
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_CREATE_FORGOT);
-        $params = modulehook('page-create-forgot-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->renderBlock('page/_blocks/_create.html.twig', 'create_forgot', $params);
     }
@@ -310,7 +313,7 @@ class CreateController extends AbstractController
 
             $args = new GenericEvent(null, $request->request->all());
             $this->dispatcher->dispatch($args, Events::PAGE_CREATE_CHECK_CREATION);
-            $args = modulehook('check-create', $args->getArguments());
+            $args = $args->getArguments();
 
             if (isset($args['blockaccount']) && $args['blockaccount'])
             {
@@ -355,7 +358,7 @@ class CreateController extends AbstractController
 
                 try
                 {
-                    //-- Configure account
+                    // -- Configure account
                     $accountEntity = new User();
                     $accountEntity->setLogin((string) $shortname)
                         ->setSuperuser((int) $this->settings->getSetting('defaultsuperuser', 0))
@@ -370,11 +373,11 @@ class CreateController extends AbstractController
                     $dbpass = $this->passwordEncoder->encodePassword($accountEntity, $pass1);
                     $accountEntity->setPassword($dbpass);
 
-                    //-- Need for get a ID of new account
+                    // -- Need for get a ID of new account
                     $this->getDoctrine()->getManager()->persist($accountEntity);
-                    $this->getDoctrine()->getManager()->flush(); //Persist objects
+                    $this->getDoctrine()->getManager()->flush(); // Persist objects
 
-                    //-- Configure character
+                    // -- Configure character
                     $characterEntity = new Avatar();
                     $characterEntity->setPlayername((string) $shortname)
                         ->setSex($sex)
@@ -385,20 +388,19 @@ class CreateController extends AbstractController
                         ->setAcct($accountEntity)
                     ;
 
-                    //-- Need for get ID of new character
+                    // -- Need for get ID of new character
                     $this->getDoctrine()->getManager()->persist($characterEntity);
-                    $this->getDoctrine()->getManager()->flush(); //-- Persist objects
+                    $this->getDoctrine()->getManager()->flush(); // -- Persist objects
 
-                    //-- Set ID of character and update Account
+                    // -- Set ID of character and update Account
                     $accountEntity->setAvatar($characterEntity);
                     $this->getDoctrine()->getManager()->persist($accountEntity);
-                    $this->getDoctrine()->getManager()->flush(); //-- Persist objects
+                    $this->getDoctrine()->getManager()->flush(); // -- Persist objects
 
                     $args           = $request->request->all();
                     $args['acctid'] = $accountEntity->getAcctid();
                     $args           = new GenericEvent(null, $args);
                     $this->dispatcher->dispatch($args, Events::PAGE_CREATE_PROCESS_CREATION);
-                    modulehook('process-create', $args->getArguments());
 
                     if ('' != $emailverification)
                     {
@@ -411,7 +413,7 @@ class CreateController extends AbstractController
                             'validationid' => $emailverification,
                         ], 'app_mail');
 
-                        lotgd_mail($email, $subj, $this->format->colorize($msg));
+                        $this->mailer->sendEmail(new Address($email), $subj, $msg);
 
                         $this->addFlash('warning', $this->translator->trans('create.account.emailVerification', ['email' => $email], $params['textDomain']));
 
@@ -444,14 +446,22 @@ class CreateController extends AbstractController
          */
         $args = new GenericEvent(null, ['templates' => []]);
         $this->dispatcher->dispatch($args, Events::PAGE_CREATE_FORM);
-        $result = modulehook('create-form', $args->getArguments());
+        $result = $args->getArguments();
 
         $params['templates'] = $result['templates'];
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_CREATE_POST);
-        $params = modulehook('page-create-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->render('page/create.html.twig', $params);
+    }
+
+    /** @required */
+    public function setMailer(LotgdMail $mailer): self
+    {
+        $this->mailer = $mailer;
+
+        return $this;
     }
 }

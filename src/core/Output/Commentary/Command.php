@@ -41,7 +41,7 @@ trait Command
         //-- Search for custom commands
         $args = new EventCommentary(['command' => $command, 'section' => $data['section'], 'data' => &$data]);
         $this->hook->dispatch($args, EventCommentary::COMMANDS);
-        $returnedHook = modulehook('commentary-command', $args->getData());
+        $returnedHook = $args->getData();
 
         $processed = true;
 

@@ -43,7 +43,6 @@ class ForestController extends AbstractController
         $this->navigation->forestNav($params['translation_domain_navigation']);
 
         $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_FOREST_HEADER);
-        modulehook('forest-header');
 
         if ($session['user']['level'] >= $this->settings->getSetting('maxlevel', 15) && 0 == $session['user']['seendragon'])
         {
@@ -55,7 +54,7 @@ class ForestController extends AbstractController
             $isforest = 0;
             $args     = new GenericEvent();
             $this->dispatcher->dispatch($args, Events::PAGE_FOREST_VALID_FOREST_LOC);
-            $vloc = modulehook('validforestloc', $args->getArguments());
+            $vloc = $args->getArguments();
 
             foreach ($vloc as $i => $l)
             {
@@ -75,7 +74,6 @@ class ForestController extends AbstractController
 
         $args = new GenericEvent();
         $this->dispatcher->dispatch($args, Events::PAGE_FOREST);
-        modulehook('forest', $args->getArguments());
 
         return $this->renderForest($params);
     }
@@ -92,7 +90,7 @@ class ForestController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_FOREST_POST);
-        $params = modulehook('page-forest-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->render('page/forest.html.twig', $params);
     }

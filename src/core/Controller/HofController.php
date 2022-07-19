@@ -41,7 +41,7 @@ class HofController extends AbstractController
         // This hook is specifically to allow modules that do other hofs to create ambience.
         $args = new GenericEvent(null, ['textDomain' => 'page_hof', 'textDomainNavigation' => 'navigation_hof']);
         $this->dispatcher->dispatch($args, Events::PAGE_HOF_PRE);
-        $result               = modulehook('hof-text-domain', $args->getArguments());
+        $result               = $args->getArguments();
         $textDomain           = $result['textDomain'];
         $textDomainNavigation = $result['textDomainNavigation'];
         unset($result);
@@ -83,7 +83,6 @@ class HofController extends AbstractController
 
         $args = new GenericEvent();
         $this->dispatcher->dispatch($args, Events::PAGE_HOF_ADD);
-        modulehook('hof-add', $args->getArguments());
 
         $method = 'hof'.ucfirst($op);
         $method = method_exists($this, $method) ? $method : 'hofKills';
@@ -438,7 +437,7 @@ class HofController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_HOF_POST);
-        $params = modulehook('page-hof-tpl-params', $params);
+        $params = $args->getArguments();
 
         //-- Restore text domain for navigation
         $this->navigation->setTextDomain();

@@ -75,7 +75,7 @@ class ClanController extends AbstractController
         // This hook is specifically to allow modules that do other clans to create ambience.
         $args = new GenericEvent(null, ['textDomain' => 'page_clan', 'textDomainNavigation' => 'navigation_clan']);
         $this->dispatcher->dispatch($args, Events::PAGE_CLAN_PRE);
-        $result               = modulehook('clan-text-domain', $args->getArguments());
+        $result               = $args->getArguments();
         $textDomain           = $result['textDomain'];
         $textDomainNavigation = $result['textDomainNavigation'];
         unset($result);
@@ -113,7 +113,7 @@ class ClanController extends AbstractController
 
         $ranks = new EventClan(['ranks' => $ranks, 'textDomain' => $textDomain, 'clanid' => null]);
         $this->dispatcher->dispatch($ranks, EventClan::RANK_LIST);
-        $ranks                = modulehook('clanranks', $ranks->getData());
+        $ranks                = $ranks->getData();
         $params['ranksNames'] = $ranks['ranks'];
 
         $op     = (string) $request->query->get('op', '');
@@ -428,7 +428,7 @@ class ClanController extends AbstractController
         {
             $args = new EventClan(['clanname' => $entity->getClanname(), 'clanshort' => $entity->getClanshort()]);
             $this->dispatcher->dispatch($args, EventClan::CREATE);
-            $args = modulehook('process-createclan', $args->getData());
+            $args = $args->getData();
 
             if ($args['blocked'] ?? false)
             {
@@ -487,7 +487,6 @@ class ClanController extends AbstractController
         $params['tpl'] = 'clan_applicant';
 
         $this->dispatcher->dispatch(new EventClan(), EventClan::ENTER);
-        modulehook('clan-enter');
 
         if ('withdraw' == $request->query->get('op'))
         {
@@ -637,7 +636,7 @@ class ClanController extends AbstractController
             ]);
 
             $this->dispatcher->dispatch($args, EventClan::RANK_SET);
-            $args = modulehook('clan-setrank', $args->getData());
+            $args = $args->getData();
 
             $character->setClanrank(CLAN_APPLICANT)
                 ->setClanid(0)
@@ -675,7 +674,7 @@ class ClanController extends AbstractController
                     'oldrank' => $character->getClanrank(),
                 ]);
                 $this->dispatcher->dispatch($args, EventClan::RANK_SET);
-                $args = modulehook('clan-setrank', $args->getData());
+                $args = $args->getData();
 
                 if ( ! ($args['handled'] ?? false))
                 {
@@ -709,7 +708,6 @@ class ClanController extends AbstractController
             'acctid'   => $session['user']['acctid'],
         ]);
         $this->dispatcher->dispatch($args, EventClan::WITHDRAW);
-        modulehook('clan-withdraw', $args->getData());
 
         /** @var \Lotgd\Core\Repository\CharactersRepository $charRepository */
         $charRepository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
@@ -744,7 +742,6 @@ class ClanController extends AbstractController
                     //-- There are no other members, we need to delete the clan.
                     $args = new EventClan(['clanid' => $session['user']['clanid'], 'clanEntity' => $clanEntity]);
                     $this->dispatcher->dispatch($args, EventClan::DELETE);
-                    modulehook('clan-delete', $args->getData());
 
                     $this->getDoctrine()->getManager()->remove($clanEntity);
                     $this->getDoctrine()->getManager()->flush();
@@ -795,7 +792,7 @@ class ClanController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_CLAN_POST);
-        $params = modulehook('page-clan-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         //-- Restore text domain for navigation
         $this->navigation->setTextDomain();

@@ -22,7 +22,6 @@ $params = [
 ];
 
 LotgdNavigation::superuserGrottoNav();
-LotgdNavigation::addNav('Module Manager', 'modules.php');
 
 LotgdNavigation::addHeader('configuration.category.settings');
 LotgdNavigation::addNav('configuration.nav.standard', 'configuration.php');

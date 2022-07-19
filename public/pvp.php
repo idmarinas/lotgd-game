@@ -196,7 +196,7 @@ $params['battle'] = $battle;
 //-- This is only for params not use for other purpose
 $args = new GenericEvent(null, $params);
 LotgdEventDispatcher::dispatch($args, Events::PAGE_PVP_POST);
-$params = modulehook('page-pvp-tpl-params', $args->getArguments());
+$params = $args->getArguments();
 
 $request->attributes->set('params', $params);
 

@@ -73,7 +73,7 @@ class DragonController extends AbstractController
         // This hook is specifically to allow modules that do other dragons to create ambience.
         $args = new GenericEvent(null, ['textDomain' => 'page_dragon', 'textDomainNavigation' => 'navigation_app']);
         $this->dispatcher->dispatch($args, Events::PAGE_DRAGON_PRE);
-        $result                            = modulehook('dragon-text-domain', $args->getArguments());
+        $result                            = $args->getArguments();
         $this->translationDomain           = $result['textDomain'];
         $this->translationDomainNavigation = $result['textDomainNavigation'];
         unset($result);
@@ -137,7 +137,7 @@ class DragonController extends AbstractController
 
         $args = new GenericEvent(null, $badguy);
         $this->dispatcher->dispatch($args, Events::PAGE_DRAGON_BUFF);
-        $badguy = modulehook('buffdragon', $args->getArguments());
+        $badguy = $args->getArguments();
 
         $session['user']['badguy'] = [
             'enemies' => [$badguy],
@@ -172,7 +172,7 @@ class DragonController extends AbstractController
             'base'     => $dkpoints + ($session['user']['level'] * 10),
         ]);
         $this->dispatcher->dispatch($args, Events::PAGE_DRAGON_HP_RECALC);
-        $hpgain = modulehook('hprecalc', $args->getArguments());
+        $hpgain = $args->getArguments();
 
         $this->buffer->calculateBuffFields();
 
@@ -212,7 +212,7 @@ class DragonController extends AbstractController
 
         $args = new GenericEvent(null, $nochange);
         $this->dispatcher->dispatch($args, Events::PAGE_DRAGON_DK_PRESERVE);
-        $nochange = modulehook('dk-preserve', $args->getArguments());
+        $nochange = $args->getArguments();
         ++$session['user']['dragonkills'];
 
         $badguys = $session['user']['badguy']; //needed for the dragons name later
@@ -301,12 +301,11 @@ class DragonController extends AbstractController
         // Moved this hear to make some things easier.
         $args = new GenericEvent();
         $this->dispatcher->dispatch($args, Events::PAGE_DRAGON_KILL);
-        modulehook('dragonkill', $args->getArguments());
 
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_DRAGON_POST);
-        $params = modulehook('page-dragon-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         $this->navigation->addNav('common.nav.newday', 'news.php');
 
@@ -363,7 +362,7 @@ class DragonController extends AbstractController
             {
                 $args = new GenericEvent();
                 $this->dispatcher->dispatch($args, Events::PAGE_DRAGON_DEATH);
-                $result = modulehook('dragondeath', $args->getArguments());
+                $result = $args->getArguments();
 
                 foreach ($result as $msg)
                 {
