@@ -120,7 +120,7 @@ class CreateController extends AbstractController
     {
         /** @var Lotgd\Core\Repository\UserRepository $accountRepo */
         $accountRepo = $this->getDoctrine()->getRepository('LotgdCore:User');
-        $code        = $request->query->getInt('id');
+        $code        = (string) $request->query->get('id');
 
         $account = $accountRepo->findOneBy(['emailvalidation' => $code]);
 
