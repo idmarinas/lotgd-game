@@ -98,6 +98,8 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :wrench: FIXES
 
 -   `src/core/Tool/Validator.php` Fix error with cheking if email is valid
+-   `src/core/Controller/CreateController.php` Fixed error with validation email address.
+    -   Previously it treated the `id` as numeric when it was a string.
 
 ### :x: REMOVES
 
