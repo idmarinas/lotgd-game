@@ -19,6 +19,16 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `src/core/Controller/MountsController.php` use `remote-modal` Stimulus controller to load this.
 -   `src/ajax/core/Bans.php` migrate this class to Stimulus controller
     -   `src/core/Controller/BansController.php` use `remote-modal` Stimulus controller to load this.
+-   **Change CronJob System**
+    -   Need update your crontab:
+        -   From `* * * * * cd /path/to/project/public && php cronjob.php 1>> /dev/null 2>&1`  
+            To `* * * * * php /path/to/project/bin/console cron:run 1>> /dev/null 2>&1`
+    -   Alternative method to run your cronjobs if don't have a dedicated dron daemon:
+        ```bash
+            bin/console cron:start # will run in background mode, use --blocking to run in foreground
+            bin/console cron:stop # will stop the background cron daemon
+        ```
+    -   More info in [Cron Symfony Bundle](https://github.com/Cron/Symfony-Bundle)
 
 ### :star: FEATURES
 
