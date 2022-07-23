@@ -31,6 +31,7 @@ class Kernel extends BaseKernel
     public const MINOR_VERSION       = 0;
     public const RELEASE_VERSION     = 0;
     public const EXTRA_VERSION       = '';
+    /** @deprecated 8.0.0 deleted in 9.0.0 */
     public const VERSION_NUMBER      = self::VERSION_ID; //-- Alias of VERSION_ID
     public const TEXT_DOMAIN_DEFAULT = 'app_default';
 
