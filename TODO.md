@@ -5,10 +5,7 @@
 # Actualmente haciendo esto (8.0.0)
 
 -   **BC** Se elimina la compatibilidad con el antiguo sistema de módulos
-    -   Seguir eliminando las funciones referentes a los modulos
--   Se han migrado todos los cronjob a comandos de consola.
-    -   _Nota_ el cronjob del nuevo día (newdayrunonce) no es compatible con el sistema de módulos.
-    -   El nuevo sistema de CronJob se usará en la versión X.0.0 donde se elimina la compatibilidad con los módulos
+    -   Seguir eliminando las funciones referentes a los módulos
 
 # Cosas a mejorar
 
