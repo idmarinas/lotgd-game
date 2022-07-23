@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Installer\Upgrade;
 
 use Lotgd\Core\Installer\InstallerAbstract;
+use Throwable;
 
 class Version80000 extends InstallerAbstract
 {
@@ -44,5 +45,22 @@ class Version80000 extends InstallerAbstract
             $this->getProjectDir().'/src/ajax/core/Entity/ModuleUserprefs.php',
             $this->getProjectDir().'/src/ajax/core/Entity/Modules.php',
         ]);
+    }
+
+    //-- Update cronjobs
+    public function step1(): bool
+    {
+        try
+        {
+            $sql = file_get_contents(__DIR__.'/data/80000/cron_jobs.sql');
+
+            $this->doctrine->getConnection()->executeQuery($sql);
+        }
+        catch (Throwable $th)
+        {
+            return false;
+        }
+
+        return true;
     }
 }
