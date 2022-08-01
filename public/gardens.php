@@ -89,7 +89,7 @@ if ( ! $skipgardendesc)
 
 $params['showGardenDesc'] = ! $skipgardendesc;
 
-LotgdNavigation::gardensNav();
+LotgdNavigation::gardensNav($textDomainNavigation);
 
 $request->attributes->set('params', $params);
 

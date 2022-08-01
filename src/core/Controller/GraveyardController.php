@@ -589,6 +589,7 @@ class GraveyardController extends AbstractController
         return $this->renderGraveyard($params, $request);
     }
 
+    /** @required */
     public function setServiceCreatureFunction(CreatureFunction $service): self
     {
         $this->serviceCreatureFunction = $service;
@@ -596,9 +597,7 @@ class GraveyardController extends AbstractController
         return $this;
     }
 
-    /**
-     * @required
-     */
+    /** @required */
     public function setServiceBattle(Battle $battle): self
     {
         $this->serviceBattle = $battle;
@@ -606,9 +605,7 @@ class GraveyardController extends AbstractController
         return $this;
     }
 
-    /**
-     * @required
-     */
+    /** @required */
     public function setOccurrenceDispatcher(OccurrenceDispatcher $occurrence): self
     {
         $this->occurrenceDispatcher = $occurrence;
@@ -616,9 +613,7 @@ class GraveyardController extends AbstractController
         return $this;
     }
 
-    /**
-     * @required
-     */
+    /** @required */
     public function setDoctrine(EntityManagerInterface $em): self
     {
         $this->doctrine = $em;
