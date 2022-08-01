@@ -5,11 +5,7 @@ use Lotgd\Core\EntityForm\CharactersType;
 //addnews ready
 // mail ready
 
-use Lotgd\Core\Events;
-use Symfony\Component\EventDispatcher\GenericEvent;
-
 require_once 'common.php';
-require_once 'lib/showform.php';
 
 check_su_access(SU_EDIT_USERS);
 
@@ -201,49 +197,6 @@ elseif ('save' == $op)
     }
 
     ($messages) && LotgdFlashMessages::addSuccessMessage($messages);
-}
-elseif ('savemodule' == $op)
-{
-    $post = LotgdRequest::getPostAll();
-    $args = new GenericEvent(null, $post);
-    LotgdEventDispatcher::dispatch($args, Events::PAGE_USER_VALIDATE_PREFS);
-    $post = modulehook('validateprefs', $args->getArguments(), true, $module);
-
-    if (isset($post['validation_error']) && $post['validation_error'])
-    {
-        LotgdFlashMessages::addErrorMessage(LotgdTranslator::t('flash.message.account.edit.module.error', ['error' => $post['validation_error']], $textDomain));
-    }
-    else
-    {
-        reset($post);
-
-        $userPrefsRepository = Doctrine::getRepository('LotgdCore:ModuleUserprefs');
-
-        $messages = '';
-
-        foreach ($post as $key => $val)
-        {
-            $entity = $userPrefsRepository->findOneBy(['modulename' => $module, 'setting' => $key, 'userid' => $userId]);
-
-            Doctrine::persist($userPrefsRepository->hydrateEntity([
-                'modulename' => $module,
-                'setting'    => $key,
-                'userid'     => $userId,
-                'value'      => $val,
-            ], $entity));
-            $messages .= LotgdTranslator::t('flash.message.account.edit.module.setting', ['key' => $module, 'val' => $val], $textDomain);
-        }
-
-        Doctrine::flush();
-
-        $messages .= LotgdTranslator::t('flash.message.account.edit.module.saved', ['module' => $module], $textDomain);
-
-        LotgdFlashMessages::addSuccessMessage($messages);
-    }
-
-    $op = 'edit';
-    LotgdRequest::setQuery('op', 'edit');
-    LotgdRequest::setQuery('subop', 'module');
 }
 
 $row = $characterInfo ?? null;

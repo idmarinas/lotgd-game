@@ -3,7 +3,6 @@
 use Lotgd\Core\Entity\AccountsEverypage;
 
 require_once 'common.php';
-require_once 'lib/showform.php';
 
 check_su_access(SU_EDIT_BANS);
 

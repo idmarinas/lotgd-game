@@ -19,7 +19,6 @@ if (isset($_POST['template']))
 }
 
 require_once 'common.php';
-require_once 'lib/showform.php';
 
 $textDomain = 'page_prefs';
 
@@ -519,8 +518,7 @@ else
 
 $args = new GenericEvent(null, $params);
 LotgdEventDispatcher::dispatch($args, Events::PAGE_PREFS_POST);
-$params = modulehook('page-prefs-tpl-params', $args->getArguments());
-LotgdResponse::pageAddContent(LotgdTheme::render('page/prefs.html.twig', $params));
+LotgdResponse::pageAddContent(LotgdTheme::render('page/prefs.html.twig', $params->getArguments()));
 
 //-- Finalize page
 LotgdResponse::pageEnd();
