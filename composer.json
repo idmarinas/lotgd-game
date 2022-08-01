@@ -32,18 +32,16 @@
         "ext-pdo_mysql": "*",
         "ext-session": "*",
         "beberlei/doctrineextensions": "^1.3",
-        "bukashk0zzz/filter-bundle": "^4.0",
+        "bukashk0zzz/filter-bundle": "^4.1",
         "cocur/slugify": "^4.1",
         "composer/semver": "^3.3",
         "cron/cron-bundle": "^2.10",
-        "doctrine/doctrine-bundle": "^2.6",
+        "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.7",
+        "doctrine/orm": "^2.12",
         "ezyang/htmlpurifier": "^4.14",
-        "gedmo/doctrine-extensions": "^3.7",
+        "gedmo/doctrine-extensions": "^3.8",
         "idmarinas/lotgd-contracts": "^0.2.0",
-        "jaxon-php/jaxon-core": "^3.2",
-        "jaxon-php/jaxon-dialogs": "^3.1",
         "kitlabs/kit-crypt-bundle": "^3.1",
         "laminas/laminas-escaper": "^2.6",
         "laminas/laminas-filter": "^2.9",
@@ -87,7 +85,7 @@
         "symfony/yaml": "4.4.*",
         "tracy/tracy": "^2.9",
         "twig/extra-bundle": "^2.15",
-        "twig/intl-extra": "^3.3",
+        "twig/intl-extra": "^3.4",
         "twig/twig": "^2.15"
     },
     "require-dev": {
@@ -116,7 +114,7 @@
             "Lotgd\\Ajax\\Pattern\\Core\\": "src/ajax/pattern/core/",
             "Lotgd\\Ajax\\Pattern\\Local\\": "src/ajax/pattern/local/"
         },
-		"files": ["src/functions.php"]
+        "files": ["src/functions.php"]
     },
     "autoload-dev": {
         "psr-4": {
