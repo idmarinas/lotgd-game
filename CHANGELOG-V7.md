@@ -33,6 +33,9 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   `src/core/Tool/Validator.php` Fix error with cheking if email is valid
 -   `src/core/Controller/CreateController.php` Fixed error with validation email address.
     -   Previously it treated the `id` as numeric when it was a string.
+-   `src/core/Controller/GraveyardController.php` Fixed error, mark function `setServiceCreatureFunction` with *required* anotation.
+    -   With this, Symfony inject services.
+-   `public/gardens` Fixed error, pass `$textDomainNavigation` as argument. 
 
 ### :x: REMOVES
 
