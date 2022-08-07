@@ -84,8 +84,6 @@ elseif ('forcechangeemail' == $op)
 }
 elseif ('cancelemail' == $op)
 {
-    LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
-
     if ($session['user']['alive'])
     {
         LotgdNavigation::villageNav();
@@ -107,6 +105,8 @@ elseif ('cancelemail' == $op)
 
     $session['user']['replaceemail']    = '';
     $session['user']['emailvalidation'] = '';
+
+    LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 }
 else
 {
