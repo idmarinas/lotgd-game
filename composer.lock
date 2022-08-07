@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a187bc80c36aa7148e39415734cc58f",
+    "content-hash": "6fa57ee23f814a4d78fa84e2218f576e",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -114,16 +114,16 @@
         },
         {
             "name": "bukashk0zzz/filter-bundle",
-            "version": "4.x-dev",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Bukashk0zzz/FilterBundle.git",
-                "reference": "b41ff63732f00773448a5ab1b46c671ff9b65ac0"
+                "reference": "2c8c5c60103b7b49f319a4307111da5ee0c42ba7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Bukashk0zzz/FilterBundle/zipball/b41ff63732f00773448a5ab1b46c671ff9b65ac0",
-                "reference": "b41ff63732f00773448a5ab1b46c671ff9b65ac0",
+                "url": "https://api.github.com/repos/Bukashk0zzz/FilterBundle/zipball/2c8c5c60103b7b49f319a4307111da5ee0c42ba7",
+                "reference": "2c8c5c60103b7b49f319a4307111da5ee0c42ba7",
                 "shasum": ""
             },
             "require": {
@@ -173,9 +173,9 @@
             "support": {
                 "email": "bukashk0zzz@gmail.com",
                 "issues": "https://github.com/bukashk0zzz/FilterBundle/issues",
-                "source": "https://github.com/Bukashk0zzz/FilterBundle/tree/4.x"
+                "source": "https://github.com/Bukashk0zzz/FilterBundle/tree/v4.0.1"
             },
-            "time": "2020-01-15T08:10:25+00:00"
+            "time": "2021-05-20T11:44:15+00:00"
         },
         {
             "name": "cocur/slugify",
@@ -1648,20 +1648,19 @@
         },
         {
             "name": "doctrine/persistence",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "25ec98a8cbd1f850e60fdb62c0ef77c162da8704"
+                "reference": "ac6fce61f037d7e54dbb2435f5b5648d86548e23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/25ec98a8cbd1f850e60fdb62c0ef77c162da8704",
-                "reference": "25ec98a8cbd1f850e60fdb62c0ef77c162da8704",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/ac6fce61f037d7e54dbb2435f5b5648d86548e23",
+                "reference": "ac6fce61f037d7e54dbb2435f5b5648d86548e23",
                 "shasum": ""
             },
             "require": {
-                "doctrine/collections": "^1.0",
                 "doctrine/event-manager": "^1.0",
                 "php": "^7.2 || ^8.0",
                 "psr/cache": "^1.0 || ^2.0 || ^3.0"
@@ -1729,7 +1728,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/persistence/issues",
-                "source": "https://github.com/doctrine/persistence/tree/3.0.2"
+                "source": "https://github.com/doctrine/persistence/tree/3.0.3"
             },
             "funding": [
                 {
@@ -1745,7 +1744,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-05-06T06:10:05+00:00"
+            "time": "2022-08-04T21:14:21+00:00"
         },
         {
             "name": "doctrine/sql-formatter",
@@ -2273,16 +2272,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "3.17.1",
+            "version": "3.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "190f64b051795d447ec755acbfdb1bff330a6707"
+                "reference": "f721ffd76733c24ec1e8fd1e50e44a335fb78bbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/190f64b051795d447ec755acbfdb1bff330a6707",
-                "reference": "190f64b051795d447ec755acbfdb1bff330a6707",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/f721ffd76733c24ec1e8fd1e50e44a335fb78bbe",
+                "reference": "f721ffd76733c24ec1e8fd1e50e44a335fb78bbe",
                 "shasum": ""
             },
             "require": {
@@ -2310,6 +2309,7 @@
                 "symfony/filesystem": "^3.0|^4.0|^5.0|^6.0",
                 "symfony/form": "^3.0|^4.0|^5.0|^6.0",
                 "symfony/translation": "^3.0|^4.0|^5.0|^6.0",
+                "symfony/uid": "^5.1|^6.0",
                 "symfony/validator": "^3.1.9|^4.0|^5.0|^6.0",
                 "symfony/yaml": "^3.3|^4.0|^5.0|^6.0",
                 "twig/twig": "~1.34|~2.4|^3.0"
@@ -2317,6 +2317,7 @@
             "suggest": {
                 "doctrine/collections": "Required if you like to use doctrine collection types as ArrayCollection.",
                 "symfony/cache": "Required if you like to use cache functionality.",
+                "symfony/uid": "Required if you'd like to serialize UID objects.",
                 "symfony/yaml": "Required if you'd like to use the YAML metadata format."
             },
             "type": "library",
@@ -2355,7 +2356,7 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/serializer/issues",
-                "source": "https://github.com/schmittjoh/serializer/tree/3.17.1"
+                "source": "https://github.com/schmittjoh/serializer/tree/3.18.0"
             },
             "funding": [
                 {
@@ -2363,7 +2364,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-28T20:59:55+00:00"
+            "time": "2022-08-06T05:17:44+00:00"
         },
         {
             "name": "kitlabs/kit-crypt-bundle",
@@ -4105,16 +4106,16 @@
         },
         {
             "name": "sonata-project/block-bundle",
-            "version": "4.16.0",
+            "version": "4.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "29b56c8df0b487949c3ea6c8d2c32ecb61ff016c"
+                "reference": "60c9a9f2c74e20c964014645a6247c1a6145f81b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/29b56c8df0b487949c3ea6c8d2c32ecb61ff016c",
-                "reference": "29b56c8df0b487949c3ea6c8d2c32ecb61ff016c",
+                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/60c9a9f2c74e20c964014645a6247c1a6145f81b",
+                "reference": "60c9a9f2c74e20c964014645a6247c1a6145f81b",
                 "shasum": ""
             },
             "require": {
@@ -4204,7 +4205,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataBlockBundle/issues",
-                "source": "https://github.com/sonata-project/SonataBlockBundle/tree/4.16.0"
+                "source": "https://github.com/sonata-project/SonataBlockBundle/tree/4.16.1"
             },
             "funding": [
                 {
@@ -4224,7 +4225,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-20T16:05:01+00:00"
+            "time": "2022-08-05T10:39:39+00:00"
         },
         {
             "name": "sonata-project/cache",
@@ -5940,16 +5941,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.19.2",
+            "version": "v1.19.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "d1a692369be53445af6e391170b509d7f5d026cf"
+                "reference": "ab0453b16029e131c112df1a76e59eb2a47e1f67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/d1a692369be53445af6e391170b509d7f5d026cf",
-                "reference": "d1a692369be53445af6e391170b509d7f5d026cf",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/ab0453b16029e131c112df1a76e59eb2a47e1f67",
+                "reference": "ab0453b16029e131c112df1a76e59eb2a47e1f67",
                 "shasum": ""
             },
             "require": {
@@ -5985,7 +5986,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.19.2"
+                "source": "https://github.com/symfony/flex/tree/v1.19.3"
             },
             "funding": [
                 {
@@ -6001,7 +6002,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-14T21:13:39+00:00"
+            "time": "2022-08-07T09:39:08+00:00"
         },
         {
             "name": "symfony/form",
@@ -11392,16 +11393,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.13.9",
+            "version": "0.13.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "d6319ec783876579b608840cdfe1d8b566c72f74"
+                "reference": "d1e069db8ad3b4aea2b968248370c21415e4c180"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/d6319ec783876579b608840cdfe1d8b566c72f74",
-                "reference": "d6319ec783876579b608840cdfe1d8b566c72f74",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/d1e069db8ad3b4aea2b968248370c21415e4c180",
+                "reference": "d1e069db8ad3b4aea2b968248370c21415e4c180",
                 "shasum": ""
             },
             "require": {
@@ -11440,7 +11441,7 @@
             "description": "Instant Upgrade and Automated Refactoring of any PHP code",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.13.9"
+                "source": "https://github.com/rectorphp/rector/tree/0.13.10"
             },
             "funding": [
                 {
@@ -11448,7 +11449,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-23T10:55:44+00:00"
+            "time": "2022-08-03T12:48:10+00:00"
         },
         {
             "name": "sabre/event",
@@ -13073,7 +13074,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
         "macfja/tracy-doctrine-sql": 20
     },
