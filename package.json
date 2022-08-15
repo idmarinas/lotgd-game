@@ -52,7 +52,7 @@
         "stimulus-autocomplete": "^3.0.2",
         "stimulus-character-counter": "^4.0.0",
         "stimulus-notification": "^2.0.0",
-        "stimulus-popover": "^5.0.1",
+        "stimulus-popover": "^6.1.0",
         "stimulus-use": "^0.50.0",
         "sweetalert2": "^11.4.14",
         "tailwindcss": "^3.0.24",
