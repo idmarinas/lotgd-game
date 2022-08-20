@@ -36,6 +36,7 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   Previously it treated the `id` as numeric when it was a string.
 -   `src/core/Controller/GraveyardController.php` Fixed error, mark function `setServiceCreatureFunction` with *required* anotation.
     -   With this, Symfony inject services.
+-   `src/core/Controller/StableController.php` Fixed error with name of var. **dipatcher** to **dispatcher**
 -   `public/gardens` Fixed error, pass `$textDomainNavigation` as argument. 
 
 ### :x: REMOVES

@@ -30,7 +30,6 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class StableController extends AbstractController
 {
-    public $dipatcher;
     private $navigation;
     private $dispatcher;
     private $repository;
@@ -68,7 +67,7 @@ class StableController extends AbstractController
         // Don't hook on to this text for your standard modules please, use "stable" instead.
         // This hook is specifically to allow modules that do other stables to create ambience.
         $args = new GenericEvent(null, ['textDomain' => 'page_stables', 'textDomainNavigation' => 'navigation_stables']);
-        $this->dipatcher->dispatch($args, Events::PAGE_STABLES_PRE);
+        $this->dispatcher->dispatch($args, Events::PAGE_STABLES_PRE);
         $result               = $args->getArguments();
         $textDomain           = $result['textDomain'];
         $textDomainNavigation = $result['textDomainNavigation'];
