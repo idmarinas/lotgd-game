@@ -20,6 +20,9 @@ trait News
 {
     public function showNewsItem($item)
     {
+        $arguments = is_array($item['arguments']) ? $item['arguments'] : [];
+        $arguments = is_string($item['arguments']) ? [$item['arguments']] : $arguments;
+
         //-- News that use new format
         if ($item['newFormat'])
         {
@@ -60,12 +63,12 @@ trait News
                 return $message;
             }
 
-            return $this->translator->trans($item['text'], $item['arguments'] ?? [], $item['textDomain']);
+            return $this->translator->trans($item['text'], $arguments, $item['textDomain']);
         }
 
         //-- This old of make news, are deprecated and deleted in future version.
         //-- Delete old news of your server.
 
-        return $this->sprintfnews(str_replace('`%', '`%%', $item['text']), $item['arguments'] ?? []);
+        return $this->sprintfnews(str_replace('`%', '`%%', $item['text']), $arguments);
     }
 }

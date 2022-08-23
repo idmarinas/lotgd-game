@@ -38,6 +38,7 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   With this, Symfony inject services.
 -   `src/core/Controller/StableController.php` Fixed error with name of var. **dipatcher** to **dispatcher**
 -   `public/gardens` Fixed error, pass `$textDomainNavigation` as argument. 
+-   `src/core/Twig/Extension/Pattern/News.php` Check if arguments is an array.
 
 ### :x: REMOVES
 
