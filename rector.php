@@ -31,8 +31,6 @@ return static function (RectorConfig $rectorConfig): void
     $rectorConfig->import(SetList::PHP_74);
     $rectorConfig->import(SetList::PHP_80);
     $rectorConfig->import(SetList::PHP_81);
-    $rectorConfig->import(SetList::FRAMEWORK_EXTRA_BUNDLE_40);
-    $rectorConfig->import(SetList::FRAMEWORK_EXTRA_BUNDLE_50);
 
     //-- Symfony Framework
     $rectorConfig->import(SymfonySetList::SYMFONY_40);
