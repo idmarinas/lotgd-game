@@ -41,7 +41,6 @@ class Petitions
     private ?int $author = 0;
 
     /**
-     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="date", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
@@ -66,7 +65,6 @@ class Petitions
     private array $pageinfo = [];
 
     /**
-     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="closedate", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */

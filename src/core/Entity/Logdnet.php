@@ -53,7 +53,6 @@ class Logdnet
     private float $priority = 100;
 
     /**
-     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="lastupdate", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
@@ -72,7 +71,6 @@ class Logdnet
     private ?string $admin = 'unknown';
 
     /**
-     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="lastping", type="datetime")
      */

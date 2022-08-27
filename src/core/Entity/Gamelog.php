@@ -56,7 +56,6 @@ class Gamelog
     private ?bool $filed = false;
 
     /**
-     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="date", type="datetime")
      */

@@ -15,10 +15,10 @@ namespace Lotgd\Core\Tool;
 
 use Lotgd\Core\Kernel;
 use Lotgd\Core\Lib\Settings;
-use Lotgd\Core\Tool\Sanitize;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
+use Throwable;
 use Twig\Environment;
 
 /**
@@ -109,7 +109,7 @@ class LotgdMail
 
             return true;
         }
-        catch (\Throwable $th)
+        catch (Throwable $th)
         {
             return false;
         }

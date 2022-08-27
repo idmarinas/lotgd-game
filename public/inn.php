@@ -22,11 +22,6 @@ unset($result);
 
 $skipinndesc = false;
 
-if ( ! $skipinndesc)
-{
-    LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
-}
-
 /** @var Lotgd\Core\Http\Request $request */
 $request = LotgdKernel::get(Request::class);
 
@@ -130,6 +125,11 @@ switch ($op)
 }
 
 $params['showInnDescription'] = ! $skipinndesc;
+
+if ( ! $skipinndesc)
+{
+    LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
+}
 
 $request->attributes->set('params', $params);
 

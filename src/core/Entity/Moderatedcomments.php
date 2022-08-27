@@ -45,7 +45,6 @@ class Moderatedcomments
     private ?int $moderator = 0;
 
     /**
-     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="moddate", type="datetime")
      */

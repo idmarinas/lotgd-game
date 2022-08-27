@@ -56,7 +56,7 @@ class ForestController extends AbstractController
             $this->dispatcher->dispatch($args, Events::PAGE_FOREST_VALID_FOREST_LOC);
             $vloc = $args->getArguments();
 
-            foreach ($vloc as $i => $l)
+            foreach (array_keys($vloc) as $i)
             {
                 if ($session['user']['location'] == $i)
                 {

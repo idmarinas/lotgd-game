@@ -22,7 +22,6 @@ use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Log;
 use Lotgd\Core\Output\Censor;
-use Lotgd\Core\Output\Format;
 use Lotgd\Core\Tool\LotgdMail;
 use Lotgd\Core\Tool\Sanitize;
 use Lotgd\Core\Tool\SystemMail;
@@ -46,7 +45,6 @@ class CreateController extends AbstractController
     private $translator;
     private $censor;
     private $sanitize;
-    private $format;
     private $log;
     private $settings;
     private $passwordEncoder;
@@ -60,7 +58,6 @@ class CreateController extends AbstractController
         TranslatorInterface $translator,
         Censor $censor,
         Sanitize $sanitize,
-        Format $format,
         Log $log,
         Settings $settings,
         UserPasswordEncoderInterface $passwordEncoder,
@@ -72,7 +69,6 @@ class CreateController extends AbstractController
         $this->translator      = $translator;
         $this->censor          = $censor;
         $this->sanitize        = $sanitize;
-        $this->format          = $format;
         $this->log             = $log;
         $this->settings        = $settings;
         $this->passwordEncoder = $passwordEncoder;

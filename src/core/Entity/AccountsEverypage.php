@@ -32,7 +32,6 @@ class AccountsEverypage
     private ?int $acctid = null;
 
     /**
-     * @var float|null
      *
      * @ORM\Column(name="gentime", type="float", precision=10, options={"unsigned"=true})
      */

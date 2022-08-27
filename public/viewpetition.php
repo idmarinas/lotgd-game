@@ -108,7 +108,7 @@ elseif ('view' == $op)
 
     $params['viewPageInfo'] = $viewpageinfo;
 
-    if (\count($statuses) > 0)
+    if ($statuses !== [])
     {
         reset($statuses);
         foreach ($statuses as $key => $val)
