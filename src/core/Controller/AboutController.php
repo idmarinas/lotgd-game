@@ -112,17 +112,10 @@ class AboutController extends AbstractController
         $this->navigation->addHeader('about.category.about');
         $this->navigation->addNav('about.nav.about', 'about.php');
         $this->navigation->addNav('about.nav.setup', 'about.php?op=setup');
-        $this->navigation->addNav('about.nav.module', 'about.php?op=listmodules');
         $this->navigation->addNav('about.nav.bundle', 'about.php?op=bundles');
         $this->navigation->addNav('about.nav.license', 'about.php?op=license');
 
-        if ('listmodules' == $op)
-        {
-            $this->navigation->blockLink('about.php?op=listmodules');
-
-            $method = 'modules';
-        }
-        elseif ('bundles' == $op)
+        if ('bundles' == $op)
         {
             $this->navigation->blockLink('about.php?op=bundles');
 
@@ -161,16 +154,6 @@ class AboutController extends AbstractController
         }
 
         return $this->{$method}();
-    }
-
-    public function modules()
-    {
-        $params = [
-            'block_tpl' => 'about_modules',
-            'result'    => $this->getDoctrine()->getRepository('LotgdCore:Modules')->findBy(['active' => 1], ['category' => 'ASC', 'formalname' => 'ASC']),
-        ];
-
-        return $this->renderAbout($params);
     }
 
     public function bundles(): Response
