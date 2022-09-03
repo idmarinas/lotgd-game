@@ -50,7 +50,6 @@
         "laminas/laminas-log": "^2.12",
         "laminas/laminas-math": "^3.2",
         "laminas/laminas-paginator": "^2.8",
-        "laminas/laminas-serializer": "^2.9",
         "laminas/laminas-stdlib": "^3.2",
         "laminas/laminas-validator": "^2.14",
         "laminas/laminas-view": "^2.11",

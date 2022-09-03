@@ -178,9 +178,6 @@
     "laminas/laminas-paginator": {
         "version": "2.10.0"
     },
-    "laminas/laminas-serializer": {
-        "version": "2.10.1"
-    },
     "laminas/laminas-servicemanager": {
         "version": "3.6.4"
     },
