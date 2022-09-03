@@ -73,6 +73,7 @@
 
 // Constants used in lib/modules - for providing more information about the
 // status of the module
+/** @deprecated 8.0.0 deleted in version 9.0.0 */
 \defined('MODULE_NO_INFO')          || \define('MODULE_NO_INFO', 0);
 \defined('MODULE_INSTALLED')        || \define('MODULE_INSTALLED', 1);
 \defined('MODULE_VERSION_OK')       || \define('MODULE_VERSION_OK', 2);
