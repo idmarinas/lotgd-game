@@ -119,24 +119,6 @@ if ( ! $op && '' == $com && ! $comment && ! $commenting)
         $op = '';
         $request->setQuery('op', '');
     }
-    //-- Only execute when NOT occurrence is in progress.
-    elseif (0 != module_events('village', LotgdSetting::getSetting('villagechance', 0)))
-    {
-        if (LotgdNavigation::checkNavs())
-        {
-            LotgdResponse::pageEnd();
-        }
-        else
-        {
-            // Reset the special for good.
-            $session['user']['specialinc']  = '';
-            $session['user']['specialmisc'] = '';
-            $skipvillagedesc                = true;
-
-            $op = '';
-            $request->setQuery('op', '');
-        }
-    }
 }
 
 //-- Change text domain for navigation

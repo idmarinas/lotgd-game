@@ -62,24 +62,6 @@ if ( ! $op && '' == $com && ! $comment && ! $refresh && ! $commenting)
         $op             = '';
         $request->query->set('op', '');
     }
-    //-- Only execute when NOT occurrence is in progress.
-    elseif (0 != module_events('gardens', LotgdSetting::getSetting('gardenchance', 0)))
-    {
-        if (LotgdNavigation::checkNavs())
-        {
-            LotgdResponse::pageEnd();
-        }
-        else
-        {
-            // Reset the special for good.
-            $session['user']['specialinc']  = '';
-            $session['user']['specialmisc'] = '';
-
-            $skipgardendesc = true;
-            $op             = '';
-            $request->query->set('op', '');
-        }
-    }
 }
 
 if ( ! $skipgardendesc)
@@ -94,8 +76,6 @@ LotgdNavigation::gardensNav($textDomainNavigation);
 $request->attributes->set('params', $params);
 
 LotgdResponse::callController(GardenController::class);
-
-module_display_events('gardens', 'gardens.php');
 
 //-- Finalize page
 LotgdResponse::pageEnd();

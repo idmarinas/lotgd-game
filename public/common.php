@@ -123,9 +123,6 @@ elseif (LotgdSetting::getSetting('maintenance', 0))
     ]);
 }
 
-$script = substr(LotgdRequest::getServer('SCRIPT_NAME'), 0, strrpos(LotgdRequest::getServer('SCRIPT_NAME'), '.'));
-mass_module_prepare(['everyhit', "header-{$script}", "footer-{$script}", 'holiday', 'charstats']);
-
 // In the event of redirects, we want to have a version of their session we
 // can revert to:
 $revertsession = $session;

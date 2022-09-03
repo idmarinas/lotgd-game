@@ -100,24 +100,6 @@ elseif ('search' == $op)
             $op = '';
             $request->query->set('op', '');
         }
-        //-- Only execute when NOT occurrence is in progress.
-        elseif (0 != module_events('forest', LotgdSetting::getSetting('forestchance', 15)))
-        {
-            if (LotgdNavigation::checkNavs())
-            {
-                LotgdResponse::pageEnd();
-            }
-
-            // If we're showing the forest, make sure to reset the special
-            // and the specialmisc
-            $session['user']['specialinc']  = '';
-            $session['user']['specialmisc'] = '';
-            $dontDisplayForestMessage       = true;
-            $params['showForestMessage']    = ! $dontDisplayForestMessage;
-
-            $op = '';
-            $request->query->set('op', '');
-        }
         else
         {
             --$session['user']['turns'];
@@ -443,12 +425,6 @@ if ( ! $battle)
 
 //-- Restore text domain for navigation
 LotgdNavigation::setTextDomain();
-
-//-- Display events
-if ('' == $op)
-{
-    module_display_events('forest', 'forest.php');
-}
 
 //-- Finalize page
 LotgdResponse::pageEnd();

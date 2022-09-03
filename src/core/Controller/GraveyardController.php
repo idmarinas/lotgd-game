@@ -230,24 +230,6 @@ class GraveyardController extends AbstractController
 
                 $request->query->set('op', '');
             }
-            //-- Only execute when NOT occurrence is in progress.
-            elseif (0 != module_events('graveyard', $this->settings->getSetting('gravechance', 0)))
-            {
-                if ($this->navigation->checkNavs())
-                {
-                    $this->response->pageEnd();
-                }
-
-                // If we're going back to the graveyard, make sure to reset
-                // the special and the specialmisc
-                $session['user']['specialinc']  = '';
-                $session['user']['specialmisc'] = '';
-
-                $skipgraveyardtext           = true;
-                $params['showGraveyardDesc'] = ! $skipgraveyardtext;
-
-                $request->query->set('op', '');
-            }
             else
             {
                 --$session['user']['gravefights'];

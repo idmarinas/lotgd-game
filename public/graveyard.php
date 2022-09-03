@@ -36,10 +36,5 @@ LotgdResponse::callController('Lotgd\Core\Controller\GraveyardController');
 
 $params = $request->attributes->get('params');
 
-if ('default' == $params['tpl'])
-{
-    module_display_events('graveyard', 'graveyard.php');
-}
-
 //-- Finalize page
 LotgdResponse::pageEnd();

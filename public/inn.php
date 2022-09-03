@@ -103,22 +103,6 @@ switch ($op)
                 $op = '';
                 LotgdRequest::setQuery('op', '');
             }
-            //-- Only execute when NOT occurrence is in progress.
-            elseif (0 != module_events('inn', LotgdSetting::getSetting('innchance', 0)))
-            {
-                if (LotgdNavigation::checkNavs())
-                {
-                    LotgdResponse::pageEnd();
-                }
-
-                // Reset the special for good.
-                $session['user']['specialinc']  = '';
-                $session['user']['specialmisc'] = '';
-                $skipinndesc                    = true;
-
-                $op = '';
-                LotgdRequest::setQuery('op', '');
-            }
         }
 
     break;
@@ -141,8 +125,6 @@ if ('default' == $params['tpl'])
 {
     $args = new GenericEvent();
     LotgdEventDispatcher::dispatch($args, Events::PAGE_INN);
-
-    module_display_events('inn', 'inn.php');
 }
 
 //-- Finalize page

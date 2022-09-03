@@ -64,8 +64,6 @@ elseif ('del' == $op)
 
     $op = '';
     LotgdRequest::setQuery('op', '');
-
-    module_delete_objprefs('companions', $id);
 }
 elseif ('take' == $op)
 {
