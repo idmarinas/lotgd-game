@@ -134,7 +134,8 @@
         "test": "php bin/phpunit --process-isolation"
     },
     "conflict": {
-        "symfony/symfony": "*"
+        "symfony/symfony": "*",
+        "doctrine/persistence": ">=3"
     },
     "extra": {
         "symfony": {
