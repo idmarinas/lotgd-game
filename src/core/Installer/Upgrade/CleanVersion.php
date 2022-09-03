@@ -19,7 +19,7 @@ use Lotgd\Core\Installer\InstallerAbstract;
 class CleanVersion extends InstallerAbstract
 {
     protected $upgradeVersion = 'clean';
-    protected $hasMigration = 20_210_127_183_022;
+    protected $hasMigration = 20_220_903_124_947;
 
     //-- Insert data of armors.
     public function step0(): bool
@@ -72,12 +72,12 @@ class CleanVersion extends InstallerAbstract
         return true;
     }
 
-    //-- Insert data of cronjobs.
+    //-- Insert data of weapons.
     public function step3(): bool
     {
         try
         {
-            $sql = file_get_contents(__DIR__.'/data/clean/cronjob.sql');
+            $sql = file_get_contents(__DIR__.'/data/clean/weapon.sql');
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
@@ -163,23 +163,6 @@ class CleanVersion extends InstallerAbstract
         try
         {
             $sql = file_get_contents(__DIR__.'/data/clean/title.sql');
-
-            $this->doctrine->getConnection()->executeQuery($sql);
-        }
-        catch (Throwable $th)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    //-- Insert data of weapons.
-    public function step9(): bool
-    {
-        try
-        {
-            $sql = file_get_contents(__DIR__.'/data/clean/weapon.sql');
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
