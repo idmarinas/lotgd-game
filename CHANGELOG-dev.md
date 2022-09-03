@@ -39,6 +39,15 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :fire: DEPRECATED
 
 -   `src/core/Kernel.php` Mark const `VERSION_NUMBER` as deprecated
+-   **Constants**
+    -   `MODULE_NO_INFO`
+    -   `MODULE_INSTALLED`
+    -   `MODULE_VERSION_OK`
+    -   `MODULE_NOT_INSTALLED`
+    -   `MODULE_FILE_NOT_PRESENT`
+    -   `MODULE_VERSION_TOO_LOW`
+    -   `MODULE_ACTIVE`
+    -   `MODULE_INJECTED`
 
 ### :wrench: FIXES
 
