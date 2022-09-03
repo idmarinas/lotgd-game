@@ -15,10 +15,11 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :cyclone: CHANGES
 
--   `src/ajax/core/Mounts.php` migrate this class to Stimulus controller
-    -   `src/core/Controller/MountsController.php` use `remote-modal` Stimulus controller to load this.
--   `src/ajax/core/Bans.php` migrate this class to Stimulus controller
-    -   `src/core/Controller/BansController.php` use `remote-modal` Stimulus controller to load this.
+-   **Jaxon PHP to Stimulus**
+    -   `src/ajax/core/Mounts.php` migrate this class to Stimulus controller
+        -   `src/core/Controller/MountsController.php` use `remote-modal` Stimulus controller to load this.
+    -   `src/ajax/core/Bans.php` migrate this class to Stimulus controller
+        -   `src/core/Controller/BansController.php` use `remote-modal` Stimulus controller to load this.
 -   **Change CronJob System**
     -   Need update your crontab:
         -   From `* * * * * cd /path/to/project/public && php cronjob.php 1>> /dev/null 2>&1`  
@@ -29,6 +30,8 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
             bin/console cron:stop # will stop the background cron daemon
         ```
     -   More info in [Cron Symfony Bundle](https://github.com/Cron/Symfony-Bundle)
+-   **Installer** Merges all migrations into a new clean migration.
+    -   Version `8.0.0` needs to be installed from version `7.1.*`
 
 ### :star: FEATURES
 

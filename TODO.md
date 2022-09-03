@@ -5,7 +5,6 @@
 # Actualmente haciendo esto (8.0.0)
 
 -   **BC** Se elimina la compatibilidad con el antiguo sistema de módulos
-    -   Seguir eliminando las funciones referentes a los módulos
 
 # Cosas a mejorar
 
@@ -63,13 +62,6 @@
     -   Usar macros y blocks donde se pueda.
 -   **BC** Esta versión será ya una Symfony App (En estudio, puede que la versión 9.0.0 sea la Symfony App)
     -   Según se vea, dependiendo del sistema de eventos especiales, que parece ser que es el que más problemas va a dar.
--   **BC** Se elimina la compatibilidad del antiguo sistema de módulos.
-    -   Por lo que la versión 7.0.0 sería la última versión compatible con los módulos.
--   Se fusiona todos los installer a uno nuevo como clean version
-    -   El installer de la versión 6.0.0 depende de laminas/laminas-serializer
-        -   Es en el único sitio donde se utiliza este componente
--   Eliminar paquete laminas/laminas-serializer
--   Eliminar la dependencia de Jaxon-PHP, usar Stimulus
 -   Se usará todos los componentes del Framework de Symfony (ruter incluido)
 -   Todo el Core estará compuesto por Bundles, para así poder usar un Skeleton muy similar al de Symfony App Skeleton
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
@@ -129,7 +121,6 @@
 
 ## Para la versión X.Y.Z
 
--   Migrar los cronjobs a cron/cron bundle mediante comandos de symfony console.
 -   Copiar el sistema de petition (y adaptarlo) en el app bundle.
 -   Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
     -   Poner las opciones de la encuesta en una tabla separada. Permitiendo que las opciones también se puedan traducir.
@@ -141,14 +132,15 @@
     -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
 -   Crear el bundle del inventario. Para sustituir el antiguo sistema de armadura y arma.
 -   Crear el bundle de energia, que permita poner energia o un sistema por turnos.
--   Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
-    -   La instalación por consola ya se creo en la versión 5.0.0
-        -   Se mirará incluir una versión de instalación por web
-            -   Problematico la creación del usuario admin
-    -   Para los admin que no dispongan de esta opción se agrega la opción de instalación via web.
 -   Posible candidato a sustituir el petition system por https://github.com/hackzilla-project/TicketBundle
 -   Para limitar los intentos de conexión https://github.com/anyx/LoginGateBundle
     -   No es necesario desde la versión 5.4 de Symfony
+-   **No se implementará por el momento** Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
+    -   No es una buena idea, esto se descarga por el momento.
+    -   La instalación por consola ya se creo en la versión 5.0.0
+        -   Se mirará incluir una versión de instalación por web
+            -   Problemático la creación del usuario admin
+    -   Para los admin que no dispongan de esta opción se agrega la opción de instalación via web.
 
 ## Cosas pendientes
 
