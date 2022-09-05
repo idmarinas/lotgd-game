@@ -130,7 +130,7 @@ trait Version
         '7.0.4 IDMarinas Edition'         => 70004,
         '7.1.0 IDMarinas Edition'         => 70100,
         '7.1.1 IDMarinas Edition'         => 70101,
-        '8.0.0 IDMarinas Edition'         => 80000,//-- Remove old system of modules
+        '8.0.0 IDMarinas Edition'         => 80000,//-- Remove old system of modules. Merges all migrations into a new clean migration.
     ];
 
     /**
@@ -166,8 +166,8 @@ trait Version
      */
     public function getInstallerVersions(): array
     {
-        //-- Only version up of 4.12.0 IDMarinas Edition is allowed in installer
-        return \array_filter($this->lotgd_versions, fn($version) => $version > 41200 || -1 == $version);
+        //-- The installer supports versions from 8.0.0 IDMarinas Edition and higher.
+        return \array_filter($this->lotgd_versions, fn($version) => $version >= 80000 || -1 == $version);
     }
 
     /**
