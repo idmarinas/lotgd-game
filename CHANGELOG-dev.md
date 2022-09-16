@@ -75,11 +75,15 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   `lib/lotgd_mail.php` Use Symfony mailer or `Lotgd\Core\Tool\LotgdMail`
 -   `src/ajax/core/Mounts.php` deleted, now is a Stimulus controller
 -   `src/ajax/core/Bans.php` deleted, now is a Stimulus controller
--   **Deprecated functions**
-    -   `src/functions.php`
+-   **Deprecated**
+    -   **Functions** in `src/functions.php`
         -   `myDefine`
         -   `safeescape`
         -   `nltoappon`
+    -   **File** `lib/serverfunctions.class.php`
+        -   `isTheServerFull`
+        -   `resetAllDragonkillPoints` 
+        -   **Note**: use service `lotgd_core.service.server_functions`
 
 ### :notebook: NOTES
 
