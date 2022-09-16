@@ -12,7 +12,6 @@ use Lotgd\Core\Event\Core;
 \define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
-require_once 'lib/serverfunctions.class.php';
 
 $op    = (string) LotgdRequest::getQuery('op');
 $name  = (string) LotgdRequest::getPost('name');

@@ -1,7 +1,6 @@
 <?php
 
 require_once 'common.php';
-require_once 'lib/serverfunctions.class.php';
 
 check_su_access(SU_MEGAUSER);
 
