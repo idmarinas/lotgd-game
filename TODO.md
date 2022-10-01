@@ -1,6 +1,7 @@
 # Módulos
 
--   Adaptarlos para la version 6.2.0
+-   Adaptarlos para la version 7.1.0
+-   Migrar todos a un bundle para la versión 8.0.0
 
 # Actualmente haciendo esto (8.0.0)
 
@@ -43,7 +44,8 @@
 ## **BC** Para la versión X.0.0
 
 -   Crear un systema de turnos/stamina mixto, para poder elegir que se usa para las acciones.
--   Crear un bundle `lotgd-core-bundle` que agrege todos los paquetes que se requieran como base "7.1.0"
+-   Crear un bundle `lotgd-core-bundle` que agrege todos los paquetes que se requieran como base
+    -   Ir migrando ciertas partes a un bundle, para ir creando LoTGD Core como una Symfony App
 -   Esta será la última versión que use la ordenación de carpetas `src/core` y `src/local`
     -   La versión X.0.0 será la última versión con esta estructura, y será la versión dedicada a facilitar la transición a la versión LoTGD APP Symfony.
         -   La estructura actual X.0.0 y anterior es un poco caótica, por lo que se usará esta última versión para facilitar el salto a la versión LoTGD APP Symfony.
