@@ -6,6 +6,11 @@
 # Actualmente haciendo esto (8.0.0)
 
 -   **BC** Se elimina la compatibilidad con el antiguo sistema de módulos
+-   Añadir clean_version a la version ya instalada, para que no la intente instalar. 
+    -   Se agrega durante la instalación de la 8.0.0
+        -   Si es una actualización, si es una instalación limpia no hace nada
+-   Probar la migración a la versión 8.0.0 desde la 7.1.*
+-   Probar instalación desde la versión 8.0.0
 
 # Cosas a mejorar
 
