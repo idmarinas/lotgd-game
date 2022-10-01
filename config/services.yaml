@@ -36,6 +36,7 @@ services:
             - "../src/core/ExpressionLanguage/BattleProvider.php"
             - "../src/core/Fixed/HookManager.php"
             - "../src/core/Twig/Extension/AdvertisingGoogle.php"
+            - "../src/core/Twig/Extension/Jaxon.php"
             - "../src/core/Hook.php"
             - "../src/core/Kernel.php"
             - "../src/core/Service/Jaxon.php"
