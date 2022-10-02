@@ -8,12 +8,16 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
  * @author IDMarinas
  *
- * @since 7.0.0
+ * @since 8.0.0
  */
 
 namespace Lotgd\Core\Installer\Command;
 
 use Lotgd\Core\Installer\Upgrade\Version80000;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -29,5 +33,29 @@ final class Install80000Command extends AbstractCommand
 
         $this->installer  = $install;
         $this->translator = $translator;
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        // -- Add new clean version to executed list
+        $params = new ArrayInput([
+            'version' => 'DoctrineMigrations\Version20220903124947',
+            '--add'   => true,
+        ]);
+        $params->setInteractive(false);
+
+        $command = $this->getApplication()->find('doctrine:migrations:version');
+
+        try
+        {
+            $command->run($params, new NullOutput());
+        }
+        catch (\Throwable $th)
+        {
+            //-- Not break execute if migration are in DB
+        }
+
+        // -- Execute command
+        return parent::execute($input, $output);
     }
 }
