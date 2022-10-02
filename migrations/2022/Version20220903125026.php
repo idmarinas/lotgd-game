@@ -27,13 +27,6 @@ final class Version20220903125026 extends AbstractMigration
         $this->addSql('DROP TABLE module_settings');
         $this->addSql('DROP TABLE module_userprefs');
         $this->addSql('DROP TABLE modules');
-        $this->addSql('ALTER TABLE bans CHANGE banexpire banexpire DATETIME NOT NULL');
-        $this->addSql('ALTER TABLE cron_report ADD error LONGTEXT NOT NULL');
-        $this->addSql('ALTER TABLE debuglog CHANGE date date DATETIME NOT NULL');
-        $this->addSql('ALTER TABLE debuglog_archive CHANGE date date DATETIME NOT NULL');
-        $this->addSql('ALTER TABLE gamelog CHANGE date date DATETIME NOT NULL');
-        $this->addSql('ALTER TABLE logdnet CHANGE lastping lastping DATETIME NOT NULL');
-        $this->addSql('ALTER TABLE moderatedcomments CHANGE moddate moddate DATETIME NOT NULL');
         $this->addSql('DROP INDEX uri ON referers');
         $this->addSql('CREATE INDEX uri ON referers (uri)');
     }
@@ -48,13 +41,6 @@ final class Version20220903125026 extends AbstractMigration
         $this->addSql('CREATE TABLE module_settings (modulename VARCHAR(50) CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, setting VARCHAR(50) CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, value TEXT CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, PRIMARY KEY(modulename, setting)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ');
         $this->addSql('CREATE TABLE module_userprefs (modulename VARCHAR(50) CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, setting VARCHAR(50) CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, userid INT UNSIGNED DEFAULT 0 NOT NULL, value TEXT CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, INDEX modulename (modulename, userid), PRIMARY KEY(modulename, setting, userid)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ');
         $this->addSql('CREATE TABLE modules (modulename VARCHAR(50) CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, formalname VARCHAR(255) CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, description TEXT CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, moduleauthor VARCHAR(255) CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, active TINYINT(1) DEFAULT \'0\' NOT NULL, filename VARCHAR(255) CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, installdate DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL, installedby VARCHAR(50) CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, filemoddate DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL, type TINYINT(1) DEFAULT \'0\' NOT NULL, extras TEXT CHARACTER SET utf8 DEFAULT NULL COLLATE `utf8_unicode_ci`, category VARCHAR(50) CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, infokeys TEXT CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, version VARCHAR(10) CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, download VARCHAR(200) CHARACTER SET utf8 NOT NULL COLLATE `utf8_unicode_ci`, PRIMARY KEY(modulename)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ');
-        $this->addSql('ALTER TABLE bans CHANGE banexpire banexpire DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL');
-        $this->addSql('ALTER TABLE cron_report DROP error');
-        $this->addSql('ALTER TABLE debuglog CHANGE date date DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL');
-        $this->addSql('ALTER TABLE debuglog_archive CHANGE date date DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL');
-        $this->addSql('ALTER TABLE gamelog CHANGE date date DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL');
-        $this->addSql('ALTER TABLE logdnet CHANGE lastping lastping DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL');
-        $this->addSql('ALTER TABLE moderatedcomments CHANGE moddate moddate DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL');
         $this->addSql('DROP INDEX uri ON referers');
         $this->addSql('CREATE INDEX uri ON referers (uri(255))');
     }
