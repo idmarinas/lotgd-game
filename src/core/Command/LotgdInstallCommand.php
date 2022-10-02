@@ -128,7 +128,8 @@ final class LotgdInstallCommand extends Command
         $helper      = $this->getHelper('question');
         $nameVersion = $this->installer->getNameVersion($fromVersion);
         $type        = 'Clean Install' == $nameVersion ? 'clean' : 'version';
-        $question    = new ConfirmationQuestion(
+
+        $question = new ConfirmationQuestion(
             $this->translator->trans("installer.check.installation.verify.{$type}", ['version' => $nameVersion], InstallerAbstract::TRANSLATOR_DOMAIN),
             false
         );
@@ -140,7 +141,7 @@ final class LotgdInstallCommand extends Command
 
             $question = new ChoiceQuestion(
                 $this->translator->trans('installer.check.installation.version.choice', [], InstallerAbstract::TRANSLATOR_DOMAIN),
-                \array_keys($versions),
+                array_keys($versions),
                 0
             );
 
@@ -217,13 +218,12 @@ final class LotgdInstallCommand extends Command
                 continue;
             }
 
-            /** @var Lotgd\Core\Installer\Command\AbstractCommand  $command*/
+            /** @var Lotgd\Core\Installer\Command\AbstractCommand $command */
             $command = $this->getApplication()->find("lotgd:install:v:{$v_id}");
             $command->setProgressBar($installerBar);
-            $returnCode = (int) $command->run($input, $output);
 
             //-- If command fail, abort installation
-            if ($returnCode !== 0)
+            if (0 !== (int) $command->run($input, $output))
             {
                 $this->style->warning($this->translator->trans('installer.installation.abort.command', [
                     'version' => $this->installer->getNameVersion($v_id),
@@ -278,7 +278,7 @@ final class LotgdInstallCommand extends Command
     {
         ProgressBar::setPlaceholderFormatterDefinition('memory', function ()
         {
-            $mem = \memory_get_usage();
+            $mem    = memory_get_usage();
             $colors = $mem > 24_000_000 ? '41;37' : '44;37';
 
             return "\033[".$colors.'m '.Helper::formatMemory($mem)." \033[0m";
