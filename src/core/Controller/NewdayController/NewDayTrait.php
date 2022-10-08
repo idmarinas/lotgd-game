@@ -74,8 +74,8 @@ trait NewDayTrait
 
         $this->response->pageStart('title.default', [], $this->getTranslationDomain());
 
-        $params['tpl']                 = 'default';
-        $params['maxGoldForInterest']  = $this->settings->getSetting('maxgoldforinterest', 100000);
+        $params['tpl']                = 'default';
+        $params['maxGoldForInterest'] = $this->settings->getSetting('maxgoldforinterest', 100000);
 
         $params['resurrected'] = false;
 
@@ -129,7 +129,7 @@ trait NewDayTrait
             (-6) => 'spirits.00',
             (-2) => 'spirits.01',
             (-1) => 'spirits.02',
-            (0)  => 'spirits.03',
+            0    => 'spirits.03',
             1    => 'spirits.04',
             2    => 'spirits.05',
         ];
@@ -198,7 +198,7 @@ trait NewDayTrait
 
         $this->battle->unSuspendCompanions('allowinshades');
 
-        //-- Run new day if not run by cronjob
+        // -- Run new day if not run by cronjob
         $this->generateNewGameDay();
 
         $args = new Core([
@@ -214,7 +214,7 @@ trait NewDayTrait
         $params['includeTemplatesPre']  = $args['includeTemplatesPre'];
         $params['includeTemplatesPost'] = $args['includeTemplatesPost'];
 
-        //## Process stamina for spirit
+        // ## Process stamina for spirit
         $args = new Other(['spirits' => $spirits]);
         $this->dispatcher->dispatch($args, Other::STAMINA_NEWDAY);
 
@@ -247,8 +247,8 @@ trait NewDayTrait
             return;
         }
 
-        //check last time we did this vs now to see if it was a different game day.
-        $newDaySemaphore = $this->settings->getSetting('newdaySemaphore', '0000-00-00 00:00:00');
+        // check last time we did this vs now to see if it was a different game day.
+        $newDaySemaphore     = $this->settings->getSetting('newdaySemaphore', '0000-00-00 00:00:00');
         $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($newDaySemaphore.' +0000'));
         $gametoday           = $this->dateTime->gameTime();
 
@@ -262,7 +262,7 @@ trait NewDayTrait
 
             if (gmdate('Ymd', $gametoday) !== gmdate('Ymd', $lastnewdaysemaphore))
             {
-                //we need to run the hook, update the setting, and unlock.
+                // we need to run the hook, update the setting, and unlock.
                 $this->settings->saveSetting('newdaySemaphore', gmdate('Y-m-d H:i:s'));
             }
         }
@@ -304,7 +304,7 @@ trait NewDayTrait
     {
         global $session, $playermount;
 
-        //clear all standard buffs
+        // clear all standard buffs
         $tempbuf = $session['user']['bufflist'] ?? [];
 
         $session['user']['bufflist'] = [];
