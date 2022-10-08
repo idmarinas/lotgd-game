@@ -142,7 +142,5 @@ LotgdResponse::callController(VillageController::class);
 // -- Restore text domain for navigation
 LotgdNavigation::setTextDomain();
 
-module_display_events('village', 'village.php');
-
 // -- Finalize page
 LotgdResponse::pageEnd();
