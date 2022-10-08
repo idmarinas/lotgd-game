@@ -2,17 +2,18 @@
 
 use Lotgd\Core\Controller\VillageController;
 use Lotgd\Core\Events;
-// translator ready
-// addnews ready
-// mail ready
-
 use Lotgd\Core\Http\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-//-- First check for autochallengeç
+// translator ready
+// addnews ready
+// mail ready
+require_once 'common.php';
+
+// -- First check for autochallengeç
 if (LotgdSetting::getSetting('automaster', 1) && 1 != $session['user']['seenmaster'])
 {
-    //masters hunt down truant students
+    // masters hunt down truant students
     $level   = $session['user']['level'] + 1;
     $dks     = $session['user']['dragonkills'];
     $expreqd = LotgdTool::expForNextLevel($level, $dks);
@@ -53,7 +54,7 @@ if ( ! isset($valid_loc[$session['user']['location']]))
     $session['user']['location'] = $vname;
 }
 
-//-- Newest player in realm
+// -- Newest player in realm
 $params['newestplayer'] = (int) LotgdSetting::getSetting('newestplayer', 0);
 $params['newestname']   = (string) LotgdSetting::getSetting('newestplayername', '');
 
@@ -70,7 +71,7 @@ elseif ( ! $params['newestname'] && $params['newestplayer'])
     LotgdSetting::saveSetting('newestplayername', $params['newestname']);
 }
 
-//-- Init page
+// -- Init page
 LotgdResponse::pageStart('title', $params, $textDomain);
 
 $skipvillagedesc = false;
@@ -121,27 +122,27 @@ if ( ! $op && '' == $com && ! $comment && ! $commenting)
     }
 }
 
-//-- Change text domain for navigation
+// -- Change text domain for navigation
 LotgdNavigation::setTextDomain($textDomainNavigation);
 
 LotgdNavigation::townNav($textDomainNavigation);
 
-//special hook for all villages... saves queries...
+// special hook for all villages... saves queries...
 LotgdEventDispatcher::dispatch(new GenericEvent(), Events::PAGE_VILLAGE);
 
-$params['showVillageDesc']   = ! $skipvillagedesc; //-- Show or not village description
+$params['showVillageDesc']   = ! $skipvillagedesc; // -- Show or not village description
 $params['SU_EDIT_USERS']     = $session['user']['superuser'] & SU_EDIT_USERS;
-$params['blockCommentArea']  = false; //-- Show or not comment area
-$params['commentarySection'] = 'village'; //-- Commentary section
+$params['blockCommentArea']  = false; // -- Show or not comment area
+$params['commentarySection'] = 'village'; // -- Commentary section
 
 $request->attributes->set('params', $params);
 
 LotgdResponse::callController(VillageController::class);
 
-//-- Restore text domain for navigation
+// -- Restore text domain for navigation
 LotgdNavigation::setTextDomain();
 
 module_display_events('village', 'village.php');
 
-//-- Finalize page
+// -- Finalize page
 LotgdResponse::pageEnd();
