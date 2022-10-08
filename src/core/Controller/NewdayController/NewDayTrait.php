@@ -97,7 +97,8 @@ trait NewDayTrait
 
         $interestrate = e_rand($params['min_interest'] * 100, $params['max_interest'] * 100) / (float) 100;
 
-        $canGetInterest = ($session['user']['turns'] > $this->settings->getSetting('fightsforinterest', 4) && $session['user']['goldinbank'] >= 0);
+        $canGetInterest = $session['user']['turns'] > $this->settings->getSetting('fightsforinterest', 4);
+        $canGetInterest = $canGetInterest && $session['user']['goldinbank'] >= 0;
 
         $params['canGetInterest'] = $canGetInterest;
         $params['maxInterest']    = false;
@@ -247,7 +248,8 @@ trait NewDayTrait
         }
 
         //check last time we did this vs now to see if it was a different game day.
-        $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($this->settings->getSetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
+        $newDaySemaphore = $this->settings->getSetting('newdaySemaphore', '0000-00-00 00:00:00');
+        $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($newDaySemaphore.' +0000'));
         $gametoday           = $this->dateTime->gameTime();
 
         if (gmdate('Ymd', $gametoday) !== gmdate('Ymd', $lastnewdaysemaphore))
@@ -255,15 +257,13 @@ trait NewDayTrait
             // it appears to be a different game day, acquire semaphore and
             // check again.
             $this->settings->clearSettings();
-            $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($this->settings->getSetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
+            $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($newDaySemaphore.' +0000'));
             $gametoday           = $this->dateTime->gameTime();
 
             if (gmdate('Ymd', $gametoday) !== gmdate('Ymd', $lastnewdaysemaphore))
             {
                 //we need to run the hook, update the setting, and unlock.
                 $this->settings->saveSetting('newdaySemaphore', gmdate('Y-m-d H:i:s'));
-
-                require 'lib/newday/newday_runonce.php';
             }
         }
     }
