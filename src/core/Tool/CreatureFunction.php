@@ -93,11 +93,12 @@ class CreatureFunction
         }
         //-- Activate hook custom or default (buffbadguy)
         $this->dispatcher->dispatch($badguy, Creature::BUFF_FOR.$hookNew);
+        $badguy = $badguy->getData();
 
         //-- Update max creature health
         $badguy['creaturemaxhealth'] = $badguy['creaturehealth'];
 
-        $this->lotgdShowDebugCreature($badguy->getData());
+        $this->lotgdShowDebugCreature($badguy);
 
         return $badguy;
     }
@@ -302,7 +303,7 @@ class CreatureFunction
         ]);
         $this->dispatcher->dispatch($creatures, Creature::SEARCH);
 
-        return $creatures['creatures'];
+        return $creatures->getData()['creatures'];
     }
 
     public function getCreatureStats($dk = 0)
