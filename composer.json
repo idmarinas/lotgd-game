@@ -107,11 +107,7 @@
     "autoload": {
         "psr-4": {
             "Lotgd\\Core\\": "src/core/",
-            "Lotgd\\Local\\": "src/local/",
-            "Lotgd\\Ajax\\Core\\": "src/ajax/core/",
-            "Lotgd\\Ajax\\Local\\": "src/ajax/local/",
-            "Lotgd\\Ajax\\Pattern\\Core\\": "src/ajax/pattern/core/",
-            "Lotgd\\Ajax\\Pattern\\Local\\": "src/ajax/pattern/local/"
+            "Lotgd\\Local\\": "src/local/"
         },
         "files": ["src/functions.php"]
     },
