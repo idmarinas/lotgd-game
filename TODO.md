@@ -6,10 +6,6 @@
 # Actualmente haciendo esto (8.0.0)
 
 -   **BC** Se elimina la compatibilidad con el antiguo sistema de módulos
--   Añadir clean_version a la version ya instalada, para que no la intente instalar. 
-    -   Se agrega durante la instalación de la 8.0.0
-        -   Si es una actualización, si es una instalación limpia no hace nada
--   Probar la migración a la versión 8.0.0 desde la 7.1.*
 -   Probar instalación desde la versión 8.0.0
 
 # Cosas a mejorar
@@ -48,17 +44,17 @@
 
 ## **BC** Para la versión X.0.0
 
+-   Se revisará el código para hacer la transición más sencilla.
+-   Esta versión se centrará en hacer la transición a la versión LoTGD APP Symfony más sencilla.
 -   Crear un systema de turnos/stamina mixto, para poder elegir que se usa para las acciones.
 -   Crear un bundle `lotgd-core-bundle` que agrege todos los paquetes que se requieran como base
     -   Ir migrando ciertas partes a un bundle, para ir creando LoTGD Core como una Symfony App
+    -   Primera parte en ser migrada a bundle es el instalador. (no necesita el router)
 -   Esta será la última versión que use la ordenación de carpetas `src/core` y `src/local`
     -   La versión X.0.0 será la última versión con esta estructura, y será la versión dedicada a facilitar la transición a la versión LoTGD APP Symfony.
         -   La estructura actual X.0.0 y anterior es un poco caótica, por lo que se usará esta última versión para facilitar el salto a la versión LoTGD APP Symfony.
             -   (En la medida de lo posible)
     -   La versión LoTGD APP Symfony usará la ordenación propia de Symfony.
--   Se revisará el código para hacer la transición más sencilla.
--   Esta versión se centrará en hacer la transición a la versión LoTGD APP Symfony más sencilla.
--   Esta es la última versión que incluya compatibilidad con el antiguo sistema de módulos.
 -   WebpackEncore (Se tiene que revisar como seria con Tailwind)
     -   Organizar mejor los archivos js/css
         -   El tema se crea en una configuración nueva para personalizar
