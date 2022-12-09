@@ -29,7 +29,7 @@ use Twig\Profiler\Profile;
  */
 chdir(realpath(__DIR__.'/..'));
 
-require \dirname(__DIR__).'/config/bootstrap.php';
+require_once \dirname(__DIR__).'/config/bootstrap.php';
 // -- Include constants
 require_once 'src/constants.php';
 
