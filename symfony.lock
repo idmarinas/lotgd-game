@@ -163,14 +163,8 @@
     "laminas/laminas-hydrator": {
         "version": "3.2.0"
     },
-    "laminas/laminas-i18n": {
-        "version": "2.11.1"
-    },
     "laminas/laminas-json": {
         "version": "3.2.0"
-    },
-    "laminas/laminas-log": {
-        "version": "2.13.1"
     },
     "laminas/laminas-math": {
         "version": "3.3.2"
