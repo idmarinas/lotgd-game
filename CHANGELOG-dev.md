@@ -84,6 +84,7 @@ Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
         -   `isTheServerFull`
         -   `resetAllDragonkillPoints` 
         -   **Note**: use service `lotgd_core.service.server_functions`
+-   Composer dependencies are removed, they were not being used: `laminas/i18n` and `laminas/log`
 
 ### :notebook: NOTES
 
