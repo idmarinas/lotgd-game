@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-require_once 'src/constants.php';
-
 use Rector\CodeQuality\Rector\Array_\CallableThisArrayToAnonymousFunctionRector;
 use Rector\CodeQuality\Rector\Include_\AbsolutizeRequireAndIncludePathRector;
 use Rector\CodeQuality\Rector\If_\ShortenElseIfRector;
@@ -22,6 +20,14 @@ return static function (RectorConfig $rectorConfig): void
         __DIR__ . '/public',
         __DIR__ . '/src',
         __DIR__ . '/tests',
+    ]);
+
+    $rectorConfig->autoloadPaths([
+        __DIR__ . '/src/functions.php',
+    ]);
+
+    $rectorConfig->bootstrapFiles([
+        __DIR__ . '/src/constants.php',
     ]);
 
     $rectorConfig->phpVersion(PhpVersion::PHP_74);
