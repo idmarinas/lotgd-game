@@ -7,6 +7,7 @@
 
 -   **BC** Se elimina la compatibilidad con el antiguo sistema de módulos
 -   Probar instalación desde la versión 8.0.0
+-   migrar a la versión 5.4 de symfony
 
 # Cosas a mejorar
 
