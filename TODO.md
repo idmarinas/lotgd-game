@@ -9,6 +9,10 @@
 -   Probar instalación desde la versión 8.0.0
 -   migrar a la versión 5.4 de symfony
 
+-   Otra opción es crear el framework base y hacer que LOTGD sea un bundle de ese framework base.
+    -   Hacerlo a partir de la versión de Ignis
+-   Ir creando los bundles para ir dejando este repositorio como una plantilla inicial.
+
 # Cosas a mejorar
 
 -   Bundles
