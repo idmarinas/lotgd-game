@@ -1,6 +1,5 @@
 {
     "name": "idmarinas-lotgd",
-    "version": "7.1.0",
     "private": true,
     "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization for PHP >= 7.3",
     "homepage": "http://lotgd.infommo.es",
