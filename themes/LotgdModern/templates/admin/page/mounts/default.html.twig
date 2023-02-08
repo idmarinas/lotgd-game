@@ -49,7 +49,32 @@
                 <td>{{ '`&%s`0'|format(mount.mountname)|colorize }}</td>
                 <td>{{ 'section.default.table.tbody.cost'|trans({ 'gems': mount.mountcostgems, 'gold': mount.mountcostgold })|colorize }}</td>
                 <td>FF: {{ mount.mountforestfights|numeral }}, DKs: {{ mount.mountdkcost }}</td>
-                <td>{{ '<a href onclick="return JaxonLotgd.Ajax.Core.Mounts.getListOfOwners(%s)"><i aria-hidden="true" class="list icon"></i></a> `#%s`0'|format(mount.mountid, mount.owners)|colorize }}</td>
+                <td>
+                    <span
+                        data-controller="remote-modal"
+                        data-remote-modal-allow-background-close="true"
+                        data-remote-modal-url-value="{{ stimulus_url('Lotgd\\Core\\Controller\\MountsController', 'listOfOwner') }}"
+                        data-remote-modal-reload-data-value="true"
+                    >
+                        <button
+                            type="button"
+                            class="relative w-auto py-1 ml-2"
+                            data-remote-modal-target="activator"
+                            data-action="click->remote-modal#open"
+                            data-remote-modal-mount-id-param="{{ mount.mountid }}"
+                        >
+                            <i aria-hidden="true" class="fa fa-list"></i>
+                        </button>
+
+                        <div
+                            data-remote-modal-target="container"
+                            data-action="click->remote-modal#closeBackground keyup@window->remote-modal#closeWithKeyboard"
+                            class="transition duration-500 ease-in-out fixed inset-0 overflow-y-auto flex items-center justify-center whitespace-normal hidden"
+                        ></div>
+                    </span>
+
+                    {{ ' `#%s`0'|format(mount.owners)|colorize }}
+                </td>
             </tr>
         {% endfor %}
     </tbody>

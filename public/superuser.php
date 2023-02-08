@@ -84,8 +84,6 @@ if (($session['user']['superuser'] & SU_EDIT_EQUIPMENT) !== 0)
     LotgdNavigation::addNav('superuser.nav.armoreditor', 'armoreditor.php');
 }
 
-($session['user']['superuser'] & SU_MANAGE_MODULES) && LotgdNavigation::addNav('superuser.nav.modules', 'modules.php');
-
 LotgdNavigation::addHeader('superuser.category.mechanics');
 
 ($session['user']['superuser'] & SU_EDIT_CONFIG) && LotgdNavigation::addNav('superuser.nav.configuration', 'configuration.php');
@@ -105,7 +103,6 @@ LotgdNavigation::addHeader('superuser.category.module');
 
 $args = new Superuser([]);
 LotgdEventDispatcher::dispatch($args, Superuser::SUPERUSER);
-modulehook('superuser', $args->getData());
 
 LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/superuser.html.twig', [
     'textDomain' => $textDomain,

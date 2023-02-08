@@ -68,7 +68,7 @@ class StableController extends AbstractController
         // This hook is specifically to allow modules that do other stables to create ambience.
         $args = new GenericEvent(null, ['textDomain' => 'page_stables', 'textDomainNavigation' => 'navigation_stables']);
         $this->dispatcher->dispatch($args, Events::PAGE_STABLES_PRE);
-        $result               = modulehook('stables-text-domain', $args->getArguments());
+        $result               = $args->getArguments();
         $textDomain           = $result['textDomain'];
         $textDomainNavigation = $result['textDomainNavigation'];
         unset($result);
@@ -199,9 +199,7 @@ class StableController extends AbstractController
                 // Recalculate the special name as well.
                 $args = new GenericEvent();
                 $this->dispatcher->dispatch($args, Events::PAGE_STABLES_MOUNT);
-                modulehook('stable-mount', $args->getArguments());
                 $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_STABLES_BOUGHT);
-                modulehook('boughtmount');
             }
         }
 
@@ -230,7 +228,6 @@ class StableController extends AbstractController
         $this->buffs->stripBuff('mount');
         $session['user']['hashorse'] = 0;
         $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_STABLES_SOLD);
-        modulehook('soldmount');
 
         $params['repayGold'] = $params['repaygold'];
         $params['repayGems'] = $params['repaygems'];
@@ -348,7 +345,7 @@ class StableController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_STABLES_POST);
-        $params = modulehook('page-stables-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         //-- Restore text domain for navigation
         $this->navigation->setTextDomain();

@@ -11,10 +11,7 @@
     {# You discover it's a new day O_O #}
     {{ 'section.default.open.eyes'|trans({ 'age': user.age })|colorize }}
 
-    {# Show turns if not have stamina system module active #}
-    {% if not moduleStaminaSystem %}
-        {{ 'section.default.turns'|trans({ 'turns': turnsPerDay })|colorize }}
-    {% endif %}
+    {{ 'section.default.turns'|trans({ 'turns': turnsPerDay })|colorize }}
 
     {% if canGetInterest %}
         {{ 'section.default.interest.worker'|trans(_context)|colorize }}
@@ -36,20 +33,13 @@
         {{ message|colorize }}<br>
     {% endfor %}
 
-    {% if not moduleStaminaSystem and forestTurnDragonKill %}
-        {{ 'section.default.forest.turns'|trans({ 'turns': forestTurnDragonKill })|colorize }}
-    {% endif %}
+    {{ 'section.default.forest.turns'|trans({ 'turns': forestTurnDragonKill })|colorize }}
 
     {# Spirit of character #}
     {{ 'section.default.spirit.level'|trans({ 'spirit': spirits[spirit]|trans })|colorize }}
 
     {% if spirit|abs %}
-        {% set balance = (resurrectionTurns > 0 ? 'gain' : 'lost') %}
-        {% if moduleStaminaSystem %}
-            {{ 'section.default.spirit.stamina'|trans({ 'balance': balance })|colorize }}
-        {% else %}
-            {{ 'section.default.spirit.turns'|trans({ 'balance': balance, 'turns': resurrectionTurns|abs })|colorize }}
-        {% endif %}
+        {{ 'section.default.spirit.turns'|trans({ 'balance': balance, 'turns': resurrectionTurns|abs })|colorize }}
     {% endif %}
 
     {% if user.hashorse %}
@@ -70,7 +60,7 @@
 
     {# Haunted by ghost #}
     {% if haunted %}
-        {{ ('section.default.haunted.' ~ (moduleStaminaSystem ? 'stamina' : 'turns'))|trans({ 'name': haunted })|colorize }}
+        {{ 'section.default.haunted.turns'|trans({ 'name': haunted })|colorize }}
     {% endif %}
 {% endblock newday_default %}
 

@@ -128,52 +128,6 @@
     {{ '[Additionally, reworking the modifications will be a good idea anyway as the mechanism for making modifications is substantially cleaner/clearer starting with the 0.9.8-prerelease code.]`0"`0'|colorize }}
 {% endblock about_license %}
 
-
-{% block about_modules %}
-    <div class="shadow overflow-hidden border-b border-lotgd-200 sm:rounded-lg">
-        <table class="min-w-full divide-y divide-lotgd-200" aria-describedby="page-title">
-            {% set cat = '' %}
-            {% for module in result %}
-                {% if cat != module.category %}
-                    <thead>
-                        <tr>
-                            <th scope="col" colspan="4">{{ module.category }}</th>
-                        </tr>
-                        {% set cat = module.category %}
-                        <tr>
-                            <th scope="col" class="collapsing">{{ 'modules.name'|trans }}</th>
-                            <th scope="col" class="collapsing">{{ 'modules.version'|trans }}</th>
-                            <th scope="col">{{ 'modules.author'|trans }}</th>
-                            <th scope="col" class="collapsing">{{ 'modules.download.location'|trans }}</th>
-                        </tr>
-                    </thead>
-                {% endif %}
-
-                <tr>
-                    <td class="collapsing">{{ '`&%s`0'|format(module.formalname)|colorize }}</td>
-                    <td class="collapsing">{{ '`^%s`0'|format(module.version)|colorize }}</td>
-                    <td>{{ '`^%s`0'|format(module.moduleauthor)|colorize }}</td>
-                    <td class="collapsing">
-                        {% if module.download == 'core_module' %}
-                            <a href="http://dragonprime.net/index.php?module=Downloads;catd=4" target="_blank" rel="noopener noreferrer">{{ 'modules.core'|trans }}</a>
-                        {% elseif module.download %}
-                            {% if is_valid_protocol(module.download) %}
-                                {{ '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>'|format(module.download, 'modules.download.title'|trans) }}
-                            {% else %}
-                                {{ 'modules.download.contact'|trans|colorize }}
-                            {% endif %}
-                        {% else %}
-                            {{ 'modules.download.notPublic'|trans|colorize }}
-                        {% endif %}
-                    </td>
-                </tr>
-            {% else %}
-                <tbody><tr><td class="text-center">{{ 'modules.notInstalled'|trans|colorize }}</td></tr></tbody>
-            {% endfor %}
-        </table>
-    </div>
-{% endblock about_modules %}
-
 {% block about_bundles %}
     <div class="flex flex-col lg:flex-row lg:space-x-2 space-y-2 lg:space-y-0 mb-2 lg:mb-4 justify-center">
         <div class="w-full lg:w-1/5">

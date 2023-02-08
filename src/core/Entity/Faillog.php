@@ -40,7 +40,6 @@ class Faillog
     private ?int $eventid = null;
 
     /**
-     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="date", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */

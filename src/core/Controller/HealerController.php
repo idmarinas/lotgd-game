@@ -46,7 +46,7 @@ class HealerController extends AbstractController
         // This hook is specifically to allow modules that do other healers to create ambience.
         $args = new GenericEvent(null, ['textDomain' => 'page_healer', 'textDomainNavigation' => 'navigation_healer']);
         $this->dispatcher->dispatch($args, Events::PAGE_HEALER_PRE);
-        $result               = modulehook('healer-text-domain', $args->getArguments());
+        $result               = $args->getArguments();
         $textDomain           = $result['textDomain'];
         $textDomainNavigation = $result['textDomainNavigation'];
         unset($result);
@@ -58,7 +58,7 @@ class HealerController extends AbstractController
         $cost = log($session['user']['level']) * (($session['user']['maxhitpoints'] - $session['user']['hitpoints']) + 10);
         $args = new GenericEvent(null, ['alterpct' => 1.0, 'cost' => $cost]);
         $this->dispatcher->dispatch($args, Events::PAGE_HEALER_MULTIPLY);
-        $result = modulehook('healmultiply', $args->getArguments());
+        $result = $args->getArguments();
         $cost   = round($result['alterpct'] * $result['cost'], 0);
 
         $params = [
@@ -190,7 +190,6 @@ class HealerController extends AbstractController
                 ]);
             }
             $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_HEALER_POTION);
-            modulehook('potion');
         }
         $this->navigation->addHeader('category.heal.companion');
 
@@ -219,7 +218,7 @@ class HealerController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_HEALER_POST);
-        $params = modulehook('page-healer-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         //-- Restore text domain for navigation
         $this->navigation->setTextDomain();

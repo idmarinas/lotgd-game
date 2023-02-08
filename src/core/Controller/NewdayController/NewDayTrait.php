@@ -74,9 +74,8 @@ trait NewDayTrait
 
         $this->response->pageStart('title.default', [], $this->getTranslationDomain());
 
-        $params['tpl']                 = 'default';
-        $params['moduleStaminaSystem'] = is_module_active('staminasystem');
-        $params['maxGoldForInterest']  = $this->settings->getSetting('maxgoldforinterest', 100000);
+        $params['tpl']                = 'default';
+        $params['maxGoldForInterest'] = $this->settings->getSetting('maxgoldforinterest', 100000);
 
         $params['resurrected'] = false;
 
@@ -93,18 +92,13 @@ trait NewDayTrait
         $turnstoday = "Base: {$params['turns_per_day']}";
         $args       = new Core(['resurrection' => $resurrection, 'turnstoday' => $turnstoday]);
         $this->dispatcher->dispatch($args, Core::NEWDAY_PRE);
-        $args       = modulehook('pre-newday', $args->getData());
+        $args       = $args->getData();
         $turnstoday = $args['turnstoday'];
 
         $interestrate = e_rand($params['min_interest'] * 100, $params['max_interest'] * 100) / (float) 100;
 
-        $canGetInterest = ($session['user']['turns'] > $this->settings->getSetting('fightsforinterest', 4) && $session['user']['goldinbank'] >= 0);
-        if ($params['moduleStaminaSystem'])
-        {
-            require_once 'modules/staminasystem/lib/lib.php';
-            $stamina        = get_stamina(3);
-            $canGetInterest = ($stamina <= 40);
-        }
+        $canGetInterest = $session['user']['turns'] > $this->settings->getSetting('fightsforinterest', 4);
+        $canGetInterest = $canGetInterest && $session['user']['goldinbank'] >= 0;
 
         $params['canGetInterest'] = $canGetInterest;
         $params['maxInterest']    = false;
@@ -135,7 +129,7 @@ trait NewDayTrait
             (-6) => 'spirits.00',
             (-2) => 'spirits.01',
             (-1) => 'spirits.02',
-            (0)  => 'spirits.03',
+            0    => 'spirits.03',
             1    => 'spirits.04',
             2    => 'spirits.05',
         ];
@@ -204,7 +198,7 @@ trait NewDayTrait
 
         $this->battle->unSuspendCompanions('allowinshades');
 
-        //-- Run new day if not run by cronjob
+        // -- Run new day if not run by cronjob
         $this->generateNewGameDay();
 
         $args = new Core([
@@ -214,16 +208,15 @@ trait NewDayTrait
             'includeTemplatesPost' => $params['includeTemplatesPost'],
         ]);
         $this->dispatcher->dispatch($args, Core::NEWDAY);
-        $args = modulehook('newday', $args->getData());
+        $args = $args->getData();
 
         $turnstoday                     = $args['turnstoday'];
         $params['includeTemplatesPre']  = $args['includeTemplatesPre'];
         $params['includeTemplatesPost'] = $args['includeTemplatesPost'];
 
-        //## Process stamina for spirit
+        // ## Process stamina for spirit
         $args = new Other(['spirits' => $spirits]);
         $this->dispatcher->dispatch($args, Other::STAMINA_NEWDAY);
-        modulehook('stamina-newday', $args->getData());
 
         $this->log->debug("New Day Turns: {$turnstoday}");
 
@@ -240,18 +233,8 @@ trait NewDayTrait
         {
             $params['haunted'] = $session['user']['hauntedby'];
 
-            if ($params['moduleStaminaSystem'])
-            {
-                require_once 'modules/staminasystem/lib/lib.php';
-
-                removestamina(25000);
-                $turnstoday .= ', Haunted: Stamina reduction';
-            }
-            else
-            {
-                --$session['user']['turns'];
-                $turnstoday .= ', Haunted: -1';
-            }
+            --$session['user']['turns'];
+            $turnstoday .= ', Haunted: -1';
 
             $session['user']['hauntedby'] = '';
         }
@@ -264,8 +247,9 @@ trait NewDayTrait
             return;
         }
 
-        //check last time we did this vs now to see if it was a different game day.
-        $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($this->settings->getSetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
+        // check last time we did this vs now to see if it was a different game day.
+        $newDaySemaphore     = $this->settings->getSetting('newdaySemaphore', '0000-00-00 00:00:00');
+        $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($newDaySemaphore.' +0000'));
         $gametoday           = $this->dateTime->gameTime();
 
         if (gmdate('Ymd', $gametoday) !== gmdate('Ymd', $lastnewdaysemaphore))
@@ -273,15 +257,13 @@ trait NewDayTrait
             // it appears to be a different game day, acquire semaphore and
             // check again.
             $this->settings->clearSettings();
-            $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($this->settings->getSetting('newdaySemaphore', '0000-00-00 00:00:00').' +0000'));
+            $lastnewdaysemaphore = $this->dateTime->convertGameTime(strtotime($newDaySemaphore.' +0000'));
             $gametoday           = $this->dateTime->gameTime();
 
             if (gmdate('Ymd', $gametoday) !== gmdate('Ymd', $lastnewdaysemaphore))
             {
-                //we need to run the hook, update the setting, and unlock.
+                // we need to run the hook, update the setting, and unlock.
                 $this->settings->saveSetting('newdaySemaphore', gmdate('Y-m-d H:i:s'));
-
-                require 'lib/newday/newday_runonce.php';
             }
         }
     }
@@ -322,7 +304,7 @@ trait NewDayTrait
     {
         global $session, $playermount;
 
-        //clear all standard buffs
+        // clear all standard buffs
         $tempbuf = $session['user']['bufflist'] ?? [];
 
         $session['user']['bufflist'] = [];
@@ -361,19 +343,14 @@ trait NewDayTrait
     {
         global $session;
 
-        $params['forestTurnDragonKill'] = $dkff;
-
-        if ( ! $params['moduleStaminaSystem'])
+        foreach ($session['user']['dragonpoints'] as $val)
         {
-            foreach ($session['user']['dragonpoints'] as $val)
+            if ('ff' == $val)
             {
-                if ('ff' == $val)
-                {
-                    ++$dkff;
-                }
+                ++$dkff;
             }
-
-            $params['forestTurnDragonKill'] = $dkff;
         }
+
+        $params['forestTurnDragonKill'] = $dkff;
     }
 }

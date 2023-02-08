@@ -102,6 +102,5 @@ trait Skill
         }
 
         $this->dispatcher->dispatch(new Fight(), Fight::APPLY_SPECIALTY);
-        modulehook('apply-specialties');
     }
 }

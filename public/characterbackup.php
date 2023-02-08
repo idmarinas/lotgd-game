@@ -114,7 +114,7 @@ elseif ('restore' == $op && file_exists($pathAccountData) && file_exists($pathCh
             'proccessed' => false,
         ]);
         LotgdEventDispatcher::dispatch($args, Character::BACKUP_RESTORE);
-        $result = modulehook('character-restore', $args->getData());
+        $result = $args->getData();
 
         //-- Do nothing if it has been processed
         if ( ! isset($result['proccessed']) || ! $result['proccessed'])

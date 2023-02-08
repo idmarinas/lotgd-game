@@ -67,7 +67,6 @@ class GypsyController extends AbstractController
         $this->dateTime->checkDay();
 
         $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_GYPSY);
-        modulehook('gypsy');
 
         return $this->renderGypsy($params);
     }
@@ -77,7 +76,7 @@ class GypsyController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_GYPSY_POST);
-        $params = modulehook('page-gypsy-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->render('page/gypsy.html.twig', $params);
     }

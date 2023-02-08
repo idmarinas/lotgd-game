@@ -148,7 +148,7 @@ trait Buffer
 
         $buff = new Character(['name' => $name, 'buff' => $buff]);
         $this->dispatcher->dispatch($buff, Character::MODIFY_BUFF);
-        $buff = modulehook('modify-buff', $buff->getData());
+        $buff = $buff->getData();
 
         $this->userBuffs[$name] = $buff['buff'];
 
@@ -160,7 +160,7 @@ trait Buffer
         $companionsAllowed = $this->settings->getSetting('companionsallowed', 1);
         $args              = new Character(['maxallowed' => $companionsAllowed]);
         $this->dispatcher->dispatch($args, Character::COMPANIONS_ALLOWED);
-        $args = modulehook('companionsallowed', $args->getData());
+        $args = $args->getData();
 
         $companionsAllowed = $args['maxallowed'];
         $current           = \count(array_filter($this->companions, fn($val, $key) => ( ! isset($val['ignorelimit']) || ! $val['ignorelimit']) && ($key != $name), ARRAY_FILTER_USE_BOTH));

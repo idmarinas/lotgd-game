@@ -44,7 +44,7 @@ class ShadesController extends AbstractController
         // This hook is specifically to allow modules that do other shades to create ambience.
         $args = new GenericEvent(null, ['textDomain' => 'page_shades', 'textDomainNavigation' => 'navigation_shades']);
         $this->dispatcher->dispatch($args, Events::PAGE_SHADES_PRE);
-        $result               = modulehook('shades-text-domain', $args->getArguments());
+        $result               = $args->getArguments();
         $textDomain           = $result['textDomain'];
         $textDomainNavigation = $result['textDomainNavigation'];
         unset($result);
@@ -80,7 +80,7 @@ class ShadesController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_SHADES_POST);
-        $params = modulehook('page-shades-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         //-- Restore text domain for navigation
         $this->navigation->setTextDomain();

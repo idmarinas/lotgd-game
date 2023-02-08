@@ -48,7 +48,7 @@ class WeaponController extends AbstractController
         // This hook is specifically to allow modules that do other weapons to create ambience.
         $args = new GenericEvent(null, ['textDomain' => 'page_weapon', 'textDomainNavigation' => 'navigation_weapon']);
         $this->dispatcher->dispatch($args, Events::PAGE_WEAPONS_PRE);
-        $result               = modulehook('weapon-text-domain', $args->getArguments());
+        $result               = $args->getArguments();
         $textDomain           = $result['textDomain'];
         $textDomainNavigation = $result['textDomainNavigation'];
         unset($result);
@@ -136,7 +136,7 @@ class WeaponController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_WEAPONS_POST);
-        $params = modulehook('page-weapon-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         //-- Restore text domain for navigation
         $this->navigation->setTextDomain();

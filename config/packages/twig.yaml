@@ -3,16 +3,13 @@ twig:
     strict_variables: false
     autoescape: false
     auto_reload: '%kernel.debug%'
-    paths:
-        '%kernel.project_dir%/templates_modules': 'module'
     # Globals variables
     globals:
         userPre: ~ # Not remove, is for avoid errors
         user: '@Lotgd\Core\Service\Twig\UserVariable'
         sessionPre: ~ # Not remove, is for avoid errors
         session: '@Lotgd\Core\Service\Twig\SessionVariable'
-    form_themes: [
-        'form/tailwind-2-form-theme.html.twig'
-    ]
+    form_themes:
+        - 'form/tailwind-2-form-theme.html.twig'
     debug: '%kernel.debug%'
     exception_controller: null

@@ -26,7 +26,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Bans
 {
     /**
-     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="banexpire", type="datetime")
      */
@@ -61,7 +60,6 @@ class Bans
     private ?string $banner = null;
 
     /**
-     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="lasthit", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */

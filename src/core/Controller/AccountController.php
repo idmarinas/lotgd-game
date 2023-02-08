@@ -53,7 +53,7 @@ class AccountController extends AbstractController
         //-- Add more statistics using templates
         $args = new GenericEvent(null, ['templates' => []]);
         $this->dispatcher->dispatch($args, Events::PAGE_ACCOUNTS_STATS);
-        $tpl = modulehook('accountstats', $args->getArguments());
+        $tpl = $args->getArguments();
 
         $params = [
             'dragonpoints' => $dragonpointssummary,
@@ -62,7 +62,7 @@ class AccountController extends AbstractController
 
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_ACCOUNTS_POST);
-        $params = modulehook('page-account-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->render('page/account.html.twig', $params);
     }

@@ -10,13 +10,12 @@ use Lotgd\Core\Http\Request;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
-require_once 'lib/events.php';
 
 // Don't hook on to this text for your standard modules please, use "forest" instead.
 // This hook is specifically to allow modules that do other forests to create ambience.
 $args = new GenericEvent(null, ['textDomain' => 'page_forest', 'textDomainNavigation' => 'navigation_forest']);
 LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_PRE);
-$result               = modulehook('forest-text-domain', $args->getArguments());
+$result               = $args->getArguments();
 $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -29,7 +28,7 @@ $creatureFunctions = LotgdKernel::get('lotgd_core.tool.creature_functions');
 //-- Init page
 LotgdResponse::pageStart('title', [], $textDomain);
 
-$dontDisplayForestMessage = handle_event('forest');
+$dontDisplayForestMessage = false;
 
 $params = [
     'textDomain'                    => $textDomain,
@@ -73,14 +72,12 @@ elseif ('search' == $op)
     {
         $args = new GenericEvent();
         LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_SEARCH);
-        modulehook('forestsearch', $args->getArguments());
 
         $args = new GenericEvent(null, [
             'soberval' => 0.9,
             'sobermsg' => LotgdTranslator::t('sober.message', [], $textDomain),
             'schema'   => 'forest',
         ]);
-        modulehook('soberup', $args->getArguments());
 
         /** New occurrence dispatcher for special events. */
         /** @var \Symfony\Component\EventDispatcher\GenericEvent $event */
@@ -99,24 +96,6 @@ elseif ('search' == $op)
         {
             $dontDisplayForestMessage    = true;
             $params['showForestMessage'] = ! $dontDisplayForestMessage;
-
-            $op = '';
-            $request->query->set('op', '');
-        }
-        //-- Only execute when NOT occurrence is in progress.
-        elseif (0 != module_events('forest', LotgdSetting::getSetting('forestchance', 15)))
-        {
-            if (LotgdNavigation::checkNavs())
-            {
-                LotgdResponse::pageEnd();
-            }
-
-            // If we're showing the forest, make sure to reset the special
-            // and the specialmisc
-            $session['user']['specialinc']  = '';
-            $session['user']['specialmisc'] = '';
-            $dontDisplayForestMessage       = true;
-            $params['showForestMessage']    = ! $dontDisplayForestMessage;
 
             $op = '';
             $request->query->set('op', '');
@@ -349,7 +328,7 @@ elseif ('search' == $op)
                 ],
             ]);
             LotgdEventDispatcher::dispatch($args, Events::PAGE_FOREST_FIGHT_START);
-            $attackstack = modulehook('forestfight-start', $args->getArguments());
+            $attackstack = $args->getArguments();
 
             $session['user']['badguy'] = $attackstack;
             // If someone for any reason wanted to add a nav where the user cannot choose the number of rounds anymore
@@ -446,12 +425,6 @@ if ( ! $battle)
 
 //-- Restore text domain for navigation
 LotgdNavigation::setTextDomain();
-
-//-- Display events
-if ('' == $op)
-{
-    module_display_events('forest', 'forest.php');
-}
 
 //-- Finalize page
 LotgdResponse::pageEnd();

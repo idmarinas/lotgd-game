@@ -52,7 +52,6 @@ class PlayerFunction
         {
             $args = new Character(['color' => $colorcode]);
             $this->dispatcher->dispatch($args, Character::SPECIALTY_INCREMENT);
-            modulehook('incrementspecialty', $args->getData());
         }
         else
         {

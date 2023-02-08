@@ -24,7 +24,7 @@ $statuses = [
 
 $args = new GenericEvent(null, $statuses);
 LotgdEventDispatcher::dispatch($args, Events::PAGE_PETITION_STATUS);
-$statuses = modulehook('petition-status', $args->getArguments());
+$statuses = $args->getArguments();
 reset($statuses);
 
 $op         = (string) LotgdRequest::getQuery('op');
@@ -108,7 +108,7 @@ elseif ('view' == $op)
 
     $params['viewPageInfo'] = $viewpageinfo;
 
-    if (\count($statuses) > 0)
+    if ($statuses !== [])
     {
         reset($statuses);
         foreach ($statuses as $key => $val)

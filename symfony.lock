@@ -20,9 +20,6 @@
     "cocur/slugify": {
         "version": "v4.0.0"
     },
-    "composer/package-versions-deprecated": {
-        "version": "1.11.99.5"
-    },
     "composer/semver": {
         "version": "3.2.4"
     },
@@ -142,12 +139,6 @@
     "idmarinas/tracy-twig-bar": {
         "version": "0.1.2"
     },
-    "jaxon-php/jaxon-core": {
-        "version": "v3.4.1"
-    },
-    "jaxon-php/jaxon-dialogs": {
-        "version": "v3.1.4"
-    },
     "jms/metadata": {
         "version": "2.5.0"
     },
@@ -172,23 +163,14 @@
     "laminas/laminas-hydrator": {
         "version": "3.2.0"
     },
-    "laminas/laminas-i18n": {
-        "version": "2.11.1"
-    },
     "laminas/laminas-json": {
         "version": "3.2.0"
-    },
-    "laminas/laminas-log": {
-        "version": "2.13.1"
     },
     "laminas/laminas-math": {
         "version": "3.3.2"
     },
     "laminas/laminas-paginator": {
         "version": "2.10.0"
-    },
-    "laminas/laminas-serializer": {
-        "version": "2.10.1"
     },
     "laminas/laminas-servicemanager": {
         "version": "3.6.4"
@@ -202,12 +184,6 @@
     "laminas/laminas-view": {
         "version": "2.12.0"
     },
-    "laminas/laminas-zendframework-bridge": {
-        "version": "1.2.0"
-    },
-    "lemonphp/event": {
-        "version": "v1.0.0"
-    },
     "lotgd-core/occurrence-bundle": {
         "version": "0.1.0"
     },
@@ -216,12 +192,6 @@
     },
     "marioblazek/twig-byte-units-extension": {
         "version": "v1.0.1"
-    },
-    "matthiasmullie/minify": {
-        "version": "1.3.66"
-    },
-    "matthiasmullie/path-converter": {
-        "version": "1.1.3"
     },
     "microsoft/tolerant-php-parser": {
         "version": "v0.0.23"
@@ -255,9 +225,6 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.4.0"
-    },
-    "phpspec/prophecy": {
-        "version": "v1.15.0"
     },
     "phpstan/phpdoc-parser": {
         "version": "0.5.4"
@@ -293,9 +260,6 @@
             "./phpunit.xml.dist",
             "./tests/bootstrap.php"
         ]
-    },
-    "pimple/pimple": {
-        "version": "v3.4.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -479,15 +443,15 @@
         "version": "v4.4.24"
     },
     "symfony/flex": {
-        "version": "1.0",
+        "version": "1.19",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "1.0",
-            "ref": "c0eeb50665f0f77226616b6038a9b06c03752d8e"
+            "ref": "146251ae39e06a95be0fe3d13c807bcf3938b172"
         },
         "files": [
-            "./.env"
+            ".env"
         ]
     },
     "symfony/form": {

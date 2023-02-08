@@ -65,7 +65,6 @@ class Motd
     private ?string $motdbody = '';
 
     /**
-     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="motddate", type="datetime", nullable=true, options={"default": "0000-00-00 00:00:00"})
      */

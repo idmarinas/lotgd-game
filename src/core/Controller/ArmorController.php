@@ -47,7 +47,7 @@ class ArmorController extends AbstractController
         // This hook is specifically to allow modules that do other armors to create ambience.
         $args = new GenericEvent(null, ['textDomain' => 'page_armor', 'textDomainNavigation' => 'navigation_armor']);
         $this->dispatcher->dispatch($args, Events::PAGE_ARMOR_PRE);
-        $result               = modulehook('armor-text-domain', $args->getArguments());
+        $result               = $args->getArguments();
         $textDomain           = $result['textDomain'];
         $textDomainNavigation = $result['textDomainNavigation'];
         unset($result);
@@ -130,7 +130,7 @@ class ArmorController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_ARMOR_POST);
-        $params = modulehook('page-armor-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         //-- Restore text domain for navigation
         $this->navigation->setTextDomain();

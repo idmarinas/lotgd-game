@@ -41,7 +41,6 @@ trait Menu
 
         $args = new Fight(['script' => $script]);
         $this->dispatcher->dispatch($args, Fight::NAV_PRE);
-        modulehook('fightnav-prenav', $args->getData());
 
         $this->navigation->addHeader('category.standard');
         $this->navigation->addNav($fight, "{$script}op=fight");
@@ -74,7 +73,6 @@ trait Menu
         if ( ! $this->user['alive'])
         {
             $this->dispatcher->dispatch($args, Fight::NAV_GRAVEYARD);
-            modulehook('fightnav-graveyard', $args->getData());
         }
 
         if ($allowspecial)
@@ -82,7 +80,6 @@ trait Menu
             $this->navigation->addHeader('category.special', ['hiddeEmpty' => false]);
 
             $this->dispatcher->dispatch($args, Fight::NAV_SPECIALTY);
-            modulehook('fightnav-specialties', $args->getData());
 
             if (($this->user['superuser'] & SU_DEVELOPER) !== 0)
             {
@@ -91,7 +88,6 @@ trait Menu
             }
 
             $this->dispatcher->dispatch($args, Fight::NAV);
-            modulehook('fightnav', $args->getData());
         }
 
         if ($this->countEnemiesAlive() > 1)

@@ -33,7 +33,7 @@ class VillageController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_VILLAGE_POST);
-        $params = modulehook('page-village-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         return $this->render('page/village.html.twig', $params);
     }

@@ -49,7 +49,6 @@ trait BattleProcess
         {
             //-- We need to restore and calculate here to reflect changes that happen throughout the course of multiple rounds.
             $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_BATTLE_ROUND_START_BUFF_PRE);
-            modulehook('startofround-prebuffs'); //-- For Stamina System
 
             $this->restoreBuffFields();
             $this->calculateBuffFields();
@@ -84,7 +83,7 @@ trait BattleProcess
                     {
                         $args = new GenericEvent(null, $badguy);
                         $this->dispatcher->dispatch($args, Events::PAGE_BATTLE_ROUND_END);
-                        $badguy = modulehook('endofround', $args->getArguments()); //-- For Stamina System
+                        $badguy = $args->getArguments(); //-- For Stamina System
                     }
 
                     //-- Break player cant continue
@@ -132,7 +131,9 @@ trait BattleProcess
 
                 if ($this->surprised || 'run' == $op || 'fight' == $op)
                 {
-                    $badguy = modulehook('endofround', $badguy); //-- For Stamina System
+                    $args = new GenericEvent(null, $badguy);
+                    $this->dispatcher->dispatch($args, Events::PAGE_BATTLE_ROUND_END);
+                    $badguy = $args->getArguments(); //-- For Stamina System
                 }
             } //-- foreach enemies
             unset($badguy);
@@ -150,7 +151,6 @@ trait BattleProcess
 
         $args = new GenericEvent(null, $this->enemies);
         $this->dispatcher->dispatch($args, Events::PAGE_BATTLE_PAGE_END);
-        modulehook('endofpage', $args->getArguments());
 
         $this->updateData();
 

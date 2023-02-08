@@ -33,7 +33,9 @@ section:
                 Before activate this option, make sure you setup a cronjob on your machine confixx/plesk/cpanel or any other admin panel.
                 This is de unique cronjob need create. Copy and change <strong>"/path/to/project"</strong> to where is the game installed. This cronjob execute all CronJobs in the game.
 
-                * * * * * cd /path/to/project/public && php cronjob.php 1>> /dev/null 2>&1
+                * * * * * php /path/to/project/bin/console cron:run 1>> /dev/null 2>&1
+
+                More Info: https://github.com/Cron/Symfony-Bundle
             red: 'If you do not know what a Cronjob is... leave it turned off. If you want to know more... check out: <a class="ui red mini button" href="http://wiki.dragonprime.net/index.php?title=Cronjob">http://wiki.dragonprime.net/index.php?title=Cronjob</a>'
         form:
             button:

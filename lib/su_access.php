@@ -23,7 +23,7 @@ function check_su_access($level)
 
         $return = new Superuser(['enabled' => true, 'level' => $level]);
         \LotgdEventDispatcher::dispatch($return, Superuser::CHECK_SU_ACCESS);
-        $return = modulehook('check_su_access', $return->getData());
+        $return = $return->getData();
 
         if ($return['enabled'])
         {
@@ -128,7 +128,7 @@ function checkSuPermission($permission, ?string $return = null)
     {
         $result = new Superuser(['enabled' => true, 'permission' => $permission]);
         \LotgdEventDispatcher::dispatch($result, Superuser::CHECK_SU_PERMISSION);
-        $result = modulehook('check-su-permission', $result->getData());
+        $result = $result->getData();
 
         if ($result['enabled'])
         {

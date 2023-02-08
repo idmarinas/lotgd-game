@@ -3,6 +3,7 @@ module.exports = {
     content: [
         './assets/**/*.js',
         './src/**/*.php',
+        './templates/**/*.{html,twig}',
         './themes/**/*.{html,twig}',
     ],
     darkMode: 'media', // or 'media' or 'class'

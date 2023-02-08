@@ -15,7 +15,7 @@ require_once 'common.php';
 // This hook is specifically to allow modules that do other lodges to create ambience.
 $args = new GenericEvent(null, ['textDomain' => 'page_lodge', 'textDomainNavigation' => 'navigation_lodge']);
 LotgdEventDispatcher::dispatch($args, Events::PAGE_LODGE_PRE);
-$result               = modulehook('lodge-text-domain', $args->getArguments());
+$result               = $args->getArguments();
 $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

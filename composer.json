@@ -13,7 +13,7 @@
         "process-timeout": 5000,
         "sort-packages": true
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "license": "CC-BY-NC-SA-2.0",
     "require": {
@@ -35,24 +35,18 @@
         "cocur/slugify": "^4.1",
         "composer/semver": "^3.3",
         "cron/cron-bundle": "^2.10",
-        "doctrine/doctrine-bundle": "^2.6",
+        "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.7",
+        "doctrine/orm": "^2.12",
         "ezyang/htmlpurifier": "^4.14",
-        "gedmo/doctrine-extensions": "^3.7",
+        "gedmo/doctrine-extensions": "^3.8",
         "idmarinas/lotgd-contracts": "^0.2.0",
-        "jaxon-php/jaxon-core": "^3.2",
-        "jaxon-php/jaxon-dialogs": "^3.1",
         "kitlabs/kit-crypt-bundle": "^3.1",
-        "laminas/laminas-code": "^3.4",
         "laminas/laminas-escaper": "^2.6",
         "laminas/laminas-filter": "^2.9",
         "laminas/laminas-hydrator": "^3.1 | ^4.0",
-        "laminas/laminas-i18n": "^2.10",
-        "laminas/laminas-log": "^2.12",
         "laminas/laminas-math": "^3.2",
         "laminas/laminas-paginator": "^2.8",
-        "laminas/laminas-serializer": "^2.9",
         "laminas/laminas-stdlib": "^3.2",
         "laminas/laminas-validator": "^2.14",
         "laminas/laminas-view": "^2.11",
@@ -79,7 +73,7 @@
         "symfony/proxy-manager-bridge": "4.4.*",
         "symfony/security-bundle": "4.4.*",
         "symfony/serializer": "4.4.*",
-        "symfony/string": "5.2.*",
+        "symfony/string": "^5.2",
         "symfony/translation": "4.4.*",
         "symfony/twig-bundle": "4.4.*",
         "symfony/validator": "4.4.*",
@@ -87,7 +81,7 @@
         "symfony/yaml": "4.4.*",
         "tracy/tracy": "^2.9",
         "twig/extra-bundle": "^2.15",
-        "twig/intl-extra": "^3.3",
+        "twig/intl-extra": "^3.4",
         "twig/twig": "^2.15"
     },
     "require-dev": {
@@ -110,13 +104,9 @@
     "autoload": {
         "psr-4": {
             "Lotgd\\Core\\": "src/core/",
-            "Lotgd\\Local\\": "src/local/",
-            "Lotgd\\Ajax\\Core\\": "src/ajax/core/",
-            "Lotgd\\Ajax\\Local\\": "src/ajax/local/",
-            "Lotgd\\Ajax\\Pattern\\Core\\": "src/ajax/pattern/core/",
-            "Lotgd\\Ajax\\Pattern\\Local\\": "src/ajax/pattern/local/"
+            "Lotgd\\Local\\": "src/local/"
         },
-		"files": ["src/functions.php"]
+        "files": ["src/functions.php"]
     },
     "autoload-dev": {
         "psr-4": {
@@ -136,7 +126,8 @@
         "test": "php bin/phpunit --process-isolation"
     },
     "conflict": {
-        "symfony/symfony": "*"
+        "symfony/symfony": "*",
+        "doctrine/persistence": ">=3"
     },
     "extra": {
         "symfony": {

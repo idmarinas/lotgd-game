@@ -21,10 +21,12 @@ use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Pattern\LotgdControllerTrait;
 use Lotgd\Core\Repository\PetitionsRepository;
+use Lotgd\Core\Tool\LotgdMail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Address;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Tracy\Debugger;
@@ -39,17 +41,20 @@ class PetitionController extends AbstractController
     private $petitionsRepository;
     private $translator;
     private $settings;
+    private LotgdMail $mailer;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
         PetitionsRepository $petitionsRepository,
         TranslatorInterface $translator,
-        Settings $settings
+        Settings $settings,
+        LotgdMail $mailer
     ) {
         $this->dispatcher          = $dispatcher;
         $this->petitionsRepository = $petitionsRepository;
         $this->translator          = $translator;
         $this->settings            = $settings;
+        $this->mailer              = $mailer;
     }
 
     public function help(HttpFoundationRequest $request): Response
@@ -84,7 +89,7 @@ class PetitionController extends AbstractController
 
             $isSubmitted = true;
         }
-        //-- Default data when user have session active and not is post
+        // -- Default data when user have session active and not is post
         elseif ( ! $form->isSubmitted() && $session['user']['loggedin'] ?? false)
         {
             $form->setData([
@@ -128,7 +133,7 @@ class PetitionController extends AbstractController
     {
         global $session;
 
-        //-- Not proccess if not are loggedin
+        // -- Not proccess if not are loggedin
         if ( ! ($session['user']['loggedin'] ?? false))
         {
             return null;
@@ -155,7 +160,7 @@ class PetitionController extends AbstractController
 
             $isSubmitted = true;
         }
-        //-- Default data when user have session active and not is post
+        // -- Default data when user have session active and not is post
         elseif ( ! $form->isSubmitted() && $session['user']['loggedin'] ?? false)
         {
             $form->setData([
@@ -179,7 +184,7 @@ class PetitionController extends AbstractController
      */
     private function emailPetitionAdmin(Request $request, string $name, array $post): void
     {
-        if ( $this->settings->getSetting('emailpetitions', 0) === '' || $this->settings->getSetting('emailpetitions', 0) === '0')
+        if ('' === $this->settings->getSetting('emailpetitions', 0) || '0' === $this->settings->getSetting('emailpetitions', 0))
         {
             return;
         }
@@ -204,25 +209,25 @@ class PetitionController extends AbstractController
         $msg .= "{$tlDate} : {$date}\n";
         $msg .= "{$tlBody} :\n".Debugger::dump($post, 'Post')."\n";
 
-        lotgd_mail($this->settings->getSetting('gameadminemail', 'postmaster@localhost.com'), $tlSubject, $msg);
+        $this->mailer->sendEmail(new Address($this->settings->getSetting('gameadminemail', 'postmaster@localhost.com')), $tlSubject, $msg);
     }
 
     private function proccessForm(Request $request, $post, &$form, $formEmpty): void
     {
         global $session;
 
-        $session['user']['acctid'] ??= 0;
+        $session['user']['acctid']   ??= 0;
         $session['user']['password'] ??= '';
 
         $p = $session['user']['password'];
         unset($session['user']['password']);
 
         $post['cancelpetition'] ??= false;
-        $post['cancelreason']   = $post['cancelreason']   ?? '' ?: $this->translator->trans('section.default.post.cancel', [], self::TRANSLATION_DOMAIN);
+        $post['cancelreason'] = $post['cancelreason'] ?? '' ?: $this->translator->trans('section.default.post.cancel', [], self::TRANSLATION_DOMAIN);
 
         $post = new Core($post);
         $this->dispatcher->dispatch($post, Core::PETITION_ADD);
-        $post = modulehook('addpetition', $post->getData());
+        $post = $post->getData();
 
         if ($post['cancelpetition'])
         {
@@ -318,6 +323,6 @@ class PetitionController extends AbstractController
 
         $this->dispatcher->dispatch($args, Core::PETITION_FAQ_TOC);
 
-        return modulehook('faq-toc', $args->getData());
+        return $args->getData();
     }
 }

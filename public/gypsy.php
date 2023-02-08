@@ -15,7 +15,7 @@ require_once 'common.php';
 // This hook is specifically to allow modules that do other gypsys to create ambience.
 $args = new GenericEvent(null, ['textDomain' => 'page_gypsy', 'textDomainNavigation' => 'navigation_gypsy']);
 LotgdEventDispatcher::dispatch($args, Events::PAGE_GYPSY_PRE);
-$result               = modulehook('gypsy-text-domain', $args->getArguments());
+$result               = $args->getArguments();
 $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

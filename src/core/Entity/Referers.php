@@ -50,7 +50,6 @@ class Referers
     private ?int $count = 0;
 
     /**
-     * @var \DateTimeInterface|null
      *
      * @ORM\Column(type="datetime")
      */

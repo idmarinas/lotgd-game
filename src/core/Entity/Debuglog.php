@@ -39,7 +39,6 @@ class Debuglog
      */
     private ?int $id = null;
     /**
-     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="date", type="datetime")
      */

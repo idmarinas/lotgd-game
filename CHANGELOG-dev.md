@@ -9,56 +9,82 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V5.md)  
 Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V6.md)  
 Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V7.md)  
+Visit **_V8_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V8.md)  
 
-# Version: 7.1.0
+# Version: 8.0.0
 
 ### :cyclone: CHANGES
 
--   **BC** Min PHP version needed is `7.4`
--   `assets/lib/components/embed.js` `Lotgd.embed(this)` now also receives the event parameter `Lotgd.embed(this, event)`
--   `Faq menu` moved from Village/Shades menu to Top menu.
-    -   Now can see FAQ always.
+-   **Jaxon PHP to Stimulus**
+    -   `src/ajax/core/Mounts.php` migrate this class to Stimulus controller
+        -   `src/core/Controller/MountsController.php` use `remote-modal` Stimulus controller to load this.
+    -   `src/ajax/core/Bans.php` migrate this class to Stimulus controller
+        -   `src/core/Controller/BansController.php` use `remote-modal` Stimulus controller to load this.
+-   **Change CronJob System**
+    -   Need update your crontab:
+        -   From `* * * * * cd /path/to/project/public && php cronjob.php 1>> /dev/null 2>&1`  
+            To `* * * * * php /path/to/project/bin/console cron:run 1>> /dev/null 2>&1`
+    -   Alternative method to run your cronjobs if don't have a dedicated dron daemon:
+        ```bash
+            bin/console cron:start # will run in background mode, use --blocking to run in foreground
+            bin/console cron:stop # will stop the background cron daemon
+        ```
+    -   More info in [Cron Symfony Bundle](https://github.com/Cron/Symfony-Bundle)
+-   **Installer** Merges all migrations into a new clean migration.
+    -   Version `8.0.0` needs to be installed from version `7.1.*`
 
 ### :star: FEATURES
 
--   `stimulus-controller` Petition, add new function for load custom faq. Need pass url as param.
-    -   Example of usage
-    ```php
-        $args[] = [
-            'attr' => [
-                'data-action' => 'click->petition#loadFaq',
-                'data-petitition-url-param' => 'stimulus.php?method=NameOfMethod&controller=NamespaceOfController'
-            ],
-            'link'    => [
-                'section.faq.toc.cities',
-                [],
-                'cities_module',
-            ],
-        ];
-    ```
+-   `assets/stimulus/constrollers/remote_modal_controller.js` Add new function `queryParameters` this add query parameters to url
+-   **New** `src/core/Tool/LotgdMail.php`
+    -   Can use this tool for send email.
 
 ### :fire: DEPRECATED
 
--   `src/functions.php` Mark functions as deprecated:
-    -   `myDefine`
-    -   `safeescape`
-    -   `nltoappon`
+-   `src/core/Kernel.php` Mark const `VERSION_NUMBER` as deprecated
+-   **Constants**
+    -   `MODULE_NO_INFO`
+    -   `MODULE_INSTALLED`
+    -   `MODULE_VERSION_OK`
+    -   `MODULE_NOT_INSTALLED`
+    -   `MODULE_FILE_NOT_PRESENT`
+    -   `MODULE_VERSION_TOO_LOW`
+    -   `MODULE_ACTIVE`
+    -   `MODULE_INJECTED`
 
 ### :wrench: FIXES
 
--   `src/core/Repository/UserRepository.php` Fixed error with place of `Debugger::log()` in function `getUserById`
--   `themes/LotgdModern/templates/page/bio.html.twig` Fixed error with key of translation
--   `translations/en/page_bio+intl-icu.en.yaml` add missin key translation
--   `src/core/Repository/User/Avatar.php` Fixed error when not found news for user, now return a correct empty array
--   `public/bans.php` Fixed error that can add bans
--   Fixed some code smells and vulnerabilities
+-   `assets/lib/game/previewfield.js` Updated for use classes of TailwindCSS
 
 ### :x: REMOVES
 
--   `public/common_common.php` Deleted code to create file `.env.local.php`
-    -   You need to create this file before upgrading from a version earlier than 4.9.0
--   `assets/lib/game/datacache.js` Deleted unused functions
-    -   Use console to clear cache.
+-   **BC** Removed unused code
+    -  `assets/lib/components/embed.js`
+    -  `assets/lib/components/modal-form.js`
+    -  `assets/lib/components/modal.js`
+    -  `assets/lib/components/redirect-post.js`
+       -  This components use old Fomantic UI
+-   **BC** Deleted old modules system. Use bundles instead.
+-   **BC** Deleted JaxonPHP from core.
+    -   This include all relation code of JaxonPHP
+    -   *Note:* If you want to use its capabilities you will have to add the package yourself.
+-   **BC** Deleted files:
+    -   `lib/showform.php`
+    -   `lib/showtabs.php`
+        -  *Note:* use Symfony Forms for build forms.
+    -   `lib/lotgd_mail.php` Use Symfony mailer or `Lotgd\Core\Tool\LotgdMail`
+-   `src/ajax/core/Mounts.php` deleted, now is a Stimulus controller
+-   `src/ajax/core/Bans.php` deleted, now is a Stimulus controller
+-   **Deprecated**
+    -   **Functions** in `src/functions.php`
+        -   `myDefine`
+        -   `safeescape`
+        -   `nltoappon`
+    -   **File** `lib/serverfunctions.class.php`
+        -   `isTheServerFull`
+        -   `resetAllDragonkillPoints` 
+        -   **Note**: use service `lotgd_core.service.server_functions`
+-   Composer dependencies are removed, they were not being used: `laminas/i18n` and `laminas/log`
 
 ### :notebook: NOTES
 
@@ -66,6 +92,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
     -   :warning: Avoid, as far as possible, using static classes (e.g. LotgdSetting, Doctrine, LotgdTranslation...) as these classes will be deleted in a future version. Use autowire, dependency injection when possible.
     -   :warning: Version 7.0.0 change templates for use **TailwindCSS**
+    -   :warning: Version 8.0.0 deleted old modules system and JaxonPHP
 -   **Upgrade/Install for version 5.0.0 and up**
     -   First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
     -   If have problems:

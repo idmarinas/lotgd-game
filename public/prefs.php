@@ -19,7 +19,6 @@ if (isset($_POST['template']))
 }
 
 require_once 'common.php';
-require_once 'lib/showform.php';
 
 $textDomain = 'page_prefs';
 
@@ -58,8 +57,6 @@ if ('suicide' == $op && $params['selfDelete'])
 }
 elseif ('forcechangeemail' == $op)
 {
-    LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
-
     if ($session['user']['alive'])
     {
         LotgdNavigation::villageNav();
@@ -82,11 +79,11 @@ elseif ('forcechangeemail' == $op)
     $session['user']['emailaddress']    = $replacearray[0];
     $session['user']['replaceemail']    = '';
     $session['user']['emailvalidation'] = '';
+
+    LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 }
 elseif ('cancelemail' == $op)
 {
-    LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
-
     if ($session['user']['alive'])
     {
         LotgdNavigation::villageNav();
@@ -108,6 +105,8 @@ elseif ('cancelemail' == $op)
 
     $session['user']['replaceemail']    = '';
     $session['user']['emailvalidation'] = '';
+
+    LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 }
 else
 {
@@ -519,8 +518,7 @@ else
 
 $args = new GenericEvent(null, $params);
 LotgdEventDispatcher::dispatch($args, Events::PAGE_PREFS_POST);
-$params = modulehook('page-prefs-tpl-params', $args->getArguments());
-LotgdResponse::pageAddContent(LotgdTheme::render('page/prefs.html.twig', $params));
+LotgdResponse::pageAddContent(LotgdTheme::render('page/prefs.html.twig', $params->getArguments()));
 
 //-- Finalize page
 LotgdResponse::pageEnd();

@@ -54,7 +54,7 @@ class MercenaryCampController extends AbstractController
         // This hook is specifically to allow modules that do other inns to create ambience.
         $args = new GenericEvent(null, ['textDomain' => 'page_mercenarycamp', 'textDomainNavigation' => 'navigation_mercenarycamp']);
         $this->dispatcher->dispatch($args, Events::PAGE_MERCENARY_CAMP_PRE);
-        $result               = modulehook('mercenarycamp-text-domain', $args->getArguments());
+        $result               = $args->getArguments();
         $textDomain           = $result['textDomain'];
         $textDomainNavigation = $result['textDomainNavigation'];
         unset($result);
@@ -199,7 +199,7 @@ class MercenaryCampController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_MERCENARY_CAMP_POST);
-        $params = modulehook('page-mercenarycamp-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         //-- Restore text domain for navigation
         $this->navigation->setTextDomain();

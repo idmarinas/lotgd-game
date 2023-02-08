@@ -109,6 +109,5 @@ class ServerFunction
         //adding a hook, nasty, but you don't call this too often
         $args = new Other([$result]);
         $this->dispatcher->dispatch($args, Other::SERVER_DRAGON_POINT_RESET);
-        modulehook('dragonpointreset', $args->getData());
     }
 }

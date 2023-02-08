@@ -10,7 +10,6 @@ use Lotgd\Core\Http\Request;
 \define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
-require_once 'lib/serverfunctions.class.php';
 
 LotgdTool::checkBan();
 

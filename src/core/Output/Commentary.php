@@ -172,7 +172,7 @@ class Commentary
 
         $args = new EventCommentary(['data' => $post]);
         $this->hook->dispatch($args, EventCommentary::COMMENT_POST);
-        $args = modulehook('postcomment', $args->getData());
+        $args = $args->getData();
 
         //-- A module tells us to ignore this comment, so we will
         if ($args['ignore'] ?? false)
@@ -246,7 +246,7 @@ class Commentary
         //-- Process comment
         $args = new EventCommentary(['comment' => $comment]);
         $this->hook->dispatch($args, EventCommentary::COMMENT);
-        $comment = modulehook('commentary-comment', $args->getData());
+        $comment = $args->getData();
 
         return $comment['comment'];
     }
@@ -277,7 +277,7 @@ class Commentary
             // All of the ones after this will be translated in the modules.
             $this->hook->dispatch($comsecs, EventCommentary::MODERATE_SECTIONS);
 
-            return modulehook('moderate-comment-sections', $comsecs->getData());
+            return $comsecs->getData();
         });
     }
 

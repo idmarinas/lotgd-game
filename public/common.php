@@ -123,9 +123,6 @@ elseif (LotgdSetting::getSetting('maintenance', 0))
     ]);
 }
 
-$script = substr(LotgdRequest::getServer('SCRIPT_NAME'), 0, strrpos(LotgdRequest::getServer('SCRIPT_NAME'), '.'));
-mass_module_prepare(['everyhit', "header-{$script}", "footer-{$script}", 'holiday', 'charstats']);
-
 // In the event of redirects, we want to have a version of their session we
 // can revert to:
 $revertsession = $session;
@@ -276,12 +273,10 @@ if (LotgdSetting::getSetting('debug', 0) && SU_EDIT_CONFIG == ($session['user'][
 // You should do as LITTLE as possible here and consider if you can hook on
 // a page header instead.
 LotgdEventDispatcher::dispatch(new EveryRequest(), EveryRequest::HIT);
-modulehook('everyhit');
 
 if ($session['user']['loggedin'])
 {
     LotgdEventDispatcher::dispatch(new EveryRequest(), EveryRequest::HIT_AUTHENTICATED);
-    modulehook('everyhit-loggedin');
 }
 
 // This bit of code checks the current system load, so that high-intensity operations can be disabled or postponed during times of exceptionally high load.  Since checking system load can in itself be resource intensive, we'll only check system load once per thirty seconds, checking it against time retrieved from the database at the first load of LotgdSetting::getSetting().

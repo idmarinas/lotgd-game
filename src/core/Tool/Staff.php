@@ -52,7 +52,7 @@ class Staff
             'goldlossproportion' => $goldlossproportion,
         ]);
         $this->dispatcher->dispatch($args, Character::KILLED_PLAYER);
-        $args = modulehook('killedplayer', $args->getData());
+        $args = $args->getData();
 
         if (isset($args['donotkill']))
         {

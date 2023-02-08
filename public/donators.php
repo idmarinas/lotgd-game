@@ -68,7 +68,7 @@ if ('save' == $op)
             'messages' => [],
         ]);
         LotgdEventDispatcher::dispatch($args, Events::PAYMENT_DONATION_ADJUSTMENT);
-        $result = modulehook('donation_adjustments', $args->getArguments());
+        $result = $args->getArguments();
         $points = $result['points'];
 
         if ( ! \is_array($result['messages']))
@@ -95,7 +95,6 @@ if ('save' == $op)
         'manual' => (bool) ($txnid),
     ]);
     LotgdEventDispatcher::dispatch($args, Events::PAYMENT_DONATION_SUCCESS);
-    modulehook('donation', $args->getArguments());
 
     if ('' !== $txnid && '0' !== $txnid)
     {

@@ -8,13 +8,12 @@ use Lotgd\Core\EntityForm\CreaturesType;
 // addnews ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/showform.php';
 
 check_su_access(SU_EDIT_CREATURES);
 
 $textDomain = 'grotto_creatures';
 
-//-- Init page
+// -- Init page
 LotgdResponse::pageStart('title', [], $textDomain);
 
 LotgdNavigation::superuserGrottoNav();
@@ -89,103 +88,50 @@ elseif ('edit' == $op || 'add' == $op)
     LotgdNavigation::addNav('common.category.navigation');
     LotgdNavigation::addNav('creatures.nav.home', 'creatures.php');
 
-    if ('module' == $subop)
+    $lotgdFormFactory = LotgdKernel::get('form.factory');
+    $creatureEntity   = $repository->find($creatureId);
+    $creatureArray    = $creatureEntity ? $repository->extractEntity($creatureEntity) : [];
+    $creatureEntity   = $creatureEntity ?: new Creatures();
+
+    $form = $lotgdFormFactory->create(CreaturesType::class, $creatureEntity, [
+        'action' => "creatures.php?op=edit&creatureid={$creatureId}",
+        'attr'   => [
+            'autocomplete' => 'off',
+        ],
+    ]);
+
+    $form->handleRequest(LotgdRequest::_i());
+
+    if ($form->isSubmitted() && $form->isValid())
     {
-        $form = module_objpref_edit('creatures', $module, $creatureId);
+        $entity = $form->getData();
 
-        $params['isLaminas']  = $form instanceof Form;
-        $params['module']     = $module;
-        $params['creatureId'] = $creatureId;
+        Doctrine::persist($entity);
+        Doctrine::flush();
 
-        if ($params['isLaminas'])
-        {
-            $form->setAttribute('action', "companions.php?op=edit&subop=module&creatureid={$id}&module={$module}");
-            $params['formTypeTab'] = $form->getOption('form_type_tab');
-        }
+        $creatureId = $entity->getCreatureid();
 
-        if (LotgdRequest::isPost())
-        {
-            $post                = LotgdRequest::getPostAll();
-            $paramsFlashMessages = ['name' => $module];
+        LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('flash.message.save.saved', [], $textDomain));
 
-            if ($params['isLaminas'])
-            {
-                $form->setData($post);
-
-                if ($form->isValid())
-                {
-                    $data = $form->getData();
-
-                    process_post_save_data($data, $creatureId, $module);
-
-                    LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('flash.message.save.module', $paramsFlashMessage, $textDomain));
-                }
-            }
-            else
-            {
-                reset($post);
-
-                process_post_save_data($post, $creatureId, $module);
-
-                LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('flash.message.save.module', $paramsFlashMessage, $textDomain));
-            }
-        }
-
-        $params['form'] = $form;
-
-        LotgdNavigation::addNavAllow("creatures.php?op=save&subop=module&creatureid={$creatureId}&module={$module}");
-
-        LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/creatures/module.html.twig', $params));
-
-        LotgdResponse::pageEnd();
-    }
-    else
-    {
-        $lotgdFormFactory = LotgdKernel::get('form.factory');
-        $creatureEntity   = $repository->find($creatureId);
-        $creatureArray    = $creatureEntity ? $repository->extractEntity($creatureEntity) : [];
-        $creatureEntity   = $creatureEntity ?: new Creatures();
-
-        $form = $lotgdFormFactory->create(CreaturesType::class, $creatureEntity, [
+        // -- Redo form for change $creatureId and set new data (generated IDs)
+        $form = $lotgdFormFactory->create(CreaturesType::class, $entity, [
             'action' => "creatures.php?op=edit&creatureid={$creatureId}",
             'attr'   => [
                 'autocomplete' => 'off',
             ],
         ]);
-
-        $form->handleRequest(LotgdRequest::_i());
-
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $entity = $form->getData();
-
-            Doctrine::persist($entity);
-            Doctrine::flush();
-
-            $creatureId = $entity->getCreatureid();
-
-            LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('flash.message.save.saved', [], $textDomain));
-
-            //-- Redo form for change $creatureId and set new data (generated IDs)
-            $form = $lotgdFormFactory->create(CreaturesType::class, $entity, [
-                'action' => "creatures.php?op=edit&creatureid={$creatureId}",
-                'attr'   => [
-                    'autocomplete' => 'off',
-                ],
-            ]);
-        }
-        Doctrine::detach($creatureEntity); //-- Avoid Doctrine save a invalid Form
-
-        //-- In this position can updated $creatureId var
-        LotgdNavigation::addHeader('creatures.category.edit');
-        LotgdNavigation::addNav('creatures.nav.properties', "creatures.php?op=edit&creatureid={$creatureId}");
-        LotgdNavigation::addHeader('creatures.category.add');
-        LotgdNavigation::addNav('creatures.nav.add.other', 'creatures.php?op=add');
-        LotgdNavigation::addNavAllow("creatures.php?op=edit&creatureid={$creatureId}");
-
-        $params['form']     = $form->createView();
-        $params['creature'] = $creatureArray;
     }
+    Doctrine::detach($creatureEntity); // -- Avoid Doctrine save a invalid Form
+
+    // -- In this position can updated $creatureId var
+    LotgdNavigation::addHeader('creatures.category.edit');
+    LotgdNavigation::addNav('creatures.nav.properties', "creatures.php?op=edit&creatureid={$creatureId}");
+    LotgdNavigation::addHeader('creatures.category.add');
+    LotgdNavigation::addNav('creatures.nav.add.other', 'creatures.php?op=add');
+    LotgdNavigation::addNavAllow("creatures.php?op=edit&creatureid={$creatureId}");
+
+    $params['form']     = $form->createView();
+    $params['creature'] = $creatureArray;
 }
 
 LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/creatures.html.twig', $params));
@@ -205,5 +151,5 @@ function process_post_save_data($data, $creatureId, $module)
     }
 }
 
-//-- Finalize page
+// -- Finalize page
 LotgdResponse::pageEnd();

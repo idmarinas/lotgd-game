@@ -98,11 +98,11 @@ class BioController extends AbstractController
 
         $ranks = new Clan(['ranks' => $ranks, 'textDomain' => 'page_clan', 'clanid' => $target['clanid']]);
         $this->dispatcher->dispatch($ranks, Clan::RANK_LIST);
-        $ranks = modulehook('clanranks', $ranks->getData());
+        $ranks = $ranks->getData();
 
         $args = new Core(['' => $this->translator->trans('character.specialtyname', [], 'app_default')]);
         $this->dispatcher->dispatch($args, Core::SPECIALTY_NAMES);
-        $specialties = modulehook('specialtynames', $args->getData());
+        $specialties = $args->getData();
 
         $params = [
             'textDomain'   => self::TRANSLATION_DOMAIN,
@@ -141,11 +141,10 @@ class BioController extends AbstractController
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_BIO_POST);
-        $params = modulehook('page-bio-tpl-params', $args->getArguments());
+        $params = $args->getArguments();
 
         $args = new Other($target);
         $this->dispatcher->dispatch($args, Other::BIO_END);
-        modulehook('bioend', $args->getData());
 
         return $this->render('page/bio.html.twig', $params);
     }

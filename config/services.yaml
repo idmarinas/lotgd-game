@@ -36,8 +36,10 @@ services:
             - "../src/core/ExpressionLanguage/BattleProvider.php"
             - "../src/core/Fixed/HookManager.php"
             - "../src/core/Twig/Extension/AdvertisingGoogle.php"
+            - "../src/core/Twig/Extension/Jaxon.php"
             - "../src/core/Hook.php"
             - "../src/core/Kernel.php"
+            - "../src/core/Service/Jaxon.php"
     Lotgd\Local\:
         resource: "../src/local/"
         exclude:
@@ -78,40 +80,6 @@ services:
             - { name: doctrine.event_subscriber, connection: default }
         arguments:
             - "%lotgd_core.doctrine_prefix%"
-
-    # Jaxon-PHP Service
-    Lotgd\Core\Service\Jaxon:
-        arguments:
-            - {
-                  core:
-                      {
-                          request: { uri: "jaxon.php" },
-                          process: { exit: false },
-                      },
-                  dialogs:
-                      {
-                          default: { message: toastr, modal: semantic },
-                          classes:
-                              {
-                                  semantic: Lotgd\Core\Jaxon\Library\Semantic\Modal,
-                              },
-                          toastr:
-                              {
-                                  options:
-                                      {
-                                          progressBar: true,
-                                          newestOnTop: false,
-                                          closeButton: true,
-                                          preventDuplicates: true,
-                                          timeOut: 30000,
-                                          extendedTimeOut: 15000,
-                                      },
-                              },
-                      },
-              }
-    lotgd.core.jaxon:
-        alias: Lotgd\Core\Service\Jaxon
-        public: true
 
     # View Laminas Service
     Laminas\View\Helper\HeadLink:

@@ -5,7 +5,6 @@
 // mail ready
 
 require_once 'common.php';
-require_once 'lib/showform.php';
 
 check_su_access(SU_EDIT_CONFIG);
 
@@ -22,7 +21,6 @@ $params = [
 ];
 
 LotgdNavigation::superuserGrottoNav();
-LotgdNavigation::addNav('Module Manager', 'modules.php');
 
 LotgdNavigation::addHeader('configuration.category.settings');
 LotgdNavigation::addNav('configuration.nav.standard', 'configuration.php');
