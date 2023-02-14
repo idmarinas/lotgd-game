@@ -31,6 +31,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :wrench: FIXES
 
 -   `src/core/Controller/StableController.php` Fixed error when buy/sell mount
+-   `src/core/Http/Response.php` and `src/core/Tool/Tool.php` Fixed (may be) broken navs that ocurred some times.
 
 ### :x: REMOVES
 
