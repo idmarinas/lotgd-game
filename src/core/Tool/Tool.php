@@ -309,7 +309,7 @@ class Tool
     /**
      * Save user data and character.
      */
-    public function saveUser(bool $update_last_on = true): void
+    public function saveUser(bool $updateLastOn = true, bool $regenSession = true): void
     {
         global $session, $companions;
 
@@ -325,7 +325,7 @@ class Tool
 
         $session['user']['bufflist'] = $session['bufflist'];
 
-        if ($update_last_on)
+        if ($updateLastOn)
         {
             $session['user']['laston'] = new DateTime('now');
         }
@@ -364,10 +364,13 @@ class Tool
 
         $this->doctrine->flush(); // Persist objects
 
-        $session['user'] = [
-            'acctid'   => $session['user']['acctid'],
-            'loggedin' => $session['user']['loggedin'],
-        ];
+        if ($regenSession)
+        {
+            $session['user'] = [
+                'acctid'   => $session['user']['acctid'],
+                'loggedin' => $session['user']['loggedin'],
+            ];
+        }
     }
 
 

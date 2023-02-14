@@ -285,7 +285,7 @@ class Response extends HttpResponse
 
         if ($saveuser)
         {
-            $this->tool->saveUser();
+            $this->tool->saveUser(true, false);
         }
 
         unset($session['output']);
