@@ -120,7 +120,7 @@ class StableController extends AbstractController
         return $this->renderStable($params);
     }
 
-    protected function buy(array $params, Request $request): Response
+    protected function buymount(array $params, Request $request): Response
     {
         global $session;
 
@@ -208,7 +208,7 @@ class StableController extends AbstractController
         return $this->renderStable($params);
     }
 
-    protected function sell(array $params): Response
+    protected function sellmount(array $params): Response
     {
         $this->navigation->addHeader('category.confirm.sell');
         $this->navigation->addNav('nav.yes', 'stables.php?op=confirmsell');
