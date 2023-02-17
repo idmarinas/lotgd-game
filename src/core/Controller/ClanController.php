@@ -318,6 +318,8 @@ class ClanController extends AbstractController
 
     public function applicantApply(array $params, Request $request): Response
     {
+        global $session;
+
         $this->response->pageTitle('title.applicant', [], $params['textDomain']);
 
         $params['tpl'] = 'clan_applicant_apply';
