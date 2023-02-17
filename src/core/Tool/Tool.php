@@ -309,7 +309,7 @@ class Tool
     /**
      * Save user data and character.
      */
-    public function saveUser(bool $updateLastOn = true, bool $regenSession = true): void
+    public function saveUser(bool $updateLastOn = true, bool $regenSession = false): void
     {
         global $session, $companions;
 
