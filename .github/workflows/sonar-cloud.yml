@@ -2,7 +2,7 @@ name: SonarCloud
 on:
   push:
     branches:
-      - migration
+      - '7.1'
   pull_request:
     types: [opened, synchronize, reopened]
     tags-ignore:
