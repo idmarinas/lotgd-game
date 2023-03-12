@@ -20,7 +20,8 @@
 
 # Actualmente haciendo esto (7.Y.0)
 
--   Crear un bundle `lotgd-core-bundle` que agrege todos los paquetes que se requieran como base "7.1.0"
+-   Crear un bundle `lotgd-core-bundle` que agrege todos los paquetes que se requieran como base "7.2.0"
+-   Crear el bundle `lotgd-installer-bundle` que agrega la instalación del juego. "7.2.0"
 
 # Cosas a mejorar
 
