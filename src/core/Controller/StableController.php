@@ -130,7 +130,7 @@ class StableController extends AbstractController
         if ($session['user']['hashorse'])
         {
             $this->navigation->addHeader('category.confirm.trade');
-            $this->navigation->addNav('nav.yes', "stables.php?op=confirmbuy&id={$mountId}");
+            $this->navigation->addNav('nav.yes', "stables.php?op=buyconfirm&id={$mountId}");
             $this->navigation->addNav('nav.no', 'stables.php');
 
             $params['confirm'] = 1;
@@ -156,8 +156,10 @@ class StableController extends AbstractController
         {
             $params['mountBuyed'] = true;
 
-            if (($session['user']['gold'] + $params['repaygold']) < $mount['mountcostgold'] || ($session['user']['gems'] + $params['repaygems']) < $mount['mountcostgems'])
-            {
+            if (
+                ($session['user']['gold'] + $params['repaygold']) < $mount['mountcostgold']
+                || ($session['user']['gems'] + $params['repaygems']) < $mount['mountcostgems']
+            ) {
                 $params['mountBuyed'] = false;
             }
             else
