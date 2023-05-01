@@ -2,7 +2,7 @@ name: SonarCloud
 on:
   push:
     branches:
-      - '7.1'
+      - '7.2'
   pull_request:
     types: [opened, synchronize, reopened]
     tags-ignore:
@@ -15,7 +15,7 @@ jobs:
       matrix:
         php-version: [7.4]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
@@ -29,7 +29,7 @@ jobs:
 
       - name: Cache Composer packages
         id: composer-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: vendor
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
@@ -37,12 +37,13 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install PHP dependencies
-        run: composer update --prefer-dist --no-progress --no-scripts
+        run: composer install --prefer-dist --no-progress --no-suggest --no-scripts
 
       - name: Run test suite
         run: composer run-script test
 
       - name: Fix paths for Sonar
+        if: matrix.php-version == '7.4'
         working-directory: ./build/reports/
         run: sed -i 's/\/home\/runner\/work\/lotgd-game\/lotgd-game\//\/github\/workspace\//g' phpunit.coverage.xml
 
