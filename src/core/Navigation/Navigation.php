@@ -282,7 +282,7 @@ class Navigation
     {
         foreach ($this->navs as $navs)
         {
-            if ( ! \is_array($navs) || ! empty($navs))
+            if ( ! \is_array($navs) || empty($navs))
             {
                 continue;
             }
