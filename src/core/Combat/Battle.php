@@ -38,6 +38,7 @@ use Lotgd\Core\Combat\Battle\Suspend;
 use Lotgd\Core\Combat\Battle\Target;
 use Lotgd\Core\Combat\Battle\TempStat;
 use Lotgd\Core\Combat\Battle\TranslationDomain;
+use Lotgd\Core\ExpressionLanguage\Battle as ExpressionLanguageBattle;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Tool\PlayerFunction;
@@ -79,19 +80,22 @@ class Battle
     private $settings;
     private $request;
     private $battleShowedResults = false;
+    private $expression;
 
     public function __construct(
         EventDispatcherInterface $dispatcher,
         EntityManagerInterface $doctrine,
         PlayerFunction $playerFunction,
         Settings $settings,
-        Request $request
+        Request $request,
+        ExpressionLanguageBattle $expression
     ) {
         $this->dispatcher     = $dispatcher;
         $this->doctrine       = $doctrine;
         $this->playerFunction = $playerFunction;
         $this->settings       = $settings;
         $this->request        = $request;
+        $this->expression     = $expression;
     }
 
     /**
