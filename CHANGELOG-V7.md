@@ -34,6 +34,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   `src/core/ExpressionLanguage/BattleProvider.php` Add function `floor` to avoid errors
 -   `src/core/Installer/Pattern/Version.php` Add missing version `7.1.6` 
 -   `src/core/Controller/StablesController.php` Fixed error when buy creature and sell other.
+-   `src/core/Combat/Battle.php` and `src/core/Combat/BattleStart.php` Fixed bug that caused buffs not to be retained
 
 ### :x: REMOVES
 
