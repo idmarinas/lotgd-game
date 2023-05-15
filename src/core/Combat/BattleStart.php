@@ -76,7 +76,7 @@ trait BattleStart
             //-- Other
             'acct', 'badguy', 'allowednavs', 'companions', 'bufflist',
         ]), ARRAY_FILTER_USE_KEY);
-        $this->userBuffs  = $this->user['buffslist'] ?? [];
+        $this->userBuffs  = $this->user['bufflist'] ?? [];
         $this->userBuffs  = \is_array($this->userBuffs) ? $this->userBuffs : [];
         $this->companions = $companions;
 

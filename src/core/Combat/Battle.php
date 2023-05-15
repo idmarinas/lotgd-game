@@ -137,7 +137,8 @@ class Battle
         $companions = $this->companions;
 
         $session['user']               = $this->user;
-        $session['user']['buffslist']  = $this->userBuffs;
+        $session['user']['bufflist']   = $this->userBuffs;
+        $session['bufflist']           = $this->userBuffs;
         $session['user']['companions'] = $this->companions;
         $session['user']['badguy']     = [
             'enemies' => $this->getEnemies(),
