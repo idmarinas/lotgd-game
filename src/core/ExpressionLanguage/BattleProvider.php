@@ -36,6 +36,7 @@ class BattleProvider implements ExpressionFunctionProviderInterface
                 fn($attr) => sprintf('$character[%s]', $attr),
                 fn(array $variables, $attr) => $variables['character'][$attr] ?? null
             ),
+            ExpressionFunction::fromPhp('floor'),
         ];
     }
 }
