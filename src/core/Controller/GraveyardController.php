@@ -183,6 +183,7 @@ class GraveyardController extends AbstractController
                 $request->query->set('op', '');
                 $skipgraveyardtext           = true;
                 $params['showGraveyardDesc'] = ! $skipgraveyardtext;
+                $this->navigation->graveyardNav($this->translationDomainNavigation);
             }
             else
             {
