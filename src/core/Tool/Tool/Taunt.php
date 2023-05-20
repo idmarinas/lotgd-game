@@ -21,8 +21,7 @@ trait Taunt
     {
         global $session;
 
-        $translator = $this->kernel->getContainer()->get('translator');
-        $count      = $translator->trans('count', [], 'partial_taunt');
+        $count = $this->translator->trans('count', [], 'partial_taunt');
 
         //-- Default message, if fail in count
         //-- Always shows the default message if the key is not found in the specified language when translating.
