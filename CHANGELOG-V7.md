@@ -35,6 +35,9 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   `src/core/Installer/Pattern/Version.php` Add missing version `7.1.6` 
 -   `src/core/Controller/StablesController.php` Fixed error when buy creature and sell other.
 -   `src/core/Combat/Battle.php` and `src/core/Combat/BattleStart.php` Fixed bug that caused buffs not to be retained
+-   `src/core/Tool/Tool/DeathMessage.php` Fixed error, no use property `$this->translator`
+-   `src/core/Tool/Tool/Taunt.php` Fixed error, no use property `$this->translator`
+-   `src/core/Controller/GraveyardController.php` Fixed error that, when win battle not show navs
 
 ### :x: REMOVES
 
