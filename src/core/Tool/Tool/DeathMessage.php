@@ -21,8 +21,7 @@ trait DeathMessage
     {
         global $session;
 
-        $translator = $this->kernel->getContainer()->get('translator');
-        $count      = $translator->trans("{$zone}.count", [], 'partial_deathmessage');
+        $count = $this->translator->trans("{$zone}.count", [], 'partial_deathmessage');
 
         //-- Default message, if fail in count
         //-- Always shows the default message if the key is not found in the specified language when translating.
