@@ -57,7 +57,7 @@ class Petitions
      *
      * @ORM\Column(name="body", type="array")
      */
-    private string $body = '';
+    private array $body = [];
 
     /**
      *
@@ -195,7 +195,7 @@ class Petitions
      *
      * @return self
      */
-    public function setBody($body)
+    public function setBody(array $body): self
     {
         $this->body = $body;
 
@@ -205,7 +205,7 @@ class Petitions
     /**
      * Get the value of Body.
      */
-    public function getBody(): string
+    public function getBody(): array
     {
         return $this->body;
     }
