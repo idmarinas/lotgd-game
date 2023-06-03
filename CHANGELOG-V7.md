@@ -14,6 +14,48 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 Visit **_V5_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V5.md)  
 Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V6.md)  
 
+# Version: 7.1.8
+
+### :cyclone: CHANGES
+
+-   Nothing
+
+### :star: FEATURES
+
+-   Nothing
+
+### :fire: DEPRECATED
+
+-   Nothing
+
+### :wrench: FIXES
+
+-   `public/images/logdnet.php` and `src/core/Http/Response.php` Avoid save user when register in Logdnet
+-   `src/core/Controller/HofController.php` Fixed error in order of money
+-   `src/core/Entity/Faillog.php` Fixed error in typing `post` is an array not a string
+-   `src/core/Entity/Pettitions.php` Fixed error in typing `post` is an array not a string
+-   `tailwind.config.js` Add to content key `./vendor/**/Resources/views/*.{html,twig}` for search TailwindCSS class in templates
+
+### :x: REMOVES
+
+-   Nothing
+
+### :notebook: NOTES
+
+-   **Important**:
+    -   :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
+    -   :warning: Avoid, as far as possible, using static classes (e.g. LotgdSetting, Doctrine, LotgdTranslation...) as these classes will be deleted in a future version. Use autowire, dependency injection when possible.
+    -   :warning: Version 7.0.0 change templates for use **TailwindCSS**
+-   **Upgrade/Install for version 5.0.0 and up**
+    -   First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
+    -   If have problems:
+        -   Read info in `storage/log/tracy/*` files, and see the problem.
+        -   Read info in `var/log/*` files, and see the problem.
+        -   Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS distribution) in your webserver.
+        -   If you can't solve the problem go to: [Repository issues](https://github.com/idmarinas/lotgd-game/issues)
+-   **composer.json** Updated/Added/Deleted dependencies
+-   **package.json** Updated/Added/Deleted dependencies
+
 # Version: 7.1.7
 
 ### :cyclone: CHANGES
