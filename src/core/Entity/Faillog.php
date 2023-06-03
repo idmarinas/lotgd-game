@@ -50,7 +50,7 @@ class Faillog
      *
      * @ORM\Column(name="post", type="array")
      */
-    private string $post;
+    private array $post;
 
     /**
      *
@@ -131,7 +131,7 @@ class Faillog
      *
      * @return self
      */
-    public function setPost($post)
+    public function setPost(array $post)
     {
         $this->post = $post;
 
@@ -141,7 +141,7 @@ class Faillog
     /**
      * Get the value of Post.
      */
-    public function getPost(): string
+    public function getPost(): array
     {
         return $this->post;
     }
