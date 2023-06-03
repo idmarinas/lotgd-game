@@ -332,7 +332,7 @@ class HofController extends AbstractController
         $params['tpl'] = 'money';
 
         $query->select('c.name', 'round((0.95 * (c.gold + c.goldinbank)), 2) AS gold')
-            ->orderBy('gold', $order)
+            ->orderBy('c.gold', $order)
             ->addOrderBy('c.level', $order)
             ->addOrderBy('c.experience', $order)
         ;
