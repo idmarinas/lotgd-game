@@ -7,4 +7,4 @@ use Lotgd\Core\Controller\LogdnetController;
 
 require_once \dirname(__DIR__).'/common_common.php';
 
-LotgdResponse::callController(LogdnetController::class, 'image', true);
+LotgdResponse::callController(LogdnetController::class, 'image', true, false);

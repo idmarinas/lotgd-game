@@ -177,8 +177,12 @@ class Response extends HttpResponse
      * @param string $method Method to call of controller
      * @param bool   $send   Send content or add to response content
      */
-    public function callController(string $class, string $method = 'index', bool $send = false): void
-    {
+    public function callController(
+        string $class,
+        string $method = 'index',
+        bool $send = false,
+        bool $saveUser = true
+    ): void {
         $resolver   = new ArgumentResolver();
         $controller = [$this->kernel->getContainer()->get($class), $method];
 
@@ -194,7 +198,9 @@ class Response extends HttpResponse
             || $response instanceof BinaryFileResponse
             || $response instanceof JsonResponse
         ) {
-            $this->tool->saveUser();
+            if ($saveUser) {
+                $this->tool->saveUser();
+            }
 
             $response->send();
 
