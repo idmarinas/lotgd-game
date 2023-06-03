@@ -1,9 +1,10 @@
 module.exports = {
     important: true,
     content: [
-        './assets/**/*.js',
+        './assets/**/*.{js,ts}',
         './src/**/*.php',
         './themes/**/*.{html,twig}',
+        './vendor/**/Resources/views/*.{html,twig}'
     ],
     darkMode: 'media', // or 'media' or 'class'
     theme: {
