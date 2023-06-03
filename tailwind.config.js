@@ -4,7 +4,7 @@ module.exports = {
         './assets/**/*.{js,ts}',
         './src/**/*.php',
         './themes/**/*.{html,twig}',
-        './vendor/**/Resources/views/*.{html,twig}'
+        './vendor/**/src/Resources/views/*.{html,twig}'
     ],
     darkMode: 'media', // or 'media' or 'class'
     theme: {
