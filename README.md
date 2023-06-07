@@ -25,8 +25,6 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/idmarinas/lotgd-game.svg)
 ![GitHub language count](https://img.shields.io/github/languages/count/idmarinas/lotgd-game.svg)
 [![DepShield Badge](https://depshield.sonatype.org/badges/idmarinas/lotgd-game/depshield.svg)](https://depshield.github.io)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/idmarinas/lotgd-game.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/idmarinas/lotgd-game/alerts/)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/idmarinas/lotgd-game.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/idmarinas/lotgd-game/context:javascript)
 
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=lotgd-game)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=lotgd-game&metric=bugs)](https://sonarcloud.io/dashboard?id=lotgd-game)
