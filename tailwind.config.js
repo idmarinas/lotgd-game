@@ -3,8 +3,8 @@ module.exports = {
     content: [
         './assets/**/*.{js,ts}',
         './src/**/*.php',
-        './themes/**/*.{html,twig}',
-        './vendor/**/*.{html,twig}'
+        './themes/**/*.twig',
+        './vendor/**/*.twig'
     ],
     darkMode: 'media', // or 'media' or 'class'
     theme: {
