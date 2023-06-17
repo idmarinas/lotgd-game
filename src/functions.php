@@ -20,7 +20,7 @@ if ( ! \function_exists('e_rand'))
      * @param int|float $min
      * @param int|float $max
      */
-    function e_rand($min = null, $max = null): int
+    function e_rand($min = null, $max = null)
     {
         if ( ! \is_numeric($min))
         {
