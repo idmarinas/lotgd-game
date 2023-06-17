@@ -34,7 +34,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   `src/core/Controller/HofController.php` Fixed error in order of money
 -   `src/core/Entity/Faillog.php` Fixed error in typing `post` is an array not a string
 -   `src/core/Entity/Pettitions.php` Fixed error in typing `post` is an array not a string
--   `tailwind.config.js` Add to content key `./vendor/**/Resources/views/*.{html,twig}` for search TailwindCSS class in templates
+-   `tailwind.config.js` Add to content key `./vendor/**/*.twig` for search TailwindCSS class in templates
 
 ### :x: REMOVES
 
