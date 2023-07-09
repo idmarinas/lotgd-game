@@ -68,12 +68,12 @@
 {% block bank_enter %}
     {% trans_default_domain textDomain %}
 
-    {{ 'default.paragraph'|trans({'name': user.name, 'ownerName': ownerName})|colorize }}
+    {{ 'default.paragraph'|trans({'name': user.name, 'ownerName': ownerName, sex: user.sex })|colorize }}
 
     {% if user.goldinbank >= 0 %}
-        {{ 'default.balance.positive'|trans({ 'balance': user.goldinbank, 'ownerName': ownerName })|colorize }}
+        {{ 'default.balance.positive'|trans({ 'balance': user.goldinbank, 'ownerName': ownerName, sex: user.sex })|colorize }}
     {% else %}
-        {{ 'default.balance.negative'|trans({ 'balance': user.goldinbank|abs, 'ownerName': ownerName })|colorize }}
+        {{ 'default.balance.negative'|trans({ 'balance': user.goldinbank|abs, 'ownerName': ownerName, sex: user.sex })|colorize }}
     {% endif %}
 {% endblock bank_enter %}
 
