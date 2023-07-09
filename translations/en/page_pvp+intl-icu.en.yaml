@@ -25,7 +25,7 @@ mail:
         subject: '`2You were killed while in {location}`0'
         message: >
             `2While you were in {location}, `^{playerName}`0 initiated an attack on you with {hisHer} `^{playerWeapon}`0, and defeated you!`n`n
-            You noticed {heShe} had an initial hp of `^{playerStartHp,number}`0 and just before you died he had `^{playerHitpoints}`0 remaining.`n`n
+            You noticed {heShe} had an initial hp of `^{playerstarthp,number}`0 and just before you died he had `^{playerHitpoints}`0 remaining.`n`n
             As a result, you lost `${pvpDefLose,number,percent}`0 of your experience (approximately {expLose,plural, =1{1 point} other{# points}}), and `^{goldLost,number}`0 gold.`n
             {pvpMessageAdded}`n
             Don't you think it's time for some revenge?`0`n`n
