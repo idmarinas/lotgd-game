@@ -127,7 +127,7 @@ class ClanController extends AbstractController
         {
             $method = 'applicantNew';
         }
-        elseif (CLAN_APPLICANT == $session['user']['clanrank'])
+        elseif (CLAN_APPLICANT == $session['user']['clanrank'] && $method != 'list')
         {
             $method = 'applicant';
         }
