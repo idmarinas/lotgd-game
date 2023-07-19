@@ -218,7 +218,7 @@ class Support
                 'location'        => $killedloc,
                 'playerName'      => $session['user']['name'],
                 'playerWeapon'    => $session['user']['weapon'],
-                'creatureStartHp' => $badguy['playerstarthp'],
+                'playerStartHp'   => $badguy['playerstarthp'],
                 'playerHitpoints' => $session['user']['hitpoints'],
                 'expLose'         => $lostexp,
                 'goldLost'        => $badguy['creaturegold'],
