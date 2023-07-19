@@ -33,7 +33,7 @@ class ModuleUserprefs
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private ?string $modulename = null;
+    private string $modulename = '';
 
     /**
      *
@@ -42,7 +42,7 @@ class ModuleUserprefs
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private ?string $setting = null;
+    private string $setting = '';
 
     /**
      *
@@ -50,13 +50,13 @@ class ModuleUserprefs
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private ?int $userid = 0;
+    private int $userid = 0;
 
     /**
      *
      * @ORM\Column(name="value", type="text", length=65535)
      */
-    private ?string $value = null;
+    private string $value = '';
 
     /**
      * Set the value of Modulename.
