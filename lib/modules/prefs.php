@@ -200,6 +200,10 @@ function increment_module_pref($name, $value = 1, $module = false, $user = false
     if ( ! $entity)
     {
         $entity = new \Lotgd\Core\Entity\ModuleUserprefs();
+        $entity->setModulename($module)
+            ->setSetting($name)
+            ->setUserid($user)
+        ;
     }
 
     $entity->setValue((float) ($entity->getValue()) + $value);
