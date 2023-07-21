@@ -51,6 +51,8 @@ class GypsyController extends AbstractController
 
             return $this->redirect('gypsy.php?op=talk');
         }
+
+        return $this->index($params);
     }
 
     public function talk(array $params): Response
