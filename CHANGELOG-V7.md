@@ -34,6 +34,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **src/core/Entity/ModuleUserprefs.php** Fixed fields, not allow null values.
 -   **lib/modules/prefs.php** Add default values when not found pref.
 -   **src/core/Controller/ClanController.php** Allow see list of clans when clanrank is applicant.
+-   **src/core/Controller/GypsyController.php** Fixed, now return index if not have money
 
 ### :x: REMOVES
 
