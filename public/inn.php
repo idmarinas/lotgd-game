@@ -138,7 +138,7 @@ LotgdResponse::callController(InnController::class, $method);
 
 //-- Restore text domain for navigation
 LotgdNavigation::setTextDomain();
-if ('default' == $params['tpl'])
+if ('index' == $method)
 {
     $args = new GenericEvent();
     LotgdEventDispatcher::dispatch($args, Events::PAGE_INN);
