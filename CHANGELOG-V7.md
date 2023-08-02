@@ -35,6 +35,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 -   **lib/modules/prefs.php** Add default values when not found pref.
 -   **src/core/Controller/ClanController.php** Allow see list of clans when clanrank is applicant.
 -   **src/core/Controller/GypsyController.php** Fixed, now return index if not have money
+-   **public/inn.php** Fix error, use $method to now if is default page
 
 ### :x: REMOVES
 
