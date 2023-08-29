@@ -12,7 +12,7 @@
 
 # A tener en cuenta desde la versión 7.1.0
 
--   La versión mínima de PHP es 7.4
+-   La versión mínima y máxima de PHP es 7.4 
 
 # Módulos
 
