@@ -13,6 +13,12 @@
 
 namespace Lotgd\Core\Fixed;
 
+/**
+ * @method static $this addNav(?string $label, ?string $link = null, array $options = [])
+ * @method static $this addHeader(string $header, array $options = [])
+ * @method static $this addNavNotl(?string $label, ?string $link = null, array $options = [])
+ * @method static $this blockLink(string $link)
+ */
 class Navigation
 {
     use StaticTrait;

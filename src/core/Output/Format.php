@@ -205,7 +205,7 @@ class Format
      */
     public function messageFormatter(string $message, ?array $parameters = [], ?string $locale = null): string
     {
-        //-- Not do nothing if message is empty
+        //-- Do nothing if message is empty
         //-- MessageFormatter fail if message is empty
         if ('' == $message)
         {

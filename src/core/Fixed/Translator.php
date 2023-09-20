@@ -14,6 +14,11 @@
 namespace Lotgd\Core\Fixed;
 
 use BadMethodCallException;
+
+/**
+ * @method static string t($id, array $parameters = [], $domain = null, $locale = null)
+ * @method static string trans($id, array $parameters = [], $domain = null, $locale = null)
+ */
 class Translator
 {
     use StaticTrait;

@@ -16,6 +16,9 @@ namespace Lotgd\Core\Fixed;
 /**
  * This class is for format a string
  * For example: format a number or a date.
+ *
+ * @method static string numeral($number, int $decimals = 0, ?string $dec_point = null, ?string $thousands_sep = null)
+ * @method static string colorize(string $text)
  */
 class Format
 {

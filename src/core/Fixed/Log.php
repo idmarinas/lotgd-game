@@ -13,6 +13,10 @@
 
 namespace Lotgd\Core\Fixed;
 
+/**
+ * @method static void game(string $message, string $category = 'general', bool $filed = false)
+ * @method static void debug(string $message, ?int $target = null, ?int $user = null, ?string $field = null, ?int $value = null, bool $consolidate = true)
+ */
 class Log
 {
     use StaticTrait;

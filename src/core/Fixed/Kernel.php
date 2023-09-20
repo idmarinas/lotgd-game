@@ -21,7 +21,7 @@ class Kernel
 
     /**
      * Short method for get a service.
-     * This replace to LotgdKernel::getContainer()->get('service_name').
+     * This replaces to LotgdKernel::getContainer()->get('service_name').
      */
     public static function get(string $serviceName)
     {

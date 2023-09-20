@@ -13,6 +13,10 @@
 
 namespace Lotgd\Core\Fixed;
 
+/**
+ * @method static mixed getQuery($name, $default = null)
+ * @method static mixed getPost($name, $default = null)
+ */
 class Request
 {
     use StaticTrait;
