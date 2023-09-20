@@ -19,6 +19,8 @@ namespace Lotgd\Core\Fixed;
  *
  * @method static string numeral($number, int $decimals = 0, ?string $dec_point = null, ?string $thousands_sep = null)
  * @method static string colorize(string $text)
+ * @method static string uncolorize(string $string)
+ * @method static string relativedate($indate, $default = 'never')
  */
 class Format
 {

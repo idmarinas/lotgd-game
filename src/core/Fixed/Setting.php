@@ -13,6 +13,10 @@
 
 namespace Lotgd\Core\Fixed;
 
+/**
+ * @method static mixed getSetting($settingname, $default = null)
+ * @method static bool saveSetting(string $settingname, $value)
+ */
 class Setting
 {
     use StaticTrait;
