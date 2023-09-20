@@ -13,6 +13,11 @@
 
 namespace Lotgd\Core\Fixed;
 
+/**
+ * @method static void addNews(string $text, array $params = [], string $textDomain = 'partial_news', bool $hideFromBio = false)
+ * @method static int expForNextLevel(int $curlevel, int $curdk)
+ * @method static void saveUser(bool $updateLastOn = true, bool $regenSession = false)
+ */
 class Tool
 {
     use StaticTrait;
