@@ -13,6 +13,11 @@
 
 namespace Lotgd\Core\Fixed;
 
+use Symfony\Contracts\EventDispatcher\Event;
+
+/**
+ * @method static Event dispatch($event, string $eventName = null)
+ */
 class EventDispatcher
 {
     use StaticTrait;
