@@ -4,7 +4,6 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/ajax/core" isTestSource="false" packagePrefix="Lotgd\Ajax\Core\" />
       <sourceFolder url="file://$MODULE_DIR$/src/core" isTestSource="false" packagePrefix="Lotgd\Core\" />
-      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Lotgd\Bundle\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/src/ajax/local" isTestSource="false" packagePrefix="Lotgd\Ajax\Local\" />
       <sourceFolder url="file://$MODULE_DIR$/src/ajax/pattern/core" isTestSource="false" packagePrefix="Lotgd\Ajax\Pattern\Core\" />
@@ -192,8 +191,11 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/twig/twig" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/docs" />
+      <excludeFolder url="file://$MODULE_DIR$/public/build" />
+      <excludeFolder url="file://$MODULE_DIR$/var" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="modules" />
   </component>
 </module>
