@@ -60,7 +60,7 @@ trait BattleProcess
             foreach ($this->enemies as &$badguy)
             {
                 if (
-                    //-- Next enemy if this are dead
+                    //-- Next enemy if this is dead
                     ( ! $this->isEnemyAlive($badguy))
                     //-- Next enemy if not is target and research max attacks per round
                     || ($roundAttacks > $this->getOption('maxattacks') && ! $badguy['istarget'])
