@@ -16,6 +16,15 @@ namespace Lotgd\Core\Fixed;
 /**
  * This class is for sanitize a string
  * For example: sanitize a number or a date.
+ *
+ * @method static string unColorize(string $string)
+ * @method static string noLotgdCodes(string $string)
+ * @method static string fullSanitize(string $string)
+ * @method static string preventLotgdCodes(string $string)
+ * @method static string moduleNameSanitize(string $string)
+ * @method static string nameSanitize($spaceAllowed, string $name)
+ * @method static string colorNameSanitize($spaceallowed, string $string, $admin = null)
+ * @method static string htmlSanitize(string $string)
  */
 class Sanitize
 {
