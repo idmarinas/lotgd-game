@@ -52,7 +52,7 @@ trait BattleEnd
             $this->battleHasWinner = true;
         }
 
-        //-- Proccess victory or defeat of battle
+        //-- Process victory or defeat of battle
         $this->processBatteResults();
 
         $this->battleIsEnded = true;
