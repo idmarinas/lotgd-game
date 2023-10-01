@@ -17,6 +17,7 @@ namespace Lotgd\Core\Fixed;
  * @method static void addNews(string $text, array $params = [], string $textDomain = 'partial_news', bool $hideFromBio = false)
  * @method static int expForNextLevel(int $curlevel, int $curdk)
  * @method static void saveUser(bool $updateLastOn = true, bool $regenSession = false)
+ * @method static array selectTaunt(array $extraParams = [])
  */
 class Tool
 {

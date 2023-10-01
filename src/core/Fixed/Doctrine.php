@@ -14,9 +14,23 @@
 namespace Lotgd\Core\Fixed;
 
 use BadMethodCallException;
+use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
 use LotgdResponse;
 use Doctrine\ORM\Tools\SchemaTool;
 
+/**
+ * @method static Expr getExpressionBuilder()
+ * @method static QueryBuilder createQueryBuilder()
+ * @method static void flush()
+ * @method static object find($className, $id, $lockMode = null, $lockVersion = null)
+ * @method static void clear()
+ * @method static void persist($entity)
+ * @method static void remove($entity)
+ * @method static void refresh($entity, ?int $lockMode = null)
+ * @method static void detach($entity)
+ * @method static object getRepository($entityName)
+ */
 class Doctrine
 {
     use StaticTrait;
