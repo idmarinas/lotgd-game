@@ -18,6 +18,8 @@ namespace Lotgd\Core\Fixed;
  * @method static int expForNextLevel(int $curlevel, int $curdk)
  * @method static void saveUser(bool $updateLastOn = true, bool $regenSession = false)
  * @method static array selectTaunt(array $extraParams = [])
+ * @method static string getPartner(bool $player = false)
+ * @method static array getMount($horse = 0)
  */
 class Tool
 {
