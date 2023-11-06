@@ -68,7 +68,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     -   :warning: Version 7.0.0 change templates for use **TailwindCSS**
 -   **Upgrade/Install for version 5.0.0 and up**
     -   First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    -   If have problems:
+    -   If you have problems:
         -   Read info in `storage/log/tracy/*` files, and see the problem.
         -   Read info in `var/log/*` files, and see the problem.
         -   Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS distribution) in your webserver.
