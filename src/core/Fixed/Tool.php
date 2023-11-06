@@ -22,7 +22,13 @@ namespace Lotgd\Core\Fixed;
  * @method static array getMount($horse = 0)
  * @method static string changePlayerTitle($ntitle, $old = null)
  * @method static string getPlayerTitle($old = null)
+ * @method static string getPlayerBasename($old = null)
+ * @method static string getPlayerCBasename($old = null)
+ * @method static string changePlayerName($newname, $old = null)
+ * @method static string changePlayerCtitle($nctitle, $old = false)
  * @method static array selectDeathMessage(string $zone = 'forest', array $extraParams = [])
+ * @method static void checkBan(?string $login = null)
+ * @method static string substitute(?string $string, ?array $extraSearch = null, ?array $extraReplace = null)
  */
 class Tool
 {
