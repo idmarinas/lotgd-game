@@ -53,7 +53,7 @@ The version **IDMarinas Edition** is based on the version **1.1.2 Dragonprime** 
 
 ## IDMarinas Edition
 
-Version of the IDMarinas Edition: **_7.1.12_**
+Version of the IDMarinas Edition: **_7.1.13_**
 
 The intention to make a new branch of the Core, is to be able to update certain aspects, which were outdated, such as the script that is used to access the database, while correcting certain errors, and adding new options of customization.
 
@@ -76,7 +76,7 @@ If you want more modules, in ([DragonPrime](http://dragonprime.net)) you can fin
 -   From the 4.0.0 IDMarinas Edition you need PHP 7.1 or better
 -   From the 4.2.0 IDMarinas Edition you need PHP 7.2 or better
 -   From the 4.6.0 IDMarinas Edition you need PHP 7.3 or better
--   From the 7.1.0 IDMarinas Edition you need PHP 7.4 or better
+-   From the 7.1.0 IDMarinas Edition you need PHP 7.4
 
 # Other
 
