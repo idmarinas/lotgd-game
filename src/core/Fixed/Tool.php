@@ -20,6 +20,9 @@ namespace Lotgd\Core\Fixed;
  * @method static array selectTaunt(array $extraParams = [])
  * @method static string getPartner(bool $player = false)
  * @method static array getMount($horse = 0)
+ * @method static string changePlayerTitle($ntitle, $old = null)
+ * @method static string getPlayerTitle($old = null)
+ * @method static array selectDeathMessage(string $zone = 'forest', array $extraParams = [])
  */
 class Tool
 {
