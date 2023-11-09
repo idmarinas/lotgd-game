@@ -19,6 +19,7 @@ use function class_alias;
  * @method static string render($name, array $context = [])
  * @method static void display($name, array $context = [])
  * @method static \Twig\TemplateWrapper load($name)
+ * @method static \Twig\TemplateWrapper createTemplate($template, string $name = null)
  */
 class Theme
 {
