@@ -1,5 +1,7 @@
 <?php
 
+global $session, $companions;
+
 use Lotgd\Core\Controller\ForestController;
 use Lotgd\Core\Events;
 // addnews ready
