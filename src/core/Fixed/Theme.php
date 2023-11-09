@@ -13,6 +13,11 @@
 
 namespace Lotgd\Core\Fixed;
 
+/**
+ * @method static string render($name, array $context = [])
+ * @method static void display($name, array $context = [])
+ * @method static \Twig\TemplateWrapper load($name)
+ */
 class Theme
 {
     use StaticTrait;
