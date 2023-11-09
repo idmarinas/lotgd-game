@@ -14,6 +14,10 @@
 namespace Lotgd\Core\Fixed;
 
 use BadMethodCallException;
+use function class_alias;
+use function get_class_methods;
+use function implode;
+use function method_exists;
 
 /**
  * @method static string t($id, array $parameters = [], $domain = null, $locale = null)
@@ -33,7 +37,7 @@ class Translator
      */
     public static function __callStatic($method, $arguments)
     {
-        if (\method_exists(self::$instance, $method))
+        if (method_exists(self::$instance, $method))
         {
             return self::$instance->{$method}(...$arguments);
         }
@@ -43,10 +47,10 @@ class Translator
             return self::$instance->trans(...$arguments);
         }
 
-        $methods = \implode(', ', \get_class_methods(self::$instance));
+        $methods = implode(', ', get_class_methods(self::$instance));
 
-        throw new BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
+        throw new BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
     }
 }
 
-\class_alias('Lotgd\Core\Fixed\Translator', 'LotgdTranslator', false);
+class_alias('Lotgd\Core\Fixed\Translator', 'LotgdTranslator', false);

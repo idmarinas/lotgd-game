@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Fixed;
 
+use function class_alias;
+
 /**
  * This class is for sanitize a string
  * For example: sanitize a number or a date.
@@ -31,4 +33,4 @@ class Sanitize
     use StaticTrait;
 }
 
-\class_alias('Lotgd\Core\Fixed\Sanitize', 'LotgdSanitize', false);
+class_alias('Lotgd\Core\Fixed\Sanitize', 'LotgdSanitize', false);

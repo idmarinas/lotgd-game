@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Fixed;
 
+use function class_alias;
+
 class FlashMessages
 {
     use StaticTrait;
@@ -23,7 +25,7 @@ class FlashMessages
      * @param array|string $message
      * @param string       $type
      */
-    public static function addMessage($message, $type = null)
+    public static function addMessage($message, string $type = null): void
     {
         $type = $type ?: 'info';
 
@@ -37,7 +39,7 @@ class FlashMessages
      *
      * @return FlashMessages
      */
-    public static function addInfoMessage($message)
+    public static function addInfoMessage($message): void
     {
         self::$instance->add('info', $message);
     }
@@ -49,7 +51,7 @@ class FlashMessages
      *
      * @return FlashMessages
      */
-    public static function addSuccessMessage($message)
+    public static function addSuccessMessage($message): void
     {
         self::$instance->add('success', $message);
     }
@@ -61,7 +63,7 @@ class FlashMessages
      *
      * @return FlashMessages
      */
-    public static function addErrorMessage($message)
+    public static function addErrorMessage($message): void
     {
         self::$instance->add('error', $message);
     }
@@ -73,10 +75,10 @@ class FlashMessages
      *
      * @return FlashMessages
      */
-    public static function addWarningMessage($message)
+    public static function addWarningMessage($message): void
     {
         self::$instance->add('warning', $message);
     }
 }
 
-\class_alias('Lotgd\Core\Fixed\FlashMessages', 'LotgdFlashMessages', false);
+class_alias('Lotgd\Core\Fixed\FlashMessages', 'LotgdFlashMessages', false);

@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Fixed;
 
+use function class_alias;
+
 /**
  * @method static $this addNav(?string $label, ?string $link = null, array $options = [])
  * @method static $this addNavNotl(?string $label, ?string $link = null, array $options = [])
@@ -32,4 +34,4 @@ class Navigation
     use StaticTrait;
 }
 
-\class_alias('Lotgd\Core\Fixed\Navigation', 'LotgdNavigation', false);
+class_alias('Lotgd\Core\Fixed\Navigation', 'LotgdNavigation', false);

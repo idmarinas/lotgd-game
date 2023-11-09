@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Fixed;
 
+use function class_alias;
+
 /**
  * @method static mixed getQuery($name, $default = null)
  * @method static mixed getPost($name, $default = null)
@@ -22,4 +24,4 @@ class Request
     use StaticTrait;
 }
 
-\class_alias('Lotgd\Core\Fixed\Request', 'LotgdRequest', false);
+class_alias('Lotgd\Core\Fixed\Request', 'LotgdRequest', false);

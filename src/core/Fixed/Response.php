@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Fixed;
 
+use function class_alias;
+
 /**
  * @method static void pageStart($title = null, $parameters = [], $textDomain = null, $locale = null)
  * @method static void pageTitle($message, $parameters = [], $textDomain = null, $locale = null)
@@ -24,4 +26,4 @@ class Response
     use StaticTrait;
 }
 
-\class_alias('Lotgd\Core\Fixed\Response', 'LotgdResponse', false);
+class_alias('Lotgd\Core\Fixed\Response', 'LotgdResponse', false);

@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Fixed;
 
 use Symfony\Contracts\EventDispatcher\Event;
+use function class_alias;
 
 /**
  * @method static Event dispatch($event, string $eventName = null)
@@ -23,4 +24,4 @@ class EventDispatcher
     use StaticTrait;
 }
 
-\class_alias('Lotgd\Core\Fixed\EventDispatcher', 'LotgdEventDispatcher', false);
+class_alias('Lotgd\Core\Fixed\EventDispatcher', 'LotgdEventDispatcher', false);

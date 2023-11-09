@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Fixed;
 
+use function class_alias;
+
 /**
  * @method static void addNews(string $text, array $params = [], string $textDomain = 'partial_news', bool $hideFromBio = false)
  * @method static int expForNextLevel(int $curlevel, int $curdk)
@@ -35,4 +37,4 @@ class Tool
     use StaticTrait;
 }
 
-\class_alias('Lotgd\Core\Fixed\Tool', 'LotgdTool', false);
+class_alias('Lotgd\Core\Fixed\Tool', 'LotgdTool', false);

@@ -13,9 +13,11 @@
 
 namespace Lotgd\Core\Fixed;
 
+use function class_alias;
+
 class Session
 {
     use StaticTrait;
 }
 
-\class_alias('Lotgd\Core\Fixed\Session', 'LotgdSession', false);
+class_alias('Lotgd\Core\Fixed\Session', 'LotgdSession', false);

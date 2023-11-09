@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Fixed;
 
+use function class_alias;
+
 /**
  * @method static mixed getSetting($settingname, $default = null)
  * @method static bool saveSetting(string $settingname, $value)
@@ -22,4 +24,4 @@ class Setting
     use StaticTrait;
 }
 
-\class_alias('Lotgd\Core\Fixed\Setting', 'LotgdSetting', false);
+class_alias('Lotgd\Core\Fixed\Setting', 'LotgdSetting', false);

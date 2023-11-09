@@ -18,6 +18,7 @@ use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use LotgdResponse;
 use Doctrine\ORM\Tools\SchemaTool;
+use function class_alias;
 
 /**
  * @method static Expr getExpressionBuilder()

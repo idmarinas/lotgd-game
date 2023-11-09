@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Fixed;
 
+use function class_alias;
+
 /**
  * This class is for format a string
  * For example: format a number or a date.
@@ -27,4 +29,4 @@ class Format
     use StaticTrait;
 }
 
-\class_alias('Lotgd\Core\Fixed\Format', 'LotgdFormat', false);
+class_alias('Lotgd\Core\Fixed\Format', 'LotgdFormat', false);

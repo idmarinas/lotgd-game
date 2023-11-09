@@ -14,6 +14,10 @@
 namespace Lotgd\Core\Fixed;
 
 use BadMethodCallException;
+use function get_class_methods;
+use function implode;
+use function method_exists;
+
 trait StaticTrait
 {
     /**
@@ -38,7 +42,7 @@ trait StaticTrait
 
         $methods = implode(', ', get_class_methods(self::$instance));
 
-        throw new BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
+        throw new BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
     }
 
     /**

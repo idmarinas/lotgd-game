@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Fixed;
 
+use function class_alias;
+
 /**
  * @method static string render($name, array $context = [])
  * @method static void display($name, array $context = [])
@@ -23,4 +25,4 @@ class Theme
     use StaticTrait;
 }
 
-\class_alias('Lotgd\Core\Fixed\Theme', 'LotgdTheme', false);
+class_alias('Lotgd\Core\Fixed\Theme', 'LotgdTheme', false);
