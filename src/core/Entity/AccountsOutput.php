@@ -35,7 +35,7 @@ class AccountsOutput
      *
      * @ORM\Column(name="output", type="blob", length=16777215)
      */
-    private ?string $output = null;
+    private $output = null;
 
     /**
      * Set the value of Acctid.
@@ -76,7 +76,7 @@ class AccountsOutput
     /**
      * Get the value of Output.
      */
-    public function getOutput(): string
+    public function getOutput()
     {
         return $this->output;
     }
