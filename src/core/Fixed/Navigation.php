@@ -28,6 +28,7 @@ use function class_alias;
  * @method static void villageNav($extra = '')
  * @method static void forestNav(string $translationDomain)
  * @method static void graveyardNav(string $translationDomain)
+ * @method static void superuser()
  */
 class Navigation
 {
