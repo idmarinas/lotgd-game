@@ -81,7 +81,7 @@ class AccountsEverypage
      */
     public function setGentime($gentime)
     {
-        $this->gentime = $gentime;
+        $this->gentime = min(4_294_967_290, $gentime);
 
         return $this;
     }
@@ -91,7 +91,7 @@ class AccountsEverypage
      */
     public function getGentime(): float
     {
-        return $this->gentime;
+        return min(4_294_967_290, $this->gentime);
     }
 
     /**
@@ -103,7 +103,7 @@ class AccountsEverypage
      */
     public function setGentimecount($gentimecount)
     {
-        $this->gentimecount = $gentimecount;
+        $this->gentimecount = min(4_294_967_290, $gentimecount);
 
         return $this;
     }
@@ -113,7 +113,7 @@ class AccountsEverypage
      */
     public function getGentimecount(): int
     {
-        return $this->gentimecount;
+        return min(4_294_967_290, $this->gentimecount);
     }
 
     /**
@@ -125,7 +125,7 @@ class AccountsEverypage
      */
     public function setGensize($gensize)
     {
-        $this->gensize = $gensize;
+        $this->gensize = min(4_294_967_290, $gensize);
 
         return $this;
     }
@@ -135,6 +135,6 @@ class AccountsEverypage
      */
     public function getGensize(): int
     {
-        return $this->gensize;
+        return min(4_294_967_290, $this->gensize);
     }
 }
