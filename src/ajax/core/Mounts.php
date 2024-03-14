@@ -20,6 +20,7 @@ use LotgdFormat;
 use LotgdTranslator;
 use Throwable;
 use Tracy\Debugger;
+use function Jaxon\jaxon;
 
 class Mounts extends AjaxAbstract
 {
@@ -32,7 +33,7 @@ class Mounts extends AjaxAbstract
             return $check;
         }
 
-        $response = new Response();
+        $response = jaxon()->getResponse();
 
         try
         {

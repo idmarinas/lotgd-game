@@ -13,22 +13,20 @@
 
 namespace Lotgd\Core\Service;
 
+use Jaxon\App\Ajax;
 use Jaxon\Jaxon as JaxonCore;
+use function Jaxon\jaxon;
 
-class Jaxon extends JaxonCore
+class Jaxon extends Ajax
 {
     public function __construct(array $config)
     {
-        parent::__construct();
-
-        $this->di()->getConfig()->setOptions($config);
+        $this->config()->setOptions($config);
 
         //-- Register all class of Lotgd in dir "src/ajax/core"
         $this->register(JaxonCore::CALLABLE_DIR, './src/ajax/core', ['namespace' => 'Lotgd\\Ajax\\Core\\']);
 
         //-- Register all custom class (Available globally) in dir "src/ajax/local"
         $this->register(JaxonCore::CALLABLE_DIR, './src/ajax/local', ['namespace' => 'Lotgd\\Ajax\\Local\\']);
-
-        $this->plugin('dialog')->registerClasses();
     }
 }

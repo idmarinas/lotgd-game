@@ -20,6 +20,7 @@ use LotgdFormat;
 use LotgdTranslator;
 use Throwable;
 use Tracy\Debugger;
+use function Jaxon\jaxon;
 
 class Bans extends AjaxAbstract
 {
@@ -27,7 +28,7 @@ class Bans extends AjaxAbstract
     {
         global $session;
 
-        $response = new Response();
+        $response = jaxon()->getResponse();
 
         try
         {
