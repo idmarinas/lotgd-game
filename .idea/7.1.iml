@@ -61,12 +61,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-stdlib" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-validator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-view" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/lemonphp/event" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/lotgd-core/occurrence-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/macfja/tracy-doctrine-sql" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/marioblazek/twig-byte-units-extension" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/matthiasmullie/minify" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/matthiasmullie/path-converter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/microsoft/tolerant-php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/milo/vendor-versions" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/deep-copy" />
@@ -193,6 +190,14 @@
       <excludeFolder url="file://$MODULE_DIR$/docs" />
       <excludeFolder url="file://$MODULE_DIR$/public/build" />
       <excludeFolder url="file://$MODULE_DIR$/var" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jaxon-php/jaxon-utils" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nyholm/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nyholm/psr7-server" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-server-handler" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-server-middleware" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/tedivm/jshrink" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
