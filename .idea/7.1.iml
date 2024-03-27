@@ -41,8 +41,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/idmarinas/lotgd-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/idmarinas/maker-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/idmarinas/tracy-twig-bar" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/jaxon-php/jaxon-core" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/jaxon-php/jaxon-dialogs" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jms/metadata" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jms/serializer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/kitlabs/kit-crypt-bundle" />
@@ -83,7 +81,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-text-template" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-timer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/phpunit" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/pimple/pimple" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/cache" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/container" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/log" />
@@ -190,14 +187,6 @@
       <excludeFolder url="file://$MODULE_DIR$/docs" />
       <excludeFolder url="file://$MODULE_DIR$/public/build" />
       <excludeFolder url="file://$MODULE_DIR$/var" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/jaxon-php/jaxon-utils" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/nyholm/psr7" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/nyholm/psr7-server" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-factory" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-server-handler" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-server-middleware" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/tedivm/jshrink" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

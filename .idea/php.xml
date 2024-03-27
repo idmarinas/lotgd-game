@@ -164,16 +164,13 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/bukashk0zzz/filter-bundle" />
-      <path value="$PROJECT_DIR$/vendor/pimple/pimple" />
       <path value="$PROJECT_DIR$/vendor/ezyang/htmlpurifier" />
       <path value="$PROJECT_DIR$/vendor/gabrielelana/byte-units" />
       <path value="$PROJECT_DIR$/vendor/cocur/slugify" />
       <path value="$PROJECT_DIR$/vendor/marioblazek/twig-byte-units-extension" />
       <path value="$PROJECT_DIR$/vendor/cron/cron-bundle" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-invoker" />
-      <path value="$PROJECT_DIR$/vendor/jaxon-php/jaxon-dialogs" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
-      <path value="$PROJECT_DIR$/vendor/jaxon-php/jaxon-core" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
       <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
@@ -193,14 +190,6 @@
       <path value="$PROJECT_DIR$/../modules/vendor/rector/rector" />
       <path value="$PROJECT_DIR$/../modules/vendor/phpstan/phpstan" />
       <path value="$PROJECT_DIR$/../modules/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/tedivm/jshrink" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-server-handler" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-server-middleware" />
-      <path value="$PROJECT_DIR$/vendor/jaxon-php/jaxon-utils" />
-      <path value="$PROJECT_DIR$/vendor/nyholm/psr7" />
-      <path value="$PROJECT_DIR$/vendor/nyholm/psr7-server" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
