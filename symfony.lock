@@ -142,12 +142,6 @@
     "idmarinas/tracy-twig-bar": {
         "version": "0.1.2"
     },
-    "jaxon-php/jaxon-core": {
-        "version": "v3.4.1"
-    },
-    "jaxon-php/jaxon-dialogs": {
-        "version": "v3.1.4"
-    },
     "jms/metadata": {
         "version": "2.5.0"
     },
@@ -293,9 +287,6 @@
             "./phpunit.xml.dist",
             "./tests/bootstrap.php"
         ]
-    },
-    "pimple/pimple": {
-        "version": "v3.4.0"
     },
     "psr/cache": {
         "version": "1.0.1"
