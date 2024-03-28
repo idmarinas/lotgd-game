@@ -86,7 +86,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -111,7 +111,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
-- Fixed a error in `6.0.0` migration database, when make a installation.
+- Fixed an error in `6.0.0` migration database, when make an installation.
 
 ### :x: REMOVES
 
@@ -126,7 +126,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -171,7 +171,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -212,7 +212,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -256,7 +256,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -303,7 +303,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -343,7 +343,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -384,7 +384,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -426,7 +426,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -452,7 +452,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :wrench: FIXES
 
 - `src/core/Controller/StableController.php` Fixed error when buy/sell mount
-- `src/core/Http/Response.php` and `src/core/Tool/Tool.php` Fixed (may be) broken navs that ocurred some times.
+- `src/core/Http/Response.php` and `src/core/Tool/Tool.php` Fixed (maybe) broken navs that occurred sometimes.
 
 ### :x: REMOVES
 
@@ -467,7 +467,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -507,7 +507,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -532,11 +532,11 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 ### :wrench: FIXES
 
-- `src/core/Tool/Validator.php` Fix error with cheking if email is valid
+- `src/core/Tool/Validator.php` Fix error with checking if email is valid
 - `src/core/Controller/CreateController.php` Fixed error with validation email address.
     - Previously it treated the `id` as numeric when it was a string.
 - `src/core/Controller/GraveyardController.php` Fixed error, mark function `setServiceCreatureFunction` with *required*
-  anotation.
+  annotation.
     - With this, Symfony inject services.
 - `src/core/Controller/StableController.php` Fixed error with name of var. **dipatcher** to **dispatcher**
 - `public/gardens` Fixed error, pass `$textDomainNavigation` as argument.
@@ -556,7 +556,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 8.0.0 deleted old system of modules and JaxonPHP
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -603,7 +603,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 
 - `src/core/Repository/UserRepository.php` Fixed error with place of `Debugger::log()` in function `getUserById`
 - `themes/LotgdModern/templates/page/bio.html.twig` Fixed error with key of translation
-- `translations/en/page_bio+intl-icu.en.yaml` add missin key translation
+- `translations/en/page_bio+intl-icu.en.yaml` add missing key translation
 - `src/core/Repository/User/Avatar.php` Fixed error when not found news for user, now return a correct empty array
 - `public/bans.php` Fixed error that can add bans
 - Fixed some code smells and vulnerabilities
@@ -624,7 +624,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -666,7 +666,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -692,9 +692,9 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :wrench: FIXES
 
 - **lib/showform.php** Updated for show form with Tailwind CSS
-- Use new name of Stimulus package, this avoid some errors.
-    - **asssets/stimulus/controllers/form/input_range_controller.js**
-    - **asssets/stimulus/controllers/form/submit_controller.js**
+- Use new name of Stimulus package, this avoids some errors.
+    - **assets/stimulus/controllers/form/input_range_controller.js**
+    - **assets/stimulus/controllers/form/submit_controller.js**
 - **systemmail** Remplace `systemmail()` function for service method.
 - **is_email** Remplace `is_email()` function for service method.
 
@@ -711,7 +711,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -737,7 +737,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
 ### :wrench: FIXES
 
 - **Service** Create a public service `lotgd_http_client` use this instead of `http_client`
-- **Comentary** Fixed error with undefined "Lotgd"
+- **Commentary** Fixed error with undefined "Lotgd"
 
 ### :x: REMOVES
 
@@ -752,7 +752,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -795,7 +795,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - :warning: Version 7.0.0 change templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
     - First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
-    - If have problems:
+    - If you have problems:
         - Read info in `storage/log/tracy/*` files, and see the problem.
         - Read info in `var/log/*` files, and see the problem.
         - Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
@@ -829,7 +829,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
                   'title' => 'Notification Title', 
                   'notification' => 'Notification message', 
                   'close' => false,
-                  'duration' => 7000 // Time in miliseconds
+                  'duration' => 7000 // Time in milliseconds
                   'id' => 'id-for-notification' //-- By default is auto-generated
               ]);
           ```
@@ -838,7 +838,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
         - `Lotgd\Core\Form\Type\TextareaLimitType`
             - This type create a text area with a counter of characters that have limit
         - `Lotgd\Core\Form\Type\AutocompleteType`
-            - This ty pe create a input field for autocomplete from server.
+            - This ty pe create an input field for autocomplete from server.
 
 ### :fire: DEPRECATED
 
@@ -846,7 +846,7 @@ Visit **_V6_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/migratio
     - Use `Lotgd\Core\Pattern\LotgdControllerTrait` instead
         - This trait have other methods used in LoTGD
 - **JaxonPHP** is deprecated and deleted of core in version 8.0.0
-    - You can add this dependencie if your use it in version 8.0.0 and up
+    - You can add these dependencies if your use it in version 8.0.0 and up
     - Think about migrating all JaxonPHP classes to Stimulus.
 
 ### :wrench: FIXES
