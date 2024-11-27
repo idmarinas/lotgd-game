@@ -6,7 +6,7 @@
             "composer/package-versions-deprecated": true,
             "symfony/flex": true
         },
-        "optimize-autoloader": true,
+        "optimize-autoloader": false,
         "preferred-install": {
             "*": "dist"
         },
