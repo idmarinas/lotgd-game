@@ -20,49 +20,50 @@ use LotgdFormat;
 use LotgdTranslator;
 use Throwable;
 use Tracy\Debugger;
+use function Jaxon\jaxon;
 
 class Mounts extends AjaxAbstract
 {
-    public function getListOfOwners(int $mountId)
-    {
-        $check = $this->checkLoggedInRedirect();
+	public function getListOfOwners(int $mountId)
+	{
+		$check = $this->checkLoggedInRedirect();
 
-        if (true !== $check)
-        {
-            return $check;
-        }
+		if (true !== $check)
+		{
+			return $check;
+		}
 
-        $response = new Response();
+		$response = jaxon()->getResponse();
 
-        try
-        {
-            $repository = Doctrine::getRepository('LotgdCore:Avatar');
-            $entities   = $repository->findBy(['hashorse' => $mountId]);
-        }
-        catch (Throwable $th)
-        {
-            Debugger::log($th);
+		try
+		{
+			$repository = Doctrine::getRepository('LotgdCore:Avatar');
+			$entities   = $repository->findBy(['hashorse' => $mountId]);
+		}
+		catch (Throwable $th)
+		{
+			Debugger::log($th);
 
-            $entities = [];
-        }
-        // The dialog buttons
-        $buttons = [
-            [
-                'title' => LotgdTranslator::t('modal.buttons.cancel', [], 'app_default'),
-                'class' => 'ui red deny button',
-            ],
-        ];
+			$entities = [];
+		}
+		// The dialog buttons
+		$buttons = [
+			[
+				'title' => LotgdTranslator::t('modal.buttons.cancel', [], 'app_default'),
+				'class' => 'ui red deny button',
+			],
+		];
 
-        $content = '';
+		$content = '';
 
-        foreach ($entities as $char)
-        {
-            $content .= LotgdFormat::colorize($char->getName(), true).'<br>';
-        }
+		foreach ($entities as $char)
+		{
+			$content .= LotgdFormat::colorize($char->getName(), true).'<br>';
+		}
 
-        // Show the dialog
-        $response->dialog->show('', ['content' => $content ?: '---'], $buttons);
+		// Show the dialog
+		$response->dialog->show('', ['content' => $content ?: '---'], $buttons);
 
-        return $response;
-    }
+		return $response;
+	}
 }

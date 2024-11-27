@@ -21,41 +21,41 @@ use function Jaxon\jaxon;
  */
 abstract class AjaxAbstract
 {
-    /**
-     * Return true or empty Jaxon\Response\Response.
-     *
-     * @return \Jaxon\Response\ResponseInterface|true
-     */
-    protected function checkLoggedIn()
-    {
-        global $session;
+	/**
+	 * Return true or empty Jaxon\Response\Response.
+	 *
+	 * @return \Jaxon\Response\ResponseInterface|true
+	 */
+	protected function checkLoggedIn()
+	{
+		global $session;
 
-        //-- Do nothing if there is no active session
-        if ( ! ($session['user']['loggedin'] ?? false))
-        {
-            return jaxon()->getResponse();
-        }
+		//-- Do nothing if there is no active session
+		if ( ! ($session['user']['loggedin'] ?? false))
+		{
+			return jaxon()->getResponse();
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * Return true or redirect to home.php page.
-     *
-     * @return \Jaxon\Response\ResponseInterface|true
-     */
-    protected function checkLoggedInRedirect()
-    {
-        global $session;
+	/**
+	 * Return true or redirect to home.php page.
+	 *
+	 * @return \Jaxon\Response\ResponseInterface|true
+	 */
+	protected function checkLoggedInRedirect()
+	{
+		global $session;
 
-        //-- Do nothing if there is no active session
-        if ( ! ($session['user']['loggedin'] ?? false))
-        {
-            $response = jaxon()->getResponse();
+		//-- Do nothing if there is no active session
+		if ( ! ($session['user']['loggedin'] ?? false))
+		{
+			$response = jaxon()->getResponse();
 
-            return $response->redirect('home.php');
-        }
+			return $response->redirect('home.php');
+		}
 
-        return true;
-    }
+		return true;
+	}
 }
