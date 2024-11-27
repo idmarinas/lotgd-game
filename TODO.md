@@ -1,7 +1,7 @@
 # A tener en cuenta desde la versión 5.0.0
 
 -   El antiguo sistema de módulos está obsoleto desde la versión **5.0.0**
-    -   Los módulos antiguos seguiran funcionando pero estan obsoletos.
+    -   Los módulos antiguos seguirán funcionando pero están obsoletos.
     -   El nuevo sistema tipo Bundle reemplaza al sistema de módulos antiguos.
     -   A partir de la versión **5.0.0** se empezará a usar un sistema de módulos tipo Bundle
 
@@ -20,7 +20,7 @@
 
 # Actualmente haciendo esto (7.Y.0)
 
--   Crear un bundle `lotgd-core-bundle` que agrege todos los paquetes que se requieran como base "7.1.0"
+-   Crear un bundle `lotgd-core-bundle` que agregue todos los paquetes que se requieran como base "7.1.0"
 
 # Cosas a mejorar
 
@@ -31,16 +31,16 @@
             -   Este sistema no me convence, por lo que en la versión 8.0.0 planeo hacer otra cosa:
                 -   Crear bundles de cada zona:
                     -   `village`, `forest`, `shop`...
-                    -   Con estos bundles se podria usar el sistema de event dispatcher de symfony para activar estos tipos de eventos especiales.
+                    -   Con estos bundles se podría usar el sistema de event dispatcher de symfony para activar estos tipos de eventos especiales.
                         -   Por ejemplo con el evento `request` antes de procesar toda la petición.
         -   Agregar opción para priorizar eventos.
             -   Agregar la prioridad a los eventos esto es útil para los eventos que no tienen menú de opciones y los que sí
-                -   Se permitiria pasar antes los eventos que no tienen menús para así no entrar en conflicto con los que tienen menú
+                -   Se permitiría pasar antes los eventos que no tienen menús para así no entrar en conflicto con los que tienen menú
         -   Se agregará unas constantes con diferentes prioridades:
             -   Se establecen en orden de prioridad
                 -   `priority_info` Para los eventos que no necesitan una respuesta y no son interactivos, solo son informativos de que ha pasado algo.
                     -   Este evento permite que se ejecute los otros dos.
-                -   `priority_interactive` Para eventos que no necesitan respuesta pero son interactivos, por ejemplo, se puede comentar (ejemplo es la pradera donde puede comer la montura y se puede escribir un comentario pero no hace falta una respuesta)
+                -   `priority_interactive` Para eventos que no necesitan respuesta, pero son interactivos, por ejemplo, se puede comentar (ejemplo es la pradera donde puede comer la montura y se puede escribir un comentario, pero no hace falta una respuesta)
                     -   Este evento impide que se ejecute otro evento con la misma prioridad, pero puede ejecutarse un evento de la prioridad anterior.
                 -   `priority_needs_response` Para eventos que necesitan una respuesta por parte del usuario (tienen un menú de navegación)
                     -   Este tipo de evento impide que se ejecuten los otros dos eventos.
@@ -48,7 +48,7 @@
             -   Convertir en un bundle que gestione todo el evento.
                 -   La idea es encapsular el evento dentro de un bundle que controle toda la lógica de dicho evento.
                 -   De esta forma se puede controlar todo el evento y volver a la página que lanzó el evento más fácilmente.
-                -   Se puede usar la sesion para pasar datos de una petición a otra (request)
+                -   Se puede usar la sesión para pasar datos de una petición a otra (request)
                     -   De esta forma se omite usar el query param
 -   Todas las páginas se han migrado al sistema de controlador, queda mejorarlo
     -   Las páginas Grotto (las de configuración y administración) no se pasarán a un sistema de controlador.
@@ -56,6 +56,7 @@
 -   Se han migrado todos los cronjob a comandos de consola.
     -   _Nota_ el cronjob del nuevo día (newdayrunonce) no es compatible con el sistema de módulos.
     -   El nuevo sistema de CronJob se usará en la versión X.0.0 donde se elimina la compatibilidad con los módulos
+
 # Futuras versiones
 ## **BC** Para la versión X.0.0
 
@@ -70,7 +71,7 @@
 -   WebpackEncore (Se tiene que revisar como seria con Tailwind)
     -   Organizar mejor los archivos js/css
         -   El tema se crea en una configuración nueva para personalizar
-        -   El js se crea en una entry comun para todo (app por ejemplo) ya que puede dar problemas
+        -   El js se crea en una entry común para todo (app por ejemplo), ya que puede dar problemas
             -   webpack.encore.entry.js
             -   webpack.encore.theme.js
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
@@ -84,7 +85,7 @@
         -   Es en el único sitio donde se utiliza este componente
 -   Eliminar paquete laminas/laminas-serializer
 -   Eliminar la dependencia de Jaxon-PHP, usar Stimulus
--   Se usará todos los componentes del Framework de Symfony (ruter incluido)
+-   Se usará todos los componentes del Framework de Symfony (router incluido)
 -   Todo el Core estará compuesto por Bundles, para así poder usar un Skeleton muy similar al de Symfony App Skeleton
 -   lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en bundle core)
 -   `src/core/Controller/CreateController.php`
@@ -120,25 +121,25 @@
         -   Continuar con el que ya tengo iniciado `https://github.com/idmarinas/MessageBundle`
         -   En el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
     -   `Energy` un bundle que permite determinar el tipo de sistema que se usa para las acciones turnos/stamina
-        -   Se puede elegir el minimo de energía y el máximo que puede tener el personaje
+        -   Se puede elegir el mínimo de energía y el máximo que puede tener el personaje
         -   Se puede hacer que depende de algún atributo. (que tenga bono)
         -   Tendrá funciones para poder aumentar y disminuir la energía.
 -   **Correos** permitir usar una plantilla para así personalizar los mensajes
-    -   Se usara el `Symfony\Bridge\Twig\Mime\TemplatedEmail` para todos los correos del core. 
+    -   Se usará `Symfony\Bridge\Twig\Mime\TemplatedEmail` para todos los correos del core. 
     ```php
         use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
         $email = (new TemplatedEmail())
         // ...
             // html mail
-            ->htmlTemplate('emails/signup.html.twig')
+            ->htmlTemplate('signup.html.twig')
             //-- or only text mail
-            ->textTemplate('emails/signup.txt.twig')
+            ->textTemplate('signup.txt.twig')
         // ...
         ;
     ```
     -   Habrá dos versiones de cada correo predeterminado version html y txt
-    -   Desde la configuración se podrá decidir si se envian correos en html o txt
+    -   Desde la configuración se podrá decidir si se envían correos en html o txt
     -   Agregar opción para que el usuario pueda elegir.
 
 ## Para la versión X.Y.Z
@@ -147,28 +148,28 @@
 -   Copiar el sistema de petition (y adaptarlo) en el app bundle.
 -   Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
     -   Poner las opciones de la encuesta en una tabla separada. Permitiendo que las opciones también se puedan traducir.
--   Agregar sistema al core, para poder añadir términos y condiciones y politica de privacidad, sin necesidad de módulo.
--   **BC** Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
--   **BC** Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente como el sistema de combate nuevo.
+-   Agregar sistema al core, para poder añadir términos y condiciones y política de privacidad, sin necesidad de módulo.
+-   **BC** Hacer el que sistema de combate sea más personalizable, se pueda extender las clases para añadir más opciones.
+-   **BC** Rehacer los personajes, para que sean más sencillos de extender, también para que se complemente como el sistema de combate nuevo.
     -   Se simplifica la forma en la que se calcula las estadísticas del personaje, haciendo que tanto los personajes jugador como los creados por el servidor, tengan una forma de creación muy similar.
 -   **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
     -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
 -   Crear el bundle del inventario. Para sustituir el antiguo sistema de armadura y arma.
--   Crear el bundle de energia, que permita poner energia o un sistema por turnos.
+-   Crear el bundle de energía, que permita poner energía o un sistema por turnos.
 -   Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
-    -   La instalación por consola ya se creo en la versión 5.0.0
+    -   La instalación por consola ya se creó en la versión 5.0.0
         -   Se mirará incluir una versión de instalación por web
-            -   Problematico la creación del usuario admin
+            -   Problemático la creación del usuario admin
     -   Para los admin que no dispongan de esta opción se agrega la opción de instalación via web.
 -   Posible candidato a sustituir el petition system por https://github.com/hackzilla-project/TicketBundle
 -   Para limitar los intentos de conexión https://github.com/anyx/LoginGateBundle
 
 ## Cosas pendientes
 
--   Añadir un check para comprobar si se han usado las funciones obligatorias (copyright(), game_version() .... )
+-   Añadir un check para comprobar si se han usado las funciones obligatorias (copyright(), game_version() ... )
 -   Crear un sistema de publicidad interno (que permite comprar espacios publicitarios)
     -   Compatible con el sistema simple (los tipo Google AdSense)
--   Códigos de color, cambiar y unir todos los códigos de color, (color, negrita, cursiva, etc) en un mismo lugar
+-   Códigos de color, cambiar y unir todos los códigos de color, (color, negrita, cursiva, etc.) en un mismo lugar
     -   IDEA: usar la clase BBCode, ejemplo como se usa en foros y similar
 -   ¿? Permitir que en los eventos, el chance pueda ser superior a 100, para priorizar que un evento pueda pasar con más frecuencia.
     -   Usar otra forma
@@ -194,7 +195,9 @@
     -   Esto permite que cada componente tenga las opciones que necesita y los tipos de valor correctos
         
         ```php
-        In many cases you may need to define multiple configurations for each option. For example, suppose the InvoiceMailer class has an host option that isrequired and a transport option which can be one of sendmail, mail and smtp. You can improve the readability of the code avoiding to duplicate option namefor each configuration using the define() method:
+        /*
+        In many cases you may need to define multiple configurations for each option. For example, suppose the InvoiceMailer class has a host option that is required and a transport option which can be one of sendmail, mail and smtp. You can improve the readability of the code avoiding duplicating option name for each configuration using the define() method:
+        */
         // ...
         class InvoiceMailer
         {
