@@ -24,8 +24,6 @@ trait Version
 	 *
 	 * @var array
 	 */
-	protected $lotgd_versions = [
-		'Clean Install'                   => -1, //needed just as a placeholder for new installs.
 	protected array $lotgd_versions = [
 		'Clean Install'                   => -1, //needed just as a placeholder for new installations.
 		'0.9'                             => 900,
