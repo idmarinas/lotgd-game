@@ -2,7 +2,7 @@
     "name": "idmarinas-lotgd",
     "private": true,
     "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization for PHP >= 7.3",
-    "homepage": "http://lotgd.infommo.es",
+    "homepage": "https://lotgd.infommo.es",
     "repository": {
         "type": "git",
         "url": "https://github.com/idmarinas/lotgd-game.git"
