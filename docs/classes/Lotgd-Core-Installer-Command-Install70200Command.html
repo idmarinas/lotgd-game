@@ -95,15 +95,16 @@
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/lotgd.html">Lotgd</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/lotgd-core.html">Core</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/lotgd-core-controller.html">Controller</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/lotgd-core-installer.html">Installer</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/lotgd-core-installer-command.html">Command</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    GypsyController
+    Install70200Command
 
         <span class="phpdocumentor-element__extends">
-        extends <abbr title="\Symfony\Bundle\FrameworkBundle\Controller\AbstractController">AbstractController</abbr>
+        extends <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html"><abbr title="\Lotgd\Core\Installer\Command\AbstractCommand">AbstractCommand</abbr></a>
     </span>
     
             <div class="phpdocumentor-element__package">
@@ -117,14 +118,14 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Controller/GypsyController.php"><a href="files/src-core-controller-gypsycontroller.html"><abbr title="src/core/Controller/GypsyController.php">GypsyController.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Command/Install70200Command.php"><a href="files/src-core-installer-command-install70200command.html"><abbr title="src/core/Installer/Command/Install70200Command.php">Install70200Command.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
-        
-    <section class="phpdocumentor-description"></section>
+            <p class="phpdocumentor-summary">Command for upgrade to 7.2.0 version.</p>
+
 
 
 
@@ -139,66 +140,66 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Lotgd-Core-Controller-GypsyController.html#property_dateTime">$dateTime</a>
+                    <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html#property_bar">$bar</a>
     <span>
                         &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Lotgd-Core-Controller-GypsyController.html#property_dispatcher">$dispatcher</a>
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Installer-Command-Install70200Command.html#property_defaultName">$defaultName</a>
     <span>
                         &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Lotgd-Core-Controller-GypsyController.html#property_log">$log</a>
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html#property_installer">$installer</a>
     <span>
                         &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Lotgd-Core-Controller-GypsyController.html#property_navigation">$navigation</a>
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html#property_translator">$translator</a>
     <span>
                         &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Controller-GypsyController.html#method___construct">__construct()</a>
+    <a href="classes/Lotgd-Core-Installer-Command-Install70200Command.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Controller-GypsyController.html#method_index">index()</a>
+    <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html#method_setProgressBar">setProgressBar()</a>
     <span>
-                                &nbsp;: <abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr>    </span>
+                                &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Controller-GypsyController.html#method_pay">pay()</a>
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html#method_configure">configure()</a>
     <span>
-                                &nbsp;: <abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr>    </span>
+                                &nbsp;: mixed    </span>
 </dt>
-<dd></dd>
+<dd>{@inheritdoc}</dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Controller-GypsyController.html#method_talk">talk()</a>
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html#method_execute">execute()</a>
     <span>
-                                &nbsp;: <abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr>    </span>
+                                &nbsp;: int    </span>
 </dt>
-<dd></dd>
+<dd>{@inheritdoc}</dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/Lotgd-Core-Controller-GypsyController.html#method_renderGypsy">renderGypsy()</a>
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html#method_migrateDataBase">migrateDataBase()</a>
     <span>
-                                &nbsp;: <abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr>    </span>
+                                &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
@@ -212,33 +213,33 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/Lotgd-Core-Controller-GypsyController.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Lotgd-Core-Installer-Command-Install70200Command.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="
             phpdocumentor-element
             -property
-            -private
+            -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_dateTime">
-        $dateTime
-        <a href="classes/Lotgd-Core-Controller-GypsyController.html#property_dateTime" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_bar">
+        $bar
+        <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html#property_bar" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Controller/GypsyController.php"><a href="files/src-core-controller-gypsycontroller.html"><abbr title="src/core/Controller/GypsyController.php">GypsyController.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Command/AbstractCommand.php"><a href="files/src-core-installer-command-abstractcommand.html"><abbr title="src/core/Installer/Command/AbstractCommand.php">AbstractCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
+    <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$dateTime</span>
+    <span class="phpdocumentor-signature__name">$bar</span>
     </code>
 
         <section class="phpdocumentor-description"></section>
@@ -252,27 +253,61 @@
         class="
             phpdocumentor-element
             -property
-            -private
-                                                        "
+            -protected
+            -static                                            "
 >
-    <h4 class="phpdocumentor-element__name" id="property_dispatcher">
-        $dispatcher
-        <a href="classes/Lotgd-Core-Controller-GypsyController.html#property_dispatcher" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_defaultName">
+        $defaultName
+        <a href="classes/Lotgd-Core-Installer-Command-Install70200Command.html#property_defaultName" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Controller/GypsyController.php"><a href="files/src-core-controller-gypsycontroller.html"><abbr title="src/core/Controller/GypsyController.php">GypsyController.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Command/Install70200Command.php"><a href="files/src-core-installer-command-install70200command.html"><abbr title="src/core/Installer/Command/Install70200Command.php">Install70200Command.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
+    <span class="phpdocumentor-signature__visibility">protected</span>
+    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$defaultName</span>
+     = <span class="phpdocumentor-signature__default-value">&#039;lotgd:install:v:70200&#039;</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_installer">
+        $installer
+        <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html#property_installer" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Command/AbstractCommand.php"><a href="files/src-core-installer-command-abstractcommand.html"><abbr title="src/core/Installer/Command/AbstractCommand.php">AbstractCommand.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">32</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$dispatcher</span>
+    <span class="phpdocumentor-signature__name">$installer</span>
     </code>
 
         <section class="phpdocumentor-description"></section>
@@ -286,61 +321,27 @@
         class="
             phpdocumentor-element
             -property
-            -private
+            -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_log">
-        $log
-        <a href="classes/Lotgd-Core-Controller-GypsyController.html#property_log" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_translator">
+        $translator
+        <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html#property_translator" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Controller/GypsyController.php"><a href="files/src-core-controller-gypsycontroller.html"><abbr title="src/core/Controller/GypsyController.php">GypsyController.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Command/AbstractCommand.php"><a href="files/src-core-installer-command-abstractcommand.html"><abbr title="src/core/Installer/Command/AbstractCommand.php">AbstractCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
+    <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$log</span>
-    </code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_navigation">
-        $navigation
-        <a href="classes/Lotgd-Core-Controller-GypsyController.html#property_navigation" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Controller/GypsyController.php"><a href="files/src-core-controller-gypsycontroller.html"><abbr title="src/core/Controller/GypsyController.php">GypsyController.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">28</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$navigation</span>
+    <span class="phpdocumentor-signature__name">$translator</span>
     </code>
 
         <section class="phpdocumentor-description"></section>
@@ -355,7 +356,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Lotgd-Core-Controller-GypsyController.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Lotgd-Core-Installer-Command-Install70200Command.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -365,51 +366,35 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/Lotgd-Core-Controller-GypsyController.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Lotgd-Core-Installer-Command-Install70200Command.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Controller/GypsyController.php"><a href="files/src-core-controller-gypsycontroller.html"><abbr title="src/core/Controller/GypsyController.php">GypsyController.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Command/Install70200Command.php"><a href="files/src-core-installer-command-install70200command.html"><abbr title="src/core/Installer/Command/Install70200Command.php">Install70200Command.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Contracts\EventDispatcher\EventDispatcherInterface">EventDispatcherInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$eventDispatcher</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Navigation-Navigation.html"><abbr title="\Lotgd\Core\Navigation\Navigation">Navigation</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$navigation</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Log.html"><abbr title="\Lotgd\Core\Log">Log</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$log</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Tool-DateTime.html"><abbr title="\Lotgd\Core\Tool\DateTime">DateTime</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dateTime</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Installer-Upgrade-Version70200.html"><abbr title="\Lotgd\Core\Installer\Upgrade\Version70200">Version70200</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$install</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Contracts\Translation\TranslatorInterface">TranslatorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$translator</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$eventDispatcher</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Contracts\EventDispatcher\EventDispatcherInterface">EventDispatcherInterface</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$install</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Installer-Upgrade-Version70200.html"><abbr title="\Lotgd\Core\Installer\Upgrade\Version70200">Version70200</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$navigation</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Navigation-Navigation.html"><abbr title="\Lotgd\Core\Navigation\Navigation">Navigation</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$log</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Log.html"><abbr title="\Lotgd\Core\Log">Log</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$dateTime</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Tool-DateTime.html"><abbr title="\Lotgd\Core\Tool\DateTime">DateTime</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$translator</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Contracts\Translation\TranslatorInterface">TranslatorInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -431,29 +416,29 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_index">
-        index()
-        <a href="classes/Lotgd-Core-Controller-GypsyController.html#method_index" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_setProgressBar">
+        setProgressBar()
+        <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html#method_setProgressBar" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Controller/GypsyController.php"><a href="files/src-core-controller-gypsycontroller.html"><abbr title="src/core/Controller/GypsyController.php">GypsyController.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Command/AbstractCommand.php"><a href="files/src-core-installer-command-abstractcommand.html"><abbr title="src/core/Installer/Command/AbstractCommand.php">AbstractCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">65</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">index</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$params</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">setProgressBar</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Console\Helper\ProgressBar">ProgressBar</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$bar</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$params</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                <span class="phpdocumentor-signature__argument__name">$bar</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Console\Helper\ProgressBar">ProgressBar</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -464,7 +449,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr></span>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
         
     
@@ -472,43 +457,32 @@
                     <article
         class="phpdocumentor-element
             -method
-            -public
+            -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_pay">
-        pay()
-        <a href="classes/Lotgd-Core-Controller-GypsyController.html#method_pay" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_configure">
+        configure()
+        <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html#method_configure" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Controller/GypsyController.php"><a href="files/src-core-controller-gypsycontroller.html"><abbr title="src/core/Controller/GypsyController.php">GypsyController.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Command/AbstractCommand.php"><a href="files/src-core-installer-command-abstractcommand.html"><abbr title="src/core/Installer/Command/AbstractCommand.php">AbstractCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">pay</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$params</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr></span></code>
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">configure</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$params</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
+    
+    
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr></span>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
         
     
@@ -516,32 +490,40 @@
                     <article
         class="phpdocumentor-element
             -method
-            -public
+            -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_talk">
-        talk()
-        <a href="classes/Lotgd-Core-Controller-GypsyController.html#method_talk" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_execute">
+        execute()
+        <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html#method_execute" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Controller/GypsyController.php"><a href="files/src-core-controller-gypsycontroller.html"><abbr title="src/core/Controller/GypsyController.php">GypsyController.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Command/AbstractCommand.php"><a href="files/src-core-installer-command-abstractcommand.html"><abbr title="src/core/Installer/Command/AbstractCommand.php">AbstractCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">{@inheritdoc}</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">talk</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$params</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr></span></code>
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">execute</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Console\Input\InputInterface">InputInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$input</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Console\Output\OutputInterface">OutputInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$output</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$params</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                <span class="phpdocumentor-signature__argument__name">$input</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Console\Input\InputInterface">InputInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$output</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Console\Output\OutputInterface">OutputInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -552,7 +534,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr></span>
+    <span class="phpdocumentor-signature__response_type">int</span>
             &mdash;
         
     
@@ -560,32 +542,32 @@
                     <article
         class="phpdocumentor-element
             -method
-            -private
+            -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_renderGypsy">
-        renderGypsy()
-        <a href="classes/Lotgd-Core-Controller-GypsyController.html#method_renderGypsy" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_migrateDataBase">
+        migrateDataBase()
+        <a href="classes/Lotgd-Core-Installer-Command-AbstractCommand.html#method_migrateDataBase" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Controller/GypsyController.php"><a href="files/src-core-controller-gypsycontroller.html"><abbr title="src/core/Controller/GypsyController.php">GypsyController.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Installer/Command/AbstractCommand.php"><a href="files/src-core-installer-command-abstractcommand.html"><abbr title="src/core/Installer/Command/AbstractCommand.php">AbstractCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">77</span>
+    <span class="phpdocumentor-element-found-in__line">106</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">renderGypsy</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$params</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr></span></code>
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">migrateDataBase</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$hasMigration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$params</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                <span class="phpdocumentor-signature__argument__name">$hasMigration</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -596,7 +578,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\HttpFoundation\Response">Response</abbr></span>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
         
     
@@ -679,7 +661,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Lotgd-Core-Controller-GypsyController.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Lotgd-Core-Installer-Command-Install70200Command.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

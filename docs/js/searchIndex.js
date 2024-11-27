@@ -323,7 +323,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Lotgd\\Ajax\\Core\\Bans",
             "name": "Bans",
-            "summary": "Use\u0020this\u0020class\u0020to\u0020add\u0020a\u0020basic\u0020function\u0020to\u0020your\u0020Jaxon\u0020request.",
+            "summary": "",
             "url": "classes/Lotgd-Ajax-Core-Bans.html"
         },                {
             "fqsen": "\\Lotgd\\Ajax\\Core\\Bans\u003A\u003AshowAffected\u0028\u0029",
@@ -333,28 +333,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Lotgd\\Ajax\\Core\\Mounts",
             "name": "Mounts",
-            "summary": "Use\u0020this\u0020class\u0020to\u0020add\u0020a\u0020basic\u0020function\u0020to\u0020your\u0020Jaxon\u0020request.",
+            "summary": "",
             "url": "classes/Lotgd-Ajax-Core-Mounts.html"
         },                {
             "fqsen": "\\Lotgd\\Ajax\\Core\\Mounts\u003A\u003AgetListOfOwners\u0028\u0029",
             "name": "getListOfOwners",
             "summary": "",
             "url": "classes/Lotgd-Ajax-Core-Mounts.html#method_getListOfOwners"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\AjaxAbstract",
-            "name": "AjaxAbstract",
-            "summary": "Use\u0020this\u0020class\u0020to\u0020add\u0020a\u0020basic\u0020function\u0020to\u0020your\u0020Jaxon\u0020request.",
-            "url": "classes/Lotgd-Core-AjaxAbstract.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\AjaxAbstract\u003A\u003AcheckLoggedIn\u0028\u0029",
-            "name": "checkLoggedIn",
-            "summary": "Return\u0020true\u0020or\u0020empty\u0020Jaxon\\Response\\Response.",
-            "url": "classes/Lotgd-Core-AjaxAbstract.html#method_checkLoggedIn"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\AjaxAbstract\u003A\u003AcheckLoggedInRedirect\u0028\u0029",
-            "name": "checkLoggedInRedirect",
-            "summary": "Return\u0020true\u0020or\u0020redirect\u0020to\u0020home.php\u0020page.",
-            "url": "classes/Lotgd-Core-AjaxAbstract.html#method_checkLoggedInRedirect"
         },                {
             "fqsen": "\\Lotgd\\Core\\Bag\\NotificationsBag",
             "name": "NotificationsBag",
@@ -1570,6 +1555,11 @@ Search.appendIndex(
             "name": "battleShowedResults",
             "summary": "",
             "url": "classes/Lotgd-Core-Combat-Battle.html#property_battleShowedResults"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Combat\\Battle\u003A\u003A\u0024expression",
+            "name": "expression",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Combat-Battle.html#property_expression"
         },                {
             "fqsen": "\\Lotgd\\Core\\Combat\\BattleEnd",
             "name": "BattleEnd",
@@ -4326,20 +4316,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-StableController.html#method_enter"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Controller\\StableController\u003A\u003Abuy\u0028\u0029",
-            "name": "buy",
+            "fqsen": "\\Lotgd\\Core\\Controller\\StableController\u003A\u003Abuymount\u0028\u0029",
+            "name": "buymount",
             "summary": "",
-            "url": "classes/Lotgd-Core-Controller-StableController.html#method_buy"
+            "url": "classes/Lotgd-Core-Controller-StableController.html#method_buymount"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\StableController\u003A\u003Abuyconfirm\u0028\u0029",
             "name": "buyconfirm",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-StableController.html#method_buyconfirm"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Controller\\StableController\u003A\u003Asell\u0028\u0029",
-            "name": "sell",
+            "fqsen": "\\Lotgd\\Core\\Controller\\StableController\u003A\u003Asellmount\u0028\u0029",
+            "name": "sellmount",
             "summary": "",
-            "url": "classes/Lotgd-Core-Controller-StableController.html#method_sell"
+            "url": "classes/Lotgd-Core-Controller-StableController.html#method_sellmount"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\StableController\u003A\u003Asellconfirm\u0028\u0029",
             "name": "sellconfirm",
@@ -4365,11 +4355,6 @@ Search.appendIndex(
             "name": "getRepository",
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-StableController.html#method_getRepository"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Controller\\StableController\u003A\u003A\u0024dipatcher",
-            "name": "dipatcher",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Controller-StableController.html#property_dipatcher"
         },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\StableController\u003A\u003A\u0024navigation",
             "name": "navigation",
@@ -14536,6 +14521,21 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Installer-Command-Install70000Command.html#property_defaultName"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\Install70200Command",
+            "name": "Install70200Command",
+            "summary": "Command\u0020for\u0020upgrade\u0020to\u00207.2.0\u0020version.",
+            "url": "classes/Lotgd-Core-Installer-Command-Install70200Command.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\Install70200Command\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Command-Install70200Command.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Command\\Install70200Command\u003A\u003A\u0024defaultName",
+            "name": "defaultName",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Command-Install70200Command.html#property_defaultName"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Install",
             "name": "Install",
             "summary": "",
@@ -15061,40 +15061,25 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Installer-Upgrade-Version70000.html#property_hasMigration"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Jaxon\\Library\\Semantic\\Modal",
-            "name": "Modal",
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version70200",
+            "name": "Version70200",
             "summary": "",
-            "url": "classes/Lotgd-Core-Jaxon-Library-Semantic-Modal.html"
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version70200.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Jaxon\\Library\\Semantic\\Modal\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "The\u0020constructor.",
-            "url": "classes/Lotgd-Core-Jaxon-Library-Semantic-Modal.html#method___construct"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Jaxon\\Library\\Semantic\\Modal\u003A\u003AgetScript\u0028\u0029",
-            "name": "getScript",
-            "summary": "Get\u0020the\u0020javascript\u0020code\u0020to\u0020be\u0020printed\u0020into\u0020the\u0020page.",
-            "url": "classes/Lotgd-Core-Jaxon-Library-Semantic-Modal.html#method_getScript"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Jaxon\\Library\\Semantic\\Modal\u003A\u003Ashow\u0028\u0029",
-            "name": "show",
-            "summary": "Show\u0020a\u0020modal\u0020dialog.",
-            "url": "classes/Lotgd-Core-Jaxon-Library-Semantic-Modal.html#method_show"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Jaxon\\Library\\Semantic\\Modal\u003A\u003Ahide\u0028\u0029",
-            "name": "hide",
-            "summary": "Hide\u0020the\u0020modal\u0020dialog.",
-            "url": "classes/Lotgd-Core-Jaxon-Library-Semantic-Modal.html#method_hide"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Jaxon\\Library\\Semantic\\Modal\u003A\u003Arender\u0028\u0029",
-            "name": "render",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Jaxon-Library-Semantic-Modal.html#method_render"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Jaxon\\Library\\Semantic\\Modal\u003A\u003APATH_TEMPLATE_JAXON",
-            "name": "PATH_TEMPLATE_JAXON",
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version70200\u003A\u003Astep0\u0028\u0029",
+            "name": "step0",
             "summary": "",
-            "url": "classes/Lotgd-Core-Jaxon-Library-Semantic-Modal.html#constant_PATH_TEMPLATE_JAXON"
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version70200.html#method_step0"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version70200\u003A\u003A\u0024upgradeVersion",
+            "name": "upgradeVersion",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version70200.html#property_upgradeVersion"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version70200\u003A\u003A\u0024hasMigration",
+            "name": "hasMigration",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version70200.html#property_hasMigration"
         },                {
             "fqsen": "\\Lotgd\\Core\\Kernel",
             "name": "Kernel",
@@ -17491,16 +17476,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Service-HttpRequestFactory.html#method___invoke"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Service\\Jaxon",
-            "name": "Jaxon",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Service-Jaxon.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Service\\Jaxon\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Service-Jaxon.html#method___construct"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Service\\PageParts",
             "name": "PageParts",
             "summary": "",
@@ -18746,31 +18721,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Extension-Helpers.html#property_request"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Jaxon",
-            "name": "Jaxon",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Jaxon.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Jaxon\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Jaxon.html#method___construct"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Jaxon\u003A\u003AgetFunctions\u0028\u0029",
-            "name": "getFunctions",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Jaxon.html#method_getFunctions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Jaxon\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Twig-Extension-Jaxon.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Jaxon\u003A\u003A\u0024jaxon",
-            "name": "jaxon",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Jaxon.html#property_jaxon"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Motd",
             "name": "Motd",
             "summary": "",
@@ -19601,11 +19551,6 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/lotgd.html"
         },                {
-            "fqsen": "\\Lotgd\\Core",
-            "name": "Core",
-            "summary": "",
-            "url": "namespaces/lotgd-core.html"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Bag",
             "name": "Bag",
             "summary": "",
@@ -19776,6 +19721,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/lotgd-core-event.html"
         },                {
+            "fqsen": "\\Lotgd\\Core",
+            "name": "Core",
+            "summary": "",
+            "url": "namespaces/lotgd-core.html"
+        },                {
             "fqsen": "\\Lotgd\\Core\\EventSubscriber",
             "name": "EventSubscriber",
             "summary": "",
@@ -19855,21 +19805,6 @@ Search.appendIndex(
             "name": "Upgrade",
             "summary": "",
             "url": "namespaces/lotgd-core-installer-upgrade.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Jaxon\\Library\\Semantic",
-            "name": "Semantic",
-            "summary": "",
-            "url": "namespaces/lotgd-core-jaxon-library-semantic.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Jaxon\\Library",
-            "name": "Library",
-            "summary": "",
-            "url": "namespaces/lotgd-core-jaxon-library.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Jaxon",
-            "name": "Jaxon",
-            "summary": "",
-            "url": "namespaces/lotgd-core-jaxon.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Lib",
             "name": "Lib",
