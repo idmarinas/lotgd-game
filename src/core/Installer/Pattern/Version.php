@@ -3,15 +3,19 @@
 /**
  * This file is part of Legend of the Green Dragon.
  *
- * @see https://github.com/idmarinas/lotgd-game
+ * @see     https://github.com/idmarinas/lotgd-game
  *
  * @license https://github.com/idmarinas/lotgd-game/blob/migration/public/LICENSE.txt
- * @author IDMarinas
+ * @author  IDMarinas
  *
- * @since 5.0.0
+ * @since   5.0.0
  */
 
 namespace Lotgd\Core\Installer\Pattern;
+
+use function array_filter;
+use function array_search;
+use function max;
 
 trait Version
 {
@@ -144,48 +148,48 @@ trait Version
         '7.1.13 IDMarinas Edition'        => 70113,
     ];
 
-    /**
-     * Get int value for a string version.
-     */
-    public function getIntVersion(string $version): int
-    {
-        return $this->lotgd_versions[$version] ?? 0;
-    }
+	/**
+	 * Get int value for a string version.
+	 */
+	public function getIntVersion (string $version): int
+	{
+		return $this->lotgd_versions[$version] ?? 0;
+	}
 
-    /**
-     * Get name for a numeric version.
-     */
-    public function getNameVersion(int $version): string
-    {
-        $version = \max(-1, $version) ?: -1;
+	/**
+	 * Get name for a numeric version.
+	 */
+	public function getNameVersion (int $version): string
+	{
+		$version = max(-1, $version) ?: -1;
 
-        return (string) \array_search($version, $this->lotgd_versions);
-    }
+		return (string)array_search($version, $this->lotgd_versions);
+	}
 
-    /**
-     * Check if ID is a valid version.
-     */
-    public function isValidVersion(int $version): bool
-    {
-        $version = \max(-1, $version) ?: -1;
+	/**
+	 * Check if ID is a valid version.
+	 */
+	public function isValidVersion (int $version): bool
+	{
+		$version = max(-1, $version) ?: -1;
 
-        return in_array($version, $this->lotgd_versions);
-    }
+		return in_array($version, $this->lotgd_versions);
+	}
 
-    /**
-     * Get array of versions.
-     */
-    public function getInstallerVersions(): array
-    {
-        //-- Only version up of 4.12.0 IDMarinas Edition is allowed in installer
-        return \array_filter($this->lotgd_versions, fn($version) => $version > 41200 || -1 == $version);
-    }
+	/**
+	 * Get array of versions.
+	 */
+	public function getInstallerVersions (): array
+	{
+		//-- Only version up of 4.12.0 IDMarinas Edition is allowed in installer
+		return array_filter($this->lotgd_versions, fn($version) => $version > 41200 || -1 == $version);
+	}
 
-    /**
-     * Get array of versions.
-     */
-    public function getFullListOfVersion(): array
-    {
-        return $this->lotgd_versions;
-    }
+	/**
+	 * Get array of versions.
+	 */
+	public function getFullListOfVersion (): array
+	{
+		return $this->lotgd_versions;
+	}
 }
