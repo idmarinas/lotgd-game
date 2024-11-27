@@ -38,7 +38,7 @@
         "del": "^6.1.0",
         "fancy-log": "^2.0.0",
         "file-loader": "^6.2.0",
-        "gulp": "^4.0.2",
+        "gulp": "^5.0.0",
         "gulp-print": "^5.0.2",
         "gulp-uglify": "^3.0.2",
         "jquery": "^3.6.0",
