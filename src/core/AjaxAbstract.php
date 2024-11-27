@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core;
 
-use Jaxon\Response\Response;
+use function Jaxon\jaxon;
 
 /**
  * Use this class to add a basic function to your Jaxon request.
@@ -24,7 +24,7 @@ abstract class AjaxAbstract
     /**
      * Return true or empty Jaxon\Response\Response.
      *
-     * @return true|Response
+     * @return \Jaxon\Response\ResponseInterface|true
      */
     protected function checkLoggedIn()
     {
@@ -33,7 +33,7 @@ abstract class AjaxAbstract
         //-- Do nothing if there is no active session
         if ( ! ($session['user']['loggedin'] ?? false))
         {
-            return new Response();
+            return jaxon()->getResponse();
         }
 
         return true;
@@ -42,7 +42,7 @@ abstract class AjaxAbstract
     /**
      * Return true or redirect to home.php page.
      *
-     * @return true|Redirect
+     * @return \Jaxon\Response\ResponseInterface|true
      */
     protected function checkLoggedInRedirect()
     {
@@ -51,7 +51,7 @@ abstract class AjaxAbstract
         //-- Do nothing if there is no active session
         if ( ! ($session['user']['loggedin'] ?? false))
         {
-            $response = new Response();
+            $response = jaxon()->getResponse();
 
             return $response->redirect('home.php');
         }
