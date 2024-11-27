@@ -210,14 +210,6 @@ $RECYCLE.BIN/
 !/config/autoload/local/README.md
 
 # Ignore local content of LoTGD (except .gitkeep)
-/src/ajax/local/**
-/src/ajax/local/**/
-!/src/ajax/local/**/.gitkeep
-!/src/ajax/local/**/README.md
-/src/ajax/pattern/local/**
-/src/ajax/pattern/local/**/
-!/src/ajax/pattern/local/**/.gitkeep
-!/src/ajax/pattern/local/**/README.md
 /src/local/**
 !/src/local/**/
 !/src/local/**/.gitkeep
@@ -247,7 +239,6 @@ phan.csv
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
-/vendor/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
@@ -261,8 +252,3 @@ phan.csv
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
-
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###

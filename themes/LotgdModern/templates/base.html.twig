@@ -36,22 +36,14 @@
             {# Favicon can custom per theme #}
             <link rel="shortcut icon" href="favicon.png" type="image/png" />
         {% endblock lotgd_head_css %}
-        <!-- Jaxon CSS styles -->
-        {{ jaxon_css() }}
 
         {{ encore_entry_script_tags('lotgd_lib') }}
         {% block lotgd_head_theme_js %}{% endblock %}
-
-        <!-- Jaxon JS script -->
-        {{ jaxon_js() }}
 
         <!-- Dynamically added script/style code and files -->
         {{ head_link() }}
         {{ head_style() }}
         {{ head_script() }}
-
-        <!-- Jaxon inline Script -->
-        {{ jaxon_script() }}
     </head>
     <body>
         {% block lotgd_body %}{% endblock %}

@@ -79,40 +79,6 @@ services:
         arguments:
             - "%lotgd_core.doctrine_prefix%"
 
-    # Jaxon-PHP Service
-    Lotgd\Core\Service\Jaxon:
-        arguments:
-            - {
-                  core:
-                      {
-                          request: { uri: "jaxon.php" },
-                          process: { exit: false },
-                      },
-                  dialogs:
-                      {
-                          default: { message: toastr, modal: semantic },
-                          classes:
-                              {
-                                  semantic: Lotgd\Core\Jaxon\Library\Semantic\Modal,
-                              },
-                          toastr:
-                              {
-                                  options:
-                                      {
-                                          progressBar: true,
-                                          newestOnTop: false,
-                                          closeButton: true,
-                                          preventDuplicates: true,
-                                          timeOut: 30000,
-                                          extendedTimeOut: 15000,
-                                      },
-                              },
-                      },
-              }
-    lotgd.core.jaxon:
-        alias: Lotgd\Core\Service\Jaxon
-        public: true
-
     # View Laminas Service
     Laminas\View\Helper\HeadLink:
         public: true
