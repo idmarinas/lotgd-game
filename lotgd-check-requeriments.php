@@ -46,8 +46,8 @@
         'mysql_version'  => '5.5.3',
     ];
 
-    $requeriments = [
-        //-- LotgdVersion => Requeriments
+    $requirements = [
+        //-- LotgdVersion => Requirements
         '5.0' => $default,
         '7.1' => array_merge($default, ['php_version' => '7.4.0'])
     ];
@@ -57,7 +57,7 @@
     $extensionsFullList = [];
 
     //-- Process requirements
-    foreach ($requeriments as $lotgdVersion => $reqs)
+    foreach ($requirements as $lotgdVersion => $reqs)
     {
         $results[$lotgdVersion] = [];
         $reqResults             = [];
@@ -182,7 +182,7 @@
         return $val;
     }
 
-    function format_bytes($size, $precision = 0)
+    function format_bytes($size, $precision = 0): string
     {
         $base     = \log($size, 1024);
         $suffixes = ['', 'K', 'M', 'G', 'T'];
@@ -198,7 +198,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8"/>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <title>Check requeriments for install of Legend of the Green Dragon</title>
 
         <style>
@@ -247,7 +247,7 @@
                     margin: 0;
                 }
                 hr {
-                    margin: 15px 0px;
+                    margin: 15px 0;
                     height: 0;
                     padding: 0;
                     border-width: 2px 0 0 0;
@@ -372,8 +372,7 @@
                     pointer-events: none;
                     font-weight: 400;
                     color: rgba(0,0,0,.4);
-                    border: 0px;
-                    border-left: 0px;
+                    border-width: 0;
                 }
                 table > tbody > tr > th
                 {
@@ -392,14 +391,12 @@
                 <caption>Fail/Pass for LoTGD versions in this server.</caption>
                 <thead>
                     <tr>
-                        <tr>
-                            <th scope="colgroup" colspan="<?= count($lotgdVersions) ?>">LoTGD Version</th>
-                        </tr>
-                        <tr>
-                            <?php foreach($lotgdVersions as $version): ?>
-                                <th scope="col"><?= $version ?></th>
-                            <?php endforeach; ?>
-                        </tr>
+                        <th scope="colgroup" colspan="<?= count($lotgdVersions) ?>">LoTGD Version</th>
+                    </tr>
+                    <tr>
+                        <?php foreach($lotgdVersions as $version): ?>
+                            <th scope="col"><?= $version ?></th>
+                        <?php endforeach; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -485,16 +482,14 @@
                                 </td>
                             <?php endforeach; ?>
                         </tr>
-                        <tr>
-                            <thead>
-                                <tr>
-                                    <th scope="col">PHP Extensions</th>
-                                    <?php foreach($lotgdVersions as $version): ?>
-                                        <th scope="col"><?= $version ?></th>
-                                    <?php endforeach; ?>
-                                </tr>
-                            </thead>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th scope="col">PHP Extensions</th>
+                                <?php foreach($lotgdVersions as $version): ?>
+                                    <th scope="col"><?= $version ?></th>
+                                <?php endforeach; ?>
+                            </tr>
+                        </thead>
                         <?php foreach($extensionsFullList as $ext => $name): ?>
                             <tr>
                                 <th scope="col" class="smaller"><?= $name ?></th>
