@@ -10,3 +10,6 @@ trim_trailing_whitespace = true
 
 [*.{md,md.dist}]
 trim_trailing_whitespace = false
+
+[*.test]
+trim_trailing_whitespace = false
