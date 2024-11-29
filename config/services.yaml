@@ -90,11 +90,6 @@ services:
                   },
                 dialogs:
                   {
-                      default: { message: toastr, modal: semantic },
-                      classes:
-                        {
-                            semantic: Lotgd\Core\Jaxon\Library\Semantic\Modal,
-                        },
                       toastr:
                         {
                             options:
