@@ -18,7 +18,7 @@ try
     {
         $jaxon->processRequest();
 
-        LotgdTool::saveUser(false); //-- Not updated laston (to avoid perma loggedin)
+        LotgdTool::saveUser(false); //-- Not updated last on (to avoid perm logged)
 
         exit;
     }
