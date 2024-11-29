@@ -4,8 +4,8 @@ use Tracy\Debugger;
 
 \define('OVERRIDE_FORCED_NAV', true);
 
-//-- Allow anonymous conections to Jaxon functions
-//-- This avoid some errors and allow to use with not registers users.
+//-- Allow anonymous connections to Jaxon functions
+//-- This avoids some errors and allows to use it with not registers users.
 \define('ALLOW_ANONYMOUS', true);
 
 require_once 'common_jaxon.php';
