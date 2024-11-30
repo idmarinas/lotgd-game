@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of Legend of the Green Dragon.
+ * This file is part of the Legend of the Green Dragon.
  *
  * @see     https://github.com/idmarinas/lotgd-game
  *
@@ -20,7 +20,7 @@ use function max;
 trait Version
 {
 	/**
-	 * Versions of game.
+	 * Versions of the game.
 	 *
 	 * @var array
 	 */
@@ -178,7 +178,7 @@ trait Version
 	}
 
 	/**
-	 * Get array of versions.
+	 * Get an array of versions.
 	 */
 	public function getInstallerVersions (): array
 	{
@@ -187,7 +187,7 @@ trait Version
 	}
 
 	/**
-	 * Get array of versions.
+	 * Get an array of versions.
 	 */
 	public function getFullListOfVersion (): array
 	{
