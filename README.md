@@ -1,4 +1,4 @@
-[![Changelog of DEV version](https://img.shields.io/badge/Changelog-DEV-orange)](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-dev.md)
+[![Changelog of DEV version](https://img.shields.io/badge/Changelog-DEV-orange)](https://github.com/idmarinas/lotgd-game/blob/7.1/CHANGELOG-dev.md)
 [![Changelog for last release version](https://img.shields.io/badge/Changelog-6.*-yellow)](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V6.md)
 [![Changelog for last release version](https://img.shields.io/badge/Changelog-7.*-green)](https://github.com/idmarinas/lotgd-game/blob/migration/CHANGELOG-V7.md)
 [![Wiki of LoTGD](https://img.shields.io/badge/LoTGD-Wiki-green)](https://github.com/idmarinas/lotgd-game/wiki)
@@ -49,34 +49,38 @@
 
 # About
 
-The version **IDMarinas Edition** is based on the version **1.1.2 Dragonprime** by Dragonprime Development Team ([Dragonprime](http://dragonprime.net)) and have code of Oliver Brendel ([NB Core](http://nb-core.org)).
+The version **IDMarinas Edition** is based on the version **1.1.2 Dragonprime** by Dragonprime Development
+Team ([Dragonprime](http://dragonprime.net)) and has code of Oliver Brendel ([NB Core](http://nb-core.org)).
 
 ## IDMarinas Edition
 
 Version of the IDMarinas Edition: **_7.2.0_**
 
-The intention to make a new branch of the Core, is to be able to update certain aspects, which were outdated, such as the script that is used to access the database, while correcting certain errors, and adding new options of customization.
+The intention to make a new branch of the Core, is to be able to update certain aspects, which were outdated, such as
+the script that is used to access the database, while correcting certain errors, and adding new options of
+customization.
 
 IDMarinas Edition is used in:
 
--   [The Legend of the Green Dragon](http://lotgd.infommo.es) (Demo)
--   [La Leyenda de Ignis](http://draconia.infommo.es)
+- [The Legend of the Green Dragon](http://lotgd.infommo.es) (Demo)
+- [La Leyenda de Ignis](http://draconia.infommo.es)
 
 ## Modules
 
 You can find modules revised for IDMarinas Edition in [LOTGD - Modules](https://github.com/idmarinas/lotgd-modules).
-If you want more modules, in ([DragonPrime](http://dragonprime.net)) you can find more modules and you can revised for work in IDMarinas Edition
+If you want more modules, in ([DragonPrime](http://dragonprime.net)) you can find more modules, and you can revise for
+work in IDMarinas Edition
 
 ## Compatibility
 
--   This version may not be compatible with most of the modules available for version 1.1.\* DragonPrime Edition
-    -   It may be necessary to adapt the modules to work in _IDMarinas Edition_
-    -   In _IDMarinas Edition 3.0.0_, most modules will not work
--   From the 2.7.0 IDMarinas Edition you need PHP 7.0 or better
--   From the 4.0.0 IDMarinas Edition you need PHP 7.1 or better
--   From the 4.2.0 IDMarinas Edition you need PHP 7.2 or better
--   From the 4.6.0 IDMarinas Edition you need PHP 7.3 or better
--   From the 7.1.0 IDMarinas Edition you need PHP 7.4
+- This version may not be compatible with most of the modules available for version 1.1.\* DragonPrime Edition
+	- It may be necessary to adapt the modules to work in _IDMarinas Edition_
+	- In _IDMarinas Edition 3.0.0_, most modules will not work
+- From the 2.7.0 IDMarinas Edition you need PHP 7.0 or better
+- From the 4.0.0 IDMarinas Edition you need PHP 7.1 or better
+- From the 4.2.0 IDMarinas Edition you need PHP 7.2 or better
+- From the 4.6.0 IDMarinas Edition you need PHP 7.3 or better
+- From the 7.1.0 IDMarinas Edition you need PHP 7.4
 
 # Other
 
