@@ -48,7 +48,7 @@
 		"numeral": "^2.0.6",
 		"postcss": "^8.4.49",
 		"postcss-loader": "^6.2.1",
-		"regenerator-runtime": "^0.13.9",
+		"regenerator-runtime": "^0.14.1",
 		"stimulus-autocomplete": "^3.1.0",
 		"stimulus-character-counter": "^4.2.0",
 		"stimulus-notification": "^2.2.0",
