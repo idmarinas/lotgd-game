@@ -1,57 +1,48 @@
-name: PHP Composer
+name: LoTGD Test Suite
 
 on:
-  push:
-    branches: [ '7.1' ]
   pull_request:
-    branches: [ '7.1' ]
+    types: [ opened, synchronize, reopened ]
+    tags-ignore:
+      - dependencies
+  push:
+    branches:
+      - '7.1'
 
 jobs:
   build:
+    runs-on: ${{ matrix.operating-system }}
+    name: PHP ${{ matrix.php }}
     strategy:
       matrix:
-        php-version: [7.4]
-
-    runs-on: ubuntu-latest
+        operating-system: [ ubuntu-latest ]
+        php: [ '7.4' ]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@master
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: ${{ (matrix.php == '7.4') && '0' || '1' }}
 
-      - name: Setup PHP ${{ matrix.php-version }}
-        uses: shivammathur/setup-php@master
+      - name: Setup PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-version }}
+          php-version: ${{ matrix.php }}
+          tools: flex
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate
+      - name: Download dependencies
+        uses: ramsey/composer-install@v2
 
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v2
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
+      - name: Run test suite on PHP ${{ matrix.php }}
+        run: ./vendor/bin/phpunit
 
-      - name: Cache PHP Security Checker
-        uses: actions/cache@v2
-        id: cache-db
-        with:
-          path: ~/.symfony/cache
-          key: db
+      - name: Fix paths for Sonar
+        if: matrix.php == '7.4'
+        working-directory: ./build/reports/
+        run: sed -i 's/\/home\/runner\/work\/common-bundle\/common-bundle\//\/github\/workspace\//g' phpunit.coverage.xml
 
-      - name: The PHP Security Checker
-        uses: symfonycorp/security-checker-action@v2
-
-      - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer update --prefer-dist --no-progress --no-suggest
-
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
-
-    # - name: Run test suite
-    #   run: composer run-script test
+      - name: SonarCloud Scan
+        if: matrix.php == '7.4'
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
