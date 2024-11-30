@@ -21,6 +21,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/idmarinas/lotgd-game.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/idmarinas/lotgd-game.svg)
 
+![Packagist Dependency Version](https://img.shields.io/packagist/dependency-v/idmarinas/lotgd/php)
 ![GitHub top language](https://img.shields.io/github/languages/top/idmarinas/lotgd-game.svg)
 ![GitHub language count](https://img.shields.io/github/languages/count/idmarinas/lotgd-game.svg)
 
@@ -34,7 +35,7 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&metric=coverage)](https://sonarcloud.io/dashboard?id=lotgd-game)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=lotgd-game)
 
-[![PHP](https://img.shields.io/badge/php_^7.4-%23777BB4.svg?style=flat&logo=php&logoColor=white)](https://www.php.net)
+[![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=flat&logo=php&logoColor=white)](https://www.php.net)
 [![Gulp](https://img.shields.io/badge/GULP-%23CF4647.svg?style=flat&logo=gulp&logoColor=white)](https://gulpjs.com/)
 [![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=flat&logo=webpack&logoColor=black)](https://webpack.js.org)
 [![Symfony](https://img.shields.io/badge/symfony-black.svg?style=flat&logo=symfony&logoColor=white)](https://www.symfony.com)
