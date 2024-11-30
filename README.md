@@ -54,9 +54,8 @@ Team ([Dragonprime](http://dragonprime.net)) and has code of Oliver Brendel ([NB
 
 Version of the IDMarinas Edition: **_7.2.0_**
 
-The intention to make a new branch of the Core, is to be able to update certain aspects, which were outdated, such as
-the script that is used to access the database, while correcting certain errors, and adding new options of
-customization.
+The intention to make a new branch of the Core is to be able to update certain aspects, which were outdated, such as
+the script that is used to access the database. And fixed certain errors, and adding new options for customization.
 
 IDMarinas Edition is used in:
 
