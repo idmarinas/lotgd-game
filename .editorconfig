@@ -13,3 +13,6 @@ trim_trailing_whitespace = false
 
 [*.test]
 trim_trailing_whitespace = false
+
+[.github/workflows/*.yml]
+indent_size = 2
