@@ -34,9 +34,11 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&metric=coverage)](https://sonarcloud.io/dashboard?id=lotgd-game)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=lotgd-game)
 
-[![Build in PHP](https://img.shields.io/badge/PHP-^7.4-8892BF.svg?logo=php)](http://php.net/)
-[![built with gulp](https://img.shields.io/badge/gulp-builds_this_project-eb4a4b.svg?logo=gulp)](http://gulpjs.com/)
-[![built with webpack](https://img.shields.io/badge/webpack-builds_javascript-175d96.svg?logo=webpack)](https://webpack.js.org)
+[![PHP](https://img.shields.io/badge/php_^7.4-%23777BB4.svg?style=flat&logo=php&logoColor=white)](https://www.php.net)
+[![Gulp](https://img.shields.io/badge/GULP-%23CF4647.svg?style=flat&logo=gulp&logoColor=white)](https://gulpjs.com/)
+[![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=flat&logo=webpack&logoColor=black)](https://webpack.js.org)
+[![Symfony](https://img.shields.io/badge/symfony-black.svg?style=flat&logo=symfony&logoColor=white)](https://www.symfony.com)
+[![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=flat&logo=tailwind-css&logoColor=white)](https://www.tailwindcss.com)
 
 [![PayPal.Me - The safer, easier way to pay online!](https://img.shields.io/badge/donate-help_my_project-ffaa29.svg?logo=paypal&cacheSeconds=86400)](https://www.paypal.me/idmarinas)
 [![Liberapay - Donate](https://img.shields.io/liberapay/receives/IDMarinas.svg?logo=liberapay&cacheSeconds=86400)](https://liberapay.com/IDMarinas/donate)
