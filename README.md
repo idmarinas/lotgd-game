@@ -60,8 +60,9 @@ customization.
 
 IDMarinas Edition is used in:
 
-- [The Legend of the Green Dragon](http://lotgd.infommo.es) (Demo)
-- [La Leyenda de Ignis](http://draconia.infommo.es)
+- [The Legend of the Green Dragon](https://lotgd.infommo.es) (Demo)
+- [La Leyenda de Ignis (Spanish version)](https://ignis.infommo.es)
+- [The Legend of Ignis (English version)](https://tloi.infommo.es)
 
 ## Modules
 
