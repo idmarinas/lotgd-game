@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Symfony2PluginSettings">
+    <option name="directoryToApp" value="src/core" />
     <option name="pluginEnabled" value="true" />
+    <option name="profilerCsvPath" value="" />
+    <option name="routingFiles">
+      <list>
+        <routing_file path="app/cache/dev/appDevUrlGenerator.php" />
+        <routing_file path="var/cache/dev/appDevUrlGenerator.php" />
+        <routing_file path="var/cache/dev/appDevDebugProjectContainerUrlGenerator.php" />
+        <routing_file path="var/cache/dev/srcDevDebugProjectContainerUrlGenerator.php" />
+        <routing_file path="var/cache/dev/url_generating_routes.php" />
+        <routing_file path="var/cache/dev/UrlGenerator.php" />
+      </list>
+    </option>
   </component>
 </project>
