@@ -3,19 +3,30 @@ name: LoTGD Test Suite
 on:
   pull_request:
     types: [ opened, synchronize, reopened ]
-    tags-ignore:
-      - dependencies
+    tags-ignore: [ dependencies, documentation, meta, 'docker configuration', 'deployer configuration' ]
   push:
-    branches:
-      - ${{ github.ref_name }}
+    paths-ignore:
+      - '.deployer/**'
+      - '.docker/**'
+      - 'migrations/**'
+      - '**/docs/**'
+      - '**/Writerside/**'
+      - '**/README.md'
+      - '**/COMMANDS.md'
+      - '**/TIPS.md'
+      - '**/TODO.md'
+      - '**/LICENSE'
+      - rector.php
+      - .editorconfig
+      - .gitignore
+      - compose.yaml
 
 jobs:
   build:
-    runs-on: ${{ matrix.operating-system }}
+    runs-on: ubuntu-latest
     name: PHP ${{ matrix.php }}
     strategy:
       matrix:
-        operating-system: [ ubuntu-latest ]
         php: [ '7.4' ]
 
     steps:
@@ -33,7 +44,7 @@ jobs:
         uses: ramsey/composer-install@v2
 
       - name: Run test suite on PHP ${{ matrix.php }}
-        run: ./vendor/bin/phpunit
+        run: ./vendor/bin/phpunit --exclude ignore
 
       - name: SonarCloud Scan
         if: matrix.php == '7.4'
