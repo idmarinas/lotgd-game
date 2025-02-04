@@ -52,21 +52,21 @@ services:
 
     Lotgd\Core\Installer\Command\:
         resource: "../src/core/Installer/Command"
-        tags: ['console.command']
+        tags: [ 'console.command' ]
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     Lotgd\Core\Controller\:
         resource: '../src/core/Controller/'
-        tags: ['controller.service_arguments']
+        tags: [ 'controller.service_arguments' ]
 
     Lotgd\Core\Controller\AboutController:
         calls:
-            - setBundles: [ "@=service('kernel').getBundles()" ]
+            -   setBundles: [ "@=service('kernel').getBundles()" ]
 
     Lotgd\Local\Controller\:
         resource: '../src/local/Controller/'
-        tags: ['controller.service_arguments']
+        tags: [ 'controller.service_arguments' ]
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
@@ -79,42 +79,13 @@ services:
         arguments:
             - "%lotgd_core.doctrine_prefix%"
 
-    # Jaxon-PHP Service
-    Lotgd\Core\Service\Jaxon:
-        arguments:
-            - {
-                core:
-                  {
-                      request: { uri: "jaxon.php" },
-                      process: { exit: false },
-                  },
-                dialogs:
-                  {
-                      toastr:
-                        {
-                            options:
-                              {
-                                  progressBar: true,
-                                  newestOnTop: false,
-                                  closeButton: true,
-                                  preventDuplicates: true,
-                                  timeOut: 30000,
-                                  extendedTimeOut: 15000,
-                              },
-                        },
-                  },
-            }
-    lotgd.core.jaxon:
-        alias: Lotgd\Core\Service\Jaxon
-        public: true
-
     # View Laminas Service
     Laminas\View\Helper\HeadLink:
         public: true
     Laminas\View\Helper\HeadMeta:
         public: true
         calls:
-            - setView: ['@Laminas\View\Renderer\PhpRenderer']
+            -   setView: [ '@Laminas\View\Renderer\PhpRenderer' ]
     Laminas\View\Helper\HeadScript:
         public: true
     Laminas\View\Helper\HeadStyle:
@@ -137,8 +108,8 @@ services:
             - '@Lotgd\Core\Output\Code'
             - '@Lotgd\Core\Output\Color'
         calls:
-            - setDecPoint: ['%lotgd_core.number.format.decimal.point%']
-            - setThousandsSep: ['%lotgd_core.number.format.thousands.sep%']
+            -   setDecPoint: [ '%lotgd_core.number.format.decimal.point%' ]
+            -   setThousandsSep: [ '%lotgd_core.number.format.thousands.sep%' ]
     Lotgd\Core\Output\Censor:
         lazy: true
         arguments:
@@ -214,7 +185,7 @@ services:
     Lotgd\Core\Tool\SystemMail:
         lazy: true
         calls:
-            - setMailer: ['@mailer']
+            -   setMailer: [ '@mailer' ]
     lotgd_core.tool.system_mail:
         alias: Lotgd\Core\Tool\SystemMail
         public: true
@@ -229,11 +200,11 @@ services:
     Lotgd\Core\Navigation\Navigation:
         public: true
         calls:
-            - setClassHeader: ['header']
-            - setClassNav: ['nav']
+            -   setClassHeader: [ 'header' ]
+            -   setClassNav: [ 'nav' ]
     Lotgd\Core\Http\Request:
         public: true
-        class:   Lotgd\Core\Http\Request
+        class: Lotgd\Core\Http\Request
         factory: '@Lotgd\Core\Service\HttpRequestFactory'
     Lotgd\Core\Http\Response:
         public: true
