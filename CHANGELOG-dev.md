@@ -38,6 +38,13 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/7.2/CHAN
 	- `resetAllDragonkillPoints($acctid))` use
 	  `LotgdKernel::get("lotgd_core.service.server_functions")->resetAllDragonkillPoints($acctid))` instead or
 	  dependency injection.
+- **BC** Removed the following packages in `composer.json`
+	- `laminas/laminas-log` dependency
+	- `symfony/debug-bundle` dependency (not used)
+	- `laminas/laminas-math` dependency
+	- `laminas/laminas-validator` dependency
+	- `jaxon-php/jaxon-dialogs` dependency
+	- `jaxon-php/jaxon-core` dependency
 
 ### :notebook: NOTES
 
