@@ -1,5 +1,6 @@
+* text=lf
+.gitattributes merge=ours
 CHANGELOG-dev.md merge=ours
 composer.json merge=ours
 package.json merge=ours
-.gitattributes merge=ours
-* text=lf
+README.md merge=ours
