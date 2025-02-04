@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/ajax/core" isTestSource="false" packagePrefix="Lotgd\Ajax\Core\" />
       <sourceFolder url="file://$MODULE_DIR$/src/ajax/local" isTestSource="false" packagePrefix="Lotgd\Ajax\Local\" />
       <sourceFolder url="file://$MODULE_DIR$/src/ajax/pattern/local" isTestSource="false" packagePrefix="Lotgd\Ajax\Pattern\Local\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ajax/pattern/core" isTestSource="false" packagePrefix="Lotgd\Ajax\Pattern\Core\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/beberlei/doctrineextensions" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/behat/transliterator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bukashk0zzz/filter-bundle" />

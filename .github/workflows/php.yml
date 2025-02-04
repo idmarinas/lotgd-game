@@ -3,19 +3,30 @@ name: LoTGD Test Suite
 on:
   pull_request:
     types: [ opened, synchronize, reopened ]
-    tags-ignore:
-      - dependencies
+    tags-ignore: [ dependencies, documentation, meta, 'docker configuration', 'deployer configuration' ]
   push:
-    branches:
-      - '7.1'
+    paths-ignore:
+      - '.deployer/**'
+      - '.docker/**'
+      - 'migrations/**'
+      - '**/docs/**'
+      - '**/Writerside/**'
+      - '**/README.md'
+      - '**/COMMANDS.md'
+      - '**/TIPS.md'
+      - '**/TODO.md'
+      - '**/LICENSE'
+      - rector.php
+      - .editorconfig
+      - .gitignore
+      - compose.yaml
 
 jobs:
   build:
-    runs-on: ${{ matrix.operating-system }}
+    runs-on: ubuntu-latest
     name: PHP ${{ matrix.php }}
     strategy:
       matrix:
-        operating-system: [ ubuntu-latest ]
         php: [ '7.4' ]
 
     steps:
@@ -33,16 +44,11 @@ jobs:
         uses: ramsey/composer-install@v2
 
       - name: Run test suite on PHP ${{ matrix.php }}
-        run: ./vendor/bin/phpunit
-
-      - name: Fix paths for Sonar
-        if: matrix.php == '7.4'
-        working-directory: ./build/reports/
-        run: sed -i 's/\/home\/runner\/work\/common-bundle\/common-bundle\//\/github\/workspace\//g' phpunit.coverage.xml
+        run: ./vendor/bin/phpunit --exclude ignore
 
       - name: SonarCloud Scan
         if: matrix.php == '7.4'
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarqube-scan-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
