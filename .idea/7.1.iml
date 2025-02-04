@@ -7,7 +7,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/local" isTestSource="false" packagePrefix="Lotgd\Local\" />
       <sourceFolder url="file://$MODULE_DIR$/src/ajax/core" isTestSource="false" packagePrefix="Lotgd\Ajax\Core\" />
       <sourceFolder url="file://$MODULE_DIR$/src/ajax/local" isTestSource="false" packagePrefix="Lotgd\Ajax\Local\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/ajax/pattern/core" isTestSource="false" packagePrefix="Lotgd\Ajax\Pattern\Core\" />
       <sourceFolder url="file://$MODULE_DIR$/src/ajax/pattern/local" isTestSource="false" packagePrefix="Lotgd\Ajax\Pattern\Local\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/beberlei/doctrineextensions" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/behat/transliterator" />
@@ -189,8 +188,6 @@
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/storage" />
       <excludeFolder url="file://$MODULE_DIR$/vendor" />
-      <excludeFolder url="file://$MODULE_DIR$/output-cache.dist" />
-      <excludeFolder url="file://$MODULE_DIR$/src/ajax.dist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

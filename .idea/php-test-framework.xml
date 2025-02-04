@@ -5,7 +5,7 @@
       <tool tool_name="PHPUnit">
         <cache>
           <versions>
-            <info id="LocalF:\LoTGD\core\vendor\autoload.php" version="9.6.21" />
+            <info id="Local\vendor/autoload.php" version="9.6.22" />
           </versions>
         </cache>
       </tool>
