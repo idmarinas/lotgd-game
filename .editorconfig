@@ -1,18 +1,22 @@
 root = true
 
 [*]
-charset                  = utf-8
-indent_style             = tab
-indent_size              = 4
-end_of_line              = lf
-insert_final_newline     = false
-trim_trailing_whitespace = true
+charset                     = utf-8
+indent_style                = tab
+tab_width                   = 4
+indent_size                 = 4
+end_of_line                 = lf
+max_line_length             = 120
+insert_final_newline        = true
+trim_trailing_whitespace    = true
+ij_continuation_indent_size = 2
+ij_visual_guides            = 120
+ij_smart_tabs               = true
+ij_wrap_on_typing           = true
 
 [*.{md,md.dist}]
 trim_trailing_whitespace = false
 
 [*.test]
+insert_final_newline     = false
 trim_trailing_whitespace = false
-
-[.github/workflows/*.yml]
-indent_size = 2
