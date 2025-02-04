@@ -1,239 +1,212 @@
 import RemoteModal from './remote_modal_controller'
 
 //-- Mixins
-import { useLoadingBarTop, useButtonLoading, useSyncIcon } from '../mixins'
-
-export default class extends RemoteModal
-{
-    static values = {
-        urlStatus: String,
-        urlWrite: String,
-        urlReply: String,
-        urlRead: String,
-        urlUnread: String,
-        urlDelete: String,
-        urlDeleteBulk: String,
-        transCheckAllInactive: String,
-        transCheckAllActive: String
-    }
-
-    static targets = ['buttons']
-
-    connect ()
-    {
-        super.connect()
-
-        useLoadingBarTop(this)
-        useButtonLoading(this)
-        useSyncIcon(this, 'top', 'left', 'text-lotgd-green-600')
-
-        setInterval(() => this.statusUpdate(), 15000)
-    }
+import {useButtonLoading, useLoadingBarTop, useSyncIcon} from '../mixins'
 
-    buttonsTargetConnected(target)
-    {
-        document.addEventListener('limit_characters.is_over_characters', e =>
-        {
-            const btns = target.getElementsByTagName('button')
-            for (let btn of btns)
-            {
-                btn.disabled = e.detail.isOverCharacters
-            }
-        })
-    }
+export default class extends RemoteModal {
+	static values = {
+		urlStatus: String,
+		urlWrite: String,
+		urlReply: String,
+		urlRead: String,
+		urlUnread: String,
+		urlDelete: String,
+		urlDeleteBulk: String,
+		transCheckAllInactive: String,
+		transCheckAllActive: String,
+	}
 
-    async inbox (event)
-    {
-        const params = event.params
+	static targets = ['buttons']
 
-        let url = this.urlValue
-        let content = null
+	connect() {
+		super.connect()
 
-        if (Object.keys(params).length > 0)
-        {
-            this.startLoadingBarTop()
-            url = `${url}&sort_order=${params.sortOrder}&sort_direction=${params.sortDirection}`
-        }
-        else
-        {
-            this.startButtonLoading(event.target)
-        }
+		useLoadingBarTop(this)
+		useButtonLoading(this)
+		useSyncIcon(this, 'top', 'left', 'text-lotgd-green-600')
 
-        this.remoteContent = ''
-        content = await this.fetch(url)
+		setInterval(() => this.statusUpdate(), 15000)
+	}
 
-        if (Object.keys(params).length > 0)
-        {
-            this.stopLoadingBarTop()
-        }
+	buttonsTargetConnected(target) {
+		document.addEventListener('limit_characters.is_over_characters', e => {
+			const btns = target.getElementsByTagName('button')
+			for (let btn of btns) {
+				btn.disabled = e.detail.isOverCharacters
+			}
+		})
+	}
 
-        if ( ! content) return
+	async inbox(event) {
+		const params = event.params
 
-        this.containerTarget.innerHTML = ''
+		let url = this.urlValue
+		let content = null
 
-        this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
-    }
+		if (Object.keys(params).length > 0) {
+			this.startLoadingBarTop()
+			url = `${url}&sort_order=${params.sortOrder}&sort_direction=${params.sortDirection}`
+		} else {
+			this.startButtonLoading(event.target)
+		}
 
-    async read (event)
-    {
-        event.preventDefault()
+		this.remoteContent = ''
+		content = await this.fetch(url)
 
-        const params = event.params
+		if (Object.keys(params).length > 0) {
+			this.stopLoadingBarTop()
+		}
 
-        let url = this.urlReadValue
-        let content = null
+		if (!content) return
 
-        if (Object.keys(params).length > 0)
-        {
+		this.containerTarget.innerHTML = ''
 
-            url = `${url}&message_id=${params.id}`
-        }
+		this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
+	}
 
-        if (params.isButton === true)
-        {
-            this.startButtonLoading(event.target)
-        }
-        else
-        {
-            this.startLoadingBarTop()
-        }
+	async read(event) {
+		event.preventDefault()
 
-        this.remoteContent = ''
-        content = await this.fetch(url)
+		const params = event.params
 
-        if (params.isButton === false || params.isButton === undefined)
-        {
-            this.stopLoadingBarTop()
-        }
+		let url = this.urlReadValue
+		let content = null
 
-        if ( ! content) return
+		if (Object.keys(params).length > 0) {
 
-        this.containerTarget.innerHTML = ''
+			url = `${url}&message_id=${params.id}`
+		}
 
-        this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
+		if (params.isButton === true) {
+			this.startButtonLoading(event.target)
+		} else {
+			this.startLoadingBarTop()
+		}
 
-    }
+		this.remoteContent = ''
+		content = await this.fetch(url)
 
-    async unread (event)
-    {
-        const params = event.params
+		if (params.isButton === false || params.isButton === undefined) {
+			this.stopLoadingBarTop()
+		}
 
-        this.startButtonLoading(event.target)
+		if (!content) return
 
-        let content = ''
+		this.containerTarget.innerHTML = ''
 
-        this.remoteContent = ''
-        content = await this.fetch(`${this.urlUnreadValue}&message_id=${params.id}`)
+		this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
 
-        this.stopButtonLoading(event.target)
+	}
 
-        if ( ! content) return
+	async unread(event) {
+		const params = event.params
 
-        this.containerTarget.innerHTML = ''
+		this.startButtonLoading(event.target)
 
-        this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
-    }
+		let content = ''
 
-    async delete (event)
-    {
-        this.startButtonLoading(event.target)
+		this.remoteContent = ''
+		content = await this.fetch(`${this.urlUnreadValue}&message_id=${params.id}`)
 
-        const id = event.params.id
+		this.stopButtonLoading(event.target)
 
-        this.remoteContent = ''
-        let content = await this.fetch(`${this.urlDeleteValue}&id=${id}`)
+		if (!content) return
 
-        this.stopButtonLoading(event.target)
+		this.containerTarget.innerHTML = ''
 
-        if ( ! content) return
+		this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
+	}
 
-        this.containerTarget.innerHTML = ''
+	async delete(event) {
+		this.startButtonLoading(event.target)
 
-        this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
-    }
+		const id = event.params.id
 
-    async deleteBulk()
-    {
-        const btns = this.containerTarget.getElementsByTagName('button')
+		this.remoteContent = ''
+		let content = await this.fetch(`${this.urlDeleteValue}&id=${id}`)
 
-        for (let btn of btns)
-        {
-            this.startButtonLoading(btn)
-        }
+		this.stopButtonLoading(event.target)
 
-        const form = this.containerTarget.getElementsByTagName('form')[0]
+		if (!content) return
 
-        this.remoteContent = ''
-        const content = await this.fetch(this.urlDeleteBulkValue, {
-            method: 'POST',
-            body: new FormData(form)
-        })
+		this.containerTarget.innerHTML = ''
 
-        if ( ! content) return
+		this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
+	}
 
-        this.containerTarget.innerHTML = ''
+	async deleteBulk() {
+		const btns = this.containerTarget.getElementsByTagName('button')
 
-        this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
-    }
+		for (let btn of btns) {
+			this.startButtonLoading(btn)
+		}
 
-    async statusUpdate ()
-    {
-        if ( ! this.hasUrlStatusValue || this.loading === true)
-        {
-            return
-        }
+		const form = this.containerTarget.getElementsByTagName('form')[0]
 
-        this.startSyncIcon(this.activatorTarget)
+		this.remoteContent = ''
+		const content = await this.fetch(this.urlDeleteBulkValue, {
+			method: 'POST',
+			body: new FormData(form),
+		})
 
-        const response = await fetch(this.urlStatusValue)
-        const content = await response.text()
+		if (!content) return
 
-        this.stopSyncIcon(this.activatorTarget)
+		this.containerTarget.innerHTML = ''
 
-        this.activatorTarget.innerHTML = ''
-        this.activatorTarget.appendChild(document.createRange().createContextualFragment(content))
-    }
+		this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
+	}
 
-    async write(event)
-    {
-        this.#send(event, this.urlWriteValue)
-    }
+	async statusUpdate() {
+		if (!this.hasUrlStatusValue || this.loading === true) {
+			return
+		}
 
-    async reply(event)
-    {
-        this.#send(event, `${this.urlReplyValue}&message_id=${event.params.id}`)
-    }
+		this.startSyncIcon(this.activatorTarget)
 
-    checkAll (event)
-    {
-        const checkAll = event.target.innerHTML === this.transCheckAllInactiveValue
+		const response = await fetch(this.urlStatusValue)
+		const content = await response.text()
 
-        this.startButtonLoading(event.target)
+		this.stopSyncIcon(this.activatorTarget)
 
-        document.getElementsByName('msg[]').forEach(field =>
-        {
-            field.checked = checkAll
-        })
+		this.activatorTarget.innerHTML = ''
+		this.activatorTarget.appendChild(document.createRange().createContextualFragment(content))
+	}
 
-        this.stopButtonLoading(event.target)
+	async write(event) {
+		this.#send(event, `${this.urlWriteValue}&to_player=${event.params.toPlayer}`)
+	}
 
-        event.target.innerHTML = checkAll ? this.transCheckAllActiveValue : this.transCheckAllInactiveValue
-    }
+	async reply(event) {
+		this.#send(event, `${this.urlReplyValue}&message_id=${event.params.id}`)
+	}
 
-    async #send(event, url)
-    {
-        this.startButtonLoading(event.target)
+	checkAll(event) {
+		const checkAll = event.target.innerHTML === this.transCheckAllInactiveValue
 
-        this.remoteContent = ''
+		this.startButtonLoading(event.target)
 
-        const content = await this.fetch(url)
+		document.getElementsByName('msg[]').forEach(field => {
+			field.checked = checkAll
+		})
 
-        this.stopButtonLoading(event.target)
+		this.stopButtonLoading(event.target)
 
-        if ( ! content) return
+		event.target.innerHTML = checkAll ? this.transCheckAllActiveValue : this.transCheckAllInactiveValue
+	}
 
-        this.containerTarget.innerHTML = ''
+	async #send(event, url) {
+		this.startButtonLoading(event.target)
 
-        this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
-    }
+		this.remoteContent = ''
+
+		const content = await this.fetch(url)
+
+		this.stopButtonLoading(event.target)
+
+		if (!content) return
+
+		this.containerTarget.innerHTML = ''
+
+		this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
+	}
 }
