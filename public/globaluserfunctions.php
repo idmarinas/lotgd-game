@@ -1,7 +1,6 @@
 <?php
 
 require_once 'common.php';
-require_once 'lib/serverfunctions.class.php';
 
 check_su_access(SU_MEGAUSER);
 
@@ -15,26 +14,25 @@ LotgdNavigation::superuserGrottoNav();
 LotgdNavigation::addHeader('globaluserfunctions.category.actions');
 LotgdNavigation::addNav('globaluserfunctions.nav.reset', 'globaluserfunctions.php?op=dkpointreset');
 
-$op     = (string) LotgdRequest::getQuery('op');
+$op = (string)LotgdRequest::getQuery('op');
 $params = [];
 
-switch ($op)
-{
-    case 'dkpointreset':
-        LotgdNavigation::addHeader('globaluserfunctions.category.dragonpoints');
-        LotgdNavigation::addNav('globaluserfunctions.nav.reset.now', 'globaluserfunctions.php?op=dkpointresetnow');
+switch ($op) {
+	case 'dkpointreset':
+		LotgdNavigation::addHeader('globaluserfunctions.category.dragonpoints');
+		LotgdNavigation::addNav('globaluserfunctions.nav.reset.now', 'globaluserfunctions.php?op=dkpointresetnow');
 
-    break;
-    case 'dkpointresetnow':
-        LotgdKernel::get('lotgd_core.service.server_functions')->resetAllDragonkillPoints();
+		break;
+	case 'dkpointresetnow':
+		LotgdKernel::get('lotgd_core.service.server_functions')->resetAllDragonkillPoints();
 
-        $params['tpl'] = 'reset-now';
+		$params['tpl'] = 'reset-now';
 
-    break;
-    default:
-        $params['tpl'] = 'default';
+		break;
+	default:
+		$params['tpl'] = 'default';
 
-    break;
+		break;
 }
 
 LotgdResponse::pageAddContent(LotgdTheme::render('admin/page/globaluserfunctions.html.twig', $params));
