@@ -4,6 +4,14 @@
     <option name="directoryToApp" value="src/core" />
     <option name="pluginEnabled" value="true" />
     <option name="profilerCsvPath" value="" />
+    <option name="twigNamespaces">
+      <list>
+        <twig_namespace custom="true" namespaceType="ADD_PATH" path="themes/LotgdModern/templates" />
+        <twig_namespace custom="true" enabled="false" namespace="module" namespaceType="ADD_PATH" path="templates_modules" />
+        <twig_namespace custom="true" enabled="false" namespace="module" namespaceType="ADD_PATH" path="templates_modules" />
+        <twig_namespace custom="true" namespace="module" namespaceType="ADD_PATH" path="templates_modules" />
+      </list>
+    </option>
     <option name="containerFiles">
       <list>
         <container_file path="var/cache/dev/coreLotgd_Core_KernelDevDebugContainer.xml" />
