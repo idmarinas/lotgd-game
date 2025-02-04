@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Test" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
     <CommandLine parameters="-d xdebug.mode=coverage" />
-    <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
+    <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" scope="XML" options="--exclude ignore" use_alternative_configuration_file="true" />
     <method v="2" />
   </configuration>
 </component>

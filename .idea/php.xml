@@ -2,7 +2,7 @@
 <project version="4">
   <component name="MessDetector">
     <phpmd_settings>
-      <phpmd_by_interpreter asDefaultInterpreter="true" interpreter_id="56b53453-b60c-4446-8e36-00bc696a53b7" timeout="30000" />
+      <phpmd_by_interpreter asDefaultInterpreter="true" interpreter_id="02dcf90c-37ef-4ba4-b484-534b37bd415d" timeout="30000" />
     </phpmd_settings>
   </component>
   <component name="MessDetectorOptionsConfiguration">
@@ -17,7 +17,7 @@
   </component>
   <component name="PhpCodeSniffer">
     <phpcs_settings>
-      <phpcs_by_interpreter asDefaultInterpreter="true" interpreter_id="56b53453-b60c-4446-8e36-00bc696a53b7" timeout="30000" />
+      <phpcs_by_interpreter asDefaultInterpreter="true" interpreter_id="02dcf90c-37ef-4ba4-b484-534b37bd415d" timeout="30000" />
     </phpcs_settings>
   </component>
   <component name="PhpIncludePathManager">
@@ -210,6 +210,19 @@
       <path value="$PROJECT_DIR$/vendor/jaxon-php/jaxon-core" />
       <path value="$PROJECT_DIR$/vendor/jaxon-php/jaxon-dialogs" />
       <path value="$PROJECT_DIR$/vendor/jaxon-php/jaxon-utils" />
+      <path value="$PROJECT_DIR$/vendor/hoa/compiler" />
+      <path value="$PROJECT_DIR$/vendor/hoa/consistency" />
+      <path value="$PROJECT_DIR$/vendor/hoa/file" />
+      <path value="$PROJECT_DIR$/vendor/hoa/iterator" />
+      <path value="$PROJECT_DIR$/vendor/hoa/event" />
+      <path value="$PROJECT_DIR$/vendor/hoa/exception" />
+      <path value="$PROJECT_DIR$/vendor/hoa/regex" />
+      <path value="$PROJECT_DIR$/vendor/hoa/stream" />
+      <path value="$PROJECT_DIR$/vendor/hoa/math" />
+      <path value="$PROJECT_DIR$/vendor/hoa/protocol" />
+      <path value="$PROJECT_DIR$/vendor/hoa/zformat" />
+      <path value="$PROJECT_DIR$/vendor/hoa/ustring" />
+      <path value="$PROJECT_DIR$/vendor/hoa/visitor" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
