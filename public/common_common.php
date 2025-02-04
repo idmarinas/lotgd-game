@@ -24,61 +24,53 @@ use Tracy\Debugger;
 use Twig\Extension\ProfilerExtension;
 use Twig\Profiler\Profile;
 
-/*
- * For no repeat same parts in common and common_jaxon.
- */
-chdir(realpath(__DIR__.'/..'));
+chdir(realpath(__DIR__ . '/..'));
 
-require \dirname(__DIR__).'/config/bootstrap.php';
+require \dirname(__DIR__) . '/config/bootstrap.php';
 //-- Include constants
 require_once 'src/constants.php';
 
 //-- Autoload annotations
 AnnotationRegistry::registerLoader(
-    fn($className) => class_exists($className)
+	fn($className) => class_exists($className)
 );
 
 // Set some constant defaults in case they weren't set before the inclusion of
 // common.php
 \defined('OVERRIDE_FORCED_NAV') || \define('OVERRIDE_FORCED_NAV', false);
-\defined('ALLOW_ANONYMOUS')     || \define('ALLOW_ANONYMOUS', false);
+\defined('ALLOW_ANONYMOUS') || \define('ALLOW_ANONYMOUS', false);
 
 $isDevelopment = 'prod' != $_SERVER['APP_ENV'];
 //-- Init Debugger
 $debuggerMode = $isDevelopment ? Debugger::DEVELOPMENT : Debugger::PRODUCTION;
-Debugger::enable($debuggerMode, __DIR__.'/../storage/log/tracy');
+Debugger::enable($debuggerMode, __DIR__ . '/../storage/log/tracy');
 Debugger::timer('page-generating');
 Debugger::timer('page-footer');
 Debugger::$maxDepth = 5; // default: 3
 //-- Extensions for Tracy
-if ($isDevelopment)
-{
-    Debugger::getBar()->addPanel(new Panel());
+if ($isDevelopment) {
+	Debugger::getBar()->addPanel(new Panel());
 }
 
 //-- Prepare LoTGD Kernel
-try
-{
-    LotgdKernel::instance(new Lotgd\Core\Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']));
-    LotgdKernel::boot();
+try {
+	LotgdKernel::instance(new Lotgd\Core\Kernel($_SERVER['APP_ENV'], (bool)$_SERVER['APP_DEBUG']));
+	LotgdKernel::boot();
 
-    if ($isDevelopment)
-    {
-        //-- Add Twig template in the Tracy debugger bar.
-        $profile = new Profile();
-        $twig    = LotgdKernel::get('twig');
-        $twig->addExtension(new ProfilerExtension($profile));
-        $twig->addExtension(new TracyExtension());
+	if ($isDevelopment) {
+		//-- Add Twig template in the Tracy debugger bar.
+		$profile = new Profile();
+		$twig = LotgdKernel::get('twig');
+		$twig->addExtension(new ProfilerExtension($profile));
+		$twig->addExtension(new TracyExtension());
 
-        TwigBar::init($profile);
+		TwigBar::init($profile);
 
-        //-- Add Sql requests made by Doctrine in the Tracy debugger bar.
-        DoctrineSql::init(LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
-    }
-}
-catch (Throwable $th)
-{
-    Debugger::log($th);
+		//-- Add Sql requests made by Doctrine in the Tracy debugger bar.
+		DoctrineSql::init(LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
+	}
+} catch (Throwable $th) {
+	Debugger::log($th);
 }
 
 /*
@@ -138,7 +130,6 @@ require_once 'lib/forcednavigation.php';
 require_once 'lib/lotgd_mail.php';
 
 // Decline static file requests back to the PHP built-in webserver
-if ('cli-server' === \PHP_SAPI && is_file(__DIR__.parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH)))
-{
-    return false;
+if ('cli-server' === \PHP_SAPI && is_file(__DIR__ . parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH))) {
+	return false;
 }
