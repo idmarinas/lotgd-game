@@ -1,87 +1,83 @@
-import { Modal } from "tailwindcss-stimulus-components"
+import {Modal} from 'tailwindcss-stimulus-components'
 
 //-- Mixins
-import { useLoading } from '../mixins'
+import {useLoading} from '../mixins'
 
-export default class extends Modal
-{
-    remoteContent = ''
+export default class extends Modal {
+	static targets = ['activator']
+	static values = {url: String, reloadData: Boolean}
+	remoteContent = ''
 
-    static targets = ['activator']
-    static values = { url: String, reloadData: Boolean }
+	connect() {
+		super.connect()
 
-    connect ()
-    {
-        super.connect()
+		useLoading(this)
+	}
 
-        useLoading(this)
-    }
+	async open(event) {
+		event.preventDefault()
 
-    async open (event)
-    {
-        event.preventDefault()
+		this.startLoading()
 
-        this.startLoading()
+		let content = null
+		let url = undefined
 
-        let content = null
+		if (Object.keys(event.params).length > 0) {
+			url = `${this.urlValue}`
+				+ Object.entries(event.params)
+						.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+						.join('&')
+		}
 
-        content = await this.fetch()
+		content = await this.fetch(url)
 
-        this.stopLoading()
+		this.stopLoading()
 
-        if ( ! content) return
+		if (!content) return
 
-        this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
+		this.containerTarget.appendChild(document.createRange().createContextualFragment(content))
 
-        if ( ! this.containerTarget.style.zIndex || this.containerTarget.style.zIndex < 9999)
-        {
-            this.containerTarget.style.zIndex = 9999
-        }
+		if (!this.containerTarget.style.zIndex || this.containerTarget.style.zIndex < 9999) {
+			this.containerTarget.style.zIndex = 9999
+		}
 
-        super.open(event)
-    }
+		super.open(event)
+	}
 
-    close (event)
-    {
-        if (event && this.preventDefaultActionClosing)
-        {
-            event.preventDefault()
-        }
+	close(event) {
+		if (event && this.preventDefaultActionClosing) {
+			event.preventDefault()
+		}
 
-        //-- By default if not defined reset content
-        if ( ! this.hasReloadDataValue || this.reloadDataValue === true)
-        {
-            //-- Reset content
-            //-- This force to reload data other time
-            this.containerTarget.innerHTML = ''
-            this.remoteContent = ''
-        }
+		//-- By default if not defined reset content
+		if (!this.hasReloadDataValue || this.reloadDataValue === true) {
+			//-- Reset content
+			//-- This force to reload data other time
+			this.containerTarget.innerHTML = ''
+			this.remoteContent = ''
+		}
 
-        super.close(event)
-    }
+		super.close(event)
+	}
 
-    async fetch (fetchUrl, options = {})
-    {
-        let url = this.hasUrlValue ? this.urlValue : null
+	async fetch(fetchUrl, options = {}) {
+		let url = this.hasUrlValue ? this.urlValue : null
 
-        if (fetchUrl !== undefined && fetchUrl !== null && fetchUrl !== '')
-        {
-            url = fetchUrl
-        }
+		if (fetchUrl !== undefined && fetchUrl !== null && fetchUrl !== '') {
+			url = fetchUrl
+		}
 
-        if ( ! this.remoteContent)
-        {
-            if (url === undefined || url === null || url === '')
-            {
-                console.error('[stimulus-remote-modal] You need to pass an url to fetch the modal content.')
+		if (!this.remoteContent) {
+			if (url === undefined || url === null || url === '') {
+				console.error('[stimulus-remote-modal] You need to pass an url to fetch the modal content.')
 
-                return
-            }
+				return
+			}
 
-            const response = await fetch(url, options)
-            this.remoteContent = await response.text()
-        }
+			const response = await fetch(url, options)
+			this.remoteContent = await response.text()
+		}
 
-        return this.remoteContent
-    }
+		return this.remoteContent
+	}
 }
