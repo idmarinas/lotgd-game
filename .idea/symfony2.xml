@@ -4,6 +4,11 @@
     <option name="directoryToApp" value="src/core" />
     <option name="pluginEnabled" value="true" />
     <option name="profilerCsvPath" value="" />
+    <option name="containerFiles">
+      <list>
+        <container_file path="var/cache/dev/coreLotgd_Core_KernelDevDebugContainer.xml" />
+      </list>
+    </option>
     <option name="routingFiles">
       <list>
         <routing_file path="app/cache/dev/appDevUrlGenerator.php" />

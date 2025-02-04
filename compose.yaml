@@ -1,0 +1,21 @@
+name: lotgd_core
+
+services:
+    php:
+        build:
+            context: .docker/php
+            target: dev
+            args:
+                VERSION: '7.4'
+        environment:
+            SYMFONY_REQUIRE: '4.4.*'
+        healthcheck:
+            test: php -v || exit 1
+        volumes:
+            - ./:/var/www/html
+            ## PHP Conf
+            - ./.docker/php/conf.d/common.ini:/usr/local/etc/php/conf.d/common.ini
+            - ./.docker/php/conf.d/disable_functions.ini:/usr/local/etc/php/conf.d/disable_functions.ini
+            ## PHP Conf Dev
+            - ./.docker/php/conf.d/dev/php.ini:/usr/local/etc/php/conf.d/php.ini
+            - ./.docker/php/conf.d/dev/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
