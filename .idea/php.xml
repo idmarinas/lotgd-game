@@ -195,17 +195,6 @@
       <path value="$PROJECT_DIR$/vendor/phpstan/phpstan" />
       <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/phpunit-bridge" />
-      <path value="$PROJECT_DIR$/vendor/pimple/pimple" />
-      <path value="$PROJECT_DIR$/vendor/nyholm/psr7" />
-      <path value="$PROJECT_DIR$/vendor/nyholm/psr7-server" />
-      <path value="$PROJECT_DIR$/vendor/tedivm/jshrink" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-server-middleware" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-server-handler" />
-      <path value="$PROJECT_DIR$/vendor/jaxon-php/jaxon-core" />
-      <path value="$PROJECT_DIR$/vendor/jaxon-php/jaxon-dialogs" />
-      <path value="$PROJECT_DIR$/vendor/jaxon-php/jaxon-utils" />
       <path value="$PROJECT_DIR$/vendor/hoa/compiler" />
       <path value="$PROJECT_DIR$/vendor/hoa/consistency" />
       <path value="$PROJECT_DIR$/vendor/hoa/file" />
