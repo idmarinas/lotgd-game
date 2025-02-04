@@ -1,58 +1,104 @@
 {% trans_default_domain textDomain %}
 
 <table class="ui very compact striped table" aria-describedby="page-title">
-    <thead>
-        <tr>
-            <th scope="col">{{ 'section.default.table.thead.ops'|trans|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.name'|trans|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.cost'|trans|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.feat'|trans|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.owners'|trans|uncolorize }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% set cat = '' %}
-        {% for mount in mounts %}
-            {% if cat != mount.mountcategory %}
-                {% set cat = mount.mountcategory %}
-                <thead>
-                    <td colspan="5">{{ 'section.default.table.thead.category'|trans({ 'category': mount.mountcategory })|colorize }}</td>
-                </thead>
-            {% endif %}
-            <tr>
-                <td class="collapsing">
-                    <div class="ui mini icon buttons">
-                        <a href="{{ ('mounts.php?op=edit&id=' ~ mount.mountid)|lotgd_url }}" class="ui button" data-tooltip="{{ 'section.default.table.tbody.edit'|trans|uncolorize }}">
-                            <i aria-hidden="true" class="edit icon"></i>
-                        </a>
-                        <a href="{{ ('mounts.php?op=give&id=' ~ mount.mountid)|lotgd_url }}" class="ui button" data-tooltip="{{ 'section.default.table.tbody.give'|trans|uncolorize }}">
-                            <i aria-hidden="true" class="gift icon"></i>
-                        </a>
-                        {% if not mount.mountactive %}
-                            {% set options = {'html': 'section.default.table.tbody.del.confirm'|trans({ 'n': mount.owners })|uncolorize }|json_encode %}
-                            <a href="{{ ('mounts.php?op=del&id=' ~ mount.mountid)|lotgd_url }}" class="ui red button" data-tooltip="{{ 'section.default.table.tbody.del'|trans|uncolorize }}" onclick="Lotgd.confirm(this, event)" data-options="{{ options|e('html_attr') }}">
-                                <i aria-hidden="true" class="trash icon"></i>
-                            </a>
-                        {% endif %}
+	<thead>
+	<tr>
+		<th scope="col">{{ 'section.default.table.thead.ops'|trans|uncolorize }}</th>
+		<th scope="col">{{ 'section.default.table.thead.name'|trans|uncolorize }}</th>
+		<th scope="col">{{ 'section.default.table.thead.cost'|trans|uncolorize }}</th>
+		<th scope="col">{{ 'section.default.table.thead.feat'|trans|uncolorize }}</th>
+		<th scope="col">{{ 'section.default.table.thead.owners'|trans|uncolorize }}</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% set cat = '' %}
+	{% for mount in mounts %}
+		{% if cat != mount.mountcategory %}
+			{% set cat = mount.mountcategory %}
+			<thead>
+			<td colspan="5">{{ 'section.default.table.thead.category'|trans({ 'category': mount.mountcategory })|colorize }}</td>
+			</thead>
+		{% endif %}
+		<tr>
+			<td class="collapsing">
+				<div class="ui mini icon buttons">
+					<a
+						href="{{ ('mounts.php?op=edit&id=' ~ mount.mountid)|lotgd_url }}"
+						class="ui button"
+						data-tooltip="{{ 'section.default.table.tbody.edit'|trans|uncolorize }}"
+					>
+						<i aria-hidden="true" class="edit icon"></i>
+					</a>
+					<a
+						href="{{ ('mounts.php?op=give&id=' ~ mount.mountid)|lotgd_url }}"
+						class="ui button"
+						data-tooltip="{{ 'section.default.table.tbody.give'|trans|uncolorize }}"
+					>
+						<i aria-hidden="true" class="gift icon"></i>
+					</a>
+					{% if not mount.mountactive %}
+						{% set options = {'html': 'section.default.table.tbody.del.confirm'|trans({ 'n': mount.owners })|uncolorize }|json_encode %}
+						<a
+							href="{{ ('mounts.php?op=del&id=' ~ mount.mountid)|lotgd_url }}"
+							class="ui red button"
+							data-tooltip="{{ 'section.default.table.tbody.del'|trans|uncolorize }}"
+							onclick="Lotgd.confirm(this, event)"
+							data-options="{{ options|e('html_attr') }}"
+						>
+							<i
+								aria-hidden="true"
+								class="far fa-trash-alt text-lotgd-red-500 hover:text-lotgd-red-100"
+							></i>
+						</a>
+					{% endif %}
 
-                        {% if mount.mountactive %}
-                            <a href="{{ ('mounts.php?op=deactivate&id=' ~ mount.mountid)|lotgd_url }}" class="ui button" data-tooltip="{{ 'section.default.table.tbody.deac'|trans|uncolorize }}">
-                                <i aria-hidden="true" class="cog icon"></i>
-                            </a>
-                        {% else %}
-                            <a href="{{ ('mounts.php?op=activate&id=' ~ mount.mountid)|lotgd_url }}" class="ui orange button" data-tooltip="{{ 'section.default.table.tbody.act'|trans|uncolorize }}">
-                                <i aria-hidden="true" class="cog icon"></i>
-                            </a>
-                        {% endif %}
-                    </div>
-                </td>
-                <td>{{ '`&%s`0'|format(mount.mountname)|colorize }}</td>
-                <td>{{ 'section.default.table.tbody.cost'|trans({ 'gems': mount.mountcostgems, 'gold': mount.mountcostgold })|colorize }}</td>
-                <td>FF: {{ mount.mountforestfights|numeral }}, DKs: {{ mount.mountdkcost }}</td>
-                <td>{{ '<a href onclick="return JaxonLotgd.Ajax.Core.Mounts.getListOfOwners(%s)"><i aria-hidden="true" class="list icon"></i></a> `#%s`0'|format(mount.mountid, mount.owners)|colorize }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
+					{% if mount.mountactive %}
+						<a
+							href="{{ ('mounts.php?op=deactivate&id=' ~ mount.mountid)|lotgd_url }}"
+							data-tooltip="{{ 'section.default.table.tbody.deac'|trans|uncolorize }}"
+						>
+							<i
+								aria-hidden="true"
+								class="fas fa-cog text-lotgd-green-500 hover:text-lotgd-green-100"
+							></i>
+						</a>
+					{% else %}
+						<a
+							href="{{ ('mounts.php?op=activate&id=' ~ mount.mountid)|lotgd_url }}"
+							data-tooltip="{{ 'section.default.table.tbody.act'|trans|uncolorize }}"
+						>
+							<i
+								aria-hidden="true"
+								class="fas fa-cog text-lotgd-orange-500 hover:text-lotgd-orange-100"
+							></i>
+						</a>
+					{% endif %}
+				</div>
+			</td>
+			<td>{{ '`&%s`0'|format(mount.mountname)|colorize }}</td>
+			<td>{{ 'section.default.table.tbody.cost'|trans({ 'gems': mount.mountcostgems, 'gold': mount.mountcostgold })|colorize }}</td>
+			<td>FF: {{ mount.mountforestfights|numeral }}, DKs: {{ mount.mountdkcost }}</td>
+			<td>
+				<span
+					data-controller="remote-modal"
+					data-remote-modal-allow-background-close="true"
+					data-remote-modal-url-value="{{ stimulus_url('Lotgd\\Core\\Controller\\Stimulus\\MountsController') }}"
+				>
+					<button type="button" data-remote-modal-id-param="{{ mount.mountid }}">
+						<i aria-hidden="true" class="fa fa-list"></i>
+						{{ ('`#' ~ mount.owners ~ '`0')|colorize }}
+					</button>
+
+					<div
+						data-remote-modal-target="container"
+						data-action="click->remote-modal#closeBackground keyup@window->remote-modal#closeWithKeyboard"
+						class="transition duration-500 ease-in-out fixed inset-0 overflow-y-auto flex items-center justify-center whitespace-normal hidden"
+					></div>
+				</span>
+			</td>
+		</tr>
+	{% endfor %}
+	</tbody>
 </table>
 
 {{ 'section.default.paragraph'|trans|colorize }}
