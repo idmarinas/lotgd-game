@@ -26,12 +26,18 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/7.2/CHAN
 
 ### :wrench: FIXES
 
-- Nothing
+- **public/login.php** Fixed typo in `LotgdMessaged::` rename to `LotgdMessages::`
+- **Recover password system** Fixed a bug where the password could not be reset.
 
 ### :x: REMOVES
 
-- **BC** **Jaxon-PHP** removed, migrated to StimulusJS
-	- Deleted all related files and code.
+- **Jaxon-PHP** removed, migrated to StimulusJS
+	- **Removed files**
+		- **src/core/Twig/Extenxion/Jaxon.php**
+		- **src/core/Service/Jaxon.php**
+		- **src/core/Jaxon/Library/Semantic/Modal.php**
+		- **src/core/Service/Jaxon.php**
+		- **src/core/AjaxAbstract.php**
 - **BC** remove file **lib/serverfunctions.class.php**
 	- `isTheServerFull()` use `LotgdKernel::get("lotgd_core.service.server_functions")->isTheServerFull()` instead or
 	  dependency injection.
