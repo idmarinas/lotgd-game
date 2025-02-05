@@ -1,7 +1,14 @@
 <?php
+
+use Lotgd\Core\Kernel;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
+use Tracy\Debugger;
+
 /**
  * Function for send Mails to users
- * Has the same structure as the php "mail()" function, but this function checks if you want to send emails in html format or not.
+ * Has the same structure as the php "mail()" function, but this function checks if you want to send emails in html
+ * format or not.
  *
  * @param mixed $to
  * @param mixed $subject
@@ -11,65 +18,58 @@
  *
  * @deprecated 5.3.0 Removed in future versions.
  */
-function lotgd_mail($to, $subject, $message, $additional_headers = '', $additional_parameters = '')
+function lotgd_mail ($to, $subject, $message, $additional_headers = '', $additional_parameters = '')
 {
-    $message = \LotgdSanitize::fullSanitize(\str_replace('`n', '<br>', nltoappon($message)));
-    $headers = [];
+	trigger_error(
+	  sprintf(
+		'Usage of %s is obsolete since 5.3.0; and delete in future version. Use Symfony mailer for send emails.',
+		__METHOD__
+	  ),
+	  E_USER_DEPRECATED
+	);
 
-    \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 5.3.0; and delete in future version. Use Symfony mailer for send emails.',
-        __METHOD__
-    ), E_USER_DEPRECATED);
+	$message = str_replace(["\r\n", "\r"], "\n", $message);
+	$message = str_replace("\n", '`n', $message);
+	$message = LotgdSanitize::fullSanitize(str_replace('`n', '<br>', $message));
 
-    //-- Add a "From" header if not added
-    if ( ! \strstr($additional_headers, 'From'))
-    {
-        $headers[] = 'From: '.LotgdSetting::getSetting('servername', 'The Legend of the Green Dragon').' <'.LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com').'>';
-    }
+	$mailer = LotgdKernel::get('lotgd.core.mailer');
 
-    //-- Send mail in HTML format
-    if (LotgdSetting::getSetting('sendhtmlmail', 0))
-    {
-        if ( ! \strstr($additional_headers, 'MIME-Version'))
-        {
-            $headers[] = 'MIME-Version: 1.0';
-        }
+	$emailFrom = LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com');
+	$nameFrom = LotgdSetting::getSetting('servername', 'The Legend of the Green Dragon');
+	$from = new Address($emailFrom, $nameFrom);
 
-        if ( ! \strstr($additional_headers, 'Content-type'))
-        {
-            $headers[] = 'Content-type: text/html; charset=UTF-8';
-        }
+	$email = (new Email())
+	  ->from($from)
+	  ->to($to)
+	  ->subject($subject)
+	;
 
-        $data = [
-            'title'     => $subject,
-            'content'   => $message,
-            'copyright' => \Lotgd\Core\Kernel::COPYRIGHT,
-            'url'       => LotgdSetting::getSetting('serverurl', '//'.$_SERVER['SERVER_NAME']),
-        ];
+	//-- Send mail in HTML format
+	if (LotgdSetting::getSetting('sendhtmlmail', 0)) {
+		$data = [
+		  'title'     => $subject,
+		  'content'   => $message,
+		  'copyright' => Kernel::COPYRIGHT,
+		  'url'       => LotgdSetting::getSetting('serverurl', '//' . $_SERVER['SERVER_NAME']),
+		];
 
-        try
-        {
-            $message = \LotgdTheme::render('mail.twig', $data);
-        }
-        catch(\Throwable $ex)
-        {
-            \Tracy\Debugger::log($ex);
-            $message = \str_replace('<br>', "\r\n", $message);
-            $headers = [];
+		try {
+			$message = LotgdTheme::render('mail.twig', $data);
 
-            //-- Add a "From" header if not added
-            if ( ! \strstr($additional_headers, 'From'))
-            {
-                $headers[] = 'From: '.LotgdSetting::getSetting('servername', 'The Legend of the Green Dragon').' <'.LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com').'>';
-            }
-        }
+			$email->html($message);
+		} catch (Throwable $ex) {
+			Debugger::log($ex);
+			$email->text(str_replace('<br>', "\r\n", $message));
+		}
 
-        unset($data);
-    }
-    else
-    {
-        $message = \str_replace('<br>', "\r\n", $message);
-    }
+		unset($data);
+	} else {
+		$email->text(str_replace('<br>', "\r\n", $message));
+	}
 
-    return \mail($to, $subject, $message, $additional_headers.\implode("\r\n", $headers), $additional_parameters);
+	try {
+		$mailer->send($email);
+	} catch (Throwable $ex) {
+		Debugger::log($ex);
+	}
 }
