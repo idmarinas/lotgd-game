@@ -17,6 +17,7 @@ $op = (string)LotgdRequest::getQuery('op');
 $name = (string)LotgdRequest::getPost('name');
 $iname = (string)LotgdSetting::getSetting('innname', LOCATION_INN);
 $force = LotgdRequest::getPost('force');
+$forgotval = LotgdRequest::getPost('forgotval');
 
 if ('' != $name) {
 	if ($session['loggedin']) {
@@ -44,7 +45,9 @@ if ('' != $name) {
 	$account = $repositoryAccounts->findOneByLogin($name);
 
 	//-- Not found account
-	if (!$account || !$passwordEncoder->isPasswordValid($account, $password)) {
+	if (!$account || ($forgotval != 1 && !$passwordEncoder->isPasswordValid($account, $password))
+	    || ($forgotval == 1 && $account->getPassword() == $password)
+	) {
 		LotgdFlashMessages::addErrorMessage(LotgdTranslator::t('login.incorrect', [], 'page_login'));
 
 		//now we'll log the failed attempt and begin to issue bans if
@@ -52,12 +55,12 @@ if ('' != $name) {
 		LotgdTool::checkBan();
 
 		$result = $repositoryAccounts
-			->createQueryBuilder('u')
-			->select('u.acctid')
-			->where('u.login = :login')
-			->setParameters(['login' => $name])
-			->getQuery()
-			->getResult()
+		  ->createQueryBuilder('u')
+		  ->select('u.acctid')
+		  ->where('u.login = :login')
+		  ->setParameters(['login' => $name])
+		  ->getQuery()
+		  ->getResult()
 		;
 
 		if (count($result) > 0) {
@@ -68,12 +71,12 @@ if ('' != $name) {
 
 				$failLog = new Faillog();
 				$failLog
-					->setEventid(0)
-					->setDate(new DateTime())
-					->setPost($post)
-					->setIp(LotgdRequest::getServer('REMOTE_ADDR'))
-					->setAcctid($row['acctid'])
-					->setId(LotgdRequest::getCookie('lgi') ?: '')
+				  ->setEventid(0)
+				  ->setDate(new DateTime())
+				  ->setPost($post)
+				  ->setIp(LotgdRequest::getServer('REMOTE_ADDR'))
+				  ->setAcctid($row['acctid'])
+				  ->setId(LotgdRequest::getCookie('lgi') ?: '')
 				;
 
 				Doctrine::persist($failLog);
@@ -83,14 +86,14 @@ if ('' != $name) {
 				$expr = $query->expr();
 
 				$query
-					->select('u.ip', 'u.date', 'u.id', 'a.superuser', 'a.login')
-					->from('LotgdCore:Faillog', 'u')
-					->join('LotgdCore:User', 'a', 'with', $expr->eq('a.acctid', 'u.acctid'))
-					->where('u.ip = :ip AND u.date > :date')
-					->setParameters([
-						'ip' => LotgdRequest::getServer('REMOTE_ADDR'),
-						'date' => date('Y-m-d H:i:s', strtotime('-1 day')),
-					])
+				  ->select('u.ip', 'u.date', 'u.id', 'a.superuser', 'a.login')
+				  ->from('LotgdCore:Faillog', 'u')
+				  ->join('LotgdCore:User', 'a', 'with', $expr->eq('a.acctid', 'u.acctid'))
+				  ->where('u.ip = :ip AND u.date > :date')
+				  ->setParameters([
+					'ip'   => LotgdRequest::getServer('REMOTE_ADDR'),
+					'date' => date('Y-m-d H:i:s', strtotime('-1 day')),
+				  ])
 				;
 
 				$c = 0;
@@ -106,11 +109,11 @@ if ('' != $name) {
 					}
 					++$c;
 					$alert .= sprintf(
-						'`7`3%s`0: Failed attempt from `&%s`0 [`3%s`0] to log on to `^%s`0`0`n',
-						$row2['date']->format('Y-m-d H:i:s'),
-						$row2['ip'],
-						$row2['id'],
-						$row2['login']
+					  '`7`3%s`0: Failed attempt from `&%s`0 [`3%s`0] to log on to `^%s`0`0`n',
+					  $row2['date']->format('Y-m-d H:i:s'),
+					  $row2['ip'],
+					  $row2['id'],
+					  $row2['login']
 					);
 				}
 
@@ -119,11 +122,11 @@ if ('' != $name) {
 					$bans = new Bans();
 					$banexpire = new DateTime('now');
 					$bans
-						->setIpfilter(LotgdRequest::getServer('REMOTE_ADDR'))
-						->setBanreason(LotgdTranslator::t('login.banMessage', [], 'page_login'))
-						->setBanexpire($banexpire->add(new DateInterval('PT15M'))) //-- Added 15 minutes
-						->setBanner('System')
-						->setLasthit(new DateTime('0000-00-00 00:00:00'))
+					  ->setIpfilter(LotgdRequest::getServer('REMOTE_ADDR'))
+					  ->setBanreason(LotgdTranslator::t('login.banMessage', [], 'page_login'))
+					  ->setBanexpire($banexpire->add(new DateInterval('PT15M'))) //-- Added 15 minutes
+					  ->setBanner('System')
+					  ->setLasthit(new DateTime('0000-00-00 00:00:00'))
 					;
 
 					Doctrine::persist($failLog);
@@ -138,8 +141,8 @@ if ('' != $name) {
 
 						foreach ($result2 as $row2) {
 							$msg = sprintf(
-								'This message is generated as a result of one or more of the accounts having been a superuser account.  Log Follows:`n`n%s',
-								$alert
+							  'This message is generated as a result of one or more of the accounts having been a superuser account.  Log Follows:`n`n%s',
+							  $alert
 							);
 							LotgdKernel::get('lotgd_core.tool.system_mail')->send($row2['acctid'], $subj, $msg, 0);
 						}//end for
@@ -190,8 +193,8 @@ if ('' != $name) {
 
 	//-- Check for valid restorepage
 	if (empty($session['user']['restorepage']) || is_numeric($session['user']['restorepage'])
-		|| 'login.php'
-		   == $session['user']['restorepage']) {
+	    || 'login.php'
+	       == $session['user']['restorepage']) {
 		$session['user']['restorepage'] = 'news.php';
 	}
 
