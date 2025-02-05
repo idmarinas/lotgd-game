@@ -28,7 +28,7 @@ if ('' != $name) {
 	if (LotgdKernel::get('lotgd_core.service.server_functions')->isTheServerFull() && 1 != $force) {
 		//sanity check if the server is / got full --> back to home
 		$session['user'] = [];
-		LotgdFlashMessaged::addWarningMessage(LotgdTranslator::t('login.full', [], 'page_login'));
+		LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('login.full', [], 'page_login'));
 
 		redirect('home.php');
 	}
