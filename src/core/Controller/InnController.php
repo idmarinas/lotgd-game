@@ -87,7 +87,7 @@ class InnController extends AbstractController
         $params['tpl']    = 'bartender';
         $params['action'] = $action;
 
-        if ('bribe' == $action)
+        if ('bribe' === $action)
         {
             $amt  = $request->query->getInt('amt');
             $type = (string) $request->query->get('type');
@@ -99,7 +99,7 @@ class InnController extends AbstractController
             $g2 = $session['user']['level'] * 50;
             $g3 = $session['user']['level'] * 100;
 
-            if ('' == $type)
+            if ('' === $type)
             {
                 $this->navigation->addHeader($params['barkeep'], ['translate' => false]);
                 $this->navigation->addNav('nav.bribe.gem', 'inn.php?op=bartender&act=bribe&type=gem&amt=1', [
@@ -136,7 +136,7 @@ class InnController extends AbstractController
             }
             else
             {
-                if ('gem' == $type)
+                if ('gem' === $type)
                 {
                     if ($session['user']['gems'] < $amt)
                     {
@@ -200,7 +200,7 @@ class InnController extends AbstractController
                 }
             }
         }
-        elseif ('listupstairs' == $action)
+        elseif ('listupstairs' === $action)
         {
             $pvptime = $this->settings->getSetting('pvptimeout', 600);
 
@@ -212,7 +212,7 @@ class InnController extends AbstractController
 
             $this->navigation->addNav('Refresh the list', 'inn.php?op=bartender&act=listupstairs');
         }
-        elseif ('colors' == $action)
+        elseif ('colors' === $action)
         {
             $params['testText'] = (string) $request->request->get('testText');
             $params['formUrl']  = (string) $request->getServer('REQUEST_URI');
@@ -223,14 +223,14 @@ class InnController extends AbstractController
 
             $params['colors'] = '<span class="ui basic small labels"><span class="ui label">'.implode('</span> <span class="ui label">', $params['colors']).'</span></span>';
         }
-        elseif ('specialty' == $action)
+        elseif ('specialty' === $action)
         {
             $specialty = (string) $request->query->get('specialty');
             $uri       = (string) $request->getServer('REQUEST_URI');
 
             $params['specialty'] = $specialty;
 
-            if ('' == $specialty)
+            if ('' === $specialty)
             {
                 $specialities = new Core();
                 $this->dispatcher->dispatch($specialities, Core::SPECIALTY_NAMES);
@@ -285,6 +285,7 @@ class InnController extends AbstractController
         $expense     = round(($session['user']['level'] * (10 + log($session['user']['level']))), 0);
         $fee         = $this->settings->getSetting('innfee', '5%');
         $fee         = (strpos($fee, '%')) ? round($expense * (str_replace('%', '', $fee) / 100), 0) : 0;
+
         $bankexpense = $expense + $fee;
 
         $params['fee']             = $fee;

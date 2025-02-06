@@ -1,15 +1,18 @@
 <?php
 
-$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Bans::class);
+use Lotgd\Core\Entity\Bans;
+use Doctrine\ORM\Query\Expr\Join;
+
+$repository = Doctrine::getRepository(Bans::class);
 
 if ('delban' == $op)
 {
-    $ip = \LotgdRequest::getQuery('ipfilter');
-    $id = \LotgdRequest::getQuery('uniqueid');
+    $ip = LotgdRequest::getQuery('ipfilter');
+    $id = LotgdRequest::getQuery('uniqueid');
 
     if ($repository->deleteBan($ip, $id))
     {
-        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('removeban.delban', ['ip' => $ip, 'id' => $id], $textDomain));
+        LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('removeban.delban', ['ip' => $ip, 'id' => $id], $textDomain));
     }
 }
 
@@ -18,16 +21,16 @@ $removed = $repository->removeExpireBans();
 
 if ($removed)
 {
-    \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('removeban.expired', ['count' => $removed], $textDomain));
+    LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('removeban.expired', ['count' => $removed], $textDomain));
 }
 
-$page      = (int) \LotgdRequest::getQuery('page');
-$duration  = (string) \LotgdRequest::getQuery('duration');
+$page      = (int) LotgdRequest::getQuery('page');
+$duration  = (string) LotgdRequest::getQuery('duration');
 $duration  = $duration ?: 'P14D';
-$notBefore = (int) \LotgdRequest::getQuery('notbefore');
-$operator  = $notBefore ? '>=' : '<=';
+$notBefore = (int) LotgdRequest::getQuery('notbefore');
+$operator  = $notBefore !== 0 ? '>=' : '<=';
 
-$date  = new \DateTime('now');
+$date  = new DateTime('now');
 $query = $repository->createQueryBuilder('u');
 $query->orderBy('u.banexpire', 'ASC');
 
@@ -35,7 +38,7 @@ if ('searchban' == $op && $target)
 {
     $params['showing'] = ['removeban.showing.search', ['name' => $target]];
 
-    $repositoryChar = \Doctrine::getRepository('LotgdCore:Avatar');
+    $repositoryChar = Doctrine::getRepository('LotgdCore:Avatar');
     $query          = $repositoryChar->createQueryBuilder('u');
     $expr           = $query->expr();
 
@@ -43,13 +46,13 @@ if ('searchban' == $op && $target)
         ->join(
             'LotgdCore:User',
             'a',
-            \Doctrine\ORM\Query\Expr\Join::WITH,
+            Join::WITH,
             $expr->eq('a.acctid', 'u.acct')
         )
         ->join(
-            \Lotgd\Core\Entity\Bans::class,
+            Bans::class,
             'b',
-            \Doctrine\ORM\Query\Expr\Join::WITH,
+            Join::WITH,
             $expr->orX($expr->like('b.ipfilter', 'a.lastip'), $expr->like('b.uniqueid', 'a.uniqueid'))
         )
         ->where('u.name LIKE :name')
@@ -57,7 +60,7 @@ if ('searchban' == $op && $target)
         ->orderBy('b.banexpire', 'ASC')
     ;
 }
-elseif ('forever' != $duration && 'all' != $duration)
+elseif ('forever' !== $duration && 'all' !== $duration)
 {
     $type   = \substr($duration, -1);
     $matchs = [];
@@ -66,7 +69,7 @@ elseif ('forever' != $duration && 'all' != $duration)
 
     if ('D' == $type)
     {
-        $count = $count / 7;
+        $count /= 7;
     }
     $params['showing'] = ["removeban.showing.{$type}", ['notBefore' => $notBefore, 'n' => $count]];
 
@@ -74,51 +77,51 @@ elseif ('forever' != $duration && 'all' != $duration)
         ->setParameter('date', $date->add(new DateInterval($duration)))
     ;
 }
-elseif ('forever' == $duration)
+elseif ('forever' === $duration)
 {
     $query->where("u.banexpire = '0000-00-00 00:00:00'");
     $params['showing'] = 'removeban.showing.perma';
 }
-elseif ('all' == $duration)
+elseif ('all' === $duration)
 {
     $params['showing'] = 'removeban.showing.all';
 }
 
 $params['paginator'] = $repository->getPaginator($query, $page, 35);
 
-\LotgdNavigation::addHeader('bans.category.perma');
-\LotgdNavigation::addNav('bans.nav.show', 'bans.php?op=removeban&duration=forever');
+LotgdNavigation::addHeader('bans.category.perma');
+LotgdNavigation::addNav('bans.nav.show', 'bans.php?op=removeban&duration=forever');
 
-\LotgdNavigation::addHeader('bans.category.expire.within');
-\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P7D', ['params' => ['n' => 1]]);
-\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P14D', ['params' => ['n' => 2]]);
-\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P21D', ['params' => ['n' => 3]]);
-\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P28D', ['params' => ['n' => 4]]);
+LotgdNavigation::addHeader('bans.category.expire.within');
+LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P7D', ['params' => ['n' => 1]]);
+LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P14D', ['params' => ['n' => 2]]);
+LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P21D', ['params' => ['n' => 3]]);
+LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P28D', ['params' => ['n' => 4]]);
 
-\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P2M', ['params' => ['n' => 2]]);
-\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P3M', ['params' => ['n' => 3]]);
-\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P4M', ['params' => ['n' => 4]]);
-\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P5M', ['params' => ['n' => 5]]);
-\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P6M', ['params' => ['n' => 6]]);
+LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P2M', ['params' => ['n' => 2]]);
+LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P3M', ['params' => ['n' => 3]]);
+LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P4M', ['params' => ['n' => 4]]);
+LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P5M', ['params' => ['n' => 5]]);
+LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P6M', ['params' => ['n' => 6]]);
 
-\LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P1Y', ['params' => ['n' => 1]]);
-\LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P2Y', ['params' => ['n' => 2]]);
-\LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P4Y', ['params' => ['n' => 4]]);
+LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P1Y', ['params' => ['n' => 1]]);
+LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P2Y', ['params' => ['n' => 2]]);
+LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P4Y', ['params' => ['n' => 4]]);
 
-\LotgdNavigation::addNav('bans.nav.all', 'bans.php?op=removeban&duration=all');
+LotgdNavigation::addNav('bans.nav.all', 'bans.php?op=removeban&duration=all');
 
-\LotgdNavigation::addHeader('bans.category.expire.notBefore');
-\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P7D&notbefore=1', ['params' => ['n' => 1]]);
-\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P14D&notbefore=1', ['params' => ['n' => 2]]);
-\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P21D&notbefore=1', ['params' => ['n' => 3]]);
-\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P28D&notbefore=1', ['params' => ['n' => 4]]);
+LotgdNavigation::addHeader('bans.category.expire.notBefore');
+LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P7D&notbefore=1', ['params' => ['n' => 1]]);
+LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P14D&notbefore=1', ['params' => ['n' => 2]]);
+LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P21D&notbefore=1', ['params' => ['n' => 3]]);
+LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P28D&notbefore=1', ['params' => ['n' => 4]]);
 
-\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P2M&notbefore=1', ['params' => ['n' => 2]]);
-\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P3M&notbefore=1', ['params' => ['n' => 3]]);
-\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P4M&notbefore=1', ['params' => ['n' => 4]]);
-\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P5M&notbefore=1', ['params' => ['n' => 5]]);
-\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P6M&notbefore=1', ['params' => ['n' => 6]]);
+LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P2M&notbefore=1', ['params' => ['n' => 2]]);
+LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P3M&notbefore=1', ['params' => ['n' => 3]]);
+LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P4M&notbefore=1', ['params' => ['n' => 4]]);
+LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P5M&notbefore=1', ['params' => ['n' => 5]]);
+LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P6M&notbefore=1', ['params' => ['n' => 6]]);
 
-\LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P1Y&notbefore=1', ['params' => ['n' => 1]]);
-\LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P2Y&notbefore=1', ['params' => ['n' => 2]]);
-\LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P4Y&notbefore=1', ['params' => ['n' => 4]]);
+LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P1Y&notbefore=1', ['params' => ['n' => 1]]);
+LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P2Y&notbefore=1', ['params' => ['n' => 2]]);
+LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P4Y&notbefore=1', ['params' => ['n' => 4]]);

@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Repository\AvatarRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Combat\Battle;
 use Lotgd\Core\Combat\Buffer;
@@ -105,7 +106,8 @@ class GraveyardController extends AbstractController
         $params['max_heal']    = $max;
 
         $op     = (string) $request->query->get('op', '');
-        $op     = 'run' == $op ? 'fight' : $op;
+        $op     = 'run' === $op ? 'fight' : $op;
+
         $method = method_exists($this, $op) ? $op : 'default';
 
         return $this->{$method}($params, $request);
@@ -121,7 +123,7 @@ class GraveyardController extends AbstractController
 
         $op = (string) $request->query->get('op', '');
 
-        if ('run' == $op)
+        if ('run' === $op)
         {
             if (1 == mt_rand(0, 2))
             {
@@ -148,7 +150,7 @@ class GraveyardController extends AbstractController
                 $battle = true;
             }
         }
-        elseif ('fight' == $op)
+        elseif ('fight' === $op)
         {
             $battle = true;
         }
@@ -516,7 +518,7 @@ class GraveyardController extends AbstractController
 
         $name = (string) $request->request->get('name', '');
 
-        /** @var \Lotgd\Core\Repository\AvatarRepository $repository */
+        /** @var AvatarRepository $repository */
         $repository           = $this->doctrine->getRepository('LotgdCore:Avatar');
         $params['characters'] = $repository->findLikeName("%{$name}%", 100);
 

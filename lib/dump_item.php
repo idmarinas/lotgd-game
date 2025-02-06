@@ -8,14 +8,7 @@ function dump_item($item)
 {
     $out = '';
 
-    if (\is_array($item))
-    {
-        $temp = $item;
-    }
-    else
-    {
-        $temp = @\unserialize($item);
-    }
+    $temp = \is_array($item) ? $item : @\unserialize($item);
 
     if (\is_array($temp))
     {
@@ -27,9 +20,9 @@ function dump_item($item)
         }
         $out .= '</div>}';
     }
-    elseif ($item instanceof \DateTime)
+    elseif ($item instanceof DateTime)
     {
-        $out .= $item->format(\DateTime::ISO8601);
+        $out .= $item->format(DateTime::ISO8601);
     }
     else
     {
@@ -44,14 +37,7 @@ function dump_item_ascode($item, $indent = "\t")
 {
     $out = '';
 
-    if (\is_array($item))
-    {
-        $temp = $item;
-    }
-    else
-    {
-        $temp = @\unserialize($item);
-    }
+    $temp = \is_array($item) ? $item : @\unserialize($item);
 
     if (\is_array($temp))
     {
@@ -60,7 +46,7 @@ function dump_item_ascode($item, $indent = "\t")
 
         foreach ($temp as $key => $val)
         {
-            \array_push($row, "'{$key}'=&gt;".dump_item_ascode($val, $indent."\t"));
+            $row[] = "'{$key}'=&gt;".dump_item_ascode($val, $indent."\t");
         }
 
         if (\strlen(\implode(', ', $row)) > 80)

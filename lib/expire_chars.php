@@ -1,9 +1,11 @@
 <?php
 
+use Lotgd\Core\Service\Cron\AvatarCleanService;
+
 // translator ready
 // addnews ready
 // mail ready
 
 require_once 'src/constants.php';
 
-\Lotgdkernel::get('Lotgd\Core\Service\Cron\AvatarCleanService')->execute();
+Lotgdkernel::get(AvatarCleanService::class)->execute();
