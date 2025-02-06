@@ -1,5 +1,8 @@
 <?php
 
+use Lotgd\Core\Kernel;
+use Composer\Semver\Semver;
+
 // translator ready
 // addnews ready
 // mail ready
@@ -47,9 +50,9 @@ function module_check_requirements($reqs, $forceinject = false)
         //-- It's need a specific version of LoTGD
         if ('lotgd' == $key)
         {
-            $version = \explode(' ', \Lotgd\Core\Kernel::VERSION);
+            $version = \explode(' ', Kernel::VERSION);
 
-            $comparison = Composer\Semver\Semver::satisfies($version[0], $info[0]);
+            $comparison = Semver::satisfies($version[0], $info[0]);
 
             if ( ! $comparison)
             {
@@ -97,14 +100,14 @@ function mass_module_prepare(array $hooknames)
     global $module_prefs;
     global $session;
 
-    if ( ! \Doctrine::isConnected())
+    if ( ! Doctrine::isConnected())
     {
         return false;
     }
 
-    $hookRepository    = \Doctrine::getRepository('LotgdCore:ModuleHooks');
-    $settingRepository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
-    $userRepository    = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+    $hookRepository    = Doctrine::getRepository('LotgdCore:ModuleHooks');
+    $settingRepository = Doctrine::getRepository('LotgdCore:ModuleSettings');
+    $userRepository    = Doctrine::getRepository('LotgdCore:ModuleUserprefs');
 
     $query  = $hookRepository->createQueryBuilder('u');
     $result = $query
@@ -211,7 +214,7 @@ function get_module_info($shortname)
     if (\count($missingFunctions))
     {
         return [
-            'name'     => \LotgdFormat::colorize('`$Invalid Module! Contact Author or check file!`0'),
+            'name'     => LotgdFormat::colorize('`$Invalid Module! Contact Author or check file!`0'),
             'version'  => '0.0.0',
             'author'   => 'Missing functions ('.\implode(', ', $missingFunctions).')',
             'category' => 'Invalid Modules',
@@ -224,22 +227,22 @@ function get_module_info($shortname)
     $fname      = "{$shortname}_getmoduleinfo";
     $moduleinfo = $fname();
 
-    $moduleinfo['name']        = $moduleinfo['name']        ?? "Not specified ({$shortname})";
-    $moduleinfo['category']    = $moduleinfo['category']    ?? "Not specified ({$shortname})";
-    $moduleinfo['author']      = $moduleinfo['author']      ?? "Not specified ({$shortname})";
-    $moduleinfo['version']     = $moduleinfo['version']     ?? '0.0.0';
-    $moduleinfo['download']    = $moduleinfo['download']    ?? '';
-    $moduleinfo['description'] = $moduleinfo['description'] ?? '';
+    $moduleinfo['name'] ??= "Not specified ({$shortname})";
+    $moduleinfo['category'] ??= "Not specified ({$shortname})";
+    $moduleinfo['author'] ??= "Not specified ({$shortname})";
+    $moduleinfo['version'] ??= '0.0.0';
+    $moduleinfo['download'] ??= '';
+    $moduleinfo['description'] ??= '';
     $moduleinfo['modulename']  = $shortname;
 
-    $moduleinfo['requires'] = $moduleinfo['requires'] ?? [];
+    $moduleinfo['requires'] ??= [];
 
     return $moduleinfo;
 }
 
 function module_editor_navs($like, $linkprefix)
 {
-    $repository = \Doctrine::getRepository('LotgdCore:Modules');
+    $repository = Doctrine::getRepository('LotgdCore:Modules');
 
     $result = $repository->findModulesEditorNav($like);
 
@@ -250,7 +253,7 @@ function module_editor_navs($like, $linkprefix)
         if ($curcat != $row->getCategory())
         {
             $curcat = $row->getCategory();
-            \LotgdNavigation::addHeader('modules.nav.category', [
+            LotgdNavigation::addHeader('modules.nav.category', [
                 'textDomain' => 'navigation_app',
                 'params'     => [
                     'category' => $curcat,
@@ -260,7 +263,7 @@ function module_editor_navs($like, $linkprefix)
         //I really think we should give keyboard shortcuts even if they're
         //susceptible to change (which only happens here when the admin changes
         //modules around).  This annoys me every single time I come in to this page.
-        \LotgdNavigation::addNavNotl(\sprintf(
+        LotgdNavigation::addNavNotl(\sprintf(
             '%s%s%s',
             $row->getActive() ? '' : '`)',
             $row->getFormalname(),
@@ -274,7 +277,7 @@ function module_objpref_edit($type, $module, $id)
     $info = get_module_info($module);
 
     $data       = [];
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
+    $repository = Doctrine::getRepository('LotgdCore:ModuleObjprefs');
     $result     = $repository->findBy(['modulename' => $module,  'objtype' => $type, 'objid' => $id]);
 
     foreach ($result as $row)
@@ -284,7 +287,7 @@ function module_objpref_edit($type, $module, $id)
 
     if (\is_string($info["prefs-{$type}"]))
     {
-        $form = \LotgdLocation::get($info["prefs-{$type}"]);
+        $form = LotgdLocation::get($info["prefs-{$type}"]);
         $form->setAttribute('method', 'POST');
         $form->setAttribute('autocomplete', 'off');
         $form->setAttribute('class', 'ui form');
@@ -357,10 +360,10 @@ function get_racename($thisuser = true)
     {
         global $session;
 
-        return \LotgdTranslator::t('character.racename', [], $session['user']['race']);
+        return LotgdTranslator::t('character.racename', [], $session['user']['race']);
     }
 
-    return \LotgdTranslator::t('character.racename', [], $thisuser);
+    return LotgdTranslator::t('character.racename', [], $thisuser);
 }
 
 function module_pref_filter($a)
