@@ -18,7 +18,9 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/7.2/CHAN
 
 ### :star: FEATURES
 
-- Nothing
+- **src/functions.php**
+	- `output()` and `rawoutput()` added for compatibility with old modules, this makes it necessary to modify
+	  the old modules less.
 
 ### :fire: DEPRECATED
 
