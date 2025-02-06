@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Entity\ModuleSettings;
+
 /**
  * An associative array of all the settings for the given module.
  *
@@ -88,12 +90,12 @@ function set_module_setting($name, $value, $module = false)
         $module = $mostrecentmodule;
     }
 
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
+    $repository = Doctrine::getRepository('LotgdCore:ModuleSettings');
     $entity     = $repository->findOneBy(['modulename' => $module, 'setting' => $name]);
 
     if ( ! $entity)
     {
-        $entity = new \Lotgd\Core\Entity\ModuleSettings();
+        $entity = new ModuleSettings();
     }
     $entity = $repository->hydrateEntity([
         'modulename' => $module,
@@ -101,10 +103,10 @@ function set_module_setting($name, $value, $module = false)
         'value'      => $value,
     ], $entity);
 
-    \Doctrine::persist($entity);
-    \Doctrine::flush();
+    Doctrine::persist($entity);
+    Doctrine::flush();
 
-    \LotgdKernel::get('cache.app')->delete("module-settings-{$module}");
+    LotgdKernel::get('cache.app')->delete("module-settings-{$module}");
 }
 
 /**
@@ -125,20 +127,20 @@ function increment_module_setting($name, $value = 1, $module = false)
         $module = $mostrecentmodule;
     }
 
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
+    $repository = Doctrine::getRepository('LotgdCore:ModuleSettings');
     $entity     = $repository->findOneBy(['modulename' => $module, 'setting' => $name]);
 
     if ( ! $entity)
     {
-        $entity = new \Lotgd\Core\Entity\ModuleSettings();
+        $entity = new ModuleSettings();
     }
 
     $entity->setValue((float) ($entity->getValue()) + $value);
 
-    \Doctrine::persist($entity);
-    \Doctrine::flush();
+    Doctrine::persist($entity);
+    Doctrine::flush();
 
-    \LotgdKernel::get('cache.app')->delete("module-settings-{$module}");
+    LotgdKernel::get('cache.app')->delete("module-settings-{$module}");
 }
 
 /**
@@ -155,8 +157,8 @@ function clear_module_settings($module = false)
         $module = $mostrecentmodule;
     }
 
-    \LotgdResponse::pageDebug("Deleted module settings cache for {$module}.");
-    \LotgdKernel::get('cache.app')->delete("module-settings-{$module}");
+    LotgdResponse::pageDebug("Deleted module settings cache for {$module}.");
+    LotgdKernel::get('cache.app')->delete("module-settings-{$module}");
 }
 
 /**
@@ -166,12 +168,12 @@ function clear_module_settings($module = false)
  */
 function load_module_settings($module): array
 {
-    $cache = \LotgdKernel::get('cache.app');
+    $cache = LotgdKernel::get('cache.app');
     $item  = $cache->getItem("module-settings-{$module}");
 
     if ( ! $item->isHit())
     {
-        $repository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
+        $repository = Doctrine::getRepository('LotgdCore:ModuleSettings');
         $result     = $repository->findBy(['modulename' => $module]);
 
         $module_settings = [];

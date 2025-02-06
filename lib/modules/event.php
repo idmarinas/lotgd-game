@@ -133,7 +133,7 @@ function module_do_event ($type, $module, $allowinactive = false, $baseLink = fa
 	// Save off the mostrecent module since having that change can change
 	// behaviour especially if a module calls modulehooks itself or calls
 	// library functions which cause them to be called.
-	$mostrecentmodule = $mostrecentmodule ?? '';
+	$mostrecentmodule ??= '';
 
 	$mod = $mostrecentmodule;
 	$_POST['i_am_a_hack'] = 'true';

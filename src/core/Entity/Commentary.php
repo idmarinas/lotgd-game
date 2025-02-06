@@ -13,6 +13,12 @@
 
 namespace Lotgd\Core\Entity;
 
+use Lotgd\Core\Entity\Common\IdTrait;
+use Lotgd\Core\Entity\Commentary\Author;
+use Lotgd\Core\Entity\Commentary\Comment;
+use DateTime;
+use DateTimeInterface;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,12 +35,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Commentary implements EntityInterface
 {
-    use Common\IdTrait;
-    use Commentary\Author;
-    use Commentary\Comment;
+    use IdTrait;
+    use Author;
+    use Comment;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
@@ -98,17 +104,17 @@ class Commentary implements EntityInterface
 
     public function __construct()
     {
-        $this->postdate = new \DateTime('now');
+        $this->postdate = new DateTime('now');
     }
 
     /**
      * Set the value of Postdate.
      *
-     * @param \DateTime|\DateTimeImmutable $postdate
+     * @param DateTime|DateTimeImmutable $postdate
      *
      * @return self
      */
-    public function setPostdate(\DateTimeInterface $postdate)
+    public function setPostdate(DateTimeInterface $postdate)
     {
         $this->postdate = $postdate;
 
@@ -118,9 +124,9 @@ class Commentary implements EntityInterface
     /**
      * Get the value of Postdate.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
-    public function getPostdate(): \DateTimeInterface
+    public function getPostdate(): DateTimeInterface
     {
         return $this->postdate;
     }

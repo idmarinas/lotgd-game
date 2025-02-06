@@ -1,19 +1,20 @@
 <?php
 
+use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Form\ConfigurationType;
 
-$details = \LotgdKernel::get('lotgd_core.tool.date_time')->gameTimeDetails();
+$details = LotgdKernel::get('lotgd_core.tool.date_time')->gameTimeDetails();
 
-$secstonewday = \LotgdKernel::get('lotgd_core.tool.date_time')->secondsToNextGameDay($details);
+$secstonewday = LotgdKernel::get('lotgd_core.tool.date_time')->secondsToNextGameDay($details);
 $useful_vals  = [
     'dayduration'   => \round(($details['dayduration'] / 60 / 60), 0).' hours',
-    'curgametime'   => \LotgdKernel::get('lotgd_core.tool.date_time')->getGameTime(),
+    'curgametime'   => LotgdKernel::get('lotgd_core.tool.date_time')->getGameTime(),
     'curservertime' => \date('Y-m-d h:i:s a'),
     'lastnewday'    => \date('h:i:s a', \strtotime("-{$details['realsecssofartoday']} seconds")),
     'nextnewday'    => \date('h:i:s a', \strtotime("+{$details['realsecstotomorrow']} seconds")).' ('.\date('H\\h i\\m s\\s', $secstonewday).')',
 ];
 
-$settings = \LotgdKernel::get(Lotgd\Core\Lib\Settings::class);
+$settings = LotgdKernel::get(Settings::class);
 $vals = \array_merge($settings->getArray(), $useful_vals);
 
 $data = [
@@ -43,7 +44,7 @@ $data = [
     'misc'        => $vals,
 ];
 
-$lotgdFormFactory = \LotgdKernel::get('form.factory');
+$lotgdFormFactory = LotgdKernel::get('form.factory');
 
 $form = $lotgdFormFactory->create(ConfigurationType::class, $data, [
     'action' => 'configuration.php?setting=default&save=save',
@@ -52,9 +53,9 @@ $form = $lotgdFormFactory->create(ConfigurationType::class, $data, [
     ],
 ]);
 
-\LotgdNavigation::addNavAllow('configuration.php?setting=default&save=save');
+LotgdNavigation::addNavAllow('configuration.php?setting=default&save=save');
 
-$form->handleRequest(\LotgdRequest::_i());
+$form->handleRequest(LotgdRequest::_i());
 
 if ($form->isSubmitted() && $form->isValid())
 {
@@ -80,7 +81,7 @@ if ($form->isSubmitted() && $form->isValid())
 
     if ($messageType)
     {
-        \LotgdFlashMessages::{$messageType}(\LotgdTranslator::t($message, [], 'form_app'));
+        LotgdFlashMessages::{$messageType}(LotgdTranslator::t($message, [], 'form_app'));
     }
 }
 

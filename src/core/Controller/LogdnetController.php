@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Repository\LogdnetRepository;
 use Throwable;
 use DateTime;
 use DateInterval;
@@ -20,7 +21,6 @@ use Laminas\Filter\FilterChain;
 use Laminas\Filter\StringTrim;
 use Laminas\Filter\StripTags;
 use Laminas\Filter\StripNewlines;
-use Laminas\Filter;
 use Lotgd\Core\Entity\Logdnet;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Output\Censor;
@@ -150,7 +150,7 @@ class LogdnetController extends AbstractController
      */
     public function net(): JsonResponse
     {
-        /** @var \Lotgd\Core\Repository\LogdnetRepository $repository */
+        /** @var LogdnetRepository $repository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:Logdnet');
         $entities   = $repository->getNetServerList();
 

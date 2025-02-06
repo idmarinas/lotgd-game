@@ -14,7 +14,6 @@
 namespace Lotgd\Core\Form\ConfigurationType;
 
 use Laminas\Filter\StripTags;
-use Laminas\Filter;
 use Lotgd\Core\Form\Type\CheckboxType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;

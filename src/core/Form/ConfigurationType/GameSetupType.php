@@ -17,7 +17,6 @@ use Laminas\Filter\StripTags;
 use LotgdKernel;
 use Lotgd\Core\Lib\Settings;
 use Symfony\Component\Intl\Languages;
-use Laminas\Filter;
 use Lotgd\Core\Form\Type\CheckboxType;
 use Lotgd\Core\Form\Type\TagifyType;
 use Symfony\Component\Form\AbstractType;

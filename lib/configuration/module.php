@@ -2,11 +2,11 @@
 
 use Lotgd\Core\Event\Core;
 
-$module    = (string) \LotgdRequest::getQuery('module');
-$save      = (string) \LotgdRequest::getQuery('save');
-$isLaminas = (string) \LotgdRequest::getQuery('laminas');
+$module    = (string) LotgdRequest::getQuery('module');
+$save      = (string) LotgdRequest::getQuery('save');
+$isLaminas = (string) LotgdRequest::getQuery('laminas');
 
-$flashMessages = \LotgdTranslator::t('flash.message.module.fail.inject', [], $textDomain);
+$flashMessages = LotgdTranslator::t('flash.message.module.fail.inject', [], $textDomain);
 
 if (injectmodule($module, true))
 {
@@ -15,11 +15,11 @@ if (injectmodule($module, true))
     if ('' != $save && ! $isLaminas)
     {
         $old  = load_module_settings($module);
-        $post = \LotgdRequest::getPostAll();
+        $post = LotgdRequest::getPostAll();
 
         process_post_save_data($post, $old, $flashMessages, $module, $textDomain);
 
-        $flashMessages .= \LotgdTranslator::t('flash.message.module.save.saved', [], $textDomain);
+        $flashMessages .= LotgdTranslator::t('flash.message.module.save.saved', [], $textDomain);
     }
 
     $params['moduleName']     = $module;
@@ -38,7 +38,7 @@ if (injectmodule($module, true))
         {
             $params['isLaminas'] = true;
 
-            $params['form'] = \LotgdLocator::get($params['moduleInfo']['settings']);
+            $params['form'] = LotgdLocator::get($params['moduleInfo']['settings']);
             $params['form']->setAttribute('action', "configuration.php?setting=module&module={$params['moduleName']}&save=save&laminas=true");
             $params['form']->setAttribute('method', 'POST');
             $params['form']->setAttribute('autocomplete', 'off');
@@ -46,10 +46,10 @@ if (injectmodule($module, true))
 
             $params['formTypeTab'] = $params['form']->getOption('form_type_tab');
 
-            if (\LotgdRequest::isPost())
+            if (LotgdRequest::isPost())
             {
                 $old = load_module_settings($module);
-                $params['form']->setData(\LotgdRequest::getPostAll());
+                $params['form']->setData(LotgdRequest::getPostAll());
 
                 if ($params['form']->isValid())
                 {
@@ -57,7 +57,7 @@ if (injectmodule($module, true))
 
                     process_post_save_data($data, $old, $flashMessages, $module, $textDomain);
 
-                    $flashMessages .= \LotgdTranslator::t('flash.message.module.save.saved', [], $textDomain);
+                    $flashMessages .= LotgdTranslator::t('flash.message.module.save.saved', [], $textDomain);
                 }
             }
             else
@@ -98,7 +98,7 @@ if (injectmodule($module, true))
 
 if ($flashMessages)
 {
-    \LotgdFlashMessages::addInfoMessage($flashMessages);
+    LotgdFlashMessages::addInfoMessage($flashMessages);
 }
 
 function process_post_save_data($post, $old, &$flashMessages, $module, $textDomain)
@@ -121,7 +121,7 @@ function process_post_save_data($post, $old, &$flashMessages, $module, $textDoma
 
         if ( ! isset($old[$key]) || $old[$key] != $val)
         {
-            $flashMessages .= \LotgdTranslator::t('flash.message.module.save.change', ['key' => $key, 'newValue' => $val, 'oldValue' => $old[$key]], $textDomain);
+            $flashMessages .= LotgdTranslator::t('flash.message.module.save.change', ['key' => $key, 'newValue' => $val, 'oldValue' => $old[$key]], $textDomain);
             // Notify modules
             $oldval = '';
 
@@ -129,10 +129,10 @@ function process_post_save_data($post, $old, &$flashMessages, $module, $textDoma
             {
                 $oldval = $old[$key];
             }
-            \LotgdLog::game("`@Changed module(`5{$module}`0) setting `^{$key}`0 from `#{$oldval}`0 to `&{$val}`0`0", 'settings');
+            LotgdLog::game("`@Changed module(`5{$module}`0) setting `^{$key}`0 from `#{$oldval}`0 to `&{$val}`0`0", 'settings');
 
             $args = new Core(['module' => $module, 'setting' => $key, 'old' => $oldval, 'new' => $val]);
-            \LotgdEventDispatcher::dispatch($args, Core::SETTING_CHANGE);
+            LotgdEventDispatcher::dispatch($args, Core::SETTING_CHANGE);
             modulehook('changesetting', $args->getData(), true);
         }
     }

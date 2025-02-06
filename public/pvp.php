@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Pvp\Support;
+use Lotgd\Core\Combat\Battle;
 use Lotgd\Core\Controller\PvpController;
 use Lotgd\Core\Events;
 // translator ready
@@ -11,7 +13,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once 'common.php';
 
-/** @var Lotgd\Core\Http\Request $request */
+/** @var Request $request */
 $request = LotgdKernel::get(Request::class);
 $iname   = LotgdSetting::getSetting('innname', LOCATION_INN);
 $battle  = false;
@@ -46,7 +48,7 @@ elseif ('attack' == $act)
 {
     $characterId = $request->query->getInt('character_id');
 
-    $badguy       = LotgdKernel::get('Lotgd\Core\Pvp\Support')->setupPvpTarget($characterId);
+    $badguy       = LotgdKernel::get(Support::class)->setupPvpTarget($characterId);
     $failedattack = true;
 
     if (\is_array($badguy))
@@ -98,7 +100,7 @@ if ('fight' == $op || 'run' == $op)
 
 if ($battle)
 {
-    /** @var \Lotgd\Core\Combat\Battle $serviceBattle */
+    /** @var Battle $serviceBattle */
     $serviceBattle = LotgdKernel::get('lotgd_core.combat.battle');
 
     $serviceBattle->initialize();
@@ -116,7 +118,7 @@ if ($battle)
     if ($serviceBattle->isVictory())
     {
         $killedin = $badguy['location'];
-        $handled  = LotgdKernel::get('Lotgd\Core\Pvp\Support')->pvpVictory($badguy, $killedin);
+        $handled  = LotgdKernel::get(Support::class)->pvpVictory($badguy, $killedin);
 
         // Handled will be true if a module has already done the addnews or
         // whatever was needed.
@@ -158,7 +160,7 @@ if ($battle)
         $killedin = $badguy['location'];
         // This is okay because system mail which is all it's used for is
         // not translated
-        $handled = LotgdKernel::get('Lotgd\Core\Pvp\Support')->pvpDefeat($badguy, $killedin);
+        $handled = LotgdKernel::get(Support::class)->pvpDefeat($badguy, $killedin);
         // Handled will be true if a module has already done the addnews or
         // whatever was needed.
         if ( ! $handled)

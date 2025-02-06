@@ -1,5 +1,6 @@
 <?php
 
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Lotgd\Core\EntityForm\AccountsType;
 use Lotgd\Core\EntityForm\CharactersType;
 //addnews ready
@@ -144,7 +145,7 @@ elseif ('save' == $op)
         } //well, name is composed now
         elseif ('newpassword' == $key)
         {
-            /** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder $passwordEncoder */
+            /** @var UserPasswordEncoder $passwordEncoder */
             $passwordEncoder        = LotgdKernel::get('security.password_encoder');
             $postValues['password'] = $passwordEncoder->encodePassword($repository->find($userId), $val);
 

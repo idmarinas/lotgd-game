@@ -1,46 +1,47 @@
 <?php
 
+use Lotgd\Core\Template\Params;
+
 // translator ready
 // addnews ready
 // mail ready
-
 function redirect($location, $reason = false)
 {
     global $session;
 
     // This function is deliberately not localized.  It is meant as error handling.
-    $session['debug'] = $session['debug'] ?? '';
+    $session['debug'] ??= '';
 
     if (false === \strpos($location, 'badnav.php'))
     {
         //deliberately html in translations so admins can personalize this, also in one schema
         $session['user']['allowednavs'] = [];
 
-        \LotgdNavigation::addNavAllow($location);
+        LotgdNavigation::addNavAllow($location);
 
-        $content = \LotgdTranslator::t('redirect.badnav.content', [
+        $content = LotgdTranslator::t('redirect.badnav.content', [
             'locationUrl' => $location,
             'petitionUrl' => 'petition.php',
         ], 'app_default');
 
-        \LotgdResponse::pageStart('redirect.badnav.title', [], 'app_default');
-        $params = \LotgdKernel::get(Lotgd\Core\Template\Params::class);
-        $params->set('content', \LotgdFormat::colorize($content, true));
+        LotgdResponse::pageStart('redirect.badnav.title', [], 'app_default');
+        $params = LotgdKernel::get(Params::class);
+        $params->set('content', LotgdFormat::colorize($content, true));
 
-        $session['output'] = \LotgdTheme::render('layout.html.twig', $params->toArray());
+        $session['output'] = LotgdTheme::render('layout.html.twig', $params->toArray());
     }
 
-    \LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields();
-    $session['debug'] = \LotgdTranslator::t('redirect.redirection', [
+    LotgdKernel::get('lotgd_core.combat.buffer')->restoreBuffFields();
+    $session['debug'] = LotgdTranslator::t('redirect.redirection', [
         'locationTo'   => $location,
-        'locationFrom' => \LotgdRequest::getServer('REQUEST_URI'),
+        'locationFrom' => LotgdRequest::getServer('REQUEST_URI'),
         'reason'       => $reason,
     ], 'app_default');
-    \LotgdTool::saveUser();
+    LotgdTool::saveUser();
 
-    $host = \LotgdRequest::getServer('HTTP_HOST');
-    $http = (443 == \LotgdRequest::getServer('SERVER_PORT')) ? 'https' : 'http';
-    $uri  = \rtrim(\dirname(\LotgdRequest::getServer('PHP_SELF')), '/\\');
+    $host = LotgdRequest::getServer('HTTP_HOST');
+    $http = (443 == LotgdRequest::getServer('SERVER_PORT')) ? 'https' : 'http';
+    $uri  = \rtrim(\dirname(LotgdRequest::getServer('PHP_SELF')), '/\\');
 
     \header(\sprintf(
         'Location: %s://%s%s/%s',

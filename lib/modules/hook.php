@@ -1,5 +1,7 @@
 <?php
 
+use Tracy\Debugger;
+
 /**
  * An event that should be triggered.
  *
@@ -38,9 +40,9 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 
         if ( ! $where)
         {
-            $where = \LotgdRequest::getServer('SCRIPT_NAME');
+            $where = LotgdRequest::getServer('SCRIPT_NAME');
         }
-        \LotgdResponse::pageDebug("Args parameter to modulehook {$hookname} from {$where} is not an iterable value.");
+        LotgdResponse::pageDebug("Args parameter to modulehook {$hookname} from {$where} is not an iterable value.");
     }
 
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_DEBUG_OUTPUT && ! isset($hookcomment[$hookname]))
@@ -57,9 +59,9 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 
     $result = [];
 
-    if (\Doctrine::isConnected())
+    if (Doctrine::isConnected())
     {
-        $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
+        $repository = Doctrine::getRepository('LotgdCore:ModuleHooks');
         $query      = $repository->createQueryBuilder('u');
 
         $query
@@ -157,12 +159,12 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 
             if ($endtime - $starttime >= 1.00 && ($session['user']['superuser'] & SU_DEBUG_OUTPUT))
             {
-                \LotgdResponse::pageDebug('Slow Hook ('.\round($endtime - $starttime, 2)."s): {$hookname} - {$row['modulename']}`n");
+                LotgdResponse::pageDebug('Slow Hook ('.\round($endtime - $starttime, 2)."s): {$hookname} - {$row['modulename']}`n");
             }
 
             if (LotgdSetting::getSetting('debug', 0))
             {
-                $repository = \Doctrine::getRepository('LotgdCore:Debug');
+                $repository = Doctrine::getRepository('LotgdCore:Debug');
 
                 $entity = $repository->hydrateEntity([
                     'type'        => 'hooktime',
@@ -171,7 +173,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
                     'value'       => ($endtime - $starttime),
                 ]);
 
-                \Doctrine::persist($entity);
+                Doctrine::persist($entity);
             }
 
             // test to see if we had any output and if the module allows
@@ -218,7 +220,7 @@ function module_wipehooks(string $module)
         __METHOD__
     ), E_USER_DEPRECATED);
 
-    $delHooks = \Doctrine::createQueryBuilder();
+    $delHooks = Doctrine::createQueryBuilder();
     $delHooks->where('u.modulename = :name')
         ->setParameter('name', $module)
     ;
@@ -226,7 +228,7 @@ function module_wipehooks(string $module)
 
     try
     {
-        \LotgdResponse::pageDebug("Removing all hooks for {$module}");
+        LotgdResponse::pageDebug("Removing all hooks for {$module}");
 
         $delHooks->delete('LotgdCore:ModuleHooks', 'u')
             ->getQuery()
@@ -237,9 +239,9 @@ function module_wipehooks(string $module)
             ->execute()
         ;
     }
-    catch (\Throwable $ex)
+    catch (Throwable $ex)
     {
-        \Tracy\Debugger::log($ex);
+        Debugger::log($ex);
     }
 }
 
@@ -247,9 +249,9 @@ function module_addeventhook($type, $chance)
 {
     global $mostrecentmodule;
 
-    \LotgdResponse::pageDebug("Adding an event hook on {$type} events for {$mostrecentmodule}");
+    LotgdResponse::pageDebug("Adding an event hook on {$type} events for {$mostrecentmodule}");
 
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
+    $repository = Doctrine::getRepository('LotgdCore:ModuleEventHooks');
     $entity     = $repository->findOneBy(['modulename' => $mostrecentmodule, 'eventType' => $type]);
 
     $entity = $repository->hydrateEntity([
@@ -258,9 +260,9 @@ function module_addeventhook($type, $chance)
         'eventChance' => $chance,
     ], $entity);
 
-    \Doctrine::persist($entity);
+    Doctrine::persist($entity);
 
-    \Doctrine::flush();
+    Doctrine::flush();
 }
 
 /**
@@ -284,15 +286,15 @@ function module_drophook($hookname, $functioncall = false)
         $functioncall = "{$mostrecentmodule}_dohook";
     }
 
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
+    $repository = Doctrine::getRepository('LotgdCore:ModuleHooks');
     $result     = $repository->findBy(['modulename' => $mostrecentmodule, 'location' => $hookname, 'function' => $functioncall]);
 
     foreach ($result as $row)
     {
-        \Doctrine::remove($row);
+        Doctrine::remove($row);
     }
 
-    \Doctrine::flush();
+    Doctrine::flush();
 }
 
 /**
@@ -349,10 +351,10 @@ function module_addhook_priority($hookname, $priority = 50, $functioncall = fals
         $whenactive = '';
     }
 
-    \LotgdResponse::pageDebug("Adding a hook at {$hookname} for {$mostrecentmodule} to {$functioncall} which is active on condition '{$whenactive}'");
+    LotgdResponse::pageDebug("Adding a hook at {$hookname} for {$mostrecentmodule} to {$functioncall} which is active on condition '{$whenactive}'");
     //we want to do a replace in case there's any garbage left in this table which might block new clean data from going in.
     //normally that won't be the case, and so this doesn't have any performance implications.
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
+    $repository = Doctrine::getRepository('LotgdCore:ModuleHooks');
     $entity     = $repository->findBy(['modulename' => $mostrecentmodule, 'location' => $hookname, 'function' => $functioncall]);
 
     $entity = $repository->hydrateEntity([
@@ -363,6 +365,6 @@ function module_addhook_priority($hookname, $priority = 50, $functioncall = fals
         'priority'   => $priority,
     ], $entity);
 
-    \Doctrine::persist($entity);
-    \Doctrine::flush();
+    Doctrine::persist($entity);
+    Doctrine::flush();
 }

@@ -1,19 +1,21 @@
 <?php
 
+use Lotgd\Core\Entity\ModuleUserprefs;
+
 /**
  * Delete all module user preferences.
  */
 function module_delete_userprefs(int $user)
 {
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+    $repository = Doctrine::getRepository('LotgdCore:ModuleUserprefs');
     $entities   = $repository->findBy(['userid' => $user]);
 
     foreach ($entities as $entity)
     {
-        \Doctrine::remove($entity);
+        Doctrine::remove($entity);
     }
 
-    \Doctrine::flush();
+    Doctrine::flush();
 }
 
 /**
@@ -139,7 +141,7 @@ function set_module_pref($name, $value, $module = false, $user = false)
         return;
     }
 
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+    $repository = Doctrine::getRepository('LotgdCore:ModuleUserprefs');
     $entity     = $repository->findOneBy(['modulename' => $module, 'setting' => $name, 'userid' => $user]);
     $entity     = $repository->hydrateEntity([
         'modulename' => $module,
@@ -148,8 +150,8 @@ function set_module_pref($name, $value, $module = false, $user = false)
         'value'      => $value,
     ], $entity);
 
-    \Doctrine::persist($entity);
-    \Doctrine::flush();
+    Doctrine::persist($entity);
+    Doctrine::flush();
 }
 
 /**
@@ -194,12 +196,12 @@ function increment_module_pref($name, $value = 1, $module = false, $user = false
         return;
     }
 
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+    $repository = Doctrine::getRepository('LotgdCore:ModuleUserprefs');
     $entity     = $repository->findOneBy(['modulename' => $module, 'setting' => $name, 'userid' => $user]);
 
     if ( ! $entity)
     {
-        $entity = new \Lotgd\Core\Entity\ModuleUserprefs();
+        $entity = new ModuleUserprefs();
         $entity->setModulename($module)
             ->setSetting($name)
             ->setUserid($user)
@@ -208,8 +210,8 @@ function increment_module_pref($name, $value = 1, $module = false, $user = false
 
     $entity->setValue((float) ($entity->getValue()) + $value);
 
-    \Doctrine::persist($entity);
-    \Doctrine::flush();
+    Doctrine::persist($entity);
+    Doctrine::flush();
 }
 
 /**
@@ -244,13 +246,13 @@ function clear_module_pref($name, $module = false, $user = false)
         return;
     }
 
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+    $repository = Doctrine::getRepository('LotgdCore:ModuleUserprefs');
     $entity     = $repository->findOneBy(['modulename' => $module, 'setting' => $name, 'userid' => $user]);
 
     if ($entity)
     {
-        \Doctrine::remove($entity);
-        \Doctrine::flush();
+        Doctrine::remove($entity);
+        Doctrine::flush();
     }
 }
 
@@ -269,7 +271,7 @@ function load_module_prefs($module, $user = false): array
         $user = $session['user']['acctid'];
     }
 
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+    $repository = Doctrine::getRepository('LotgdCore:ModuleUserprefs');
 
     $result = $repository->findBy(['modulename' => $module, 'userid' => $user]);
 

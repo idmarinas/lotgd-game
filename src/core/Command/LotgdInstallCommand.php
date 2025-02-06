@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Command;
 
+use Lotgd\Core\Installer\Command\AbstractCommand;
+use Lotgd\Core\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Installer\Install;
 use Lotgd\Core\Installer\InstallerAbstract;
@@ -109,7 +111,7 @@ final class LotgdInstallCommand extends Command
 
     private function doExecute(InputInterface $input, OutputInterface $output)
     {
-        /** @var Lotgd\Core\Kernel $app */
+        /** @var Kernel $app */
         $app         = $this->getApplication();
         $kernel      = $app->getKernel();
         $this->style = new SymfonyStyle($input, $output);
@@ -217,7 +219,7 @@ final class LotgdInstallCommand extends Command
                 continue;
             }
 
-            /** @var Lotgd\Core\Installer\Command\AbstractCommand  $command*/
+            /** @var AbstractCommand $command*/
             $command = $this->getApplication()->find("lotgd:install:v:{$v_id}");
             $command->setProgressBar($installerBar);
             $returnCode = (int) $command->run($input, $output);
@@ -257,7 +259,7 @@ final class LotgdInstallCommand extends Command
 
     private function createUserAdmin(InputInterface $input, OutputInterface $output)
     {
-        /** @var Lotgd\Core\Repository\UserRepository $repository */
+        /** @var UserRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:User');
         $superusers = (bool) $repository->getSuperuserCountWithPermit(SU_MEGAUSER);
 

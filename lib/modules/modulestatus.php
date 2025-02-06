@@ -1,5 +1,7 @@
 <?php
 
+use Composer\Semver\Semver;
+
 /**
  * Returns the status of a module as a bitfield.
  *
@@ -12,7 +14,7 @@ function module_status($modulename, ?string $version = null)
 {
     global $injected_modules;
 
-    $modulename     = \LotgdSanitize::moduleNameSanitize($modulename);
+    $modulename     = LotgdSanitize::moduleNameSanitize($modulename);
     $modulefilename = "modules/{$modulename}.php";
 
     if ( ! \file_exists($modulefilename))
@@ -24,7 +26,7 @@ function module_status($modulename, ?string $version = null)
     // The module isn't installed
     $status = MODULE_NOT_INSTALLED;
 
-    $repository = \Doctrine::getRepository('LotgdCore:Modules');
+    $repository = Doctrine::getRepository('LotgdCore:Modules');
     $row        = $repository->findOneBy(['modulename' => $modulename]);
 
     if ($row)
@@ -56,7 +58,7 @@ function module_status($modulename, ?string $version = null)
         {
             $status |= MODULE_VERSION_OK;
         }
-        elseif ( ! Composer\Semver\Semver::satisfies($row->getVersion(), $version))
+        elseif ( ! Semver::satisfies($row->getVersion(), $version))
         {
             $status |= MODULE_VERSION_TOO_LOW;
         }
@@ -99,10 +101,10 @@ function get_module_install_status(): array
 {
     $result = null;
 
-    if (\Doctrine::isConnected())
+    if (Doctrine::isConnected())
     {
         // Collect the names of all installed modules.
-        $repository = \Doctrine::getRepository('LotgdCore:Modules');
+        $repository = Doctrine::getRepository('LotgdCore:Modules');
         $result     = $repository->findAll();
     }
 

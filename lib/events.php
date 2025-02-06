@@ -14,13 +14,13 @@ function handle_event($location, $baseLink = false)
 
     if (false === $baseLink)
     {
-        $PHP_SELF = \LotgdRequest::getServer('PHP_SELF');
+        $PHP_SELF = LotgdRequest::getServer('PHP_SELF');
         $baseLink = \substr($PHP_SELF, \strrpos($PHP_SELF, '/') + 1).'?';
     }
     $skipdesc = false;
 
     $allowinactive = false;
-    $eventhandler  = (string) \LotgdRequest::getQuery('eventhandler');
+    $eventhandler  = (string) LotgdRequest::getQuery('eventhandler');
 
     if (($session['user']['superuser'] & SU_DEVELOPER) && '' != $eventhandler)
     {
@@ -49,7 +49,7 @@ function handle_event($location, $baseLink = false)
         ];
 
         //-- Init page
-        \LotgdResponse::pageStart('title.special', [], 'partial_event');
+        LotgdResponse::pageStart('title.special', [], 'partial_event');
 
         if (\strstr($specialinc, ':'))
         {
@@ -61,20 +61,20 @@ function handle_event($location, $baseLink = false)
 
             if (($endtime - $starttime) >= 1.00 && ($session['user']['superuser'] & SU_DEBUG_OUTPUT))
             {
-                \LotgdResponse::pageDebug('Slow Event ('.\round($endtime - $starttime, 2)."s): {$location} - {$modulename}`n");
+                LotgdResponse::pageDebug('Slow Event ('.\round($endtime - $starttime, 2)."s): {$location} - {$modulename}`n");
             }
         }
 
-        if (\LotgdNavigation::checkNavs())
+        if (LotgdNavigation::checkNavs())
         {
             // The page rendered some linkage, so we just want to exit.
-            return \LotgdResponse::pageEnd();
+            return LotgdResponse::pageEnd();
         }
 
         $skipdesc                       = true;
         $session['user']['specialinc']  = '';
         $session['user']['specialmisc'] = '';
-        \LotgdRequest::setQuery('op', '');
+        LotgdRequest::setQuery('op', '');
     }
 
     return $skipdesc;

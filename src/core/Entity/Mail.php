@@ -13,6 +13,9 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTimeInterface;
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -68,7 +71,7 @@ class Mail
     private $body;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="sent", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
@@ -201,11 +204,11 @@ class Mail
     /**
      * Set the value of Sent.
      *
-     * @param \DateTime|\DateTimeImmutable $sent
+     * @param DateTime|DateTimeImmutable $sent
      *
      * @return self
      */
-    public function setSent(\DateTimeInterface $sent)
+    public function setSent(DateTimeInterface $sent)
     {
         $this->sent = $sent;
 
@@ -215,9 +218,9 @@ class Mail
     /**
      * Get the value of Sent.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
-    public function getSent(): \DateTimeInterface
+    public function getSent(): DateTimeInterface
     {
         return $this->sent;
     }

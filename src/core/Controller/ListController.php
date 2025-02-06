@@ -29,7 +29,7 @@ class ListController extends AbstractController
     public const ITEM_PER_PAGE = 50;
 
     private $dispatcher;
-    /** @var \Lotgd\Core\Repository\UserRepository */
+    /** @var UserRepository */
     private $repository;
     private $navigation;
     private $response;

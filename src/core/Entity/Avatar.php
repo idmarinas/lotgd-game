@@ -13,6 +13,13 @@
 
 namespace Lotgd\Core\Entity;
 
+use Lotgd\Core\Entity\Common\IdTrait;
+use Lotgd\Core\Entity\Avatar\Attribute;
+use Lotgd\Core\Entity\Avatar\Clan;
+use Lotgd\Core\Entity\Avatar\Equipment;
+use DateTime;
+use DateTimeInterface;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Lotgd\Core\Entity\User;
 
@@ -34,10 +41,10 @@ use Lotgd\Core\Entity\User;
  */
 class Avatar
 {
-    use Common\IdTrait;
-    use Avatar\Attribute;
-    use Avatar\Clan;
-    use Avatar\Equipment;
+    use IdTrait;
+    use Attribute;
+    use Clan;
+    use Equipment;
 
     /**
      * @var int
@@ -265,7 +272,7 @@ class Avatar
     private $specialmisc = '';
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="lastmotd", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
@@ -279,7 +286,7 @@ class Avatar
     private $playerfights = 3;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="lasthit", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
@@ -342,7 +349,7 @@ class Avatar
     private $sentnotice = false;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="pvpflag", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
@@ -384,7 +391,7 @@ class Avatar
     private $deathpower = 0;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="recentcomments", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
@@ -405,7 +412,7 @@ class Avatar
     private $race = 'app_unknown';
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="biotime", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
@@ -472,12 +479,12 @@ class Avatar
      */
     public function __construct()
     {
-        $this->lastmotd       = new \DateTime('0000-00-00 00:00:00');
-        $this->lasthit        = new \DateTime('0000-00-00 00:00:00');
-        $this->pvpflag        = new \DateTime('0000-00-00 00:00:00');
-        $this->recentcomments = new \DateTime('0000-00-00 00:00:00');
-        $this->biotime        = new \DateTime('0000-00-00 00:00:00');
-        $this->clanjoindate   = new \DateTime('0000-00-00 00:00:00');
+        $this->lastmotd       = new DateTime('0000-00-00 00:00:00');
+        $this->lasthit        = new DateTime('0000-00-00 00:00:00');
+        $this->pvpflag        = new DateTime('0000-00-00 00:00:00');
+        $this->recentcomments = new DateTime('0000-00-00 00:00:00');
+        $this->biotime        = new DateTime('0000-00-00 00:00:00');
+        $this->clanjoindate   = new DateTime('0000-00-00 00:00:00');
     }
 
     /**
@@ -1191,11 +1198,11 @@ class Avatar
     /**
      * Set the value of Lastmotd.
      *
-     * @param \DateTime|\DateTimeImmutable $lastmotd
+     * @param DateTime|DateTimeImmutable $lastmotd
      *
      * @return self
      */
-    public function setLastmotd(\DateTimeInterface $lastmotd)
+    public function setLastmotd(DateTimeInterface $lastmotd)
     {
         $this->lastmotd = $lastmotd;
 
@@ -1205,9 +1212,9 @@ class Avatar
     /**
      * Get the value of Lastmotd.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
-    public function getLastmotd(): \DateTimeInterface
+    public function getLastmotd(): DateTimeInterface
     {
         return $this->lastmotd;
     }
@@ -1237,11 +1244,11 @@ class Avatar
     /**
      * Set the value of Lasthit.
      *
-     * @param \DateTime|\DateTimeImmutable $lasthit
+     * @param DateTime|DateTimeImmutable $lasthit
      *
      * @return self
      */
-    public function setLasthit(\DateTimeInterface $lasthit)
+    public function setLasthit(DateTimeInterface $lasthit)
     {
         $this->lasthit = $lasthit;
 
@@ -1251,9 +1258,9 @@ class Avatar
     /**
      * Get the value of Lasthit.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
-    public function getLasthit(): \DateTimeInterface
+    public function getLasthit(): DateTimeInterface
     {
         return $this->lasthit;
     }
@@ -1441,11 +1448,11 @@ class Avatar
     /**
      * Set the value of Pvpflag.
      *
-     * @param \DateTime|\DateTimeImmutable $pvpflag
+     * @param DateTime|DateTimeImmutable $pvpflag
      *
      * @return self
      */
-    public function setPvpflag(\DateTimeInterface $pvpflag)
+    public function setPvpflag(DateTimeInterface $pvpflag)
     {
         $this->pvpflag = $pvpflag;
 
@@ -1455,9 +1462,9 @@ class Avatar
     /**
      * Get the value of Pvpflag.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
-    public function getPvpflag(): \DateTimeInterface
+    public function getPvpflag(): DateTimeInterface
     {
         return $this->pvpflag;
     }
@@ -1575,11 +1582,11 @@ class Avatar
     /**
      * Set the value of Recentcomments.
      *
-     * @param \DateTime|\DateTimeImmutable $recentcomments
+     * @param DateTime|DateTimeImmutable $recentcomments
      *
      * @return self
      */
-    public function setRecentcomments(\DateTimeInterface $recentcomments)
+    public function setRecentcomments(DateTimeInterface $recentcomments)
     {
         $this->recentcomments = $recentcomments;
 
@@ -1589,9 +1596,9 @@ class Avatar
     /**
      * Get the value of Recentcomments.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
-    public function getRecentcomments(): \DateTimeInterface
+    public function getRecentcomments(): DateTimeInterface
     {
         return $this->recentcomments;
     }
@@ -1641,11 +1648,11 @@ class Avatar
     /**
      * Set the value of Biotime.
      *
-     * @param \DateTime|\DateTimeImmutable $biotime
+     * @param DateTime|DateTimeImmutable $biotime
      *
      * @return self
      */
-    public function setBiotime(\DateTimeInterface $biotime)
+    public function setBiotime(DateTimeInterface $biotime)
     {
         $this->biotime = $biotime;
 
@@ -1655,9 +1662,9 @@ class Avatar
     /**
      * Get the value of Biotime.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
-    public function getBiotime(): \DateTimeInterface
+    public function getBiotime(): DateTimeInterface
     {
         return $this->biotime;
     }

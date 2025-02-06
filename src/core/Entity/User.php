@@ -13,6 +13,14 @@
 
 namespace Lotgd\Core\Entity;
 
+use Lotgd\Core\Entity\User\Avatar;
+use Lotgd\Core\Entity\User\Ban;
+use Lotgd\Core\Entity\User\Donation;
+use Lotgd\Core\Entity\User\Referer;
+use Lotgd\Core\Entity\User\Security;
+use DateTime;
+use DateTimeInterface;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -36,11 +44,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
-    use User\Avatar;
-    use User\Ban;
-    use User\Donation;
-    use User\Referer;
-    use User\Security;
+    use Avatar;
+    use Ban;
+    use Donation;
+    use Referer;
+    use Security;
 
     /**
      * @var int
@@ -52,7 +60,7 @@ class User implements UserInterface
     private $acctid;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="laston", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
@@ -85,7 +93,7 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="lastmotd", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
@@ -162,7 +170,7 @@ class User implements UserInterface
     private $transferredtoday = 0;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="recentcomments", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
@@ -176,7 +184,7 @@ class User implements UserInterface
     private $amountouttoday = 0;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="regdate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
@@ -187,10 +195,10 @@ class User implements UserInterface
      */
     public function __construct()
     {
-        $this->laston         = new \DateTime('0000-00-00 00:00:00');
-        $this->lastmotd       = new \DateTime('0000-00-00 00:00:00');
-        $this->recentcomments = new \DateTime('0000-00-00 00:00:00');
-        $this->regdate        = new \DateTime('0000-00-00 00:00:00');
+        $this->laston         = new DateTime('0000-00-00 00:00:00');
+        $this->lastmotd       = new DateTime('0000-00-00 00:00:00');
+        $this->recentcomments = new DateTime('0000-00-00 00:00:00');
+        $this->regdate        = new DateTime('0000-00-00 00:00:00');
     }
 
     /**
@@ -218,11 +226,11 @@ class User implements UserInterface
     /**
      * Set the value of Laston.
      *
-     * @param \DateTime|\DateTimeImmutable $laston
+     * @param DateTime|DateTimeImmutable $laston
      *
      * @return self
      */
-    public function setLaston(\DateTimeInterface $laston)
+    public function setLaston(DateTimeInterface $laston)
     {
         $this->laston = $laston;
 
@@ -232,9 +240,9 @@ class User implements UserInterface
     /**
      * Get the value of Laston.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
-    public function getLaston(): \DateTimeInterface
+    public function getLaston(): DateTimeInterface
     {
         return $this->laston;
     }
@@ -335,11 +343,11 @@ class User implements UserInterface
     /**
      * Set the value of Lastmotd.
      *
-     * @param \DateTime|\DateTimeImmutable $lastmotd
+     * @param DateTime|DateTimeImmutable $lastmotd
      *
      * @return self
      */
-    public function setLastmotd(\DateTimeInterface $lastmotd)
+    public function setLastmotd(DateTimeInterface $lastmotd)
     {
         $this->lastmotd = $lastmotd;
 
@@ -349,9 +357,9 @@ class User implements UserInterface
     /**
      * Get the value of Lastmotd.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
-    public function getLastmotd(): \DateTimeInterface
+    public function getLastmotd(): DateTimeInterface
     {
         return $this->lastmotd;
     }
@@ -579,11 +587,11 @@ class User implements UserInterface
     /**
      * Set the value of Recentcomments.
      *
-     * @param \DateTime|\DateTimeImmutable $recentcomments
+     * @param DateTime|DateTimeImmutable $recentcomments
      *
      * @return self
      */
-    public function setRecentcomments(\DateTimeInterface $recentcomments)
+    public function setRecentcomments(DateTimeInterface $recentcomments)
     {
         $this->recentcomments = $recentcomments;
 
@@ -593,9 +601,9 @@ class User implements UserInterface
     /**
      * Get the value of Recentcomments.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
-    public function getRecentcomments(): \DateTimeInterface
+    public function getRecentcomments(): DateTimeInterface
     {
         return $this->recentcomments;
     }
@@ -625,11 +633,11 @@ class User implements UserInterface
     /**
      * Set the value of Regdate.
      *
-     * @param \DateTime|\DateTimeImmutable $regdate
+     * @param DateTime|DateTimeImmutable $regdate
      *
      * @return self
      */
-    public function setRegdate(\DateTimeInterface $regdate)
+    public function setRegdate(DateTimeInterface $regdate)
     {
         $this->regdate = $regdate;
 
@@ -639,9 +647,9 @@ class User implements UserInterface
     /**
      * Get the value of Regdate.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
-    public function getRegdate(): \DateTimeInterface
+    public function getRegdate(): DateTimeInterface
     {
         return $this->regdate;
     }

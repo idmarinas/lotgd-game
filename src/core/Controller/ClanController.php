@@ -13,6 +13,9 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Repository\UserRepository;
+use Lotgd\Core\Repository\ClansRepository;
+use Lotgd\Core\Repository\MailRepository;
 use Lotgd\Core\Entity\Clans;
 use Lotgd\Core\Entity\Mail;
 use DateTime;
@@ -163,7 +166,7 @@ class ClanController extends AbstractController
         $claninfo      = $params['clanInfo'];
         $params['tpl'] = 'clan_default';
 
-        /** @var Lotgd\Core\Repository\UserRepository $acctRepository */
+        /** @var UserRepository $acctRepository */
         $acctRepository = $this->getDoctrine()->getRepository('LotgdCore:User');
         /** @var Lotgd\Core\Repository\CharactersRepository $charRepository */
         $charRepository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
@@ -212,7 +215,7 @@ class ClanController extends AbstractController
 
         /** @var Lotgd\Core\Repository\CharactersRepository $charRepository */
         $charRepository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
-        /** @var Lotgd\Core\Repository\ClansRepository $clanRepository */
+        /** @var ClansRepository $clanRepository */
         $clanRepository = $this->getDoctrine()->getRepository(Clans::class);
 
         $params['clanDetail']          = $clanRepository->find($clanId);
@@ -275,7 +278,7 @@ class ClanController extends AbstractController
 
         $order = $request->query->getInt('order');
 
-        /** @var Lotgd\Core\Repository\ClansRepository $clanRepository */
+        /** @var ClansRepository $clanRepository */
         $clanRepository = $this->getDoctrine()->getRepository(Clans::class);
 
         $params['clanList'] = $clanRepository->getClanListWithMembersCount($order);
@@ -326,14 +329,14 @@ class ClanController extends AbstractController
 
         $clanId = $request->query->getInt('clanid');
 
-        /** @var \Lotgd\Core\Repository\ClansRepository $clanRepository */
+        /** @var ClansRepository $clanRepository */
         $clanRepository = $this->getDoctrine()->getRepository(Clans::class);
 
         if ($clanId > 0)
         {
             /** @var Lotgd\Core\Repository\CharactersRepository $charRepository */
             $charRepository = $this->getDoctrine()->getRepository('LotgdCore:Avatar');
-            /** @var \Lotgd\Core\Repository\MailRepository $mailRepository */
+            /** @var MailRepository $mailRepository */
             $mailRepository = $this->getDoctrine()->getRepository(Mail::class);
 
             $this->addFlash('success', $this->translator->trans('flash.message.applicant.apply', [
@@ -493,7 +496,7 @@ class ClanController extends AbstractController
 
         if ('withdraw' == $request->query->get('op'))
         {
-            /** @var Lotgd\Core\Repository\MailRepository $mailRepository */
+            /** @var MailRepository $mailRepository */
             $mailRepository = $this->getDoctrine()->getRepository(Mail::class);
 
             $this->addFlash('info', $this->sanitize->fullSanitize($this->translator->trans('flash.message.applicant.withdraw', [
@@ -541,7 +544,7 @@ class ClanController extends AbstractController
             return $this->redirect('clan.php');
         }
 
-        /** @var Lotgd\Core\Repository\UserRepository $acctRepository */
+        /** @var UserRepository $acctRepository */
         $acctRepository = $this->getDoctrine()->getRepository('LotgdCore:User');
         $clanRepository = $this->getDoctrine()->getRepository(Clans::class);
 
@@ -656,7 +659,7 @@ class ClanController extends AbstractController
             //dragon kill, superuser edit, or lodge color change
             $subj = serialize(['mail.apply.subject', ['name' => $character->getName()], $params['textDomain']]);
 
-            /** @var Lotgd\Core\Repository\MailRepository $mailRepository */
+            /** @var MailRepository $mailRepository */
             $mailRepository = $this->getDoctrine()->getRepository(Mail::class);
             $mailRepository->deleteMailFromSystemBySubj($subj);
 
@@ -764,7 +767,7 @@ class ClanController extends AbstractController
             }
         }
 
-        /** @var \Lotgd\Core\Repository\MailRepository $mailRepository */
+        /** @var MailRepository $mailRepository */
         $mailRepository = $this->getDoctrine()->getRepository(Mail::class);
 
         $subj = ['mail.withdraw.subject', ['name' => $session['user']['name']], $params['textDomain']];

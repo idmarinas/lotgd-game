@@ -1,14 +1,15 @@
 <?php
 
+use Lotgd\Core\Entity\Cronjob;
 use Lotgd\Core\Form\CronjobType;
 
-$op     = (string) \LotgdRequest::getQuery('op');
-$cronId = (int) \LotgdRequest::getQuery('cronid');
-$page   = (int) \LotgdRequest::getQuery('page', 1);
+$op     = (string) LotgdRequest::getQuery('op');
+$cronId = (int) LotgdRequest::getQuery('cronid');
+$page   = (int) LotgdRequest::getQuery('page', 1);
 
 $params['cronId'] = $cronId;
 
-$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Cronjob::class);
+$repository = Doctrine::getRepository(Cronjob::class);
 
 if ('delcronjob' == $op)
 {
@@ -16,14 +17,14 @@ if ('delcronjob' == $op)
 
     if ($cronEntity)
     {
-        \LotgdLog::game("`4Delete CronJob `^{$cronId}`4 by admin {$session['user']['playername']}", 'cronjob');
+        LotgdLog::game("`4Delete CronJob `^{$cronId}`4 by admin {$session['user']['playername']}", 'cronjob');
 
-        \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.cronjob.deleted', [], $textDomain));
+        LotgdFlashMessages::addSuccessMessage(LotgdTranslator::t('flash.message.cronjob.deleted', [], $textDomain));
 
-        \LotgdKernel::get('core.cronjobs.cache')->delete('cronjobstable');
+        LotgdKernel::get('core.cronjobs.cache')->delete('cronjobstable');
 
-        \Doctrine::remove($cronEntity);
-        \Doctrine::flush();
+        Doctrine::remove($cronEntity);
+        Doctrine::flush();
     }
 
     $op = '';
@@ -31,7 +32,7 @@ if ('delcronjob' == $op)
 
 if ('' == $op)
 {
-    $lotgdFormFactory = \LotgdKernel::get('form.factory');
+    $lotgdFormFactory = LotgdKernel::get('form.factory');
 
     $form = $lotgdFormFactory->create(CronjobType::class, [
         'newdaycron' => LotgdSetting::getSetting('newdaycron', 0),
@@ -42,7 +43,7 @@ if ('' == $op)
         ],
     ]);
 
-    $form->handleRequest(\LotgdRequest::_i());
+    $form->handleRequest(LotgdRequest::_i());
 
     if ($form->isSubmitted() && $form->isValid())
     {
@@ -54,7 +55,7 @@ if ('' == $op)
 
         if ($messageType)
         {
-            \LotgdFlashMessages::{$messageType}(\LotgdTranslator::t($message, [], 'form_app'));
+            LotgdFlashMessages::{$messageType}(LotgdTranslator::t($message, [], 'form_app'));
         }
     }
 
@@ -67,9 +68,9 @@ elseif ('newcronjob' == $op)
 {
     $params['tpl'] = 'cronjob-new';
 
-    $lotgdFormFactory = \LotgdKernel::get('form.factory');
+    $lotgdFormFactory = LotgdKernel::get('form.factory');
     $entity           = $repository->find($cronId);
-    $entity           = $entity ?: new \Lotgd\Core\Entity\Cronjob();
+    $entity           = $entity ?: new Cronjob();
 
     $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
         'action' => "configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}",
@@ -78,7 +79,7 @@ elseif ('newcronjob' == $op)
         ],
     ]);
 
-    $form->handleRequest(\LotgdRequest::_i());
+    $form->handleRequest(LotgdRequest::_i());
 
     $paramsFlashMessages = [];
     $message             = null;
@@ -89,14 +90,14 @@ elseif ('newcronjob' == $op)
         $entity  = $form->getData();
         $message = $cronId ? 'flash.message.cronjob.updated' : 'flash.message.cronjob.created';
 
-        \Doctrine::persist($entity);
-        \Doctrine::flush();
+        Doctrine::persist($entity);
+        Doctrine::flush();
 
         $cronId = $entity->getId();
 
-        \LotgdLog::game('`@'.$cronId ? 'Updated' : 'Create'." CronJob`0 `^{$entity->getName()}`0`$ by admin {$session['user']['playername']}`0", 'cronjob');
+        LotgdLog::game('`@'.$cronId ? 'Updated' : 'Create'." CronJob`0 `^{$entity->getName()}`0`$ by admin {$session['user']['playername']}`0", 'cronjob');
 
-        \LotgdKernel::get('core.cronjobs.cache')->delete('cronjobstable');
+        LotgdKernel::get('core.cronjobs.cache')->delete('cronjobstable');
 
         //-- Redo form for change $cronId and set new data (generated IDs)
         $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
@@ -108,13 +109,13 @@ elseif ('newcronjob' == $op)
 
         if ($message)
         {
-            \LotgdFlashMessages::{$messageType}(\LotgdTranslator::t($message, $paramsFlashMessages, $textDomain));
+            LotgdFlashMessages::{$messageType}(LotgdTranslator::t($message, $paramsFlashMessages, $textDomain));
         }
     }
-    \Doctrine::detach($entity); //-- Avoid Doctrine save a invalid Form
+    Doctrine::detach($entity); //-- Avoid Doctrine save a invalid Form
 
     //-- In this position can updated $cronId var
-    \LotgdNavigation::addNavAllow("configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}");
+    LotgdNavigation::addNavAllow("configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}");
 
     $params['form'] = $form->createView();
 }

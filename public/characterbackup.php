@@ -1,5 +1,7 @@
 <?php
 
+use Kit\CryptBundle\Service\OpensslService;
+use Symfony\Component\Serializer\Serializer;
 use Doctrine\ORM\Id\AssignedGenerator;
 use Doctrine\ORM\Id\IdentityGenerator;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -27,10 +29,10 @@ LotgdNavigation::superuserGrottoNav();
 LotgdNavigation::addNav('navigation.nav.update', 'characterbackup.php', ['textDomain' => $params['textDomain']]);
 
 $fileSystem = new Filesystem();
-/** @var \Symfony\Component\Serializer\Serializer $serializer */
+/** @var Serializer $serializer */
 $serializer = LotgdKernel::get('serializer');
-/** @var \Kit\CryptBundle\Service\OpensslService $cryptService */
-$cryptService = LotgdKernel::get('Kit\CryptBundle\Service\OpensslService');
+/** @var OpensslService $cryptService */
+$cryptService = LotgdKernel::get(OpensslService::class);
 
 $path              = 'storage/logd_snapshots';
 $pathAccountData   = "{$path}/user-{$accountId}/LotgdCore_User.json";

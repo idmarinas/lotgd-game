@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
+use Lotgd\Core\Repository\UserRepository;
 use Lotgd\Core\Controller\LoginController;
 use Lotgd\Core\Entity\Bans;
 use Lotgd\Core\Entity\Faillog;
@@ -34,14 +36,13 @@ if ('' != $name) {
 	}
 
 	LotgdTool::checkBan(); //check if this computer is banned
-
-	/** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder $passwordEncoder */
-	$passwordEncoder = LotgdKernel::get('security.password_encoder');
+ /** @var UserPasswordEncoder $passwordEncoder */
+ $passwordEncoder = LotgdKernel::get('security.password_encoder');
 	$password = LotgdRequest::getPost('password');
 
 	//-- Using Doctrine repository to process login
-	/** @var Lotgd\Core\Repository\UserRepository $repositoryAccounts */
-	$repositoryAccounts = Doctrine::getRepository('LotgdCore:User');
+ /** @var UserRepository $repositoryAccounts */
+ $repositoryAccounts = Doctrine::getRepository('LotgdCore:User');
 	$account = $repositoryAccounts->findOneByLogin($name);
 
 	//-- Not found account

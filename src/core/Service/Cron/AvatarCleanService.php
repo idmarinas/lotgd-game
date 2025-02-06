@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Service\Cron;
 
+use Lotgd\Core\Repository\AvatarRepository;
+use Lotgd\Core\Repository\UserRepository;
 use DateTime;
 use DateInterval;
 use Doctrine\ORM\EntityManagerInterface;
@@ -63,7 +65,7 @@ class AvatarCleanService
         $new   = (int) $this->settings->getSetting('expirenewacct', 10);
         $trash = (int) $this->settings->getSetting('expiretrashacct', 1);
 
-        /** @var \Lotgd\Core\Repository\AvatarRepository $repository */
+        /** @var AvatarRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Avatar');
         $query      = $repository->createQueryBuilder('u');
         $expr       = $query->expr();
@@ -101,8 +103,7 @@ class AvatarCleanService
 
         //adjust for notification - don't notify total newbie chars
         $old = max(1, $old - (int) $this->settings->getSetting('notifydaysbeforedeletion', 5)); //a minimum of 1 day is necessary
-
-        /** @var \Lotgd\Core\Repository\UserRepository $repository */
+        /** @var UserRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:User');
         $query      = $repository->createQueryBuilder('a');
 

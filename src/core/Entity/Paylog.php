@@ -13,6 +13,9 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTimeInterface;
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -100,7 +103,7 @@ class Paylog
     private $txfee = '0.00';
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="processdate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
@@ -329,11 +332,11 @@ class Paylog
     /**
      * Set the value of Processdate.
      *
-     * @param \DateTime|\DateTimeImmutable $processdate
+     * @param DateTime|DateTimeImmutable $processdate
      *
      * @return self
      */
-    public function setProcessdate(\DateTimeInterface $processdate)
+    public function setProcessdate(DateTimeInterface $processdate)
     {
         $this->processdate = $processdate;
 
@@ -343,9 +346,9 @@ class Paylog
     /**
      * Get the value of Processdate.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
-    public function getProcessdate(): \DateTimeInterface
+    public function getProcessdate(): DateTimeInterface
     {
         return $this->processdate;
     }

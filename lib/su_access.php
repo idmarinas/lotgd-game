@@ -15,31 +15,31 @@ function check_su_access($level)
 
     $textDomain = 'partial_access';
 
-    \LotgdResponse::pageAddContent('<!--Su_Restricted-->');
+    LotgdResponse::pageAddContent('<!--Su_Restricted-->');
 
     if ($session['user']['superuser'] & $level)
     {
         //-- They have appropriate levels, let's see if there's a module that restricts access beyond this point.
 
         $return = new Superuser(['enabled' => true, 'level' => $level]);
-        \LotgdEventDispatcher::dispatch($return, Superuser::CHECK_SU_ACCESS);
+        LotgdEventDispatcher::dispatch($return, Superuser::CHECK_SU_ACCESS);
         $return = modulehook('check_su_access', $return->getData());
 
         if ($return['enabled'])
         {
-            $session['user']['laston'] = new \DateTime('now');
+            $session['user']['laston'] = new DateTime('now');
 
             return;
         }
 
-        \LotgdResponse::pageStart('title.ops', [], $textDomain);
+        LotgdResponse::pageStart('title.ops', [], $textDomain);
 
         $tpl = LotgdTheme::load('admin/_blocks/_access.html.twig');
-        \LotgdResponse::pageAddContent($tpl->renderBlock('access_ops', ['textDomain' => $textDomain]));
+        LotgdResponse::pageAddContent($tpl->renderBlock('access_ops', ['textDomain' => $textDomain]));
 
-        \LotgdNavigation::addNav('common.superuser.mundane', 'village.php');
+        LotgdNavigation::addNav('common.superuser.mundane', 'village.php');
 
-        \LotgdResponse::pageEnd();
+        LotgdResponse::pageEnd();
     }
 
     // This buff is useless because the graveyard (rightly, really)
@@ -64,11 +64,11 @@ function check_su_access($level)
 
     $session['output'] = '';
 
-    \LotgdResponse::pageStart('title.infidel', [], $textDomain);
+    LotgdResponse::pageStart('title.infidel', [], $textDomain);
 
-    \LotgdTool::addNews('`&%s was smitten down for attempting to defile the gods (they tried to hack superuser pages).', $session['user']['name']);
+    LotgdTool::addNews('`&%s was smitten down for attempting to defile the gods (they tried to hack superuser pages).', $session['user']['name']);
 
-    \LotgdLog::debug("Lost {$session['user']['gold']} and ".($session['user']['experience'] * 0.25).' experience trying to hack superuser pages.');
+    LotgdLog::debug("Lost {$session['user']['gold']} and ".($session['user']['experience'] * 0.25).' experience trying to hack superuser pages.');
 
     $session['user']['hitpoints']   = 0;
     $session['user']['alive']       = 0;
@@ -78,9 +78,9 @@ function check_su_access($level)
     $session['user']['gold']        = 0;
     $session['user']['experience'] *= 0.75;
 
-    \LotgdNavigation::addNav('home.nav.news', 'news.php');
+    LotgdNavigation::addNav('home.nav.news', 'news.php');
 
-    $repository = \Doctrine::getRepository('LotgdCore:User');
+    $repository = Doctrine::getRepository('LotgdCore:User');
     $result     = $repository->getSuperuserWithPermit(SU_EDIT_USERS);
 
     foreach ($result as $row)
@@ -94,8 +94,8 @@ function check_su_access($level)
             'mail.message',
             [
                 'name'    => $session['user']['name'],
-                'uri'     => \LotgdRequest::getServer('REQUEST_URI'),
-                'referer' => \LotgdRequest::getServer('HTTP_REFERER'),
+                'uri'     => LotgdRequest::getServer('REQUEST_URI'),
+                'referer' => LotgdRequest::getServer('HTTP_REFERER'),
             ],
             $textDomain,
         ];
@@ -103,13 +103,13 @@ function check_su_access($level)
         LotgdKernel::get('lotgd_core.tool.system_mail')->send($row['acctid'], $subj, $body);
     }
 
-    $tpl = \LotgdTheme::load('admin/_blocks/_access.html.twig');
-    \LotgdResponse::pageAddContent($tpl->renderBlock('access_infidel', [
+    $tpl = LotgdTheme::load('admin/_blocks/_access.html.twig');
+    LotgdResponse::pageAddContent($tpl->renderBlock('access_infidel', [
         'textDomain'    => $textDomain,
         'deathOverlord' => LotgdSetting::getSetting('deathoverlord', '`$Ramius'),
     ]));
 
-    \LotgdResponse::pageEnd();
+    LotgdResponse::pageEnd();
 }
 
 /**
@@ -127,12 +127,12 @@ function checkSuPermission($permission, ?string $return = null)
     if ($session['user']['superuser'] & $permission)
     {
         $result = new Superuser(['enabled' => true, 'permission' => $permission]);
-        \LotgdEventDispatcher::dispatch($result, Superuser::CHECK_SU_PERMISSION);
+        LotgdEventDispatcher::dispatch($result, Superuser::CHECK_SU_PERMISSION);
         $result = modulehook('check-su-permission', $result->getData());
 
         if ($result['enabled'])
         {
-            $session['user']['laston'] = new \DateTime('now');
+            $session['user']['laston'] = new DateTime('now');
 
             return true;
         }

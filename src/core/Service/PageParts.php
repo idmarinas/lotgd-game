@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Service;
 
+use Lotgd\Core\Repository\UserRepository;
 use Lotgd\Core\Doctrine\ORM\EntityManager;
 use Lotgd\Core\Event\Character;
 use Doctrine\ORM\EntityManagerInterface;
@@ -348,7 +349,7 @@ class PageParts
 
                 if ($this->doctrine->isConnected())
                 {
-                    /** @var \Lotgd\Core\Repository\UserRepository $repository */
+                    /** @var UserRepository $repository */
                     $repository = $this->doctrine->getRepository('LotgdCore:User');
                     $onlinecount = $repository->count(['loggedin' => '1', 'locked' => '0']);
                 }

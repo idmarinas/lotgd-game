@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Repository\UserRepository;
 use DateTime;
 use Lotgd\Core\Controller\Pattern\RenderBlockTrait;
 use Lotgd\Core\Entity\Avatar;
@@ -81,8 +82,8 @@ class CreateController extends AbstractController
 
 	public function forgotVal (array $params, Request $request): Response
 	{
-		/** @var Lotgd\Core\Repository\UserRepository $accountRepo */
-		$accountRepo = $this->getDoctrine()->getRepository('LotgdCore:User');
+		/** @var UserRepository $accountRepo */
+  $accountRepo = $this->getDoctrine()->getRepository('LotgdCore:User');
 		$forgottenCode = $request->query->getInt('id');
 
 		$account = $accountRepo->findOneBy(['forgottenpassword' => $forgottenCode]);
@@ -120,8 +121,8 @@ class CreateController extends AbstractController
 
 	public function val (array $params, Request $request): Response
 	{
-		/** @var Lotgd\Core\Repository\UserRepository $accountRepo */
-		$accountRepo = $this->getDoctrine()->getRepository('LotgdCore:User');
+		/** @var UserRepository $accountRepo */
+  $accountRepo = $this->getDoctrine()->getRepository('LotgdCore:User');
 		$code = (string)$request->query->get('id');
 
 		$account = $accountRepo->findOneBy(['emailvalidation' => $code]);

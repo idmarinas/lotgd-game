@@ -264,7 +264,7 @@ final class UserCreateCommand extends Command
 
     private function getIsAdmin(InputInterface $input, OutputInterface $output): bool
     {
-        /** @var Lotgd\Core\Repository\UserRepository $superusers */
+        /** @var UserRepository $superusers */
         $superusers = (bool) $this->getAccountRepository()->getSuperuserCountWithPermit(SU_MEGAUSER);
 
         if ($superusers)

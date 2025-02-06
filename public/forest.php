@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Tool\CreatureFunction;
+
 global $session, $companions;
 
 use Lotgd\Core\Controller\ForestController;
@@ -23,9 +25,9 @@ $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-/** @var Lotgd\Core\Http\Request $request */
+/** @var Request $request */
 $request = LotgdKernel::get(Request::class);
-/** @var \Lotgd\Core\Tool\CreatureFunction $creatureFunctions */
+/** @var CreatureFunction $creatureFunctions */
 $creatureFunctions = LotgdKernel::get('lotgd_core.tool.creature_functions');
 
 //-- Init page
@@ -85,7 +87,7 @@ elseif ('search' == $op)
         modulehook('soberup', $args->getArguments());
 
         /** New occurrence dispatcher for special events. */
-        /** @var \Symfony\Component\EventDispatcher\GenericEvent $event */
+        /** @var GenericEvent $event */
         $event = LotgdKernel::get('occurrence_dispatcher')->dispatch('forest', null, [
             'translation_domain'            => $textDomain,
             'translation_domain_navigation' => $textDomainNavigation,
