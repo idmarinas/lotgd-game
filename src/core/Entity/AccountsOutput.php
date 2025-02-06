@@ -35,7 +35,7 @@ class AccountsOutput
      *
      * @ORM\Column(name="output", type="blob", length=16777215)
      */
-    private $output = null;
+    private $output;
 
     /**
      * Set the value of Acctid.

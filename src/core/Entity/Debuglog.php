@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTimeImmutable;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -39,11 +40,9 @@ class Debuglog
      */
     private ?int $id = null;
     /**
-     * @var \DateTimeInterface|null
-     *
      * @ORM\Column(name="date", type="datetime")
      */
-    private ?\DateTimeInterface $date = null;
+    private ?DateTimeInterface $date = null;
     /**
      *
      * @ORM\Column(name="actor", type="integer", nullable=true, options={"unsigned": true})
@@ -65,8 +64,6 @@ class Debuglog
      */
     private ?string $field = null;
     /**
-     * @var float|null
-     *
      * @ORM\Column(name="value", type="float", precision=9, scale=2, options={"default"="0.00"})
      */
     private float $value = 0.00;
@@ -101,7 +98,7 @@ class Debuglog
     /**
      * Set the value of Date.
      *
-     * @param \DateTime|\DateTimeImmutable $date
+     * @param DateTime|DateTimeImmutable $date
      *
      * @return self
      */
@@ -115,7 +112,7 @@ class Debuglog
     /**
      * Get the value of Date.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getDate(): DateTimeInterface
     {

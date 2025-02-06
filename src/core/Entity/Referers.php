@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -50,11 +52,9 @@ class Referers
     private ?int $count = 0;
 
     /**
-     * @var \DateTimeInterface|null
-     *
      * @ORM\Column(type="datetime")
      */
-    private ?\DateTimeInterface $last = null;
+    private ?DateTimeInterface $last = null;
 
     /**
      *
@@ -155,7 +155,7 @@ class Referers
     /**
      * Set the value of Last.
      *
-     * @param \DateTime|\DateTimeImmutable $last
+     * @param DateTime|DateTimeImmutable $last
      *
      * @return self
      */
@@ -169,7 +169,7 @@ class Referers
     /**
      * Get the value of Last.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getLast(): DateTimeInterface
     {

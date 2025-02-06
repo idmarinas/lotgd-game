@@ -80,7 +80,7 @@ class Titles implements Translatable
     private ?string $female = null;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection<\Lotgd\Core\Entity\TitlesTranslation>
+     * @var Collection<TitlesTranslation>
      *
      * @ORM\OneToMany(targetEntity="TitlesTranslation", mappedBy="object", cascade={"all"})
      */

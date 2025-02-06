@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTimeImmutable;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -41,11 +42,9 @@ class Petitions
     private ?int $author = 0;
 
     /**
-     * @var \DateTimeInterface|null
-     *
      * @ORM\Column(name="date", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
-    private ?\DateTimeInterface $date = null;
+    private ?DateTimeInterface $date = null;
 
     /**
      *
@@ -66,11 +65,9 @@ class Petitions
     private array $pageinfo = [];
 
     /**
-     * @var \DateTimeInterface|null
-     *
      * @ORM\Column(name="closedate", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
-    private ?\DateTimeInterface $closedate = null;
+    private ?DateTimeInterface $closedate = null;
 
     /**
      *
@@ -145,7 +142,7 @@ class Petitions
     /**
      * Set the value of Date.
      *
-     * @param \DateTime|\DateTimeImmutable $date
+     * @param DateTime|DateTimeImmutable $date
      *
      * @return self
      */
@@ -159,7 +156,7 @@ class Petitions
     /**
      * Get the value of Date.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getDate(): DateTimeInterface
     {
@@ -192,8 +189,6 @@ class Petitions
      * Set the value of Body.
      *
      * @param string $body
-     *
-     * @return self
      */
     public function setBody(array $body): self
     {
@@ -235,7 +230,7 @@ class Petitions
     /**
      * Set the value of Closedate.
      *
-     * @param \DateTime|\DateTimeImmutable $closedate
+     * @param DateTime|DateTimeImmutable $closedate
      *
      * @return self
      */
@@ -249,7 +244,7 @@ class Petitions
     /**
      * Get the value of Closedate.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getClosedate(): DateTimeInterface
     {

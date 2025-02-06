@@ -79,7 +79,7 @@ class Masters implements Translatable
     private ?string $creaturewin = null;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection<\Lotgd\Core\Entity\MastersTranslation>
+     * @var Collection<MastersTranslation>
      *
      * @ORM\OneToMany(targetEntity="MastersTranslation", mappedBy="object", cascade={"all"})
      */

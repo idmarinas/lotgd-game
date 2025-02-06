@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTimeImmutable;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -46,18 +47,14 @@ class Logdnet
     private ?string $description = null;
 
     /**
-     * @var float|null
-     *
      * @ORM\Column(name="priority", type="float", precision=10, options={"default"="100"})
      */
     private float $priority = 100;
 
     /**
-     * @var \DateTimeInterface|null
-     *
      * @ORM\Column(name="lastupdate", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
-    private ?\DateTimeInterface $lastupdate = null;
+    private ?DateTimeInterface $lastupdate = null;
 
     /**
      *
@@ -72,11 +69,9 @@ class Logdnet
     private ?string $admin = 'unknown';
 
     /**
-     * @var \DateTimeInterface|null
-     *
      * @ORM\Column(name="lastping", type="datetime")
      */
-    private ?\DateTimeInterface $lastping = null;
+    private ?DateTimeInterface $lastping = null;
 
     /**
      *
@@ -193,7 +188,7 @@ class Logdnet
     /**
      * Set the value of Lastupdate.
      *
-     * @param \DateTime|\DateTimeImmutable $lastupdate
+     * @param DateTime|DateTimeImmutable $lastupdate
      *
      * @return self
      */
@@ -207,7 +202,7 @@ class Logdnet
     /**
      * Get the value of Lastupdate.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getLastupdate(): DateTimeInterface
     {
@@ -261,7 +256,7 @@ class Logdnet
     /**
      * Set the value of Lastping.
      *
-     * @param \DateTime|\DateTimeImmutable $lastping
+     * @param DateTime|DateTimeImmutable $lastping
      *
      * @return self
      */
@@ -275,7 +270,7 @@ class Logdnet
     /**
      * Get the value of Lastping.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getLastping(): DateTimeInterface
     {

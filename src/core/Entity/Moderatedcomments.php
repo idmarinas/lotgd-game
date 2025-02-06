@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTimeImmutable;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -45,11 +46,9 @@ class Moderatedcomments
     private ?int $moderator = 0;
 
     /**
-     * @var \DateTimeInterface|null
-     *
      * @ORM\Column(name="moddate", type="datetime")
      */
-    private ?\DateTimeInterface $moddate = null;
+    private ?DateTimeInterface $moddate = null;
 
     public function __construct()
     {
@@ -125,7 +124,7 @@ class Moderatedcomments
     /**
      * Set the value of Moddate.
      *
-     * @param \DateTime|\DateTimeImmutable $moddate
+     * @param DateTime|DateTimeImmutable $moddate
      *
      * @return self
      */
@@ -139,7 +138,7 @@ class Moderatedcomments
     /**
      * Get the value of Moddate.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getModdate(): DateTimeInterface
     {

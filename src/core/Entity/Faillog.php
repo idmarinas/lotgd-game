@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTimeImmutable;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -40,11 +41,9 @@ class Faillog
     private ?int $eventid = null;
 
     /**
-     * @var \DateTimeInterface|null
-     *
      * @ORM\Column(name="date", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
-    private ?\DateTimeInterface $date = null;
+    private ?DateTimeInterface $date = null;
 
     /**
      *
@@ -103,7 +102,7 @@ class Faillog
     /**
      * Set the value of Date.
      *
-     * @param \DateTime|\DateTimeImmutable $date
+     * @param DateTime|DateTimeImmutable $date
      *
      * @return self
      */
@@ -117,7 +116,7 @@ class Faillog
     /**
      * Get the value of Date.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getDate(): DateTimeInterface
     {

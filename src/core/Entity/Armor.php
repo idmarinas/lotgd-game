@@ -81,7 +81,7 @@ class Armor implements Translatable
     private ?int $level = 0;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection<\Lotgd\Core\Entity\ArmorTranslation>
+     * @var Collection<ArmorTranslation>
      *
      * @ORM\OneToMany(targetEntity="ArmorTranslation", mappedBy="object", cascade={"all"})
      */

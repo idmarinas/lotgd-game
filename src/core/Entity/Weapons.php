@@ -81,7 +81,7 @@ class Weapons implements Translatable
     private ?int $level = 0;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection<\Lotgd\Core\Entity\WeaponsTranslation>
+     * @var Collection<WeaponsTranslation>
      *
      * @ORM\OneToMany(targetEntity="WeaponsTranslation", mappedBy="object", cascade={"all"})
      */

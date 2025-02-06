@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTimeImmutable;
 use DateTime;
 use DateTimeInterface;
 use Bukashk0zzz\FilterBundle\Annotation\FilterAnnotation as Filter;
@@ -65,11 +66,9 @@ class Motd
     private ?string $motdbody = '';
 
     /**
-     * @var \DateTimeInterface|null
-     *
      * @ORM\Column(name="motddate", type="datetime", nullable=true, options={"default": "0000-00-00 00:00:00"})
      */
-    private ?\DateTimeInterface $motddate = null;
+    private ?DateTimeInterface $motddate = null;
 
     /**
      *
@@ -160,7 +159,7 @@ class Motd
     /**
      * Set the value of Motddate.
      *
-     * @param \DateTime|\DateTimeImmutable $motddate
+     * @param DateTime|DateTimeImmutable $motddate
      *
      * @return self
      */
@@ -174,7 +173,7 @@ class Motd
     /**
      * Get the value of Motddate.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getMotddate(): DateTimeInterface
     {

@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTimeImmutable;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,7 +43,7 @@ class News
      *
      * @ORM\Column(type="date", options={"default"="0000-00-00"})
      */
-    private ?\DateTimeInterface $date;
+    private ?DateTimeInterface $date;
 
     /**
      *
@@ -104,7 +105,7 @@ class News
     /**
      * Set the value of date.
      *
-     * @param \DateTime $date
+     * @param DateTime $date
      *
      * @return self
      */
@@ -118,7 +119,7 @@ class News
     /**
      * Get the value of date.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getDate(): DateTimeInterface
     {

@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTimeImmutable;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,11 +27,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Bans
 {
     /**
-     * @var \DateTimeInterface|null
-     *
      * @ORM\Column(name="banexpire", type="datetime")
      */
-    private ?\DateTimeInterface $banexpire = null;
+    private ?DateTimeInterface $banexpire;
 
     /**
      *
@@ -61,11 +60,9 @@ class Bans
     private ?string $banner = null;
 
     /**
-     * @var \DateTimeInterface|null
-     *
      * @ORM\Column(name="lasthit", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
-    private ?\DateTimeInterface $lasthit = null;
+    private ?DateTimeInterface $lasthit = null;
 
     public function __construct()
     {
@@ -75,7 +72,7 @@ class Bans
     /**
      * Set the value of Banexpire.
      *
-     * @param \DateTime|\DateTimeImmutable $banexpire
+     * @param DateTime|DateTimeImmutable $banexpire
      *
      * @return self
      */
@@ -89,7 +86,7 @@ class Bans
     /**
      * Get the value of Banexpire.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getBanexpire(): DateTimeInterface
     {
@@ -187,7 +184,7 @@ class Bans
     /**
      * Set the value of Lasthit.
      *
-     * @param \DateTime|\DateTimeImmutable $lasthit
+     * @param DateTime|DateTimeImmutable $lasthit
      *
      * @return self
      */
@@ -201,7 +198,7 @@ class Bans
     /**
      * Get the value of Lasthit.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getLasthit(): DateTimeInterface
     {

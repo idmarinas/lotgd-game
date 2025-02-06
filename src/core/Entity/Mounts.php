@@ -195,7 +195,7 @@ class Mounts implements Translatable
     private ?int $mountdkcost = 0;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection<\Lotgd\Core\Entity\MountsTranslation>
+     * @var Collection<MountsTranslation>
      *
      * @ORM\OneToMany(targetEntity="MountsTranslation", mappedBy="object", cascade={"all"})
      */

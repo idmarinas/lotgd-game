@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use DateTimeImmutable;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -66,11 +67,9 @@ class Modules
     private ?string $filename = null;
 
     /**
-     * @var \DateTimeInterface|null
-     *
      * @ORM\Column(name="installdate", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
-    private ?\DateTimeInterface $installdate = null;
+    private ?DateTimeInterface $installdate = null;
 
     /**
      *
@@ -79,11 +78,9 @@ class Modules
     private ?string $installedby = null;
 
     /**
-     * @var \DateTimeInterface|null
-     *
      * @ORM\Column(name="filemoddate", type="datetime", options={"default"="0000-00-00 00:00:00"})
      */
-    private ?\DateTimeInterface $filemoddate = null;
+    private ?DateTimeInterface $filemoddate = null;
 
     /**
      *
@@ -265,7 +262,7 @@ class Modules
     /**
      * Set the value of Installdate.
      *
-     * @param \DateTime|\DateTimeImmutable $installdate
+     * @param DateTime|DateTimeImmutable $installdate
      *
      * @return self
      */
@@ -279,7 +276,7 @@ class Modules
     /**
      * Get the value of Installdate.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getInstalldate(): DateTimeInterface
     {
@@ -311,7 +308,7 @@ class Modules
     /**
      * Set the value of Filemoddate.
      *
-     * @param \DateTime|\DateTimeImmutable $filemoddate
+     * @param DateTime|DateTimeImmutable $filemoddate
      *
      * @return self
      */
@@ -325,7 +322,7 @@ class Modules
     /**
      * Get the value of Filemoddate.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getFilemoddate(): DateTimeInterface
     {
