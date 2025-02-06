@@ -129,14 +129,14 @@ class LogdnetController extends AbstractController
                     $session['user']['login'],
                     \htmlentities($session['user']['login']).':'.$request->server->get('HTTP_HOST', '').$refer, ENT_COMPAT, 'UTF-8');
 
-                return new Response($content, 200, [
+                return new Response($content, Response::HTTP_OK, [
                     'Content-Type' => 'image/gif',
                 ]);
             }
         }
         elseif ( ! empty($logdnet))
         {
-            return new Response($logdnet['image'], 200, [
+            return new Response($logdnet['image'], Response::HTTP_OK, [
                 'Content-Type'   => $logdnet['content-type'],
                 'Content-Length' => \strlen($logdnet['image']),
             ]);

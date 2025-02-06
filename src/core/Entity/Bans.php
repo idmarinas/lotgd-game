@@ -29,7 +29,7 @@ class Bans
     /**
      * @ORM\Column(name="banexpire", type="datetime")
      */
-    private ?DateTimeInterface $banexpire = null;
+    private ?DateTimeInterface $banexpire;
 
     /**
      *
