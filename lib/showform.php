@@ -9,15 +9,15 @@ require_once 'lib/dump_item.php';
  * Construct FORM LOTGD style.
  *
  * @param array
- * @param array $row
- * @param bool $nosave
+ * @param array         $row
+ * @param bool          $nosave
  * @param false|pattern $keypref
- * @param bool $print
- * @param callable $callback      This can use for personalize the form used to show all inputs or for more process.
+ * @param bool          $print
+ * @param callable      $callback This can use for personalize the form used to show all inputs or for more process.
  *                                Can still use lotgd_show_form_field in your callable
  *                                Both functions get same parameters function($info, $row, $key, $keyout, $val,
  *                                $extensions)
- * @param mixed $layout
+ * @param mixed         $layout
  *
  * @deprecated 4.1.0
  */
@@ -26,8 +26,8 @@ function lotgd_showform ($layout, $row, $nosave = false, $keypref = false, $prin
 	static $showform_id = 0;
 	static $title_id = 0;
 
-	\trigger_error(
-	  \sprintf(
+	trigger_error(
+	  sprintf(
 		'Usage of %s is obsolete since 4.1.0; and delete in version future version, use new Symfony Form system.',
 		__METHOD__
 	  ),
@@ -37,7 +37,7 @@ function lotgd_showform ($layout, $row, $nosave = false, $keypref = false, $prin
 	/**
 	 * If $layout is a string use new form system.
 	 */
-	if (\is_string($layout)) {
+	if (is_string($layout)) {
 		return LotgdLocator::get($layout);
 	}
 
@@ -48,31 +48,31 @@ function lotgd_showform ($layout, $row, $nosave = false, $keypref = false, $prin
 	$tabContent = [];
 
 	foreach ($layout as $key => $val) {
-		$keyout = (false !== $keypref) ? \sprintf($keypref, $key) : $key;
+		$keyout = (false !== $keypref) ? sprintf($keypref, $key) : $key;
 
-		if (\is_array($val)) {
-			$info = \explode(',', $val[0]);
+		if (is_array($val)) {
+			$info = explode(',', $val[0]);
 			$val[0] = $info[0];
 			$info[0] = $val;
 		} else {
-			$info = \explode(',', $val);
+			$info = explode(',', $val);
 		}
 
-		if (\is_array($info[0])) {
-			$info[0] = \call_user_func_array('sprintf', $info[0]);
+		if (is_array($info[0])) {
+			$info[0] = call_user_func_array('sprintf', $info[0]);
 		}
 
-		$info[1] = (isset($info[1])) ? \trim($info[1]) : '';
+		$info[1] = (isset($info[1])) ? trim($info[1]) : '';
 
 		if ('title' == $info[1]) {
 			++$title_id;
 
-			$tabMenu[] = \sprintf(
+			$tabMenu[] = sprintf(
 			  '<a class="w-full inline-block" data-tabs-target="tab" data-action="click->tabs#change" href="#">%s</a>',
 			  $info[0]
 			);
 		} else if ('note' == $info[1]) {
-			$tabContent[$title_id][] = \sprintf(
+			$tabContent[$title_id][] = sprintf(
 			  '<div class="ui small info message">%s</div>',
 			  LotgdSanitize::fullSanitize($info[0])
 			);
@@ -80,7 +80,7 @@ function lotgd_showform ($layout, $row, $nosave = false, $keypref = false, $prin
 			$callback = $callback ?: 'lotgd_show_form_field';
 			$result = $callback($info, $row, $key, $keyout, $val, $extensions);
 
-			$tabContent[$title_id][] = \sprintf(
+			$tabContent[$title_id][] = sprintf(
 			  '<label class="md:flex md:items-center mb-6"><div class="md:w-1/3">%s</div><div class="md:w-2/3">%s</div></label>',
 			  LotgdFormat::colorize($info[0]),
 			  $result
@@ -91,13 +91,13 @@ function lotgd_showform ($layout, $row, $nosave = false, $keypref = false, $prin
 	$content = '';
 
 	foreach ($tabContent as $key => $value) {
-		$text = \sprintf(
+		$text = sprintf(
 		  '<div class="ui form">%s</div>',
-		  \implode('', $value)
+		  implode('', $value)
 		);
 
 		if (0 < $key) {
-			$text = \sprintf(
+			$text = sprintf(
 			  '<div class="hidden border-b border-lotgd-200 pb-3 px-2" data-tabs-target="panel"><div class="italic bg-gradient-to-r from-transparent via-lotgd-800 text-center font-bold border-b border-lotgd-500 py-2 mb-2">%s</div></div>',
 			  $text
 			);
@@ -109,15 +109,15 @@ function lotgd_showform ($layout, $row, $nosave = false, $keypref = false, $prin
 	unset($text);
 
 	if (!empty($tabMenu)) {
-		$tabMenu = \array_chunk($tabMenu, \ceil(\count($tabMenu) / 4));
+		$tabMenu = array_chunk($tabMenu, ceil(count($tabMenu) / 4));
 
 		$popupMenu = '';
 
 		foreach ($tabMenu as $menu) {
-			$popupMenu .= '<div class="column">' . \implode('', $menu) . '</div>';
+			$popupMenu .= '<div class="column">' . implode('', $menu) . '</div>';
 		}
 
-		$menu = \sprintf(
+		$menu = sprintf(
 		  '<div class="grid grid-cols-4 divide-x divide-lotgd-200 border-b border-lotgd-200 py-3 px-2 text-center">%s</div>',
 		  $popupMenu
 		);
@@ -147,7 +147,7 @@ function lotgd_showform ($layout, $row, $nosave = false, $keypref = false, $prin
 
 function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 {
-	$default = \explode('|', $info[1]);
+	$default = explode('|', $info[1]);
 	$title = $default[0];
 	$default = $default[1] ?? null;
 
@@ -158,27 +158,27 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 		case 'theme':
 			// A generic way of allowing a theme to be selected.
 			$skins = [];
-			$handle = @\opendir('templates');
+			$handle = @opendir('templates');
 			// Template directory open failed
 			if (!$handle) {
 				return 'None available';
 			}
 
-			while (false !== ($file = @\readdir($handle))) {
-				if ('html' == \pathinfo($file, PATHINFO_EXTENSION)) {
+			while (false !== ($file = @readdir($handle))) {
+				if ('html' == pathinfo($file, PATHINFO_EXTENSION)) {
 					$skins[] = $file;
 				}
 			}
 			// No templates installed!
-			if (0 == \count($skins)) {
+			if (0 == count($skins)) {
 				return 'None available';
 			}
-			\natcasesort($skins); //sort them in natural order
+			natcasesort($skins); //sort them in natural order
 			$select = "<select class='ui lotgd dropdown' name='{$keyout}'>";
 
 			foreach ($skins as $skin) {
-				$name = \str_replace('-', ' ', \ucfirst(\substr($skin, 0, \strpos($skin, '.htm'))));
-				$select .= "<option value='{$skin}' " . ($skin == $row[$key] ? 'selected' : null) . '>' . \htmlentities(
+				$name = str_replace('-', ' ', ucfirst(substr($skin, 0, strpos($skin, '.htm'))));
+				$select .= "<option value='{$skin}' " . ($skin == $row[$key] ? 'selected' : null) . '>' . htmlentities(
 					$name,
 					ENT_COMPAT,
 					LotgdSetting::getSetting('charset', 'UTF-8')
@@ -208,11 +208,11 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			$vloc['all'] = 1;
 			$vloc = modulehook('validlocation', $vloc);
 			unset($vloc['all']);
-			\reset($vloc);
+			reset($vloc);
 			$select = "<select class='ui lotgd dropdown' name='{$keyout}'>";
 
 			foreach ($vloc as $loc => $val) {
-				$select .= "<option value='{$loc}' " . ($loc == $location ? 'selected' : null) . '>' . \htmlentities(
+				$select .= "<option value='{$loc}' " . ($loc == $location ? 'selected' : null) . '>' . htmlentities(
 					$loc,
 					ENT_COMPAT,
 					LotgdSetting::getSetting('charset', 'UTF-8')
@@ -228,7 +228,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 		// FALLTHROUGH
 		// no break
 		case 'checklist':
-			\reset($info);
+			reset($info);
 			$k = key($info);
 			$v = current($info);
 			next($info);
@@ -243,7 +243,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 				$v = current($info);
 				next($info);
 				$optdis = $v;
-				if (\is_array($row[$key])) {
+				if (is_array($row[$key])) {
 					$checked = false;
 					if ($row[$key][$optval]) {
 						$checked = true;
@@ -268,7 +268,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 		// FALLTHROUGH
 		// no break
 		case 'radio':
-			\reset($info);
+			reset($info);
 			$k = key($info);
 			$v = current($info);
 			next($info);
@@ -294,33 +294,33 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 
 			break;
 		case 'dayrange':
-			$start = \strtotime(\date('Y-m-d', \strtotime('now')));
-			$end = \strtotime($info[2]);
+			$start = strtotime(date('Y-m-d', strtotime('now')));
+			$end = strtotime($info[2]);
 			$step = $info[3];
 			// we should really try to avoid an infinite loop here if
 			// they define a time string which equates to 0 :/
 			$cur = $row[$key];
 			$select = "<select class='ui lotgd dropdown' name='{$keyout}'>";
 
-			if ($cur && $cur < \date('Y-m-d H:i:s', $start)) {
-				$select .= "<option value='{$cur}' selected>" . \htmlentities(
+			if ($cur && $cur < date('Y-m-d H:i:s', $start)) {
+				$select .= "<option value='{$cur}' selected>" . htmlentities(
 					$cur,
 					ENT_COMPAT,
 					LotgdSetting::getSetting('charset', 'UTF-8')
 				  ) . '</option>';
 			}
 
-			for ($j = $start; $j < $end; $j = \strtotime($step, $j)) {
-				$d = \date('Y-m-d H:i:s', $j);
-				$select .= "<option value='{$d}'" . ($cur == $d ? ' selected' : '') . '>' . \htmlentities(
+			for ($j = $start; $j < $end; $j = strtotime($step, $j)) {
+				$d = date('Y-m-d H:i:s', $j);
+				$select .= "<option value='{$d}'" . ($cur == $d ? ' selected' : '') . '>' . htmlentities(
 					"{$d}",
 					ENT_COMPAT,
 					LotgdSetting::getSetting('charset', 'UTF-8')
 				  ) . '</option>';
 			}
 
-			if ($cur && $cur > \date('Y-m-d H:i:s', $end)) {
-				$select .= "<option value='{$cur}' selected>" . \htmlentities(
+			if ($cur && $cur > date('Y-m-d H:i:s', $end)) {
+				$select .= "<option value='{$cur}' selected>" . htmlentities(
 					$cur,
 					ENT_COMPAT,
 					LotgdSetting::getSetting('charset', 'UTF-8')
@@ -343,14 +343,14 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			$select = "<select class='ui lotgd dropdown' name='{$keyout}'>";
 
 			if ($min < $max && ($max - $min) / $step > 300) {
-				$step = \max(1, (int)(($max - $min) / 300));
+				$step = max(1, (int)(($max - $min) / 300));
 			}
 
 			for ($j = $min; $j <= $max; $j += $step) {
 				$select .= "<option value='{$j}'"
 				           . (isset($row[$key]) && $row[$key] == $j ? ' selected' : '')
 				           . '>'
-				           . \htmlentities("{$j}", ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8'))
+				           . htmlentities("{$j}", ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8'))
 				           . '</option>';
 			}
 			$select .= '</select>';
@@ -359,18 +359,18 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 
 			break;
 		case 'floatrange':
-			$min = \round((float)$info[2], 2);
-			$max = \round((float)$info[3], 2);
-			$step = \round((float)$info[4], 2);
+			$min = round((float)$info[2], 2);
+			$max = round((float)$info[3], 2);
+			$step = round((float)$info[4], 2);
 
 			if (0 == $step) {
 				$step = 1;
 			}
 			$select = "<select class='ui lotgd dropdown' name='{$keyout}'>";
-			$val = \round((float)($row[$key] ?? 0), 2);
+			$val = round((float)($row[$key] ?? 0), 2);
 
-			for ($j = $min; $j <= $max; $j = \round($j + $step, 2)) {
-				$select .= "<option value='{$j}'" . ($val == $j ? ' selected' : '') . '>' . \htmlentities(
+			for ($j = $min; $j <= $max; $j = round($j + $step, 2)) {
+				$select .= "<option value='{$j}'" . ($val == $j ? ' selected' : '') . '>' . htmlentities(
 					"{$j}",
 					ENT_COMPAT,
 					LotgdSetting::getSetting('charset', 'UTF-8')
@@ -390,13 +390,13 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			//DisplayName,bitfield,disablemask,(highbit,display)+
 			//1-26-03 added disablemask so this field type can be used
 			// on bitfields other than superuser.
-			\reset($info);
-			\next($info);
-			\next($info);
+			reset($info);
+			next($info);
+			next($info);
 			$k = key($info);
 			$disablemask = current($info);
 			next($info);
-			$disablemask = \trim($disablemask);
+			$disablemask = trim($disablemask);
 			$input = "<input type='hidden' name='{$keyout}" . "[0]' value='1'>";
 
 			foreach ($info as $k => $v) {
@@ -408,12 +408,12 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 					$v = current($info);
 					next($info);
 
-					$input .= \sprintf('<label>%s</label></div><br>', $v);
+					$input .= sprintf('<label>%s</label></div><br>', $v);
 				} else {
 					$k = key($info);
 					$v = current($info);
 					next($info);
-					$input .= \sprintf('%s<br>', $v);
+					$input .= sprintf('%s<br>', $v);
 				}
 			}
 
@@ -465,11 +465,11 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			$select = "<select class='ui lotgd dropdown' name='{$keyout}'>";
 
 			foreach ($vals as $k => $v) {
-				$select .= '<option value="' . \htmlentities(
+				$select .= '<option value="' . htmlentities(
 					$v,
 					ENT_COMPAT,
 					LotgdSetting::getSetting('charset', 'UTF-8')
-				  ) . '"' . ($row[$key] == $v ? ' selected' : '') . '>' . \htmlentities(
+				  ) . '"' . ($row[$key] == $v ? ' selected' : '') . '>' . htmlentities(
 				             $v,
 				             ENT_COMPAT,
 				             LotgdSetting::getSetting('charset', 'UTF-8')
@@ -485,7 +485,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 		// FALLTHROUGH
 		// no break
 		case 'enum':
-			\reset($info);
+			reset($info);
 			$k = key($info);
 			$v = current($info);
 			next($info);
@@ -505,7 +505,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 				if (isset($row[$key]) && $row[$key] == $optval) {
 					$selected = 1;
 				}
-				$select .= "<option value='{$optval}'" . ($selected ? ' selected' : '') . '>' . \htmlentities(
+				$select .= "<option value='{$optval}'" . ($selected ? ' selected' : '') . '>' . htmlentities(
 					"{$optdis}",
 					ENT_COMPAT,
 					LotgdSetting::getSetting('charset', 'UTF-8')
@@ -518,11 +518,11 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			break;
 		case 'password':
 			$out = '';
-			if (\array_key_exists($key, $row)) {
+			if (array_key_exists($key, $row)) {
 				$out = $row[$key];
 			}
 
-			return "<input type='password' name='{$keyout}' value='" . \htmlentities(
+			return "<input type='password' name='{$keyout}' value='" . htmlentities(
 				$out,
 				ENT_COMPAT,
 				LotgdSetting::getSetting('charset', 'UTF-8')
@@ -544,15 +544,15 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 
 		case 'hidden':
 			$val = '';
-			if (\array_key_exists($key, $row)) {
+			if (array_key_exists($key, $row)) {
 				$val = $row[$key];
 			}
 
-			return "<input type='hidden' name='{$keyout}' value=\"" . \htmlentities(
+			return "<input type='hidden' name='{$keyout}' value=\"" . htmlentities(
 				$val,
 				ENT_COMPAT,
 				LotgdSetting::getSetting('charset', 'UTF-8')
-			  ) . '">' . \htmlentities($val, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8'));
+			  ) . '">' . htmlentities($val, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8'));
 
 			break;
 		case 'viewonly':
@@ -567,9 +567,9 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			if (isset($row[$key])) {
 				$text = '<span>' . LotgdFormat::colorize(dump_item($row[$key])) . '</span>';
 				$text .= "<input type='hidden' name='"
-				         . \addslashes($key)
+				         . addslashes($key)
 				         . "' value='"
-				         . \addslashes($row[$key])
+				         . addslashes($row[$key])
 				         . "'>";
 
 				return $text;
@@ -579,9 +579,9 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 		case 'readonly':
 			if (isset($row[$key])) {
 				return "<input type='text' readonly name='"
-				       . \addslashes($key)
+				       . addslashes($key)
 				       . "' value='"
-				       . \addslashes($row[$key])
+				       . addslashes($row[$key])
 				       . "'>";
 			}
 
@@ -596,12 +596,12 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			}
 
 			if (!isset($raw) || !$raw) {
-				$text = \str_replace('`n', "\n", $text);
+				$text = str_replace('`n', "\n", $text);
 			}
 
 			$text = $text ?: '';
 
-			return "<textarea class='input' name='{$keyout}'>" . \htmlentities(
+			return "<textarea class='input' name='{$keyout}'>" . htmlentities(
 				$text,
 				ENT_COMPAT,
 				LotgdSetting::getSetting('charset', 'UTF-8')
@@ -610,7 +610,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 		case 'int':
 			$out = $row[$key] ?? $default ?: 0;
 
-			return "<input type='number' name='{$keyout}' value=\"" . \htmlentities(
+			return "<input type='number' name='{$keyout}' value=\"" . htmlentities(
 				$out,
 				ENT_COMPAT,
 				LotgdSetting::getSetting('charset', 'UTF-8')
@@ -619,7 +619,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 		case 'float':
 			$text = $row[$key] ?? $default ?: 0;
 
-			return "<input type='number' name='{$keyout}' value=\"" . \htmlentities(
+			return "<input type='number' name='{$keyout}' value=\"" . htmlentities(
 				$text,
 				ENT_COMPAT,
 				LotgdSetting::getSetting('charset', 'UTF-8')
@@ -646,28 +646,28 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			}
 
 			$val = '';
-			if (\array_key_exists($key, $row)) {
+			if (array_key_exists($key, $row)) {
 				$val = $row[$key];
 			}
 
-			return "<input type='text' size='{$minlen}' maxlength='{$len}' name='{$keyout}' value=\"" . \htmlentities(
+			return "<input type='text' size='{$minlen}' maxlength='{$len}' name='{$keyout}' value=\"" . htmlentities(
 				$val,
 				ENT_COMPAT,
 				LotgdSetting::getSetting('charset', 'UTF-8')
 			  ) . '">';
 
 		default:
-			if (\array_key_exists($info[1], $extensions)) {
+			if (array_key_exists($info[1], $extensions)) {
 				$func = $extensions[$info[1]];
 
 				$val = '';
-				if (\array_key_exists($key, $row)) {
+				if (array_key_exists($key, $row)) {
 					$val = $row[$key];
 				}
-				\call_user_func($func, $keyout, $val, $info);
+				call_user_func($func, $keyout, $val, $info);
 			} else {
 				$val = '';
-				if (\array_key_exists($key, $row)) {
+				if (array_key_exists($key, $row)) {
 					$val = $row[$key];
 				}
 
@@ -675,7 +675,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 					$val = $val->format(DateTime::ISO8601);
 				}
 
-				return "<input type='text' name='{$keyout}' value=\"" . \htmlentities(
+				return "<input type='text' name='{$keyout}' value=\"" . htmlentities(
 					$val,
 					ENT_COMPAT,
 					LotgdSetting::getSetting('charset', 'UTF-8')
