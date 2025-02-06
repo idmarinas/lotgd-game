@@ -35,7 +35,7 @@ use Twig\Test\IntegrationTestCase;
  */
 class IntegrationTest extends IntegrationTestCase
 {
-	public function getExtensions ()
+	protected function getExtensions ()
 	{
 		$client = (new Kernel())->returnClient();
 		$container = $client->getContainer();
@@ -64,7 +64,7 @@ class IntegrationTest extends IntegrationTestCase
 		];
 	}
 
-	public function getFixturesDir ()
+	protected function getFixturesDir ()
 	{
 		return __DIR__ . '/Fixtures/';
 	}

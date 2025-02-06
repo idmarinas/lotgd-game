@@ -617,6 +617,7 @@ if ( ! function_exists('bell_rand'))
                 99997 => 1.712548831,
             ];
         }
+
         $r = \mt_rand(0, 100000);
         \reset($bell_curve);
 
@@ -627,6 +628,7 @@ if ( ! function_exists('bell_rand'))
                 return $min + $val * ($max - $min);
             }
         }
+
         //We're above 0.99997
         return $min + $val * ($max - $min);
     }

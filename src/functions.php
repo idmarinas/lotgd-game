@@ -26,12 +26,14 @@ if ( ! \function_exists('e_rand'))
         {
             return \mt_rand();
         }
+
         $min = \round($min);
 
         if ( ! \is_numeric($max))
         {
             return $min;
         }
+
         $max = \round($max);
 
         return \mt_rand(\min($min, $max), \max($min, $max));
@@ -54,12 +56,14 @@ if ( ! \function_exists('r_rand'))
         {
             return \mt_rand();
         }
+
         $min *= 1000;
 
         if ( ! \is_numeric($max))
         {
             return \mt_rand($min) / 1000;
         }
+
         $max *= 1000;
 
         return \mt_rand(\min($min, $max), \max($min, $max)) / 1000;
@@ -103,8 +107,9 @@ if ( ! \function_exists('safeescape'))
 
             if (("'" == $char || '"' == $char) && '\\' != $prevchar)
             {
-                $char = "\\{$char}";
+                $char = '\\' . $char;
             }
+
             $out .= $char;
             $prevchar = $char;
         }
