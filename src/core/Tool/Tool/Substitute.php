@@ -14,7 +14,7 @@ namespace Lotgd\Core\Tool\Tool;
 
 trait Substitute
 {
-    function substitute(?string $string, ?array $extraSearch = null, ?array $extraReplace = null)
+    public function substitute(?string $string, ?array $extraSearch = null, ?array $extraReplace = null)
     {
         global $session;
 
@@ -51,7 +51,7 @@ trait Substitute
         return \str_replace($search, $replace, $string);
     }
 
-    function substituteArray(?string $string, ?array $extraSearch = null, ?array $extraReplace = null)
+    public function substituteArray(?string $string, ?array $extraSearch = null, ?array $extraReplace = null)
     {
         global $session;
         // separate substitutions for gender items (makes 2 translations per

@@ -51,9 +51,9 @@ class MountsRepository extends ServiceEntityRepository
 
             return $query->getResult();
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -78,9 +78,9 @@ class MountsRepository extends ServiceEntityRepository
 
             return true;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return false;
         }
@@ -111,9 +111,9 @@ class MountsRepository extends ServiceEntityRepository
 
             return $query->getResult();
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -137,9 +137,9 @@ class MountsRepository extends ServiceEntityRepository
 
             return $query->getArrayResult()[0];
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }
@@ -163,9 +163,9 @@ class MountsRepository extends ServiceEntityRepository
 
             return $query->getArrayResult();
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }

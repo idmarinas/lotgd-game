@@ -53,9 +53,9 @@ class CompanionsRepository extends ServiceEntityRepository
 
             return $query->getArrayResult();
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -79,9 +79,9 @@ class CompanionsRepository extends ServiceEntityRepository
 
             return $query->getArrayResult()[0];
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }
@@ -105,9 +105,9 @@ class CompanionsRepository extends ServiceEntityRepository
 
             return $query->getArrayResult();
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }
@@ -129,9 +129,9 @@ class CompanionsRepository extends ServiceEntityRepository
 
             return $query->getResult();
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }

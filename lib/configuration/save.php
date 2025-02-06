@@ -2,7 +2,7 @@
 
 use Lotgd\Core\Event\Core;
 
-$charRepository = \Doctrine::getRepository('LotgdCore:Avatar');
+$charRepository = Doctrine::getRepository('LotgdCore:Avatar');
 
 $flashMessages = '';
 
@@ -10,14 +10,14 @@ if (1 == (int) $postSettings['blockdupeemail'] && 1 != (int) $postSettings['requ
 {
     $postSettings['requirevalidemail'] = 1;
 
-    $flashMessages .= \LotgdTranslator::t('flash.message.default.save.requirevalidemail', [], $textDomain);
+    $flashMessages .= LotgdTranslator::t('flash.message.default.save.requirevalidemail', [], $textDomain);
 }
 
 if (1 == (int) $postSettings['requirevalidemail'] && 1 != (int) $postSettings['requireemail'])
 {
     $postSettings['requireemail'] = 1;
 
-    $flashMessages .= \LotgdTranslator::t('flash.message.default.save.requireemail', [], $textDomain);
+    $flashMessages .= LotgdTranslator::t('flash.message.default.save.requireemail', [], $textDomain);
 }
 
 if ('' != $postSettings['defaultsuperuser'])
@@ -37,7 +37,7 @@ if ('' != $postSettings['defaultsuperuser'])
 //-- Moving players if change name of village
 if ($postSettings['villagename'] && $postSettings['villagename'] != LotgdSetting::getSetting('villagename', LOCATION_FIELDS))
 {
-    \LotgdResponse::pageDebug('Updating village name -- moving players');
+    LotgdResponse::pageDebug('Updating village name -- moving players');
 
     //-- Moving from, to
     $charRepository->movingPlayersToLocation(LotgdSetting::getSetting('villagename', LOCATION_FIELDS), $postSettings['villagename']);
@@ -76,20 +76,20 @@ foreach ($postSettings as $key => $val)
 
         LotgdSetting::saveSetting($key, $val);
 
-        $flashMessages .= \LotgdTranslator::t('flash.message.default.save.change.setting', ['key' => $key, 'oldValue' => $old[$key], 'newValue' => $val], $textDomain);
+        $flashMessages .= LotgdTranslator::t('flash.message.default.save.change.setting', ['key' => $key, 'oldValue' => $old[$key], 'newValue' => $val], $textDomain);
 
-        \LotgdLog::game("`@Changed core setting `^{$key}`@ from `#{$old[$key]}`@ to `&{$val}`0", 'settings');
+        LotgdLog::game("`@Changed core setting `^{$key}`@ from `#{$old[$key]}`@ to `&{$val}`0", 'settings');
 
         // Notify every module
         $args = new Core(['module' => 'core', 'setting' => $key, 'old' => $old[$key], 'new' => $val]);
-        \LotgdEventDispatcher::dispatch($args, Core::SETTING_CHANGE);
+        LotgdEventDispatcher::dispatch($args, Core::SETTING_CHANGE);
         modulehook('changesetting', $args->getData(), true);
     }
 }
 
-$flashMessages .= \LotgdTranslator::t('flash.message.default.save.saved', [], $textDomain);
+$flashMessages .= LotgdTranslator::t('flash.message.default.save.saved', [], $textDomain);
 
 $op = '';
-\LotgdRequest::setQuery($op, '');
+LotgdRequest::setQuery($op, '');
 
-\LotgdFlashMessages::addInfoMessage($flashMessages);
+LotgdFlashMessages::addInfoMessage($flashMessages);

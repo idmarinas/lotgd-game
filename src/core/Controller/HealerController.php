@@ -75,12 +75,12 @@ class HealerController extends AbstractController
 
         $this->navigation->addHeader('category.return');
 
-        if ('' == $return)
+        if ('' === $return)
         {
             $this->navigation->addNav('nav.return.forest', 'forest.php');
             $this->navigation->villageNav();
         }
-        elseif ('village.php' == $return)
+        elseif ('village.php' === $return)
         {
             $this->navigation->villageNav();
         }

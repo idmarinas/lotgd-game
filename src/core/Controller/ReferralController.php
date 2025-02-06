@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Repository\UserRepository;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Http\Response as HttpResponse;
@@ -88,7 +89,7 @@ class ReferralController extends AbstractController
         $params['refererAward']  = $this->settings->getSetting('refereraward', 25);
         $params['referMinLevel'] = $this->settings->getSetting('referminlevel', 4);
 
-        /** @var Lotgd\Core\Repository\UserRepository $repository */
+        /** @var UserRepository $repository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:User');
         $query      = $repository->createQueryBuilder('u');
 

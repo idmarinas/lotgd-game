@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Pvp;
 
+use Lotgd\Core\Repository\AvatarRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Combat\Battle;
@@ -67,7 +68,7 @@ class Support
         $pvptime    = $this->settings->getSetting('pvptimeout', 600);
         $pvptimeout = new DateTime(date('Y-m-d H:i:s', strtotime("-{$pvptime} seconds")));
 
-        /** @var \Lotgd\Core\Repository\AvatarRepository $repository */
+        /** @var AvatarRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Avatar');
         $entity     = $repository->getCharacterForPvp($characterId);
 

@@ -20,7 +20,7 @@ $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-/** @var Lotgd\Core\Http\Request $request */
+/** @var Request $request */
 $request = LotgdKernel::get(Request::class);
 
 //-- Init page
@@ -39,13 +39,13 @@ $op = (string) $request->query->get('op');
 LotgdNavigation::setTextDomain($textDomainNavigation);
 
 LotgdNavigation::addHeader('category.navigation');
-if ('pay' == $op)
+if ('pay' === $op)
 {
     $method = 'pay';
 
     LotgdNavigation::villageNav();
 }
-elseif ('talk' == $op)
+elseif ('talk' === $op)
 {
     LotgdResponse::pageTitle('title.talk', [], $textDomain);
 

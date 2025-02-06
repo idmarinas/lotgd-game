@@ -24,4 +24,4 @@ class Log
     use StaticTrait;
 }
 
-class_alias('Lotgd\Core\Fixed\Log', 'LotgdLog', false);
+class_alias(\Lotgd\Core\Fixed\Log::class, 'LotgdLog', false);

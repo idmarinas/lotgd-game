@@ -15,7 +15,6 @@ namespace Lotgd\Core\Form;
 
 use Laminas\Filter\Digits;
 use Laminas\Filter\StripTags;
-use Laminas\Filter;
 use Lotgd\Core\Controller\MailController;
 use Lotgd\Core\Form\Type\AutocompleteType;
 use Lotgd\Core\Form\Type\TextareaLimitType;

@@ -82,7 +82,7 @@ final class AvatarCleanCommand extends Command
 
             $style->text('Clean old content and comments of game data base');
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return 1;
         }

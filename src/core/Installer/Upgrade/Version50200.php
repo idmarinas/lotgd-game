@@ -59,7 +59,7 @@ class Version50200 extends InstallerAbstract
                 $this->getProjectDir().'/src/core/Fixed/SymfonyForm.php',
             ]);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }

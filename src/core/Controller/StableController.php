@@ -191,7 +191,7 @@ class StableController extends AbstractController
                 $params['mountName']    = $mount['mountname'];
                 $playermount            = $mount;
 
-                if ( ! empty($mount))
+                if ( $mount !== [])
                 {
                     $params['repaygold'] = round($mount['mountcostgold'] * 2 / 3, 0);
                     $params['repaygems'] = round($mount['mountcostgems'] * 2 / 3, 0);
@@ -237,7 +237,7 @@ class StableController extends AbstractController
         $params['repayGold'] = $params['repaygold'];
         $params['repayGems'] = $params['repaygems'];
 
-        $params['mountName'] = ($params['player_mount']['newname'] ? $params['player_mount']['newname'] : $params['player_mount']['mountname']);
+        $params['mountName'] = ($params['player_mount']['newname'] ?: $params['player_mount']['mountname']);
 
         return $this->renderStable($params);
     }

@@ -24,7 +24,7 @@ trait SetSpecialtyTrait
 
         $setspecialty = (string) $request->query->get('setspecialty');
 
-        if ('' != $setspecialty)
+        if ('' !== $setspecialty)
         {
             $session['user']['specialty'] = $setspecialty;
             $this->dispatcher->dispatch(new Core(), Core::SPECIALTY_SET);

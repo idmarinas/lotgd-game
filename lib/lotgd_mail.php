@@ -69,7 +69,7 @@ function lotgd_mail ($to, $subject, $message, $additional_headers = '', $additio
 
 	try {
 		$mailer->send($email);
-	} catch (Throwable $ex) {
-		Debugger::log($ex);
+	} catch (Throwable $throwable) {
+		Debugger::log($throwable);
 	}
 }

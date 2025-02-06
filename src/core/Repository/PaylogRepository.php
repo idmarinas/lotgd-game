@@ -58,9 +58,9 @@ class PaylogRepository extends ServiceEntityRepository
 
             return true;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return false;
         }
@@ -77,9 +77,9 @@ class PaylogRepository extends ServiceEntityRepository
                 ->getArrayResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -115,9 +115,9 @@ class PaylogRepository extends ServiceEntityRepository
                 ->getResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }

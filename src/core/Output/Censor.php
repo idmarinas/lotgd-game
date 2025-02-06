@@ -40,7 +40,7 @@ class Censor extends CensorWords
             //-- Try add locale dictionary
             $this->addDictionary($locale);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             //-- If fail add en-base dictionary
             $this->addDictionary('en-base');

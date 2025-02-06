@@ -27,7 +27,7 @@ $repository = Doctrine::getRepository('LotgdCore:Masters');
 
 LotgdNavigation::superuserGrottoNav();
 
-if ('del' == $op)
+if ('del' === $op)
 {
     $master = $repository->find($masterId);
 
@@ -46,7 +46,7 @@ if ('del' == $op)
 
     redirect('masters.php');
 }
-elseif ('edit' == $op)
+elseif ('edit' === $op)
 {
     $params['tpl'] = 'edit';
 
@@ -92,7 +92,7 @@ elseif ('edit' == $op)
     $params['form'] = $form->createView();
 }
 
-if ('' == $op)
+if ('' === $op)
 {
     $params['tpl'] = 'default';
 

@@ -29,7 +29,7 @@ $repository = Doctrine::getRepository('LotgdCore:Titles');
 
 LotgdNavigation::addHeader('titleedit.category.functions');
 
-if ('delete' == $op)
+if ('delete' === $op)
 {
     $entity = $repository->find($id);
 

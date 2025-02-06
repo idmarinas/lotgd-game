@@ -47,7 +47,7 @@ $params['txnid'] = $txnid;
 LotgdNavigation::superuserGrottoNav();
 LotgdNavigation::addNav('donators.nav.refresh', 'donators.php');
 
-if ('save' == $op)
+if ('save' === $op)
 {
     $id = (int) LotgdRequest::getQuery('id');
 
@@ -134,7 +134,7 @@ if ('save' == $op)
     $op = '';
 }
 
-if ('add' == $op)
+if ('add' === $op)
 {
     $params['tpl'] = 'add';
 
@@ -155,7 +155,7 @@ if ('add' == $op)
 
     $params['paginator'] = $acctRepository->getPaginator($query, $page);
 }
-elseif ('' == $op || $op)
+elseif ('' === $op || $op)
 {
     $params['tpl'] = 'default';
 

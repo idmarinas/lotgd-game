@@ -33,4 +33,4 @@ class Sanitize
     use StaticTrait;
 }
 
-class_alias('Lotgd\Core\Fixed\Sanitize', 'LotgdSanitize', false);
+class_alias(\Lotgd\Core\Fixed\Sanitize::class, 'LotgdSanitize', false);

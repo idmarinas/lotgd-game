@@ -116,25 +116,25 @@ class AboutController extends AbstractController
         $this->navigation->addNav('about.nav.bundle', 'about.php?op=bundles');
         $this->navigation->addNav('about.nav.license', 'about.php?op=license');
 
-        if ('listmodules' == $op)
+        if ('listmodules' === $op)
         {
             $this->navigation->blockLink('about.php?op=listmodules');
 
             $method = 'modules';
         }
-        elseif ('bundles' == $op)
+        elseif ('bundles' === $op)
         {
             $this->navigation->blockLink('about.php?op=bundles');
 
             $method = 'bundles';
         }
-        elseif ('setup' == $op)
+        elseif ('setup' === $op)
         {
             $this->navigation->blockLink('about.php?op=setup');
 
             $method = 'setup';
         }
-        elseif ('license' == $op)
+        elseif ('license' === $op)
         {
             $this->navigation->blockLink('about.php?op=license');
 

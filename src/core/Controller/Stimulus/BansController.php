@@ -58,7 +58,7 @@ class BansController extends AbstractController implements LotgdControllerInterf
 			;
 
 			$result = $query->execute();
-		} catch (Throwable $exception) {
+		} catch (Throwable $throwable) {
 			$result = [];
 		}
 

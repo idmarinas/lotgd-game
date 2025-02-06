@@ -26,13 +26,13 @@ LotgdNavigation::addNav('rawsql.nav.php', 'rawsql.php?op=php');
 
 $op = (string) LotgdRequest::getQuery('op');
 
-if ('' == $op || 'sql' == $op)
+if ('' === $op || 'sql' === $op)
 {
     $params['tpl'] = 'default';
 
     $sql = (string) LotgdRequest::getPost('sql');
 
-    if ('' != $sql)
+    if ('' !== $sql)
     {
         $params['isResult'] = true;
 

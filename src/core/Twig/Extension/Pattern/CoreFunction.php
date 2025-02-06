@@ -14,7 +14,7 @@
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Twig\Environment as Environment;
+use Twig\Environment;
 
 trait CoreFunction
 {

@@ -65,9 +65,9 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->getSingleResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return $default;
         }
@@ -91,9 +91,9 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->getSingleScalarResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }
@@ -142,9 +142,9 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->getResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -174,9 +174,9 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->getResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -220,9 +220,9 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->getSingleResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -247,9 +247,9 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->execute()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return 0;
         }
@@ -282,9 +282,9 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->getSingleResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -315,9 +315,9 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->getSingleScalarResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return 0;
         }
@@ -342,9 +342,9 @@ class MailRepository extends ServiceEntityRepository implements RepositoryBackup
                 ->execute()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return 0;
         }

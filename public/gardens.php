@@ -12,7 +12,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 require_once 'common.php';
 require_once 'lib/events.php';
 
-/** @var Lotgd\Core\Http\Request $request */
+/** @var Request $request */
 $request = LotgdKernel::get(Request::class);
 
 // Don't hook on to this text for your standard modules please, use "gardens" instead.

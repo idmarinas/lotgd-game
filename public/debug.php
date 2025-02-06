@@ -44,7 +44,7 @@ $query->select('u.category', 'u.subcategory', 'sum(u.value) AS sum', 'sum(u.valu
     ->setParameter('type', 'pagegentime')
 ;
 
-if ('hooksort' == $debug)
+if ('hooksort' === $debug)
 {
     $query->setParameter('type', 'hooktime');
 }

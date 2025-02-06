@@ -48,9 +48,9 @@ class AccountsOutputRepository extends ServiceEntityRepository
                 ->getSingleScalarResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return '';
         }
@@ -72,9 +72,9 @@ class AccountsOutputRepository extends ServiceEntityRepository
                 ->execute()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return 0;
         }

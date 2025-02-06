@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Installer\Command;
 
+use Lotgd\Core\Kernel;
 use Lotgd\Core\Installer\InstallerAbstract;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\LockableTrait;
@@ -52,7 +53,7 @@ abstract class AbstractCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        /** @var Lotgd\Core\Kernel $app */
+        /** @var Kernel $app */
         $app    = $this->getApplication();
         $kernel = $app->getKernel();
 

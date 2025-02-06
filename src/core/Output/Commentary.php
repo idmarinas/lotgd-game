@@ -24,7 +24,6 @@ use Laminas\Filter\Callback;
 use HTMLPurifier;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
-use Laminas\Filter;
 use Lotgd\Core\Entity as LotgdEntity;
 use Lotgd\Core\Entity\Commentary as EntityCommentary;
 use Lotgd\Core\Event\Commentary as EventCommentary;

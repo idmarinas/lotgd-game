@@ -65,9 +65,9 @@ class ClansRepository extends ServiceEntityRepository
                 ->getResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -87,9 +87,9 @@ class ClansRepository extends ServiceEntityRepository
 
             return $entity->getClanid();
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }

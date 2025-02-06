@@ -16,7 +16,7 @@ $ascDescRaw = (int) LotgdRequest::getQuery('direction');
 $sort    = $sort ?: 'count';
 $ascDesc = 0 !== $ascDescRaw ? 'ASC' : 'DESC';
 
-if ('rebuild' == $op)
+if ('rebuild' === $op)
 {
     $result = $repository->findAll();
 
@@ -34,7 +34,7 @@ if ('rebuild' == $op)
         Doctrine::persist($row);
     }
 }
-elseif ('expire' == $op)
+elseif ('expire' === $op)
 {
     $expire = (int) LotgdSetting::getSetting('expirecontent', 180);
 

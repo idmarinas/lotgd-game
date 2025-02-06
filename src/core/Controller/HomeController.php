@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Repository\UserRepository;
 use Lotgd\Core\Kernel;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
@@ -92,7 +93,7 @@ class HomeController extends AbstractController
 
         if (abs($this->settings->getSetting('OnlineCountLast', 0) - strtotime('now')) > 60)
         {
-            /** @var \Lotgd\Core\Repository\UserRepository $account */
+            /** @var UserRepository $account */
             $account = $this->getDoctrine()->getRepository('LotgdCore:User');
 
             $this->settings->saveSetting('OnlineCount', $account->getCountAcctsOnline((int) $this->settings->getSetting('LOGINTIMEOUT', 900)));

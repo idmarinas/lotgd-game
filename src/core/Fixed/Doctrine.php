@@ -157,4 +157,4 @@ class Doctrine
     }
 }
 
-class_alias('Lotgd\Core\Fixed\Doctrine', 'Doctrine', false);
+class_alias(\Lotgd\Core\Fixed\Doctrine::class, 'Doctrine', false);

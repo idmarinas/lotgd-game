@@ -143,6 +143,7 @@ class PetitionController extends AbstractController
         $form->remove('problem_type');
         $form->add('playerAbuseId', HiddenType::class);
         $form->add('abuseMessage', HiddenType::class);
+
         $formEmpty = clone $form;
 
         $form->handleRequest($request);

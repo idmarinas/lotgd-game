@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Repository\UserRepository;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
 use Lotgd\Core\Http\Response as HttpResponse;
@@ -58,7 +59,7 @@ class HofController extends AbstractController
         $page  = $request->query->getInt('page');
         $subop = $subop ?: 'best';
         $op    = $op ?: 'kills';
-        $order = ('worst' == $subop) ? 'ASC' : 'DESC';
+        $order = ('worst' === $subop) ? 'ASC' : 'DESC';
 
         //-- Change text domain for navigation
         $this->navigation->setTextDomain($textDomainNavigation);
@@ -421,7 +422,7 @@ class HofController extends AbstractController
 
     private function renderHof(array $params): Response
     {
-        /** @var Lotgd\Core\Repository\UserRepository $repository */
+        /** @var UserRepository $repository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:User');
 
         $params['paginator'] = $repository->getPaginator($params['query'], $params['page'], 25);
@@ -448,7 +449,7 @@ class HofController extends AbstractController
 
     private function getQuery()
     {
-        /** @var Lotgd\Core\Repository\UserRepository $repository */
+        /** @var UserRepository $repository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:User');
         $query      = $repository->createQueryBuilder('u');
 

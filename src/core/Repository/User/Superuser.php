@@ -38,9 +38,9 @@ trait Superuser
                 ->getArrayResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }
@@ -62,9 +62,9 @@ trait Superuser
                 ->getSingleScalarResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return 0;
         }
@@ -91,9 +91,9 @@ trait Superuser
                 ->getArrayResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }

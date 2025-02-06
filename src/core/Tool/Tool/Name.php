@@ -20,10 +20,10 @@ trait Name
 
         if ( ! $old)
         {
-            return (string) ($session['user']['ctitle'] ? $session['user']['ctitle'] : $session['user']['title']);
+            return (string) ($session['user']['ctitle'] ?: $session['user']['title']);
         }
 
-        return (string) ($old['ctitle'] ? $old['ctitle'] : $old['title']);
+        return (string) ($old['ctitle'] ?: $old['title']);
     }
 
     public function getPlayerBasename($old = null): string
@@ -73,7 +73,7 @@ trait Name
 
             if (0 === $x)
             {
-                $newname = trim(substr($newname, $x + \strlen($title)));
+                $newname = trim(substr($newname, \strlen($title)));
             }
 
             $newname = $title.' '.$newname;

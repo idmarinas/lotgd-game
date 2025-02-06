@@ -35,4 +35,4 @@ class Navigation
     use StaticTrait;
 }
 
-class_alias('Lotgd\Core\Fixed\Navigation', 'LotgdNavigation', false);
+class_alias(\Lotgd\Core\Fixed\Navigation::class, 'LotgdNavigation', false);

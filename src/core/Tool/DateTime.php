@@ -48,7 +48,7 @@ class DateTime
                 $post = $_POST;
                 unset($post['i_am_a_hack']);
 
-                if ( ! empty($post))
+                if ( $post !== [])
                 {
                     $session['user']['lasthit'] = new \DateTime('0000-00-00 00:00:00');
                 }
@@ -136,7 +136,7 @@ class DateTime
 
     public function secondsToNextGameDay(?array $details = null)
     {
-        if ( ! $details || empty($details))
+        if ( ! $details || $details === [])
         {
             $details = $this->gameTimeDetails();
         }

@@ -10,17 +10,17 @@ function module_delete_objprefs($objtype, $objid)
 {
     global $mostrecentmodule;
 
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
+    $repository = Doctrine::getRepository('LotgdCore:ModuleObjprefs');
     $entities   = $repository->findBy(['objtype' => $objtype, 'objid' => $objid]);
 
     foreach ($entities as $entity)
     {
-        \Doctrine::remove($entity);
+        Doctrine::remove($entity);
     }
 
-    \Doctrine::flush();
+    Doctrine::flush();
 
-    \LotgdKernel::get('core.lotgd.cache')->invalidateTags(["module-objpref-{$objtype}-{$objid}"]);
+    LotgdKernel::get('core.lotgd.cache')->invalidateTags(["module-objpref-{$objtype}-{$objid}"]);
 }
 
 /**
@@ -71,6 +71,7 @@ function get_module_objpref($objtype, $objid, $name, $module = false)
             return $x[1];
         }
     }
+    return null;
 }
 
 /**
@@ -91,7 +92,7 @@ function set_module_objpref($objtype, $objid, $name, $value, $module = false)
         $module = $mostrecentmodule;
     }
 
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
+    $repository = Doctrine::getRepository('LotgdCore:ModuleObjprefs');
     $entity     = $repository->findOneBy(['modulename' => $module, 'setting' => $name, 'objtype' => $objtype, 'objid' => $objid]);
     $entity     = $repository->hydrateEntity([
         'modulename' => $module,
@@ -101,10 +102,10 @@ function set_module_objpref($objtype, $objid, $name, $value, $module = false)
         'value'      => $value,
     ], $entity);
 
-    \Doctrine::persist($entity);
-    \Doctrine::flush();
+    Doctrine::persist($entity);
+    Doctrine::flush();
 
-    \LotgdKernel::get('core.lotgd.cache')->delete("module-objpref-{$objtype}-{$objid}-{$module}");
+    LotgdKernel::get('core.lotgd.cache')->delete("module-objpref-{$objtype}-{$objid}-{$module}");
 }
 
 /**
@@ -127,7 +128,7 @@ function increment_module_objpref($objtype, $objid, $name, $value = 1, $module =
         $module = $mostrecentmodule;
     }
 
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
+    $repository = Doctrine::getRepository('LotgdCore:ModuleObjprefs');
     $entity     = $repository->findOneBy(['modulename' => $module, 'setting' => $name, 'objtype' => $objtype, 'objid' => $objid]);
     $entity     = $repository->hydrateEntity([
         'modulename' => $module,
@@ -139,10 +140,10 @@ function increment_module_objpref($objtype, $objid, $name, $value = 1, $module =
     $value = ((float) $entity->getValue()) + $value;
     $entity->setValue($value);
 
-    \Doctrine::persist($entity);
-    \Doctrine::flush();
+    Doctrine::persist($entity);
+    Doctrine::flush();
 
-    \LotgdKernel::get('core.lotgd.cache')->delete("module-objpref-{$objtype}-{$objid}-{$module}");
+    LotgdKernel::get('core.lotgd.cache')->delete("module-objpref-{$objtype}-{$objid}-{$module}");
 }
 
 /**
@@ -162,14 +163,14 @@ function load_module_objpref($objtype, $objid, $module = false): array
     }
 
     $objid = (int) $objid;
-    $cache = \LotgdKernel::get('core.lotgd.cache');
+    $cache = LotgdKernel::get('core.lotgd.cache');
 
     return $cache->get("module-objpref-{$objtype}-{$objid}-{$module}", function ($item) use ($module, $objtype, $objid)
     {
         $item->expiresAfter(600);
         $item->tag("module-objpref-{$objtype}-{$objid}");
 
-        $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
+        $repository = Doctrine::getRepository('LotgdCore:ModuleObjprefs');
         $result     = $repository->findBy(['modulename' => $module, 'objtype' => $objtype, 'objid' => $objid]);
 
         $module_objpref = [];

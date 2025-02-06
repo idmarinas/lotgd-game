@@ -216,7 +216,7 @@ trait Buff
 
                     $auraeffect = (int) \round($buff['regen'] / 3);
 
-                    if (\is_array($companions) && ! empty($companions) && 0 != $auraeffect)
+                    if (\is_array($companions) && $companions !== [] && 0 != $auraeffect)
                     {
                         foreach ($companions as $name => $companion)
                         {

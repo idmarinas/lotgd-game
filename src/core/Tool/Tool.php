@@ -12,6 +12,10 @@
 
 namespace Lotgd\Core\Tool;
 
+use Lotgd\Core\Entity\User;
+use Lotgd\Core\Repository\BansRepository;
+use Lotgd\Core\Repository\MountsRepository;
+use Lotgd\Core\Repository\UserRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Laminas\Hydrator\ClassMethodsHydrator;
@@ -28,7 +32,6 @@ use Lotgd\Core\Tool\Tool\Name;
 use Lotgd\Core\Tool\Tool\Substitute;
 use Lotgd\Core\Tool\Tool\Taunt;
 use Lotgd\Core\Tool\Tool\Title;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -171,7 +174,7 @@ class Tool
         else
         {
             $repository = $this->doctrine->getRepository('LotgdCore:User');
-            /** @var \Lotgd\Core\Entity\User $result */
+            /** @var User $result */
             $result = $repository->findOneBy(['login' => $login]);
 
             if ($result && ($result->getBanoverride() || ($result->getSuperuser() & ~SU_DOESNT_GIVE_GROTTO)))
@@ -185,7 +188,7 @@ class Tool
             $id = $result->getUniqueid();
         }
 
-        /** @var \Lotgd\Core\Repository\BansRepository $repository */
+        /** @var BansRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Bans');
         $repository->removeExpireBans();
 
@@ -248,7 +251,7 @@ class Tool
             return null;
         }
 
-        /** @var \Lotgd\Core\Repository\MountsRepository $repository */
+        /** @var MountsRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Mounts');
 
         return $repository->extractEntity($repository->find($horse));
@@ -274,7 +277,7 @@ class Tool
             return SEX_MALE == $session['user']['prefs']['sexuality'] ? $partnerMale : $partnerFemale;
         }
 
-        /** @var \Lotgd\Core\Repository\UserRepository $repository */
+        /** @var UserRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:User');
         $name       = $repository->getCharacterNameFromAcctId($session['user']['marriedto']);
 

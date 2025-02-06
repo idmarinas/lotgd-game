@@ -26,7 +26,7 @@ trait DeleteFilesTrait
         {
             $fs->remove($files);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }

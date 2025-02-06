@@ -25,7 +25,7 @@ trait RenderBlockTrait
     {
         $content = $this->container->get('twig')->load($view)->renderBlock($block, $parameters);
 
-        if (null === $response)
+        if (!$response instanceof Response)
         {
             $response = new Response();
         }

@@ -64,7 +64,7 @@ LotgdNavigation::addHeader('moderate.category.clan.halls');
 //-- Init page
 LotgdResponse::pageStart('title', [], $textDomain);
 
-if ('' == $op)
+if ('' === $op)
 {
     $params['tpl'] = '' !== $area && '0' !== $area ? 'area' : 'default';
 }

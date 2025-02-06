@@ -18,7 +18,6 @@ use Doctrine\ORM\Mapping as ORM;
 trait IdTrait
 {
     /**
-     * @var int|null
      *
      * @ORM\Column(type="integer", options={"unsigned"=true})
      * @ORM\Id

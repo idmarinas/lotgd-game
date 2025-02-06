@@ -41,11 +41,11 @@ trait Bans
         //-- Order
         $sort = "u.{$order}";
 
-        if ('name' == $order)
+        if ('name' === $order)
         {
             $sort = 'c.name';
         }
-        elseif ('level' == $order)
+        elseif ('level' === $order)
         {
             $sort = 'c.level';
         }
@@ -80,9 +80,9 @@ trait Bans
                 ->getSingleResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -109,9 +109,9 @@ trait Bans
                 ->getResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -163,9 +163,9 @@ trait Bans
                 ->getResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -182,7 +182,7 @@ trait Bans
 
             $query->set('u.loggedin', 0);
 
-            if ('ip' == $type)
+            if ('ip' === $type)
             {
                 $query->where('u.lastip = :ip')
                     ->setParameter('ip', $ip)
@@ -199,9 +199,9 @@ trait Bans
                 ->execute()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return 0;
         }

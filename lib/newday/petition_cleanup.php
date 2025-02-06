@@ -1,6 +1,6 @@
 <?php
 
-$repository = \Doctrine::getRepository('LotgdCore:Petitions');
+$repository = Doctrine::getRepository('LotgdCore:Petitions');
 
 //-- Delete old petitions
 $repository->deleteOldPetitions();

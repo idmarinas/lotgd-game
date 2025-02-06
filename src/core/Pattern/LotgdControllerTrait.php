@@ -23,7 +23,7 @@ trait LotgdControllerTrait
     /**
      * Adds a notification to the current session for type.
      *
-     * @throws \LogicException
+     * @throws LogicException
      * @return never
      */
     protected function addNotification(string $type, $message)
@@ -43,7 +43,7 @@ trait LotgdControllerTrait
     {
         $content = $this->container->get('twig')->load($view)->renderBlock($block, $parameters);
 
-        if (null === $response)
+        if (!$response instanceof Response)
         {
             $response = new Response();
         }

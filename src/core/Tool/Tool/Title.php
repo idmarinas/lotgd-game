@@ -27,6 +27,7 @@ trait Title
 
         $query = $repository->createTranslatebleQuery($query);
         $query->setParameter('dk', $dks);
+
         $result = $query->getResult();
 
         $d = $result[0]->getDk();

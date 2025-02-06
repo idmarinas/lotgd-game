@@ -40,9 +40,9 @@ class SettingsRepository extends ServiceEntityRepository
 
             return $query->getSingleScalarResult();
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return '';
         }
@@ -61,9 +61,9 @@ class SettingsRepository extends ServiceEntityRepository
                 ->execute()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
         }
 
         return $this;

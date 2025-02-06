@@ -53,9 +53,9 @@ class AvatarRepository extends ServiceEntityRepository
                 ->getSingleScalarResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }
@@ -95,9 +95,9 @@ class AvatarRepository extends ServiceEntityRepository
 
             return array_merge($character, $account);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -122,9 +122,9 @@ class AvatarRepository extends ServiceEntityRepository
                 ->getSingleResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }

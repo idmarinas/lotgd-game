@@ -37,4 +37,4 @@ class Tool
     use StaticTrait;
 }
 
-class_alias('Lotgd\Core\Fixed\Tool', 'LotgdTool', false);
+class_alias(\Lotgd\Core\Fixed\Tool::class, 'LotgdTool', false);

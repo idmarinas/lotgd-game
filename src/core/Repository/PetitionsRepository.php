@@ -54,9 +54,9 @@ class PetitionsRepository extends ServiceEntityRepository
 
             return $petitions;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return $petitions;
         }
@@ -85,9 +85,9 @@ class PetitionsRepository extends ServiceEntityRepository
                 ->getSingleScalarResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return 0;
         }
@@ -113,9 +113,9 @@ class PetitionsRepository extends ServiceEntityRepository
                 ->execute()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return false;
         }

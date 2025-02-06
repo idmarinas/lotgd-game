@@ -78,7 +78,7 @@ class Settings
             $this->doctrine->persist($entity);
             $this->doctrine->flush();
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }
@@ -89,6 +89,7 @@ class Settings
 
         $item = $this->cache->getItem($this->getCacheKey());
         $item->set($this->settings);
+
         $this->cache->save($item);
 
         return true;
@@ -114,13 +115,13 @@ class Settings
                     $sets[$row->getSetting()] = $row->getValue();
                 }
             }
-            catch (Exception $ex)
+            catch (Exception $exception)
             {
-                Debugger::log($ex);
+                Debugger::log($exception);
             }
 
             //-- If not found mark as expired
-            if (empty($sets))
+            if ($sets === [])
             {
                 $item->expiresAt(new DateTime('now'));
             }

@@ -23,7 +23,6 @@ class FlashMessages
      * Add message.
      *
      * @param array|string $message
-     * @param string       $type
      */
     public static function addMessage($message, string $type = null): void
     {
@@ -36,8 +35,6 @@ class FlashMessages
      * Add a "info" message.
      *
      * @param array|string $message
-     *
-     * @return FlashMessages
      */
     public static function addInfoMessage($message): void
     {
@@ -48,8 +45,6 @@ class FlashMessages
      * Add a "success" message.
      *
      * @param array|string $message
-     *
-     * @return FlashMessages
      */
     public static function addSuccessMessage($message): void
     {
@@ -60,8 +55,6 @@ class FlashMessages
      * Add a "error" message.
      *
      * @param array|string $message
-     *
-     * @return FlashMessages
      */
     public static function addErrorMessage($message): void
     {
@@ -72,8 +65,6 @@ class FlashMessages
      * Add a "warning" message.
      *
      * @param array|string $message
-     *
-     * @return FlashMessages
      */
     public static function addWarningMessage($message): void
     {
@@ -81,4 +72,4 @@ class FlashMessages
     }
 }
 
-class_alias('Lotgd\Core\Fixed\FlashMessages', 'LotgdFlashMessages', false);
+class_alias(\Lotgd\Core\Fixed\FlashMessages::class, 'LotgdFlashMessages', false);

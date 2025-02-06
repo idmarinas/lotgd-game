@@ -30,7 +30,7 @@ $acctRepository = Doctrine::getRepository('LotgdCore:User');
 
 $op = (string) LotgdRequest::getQuery('op');
 
-if ('stats' == $op || '' == $op)
+if ('stats' === $op || '' === $op)
 {
     $params['tpl'] = 'default';
 
@@ -41,7 +41,7 @@ if ('stats' == $op || '' == $op)
         ->getSingleResult()
     ;
 }
-elseif ('referers' == $op)
+elseif ('referers' === $op)
 {
     $params['tpl'] = 'referers';
 
@@ -70,7 +70,7 @@ elseif ('referers' == $op)
         }
     }
 }
-elseif ('graph' == $op)
+elseif ('graph' === $op)
 {
     $params['tpl'] = 'graph';
 

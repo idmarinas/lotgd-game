@@ -94,7 +94,7 @@ trait CoreFilter
 
         \array_unshift($arguments, $string);
 
-        return \call_user_func_array('sprintf', $arguments);
+        return sprintf(...$arguments);
     }
 
     /**

@@ -34,7 +34,7 @@ LotgdNavigation::addNav('weaponeditor.nav.home', "weaponeditor.php?level={$weapo
 
 LotgdNavigation::addNav('weaponeditor.nav.weapon.add', "weaponeditor.php?op=add&level={$weaponlevel}");
 
-if ('edit' == $op || 'add' == $op)
+if ('edit' === $op || 'add' === $op)
 {
     $params['tpl'] = 'edit';
 
@@ -85,7 +85,7 @@ if ('edit' == $op || 'add' == $op)
 
     $params['form'] = $form->createView();
 }
-elseif ('del' == $op)
+elseif ('del' === $op)
 {
     $armor = $repository->find($id);
 

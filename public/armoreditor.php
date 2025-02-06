@@ -32,7 +32,7 @@ LotgdNavigation::addHeader('armoreditor.category.editor');
 LotgdNavigation::addNav('armoreditor.nav.editor', "armoreditor.php?level={$armorlevel}");
 LotgdNavigation::addNav('armoreditor.nav.armor.add', "armoreditor.php?op=add&level={$armorlevel}");
 
-if ('edit' == $op || 'add' == $op)
+if ('edit' === $op || 'add' === $op)
 {
     $params['tpl'] = 'edit';
 
@@ -84,7 +84,7 @@ if ('edit' == $op || 'add' == $op)
 
     $params['form'] = $form->createView();
 }
-elseif ('del' == $op)
+elseif ('del' === $op)
 {
     $armor = $repository->find($id);
 

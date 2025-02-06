@@ -36,7 +36,7 @@ class Version50100 extends InstallerAbstract
                 $this->getProjectDir().'/templates_core/' //-- Are moved to /themes/LotgdTheme/templates/admin
             ]);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }
@@ -60,7 +60,7 @@ class Version50100 extends InstallerAbstract
                 'N;'
             ));
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }
@@ -77,7 +77,7 @@ class Version50100 extends InstallerAbstract
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }

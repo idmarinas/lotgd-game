@@ -24,4 +24,4 @@ class Setting
     use StaticTrait;
 }
 
-class_alias('Lotgd\Core\Fixed\Setting', 'LotgdSetting', false);
+class_alias(\Lotgd\Core\Fixed\Setting::class, 'LotgdSetting', false);

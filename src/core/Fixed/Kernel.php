@@ -44,4 +44,4 @@ class Kernel
     }
 }
 
-class_alias('Lotgd\Core\Fixed\Kernel', 'LotgdKernel', false);
+class_alias(\Lotgd\Core\Fixed\Kernel::class, 'LotgdKernel', false);

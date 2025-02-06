@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Doctrine\ORM;
 
+use Gedmo\Translatable\Query\TreeWalker\TranslationWalker;
 use Doctrine\ORM\Query;
 use Locale;
 use Doctrine\ORM\QueryBuilder;
@@ -51,7 +52,7 @@ trait EntityRepositoryTrait
      */
     public function hydrateEntity(array $data, $entity = null)
     {
-        if ('object' != \gettype($entity))
+        if ('object' !== \gettype($entity))
         {
             $entity = $this->_entityName;
             $entity = new $entity();
@@ -98,13 +99,13 @@ trait EntityRepositoryTrait
      * Create query for translate entity.
      *
      * @param string $dql Note: If pass a "Doctrine\ORM\QueryBuilder" auto-get a DQL string
-     * @return \Doctrine\ORM\Query
+     * @return Query
      */
     public function createTranslatebleQuery(string $dql)
     {
         $query = $this->_em->createQuery($dql);
 
-        $query->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker');
+        $query->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, TranslationWalker::class);
         // take locale from session or request etc.
         $query->setHint(TranslatableListener::HINT_TRANSLATABLE_LOCALE, Locale::getDefault());
         // fallback to default values in case if record is not translated

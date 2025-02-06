@@ -45,13 +45,13 @@ $repository = Doctrine::getRepository('LotgdCore:Petitions');
 
 LotgdNavigation::superuserGrottoNav();
 
-if ('' == $op)
+if ('' === $op)
 {
     $params['tpl'] = 'default';
 
     $setstat = (int) LotgdRequest::getQuery('setstat');
 
-    if ('' != $setstat)
+    if (0 != $setstat)
     {
         $result = $repository->find($petitionId);
 
@@ -83,7 +83,7 @@ if ('' == $op)
     LotgdNavigation::addHeader('viewpetitions.category.petitions');
     LotgdNavigation::addNav('viewpetitions.nav.refresh', 'viewpetition.php');
 }
-elseif ('view' == $op)
+elseif ('view' === $op)
 {
     $params['tpl'] = 'view';
     $viewpageinfo  = (int) LotgdRequest::getQuery('viewpageinfo');

@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Entity\User;
+use Lotgd\Core\Entity\Mail;
 use Throwable;
 use Laminas\Filter\FilterChain;
 use Laminas\Filter\StringTrim;
@@ -130,7 +132,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
         $type    = 'error';
         $message = $this->translator->trans('dialog.del.bulk.error', [], self::TRANSLATION_DOMAIN);
 
-        if (empty($post))
+        if ($post === [])
         {
             $message = $this->translator->trans('dialog.del.bulk.empty', [], self::TRANSLATION_DOMAIN);
         }
@@ -183,7 +185,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
     {
         global $session;
 
-        /** @var \Lotgd\Core\Repository\MailRepository $mail */
+        /** @var MailRepository $mail */
         $mail   = $this->getDoctrine()->getRepository('LotgdCore:Mail');
         $result = $mail->getCountMailOfCharacter((int) ($session['user']['acctid'] ?? 0));
 
@@ -207,7 +209,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
 
         if ($toPlayer !== 0)
         {
-            /** @var Lotgd\Core\Entity\User $account */
+            /** @var User $account */
             $account = $this->getDoctrine()->getRepository('LotgdCore:User')->find($toPlayer);
 
             if ($account)
@@ -307,9 +309,9 @@ class MailController extends AbstractController implements LotgdControllerInterf
                 $form->setData($row);
             }
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             $this->addNotification('error', $this->translator->trans('jaxon.fail.reply', [], self::TRANSLATION_DOMAIN));
         }
@@ -329,7 +331,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
 
         $params = $this->getParams();
 
-        /** @var \Lotgd\Core\Entity\Mail $message */
+        /** @var Mail $message */
         $message = $this->repository->findOneBy([
             'messageid' => $id,
             'msgto'     => $session['user']['acctid'],
@@ -366,7 +368,7 @@ class MailController extends AbstractController implements LotgdControllerInterf
 
         $id = $request->query->getInt('message_id');
 
-        /** @var \Lotgd\Core\Entity\Mail $message */
+        /** @var Mail $message */
         $message = $this->repository->findOneBy([
             'messageid' => $id,
             'msgto'     => $session['user']['acctid'],
@@ -439,9 +441,9 @@ class MailController extends AbstractController implements LotgdControllerInterf
 
             $form = $formEmpty;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             $this->addNotification('error', $this->translator->trans('jaxon.fail.send', [], self::TRANSLATION_DOMAIN));
         }

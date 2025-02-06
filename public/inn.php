@@ -28,7 +28,7 @@ if ( ! $skipinndesc)
     LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 }
 
-/** @var Lotgd\Core\Http\Request $request */
+/** @var Request $request */
 $request = LotgdKernel::get(Request::class);
 
 $params = [
@@ -55,7 +55,7 @@ $params['op'] = $op;
 
 // Correctly reset the location if they fleeing the dragon
 // This needs to be done up here because a special could alter your op.
-if ('fleedragon' == $op)
+if ('fleedragon' === $op)
 {
     $session['user']['location'] = $params['villageName'];
 }
@@ -87,7 +87,7 @@ switch ($op)
 
         // Don't give people a chance at a special event if they are just browsing
         // the commentary (or talking) or dealing with any of the hooks in the inn.
-        if ('fleedragon' != $op && '' == $com && ! $comment && ! $commenting)
+        if ('fleedragon' !== $op && '' == $com && ! $comment && ! $commenting)
         {
             /** New occurrence dispatcher for special events. */
             /** @var \Lotgd\CoreBundle\OccurrenceBundle\OccurrenceEvent $event */
@@ -138,7 +138,7 @@ LotgdResponse::callController(InnController::class, $method);
 
 //-- Restore text domain for navigation
 LotgdNavigation::setTextDomain();
-if ('index' == $method)
+if ('index' === $method)
 {
     $args = new GenericEvent();
     LotgdEventDispatcher::dispatch($args, Events::PAGE_INN);

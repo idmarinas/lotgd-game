@@ -3,7 +3,7 @@
 // addnews ready
 // mail ready
 // translator ready
-
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -36,7 +36,7 @@ $op = (string) LotgdRequest::getQuery('op');
 LotgdNavigation::addHeader('common.category.navigation');
 LotgdNavigation::addNav('common.nav.update', 'prefs.php');
 
-if ('suicide' == $op && $params['selfDelete'])
+if ('suicide' === $op && $params['selfDelete'])
 {
     $userId = (int) $session['user']['acctid'];
 
@@ -56,7 +56,7 @@ if ('suicide' == $op && $params['selfDelete'])
         redirect('home.php');
     }
 }
-elseif ('forcechangeemail' == $op)
+elseif ('forcechangeemail' === $op)
 {
     LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
@@ -83,7 +83,7 @@ elseif ('forcechangeemail' == $op)
     $session['user']['replaceemail']    = '';
     $session['user']['emailvalidation'] = '';
 }
-elseif ('cancelemail' == $op)
+elseif ('cancelemail' === $op)
 {
     LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 
@@ -139,7 +139,7 @@ else
         {
             if (\strlen($pass1) > 3)
             {
-                /** @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoder $passwordEncoder */
+                /** @var UserPasswordEncoder $passwordEncoder */
                 $passwordEncoder = LotgdKernel::get('security.password_encoder');
                 $account         = Doctrine::getRepository('LotgdCore:User')->find($session['user']['acctid']);
 
@@ -395,7 +395,7 @@ else
 
             if (\is_array($x[0]))
             {
-                $x[0] = \call_user_func_array('sprintf', $x[0]);
+                $x[0] = sprintf(...$x[0]);
             }
 
             $type = explode(',', $x[0]);
@@ -405,7 +405,7 @@ else
             // title section
             if (strstr($type, 'title'))
             {
-                if ($found)
+                if ($found !== 0)
                 {
                     $everfound = 1;
                     $found     = 0;
@@ -450,7 +450,7 @@ else
             }
         }
 
-        if ($found)
+        if ($found !== 0)
         {
             $msettings = array_merge($msettings, $tempsettings);
             $mdata     = array_merge($mdata, $tempdata);
@@ -465,7 +465,7 @@ else
         }
     }
 
-    if ( ! empty($foundmodules))
+    if ( $foundmodules !== [])
     {
         $modulePrefsRepository = Doctrine::getRepository('LotgdCore:ModuleUserprefs');
         $result                = $modulePrefsRepository->findModulesPrefs($foundmodules, $session['user']['acctid']);

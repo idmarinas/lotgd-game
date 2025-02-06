@@ -48,7 +48,7 @@ trait RecalculateDragonPointTrait
         $this->dispatcher->dispatch(new Core(), Core::DK_POINT_RECALC);
         modulehook('pdkpointrecalc');
 
-        if ($pdktotal != $dkills - $dp || $pdkneg)
+        if ($pdktotal !== $dkills - $dp || $pdkneg)
         {
             $this->addFlash('error', $this->translator->trans('flash.message.dragon.point.error', [], $this->getTranslationDomain()));
 
@@ -73,7 +73,7 @@ trait RecalculateDragonPointTrait
                 continue;
             } //got a headline here
 
-            $count = isset($pdks[$type]) ? $pdks[$type] : 0;
+            $count = $pdks[$type] ?? 0;
 
             while ($count)
             {

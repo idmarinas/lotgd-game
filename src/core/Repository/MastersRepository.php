@@ -47,9 +47,9 @@ class MastersRepository extends ServiceEntityRepository
 
             return $query->getArrayResult()[0];
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }
@@ -73,9 +73,9 @@ class MastersRepository extends ServiceEntityRepository
 
             return $query->getArrayResult();
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }

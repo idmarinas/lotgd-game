@@ -12,6 +12,7 @@
 
 namespace Lotgd\Core\Tool;
 
+use Lotgd\Core\Repository\AvatarRepository;
 use Throwable;
 use Tracy\Debugger;
 use Lotgd\Core\Entity\User;
@@ -152,7 +153,7 @@ class Backup
 
     private function processClan(int $accountId, $accountEntity): void
     {
-        /** @var \Lotgd\Core\Repository\AvatarRepository $charRepository */
+        /** @var AvatarRepository $charRepository */
         $charRepository = $this->doctrine->getRepository('LotgdCore:Avatar');
 
         if (
@@ -238,9 +239,9 @@ class Backup
 
             $fileSystem->dumpFile("storage/logd_snapshots/user-{$accountId}/{$entityName}.json", $data);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return false;
         }
@@ -293,9 +294,9 @@ class Backup
             //-- Basic info of account
             $fileSystem->dumpFile("{$path}/basic_info.json", $this->crypt->encrypt($this->serializer->serialize($basicInfo, 'json')));
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return false;
         }

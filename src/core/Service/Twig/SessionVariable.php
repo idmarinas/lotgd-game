@@ -22,7 +22,7 @@ class SessionVariable
 
     public function __call($method, $args)
     {
-        return $this->access()->getValue($this->getSession(), "[$method]");
+        return $this->access()->getValue($this->getSession(), "[{$method}]");
     }
 
     /**

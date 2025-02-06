@@ -13,7 +13,7 @@ require_once 'common.php';
 
 LotgdTool::checkBan();
 
-/** @var Lotgd\Core\Http\Request $request */
+/** @var Request $request */
 $request = LotgdKernel::get(Request::class);
 
 $refer = (string)$request->query->get('r');
@@ -45,7 +45,7 @@ $op = (string)$request->query->get('op');
 //-- Init page
 LotgdResponse::pageStart('title.create', [], $textDomain);
 
-if ('val' == $op || 'forgotval' == $op) {
+if ('val' === $op || 'forgotval' === $op) {
 	LotgdResponse::pageTitle('title.validate', [], $textDomain);
 }
 
@@ -59,21 +59,18 @@ if (LotgdSetting::getSetting('fullmaintenance', 0) || LotgdSetting::getSetting('
 
 $request->attributes->set('params', $params);
 
-if ('forgotval' == $op) {
-	LotgdResponse::callController(CreateController::class, 'forgotVal');
-
-	//-- Finalize page
-	LotgdResponse::pageEnd();
-} else if ('val' == $op) {
-	LotgdResponse::callController(CreateController::class, 'val');
-
-	//-- Finalize page
-	LotgdResponse::pageEnd();
-} else if ('forgot' == $op) {
-	LotgdResponse::callController(CreateController::class, 'forgot');
-
-	//-- Finalize page
-	LotgdResponse::pageEnd();
+if ('forgotval' === $op) {
+    LotgdResponse::callController(CreateController::class, 'forgotVal');
+    //-- Finalize page
+    LotgdResponse::pageEnd();
+} elseif ('val' === $op) {
+    LotgdResponse::callController(CreateController::class, 'val');
+    //-- Finalize page
+    LotgdResponse::pageEnd();
+} elseif ('forgot' === $op) {
+    LotgdResponse::callController(CreateController::class, 'forgot');
+    //-- Finalize page
+    LotgdResponse::pageEnd();
 }
 
 LotgdResponse::callController(CreateController::class, 'index');

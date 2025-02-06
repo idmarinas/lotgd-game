@@ -25,17 +25,17 @@ trait DeathMessage
     {
         global $session;
 
-        $count = $this->translator->trans("$zone.count", [], 'partial_deathmessage');
+        $count = $this->translator->trans("{$zone}.count", [], 'partial_deathmessage');
 
         //-- Default message, if fail in count
         //-- Always shows the default message if the key is not found in the specified language when translating.
         $deathmessage = 'default';
         //-- Check if found count for zone
-        if ("$zone.count" != $count)
+        if ("{$zone}.count" != $count)
         {
             $rand = mt_rand(0, max(0, $count - 1));
 
-            $deathmessage = "$zone.0$rand";
+            $deathmessage = "{$zone}.0{$rand}";
         }
 
         $params = [

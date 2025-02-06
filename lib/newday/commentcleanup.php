@@ -1,3 +1,5 @@
 <?php
 
-\LotgdKernel::get('Lotgd\Core\Service\Cron\ContentCleanService')->execute();
+use Lotgd\Core\Service\Cron\ContentCleanService;
+
+LotgdKernel::get(ContentCleanService::class)->execute();

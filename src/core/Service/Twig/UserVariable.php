@@ -22,7 +22,7 @@ class UserVariable
 
     public function __call($method, $args)
     {
-        return $this->access()->getValue($this->getUser(), "[$method]");
+        return $this->access()->getValue($this->getUser(), "[{$method}]");
     }
 
     /**

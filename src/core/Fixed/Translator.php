@@ -49,8 +49,8 @@ class Translator
 
         $methods = implode(', ', get_class_methods(self::$instance));
 
-        throw new BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
+        throw new BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
 }
 
-class_alias('Lotgd\Core\Fixed\Translator', 'LotgdTranslator', false);
+class_alias(\Lotgd\Core\Fixed\Translator::class, 'LotgdTranslator', false);

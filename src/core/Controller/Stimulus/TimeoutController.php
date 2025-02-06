@@ -13,21 +13,10 @@
 
 namespace Lotgd\Core\Controller\Stimulus;
 
-use Laminas\Filter;
-use Lotgd\Core\Form\MailWriteType;
-use Lotgd\Core\Http\Request;
 use Lotgd\Core\Lib\Settings;
-use Lotgd\Core\Pattern\LotgdControllerTrait;
-use Lotgd\Core\Repository\AvatarRepository;
-use Lotgd\Core\Repository\MailRepository;
-use Lotgd\Core\Tool\Sanitize;
 use Lotgd\Core\Controller\LotgdControllerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use Tracy\Debugger;
 
 class TimeoutController extends AbstractController implements LotgdControllerInterface
 {

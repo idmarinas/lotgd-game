@@ -207,7 +207,7 @@ class Format
     {
         //-- Do nothing if message is empty
         //-- MessageFormatter fail if message is empty
-        if ('' == $message)
+        if ('' === $message)
         {
             return '';
         }

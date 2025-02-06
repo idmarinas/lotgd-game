@@ -134,8 +134,6 @@ trait Movement
      *  Battle: attack of badguy.
      *
      * @param mixed $badguy
-     *
-     * @return bool
      */
     protected function reportEnemyMove(&$badguy): void
     {
@@ -205,8 +203,6 @@ trait Movement
      * Battle: attack of player.
      *
      * @param array $badguy
-     *
-     * @return bool
      */
     protected function reportPlayerMove(&$badguy): void
     {
@@ -618,7 +614,7 @@ trait Movement
                 $power = 1;
             }
 
-            if ($power)
+            if ($power !== 0)
             {
                 $this->addContextToRoundAlly($msg);
 

@@ -79,7 +79,7 @@ final class NewDayCommand extends Command
 
             $style->text('Generate a new game day');
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return 1;
         }

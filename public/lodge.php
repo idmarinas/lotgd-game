@@ -20,12 +20,12 @@ $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-/** @var Lotgd\Core\Http\Request $request */
+/** @var Request $request */
 $request = LotgdKernel::get(Request::class);
 
 $op = (string) $request->query->get('op');
 
-if ('' == $op)
+if ('' === $op)
 {
     LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
 }
@@ -52,7 +52,7 @@ LotgdNavigation::addHeader('category.navigation');
 LotgdNavigation::villageNav();
 
 LotgdNavigation::addHeader('category.general');
-if ('' != $op && $entry)
+if ('' !== $op && $entry)
 {
     LotgdNavigation::addnav('navs.return', 'lodge.php');
 }
@@ -60,11 +60,11 @@ if ('' != $op && $entry)
 LotgdNavigation::addnav('navs.referral', 'referral.php');
 LotgdNavigation::addnav('navs.desc', 'lodge.php?op=points');
 
-if ('' == $op)
+if ('' === $op)
 {
     $method = 'index';
 }
-elseif ('points' == $op)
+elseif ('points' === $op)
 {
     $method = 'points';
 }

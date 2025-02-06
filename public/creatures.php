@@ -30,7 +30,7 @@ $params     = [
     'textDomain' => $textDomain,
 ];
 
-if ('del' == $op)
+if ('del' === $op)
 {
     $creatureEntity = $repository->find($creatureId);
 
@@ -53,7 +53,7 @@ if ('del' == $op)
     $op = '';
 }
 
-if ('' == $op || 'search' == $op)
+if ('' === $op || 'search' === $op)
 {
     $params['tpl'] = 'default';
 
@@ -77,7 +77,7 @@ if ('' == $op || 'search' == $op)
 
     $params['paginator'] = $repository->getPaginator($query, $page);
 }
-elseif ('edit' == $op || 'add' == $op)
+elseif ('edit' === $op || 'add' === $op)
 {
     $params['tpl'] = 'edit';
 
@@ -89,7 +89,7 @@ elseif ('edit' == $op || 'add' == $op)
     LotgdNavigation::addNav('common.category.navigation');
     LotgdNavigation::addNav('creatures.nav.home', 'creatures.php');
 
-    if ('module' == $subop)
+    if ('module' === $subop)
     {
         $form = module_objpref_edit('creatures', $module, $creatureId);
 

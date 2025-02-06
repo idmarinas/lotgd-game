@@ -12,6 +12,8 @@
 
 namespace Lotgd\Core\Tool;
 
+use Lotgd\Core\Repository\UserRepository;
+use Lotgd\Core\Entity\User;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Entity\Mail;
@@ -64,10 +66,10 @@ class SystemMail
     {
         global $session;
 
-        /** @var \Lotgd\Core\Repository\UserRepository $acctRepository */
+        /** @var UserRepository $acctRepository */
         $acctRepository = $this->doctrine->getRepository('LotgdCore:User');
 
-        /** @var \Lotgd\Core\Entity\User $accountEntityTo */
+        /** @var User $accountEntityTo */
         $accountEntityTo = $acctRepository->find($to);
         $prefs           = $accountEntityTo->getPrefs();
 

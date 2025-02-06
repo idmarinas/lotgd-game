@@ -37,7 +37,7 @@ LotgdNavigation::addNav('companions.nav.add', 'companions.php?op=add');
 $op = (string) LotgdRequest::getQuery('op');
 $id = (int) LotgdRequest::getQuery('id');
 
-if ('deactivate' == $op)
+if ('deactivate' === $op)
 {
     $companionEntity = $repository->find($id);
     $companionEntity->setCompanionactive(0);
@@ -47,7 +47,7 @@ if ('deactivate' == $op)
     $op = '';
     LotgdRequest::setQuery('op', '');
 }
-elseif ('activate' == $op)
+elseif ('activate' === $op)
 {
     $companionEntity = $repository->find($id);
     $companionEntity->setCompanionactive(1);
@@ -57,7 +57,7 @@ elseif ('activate' == $op)
     $op = '';
     LotgdRequest::setQuery('op', '');
 }
-elseif ('del' == $op)
+elseif ('del' === $op)
 {
     $companionEntity = $repository->find($id);
 
@@ -68,7 +68,7 @@ elseif ('del' == $op)
 
     module_delete_objprefs('companions', $id);
 }
-elseif ('take' == $op)
+elseif ('take' === $op)
 {
     $companionEntity = $repository->find($id);
 
@@ -103,13 +103,13 @@ elseif ('take' == $op)
 unset($companionEntity);
 Doctrine::flush();
 
-if ('' == $op)
+if ('' === $op)
 {
     $params['tpl'] = 'default';
 
     $params['companionsList'] = $repository->getList();
 }
-elseif ('edit' == $op || 'add' == $op)
+elseif ('edit' === $op || 'add' === $op)
 {
     $params['tpl'] = 'edit';
 
@@ -120,7 +120,7 @@ elseif ('edit' == $op || 'add' == $op)
 
     $subop = (string) LotgdRequest::getQuery('subop');
 
-    if ('module' == $subop)
+    if ('module' === $subop)
     {
         $module = (string) LotgdRequest::getQuery('module');
 

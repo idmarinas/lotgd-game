@@ -52,9 +52,9 @@ class MotdRepository extends ServiceEntityRepository
 
             return $result[0] ?? [];
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }
@@ -91,9 +91,9 @@ class MotdRepository extends ServiceEntityRepository
 
             return array_merge($motd, $result[0]);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }
@@ -181,9 +181,9 @@ class MotdRepository extends ServiceEntityRepository
 
             return new DateTime($date);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }

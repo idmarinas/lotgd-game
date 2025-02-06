@@ -58,9 +58,9 @@ class LogdnetRepository extends ServiceEntityRepository
                 ->execute()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return 0;
         }
@@ -90,9 +90,9 @@ class LogdnetRepository extends ServiceEntityRepository
                 ->execute()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return 0;
         }
@@ -125,9 +125,9 @@ class LogdnetRepository extends ServiceEntityRepository
                 return $result;
             });
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }

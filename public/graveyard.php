@@ -1,5 +1,8 @@
 <?php
 
+use Lotgd\Core\Http\Request;
+use Lotgd\Core\Controller\GraveyardController;
+
 // addnews ready.
 // translator ready
 // mail ready
@@ -7,8 +10,8 @@
 require_once 'common.php';
 require_once 'lib/events.php';
 
-/** @var Lotgd\Core\Http\Request $request */
-$request = LotgdKernel::get('Lotgd\Core\Http\Request');
+/** @var Request $request */
+$request = LotgdKernel::get(Request::class);
 
 //-- Init page
 LotgdResponse::pageStart();
@@ -33,7 +36,7 @@ if ( ! $skipgraveyardtext)
 $request->attributes->set('params', $params);
 
 //-- Call controller
-LotgdResponse::callController('Lotgd\Core\Controller\GraveyardController');
+LotgdResponse::callController(GraveyardController::class);
 
 $params = $request->attributes->get('params');
 

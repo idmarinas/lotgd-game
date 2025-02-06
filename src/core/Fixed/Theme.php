@@ -13,17 +13,18 @@
 
 namespace Lotgd\Core\Fixed;
 
+use Twig\TemplateWrapper;
 use function class_alias;
 
 /**
  * @method static string render($name, array $context = [])
  * @method static void display($name, array $context = [])
- * @method static \Twig\TemplateWrapper load($name)
- * @method static \Twig\TemplateWrapper createTemplate($template, string $name = null)
+ * @method static TemplateWrapper load($name)
+ * @method static TemplateWrapper createTemplate($template, string $name = null)
  */
 class Theme
 {
     use StaticTrait;
 }
 
-class_alias('Lotgd\Core\Fixed\Theme', 'LotgdTheme', false);
+class_alias(\Lotgd\Core\Fixed\Theme::class, 'LotgdTheme', false);

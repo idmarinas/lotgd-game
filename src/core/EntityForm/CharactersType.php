@@ -47,10 +47,7 @@ class CharactersType extends AbstractType
                 'label'        => 'char.acct',
                 'class'        => 'LotgdCore:User',
                 'choice_value' => 'acctid',
-                'choice_label' => function ($account)
-                {
-                    return $account->getAcctid().') '.$account->getLogin();
-                },
+                'choice_label' => fn($account) => $account->getAcctid().') '.$account->getLogin(),
                 'attr' => [
                     'class' => 'clearable',
                 ],
@@ -148,10 +145,7 @@ class CharactersType extends AbstractType
                 'class'        => 'LotgdCore:Mounts',
                 'group_by'     => 'mountcategory',
                 'choice_value' => 'mountid',
-                'choice_label' => function ($mount)
-                {
-                    return $mount->getMountid().') '.$mount->getMountname();
-                },
+                'choice_label' => fn($mount) => $mount->getMountid().') '.$mount->getMountname(),
                 'attr' => [
                     'class' => 'clearable',
                 ],
@@ -165,10 +159,7 @@ class CharactersType extends AbstractType
                 'required'     => false,
                 'class'        => 'LotgdCore:Clans',
                 'choice_value' => 'clanid',
-                'choice_label' => function ($clan)
-                {
-                    return $clan->getClanid().') '.$clan->getClanname();
-                },
+                'choice_label' => fn($clan) => $clan->getClanid().') '.$clan->getClanname(),
                 'attr' => [
                     'class' => 'clearable',
                 ],

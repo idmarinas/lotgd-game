@@ -262,7 +262,7 @@ class CreatureFunction
     public function lotgdSearchCreature($multi, $targetlevel, $mintargetlevel, $packofmonsters = false, $forest = true): array
     {
         $multi = $packofmonsters ? 1 : $multi;
-        $limit = ($multi > 1 ? $multi : 1);
+        $limit = (max($multi, 1));
 
         $query = $this->repository->createQueryBuilder('u');
         $query->orderBy('RAND()');

@@ -21,7 +21,7 @@ $params = [
     'textDomain' => $textDomain,
 ];
 
-if ('block' == $op || 'unblock' == $op)
+if ('block' === $op || 'unblock' === $op)
 {
     $message      = "player.{$op}.fail";
     $flashMessage = 'addErrorMessage';

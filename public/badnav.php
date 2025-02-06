@@ -17,7 +17,7 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
     foreach ($session['user']['allowednavs'] as $key => $val)
     {
         //hack-tastic.
-        if ('' == trim($key) || 0 === $key || 'motd.php' == substr($key, 0, 8) || 'mail.php' == substr($key, 0, 8))
+        if ('' === trim($key) || 0 === $key || 'motd.php' == substr($key, 0, 8) || 'mail.php' == substr($key, 0, 8))
         {
             unset($session['user']['allowednavs'][$key]);
         }

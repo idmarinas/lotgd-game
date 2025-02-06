@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Repository\MotdRepository;
+use Lotgd\Core\Repository\NewsRepository;
 use Lotgd\Core\Combat\Battle;
 use Lotgd\Core\Events;
 use Lotgd\Core\Http\Request;
@@ -57,7 +59,7 @@ class NewsController extends AbstractController
 
         if ($hookIntercept['showLastMotd'] ?? false)
         {
-            /** @var \Lotgd\Core\Repository\MotdRepository $repository */
+            /** @var MotdRepository $repository */
             $repository         = $this->getDoctrine()->getRepository('LotgdCore:Motd');
             $params['lastMotd'] = $repository->getLastMotd();
         }
@@ -106,7 +108,7 @@ class NewsController extends AbstractController
 
         $params['SU_EDIT_COMMENTS'] = $session['user']['superuser'] & SU_EDIT_COMMENTS;
 
-        /** @var Lotgd\Core\Repository\NewsRepository $newsRepo */
+        /** @var NewsRepository $newsRepo */
         $newsRepo = $this->getDoctrine()->getRepository('LotgdCore:News');
         $page     = $request->query->getInt('page');
         $day      = $request->query->getInt('day');

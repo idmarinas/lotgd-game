@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Installer\Upgrade;
 
+use Lotgd\Core\Entity\Avatar;
+use Lotgd\Core\Entity\User;
 use Throwable;
 use Doctrine\ORM\EntityManagerInterface;
 use Kit\CryptBundle\Service\OpensslService as Crypt;
@@ -112,7 +114,7 @@ class Version60000 extends InstallerAbstract
 
                     if (false !== stripos($file, 'LotgdCore_Avatar'))
                     {
-                        $content['entity'] = 'Lotgd\Core\Entity\Avatar';
+                        $content['entity'] = Avatar::class;
                         $avatar = &$content['rows'][0];
 
                         $avatar['badguy'] = is_array($avatar['badguy']) ? $avatar['badguy'] : [];
@@ -122,7 +124,7 @@ class Version60000 extends InstallerAbstract
                     }
                     elseif (false !== stripos($file, 'LotgdCore_User'))
                     {
-                        $content['entity'] = 'Lotgd\Core\Entity\User';
+                        $content['entity'] = User::class;
                         $user = &$content['rows'][0];
 
                         $user['prefs'] = is_array($user['prefs']) ? $user['prefs'] : [];
@@ -148,7 +150,7 @@ class Version60000 extends InstallerAbstract
                 }
             }
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }
@@ -187,7 +189,7 @@ class Version60000 extends InstallerAbstract
                 'N;'
             ));
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }

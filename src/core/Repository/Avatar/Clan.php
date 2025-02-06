@@ -16,7 +16,6 @@ namespace Lotgd\Core\Repository\Avatar;
 use Throwable;
 use DateTime;
 use Doctrine\ORM\Query\Expr\Join;
-use Lotgd\Core\Entity as EntityCore;
 use Tracy\Debugger;
 
 /**
@@ -46,9 +45,9 @@ trait Clan
                 ->getResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -72,9 +71,9 @@ trait Clan
                 ->getResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -97,9 +96,9 @@ trait Clan
                 ->getSingleScalarResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return 0;
         }
@@ -134,9 +133,9 @@ trait Clan
                 ->getOneOrNullResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }
@@ -170,9 +169,9 @@ trait Clan
                 ->getResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -196,9 +195,9 @@ trait Clan
                 ->execute()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return 0;
         }
@@ -224,10 +223,11 @@ trait Clan
                 ->getOneOrNullResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
         }
+        return null;
     }
 
     /**
@@ -249,9 +249,9 @@ trait Clan
                 ->execute()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return 0;
         }

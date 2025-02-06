@@ -82,9 +82,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 ->getResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return null;
         }
@@ -117,9 +117,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 ->getSingleScalarResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return 0;
         }
@@ -145,9 +145,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 ->getArrayResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }

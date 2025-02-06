@@ -90,7 +90,7 @@ class DragonController extends AbstractController
         $op     = (string) $request->query->get('op');
         $method = method_exists($this, $op) ? $op : 'enter';
 
-        if ('run' == $method)
+        if ('run' === $method)
         {
             $this->addFlash('error', $this->translator->trans('battle.combat.run', [], $this->translationDomain));
 
@@ -100,7 +100,7 @@ class DragonController extends AbstractController
 
             $request->query->set('op', 'fight');
         }
-        elseif ('fight' == $method)
+        elseif ('fight' === $method)
         {
             $params['battle'] = true;
         }

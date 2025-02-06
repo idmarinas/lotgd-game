@@ -24,4 +24,4 @@ class Request
     use StaticTrait;
 }
 
-class_alias('Lotgd\Core\Fixed\Request', 'LotgdRequest', false);
+class_alias(\Lotgd\Core\Fixed\Request::class, 'LotgdRequest', false);

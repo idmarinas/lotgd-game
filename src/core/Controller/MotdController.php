@@ -86,9 +86,9 @@ class MotdController extends AbstractController
                 $session['user']['lastmotd'] = $lastMotd;
             }
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             $this->addNotification('error', $this->translator->trans('list.fail', [], self::TRANSLATION_DOMAIN));
         }
@@ -102,7 +102,7 @@ class MotdController extends AbstractController
 
         if ( ! checkSuPermission(SU_POST_MOTD))
         {
-            return new Response('', 403);
+            return new Response('', Response::HTTP_FORBIDDEN);
         }
 
         $itemId = $request->query->getInt('id');
@@ -180,7 +180,7 @@ class MotdController extends AbstractController
 
         if ( ! checkSuPermission(SU_POST_MOTD))
         {
-            return new Response('', 403);
+            return new Response('', Response::HTTP_FORBIDDEN);
         }
 
         $params = $this->getParams();
@@ -222,7 +222,7 @@ class MotdController extends AbstractController
     {
         if ( ! checkSuPermission(SU_POST_MOTD))
         {
-            return new Response('', 403);
+            return new Response('', Response::HTTP_FORBIDDEN);
         }
 
         $id = $request->query->getInt('id');
@@ -277,9 +277,9 @@ class MotdController extends AbstractController
             $type    = 'success';
             $message = $this->translator->trans('item.poll.voting.success', [], self::TRANSLATION_DOMAIN);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             $type    = 'error';
             $message = $this->translator->trans('item.poll.voting.fail', [], self::TRANSLATION_DOMAIN);

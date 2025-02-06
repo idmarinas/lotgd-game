@@ -19,7 +19,6 @@ use Laminas\Filter\StripNewlines;
 use Laminas\Filter\Callback;
 use HTMLPurifier;
 use Cocur\Slugify\Slugify;
-use Laminas\Filter;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Output\Code;
 use Lotgd\Core\Output\Color;

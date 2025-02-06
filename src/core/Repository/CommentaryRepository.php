@@ -53,9 +53,9 @@ class CommentaryRepository extends ServiceEntityRepository implements Repository
 
             return true;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return false;
         }
@@ -105,9 +105,9 @@ class CommentaryRepository extends ServiceEntityRepository implements Repository
 
             return true;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return false;
         }
@@ -142,9 +142,9 @@ class CommentaryRepository extends ServiceEntityRepository implements Repository
 
             return $sections;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -169,9 +169,9 @@ class CommentaryRepository extends ServiceEntityRepository implements Repository
                 ->execute()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return 0;
         }

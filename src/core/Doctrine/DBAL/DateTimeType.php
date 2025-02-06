@@ -29,7 +29,7 @@ class DateTimeType extends TypesDateTimeType
             return $value;
         }
 
-        if ($value instanceof DateTimeInterface && '-0001-11-30' == $value->format('Y-m-d'))
+        if ($value instanceof DateTimeInterface && '-0001-11-30' === $value->format('Y-m-d'))
         {
             return '0000-00-00 00:00:00';
         }

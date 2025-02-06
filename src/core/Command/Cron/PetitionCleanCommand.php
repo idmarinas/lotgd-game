@@ -80,7 +80,7 @@ final class PetitionCleanCommand extends Command
 
             $style->text($text);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return 1;
         }

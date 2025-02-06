@@ -33,7 +33,7 @@ trait Mail
             $mail   = $this->doctrine->getRepository(\Lotgd\Core\Entity\Mail::class);
             $result = $mail->getCountMailOfCharacter((int) ($session['user']['acctid'] ?? 0));
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             $result = [
                 'seen_count'     => 0,

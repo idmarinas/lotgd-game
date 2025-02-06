@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Service;
 
+use Lotgd\Core\Repository\UserRepository;
+use Lotgd\Core\Repository\AvatarRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Event\Other;
 use Lotgd\Core\Lib\Settings;
@@ -35,7 +37,7 @@ class ServerFunction
     {
         if (abs($this->settings->getSetting('OnlineCountLast', 0) - strtotime('now')) > 60)
         {
-            /** @var \Lotgd\Core\Repository\UserRepository $repository */
+            /** @var UserRepository $repository */
             $repository = $this->doctrine->getRepository('LotgdCore:User');
             $counter    = $repository->count(['locked' => 0, 'loggedin' => 1]);
 
@@ -52,7 +54,7 @@ class ServerFunction
     {
         global $session;
 
-        /** @var \Lotgd\Core\Repository\AvatarRepository $repository */
+        /** @var AvatarRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Avatar');
         $query      = $repository->createQueryBuilder('u');
 
@@ -64,7 +66,7 @@ class ServerFunction
                 ->setParameter('acct', $acctid)
             ;
         }
-        elseif (\is_array($acctid) && ! empty($acctid))
+        elseif (\is_array($acctid) && $acctid !== [])
         {
             $query->andWhere('u.acct IN (:acct)')
                 ->setParameter('acct', $acctid)
@@ -98,7 +100,7 @@ class ServerFunction
 
             if ($session['user']['acctid'] == $entity->getAcct()->getAcctid())
             {
-                /** @var \Lotgd\Core\Repository\UserRepository $repository */
+                /** @var UserRepository $repository */
                 $repository      = $this->doctrine->getRepository('LotgdCore:User');
                 $session['user'] = $repository->getUserById($entity->getAcct()->getAcctid());
             }

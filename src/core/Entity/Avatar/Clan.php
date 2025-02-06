@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Entity\Avatar;
 
+use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 trait Clan
 {
@@ -31,7 +33,7 @@ trait Clan
     private $clanrank = 0;
 
     /**
-     * @var \DateTimeInterface
+     * @var DateTimeInterface
      *
      * @ORM\Column(name="clanjoindate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
@@ -84,7 +86,7 @@ trait Clan
     /**
      * Set the value of Clanjoindate.
      *
-     * @param \DateTime|\DateTimeImmutable $clanjoindate
+     * @param DateTime|DateTimeImmutable $clanjoindate
      *
      * @return self
      */
@@ -98,7 +100,7 @@ trait Clan
     /**
      * Get the value of Clanjoindate.
      *
-     * @return \DateTime|\DateTimeImmutable
+     * @return DateTime|DateTimeImmutable
      */
     public function getClanjoindate(): DateTimeInterface
     {

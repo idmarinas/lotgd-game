@@ -43,9 +43,9 @@ trait User
 
             return $result[0]['prefs'];
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }
@@ -68,7 +68,7 @@ trait User
         //-- Order
         $sort = "u.{$order}";
 
-        if ('name' == $order)
+        if ('name' === $order)
         {
             $sort = 'c.name';
         }

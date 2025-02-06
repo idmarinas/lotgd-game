@@ -29,4 +29,4 @@ class Format
     use StaticTrait;
 }
 
-class_alias('Lotgd\Core\Fixed\Format', 'LotgdFormat', false);
+class_alias(\Lotgd\Core\Fixed\Format::class, 'LotgdFormat', false);

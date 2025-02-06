@@ -89,7 +89,7 @@ if ( ! $session['user']['alive'])
     redirect('shades.php');
 }
 
-/** @var Lotgd\Core\Http\Request $request */
+/** @var Request $request */
 $request = LotgdKernel::get(Request::class);
 
 $op         = $request->query->get('op');
@@ -103,7 +103,7 @@ $comment    = $request->request->get('comment');
 if ( ! $op && '' == $com && ! $comment && ! $commenting)
 {
     /** New occurrence dispatcher for special events. */
-    /** @var \Symfony\Component\EventDispatcher\GenericEvent $event */
+    /** @var GenericEvent $event */
     $event = LotgdKernel::get('occurrence_dispatcher')->dispatch('village', null, [
         'translation_domain'            => $textDomain,
         'translation_domain_navigation' => $textDomainNavigation,

@@ -68,7 +68,7 @@ abstract class InstallerAbstract
 
             $this->stepsProcessed = json_decode($version->getValue(), true, 512, JSON_THROW_ON_ERROR);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             //-- No need capture
         }
@@ -96,7 +96,7 @@ abstract class InstallerAbstract
             $this->doctrine->persist($version);
             $this->doctrine->flush();
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             //-- No need capture
         }

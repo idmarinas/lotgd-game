@@ -76,7 +76,7 @@ class NewdayController extends AbstractController
         modulehook('newday-intercept', $args->getArguments());
 
         $resurrection = (string) $request->query->get('resurrection');
-        $resline      = ('true' == $resurrection) ? '&resurrection=true' : '';
+        $resline      = ('true' === $resurrection) ? '&resurrection=true' : '';
 
         /*
          **  SETTINGS **

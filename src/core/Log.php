@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core;
 
+use Lotgd\Core\Repository\DebuglogRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\Entity\Debuglog;
@@ -66,7 +67,7 @@ class Log
     {
         global $session;
 
-        /** @var Lotgd\Core\Repository\DebuglogRepository $repository */
+        /** @var DebuglogRepository $repository */
         $repository = $this->doctrine->getRepository('LotgdCore:Debuglog');
 
         $corevalue = $value;
@@ -99,10 +100,7 @@ class Log
             unset($result);
         }
 
-        if (false !== $corevalue)
-        {
-            $message .= " ({$corevalue})";
-        }
+        $message .= " ({$corevalue})";
 
         $value = $value ?: 0;
 

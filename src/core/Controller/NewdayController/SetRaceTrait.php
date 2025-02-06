@@ -24,7 +24,7 @@ trait SetRaceTrait
 
         $setrace = (string) $request->query->get('setrace');
 
-        if ('' != $setrace)
+        if ('' !== $setrace)
         {
             $vname = $this->settings->getSetting('villagename', LOCATION_FIELDS);
             //in case the module wants to reference it this way.

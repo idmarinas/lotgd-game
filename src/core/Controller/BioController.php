@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Controller;
 
+use Lotgd\Core\Repository\UserRepository;
 use Lotgd\Core\Event\Clan;
 use Lotgd\Core\Event\Core;
 use Lotgd\Core\Event\Other;
@@ -67,7 +68,7 @@ class BioController extends AbstractController
             $return = trim($return, '/');
         }
 
-        /** @var \Lotgd\Core\Repository\UserRepository $repository */
+        /** @var UserRepository $repository */
         $repository = $this->getDoctrine()->getRepository('LotgdCore:User');
 
         //-- Legacy support
@@ -97,6 +98,7 @@ class BioController extends AbstractController
         ];
 
         $ranks = new Clan(['ranks' => $ranks, 'textDomain' => 'page_clan', 'clanid' => $target['clanid']]);
+
         $this->dispatcher->dispatch($ranks, Clan::RANK_LIST);
         $ranks = modulehook('clanranks', $ranks->getData());
 
@@ -125,11 +127,11 @@ class BioController extends AbstractController
         }
 
         $this->navigation->addHeader('common.category.return');
-        if ('' == $ret)
+        if ('' === $ret)
         {
             $this->navigation->addNav('bio.nav.list', $return);
         }
-        elseif ('list.php' == $return)
+        elseif ('list.php' === $return)
         {
             $this->navigation->addNav('bio.nav.list', $return);
         }

@@ -33,7 +33,7 @@ class Version50201 extends InstallerAbstract
                 $this->getProjectDir().'/src/core/Twig/Extension/AdvertisingGoogle.php',
             ]);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }

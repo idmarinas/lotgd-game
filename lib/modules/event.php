@@ -3,203 +3,196 @@
 use Lotgd\Core\Events;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-function module_collect_events($type, $allowinactive = false)
+function module_collect_events ($type, $allowinactive = false)
 {
-    global $session, $blocked_modules, $block_all_modules, $unblocked_modules;
+	global $session, $blocked_modules, $block_all_modules, $unblocked_modules;
 
-    $events = [];
+	$events = [];
 
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
-    $query      = $repository->createQueryBuilder('u');
+	$repository = Doctrine::getRepository('LotgdCore:ModuleEventHooks');
+	$query = $repository->createQueryBuilder('u');
 
-    $query
-        ->leftJoin('LotgdCore:Modules', 'm', 'with', $query->expr()->eq('m.modulename', 'u.modulename'))
-        ->where('u.eventType = :type')
-        ->setParameter('type', $type)
-        ->orderBy('rand()')
-    ;
+	$query
+	  ->leftJoin('LotgdCore:Modules', 'm', 'with', $query->expr()->eq('m.modulename', 'u.modulename'))
+	  ->where('u.eventType = :type')
+	  ->setParameter('type', $type)
+	  ->orderBy('rand()')
+	;
 
-    if ( ! $allowinactive)
-    {
-        $query->andWhere('m.active = 1');
-    }
+	if (!$allowinactive) {
+		$query->andWhere('m.active = 1');
+	}
 
-    $result = $query->getQuery()->getArrayResult();
+	$result = $query->getQuery()->getArrayResult();
 
-    // Normalize all of the event chances
-    $sum = 0;
+	// Normalize all of the event chances
+	$sum = 0;
 
-    foreach ($result as $row)
-    {
-        // The eventChance bit needs to return a value, but it can do that
-        // in any way it wants, and can have if/then or other logical
-        // structures, so we cannot just force the 'return' syntax unlike
-        // with buffs.
-        \ob_start();
-        $chance = eval($row['eventChance'].';');
-        $err    = \ob_get_contents();
-        \ob_end_clean();
+	foreach ($result as $row) {
+		// The eventChance bit needs to return a value, but it can do that
+		// in any way it wants, and can have if/then or other logical
+		// structures, so we cannot just force the 'return' syntax unlike
+		// with buffs.
+		ob_start();
+		$chance = eval($row['eventChance'] . ';');
+		$err = ob_get_contents();
+		ob_end_clean();
 
-        if ($err > '')
-        {
-            \LotgdResponse::pageDebug(['error' => $err, 'Eval code' => $row['eventChance']]);
-        }
+		if ($err > '') {
+			LotgdResponse::pageDebug(['error' => $err, 'Eval code' => $row['eventChance']]);
+		}
 
-        $chance = \max(0, \min(100, $chance));
+		$chance = max(0, min(100, $chance));
 
-        if (($block_all_modules || \array_key_exists($row['modulename'], $blocked_modules)
-            && $blocked_modules[$row['modulename']])
-            && ( ! \array_key_exists($row['modulename'], $unblocked_modules) || ! $unblocked_modules[$row['modulename']]))
-        {
-            $chance = 0;
-        }
+		if (($block_all_modules
+		     || array_key_exists($row['modulename'], $blocked_modules)
+		        && $blocked_modules[$row['modulename']])
+		    && (!array_key_exists($row['modulename'], $unblocked_modules)
+		        || !$unblocked_modules[$row['modulename']])) {
+			$chance = 0;
+		}
 
-        $events[] = [
-            'modulename' => $row['modulename'],
-            'rawchance'  => $chance,
-        ];
+		$events[] = [
+		  'modulename' => $row['modulename'],
+		  'rawchance'  => $chance,
+		];
 
-        $sum += $chance;
-    }
+		$sum += $chance;
+	}
 
-    foreach ($events as $index => $event)
-    {
-        $events[$index]['normchance'] = 0;
+	foreach ($events as $index => $event) {
+		$events[$index]['normchance'] = 0;
 
-        if ($sum)
-        {
-            $events[$index]['normchance'] = \round($event['rawchance'] / $sum * 100, 3);
-            // If an event requests 1% chance, don't give them more!
-            if ($events[$index]['normchance'] > $event['rawchance'])
-            {
-                $events[$index]['normchance'] = $event['rawchance'];
-            }
-        }
-    }
+		if ($sum) {
+			$events[$index]['normchance'] = round($event['rawchance'] / $sum * 100, 3);
+			// If an event requests 1% chance, don't give them more!
+			if ($events[$index]['normchance'] > $event['rawchance']) {
+				$events[$index]['normchance'] = $event['rawchance'];
+			}
+		}
+	}
 
-    $args = new GenericEvent(null, $events);
-    \LotgdEventDispatcher::dispatch($args, Events::EVENTS_COLLECT);
+	$args = new GenericEvent(null, $events);
+	LotgdEventDispatcher::dispatch($args, Events::EVENTS_COLLECT);
 
-    return modulehook('collect-events', $args->getArguments());
+	return modulehook('collect-events', $args->getArguments());
 }
 
-function module_events($eventtype, $basechance, $baseLink = false)
+function module_events ($eventtype, $basechance, $baseLink = false)
 {
-    global $html;
+	global $html;
 
-    if ( ! $baseLink)
-    {
-        $PHP_SELF = \LotgdRequest::getServer('PHP_SELF');
+	if (!$baseLink) {
+		$PHP_SELF = LotgdRequest::getServer('PHP_SELF');
 
-        $baseLink = \substr($PHP_SELF, \strrpos($PHP_SELF, '/') + 1).'?';
-    }
+		$baseLink = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1) . '?';
+	}
 
-    if (e_rand(1, 100) <= $basechance)
-    {
-        $events = module_collect_events($eventtype);
-        $chance = r_rand(1, 100);
+	if (e_rand(1, 100) <= $basechance) {
+		$events = module_collect_events($eventtype);
+		$chance = r_rand(1, 100);
 
-        $sum = 0;
+		$sum = 0;
 
-        foreach ($events as $event)
-        {
-            if (0 == $event['rawchance'])
-            {
-                continue;
-            }
+		foreach ($events as $event) {
+			if (0 == $event['rawchance']) {
+				continue;
+			}
 
-            if ($chance > $sum && $chance <= $sum + $event['normchance'])
-            {
-                $_POST['i_am_a_hack'] = 'true';
-                $html['event']        = [
-                    'title.special',
-                    [],
-                    'partial_event',
-                ];
-                $op = \LotgdRequest::getQuery('op');
-                \LotgdRequest::setQuery('op', '');
-                module_do_event($eventtype, $event['modulename'], false, $baseLink);
-                \LotgdRequest::setQuery('op', $op);
+			if ($chance > $sum && $chance <= $sum + $event['normchance']) {
+				$_POST['i_am_a_hack'] = 'true';
+				$html['event'] = [
+				  'title.special',
+				  [],
+				  'partial_event',
+				];
+				$op = LotgdRequest::getQuery('op');
+				LotgdRequest::setQuery('op', '');
+				module_do_event($eventtype, $event['modulename'], false, $baseLink);
+				LotgdRequest::setQuery('op', $op);
 
-                return 1;
-            }
-            $sum += $event['normchance'];
-        }
-    }
+				return 1;
+			}
+			$sum += $event['normchance'];
+		}
+	}
 
-    return 0;
+	return 0;
 }
 
-function module_do_event($type, $module, $allowinactive = false, $baseLink = false)
+function module_do_event ($type, $module, $allowinactive = false, $baseLink = false)
 {
-    global $navsection;
+	global $navsection, $mostrecentmodule;
 
-    if (false === $baseLink)
-    {
-        $PHP_SELF = LotgdRequest::getServer('PHP_SELF');
+	if (false === $baseLink) {
+		$PHP_SELF = LotgdRequest::getServer('PHP_SELF');
 
-        $baseLink = \substr($PHP_SELF, \strrpos($PHP_SELF, '/') + 1).'?';
-    }
+		$baseLink = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1) . '?';
+	}
 
-    // Save off the mostrecent module since having that change can change
-    // behaviour especially if a module calls modulehooks itself or calls
-    // library functions which cause them to be called.
-    $mostrecentmodule = $mostrecentmodule ?? '';
+	// Save off the mostrecent module since having that change can change
+	// behaviour especially if a module calls modulehooks itself or calls
+	// library functions which cause them to be called.
+	$mostrecentmodule = $mostrecentmodule ?? '';
 
-    $mod                  = $mostrecentmodule;
-    $_POST['i_am_a_hack'] = 'true';
+	$mod = $mostrecentmodule;
+	$_POST['i_am_a_hack'] = 'true';
 
-    if (injectmodule($module, $allowinactive))
-    {
-        $oldnavsection = $navsection;
-        $fname         = $module.'_runevent';
-        $fname($type, $baseLink);
-        //hook into the running event, but only in *this* running event, not in all
-        modulehook("runevent_{$module}", ['type' => $type, 'baselink' => $baseLink, 'get' => \LotgdRequest::getQueryAll(), 'post' => \LotgdRequest::getPostAll()]);
-        //revert nav section after we're done here.
-        $navsection = $oldnavsection;
-    }
+	if (injectmodule($module, $allowinactive)) {
+		$oldnavsection = $navsection;
+		$fname = $module . '_runevent';
+		$fname($type, $baseLink);
+		//hook into the running event, but only in *this* running event, not in all
+		modulehook(
+		  "runevent_{$module}",
+		  [
+			'type' => $type,
+			'baselink' => $baseLink,
+			'get' => LotgdRequest::getQueryAll(),
+			'post' => LotgdRequest::getPostAll(),
+		  ]
+		);
+		//revert nav section after we're done here.
+		$navsection = $oldnavsection;
+	}
 
-    $mostrecentmodule = $mod;
+	$mostrecentmodule = $mod;
 }
 
-function event_sort($a, $b)
+function event_sort ($a, $b)
 {
-    return \strcmp($a['modulename'], $b['modulename']);
+	return strcmp($a['modulename'], $b['modulename']);
 }
 
-function module_display_events($eventtype, $forcescript = false)
+function module_display_events ($eventtype, $forcescript = false)
 {
-    global $session;
+	global $session;
 
-    if ( ! ($session['user']['superuser'] & SU_DEVELOPER))
-    {
-        return;
-    }
+	if (!($session['user']['superuser'] & SU_DEVELOPER)) {
+		return;
+	}
 
-    $script = $forcescript;
+	$script = $forcescript;
 
-    if ( ! $forcescript)
-    {
-        $PHP_SELF = \LotgdRequest::getServer('PHP_SELF');
-        $script   = \substr($PHP_SELF, \strrpos($PHP_SELF, '/') + 1);
-    }
+	if (!$forcescript) {
+		$PHP_SELF = LotgdRequest::getServer('PHP_SELF');
+		$script = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1);
+	}
 
-    $events = module_collect_events($eventtype, false); //-- To avoid conflicts not allow inactive modules
+	$events = module_collect_events($eventtype, false); //-- To avoid conflicts not allow inactive modules
 
-    if ( ! \is_array($events) || ! \count($events))
-    {
-        return;
-    }
+	if (!is_array($events) || !count($events)) {
+		return;
+	}
 
-    \usort($events, 'event_sort');
+	usort($events, 'event_sort');
 
-    $params = [
-        'textDomain' => 'partial_event',
-        'events'     => $events,
-        'script'     => $script,
-    ];
+	$params = [
+	  'textDomain' => 'partial_event',
+	  'events'     => $events,
+	  'script'     => $script,
+	];
 
-    $tpl = \LotgdTheme::load('admin/_blocks/_partials.html.twig');
-    \LotgdResponse::pageAddContent($tpl->renderBlock('partial_event_trigger', $params));
+	$tpl = LotgdTheme::load('admin/_blocks/_partials.html.twig');
+	LotgdResponse::pageAddContent($tpl->renderBlock('partial_event_trigger', $params));
 }

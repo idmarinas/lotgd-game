@@ -8,7 +8,7 @@
 
 use Lotgd\Core\Event\Core;
 
-\LotgdEventDispatcher::dispatch(new Core(), Core::NEWDAY_RUNONCE);
+LotgdEventDispatcher::dispatch(new Core(), Core::NEWDAY_RUNONCE);
 modulehook('newday-runonce', []);
 
 //only if not done by cron

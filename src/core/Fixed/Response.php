@@ -26,4 +26,4 @@ class Response
     use StaticTrait;
 }
 
-class_alias('Lotgd\Core\Fixed\Response', 'LotgdResponse', false);
+class_alias(\Lotgd\Core\Fixed\Response::class, 'LotgdResponse', false);

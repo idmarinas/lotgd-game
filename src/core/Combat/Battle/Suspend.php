@@ -68,7 +68,7 @@ trait Suspend
             }
         }
 
-        if ($unsuspendnotify)
+        if ($unsuspendnotify !== 0)
         {
             $msg = $msg ?: 'skill.buffs.gods.restored';
 

@@ -117,7 +117,7 @@ trait Commentary
             return $singleIcon;
         }
 
-        if ('AFK' == \strtoupper($comment['chatloc']))
+        if ('AFK' === \strtoupper($comment['chatloc']))
         {
             $icon = [
                 // 'icon' => 'images/icons/onlinestatus/afk.png',
@@ -126,7 +126,7 @@ trait Commentary
                 'label'      => $status['afk'],
             ];
         }
-        elseif ('DNI' == \strtoupper($comment['chatloc']))
+        elseif ('DNI' === \strtoupper($comment['chatloc']))
         {
             $icon = [
                 'icon'       => 'far fa-circle',
@@ -171,7 +171,7 @@ trait Commentary
         $icon = null;
 
         //-- Is a message of the game
-        if ('GAME' == \strtoupper($comment['command']))
+        if ('GAME' === \strtoupper($comment['command']))
         {
             $icon = \sprintf(
                 '<span data-tooltip="%1$s" class="fa-stack" style="font-size: 0.5em;"><i class="fas fa-gamepad fa-stack-2x" aria-label="%1$s"></i></span>',
@@ -179,7 +179,7 @@ trait Commentary
             );
         }
         //-- Is a deleted message by the author
-        elseif ('GREM' == \strtoupper($comment['command']))
+        elseif ('GREM' === \strtoupper($comment['command']))
         {
             $icon = \sprintf(
                 '<span data-tooltip="%1$s" class="fa-stack" style="font-size: 0.5em;"><i class="fas fa-eraser fa-stack-2x" aria-label="%1$s"></i></span>',

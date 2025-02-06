@@ -24,4 +24,4 @@ class EventDispatcher
     use StaticTrait;
 }
 
-class_alias('Lotgd\Core\Fixed\EventDispatcher', 'LotgdEventDispatcher', false);
+class_alias(\Lotgd\Core\Fixed\EventDispatcher::class, 'LotgdEventDispatcher', false);

@@ -44,9 +44,9 @@ class AccountsEverypageRepository extends ServiceEntityRepository
                 ->getSingleResult()
             ;
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            Debugger::log($th);
+            Debugger::log($throwable);
 
             return [];
         }

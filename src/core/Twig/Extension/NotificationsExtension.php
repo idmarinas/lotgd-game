@@ -13,7 +13,6 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Lotgd\Core\Bag\NotificationsBag;
 use Lotgd\Core\Tool\Sanitize;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Twig\Environment;
