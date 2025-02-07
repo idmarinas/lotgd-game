@@ -1,7 +1,35 @@
 * text=lf
+
 .gitattributes merge=ours
 CHANGELOG-dev.md merge=ours
 composer.json merge=ours
+composer.lock merge=ours
+symfony.lock merge=ours
 package.json merge=ours
+package-lock.json merge=ours
 README.md merge=ours
 .idea/ merge=ours
+gulpfile.js merge=ours
+gulp/ merge=ours
+docs/ merge=ours
+
+/.docker/ export-ignore
+/.github export-ignore
+/.idea/ export-ignore
+/app/ export-ignore
+/build/ export-ignore
+/docs/ export-ignore
+/factories/ export-ignore
+/fixtures/ export-ignore
+/tests/ export-ignore
+/vendor/ export-ignore
+/var/ export-ignore
+/Writerside/ export-ignore
+
+/.editorconfig export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/compose.yaml export-ignore
+/phpunit.xml.dist export-ignore
+/rector.php export-ignore
+/sonar-project.properties export-ignore
