@@ -8,7 +8,7 @@
 
 </div>
 
-> The version **IDMarinas Edition** is based on the version **1.2.2 Dragonprime** by Dragonprime Development
+> The version **IDMarinas Edition** is based on the version **1.1.2 Dragonprime** by Dragonprime Development
 > Team ([Dragonprime][dp-o]) and version **1.2.5 +nb Edition** of Oliver Brendel ([NB Core][nb-core]).
 >
 > This is the original [README.txt](README.txt) file of LoTGD
