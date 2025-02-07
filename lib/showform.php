@@ -59,7 +59,7 @@ function lotgd_showform ($layout, $row, $nosave = false, $keypref = false, $prin
 		}
 
 		if (is_array($info[0])) {
-			$info[0] = call_user_func_array('sprintf', $info[0]);
+			$info[0] = sprintf(...$info[0]);
 		}
 
 		$info[1] = (isset($info[1])) ? trim($info[1]) : '';
@@ -71,7 +71,7 @@ function lotgd_showform ($layout, $row, $nosave = false, $keypref = false, $prin
 			  '<a class="w-full inline-block" data-tabs-target="tab" data-action="click->tabs#change" href="#">%s</a>',
 			  $info[0]
 			);
-		} else if ('note' == $info[1]) {
+		} elseif ('note' == $info[1]) {
 			$tabContent[$title_id][] = sprintf(
 			  '<div class="ui small info message">%s</div>',
 			  LotgdSanitize::fullSanitize($info[0])
@@ -135,7 +135,7 @@ function lotgd_showform ($layout, $row, $nosave = false, $keypref = false, $prin
 		$content .= "<input class='ui button' type='submit' value='{$save}'>";
 	}
 
-	$content = $content . '</div>';
+	$content .= '</div>';
 
 	if ($print) {
 		LotgdResponse::pageAddContent($content);
@@ -184,11 +184,8 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 					LotgdSetting::getSetting('charset', 'UTF-8')
 				  ) . '</option>';
 			}
-			$select .= '</select>';
 
-			return $select;
-
-			break;
+			return $select . '</select>';
 		case 'location':
 			// A generic way of allowing the location to be specified for
 			// things which only want to be in one place.  There are other
@@ -218,11 +215,8 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 					LotgdSetting::getSetting('charset', 'UTF-8')
 				  ) . '</option>';
 			}
-			$select .= '</select>';
 
-			return $select;
-
-			break;
+			return $select . '</select>';
 		case 'checkpretrans':
 			$pretrans = 1;
 		// FALLTHROUGH
@@ -261,8 +255,6 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			}
 
 			return $select;
-
-			break;
 		case 'radiopretrans':
 			$pretrans = 1;
 		// FALLTHROUGH
@@ -291,8 +283,6 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			}
 
 			return $select;
-
-			break;
 		case 'dayrange':
 			$start = strtotime(date('Y-m-d', strtotime('now')));
 			$end = strtotime($info[2]);
@@ -326,11 +316,8 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 					LotgdSetting::getSetting('charset', 'UTF-8')
 				  ) . '</option>';
 			}
-			$select .= '</select>';
 
-			return $select;
-
-			break;
+			return $select . '</select>';
 
 		case 'range':
 			$min = (int)$info[2];
@@ -353,11 +340,8 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 				           . htmlentities("{$j}", ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8'))
 				           . '</option>';
 			}
-			$select .= '</select>';
 
-			return $select;
-
-			break;
+			return $select . '</select>';
 		case 'floatrange':
 			$min = round((float)$info[2], 2);
 			$max = round((float)$info[3], 2);
@@ -376,11 +360,8 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 					LotgdSetting::getSetting('charset', 'UTF-8')
 				  ) . '</option>';
 			}
-			$select .= '</select>';
 
-			return $select;
-
-			break;
+			return $select . '</select>';
 		case 'bitfieldpretrans':
 			$pretrans = 1;
 		// FALLTHROUGH
@@ -418,8 +399,6 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			}
 
 			return '<div class="left floated">' . $input . '</div><br clear="all">';
-
-			break;
 		case 'datelength':
 			// However, there was a bug with your translation code wiping
 			// the key name for the actual form.  It's now fixed.
@@ -464,7 +443,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			}
 			$select = "<select class='ui lotgd dropdown' name='{$keyout}'>";
 
-			foreach ($vals as $k => $v) {
+			foreach ($vals as $v) {
 				$select .= '<option value="' . htmlentities(
 					$v,
 					ENT_COMPAT,
@@ -475,11 +454,8 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 				             LotgdSetting::getSetting('charset', 'UTF-8')
 				           ) . '</option>';
 			}
-			$select .= '</select>';
 
-			return $select;
-
-			break;
+			return $select . '</select>';
 		case 'enumpretrans':
 			$pretrans = 1;
 		// FALLTHROUGH
@@ -505,17 +481,14 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 				if (isset($row[$key]) && $row[$key] == $optval) {
 					$selected = 1;
 				}
-				$select .= "<option value='{$optval}'" . ($selected ? ' selected' : '') . '>' . htmlentities(
+				$select .= "<option value='{$optval}'" . ($selected !== 0 ? ' selected' : '') . '>' . htmlentities(
 					"{$optdis}",
 					ENT_COMPAT,
 					LotgdSetting::getSetting('charset', 'UTF-8')
 				  ) . '</option>';
 			}
-			$select .= '</select>';
 
-			return $select;
-
-			break;
+			return $select . '</select>';
 		case 'password':
 			$out = '';
 			if (array_key_exists($key, $row)) {
@@ -527,8 +500,6 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 				ENT_COMPAT,
 				LotgdSetting::getSetting('charset', 'UTF-8')
 			  ) . "'>";
-
-			break;
 		case 'bool':
 			$value = $row[$key] ?? $default ?: 0;
 
@@ -553,8 +524,6 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 				ENT_COMPAT,
 				LotgdSetting::getSetting('charset', 'UTF-8')
 			  ) . '">' . htmlentities($val, ENT_COMPAT, LotgdSetting::getSetting('charset', 'UTF-8'));
-
-			break;
 		case 'viewonly':
 			//don't unset it. it does not change, so nothing lost
 			if (isset($row[$key])) {
@@ -566,13 +535,12 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			//don't unset it, transfer it, hide it. This is now used for legacy support of playernames that are empty and showform won't carry the name over to extract the real one
 			if (isset($row[$key])) {
 				$text = '<span>' . LotgdFormat::colorize(dump_item($row[$key])) . '</span>';
-				$text .= "<input type='hidden' name='"
+
+				return $text . ("<input type='hidden' name='"
 				         . addslashes($key)
 				         . "' value='"
 				         . addslashes($row[$key])
-				         . "'>";
-
-				return $text;
+				         . "'>");
 			}
 
 			break;

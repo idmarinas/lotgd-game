@@ -43,22 +43,17 @@ if ('' == $op) {
 	$form->handleRequest(LotgdRequest::_i());
 
 	if ($form->isSubmitted() && $form->isValid()) {
-		$messageType = null;
 		$formIsValid = true;
 		$postSettings = $form->getData();
 
 		require_once 'lib/configuration/save.php';
-
-		if ($messageType) {
-			LotgdFlashMessages::{$messageType}(LotgdTranslator::t($message, [], 'form_app'));
-		}
 	}
 
 	$query = $repository->createQueryBuilder('u');
 
 	$params['paginator'] = $repository->getPaginator($query, $page);
 	$params['form'] = $form->createView();
-} else if ('newcronjob' == $op) {
+} elseif ('newcronjob' == $op) {
 	$params['tpl'] = 'cronjob-new';
 
 	$lotgdFormFactory = LotgdKernel::get('form.factory');
@@ -75,8 +70,6 @@ if ('' == $op) {
 	$form->handleRequest(LotgdRequest::_i());
 
 	$paramsFlashMessages = [];
-	$message = null;
-	$messageType = 'addSuccessMessage';
 
 	if ($form->isSubmitted() && $form->isValid()) {
 		$entity = $form->getData();
@@ -103,11 +96,10 @@ if ('' == $op) {
 		  ],
 		]);
 
-		if ($message !== '') {
-			LotgdFlashMessages::{$messageType}(LotgdTranslator::t($message, $paramsFlashMessages, $textDomain));
-		}
+		LotgdFlashMessages::addSuccessMessage(LotgdTranslator::t($message, $paramsFlashMessages, $textDomain));
 	}
-	Doctrine::detach($entity); //-- Avoid Doctrine save a invalid Form
+
+	Doctrine::detach($entity); //-- Avoid Doctrine save an invalid Form
 
 	//-- In this position can updated $cronId var
 	LotgdNavigation::addNavAllow("configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}");
