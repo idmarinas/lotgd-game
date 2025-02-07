@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <phpdocumentor
-        configVersion="3"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="https://www.phpdoc.org"
-        xsi:noNamespaceSchemaLocation="https://docs.phpdoc.org/latest/phpdoc.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  configVersion="3"
+  xmlns="https://www.phpdoc.org"
+  xsi:noNamespaceSchemaLocation="https://docs.phpdoc.org/latest/phpdoc.xsd"
 >
-    <title>Legend of the Green Dragon</title>
-    <paths>
-        <output>docs</output>
-        <cache>output-cache.dist</cache>
-    </paths>
-    <version number="5.2.0">
-        <api>
-            <source dsn=".">
-                <path>src</path>
-                <path>lib</path>
-                <path>config</path>
-            </source>
-            <markers>
-                <marker>TODO</marker>
-                <marker>FIXME</marker>
-            </markers>
-        </api>
-    </version>
+	<title>Legend of the Green Dragon</title>
+	<paths>
+		<output>docs</output>
+		<cache>output-cache.dist</cache>
+	</paths>
+	<version number="7.2.0">
+		<api>
+			<source dsn=".">
+				<path>src</path>
+				<path>lib</path>
+				<path>config</path>
+			</source>
+			<markers>
+				<marker>TODO</marker>
+				<marker>FIXME</marker>
+			</markers>
+		</api>
+	</version>
 </phpdocumentor>
