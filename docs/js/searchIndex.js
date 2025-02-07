@@ -28,7 +28,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\lotgd_mail\u0028\u0029",
             "name": "lotgd_mail",
-            "summary": "Function\u0020for\u0020send\u0020Mails\u0020to\u0020users\nHas\u0020the\u0020same\u0020structure\u0020as\u0020the\u0020php\u0020\u0022mail\u0028\u0029\u0022\u0020function,\u0020but\u0020this\u0020function\u0020checks\u0020if\u0020you\u0020want\u0020to\u0020send\u0020emails\u0020in\u0020html\u0020format\u0020or\u0020not.",
+            "summary": "Function\u0020for\u0020send\u0020Mails\u0020to\u0020users\nHas\u0020the\u0020same\u0020structure\u0020as\u0020the\u0020php\u0020\u0022mail\u0028\u0029\u0022\u0020function,\u0020but\u0020this\u0020function\u0020checks\u0020if\u0020you\u0020want\u0020to\u0020send\u0020emails\u0020in\u0020html\nformat\u0020or\u0020not.",
             "url": "namespaces/default.html#function_lotgd_mail"
         },                {
             "fqsen": "\\activate_module\u0028\u0029",
@@ -281,21 +281,6 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#function_redirect"
         },                {
-            "fqsen": "\\ServerFunctions",
-            "name": "ServerFunctions",
-            "summary": "",
-            "url": "classes/ServerFunctions.html"
-        },                {
-            "fqsen": "\\ServerFunctions\u003A\u003AisTheServerFull\u0028\u0029",
-            "name": "isTheServerFull",
-            "summary": "",
-            "url": "classes/ServerFunctions.html#method_isTheServerFull"
-        },                {
-            "fqsen": "\\ServerFunctions\u003A\u003AresetAllDragonkillPoints\u0028\u0029",
-            "name": "resetAllDragonkillPoints",
-            "summary": "",
-            "url": "classes/ServerFunctions.html#method_resetAllDragonkillPoints"
-        },                {
             "fqsen": "\\lotgd_showform\u0028\u0029",
             "name": "lotgd_showform",
             "summary": "Construct\u0020FORM\u0020LOTGD\u0020style.",
@@ -320,26 +305,6 @@ Search.appendIndex(
             "name": "checkSuPermission",
             "summary": "Check\u0020Superuser\u0020premission.",
             "url": "namespaces/default.html#function_checkSuPermission"
-        },                {
-            "fqsen": "\\Lotgd\\Ajax\\Core\\Bans",
-            "name": "Bans",
-            "summary": "",
-            "url": "classes/Lotgd-Ajax-Core-Bans.html"
-        },                {
-            "fqsen": "\\Lotgd\\Ajax\\Core\\Bans\u003A\u003AshowAffected\u0028\u0029",
-            "name": "showAffected",
-            "summary": "",
-            "url": "classes/Lotgd-Ajax-Core-Bans.html#method_showAffected"
-        },                {
-            "fqsen": "\\Lotgd\\Ajax\\Core\\Mounts",
-            "name": "Mounts",
-            "summary": "",
-            "url": "classes/Lotgd-Ajax-Core-Mounts.html"
-        },                {
-            "fqsen": "\\Lotgd\\Ajax\\Core\\Mounts\u003A\u003AgetListOfOwners\u0028\u0029",
-            "name": "getListOfOwners",
-            "summary": "",
-            "url": "classes/Lotgd-Ajax-Core-Mounts.html#method_getListOfOwners"
         },                {
             "fqsen": "\\Lotgd\\Core\\Bag\\NotificationsBag",
             "name": "NotificationsBag",
@@ -4401,6 +4366,76 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Controller-StableController.html#property_response"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\BansController",
+            "name": "BansController",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-Stimulus-BansController.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\BansController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-Stimulus-BansController.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\BansController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-Stimulus-BansController.html#method_index"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\BansController\u003A\u003AallowAnonymous\u0028\u0029",
+            "name": "allowAnonymous",
+            "summary": "Allow\u0020anonymous\u0020user\u0020acces\u0020to\u0020this\u0020controller\u003F",
+            "url": "classes/Lotgd-Core-Controller-Stimulus-BansController.html#method_allowAnonymous"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\BansController\u003A\u003AoverrideForcedNav\u0028\u0029",
+            "name": "overrideForcedNav",
+            "summary": "Override\u0020forced\u0020nav\u003F.",
+            "url": "classes/Lotgd-Core-Controller-Stimulus-BansController.html#method_overrideForcedNav"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\BansController\u003A\u003A\u0024em",
+            "name": "em",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-Stimulus-BansController.html#property_em"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\BansController\u003A\u003A\u0024format",
+            "name": "format",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-Stimulus-BansController.html#property_format"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\MountController",
+            "name": "MountController",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-Stimulus-MountController.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\MountController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-Stimulus-MountController.html#method___construct"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\MountController\u003A\u003Aindex\u0028\u0029",
+            "name": "index",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-Stimulus-MountController.html#method_index"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\MountController\u003A\u003AallowAnonymous\u0028\u0029",
+            "name": "allowAnonymous",
+            "summary": "Allow\u0020anonymous\u0020user\u0020acces\u0020to\u0020this\u0020controller\u003F",
+            "url": "classes/Lotgd-Core-Controller-Stimulus-MountController.html#method_allowAnonymous"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\MountController\u003A\u003AoverrideForcedNav\u0028\u0029",
+            "name": "overrideForcedNav",
+            "summary": "Override\u0020forced\u0020nav\u003F.",
+            "url": "classes/Lotgd-Core-Controller-Stimulus-MountController.html#method_overrideForcedNav"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\MountController\u003A\u003A\u0024repository",
+            "name": "repository",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-Stimulus-MountController.html#property_repository"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\MountController\u003A\u003A\u0024format",
+            "name": "format",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Controller-Stimulus-MountController.html#property_format"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Controller\\Stimulus\\TimeoutController",
             "name": "TimeoutController",
             "summary": "",
@@ -6241,65 +6276,65 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Entity-Bans.html#method___construct"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AsetBanexpire\u0028\u0029",
-            "name": "setBanexpire",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Banexpire.",
-            "url": "classes/Lotgd-Core-Entity-Bans.html#method_setBanexpire"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AgetBanexpire\u0028\u0029",
             "name": "getBanexpire",
             "summary": "Get\u0020the\u0020value\u0020of\u0020Banexpire.",
             "url": "classes/Lotgd-Core-Entity-Bans.html#method_getBanexpire"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AsetUniqueid\u0028\u0029",
-            "name": "setUniqueid",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Uniqueid.",
-            "url": "classes/Lotgd-Core-Entity-Bans.html#method_setUniqueid"
+            "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AsetBanexpire\u0028\u0029",
+            "name": "setBanexpire",
+            "summary": "Set\u0020the\u0020value\u0020of\u0020Banexpire.",
+            "url": "classes/Lotgd-Core-Entity-Bans.html#method_setBanexpire"
         },                {
             "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AgetUniqueid\u0028\u0029",
             "name": "getUniqueid",
             "summary": "Get\u0020the\u0020value\u0020of\u0020Uniqueid.",
             "url": "classes/Lotgd-Core-Entity-Bans.html#method_getUniqueid"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AsetIpfilter\u0028\u0029",
-            "name": "setIpfilter",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Ipfilter.",
-            "url": "classes/Lotgd-Core-Entity-Bans.html#method_setIpfilter"
+            "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AsetUniqueid\u0028\u0029",
+            "name": "setUniqueid",
+            "summary": "Set\u0020the\u0020value\u0020of\u0020Uniqueid.",
+            "url": "classes/Lotgd-Core-Entity-Bans.html#method_setUniqueid"
         },                {
             "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AgetIpfilter\u0028\u0029",
             "name": "getIpfilter",
             "summary": "Get\u0020the\u0020value\u0020of\u0020Ipfilter.",
             "url": "classes/Lotgd-Core-Entity-Bans.html#method_getIpfilter"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AsetBanreason\u0028\u0029",
-            "name": "setBanreason",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Banreason.",
-            "url": "classes/Lotgd-Core-Entity-Bans.html#method_setBanreason"
+            "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AsetIpfilter\u0028\u0029",
+            "name": "setIpfilter",
+            "summary": "Set\u0020the\u0020value\u0020of\u0020Ipfilter.",
+            "url": "classes/Lotgd-Core-Entity-Bans.html#method_setIpfilter"
         },                {
             "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AgetBanreason\u0028\u0029",
             "name": "getBanreason",
             "summary": "Get\u0020the\u0020value\u0020of\u0020Banreason.",
             "url": "classes/Lotgd-Core-Entity-Bans.html#method_getBanreason"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AsetBanner\u0028\u0029",
-            "name": "setBanner",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Banner.",
-            "url": "classes/Lotgd-Core-Entity-Bans.html#method_setBanner"
+            "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AsetBanreason\u0028\u0029",
+            "name": "setBanreason",
+            "summary": "Set\u0020the\u0020value\u0020of\u0020Banreason.",
+            "url": "classes/Lotgd-Core-Entity-Bans.html#method_setBanreason"
         },                {
             "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AgetBanner\u0028\u0029",
             "name": "getBanner",
             "summary": "Get\u0020the\u0020value\u0020of\u0020Banner.",
             "url": "classes/Lotgd-Core-Entity-Bans.html#method_getBanner"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AsetLasthit\u0028\u0029",
-            "name": "setLasthit",
-            "summary": "Set\u0020the\u0020value\u0020of\u0020Lasthit.",
-            "url": "classes/Lotgd-Core-Entity-Bans.html#method_setLasthit"
+            "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AsetBanner\u0028\u0029",
+            "name": "setBanner",
+            "summary": "Set\u0020the\u0020value\u0020of\u0020Banner.",
+            "url": "classes/Lotgd-Core-Entity-Bans.html#method_setBanner"
         },                {
             "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AgetLasthit\u0028\u0029",
             "name": "getLasthit",
             "summary": "Get\u0020the\u0020value\u0020of\u0020Lasthit.",
             "url": "classes/Lotgd-Core-Entity-Bans.html#method_getLasthit"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003AsetLasthit\u0028\u0029",
+            "name": "setLasthit",
+            "summary": "Set\u0020the\u0020value\u0020of\u0020Lasthit.",
+            "url": "classes/Lotgd-Core-Entity-Bans.html#method_setLasthit"
         },                {
             "fqsen": "\\Lotgd\\Core\\Entity\\Bans\u003A\u003A\u0024banexpire",
             "name": "banexpire",
@@ -14733,17 +14768,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Version\u003A\u003AgetInstallerVersions\u0028\u0029",
             "name": "getInstallerVersions",
-            "summary": "Get\u0020array\u0020of\u0020versions.",
+            "summary": "Get\u0020an\u0020array\u0020of\u0020versions.",
             "url": "classes/Lotgd-Core-Installer-Pattern-Version.html#method_getInstallerVersions"
         },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Version\u003A\u003AgetFullListOfVersion\u0028\u0029",
             "name": "getFullListOfVersion",
-            "summary": "Get\u0020array\u0020of\u0020versions.",
+            "summary": "Get\u0020an\u0020array\u0020of\u0020versions.",
             "url": "classes/Lotgd-Core-Installer-Pattern-Version.html#method_getFullListOfVersion"
         },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Pattern\\Version\u003A\u003A\u0024lotgd_versions",
             "name": "lotgd_versions",
-            "summary": "Versions\u0020of\u0020game.",
+            "summary": "Versions\u0020of\u0020the\u0020game.",
             "url": "classes/Lotgd-Core-Installer-Pattern-Version.html#property_lotgd_versions"
         },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\CleanVersion",
@@ -15086,20 +15121,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Kernel.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Kernel\u003A\u003Abuild\u0028\u0029",
-            "name": "build",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Kernel.html#method_build"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Kernel\u003A\u003AregisterBundles\u0028\u0029",
             "name": "registerBundles",
             "summary": "",
             "url": "classes/Lotgd-Core-Kernel.html#method_registerBundles"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Kernel\u003A\u003AgetProjectDir\u0028\u0029",
-            "name": "getProjectDir",
-            "summary": "\u007B\u0040inheritdoc\u007D",
-            "url": "classes/Lotgd-Core-Kernel.html#method_getProjectDir"
         },                {
             "fqsen": "\\Lotgd\\Core\\Kernel\u003A\u003AconfigureContainer\u0028\u0029",
             "name": "configureContainer",
@@ -15110,6 +15135,16 @@ Search.appendIndex(
             "name": "configureRoutes",
             "summary": "",
             "url": "classes/Lotgd-Core-Kernel.html#method_configureRoutes"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Kernel\u003A\u003Abuild\u0028\u0029",
+            "name": "build",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Kernel.html#method_build"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Kernel\u003A\u003AgetProjectDir\u0028\u0029",
+            "name": "getProjectDir",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Kernel.html#method_getProjectDir"
         },                {
             "fqsen": "\\Lotgd\\Core\\Kernel\u003A\u003AVERSION",
             "name": "VERSION",
@@ -15158,7 +15193,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Lotgd\\Core\\Kernel\u003A\u003ALICENSE",
             "name": "LICENSE",
-            "summary": "This\u0020series\u0020of\u0020scripts\u0020\u0028collectively\u0020known\u0020as\u0020Legend\u0020of\u0020the\u0020Green\u0020Dragon\u0020or\u0020LotGD\u0029\u0020is\u0020licensed\u0020according\u0020to\u0020the\u0020Creating\u0020Commons\u0020Attribution\nNon\u002Dcommercial\u0020Share\u002Dalike\u0020license.\u0020\u0020The\u0020terms\u0020of\u0020this\u0020license\u0020must\u0020be\u0020followed\u0020for\u0020you\u0020to\u0020legally\u0020use\u0020or\u0020distribute\u0020this\u0020software.\u0020This\nlicense\u0020must\u0020be\u0020used\u0020on\u0020the\u0020distribution\u0020of\u0020any\u0020works\u0020derived\u0020from\u0020this\u0020work.\u0020This\u0020license\u0020text\u0020may\u0020not\u0020be\u0020removed\u0020nor\u0020altered\u0020in\u0020any\u0020way.",
+            "summary": "This\u0020series\u0020of\u0020scripts\u0020\u0028collectively\u0020known\u0020as\u0020Legend\u0020of\u0020the\u0020Green\u0020Dragon\u0020or\u0020LotGD\u0029\u0020is\u0020licensed\u0020according\u0020to\u0020the\nCreating\u0020Commons\u0020Attribution\u0020Non\u002Dcommercial\u0020Share\u002Dalike\u0020license.\u0020\u0020The\u0020terms\u0020of\u0020this\u0020license\u0020must\u0020be\u0020followed\u0020for\nyou\u0020to\u0020legally\u0020use\u0020or\u0020distribute\u0020this\u0020software.\u0020This\u0020license\u0020must\u0020be\u0020used\u0020on\u0020the\u0020distribution\u0020of\u0020any\u0020works\nderived\u0020from\u0020this\u0020work.\u0020This\u0020license\u0020text\u0020may\u0020not\u0020be\u0020removed\u0020nor\u0020altered\u0020in\u0020any\u0020way.\u0020Please\u0020see\u0020the\u0020file\u0020LICENSE\nfor\u0020a\u0020full\u0020textual\u0020description\u0020of\u0020the\u0020license.",
             "url": "classes/Lotgd-Core-Kernel.html#constant_LICENSE"
         },                {
             "fqsen": "\\Lotgd\\Core\\Kernel\u003A\u003ACONFIG_EXTS",
@@ -15341,15 +15376,15 @@ Search.appendIndex(
             "summary": "Add\u0020a\u0020allowed\u0020nav\u0020for\u0020user.",
             "url": "classes/Lotgd-Core-Navigation-Navigation.html#method_addNavAllow"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003AsetTextDomain\u0028\u0029",
-            "name": "setTextDomain",
-            "summary": "Set\u0020text\u0020domain\u0020for\u0020translator.",
-            "url": "classes/Lotgd-Core-Navigation-Navigation.html#method_setTextDomain"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003AgetTextDomain\u0028\u0029",
             "name": "getTextDomain",
             "summary": "Get\u0020text\u0020domain\u0020for\u0020translator.",
             "url": "classes/Lotgd-Core-Navigation-Navigation.html#method_getTextDomain"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003AsetTextDomain\u0028\u0029",
+            "name": "setTextDomain",
+            "summary": "Set\u0020text\u0020domain\u0020for\u0020translator.",
+            "url": "classes/Lotgd-Core-Navigation-Navigation.html#method_setTextDomain"
         },                {
             "fqsen": "\\Lotgd\\Core\\Navigation\\Navigation\u003A\u003AgetLastHeader\u0028\u0029",
             "name": "getLastHeader",
@@ -17566,6 +17601,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Service-PaypalButtons.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Service\\PaypalButtons\u003A\u003AgetSubscribedEvents\u0028\u0029",
+            "name": "getSubscribedEvents",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Service-PaypalButtons.html#method_getSubscribedEvents"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Service\\PaypalButtons\u003A\u003AonBlock\u0028\u0029",
             "name": "onBlock",
             "summary": "",
@@ -19016,26 +19056,6 @@ Search.appendIndex(
             "summary": "Dump\u0020var\u0020and\u0020return\u0020a\u0020string.",
             "url": "classes/Lotgd-Core-Twig-Extension-Pattern-CoreFunction.html#method_varDump"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\Jaxon",
-            "name": "Jaxon",
-            "summary": "Trait\u0020to\u0020output\u0020Jaxon\u0020files.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-Jaxon.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\Jaxon\u003A\u003AjaxonCss\u0028\u0029",
-            "name": "jaxonCss",
-            "summary": "Get\u0020Jaxon\u0020CSS.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-Jaxon.html#method_jaxonCss"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\Jaxon\u003A\u003AjaxonJs\u0028\u0029",
-            "name": "jaxonJs",
-            "summary": "Get\u0020Jaxon\u0020Js.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-Jaxon.html#method_jaxonJs"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\Jaxon\u003A\u003AjaxonScript\u0028\u0029",
-            "name": "jaxonScript",
-            "summary": "Get\u0020Jaxon\u0020Script.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Pattern-Jaxon.html#method_jaxonScript"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\Mail",
             "name": "Mail",
             "summary": "Trait\u0020to\u0020created\u0020ye\u0020olde\u0020mail\u0020link.",
@@ -19536,21 +19556,6 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html"
         },                {
-            "fqsen": "\\Lotgd\\Ajax\\Core",
-            "name": "Core",
-            "summary": "",
-            "url": "namespaces/lotgd-ajax-core.html"
-        },                {
-            "fqsen": "\\Lotgd\\Ajax",
-            "name": "Ajax",
-            "summary": "",
-            "url": "namespaces/lotgd-ajax.html"
-        },                {
-            "fqsen": "\\Lotgd",
-            "name": "Lotgd",
-            "summary": "",
-            "url": "namespaces/lotgd.html"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Bag",
             "name": "Bag",
             "summary": "",
@@ -19725,6 +19730,11 @@ Search.appendIndex(
             "name": "Core",
             "summary": "",
             "url": "namespaces/lotgd-core.html"
+        },                {
+            "fqsen": "\\Lotgd",
+            "name": "Lotgd",
+            "summary": "",
+            "url": "namespaces/lotgd.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\EventSubscriber",
             "name": "EventSubscriber",
