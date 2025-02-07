@@ -11,13 +11,13 @@ function check_su_access($level)
 {
     global $session,$thispage_superuser_level;
 
-    $thispage_superuser_level = $thispage_superuser_level | $level;
+    $thispage_superuser_level |= $level;
 
     $textDomain = 'partial_access';
 
     LotgdResponse::pageAddContent('<!--Su_Restricted-->');
 
-    if ($session['user']['superuser'] & $level)
+    if (($session['user']['superuser'] & $level) !== 0)
     {
         //-- They have appropriate levels, let's see if there's a module that restricts access beyond this point.
 
@@ -124,7 +124,7 @@ function checkSuPermission($permission, ?string $return = null)
 {
     global $session;
 
-    if ($session['user']['superuser'] & $permission)
+    if (($session['user']['superuser'] & $permission) !== 0)
     {
         $result = new Superuser(['enabled' => true, 'permission' => $permission]);
         LotgdEventDispatcher::dispatch($result, Superuser::CHECK_SU_PERMISSION);

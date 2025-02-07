@@ -191,10 +191,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
                 unset($res['nocollapse']);
             }
             //handle return arguments.
-            if (\is_iterable($res))
-            {
-                $args = $res;
-            }
+            $args = $res;
         }
 
         //revert nav section after we're done here.
@@ -239,9 +236,9 @@ function module_wipehooks(string $module)
             ->execute()
         ;
     }
-    catch (Throwable $ex)
+    catch (Throwable $throwable)
     {
-        Debugger::log($ex);
+        Debugger::log($throwable);
     }
 }
 

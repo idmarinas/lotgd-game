@@ -38,7 +38,7 @@ function injectmodule($modulename, $force = false)
             $row = null;
         }
 
-        if ( ! $force)
+        if ( $force === 0)
         {
             //our chance to abort if this module isn't currently installed
             //or doesn't meet the prerequisites.
@@ -66,7 +66,7 @@ function injectmodule($modulename, $force = false)
         $mostrecentmodule = $modulename;
         $info             = '';
 
-        if ( ! $force)
+        if ( $force === 0)
         {
             //avoid calling the function if we're forcing the module
             $fname = $modulename.'_getmoduleinfo';

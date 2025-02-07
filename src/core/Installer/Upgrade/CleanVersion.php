@@ -30,7 +30,7 @@ class CleanVersion extends InstallerAbstract
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }
@@ -47,7 +47,7 @@ class CleanVersion extends InstallerAbstract
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }
@@ -64,7 +64,7 @@ class CleanVersion extends InstallerAbstract
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }
@@ -81,7 +81,7 @@ class CleanVersion extends InstallerAbstract
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }
@@ -98,7 +98,7 @@ class CleanVersion extends InstallerAbstract
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }
@@ -115,7 +115,7 @@ class CleanVersion extends InstallerAbstract
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }
@@ -132,7 +132,7 @@ class CleanVersion extends InstallerAbstract
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }
@@ -149,7 +149,7 @@ class CleanVersion extends InstallerAbstract
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }
@@ -166,7 +166,7 @@ class CleanVersion extends InstallerAbstract
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }
@@ -183,7 +183,7 @@ class CleanVersion extends InstallerAbstract
 
             $this->doctrine->getConnection()->executeQuery($sql);
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             return false;
         }

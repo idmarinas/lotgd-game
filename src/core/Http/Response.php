@@ -96,6 +96,7 @@ class Response extends HttpResponse
 
         $script = $this->request->getServer('SCRIPT_NAME');
         $script = substr($script, 0, strpos($script, '.'));
+
         $module = (string) $this->request->getQuery('module');
 
         $args = new EveryRequest(['script' => $script, 'module' => $module]);
@@ -223,6 +224,7 @@ class Response extends HttpResponse
 
         $script = $this->request->getServer('SCRIPT_NAME');
         $script = substr($script, 0, strpos($script, '.'));
+
         $module = (string) $this->request->getQuery('module');
 
         $args = new EveryRequest(['script' => $script, '__scriptfile__' => $script, 'module' => $module]);

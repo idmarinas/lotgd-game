@@ -136,12 +136,11 @@ if (!function_exists('nltoappon')) {
 // It is to add more compatibility with the old modules.
 
 if (!function_exists('output')) {
-	function output (): void
+	function output (...$args): void
 	{
-		$args = func_get_args();
 		$text = array_shift($args);
 
-		if (count($args) > 0) {
+		if ($args !== []) {
 			//special case since we use `% as a color code so often.
 			$text = str_replace('`%', '`%%', $text);
 			$text = sprintf($text, ...$args);

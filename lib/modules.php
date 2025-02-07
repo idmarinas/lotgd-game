@@ -135,7 +135,7 @@ function mass_module_prepare(array $hooknames)
         //a little black magic trickery: formatting entries in
         //$modulehook_queries the same way that DB::query_cached
         //returns query results.
-        \array_push($modulehook_queries[$row->getLocation()], $row);
+        $modulehook_queries[$row->getLocation()][] = $row;
         $module_preload[$row->getLocation()][$row->getModulename()] = $row->getFunction();
     }
 
@@ -211,7 +211,7 @@ function get_module_info($shortname)
 
     $mostrecentmodule = $mod;
 
-    if (\count($missingFunctions))
+    if ($missingFunctions !== [])
     {
         return [
             'name'     => LotgdFormat::colorize('`$Invalid Module! Contact Author or check file!`0'),
@@ -296,7 +296,7 @@ function module_objpref_edit($type, $module, $id)
 
         return $form;
     }
-    elseif (\is_array($info["prefs-{$type}"]) && \count($info["prefs-{$type}"]) > 0)
+    elseif (\is_array($info["prefs-{$type}"]) && $info["prefs-{$type}"] !== [])
     {
         $msettings = [];
 

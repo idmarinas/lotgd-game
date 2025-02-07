@@ -137,12 +137,9 @@ function get_module_install_status(): array
 
     $uninstalled = \count($files);
 
-    if (\count($files))
+    foreach ($files as $file)
     {
-        foreach ($files as $file)
-        {
-            $uninstalledModules[] = \basename($file, '.php');
-        }
+        $uninstalledModules[] = \basename($file, '.php');
     }
 
     return [

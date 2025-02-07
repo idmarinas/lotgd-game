@@ -72,9 +72,9 @@ trait HealthBar
             $health    = $badguy['creaturehealth'];
             $maxhealth = $badguy['creaturemaxhealth'];
 
-            if ($badguy['hidehitpoints'] ?? false)
-            {
-                $maxhealth = $health = 'battlebars.unknownhp';
+            if ($badguy['hidehitpoints'] ?? false) {
+                $maxhealth = 'battlebars.unknownhp';
+                $health = 'battlebars.unknownhp';
             }
 
             $data['enemies'][$index] = [
@@ -105,9 +105,9 @@ trait HealthBar
             $health    = $companion['hitpoints'];
             $maxhealth = $companion['maxhitpoints'];
 
-            if ($companion['hidehitpoints'] ?? false)
-            {
-                $maxhealth = $health = 'battlebars.unknownhp';
+            if ($companion['hidehitpoints'] ?? false) {
+                $maxhealth = 'battlebars.unknownhp';
+                $health = 'battlebars.unknownhp';
             }
 
             $data['companions'][$index] = [

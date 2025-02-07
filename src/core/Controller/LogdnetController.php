@@ -293,7 +293,7 @@ class LogdnetController extends AbstractController
 
                 return $content;
             }
-            catch (Throwable $th)
+            catch (Throwable $throwable)
             {
                 return [];
             }

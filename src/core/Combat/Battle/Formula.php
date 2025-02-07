@@ -60,7 +60,7 @@ trait Formula
                 $atk      = $patkroll;
                 $catkroll = bell_rand(0, $adjustedcreaturedefense);
 
-                $creaturedmg = 0 - (int) ($catkroll - $patkroll);
+                $creaturedmg = -(int) ($catkroll - $patkroll);
 
                 if ($creaturedmg < 0)
                 {
@@ -82,7 +82,7 @@ trait Formula
                     $catkroll *= $powerattackmulti;
                 }
 
-                $selfdmg = 0 - (int) ($pdefroll - $catkroll);
+                $selfdmg = -(int) ($pdefroll - $catkroll);
 
                 if ($selfdmg < 0)
                 {
@@ -152,7 +152,7 @@ trait Formula
                 $atk      = $patkroll;
                 $catkroll = bell_rand(0, $adjustedcreaturedefense);
 
-                $creaturedmg = 0 - (int) ($catkroll - $patkroll);
+                $creaturedmg = -(int) ($catkroll - $patkroll);
 
                 if ($creaturedmg < 0)
                 {
@@ -168,7 +168,7 @@ trait Formula
                 $pdefroll = bell_rand(0, $adjustedselfdefense);
                 $catkroll = bell_rand(0, $creatureattack);
 
-                $selfdmg = 0 - (int) ($pdefroll - $catkroll);
+                $selfdmg = -(int) ($pdefroll - $catkroll);
 
                 if ($selfdmg < 0)
                 {

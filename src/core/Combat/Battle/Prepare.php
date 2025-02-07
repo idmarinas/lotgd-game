@@ -42,7 +42,7 @@ trait Prepare
      */
     protected function prepareCompanions(): void
     {
-        if (\is_array($this->companions) && ! empty($this->companions))
+        if (\is_array($this->companions) && $this->companions !== [])
         {
             foreach ($this->companions as &$companion)
             {

@@ -115,6 +115,7 @@ class ClanController extends AbstractController
         ];
 
         $ranks = new EventClan(['ranks' => $ranks, 'textDomain' => $textDomain, 'clanid' => null]);
+
         $this->dispatcher->dispatch($ranks, EventClan::RANK_LIST);
         $ranks                = modulehook('clanranks', $ranks->getData());
         $params['ranksNames'] = $ranks['ranks'];
@@ -285,7 +286,7 @@ class ClanController extends AbstractController
 
         $this->navigation->addHeader('category.options');
 
-        if (\count($params['clanList']) > 0)
+        if ($params['clanList'] !== [])
         {
             $this->navigation->addNav('nav.list.lobby', 'clan.php');
 

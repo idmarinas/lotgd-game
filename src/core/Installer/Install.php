@@ -53,7 +53,7 @@ class Install extends InstallerAbstract
 
             $versionInstalled = (int) $version->getValue();
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             //-- No version installed is a new install
             $versionInstalled = 0;
@@ -120,7 +120,7 @@ class Install extends InstallerAbstract
             $this->doctrine->persist($version);
             $this->doctrine->flush();
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
             //-- No need capture
         }

@@ -69,12 +69,12 @@ if ($form->isSubmitted() && $form->isValid())
     {
         if (\is_array($value))
         {
-            $postSettings = $postSettings + $value;
+            $postSettings += $value;
 
             continue;
         }
 
-        $postSettings = $postSettings + [$key => $value];
+        $postSettings += [$key => $value];
     }
 
     require_once 'lib/configuration/save.php';

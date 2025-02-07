@@ -280,7 +280,7 @@ class Navigation
 	public function checkNavs (): bool
 	{
 		foreach ($this->navs as $navs) {
-			if (!is_array($navs) || empty($navs)) {
+			if (!is_array($navs) || $navs === []) {
 				continue;
 			}
 

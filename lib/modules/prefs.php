@@ -59,16 +59,8 @@ function get_module_pref($name, $module = false, $user = false)
         $module = $mostrecentmodule;
     }
 
-    if (false === $user)
-    {
-        if (isset($session['user']['loggedin']) && $session['user']['loggedin'])
-        {
-            $user = $session['user']['acctid'];
-        }
-        else
-        {
-            $user = 0;
-        }
+    if (false === $user) {
+        $user = isset($session['user']['loggedin']) && $session['user']['loggedin'] ? $session['user']['acctid'] : 0;
     }
 
     $module_prefs = load_module_prefs($module, $user);

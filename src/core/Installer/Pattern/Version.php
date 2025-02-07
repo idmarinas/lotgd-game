@@ -20,11 +20,9 @@ use function max;
 trait Version
 {
 	/**
-	 * Versions of the game.
-	 *
-	 * @var array
-	 */
-	protected array $lotgd_versions = [
+  * Versions of the game.
+  */
+ protected array $lotgd_versions = [
 		'Clean Install'                   => -1, //needed just as a placeholder for new installations.
 		'0.9'                             => 900,
 		'0.9.1'                           => 901,

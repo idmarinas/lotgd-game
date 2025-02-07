@@ -37,6 +37,7 @@ final class DonationButtonsBlock extends AbstractBlockService
         $host = $this->request->getServer('HTTP_HOST');
         $now  = new DateTime('now');
         $now->sub(new DateInterval('PT1H'));
+
         $cacheTime = 900;
 
         $alreadyRegisteredLogdnet = true;

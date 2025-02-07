@@ -168,7 +168,7 @@ function module_display_events ($eventtype, $forcescript = false)
 {
 	global $session;
 
-	if (!($session['user']['superuser'] & SU_DEVELOPER)) {
+	if (($session['user']['superuser'] & SU_DEVELOPER) === 0) {
 		return;
 	}
 
@@ -181,7 +181,7 @@ function module_display_events ($eventtype, $forcescript = false)
 
 	$events = module_collect_events($eventtype, false); //-- To avoid conflicts not allow inactive modules
 
-	if (!is_array($events) || !count($events)) {
+	if (!is_array($events) || $events === []) {
 		return;
 	}
 

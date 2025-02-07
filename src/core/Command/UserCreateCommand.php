@@ -141,9 +141,9 @@ final class UserCreateCommand extends Command
             $this->doctrine->persist($account);
             $this->doctrine->flush(); //-- Persist objects
         }
-        catch (Throwable $th)
+        catch (Throwable $throwable)
         {
-            $style->text($th->getMessage());
+            $style->text($throwable->getMessage());
 
             $style->error($this->translator->trans('user.create.fail', [], self::TEXT_DOMAIN));
 

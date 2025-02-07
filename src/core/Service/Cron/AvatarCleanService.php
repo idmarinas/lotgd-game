@@ -92,9 +92,15 @@ class AvatarCleanService
             ->setParameter('permit', NO_ACCOUNT_EXPIRATION)
         ;
 
-        ($old !== 0) ? $query->setParameter('dateOld', $dateOld) : null;
-        ($new !== 0) ? $query->setParameter('dateNew', $dateNew) : null;
-        ($trash !== 0) ? $query->setParameter('dateTrash', $dateTrash) : null;
+        if ($old !== 0) {
+            $query->setParameter('dateOld', $dateOld);
+        }
+        if ($new !== 0) {
+            $query->setParameter('dateNew', $dateNew);
+        }
+        if ($trash !== 0) {
+            $query->setParameter('dateTrash', $dateTrash);
+        }
 
         $result = $query->getQuery()->getResult();
 
@@ -125,7 +131,7 @@ class AvatarCleanService
             ->setParameter('empty', '')
         ;
 
-        ($old !== 0) ? $query->setParameter('dateOld', $dateOld) : null;
+        $query->setParameter('dateOld', $dateOld);
 
         $result = $query->getQuery()->getResult();
 

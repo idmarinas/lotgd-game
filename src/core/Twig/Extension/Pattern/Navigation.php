@@ -176,10 +176,10 @@ trait Navigation
 
 		//-- Check if have a ?
 		if (false === strpos($link, '?')) {
-			$link = "{$link}?";
-		} else if (false !== strpos($link, '?')) {
-			$link = "{$link}&";
-		}
+      $link = "{$link}?";
+  } elseif (false !== strpos($link, '?')) {
+      $link = "{$link}&";
+  }
 
 		$pages['href'] = $link;
 

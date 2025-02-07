@@ -78,6 +78,7 @@ trait BattleStart
         ]), ARRAY_FILTER_USE_KEY);
         $this->userBuffs  = $this->user['bufflist'] ?? [];
         $this->userBuffs  = \is_array($this->userBuffs) ? $this->userBuffs : [];
+
         $this->companions = $companions;
 
         $this->setOptions($this->user['badguy']['options'] ?? []);

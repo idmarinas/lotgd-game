@@ -69,8 +69,8 @@ try {
 		//-- Add Sql requests made by Doctrine in the Tracy debugger bar.
 		DoctrineSql::init(LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
 	}
-} catch (Throwable $th) {
-	Debugger::log($th);
+} catch (Throwable $throwable) {
+	Debugger::log($throwable);
 }
 
 /*

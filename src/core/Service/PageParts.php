@@ -122,9 +122,11 @@ class PageParts
             {
                 $spirits[(int) $u['spirits']] = 'DEAD';
             }
-
-            $oAtk      = $atk      = $this->playerFunction->getPlayerAttack(); //Original Attack
-            $oDef      = $def      = $this->playerFunction->getPlayerDefense(); //Original Defense
+            $oAtk = $this->playerFunction->getPlayerAttack();
+            $atk = $oAtk;
+            //Original Attack
+            $oDef = $this->playerFunction->getPlayerDefense();
+            $def = $oDef; //Original Defense
             $spd       = $this->playerFunction->getPlayerSpeed();
             $hitpoints = $this->playerFunction->getPlayerHitpoints(); //Health of character
 
@@ -152,7 +154,7 @@ class PageParts
                     if (\is_array($val['name']))
                     {
                         $val['name'][0] = str_replace('`%', '`%%', $val['name'][0]);
-                        $val['name']    = \call_user_func_array('sprintf', $val['name']);
+                        $val['name']    = sprintf(...$val['name']);
                     }
 
                     $val['rounds'] ??= 0;

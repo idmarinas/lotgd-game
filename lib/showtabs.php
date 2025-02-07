@@ -50,7 +50,7 @@ function lotgd_showtabs($tabs, $print = true, ?callable $callback = null, $brows
         $ulMenu[] = \sprintf('<a class="%s item" data-tab="%s-%s">%s</a>', $class, $showtab_id, $tab_id, $title);
 
         //-- Content of tab
-        if ( ! $callback)
+        if ( $callback === null)
         {
             $ulContent .= \sprintf('<div class="ui %s tab segment" data-tab="%s-%s">%s</div>', $class, $showtab_id, $tab_id, $content);
         }
