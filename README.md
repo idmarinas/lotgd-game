@@ -3,28 +3,29 @@
 
 # Legend of the Green Dragon - IDMarinas Edition
 
+![GitHub release](https://img.shields.io/github/release/idmarinas/lotgd-game.svg?style=for-the-badge)
+![GitHub Release Date](https://img.shields.io/github/release-date/idmarinas/lotgd-game.svg?style=for-the-badge)
+
 </div>
 
 > The version **IDMarinas Edition** is based on the version **1.1.2 Dragonprime** by Dragonprime Development
-> Team ([Dragonprime](http://dragonprime.net)) and has code of Oliver Brendel ([NB Core](http://nb-core.org)).
+> Team ([Dragonprime][dp-o]) and has code of Oliver Brendel ([NB Core][nb-core]).
 
 
 <br />
 
 <div align="center">
 
-[![Test Suite](https://img.shields.io/github/actions/workflow/status/idmarinas/lotgd-game/php.yml?style=for-the-badge&logo=github&logoColor=white&label=Bundle%20Test%20Suite)](https://github.com/idmarinas/lotgd-game/actions/workflows/php.yml)
-[![Quality Gate Status](https://img.shields.io/sonar/quality_gate/idmarinas_lotgd-game?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)](https://sonarcloud.io/summary/new_code?id=idmarinas_lotgd-game)
-[![Coverage](https://img.shields.io/sonar/coverage/idmarinas_lotgd-game?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)](https://sonarcloud.io/dashboard?id=idmarinas_lotgd-game)
-[![Technical Debt](https://img.shields.io/sonar/tech_debt/idmarinas_lotgd-game?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)](https://sonarcloud.io/dashboard?id=idmarinas_lotgd-game)
+[![Test Suite](https://img.shields.io/github/actions/workflow/status/idmarinas/lotgd-game/php.yml?branch=7.x&style=for-the-badge&logo=github&logoColor=white&label=Lotgd%20Test%20Suite)](https://github.com/idmarinas/lotgd-game/actions/workflows/php.yml)
+[![Quality Gate Status](https://img.shields.io/sonar/quality_gate/idmarinas_lotgd-game/7.x?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)](https://sonarcloud.io/summary/new_code?id=idmarinas_lotgd-game)
+[![Coverage](https://img.shields.io/sonar/coverage/idmarinas_lotgd-game/7.x?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)](https://sonarcloud.io/dashboard?id=idmarinas_lotgd-game)
+[![Technical Debt](https://img.shields.io/sonar/tech_debt/idmarinas_lotgd-game/7.x?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)](https://sonarcloud.io/dashboard?id=idmarinas_lotgd-game)
 
 <br />
 
-![GitHub release](https://img.shields.io/github/release/idmarinas/lotgd-game.svg?style=for-the-badge)
-![GitHub Release Date](https://img.shields.io/github/release-date/idmarinas/lotgd-game.svg?style=for-the-badge)
-![Github commits (since latest release)](https://img.shields.io/github/commits-since/idmarinas/lotgd-game/latest.svg?style=for-the-badge)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/w/idmarinas/lotgd-game.svg?style=for-the-badge)
-![GitHub last commit](https://img.shields.io/github/last-commit/idmarinas/lotgd-game.svg?style=for-the-badge)
+![Github commits (since latest release)](https://img.shields.io/github/commits-since/idmarinas/lotgd-game/latest/7.x?style=for-the-badge)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/idmarinas/lotgd-game/7.x?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/idmarinas/lotgd-game/7.x?style=for-the-badge)
 
 #### Code analysis
 
@@ -44,7 +45,7 @@
 >
 > [![PayPal.Me - The safer, easier way to pay online!](https://img.shields.io/badge/donate-help_my_projects-ffaa29.svg?style=for-the-badge&logo=paypal&cacheSeconds=86400)](https://www.paypal.me/idmarinas)
 > [![Liberapay - Donate](https://img.shields.io/liberapay/receives/IDMarinas.svg?style=for-the-badge&logo=liberapay&cacheSeconds=86400)](https://liberapay.com/IDMarinas/donate)
-> [![Static Badge](https://img.shields.io/badge/Sponsor-ea4aaa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sponsors/idmarinas)
+> [![GitHub Sponsor](https://img.shields.io/badge/Sponsor-ea4aaa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sponsors/idmarinas)
 
 
 <br />
@@ -58,14 +59,14 @@ the script that is used to access the database. And fixed certain errors, and ad
 
 IDMarinas Edition is used in:
 
-- [The Legend of the Green Dragon](https://lotgd.infommo.es) (Demo)
-- [La Leyenda de Ignis (Spanish version)](https://ignis.infommo.es)
-- [The Legend of Ignis (English version)](https://tloi.infommo.es)
+- [The Legend of the Green Dragon][lotgd-d] (Demo)
+- [La Leyenda de Ignis (Spanish version)][ignis]
+- [The Legend of Ignis (English version)][tloi]
 
 ## Modules
 
-You can find modules revised for IDMarinas Edition in [LOTGD - Modules](https://github.com/idmarinas/lotgd-modules).
-If you want more modules, in ([DragonPrime](http://dragonprime.net)) you can find more modules, and you can revise for
+You can find modules revised for IDMarinas Edition in [LOTGD - Modules][idm-modules].
+If you want more modules, in ([DragonPrime][dp-o] you can find more modules, and you can revise for
 work in IDMarinas Edition
 
 ## Compatibility
@@ -81,11 +82,11 @@ work in IDMarinas Edition
 
 ## Other
 
-Read [Wiki](https://github.com/idmarinas/lotgd-game/wiki) for more information.
+Read [Wiki] for more information.
 
 ## 🖱️ Tech used in code
 
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/idmarinas/template-bundle.svg?style=for-the-badge)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/idmarinas/lotgd-game?style=for-the-badge)
 [![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net)
 [![Symfony](https://img.shields.io/badge/symfony-black.svg?style=for-the-badge&logo=symfony&logoColor=white)](https://www.symfony.com)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
@@ -104,3 +105,17 @@ Read [Wiki](https://github.com/idmarinas/lotgd-game/wiki) for more information.
 
 [![X](https://img.shields.io/badge/Twitter-%23000000.svg?style=for-the-badge&logo=X&logoColor=white)](https://x.com/idmarinas)
 [![Discord](https://img.shields.io/badge/Discord-LoTGD-blue?logo=discord&style=for-the-badge&logoColor=white)](https://discord.gg/RJydxaS)
+
+[nb-core]: http://nb-core.org
+
+[dp-o]: http://dragonprime.net
+
+[idm-modules]: https://github.com/idmarinas/lotgd-modules
+
+[lotgd-d]: https://lotgd.infommo.es
+
+[ignis]: https://ignis.infommo.es
+
+[tloi]: https://tloi.infommo.es
+
+[wiki]: https://github.com/idmarinas/lotgd-game/wiki
