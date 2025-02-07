@@ -4,3 +4,4 @@ CHANGELOG-dev.md merge=ours
 composer.json merge=ours
 package.json merge=ours
 README.md merge=ours
+.idea/ merge=ours
