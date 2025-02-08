@@ -35,7 +35,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/7.2/CHAN
 
 - **Jaxon-PHP** removed, migrated to StimulusJS
 	- **Removed files**
-		- **src/core/Twig/Extenxion/Jaxon.php**
+		- **src/core/Twig/Extension/Jaxon.php**
 		- **src/core/Service/Jaxon.php**
 		- **src/core/Jaxon/Library/Semantic/Modal.php**
 		- **src/core/Service/Jaxon.php**
