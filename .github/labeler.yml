@@ -1,2 +1,48 @@
-dependencies:
-  - any: ['package.json', 'package-lock.json', 'composer.json', 'composer.lock']
+documentation:
+    -   changed-files:
+            -   any-glob-to-any-file:
+                    - docs/**
+                    - README.md
+                    - Writerside/**
+
+meta:
+    -   changed-files:
+            -   any-glob-to-any-file:
+                    - CODE_OF_CONDUCT.md
+                    - CONTRIBUTING.md
+                    - SECURITY.md
+                    - .editorconfig
+                    - .gitignore
+                    - .gitattributes
+                    - .idea/**
+                    - .github/FUNDING.yml
+                    - .github/ISSUE_TEMPLATE/**
+                    - .github/PULL_REQUEST_TEMPLATE.md
+
+ci/cd:
+    -   changed-files:
+            -   any-glob-to-any-file:
+                    - .github/workflows/**
+                    - .github/labeler.yml
+
+'docker configuration':
+    -   changed-files:
+            -   any-glob-to-any-file:
+                    - .docker/**
+                    - compose.yaml
+                    - compose.prod.yaml
+                    - compose.dev.yaml
+                    - compose.test.yaml
+                    - compose.override.yaml
+
+'deployer configuration':
+    -   changed-files:
+            -   any-glob-to-any-file:
+                    - .deployer/**
+                    - deploy.php
+
+tests:
+    -   changed-files:
+            -   any-glob-to-any-file:
+                    - tests/**
+                    - src/*/tests/**
