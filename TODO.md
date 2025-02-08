@@ -20,6 +20,7 @@
 
 # Actualmente haciendo esto (7.2.0)
 
+- Cambiar la forma en la que se muestra la versión de LoTGD (poner la versión original + IDMarinas Edition x.y.z)
 - Limpiando el core, y mejorando el código, para migrar a php 8.0
 - Hacer que los modal de Stimulus, se carguen desde un unico modal, se puede usar la etiqueta <dialog> de html
 
