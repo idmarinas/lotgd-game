@@ -1,22 +1,12 @@
-# A tener en cuenta desde la versión 5.0.0
+# A tener en cuenta ...
 
-- El antiguo sistema de módulos está obsoleto desde la versión **5.0.0**
+- **5.0.0** El antiguo sistema de módulos está obsoleto
 	- Los módulos antiguos seguirán funcionando pero están obsoletos.
 	- El nuevo sistema tipo Bundle reemplaza al sistema de módulos antiguos.
-	- A partir de la versión **5.0.0** se empezará a usar un sistema de módulos tipo Bundle
-
-# A tener en cuenta desde la versión 7.0.0
-
-- Esta es la última versión compatible con el antiguo sistema de módulos.
-- Se ha cambiado de Fomantic UI a TailwindCSS
-
-# A tener en cuenta desde la versión 7.1.0
-
-- La versión mínima y máxima de PHP es 7.4
-
-# Módulos
-
-- Adaptarlos para la version 6.2.0
+	- Se empezará a usar un sistema de módulos tipo Bundle
+- **7.0.0** Esta es la última versión compatible con el antiguo sistema de módulos.
+	- Se ha cambiado de Fomantic UI a TailwindCSS
+- **7.1.0** La versión mínima y máxima de PHP es `7.4`
 
 # Actualmente haciendo esto (7.2.0)
 
