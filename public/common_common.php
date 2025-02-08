@@ -18,6 +18,11 @@ use Lotgd\Core\Fixed\Setting as LotgdSetting;
 use Lotgd\Core\Fixed\Theme as LotgdTheme;
 use Lotgd\Core\Fixed\Tool as LotgdTool;
 use Lotgd\Core\Fixed\Translator as LotgdTranslator;
+use Lotgd\Core\Http\Request;
+use Lotgd\Core\Http\Response;
+use Lotgd\Core\Navigation\Navigation;
+use Lotgd\Core\Output\Format;
+use Lotgd\Core\Tool\Sanitize;
 use MacFJA\Tracy\DoctrineSql;
 use Milo\VendorVersions\Panel;
 use Tracy\Debugger;
@@ -26,19 +31,19 @@ use Twig\Profiler\Profile;
 
 chdir(realpath(__DIR__ . '/..'));
 
-require \dirname(__DIR__) . '/config/bootstrap.php';
+require_once dirname(__DIR__) . '/config/bootstrap.php';
 //-- Include constants
 require_once 'src/constants.php';
 
 //-- Autoload annotations
 AnnotationRegistry::registerLoader(
-	fn($className) => class_exists($className)
+  fn($className) => class_exists($className)
 );
 
 // Set some constant defaults in case they weren't set before the inclusion of
 // common.php
-\defined('OVERRIDE_FORCED_NAV') || \define('OVERRIDE_FORCED_NAV', false);
-\defined('ALLOW_ANONYMOUS') || \define('ALLOW_ANONYMOUS', false);
+defined('OVERRIDE_FORCED_NAV') || define('OVERRIDE_FORCED_NAV', false);
+defined('ALLOW_ANONYMOUS') || define('ALLOW_ANONYMOUS', false);
 
 $isDevelopment = 'prod' != $_SERVER['APP_ENV'];
 //-- Init Debugger
@@ -87,17 +92,17 @@ Doctrine::instance(LotgdKernel::get('doctrine.orm.entity_manager'));
 //-- Configure Flash Messages
 LotgdFlashMessages::instance(LotgdKernel::get('session')->getFlashBag());
 //-- Configure format instance
-LotgdFormat::instance(LotgdKernel::get(\Lotgd\Core\Output\Format::class));
+LotgdFormat::instance(LotgdKernel::get(Format::class));
 //-- Configure Request instance
-LotgdRequest::instance(LotgdKernel::get(\Lotgd\Core\Http\Request::class));
+LotgdRequest::instance(LotgdKernel::get(Request::class));
 //-- Configure Response instance
-LotgdResponse::instance(LotgdKernel::get(\Lotgd\Core\Http\Response::class));
+LotgdResponse::instance(LotgdKernel::get(Response::class));
 //-- Configure Navigation instance
-LotgdNavigation::instance(LotgdKernel::get(\Lotgd\Core\Navigation\Navigation::class));
+LotgdNavigation::instance(LotgdKernel::get(Navigation::class));
 //-- Configure Theme template
 LotgdTheme::instance(LotgdKernel::get('twig'));
 //-- Configure Sanitize instance
-LotgdSanitize::instance(LotgdKernel::get(\Lotgd\Core\Tool\Sanitize::class));
+LotgdSanitize::instance(LotgdKernel::get(Sanitize::class));
 //-- Configure Translator
 LotgdTranslator::instance(LotgdKernel::get('translator'));
 //-- Configure Event dispatcher instance
@@ -130,6 +135,6 @@ require_once 'lib/forcednavigation.php';
 require_once 'lib/lotgd_mail.php';
 
 // Decline static file requests back to the PHP built-in webserver
-if ('cli-server' === \PHP_SAPI && is_file(__DIR__ . parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH))) {
+if ('cli-server' === PHP_SAPI && is_file(__DIR__ . parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH))) {
 	return false;
 }
