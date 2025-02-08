@@ -12,7 +12,25 @@
 
 - Cambiar la forma en la que se muestra la versión de LoTGD (poner la versión original + IDMarinas Edition x.y.z)
 - Limpiando el core, y mejorando el código, para migrar a php 8.0
-- Hacer que los modal de Stimulus, se carguen desde un unico modal, se puede usar la etiqueta <dialog> de html
+- Hacer que los modals de Stimulus, se carguen desde un único modal, se puede usar la etiqueta <dialog> de html
+
+# Para la versión 8.0.0
+
+- **BC** esta versión será una Symfony App
+- Agregar opción para poder instalar LoTGD en Docker
+- El panel de administración del juego estará creado con EasyAdminBundle
+- Se elimina https://github.com/Sylius/SyliusThemeBundle y se hace opcional
+- Se elimina paquete `laminas/laminas-serializer`
+- **BC** se elimina la compatibilidad con el antiguo sistema de módulos.
+- Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
+	- Usar macros y blocks donde se pueda.
+- WebpackEncore (Se tiene que revisar como seria con Tailwind)
+	- Organizar mejor los archivos js/css
+		- El tema se crea en una configuración nueva para personalizar
+		- El js se crea en una entry común para todo (app por ejemplo), ya que puede dar problemas
+			- webpack.encore.entry.js
+			- webpack.encore.theme.js
+	- Sustituir WebpackEncore por AssetMapper (¿?)
 
 # Cosas a mejorar
 
@@ -53,7 +71,6 @@
 					- De esta forma se omite usar el query param
 - Todas las páginas se han migrado al sistema de controlador, queda mejorarlo
 	- Las páginas Grotto (las de configuración y administración) no se pasarán a un sistema de controlador.
-		- El panel de administración del juego se va a sustituir por **Sonata Admin**
 - Se han migrado todos los cronjob a comandos de consola.
 	- _Nota_ el cronjob del nuevo día (newdayrunonce) no es compatible con el sistema de módulos.
 	- El nuevo sistema de CronJob se usará en la versión X.0.0 donde se elimina la compatibilidad con los módulos
@@ -62,35 +79,8 @@
 
 ## **BC** Para la versión X.0.0
 
-- Esta será la última versión que use la ordenación de carpetas `src/core` y `src/local`
-	- La versión X.0.0 será la última versión con esta estructura, y será la versión dedicada a facilitar la transición
-	  a la versión LoTGD APP Symfony.
-		- La estructura actual X.0.0 y anterior es un poco caótica, por lo que se usará esta última versión para
-		  facilitar el salto a la versión LoTGD APP Symfony.
-			- (En la medida de lo posible)
-	- La versión LoTGD APP Symfony usará la ordenación propia de Symfony.
 - Se revisará el código para hacer la transición más sencilla.
 - Esta versión se centrará en hacer la transición a la versión LoTGD APP Symfony más sencilla.
-- Esta es la última versión que incluya compatibilidad con el antiguo sistema de módulos.
-- WebpackEncore (Se tiene que revisar como seria con Tailwind)
-	- Organizar mejor los archivos js/css
-		- El tema se crea en una configuración nueva para personalizar
-		- El js se crea en una entry común para todo (app por ejemplo), ya que puede dar problemas
-			- webpack.encore.entry.js
-			- webpack.encore.theme.js
-- Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
-	- Usar macros y blocks donde se pueda.
-- **BC** Esta versión será ya una Symfony App (En estudio, puede que la versión 9.0.0 sea la Symfony App)
-	- Según se vea, dependiendo del sistema de eventos especiales, que parece ser que es el que más problemas va a dar.
-- **BC** Se elimina la compatibilidad del antiguo sistema de módulos.
-	- Por lo que la versión 7.0.0 sería la última versión compatible con los módulos.
-- Se fusiona todos los installer a uno nuevo como clean version
-	- El installer de la versión 6.0.0 depende de laminas/laminas-serializer
-		- Es en el único sitio donde se utiliza este componente
-- Eliminar paquete laminas/laminas-serializer
-- Eliminar la dependencia de Jaxon-PHP, usar Stimulus
-- Se usará todos los componentes del Framework de Symfony (router incluido)
-- Todo el Core estará compuesto por Bundles, para así poder usar un Skeleton muy similar al de Symfony App Skeleton
 - lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en
   bundle core)
 - `src/core/Controller/CreateController.php`
@@ -100,7 +90,6 @@
 - Sustituir la función lotgd_mail por Symfony mailer
 	- **lib/lotgd_mail.php** Function `lotgd_mail` is deprecated and removed in future versions.
 		- Use `Symfony mailer` instead.
-- Eliminar https://github.com/Sylius/SyliusThemeBundle y hacerlo opcional
 - `dragonpoints` para los puntos de dragón asignados actualmente es un array serializado
 	- Se registra los valores que se han aumentado al personaje mediante las iniciales del atributo.
 	  ```php
