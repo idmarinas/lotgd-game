@@ -1,21 +1,44 @@
 {
 	"name": "idmarinas/lotgd",
 	"description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization, migrating to a Symfony Application",
-	"config": {
-		"allow-plugins": {
-			"composer/package-versions-deprecated": true,
-			"symfony/flex": true
+	"type": "project",
+	"license": "CC-BY-NC-SA-2.0",
+	"keywords": [
+		"lotgd",
+		"game",
+		"browser-game"
+	],
+	"homepage": "https://github.com/idmarinas/lotgd-game",
+	"authors": [
+		{
+			"name": "Eric Stevens & JT Traub (MightyE)",
+			"homepage": "https://lotgd.net/",
+			"role": "Author"
 		},
-		"optimize-autoloader": false,
-		"preferred-install": {
-			"*": "dist"
+		{
+			"name": "DragonPrime",
+			"homepage": "https://www.dragonprime.net",
+			"role": "Developer, Maintainer"
 		},
-		"process-timeout": 5000,
-		"sort-packages": true
+		{
+			"name": "Oliver Brendel",
+			"homepage": "https://nb-core.org",
+			"role": "Contributor"
+		},
+		{
+			"name": "Iván Diaz Marinas (IDMarinas)",
+			"email": "35842929+idmarinas@users.noreply.github.com",
+			"homepage": "https://lotgd.infommo.es",
+			"role": "Contributor, Maintainer"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/idmarinas/lotgd-game/issues",
+		"wiki": "https://github.com/idmarinas/lotgd-game/wiki",
+		"docs": "https://idmarinas.github.io/lotgd-game/"
 	},
 	"minimum-stability": "stable",
 	"prefer-stable": true,
-	"license": "CC-BY-NC-SA-2.0",
 	"require": {
 		"php": "^7.4",
 		"ext-bcmath": "*",
@@ -100,6 +123,9 @@
 		"symfony/var-dumper": "^4.4",
 		"symfony/web-profiler-bundle": "^4.4"
 	},
+	"conflict": {
+		"symfony/symfony": "*"
+	},
 	"autoload": {
 		"psr-4": {
 			"Lotgd\\Core\\": "src/core/",
@@ -126,19 +152,44 @@
 		],
 		"test": "php bin/phpunit --process-isolation"
 	},
-	"conflict": {
-		"symfony/symfony": "*"
-	},
 	"extra": {
 		"symfony": {
 			"allow-contrib": false,
 			"require": "4.4.*"
 		}
 	},
+	"config": {
+		"allow-plugins": {
+			"composer/package-versions-deprecated": true,
+			"symfony/flex": true,
+			"symfony/runtime": true
+		},
+		"optimize-autoloader": false,
+		"preferred-install": {
+			"*": "dist"
+		},
+		"sort-packages": true
+	},
 	"funding": [
 		{
 			"type": "paypal",
 			"url": "https://www.paypal.me/idmarinas"
+		},
+		{
+			"type": "github-sponsors",
+			"url": "https://github.com/sponsors/idmarinas"
+		},
+		{
+			"type": "author",
+			"url": "https://lotgd.net/"
+		},
+		{
+			"type": "dragon-prime",
+			"url": "https://www.dragonprime.net"
+		},
+		{
+			"type": "oliver-brendel",
+			"url": "https://nb-core.org"
 		}
 	]
 }
