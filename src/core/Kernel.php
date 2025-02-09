@@ -27,37 +27,60 @@ class Kernel extends BaseKernel
 {
 	use MicroKernelTrait;
 
-	public const VERSION             = '7.2.0 IDMarinas Edition'; // Version of game in public display format.
-	public const VERSION_ID          = 7020;                      // Identify version of game in numeric format.
+	// Version of game in public display format.
+	public const VERSION = '1.1.2 DragonPrime (' . self::IDMARINAS_EDITION . ' IDMarinas Edition)';
+	// Identify version of game in numeric format.
+	public const VERSION_ID          = 7020;
 	public const MAJOR_VERSION       = 7;
 	public const MINOR_VERSION       = 2;
 	public const RELEASE_VERSION     = 0;
 	public const EXTRA_VERSION       = '';
-	public const VERSION_NUMBER      = self::VERSION_ID; //-- Alias of VERSION_ID
+	public const IDMARINAS_EDITION   = self::MAJOR_VERSION . '.' . self::MINOR_VERSION . '.' . self::RELEASE_VERSION;
 	public const TEXT_DOMAIN_DEFAULT = 'app_default';
 
 	/**
-	 * This series of scripts (collectively known as Legend of the Green Dragon or LotGD) is copyright as per below.
-	 * You are prohibited by law from removing or altering this copyright information in any fashion except as follows:
-	 *      if you have added functionality to the code, you may append your
-	 *      name at the end indicating which parts are copyright by you.
-	 *  Eg:
-	 *  Copyright 2002-2004, Game: Eric Stevens & JT Traub, modified by Your Name.
+	 * **** NOTICE ****
+	 * This series of scripts (collectively known as Legend of the Green Dragon
+	 * or LotGD) is copyright as per below.
+	 * You are prohibited by law from removing or altering this copyright
+	 * information in any fashion except as follows:
+	 *        if you have added functionality to the code, you may append your
+	 *        name at the end indicating which parts are copyright by you.
+	 * Eg:
+	 * Copyright 2002-2004, Game: Eric Stevens & JT Traub, modified by Your Name
 	 *
 	 * @var string
 	 */
-	public const COPYRIGHT = 'Game Design and Code: Copyright &copy; 2002-2005, Eric Stevens & JT Traub, &copy; 2006-2007, Dragonprime Development Team, &copy; 2015-2022 IDMarinas remodelling and enhancing';
+	public const COPYRIGHT = 'Game Design and Code: Copyright &copy; 2002-2005, Eric Stevens & JT Traub, &copy; 2006-2007, Dragonprime Development Team <span class="col-dk-red"> &copy 2007-? Oliver Brendel remodelling and enhancing</span> <span class="col-dk-link-blue"> &copy 2015-? IDMarinas remodelling and enhancing</span>';
+	/**
+	 * **** NOTICE ****
+	 * This series of scripts (collectively known as Legend of the Green Dragon
+	 * or LotGD) is copyright as per above.   Read the above paragraph for
+	 * instructions regarding this copyright notice.
+	 */
 
 	/**
-	 * This series of scripts (collectively known as Legend of the Green Dragon or LotGD) is licensed according to the
-	 * Creating Commons Attribution Non-commercial Share-alike license.  The terms of this license must be followed for
-	 * you to legally use or distribute this software. This license must be used on the distribution of any works
-	 * derived from this work. This license text may not be removed nor altered in any way. Please see the file LICENSE
-	 * for a full textual description of the license.
-	 *
-	 * @var string
+	 * **** NOTICE ****
+	 * This series of scripts (collectively known as Legend of the Green Dragon
+	 * or LotGD) is licensed according to the Creating Commons Attribution
+	 * Non-commercial Share-alike license.  The terms of this license must be
+	 * followed for you to legally use or distribute this software.   This
+	 * license must be used on the distribution of any works derived from this
+	 * work.  This license text may not be removed nor altered in any way.
+	 * Please see the file LICENSE for a full textual description of the license.
 	 */
-	public const LICENSE = "\n<!-- Creative Commons License -->\n<a href='http://creativecommons.org/licenses/by-nc-sa/2.0/' target='_blank' rel='noopener noreferrer'><img clear='right' align='left' alt='Creative Commons License' border='0' src='images/somerights20.gif' /></a>\nThis work is licensed under a <a href='http://creativecommons.org/licenses/by-nc-sa/2.0/' target='_blank' rel='noopener noreferrer'>Creative Commons License</a>.<br />\n<!-- /Creative Commons License -->\n<!--\n  <rdf:RDF xmlns='http://web.resource.org/cc/' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>\n	<Work rdf:about=''>\n	  <dc:type rdf:resource='http://purl.org/dc/dcmitype/Interactive' />\n	  <license rdf:resource='http://creativecommons.org/licenses/by-nc-sa/2.0/' />\n	</Work>\n	<License rdf:about='http://creativecommons.org/licenses/by-nc-sa/2.0/'>\n	  <permits rdf:resource='http://web.resource.org/cc/Reproduction' />\n	  <permits rdf:resource='http://web.resource.org/cc/Distribution' />\n	  <requires rdf:resource='http://web.resource.org/cc/Notice' />\n	  <requires rdf:resource='http://web.resource.org/cc/Attribution' />\n	  <prohibits rdf:resource='http://web.resource.org/cc/CommercialUse' />\n	  <permits rdf:resource='http://web.resource.org/cc/DerivativeWorks' />\n	  <requires rdf:resource='http://web.resource.org/cc/ShareAlike' />\n	</License>\n  </rdf:RDF>\n-->\n";
+	public const LICENSE = "\n<!-- Creative Commons License -->\n<a rel='license' href='http://creativecommons
+	.org/licenses/by-nc-sa/2.0/' target='_blank'><img clear='right' align='left' alt='Creative Commons License' border='0' src='images/somerights20.gif' /></a>\nThis work is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/2.0/' target='_blank'>Creative Commons License</a>.<br />\n<!-- /Creative Commons License -->\n<!--\n  <rdf:RDF xmlns='http://web.resource.org/cc/' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>\n	<Work rdf:about=''>\n	  <dc:type rdf:resource='http://purl.org/dc/dcmitype/Interactive' />\n	  <license rdf:resource='http://creativecommons.org/licenses/by-nc-sa/2.0/' />\n	</Work>\n	<License rdf:about='http://creativecommons.org/licenses/by-nc-sa/2.0/'>\n	  <permits rdf:resource='http://web.resource.org/cc/Reproduction' />\n	  <permits rdf:resource='http://web.resource.org/cc/Distribution' />\n	  <requires rdf:resource='http://web.resource.org/cc/Notice' />\n	  <requires rdf:resource='http://web.resource.org/cc/Attribution' />\n	  <prohibits rdf:resource='http://web.resource.org/cc/CommercialUse' />\n	  <permits rdf:resource='http://web.resource.org/cc/DerivativeWorks' />\n	  <requires rdf:resource='http://web.resource.org/cc/ShareAlike' />\n	</License>\n  </rdf:RDF>\n-->\n";
+	/**
+	 * .... NOTICE *****
+	 * This series of scripts (collectively known as Legend of the Green Dragon
+	 * or LotGD) is licensed according to the Creating Commons Attribution
+	 * Non-commercial Share-alike license.  The terms of this license must be
+	 * followed for you to legally use or distribute this software.   This
+	 * license must be used on the distribution of any works derived from this
+	 * work.  This license text may not be removed nor altered in any way.
+	 * Please see the file LICENSE for a full textual description of the license.
+	 */
 
 	private const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
