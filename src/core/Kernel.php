@@ -30,7 +30,7 @@ class Kernel extends BaseKernel
 	// Version of game in public display format.
 	public const VERSION = '1.1.2 DragonPrime (' . self::IDMARINAS_EDITION . ' IDMarinas Edition)';
 	// Identify version of game in numeric format.
-	public const VERSION_ID          = 7020;
+	public const VERSION_ID          = 70200;
 	public const MAJOR_VERSION       = 7;
 	public const MINOR_VERSION       = 2;
 	public const RELEASE_VERSION     = 0;
