@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f655873bed01d2b371b35728526d895",
+    "content-hash": "2376d1437ff8471152f7593cc93212e5",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -1666,38 +1666,44 @@
         },
         {
             "name": "doctrine/persistence",
-            "version": "3.4.0",
+            "version": "2.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "0ea965320cec355dba75031c1b23d4c78362e3ff"
+                "reference": "e36f22765f4d10a7748228babbf73da5edfeed3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/0ea965320cec355dba75031c1b23d4c78362e3ff",
-                "reference": "0ea965320cec355dba75031c1b23d4c78362e3ff",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/e36f22765f4d10a7748228babbf73da5edfeed3c",
+                "reference": "e36f22765f4d10a7748228babbf73da5edfeed3c",
                 "shasum": ""
             },
             "require": {
+                "doctrine/cache": "^1.11 || ^2.0",
+                "doctrine/collections": "^1.0",
+                "doctrine/deprecations": "^0.5.3 || ^1",
                 "doctrine/event-manager": "^1 || ^2",
-                "php": "^7.2 || ^8.0",
+                "php": "^7.1 || ^8.0",
                 "psr/cache": "^1.0 || ^2.0 || ^3.0"
             },
             "conflict": {
+                "doctrine/annotations": "<1.0 || >=3.0",
                 "doctrine/common": "<2.10"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^12",
+                "composer/package-versions-deprecated": "^1.11",
+                "doctrine/annotations": "^1 || ^2",
+                "doctrine/coding-standard": "^9 || ^11",
                 "doctrine/common": "^3.0",
-                "phpstan/phpstan": "1.12.7",
-                "phpstan/phpstan-phpunit": "^1",
-                "phpstan/phpstan-strict-rules": "^1.1",
-                "phpunit/phpunit": "^8.5.38 || ^9.5",
-                "symfony/cache": "^4.4 || ^5.4 || ^6.0 || ^7.0"
+                "phpstan/phpstan": "~1.4.10 || 1.9.4",
+                "phpunit/phpunit": "^7.5.20 || ^8.5 || ^9.5",
+                "symfony/cache": "^4.4 || ^5.4 || ^6.0",
+                "vimeo/psalm": "4.30.0 || 5.3.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
+                    "Doctrine\\Common\\": "src/Common",
                     "Doctrine\\Persistence\\": "src/Persistence"
                 }
             },
@@ -1732,7 +1738,7 @@
                 }
             ],
             "description": "The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.",
-            "homepage": "https://www.doctrine-project.org/projects/persistence.html",
+            "homepage": "https://doctrine-project.org/projects/persistence.html",
             "keywords": [
                 "mapper",
                 "object",
@@ -1742,7 +1748,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/persistence/issues",
-                "source": "https://github.com/doctrine/persistence/tree/3.4.0"
+                "source": "https://github.com/doctrine/persistence/tree/2.5.7"
             },
             "funding": [
                 {
@@ -1758,7 +1764,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-30T19:48:12+00:00"
+            "time": "2023-02-03T15:51:16+00:00"
         },
         {
             "name": "doctrine/sql-formatter",
@@ -10646,16 +10652,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.16",
+            "version": "1.12.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "e0bb5cb78545aae631220735aa706eac633a6be9"
+                "reference": "7027b3b0270bf392de0cfba12825979768d728bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e0bb5cb78545aae631220735aa706eac633a6be9",
-                "reference": "e0bb5cb78545aae631220735aa706eac633a6be9",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7027b3b0270bf392de0cfba12825979768d728bf",
+                "reference": "7027b3b0270bf392de0cfba12825979768d728bf",
                 "shasum": ""
             },
             "require": {
@@ -10700,7 +10706,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-21T14:50:05+00:00"
+            "time": "2025-02-07T15:01:57+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
