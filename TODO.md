@@ -10,7 +10,7 @@
 
 # Actualmente haciendo esto (7.2.0)
 
-- Cambiar la forma en la que se muestra la versión de LoTGD (poner la versión original + IDMarinas Edition x.y.z)
+- Se revisa el código para hacer ir limpiando cosas que se van a quitar en la versión 8.0.0
 - Limpiando el core, y mejorando el código, para migrar a php 8.0
 - Hacer que los modals de Stimulus, se carguen desde un único modal, se puede usar la etiqueta <dialog> de html
 
@@ -22,15 +22,42 @@
 - Se elimina https://github.com/Sylius/SyliusThemeBundle y se hace opcional
 - Se elimina paquete `laminas/laminas-serializer`
 - **BC** se elimina la compatibilidad con el antiguo sistema de módulos.
+- Se han migrado todos los cronjob a comandos de consola.
 - Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
 	- Usar macros y blocks donde se pueda.
-- WebpackEncore (Se tiene que revisar como seria con Tailwind)
+- WebpackEncore (Se tiene que revisar como sería con Tailwind)
+	- Sustituir WebpackEncore por AssetMapper (¿?)
 	- Organizar mejor los archivos js/css
 		- El tema se crea en una configuración nueva para personalizar
 		- El js se crea en una entry común para todo (app por ejemplo), ya que puede dar problemas
 			- webpack.encore.entry.js
 			- webpack.encore.theme.js
-	- Sustituir WebpackEncore por AssetMapper (¿?)
+- **Correos** permitir usar una plantilla para así personalizar los mensajes
+	- Se usará `Symfony\Bridge\Twig\Mime\TemplatedEmail` para todos los correos del core.
+	- Habrá dos versiones de cada correo predeterminado version html y txt
+	- Desde la configuración se podrá decidir si se envían correos en html o txt
+	- Agregar opción para que el usuario pueda elegir.
+  ```php
+      use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+  
+      $email = (new TemplatedEmail())
+      // ...
+          // html mail
+          ->htmlTemplate('signup.html.twig')
+          //-- or only text mail
+          ->textTemplate('signup.txt.twig')
+      // ...
+      ;
+  ```
+- Se simplifica el sistema de instalación, se elimina el instalador actual
+	- Se va a pasar a un sistema de migraciones de "Doctrine migrations"
+	- Esto permite que tanto si se crea una versión limpia como si actualizas desde una versión anterior se actualice
+	  la base de datos acorde a eso.
+	- La instalación via web, ya no será posible, y no se planea ponerla.
+- Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
+	- Poner las opciones de la encuesta en una tabla separada. Permitiendo que las opciones también se puedan traducir.
+- Agregar sistema al core, para poder añadir términos y condiciones y política de privacidad, sin necesidad de módulo.
+-
 
 # Cosas a mejorar
 
@@ -68,19 +95,12 @@
 				- De esta forma se puede controlar todo el evento y volver a la página que lanzó el evento más
 				  fácilmente.
 				- Se puede usar la sesión para pasar datos de una petición a otra (request)
-					- De esta forma se omite usar el query param
-- Todas las páginas se han migrado al sistema de controlador, queda mejorarlo
-	- Las páginas Grotto (las de configuración y administración) no se pasarán a un sistema de controlador.
-- Se han migrado todos los cronjob a comandos de consola.
-	- _Nota_ el cronjob del nuevo día (newdayrunonce) no es compatible con el sistema de módulos.
-	- El nuevo sistema de CronJob se usará en la versión X.0.0 donde se elimina la compatibilidad con los módulos
+					- De esta forma se omite usar la query param
 
 # Futuras versiones
 
 ## **BC** Para la versión X.0.0
 
-- Se revisará el código para hacer la transición más sencilla.
-- Esta versión se centrará en hacer la transición a la versión LoTGD APP Symfony más sencilla.
 - lotgd_core_paypal_currency para poner la moneda que se usa en el servidor para las donaciones por paypal (como en
   bundle core)
 - `src/core/Controller/CreateController.php`
@@ -118,31 +138,9 @@
 		- Se puede elegir el mínimo de energía y el máximo que puede tener el personaje
 		- Se puede hacer que depende de algún atributo. (que tenga bono)
 		- Tendrá funciones para poder aumentar y disminuir la energía.
-- **Correos** permitir usar una plantilla para así personalizar los mensajes
-	- Se usará `Symfony\Bridge\Twig\Mime\TemplatedEmail` para todos los correos del core.
-  ```php
-	  use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-
-	  $email = (new TemplatedEmail())
-	  // ...
-		  // html mail
-		  ->htmlTemplate('signup.html.twig')
-		  //-- or only text mail
-		  ->textTemplate('signup.txt.twig')
-	  // ...
-	  ;
-  ```
-	- Habrá dos versiones de cada correo predeterminado version html y txt
-	- Desde la configuración se podrá decidir si se envían correos en html o txt
-	- Agregar opción para que el usuario pueda elegir.
 
 ## Para la versión X.Y.Z
 
-- Migrar los cronjobs a cron/cron bundle mediante comandos de symfony console.
-- Copiar el sistema de petition (y adaptarlo) en el app bundle.
-- Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
-	- Poner las opciones de la encuesta en una tabla separada. Permitiendo que las opciones también se puedan traducir.
-- Agregar sistema al core, para poder añadir términos y condiciones y política de privacidad, sin necesidad de módulo.
 - **BC** Hacer el que sistema de combate sea más personalizable, se pueda extender las clases para añadir más opciones.
 - **BC** Rehacer los personajes, para que sean más sencillos de extender, también para que se complemente como el
   sistema de combate nuevo.
@@ -150,69 +148,14 @@
 	  jugador como los creados por el servidor, tengan una forma de creación muy similar.
 - **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
 	- Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
-- Crear el bundle del inventario. Para sustituir el antiguo sistema de armadura y arma.
 - Crear el bundle de energía, que permita poner energía o un sistema por turnos.
-- Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
-	- La instalación por consola ya se creó en la versión 5.0.0
-		- Se mirará incluir una versión de instalación por web
-			- Problemático la creación del usuario admin
-	- Para los admin que no dispongan de esta opción se agrega la opción de instalación via web.
-- Posible candidato a sustituir el petition system por https://github.com/hackzilla-project/TicketBundle
-- Para limitar los intentos de conexión https://github.com/anyx/LoginGateBundle
 
 ## Cosas pendientes
 
 - Añadir un check para comprobar si se han usado las funciones obligatorias (copyright(), game_version() ... )
-- Crear un sistema de publicidad interno (que permite comprar espacios publicitarios)
 	- Compatible con el sistema simple (los tipo Google AdSense)
 - Códigos de color, cambiar y unir todos los códigos de color, (color, negrita, cursiva, etc.) en un mismo lugar
 	- IDEA: usar la clase BBCode, ejemplo como se usa en foros y similar
 - ¿? Permitir que en los eventos, el chance pueda ser superior a 100, para priorizar que un evento pueda pasar con más
   frecuencia.
 	- Usar otra forma
-
-## Cosas a mirar
-
-- https://github.com/pirasterize/sonata-form-builder
-- https://github.com/nelmio/NelmioSecurityBundle
-- https://github.com/nan-guo/Sonata-Menu-Bundle
-- https://github.com/KnpLabs/KnpPaginatorBundle para la paginación
-- Panel de administración, https://github.com/sonata-project/SonataAdminBundle
-- https://github.com/sonata-project/SonataPageBundle
-	- Puede ser interesante para añadir páginas personalizadas, pero parece que no es compatible con la versión 5 de
-	  symfony
-- SonataBlockBundle puede ser interesante para agregar bloques en lugares concretos
-	- https://sonata-project.org/bundles/block/master/doc/reference/events.html
-- https://symfony.com/doc/current/workflow.html
-- https://github.com/vimeo/psalm/blob/master/docs/running_psalm/installation.md
-- https://symfony.com/doc/current/components/process.html
-- https://symfony.com/doc/current/components/config.html
-- https://symfony.com/doc/current/components/finder.html
-- https://symfony.com/doc/current/components/options_resolver.html
-	- Para configurar los componentes y opciones que se pueden usar
-	- Esto permite que cada componente tenga las opciones que necesita y los tipos de valor correctos
-
-	  ```php
-	  /*
-	  In many cases you may need to define multiple configurations for each option. For example, suppose the InvoiceMailer class has a host option that is required and a transport option which can be one of sendmail, mail and smtp. You can improve the readability of the code avoiding duplicating option name for each configuration using the define() method:
-	  */
-	  // ...
-	  class InvoiceMailer
-	  {
-		  // ...
-		  public function configureOptions(OptionsResolver $resolver)
-		  {
-			  // ...
-			  $resolver->define('host')
-				  ->required()
-				  ->default('smtp.example.org')
-				  ->allowedTypes('string')
-				  ->info('The IP address or hostname');
-
-			  $resolver->define('transport')
-				  ->required()
-				  ->default('transport')
-				  ->allowedValues(['sendmail', 'mail', 'smtp']);
-		  }
-	  }
-	  ```
