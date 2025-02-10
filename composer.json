@@ -124,6 +124,7 @@
 		"symfony/web-profiler-bundle": "^4.4"
 	},
 	"conflict": {
+		"doctrine/persistence": ">=3.0",
 		"symfony/symfony": "*"
 	},
 	"autoload": {
