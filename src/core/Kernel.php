@@ -28,7 +28,7 @@ class Kernel extends BaseKernel
 	use MicroKernelTrait;
 
 	// Version of game in public display format.
-	public const VERSION = '1.1.2 DragonPrime (' . self::IDMARINAS_EDITION . ' IDMarinas Edition)';
+	public const VERSION = '1.1.2 Dragonprime Edition (IDMarinas Edition v' . self::IDMARINAS_EDITION . ')';
 	// Identify version of game in numeric format.
 	public const VERSION_ID          = 70200;
 	public const MAJOR_VERSION       = 7;
@@ -51,7 +51,7 @@ class Kernel extends BaseKernel
 	 *
 	 * @var string
 	 */
-	public const COPYRIGHT = 'Game Design and Code: Copyright &copy; 2002-2005, Eric Stevens & JT Traub, &copy; 2006-2007, Dragonprime Development Team <span class="col-dk-red"> &copy 2007-? Oliver Brendel remodelling and enhancing</span> <span class="col-dk-link-blue"> &copy 2015-? IDMarinas remodelling and enhancing</span>';
+	public const COPYRIGHT = 'Game Design and Code: Copyright &copy; 2002-2005, Eric Stevens & JT Traub, &copy; 2006-2007, Dragonprime Development Team <span class="text-col-dk-red"> &copy 2007-? Oliver Brendel remodelling and enhancing</span> <span class="text-col-dk-link-blue"> &copy 2015-? IDMarinas remodelling and enhancing</span>';
 	/**
 	 * **** NOTICE ****
 	 * This series of scripts (collectively known as Legend of the Green Dragon
