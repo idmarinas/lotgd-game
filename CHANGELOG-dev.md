@@ -14,13 +14,16 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/7.2/CHAN
 
 ### :cyclone: CHANGES
 
-- Nothing
+- **Version show** now show original version of LoTGD following by custom version of IDMarinas Edition
+- **Refactor** a refactor has been made to all the code in order to migrate to the `PHP 8.0` version.
 
 ### :star: FEATURES
 
 - **src/functions.php**
 	- `output()` and `rawoutput()` added for compatibility with old modules, this makes it necessary to modify
 	  the old modules less.
+- **Docker** add Docker related files to containerized LoTGD but only for development purpose
+	- **Docker** for production _coming soon_ "For 7.x series and up"
 
 ### :fire: DEPRECATED
 
@@ -30,6 +33,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/7.2/CHAN
 
 - **public/login.php** Fixed typo in `LotgdMessaged::` rename to `LotgdMessages::`
 - **Recover password system** Fixed a bug where the password could not be reset.
+- **Fixes** some accessibility problems have been corrected
 
 ### :x: REMOVES
 
