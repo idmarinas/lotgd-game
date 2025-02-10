@@ -6,7 +6,6 @@ paragraph: >
     Anyway, it is possible to get the full core of the game (the core of the game does not refer to modules) from the repositories.
     You may download the entirety of the latest publically released stable version from:`n`n
     Original version of core: {dragonprime}`n
-    Fork with improves: {idmarinas} (`^It's this version you're looking at.`0)`n
     `nYou may then work with that code within the restrictions of its license.
     `n`nHopefully this will help put an end to actions like the following:
 
