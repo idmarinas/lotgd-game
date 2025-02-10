@@ -20,8 +20,8 @@
 
 [![Test Suite](https://img.shields.io/github/actions/workflow/status/idmarinas/lotgd-game/php.yml?branch=7.x&style=for-the-badge&logo=github&logoColor=white&label=Lotgd%20Test%20Suite)](https://github.com/idmarinas/lotgd-game/actions/workflows/php.yml)
 [![Quality Gate Status](https://img.shields.io/sonar/quality_gate/idmarinas_lotgd-game/7.x?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)](https://sonarcloud.io/summary/new_code?id=idmarinas_lotgd-game)
-[![Coverage](https://img.shields.io/sonar/coverage/idmarinas_lotgd-game/7.x?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)](https://sonarcloud.io/dashboard?id=idmarinas_lotgd-game)
-[![Technical Debt](https://img.shields.io/sonar/tech_debt/idmarinas_lotgd-game/7.x?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)](https://sonarcloud.io/dashboard?id=idmarinas_lotgd-game)
+[![Coverage](https://img.shields.io/sonar/coverage/idmarinas_lotgd-game/7.x?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)][sonarcloud]
+[![Technical Debt](https://img.shields.io/sonar/tech_debt/idmarinas_lotgd-game/7.x?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)][sonarcloud]
 
 <br />
 
@@ -31,13 +31,13 @@
 
 #### Code analysis
 
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&branch=7.x&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=idmarinas_lotgd-game)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&branch=7.x&metric=bugs)](https://sonarcloud.io/dashboard?id=idmarinas_lotgd-game)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&branch=7.x&metric=security_rating)](https://sonarcloud.io/dashboard?id=idmarinas_lotgd-game)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&branch=7.x&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=idmarinas_lotgd-game)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&branch=7.x&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=idmarinas_lotgd-game)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&branch=7.x&metric=code_smells)](https://sonarcloud.io/dashboard?id=idmarinas_lotgd-game)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&branch=7.x&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=idmarinas_lotgd-game)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&branch=7.x&metric=reliability_rating)][sonarcloud]
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&branch=7.x&metric=bugs)][sonarcloud]
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&branch=7.x&metric=security_rating)][sonarcloud]
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&branch=7.x&metric=vulnerabilities)][sonarcloud]
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&branch=7.x&metric=sqale_rating)][sonarcloud]
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&branch=7.x&metric=code_smells)][sonarcloud]
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=idmarinas_lotgd-game&branch=7.x&metric=duplicated_lines_density)][sonarcloud]
 
 </div>
 
@@ -121,3 +121,5 @@ Read [Wiki] for more information.
 [tloi]: https://tloi.infommo.es
 
 [wiki]: https://github.com/idmarinas/lotgd-game/wiki
+
+[sonarcloud]: https://sonarcloud.io/dashboard?id=idmarinas_lotgd-game
