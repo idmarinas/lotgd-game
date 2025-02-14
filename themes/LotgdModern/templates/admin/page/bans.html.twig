@@ -1,13 +1,15 @@
 {% trans_default_domain textDomain %}
 
 <form action="{{ 'bans.php?op=search'|lotgd_url }}" autocomplete="off" method="POST" class="ui form">
-    <div class="inline field">
-        <label for="q">{{ 'default.form.search.label'|trans|colorize }}</label>
-        <div class="ui action input">
-            <input type="text" name="q" id="q">
-            <button type="submit" class="ui button">{{ 'default.form.search.button.submit'|trans|uncolorize }}</button>
-        </div>
-    </div>
+	<div>
+		<label class="flex-1" for="q">{{ 'default.form.search.label'|trans|colorize }}</label>
+		<div class="flex gap-4">
+			<input class="flex-1" type="text" name="q" id="q">
+			<button type="submit" class="w-1/5">
+				{{ 'default.form.search.button.submit'|trans|uncolorize }}
+			</button>
+		</div>
+	</div>
 </form>
 
 <br>
