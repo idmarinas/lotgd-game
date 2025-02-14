@@ -23,53 +23,53 @@
 			<td class="collapsing">
 				<div class="ui mini icon buttons">
 					<a
-						href="{{ ('mounts.php?op=edit&id=' ~ mount.mountid)|lotgd_url }}"
-						class="ui button"
-						data-tooltip="{{ 'section.default.table.tbody.edit'|trans|uncolorize }}"
+					  href="{{ ('mounts.php?op=edit&id=' ~ mount.mountid)|lotgd_url }}"
+					  class="ui button"
+					  data-tooltip="{{ 'section.default.table.tbody.edit'|trans|uncolorize }}"
 					>
 						<i aria-hidden="true" class="edit icon"></i>
 					</a>
 					<a
-						href="{{ ('mounts.php?op=give&id=' ~ mount.mountid)|lotgd_url }}"
-						class="ui button"
-						data-tooltip="{{ 'section.default.table.tbody.give'|trans|uncolorize }}"
+					  href="{{ ('mounts.php?op=give&id=' ~ mount.mountid)|lotgd_url }}"
+					  class="ui button"
+					  data-tooltip="{{ 'section.default.table.tbody.give'|trans|uncolorize }}"
 					>
 						<i aria-hidden="true" class="gift icon"></i>
 					</a>
 					{% if not mount.mountactive %}
 						{% set options = {'html': 'section.default.table.tbody.del.confirm'|trans({ 'n': mount.owners })|uncolorize }|json_encode %}
 						<a
-							href="{{ ('mounts.php?op=del&id=' ~ mount.mountid)|lotgd_url }}"
-							class="ui red button"
-							data-tooltip="{{ 'section.default.table.tbody.del'|trans|uncolorize }}"
-							onclick="Lotgd.confirm(this, event)"
-							data-options="{{ options|e('html_attr') }}"
+						  href="{{ ('mounts.php?op=del&id=' ~ mount.mountid)|lotgd_url }}"
+						  class="ui red button"
+						  data-tooltip="{{ 'section.default.table.tbody.del'|trans|uncolorize }}"
+						  onclick="Lotgd.confirm(this, event)"
+						  data-options="{{ options|e('html_attr') }}"
 						>
 							<i
-								aria-hidden="true"
-								class="far fa-trash-alt text-lotgd-red-500 hover:text-lotgd-red-100"
+							  aria-hidden="true"
+							  class="far fa-trash-alt text-lotgd-red-500 hover:text-lotgd-red-100"
 							></i>
 						</a>
 					{% endif %}
 
 					{% if mount.mountactive %}
 						<a
-							href="{{ ('mounts.php?op=deactivate&id=' ~ mount.mountid)|lotgd_url }}"
-							data-tooltip="{{ 'section.default.table.tbody.deac'|trans|uncolorize }}"
+						  href="{{ ('mounts.php?op=deactivate&id=' ~ mount.mountid)|lotgd_url }}"
+						  data-tooltip="{{ 'section.default.table.tbody.deac'|trans|uncolorize }}"
 						>
 							<i
-								aria-hidden="true"
-								class="fas fa-cog text-lotgd-green-500 hover:text-lotgd-green-100"
+							  aria-hidden="true"
+							  class="fas fa-cog text-lotgd-green-500 hover:text-lotgd-green-100"
 							></i>
 						</a>
 					{% else %}
 						<a
-							href="{{ ('mounts.php?op=activate&id=' ~ mount.mountid)|lotgd_url }}"
-							data-tooltip="{{ 'section.default.table.tbody.act'|trans|uncolorize }}"
+						  href="{{ ('mounts.php?op=activate&id=' ~ mount.mountid)|lotgd_url }}"
+						  data-tooltip="{{ 'section.default.table.tbody.act'|trans|uncolorize }}"
 						>
 							<i
-								aria-hidden="true"
-								class="fas fa-cog text-lotgd-orange-500 hover:text-lotgd-orange-100"
+							  aria-hidden="true"
+							  class="fas fa-cog text-lotgd-orange-500 hover:text-lotgd-orange-100"
 							></i>
 						</a>
 					{% endif %}
@@ -80,19 +80,24 @@
 			<td>FF: {{ mount.mountforestfights|numeral }}, DKs: {{ mount.mountdkcost }}</td>
 			<td>
 				<span
-					data-controller="remote-modal"
-					data-remote-modal-allow-background-close="true"
-					data-remote-modal-url-value="{{ stimulus_url('Lotgd\\Core\\Controller\\Stimulus\\MountsController') }}"
+				  data-controller="remote-modal"
+				  data-remote-modal-allow-background-close="true"
+				  data-remote-modal-url-value="{{ stimulus_url('Lotgd\\Core\\Controller\\Stimulus\\MountController') }}"
 				>
-					<button type="button" data-remote-modal-id-param="{{ mount.mountid }}">
+					<button
+					  type="button"
+					  data-remote-modal-target="activator"
+					  data-remote-modal-id-param="{{ mount.mountid }}"
+					  data-action="click->remote-modal#open"
+					>
 						<i aria-hidden="true" class="fa fa-list"></i>
 						{{ ('`#' ~ mount.owners ~ '`0')|colorize }}
 					</button>
 
 					<div
-						data-remote-modal-target="container"
-						data-action="click->remote-modal#closeBackground keyup@window->remote-modal#closeWithKeyboard"
-						class="transition duration-500 ease-in-out fixed inset-0 overflow-y-auto flex items-center justify-center whitespace-normal hidden"
+					  data-remote-modal-target="container"
+					  data-action="click->remote-modal#closeBackground keyup@window->remote-modal#closeWithKeyboard"
+					  class="transition duration-500 ease-in-out fixed inset-0 overflow-y-auto flex items-center justify-center whitespace-normal hidden"
 					></div>
 				</span>
 			</td>
