@@ -19,7 +19,7 @@
 <div align="center">
 
 [![Test Suite](https://img.shields.io/github/actions/workflow/status/idmarinas/lotgd-game/php.yml?branch=7.x&style=for-the-badge&logo=github&logoColor=white&label=Lotgd%20Test%20Suite)](https://github.com/idmarinas/lotgd-game/actions/workflows/php.yml)
-[![Quality Gate Status](https://img.shields.io/sonar/quality_gate/idmarinas_lotgd-game/7.x?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)](https://sonarcloud.io/summary/new_code?id=idmarinas_lotgd-game)
+[![Quality Gate Status](https://img.shields.io/sonar/quality_gate/idmarinas_lotgd-game/7.x?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)][sonarcloud]
 [![Coverage](https://img.shields.io/sonar/coverage/idmarinas_lotgd-game/7.x?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)][sonarcloud]
 [![Technical Debt](https://img.shields.io/sonar/tech_debt/idmarinas_lotgd-game/7.x?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarcloud&logoColor=white)][sonarcloud]
 
