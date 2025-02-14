@@ -1,14 +1,14 @@
 {% trans_default_domain textDomain %}
 
 {% if petition.acctid %}
-    <div class="ui buttons">
-        <a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.write('{{ petition.acctid }}')" class="ui button">
-            {{ 'section.view.write'|trans|uncolorize }}
-        </a>
-    </div>
+	<div class="ui buttons">
+		<a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.write('{{ petition.acctid }}')" class="ui button">
+			{{ 'section.view.write'|trans|uncolorize }}
+		</a>
+	</div>
 {% endif %}
 
-<h2>{{ 'section.view.category'|trans({ 'category': petition.body.problem_type })|colorize }}</h2>
+<h2>{{ 'section.view.category'|trans({ 'category': petition.body.problem_type|trans({}, 'jaxon_petition') })|colorize }}</h2>
 
 {{ 'section.view.from'|trans({ 'name': petition.authorName })|colorize }}
 
@@ -17,34 +17,46 @@
 {{ 'section.view.status'|trans({ 'status': statuses[petition.status]|trans })|colorize }}
 
 {% if petition.closedate.getTimestamp %}
-    {{ 'section.view.close.date'|trans({ 'name': petition.closerName, 'date': petition.closedate, 'relative': petition.closedate|relative_date })|colorize }}
+	{{ 'section.view.close.date'|trans({ 'name': petition.closerName, 'date': petition.closedate, 'relative': petition.closedate|relative_date })|colorize }}
 {% endif %}
 
 {{ 'section.view.body'|trans|colorize }}
-<table class="ui very compact very basic table">
-    <tr>
-        <th scope="col" class="collapsing right aligned">{{ '`$[ipaddress]`0'|colorize }}</th>
-        <th scope="col" class="collapsing">{{ '`^=`0'|colorize }}</th>
-        <th scope="col">{{ '`#%s`0'|format(petition.ip)|colorize }}</th>
-    </tr>
-    {% for key, val in petition.body %}
-        <tr>
-            <td class="collapsing right aligned">{{ '`$[%s]`0'|format(key)|colorize }}</td>
-            <td class="collapsing">{{ '`^=`0'|colorize }}</td>
-            <td>{{ '`^%s`0'|format(val|prevent_codes)|colorize }}</td>
-        </tr>
-    {% endfor %}
+<table class="table-fixed">
+	<thead>
+	<tr>
+		<th scope="col" class="w-auto">{{ 'Field'|colorize }}</th>
+		<th scope="col" class="w-auto"></th>
+		<th scope="col">{{ 'Value'|colorize }}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td class="w-auto text-right">{{ '`$[ipaddress]`0'|colorize }}</td>
+		<td class="w-auto">{{ '`^=`0'|colorize }}</td>
+		<td>{{ '`#%s`0'|format(petition.ip)|colorize }}</td>
+	</tr>
+	{% for key, val in petition.body %}
+		<tr>
+			<td class="w-auto text-right">{{ '`$[%s]`0'|format(key)|colorize }}</td>
+			<td class="w-auto">{{ '`^=`0'|colorize }}</td>
+			<td>
+				{% set value = ('problem_type' == key ? val|trans({}, 'jaxon_petition') : val) %}
+				{{ '`^%s`0'|format(value|prevent_codes)|colorize }}
+			</td>
+		</tr>
+	{% endfor %}
+	</tbody>
 </table>
 
 {# Set a limits of comments per page. Default is 25 #}
 {% commentary_limit_comments 200 %}
 
 {{ commentary_block({
-    'section': 'pet-' ~ petition.petitionid,
-    'textDomainStatus': 'app_commentary'
+	'section': 'pet-' ~ petition.petitionid,
+	'textDomainStatus': 'app_commentary'
 }, textDomain) }}
 
 {% if viewPageInfo %}
-    {{ 'section.view.page.info'|trans|colorize }}
-    <pre style="background-color: white;">{{ var_dump(petition.pageinfo)|highlight_string }}</pre>
+	{{ 'section.view.page.info'|trans|colorize }}
+	<pre style="background-color: white;">{{ var_dump(petition.pageinfo)|highlight_string }}</pre>
 {% endif %}
