@@ -33,6 +33,7 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/7.2/CHAN
 
 - **public/login.php** Fixed typo in `LotgdMessaged::` rename to `LotgdMessages::`
 - **Recover password system** Fixed a bug where the password could not be reset.
+- **lib/redirect.php** Fixed a possible bug: now `REQUEST_SCHEME` and not `SERVER_PORT` is used to construct the url
 - **Fixes** some accessibility problems have been corrected
 
 ### :x: REMOVES
