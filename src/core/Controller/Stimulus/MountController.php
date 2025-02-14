@@ -49,9 +49,10 @@ class MountController extends AbstractController implements LotgdControllerInter
 			$content .= '... <br />';
 		}
 
-		return $this->renderBlock('components/modal.html.twig', 'dialog', [
-			'content'      => $content ?: '---',
-			'close_button' => true,
+		return $this->renderBlock('components/modal.html.twig', 'modal_inner_container', [
+		  'content'      => $content ?: '---',
+		  'close_button' => true,
+		  'controller'   => 'remote-modal',
 		]);
 	}
 
