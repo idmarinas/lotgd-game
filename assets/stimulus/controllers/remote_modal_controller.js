@@ -23,10 +23,10 @@ export default class extends Modal {
 		let url = undefined
 
 		if (Object.keys(event.params).length > 0) {
-			url = `${this.urlValue}`
-				+ Object.entries(event.params)
-						.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-						.join('&')
+			url = `${this.urlValue}&`
+			  + Object.entries(event.params)
+			          .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+			          .join('&')
 		}
 
 		content = await this.fetch(url)
