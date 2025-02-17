@@ -57,7 +57,6 @@
 - Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
 	- Poner las opciones de la encuesta en una tabla separada. Permitiendo que las opciones también se puedan traducir.
 - Agregar sistema al core, para poder añadir términos y condiciones y política de privacidad, sin necesidad de módulo.
--
 
 # Cosas a mejorar
 
@@ -153,7 +152,6 @@
 ## Cosas pendientes
 
 - Añadir un check para comprobar si se han usado las funciones obligatorias (copyright(), game_version() ... )
-	- Compatible con el sistema simple (los tipo Google AdSense)
 - Códigos de color, cambiar y unir todos los códigos de color, (color, negrita, cursiva, etc.) en un mismo lugar
 	- IDEA: usar la clase BBCode, ejemplo como se usa en foros y similar
 - ¿? Permitir que en los eventos, el chance pueda ser superior a 100, para priorizar que un evento pueda pasar con más
