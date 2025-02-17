@@ -16,7 +16,7 @@
 
 {{ 'section.view.status'|trans({ 'status': statuses[petition.status]|trans })|colorize }}
 
-{% if petition.closedate.getTimestamp %}
+{% if petition.closedate.getTimestamp > 0 %}
 	{{ 'section.view.close.date'|trans({ 'name': petition.closerName, 'date': petition.closedate, 'relative': petition.closedate|relative_date })|colorize }}
 {% endif %}
 
