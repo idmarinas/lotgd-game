@@ -39,7 +39,7 @@
 		<tr>
 			<td class="w-auto text-right">{{ '`$[%s]`0'|format(key)|colorize }}</td>
 			<td class="w-auto">{{ '`^=`0'|colorize }}</td>
-			<td>
+			<td class="whitespace-normal">
 				{% set value = ('problem_type' == key ? val|trans({}, 'jaxon_petition') : val) %}
 				{{ '`^%s`0'|format(value|prevent_codes)|colorize }}
 			</td>
