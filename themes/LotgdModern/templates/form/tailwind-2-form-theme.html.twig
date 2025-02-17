@@ -1,372 +1,391 @@
 {% use 'form_div_layout.html.twig' %}
 
 {%- block form_start -%}
-    {# Allow url of action #}
-    {% if action %}
-        {% set action = action|lotgd_url %}
-    {% endif %}
+	{# Allow url of action #}
+	{% if action %}
+		{% set action = action|lotgd_url %}
+	{% endif %}
 
-    {{- parent() -}}
+	{{- parent() -}}
 
-    {% if form.vars.label %}
-        <div class="italic bg-gradient-to-r from-transparent via-lotgd-800 text-center text-xl font-bold border-b border-lotgd-500 p-2">
-            {{ form.vars.label|trans({}, form.vars.translation_domain) }}
-        </div>
-    {% endif %}
+	{% if form.vars.label %}
+		<div class="italic bg-gradient-to-r from-transparent via-lotgd-800 text-center text-xl font-bold border-b border-lotgd-500 p-2">
+			{{ form.vars.label|trans({}, form.vars.translation_domain) }}
+		</div>
+	{% endif %}
 {%- endblock form_start -%}
 
 {%- block form_widget_simple -%}
-    {%- if errors|length > 0 -%}
-        {% set attr = attr|merge({class: attr.class ~ ' input-red'}) %}
-    {%- endif -%}
+	{%- if errors|length > 0 -%}
+		{% set attr = attr|merge({class: attr.class ~ ' input-red'}) %}
+	{%- endif -%}
 
-    {{- parent() -}}
+	{{- parent() -}}
 {%- endblock form_widget_simple -%}
 
 {%- block form_widget_compound -%}
-    <div {{ block('widget_container_attributes') }}>
-        {%- if form is rootform -%}
-            {{ form_errors(form) }}
-        {%- endif -%}
-        {{- block('form_rows') -}}
-        {{- form_rest(form) -}}
-    </div>
+	<div {{ block('widget_container_attributes') }}>
+		{%- if form is rootform -%}
+			{{ form_errors(form) }}
+		{%- endif -%}
+		{{- block('form_rows') -}}
+		{{- form_rest(form) -}}
+	</div>
 {%- endblock form_widget_compound -%}
 
 {%- block form_row -%}
-    {%- set row_attr = row_attr|merge({ class: row_attr.class|default(row_class|default('md:flex md:items-center mb-6')) }) -%}
-    {%- set widget_attr = {} -%}
-    {%- if help is not empty -%}
-        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
-    {%- endif -%}
-    <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
-        {{- form_label(form) -}}
-        <div class="md:w-2/3">
-            {{- form_widget(form, widget_attr) -}}
-            {{- form_errors(form) -}}
-            {{- form_help(form) -}}
-        </div>
-    </div>
+	{%- set row_attr = row_attr|merge({ class: row_attr.class|default(row_class|default('md:flex md:items-center mb-6')) }) -%}
+	{%- set widget_attr = {} -%}
+	{%- if help is not empty -%}
+		{%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+	{%- endif -%}
+	<div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+		{{- form_label(form) -}}
+		<div class="md:w-2/3">
+			{{- form_widget(form, widget_attr) -}}
+			{{- form_errors(form) -}}
+			{{- form_help(form) -}}
+		</div>
+	</div>
 {%- endblock form_row -%}
 
 {%- block form_label -%}
-    {%- set label_attr = label_attr|merge({ class: label_attr.class|default(label_class|default('block font-bold md:text-right mb-1 md:mb-0 pr-4')) }) -%}
-    <div class="md:w-1/3">{{- parent()|colorize -}}</div>
+	{%- set label_attr = label_attr|merge({ class: label_attr.class|default(label_class|default('block font-bold md:text-right mb-1 md:mb-0 pr-4')) }) -%}
+	<div class="md:w-1/3">{{- parent()|colorize -}}</div>
 {%- endblock form_label -%}
 
 {%- block form_help -%}
-    {%- set help_attr = help_attr|merge({ class: help_attr.class|default(help_class|default('mt-1 text-blue-100 text-xs italic')) }) -%}
-    {{- parent() -}}
+	{%- set help_attr = help_attr|merge({ class: help_attr.class|default(help_class|default('mt-1 text-blue-100 text-xs italic')) }) -%}
+	{{- parent() -}}
 {%- endblock form_help -%}
 
 {%- block form_errors -%}
-    {%- if errors|length > 0 -%}
-        <ul>
-            {%- for error in errors -%}
-                <li class="{{ error_item_class|default('text-red-600') }}">{{ error.message }}</li>
-            {%- endfor -%}
-        </ul>
-    {%- endif -%}
+	{%- if errors|length > 0 -%}
+		<ul>
+			{%- for error in errors -%}
+				<li class="{{ error_item_class|default('text-red-600') }}">{{ error.message }}</li>
+			{%- endfor -%}
+		</ul>
+	{%- endif -%}
 {%- endblock form_errors -%}
 
 {%- block textarea_widget -%}
-    {%- if errors|length > 0 -%}
-        {% set attr = attr|merge({class: attr.class ~ ' input-red'}) %}
-    {%- endif -%}
+	{%- if errors|length > 0 -%}
+		{% set attr = attr|merge({class: attr.class ~ ' input-red'}) %}
+	{%- endif -%}
 
-    <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+	<textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
 {%- endblock textarea_widget -%}
 
 {%- block range_widget -%}
-    <div data-controller="form--input-range" class="flex items-end gap-4">
-        <div class="w-4/5">
-            <div class="flex">
-                <div class="flex-1 text-left"><span data-form--input-range-target="min"></span></div>
-                <div class="flex-1 text-right"><span data-form--input-range-target="max"></span></div>
-            </div>
-            <input
-                type="range"
-                {{ block('widget_attributes') }}
-                {% if value is not empty %}value="{{ value }}" {% endif %}
-                data-form--input-range-target="range"
-                data-action="input->form--input-range#updateValue"
-            />
-        </div>
-        <div class="w-1/5 rounded py2 px-3 text-center bg-lotgd-700 text-gray-100 mb-2" data-form--input-range-target="value"></div>
-    </div>
+	<div data-controller="form--input-range" class="flex items-end gap-4">
+		<div class="w-4/5">
+			<div class="flex">
+				<div class="flex-1 text-left"><span data-form--input-range-target="min"></span></div>
+				<div class="flex-1 text-right"><span data-form--input-range-target="max"></span></div>
+			</div>
+			<input
+			  type="range"
+			  {{ block('widget_attributes') }}
+			  {% if value is not empty %}value="{{ value }}" {% endif %}
+			  data-form--input-range-target="range"
+			  data-action="input->form--input-range#updateValue"
+			/>
+		</div>
+		<div
+		  class="w-1/5 rounded py2 px-3 text-center bg-lotgd-700 text-gray-100 mb-2"
+		  data-form--input-range-target="value"
+		></div>
+	</div>
 {%- endblock range_widget %}
 
 {# Checkbox toggle style #}
 
 {%- block checkbox_row -%}
-    {%- set row_attr = row_attr|merge({ class: row_attr.class|default(row_class|default('md:flex md:items-center mb-6')) }) -%}
+	{%- set row_attr = row_attr|merge({ class: row_attr.class|default(row_class|default('md:flex md:items-center mb-6')) }) -%}
 
-    {%- set widget_attr = {attr: {class: 'unstyle hidden'}} -%}
+	{%- set widget_attr = {attr: {class: 'unstyle hidden'}} -%}
 
-    {%- if help is not empty -%}
-        {%- set widget_attr = widget_attr|merge({attr: {'aria-describedby': id ~"_help"}}) -%}
-    {%- endif -%}
+	{%- if help is not empty -%}
+		{%- set widget_attr = widget_attr|merge({attr: {'aria-describedby': id ~"_help"}}) -%}
+	{%- endif -%}
 
-    {% if not compound -%}
-        {% set label_attr = label_attr|merge({'for': id}) %}
-    {%- endif -%}
+	{% if not compound -%}
+		{% set label_attr = label_attr|merge({'for': id}) %}
+	{%- endif -%}
 
-    {% if required -%}
-        {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
-    {%- endif -%}
+	{% if required -%}
+		{% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+	{%- endif -%}
 
-    {% if label is empty -%}
-        {%- if label_format is not empty -%}
-            {% set label = label_format|replace({
-                '%name%': name,
-                '%id%': id,
-            }) %}
-        {%- else -%}
-            {% set label = name|humanize %}
-        {%- endif -%}
-    {%- endif -%}
+	{% if label is empty -%}
+		{%- if label_format is not empty -%}
+			{% set label = label_format|replace({
+				'%name%': name,
+				'%id%': id,
+			}) %}
+		{%- else -%}
+			{% set label = name|humanize %}
+		{%- endif -%}
+	{%- endif -%}
 
-    <label{% if label_attr %}{% with { attr: label_attr|merge(row_attr) } %}{{ block('attributes') }}{% endwith %}{% endif %}>
-        <div class="md:w-1/3">
-            <div class="block font-bold md:text-right mb-1 md:mb-0 pr-4">
-                {%- if translation_domain is same as(false) -%}
-                    {{- label -}}
-                {%- else -%}
-                    {{- label|trans(label_translation_parameters, translation_domain) -}}
-                {%- endif -%}
-            </div>
-        </div>
-        <div class="md:w-2/3">
-            {{- form_errors(form) -}}
+	<label{% if label_attr %}{% with { attr: label_attr|merge(row_attr) } %}{{ block('attributes') }}{% endwith %}{% endif %}>
+		<div class="md:w-1/3">
+			<div class="block font-bold md:text-right mb-1 md:mb-0 pr-4">
+				{%- if translation_domain is same as(false) -%}
+					{{- label -}}
+				{%- else -%}
+					{{- label|trans(label_translation_parameters, translation_domain) -}}
+				{%- endif -%}
+			</div>
+		</div>
+		<div class="md:w-2/3">
+			{{- form_errors(form) -}}
 
-            <div class="relative">
-                {{- form_widget(form, widget_attr) -}}
-                <!-- path -->
-                <div class="toggle-path w-14 h-7 rounded-full shadow-inner"></div>
-                <!-- circle -->
-                <div class="toggle-circle absolute w-5 h-5 rounded-full shadow top-1 left-1"></div>
-            </div>
+			<div class="relative">
+				{{- form_widget(form, widget_attr) -}}
+				<!-- path -->
+				<div class="toggle-path w-14 h-7 rounded-full shadow-inner"></div>
+				<!-- circle -->
+				<div class="toggle-circle absolute w-5 h-5 rounded-full shadow top-1 left-1"></div>
+			</div>
 
-            {{- form_help(form) -}}
-        </div>
-    </label>
+			{{- form_help(form) -}}
+		</div>
+	</label>
 {%- endblock checkbox_row -%}
 
 {%- block choice_widget_expanded -%}
-    <div {{ block('widget_container_attributes') }}>
-        {%- for child in form %}
-            {{- form_row(child) -}}
-        {% endfor -%}
-    </div>
+	<div {{ block('widget_container_attributes') }}>
+		{%- for child in form %}
+			{{- form_row(child) -}}
+		{% endfor -%}
+	</div>
 {%- endblock choice_widget_expanded -%}
 
 {%- block collection_widget -%}
-    {% if prototype is defined and not prototype.rendered %}
-        {%- set attr = attr|merge({
-            'data-prototype': form_row(prototype)|e('html_attr'),
-            'data-controller': 'form--collection-prototype'
-        }) -%}
-    {% endif %}
-    {{- block('form_widget') -}}
+	{% if prototype is defined and not prototype.rendered %}
+		{%- set attr = attr|merge({
+			'data-prototype': form_row(prototype)|e('html_attr'),
+			'data-controller': 'form--collection-prototype'
+		}) -%}
+	{% endif %}
+	{{- block('form_widget') -}}
 {%- endblock collection_widget -%}
 
 {%- block datetime_widget -%}
-    {% apply spaceless %}
-        {% if widget == 'single_text' %}
-            {% set type = 'text' %}
-            {{ block('form_widget_simple') }}
-        {% else %}
-            <div {{ block('widget_container_attributes') }}>
-                <div class="flex gap-2">
-                    <div class="flex-1">
-                        {{ form_widget(form.date) }}
-                    </div>
-                    <div class="flex-1">
-                        {{ form_widget(form.time) }}
-                    </div>
-                </div>
-                {{ form_errors(form.date) }}
-                {{ form_errors(form.time) }}
-            </div>
-        {% endif %}
-    {% endapply %}
+	{% apply spaceless %}
+		{% if widget == 'single_text' %}
+			{% set type = 'text' %}
+			{{ block('form_widget_simple') }}
+		{% else %}
+			<div {{ block('widget_container_attributes') }}>
+				<div class="flex gap-2">
+					<div class="flex-1">
+						{{ form_widget(form.date) }}
+					</div>
+					<div class="flex-1">
+						{{ form_widget(form.time) }}
+					</div>
+				</div>
+				{{ form_errors(form.date) }}
+				{{ form_errors(form.time) }}
+			</div>
+		{% endif %}
+	{% endapply %}
 {%- endblock datetime_widget -%}
 
 {%- block date_widget -%}
-    {% apply spaceless %}
-        {% if widget == 'single_text' %}
-            {{ block('form_widget_simple') }}
-        {% else %}
-            <div {{ block('widget_container_attributes') }}>
-                <div class="flex gap-1">
-                    {{ date_pattern|replace({
-                        '{{ year }}':  '<div class="flex-1">' ~ form_widget(form.year) ~ '</div>',
-                        '{{ month }}': '<div class="flex-1">' ~ form_widget(form.month) ~ '</div>',
-                        '{{ day }}':   '<div class="flex-1">' ~ form_widget(form.day) ~ '</div>',
-                    })|raw }}
-                </div>
-            </div>
-        {% endif %}
-    {% endapply %}
+	{% apply spaceless %}
+		{% if widget == 'single_text' %}
+			{{ block('form_widget_simple') }}
+		{% else %}
+			<div {{ block('widget_container_attributes') }}>
+				<div class="flex gap-1">
+					{{ date_pattern|replace({
+						'{{ year }}':  '<div class="flex-1">' ~ form_widget(form.year) ~ '</div>',
+						'{{ month }}': '<div class="flex-1">' ~ form_widget(form.month) ~ '</div>',
+						'{{ day }}':   '<div class="flex-1">' ~ form_widget(form.day) ~ '</div>',
+					})|raw }}
+				</div>
+			</div>
+		{% endif %}
+	{% endapply %}
 {%- endblock date_widget -%}
 
 {%- block time_widget -%}
-    {% apply spaceless %}
-        {% if widget == 'single_text' %}
-            {{ block('form_widget_simple') }}
-        {% else %}
-            {% set vars = widget == 'text' ? { 'attr': { 'size': 1 }} : {} %}
-            <div {{ block('widget_container_attributes') }}>
-                <div class="flex gap-1">
-                    <div class="flex-1">
-                        {{ form_widget(form.hour, vars) }}
-                    </div>
-                    <div class="flex-none">:</div>
-                    <div class="flex-1">
-                        {{ form_widget(form.minute, vars) }}
-                    </div>
-                    {% if with_seconds %}
-                        <div class="flex-none">:</div>
-                        <div class="flex-1">
-                            {{ form_widget(form.second, vars) }}
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        {% endif %}
-    {% endapply %}
+	{% apply spaceless %}
+		{% if widget == 'single_text' %}
+			{{ block('form_widget_simple') }}
+		{% else %}
+			{% set vars = widget == 'text' ? { 'attr': { 'size': 1 }} : {} %}
+			<div {{ block('widget_container_attributes') }}>
+				<div class="flex gap-1">
+					<div class="flex-1">
+						{{ form_widget(form.hour, vars) }}
+					</div>
+					<div class="flex-none">:</div>
+					<div class="flex-1">
+						{{ form_widget(form.minute, vars) }}
+					</div>
+					{% if with_seconds %}
+						<div class="flex-none">:</div>
+						<div class="flex-1">
+							{{ form_widget(form.second, vars) }}
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		{% endif %}
+	{% endapply %}
 {%- endblock time_widget %}
 
 {# Custom Rows #}
 
 {%- block tagify_row -%}
-    <div class="md:flex md:items-center mb-6">
-        {{- form_label(form) -}}
-        <div class="md:w-2/3">
-            <button
-                type="button"
-                class="unstyle absolute z-10 cursor-pointer rounded-full w-11 h-11 ring-inset ring-2 ring-blue-500 hover:ring-4 text-blue-500"
-                id="button-{{ id }}"
-            >+</button>
+	<div class="md:flex md:items-center mb-6">
+		{{- form_label(form) -}}
+		<div class="md:w-2/3">
+			<button
+			  type="button"
+			  class="unstyle absolute z-10 cursor-pointer rounded-full w-11 h-11 ring-inset ring-2 ring-blue-500 hover:ring-4 text-blue-500"
+			  id="button-{{ id }}"
+			>+
+			</button>
 
-            <input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
-            {{- form_errors(form) -}}
-            {{- form_help(form) -}}
-        </div>
-    </div>
+			<input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+			{{- form_errors(form) -}}
+			{{- form_help(form) -}}
+		</div>
+	</div>
 
-    <script>
-        /* eslint-disable no-undef */
-        const input = document.getElementById('{{ id }}')
+	<script>
+		/* eslint-disable no-undef */
+		const input = document.getElementById('{{ id }}')
 
-        const tagify = Lotgd.tagify(input, {
-            autocomplete: {
-                enabled: false
-            },
-            dropdown: {
-                enabled: false
-            }
-        })
-        const button = document.getElementById('button-{{ id }}')
+		const tagify = Lotgd.tagify(input, {
+			autocomplete: {
+				enabled: false,
+			},
+			dropdown: {
+				enabled: false,
+			},
+		})
+		const button = document.getElementById('button-{{ id }}')
 
-        button.addEventListener('click', () =>
-        {
-            tagify.addEmptyTag()
-        })
-    </script>
+		button.addEventListener('click', () => {
+			tagify.addEmptyTag()
+		})
+	</script>
 {%- endblock tagify_row -%}
 
 {%- block view_only_row -%}
-    <div class="md:flex md:items-center mb-6">
-        {{- form_label(form) -}}
-        {% set value = value|default(form.parent.vars.value[name]) %}
-        <div class="md:w-2/3">
+	<div class="md:flex md:items-center mb-6">
+		{{- form_label(form) -}}
+		{% set value = value|default(form.parent.vars.value[name]) %}
+		<div class="md:w-2/3">
             <span class="rounded bg-lotgd-50 text-black py-1 px-3 text-sm">
                 {%- if apply_filter -%}
-                    {{ value|apply_filter(apply_filter)|uncolorize }}
+	                {{ value|apply_filter(apply_filter)|uncolorize }}
                 {%- else -%}
-                    {{ value|uncolorize }}
+	                {{ value|uncolorize }}
                 {%- endif -%}
             </span>
-            {{- form_help(form) -}}
-        </div>
-    </div>
+			{{- form_help(form) -}}
+		</div>
+	</div>
 {%- endblock view_only_row -%}
 
 {%- block translatable_row -%}
-    {% set sanitized_name = full_name|replace({'[' : '_', ']' : '_'}) %}
+	{% set sanitized_name = full_name|replace({'[' : '_', ']' : '_'}) %}
 
-    <div id="{{ sanitized_name }}translatable">
-        <div class="ui top attached translatable tabular menu">
-            {{- form_label(form) -}}
-            {% for locale in locales %}
-                <a class="item {{ loop.first ? 'active':'' }}" data-tab="{{ sanitized_name ~ locale ~ "_tab" }}">
-                    {{ locale }}
-                    {% if locale in required_locale %}
-                        <span class="ui text red">*</span>
-                    {% endif %}
-                </a>
-            {% endfor %}
-        </div>
-        {% for locale in locales %}
-            <div class="ui bottom attached tab segment {{ loop.first ? 'active':'' }}" data-tab="{{ sanitized_name ~ locale ~ "_tab" }}">
-                {{- form_widget(attribute(form, locale ~ '_' ~ name)) -}}
-                {{- form_errors(attribute(form, locale ~ '_' ~ name)) -}}
-                {{- form_help(attribute(form, locale ~ '_' ~ name)) -}}
-            </div>
-        {% endfor %}
-    </div>
+	<div
+	  id="{{ sanitized_name }}translatable"
+	  data-controller="tabs"
+	  data-tabs-active-tab="bg-green-900 text-white rounded-lg"
+	  data-tabs-inactive-tab="bg-green-600 text-white rounded"
+	  data-tabs-index-value="1"
+	>
+		<div class="flex gap-2 py-1 mb-2 border-b border-green-500">
+			{{- form_label(form) -}}
+			{% for locale in locales %}
+				<a
+				  class="flex-initial unstyle text-black px-2" data-tabs-target="tab"
+				  data-action="click->tabs#change"
+				>
+					{{ locale }}
+					{% if locale in required_locale %}
+						<span class="text-red-500">*</span>
+					{% endif %}
+				</a>
+			{% endfor %}
+		</div>
+
+		{% for locale in locales %}
+			<div
+			  class="ui bottom attached tab segment"
+			  data-tabs-target="panel"
+			>
+				{{- form_widget(attribute(form, locale ~ '_' ~ name)) -}}
+				{{- form_errors(attribute(form, locale ~ '_' ~ name)) -}}
+				{{- form_help(attribute(form, locale ~ '_' ~ name)) -}}
+			</div>
+		{% endfor %}
+	</div>
 {%- endblock -%}
 
 {%- block textarea_limit_row -%}
-    <div
-        class="md:flex md:items-center mb-6"
-        data-controller="limit-characters"
-        data-limit-characters-limit-value="{{ characters_limit }}"
-        {% with { attr: row_attr, translation_domain: 'app_default', colorize: true } %}{{ block('attributes') }}{% endwith %}
-    >
-        {{- form_label(form) -}}
-        <div class="md:w-2/3">
-            <div data-limit-characters-target="counter"></div>
-            <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
-            {{- form_errors(form) -}}
-            {{- form_help(form) -}}
-        </div>
-    </div>
+	<div
+	  class="md:flex md:items-center mb-6"
+	  data-controller="limit-characters"
+	  data-limit-characters-limit-value="{{ characters_limit }}"
+	  {% with { attr: row_attr, translation_domain: 'app_default', colorize: true } %}{{ block('attributes') }}{% endwith %}
+	>
+		{{- form_label(form) -}}
+		<div class="md:w-2/3">
+			<div data-limit-characters-target="counter"></div>
+			<textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+			{{- form_errors(form) -}}
+			{{- form_help(form) -}}
+		</div>
+	</div>
 {%- endblock textarea_limit_row -%}
 
 {%- block autocomplete_row -%}
-    <div
-        class="md:flex md:items-center mb-6"
-        data-controller="{{ stimulus_controller }}"
-        data-{{ stimulus_controller }}-url-value="{{ url_value }}"
-        data-{{ stimulus_controller }}-min-length-value="{{ min_length_value }}"
-        {% with { attr: row_attr } %}{{ block('attributes') }}{% endwith %}
-    >
-        {{- form_label(form) -}}
-        <div class="md:w-2/3 relative">
-            <input type="text" data-{{ stimulus_controller }}-target="input" />
-            <input type="hidden" {{ block('widget_attributes') }} data-{{ stimulus_controller }}-target="hidden"/>
-            <ul class="divide-y divide-lotgd-300 absolute bg-lotgd-700 w-full border-b border-l border-r border-lotgd-300 rounded-b shadow-lg" data-{{ stimulus_controller }}-target="results"></ul>
-            {{- form_errors(form) -}}
-            {{- form_help(form) -}}
-        </div>
-    </div>
+	<div
+	  class="md:flex md:items-center mb-6"
+	  data-controller="{{ stimulus_controller }}"
+	  data-{{ stimulus_controller }}-url-value="{{ url_value }}"
+	  data-{{ stimulus_controller }}-min-length-value="{{ min_length_value }}"
+	  {% with { attr: row_attr } %}{{ block('attributes') }}{% endwith %}
+	>
+		{{- form_label(form) -}}
+		<div class="md:w-2/3 relative">
+			<input type="text" data-{{ stimulus_controller }}-target="input" />
+			<input type="hidden" {{ block('widget_attributes') }} data-{{ stimulus_controller }}-target="hidden" />
+			<ul
+			  class="divide-y divide-lotgd-300 absolute bg-lotgd-700 w-full border-b border-l border-r border-lotgd-300 rounded-b shadow-lg"
+			  data-{{ stimulus_controller }}-target="results"
+			></ul>
+			{{- form_errors(form) -}}
+			{{- form_help(form) -}}
+		</div>
+	</div>
 {%- endblock autocomplete_row -%}
 
 {% block attributes -%}
-    {%- for attrname, attrvalue in attr -%}
-        {{- " " -}}
-        {%- if attrname in ['placeholder', 'title'] or attrname starts with 'data-' and attrname ends with '-value' -%}
-            {% set attr_value = translation_domain is same as(false) or attrvalue is null ? attrvalue : attrvalue|trans(attr_translation_parameters, translation_domain) %}
-            {% if colorize is defined and colorize is same as(true) %}
-                {% set attr_value = attr_value|colorize %}
-            {% endif %}
-            {{- attrname }}="{{ attr_value }}"
-        {%- elseif attrvalue is same as(true) -%}
-            {{- attrname }}="{{ attrname }}"
-        {%- elseif attrvalue is not same as(false) -%}
-            {{- attrname }}="{{ attrvalue }}"
-        {%- endif -%}
-    {%- endfor -%}
+	{%- for attrname, attrvalue in attr -%}
+		{{- " " -}}
+		{%- if attrname in ['placeholder', 'title'] or attrname starts with 'data-' and attrname ends with '-value' -%}
+			{% set attr_value = translation_domain is same as(false) or attrvalue is null ? attrvalue : attrvalue|trans(attr_translation_parameters, translation_domain) %}
+			{% if colorize is defined and colorize is same as(true) %}
+				{% set attr_value = attr_value|colorize %}
+			{% endif %}
+			{{- attrname }}="{{ attr_value }}"
+		{%- elseif attrvalue is same as(true) -%}
+			{{- attrname }}="{{ attrname }}"
+		{%- elseif attrvalue is not same as(false) -%}
+			{{- attrname }}="{{ attrvalue }}"
+		{%- endif -%}
+	{%- endfor -%}
 {%- endblock attributes -%}
