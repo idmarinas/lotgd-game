@@ -10,7 +10,7 @@
 
 # Actualmente haciendo esto (7.2.0)
 
-- Se revisa el código para hacer ir limpiando cosas que se van a quitar en la versión 8.0.0
+- Se revisa el código para ir limpiando cosas que se van a quitar en la versión 8.0.0
 - Limpiando el core, y mejorando el código, para migrar a php 8.0
 - Hacer que los modals de Stimulus, se carguen desde un único modal, se puede usar la etiqueta <dialog> de html
 
@@ -19,6 +19,14 @@
 - **BC** esta versión será una Symfony App
 - Agregar opción para poder instalar LoTGD en Docker
 - El panel de administración del juego estará creado con EasyAdminBundle
+- Se va a basar en bundles, se creará todo el core de LoTGD en bundles unido en uno, que se puede usar para crear
+  una versión propia
+- Entities, opciones:
+	1. Se crean como clases abstractas dentro del core y luego se crea una clase que extienda la case abstracta. Esto
+	   permite que se pueda añadir nuevas funciones a LoTGD sin necesidad de tener que modificar el juego,
+	2. Crear las clases, de forma normal dentro del LoTGD Core. Aunque no da una fléxibilidad como la anterior, puede
+	   reducir futuros conflictos con actualizaciones.
+		1. Se puede sustituir una entity por otra en la configuración de Doctrine.
 - Se elimina https://github.com/Sylius/SyliusThemeBundle y se hace opcional
 - Se elimina paquete `laminas/laminas-serializer`
 - **BC** se elimina la compatibilidad con el antiguo sistema de módulos.
