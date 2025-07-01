@@ -26,7 +26,8 @@ services:
     apache:
         image: idmarinas/apache:2.4
         ports:
-            - "8080:443"
+            - "8080:80"
+            - "8083:443"
         healthcheck:
             test: wget --no-verbose --tries=1 --spider http://localhost || exit 1
         volumes:
