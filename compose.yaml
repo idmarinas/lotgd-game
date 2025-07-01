@@ -24,11 +24,7 @@ services:
             - db_password
 
     apache:
-        build:
-            context: .docker/apache
-            target: dev
-            args:
-                VERSION: 2.4.62
+        image: idmarinas/apache:2.4
         ports:
             - "8080:443"
         healthcheck:
