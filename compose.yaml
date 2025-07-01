@@ -41,11 +41,7 @@ services:
             - php
             - database
     php:
-        build:
-            context: .docker/php
-            target: dev
-            args:
-                VERSION: '7.4'
+        image: idmarinas/php:7.4-xdebug
         environment:
             SYMFONY_REQUIRE: '4.4.*'
         healthcheck:
