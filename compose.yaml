@@ -32,9 +32,6 @@ services:
             test: wget --no-verbose --tries=1 --spider http://localhost || exit 1
         volumes:
             - ./:/var/www/html
-            ## Conf
-            - ./.docker/apache/conf/directory.conf:/usr/local/apache2/conf/d/directory.conf
-            - ./.docker/apache/conf/httpd-ssl.conf:/usr/local/apache2/conf/d/httpd-ssl.conf
             ## Sites
             - ./.docker/apache/sites/dev/000-default.conf:/usr/local/apache2/conf/sites/000-default.conf
             - ./.docker/apache/sites/dev/default-ssl.conf:/usr/local/apache2/conf/sites/default-ssl.conf
