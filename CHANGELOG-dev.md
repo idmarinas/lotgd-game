@@ -14,15 +14,15 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/7.2/CHAN
 
 ### :cyclone: CHANGES
 
-- **Version show** now show original version of LoTGD following by custom version of IDMarinas Edition
-- **Refactor** a refactor has been made to all the code in order to migrate to the `PHP 8.0` version.
+- **Version show** now shows an original version of LoTGD followed by a custom version of IDMarinas Edition
+- **Refactor** a refactor has been made to all the code to migrate to the `PHP 8.0` version.
 
 ### :star: FEATURES
 
 - **src/functions.php**
 	- `output()` and `rawoutput()` added for compatibility with old modules, this makes it necessary to modify
 	  the old modules less.
-- **Docker** add Docker related files to containerized LoTGD but only for development purpose
+- **Docker** added Docker-related files to containerized LoTGD but only for development purposes
 	- **Docker** for production _coming soon_ "For 7.x series and up"
 
 ### :fire: DEPRECATED
@@ -34,9 +34,9 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/7.2/CHAN
 - **public/login.php** Fixed typo in `LotgdMessaged::` rename to `LotgdMessages::`
 - **Recover password system** Fixed a bug where the password could not be reset.
 - **lib/redirect.php** Fixed a possible bug: now `REQUEST_SCHEME` and not `SERVER_PORT` is used to construct the url
-- **Petition View** : now show the type of petition
+- **Petition View**: now shows the type of petition
 - **Styling**
-	- Fixed styling of some templates.
+	- Fixed the styling of some templates.
 - **Fixes** some accessibility problems have been corrected
 
 ### :x: REMOVES
@@ -66,16 +66,16 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/7.2/CHAN
 
 - **Important**:
 	- :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
-	- :warning: Avoid, as far as possible, using static classes (e.g. LotgdSetting, Doctrine, LotgdTranslation...) as
+	- :warning: Avoid, as far as possible, using static classes (e.g., LotgdSetting, Doctrine, LotgdTranslation...) as
 	  these classes will be deleted in a future version. Use autowire, dependency injection when possible.
-	- :warning: Version 7.0.0 change templates for use **TailwindCSS**
+	- :warning: Version 7.0.0 changes templates for use **TailwindCSS**
 - **Upgrade/Install for version 5.0.0 and up**
-	- First read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
+	- First, read [docs](https://github.com/idmarinas/lotgd-game/wiki/Skeleton) and follow steps.
 	- If you have problems:
 		- Read info in `storage/log/tracy/*` files, and see the problem.
 		- Read info in `var/log/*` files, and see the problem.
 		- Read info in `var/log/apache2/error.log` (this is the default location in Debian, can change in your OS
 		  distribution) in your webserver.
-		- If you can't solve the problem go to: [Repository issues](https://github.com/idmarinas/lotgd-game/issues)
+		- If you can't solve the problem, go to: [Repository issues](https://github.com/idmarinas/lotgd-game/issues)
 - **composer.json** Updated/Added/Deleted dependencies
 - **package.json** Updated/Added/Deleted dependencies
