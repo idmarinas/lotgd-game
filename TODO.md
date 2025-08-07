@@ -8,11 +8,17 @@
 	- Se ha cambiado de Fomantic UI a TailwindCSS
 - **7.1.0** La versión mínima y máxima de PHP es `7.4`
 
+# Versión 7.y.z
+
+La versión **7** de LoGTD se va a centrar en convertir todo el núcleo en bundles, para preparar la versión **8**
+
+- Si migraran todas las partes que se puedan, para seguir manteniendo la compatibilidad con el antiguo sistema de módulos
+
 # Actualmente haciendo esto (7.2.0)
 
-- Se revisa el código para ir limpiando cosas que se van a quitar en la versión 8.0.0
 - Limpiando el core, y mejorando el código, para migrar a php 8.0
 - Hacer que los modals de Stimulus, se carguen desde un único modal, se puede usar la etiqueta <dialog> de html
+- Comprobando el código y probando el juego, para encontrar errores.
 
 # Para la versión 8.0.0
 
