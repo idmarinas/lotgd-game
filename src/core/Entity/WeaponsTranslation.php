@@ -38,7 +38,7 @@ class WeaponsTranslation extends AbstractPersonalTranslation
     protected $id = null;
 
     /**
-     * @var \Lotgd\Core\Entity\Weapons|null
+     * @var Weapons|null
      *
      * @ORM\ManyToOne(targetEntity="Weapons", inversedBy="translations", cascade={"all"})
      * @ORM\JoinColumn(name="object_id", referencedColumnName="weaponid", onDelete="CASCADE")

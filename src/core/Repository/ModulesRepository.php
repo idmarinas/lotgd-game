@@ -22,6 +22,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Modules;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Modules>
+ */
 class ModulesRepository extends ServiceEntityRepository
 {
     use Setting;

@@ -408,7 +408,7 @@ class TrainController extends AbstractController
                 $this->dispatcher->dispatch($args, Events::PAGE_TRAIN_TRANING_VICTORY);
                 $result = modulehook('training-victory', $args->getArguments());
 
-                array_walk($result['messages'], function ($elem)
+                array_walk($result['messages'], function ($elem): void
                 {
                     $this->serviceBattle->addContextToBattleEnd($elem);
                 });
@@ -449,7 +449,7 @@ class TrainController extends AbstractController
                 $args   = new GenericEvent(null, ['badguy' => $badguy, 'messages' => []]);
                 $result = modulehook('training-defeat', $args->getArguments());
 
-                array_walk($result['messages'], function ($elem)
+                array_walk($result['messages'], function ($elem): void
                 {
                     $this->serviceBattle->addContextToBattleEnd($elem);
                 });

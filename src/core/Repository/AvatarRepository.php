@@ -23,6 +23,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Avatar as AvatarEntity;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<\Lotgd\Core\Entity\Avatar>
+ */
 class AvatarRepository extends ServiceEntityRepository
 {
     use Bio;

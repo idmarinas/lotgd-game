@@ -20,6 +20,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Creatures;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Creatures>
+ */
 class CreaturesRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

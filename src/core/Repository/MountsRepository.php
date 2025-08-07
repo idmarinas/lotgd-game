@@ -21,6 +21,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Mounts;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Mounts>
+ */
 class MountsRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

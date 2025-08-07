@@ -34,6 +34,9 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<\Lotgd\Core\Entity\User>
+ */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     use EntityRepositoryTrait;

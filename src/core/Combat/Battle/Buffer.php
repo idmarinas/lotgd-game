@@ -198,7 +198,7 @@ trait Buffer
 
     public function stripAllBuffs()
     {
-        array_walk($this->userBuffs, function ($elem, $key)
+        array_walk($this->userBuffs, function ($elem, $key): void
         {
             $this->stripBuff($key);
         });

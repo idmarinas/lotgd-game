@@ -24,6 +24,9 @@ use Lotgd\Core\Entity\Motd;
 use Throwable;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Motd>
+ */
 class MotdRepository extends ServiceEntityRepository
 {
 	use EntityRepositoryTrait;

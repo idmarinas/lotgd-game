@@ -19,6 +19,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Entity\Whostyping;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Whostyping>
+ */
 class WhostypingRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

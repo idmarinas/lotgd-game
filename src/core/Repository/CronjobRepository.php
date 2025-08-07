@@ -23,6 +23,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Cronjob;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Cronjob>
+ */
 class CronjobRepository extends ServiceEntityRepository
 {
     use Bio;

@@ -22,6 +22,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Faillog;
 
+/**
+ * @extends ServiceEntityRepository<Faillog>
+ */
 class FaillogRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

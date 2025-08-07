@@ -23,6 +23,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\News as NewsEntity;
 
+/**
+ * @extends ServiceEntityRepository<\Lotgd\Core\Entity\News>
+ */
 class NewsRepository extends ServiceEntityRepository implements RepositoryBackupInterface
 {
     use Backup;

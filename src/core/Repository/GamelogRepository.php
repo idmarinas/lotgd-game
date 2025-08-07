@@ -22,6 +22,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Gamelog;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Gamelog>
+ */
 class GamelogRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

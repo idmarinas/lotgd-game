@@ -105,7 +105,7 @@ class CreateController extends AbstractController
 
 		//-- Rare case: we have somebody who deleted his first validation email and then requests a forgotten PW...
 		if ('' != $account->getEmailvalidation() && 'x' != substr($account->getEmailvalidation(), 0, 1)) {
-			$account->getEmailvalidation('');
+			$account->getEmailvalidation();
 		}
 
 		$this->getDoctrine()->getManager()->flush(); //-- Persist objects

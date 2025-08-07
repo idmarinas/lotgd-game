@@ -22,6 +22,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Referers;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Referers>
+ */
 class ReferersRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

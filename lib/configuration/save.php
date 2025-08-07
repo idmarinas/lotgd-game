@@ -62,7 +62,7 @@ if ($postSettings['innname'] && $postSettings['innname'] != LotgdSetting::getSet
 	}
 }
 
-$settings = $settings ?? LotgdKernel::get(Settings::class);
+$settings ??= LotgdKernel::get(Settings::class);
 
 $old = $settings->getArray();
 $current = $settings->getArray();

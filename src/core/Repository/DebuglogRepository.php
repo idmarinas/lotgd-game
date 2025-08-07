@@ -20,6 +20,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Debuglog;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Debuglog>
+ */
 class DebuglogRepository extends ServiceEntityRepository implements RepositoryBackupInterface
 {
     use EntityRepositoryTrait;

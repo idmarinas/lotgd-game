@@ -21,6 +21,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\AccountsOutput as AccountsOutputEntity;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<\Lotgd\Core\Entity\AccountsOutput>
+ */
 class AccountsOutputRepository extends ServiceEntityRepository
 {
     use Backup;

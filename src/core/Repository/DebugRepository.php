@@ -18,6 +18,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Debug;
 
+/**
+ * @extends ServiceEntityRepository<Debug>
+ */
 class DebugRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

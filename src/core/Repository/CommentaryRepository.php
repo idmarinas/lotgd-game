@@ -25,6 +25,9 @@ use Lotgd\Core\Entity\Commentary as EntityCommentary;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<\Lotgd\Core\Entity\Commentary>
+ */
 class CommentaryRepository extends ServiceEntityRepository implements RepositoryBackupInterface
 {
     use Backup;

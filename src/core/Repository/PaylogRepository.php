@@ -21,6 +21,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Paylog;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Paylog>
+ */
 class PaylogRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

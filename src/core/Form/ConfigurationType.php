@@ -80,7 +80,7 @@ class ConfigurationType extends AbstractType
 
         //-- Listener to delete data duplicated in each field
         //-- Each field have all data settings, but not need all of this data
-        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event)
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void
         {
             $fields = $event->getForm()->all();
             $data = $event->getData();

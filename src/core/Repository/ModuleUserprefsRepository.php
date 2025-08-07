@@ -22,6 +22,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\ModuleUserprefs as ModuleUserprefsEntity;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<\Lotgd\Core\Entity\ModuleUserprefs>
+ */
 class ModuleUserprefsRepository extends ServiceEntityRepository implements RepositoryBackupInterface
 {
     use Backup;

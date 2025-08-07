@@ -38,7 +38,7 @@ class MountsTranslation extends AbstractPersonalTranslation
     protected $id = null;
 
     /**
-     * @var \Lotgd\Core\Entity\Mounts|null
+     * @var Mounts|null
      *
      * @ORM\ManyToOne(targetEntity="Mounts", inversedBy="translations", cascade={"all"})
      * @ORM\JoinColumn(name="object_id", referencedColumnName="mountid", onDelete="CASCADE")

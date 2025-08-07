@@ -20,6 +20,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\AccountsEverypage;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<AccountsEverypage>
+ */
 class AccountsEverypageRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

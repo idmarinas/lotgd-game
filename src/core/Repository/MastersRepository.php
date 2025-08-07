@@ -20,6 +20,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Masters;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Masters>
+ */
 class MastersRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

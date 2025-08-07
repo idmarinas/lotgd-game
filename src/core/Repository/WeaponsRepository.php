@@ -20,6 +20,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Weapons;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Weapons>
+ */
 class WeaponsRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

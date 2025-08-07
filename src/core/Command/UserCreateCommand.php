@@ -181,7 +181,7 @@ final class UserCreateCommand extends Command
 		$question->setValidator(function ($value) {
 			$errors = $this->validator->validate((string)$value, [
 			  new Assert\Length(['min' => 3, 'max' => 25]),
-			  new Assert\Callback(function ($login, ExecutionContextInterface $context) {
+			  new Assert\Callback(function ($login, ExecutionContextInterface $context): void {
 				  $exists = null !== $this->getAccountRepository()->findOneByLogin($login);
 
 				  if ($exists) {
@@ -210,7 +210,7 @@ final class UserCreateCommand extends Command
 		$question->setValidator(function ($value) {
 			$errors = $this->validator->validate((string)$value, [
 			  new Assert\Email(),
-			  new Assert\Callback(function ($email, ExecutionContextInterface $context) {
+			  new Assert\Callback(function ($email, ExecutionContextInterface $context): void {
 				  $exists = null !== $this->getAccountRepository()->findOneByEmailaddress($email);
 
 				  if ($exists && $email) {

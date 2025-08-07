@@ -22,6 +22,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Petitions;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Petitions>
+ */
 class PetitionsRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

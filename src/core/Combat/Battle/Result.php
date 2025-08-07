@@ -307,7 +307,7 @@ trait Result
         // We now have the total experience which should have been gained during the fight.
         // Now we will calculate the average exp per enemy.
         $exp      = round($exp / $count);
-        $gold     = e_rand(round($gold / $count), round(($gold / $count) * (($count + 1) * pow(1.2, $count - 1)), 0));
+        $gold     = e_rand(round($gold / $count), round(($gold / $count) * (($count + 1) * 1.2 ** ($count - 1)), 0));
         $expBonus = round($expBonus / $count, 0);
 
         // Increase the level for each enemy by one half, so flawless fights can be achieved for
@@ -359,7 +359,7 @@ trait Result
 
         if ($expbonus > 0)
         {
-            $expbonus = round($expbonus * pow(1 + ($this->settings->getSetting('addexp', 5) / 100), $count - 1), 0);
+            $expbonus = round($expbonus * (1 + $this->settings->getSetting('addexp', 5) / 100) ** ($count - 1), 0);
 
             $this->addContextToBattleEnd(['combat.end.experience.forest.bonus', [
                 'bonus'     => $expbonus,
@@ -398,7 +398,7 @@ trait Result
 
         if ($expbonus > 0)
         {
-            $expbonus = round($expbonus * pow(1 + ($this->settings->getSetting('addexp', 5) / 100), $count - 1), 0);
+            $expbonus = round($expbonus * (1 + $this->settings->getSetting('addexp', 5) / 100) ** ($count - 1), 0);
 
             $this->addContextToBattleEnd(['combat.end.experience.graveyard.bonus', [
                 'calculate' => true,

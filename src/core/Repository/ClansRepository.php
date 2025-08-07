@@ -21,6 +21,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Clans;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Clans>
+ */
 class ClansRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

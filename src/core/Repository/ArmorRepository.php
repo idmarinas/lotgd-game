@@ -20,6 +20,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Armor;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Armor>
+ */
 class ArmorRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

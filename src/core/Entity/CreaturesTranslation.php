@@ -38,7 +38,7 @@ class CreaturesTranslation extends AbstractPersonalTranslation
     protected $id = null;
 
     /**
-     * @var \Lotgd\Core\Entity\Creatures|null
+     * @var Creatures|null
      *
      * @ORM\ManyToOne(targetEntity="Creatures", inversedBy="translations", cascade={"all"})
      * @ORM\JoinColumn(name="object_id", referencedColumnName="creatureid", onDelete="CASCADE")

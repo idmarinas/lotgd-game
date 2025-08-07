@@ -25,6 +25,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Mail as MailEntity;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<\Lotgd\Core\Entity\Mail>
+ */
 class MailRepository extends ServiceEntityRepository implements RepositoryBackupInterface
 {
     use Backup;

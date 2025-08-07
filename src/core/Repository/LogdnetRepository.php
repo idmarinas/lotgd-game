@@ -25,6 +25,9 @@ use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Logdnet>
+ */
 class LogdnetRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

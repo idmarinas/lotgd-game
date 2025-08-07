@@ -21,6 +21,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Companions;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Companions>
+ */
 class CompanionsRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

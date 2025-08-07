@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Twig\NodeVisitor;
 
+use LogicException;
+
 class Scope
 {
     private $parent;
@@ -55,7 +57,7 @@ class Scope
      * @param mixed $key
      * @param mixed $value
      *
-     * @throws \LogicException
+     * @throws LogicException
      *
      * @return $this
      */
@@ -63,7 +65,7 @@ class Scope
     {
         if ($this->left)
         {
-            throw new \LogicException('Left scope.');
+            throw new LogicException('Left scope.');
         }
 
         $this->data[$key] = $value;

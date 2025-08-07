@@ -29,7 +29,7 @@ class FiltersExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event)
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void
         {
             $filters = $event->getForm()->getConfig()->getOption('filters');
             $data = $event->getData();

@@ -21,6 +21,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Titles;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Titles>
+ */
 class TitlesRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

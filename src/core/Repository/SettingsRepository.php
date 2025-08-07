@@ -20,6 +20,9 @@ use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Settings;
 use Tracy\Debugger;
 
+/**
+ * @extends ServiceEntityRepository<Settings>
+ */
 class SettingsRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;

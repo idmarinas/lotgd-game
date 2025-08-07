@@ -21,6 +21,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use Lotgd\Core\Doctrine\ORM\EntityRepositoryTrait;
 use Lotgd\Core\Entity\Bans;
 
+/**
+ * @extends ServiceEntityRepository<Bans>
+ */
 class BansRepository extends ServiceEntityRepository
 {
     use EntityRepositoryTrait;
