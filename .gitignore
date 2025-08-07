@@ -33,6 +33,7 @@ phan.csv
 /.env.local
 /.env.local.php
 /.env.*.local
+/.env.docker
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
