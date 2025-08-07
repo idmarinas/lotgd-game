@@ -24,33 +24,32 @@ $memoryLimit = return_bytes($_memoryLimit);
 
 //-- Extensions
 $extensions = [
-  'bcmath'    => 'BC Math',
-  'curl'      => 'cURL',
-  'exif'      => 'Exif',
-  'gd'        => 'GD',
-  'intl'      => 'Intl',
-  'json'      => 'Json',
-  'mbstring'  => 'Multibyte String',
-  'pdo'       => 'PDO',
-  'pdo_mysql' => 'PDO MySQL',
-  'session'   => 'Session',
-  'ctype'     => 'Ctype',
-  'iconv'     => 'Iconv',
+	'bcmath'    => 'BC Math',
+	'curl'      => 'cURL',
+	'exif'      => 'Exif',
+	'gd'        => 'GD',
+	'intl'      => 'Intl',
+	'json'      => 'Json',
+	'mbstring'  => 'Multibyte String',
+	'pdo'       => 'PDO',
+	'pdo_mysql' => 'PDO MySQL',
+	'session'   => 'Session',
+	'ctype'     => 'Ctype',
+	'iconv'     => 'Iconv',
 ];
 
 $default = [
-  'php_version'    => '7.3.0',
-  'memory_limit'   => 128 * 1024 * 1024, //-- Need 128 MB
-  'execution_time' => 60, //-- 60 Seconds
-  'extensions'     => $extensions,
-  'mysql_version'  => '5.5.3',
+	'php_version'    => '7.3.0',
+	'memory_limit'   => 128 * 1024 * 1024, //-- Need 128 MB
+	'execution_time' => 60, //-- 60 Seconds
+	'extensions'     => $extensions,
+	'mysql_version'  => '5.5.3',
 ];
 
 $requirements = [
 	//-- LotgdVersion => Requirements
 	'5.0' => $default,
 	'7.1' => array_merge($default, ['php_version' => '7.4.0']),
-	'7.2' => array_merge($default, ['php_version' => '8.0.0']),
 ];
 
 $results = [];
@@ -76,8 +75,8 @@ foreach ($requirements as $lotgdVersion => $reqs) {
 	}
 
 	$results[$lotgdVersion] = [
-	  'isPassed' => $isPassed,
-	  'details'  => $reqResults,
+		'isPassed' => $isPassed,
+		'details'  => $reqResults,
 	];
 }
 
@@ -87,9 +86,9 @@ asort($extensionsFullList, SORT_STRING);
 function php_version ($version): array
 {
 	return [
-	  'isPassed' => (version_compare(PHP_VERSION, $version) >= 0),
-	  'current'  => PHP_VERSION,
-	  'need'     => $version,
+		'isPassed' => (version_compare(PHP_VERSION, $version) >= 0),
+		'current'  => PHP_VERSION,
+		'need'     => $version,
 	];
 }
 
@@ -99,9 +98,9 @@ function memory_limit ($value): array
 	global $_memoryLimit, $memoryLimit;
 
 	return [
-	  'isPassed' => (-1 == $_memoryLimit || $memoryLimit >= $value),
-	  'current'  => $_memoryLimit,
-	  'need'     => format_bytes($value),
+		'isPassed' => (-1 == $_memoryLimit || $memoryLimit >= $value),
+		'current'  => $_memoryLimit,
+		'need'     => format_bytes($value),
 	];
 }
 
@@ -111,9 +110,9 @@ function execution_time ($value): array
 	$executionTime = @ini_get('max_execution_time');
 
 	return [
-	  'isPassed' => $executionTime >= $value || 0 == $executionTime,
-	  'current'  => $executionTime,
-	  'need'     => $value,
+		'isPassed' => $executionTime >= $value || 0 == $executionTime,
+		'current'  => $executionTime,
+		'need'     => $value,
 	];
 }
 
@@ -129,14 +128,14 @@ function extensions ($extensions): array
 		}
 
 		$results[$ext] = [
-		  'isPassed' => extension_loaded($ext),
-		  'name'     => $name,
+			'isPassed' => extension_loaded($ext),
+			'name'     => $name,
 		];
 	}
 
 	return [
-	  'isPassed' => $isPassed,
-	  'details'  => $results,
+		'isPassed' => $isPassed,
+		'details'  => $results,
 	];
 }
 
@@ -146,10 +145,10 @@ function mysql_version ($version): array
 	$mysql = @new CustomMysqli();
 
 	return [
-	  'isError'  => (bool)$mysql->connect_errno,
-	  'isPassed' => $mysql->connect_errno ? true : version_compare($mysql->server_info, $version) >= 0,
-	  'current'  => $mysql->connect_errno ? 'unknown' : $mysql->server_info,
-	  'need'     => $version,
+		'isError'  => (bool)$mysql->connect_errno,
+		'isPassed' => $mysql->connect_errno ? true : version_compare($mysql->server_info, $version) >= 0,
+		'current'  => $mysql->connect_errno ? 'unknown' : $mysql->server_info,
+		'need'     => $version,
 	];
 }
 
@@ -399,8 +398,8 @@ $lotgdVersions = array_keys($results);
 <body>
 	<h1 id="header">
 		<img
-		  alt=""
-		  src="data:image/gif;base64,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"
+			alt=""
+			src="data:image/gif;base64,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"
 		/>
 		Final conclusions
 	</h1>
@@ -446,17 +445,17 @@ $lotgdVersions = array_keys($results);
 		<?php
 		if ($hasFail): ?>
 			<p class="fail">See the information below for instructions how to fix or <a
-				  rel="noopener noreferrer"
-				  href="https://github.com/idmarinas/lotgd-game/issues"
-				  target="_blank"
+					rel="noopener noreferrer"
+					href="https://github.com/idmarinas/lotgd-game/issues"
+					target="_blank"
 				>create issue</a> for additional assistance.</p>
 		<?php
 		endif; ?>
 	</div>
 	<h1 id="header">
 		<img
-		  alt=""
-		  src="data:image/gif;base64,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"
+			alt=""
+			src="data:image/gif;base64,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"
 		/>
 		Legend of the Green Dragon Requirements
 	</h1>
@@ -560,7 +559,7 @@ $lotgdVersions = array_keys($results);
 								<?php
 								$data = $results[$version]['details']['extensions']['details'][$ext] ?>
 								<td class="<?= $data['isPassed'] ? 'success' : 'fail' ?>"><?= $data['isPassed'] ?
-									  'Success' : 'Fail' ?></td>
+										'Success' : 'Fail' ?></td>
 							<?php
 							else: ?>
 								<td>---</td>
