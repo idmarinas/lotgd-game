@@ -3,13 +3,6 @@
     <deployment type="docker-compose.yml">
       <settings>
         <option name="envFilePath" value="F:\LoTGD\core\.env.docker" />
-        <option name="services">
-          <list>
-            <option value="apache" />
-            <option value="database" />
-            <option value="php" />
-          </list>
-        </option>
         <option name="sourceFilePath" value="compose.yaml" />
       </settings>
     </deployment>
