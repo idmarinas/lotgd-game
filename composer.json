@@ -151,6 +151,15 @@
 			"composer dump-env prod",
 			"php bin/console cache:clear"
 		],
+		"dev:dump:env": [
+			"php bin/console secrets:decrypt-to-local --force --env=dev",
+			"@composer dump-env dev"
+		],
+		"prod:dump:env": [
+			"php bin/console secrets:decrypt-to-local --force --env=prod",
+			"@composer dump-env prod",
+			"php -f .docker/scripts/create_env_file.php"
+		],
 		"test": "php bin/phpunit --process-isolation"
 	},
 	"extra": {
