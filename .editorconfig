@@ -1,26 +1,46 @@
+# Indicates that this is the main .editorconfig file
 root = true
 
+# Global configuration for all files
 [*]
 charset                     = utf-8
 indent_style                = tab
-tab_width                   = 4
 indent_size                 = 4
+tab_width                   = 4
 end_of_line                 = lf
 max_line_length             = 120
 insert_final_newline        = true
 trim_trailing_whitespace    = true
-ij_continuation_indent_size = 2
-ij_visual_guides            = 120
+ij_continuation_indent_size = 4
+ij_visual_guides            = 80, 120
 ij_smart_tabs               = true
 ij_wrap_on_typing           = true
 
+# Configuration for YAML files (common in Symfony projects)
+[{compose*.{yml,yaml},.github/workflows/*.{yml,yaml}}]
+indent_size  = 2
+indent_style = space
+
+# Configuration for JSON and XML files
+[*.{json,xml}]
+indent_size = 2
+
+# Configuration for Twig files
+[*.twig]
+indent_size = 2
+
+# Configuration for Markdown files
 [*.{md,md.dist}]
 trim_trailing_whitespace = false
+max_line_length          = off
 
+# Configuration for test files
 [*.test]
+indent_style             = space
 insert_final_newline     = false
 trim_trailing_whitespace = false
 
-[.github/workflows/*.yml]
-indent_size  = 2
+[{config,**/config}/**/*.{yaml,yml}]
 indent_style = space
+indent_size  = 4
+tab_width    = 4
