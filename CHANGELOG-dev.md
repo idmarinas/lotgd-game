@@ -22,8 +22,10 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/7.2/CHAN
 - **src/functions.php**
 	- `output()` and `rawoutput()` added for compatibility with old modules, this makes it necessary to modify
 	  the old modules less.
-- **Docker** added Docker-related files to containerized LoTGD but only for development purposes
-	- **Docker** for production _coming soon_ "For 7.x series and up"
+- **Docker** added Docker-related files to containerized LoTGD
+	- Docker configuration has been created for **Dev** and **Prod**.
+		- It is advisable to **review** the configuration before using it in production.
+	- The configuration to use Caddy instead of Apache is also included. By default Apache is used
 
 ### :fire: DEPRECATED
 
