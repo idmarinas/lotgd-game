@@ -14,25 +14,30 @@
  * @since   1.0.0
  */
 
+// TODO: trasladar a composer-plugin
 // Incluye el archivo de configuración
 $dir = dirname(__DIR__, 2);
 $config = include "$dir/.env.local.php";
-
-require_once $dir . '/vendor/autoload.php';
+ksort($config, SORT_NATURAL);
 
 // Abre (o crea) el archivo .env para escribir
 $envFile = fopen("$dir/.env.docker", 'w');
 
 // Recorre el array y escribe cada clave-valor en el archivo .env
 foreach ($config as $key => $value) {
-	if (str_contains($value, ' ')) {
-		$value = '"' . $value . '"';
-	}
+    if ('DATABASE_NAME' === $key || 'DATABASE_USER' === $key) {
+        $value = str_replace('_dev', '', $value);
+    }
 
-	fwrite($envFile, "$key=$value\n");
+    if (str_contains($value, ' ')) {
+        $value = '"' . $value . '"';
+    }
+
+    fwrite($envFile, "$key=$value\n");
 }
 
 // Cierra el archivo
 fclose($envFile);
 
 echo '.env.docker file has been created successfully.';
+echo "\n";
