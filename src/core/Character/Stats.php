@@ -47,6 +47,7 @@ class Stats
             {
                 $this->stats[$label] = [];
             }
+
             $this->setLastCat($label);
         }
     }

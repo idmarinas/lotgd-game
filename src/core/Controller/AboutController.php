@@ -30,10 +30,15 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class AboutController extends AbstractController
 {
     private EventDispatcherInterface $dispatcher;
+
     private Settings $settings;
+
     private CacheInterface $cache;
+
     private DateTime $dateTime;
+
     private Navigation $navigation;
+
     private array $bundles = [];
 
     public function __construct(

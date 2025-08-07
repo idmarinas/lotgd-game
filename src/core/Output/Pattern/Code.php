@@ -11,14 +11,23 @@ namespace Lotgd\Core\Output\Pattern;
 trait Code
 {
     protected $codePatternOpen;
+
     protected $codePatternClose;
+
     protected $codeReplacementOpen;
+
     protected $codeReplacementClose;
+
     protected $codeSpecialOpen;
+
     protected $codeSpecialClose;
+
     protected $codeSpecialPatternOpen;
+
     protected $codeSpecialPatternClose;
+
     protected $codeSpecialReplacementOpen;
+
     protected $codeSpecialReplacementClose;
 
     /**

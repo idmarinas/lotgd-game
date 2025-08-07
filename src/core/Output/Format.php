@@ -25,7 +25,9 @@ class Format
     use Pattern\Color;
 
     protected $codes;
+
     protected $colors;
+
     protected $translator;
 
     /**
@@ -92,6 +94,7 @@ class Format
         {
             $indate = new DateTime($indate);
         }
+
         $nullDate = new DateTime('0000-00-00 00:00:00');
         $default  = $default ?: 'never';
 

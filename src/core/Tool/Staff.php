@@ -24,9 +24,13 @@ class Staff
     public const TRANSLATION_DOMAIN = 'grotto_staff';
 
     private $dispatcher;
+
     private $response;
+
     private $navigation;
+
     private $format;
+
     private $translator;
 
     public function __construct(

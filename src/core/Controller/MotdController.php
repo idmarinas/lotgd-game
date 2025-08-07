@@ -36,6 +36,7 @@ class MotdController extends AbstractController
     public const TRANSLATION_DOMAIN = 'jaxon_motd';
 
     private $translator;
+
     private $repository;
 
     public function __construct(TranslatorInterface $translator, MotdRepository $repository)

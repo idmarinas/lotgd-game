@@ -59,6 +59,7 @@ trait Process
                 ]);
             }
         }
+
         unset($leader);
         $leadersEnemiesDie = ($leaderEnemyDies === \count($leaderEnemy));
 
@@ -80,6 +81,7 @@ trait Process
                 $badguy['istarget'] = false;
             }
         }
+
         unset($enemy);
     }
 

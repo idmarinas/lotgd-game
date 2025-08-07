@@ -19,7 +19,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 trait Result
 {
     protected $battleHasWinner = false;
+
     protected $victory         = false;
+
     protected $defeat          = false;
 
     public function battleHasWinner(): bool
@@ -118,6 +120,7 @@ trait Result
         {
             $this->victoryGainExperience($exp, $expBonus);
         }
+
         //-- Gain favor if can gain favor and not exp
         if ($this->canGainFavor() && ! $this->canGainExp())
         {
@@ -271,6 +274,7 @@ trait Result
             {
                 $badguy['creaturegold'] = e_rand(round($badguy['creaturegold'] / 4), round(3 * $badguy['creaturegold'] / 4));
             }
+
             $gold += $badguy['creaturegold'];
 
             if ($badguy['creaturelose'] ?? false)
@@ -289,6 +293,7 @@ trait Result
             {
                 $didDamage = true;
             }
+
             $creatureLevel = max($creatureLevel, $badguy['creaturelevel']);
 
             if ($this->allowFlawless() && isset($badguy['denyflawless']) && $badguy['denyflawless'] > '')
@@ -299,6 +304,7 @@ trait Result
             $exp      += $badguy['creatureexp'];
             $expBonus += round(($badguy['creatureexp'] * (1 + .25 * ($badguy['creaturelevel'] - $this->user['level']))) - $badguy['creatureexp'], 0);
         }
+
         unset($badguy);
 
         $multibonus = $count > 1 ? 1 : 0;

@@ -34,14 +34,23 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class InnController extends AbstractController
 {
     private $navigation;
+
     private $dispatcher;
+
     private $translator;
+
     private $log;
+
     private $tool;
+
     private $sanitize;
+
     private $pvpListing;
+
     private $color;
+
     private $dateTime;
+
     private $settings;
 
     public function __construct(
@@ -183,6 +192,7 @@ class InnController extends AbstractController
                     {
                         $this->navigation->addNav('nav.bribe.upstairs', 'inn.php?op=bartender&act=listupstairs');
                     }
+
                     $this->navigation->addNav('nav.bribe.color', 'inn.php?op=bartender&act=colors');
 
                     if ('' !== $this->settings->getSetting('allowspecialswitch', true) && '0' !== $this->settings->getSetting('allowspecialswitch', true))
@@ -378,6 +388,7 @@ class InnController extends AbstractController
         {
             $this->navigation->addNav('nav.converse', 'inn.php?op=converse');
         }
+
         $this->navigation->addNav('nav.barkeep.talk', 'inn.php?op=bartender', [
             'params' => [
                 'barkeep' => $params['barkeep'],

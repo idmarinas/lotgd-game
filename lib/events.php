@@ -17,6 +17,7 @@ function handle_event($location, $baseLink = false)
         $PHP_SELF = LotgdRequest::getServer('PHP_SELF');
         $baseLink = \substr($PHP_SELF, \strrpos($PHP_SELF, '/') + 1).'?';
     }
+
     $skipdesc = false;
 
     $allowinactive = false;

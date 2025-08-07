@@ -142,6 +142,7 @@ function lotgd_showform ($layout, $row, $nosave = false, $keypref = false, $prin
 	} else {
 		return $content;
 	}
+
 	unset($tabContent, $content, $tabMenu);
 }
 
@@ -169,10 +170,12 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 					$skins[] = $file;
 				}
 			}
+
 			// No templates installed!
 			if (0 == count($skins)) {
 				return 'None available';
 			}
+
 			natcasesort($skins); //sort them in natural order
 			$select = "<select class='ui lotgd dropdown' name='{$keyout}'>";
 
@@ -247,6 +250,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 					LotgdResponse::pageDebug('You must pass an array as the value when using a checklist.');
 					$checked = false;
 				}
+
 				$select .= "<div class='ui lotgd checkbox'><input type='checkbox' name='{$keyout}[{$optval}]' value='1'"
 				           . ($checked == $optval ? ' checked' : '')
 				           . '><label>'
@@ -327,6 +331,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			if (0 == $step) {
 				$step = 1;
 			}
+
 			$select = "<select class='ui lotgd dropdown' name='{$keyout}'>";
 
 			if ($min < $max && ($max - $min) / $step > 300) {
@@ -350,6 +355,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			if (0 == $step) {
 				$step = 1;
 			}
+
 			$select = "<select class='ui lotgd dropdown' name='{$keyout}'>";
 			$val = round((float)($row[$key] ?? 0), 2);
 
@@ -441,6 +447,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 			foreach ($vals as $k => $v) {
 				$vals[$k] = $v;
 			}
+
 			$select = "<select class='ui lotgd dropdown' name='{$keyout}'>";
 
 			foreach ($vals as $v) {
@@ -481,6 +488,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 				if (isset($row[$key]) && $row[$key] == $optval) {
 					$selected = 1;
 				}
+
 				$select .= "<option value='{$optval}'" . ($selected !== 0 ? ' selected' : '') . '>' . htmlentities(
 					"{$optdis}",
 					ENT_COMPAT,
@@ -632,6 +640,7 @@ function lotgd_show_form_field ($info, $row, $key, $keyout, $val, $extensions)
 				if (array_key_exists($key, $row)) {
 					$val = $row[$key];
 				}
+
 				call_user_func($func, $keyout, $val, $info);
 			} else {
 				$val = '';

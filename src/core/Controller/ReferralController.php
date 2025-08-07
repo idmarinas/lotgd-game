@@ -30,9 +30,13 @@ class ReferralController extends AbstractController
     public const TRANSLATION_DOMAIN = 'page_referral';
 
     private $dispatcher;
+
     private $settings;
+
     private $response;
+
     private $navigation;
+
     private $translator;
 
     public function __construct(

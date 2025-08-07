@@ -32,6 +32,7 @@ final class NewDayCommand extends Command
     protected static $defaultName = 'lotgd:cron:game:newday';
 
     private $dispatcher;
+
     private $translator;
 
     public function __construct(EventDispatcherInterface $dispatcher, TranslatorInterface $translator)

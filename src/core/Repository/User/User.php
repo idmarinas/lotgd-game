@@ -72,6 +72,7 @@ trait User
         {
             $sort = 'c.name';
         }
+
         $query->orderBy($sort, 'ASC');
 
         if ($search !== '' && $search !== '0')

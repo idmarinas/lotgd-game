@@ -190,6 +190,7 @@ trait Buff
                 {
                     $hptoregen = $hpdiff;
                 }
+
                 $this->user['hitpoints'] += $hptoregen;
                 // Now, take abs value just incase this was a damaging buff
                 $hptoregen = \abs($hptoregen);
@@ -262,6 +263,7 @@ trait Buff
                     $min = $buff['minbadguydamage'] ?? 0;
                     $who = 0;
                 }
+
                 $minioncounter = 1;
 
                 while ($minioncounter <= $buff['minioncount'] && $who >= 0)
@@ -352,6 +354,7 @@ trait Buff
                     $msg = $buff['effectfailmsg'] ?? '';
                 }
             }
+
             $this->user['hitpoints'] += $healhp;
 
             if ($msg)
@@ -440,6 +443,7 @@ trait Buff
 
                         $this->addContextToRoundAlly([$msg, [], $this->getTranslationDomain()]);
                     }
+
                     $this->stripBuff($key);
                 }
             }

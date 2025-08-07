@@ -19,6 +19,7 @@ use Throwable;
 trait Buffer
 {
     private $buffReplacements = [];
+
     private $debuggedBuffs    = [];
 
     public function calculateBuffFields()
@@ -46,6 +47,7 @@ trait Buffer
 
             $buff['tempstats_calculated'] = true;
         }
+
         unset($buff);
 
         //process calculated buff fields.
@@ -89,11 +91,13 @@ trait Buffer
                     $this->buffReplacements[$buffname][$property] = $origstring;
                     $this->userBuffs[$buffname][$property]        = $val;
                 }
+
                 unset($val);
             }
 
             $buff['fields_calculated'] = true;
         }
+
         unset($buff);
 
         $this->updateData();
@@ -113,6 +117,7 @@ trait Buffer
                         unset($this->userBuffs[$buffname]['fields_calculated']);
                     }
                 }
+
                 unset($this->buffReplacements[$buffname]);
             }
         }
@@ -128,6 +133,7 @@ trait Buffer
                         $this->applyTempStat(substr($property, 9), -$value);
                     }
                 }
+
                 unset($this->userBuffs[$buffname]['tempstats_calculated']);
             }
         }
@@ -173,6 +179,7 @@ trait Buffer
             {
                 $companion['ignorelimit'] = true;
             }
+
             $this->companions[$name] = $companion;
 
             $this->updateData();

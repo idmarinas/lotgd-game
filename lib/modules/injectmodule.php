@@ -132,6 +132,7 @@ function injectmodule($modulename, $force = false)
                 }
             }
         }
+
         $injected_modules[$force][$modulename] = true;
 
         return true;

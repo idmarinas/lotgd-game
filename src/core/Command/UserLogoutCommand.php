@@ -35,8 +35,11 @@ final class UserLogoutCommand extends Command
     protected static $defaultName = 'lotgd:user:logout';
 
     private $repository;
+
     private $cache;
+
     private $settings;
+
     private $translator;
 
     public function __construct(UserRepository $repository, CacheInterface $cache, Settings $settings, TranslatorInterface $translator)

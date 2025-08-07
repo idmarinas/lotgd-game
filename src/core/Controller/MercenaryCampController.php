@@ -28,10 +28,15 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class MercenaryCampController extends AbstractController
 {
     private $navigation;
+
     private $dispatcher;
+
     private $repository;
+
     private $log;
+
     private $buffs;
+
     private $response;
 
     public function __construct(

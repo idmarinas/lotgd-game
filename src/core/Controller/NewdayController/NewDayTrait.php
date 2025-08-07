@@ -24,8 +24,11 @@ use Lotgd\Core\Tool\Tool;
 trait NewDayTrait
 {
     private $sanitize;
+
     private $tool;
+
     private $buffer;
+
     private $battle;
 
     /**
@@ -163,6 +166,7 @@ trait NewDayTrait
         {
             $this->log->debug(($nbgold >= 0 ? 'earned ' : 'paid ').abs($nbgold).' gold in interest');
         }
+
         $turnstoday .= ", Spirits: {$resurrectionturns}, DK: {$dkff}";
         $session['user']['turns']     = $params['turns_per_day'] + $resurrectionturns + $dkff;
         $session['user']['hitpoints'] = $session['user']['maxhitpoints'];
@@ -172,6 +176,7 @@ trait NewDayTrait
         {
             $session['user']['playerfights'] = $params['daily_pvp_fights'];
         }
+
         $session['user']['transferredtoday'] = 0;
         $session['user']['amountouttoday']   = 0;
         $session['user']['seendragon']       = 0;
@@ -183,6 +188,7 @@ trait NewDayTrait
             $session['user']['soulpoints']  = 50 + 10 * $session['user']['level'] + $session['user']['dragonkills'] * 2;
             $session['user']['gravefights'] = $this->settings->getSetting('gravefightsperday', 10);
         }
+
         $session['user']['boughtroomtoday'] = 0;
         $session['user']['recentcomments']  = $session['user']['lasthit'];
         $session['user']['lasthit']         = new DateTime('now');
@@ -353,6 +359,7 @@ trait NewDayTrait
             {
                 $buff['schema'] = 'mounts';
             }
+
             $this->buffer->applyBuff('mount', $buff);
         }
     }

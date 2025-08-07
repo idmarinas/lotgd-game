@@ -82,6 +82,7 @@ else
         {
             LotgdFlashMessages::addErrorMessage(LotgdTranslator::t('flash.message.php.error.th', ['error' => $ex->getMessage()], $textDomain));
         }
+
         LotgdLog::debug('Ran Raw PHP: '.$php);
     }
 }

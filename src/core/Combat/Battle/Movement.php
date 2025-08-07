@@ -193,6 +193,7 @@ trait Movement
             {
                 $badguy['killedplayer'] = true;
             }
+
             $this->processDmgshield($this->buffModifiers['dmgshield'], $selfdmg, $badguy);
             $this->processLifetaps($this->buffModifiers['lifetap'], -$selfdmg, $badguy);
             $badguy['diddamage'] = 1;
@@ -461,6 +462,7 @@ trait Movement
 
                 $companion['hitpoints'] -= $damage_received;
             }
+
             $companion['used'] = true;
         }
         elseif ('defend' == $activate && ($companion['abilities']['defend'] ?? false) && ! $this->defended && ! $companion['used'])

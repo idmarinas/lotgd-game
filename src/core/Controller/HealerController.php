@@ -26,8 +26,11 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class HealerController extends AbstractController
 {
     private $dispatcher;
+
     private $log;
+
     private $navigation;
+
     private $response;
 
     public function __construct(EventDispatcherInterface $eventDispatcher, Log $log, Navigation $navigation, HttpResponse $response)
@@ -189,9 +192,11 @@ class HealerController extends AbstractController
                     ],
                 ]);
             }
+
             $this->dispatcher->dispatch(new GenericEvent(), Events::PAGE_HEALER_POTION);
             modulehook('potion');
         }
+
         $this->navigation->addHeader('category.heal.companion');
 
         foreach ($companions as $name => $companion)

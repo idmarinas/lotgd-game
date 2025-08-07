@@ -108,6 +108,7 @@ if ('' != $name) {
 						++$c;
 						$su = true;
 					}
+
 					++$c;
 					$alert .= sprintf(
 					  '`7`3%s`0: Failed attempt from `&%s`0 [`3%s`0] to log on to `^%s`0`0`n',

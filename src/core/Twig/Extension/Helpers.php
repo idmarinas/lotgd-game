@@ -31,12 +31,19 @@ use Twig\TwigFunction;
 class Helpers extends AbstractExtension
 {
     protected $request;
+
     protected $headLink;
+
     protected $headMeta;
+
     protected $headScript;
+
     protected $headStyle;
+
     protected $headTitle;
+
     protected $inlineScript;
+
     protected $basePath;
 
     public function __construct(

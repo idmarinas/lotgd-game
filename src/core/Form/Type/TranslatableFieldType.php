@@ -25,6 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class TranslatableFieldType extends AbstractType
 {
     protected const LABEL_CLASS = 'item disabled';
+
     private $settings;
 
     public function __construct(Settings $settings)

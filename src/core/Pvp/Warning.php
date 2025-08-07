@@ -24,8 +24,11 @@ class Warning
     public const TRANSLATION_DOMAIN = 'page_pvp';
 
     private $dispatcher;
+
     private $settings;
+
     private $flash;
+
     private $translator;
 
     public function __construct(EventDispatcherInterface $dispatcher, Settings $settings, FlashBagInterface $flash, TranslatorInterface $translator)

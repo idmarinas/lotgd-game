@@ -20,6 +20,7 @@ class Version70000 extends InstallerAbstract
     use DeleteFilesTrait;
 
     protected $upgradeVersion = 70000;
+
     protected $hasMigration   = 0;
 
     //-- Delete old files

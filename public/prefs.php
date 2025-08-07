@@ -179,6 +179,7 @@ else
                 {
                     continue;
                 }
+
                 $val    = LotgdRequest::getPost($key);
                 $x      = explode('___', $key);
                 $module = $x[0];
@@ -244,6 +245,7 @@ else
                         {
                             $changetimeoutwarning = LotgdTranslator::t('mail.timeout', ['days' => LotgdSetting::getSetting('playerchangeemaildays', 3)], $textDomain);
                         }
+
                         $footer = $changetimeoutwarning.LotgdTranslator::t('mail.footer', ['server' => $serverurl], $textDomain);
 
                         if (0 == LotgdSetting::getSetting('validationtarget', 0))
@@ -372,6 +374,7 @@ else
         {
             continue;
         }
+
         $tempsettings = [];
         $tempdata     = [];
         $found        = 0;
@@ -412,6 +415,7 @@ else
                     $msettings = array_merge($msettings, $tempsettings);
                     $mdata     = array_merge($mdata, $tempdata);
                 }
+
                 $tempsettings = [];
                 $tempdata     = [];
             }
@@ -425,6 +429,7 @@ else
             {
                 $found = 1;
             }
+
             // If this is a check preference, we need to call the modulehook
             // checkuserpref  (requested by cortalUX)
             if ($ischeck)
@@ -437,6 +442,7 @@ else
                 {
                     continue;
                 }
+
                 $x[0]  = $args['pref'];
                 $x[1]  = $args['default'];
                 $found = 1;
@@ -508,6 +514,7 @@ else
         {
             LotgdResponse::pageAddContent(LotgdFormat::colorize(LotgdTranslator::t('replace.email.trouble', [], $textDomain)));
         }
+
         $cancelemail = LotgdTranslator::t('replace.email.button.cancel', [], $textDomain);
         LotgdResponse::pageAddContent(LotgdFormat::colorize(LotgdTranslator::t('replace.email.cancel', [], $textDomain)));
         LotgdResponse::pageAddContent("<form action='prefs.php?op=cancelemail' method='POST'><input type='submit' class='ui button' value='{$cancelemail}'></form><br>");

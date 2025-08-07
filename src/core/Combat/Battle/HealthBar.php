@@ -16,6 +16,7 @@ namespace Lotgd\Core\Combat\Battle;
 trait HealthBar
 {
     protected $battleBarStart = [];
+
     protected $battleBarEnd   = [];
 
     /**

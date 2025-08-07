@@ -26,7 +26,9 @@ use Lotgd\Core\Output\Color;
 class Sanitize
 {
     protected $color;
+
     protected $code;
+
     private $settings;
 
     public function __construct(Color $color, Code $code, Settings $settings)

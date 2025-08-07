@@ -24,7 +24,9 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class LodgeController extends AbstractController
 {
     private $dispatcher;
+
     private $navigation;
+
     private $settings;
 
     public function __construct(EventDispatcherInterface $eventDispatcher, Navigation $navigation, Settings $settings)

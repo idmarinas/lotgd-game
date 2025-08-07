@@ -25,6 +25,7 @@ trait TempStat
             {
                 $this->temp_user_stats['add'] = [];
             }
+
             $temp = &$this->temp_user_stats['add'];
 
             if ( ! isset($temp[$name]))
@@ -108,6 +109,7 @@ trait TempStat
                     }
                 }
             }
+
             $this->temp_user_stats['is_suspended'] = false;
 
             $this->updateData();

@@ -19,10 +19,15 @@ use Symfony\Contracts\Cache\ItemInterface;
 class Settings
 {
     protected $tablename = 'settings';
+
     protected $doctrine;
+
     protected $repository;
+
     protected $cache;
+
     protected $settings    = [];
+
     protected $settingsKey = 'game-settings-';
 
     public function __construct(CacheInterface $cache, EntityManagerInterface $doctrine)

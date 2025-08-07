@@ -35,7 +35,9 @@ trait RecalculateDragonPointTrait
             if (\count($head) > 1)
             {
                 continue;
-            } //got a headline here
+            }
+
+             //got a headline here
             $pdks[$type] = $request->request->getInt($type);
             $pdktotal += $pdks[$type];
 

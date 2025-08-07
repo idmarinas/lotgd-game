@@ -29,9 +29,13 @@ class Navigation extends AbstractExtension
     use Pattern\Navigation;
 
     protected $translator;
+
     protected $navigation;
+
     protected $accessKeys;
+
     protected $format;
+
     protected $request;
 
     public function __construct(

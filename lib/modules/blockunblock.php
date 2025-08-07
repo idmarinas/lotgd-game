@@ -23,6 +23,7 @@ function blockmodule($modulename)
 
         return;
     }
+
     $blocked_modules[$modulename] = 1;
 }
 
@@ -48,5 +49,6 @@ function unblockmodule($modulename)
 
         return;
     }
+
     $unblocked_modules[$modulename] = 1;
 }

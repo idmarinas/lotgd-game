@@ -44,8 +44,11 @@ final class LotgdInstallCommand extends Command
     protected static $defaultName = 'lotgd:install';
 
     protected $installer;
+
     protected $translator;
+
     protected $style;
+
     protected $doctrine;
 
     public function __construct(Install $install, TranslatorInterface $translator, EntityManagerInterface $doctrine)

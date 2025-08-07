@@ -24,10 +24,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class CreatureFunction
 {
     private $dispatcher;
+
     private $response;
+
     private $cache;
+
     private CreaturesRepository $repository;
+
     private $translator;
+
     private $settings;
 
     public function __construct(
@@ -91,6 +96,7 @@ class CreatureFunction
         {
             $hookNew = 'master';
         }
+
         //-- Activate hook custom or default (buffbadguy)
         $this->dispatcher->dispatch($badguy, Creature::BUFF_FOR.$hookNew);
         $badguy = modulehook($hook, $badguy->getData());
@@ -134,6 +140,7 @@ class CreatureFunction
                     $creaturegold += (31 * ($i < 4 ? 2 : 1));
                     //give lower levels more gold
                 }
+
                 $stats[$i] = [
                     'creaturelevel'   => $i,
                     'creaturehealth'  => $creaturehealth,

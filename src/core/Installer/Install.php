@@ -26,6 +26,7 @@ class Install extends InstallerAbstract
     use Version;
 
     protected $installedVersionData;
+
     protected $installedVersionDataFile;
 
     /**

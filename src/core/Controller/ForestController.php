@@ -24,7 +24,9 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class ForestController extends AbstractController
 {
     private $dispatcher;
+
     private $navigation;
+
     private $settings;
 
     public function __construct(EventDispatcherInterface $dispatcher, Navigation $navigation, Settings $settings)

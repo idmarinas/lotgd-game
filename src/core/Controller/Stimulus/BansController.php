@@ -27,6 +27,7 @@ class BansController extends AbstractController implements LotgdControllerInterf
 	use LotgdControllerTrait;
 
 	private EntityManagerInterface $em;
+
 	private Format                 $format;
 
 	public function __construct (EntityManagerInterface $em, Format $format)

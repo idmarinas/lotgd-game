@@ -71,6 +71,7 @@ function get_module_objpref($objtype, $objid, $name, $module = false)
             return $x[1];
         }
     }
+
     return null;
 }
 

@@ -17,6 +17,7 @@ use LogicException;
 trait Ghost
 {
     private $ghostActivated = false;
+
     private $ghostStats     = [];
 
     /**

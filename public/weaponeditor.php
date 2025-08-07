@@ -79,6 +79,7 @@ if ('edit' === $op || 'add' === $op)
             ],
         ]);
     }
+
     Doctrine::detach($weaponEntity); //-- Avoid Doctrine save a invalid Form
 
     LotgdNavigation::addNavAllow("weaponeditor.php?op=edit&id={$id}&level={$weaponlevel}");

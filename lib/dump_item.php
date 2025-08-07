@@ -18,6 +18,7 @@ function dump_item($item)
         {
             $out .= "'{$key}' = '".dump_item($val)."'`n";
         }
+
         $out .= '</div>}';
     }
     elseif ($item instanceof DateTime)
@@ -57,6 +58,7 @@ function dump_item_ascode($item, $indent = "\t")
         {
             $out .= \implode(', ', $row);
         }
+
         $out .= "\n{$indent})";
     }
     else

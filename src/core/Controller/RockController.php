@@ -24,7 +24,9 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class RockController extends AbstractController
 {
     private $dispatcher;
+
     private $navigation;
+
     private $response;
 
     public function __construct(EventDispatcherInterface $eventDispatcher, Navigation $navigation, HttpResponse $response)

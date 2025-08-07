@@ -39,9 +39,13 @@ class Commentary extends AbstractExtension
     use CommentaryModerate;
 
     protected $commentary;
+
     protected $translator;
+
     protected $request;
+
     protected $color;
+
     protected $commentaryNodeVisitor;
 
     /**
@@ -50,6 +54,7 @@ class Commentary extends AbstractExtension
      * @var array
      */
     protected $onlineStatus;
+
     private $settings;
 
     public function __construct(

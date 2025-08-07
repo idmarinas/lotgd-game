@@ -92,6 +92,7 @@ elseif ('lasthit' == $op)
     {
         $output2 = gzuncompress($output2);
     }
+
     echo str_replace('.focus();', '.blur();', str_replace('<iframe src=', '<iframe Xsrc=', $output2));
 
     exit(0);
@@ -162,6 +163,7 @@ elseif ('save' == $op)
                     $value += (int) $k;
                 }
             }
+
             //strip off an attempt to set privs that the user doesn't
             //have authority to set.
             $stripfield = ((int) $oldvalues['superuser'] | $session['user']['superuser'] | SU_ANYONE_CAN_SET | (($session['user']['superuser'] & SU_MEGAUSER) !== 0 ? 0xFFFFFFFF : 0));
@@ -354,6 +356,7 @@ switch ($op)
                     {
                         $x = explode('|', $val);
                     }
+
                     $msettings[$key] = $x[0];
                     // Set up the defaults as well.
                     if (isset($x[1]))

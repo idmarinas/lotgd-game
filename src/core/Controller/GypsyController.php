@@ -25,8 +25,11 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class GypsyController extends AbstractController
 {
     private $dispatcher;
+
     private $navigation;
+
     private $log;
+
     private $dateTime;
 
     public function __construct(EventDispatcherInterface $eventDispatcher, Navigation $navigation, Log $log, DateTime $dateTime)

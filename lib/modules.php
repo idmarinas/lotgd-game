@@ -66,6 +66,7 @@ function module_check_requirements($reqs, $forceinject = false)
         {
             return false;
         }
+
         // This is actually cheap since we cache the result
         $status = module_status($key);
         // If it's not injected and we should force it, do so.
@@ -132,6 +133,7 @@ function mass_module_prepare(array $hooknames)
             $module_preload[$row->getLocation()]     = [];
             $modulehook_queries[$row->getLocation()] = [];
         }
+
         //a little black magic trickery: formatting entries in
         //$modulehook_queries the same way that DB::query_cached
         //returns query results.
@@ -260,6 +262,7 @@ function module_editor_navs($like, $linkprefix)
                 ],
             ]);
         }
+
         //I really think we should give keyboard shortcuts even if they're
         //susceptible to change (which only happens here when the admin changes
         //modules around).  This annoys me every single time I come in to this page.

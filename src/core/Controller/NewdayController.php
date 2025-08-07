@@ -40,13 +40,21 @@ class NewdayController extends AbstractController
     use SetSpecialtyTrait;
 
     private $translationDomain;
+
     private $translationDomainNavigation;
+
     private $settings;
+
     private $dispatcher;
+
     private $translator;
+
     private $dateTime;
+
     private $navigation;
+
     private $response;
+
     private $log;
 
     public function __construct(
@@ -208,6 +216,7 @@ class NewdayController extends AbstractController
         {
             $canbuy['ff'] = 0;
         }
+
         $args = new GenericEvent(null, ['desc' => $labels, 'buy' => $canbuy]);
         $this->dispatcher->dispatch($args, Events::PAGE_NEWDAY_DK_POINT_LABELS);
 

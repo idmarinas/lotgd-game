@@ -64,6 +64,7 @@ elseif ( ! \is_array($module) && ! $module)
 {
     $modules = [];
 }
+
 reset($modules);
 
 $params['messages'] = null;

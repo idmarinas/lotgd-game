@@ -27,12 +27,19 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class SystemMail
 {
     private $doctrine;
+
     private $translator;
+
     private $settings;
+
     private $request;
+
     private $sanitize;
+
     private $format;
+
     private $validator;
+
     private $mailer;
 
     public function __construct(

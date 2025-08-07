@@ -40,11 +40,17 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class LogdnetController extends AbstractController
 {
     private $client;
+
     private $cache;
+
     private $sanitize;
+
     private $validator;
+
     private $settings;
+
     private $censor;
+
     private $session;
 
     public function __construct(

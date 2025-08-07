@@ -29,14 +29,24 @@ abstract class InstallerAbstract
     protected $upgradeVersion;
 
     protected $totaSteps;
+
     protected $style;
+
     protected $output;
+
     protected $input;
+
     protected $doctrine;
+
     protected $translator;
+
     protected $stepsProcessed;
+
     protected $stepsProcessedFile;
-    protected $dataDir      = ''; //-- Directory of data "data/"
+
+    protected $dataDir      = '';
+
+     //-- Directory of data "data/"
     protected $hasMigration = false;
 
     public function __construct(EntityManagerInterface $doctrine, TranslatorInterface $translator)

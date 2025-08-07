@@ -84,7 +84,9 @@ class Navigation
 	protected $textDomainPrev = '';
 
 	private $dispatcher;
+
 	private $request;
+
 	private $settings;
 
 	public function __construct (EventDispatcherInterface $dispatcher, Request $request, Settings $settings)

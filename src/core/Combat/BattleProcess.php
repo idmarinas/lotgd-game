@@ -106,6 +106,7 @@ trait BattleProcess
                             if ($this->isEnemyAlive($badguy) && $this->isPlayerAlive() && $badguy['istarget']) {
                                 $this->companionMagic($badguy);
                             }
+
                             //-- Third move is for player
                             if ($this->isEnemyAlive($badguy) && $this->isPlayerAlive() && $badguy['istarget']) {
                                 $this->playerMove($badguy);
@@ -134,7 +135,9 @@ trait BattleProcess
                 {
                     $badguy = modulehook('endofround', $badguy); //-- For Stamina System
                 }
-            } //-- foreach enemies
+            }
+
+             //-- foreach enemies
             unset($badguy);
 
             $this->expireBuffs();

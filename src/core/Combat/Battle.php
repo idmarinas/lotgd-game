@@ -75,11 +75,17 @@ class Battle
     use TranslationDomain;
 
     private $dispatcher;
+
     private $doctrine;
+
     private $playerFunction;
+
     private $settings;
+
     private $request;
+
     private $battleShowedResults = false;
+
     private $expression;
 
     public function __construct(

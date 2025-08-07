@@ -227,6 +227,7 @@ trait Clan
         {
             Debugger::log($throwable);
         }
+
         return null;
     }
 

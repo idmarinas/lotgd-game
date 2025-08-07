@@ -26,7 +26,9 @@ use Symfony\Component\HttpFoundation\Response;
 final class DonationButtonsBlock extends AbstractBlockService
 {
     protected $request;
+
     protected $doctrine;
+
     protected $settings;
 
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response

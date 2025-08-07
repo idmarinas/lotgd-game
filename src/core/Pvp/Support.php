@@ -30,13 +30,21 @@ class Support
     public const TRANSLATION_DOMAIN = 'page_pvp';
 
     private $dispatcher;
+
     private $doctrine;
+
     private $settings;
+
     private $log;
+
     private $format;
+
     private $navigation;
+
     private $pvpWarning;
+
     private $battle;
+
     private $systemMail;
 
     public function __construct(
@@ -150,6 +158,7 @@ class Support
         {
             $winamount = 0;
         }
+
         $session['user']['gold'] += $winamount;
 
         $this->battle->addContextToBattleEnd([
@@ -193,6 +202,7 @@ class Support
                 self::TRANSLATION_DOMAIN,
             ]);
         }
+
         $wonexp = $exp + $expbonus;
         $this->battle->addContextToBattleEnd([
             'battle.victory.experience',

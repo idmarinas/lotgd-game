@@ -20,8 +20,11 @@ use Lotgd\Core\Navigation\Navigation;
 class DateTime
 {
     private $response;
+
     private $navigation;
+
     private $request;
+
     private $settings;
 
     public function __construct(Response $response, Navigation $navigation, Request $request, Settings $settings)

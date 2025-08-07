@@ -18,7 +18,9 @@ use LogicException;
 class Scope
 {
     private $parent;
+
     private $data = [];
+
     private $left = false;
 
     public function __construct(?self $parent = null)

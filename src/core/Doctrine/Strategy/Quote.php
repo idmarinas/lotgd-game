@@ -74,6 +74,7 @@ class Quote implements QuoteStrategy
 
                 continue;
             }
+
             // Association defined as Id field
             $joinColumns            = $class->associationMappings[$fieldName]['joinColumns'];
             $assocQuotedColumnNames = \array_map(

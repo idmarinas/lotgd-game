@@ -26,6 +26,7 @@ class MountController extends AbstractController implements LotgdControllerInter
 	use LotgdControllerTrait;
 
 	private AvatarRepository $repository;
+
 	private Format           $format;
 
 	public function __construct (AvatarRepository $repository, Format $format)

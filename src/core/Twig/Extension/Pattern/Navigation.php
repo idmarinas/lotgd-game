@@ -69,6 +69,7 @@ trait Navigation
 		if ($blocked) {
 			unset($attributes['href']);
 		}
+
 		$attributes = $this->createAttributesString($attributes);
 
 		return $this->format->colorize(

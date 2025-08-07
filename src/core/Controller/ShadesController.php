@@ -25,7 +25,9 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class ShadesController extends AbstractController
 {
     private $dispatcher;
+
     private $response;
+
     private $navigation;
 
     public function __construct(

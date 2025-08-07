@@ -31,13 +31,21 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class StableController extends AbstractController
 {
     private $navigation;
+
     private $dispatcher;
+
     private $repository;
+
     private $log;
+
     private $sanitize;
+
     private $buffs;
+
     private $settings;
+
     private $tool;
+
     private $response;
 
     public function __construct(
@@ -173,6 +181,7 @@ class StableController extends AbstractController
                 {
                     $debugmount1 = 'a '.$debugmount1;
                 }
+
                 $session['user']['hashorse'] = $mount['mountid'];
                 $debugmount2                 = $mount['mountname'];
                 $goldcost                    = $params['repaygold'] - $mount['mountcostgold'];

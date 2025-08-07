@@ -25,6 +25,7 @@ trait BattleStart
      * @var bool
      */
     private $battleIsStarted    = false;
+
     private $battleIsInitalized = false;
 
     /**

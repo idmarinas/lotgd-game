@@ -36,21 +36,35 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class TrainController extends AbstractController
 {
     protected $translationDomain;
+
     protected $translationDomainNavigation;
 
     private $dispatcher;
+
     private $navigation;
+
     private $response;
+
     private $serviceBattle;
+
     private $repository;
+
     private $settings;
+
     private $dateTime;
+
     private $translator;
+
     private $tool;
+
     private $log;
+
     private $buffer;
+
     private $playerFunction;
+
     private $creatureFunction;
+
     private $systemMail;
 
     public function __construct(
@@ -390,6 +404,7 @@ class TrainController extends AbstractController
                         $companion['hitpoints'] = $companion['maxhitpoints'];
                         $newcompanions[$name]   = $companion;
                     }
+
                     $companions = $newcompanions;
                 }
 

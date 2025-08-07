@@ -113,6 +113,7 @@ function module_events ($eventtype, $basechance, $baseLink = false)
 
 				return 1;
 			}
+
 			$sum += $event['normchance'];
 		}
 	}

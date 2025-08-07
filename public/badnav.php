@@ -30,6 +30,7 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
     {
         $outputHtml = gzuncompress($outputHtml);
     }
+
     //check if the output needs to be unzipped again
     //and make sure '' is not within gzuncompress -> error
     if ('' != $outputHtml && false !== strpos('HTML', (string) $outputHtml))

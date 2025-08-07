@@ -42,6 +42,7 @@ trait Formula
             {
                 $badguy['physicalresistance'] = 0;
             }
+
             $powerattack      = (int) $this->settings->getSetting('forestpowerattackchance', 10);
             $powerattackmulti = (float) $this->settings->getSetting('forestpowerattackmulti', 3);
 
@@ -74,6 +75,7 @@ trait Formula
                     $creaturedmg = round($this->buffModifiers['dmgmod'] * $creaturedmg, 0);
                     $creaturedmg = max(0, round($creaturedmg - $badguy['physicalresistance']));
                 }
+
                 $pdefroll = bell_rand(0, $adjustedselfdefense);
                 $catkroll = bell_rand(0, $creatureattack);
 

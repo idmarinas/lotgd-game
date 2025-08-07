@@ -36,17 +36,27 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class DragonController extends AbstractController
 {
     protected $translationDomain;
+
     protected $translationDomainNavigation;
 
     private $dispatcher;
+
     private $translator;
+
     private $settings;
+
     private $buffer;
+
     private $creatureFunction;
+
     private $response;
+
     private $serviceBattle;
+
     private $navigation;
+
     private $tool;
+
     private $log;
 
     public function __construct(
@@ -250,6 +260,7 @@ class DragonController extends AbstractController
             $restartgems = max(0, ($session['user']['dragonkills'] - ($this->settings->getSetting('maxrestartgold', 300) / $this->settings->getSetting('newplayerstartgold', 50)) - 1));
             $restartgems = min($restartgems, $this->settings->getSetting('maxrestartgems', 10));
         }
+
         $session['user']['gold'] = $restartgold;
         $session['user']['gems'] += $restartgems;
 

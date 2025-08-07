@@ -25,10 +25,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class LoginController extends AbstractController
 {
     private $dispatcher;
+
     private $translator;
+
     private $tools;
+
     private $settings;
+
     private $cache;
+
     private $sessionHttp;
 
     public function __construct(

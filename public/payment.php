@@ -96,6 +96,7 @@ else
                     $emsg = "This payment isn't to me!  It's to {$receiver_email}.\n";
                     payment_error(E_WARNING, $emsg, __FILE__, __LINE__);
                 }
+
                 writelog($response);
             }
             else
@@ -112,6 +113,7 @@ else
             payment_error(E_ERROR, "Payment Status is 'INVALID'!\n\nPOST data:`n".serialize($_POST), __FILE__, __LINE__);
         }
     }
+
     fclose($fp);
 }
 
@@ -227,6 +229,7 @@ if ($payment_errors > '')
 
     mail($adminEmail, 'Payment Error', $payment_errors.'<hr>', 'From: '.LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com'));
 }
+
 $output = ob_get_contents();
 
 if ($output > '')

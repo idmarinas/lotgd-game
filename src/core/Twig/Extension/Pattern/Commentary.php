@@ -20,6 +20,7 @@ use Twig\Environment;
 trait Commentary
 {
     protected $onlineStatus;
+
     protected $templateCommentaryBlock;
 
     /**

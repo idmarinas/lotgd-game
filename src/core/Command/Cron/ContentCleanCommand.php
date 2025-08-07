@@ -31,6 +31,7 @@ final class ContentCleanCommand extends Command
     protected static $defaultName = 'lotgd:cron:content:clean';
 
     private $contentClean;
+
     private $translator;
 
     public function __construct(ContentCleanService $contentClean, TranslatorInterface $translator)

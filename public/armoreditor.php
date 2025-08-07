@@ -78,6 +78,7 @@ if ('edit' === $op || 'add' === $op)
             ],
         ]);
     }
+
     Doctrine::detach($armorEntity); //-- Avoid Doctrine save a invalid Form
 
     LotgdNavigation::addNavAllow("armoreditor.php?op=edit&id={$id}&level={$armorlevel}");

@@ -39,13 +39,21 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ClanController extends AbstractController
 {
     private $dispatcher;
+
     private $log;
+
     private $translator;
+
     private $cache;
+
     private $sanitize;
+
     private $navigation;
+
     private $response;
+
     private $settings;
+
     private $systemMail;
 
     public function __construct(
@@ -197,6 +205,7 @@ class ClanController extends AbstractController
                     //session in order for the db write to take effect.
                     $session['user']['clanrank'] = CLAN_LEADER;
                 }
+
                 $params['promotingLeader'] = true;
             }
         }

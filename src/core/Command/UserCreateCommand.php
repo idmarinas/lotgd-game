@@ -66,10 +66,15 @@ final class UserCreateCommand extends Command
 	protected static $defaultName = 'lotgd:user:create';
 
 	protected $doctrine;
+
 	protected $translator;
+
 	protected $validator;
+
 	protected $settings;
+
 	protected $accountRepository;
+
 	protected $passwordEncoder;
 
 	public function __construct (

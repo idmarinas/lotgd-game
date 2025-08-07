@@ -21,8 +21,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class PlayerFunction
 {
     private $dispatcher;
+
     private $response;
+
     private $translator;
+
     /** @var \Lotgd\Core\Repository\CharactersRepository */
     private $repository;
 

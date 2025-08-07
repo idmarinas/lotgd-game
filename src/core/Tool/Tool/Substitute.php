@@ -92,6 +92,7 @@ trait Substitute
             $search  = \array_merge($search, $extraSearch);
             $replace = \array_merge($replace, $extraReplace);
         }
+
         $replacement_array = [$string];
 
         // Do this the right way.

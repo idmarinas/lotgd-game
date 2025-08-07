@@ -31,6 +31,7 @@ final class PetitionCleanCommand extends Command
     protected static $defaultName = 'lotgd:cron:game:petition:clean';
 
     private $repository;
+
     private $translator;
 
     public function __construct(PetitionsRepository $repository, TranslatorInterface $translator)

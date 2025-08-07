@@ -85,6 +85,7 @@ elseif ('edit' === $op)
             ],
         ]);
     }
+
     Doctrine::detach($masterEntity); //-- Avoid Doctrine save a invalid Form
 
     LotgdNavigation::addNavAllow("masters.php?op=edit&master_id={$masterId}");

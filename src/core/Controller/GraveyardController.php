@@ -36,19 +36,31 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class GraveyardController extends AbstractController
 {
     protected $translationDomain;
+
     protected $translationDomainNavigation;
 
     private $dispatcher;
+
     private $response;
+
     private $settings;
+
     private $navigation;
+
     private $serviceBattle;
+
     private $buffer;
+
     private $serviceCreatureFunction;
+
     private $occurrenceDispatcher;
+
     private $tool;
+
     private $translator;
+
     private $doctrine;
+
     private $systemMail;
 
     public function __construct(

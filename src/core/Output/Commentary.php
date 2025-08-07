@@ -48,13 +48,21 @@ class Commentary
      * @var CommentaryRepository
      */
     protected $repository;
+
     protected $translator;
+
     protected $cache;
+
     protected $censor;
+
     protected $hook;
+
     protected $flashBag;
+
     protected $doctrine;
+
     protected $normalizer;
+
     private $settings;
 
     public function __construct(

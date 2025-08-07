@@ -122,6 +122,7 @@ function get_module_install_status(): array
 
             $installedCategories[$row->getCategory()] = ($installedCategories[$row->getCategory()] ?? 0) + 1;
         }
+
         unset($row);
     }
 

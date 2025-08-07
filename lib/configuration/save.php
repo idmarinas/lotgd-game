@@ -27,6 +27,7 @@ if ('' != $postSettings['defaultsuperuser']) {
 			$value += (int)$k;
 		}
 	}
+
 	$postSettings['defaultsuperuser'] = $value;
 }
 

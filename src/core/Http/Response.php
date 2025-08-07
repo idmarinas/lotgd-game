@@ -37,15 +37,25 @@ use Twig\Environment;
 class Response extends HttpResponse
 {
     private $translator;
+
     private EntityManager $doctrine;
+
     private $headTitle;
+
     private $template;
+
     private $request;
+
     private $params;
+
     private EventDispatcherInterface $eventDispatcher;
+
     private $kernel;
+
     private $pageParts;
+
     private Buffer $buffer;
+
     private Tool $tool;
 
     public function __construct(
@@ -256,6 +266,7 @@ class Response extends HttpResponse
         {
             $lastMotd = $this->doctrine->getRepository('LotgdCore:Motd')->getLastMotdDate();
         }
+
         $session['needtoviewmotd'] ??= false;
 
         if (isset($session['user']['lastmotd'])
@@ -264,6 +275,7 @@ class Response extends HttpResponse
         ) {
             $session['needtoviewmotd'] = true;
         }
+
         // -- END - Check if see or not MoTD
 
         // -- Character Stats

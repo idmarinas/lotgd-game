@@ -33,7 +33,9 @@ class BioController extends AbstractController
     public const TRANSLATION_DOMAIN = 'page_bio';
 
     private $dispatcher;
+
     private $translator;
+
     private $navigation;
 
     private $response;
@@ -76,6 +78,7 @@ class BioController extends AbstractController
         {
             $char = $repository->getAcctIdFromLogin($char);
         }
+
         $target     = $repository->getCharacterInfoFromAcctId((int) $char);
         $recentNews = $repository->getCharacterNewsFromAcctId((int) $char);
 
@@ -140,6 +143,7 @@ class BioController extends AbstractController
             $this->navigation->addNav('bio.nav.whence', $return);
             $this->navigation->addNav('bio.nav.village', 'village.php');
         }
+
         //-- This is only for params not use for other purpose
         $args = new GenericEvent(null, $params);
         $this->dispatcher->dispatch($args, Events::PAGE_BIO_POST);

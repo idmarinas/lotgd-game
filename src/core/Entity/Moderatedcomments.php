@@ -33,6 +33,7 @@ class Moderatedcomments
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private ?int $modid = null;
+
     /**
      *
      * @ORM\Column(name="comment", type="text", length=65535)

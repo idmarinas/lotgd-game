@@ -32,10 +32,15 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class Backup
 {
     private $doctrine;
+
     private $log;
+
     private $eventDispatcher;
+
     private $normalizer;
+
     private $serializer;
+
     private $crypt;
 
     public function __construct(

@@ -31,7 +31,9 @@ abstract class AbstractCommand extends Command
     use LockableTrait;
 
     protected $installer;
+
     protected $translator;
+
     protected $bar;
 
     public function setProgressBar(ProgressBar $bar)

@@ -29,9 +29,12 @@ class ListController extends AbstractController
     public const ITEM_PER_PAGE = 50;
 
     private $dispatcher;
+
     /** @var UserRepository */
     private $repository;
+
     private $navigation;
+
     private $response;
 
     public function __construct(EventDispatcherInterface $eventDispatcher, Navigation $navigation, HttpResponse $response)

@@ -29,7 +29,9 @@ class NewsController extends AbstractController
     public const NEWS_PER_PAGE = 50;
 
     private $navigation;
+
     private $dispatcher;
+
     private $battle;
 
     public function __construct(
@@ -101,6 +103,7 @@ class NewsController extends AbstractController
         {
             $this->navigation->addNav('common.nav.preferences', 'prefs.php');
         }
+
         $this->navigation->addNav('news.nav.about', 'about.php');
 
         //-- Superuser menu

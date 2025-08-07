@@ -71,6 +71,7 @@ elseif ('forever' !== $duration && 'all' !== $duration)
     {
         $count /= 7;
     }
+
     $params['showing'] = ["removeban.showing.{$type}", ['notBefore' => $notBefore, 'n' => $count]];
 
     $query->where("u.banexpire {$operator} :date AND u.banexpire > '0000-00-00 00:00:00'")

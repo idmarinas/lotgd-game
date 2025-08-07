@@ -92,6 +92,7 @@ trait Enemy
             $enemy['dead']    = ! $this->isEnemyAlive($enemy);
             $enemy['options'] = $this->getOptions();
         }
+
         unset($enemy);
 
         $this->enemies = $enemies;

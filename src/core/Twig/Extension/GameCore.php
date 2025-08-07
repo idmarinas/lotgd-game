@@ -45,11 +45,17 @@ class GameCore extends AbstractExtension
     use Source;
 
     protected $request;
+
     protected $sanitize;
+
     protected $translator;
+
     protected $settings;
+
     protected $dispatcher;
+
     protected $doctrine;
+
     protected $session;
 
     public function __construct(

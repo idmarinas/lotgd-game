@@ -43,10 +43,15 @@ class MailController extends AbstractController implements LotgdControllerInterf
     public const TRANSLATION_DOMAIN = 'jaxon_mail';
 
     private $repository;
+
     private $settings;
+
     private $translator;
+
     private $avatarRepository;
+
     private $sanitize;
+
     private $systemMail;
 
     public function __construct(

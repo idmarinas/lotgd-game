@@ -97,6 +97,7 @@ class Log
                 $message = $result->getMessage();
                 $id      = $result->getId();
             }
+
             unset($result);
         }
 

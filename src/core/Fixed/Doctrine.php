@@ -100,6 +100,7 @@ class Doctrine
         {
             $metaData[] = self::$instance->getMetadataFactory()->getMetadataFor($className);
         }
+
         $sqls = $schemaTool->getUpdateSchemaSql($metaData, true);
 
         if (empty($sqls))

@@ -39,6 +39,7 @@ if ( ! isset($session['iterations']))
 {
     $session['iterations'] = 0;
 }
+
 ++$session['iterations'];
 
 $old = $now - 2;

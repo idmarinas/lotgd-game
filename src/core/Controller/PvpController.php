@@ -25,8 +25,11 @@ use Symfony\Component\HttpFoundation\Response;
 class PvpController extends AbstractController
 {
     private $listing;
+
     private $settings;
+
     private $navigation;
+
     private $pvpWarning;
 
     public function __construct(Listing $listing, Settings $settings, Navigation $navigation, Warning $warning)

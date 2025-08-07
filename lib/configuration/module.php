@@ -83,6 +83,7 @@ if (injectmodule($module, true))
                 {
                     $x = \explode('|', $val);
                 }
+
                 $processSettings[$key] = $x[0];
 
                 if ( ! isset($moduleSettings[$key]) && isset($x[1]))
@@ -129,6 +130,7 @@ function process_post_save_data($post, $old, &$flashMessages, $module, $textDoma
             {
                 $oldval = $old[$key];
             }
+
             LotgdLog::game("`@Changed module(`5{$module}`0) setting `^{$key}`0 from `#{$oldval}`0 to `&{$val}`0`0", 'settings');
 
             $args = new Core(['module' => $module, 'setting' => $key, 'old' => $oldval, 'new' => $val]);

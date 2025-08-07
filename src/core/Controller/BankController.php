@@ -28,10 +28,15 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class BankController extends AbstractController
 {
     private $dispatcher;
+
     private $log;
+
     private $settings;
+
     private $navigation;
+
     private $response;
+
     private $systemMail;
 
     public function __construct(
@@ -198,6 +203,7 @@ class BankController extends AbstractController
                         $session['user']['goldinbank'] += $session['user']['gold'];
                         $session['user']['gold'] = 0;
                     }
+
                     $session['user']['amountouttoday'] += $amt;
 
                     $result->setGoldinbank($result->getGoldinbank() + $amt);

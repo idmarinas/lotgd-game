@@ -11,7 +11,9 @@ namespace Lotgd\Core\Output\Pattern;
 trait Color
 {
     protected $colorPatternOpen;
+
     protected $colorPatternClose;
+
     protected $colorReplacement;
 
     /**

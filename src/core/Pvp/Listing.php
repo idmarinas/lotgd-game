@@ -20,9 +20,12 @@ use Lotgd\Core\Lib\Settings;
 class Listing
 {
     protected $doctrine;
+
     /** @var \Lotgd\Core\Repository\CharactersRepository */
     protected $repository;
+
     protected $query;
+
     private $settings;
 
     public function __construct(EntityManagerInterface $doctrine, Settings $settings)

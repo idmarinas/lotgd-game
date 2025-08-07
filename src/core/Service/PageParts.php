@@ -30,14 +30,23 @@ use Twig\Environment;
 class PageParts
 {
     private $stats;
+
     private $twig;
+
     private $format;
+
     private $playerFunction;
+
     private $settings;
+
     private $dispatcher;
+
     private $translator;
+
     private $tempStat;
+
     private EntityManager $doctrine;
+
     private $cache;
 
     public function __construct(
@@ -122,6 +131,7 @@ class PageParts
             {
                 $spirits[(int) $u['spirits']] = 'DEAD';
             }
+
             $oAtk = $this->playerFunction->getPlayerAttack();
             $atk = $oAtk;
             //Original Attack
@@ -142,6 +152,7 @@ class PageParts
                 {
                     continue;
                 }
+
                 $atk *= ($val['atkmod'] ?? 1);
                 $def *= ($val['defmod'] ?? 1);
 
@@ -228,6 +239,7 @@ class PageParts
                 {
                     $this->stats->addcharstat($this->translator->trans('statistic.stat.drunkeness', [], 'app_default'), '');
                 }
+
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.experience', [], 'app_default'), $this->format->numeral($u['experience'].$this->tempStat->checkTempStat('experience', 1)));
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.attack', [], 'app_default'), sprintf("{$atk} `\$<span title='%s'>(?)</span>`0", $this->playerFunction->explainedGetPlayerAttack().$this->tempStat->checkTempStat('attack', 1)));
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.defense', [], 'app_default'), sprintf("{$def} `\$<span title='%s'>(?)</span>`0", $this->playerFunction->explainedGetPlayerDefense().$this->tempStat->checkTempStat('defense', 1)));
@@ -247,6 +259,7 @@ class PageParts
                 {
                     $this->stats->addcharstat($this->translator->trans('statistic.stat.stamina', [], 'app_default'), '');
                 }
+
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.torments', [], 'app_default'), $u['gravefights'].$this->tempStat->checkTempStat('gravefights', 1));
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.psyche', [], 'app_default'), 10 + round(($u['level'] - 1) * 1.5));
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.spirit', [], 'app_default'), 10 + round(($u['level'] - 1) * 1.5));
@@ -282,6 +295,7 @@ class PageParts
                     }
                 }
             }
+
             $this->stats->addcharstat($this->translator->trans('statistic.category.character.personal', [], 'app_default'));
 
             if ($u['alive'])
@@ -303,6 +317,7 @@ class PageParts
             {
                 $this->stats->addcharstat($this->translator->trans('statistic.stat.inventory', [], 'app_default'), '');
             }
+
             $this->stats->addcharstat($this->translator->trans('statistic.stat.weapon', [], 'app_default'), $u['weapon']);
             $this->stats->addcharstat($this->translator->trans('statistic.stat.armor', [], 'app_default'), $u['armor']);
 

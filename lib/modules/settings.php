@@ -97,6 +97,7 @@ function set_module_setting($name, $value, $module = false)
     {
         $entity = new ModuleSettings();
     }
+
     $entity = $repository->hydrateEntity([
         'modulename' => $module,
         'setting'    => $name,

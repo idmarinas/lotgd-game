@@ -61,6 +61,7 @@ if (isset($session['lasthit'], $session['loggedin'])
 
 	redirect('home.php', LotgdTranslator::t('session.login.account.notLogged', [], 'app_default'));
 }
+
 $session['lasthit'] = strtotime('now');
 
 $cp = Kernel::COPYRIGHT;
@@ -158,6 +159,7 @@ $session['bufflist'] = array_map('array_filter', $session['user']['bufflist'] ??
 if (!is_array($session['bufflist'])) {
 	$session['bufflist'] = [];
 }
+
 $session['user']['lastip'] = LotgdRequest::getServer('REMOTE_ADDR');
 
 if (!LotgdRequest::getCookie('lgi') || strlen(LotgdRequest::getCookie('lgi')) < 32) {
@@ -208,6 +210,7 @@ if ($url != $site && $uri && $site) {
 
 	unset($referers, $refererRepository);
 }
+
 unset($url, $site, $uri);
 
 $session['user']['superuser'] ??= 0;
@@ -225,6 +228,7 @@ $companions = [];
 if (!empty($temp_comp)) {
 	$companions = array_filter($temp_comp, 'is_array');
 }
+
 unset($temp_comp);
 
 $claninfo = [];

@@ -26,7 +26,9 @@ use Lotgd\Core\Log;
 class ContentCleanService
 {
     private $log;
+
     private $doctrine;
+
     private $settings;
 
     public function __construct(Log $log, Settings $settings, EntityManagerInterface $doctrine)

@@ -24,6 +24,7 @@ class CommentaryNodeVisitor extends AbstractNodeVisitor
     public const UNDEFINED = '_undefined';
 
     private $enabled  = false;
+
     private $messages = [];
 
     public function enable()

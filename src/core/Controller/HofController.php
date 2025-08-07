@@ -26,7 +26,9 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class HofController extends AbstractController
 {
     private $dispatcher;
+
     private $response;
+
     private $navigation;
 
     public function __construct(EventDispatcherInterface $eventDispatcher, HttpResponse $response, Navigation $navigation)

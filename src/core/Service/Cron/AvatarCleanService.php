@@ -30,9 +30,13 @@ class AvatarCleanService
     protected static $defaultName = 'lotgd:cron:content:clean';
 
     private $settings;
+
     private $log;
+
     private $translator;
+
     private $doctrine;
+
     private $backup;
 
     public function __construct(
@@ -95,9 +99,11 @@ class AvatarCleanService
         if ($old !== 0) {
             $query->setParameter('dateOld', $dateOld);
         }
+
         if ($new !== 0) {
             $query->setParameter('dateNew', $dateNew);
         }
+
         if ($trash !== 0) {
             $query->setParameter('dateTrash', $dateTrash);
         }
@@ -186,6 +192,7 @@ class AvatarCleanService
                 $dk1lvl += $entity->getLevel();
                 ++$dk1ct;
             }
+
             $dks += $entity->getDragonkills();
         }
 

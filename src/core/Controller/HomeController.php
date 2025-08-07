@@ -29,9 +29,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class HomeController extends AbstractController
 {
     private $settings;
+
     private $dispatcher;
+
     private $translator;
+
     private $dateTime;
+
     private $navigation;
 
     public function __construct(

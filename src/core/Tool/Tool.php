@@ -45,12 +45,19 @@ class Tool
     use Title;
 
     private $dispatcher;
+
     private $doctrine;
+
     private $settings;
+
     private $response;
+
     private $cache;
+
     private $request;
+
     private $translator;
+
     private $buffer;
 
     public function __construct(

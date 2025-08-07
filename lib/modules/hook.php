@@ -42,6 +42,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
         {
             $where = LotgdRequest::getServer('SCRIPT_NAME');
         }
+
         LotgdResponse::pageDebug("Args parameter to modulehook {$hookname} from {$where} is not an iterable value.");
     }
 
@@ -102,6 +103,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
         {
             continue;
         }
+
         // Skip any module invocations which should be blocked.
 
         if ( ! \array_key_exists($row['modulename'], $blocked_modules))
@@ -137,6 +139,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
         {
             $row['whenactive'] = '';
         }
+
         $cond = \trim($row['whenactive']);
 
         if ('' == $cond || module_condition($cond))
@@ -190,6 +193,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
             {
                 unset($res['nocollapse']);
             }
+
             //handle return arguments.
             $args = $res;
         }

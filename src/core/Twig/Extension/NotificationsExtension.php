@@ -22,6 +22,7 @@ use Twig\TwigFunction;
 class NotificationsExtension extends AbstractExtension
 {
     protected $session;
+
     protected $sanitize;
 
     public function __construct(SessionInterface $session, Sanitize $sanitize)

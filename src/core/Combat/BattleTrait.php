@@ -25,12 +25,19 @@ use Twig\Environment;
 trait BattleTrait
 {
     private $tools;
+
     private $log;
+
     private $navigation;
+
     private $response;
+
     private $twig;
+
     private $sanitize;
+
     private $translator;
+
     private $expression;
 
     /**

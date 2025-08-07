@@ -23,6 +23,7 @@ class Motd extends AbstractExtension
     use Pattern\Motd;
 
     protected $doctrine;
+
     protected $repository;
 
     public function __construct(EntityManagerInterface $doctrine)

@@ -27,9 +27,13 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class WeaponController extends AbstractController
 {
     private $dispatcher;
+
     private $log;
+
     private $repository;
+
     private $response;
+
     private $navigation;
 
     public function __construct(EventDispatcherInterface $eventDispatcher, Log $log, HttpResponse $response, Navigation $navigation)

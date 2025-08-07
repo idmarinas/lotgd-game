@@ -46,6 +46,7 @@ function lotgd_showtabs($tabs, $print = true, ?callable $callback = null, $brows
         {
             $class = 'bottom attached '.$class;
         }
+
         //-- Title of tab
         $ulMenu[] = \sprintf('<a class="%s item" data-tab="%s-%s">%s</a>', $class, $showtab_id, $tab_id, $title);
 
@@ -79,6 +80,7 @@ function lotgd_showtabs($tabs, $print = true, ?callable $callback = null, $brows
             $popupMenu .= \implode('', $menu);
             $popupMenu .= '</div></div>';
         }
+
         $popupMenu .= '</div></div>';
 
         $content .= \sprintf(

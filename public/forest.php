@@ -169,6 +169,7 @@ elseif ('search' == $op)
                     ++$plev;
                     $extrabuff = .4;
                 }
+
                 LotgdFlashMessages::addErrorMessage(LotgdTranslator::t('flash.message.suicide', [], $textDomain));
             }
 
@@ -219,6 +220,7 @@ elseif ('search' == $op)
                             $mintargetlevel = $targetlevel - 1;
                         }
                     }
+
                     $multi = min($multi, $session['user']['level']);
                 }
             }
@@ -236,6 +238,7 @@ elseif ('search' == $op)
                 $multi += $targetlevel - 17; //-- More dificult if have more level than 15
                 // $targetlevel = 17; //-- Not avoid level range setting
             }
+
             LotgdResponse::pageDebug("Creatures: {$multi} Targetlevel: {$targetlevel} Mintargetlevel: {$mintargetlevel}");
 
             $packofmonsters = 0 == mt_rand(0, 5) && LotgdSetting::getSetting('allowpackofmonsters', true); // true or false
@@ -297,6 +300,7 @@ elseif ('search' == $op)
                             // And mark it as an 'elite' troop.
                             $badguy['creaturename'] = $prefix.' '.$badguy['creaturename'];
                         }
+
                         $stack[$i] = $badguy;
                     }
 
@@ -341,10 +345,12 @@ elseif ('search' == $op)
                             // And mark it as an 'elite' troop.
                             $badguy['creaturename'] = $prefix.' '.$badguy['creaturename'];
                         }
+
                         $stack[] = $badguy;
                     }
                 }
             }
+
             LotgdKernel::get('lotgd_core.combat.buffer')->calculateBuffFields();
             $args = new GenericEvent(null, [
                 'enemies' => $stack,

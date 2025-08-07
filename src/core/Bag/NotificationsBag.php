@@ -16,7 +16,9 @@ namespace Lotgd\Core\Bag;
 class NotificationsBag implements NotificationsBagInterface
 {
     private string $name = 'notifications';
+
     private array $flashes = [];
+
     private $storageKey;
 
     /**

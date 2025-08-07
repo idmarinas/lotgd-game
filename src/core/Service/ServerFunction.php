@@ -23,7 +23,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class ServerFunction
 {
     private $settings;
+
     private $doctrine;
+
     private $dispatcher;
 
     public function __construct(Settings $settings, EntityManagerInterface $doctrine, EventDispatcherInterface $dispatcher)

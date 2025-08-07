@@ -23,6 +23,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class AccountController extends AbstractController
 {
     private $dispatcher;
+
     private $navigation;
 
     public function __construct(EventDispatcherInterface $eventDispatcher, Navigation $navigation)

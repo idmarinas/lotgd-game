@@ -49,6 +49,7 @@ trait Bans
         {
             $sort = 'c.level';
         }
+
         $query->orderBy($sort, 'ASC');
 
         if ($search !== '' && $search !== '0')
@@ -142,6 +143,7 @@ trait Bans
                 {
                     break;
                 }
+
                 $thisip = \substr($ip, 0, $x);
                 $query->orWhere("u.lastip LIKE ?{$x}")
                     ->setParameter($x, "{$thisip}%")

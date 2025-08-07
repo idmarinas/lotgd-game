@@ -174,6 +174,7 @@ elseif ('edit' === $op || 'add' === $op)
                 ],
             ]);
         }
+
         Doctrine::detach($creatureEntity); //-- Avoid Doctrine save a invalid Form
 
         //-- In this position can updated $creatureId var

@@ -39,30 +39,36 @@ class Debuglog
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private ?int $id = null;
+
     /**
      * @ORM\Column(name="date", type="datetime")
      */
     private ?DateTimeInterface $date = null;
+
     /**
      *
      * @ORM\Column(name="actor", type="integer", nullable=true, options={"unsigned": true})
      */
     private ?int $actor = null;
+
     /**
      *
      * @ORM\Column(name="target", type="integer", nullable=true, options={"unsigned": true})
      */
     private ?int $target = null;
+
     /**
      *
      * @ORM\Column(name="message", type="text", length=65535)
      */
     private ?string $message = null;
+
     /**
      *
      * @ORM\Column(name="field", type="string", length=20)
      */
     private ?string $field = null;
+
     /**
      * @ORM\Column(name="value", type="float", precision=9, scale=2, options={"default"="0.00"})
      */

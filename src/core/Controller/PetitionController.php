@@ -36,8 +36,11 @@ class PetitionController extends AbstractController
     public const TRANSLATION_DOMAIN = 'jaxon_petition';
 
     private $dispatcher;
+
     private $petitionsRepository;
+
     private $translator;
+
     private $settings;
 
     public function __construct(
