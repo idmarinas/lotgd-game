@@ -1,0 +1,9 @@
+"blog.{$SERVER_NAME:localhost}" {
+	import a-common blog
+	import a-headers
+
+	import a-maintenance
+	php_server {
+		env APP_ID blog
+	}
+}

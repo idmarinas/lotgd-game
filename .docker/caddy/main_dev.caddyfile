@@ -1,0 +1,25 @@
+{
+    skip_install_trust
+    debug
+    metrics
+    persist_config off
+
+    admin :2019 {
+        origins ::1
+    }
+
+    servers :80 {
+        name "{$SERVER_NAME:localhost}"
+    }
+
+    servers :443 {
+        name "{$SERVER_NAME:localhost}_ssl"
+    }
+}
+
+(a-maintenance) {
+
+}
+
+import snippets/sites.caddyfile
+import sites/*.caddyfile

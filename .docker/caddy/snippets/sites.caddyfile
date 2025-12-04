@@ -1,0 +1,27 @@
+(a-common) {
+	root {$SERVER_ROOT:public/}
+
+	log "{args[0]}" {
+		output file "/data/logs/{args[0]}/access.log"
+	}
+
+	encode
+
+	file_server {
+		precompressed
+		hide *.php
+	}
+}
+
+# Headers for response
+(a-headers) {
+	# Disable Topics tracking if not enabled explicitly: https://github.com/jkarlin/topics
+#	header ?Permissions-Policy "browsing-topics=()"
+	header ?X-XSS-Protection 1
+	header ?X-Content-Type-Options nosniff
+	header ?X-Frame-Options sameorigin
+	header ?X-Robots-Tag noindex
+	header ?Cross-Origin-Resource-Policy same-origin
+	header ?Cross-Origin-Opener-Policy same-origin-allow-popups
+	header ?Referrer-Policy no-referrer strict-origin strict-origin same-origin-when-cross-origin
+}

@@ -1,0 +1,9 @@
+"admin.{$SERVER_NAME:localhost}" {
+	import a-common admin
+	import a-headers
+
+	import a-maintenance
+	php_server {
+		env APP_ID admin
+	}
+}

@@ -1,0 +1,13 @@
+"{$SERVER_NAME:localhost}" {
+	redir https://www.{host}{uri}
+}
+
+"www.{$SERVER_NAME:localhost}" {
+	import a-common www
+	import a-headers
+
+	import a-maintenance
+	php_server {
+		env APP_ID web
+	}
+}
