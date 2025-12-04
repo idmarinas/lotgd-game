@@ -1,3 +1,3 @@
 # CAUTION
 
-> Use this configuration by your responsibility
+> Remember to review the configuration of these files
