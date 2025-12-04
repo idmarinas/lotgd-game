@@ -1,8 +1,10 @@
 name: lotgd_core
 
 services:
+    ###> doctrine/doctrine-bundle ###
     database:
-        image: mariadb:11.4.5
+        image: mariadb:11.8.2
+        restart: always
         ports:
             - "3306:3306"
         environment:
@@ -11,7 +13,6 @@ services:
             MARIADB_USER: ${DATABASE_USER}
             MARIADB_PASSWORD_FILE: /run/secrets/db_password
             MARIADB_ROOT_PASSWORD_FILE: /run/secrets/db_password
-            # MARIADB_RANDOM_ROOT_PASSWORD: 0
         healthcheck:
             test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
             start_period: 10s
@@ -22,40 +23,38 @@ services:
             - database_data:/var/lib/mysql
         secrets:
             - db_password
+    ###< doctrine/doctrine-bundle ###
 
     apache:
         image: idmarinas/apache:2.4
-        ports:
-            - "8080:80"
-            - "8083:443"
+        restart: always
         healthcheck:
             test: wget --no-verbose --tries=1 --spider http://localhost || exit 1
         volumes:
             - ./:/var/www/html
-            ## Sites
-            - ./.docker/apache/sites/dev/000-default.conf:/usr/local/apache2/conf/sites/000-default.conf
-            - ./.docker/apache/sites/dev/default-ssl.conf:/usr/local/apache2/conf/sites/default-ssl.conf
+            ## Config
+            - ./.docker/apache/conf/headers.conf:/usr/local/apache2/conf/x/headers.conf:ro
+            - ./.docker/apache/sites/common.conf:/usr/local/apache2/conf/x/common.conf:ro
         depends_on:
             - php
             - database
+
     php:
-        image: idmarinas/php:7.4-xdebug
-        environment:
-            SYMFONY_REQUIRE: '4.4.*'
+        image: idmarinas/php:7.4
+        restart: always
         healthcheck:
             test: php -v || exit 1
         volumes:
             - ./:/var/www/html
             ## PHP Conf
-            - ./.docker/php/conf.d/common.ini:/usr/local/etc/php/conf.d/common.ini
-            - ./.docker/php/conf.d/disable_functions.ini:/usr/local/etc/php/conf.d/disable_functions.ini
-            ## PHP Conf Dev
-            - ./.docker/php/conf.d/dev/php.ini:/usr/local/etc/php/conf.d/php.ini
-            - ./.docker/php/conf.d/dev/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
+            - ./.docker/php/conf.d/date_timezone.ini:/usr/local/etc/php/conf.d/date_timezone.ini:ro
+            - ./.docker/php/conf.d/disable_function.ini:/usr/local/etc/php/conf.d/disable_function.ini:ro
+
+volumes:
+    ###> doctrine/doctrine-bundle ###
+    database_data:
+    ###< doctrine/doctrine-bundle ###
 
 secrets:
     db_password:
         environment: DATABASE_PASSWORD
-
-volumes:
-    database_data:

@@ -1,0 +1,72 @@
+services:
+  ###> doctrine/doctrine-bundle ###
+  database:
+    restart: on-failure
+    environment:
+      MARIADB_DATABASE: ${DATABASE_NAME}_dev
+      MARIADB_USER: ${DATABASE_USER}_dev
+    ports: !override
+      - "13306:3306"
+    volumes:
+      - database_data_dev:/var/lib/mysql
+  ###< doctrine/doctrine-bundle ###
+
+  database_test:
+    restart: on-failure
+    extends:
+      file: compose.yaml
+      service: database
+    ports: !reset [ ]
+    environment:
+      MARIADB_DATABASE: ${DATABASE_NAME}_test
+      MARIADB_USER: ${DATABASE_USER}_test
+    volumes:
+      - database_data_test:/var/lib/mysql
+
+  apache:
+    restart: on-failure
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      ## Certs
+      - ./.docker/apache/conf/localhost.crt:/usr/local/apache2/conf/localhost.crt:ro
+      - ./.docker/apache/conf/localhost.key:/usr/local/apache2/conf/localhost.key:ro
+      ## Conf
+      - ./.docker/apache/conf/dev/server_name.conf:/usr/local/apache2/conf/d/server-name.conf:ro
+      - ./.docker/apache/sites/dev/certs.conf:/usr/local/apache2/conf/x/dev-certs.conf:ro
+      ## Sites
+      - ./.docker/apache/sites/dev/000-default.conf:/usr/local/apache2/conf/sites/000-default.conf:ro
+      - ./.docker/apache/sites/dev/default-ssl.conf:/usr/local/apache2/conf/sites/default-ssl.conf:ro
+    depends_on: !override
+      - php
+      - database
+      - database_test
+
+  php:
+    restart: on-failure
+    image: idmarinas/php:7.4-xdebug
+    expose:
+      - 9000
+    volumes:
+      - ./.docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
+      ## SSH
+      - ssh_key:/root/.ssh:ro
+
+  ###> symfony/mailer ###
+  mailer:
+    restart: on-failure
+    image: axllent/mailpit
+    ports:
+      - "1025"
+      - "8025"
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+  ###< symfony/mailer ###
+
+volumes:
+  database_data_dev:
+  database_data_test:
+  ssh_key:
+    external: true
