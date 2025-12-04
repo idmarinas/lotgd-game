@@ -98,8 +98,8 @@ if (!function_exists('safeescape')) {
 		$prevchar = '';
 		$out = '';
 
-		for ($x = 0; $x < strlen($input); ++$x) {
-			$char = substr($input, $x, 1);
+		for ($x = 0; $x < strlen((string) $input); ++$x) {
+			$char = substr((string) $input, $x, 1);
 
 			if (("'" == $char || '"' == $char) && '\\' != $prevchar) {
 				$char = '\\' . $char;
