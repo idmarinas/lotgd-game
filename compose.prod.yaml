@@ -1,9 +1,10 @@
 services:
-  deploy:
+  database:
+    restart: always
     deploy:
       resources:
         limits:
-          cpus: '0.3'
+          cpus: '0.8'
           memory: 350M
       restart_policy:
         condition: on-failure
@@ -11,38 +12,60 @@ services:
         max_attempts: 10
         window: 5s
 
-  apache:
-    ports:
-      - "80:80"
-      - "443:443"
+  webserver:
+    restart: always
     volumes:
-      # Shared files between deploys
-      - source_uploads:/var/www/html/public/uploads # For example files uploaded by users
-      ## Certs - In a volumen, for not expose them, and for persist between deploys
-      # - ./.docker/apache/conf/localhost.crt:/usr/local/apache2/conf/localhost.crt:ro
-      # - ./.docker/apache/conf/localhost.key:/usr/local/apache2/conf/localhost.key:ro
-      ## Conf
-      - ./.docker/apache/conf/prod/server_name.conf:/usr/local/apache2/conf/d/server-name.conf:ro
-      - ./.docker/apache/conf/prod/remoteip.trusted_proxy.conf:/usr/local/apache2/conf/d/remoteip-trusted-proxy.conf:ro
-      - ./.docker/apache/sites/prod/certs.conf:/usr/local/apache2/conf/x/prod-certs.conf:ro
-      - ./.docker/apache/sites/prod/headers.conf:/usr/local/apache2/conf/x/prod-headers.conf:ro
-      ## Sites
-      - ./.docker/apache/sites/prod/000-default.conf:/usr/local/apache2/conf/sites/000-default.conf:ro
-      - ./.docker/apache/sites/prod/default-ssl.conf:/usr/local/apache2/conf/sites/default-ssl.conf:ro
+      # Shared files between deployments
+      - source_uploads:/app/public/uploads # For example, files uploaded by users
+    depends_on:
+      - database
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: 500M
+          cpus: '1'
+          memory: 250M
       restart_policy:
         condition: on-failure
         delay: 5s
         max_attempts: 10
         window: 5s
-  php:
+
+  worker_async:
+    image: ${DOCKER_IMAGE_NAME_WEBSERVER}
+    entrypoint: '/usr/local/bin/worker_async_entrypoint.sh'
+    restart: always
+    healthcheck:
+      test: [ "CMD", "php", "bin/console", "about" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      - database
+    deploy:
+      resources:
+        limits:
+          cpus: '0.7'
+          memory: 175M
+
+  worker_scheduler:
+    image: ${DOCKER_IMAGE_NAME_WEBSERVER}
+    entrypoint: '/usr/local/bin/worker_scheduler_entrypoint.sh'
+    restart: always
+    healthcheck:
+      test: [ "CMD", "php", "bin/console", "about" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     volumes:
-      # Shared files between deploys
-      - source_uploads:/var/www/html/public/uploads # For example files uploaded by users
+      - scheduler_cache:/app/storage/scheduler
+    depends_on:
+      - database
+    deploy:
+      resources:
+        limits:
+          cpus: '0.7'
+          memory: 175M
 
 volumes:
   source_uploads:
+  scheduler_cache:

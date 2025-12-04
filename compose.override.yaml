@@ -1,61 +1,37 @@
 services:
   ###> doctrine/doctrine-bundle ###
   database:
-    restart: on-failure
+    restart: no
+    ports:
+      - "13306:3306"
     environment:
       MARIADB_DATABASE: ${DATABASE_NAME}_dev
       MARIADB_USER: ${DATABASE_USER}_dev
-    ports: !override
-      - "13306:3306"
     volumes:
       - database_data_dev:/var/lib/mysql
   ###< doctrine/doctrine-bundle ###
 
   database_test:
-    restart: on-failure
+    restart: no
     extends:
       file: compose.yaml
       service: database
-    ports: !reset [ ]
+    ports:
+      - "13307:3306"
     environment:
       MARIADB_DATABASE: ${DATABASE_NAME}_test
       MARIADB_USER: ${DATABASE_USER}_test
     volumes:
       - database_data_test:/var/lib/mysql
 
-  apache:
-    restart: on-failure
-    ports:
-      - "8080:80"
-      - "8443:443"
+  webserver:
+    restart: no
     volumes:
-      ## Certs
-      - ./.docker/apache/conf/localhost.crt:/usr/local/apache2/conf/localhost.crt:ro
-      - ./.docker/apache/conf/localhost.key:/usr/local/apache2/conf/localhost.key:ro
-      ## Conf
-      - ./.docker/apache/conf/dev/server_name.conf:/usr/local/apache2/conf/d/server-name.conf:ro
-      - ./.docker/apache/sites/dev/certs.conf:/usr/local/apache2/conf/x/dev-certs.conf:ro
-      ## Sites
-      - ./.docker/apache/sites/dev/000-default.conf:/usr/local/apache2/conf/sites/000-default.conf:ro
-      - ./.docker/apache/sites/dev/default-ssl.conf:/usr/local/apache2/conf/sites/default-ssl.conf:ro
-    depends_on: !override
-      - php
-      - database
-      - database_test
-
-  php:
-    restart: on-failure
-    image: idmarinas/php:7.4-xdebug
-    expose:
-      - 9000
-    volumes:
-      - ./.docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
-      ## SSH
-      - ssh_key:/root/.ssh:ro
+      - ./:/app
 
   ###> symfony/mailer ###
   mailer:
-    restart: on-failure
+    restart: no
     image: axllent/mailpit
     ports:
       - "1025"
@@ -64,6 +40,18 @@ services:
       MP_SMTP_AUTH_ACCEPT_ANY: 1
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
   ###< symfony/mailer ###
+
+  # Used to publish the application
+  deployer:
+    image: idmarinas/php:8.4-deployer
+    privileged: true
+    healthcheck:
+      test: php -v || exit 1
+    volumes:
+      - ./:/app
+      - /var/lib/docker  # Volumen anónimo temporal
+      ## SSH
+      - ssh_key:/root/.ssh
 
 volumes:
   database_data_dev:

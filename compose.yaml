@@ -1,60 +1,67 @@
-name: lotgd_core
+name: ${APP_PROJECT_NAME}
 
 services:
-    ###> doctrine/doctrine-bundle ###
-    database:
-        image: mariadb:11.8.2
-        restart: always
-        ports:
-            - "3306:3306"
-        environment:
-            MARIADB_AUTO_UPGRADE: true
-            MARIADB_DATABASE: ${DATABASE_NAME}
-            MARIADB_USER: ${DATABASE_USER}
-            MARIADB_PASSWORD_FILE: /run/secrets/db_password
-            MARIADB_ROOT_PASSWORD_FILE: /run/secrets/db_password
-        healthcheck:
-            test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
-            start_period: 10s
-            interval: 10s
-            timeout: 5s
-            retries: 3
-        volumes:
-            - database_data:/var/lib/mysql
-        secrets:
-            - db_password
-    ###< doctrine/doctrine-bundle ###
+  ###> doctrine/doctrine-bundle ###
+  database:
+    image: mariadb:${DATABASE_VERSION_NUMBER}
+    environment:
+      MARIADB_AUTO_UPGRADE: true
+      MARIADB_DATABASE: ${DATABASE_NAME}
+      MARIADB_USER: ${DATABASE_USER}
+      MARIADB_PASSWORD_FILE: /run/secrets/db_password
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/db_password
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - database_data:/var/lib/mysql
+    secrets:
+      - db_password
+  ###< doctrine/doctrine-bundle ###
 
-    apache:
-        image: idmarinas/apache:2.4
-        restart: always
-        healthcheck:
-            test: wget --no-verbose --tries=1 --spider http://localhost || exit 1
-        volumes:
-            - ./:/var/www/html
-            ## Config
-            - ./.docker/apache/conf/headers.conf:/usr/local/apache2/conf/x/headers.conf:ro
-            - ./.docker/apache/sites/common.conf:/usr/local/apache2/conf/x/common.conf:ro
-        depends_on:
-            - php
-            - database
-
-    php:
-        image: idmarinas/php:7.4
-        restart: always
-        healthcheck:
-            test: php -v || exit 1
-        volumes:
-            - ./:/var/www/html
-            ## PHP Conf
-            - ./.docker/php/conf.d/date_timezone.ini:/usr/local/etc/php/conf.d/date_timezone.ini:ro
-            - ./.docker/php/conf.d/disable_function.ini:/usr/local/etc/php/conf.d/disable_function.ini:ro
+  webserver:
+    image: ${DOCKER_IMAGE_NAME_WEBSERVER}
+    pull_policy: never
+    environment:
+      SERVER_NAME: ${APP_SERVER_NAME}
+      CLOUDFLARE_API_TOKEN_FILE: /run/secrets/cloudflare_api_token
+    volumes:
+      # Named volumes for /data and /config to persist important information.
+      - caddy_data:/data
+      - caddy_config:/config
+    secrets:
+      - cloudflare_api_token
+    tty: true
+    networks:
+      - proxy
+      - default
+    labels:
+      - 'traefik.enable=true'
+      # Main web and subdomains
+      - 'traefik.tcp.routers.${APP_PROJECT_NAME}.rule=HostSNI(`${APP_SERVER_NAME}`) || HostSNI(`www.${APP_SERVER_NAME}`)'
+      - 'traefik.tcp.routers.${APP_PROJECT_NAME}.service=${APP_PROJECT_NAME}'
+      - 'traefik.tcp.routers.${APP_PROJECT_NAME}.entrypoints=web,websecure'
+      - 'traefik.tcp.services.${APP_PROJECT_NAME}.loadbalancer.server.port=443'
+      - 'traefik.tcp.routers.${APP_PROJECT_NAME}.tls=true'
+      - 'traefik.tcp.routers.${APP_PROJECT_NAME}.tls.passthrough=true'
+      - 'traefik.tcp.routers.${APP_PROJECT_NAME}.priority=20'
 
 volumes:
-    ###> doctrine/doctrine-bundle ###
-    database_data:
-    ###< doctrine/doctrine-bundle ###
+  caddy_data:
+  caddy_config:
+  ###> doctrine/doctrine-bundle ###
+  database_data:
+  ###< doctrine/doctrine-bundle ###
 
 secrets:
-    db_password:
-        environment: DATABASE_PASSWORD
+  db_password:
+    environment: DATABASE_PASSWORD
+  cloudflare_api_token:
+    environment: CLOUDFLARE_API_TOKEN
+
+networks:
+  proxy:
+    external: true
