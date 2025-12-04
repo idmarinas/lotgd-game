@@ -63,6 +63,10 @@ Visit **_V7_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/7.2/CHAN
   - `laminas/laminas-validator` dependency
   - `jaxon-php/jaxon-dialogs` dependency
   - `jaxon-php/jaxon-core` dependency
+- **BC** Removed Table Prefix for Doctrine
+  - `Lotgd\Core\Doctrine\Extension\TablePrefix` class
+  - `lotgd_core.doctrine_prefix` parameter
+  - `DATABASE_PREFIX` env var
 
 ### :notebook: NOTES
 
