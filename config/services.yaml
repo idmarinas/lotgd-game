@@ -4,7 +4,6 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    lotgd_core.doctrine_prefix: "%env(DATABASE_PREFIX)%"
     lotgd_core.number.format.decimal.point: '.'
     lotgd_core.number.format.thousands.sep: ','
     doctrine.orm.entity_manager.class: Lotgd\Core\Doctrine\ORM\EntityManager
@@ -70,14 +69,6 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-
-    # Doctrine Extension listeners to handle table prefix
-    lotgd.core.doctrine.listener.table_prefix:
-        class: Lotgd\Core\Doctrine\Extension\TablePrefix
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-        arguments:
-            - "%lotgd_core.doctrine_prefix%"
 
     # View Laminas Service
     Laminas\View\Helper\HeadLink:
