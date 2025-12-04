@@ -271,7 +271,7 @@ switch ($op)
 
         if (($session['user']['superuser'] & SU_EDIT_DONATIONS) !== 0)
         {
-            LotgdNavigation::addNav('user.nav.donation', 'donators.php?op=add1&name='.rawurlencode($row['login']).'&ret='.urlencode(LotgdRequest::getServer('REQUEST_URI')));
+            LotgdNavigation::addNav('user.nav.donation', 'donators.php?op=add1&name='.rawurlencode((string) $row['login']).'&ret='.urlencode(LotgdRequest::getServer('REQUEST_URI')));
         }
 
         LotgdNavigation::addHeader('user.category.bans');
@@ -348,13 +348,13 @@ switch ($op)
                     if (\is_array($val))
                     {
                         $v      = $val[0];
-                        $x      = explode('|', $v);
+                        $x      = explode('|', (string) $v);
                         $val[0] = $x[0];
                         $x[0]   = $val;
                     }
                     else
                     {
-                        $x = explode('|', $val);
+                        $x = explode('|', (string) $val);
                     }
 
                     $msettings[$key] = $x[0];

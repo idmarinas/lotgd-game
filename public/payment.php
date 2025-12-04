@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 ob_start();
 
-set_error_handler('payment_error');
+set_error_handler(payment_error(...));
 \define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
@@ -125,7 +125,7 @@ function writelog($response)
     global $payment_fee, $txn_type;
 
     $match = [];
-    preg_match("'([^:]*):([^/])*'", $item_number, $match);
+    preg_match("'([^:]*):([^/])*'", (string) $item_number, $match);
 
     if ($match[1] > '')
     {

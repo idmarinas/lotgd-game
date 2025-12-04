@@ -13,7 +13,7 @@ if (isset($_POST['template']))
 
     if ($skin > '')
     {
-        setcookie('template', $skin, ['expires' => strtotime('+45 days')]);
+        setcookie('template', (string) $skin, ['expires' => strtotime('+45 days')]);
         $_COOKIE['template'] = $skin;
     }
 }
@@ -71,7 +71,7 @@ elseif ('forcechangeemail' === $op)
 
     LotgdNavigation::addNav('common.nav.prefs', 'prefs.php');
 
-    $replacearray = explode('|', $session['user']['replaceemail']);
+    $replacearray = explode('|', (string) $session['user']['replaceemail']);
     $email        = $replacearray[0];
 
     $params['tpl']   = 'forcechangeemail';
@@ -98,7 +98,7 @@ elseif ('cancelemail' === $op)
 
     LotgdNavigation::addNav('common.nav.prefs', 'prefs.php');
 
-    $replacearray = explode('|', $session['user']['replaceemail']);
+    $replacearray = explode('|', (string) $session['user']['replaceemail']);
     $email        = $replacearray[0];
 
     $params['tpl']   = 'cancelemail';
@@ -137,7 +137,7 @@ else
         }
         elseif ('' != $pass1)
         {
-            if (\strlen($pass1) > 3)
+            if (\strlen((string) $pass1) > 3)
             {
                 /** @var UserPasswordEncoder $passwordEncoder */
                 $passwordEncoder = LotgdKernel::get('security.password_encoder');
@@ -175,7 +175,7 @@ else
 
             if (strstr($key, '___'))
             {
-                if (false === strpos($key, 'user_') && false === strpos($key, 'check_'))
+                if (!str_contains($key, 'user_') && !str_contains($key, 'check_'))
                 {
                     continue;
                 }
@@ -197,7 +197,7 @@ else
             $session['user']['prefs'][$key] = $val;
         }
 
-        $bio = stripslashes($post['bio']);
+        $bio = stripslashes((string) $post['bio']);
 
         if ($bio != $session['user']['bio'])
         {
@@ -260,8 +260,8 @@ else
                             $ownermsg .= $newvalidationsent.$footer;
                         }
 
-                        mail($email, $subj, str_replace('`n', "\n", $msg), 'From: '.LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com'));
-                        mail($session['user']['emailaddress'], $subj, str_replace('`n', "\n", $ownermsg), 'From: '.LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com'));
+                        mail((string) $email, $subj, str_replace('`n', "\n", $msg), 'From: '.LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com'));
+                        mail((string) $session['user']['emailaddress'], $subj, str_replace('`n', "\n", $ownermsg), 'From: '.LotgdSetting::getSetting('gameadminemail', 'postmaster@localhost.com'));
 
                         $session['user']['replaceemail']    = $email.'|'.date('Y-m-d H:i:s');
                         $session['user']['emailvalidation'] = $emailverification;
@@ -381,19 +381,19 @@ else
 
         foreach ($info['prefs'] as $key => $val)
         {
-            $isuser  = preg_match('/^user_/', $key);
-            $ischeck = preg_match('/^check_/', $key);
+            $isuser  = preg_match('/^user_/', (string) $key);
+            $ischeck = preg_match('/^check_/', (string) $key);
 
             if (\is_array($val))
             {
                 $v      = $val[0];
-                $x      = explode('|', $v);
+                $x      = explode('|', (string) $v);
                 $val[0] = $x[0];
                 $x[0]   = $val;
             }
             else
             {
-                $x = explode('|', $val);
+                $x = explode('|', (string) $val);
             }
 
             if (\is_array($x[0]))
@@ -488,7 +488,7 @@ else
     if ('' != $session['user']['replaceemail'])
     {
         //we have an email change request here
-        $replacearray = explode('|', $session['user']['replaceemail']);
+        $replacearray = explode('|', (string) $session['user']['replaceemail']);
         LotgdResponse::pageAddContent(LotgdFormat::colorize(LotgdTranslator::t('replace.email.pending', ['email' => $replacearray[0], 'time' => $replacearray[1]], $textDomain)));
         $expirationdate = strtotime('+ '.LotgdSetting::getSetting('playerchangeemaildays', 3).' days', strtotime($replacearray[1]));
         $left           = $expirationdate - strtotime('now');

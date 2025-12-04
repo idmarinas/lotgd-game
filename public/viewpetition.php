@@ -151,7 +151,7 @@ elseif ('view' === $op)
 
     if ($params['petition']['acctid'] > 0 && $session['user']['superuser'] & SU_EDIT_DONATIONS)
     {
-        LotgdNavigation::addNav('viewpetitions.nav.user.donation', 'donators.php?op=add&name='.rawurlencode($params['petition']['login']).'&ret='.urlencode($_SERVER['REQUEST_URI']));
+        LotgdNavigation::addNav('viewpetitions.nav.user.donation', 'donators.php?op=add&name='.rawurlencode((string) $params['petition']['login']).'&ret='.urlencode((string) $_SERVER['REQUEST_URI']));
     }
 }
 

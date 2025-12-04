@@ -173,7 +173,7 @@ if ('' != $name) {
 	LotgdEventDispatcher::dispatch(new Core(), Core::LOGIN_CHECK);
 	modulehook('check-login');
 
-	if ('' != $session['user']['emailvalidation'] && 'x' != substr($session['user']['emailvalidation'], 0, 1)) {
+	if ('' != $session['user']['emailvalidation'] && !str_starts_with((string) $session['user']['emailvalidation'], 'x')) {
 		$session['user'] = [];
 		LotgdFlashMessages::addErrorMessage(LotgdTranslator::t('login.validate', [], 'page_login'));
 

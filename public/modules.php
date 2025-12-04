@@ -156,7 +156,7 @@ reset($seencats);
 LotgdNavigation::addHeader('modules.category.modules');
 foreach ($seencats as $category => $count)
 {
-    LotgdNavigation::addNav('modules.nav.modules', 'modules.php?cat='.rawurlencode($category), [
+    LotgdNavigation::addNav('modules.nav.modules', 'modules.php?cat='.rawurlencode((string) $category), [
         'params' => [
             'cat'   => $category,
             'count' => $count,
@@ -189,7 +189,7 @@ if ('' == $op && 'installed' != $cat && 'deactivated' != $cat && 'activated' != 
             foreach ($uninstmodules as $key => $shortname)
             {
                 //test if the file is a valid module or a lib file/whatever that got in, maybe even malcode that does not have module form
-                $shortname = strtolower($shortname);
+                $shortname = strtolower((string) $shortname);
                 $file      = file_get_contents("modules/{$shortname}.php");
 
                 //-- Here the files has neither do_hook nor getinfo, which means it won't execute as a module here --> block it + notify the admin who is the manage modules section
@@ -197,9 +197,9 @@ if ('' == $op && 'installed' != $cat && 'deactivated' != $cat && 'activated' != 
                     'name' => $shortname.'.php ',
                 ]);
 
-                if (false !== strpos($file, $shortname.'_getmoduleinfo')
-                    && false !== strpos($file, $shortname.'_install')
-                    && false !== strpos($file, $shortname.'_uninstall')
+                if (str_contains($file, $shortname.'_getmoduleinfo')
+                    && str_contains($file, $shortname.'_install')
+                    && str_contains($file, $shortname.'_uninstall')
                 ) {
                     $temp = get_module_info($shortname);
                 }
@@ -214,7 +214,7 @@ if ('' == $op && 'installed' != $cat && 'deactivated' != $cat && 'activated' != 
 
                     foreach ($temp['requires'] as $key => $val)
                     {
-                        $info                                 = explode('|', $val);
+                        $info                                 = explode('|', (string) $val);
                         $temp['requiresCheck'][$key]['check'] = module_check_requirements([$key => $val]);
                         $temp['requiresCheck'][$key]['name']  = "{$key} {$info[0]} -- {$info[1]}`n";
 
