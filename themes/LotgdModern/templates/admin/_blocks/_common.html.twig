@@ -1,17 +1,15 @@
-{% trans_default_domain 'app_common' %}
-
 {% block common_database %}
-    {{ 'database.title'|trans|colorize }}
+	{{ 'database.title'|trans({}, 'app_common')|colorize }}
 {% endblock common_database %}
 
 {% block common_install %}
-    {{ 'install.paragraph'|trans({fileName: fileName})|colorize }}
+	{{ 'install.paragraph'|trans({fileName: fileName}, 'app_common')|colorize }}
 {% endblock common_install %}
 
 {% block common_security %}
-    {{ 'security.paragraph'|trans|colorize }}
+	{{ 'security.paragraph'|trans({}, 'app_common')|colorize }}
 {% endblock common_security %}
 
 {% block common_upgrade %}
-    {{ 'upgrade.paragraph'|trans|colorize }}
+	{{ 'upgrade.paragraph'|trans({}, 'app_common')|colorize }}
 {% endblock common_upgrade %}
