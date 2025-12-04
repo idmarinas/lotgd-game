@@ -5,8 +5,8 @@ doctrine:
         user: '%env(DATABASE_USER)%'
         password: '%env(DATABASE_PASSWORD)%'
         host: '%env(DATABASE_HOST)%'
-        port: 3306
-        driver: '%env(DATABASE_DRIVER)%'
+        port: '%env(int:DATABASE_PORT)%'
+        driver: pdo_mysql
         charset: utf8
         mapping_types:
             enum: string
@@ -21,6 +21,7 @@ doctrine:
             # based on the platform.
             charset: utf8
             collate: utf8_unicode_ci
+            engine: InnoDB
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
