@@ -5,13 +5,13 @@ root = true
 [*]
 charset                     = utf-8
 indent_style                = tab
-indent_size                 = 4
-tab_width                   = 4
+indent_size                 = 2
+tab_width                   = 2
 end_of_line                 = lf
 max_line_length             = 120
 insert_final_newline        = true
 trim_trailing_whitespace    = true
-ij_continuation_indent_size = 4
+ij_continuation_indent_size = 2
 ij_visual_guides            = 80, 120
 ij_smart_tabs               = true
 ij_wrap_on_typing           = true
@@ -33,6 +33,7 @@ indent_size = 2
 [*.{md,md.dist}]
 trim_trailing_whitespace = false
 max_line_length          = off
+indent_style             = space
 
 # Configuration for test files
 [*.test]
@@ -40,6 +41,7 @@ indent_style             = space
 insert_final_newline     = false
 trim_trailing_whitespace = false
 
+# Configuration for yaml config files
 [{config,**/config}/**/*.{yaml,yml}]
 indent_style = space
 indent_size  = 4
