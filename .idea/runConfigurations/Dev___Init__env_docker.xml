@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Dev - Init .env.docker" type="PowerShellRunType" factoryName="PowerShell" scriptUrl="F:\LoTGD\core\.docker\scripts\dev\InitEnvDocker.ps1" workingDirectory="F:\LoTGD\core" executablePath="C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe">
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>

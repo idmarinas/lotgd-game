@@ -13,7 +13,7 @@
         <option value="" />
       </list>
     </option>
-    <option name="rectorConfigPath" value="F:\LoTGD\core\rector.php" />
+    <option name="rectorConfigPath" value="F:\Projects\template-symfony\rector.php" />
     <method v="2" />
   </configuration>
 </component>

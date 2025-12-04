@@ -1,11 +1,11 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Dev - Webserver" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
+  <configuration default="false" name="Dev - Deployer" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
     <deployment type="docker-compose.yml">
       <settings>
-        <option name="envFilePath" value="F:\LoTGD\core\.env.docker" />
+        <option name="envFilePath" value="" />
         <option name="envFilePaths">
           <list>
-            <option value="F:\LoTGD\core\.env.docker" />
+            <option value="" />
           </list>
         </option>
         <option name="secondarySourceFiles">
@@ -15,10 +15,7 @@
         </option>
         <option name="services">
           <list>
-            <option value="database" />
-            <option value="database_test" />
-            <option value="mailer" />
-            <option value="webserver" />
+            <option value="deployer" />
           </list>
         </option>
         <option name="sourceFilePath" value="compose.yaml" />

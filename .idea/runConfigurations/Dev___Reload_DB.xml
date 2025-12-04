@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Dev - Reload DB" type="ComposerRunConfigurationType" factoryName="Composer Script">
+    <option name="commandLineParameters" value="" />
+    <option name="pathToComposerJson" value="$PROJECT_DIR$/composer.json" />
+    <method v="2" />
+  </configuration>
+</component>
