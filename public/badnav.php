@@ -9,7 +9,7 @@ require_once 'common.php';
 
 if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
 {
-    if (isset($session['output']) && false !== strpos($session['output'], '<!--CheckNewDay()-->'))
+    if (isset($session['output']) && str_contains($session['output'], '<!--CheckNewDay()-->'))
     {
         LotgdKernel::get('lotgd_core.tool.date_time')->checkDay();
     }
@@ -17,7 +17,7 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
     foreach ($session['user']['allowednavs'] as $key => $val)
     {
         //hack-tastic.
-        if ('' === trim($key) || 0 === $key || 'motd.php' == substr($key, 0, 8) || 'mail.php' == substr($key, 0, 8))
+        if ('' === trim((string) $key) || 0 === $key || str_starts_with((string) $key, 'motd.php') || str_starts_with((string) $key, 'mail.php'))
         {
             unset($session['user']['allowednavs'][$key]);
         }
@@ -33,7 +33,7 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
 
     //check if the output needs to be unzipped again
     //and make sure '' is not within gzuncompress -> error
-    if ('' != $outputHtml && false !== strpos('HTML', (string) $outputHtml))
+    if ('' != $outputHtml && str_contains('HTML', (string) $outputHtml))
     {
         $outputHtml = gzuncompress($outputHtml);
     }

@@ -8,7 +8,7 @@ use Cron\Schedule\CrontabSchedule;
 use Lotgd\Core\Entity\Cronjob;
 
 //-- Only can invoke in cli (shell)
-if ('cli' != substr(PHP_SAPI, 0, 3) || ! empty($_SERVER['REMOTE_ADDR']))
+if (!str_starts_with(PHP_SAPI, 'cli') || ! empty($_SERVER['REMOTE_ADDR']))
 {
     echo 'Only in cli';
 

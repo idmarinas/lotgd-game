@@ -20,7 +20,7 @@ require_once 'lib/redirect.php';
 
 //-- Check if game is installed
 if (
-  'cli' != substr(PHP_SAPI, 0, 3) //-- Not check if is a cli (CronJob)
+  !str_starts_with(PHP_SAPI, 'cli') //-- Not check if is a cli (CronJob)
   && !file_exists('data/installer/installed_version_data.data') //-- New file for save version of game
 ) {
 	//-- New installer not check for update
@@ -33,7 +33,7 @@ if (
 
 	LotgdResponse::pageEnd(false);
 } //-- This file not is necessary, so if you find delete it.
-elseif (file_exists('public/installer.php') && 'cli' != substr(PHP_SAPI, 0, 3)) {
+elseif (file_exists('public/installer.php') && !str_starts_with(PHP_SAPI, 'cli')) {
 	// here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
 	LotgdResponse::pageStart('title.security', [], 'app_common');
 
@@ -154,7 +154,7 @@ if (isset($session['user']['hitpoints']) && 0 < $session['user']['hitpoints']) {
 	$session['user']['alive'] = true;
 }
 
-$session['bufflist'] = array_map('array_filter', $session['user']['bufflist'] ?? []);
+$session['bufflist'] = array_map(array_filter(...), $session['user']['bufflist'] ?? []);
 
 if (!is_array($session['bufflist'])) {
 	$session['bufflist'] = [];
@@ -226,7 +226,7 @@ $temp_comp = $session['user']['companions'] ?? [];
 $companions = [];
 
 if (!empty($temp_comp)) {
-	$companions = array_filter($temp_comp, 'is_array');
+	$companions = array_filter($temp_comp, is_array(...));
 }
 
 unset($temp_comp);
