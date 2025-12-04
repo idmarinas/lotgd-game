@@ -1,10 +1,12 @@
-###> lotgd/core ###
-
-# Ignore local config
-/config/autoload/local/**
-!/config/autoload/local/**/
-!/config/autoload/local/.gitkeep
-!/config/autoload/local/README.md
+###> idmarinas/lotgd-game ###
+**/*.dist
+.deployer/*.tar
+.storage/
+/build/
+/node_modules/
+/.env.docker
+/composer.lock
+/package*.json
 
 # Ignore local content of LoTGD (except .gitkeep)
 /src/local/**
@@ -16,37 +18,35 @@
 /storage/**
 !/storage/**/
 !/storage/**/.gitkeep
-
-# Other files/folders
-cli-config.php
-phan.csv
-/public/_themes/
-
-# Ignore all files/folders that end in .dist
-*.dist
-!phpunit.xml.dist
-/build/
-
-###< lotgd/core ###
+###< idmarinas/lotgd-game ###
 
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
 /.env.*.local
-/.env.docker
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
+/storage/
 /var/
+/vendor/
 ###< symfony/framework-bundle ###
 
-###> symfony/phpunit-bridge ###
-.phpunit.result.cache
+###> phpunit/phpunit ###
 /phpunit.xml
-###< symfony/phpunit-bridge ###
+/.phpunit.cache/
+###< phpunit/phpunit ###
+
+###> symfony/asset-mapper ###
+/public/assets/
+/assets/vendor/
+###< symfony/asset-mapper ###
 
 ###> symfony/webpack-encore-bundle ###
-/node_modules/
 /public/build/
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
